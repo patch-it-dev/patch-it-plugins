@@ -9,7 +9,7 @@ Thanks for helping patch-it watch more APIs. This file is the rulebook; [docs/wr
 3. **Every plugin has a golden test** over a real saved copy of its source: `testdata/<file>` in, `testdata/golden/<api>.json` out. `testdata/README.md` lists each file with its URL, the date you fetched it, its license, and a short quote of the part your plugin reads. Keep openly licensed files whole; trim vendor documentation pages to what the test needs.
 4. **Precision over recall.** A missed change is a bug we can fix later. A wrong change becomes a wrong pull request in someone's repo. When in doubt, don't emit.
 5. **One pinned drop test per plugin**: a realistic input your plugin must *not* turn into an event (an unrelated section, a renamed heading, a non-breaking addition).
-6. **Document the provider** in `providers/<api>.md`: what it publishes, where, how often, what the plugin reads and what it ignores.
+6. **Document the provider** in `providers/<api>.md`, copied from [`providers/_template.md`](providers/_template.md): what it watches, **why you chose that source** (and the alternatives you didn't), how the provider announces changes, what the plugin reads and ignores, and known gaps.
 7. **Nothing private.** This repo is public. No credentials, tokens, internal hostnames or links to private repos or systems, in code, tests, commit messages or PR descriptions. CI scans every PR for secrets and for known internal names.
 
 ## Sign your commits (DCO)
