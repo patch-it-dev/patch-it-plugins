@@ -41,8 +41,6 @@ go test -race ./...
 python3 scripts/leak_guard.py --all   # the internal-names check over every tracked file
 ```
 
-Until the plugin code lands there is no `go.mod`, and `CI_go` passes with a notice.
-
 ## Layout
 
 ```

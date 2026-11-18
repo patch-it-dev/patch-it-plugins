@@ -2,7 +2,7 @@
 
 The source plugins for [patch-it](https://github.com/patch-it-dev/patch-it), the tool that turns third-party API changes into pull requests in your repo. Each plugin reads one provider's own sources (API specs, changelogs, deprecation pages, SDK migration guides, release feeds) and turns what changed into change events.
 
-> **Under construction.** Plugins are being moved here from patch-it's hosted ingestion service. Until they land, this repo holds the rules, the CI and [the list of supported plugins](docs/plugins.md); the Go code follows.
+> **Just moved.** The plugins were moved here from patch-it's hosted ingestion service, which imports this module at a tagged release (`v0.x.y`) and runs them every day.
 
 ## How a plugin works
 
@@ -25,7 +25,7 @@ See **[docs/plugins.md](docs/plugins.md)**. The same list is on [docs.patch-it.d
 
 ## Run the tests
 
-Once the code has landed (Go, see `go.mod`):
+Go (the version in `go.mod`), no other setup:
 
 ```sh
 go build ./...
@@ -35,6 +35,14 @@ go test -race ./...
 ```
 
 The tests are offline: every plugin's test reads a saved copy of its source from `testdata/` and compares the events with a golden file.
+
+### Environment
+
+| Variable | Needed | What it does |
+|---|---|---|
+| `GITHUB_TOKEN` | No | Optional. A GitHub token (no scopes needed) sent to the GitHub API when the `openapi` adapters look up release tags (Stripe's and Datadog's releases, GitHub's API versions). It only raises GitHub's rate limit for unauthenticated calls (60 an hour per IP); the tests never use it. |
+
+Nothing else is read from the environment.
 
 ## Contributing
 
