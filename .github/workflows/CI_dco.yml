@@ -1,0 +1,51 @@
+# Every commit carries a DCO sign-off (`git commit -s`) by its author:
+# a "Signed-off-by: Name <email>" line whose email is the commit author's.
+# Merge commits are skipped. See CONTRIBUTING.md#sign-your-commits-dco.
+name: CI_dco
+
+on:
+  pull_request:
+  merge_group:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# A new push cancels the run it supersedes.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  dco:
+    name: commits are signed off
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: check sign-offs
+        env:
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          PR_HEAD: ${{ github.event.pull_request.head.sha }}
+          MQ_BASE: ${{ github.event.merge_group.base_sha }}
+          MQ_HEAD: ${{ github.event.merge_group.head_sha }}
+        run: |
+          base="${PR_BASE:-$MQ_BASE}"; head="${PR_HEAD:-$MQ_HEAD}"
+          if [ -z "$base" ]; then
+            # A manual run checks the last commit only.
+            base="HEAD~1"; head="HEAD"
+          fi
+          bad=0
+          for sha in $(git rev-list --no-merges "$base..$head"); do
+            email=$(git log -1 --format='%ae' "$sha")
+            if git log -1 --format='%(trailers:key=Signed-off-by,valueonly)' "$sha" | grep -qiF "<$email>"; then
+              echo "ok      ${sha:0:12} $(git log -1 --format=%s "$sha")"
+            else
+              echo "::error::commit ${sha:0:12} ($(git log -1 --format=%s "$sha")) has no Signed-off-by for its author. Fix: git rebase --signoff $base, then push."
+              bad=1
+            fi
+          done
+          exit $bad

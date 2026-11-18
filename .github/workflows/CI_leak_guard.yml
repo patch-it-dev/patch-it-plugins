@@ -1,0 +1,79 @@
+# This repo is public: nothing private may land in it.
+# - gitleaks (pinned release, checksum-verified) looks for secrets in the PR's commits,
+#   and in the whole history on the weekly run.
+# - scripts/leak_guard.py looks for known internal names. The list is committed only as
+#   SHA-256 hashes (scripts/banned-terms.sha256); a hit prints file:line, never the term.
+# Runs on every PR and weekly (a new term added to the list then covers old files too).
+name: CI_leak_guard
+
+on:
+  pull_request:
+  merge_group:
+  schedule:
+    - cron: "41 4 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# A new push cancels the run it supersedes.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  GITLEAKS_VERSION: 8.30.1
+  GITLEAKS_SHA256: 551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb
+
+jobs:
+  leak-guard:
+    name: secrets and internal names
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: which commits to check
+        id: range
+        env:
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          PR_HEAD: ${{ github.event.pull_request.head.sha }}
+          MQ_BASE: ${{ github.event.merge_group.base_sha }}
+          MQ_HEAD: ${{ github.event.merge_group.head_sha }}
+        run: |
+          # PRs and the merge queue: only what they add. Schedule and manual runs: everything.
+          base="${PR_BASE:-$MQ_BASE}"; head="${PR_HEAD:-$MQ_HEAD}"
+          echo "base=$base" >> "$GITHUB_OUTPUT"
+          echo "head=$head" >> "$GITHUB_OUTPUT"
+          if [ -n "$base" ]; then echo "checking $base..$head"; else echo "checking the whole repo"; fi
+
+      - name: install gitleaks ${{ env.GITLEAKS_VERSION }}
+        run: |
+          tarball="gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          curl -fsSL -o "$RUNNER_TEMP/$tarball" "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/${tarball}"
+          echo "${GITLEAKS_SHA256}  $RUNNER_TEMP/$tarball" | sha256sum -c -
+          tar -xzf "$RUNNER_TEMP/$tarball" -C "$RUNNER_TEMP" gitleaks
+
+      - name: gitleaks
+        env:
+          BASE: ${{ steps.range.outputs.base }}
+          HEAD: ${{ steps.range.outputs.head }}
+        run: |
+          if [ -n "$BASE" ]; then
+            "$RUNNER_TEMP/gitleaks" git --no-banner --redact --verbose --log-opts="$BASE..$HEAD" .
+          else
+            "$RUNNER_TEMP/gitleaks" git --no-banner --redact --verbose .
+          fi
+
+      - name: internal names (hashed)
+        env:
+          BASE: ${{ steps.range.outputs.base }}
+          HEAD: ${{ steps.range.outputs.head }}
+        run: |
+          if [ -n "$BASE" ]; then
+            python3 scripts/leak_guard.py --diff "$BASE" "$HEAD"
+          else
+            python3 scripts/leak_guard.py --all
+          fi
