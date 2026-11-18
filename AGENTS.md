@@ -43,15 +43,26 @@ python3 scripts/leak_guard.py --all   # the internal-names check over every trac
 
 ## Layout
 
+Go module `github.com/patch-it-dev/patch-it-plugins`; the only dependency is `gopkg.in/yaml.v3`.
+
 ```
+plugin/                the Plugin interface, the registry, Env, Result, Spec (baselines)
+plugins/<format>/      one package per format plugin: openapi, retirements, migrationguide,
+                       removedmembers, changelog, feed; plugins/all imports every one
+kit/  kit/kittest/     Unchanged, Cite, Wayback; the test kit (Mem, Pages, Ingest, Golden)
+event/  migrate/       the change-event types from patch-it's contract (v1 + v2), v1 -> v2
+fetch/                 the HTTP fetch with retries and the ETag / Last-Modified cache
+diff/ normalize/ hint/ adapter/   the OpenAPI diff engine and the spec adapters
+retire/  sdkguide/     deprecations-page and migration-guide readers
+contract/fixtures/     a copy of patch-it's change-event fixtures (CI_contract checks it)
 docs/plugins.md        the list of supported plugins (Rule 1)
-docs/                  contributor docs
+docs/                  contributor docs, including writing-a-plugin.md
 providers/<api>.md     one page per provider
-scripts/leak_guard.py  the hashed internal-names check
-.github/               CODEOWNERS, PR template, workflows (CI_go, CI_dco, CI_leak_guard)
+scripts/               leak_guard.py (hashed internal names), check_contract.py
+.github/               CODEOWNERS, PR template, workflows (CI_go, CI_dco, CI_leak_guard, CI_contract)
 ```
 
-When the code lands (Go module `github.com/patch-it-dev/patch-it-plugins`): `plugin/` (the interface and registry), `plugins/<format>/` (one package per format plugin, `plugins/all` imports every one), `event/` (the change-event types from [patch-it's contract](https://github.com/patch-it-dev/patch-it/tree/main/docs/contract)), `fetch/`, `kit/`, `diff/`, `normalize/`, `hint/`, `retire/`, `sdkguide/`, `adapter/`, `contract/fixtures/`.
+The [change-event contract](https://github.com/patch-it-dev/patch-it/tree/main/docs/contract) is owned by patch-it: don't change `contract/fixtures/` here first.
 
 ## Commits and PRs
 
