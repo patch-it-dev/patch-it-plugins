@@ -1,0 +1,23 @@
+[
+  {
+    "id": 0,
+    "fingerprint": "sha256:ff7dd3f4198ccc46ce89ac4c82249fe9e442478d8c3da6b713596249017f96fb",
+    "api": "stripe",
+    "version": "2026-08-26.dahlia",
+    "previous_version": "2026-07-29.dahlia",
+    "change_type": "breaking",
+    "breaking": true,
+    "affected": {
+      "kind": "schema_property",
+      "side": "response",
+      "schema": "payments_primitives_payment_records_resource_payment_method_card_details_resource_three_d_secure",
+      "property": "cryptogram"
+    },
+    "description": "Property cryptogram removed from schema payments_primitives_payment_records_resource_payment_method_card_details_resource_three_d_secure.",
+    "source_url": "https://raw.githubusercontent.com/stripe/openapi/v2460/latest/openapi.spec3.json",
+    "source_pointer": "/components/schemas/payments_primitives_payment_records_resource_payment_method_card_details_resource_three_d_secure/properties/cryptogram",
+    "source_excerpt": "{\"description\":\"The 3D Secure cryptogram, also known as the \\\"authentication value\\\" (AAV, CAVV or AEVV).\",\"maxLength\":5000,\"nullable\":true,\"type\":\"string\"}",
+    "confidence": 1,
+    "detected_at": "2026-09-27T12:00:00Z"
+  }
+]

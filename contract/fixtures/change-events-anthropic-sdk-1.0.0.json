@@ -1,0 +1,65 @@
+{
+  "_comment": "Real output of the `anthropic` plugin for anthropic-sdk-python's migration guide to 1.0.0, read 2026-10-17 by patch-it's hosted ingestion service and served with the stored row id as `id`. One breaking request_parameter event per parameter the release removed from `messages.create()` and its siblings; `source_url` is MIGRATION.md at the v1.0.0 tag. No hand edits.",
+  "changes": [
+    {
+      "id": 1,
+      "fingerprint": "sha256:e9b8f3f704d8fa87eacc9b2d1cb9c30cb93720cfa63ce32fbccba4a15d5c2d8e",
+      "api": "anthropic",
+      "version": "1.0.0",
+      "change_type": "breaking",
+      "breaking": true,
+      "affected": {
+        "kind": "request_parameter",
+        "side": "request",
+        "operation": "POST /v1/messages",
+        "property": "temperature"
+      },
+      "description": "Parameter temperature removed from `messages.create()` and its sibling methods in the anthropic SDK 1.0.0: passing it raises a TypeError.",
+      "migration_hint": "Remove them. Current models do not use these sampling parameters; for an older model that still does, pass them through `extra_body` (see below). Source: https://github.com/anthropics/anthropic-sdk-python/blob/v1.0.0/MIGRATION.md",
+      "source_url": "https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/v1.0.0/MIGRATION.md",
+      "source_excerpt": "## Removed: deprecated request parameters\n| Method(s)                                                                                                                                                                                       | Removed parameter               | Use instead                                                                                                                                                                                                                                                                                                                                |\n| `messages.create()`, `messages.stream()`, `messages.parse()` and their `beta.messages` counterparts, `beta.messages.tool_runner()`, and the per-request `params` of `messages.batches.create()` | `temperature`, `top_p`, `top_k` | Remove them. Current models do not use these sampling parameters; for an older model that still does, pass them through `extra_body` (see below).                                                                                                                                                                                          |",
+      "confidence": 1,
+      "detected_at": "2026-10-17T05:06:50.237875535Z"
+    },
+    {
+      "id": 2,
+      "fingerprint": "sha256:b762174f68a46339392c6d8908ef8c01cf9a513e41bcdb2f6807ebc31bf98f84",
+      "api": "anthropic",
+      "version": "1.0.0",
+      "change_type": "breaking",
+      "breaking": true,
+      "affected": {
+        "kind": "request_parameter",
+        "side": "request",
+        "operation": "POST /v1/messages",
+        "property": "top_p"
+      },
+      "description": "Parameter top_p removed from `messages.create()` and its sibling methods in the anthropic SDK 1.0.0: passing it raises a TypeError.",
+      "migration_hint": "Remove them. Current models do not use these sampling parameters; for an older model that still does, pass them through `extra_body` (see below). Source: https://github.com/anthropics/anthropic-sdk-python/blob/v1.0.0/MIGRATION.md",
+      "source_url": "https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/v1.0.0/MIGRATION.md",
+      "source_excerpt": "## Removed: deprecated request parameters\n| Method(s)                                                                                                                                                                                       | Removed parameter               | Use instead                                                                                                                                                                                                                                                                                                                                |\n| `messages.create()`, `messages.stream()`, `messages.parse()` and their `beta.messages` counterparts, `beta.messages.tool_runner()`, and the per-request `params` of `messages.batches.create()` | `temperature`, `top_p`, `top_k` | Remove them. Current models do not use these sampling parameters; for an older model that still does, pass them through `extra_body` (see below).                                                                                                                                                                                          |",
+      "confidence": 1,
+      "detected_at": "2026-10-17T05:06:50.237875535Z"
+    },
+    {
+      "id": 3,
+      "fingerprint": "sha256:0fb1e185b107b91ef956a3ee7efdd3dbd9caa97ae8264b7f7ee308d41ffd579e",
+      "api": "anthropic",
+      "version": "1.0.0",
+      "change_type": "breaking",
+      "breaking": true,
+      "affected": {
+        "kind": "request_parameter",
+        "side": "request",
+        "operation": "POST /v1/messages",
+        "property": "top_k"
+      },
+      "description": "Parameter top_k removed from `messages.create()` and its sibling methods in the anthropic SDK 1.0.0: passing it raises a TypeError.",
+      "migration_hint": "Remove them. Current models do not use these sampling parameters; for an older model that still does, pass them through `extra_body` (see below). Source: https://github.com/anthropics/anthropic-sdk-python/blob/v1.0.0/MIGRATION.md",
+      "source_url": "https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/v1.0.0/MIGRATION.md",
+      "source_excerpt": "## Removed: deprecated request parameters\n| Method(s)                                                                                                                                                                                       | Removed parameter               | Use instead                                                                                                                                                                                                                                                                                                                                |\n| `messages.create()`, `messages.stream()`, `messages.parse()` and their `beta.messages` counterparts, `beta.messages.tool_runner()`, and the per-request `params` of `messages.batches.create()` | `temperature`, `top_p`, `top_k` | Remove them. Current models do not use these sampling parameters; for an older model that still does, pass them through `extra_body` (see below).                                                                                                                                                                                          |",
+      "confidence": 1,
+      "detected_at": "2026-10-17T05:06:50.237875535Z"
+    }
+  ]
+}

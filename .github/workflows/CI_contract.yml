@@ -1,0 +1,51 @@
+# contract/fixtures/ is a copy of patch-it's fixtures/ (the change-event contract
+# patch-it owns). This fails when the two drift apart, so event/ and migrate/ test
+# the same events the patch-it client does. Only top-level "_comment" fields may
+# differ (scripts/check_contract.py).
+#
+# patch-it is cloned anonymously, with no token. While patch-it isn't public yet the
+# clone can't see it, and the check passes with a notice.
+name: CI_contract
+
+on:
+  pull_request:
+  merge_group:
+  schedule:
+    - cron: "17 5 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# A new push cancels the run it supersedes.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contract:
+    name: contract fixtures match patch-it
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: clone patch-it's fixtures (anonymous)
+        id: upstream
+        env:
+          GIT_TERMINAL_PROMPT: "0"
+        run: |
+          code=$(curl -s -o /dev/null -w '%{http_code}' https://api.github.com/repos/patch-it-dev/patch-it)
+          if [ "$code" = "404" ]; then
+            echo "::notice::patch-it-dev/patch-it isn't publicly readable yet; skipping the contract check."
+            echo "present=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git -c credential.helper= clone --quiet --depth 1 --filter=blob:none --sparse \
+            https://github.com/patch-it-dev/patch-it upstream
+          git -C upstream sparse-checkout set fixtures
+          echo "present=true" >> "$GITHUB_OUTPUT"
+
+      - name: compare
+        if: steps.upstream.outputs.present == 'true'
+        run: python3 scripts/check_contract.py upstream/fixtures

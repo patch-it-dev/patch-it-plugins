@@ -1,0 +1,90 @@
+{
+  "components": {
+    "schemas": {
+      "rate-limit": {
+        "properties": {
+          "limit": {
+            "type": "integer"
+          },
+          "remaining": {
+            "type": "integer"
+          },
+          "reset": {
+            "type": "integer"
+          },
+          "used": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "limit",
+          "remaining",
+          "reset",
+          "used"
+        ],
+        "title": "Rate Limit",
+        "type": "object"
+      },
+      "rate-limit-overview": {
+        "description": "Rate limit status for the applicable requester and resource category. Requests\nauthenticated as a user share the user's rate limit across credentials. Requests\nwithout authentication use the requesting IP address. API requests routed through\neither an API hostname or a web hostname can count against the same applicable limit.",
+        "properties": {
+          "resources": {
+            "properties": {
+              "actions_runner_registration": {
+                "$ref": "#/components/schemas/rate-limit"
+              },
+              "code_scanning_autofix": {
+                "$ref": "#/components/schemas/rate-limit"
+              },
+              "code_search": {
+                "$ref": "#/components/schemas/rate-limit"
+              },
+              "copilot_usage_records": {
+                "$ref": "#/components/schemas/rate-limit"
+              },
+              "core": {
+                "$ref": "#/components/schemas/rate-limit"
+              },
+              "dependency_sbom": {
+                "$ref": "#/components/schemas/rate-limit"
+              },
+              "dependency_snapshots": {
+                "$ref": "#/components/schemas/rate-limit"
+              },
+              "graphql": {
+                "$ref": "#/components/schemas/rate-limit"
+              },
+              "integration_manifest": {
+                "$ref": "#/components/schemas/rate-limit"
+              },
+              "scim": {
+                "$ref": "#/components/schemas/rate-limit"
+              },
+              "search": {
+                "$ref": "#/components/schemas/rate-limit"
+              },
+              "source_import": {
+                "$ref": "#/components/schemas/rate-limit"
+              }
+            },
+            "required": [
+              "core",
+              "search"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "resources"
+        ],
+        "title": "Rate Limit Overview",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "version": "1.1.4"
+  },
+  "openapi": "3.0.3",
+  "paths": {}
+}

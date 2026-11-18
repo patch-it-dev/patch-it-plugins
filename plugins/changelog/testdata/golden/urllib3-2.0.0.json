@@ -1,0 +1,281 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:eae9f46e65df370e9a389913f8b726cb59479f97e0f1a0379ece1a1ac02ee084",
+    "api": "urllib3",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "urllib3",
+      "change": "removed_symbol",
+      "symbols": [
+        "HTTPResponse.from_httplib"
+      ]
+    },
+    "description": "`HTTPResponse.from_httplib` was removed in urllib3 2.0.0: code using it fails.",
+    "migration_hint": "Removed ``urllib3.HTTPResponse.from_httplib`` (`#2648 <https://github.com/urllib3/urllib3/issues/2648>`__). (urllib3's changelog for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/urllib3/urllib3/2.0.0/CHANGES.rst",
+    "source_excerpt": "2.0.0 (2023-04-26)\nRemoved\n* Removed ``urllib3.HTTPResponse.from_httplib`` (`#2648 <https://github.com/urllib3/urllib3/issues/2648>`__).",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:4b651d9f82fa23c1f044e54df1f3f2201ed75f95e88906229250ff101f40d4de",
+    "api": "urllib3",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "urllib3",
+      "change": "removed_symbol",
+      "symbols": [
+        "contrib.ntlmpool"
+      ]
+    },
+    "description": "`contrib.ntlmpool` was removed in urllib3 2.0.0: code using it fails.",
+    "migration_hint": "Removed the deprecated ``urllib3.contrib.ntlmpool`` module (`#2339 <https://github.com/urllib3/urllib3/issues/2339>`__). (urllib3's changelog for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/urllib3/urllib3/2.0.0/CHANGES.rst",
+    "source_excerpt": "2.0.0 (2023-04-26)\nRemoved\n* Removed the deprecated ``urllib3.contrib.ntlmpool`` module (`#2339 <https://github.com/urllib3/urllib3/issues/2339>`__).",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:076ecf01a372ed8249425c78f9567484ba6bb2b93b014920b88ab993af3428a7",
+    "api": "urllib3",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "urllib3",
+      "change": "removed_symbol",
+      "symbols": [
+        "exceptions.SNIMissingWarning"
+      ]
+    },
+    "description": "`exceptions.SNIMissingWarning` was removed in urllib3 2.0.0: code using it fails.",
+    "migration_hint": "Removed ``urllib3.exceptions.SNIMissingWarning`` (`#2168 <https://github.com/urllib3/urllib3/issues/2168>`__). (urllib3's changelog for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/urllib3/urllib3/2.0.0/CHANGES.rst",
+    "source_excerpt": "2.0.0 (2023-04-26)\nRemoved\n* Removed ``urllib3.exceptions.SNIMissingWarning`` (`#2168 <https://github.com/urllib3/urllib3/issues/2168>`__).",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:044a3e14ed78e58031de6193746551f0855f3e7d2301ea245bec5b912f98c5bb",
+    "api": "urllib3",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "urllib3",
+      "change": "removed_symbol",
+      "symbols": [
+        "HTTPConnectionPool._prepare_conn"
+      ]
+    },
+    "description": "`HTTPConnectionPool._prepare_conn` was removed in urllib3 2.0.0: code using it fails.",
+    "migration_hint": "Removed the ``_prepare_conn`` method from ``HTTPConnectionPool``. Previously this was only used to call ``HTTPSConnection.set_cert()`` by ``HTTPSConnectionPool`` (`#1985 <https://github.com/urllib3/urllib3/issues/1985>`__). (urllib3's changelog for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/urllib3/urllib3/2.0.0/CHANGES.rst",
+    "source_excerpt": "2.0.0 (2023-04-26)\nRemoved\n* Removed the ``_prepare_conn`` method from ``HTTPConnectionPool``. Previously this was only used to call ``HTTPSConnection.set_cert()`` by ``HTTPSConnectionPool`` (`#1985 <https://github.com/urllib3/urllib3/issues/1985>`__).",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:81faaf5c8d89b30236258585ff6e5cfb0f200aa6d0cf68d7c471efda7c4edf4e",
+    "api": "urllib3",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "urllib3",
+      "change": "removed_symbol",
+      "symbols": [
+        "HTTPSConnection.tls_in_tls_required"
+      ]
+    },
+    "description": "`HTTPSConnection.tls_in_tls_required` was removed in urllib3 2.0.0: code using it fails.",
+    "migration_hint": "Removed ``tls_in_tls_required`` property from ``HTTPSConnection``. This is now determined from the ``scheme`` parameter in ``HTTPConnection.set_tunnel()`` (`#1985 <https://github.com/urllib3/urllib3/issues/1985>`__). (urllib3's changelog for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/urllib3/urllib3/2.0.0/CHANGES.rst",
+    "source_excerpt": "2.0.0 (2023-04-26)\nRemoved\n* Removed ``tls_in_tls_required`` property from ``HTTPSConnection``. This is now determined from the ``scheme`` parameter in ``HTTPConnection.set_tunnel()`` (`#1985 <https://github.com/urllib3/urllib3/issues/1985>`__).",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:ce792af7dd7bc3ed3318e89507e60f495a431a8e840d30763a706d48d7238dc3",
+    "api": "urllib3",
+    "version": "2.0.0",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "urllib3",
+      "change": "removed_symbol",
+      "symbols": [
+        "HTTPResponse.getheaders",
+        "HTTPResponse.getheader"
+      ]
+    },
+    "description": "`HTTPResponse.getheaders`, `HTTPResponse.getheader` are deprecated in urllib3 2.0.0: a later release may remove it.",
+    "migration_hint": "Deprecated ``HTTPResponse.getheaders()`` and ``HTTPResponse.getheader()`` which will be removed in urllib3 v2.1.0. Instead use ``HTTPResponse.headers`` and ``HTTPResponse.headers.get(name, default)``. (`#1543 <https://github.com/urllib3/urllib3/issues/1543>`__, `#2814 <https://github.com/urllib3/urllib3/issues/2814>`__). (urllib3's changelog for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/urllib3/urllib3/2.0.0/CHANGES.rst",
+    "source_excerpt": "2.0.0 (2023-04-26)\nDeprecated\n* Deprecated ``HTTPResponse.getheaders()`` and ``HTTPResponse.getheader()`` which will be removed in urllib3 v2.1.0. Instead use ``HTTPResponse.headers`` and ``HTTPResponse.headers.get(name, default)``. (`#1543 <https://github.com/urllib3/urllib3/issues/1543>`__, `#2814 <https://github.com/urllib3/urllib3/issues/2814>`__).",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:30d4426399a9705181de125e34e186ef1aef9bcd9f12f6212513bb371a8cd979",
+    "api": "urllib3",
+    "version": "2.0.0",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "urllib3",
+      "change": "removed_symbol",
+      "symbols": [
+        "contrib.pyopenssl"
+      ]
+    },
+    "description": "`contrib.pyopenssl` is deprecated in urllib3 2.0.0: a later release may remove it.",
+    "migration_hint": "Deprecated ``urllib3.contrib.pyopenssl`` module which will be removed in urllib3 v2.1.0 (`#2691 <https://github.com/urllib3/urllib3/issues/2691>`__). (urllib3's changelog for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/urllib3/urllib3/2.0.0/CHANGES.rst",
+    "source_excerpt": "2.0.0 (2023-04-26)\nDeprecated\n* Deprecated ``urllib3.contrib.pyopenssl`` module which will be removed in urllib3 v2.1.0 (`#2691 <https://github.com/urllib3/urllib3/issues/2691>`__).",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
+    "fingerprint": "sha256:aa634fb973e53235a99b7c8e1aaba98b3d11efcd404e1c87a7a43db0310653f2",
+    "api": "urllib3",
+    "version": "2.0.0",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "urllib3",
+      "change": "removed_symbol",
+      "symbols": [
+        "contrib.securetransport"
+      ]
+    },
+    "description": "`contrib.securetransport` is deprecated in urllib3 2.0.0: a later release may remove it.",
+    "migration_hint": "Deprecated ``urllib3.contrib.securetransport`` module which will be removed in urllib3 v2.1.0 (`#2692 <https://github.com/urllib3/urllib3/issues/2692>`__). (urllib3's changelog for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/urllib3/urllib3/2.0.0/CHANGES.rst",
+    "source_excerpt": "2.0.0 (2023-04-26)\nDeprecated\n* Deprecated ``urllib3.contrib.securetransport`` module which will be removed in urllib3 v2.1.0 (`#2692 <https://github.com/urllib3/urllib3/issues/2692>`__).",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 9,
+    "fingerprint": "sha256:862dd1626f30afb034581ba6d00d7c02b262e9f0bf50e49afd4d8d8e132a12c0",
+    "api": "urllib3",
+    "version": "2.0.0",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "urllib3",
+      "change": "removed_symbol",
+      "symbols": [
+        "NewConnectionError.pool"
+      ]
+    },
+    "description": "`NewConnectionError.pool` is deprecated in urllib3 2.0.0: a later release may remove it.",
+    "migration_hint": "Deprecated the ``NewConnectionError.pool`` attribute which will be removed in urllib3 v2.1.0 (`#2271 <https://github.com/urllib3/urllib3/issues/2271>`__). (urllib3's changelog for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/urllib3/urllib3/2.0.0/CHANGES.rst",
+    "source_excerpt": "2.0.0 (2023-04-26)\nDeprecated\n* Deprecated the ``NewConnectionError.pool`` attribute which will be removed in urllib3 v2.1.0 (`#2271 <https://github.com/urllib3/urllib3/issues/2271>`__).",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 10,
+    "fingerprint": "sha256:29623796f12a6dfdda28b88b2bf4fc020c8f14955a132bf890bb65c02b440ff8",
+    "api": "urllib3",
+    "version": "2.0.0",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "urllib3",
+      "change": "renamed_symbol",
+      "symbols": [
+        "format_header_param_html5",
+        "format_header_param"
+      ],
+      "replacement": "format_multipart_header_param"
+    },
+    "description": "`format_header_param_html5`, `format_header_param` are deprecated in urllib3 2.0.0 in favor of `format_multipart_header_param`.",
+    "migration_hint": "Deprecated ``format_header_param_html5`` and ``format_header_param`` in favor of ``format_multipart_header_param`` (`#2257 <https://github.com/urllib3/urllib3/issues/2257>`__). (urllib3's changelog for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/urllib3/urllib3/2.0.0/CHANGES.rst",
+    "source_excerpt": "2.0.0 (2023-04-26)\nDeprecated\n* Deprecated ``format_header_param_html5`` and ``format_header_param`` in favor of ``format_multipart_header_param`` (`#2257 <https://github.com/urllib3/urllib3/issues/2257>`__).",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 11,
+    "fingerprint": "sha256:68e644ae2a7f6386b541a7a5faaae32c2b4897d63154b18c3d0fe41b1ce85222",
+    "api": "urllib3",
+    "version": "2.0.0",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "urllib3",
+      "change": "removed_symbol",
+      "symbols": [
+        "HTTPSConnection.set_cert"
+      ]
+    },
+    "description": "`HTTPSConnection.set_cert` is deprecated in urllib3 2.0.0: a later release may remove it.",
+    "migration_hint": "Deprecated ``HTTPSConnection.set_cert()`` method. Instead pass parameters to the ``HTTPSConnection`` constructor (`#1985 <https://github.com/urllib3/urllib3/issues/1985>`__). (urllib3's changelog for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/urllib3/urllib3/2.0.0/CHANGES.rst",
+    "source_excerpt": "2.0.0 (2023-04-26)\nDeprecated\n* Deprecated ``HTTPSConnection.set_cert()`` method. Instead pass parameters to the ``HTTPSConnection`` constructor (`#1985 <https://github.com/urllib3/urllib3/issues/1985>`__).",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 12,
+    "fingerprint": "sha256:e933598726e75efd4be2f3c08639f52648119833b6f4846f452e4138061c534b",
+    "api": "urllib3",
+    "version": "2.0.0",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "urllib3",
+      "change": "removed_symbol",
+      "symbols": [
+        "HTTPConnection.request_chunked"
+      ]
+    },
+    "description": "`HTTPConnection.request_chunked` is deprecated in urllib3 2.0.0: a later release may remove it.",
+    "migration_hint": "Deprecated ``HTTPConnection.request_chunked()`` method which will be removed in urllib3 v2.1.0. Instead pass ``chunked=True`` to ``HTTPConnection.request()`` (`#1985 <https://github.com/urllib3/urllib3/issues/1985>`__). (urllib3's changelog for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/urllib3/urllib3/2.0.0/CHANGES.rst",
+    "source_excerpt": "2.0.0 (2023-04-26)\nDeprecated\n* Deprecated ``HTTPConnection.request_chunked()`` method which will be removed in urllib3 v2.1.0. Instead pass ``chunked=True`` to ``HTTPConnection.request()`` (`#1985 <https://github.com/urllib3/urllib3/issues/1985>`__).",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "id": 0,
+    "fingerprint": "sha256:5e6a726296bc4c319b8605eb7e3f67d641ae3d63c9d5038b75bb691d5ac5b6be",
+    "api": "stripe",
+    "version": "2026-08-26.dahlia",
+    "previous_version": "2026-07-29.dahlia",
+    "change_type": "deprecation",
+    "breaking": false,
+    "affected": {
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /v1/charges"
+    },
+    "description": "Operation POST /v1/charges marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/stripe/openapi/v2468/latest/openapi.spec3.json",
+    "source_pointer": "/paths/~1v1~1charges/post/deprecated",
+    "source_excerpt": "true",
+    "confidence": 1,
+    "detected_at": "2026-09-27T12:00:00Z"
+  }
+]

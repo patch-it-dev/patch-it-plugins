@@ -1,0 +1,22 @@
+[
+  {
+    "id": 0,
+    "fingerprint": "sha256:c945f5c4c228e6a9a7fa10537b4f931c4dfdae7ee8688520dc3229b9860862bc",
+    "api": "stripe",
+    "version": "2026-08-26.dahlia",
+    "previous_version": "2026-07-29.dahlia",
+    "change_type": "new_feature",
+    "breaking": false,
+    "affected": {
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /v1/billing/feedback_options"
+    },
+    "description": "New operation POST /v1/billing/feedback_options.",
+    "source_url": "https://raw.githubusercontent.com/stripe/openapi/v2468/latest/openapi.spec3.json",
+    "source_pointer": "/paths/~1v1~1billing~1feedback_options/post",
+    "source_excerpt": "{\"operationId\":\"PostBillingFeedbackOptions\",\"summary\":\"Create a feedback option\"}",
+    "confidence": 1,
+    "detected_at": "2026-09-27T12:00:00Z"
+  }
+]

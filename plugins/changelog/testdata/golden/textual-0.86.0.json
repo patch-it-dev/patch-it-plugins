@@ -1,0 +1,48 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:24d9bb42e9abe2644dbb30433702c9d94f1598d7143ad708c2fe09568f9437c0",
+    "api": "textual",
+    "version": "0.86.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "textual",
+      "change": "removed_symbol",
+      "symbols": [
+        "App.dark"
+      ]
+    },
+    "description": "`App.dark` was removed in textual 0.86.0: code using it fails.",
+    "migration_hint": "Breaking change: Removed `App.dark` reactive attribute https://github.com/Textualize/textual/pull/5087 (textual's changelog for 0.86.0)",
+    "source_url": "https://raw.githubusercontent.com/Textualize/textual/v0.86.0/CHANGELOG.md",
+    "source_excerpt": "## [0.86.0] - 2024-11-16\nChanged\n- Breaking change: Removed `App.dark` reactive attribute https://github.com/Textualize/textual/pull/5087",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:852863d8d05a5753b2d64b4b0dc3717fce11f753727c586cd18eae7f7059dfc9",
+    "api": "textual",
+    "version": "0.86.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "textual",
+      "change": "removed_symbol",
+      "symbols": [
+        "App.HOVER_EFFECTS_SCROLL_PAUSE"
+      ]
+    },
+    "description": "`App.HOVER_EFFECTS_SCROLL_PAUSE` was removed in textual 0.86.0: code using it fails.",
+    "migration_hint": "Removed `App.HOVER_EFFECTS_SCROLL_PAUSE` https://github.com/Textualize/textual/pull/5238 (textual's changelog for 0.86.0)",
+    "source_url": "https://raw.githubusercontent.com/Textualize/textual/v0.86.0/CHANGELOG.md",
+    "source_excerpt": "## [0.86.0] - 2024-11-16\nRemoved\n- Removed `App.HOVER_EFFECTS_SCROLL_PAUSE` https://github.com/Textualize/textual/pull/5238",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

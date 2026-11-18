@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Use Case: actions - GitHub Changelog</title>
+	<atom:link href="https://github.blog/changelog/label/actions/feed/" rel="self" type="application/rss+xml" />
+	<link>https://github.blog/changelog/label/actions/</link>
+	<description>Updates, ideas, and inspiration from GitHub to help developers build and design software.</description>
+	<lastBuildDate>Thu, 12 Nov 2026 21:01:00 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=7.1.4</generator>
+
+<image>
+	<url>https://github.blog/wp-content/uploads/2019/01/cropped-github-favicon-512.png?fit=32%2C32</url>
+	<title>Use Case: actions - GitHub Changelog</title>
+	<link>https://github.blog/changelog/label/actions/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+<site xmlns="com-wordpress:feed-additions:1">153214340</site>	<item>
+		<title>Actions for ARM32 Linux &#038; Windows retirement</title>
+		<link>https://github.blog/changelog/2026-11-12-actions-for-arm32-linux-windows-retirement</link>
+		
+		<dc:creator><![CDATA[Allison]]></dc:creator>
+		<pubDate>Thu, 12 Nov 2026 20:59:36 +0000</pubDate>
+				<guid isPermaLink="false">https://github.blog/changelog/2026-11-12-actions-for-arm32-linux-windows-retirement</guid>
+
+					<description><![CDATA[<p>GitHub Actions hosted runners will be ending support for ARM32 job execution on Windows and Linux by 8th Dec 2026. This follows our end of support for node20 where Node&#8230;</p>
+<p>The post <a href="https://github.blog/changelog/2026-11-12-actions-for-arm32-linux-windows-retirement">Actions for ARM32 Linux &amp; Windows retirement</a> appeared first on <a href="https://github.blog">The GitHub Blog</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><p>GitHub Actions hosted runners will be ending support for ARM32 job execution on Windows and Linux by 8th Dec 2026. This follows our <a href="https://github.blog/changelog/2026-09-23-node-20-is-no-longer-available-in-github-actions/">end of support for node20 </a> where Node 24 does not support ARM32.</p>
+<p>This includes the removal of support on hosted runners for native AArch32 User-space execution.</p>
+<p>Join the discussion within <a href="https://github.com/orgs/community/discussions/categories/announcements">GitHub Community</a>.<br>
+<img decoding="async" src="https://github.com/user-attachments/assets/f878c51d-8e70-4f3f-bcb3-58b94509203a" alt="social"></p>
+</body></html>
+<p>The post <a href="https://github.blog/changelog/2026-11-12-actions-for-arm32-linux-windows-retirement">Actions for ARM32 Linux &amp; Windows retirement</a> appeared first on <a href="https://github.blog">The GitHub Blog</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<category domain="changelog-type"><![CDATA[Retired]]></category>
+<category domain="changelog-label"><![CDATA[actions]]></category>
+<post-id xmlns="com-wordpress:feed-additions:1">100119</post-id>	</item>
+		<item>
+		<title>pull_request_target blocked by default December 2</title>
+		<link>https://github.blog/changelog/2026-11-02-pull_request_target-blocked-by-default-december-2</link>
+		
+		<dc:creator><![CDATA[Allison]]></dc:creator>
+		<pubDate>Mon, 02 Nov 2026 15:14:46 +0000</pubDate>
+				<guid isPermaLink="false">https://github.blog/changelog/2026-11-02-pull_request_target-blocked-by-default-december-2</guid>
+
+					<description><![CDATA[<p>Starting December 2, 2026, GitHub Actions will block pull_request_target events by default in all public repositories, unless an applicable Actions event policy explicitly allows them. Enforcement was previously scheduled for&#8230;</p>
+<p>The post <a href="https://github.blog/changelog/2026-11-02-pull_request_target-blocked-by-default-december-2">pull_request_target blocked by default December 2</a> appeared first on <a href="https://github.blog">The GitHub Blog</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><p>Starting December 2, 2026, GitHub Actions will block <code>pull_request_target</code> events by default in all public repositories, unless an applicable Actions event policy explicitly allows them. Enforcement was previously scheduled for November 2, 2026.</p>
+<p>GitHub introduced this default rule through workflow execution protections. The rule initially runs in evaluate mode, so you can see which workflow runs it would block before enforcement begins.</p>
+<p>Private and internal repositories aren&rsquo;t affected.</p>
+<h2 id="why-were-making-this-change" id="why-were-making-this-change" ><a class="heading-link" href="#why-were-making-this-change">Why we&rsquo;re making this change<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h2>
+<p><code>pull_request_target</code> runs in the context of the base repository and can access its secrets. If a workflow executes untrusted code from a fork, that code could compromise your pipeline or steal secrets. The default rule helps reduce this risk while letting you explicitly allow workflows that depend on the trigger.</p>
+<h2 id="brownout-schedule" id="brownout-schedule" ><a class="heading-link" href="#brownout-schedule">Brownout schedule<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h2>
+<p>Before permanent enforcement begins on December 2, 2026, we&rsquo;ll temporarily enforce the default protection during two scheduled brownouts. These windows will help you identify affected workflows and update your policies before enforcement becomes permanent.</p>
+<div data-target="content-table-wrap.container" class="content-table-wrap"><content-table-wrap><table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Time (UTC)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>November 9, 2026</td>
+<td>16:00&ndash;18:00</td>
+</tr>
+<tr>
+<td>November 16, 2026</td>
+<td>16:00&ndash;18:00</td>
+</tr>
+</tbody>
+</table></content-table-wrap></div>
+<p>During each window, <code>pull_request_target</code> workflow attempts blocked by the default rule in affected public repositories will create failed runs with an error annotation; the workflows won&rsquo;t execute. After each window, the default rule will return to evaluate mode, allowing workflows to run with warnings. Private and internal repositories aren&rsquo;t affected.</p>
+<h2 id="prepare-your-workflows" id="prepare-your-workflows" ><a class="heading-link" href="#prepare-your-workflows">Prepare your workflows<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h2>
+<p>Before the first brownout on November 9, use Insights to see which workflow runs the rule would block. From there, you have two options:</p>
+<ul>
+<li>Keep the default rule in place to block <code>pull_request_target</code>.</li>
+<li>Explicitly allow <code>pull_request_target</code> in an applicable Actions event policy if your workflows depend on it. Use workflow file targeting to allow specific workflows.</li>
+</ul>
+<p>See <a href="https://docs.github.com/actions/how-tos/administer/control-workflow-execution">how to control workflow execution</a> to configure your policies.</p>
+<p>This change applies to public repositories on GitHub Free, GitHub Team, and GitHub Enterprise Cloud, not GitHub Enterprise Server.</p>
+</body></html>
+<p>The post <a href="https://github.blog/changelog/2026-11-02-pull_request_target-blocked-by-default-december-2">pull_request_target blocked by default December 2</a> appeared first on <a href="https://github.blog">The GitHub Blog</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<category domain="changelog-type"><![CDATA[Retired]]></category>
+<category domain="changelog-label"><![CDATA[actions]]></category>
+<category domain="changelog-label"><![CDATA[application security]]></category>
+<post-id xmlns="com-wordpress:feed-additions:1">99939</post-id>	</item>
+		<item>
+		<title>GitHub Actions: macOS 14 runner image retirement</title>
+		<link>https://github.blog/changelog/2026-10-01-github-actions-macos-14-runner-image-retirement</link>
+		
+		<dc:creator><![CDATA[Allison]]></dc:creator>
+		<pubDate>Thu, 01 Oct 2026 19:11:23 +0000</pubDate>
+				<guid isPermaLink="false">https://github.blog/changelog/2026-10-01-github-actions-macos-14-runner-image-retirement</guid>
+
+					<description><![CDATA[<p>The macOS 14 runner image will be retired on November 2, 2026. To raise awareness of the upcoming removal, jobs using macOS 14 will temporarily fail during the following scheduled&#8230;</p>
+<p>The post <a href="https://github.blog/changelog/2026-10-01-github-actions-macos-14-runner-image-retirement">GitHub Actions: macOS 14 runner image retirement</a> appeared first on <a href="https://github.blog">The GitHub Blog</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><p>The macOS 14 runner image will be retired on November 2, 2026. To raise awareness of the upcoming removal, jobs using macOS 14 will temporarily fail during the following scheduled brownout periods:</p>
+<ul>
+<li>October 5, 14:00 UTC to October 6, 00:00 UTC</li>
+<li>October 12, 14:00 UTC to October 13, 00:00 UTC</li>
+<li>October 16, 14:00 UTC to October 17, 00:00 UTC</li>
+<li>October 19, 14:00 UTC to October 20, 00:00 UTC</li>
+<li>October 23, 14:00 UTC to October 24, 00:00 UTC</li>
+<li>October 26, 14:00 UTC to October 27, 00:00 UTC</li>
+<li>October 29, 14:00 UTC to October 30, 00:00 UTC</li>
+<li>October 30, 14:00 UTC to October 31, 00:00 UTC</li>
+</ul>
+<p>This deprecation includes the following labels:</p>
+<ul>
+<li><code>macos-14</code></li>
+<li><code>macos-14-large</code></li>
+<li><code>macos-14-xlarge</code></li>
+</ul>
+<p>During the lead-up to retirement, GitHub may reduce macOS 14 runner capacity, which could result in longer queue times for jobs that continue to use these labels.</p>
+<h3 id="what-you-need-to-do" id="what-you-need-to-do" ><a class="heading-link" href="#what-you-need-to-do">What you need to do<span class="heading-hash pl-2 text-italic text-bold" aria-hidden="true"></span></a></h3>
+<p>Update your workflow files to use one of the following macOS arm64 labels:</p>
+<ul>
+<li><code>macos-latest</code> (<code>macos-26</code>)</li>
+<li><code>macos-15</code></li>
+<li><code>macos-latest-xlarge</code> (<code>macos-26-xlarge</code>)</li>
+<li><code>macos-15-xlarge</code></li>
+</ul>
+<p>For up-to-date information about available tools and software, see the <a href="https://github.com/actions/runner-images">runner images repository</a>. If you run into problems or need help, contact <a href="https://support.github.com/contact?form%5Bsubject%5D=Re%3A+GitHub+Actions&amp;tags=dotcom-contact-params">GitHub Support</a>.</p>
+</body></html>
+<p>The post <a href="https://github.blog/changelog/2026-10-01-github-actions-macos-14-runner-image-retirement">GitHub Actions: macOS 14 runner image retirement</a> appeared first on <a href="https://github.blog">The GitHub Blog</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<category domain="changelog-type"><![CDATA[Retired]]></category>
+<category domain="changelog-label"><![CDATA[actions]]></category>
+<post-id xmlns="com-wordpress:feed-additions:1">99219</post-id>	</item>
+	</channel>
+</rss>

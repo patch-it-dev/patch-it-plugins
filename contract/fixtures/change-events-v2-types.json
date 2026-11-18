@@ -1,0 +1,133 @@
+{
+  "changes": [
+    {
+      "id": 1,
+      "fingerprint": "sha256:f8416cbd34c4ff65d68365ae656c636732d41bb1027ed839440137f87c26d4cf",
+      "api": "stripe",
+      "version": "2026-09-30.endive",
+      "previous_version": "2026-08-26.dahlia",
+      "change_type": "breaking",
+      "breaking": true,
+      "subject": {
+        "type": "api_operation",
+        "kind": "schema_property",
+        "side": "response",
+        "schema": "invoice",
+        "property": "subscription"
+      },
+      "description": "Property invoice.subscription removed.",
+      "source_url": "https://example.test/stripe/2026-09-30.endive",
+      "source_excerpt": "Synthetic fixture for api_operation: not a real source.",
+      "confidence": 1,
+      "detected_at": "2026-11-03T12:00:00Z"
+    },
+    {
+      "id": 2,
+      "fingerprint": "sha256:a49391691dd2187ece6ba84dcf6ec244bbe0c71c9e972b54104db769319d9f45",
+      "api": "openai-models",
+      "version": "2026-12-11",
+      "change_type": "breaking",
+      "breaking": true,
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "examplemodel-1",
+        "replacement": "examplemodel-2"
+      },
+      "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+      "migration_hint": "Use `examplemodel-2` instead.",
+      "source_url": "https://example.test/openai-models/2026-12-11",
+      "source_excerpt": "Synthetic fixture for model: not a real source.",
+      "confidence": 1,
+      "detected_at": "2026-11-03T12:00:00Z"
+    },
+    {
+      "id": 3,
+      "fingerprint": "sha256:7caa5ac7c7922798e11123fce490b3309dba0ca23ed2460938b8e284d2001a0d",
+      "api": "examplepkg",
+      "version": "2.0.0",
+      "change_type": "breaking",
+      "breaking": true,
+      "subject": {
+        "type": "package_release",
+        "ecosystem": "pypi",
+        "package": "examplepkg",
+        "change": "renamed_symbol",
+        "symbols": [
+          "Model.parse_obj"
+        ],
+        "replacement": "Model.model_validate"
+      },
+      "description": "Model.parse_obj renamed to Model.model_validate in examplepkg 2.0.0.",
+      "source_url": "https://example.test/examplepkg/2.0.0",
+      "source_excerpt": "Synthetic fixture for package_release: not a real source.",
+      "confidence": 1,
+      "detected_at": "2026-11-03T12:00:00Z"
+    },
+    {
+      "id": 4,
+      "fingerprint": "sha256:27deca77d38e704021cfdfc77741903aff791ae118121d9e1157492416042bc1",
+      "api": "examplepkg",
+      "version": "2.0.0",
+      "change_type": "breaking",
+      "breaking": true,
+      "subject": {
+        "type": "package_release",
+        "ecosystem": "pypi",
+        "package": "examplepkg",
+        "change": "removed_symbol",
+        "symbols": [
+          "Client.legacy_call"
+        ]
+      },
+      "description": "Client.legacy_call removed in examplepkg 2.0.0.",
+      "source_url": "https://example.test/examplepkg/2.0.0",
+      "source_excerpt": "Synthetic fixture for package_release: not a real source.",
+      "confidence": 1,
+      "detected_at": "2026-11-03T12:00:00Z"
+    },
+    {
+      "id": 5,
+      "fingerprint": "sha256:a670cf0f7ec97526cdef4eb710a70cce61d9d1ef190fdf18d41a53937eb55ecc",
+      "api": "examplepkg",
+      "version": "2.0.0",
+      "change_type": "deprecation",
+      "breaking": false,
+      "subject": {
+        "type": "package_release",
+        "ecosystem": "npm",
+        "package": "examplepkg",
+        "change": "changed_default",
+        "symbols": [
+          "connect"
+        ],
+        "parameter": "timeout"
+      },
+      "description": "The default of connect(timeout) changed in examplepkg 2.0.0.",
+      "source_url": "https://example.test/examplepkg/2.0.0",
+      "source_excerpt": "Synthetic fixture for package_release: not a real source.",
+      "confidence": 1,
+      "detected_at": "2026-11-03T12:00:00Z"
+    },
+    {
+      "id": 6,
+      "fingerprint": "sha256:2131ccf4b4cea4214775419c1df37eef0b139d20570e51e548d93f19c33a02f8",
+      "api": "github-actions",
+      "version": "2026-09-23",
+      "change_type": "breaking",
+      "breaking": true,
+      "subject": {
+        "type": "ci_runtime",
+        "platform": "github-actions",
+        "runtime": "node20",
+        "replacement": "node24"
+      },
+      "description": "Node 20 is no longer available on GitHub Actions runners from 2026-09-23.",
+      "source_url": "https://example.test/github-actions/2026-09-23",
+      "source_excerpt": "Synthetic fixture for ci_runtime: not a real source.",
+      "confidence": 1,
+      "detected_at": "2026-11-03T12:00:00Z"
+    }
+  ]
+}

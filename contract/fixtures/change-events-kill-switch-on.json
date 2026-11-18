@@ -1,0 +1,31 @@
+{
+  "_comment": "Change-feed fixture: a GET /v1/changes response with the kill switch on (docs/contract/change-feed-api.md#the-kill-switch). The client must open nothing, print the reason and exit 0. The event is a copy of id 1 in change-events.json, so a client that ignored the switch would have something to act on.",
+  "changes": [
+    {
+      "id": 1,
+      "fingerprint": "sha256:19487576b199387eaa21f6a766aa36563a16b7f4f0f4dbeaa60d351acccde6fe",
+      "api": "stripe",
+      "version": "2026-08-26.dahlia",
+      "previous_version": "2026-07-29.dahlia",
+      "change_type": "new_feature",
+      "breaking": false,
+      "affected": {
+        "kind": "operation",
+        "side": "request",
+        "operation": "POST /v1/billing/feedback_options"
+      },
+      "description": "New operation POST /v1/billing/feedback_options (PostBillingFeedbackOptions).",
+      "source_url": "https://raw.githubusercontent.com/stripe/openapi/v2468/latest/openapi.spec3.json",
+      "source_pointer": "/paths/~1v1~1billing~1feedback_options/post",
+      "source_excerpt": "{…,\"operationId\":\"PostBillingFeedbackOptions\",…,\"summary\":\"Create a feedback option\"}",
+      "confidence": 1.0,
+      "detected_at": "2026-09-13T15:00:00Z"
+    }
+  ],
+  "next_cursor": "1",
+  "kill_switch": {
+    "on": true,
+    "reason": "pausing all pull requests while a bad fix is investigated",
+    "since": "2026-11-14T03:00:00Z"
+  }
+}

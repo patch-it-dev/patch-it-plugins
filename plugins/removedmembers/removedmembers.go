@@ -1,0 +1,189 @@
+// Package removedmembers is the source plugin for a package release that
+// removed members of its top-level module, read from the release's own
+// migration guide at its tag: change event v2's `package_release` subject
+// . NumPy 2.0 first: its guide lists about 60 members of the main `np`
+// namespace that were removed, each with a migration guideline, and code using
+// one raises AttributeError on NumPy 2 (checked 2026-11-04 at tag v2.0.0).
+//
+// A row whose guideline is exactly one replacement in the module ("Use
+// “np.float64“ instead.") becomes a `renamed_symbol` with that replacement:
+// the rename works on NumPy 1.x too, so a fix holds before and after the
+// upgrade. Every other row (no replacement, a builtin, an expression, a
+// sentence of advice) becomes a `removed_symbol`, which the patch-it client
+// opens as an issue: precision over recall.
+package removedmembers
+
+import (
+	"context"
+	"fmt"
+	"regexp"
+	"strings"
+
+	"github.com/patch-it-dev/patch-it-plugins/event"
+	"github.com/patch-it-dev/patch-it-plugins/plugin"
+)
+
+func init() {
+	plugin.Register(Plugin{Guide: NumPy2})
+}
+
+// Guide is one package's guide to one release.
+type Guide struct {
+	Package string // the PyPI name and the events' api: "numpy"
+	Module  string // how the guide writes the module in a replacement: "np"
+	Release string // "2.0.0"
+	Repo    string // owner/name on GitHub
+	Path    string // the guide's path in the repo at the release tag
+	Section string // the heading the table is under
+}
+
+// NumPy2 is NumPy's 2.0 migration guide, "Main namespace" table.
+var NumPy2 = Guide{
+	Package: "numpy",
+	Module:  "np",
+	Release: "2.0.0",
+	Repo:    "numpy/numpy",
+	Path:    "doc/source/numpy_2_0_migration_guide.rst",
+	Section: "Main namespace",
+}
+
+// URL is the guide as it was at the release tag: its own provenance.
+func (g Guide) URL() string {
+	return fmt.Sprintf("https://raw.githubusercontent.com/%s/v%s/%s", g.Repo, g.Release, g.Path)
+}
+
+// Removal is one removed member and the guide's guideline for it.
+type Removal struct {
+	Member      string
+	Guideline   string
+	Replacement string // the one member to use instead, or ""
+	Excerpt     string // the table's header and the row
+}
+
+// Parse reads the section's table: an RST simple table, the member in the
+// first column, the guideline in the second, a guideline continued on the next
+// lines indented to the second column.
+func Parse(page []byte, g Guide) ([]Removal, error) {
+	lines := strings.Split(strings.ReplaceAll(string(page), "\r\n", "\n"), "\n")
+	start := -1
+	for i, l := range lines {
+		if strings.TrimSpace(l) == g.Section && i+1 < len(lines) && strings.HasPrefix(lines[i+1], "---") {
+			start = i
+			break
+		}
+	}
+	if start < 0 {
+		return nil, fmt.Errorf("no %q section: the guide's shape may have changed", g.Section)
+	}
+	border := -1
+	for i := start; i < len(lines); i++ {
+		if strings.HasPrefix(lines[i], "====") && strings.Contains(lines[i], " ") {
+			border = i
+			break
+		}
+	}
+	if border < 0 || border+2 >= len(lines) {
+		return nil, fmt.Errorf("no table under %q", g.Section)
+	}
+	col := strings.Index(lines[border], " ") + 1
+	for col < len(lines[border]) && lines[border][col] == ' ' {
+		col++
+	}
+	header := lines[border+1]
+	if !strings.HasPrefix(strings.ToLower(header), "removed member") {
+		return nil, fmt.Errorf("the table under %q isn't the removed members: %q", g.Section, header)
+	}
+	head := strings.Join([]string{lines[border], header, lines[border+2]}, "\n")
+	var out []Removal
+	var raw []string
+	for i := border + 3; i < len(lines) && !strings.HasPrefix(lines[i], "===="); i++ {
+		l := lines[i]
+		if len(l) > col && strings.TrimSpace(l[:col]) == "" && len(out) > 0 {
+			out[len(out)-1].Guideline += " " + strings.TrimSpace(l)
+			raw[len(raw)-1] += "\n" + l
+			continue
+		}
+		if strings.TrimSpace(l) == "" {
+			continue
+		}
+		member, guide := l, ""
+		if len(l) > col {
+			member, guide = l[:col], l[col:]
+		}
+		out = append(out, Removal{
+			Member:    strings.ReplaceAll(strings.TrimSpace(member), `\_`, "_"),
+			Guideline: strings.TrimSpace(guide),
+		})
+		raw = append(raw, l)
+	}
+	if len(out) == 0 {
+		return nil, fmt.Errorf("the removed members table under %q is empty", g.Section)
+	}
+	plain := regexp.MustCompile("^Use ``" + regexp.QuoteMeta(g.Module) + `\.([A-Za-z_][A-Za-z0-9_]*)` + "`` instead\\.$")
+	for i := range out {
+		if m := plain.FindStringSubmatch(out[i].Guideline); m != nil {
+			out[i].Replacement = m[1]
+		}
+		out[i].Excerpt = g.Section + "\n" + head + "\n" + raw[i]
+	}
+	return out, nil
+}
+
+// Plugin reads one guide.
+type Plugin struct {
+	Guide Guide
+}
+
+func (p Plugin) Name() string { return p.Guide.Package }
+
+// Run reads the guide at its tag. The tag never changes, so a rerun stores
+// nothing new: the fingerprints dedupe.
+func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) {
+	g := p.Guide
+	page, err := env.Get(ctx, g.URL())
+	if err != nil {
+		return plugin.Result{}, fmt.Errorf("fetching %s: %w", g.URL(), err)
+	}
+	removals, err := Parse(page, g)
+	if err != nil {
+		return plugin.Result{}, fmt.Errorf("reading %s: %w", g.URL(), err)
+	}
+	now := env.Now().UTC()
+	var events []event.EventV2
+	var rejected []error
+	for _, r := range removals {
+		subject := event.Subject{
+			Type: event.SubjectPackageRelease, Ecosystem: "pypi", Package: g.Package,
+			Change: event.PackageRemovedSymbol, Symbols: []string{r.Member},
+		}
+		desc := fmt.Sprintf("%s.%s was removed in %s %s: code using it raises AttributeError.", g.Module, r.Member, g.Package, g.Release)
+		if r.Replacement != "" {
+			subject.Change, subject.Replacement = event.PackageRenamedSymbol, r.Replacement
+		}
+		e := event.EventV2{
+			API:           g.Package,
+			Version:       g.Release,
+			ChangeType:    event.ChangeTypeBreaking,
+			Breaking:      true,
+			Subject:       subject,
+			Description:   desc,
+			MigrationHint: fmt.Sprintf("%s (%s's migration guide for %s)", r.Guideline, g.Package, g.Release),
+			SourceURL:     g.URL(),
+			SourceExcerpt: r.Excerpt,
+			Confidence:    1.0,
+			DetectedAt:    now,
+		}
+		e.Fingerprint = event.FingerprintV2(e.API, e.Version, e.ChangeType, subject, "")
+		if err := e.Validate(); err != nil {
+			rejected = append(rejected, fmt.Errorf("%s %s: %w", g.Package, r.Member, err))
+			continue
+		}
+		events = append(events, e)
+	}
+	return plugin.Result{
+		Label:     g.URL(),
+		Events:    events,
+		Rejected:  rejected,
+		Baselines: []plugin.Spec{plugin.Baseline(g.Package, g.Release, "v"+g.Release, g.URL(), page, false, now)},
+	}, nil
+}

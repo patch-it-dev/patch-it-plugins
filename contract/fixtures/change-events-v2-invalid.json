@@ -1,0 +1,624 @@
+{
+  "cases": [
+    {
+      "why_invalid": "unknown subject.type",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "api": "openai-models",
+        "version": "2026-12-11",
+        "change_type": "breaking",
+        "breaking": true,
+        "subject": {
+          "type": "sdk_release",
+          "provider": "openai",
+          "name": "examplemodel-1",
+          "replacement": "examplemodel-2"
+        },
+        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+        "source_url": "https://example.test/openai-models/2026-12-11",
+        "source_excerpt": "Synthetic fixture for model: not a real source.",
+        "confidence": 1.0,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "migration_hint": "Use `examplemodel-2` instead.",
+        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "why_invalid": "model without a name",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "api": "openai-models",
+        "version": "2026-12-11",
+        "change_type": "breaking",
+        "breaking": true,
+        "subject": {
+          "type": "model",
+          "provider": "openai",
+          "replacement": "examplemodel-2"
+        },
+        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+        "source_url": "https://example.test/openai-models/2026-12-11",
+        "source_excerpt": "Synthetic fixture for model: not a real source.",
+        "confidence": 1.0,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "migration_hint": "Use `examplemodel-2` instead.",
+        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "why_invalid": "model without a provider",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "api": "openai-models",
+        "version": "2026-12-11",
+        "change_type": "breaking",
+        "breaking": true,
+        "subject": {
+          "type": "model",
+          "name": "examplemodel-1",
+          "replacement": "examplemodel-2"
+        },
+        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+        "source_url": "https://example.test/openai-models/2026-12-11",
+        "source_excerpt": "Synthetic fixture for model: not a real source.",
+        "confidence": 1.0,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "migration_hint": "Use `examplemodel-2` instead.",
+        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "why_invalid": "model with a field of another type (kind)",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "api": "openai-models",
+        "version": "2026-12-11",
+        "change_type": "breaking",
+        "breaking": true,
+        "subject": {
+          "type": "model",
+          "provider": "openai",
+          "name": "examplemodel-1",
+          "replacement": "examplemodel-2",
+          "kind": "operation"
+        },
+        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+        "source_url": "https://example.test/openai-models/2026-12-11",
+        "source_excerpt": "Synthetic fixture for model: not a real source.",
+        "confidence": 1.0,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "migration_hint": "Use `examplemodel-2` instead.",
+        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "why_invalid": "package_release removed_parameter without the parameter",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "api": "openai-models",
+        "version": "2026-12-11",
+        "change_type": "breaking",
+        "breaking": true,
+        "subject": {
+          "type": "package_release",
+          "ecosystem": "pypi",
+          "package": "examplepkg",
+          "change": "removed_parameter",
+          "symbols": [
+            "messages.create"
+          ]
+        },
+        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+        "source_url": "https://example.test/openai-models/2026-12-11",
+        "source_excerpt": "Synthetic fixture for model: not a real source.",
+        "confidence": 1.0,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "migration_hint": "Use `examplemodel-2` instead.",
+        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "why_invalid": "package_release changed_default without the parameter",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "api": "openai-models",
+        "version": "2026-12-11",
+        "change_type": "breaking",
+        "breaking": true,
+        "subject": {
+          "type": "package_release",
+          "ecosystem": "pypi",
+          "package": "examplepkg",
+          "change": "changed_default",
+          "symbols": [
+            "messages.create"
+          ]
+        },
+        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+        "source_url": "https://example.test/openai-models/2026-12-11",
+        "source_excerpt": "Synthetic fixture for model: not a real source.",
+        "confidence": 1.0,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "migration_hint": "Use `examplemodel-2` instead.",
+        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "why_invalid": "package_release renamed_symbol without the replacement",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "api": "openai-models",
+        "version": "2026-12-11",
+        "change_type": "breaking",
+        "breaking": true,
+        "subject": {
+          "type": "package_release",
+          "ecosystem": "pypi",
+          "package": "examplepkg",
+          "change": "renamed_symbol",
+          "symbols": [
+            "messages.create"
+          ]
+        },
+        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+        "source_url": "https://example.test/openai-models/2026-12-11",
+        "source_excerpt": "Synthetic fixture for model: not a real source.",
+        "confidence": 1.0,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "migration_hint": "Use `examplemodel-2` instead.",
+        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "why_invalid": "package_release with no symbols",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "api": "openai-models",
+        "version": "2026-12-11",
+        "change_type": "breaking",
+        "breaking": true,
+        "subject": {
+          "type": "package_release",
+          "ecosystem": "pypi",
+          "package": "examplepkg",
+          "change": "removed_parameter",
+          "symbols": [],
+          "parameter": "temperature"
+        },
+        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+        "source_url": "https://example.test/openai-models/2026-12-11",
+        "source_excerpt": "Synthetic fixture for model: not a real source.",
+        "confidence": 1.0,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "migration_hint": "Use `examplemodel-2` instead.",
+        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "why_invalid": "package_release with an empty symbol",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "api": "openai-models",
+        "version": "2026-12-11",
+        "change_type": "breaking",
+        "breaking": true,
+        "subject": {
+          "type": "package_release",
+          "ecosystem": "pypi",
+          "package": "examplepkg",
+          "change": "removed_parameter",
+          "symbols": [
+            ""
+          ],
+          "parameter": "temperature"
+        },
+        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+        "source_url": "https://example.test/openai-models/2026-12-11",
+        "source_excerpt": "Synthetic fixture for model: not a real source.",
+        "confidence": 1.0,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "migration_hint": "Use `examplemodel-2` instead.",
+        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "why_invalid": "package_release with an unknown change",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "api": "openai-models",
+        "version": "2026-12-11",
+        "change_type": "breaking",
+        "breaking": true,
+        "subject": {
+          "type": "package_release",
+          "ecosystem": "pypi",
+          "package": "examplepkg",
+          "change": "broke_it",
+          "symbols": [
+            "messages.create"
+          ],
+          "parameter": "temperature"
+        },
+        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+        "source_url": "https://example.test/openai-models/2026-12-11",
+        "source_excerpt": "Synthetic fixture for model: not a real source.",
+        "confidence": 1.0,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "migration_hint": "Use `examplemodel-2` instead.",
+        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "why_invalid": "package_release without the ecosystem",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "api": "openai-models",
+        "version": "2026-12-11",
+        "change_type": "breaking",
+        "breaking": true,
+        "subject": {
+          "type": "package_release",
+          "package": "examplepkg",
+          "change": "removed_parameter",
+          "symbols": [
+            "messages.create"
+          ],
+          "parameter": "temperature"
+        },
+        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+        "source_url": "https://example.test/openai-models/2026-12-11",
+        "source_excerpt": "Synthetic fixture for model: not a real source.",
+        "confidence": 1.0,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "migration_hint": "Use `examplemodel-2` instead.",
+        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "why_invalid": "ci_runtime without the runtime",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "api": "openai-models",
+        "version": "2026-12-11",
+        "change_type": "breaking",
+        "breaking": true,
+        "subject": {
+          "type": "ci_runtime",
+          "platform": "github-actions"
+        },
+        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+        "source_url": "https://example.test/openai-models/2026-12-11",
+        "source_excerpt": "Synthetic fixture for model: not a real source.",
+        "confidence": 1.0,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "migration_hint": "Use `examplemodel-2` instead.",
+        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "why_invalid": "api_operation with value, which v2 dropped (a model has its own type)",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "api": "openai-models",
+        "version": "2026-12-11",
+        "change_type": "breaking",
+        "breaking": true,
+        "subject": {
+          "type": "api_operation",
+          "kind": "request_parameter",
+          "side": "request",
+          "operation": "POST /v1/chat/completions",
+          "property": "model",
+          "value": "gpt-4"
+        },
+        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+        "source_url": "https://example.test/openai-models/2026-12-11",
+        "source_excerpt": "Synthetic fixture for model: not a real source.",
+        "confidence": 1.0,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "migration_hint": "Use `examplemodel-2` instead.",
+        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "why_invalid": "api_operation schema_property on the request side",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "api": "openai-models",
+        "version": "2026-12-11",
+        "change_type": "breaking",
+        "breaking": true,
+        "subject": {
+          "type": "api_operation",
+          "kind": "schema_property",
+          "side": "request",
+          "schema": "invoice",
+          "property": "x"
+        },
+        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+        "source_url": "https://example.test/openai-models/2026-12-11",
+        "source_excerpt": "Synthetic fixture for model: not a real source.",
+        "confidence": 1.0,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "migration_hint": "Use `examplemodel-2` instead.",
+        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "why_invalid": "api_operation request_parameter without the property",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "api": "openai-models",
+        "version": "2026-12-11",
+        "change_type": "breaking",
+        "breaking": true,
+        "subject": {
+          "type": "api_operation",
+          "kind": "request_parameter",
+          "side": "request",
+          "operation": "POST /v1/charges"
+        },
+        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+        "source_url": "https://example.test/openai-models/2026-12-11",
+        "source_excerpt": "Synthetic fixture for model: not a real source.",
+        "confidence": 1.0,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "migration_hint": "Use `examplemodel-2` instead.",
+        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "why_invalid": "supersedes isn't a fingerprint",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "api": "openai-models",
+        "version": "2026-12-11",
+        "change_type": "breaking",
+        "breaking": true,
+        "subject": {
+          "type": "model",
+          "provider": "openai",
+          "name": "examplemodel-1",
+          "replacement": "examplemodel-2"
+        },
+        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+        "source_url": "https://example.test/openai-models/2026-12-11",
+        "source_excerpt": "Synthetic fixture for model: not a real source.",
+        "confidence": 1.0,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "migration_hint": "Use `examplemodel-2` instead.",
+        "supersedes": "sha256:xyz"
+      }
+    },
+    {
+      "why_invalid": "v1's affected next to subject: a field v2 doesn't define",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "api": "openai-models",
+        "version": "2026-12-11",
+        "change_type": "breaking",
+        "breaking": true,
+        "subject": {
+          "type": "model",
+          "provider": "openai",
+          "name": "examplemodel-1",
+          "replacement": "examplemodel-2"
+        },
+        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+        "source_url": "https://example.test/openai-models/2026-12-11",
+        "source_excerpt": "Synthetic fixture for model: not a real source.",
+        "confidence": 1.0,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "migration_hint": "Use `examplemodel-2` instead.",
+        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "affected": {
+          "kind": "operation",
+          "side": "request",
+          "operation": "POST /v1/x"
+        }
+      }
+    },
+    {
+      "why_invalid": "no subject",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "api": "openai-models",
+        "version": "2026-12-11",
+        "change_type": "breaking",
+        "breaking": true,
+        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+        "source_url": "https://example.test/openai-models/2026-12-11",
+        "source_excerpt": "Synthetic fixture for model: not a real source.",
+        "confidence": 1.0,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "migration_hint": "Use `examplemodel-2` instead.",
+        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "why_invalid": "no source_url (no provenance, no event)",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "api": "openai-models",
+        "version": "2026-12-11",
+        "change_type": "breaking",
+        "breaking": true,
+        "subject": {
+          "type": "model",
+          "provider": "openai",
+          "name": "examplemodel-1",
+          "replacement": "examplemodel-2"
+        },
+        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+        "source_excerpt": "Synthetic fixture for model: not a real source.",
+        "confidence": 1.0,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "migration_hint": "Use `examplemodel-2` instead.",
+        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "why_invalid": "breaking disagrees with change_type",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "api": "openai-models",
+        "version": "2026-12-11",
+        "change_type": "breaking",
+        "breaking": false,
+        "subject": {
+          "type": "model",
+          "provider": "openai",
+          "name": "examplemodel-1",
+          "replacement": "examplemodel-2"
+        },
+        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+        "source_url": "https://example.test/openai-models/2026-12-11",
+        "source_excerpt": "Synthetic fixture for model: not a real source.",
+        "confidence": 1.0,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "migration_hint": "Use `examplemodel-2` instead.",
+        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "why_invalid": "ci_runtime without the platform",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "api": "openai-models",
+        "version": "2026-12-11",
+        "change_type": "breaking",
+        "breaking": true,
+        "subject": {
+          "type": "ci_runtime",
+          "runtime": "node20"
+        },
+        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+        "source_url": "https://example.test/openai-models/2026-12-11",
+        "source_excerpt": "Synthetic fixture for model: not a real source.",
+        "confidence": 1.0,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "migration_hint": "Use `examplemodel-2` instead.",
+        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "why_invalid": "package_release without the package",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "api": "openai-models",
+        "version": "2026-12-11",
+        "change_type": "breaking",
+        "breaking": true,
+        "subject": {
+          "type": "package_release",
+          "ecosystem": "pypi",
+          "change": "removed_symbol",
+          "symbols": [
+            "x.y"
+          ]
+        },
+        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+        "source_url": "https://example.test/openai-models/2026-12-11",
+        "source_excerpt": "Synthetic fixture for model: not a real source.",
+        "confidence": 1.0,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "migration_hint": "Use `examplemodel-2` instead.",
+        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "why_invalid": "api_operation with an empty field of another type (replacement: \"\")",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "api": "openai-models",
+        "version": "2026-12-11",
+        "change_type": "breaking",
+        "breaking": true,
+        "subject": {
+          "type": "api_operation",
+          "kind": "operation",
+          "side": "request",
+          "operation": "POST /v1/x",
+          "replacement": ""
+        },
+        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+        "source_url": "https://example.test/openai-models/2026-12-11",
+        "source_excerpt": "Synthetic fixture for model: not a real source.",
+        "confidence": 1.0,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "migration_hint": "Use `examplemodel-2` instead.",
+        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "why_invalid": "a key in the wrong case (TYPE), which Go's decoder would otherwise match",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "api": "openai-models",
+        "version": "2026-12-11",
+        "change_type": "breaking",
+        "breaking": true,
+        "subject": {
+          "TYPE": "model",
+          "provider": "openai",
+          "name": "examplemodel-1"
+        },
+        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+        "source_url": "https://example.test/openai-models/2026-12-11",
+        "source_excerpt": "Synthetic fixture for model: not a real source.",
+        "confidence": 1.0,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "migration_hint": "Use `examplemodel-2` instead.",
+        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "why_invalid": "a top-level key in the wrong case (API)",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "version": "2026-12-11",
+        "change_type": "breaking",
+        "breaking": true,
+        "subject": {
+          "type": "model",
+          "provider": "openai",
+          "name": "examplemodel-1",
+          "replacement": "examplemodel-2"
+        },
+        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+        "source_url": "https://example.test/openai-models/2026-12-11",
+        "source_excerpt": "Synthetic fixture for model: not a real source.",
+        "confidence": 1.0,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "migration_hint": "Use `examplemodel-2` instead.",
+        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "API": "openai-models"
+      }
+    }
+  ]
+}
