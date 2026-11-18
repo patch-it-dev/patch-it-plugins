@@ -1,14 +1,14 @@
 // Package adapter defines the per-API source adapter interface and holds
 // each API's adapter, starting with Stripe. An adapter only knows where its
 // API's spec lives and how to fetch it — fetching mechanics live in
-// internal/fetch, and diffing/normalizing/storing are shared, not adapter code.
+// fetch/, and diffing/normalizing/storing are shared, not adapter code.
 package adapter
 
 import "context"
 
 // Spec is one fetched spec: its raw bytes, the API version it declares, and
 // the pinned URL it came from. It is not yet parsed or stored — that is
-// diff.Parse's and the baseline's (source.Spec) job, respectively.
+// diff.Parse's and the baseline's (plugin.Spec) job, respectively.
 type Spec struct {
 	Content   []byte
 	Version   string

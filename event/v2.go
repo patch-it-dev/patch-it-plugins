@@ -14,7 +14,7 @@ import (
 // Change event v2 (the change event contract), in force since the
 // cut-over: v1's fields with `affected`, which can only describe an OpenAPI
 // location, replaced by a typed `subject`. The store holds and serves v2; the
-// sources still build v1 events, converted on the way out (internal/migrate).
+// sources still build v1 events, converted on the way out (migrate/).
 
 // SubjectType is what kind of thing changed.
 type SubjectType string
@@ -89,7 +89,7 @@ type EventV2 struct {
 
 // DecodeV2 reads one v2 event and refuses a field the contract doesn't define,
 // at the top level or in subject: the patch-it client's model forbids extra
-// fields too, so ingest and the client reject the same events. Keys are
+// fields too, so the hosted service and the client reject the same events. Keys are
 // matched exactly ("TYPE" isn't "type", though encoding/json would take it),
 // and a subject key belongs to its type even when its value is empty: pydantic
 // sees the key, not the value.

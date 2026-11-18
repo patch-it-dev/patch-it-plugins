@@ -7,7 +7,7 @@
 //	got := kittest.Ingest(t, plugin, kittest.Pages{url: "testdata/page.md"})
 //	kittest.Golden(t, "testdata/golden/numpy.json", got)
 //
-// `go test ./internal/plugin/<name> -update` rewrites a plugin's golden files;
+// `go test ./plugins/<name> -update` rewrites a plugin's golden files;
 // review the diff like code.
 package kittest
 

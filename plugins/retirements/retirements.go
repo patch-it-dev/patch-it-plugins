@@ -1,7 +1,7 @@
 // Package retirements is the source plugin for a model provider's deprecations
 // page (OpenAI, Anthropic): every retired model becomes an event. There is no
 // spec to diff: the page is read as it is now, and the events cite a Wayback
-// Machine snapshot of it, never the live page (internal/plugin/kit).
+// Machine snapshot of it, never the live page (kit/).
 package retirements
 
 import (

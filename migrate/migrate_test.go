@@ -11,13 +11,13 @@ import (
 	"github.com/patch-it-dev/patch-it-plugins/event"
 )
 
-// -update rewrites the golden v2 fixture from the v1 ones: go test ./internal/migrate -update
+// -update rewrites the golden v2 fixture from the v1 ones: go test ./migrate -update
 var update = flag.Bool("update", false, "rewrite contract/fixtures/change-events-v2.json")
 
 const fixtures = "../contract/fixtures/"
 
 // The v1 fixtures the golden v2 file is converted from: the shared contract
-// fixture, ingest's model retirements and the anthropic SDK release.
+// fixture, the hosted service's model retirements and the anthropic SDK release.
 var v1Files = []string{
 	"change-events.json",
 	"change-events-model-retirements-2026-10-13.json",
@@ -73,7 +73,7 @@ func TestV2FixtureIsTheConversionOfV1(t *testing.T) {
 		t.Fatalf("%v (run with -update to create it)", err)
 	}
 	if !bytes.Equal(buf.Bytes(), want) {
-		t.Errorf("%s isn't the conversion of the v1 fixtures: run go test ./internal/migrate -update", golden)
+		t.Errorf("%s isn't the conversion of the v1 fixtures: run go test ./migrate -update", golden)
 	}
 }
 
@@ -97,7 +97,7 @@ func TestAStripeEventKeepsItsFingerprint(t *testing.T) {
 }
 
 // A re-keyed event names the fingerprint it replaces: the patch-it client
-// finds its open issue or pull request by that one, and opens nothing twice (the PR #124
+// finds its open issue or pull request by that one, and opens nothing twice (found in
 // review: without it, every repo with an open retirement PR gets a second).
 func TestARekeyedEventSupersedesItsV1Fingerprint(t *testing.T) {
 	for _, name := range v1Files[1:] {

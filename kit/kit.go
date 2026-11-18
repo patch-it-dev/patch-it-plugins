@@ -1,7 +1,7 @@
 // Package kit is what source plugins share beyond the core: the Wayback
 // Machine client a plugin cites a live page through (Wayback, Cite) and the
 // "same page as last run" check (Unchanged). Fetching with ETag and
-// Last-Modified caching is internal/fetch's Cache, handed to every plugin as
+// Last-Modified caching is fetch's Cache, handed to every plugin as
 // plugin.Env.Get; the test kit is kittest.
 //
 // kit is not a plugin: plugins import it, it imports no plugin.

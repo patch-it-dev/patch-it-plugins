@@ -1,6 +1,6 @@
 // Package migrationguide is the source plugin for an SDK's migration guide,
 // read at the release tag of the major it describes: an event per request
-// parameter the release removed (internal/sdkguide). The tag never changes, so
+// parameter the release removed (sdkguide/). The tag never changes, so
 // a rerun stores nothing new: the fingerprints dedupe.
 package migrationguide
 

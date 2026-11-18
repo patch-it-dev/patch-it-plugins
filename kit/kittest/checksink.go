@@ -9,10 +9,11 @@ import (
 	"github.com/patch-it-dev/patch-it-plugins/plugin"
 )
 
-// CheckSink checks that the Sinks open returns store as ingest does: dedupe by
-// fingerprint, ids in save order, an invalid event saving nothing, and which
-// baseline is the last. Mem passes it; ingest runs it against its Postgres
-// store too, so the two can't drift apart. open must return an empty Sink.
+// CheckSink checks that the Sinks open returns store as patch-it's hosted
+// ingestion service does: dedupe by fingerprint, ids in save order, an invalid
+// event saving nothing, and which baseline is the last. Mem passes it; the
+// hosted service runs it against its own store too, so the two can't drift
+// apart. open must return an empty Sink.
 func CheckSink(t *testing.T, open func(t *testing.T) Sink) {
 	at := time.Date(2026, 9, 20, 10, 0, 0, 0, time.UTC)
 	lastTag := func(t *testing.T, s Sink, api string) string {

@@ -9,7 +9,7 @@ import (
 )
 
 // -update writes the computed fingerprints into the hand-written v2 fixture:
-// go test ./internal/event -update
+// go test ./event -update
 var update = flag.Bool("update", false, "rewrite fingerprints in change-events-v2-types.json")
 
 const v2Fixtures = "../contract/fixtures/"
@@ -122,7 +122,7 @@ func TestAPIOperationKeepsV1Fingerprint(t *testing.T) {
 	}
 }
 
-// The same release listed in another order is the same event (the PR #124
+// The same release listed in another order is the same event (found in
 // review: otherwise the store keeps it twice).
 func TestSymbolOrderDoesntChangeTheFingerprint(t *testing.T) {
 	s := Subject{Type: SubjectPackageRelease, Ecosystem: "pypi", Package: "anthropic",

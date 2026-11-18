@@ -183,7 +183,7 @@ func TestIndexFetchesAVersionsEntriesAndAttachesHints(t *testing.T) {
 		request("POST /v1/invoices", "payment_settings.payment_method_types[]", breaking, "placeholder"),
 		{ChangeType: breaking, Affected: event.Affected{Kind: event.AffectedKindSchemaProperty, Side: event.SideResponse,
 			Schema: "payment_intent", Property: "charges"}},
-		// The PR #87 review's collision: the top-level billing_cycle_anchor type
+		// A collision found in review: the top-level billing_cycle_anchor type
 		// change on Subscription#update, and the nested one trial offers added.
 		// Each gets its own entry; neither gets the other's.
 		request("POST /v1/subscriptions/{subscription_exposed_id}", "billing_cycle_anchor", breaking, "Handle billing_cycle_anchor as object."),

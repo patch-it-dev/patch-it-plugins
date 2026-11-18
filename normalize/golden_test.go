@@ -20,7 +20,7 @@ import (
 //
 // When the pipeline's output changes on purpose, regenerate the files with
 //
-//	go test ./internal/normalize -run TestGolden -update
+//	go test ./normalize -run TestGolden -update
 //
 // and review every changed events.json in the diff before committing. That
 // review is the point: a golden file nobody reads proves nothing.

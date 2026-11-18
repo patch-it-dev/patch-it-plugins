@@ -1,8 +1,9 @@
-// Package source is what a change source is: every source is a plugin behind
+// Package plugin is what a change source is: every source is a plugin behind
 // one interface, registered by name. A plugin reads its source and returns a
-// Result; it stores nothing itself. Whoever runs it (ingest's runner, or the
-// test kit) stores the events, then the baselines. Adding a source is a new
-// plugin package that calls Register; nothing here changes.
+// Result; it stores nothing itself. Whoever runs it (patch-it's hosted
+// ingestion service, or the test kit) stores the events, then the baselines.
+// Adding a source is a new package under plugins/ that calls Register; nothing
+// here changes.
 package plugin
 
 import (
@@ -84,10 +85,10 @@ func Register(p Plugin) {
 	mu.Lock()
 	defer mu.Unlock()
 	if p.Name() == "all" {
-		panic(`source: "all" means every plugin; a plugin can't be named it`)
+		panic(`plugin: "all" means every plugin; a plugin can't be named it`)
 	}
 	if _, dup := registry[p.Name()]; dup {
-		panic(fmt.Sprintf("source: a plugin named %q is already registered", p.Name()))
+		panic(fmt.Sprintf("plugin: a plugin named %q is already registered", p.Name()))
 	}
 	registry[p.Name()] = p
 }

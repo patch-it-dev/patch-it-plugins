@@ -169,7 +169,7 @@ func TestAValueNeedsTheProperty(t *testing.T) {
 	}
 }
 
-// Contract test between ingest and the patch-it client.
+// Contract test between the hosted service and the patch-it client.
 // contract/fixtures/change-events.json is the file the client builds against
 // in place of the real feed. The client's tests check the same file against its
 // own model, so if either side's idea of a change event drifts from the
@@ -191,12 +191,12 @@ func TestSharedFixtureMatchesTheContract(t *testing.T) {
 	}
 	for _, e := range feed.Changes {
 		if err := e.Validate(); err != nil {
-			t.Errorf("fixture event %d fails ingest's validation: %v", e.ID, err)
+			t.Errorf("fixture event %d fails the service's validation: %v", e.ID, err)
 		}
 	}
 }
 
-// The model retirements fixture is ingest's real output, the first to
+// The model retirements fixture is the hosted service's real output, the first to
 // carry affected.value. Ingest and the client both check it.
 func TestRetirementFixtureMatchesTheContract(t *testing.T) {
 	raw, err := os.ReadFile("../contract/fixtures/change-events-model-retirements-2026-10-13.json")

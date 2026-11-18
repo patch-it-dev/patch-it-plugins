@@ -15,7 +15,7 @@ import (
 
 // Sink is where a kit run stores what a plugin found, and where the plugin
 // reads its last baseline back from (it is the run's Env.Baselines). Mem is
-// the one the kit uses; ingest stores in Postgres the same way.
+// the one the kit uses; patch-it's hosted ingestion service stores the same way.
 type Sink interface {
 	plugin.BaselineReader
 	// SaveEvents stores events, skipping any whose fingerprint is already
@@ -27,7 +27,7 @@ type Sink interface {
 	All() ([]event.EventV2, error)
 }
 
-// Mem is a Sink in memory that stores like ingest's Postgres store does, so a
+// Mem is a Sink in memory that stores like the hosted service's database does, so a
 // golden file is the same whichever stored the events: events are deduped by
 // fingerprint and get ids 1, 2, 3... in the order they were saved, each is
 // stored as its JSON (what the feed serves), and a baseline is the latest
@@ -131,7 +131,7 @@ func (m *Mem) LastSpec(api string) (*plugin.Spec, error) {
 	return &spec, nil
 }
 
-// Run runs p once and stores what it found in sink, as ingest's runner does:
+// Run runs p once and stores what it found in sink, as the hosted service's runner does:
 // the events first, then the baselines, so a run that fails in between leaves
 // the baseline where it was. rejected reports whether any change failed to
 // become a valid event. Unlike Ingest it doesn't fail the test, for tests that

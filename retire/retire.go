@@ -6,7 +6,7 @@
 // Both providers serve the page as markdown at its URL plus ".md" (checked
 // 2026-10-13), and both write each announcement as a table whose first column
 // is the date the model stops working. The event cites a Wayback Machine
-// snapshot of that markdown (internal/plugin/kit), never the live page: the contract
+// snapshot of that markdown (kit/), never the live page: the contract
 // requires a source that can't change under the event.
 package retire
 
