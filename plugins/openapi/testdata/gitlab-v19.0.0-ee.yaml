@@ -1,0 +1,93 @@
+# A trimmed excerpt of gitlab-org/gitlab's doc/api/openapi/openapi_v3.yaml at v19.0.0-ee
+# (https://gitlab.com/gitlab-org/gitlab/-/raw/v19.0.0-ee/doc/api/openapi/openapi_v3.yaml,
+# checked 2026-11-15). Every line below is copied unchanged; other paths, schemas
+# and top-level fields were left out.
+openapi: 3.0.0
+info:
+  title: GitLab REST API
+  version: v4
+paths:
+  "/api/v4/import/bitbucket":
+    post:
+      operationId: postApiV4ImportBitbucket
+      summary: Import a BitBucket Cloud repository
+      description: This feature was introduced in GitLab 17.0.
+      tags:
+      - Project import
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ProjectImportEntity"
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '422':
+          description: Unprocessable entity
+        '503':
+          description: Service unavailable
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/RequestBody_f0e6af1da635"
+components:
+  schemas:
+    APIEntitiesBadge:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Pipeline Status
+        link_url:
+          type: string
+          example: https://example.gitlab.com
+        image_url:
+          type: string
+          example: https://example.gitlab.com
+        rendered_link_url:
+          type: string
+          example: https://example.gitlab.com
+        rendered_image_url:
+          type: string
+          example: https://example.gitlab.com
+        id:
+          type: integer
+          example: 1
+        kind:
+          type: string
+          example: project
+    RequestBody_f0e6af1da635:
+      type: object
+      properties:
+        bitbucket_email:
+          type: string
+          description: BitBucket email
+          nullable: true
+        bitbucket_api_token:
+          type: string
+          description: BitBucket API token
+          nullable: true
+        repo_path:
+          type: string
+          description: Repository path
+          nullable: true
+        target_namespace:
+          type: string
+          description: Target namespace
+          nullable: true
+        new_name:
+          type: string
+          description: New repository name
+          nullable: true
+      required:
+      - bitbucket_email
+      - bitbucket_api_token
+      - repo_path
+      - target_namespace

@@ -1,0 +1,5 @@
+{"openapi": "3.0.0", "info": {"version": "2026-08-26.dahlia"},
+ "paths": {"/v1/billing/feedback_options": {"post": {
+   "operationId": "PostBillingFeedbackOptions",
+   "summary": "Create a feedback option"}}},
+ "components": {"schemas": {}}}

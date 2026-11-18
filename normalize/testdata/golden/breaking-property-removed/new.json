@@ -1,0 +1,5 @@
+{"openapi": "3.0.0", "info": {"version": "2026-08-26.dahlia"}, "paths": {},
+ "components": {"schemas": {"payments_primitives_payment_records_resource_payment_method_card_details_resource_three_d_secure": {
+   "type": "object",
+   "properties": {
+     "result": {"type": "string"}}}}}}

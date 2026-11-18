@@ -1,0 +1,55 @@
+{
+  "_comment": "Change-feed fixture: the GET /v1/changes response shape, holding the three real Stripe events from docs/contract/change-event.md (v2460 -> v2468). This file is the contract test between the service and the patch-it client: the service's real response must match its shape. Fingerprints follow the contract's formula with detail = added | removed | the enum value.",
+  "changes": [
+    {
+      "id": 1,
+      "fingerprint": "sha256:19487576b199387eaa21f6a766aa36563a16b7f4f0f4dbeaa60d351acccde6fe",
+      "api": "stripe",
+      "version": "2026-08-26.dahlia",
+      "previous_version": "2026-07-29.dahlia",
+      "change_type": "new_feature",
+      "breaking": false,
+      "affected": { "kind": "operation", "side": "request", "operation": "POST /v1/billing/feedback_options" },
+      "description": "New operation POST /v1/billing/feedback_options (PostBillingFeedbackOptions).",
+      "source_url": "https://raw.githubusercontent.com/stripe/openapi/v2468/latest/openapi.spec3.json",
+      "source_pointer": "/paths/~1v1~1billing~1feedback_options/post",
+      "source_excerpt": "{…,\"operationId\":\"PostBillingFeedbackOptions\",…,\"summary\":\"Create a feedback option\"}",
+      "confidence": 1.0,
+      "detected_at": "2026-09-13T15:00:00Z"
+    },
+    {
+      "id": 2,
+      "fingerprint": "sha256:65c18bd38f92fd41262bc9513c1ac8d5674e930886fc018ccc988b24d6f4ee93",
+      "api": "stripe",
+      "version": "2026-08-26.dahlia",
+      "previous_version": "2026-07-29.dahlia",
+      "change_type": "new_feature",
+      "breaking": false,
+      "affected": { "kind": "schema_property", "side": "response", "schema": "invoices_payment_settings", "property": "payment_method_types[]" },
+      "description": "Enum value 'billie' added to invoices_payment_settings.payment_method_types[].",
+      "source_url": "https://raw.githubusercontent.com/stripe/openapi/v2468/latest/openapi.spec3.json",
+      "source_pointer": "/components/schemas/invoices_payment_settings/properties/payment_method_types/items/enum",
+      "source_excerpt": "[\"ach_credit_transfer\",\"ach_debit\",…,\"billie\",…]",
+      "confidence": 1.0,
+      "detected_at": "2026-09-13T15:00:00Z"
+    },
+    {
+      "id": 3,
+      "fingerprint": "sha256:d1b2229af8fd2bb293d4ef758ecd714d40849e8163b9bf5bad12bba88aa93e86",
+      "api": "stripe",
+      "version": "2026-08-26.dahlia",
+      "previous_version": "2026-07-29.dahlia",
+      "change_type": "breaking",
+      "breaking": true,
+      "affected": { "kind": "schema_property", "side": "response", "schema": "payments_primitives_payment_records_resource_payment_method_card_details_resource_three_d_secure", "property": "cryptogram" },
+      "description": "Property cryptogram removed from payments_primitives_payment_records_resource_payment_method_card_details_resource_three_d_secure.",
+      "source_url": "https://raw.githubusercontent.com/stripe/openapi/v2460/latest/openapi.spec3.json",
+      "source_pointer": "/components/schemas/payments_primitives_payment_records_resource_payment_method_card_details_resource_three_d_secure/properties/cryptogram",
+      "source_excerpt": "{\"description\":\"The 3D Secure cryptogram, also known as the \\\"authentication value\\\" (AAV, CAVV or AEVV).\",\"maxLength\":5000,\"nullable\":true,\"type\":\"string\"}",
+      "confidence": 1.0,
+      "detected_at": "2026-09-13T15:00:00Z"
+    }
+  ],
+  "next_cursor": "3",
+  "kill_switch": {"on": false, "reason": null, "since": null}
+}
