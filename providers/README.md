@@ -8,4 +8,19 @@ One page per plugin id: `providers/<api>.md`. Start from [`_template.md`](_templ
 - **What the plugin reads** from it, and what it deliberately ignores (and why).
 - **Known gaps**: changes the provider makes that this plugin can't see yet.
 
-The pages arrive with the plugin code. The list of plugins is [docs/plugins.md](../docs/plugins.md).
+| Page | Plugin | Format plugin |
+|---|---|---|
+| [stripe.md](stripe.md) | `stripe` | `openapi` |
+| [datadog.md](datadog.md) | `datadog` | `openapi` |
+| [github.md](github.md) | `github` | `openapi` |
+| [gitlab.md](gitlab.md) | `gitlab` | `openapi` |
+| [openai-models.md](openai-models.md) | `openai-models` | `retirements` |
+| [anthropic-models.md](anthropic-models.md) | `anthropic-models` | `retirements` |
+| [anthropic.md](anthropic.md) | `anthropic` | `migrationguide` |
+| [numpy.md](numpy.md) | `numpy` | `removedmembers` |
+| [textual.md](textual.md) | `textual` | `changelog` |
+| [urllib3.md](urllib3.md) | `urllib3` | `changelog` |
+| [github-actions.md](github-actions.md) | `github-actions` | `feed` |
+| [vertex-ai-models.md](vertex-ai-models.md) | `vertex-ai-models` | `feed` |
+
+The list of plugins, with their status, is [docs/plugins.md](../docs/plugins.md).
