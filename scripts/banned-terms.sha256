@@ -1,0 +1,10 @@
+# SHA-256 of each banned term, lowercase, one per line. Never commit the terms themselves.
+# Add one: python3 scripts/leak_guard.py --hash 'the term'   (then paste the hash here; say "add a banned term", nothing more)
+83ff934257e433a14a6ccae00bd9bf824c47cd69b1c41f927ca6c5b852e6a415
+82d9177ab79253ce2fbda44c8701449f9b9460016907629b32bbe5fa88cac060
+793ff24ef6ff8309b15a2f29ea834e1936cdf754a14b928405cca5fbac3014f5
+ff4f356151e16bf8431a3a42d9e4bad4895a2d66397da6eb8d06ff7b5cda239a
+5ff32e7369f9a12d17216cc589e803307dd764f5dff8d2215e1da1af868dc093
+593bdde80c62225c0dc15828894bec85726095a532774259ed49ef24450d36ac
+3a829ba4d09623c4f5f8209a65991f7aa080f0a9ea301bc9a4fa7d6e88d6df99
+0523a5370b91e6c3b81a48ea498d6c04ddf241fdad29ea1a7eec2ad3f36a8cb6

@@ -1,0 +1,99 @@
+# The plugins build, are formatted and vetted, and their tests pass with the race
+# detector. Two guards keep plugins self-contained:
+#   - imports: only this module, the standard library and the approved dependencies;
+#   - network: net/http only in the fetch layer (fetch/, kit/, adapter/).
+# Until the Go code lands there is no go.mod, and every step after the first is skipped
+# with a notice, so the check passes.
+name: CI_go
+
+on:
+  pull_request:
+  merge_group:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# A new push cancels the run it supersedes.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  go:
+    name: go build, vet, gofmt, test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: is there Go code yet
+        id: go
+        run: |
+          if [ -f go.mod ]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::No go.mod yet: no Go packages to check. CI_go passes until the plugin code lands."
+            echo "present=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/setup-go@v7
+        if: steps.go.outputs.present == 'true'
+        with:
+          go-version-file: go.mod
+          cache-dependency-path: go.sum
+
+      - name: go.mod and go.sum are tidy
+        if: steps.go.outputs.present == 'true'
+        run: |
+          go mod tidy
+          if ! git diff --exit-code -- go.mod go.sum; then
+            echo "::error file=go.mod::go.mod/go.sum are not tidy. Run 'go mod tidy' and commit the result."
+            exit 1
+          fi
+
+      - name: go build
+        if: steps.go.outputs.present == 'true'
+        run: go build ./...
+
+      - name: gofmt
+        if: steps.go.outputs.present == 'true'
+        run: |
+          unformatted=$(gofmt -l .)
+          if [ -n "$unformatted" ]; then
+            for f in $unformatted; do echo "::error file=$f::not gofmt-formatted. Run 'gofmt -w .'."; done
+            exit 1
+          fi
+
+      - name: go vet
+        if: steps.go.outputs.present == 'true'
+        run: go vet ./...
+
+      # An allowlist, so a plugin can't pull in a database driver, a cloud SDK or
+      # anything private. Adding a dependency means adding it here, in review.
+      - name: imports are this module, the standard library or approved
+        if: steps.go.outputs.present == 'true'
+        run: |
+          module=$(go list -m)
+          allowed="^($module(/|$)|gopkg\.in/yaml\.v3$)"
+          others=$(go list -deps -test -f '{{if not .Standard}}{{.ImportPath}}{{end}}' ./... | sed 's/ \[.*//' | sort -u | grep -vE "$allowed" || true)
+          if [ -n "$others" ]; then
+            echo "::error::imports outside the allowlist (CI_go.yml):"; echo "$others"; exit 1
+          fi
+
+      # Plugins fetch through env.Get / kit, never on their own.
+      - name: net/http only in the fetch layer
+        if: steps.go.outputs.present == 'true'
+        run: |
+          module=$(go list -m)
+          bad=$(go list -f '{{.ImportPath}} {{join .Imports " "}}' ./... \
+            | grep -E '(^| )net/http( |$)' | cut -d' ' -f1 \
+            | grep -vE "^$module/(fetch|kit|adapter)(/|$)" || true)
+          if [ -n "$bad" ]; then
+            echo "::error::these packages import net/http; fetch through env.Get or kit instead:"; echo "$bad"; exit 1
+          fi
+
+      # -race: the fetcher and the tests' HTTP servers run on other goroutines.
+      - name: go test
+        if: steps.go.outputs.present == 'true'
+        run: go test -race -count=1 ./...
