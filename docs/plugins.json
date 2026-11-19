@@ -1,7 +1,7 @@
 {
   "_comment": "Generated from the plugin registry and docs/plugins.md by `make plugins-json` (go run ./cmd/list-plugins). Don't edit by hand.",
   "$schema": "./plugins.schema.json",
-  "count": 20,
+  "count": 21,
   "plugins": [
     {
       "id": "algolia-ingestion",
@@ -72,6 +72,16 @@
       "source_url": "https://github.com/DataDog/datadog-api-client-python",
       "status": "live",
       "provider_page": "providers/datadog.md"
+    },
+    {
+      "id": "elasticsearch",
+      "provider": "Elastic",
+      "layer": "api",
+      "watches": "Elasticsearch REST API operations deprecated, and deprecated operations removed, between released minor versions of the spec",
+      "format": "openapi",
+      "source_url": "https://github.com/elastic/elasticsearch-specification",
+      "status": "live",
+      "provider_page": "providers/elasticsearch.md"
     },
     {
       "id": "github",

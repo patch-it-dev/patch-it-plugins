@@ -1,0 +1,718 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Elasticsearch Request & Response Specification",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://github.com/elastic/elasticsearch-specification/blob/main/LICENSE"
+    },
+    "version": ""
+  },
+  "paths": {
+    "/_data_stream/{name}/_options": {
+      "get": {
+        "tags": [
+          "data stream"
+        ],
+        "summary": "Get data stream options",
+        "description": "Get the data stream options configuration of one or more data streams.",
+        "operationId": "indices-get-data-stream-options",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Comma-separated list of data streams to limit the request.\nSupports wildcards (`*`).\nTo target all data streams, omit this parameter or use `*` or `_all`.",
+            "required": true,
+            "deprecated": false,
+            "schema": {
+              "$ref": "#/components/schemas/_types.DataStreamNames"
+            },
+            "style": "simple"
+          },
+          {
+            "in": "query",
+            "name": "expand_wildcards",
+            "description": "Type of data stream that wildcard patterns can match.\nSupports comma-separated values, such as `open,hidden`.\nValid values are: `all`, `open`, `closed`, `hidden`, `none`.",
+            "deprecated": false,
+            "schema": {
+              "default": "open",
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/_types.ExpandWildcards"
+                }
+              ]
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "master_timeout",
+            "description": "Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.",
+            "deprecated": false,
+            "schema": {
+              "default": "30s",
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/_types.Duration"
+                }
+              ]
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data_streams": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/indices.get_data_stream_options.DataStreamWithOptions"
+                      }
+                    }
+                  },
+                  "required": [
+                    "data_streams"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-state": "Generally available; Added in 8.19.0",
+        "x-metaTags": [
+          {
+            "content": "Elasticsearch",
+            "name": "product_name"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "data stream"
+        ],
+        "summary": "Update data stream options",
+        "description": "Update the data stream options of the specified data streams.",
+        "operationId": "indices-put-data-stream-options",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Comma-separated list of data streams used to limit the request.\nSupports wildcards (`*`).\nTo target all data streams use `*` or `_all`.",
+            "required": true,
+            "deprecated": false,
+            "schema": {
+              "$ref": "#/components/schemas/_types.DataStreamNames"
+            },
+            "style": "simple"
+          },
+          {
+            "in": "query",
+            "name": "expand_wildcards",
+            "description": "Type of data stream that wildcard patterns can match.\nSupports comma-separated values, such as `open,hidden`.\nValid values are: `all`, `hidden`, `open`, `closed`, `none`.",
+            "deprecated": false,
+            "schema": {
+              "default": "open",
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/_types.ExpandWildcards"
+                }
+              ]
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "master_timeout",
+            "description": "Period to wait for a connection to the master node. If no response is\nreceived before the timeout expires, the request fails and returns an\nerror.",
+            "deprecated": false,
+            "schema": {
+              "default": "30s",
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/_types.Duration"
+                }
+              ]
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "timeout",
+            "description": "Period to wait for a response.\nIf no response is received before the timeout expires, the request fails and returns an error.",
+            "deprecated": false,
+            "schema": {
+              "default": "30s",
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/_types.Duration"
+                }
+              ]
+            },
+            "style": "form"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "failure_store": {
+                    "description": "If defined, it will update the failure store configuration of every data stream resolved by the name expression.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/indices._types.DataStreamFailureStore"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_types.AcknowledgedResponseBase"
+                }
+              }
+            }
+          }
+        },
+        "x-state": "Generally available; Added in 8.19.0",
+        "x-metaTags": [
+          {
+            "content": "Elasticsearch",
+            "name": "product_name"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "data stream"
+        ],
+        "summary": "Delete data stream options",
+        "description": "Removes the data stream options from a data stream.",
+        "operationId": "indices-delete-data-stream-options",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "A comma-separated list of data streams of which the data stream options will be deleted.\nUse `*` to get all data streams",
+            "required": true,
+            "deprecated": false,
+            "schema": {
+              "$ref": "#/components/schemas/_types.DataStreamNames"
+            },
+            "style": "simple"
+          },
+          {
+            "in": "query",
+            "name": "expand_wildcards",
+            "description": "Whether wildcard expressions should get expanded to open or closed indices",
+            "deprecated": false,
+            "schema": {
+              "default": "open",
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/_types.ExpandWildcards"
+                }
+              ]
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "master_timeout",
+            "description": "The period to wait for a connection to the master node.",
+            "deprecated": false,
+            "schema": {
+              "default": "30s",
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/_types.Duration"
+                }
+              ]
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "timeout",
+            "description": "The period to wait for a response.",
+            "deprecated": false,
+            "schema": {
+              "default": "30s",
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/_types.Duration"
+                }
+              ]
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_types.AcknowledgedResponseBase"
+                },
+                "examples": {
+                  "IndicesDeleteDataStreamOptionsResponseExample1": {
+                    "description": "A successful response for deleting data stream options.",
+                    "value": "{\n  \"acknowledged\": true\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-state": "Generally available; Added in 8.19.0",
+        "x-metaTags": [
+          {
+            "content": "Elasticsearch",
+            "name": "product_name"
+          }
+        ]
+      }
+    },
+    "/{index}/_unfreeze": {
+      "post": {
+        "tags": [
+          "indices"
+        ],
+        "summary": "Unfreeze an index",
+        "description": "When a frozen index is unfrozen, the index goes through the normal recovery process and becomes writeable again.\n\n## Required authorization\n\n* Index privileges: `manage`\n",
+        "operationId": "indices-unfreeze",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "index",
+            "description": "Identifier for the index.",
+            "required": true,
+            "deprecated": false,
+            "schema": {
+              "$ref": "#/components/schemas/_types.IndexName"
+            },
+            "style": "simple"
+          },
+          {
+            "in": "query",
+            "name": "allow_no_indices",
+            "description": "If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.\nThis behavior applies even if the request targets other open indices.",
+            "deprecated": false,
+            "schema": {
+              "default": true,
+              "type": "boolean"
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "expand_wildcards",
+            "description": "Type of index that wildcard patterns can match.\nIf the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.\nSupports comma-separated values, such as `open,hidden`.\nValid values are: `all`, `open`, `closed`, `hidden`, `none`.",
+            "deprecated": false,
+            "schema": {
+              "default": "open",
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/_types.ExpandWildcards"
+                }
+              ]
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "ignore_unavailable",
+            "description": "If `false`, the request returns an error if it targets a missing or closed index.",
+            "deprecated": false,
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "master_timeout",
+            "description": "Period to wait for a connection to the master node.\nIf no response is received before the timeout expires, the request fails and returns an error.",
+            "deprecated": false,
+            "schema": {
+              "default": "30s",
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/_types.Duration"
+                }
+              ]
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "timeout",
+            "description": "Period to wait for a response.\nIf no response is received before the timeout expires, the request fails and returns an error.",
+            "deprecated": false,
+            "schema": {
+              "default": "30s",
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/_types.Duration"
+                }
+              ]
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "wait_for_active_shards",
+            "description": "The number of shard copies that must be active before proceeding with the operation.\nSet to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).",
+            "deprecated": false,
+            "schema": {
+              "default": "1",
+              "type": "string"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "acknowledged": {
+                      "type": "boolean"
+                    },
+                    "shards_acknowledged": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "acknowledged",
+                    "shards_acknowledged"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true,
+        "x-state": "Generally available; Added in 6.6.0",
+        "x-metaTags": [
+          {
+            "content": "Elasticsearch",
+            "name": "product_name"
+          }
+        ]
+      }
+    },
+    "/{index}/_knn_search": {
+      "get": {
+        "tags": [
+          "search"
+        ],
+        "summary": "Run a knn search",
+        "description": "NOTE: The kNN search API has been replaced by the `knn` option in the search API.\n\nPerform a k-nearest neighbor (kNN) search on a dense_vector field and return the matching documents.\nGiven a query vector, the API finds the k closest vectors and returns those documents as search hits.\n\nElasticsearch uses the HNSW algorithm to support efficient kNN search.\nLike most kNN algorithms, HNSW is an approximate method that sacrifices result accuracy for improved search speed.\nThis means the results returned are not always the true k closest neighbors.\n\nThe kNN search API supports restricting the search using a filter.\nThe search will return the top k documents that also match the filter query.\n\nA kNN search response has the exact same structure as a search API response.\nHowever, certain sections have a meaning specific to kNN search:\n\n* The document `_score` is determined by the similarity between the query and document vector.\n* The `hits.total` object contains the total number of nearest neighbor candidates considered, which is `num_candidates * num_shards`. The `hits.total.relation` will always be `eq`, indicating an exact value.",
+        "operationId": "knn-search",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/knn_search-index"
+          },
+          {
+            "$ref": "#/components/parameters/knn_search-routing"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/knn_search"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/knn_search-200"
+          }
+        },
+        "deprecated": true,
+        "x-state": "Technical preview; Added in 8.0.0",
+        "x-metaTags": [
+          {
+            "content": "Elasticsearch",
+            "name": "product_name"
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "search"
+        ],
+        "summary": "Run a knn search",
+        "description": "NOTE: The kNN search API has been replaced by the `knn` option in the search API.\n\nPerform a k-nearest neighbor (kNN) search on a dense_vector field and return the matching documents.\nGiven a query vector, the API finds the k closest vectors and returns those documents as search hits.\n\nElasticsearch uses the HNSW algorithm to support efficient kNN search.\nLike most kNN algorithms, HNSW is an approximate method that sacrifices result accuracy for improved search speed.\nThis means the results returned are not always the true k closest neighbors.\n\nThe kNN search API supports restricting the search using a filter.\nThe search will return the top k documents that also match the filter query.\n\nA kNN search response has the exact same structure as a search API response.\nHowever, certain sections have a meaning specific to kNN search:\n\n* The document `_score` is determined by the similarity between the query and document vector.\n* The `hits.total` object contains the total number of nearest neighbor candidates considered, which is `num_candidates * num_shards`. The `hits.total.relation` will always be `eq`, indicating an exact value.",
+        "operationId": "knn-search-1",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/knn_search-index"
+          },
+          {
+            "$ref": "#/components/parameters/knn_search-routing"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/knn_search"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/knn_search-200"
+          }
+        },
+        "deprecated": true,
+        "x-state": "Technical preview; Added in 8.0.0",
+        "x-metaTags": [
+          {
+            "content": "Elasticsearch",
+            "name": "product_name"
+          }
+        ]
+      }
+    },
+    "/_application/analytics/{name}": {
+      "get": {
+        "tags": [
+          "analytics"
+        ],
+        "summary": "Get behavioral analytics collections",
+        "operationId": "search-application-get-behavioral-analytics-1",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/search_application.get_behavioral_analytics-name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/search_application.get_behavioral_analytics-200"
+          }
+        },
+        "x-state": "Technical preview; Added in 8.8.0",
+        "x-metaTags": [
+          {
+            "content": "Elasticsearch",
+            "name": "product_name"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "analytics"
+        ],
+        "summary": "Create a behavioral analytics collection",
+        "operationId": "search-application-put-behavioral-analytics",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "The name of the analytics collection to be created or updated.",
+            "required": true,
+            "deprecated": false,
+            "schema": {
+              "$ref": "#/components/schemas/_types.Name"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/search_application.put_behavioral_analytics.AnalyticsAcknowledgeResponseBase"
+                }
+              }
+            }
+          }
+        },
+        "x-state": "Technical preview; Added in 8.8.0",
+        "x-metaTags": [
+          {
+            "content": "Elasticsearch",
+            "name": "product_name"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "analytics"
+        ],
+        "summary": "Delete a behavioral analytics collection",
+        "description": "The associated data stream is also deleted.",
+        "operationId": "search-application-delete-behavioral-analytics",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "The name of the analytics collection to be deleted",
+            "required": true,
+            "deprecated": false,
+            "schema": {
+              "$ref": "#/components/schemas/_types.Name"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_types.AcknowledgedResponseBase"
+                }
+              }
+            }
+          }
+        },
+        "x-state": "Technical preview; Added in 8.8.0",
+        "x-metaTags": [
+          {
+            "content": "Elasticsearch",
+            "name": "product_name"
+          }
+        ]
+      }
+    },
+    "/_application/analytics": {
+      "get": {
+        "tags": [
+          "analytics"
+        ],
+        "summary": "Get behavioral analytics collections",
+        "operationId": "search-application-get-behavioral-analytics",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/search_application.get_behavioral_analytics-200"
+          }
+        },
+        "x-state": "Technical preview; Added in 8.8.0",
+        "x-metaTags": [
+          {
+            "content": "Elasticsearch",
+            "name": "product_name"
+          }
+        ]
+      }
+    },
+    "/_application/analytics/{collection_name}/event/{event_type}": {
+      "post": {
+        "tags": [
+          "analytics"
+        ],
+        "summary": "Create a behavioral analytics collection event",
+        "externalDocs": {
+          "url": "https://www.elastic.co/guide/en/elasticsearch/reference/8.19/behavioral-analytics-event-reference.html"
+        },
+        "operationId": "search-application-post-behavioral-analytics-event",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "collection_name",
+            "description": "The name of the behavioral analytics collection.",
+            "required": true,
+            "deprecated": false,
+            "schema": {
+              "$ref": "#/components/schemas/_types.Name"
+            },
+            "style": "simple"
+          },
+          {
+            "in": "path",
+            "name": "event_type",
+            "description": "The analytics event type.",
+            "required": true,
+            "deprecated": false,
+            "schema": {
+              "$ref": "#/components/schemas/search_application._types.EventType"
+            },
+            "style": "simple"
+          },
+          {
+            "in": "query",
+            "name": "debug",
+            "description": "Whether the response type has to include more details",
+            "deprecated": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "style": "form"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "examples": {
+                "BehavioralAnalyticsEventPostRequestExample1": {
+                  "description": "Run `POST _application/analytics/my_analytics_collection/event/search_click` to send a `search_click` event to an analytics collection called `my_analytics_collection`.",
+                  "value": "{\n  \"session\": {\n    \"id\": \"1797ca95-91c9-4e2e-b1bd-9c38e6f386a9\"\n  },\n  \"user\": {\n    \"id\": \"5f26f01a-bbee-4202-9298-81261067abbd\"\n  },\n  \"search\":{\n    \"query\": \"search term\",\n    \"results\": {\n      \"items\": [\n        {\n          \"document\": {\n            \"id\": \"123\",\n            \"index\": \"products\"\n          }\n        }\n      ],\n      \"total_results\": 10\n    },\n    \"sort\": {\n      \"name\": \"relevance\"\n    },\n    \"search_application\": \"website\"\n  },\n  \"document\":{\n    \"id\": \"123\",\n    \"index\": \"products\"\n  }\n}"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "accepted": {
+                      "type": "boolean"
+                    },
+                    "event": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "accepted"
+                  ]
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "\nEvent has been accepted and will be ingested."
+          },
+          "400": {
+            "description": "\nEither the event type is unknown or the event payload contains invalid data."
+          },
+          "404": {
+            "description": "\nAnalytics collection does not exist."
+          }
+        },
+        "x-state": "Technical preview",
+        "x-metaTags": [
+          {
+            "content": "Elasticsearch",
+            "name": "product_name"
+          }
+        ]
+      }
+    }
+  }
+}
