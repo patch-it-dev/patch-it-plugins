@@ -86,3 +86,14 @@ flowchart LR
 ````
 
 Keep the layer statuses the same in every repo, and change them everywhere at once when one moves.
+
+## When a repo goes public
+
+The README is half of it. The same day, in the repo's settings:
+
+1. **Description**: one line in the same words (what the repo is, the layers, "You get the fix, not the alert"), under 350 characters, no version-bot names, never API-only.
+2. **Website**: `https://docs.patch-it.dev` (or the page in the docs about this repo).
+3. **Topics**: from `dependencies`, `breaking-changes`, `api-changes`, `api`, `sdk`, `ai-models`, `ci`, `pull-requests`, `automation`, plus the repo's language and what it is (`go`, `plugins`, `documentation`, …).
+4. **Discussions** on, if people will ask questions there; keep the categories Q&A, Ideas, Show and tell and Announcements.
+5. **Social preview** (Settings → General → Social preview; GitHub has no API for it): a 1280×640 PNG, dark background from the brand tokens, the plain wordmark, Patchy on a cream tile, IBM Plex, the repo's one line. No gradients or glows.
+6. Check a shared link to the repo shows its own card.
