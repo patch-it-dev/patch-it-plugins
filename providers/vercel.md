@@ -27,8 +27,8 @@ Format plugin: `openapi` (`plugins/openapi`), with `adapter.Vercel`.
 ## What the plugin reads and ignores
 
 - **Reads:** the spec at the newest tag, diffed against the last one. Two events come out of it:
-  - **Deprecations:** an operation that gains the `deprecated` flag, or a summary that starts "Deprecated" or ends "(deprecated)". The event cites the flag or the summary.
-  - **Removals (breaking):** an operation that leaves the spec after the previous spec had marked it deprecated.
+  - **Deprecations:** an operation that gains the `deprecated` flag, or a summary that starts "Deprecated:" (with the colon) or ends "(deprecated)". A bare leading "Deprecated" doesn't count, because it would match an operation about deprecated things, such as "Deprecated runtimes for a project". The event cites the flag or the summary.
+  - **Removals (breaking):** an operation that leaves the spec after the previous spec had marked it deprecated. "Removed" means removed from the spec, which isn't always the endpoint shutting down. All four in the history were real sunsets, but a deprecated operation could also leave the spec for a newer path version while its old URL keeps answering for a while.
 - **Matches operations by path template:** `DELETE /v2/sandboxes/drives/{name}` and `.../{nameOrId}` are one operation, because a caller sends the same URL to both (renamed in v1.28.65).
 - **Ignores everything else**, because in the spec's history it was mostly not a change to the API:
   - **Unmarked removals.** 103 operations left the spec without being deprecated first. 16 came back in a later release (`/v1/log-drains`, `/v1/integrations/git-namespaces`), and the `/v1/edge-config` ones were the product's [rename to Global Config](https://vercel.com/changelog/edge-config-is-now-global-config).
