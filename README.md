@@ -19,23 +19,25 @@ flowchart LR
   A["Provider's own source<br/>spec · changelog · shutdown notice · feed"] -->|"read daily"| B["Plugin<br/>(this repo)"]
   B -->|"what changed, quoted"| C["Change event<br/>breaking · deprecation · date · source"]
   C --> D["patch-it in your CI<br/>finds the lines, an AI model writes the change"]
-  D --> E["Pull request in your repo<br/>your tests check it, you merge it"]
+  D --> E["Pull request in your repo<br/>your CI runs your tests, you merge it"]
 ```
 
 ## What patch-it does
 
-1. **It acts on its own.** A plugin here sees the change where the provider announces it, and patch-it starts from there: no alert to triage, no ticket to assign. That includes changes that never bump a version, like an AI model or an API shut down on a date.
-2. **It writes the fix.** An AI model (on your own key) reads the change and the lines it affects and writes the code change. Your repo's own tests check it, and it arrives as a pull request you review and merge like any other: the code change, not just the version.
+1. **It notices on its own.** A plugin here sees the change where the provider announces it, and patch-it picks it up from there: no alert to triage, no ticket to assign. That includes changes that never bump a version, like an AI model or an API shut down on a date.
+2. **It writes the fix.** An AI model (on your own key) reads the change and the lines it affects and writes the code change. It arrives as a pull request: your CI runs your tests on it, like any PR, and you review and merge it. The code change, not just the version.
 3. **Proof:** 8 pull requests opened by the early version have been merged by outside maintainers.
 4. **What it covers:**
 
-   | Layer | Status |
-   |---|---|
-   | APIs (Stripe, OpenAI, Anthropic and [more](docs/plugins.md)) | live |
-   | AI models (shutdowns and retirements) | live |
-   | Packages and SDKs (breaking major releases) | in testing |
-   | Runtimes (end of life) | building |
-   | CI (retired runners, images, actions) | planned |
+   | Layer | Noticed (a plugin here watches it) | Fixed (patch-it writes the PR) |
+   |---|---|---|
+   | APIs: Stripe, GitHub, GitLab, Datadog, Vercel, Supabase, Algolia, MongoDB Atlas, Cloudflare | live | live |
+   | AI models: OpenAI, Anthropic and Vertex AI model retirements | live | live |
+   | Packages and SDKs: NumPy, Textual, urllib3, the Anthropic Python SDK | live | in testing |
+   | Runtimes: Redis | live | building |
+   | CI: GitHub Actions runner retirements | live | planned |
+
+   As of 2026-11-19; every plugin is in [docs/plugins.md](docs/plugins.md).
 
 5. **Start:** [docs.patch-it.dev](https://docs.patch-it.dev) sets up the GitHub Action in your repo. To have it watch a provider it doesn't cover yet, add a plugin (below).
 
