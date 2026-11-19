@@ -1,0 +1,146 @@
+# Release: tag main's HEAD with the next version and publish a GitHub release.
+#
+# A maintainer runs it by hand: Actions -> Release -> Run workflow -> pick the bump.
+# It never runs on push, on a schedule or on a PR.
+#
+#   patch  v0.4.1 -> v0.4.2   fixes, new providers on an existing format plugin
+#   minor  v0.4.1 -> v0.5.0   new format plugins, new exported API, anything a user should read about
+#   (no tag yet -> v0.1.0)
+#
+# v1.0.0 and later majors are not an option here: they are a deliberate decision a
+# maintainer makes by hand, not a button.
+#
+# Fail closed: the leak guard, gitleaks, build, vet, gofmt and the tests run on the exact
+# commit being tagged, and any failure stops the run before a tag exists.
+#
+# NEVER delete or move a pushed tag. Go's module proxy (proxy.golang.org) and checksum
+# database remember every version forever, so a moved tag breaks everyone who already
+# fetched it. If a release is wrong, fix it on main and release a new patch version.
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: "Which part of the version to bump (patch: fixes and providers; minor: new format plugins or API)"
+        type: choice
+        options:
+          - patch
+          - minor
+        default: patch
+
+permissions:
+  contents: write
+
+# One release at a time; a second run waits instead of cancelling the first.
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+env:
+  GITLEAKS_VERSION: 8.30.1
+  GITLEAKS_SHA256: 551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb
+
+jobs:
+  release:
+    name: tag and release main
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: only from main
+        if: github.ref != 'refs/heads/main'
+        env:
+          REF: ${{ github.ref }}
+        run: |
+          echo "::error::Run the Release workflow from main, not $REF."
+          exit 1
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: next version
+        id: version
+        env:
+          BUMP: ${{ inputs.bump }}
+        run: |
+          head=$(git rev-parse HEAD)
+          existing=$(git tag --points-at "$head")
+          if [ -n "$existing" ]; then
+            echo "::error::main's HEAD ($head) is already tagged: $existing. Nothing new to release."
+            exit 1
+          fi
+
+          latest=$(git tag -l 'v*' | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -n 1 || true)
+          if [ -z "$latest" ]; then
+            next=v0.1.0
+          else
+            IFS=. read -r major minor patch <<< "${latest#v}"
+            case "$BUMP" in
+              patch) next="v${major}.${minor}.$((patch + 1))" ;;
+              minor) next="v${major}.$((minor + 1)).0" ;;
+              *) echo "::error::unknown bump '$BUMP'"; exit 1 ;;
+            esac
+          fi
+
+          if git rev-parse -q --verify "refs/tags/$next" >/dev/null; then
+            echo "::error::$next already exists."
+            exit 1
+          fi
+          echo "latest=${latest:-none}, bump=$BUMP -> $next at $head"
+          echo "tag=$next" >> "$GITHUB_OUTPUT"
+          echo "sha=$head" >> "$GITHUB_OUTPUT"
+
+      - name: internal names (hashed), whole tree
+        run: python3 scripts/leak_guard.py --all
+
+      - name: install gitleaks ${{ env.GITLEAKS_VERSION }}
+        run: |
+          tarball="gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          curl -fsSL -o "$RUNNER_TEMP/$tarball" "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/${tarball}"
+          echo "${GITLEAKS_SHA256}  $RUNNER_TEMP/$tarball" | sha256sum -c -
+          tar -xzf "$RUNNER_TEMP/$tarball" -C "$RUNNER_TEMP" gitleaks
+
+      - name: gitleaks, whole history
+        run: '"$RUNNER_TEMP/gitleaks" git --no-banner --redact --verbose .'
+
+      - uses: actions/setup-go@d8cbb8045d7f43706b9177cceb36c1f91a6644d5 # v7.1.0
+        with:
+          go-version-file: go.mod
+          cache-dependency-path: go.sum
+
+      - name: go build
+        run: go build ./...
+
+      - name: go vet
+        run: go vet ./...
+
+      - name: gofmt
+        run: |
+          unformatted=$(gofmt -l .)
+          if [ -n "$unformatted" ]; then
+            echo "::error::not gofmt-formatted:"; echo "$unformatted"; exit 1
+          fi
+
+      - name: go test
+        run: go test -race -count=1 ./...
+
+      # Only reached when every check above passed.
+      - name: create and push the annotated tag
+        env:
+          TAG: ${{ steps.version.outputs.tag }}
+          SHA: ${{ steps.version.outputs.sha }}
+          ACTOR: ${{ github.actor }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "$TAG" "$SHA" -m "$TAG" -m "Released by @$ACTOR with the Release workflow."
+          git push origin "refs/tags/$TAG"
+
+      - name: publish the GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.version.outputs.tag }}
+        run: gh release create "$TAG" --verify-tag --generate-notes --title "$TAG"

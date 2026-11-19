@@ -1,0 +1,20 @@
+# Categories for the notes `gh release create --generate-notes` writes (the Release
+# workflow). A merged PR lands in the first category whose label it carries.
+changelog:
+  exclude:
+    labels:
+      - ignore-for-release
+  categories:
+    - title: Plugins
+      labels:
+        - plugin
+        - enhancement
+    - title: Fixes
+      labels:
+        - bug
+    - title: Docs
+      labels:
+        - documentation
+    - title: Other changes
+      labels:
+        - "*"

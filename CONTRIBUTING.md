@@ -38,6 +38,22 @@ That adds `Signed-off-by: Your Name <you@example.com>`, matching the commit's au
 | `CI_dco` | Every commit in the PR is signed off by its author |
 | `CI_leak_guard` | gitleaks over the PR's commits, and a check for known internal names (stored as hashes only). Also runs weekly over the whole repo |
 | `Claude Code Review` | Claude reviews the PR against the rules above, once (PRs from this repo's branches; forks: a maintainer comments `@claude review`). Advisory, not a required check |
+| `Release` | Not a check: a maintainer runs it by hand to tag a release (see [Releasing](#releasing)) |
+
+## Releasing
+
+Releases are tags on `main` (`v0.x.y`), made only by the **Release** workflow, which a maintainer runs by hand. Nothing is tagged on push, and agents never tag or release.
+
+1. Merge the PRs that should go out.
+2. **Actions → Release → Run workflow** (branch `main`), pick the bump:
+   - **patch** (`v0.4.1` → `v0.4.2`): fixes, a new provider on an existing format plugin, docs;
+   - **minor** (`v0.4.1` → `v0.5.0`): a new format plugin, new exported API, anything users should read about.
+3. The workflow refuses if `main`'s HEAD is already tagged, then runs, on that exact commit, the internal-names check over every file, gitleaks over the whole history, `go build`, `go vet`, `gofmt` and `go test -race`. Any failure stops it before a tag exists.
+4. When everything passes it pushes an annotated tag and publishes a GitHub release with generated notes (grouped by the PR's label: `plugin`/`enhancement`, `bug`, `documentation`; see [`.github/release.yml`](.github/release.yml)).
+
+`v1.0.0` (and any later major) is not a button: it is a deliberate decision a maintainer makes and tags by hand.
+
+**Never delete or move a pushed tag.** Go's module proxy and checksum database keep every published version forever, so a moved tag breaks everyone who already fetched it. If a release is wrong, fix it on `main` and release the next patch version.
 
 ## License
 
