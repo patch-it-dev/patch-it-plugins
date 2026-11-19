@@ -23,6 +23,7 @@ One page per plugin id: `providers/<api>.md`. Start from [`_template.md`](_templ
 | [anthropic-models.md](anthropic-models.md) | `anthropic-models` | `retirements` |
 | [anthropic.md](anthropic.md) | `anthropic` | `migrationguide` |
 | [numpy.md](numpy.md) | `numpy` | `removedmembers` |
+| [posthog.md](posthog.md) | `posthog` | `removedmembers` |
 | [textual.md](textual.md) | `textual` | `changelog` |
 | [urllib3.md](urllib3.md) | `urllib3` | `changelog` |
 | [github-actions.md](github-actions.md) | `github-actions` | `feed` |

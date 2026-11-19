@@ -31,6 +31,7 @@ The table between the `plugins:start` and `plugins:end` markers is also publishe
 | [`vertex-ai-models`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/vertex-ai-models.md) | Google | AI models | Generative AI model deprecations on Vertex AI | `feed` | [Vertex AI generative AI release notes (Atom)](https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml) | live |
 | [`redis`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/redis.md) | Redis | runtime | Commands removed entirely from Redis's own command catalog between two snapshots | `catalog` | [redis/redis-doc `commands.json`](https://github.com/redis/redis-doc/blob/master/commands.json) | live |
 | [`cloudflare`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/cloudflare.md) | Cloudflare | API | REST API operations Cloudflare deprecates, breaking on their end-of-life date when it gives one | `feed` | [Cloudflare API deprecations (RSS)](https://developers.cloudflare.com/fundamentals/api/reference/deprecations/index.xml) | live |
+| [`posthog`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/posthog.md) | PostHog | SDK | Members removed in the posthog Python SDK 8.0.0 | `removedmembers` | [posthog-python 7.x to 8.0 migration guide](https://github.com/PostHog/posthog-python/blob/posthog-v8.0.0/docs/migration-7.x-to-8.0.md) | live |
 <!-- plugins:end -->
 
 ## The columns
@@ -41,8 +42,8 @@ The table between the `plugins:start` and `plugins:end` markers is also publishe
 | Provider | Whose API, SDK or package it is. |
 | Layer | Which kind of dependency it covers: `API`, `SDK`, `package`, `runtime`, `CI` or `AI models`. |
 | What it watches | The kind of change it reports, in a few words. |
-| Format plugin | Which shared reader it is built on: `openapi` (a spec per release, diffed), `retirements` (a deprecations page), `migrationguide` (an SDK's migration guide), `removedmembers` (a package's table of removed members), `changelog` (a release changelog file), `feed` (an RSS or Atom feed), `catalog` (a structured JSON catalog of names, diffed between two snapshots), `apichangelog` (a vendor's machine-readable API changelog, in JSON). |
+| Format plugin | Which shared reader it is built on: `openapi` (a spec per release, diffed), `retirements` (a deprecations page), `migrationguide` (an SDK's migration guide), `removedmembers` (a package's table of removed members, in RST or Markdown), `changelog` (a release changelog file), `feed` (an RSS or Atom feed), `catalog` (a structured JSON catalog of names, diffed between two snapshots), `apichangelog` (a vendor's machine-readable API changelog, in JSON). |
 | Source | The provider's own public page or file the plugin reads. Every event links back to it. |
 | Status | `live`: in the code on `main`. patch-it's hosted ingestion service runs it daily from the next release, which is cut automatically. `planned`: accepted, not written yet. `paused`: in the code but deliberately switched off, with the reason in the row. |
 
-Some plugins read one pinned release (`anthropic` 1.0.0, `numpy` 2.0.0, `textual` 0.86.0, `urllib3` 2.0.0): a newer release of the same package is a new entry in that plugin, not a new row, unless it changes the format.
+Some plugins read one pinned release (`anthropic` 1.0.0, `numpy` 2.0.0, `posthog` 8.0.0, `textual` 0.86.0, `urllib3` 2.0.0): a newer release of the same package is a new entry in that plugin, not a new row, unless it changes the format.

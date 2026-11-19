@@ -11,11 +11,18 @@
 // upgrade. Every other row (no replacement, a builtin, an expression, a
 // sentence of advice) becomes a `removed_symbol`, which the patch-it client
 // opens as an issue: precision over recall.
+//
+// A guide's table is an RST simple table (NumPy) or a Markdown pipe table
+// (PostHog, markdown.go). A Markdown row may list several members in one cell;
+// each is its own event, as each NumPy row is. A row the reader can't read as
+// members of the package (prose, an argument value, an environment variable)
+// is dropped and logged, never guessed at.
 package removedmembers
 
 import (
 	"context"
 	"fmt"
+	"log"
 	"regexp"
 	"strings"
 
@@ -25,6 +32,7 @@ import (
 
 func init() {
 	plugin.Register(Plugin{Guide: NumPy2})
+	plugin.Register(Plugin{Guide: PostHog8})
 }
 
 // Guide is one package's guide to one release.
@@ -35,6 +43,62 @@ type Guide struct {
 	Repo    string // owner/name on GitHub
 	Path    string // the guide's path in the repo at the release tag
 	Section string // the heading the table is under
+
+	// Tag is the release tag; "" is "v" + Release.
+	Tag string
+	// Format is how the table is written: FormatRST (the default) or
+	// FormatMarkdown.
+	Format Format
+	// Header is the table's first column heading, matched case-insensitively
+	// (as a prefix in an RST table); "" is "removed member".
+	Header string
+	// Effect is what code using any removed member gets, said in every
+	// event's description after "<Module>.<member> was removed": only for a
+	// guide whose members are all attributes of Module and all fail the same
+	// way. "" says only that it was removed.
+	Effect string
+	// EnvVars are names in the table that are environment variables, not
+	// members of the package: no code imports one, so they're dropped. Listed
+	// by hand from the code, not guessed from a prefix (a package can have
+	// constants named like its environment variables).
+	EnvVars []string
+	// NewReplacements says the release's replacements are new in it: a
+	// rename fix wouldn't run on the release before, and may need a different
+	// import. A row with one replacement is then a removed_symbol, with the
+	// replacement in the migration hint (the guide's own cell), not a
+	// renamed_symbol the client would apply as a rename. NumPy 2.0's
+	// replacements already worked on 1.x, so it doesn't set this.
+	NewReplacements bool
+	// Paths gives a name the table writes in shorthand the path code imports
+	// it by, after Module ("EVENTS_ENDPOINT" -> "request.EVENTS_ENDPOINT"),
+	// checked by hand against the package at the release before. A guide's
+	// cell can list names that share a prefix only the first one spells out.
+	Paths map[string]string
+	// StillWork are names the table lists as removed but the same guide says
+	// still work or have no effect: no event, with the guide's reason.
+	StillWork map[string]string
+}
+
+// Format is how a guide writes its table.
+type Format string
+
+const (
+	FormatRST      Format = ""
+	FormatMarkdown Format = "markdown"
+)
+
+func (g Guide) tag() string {
+	if g.Tag != "" {
+		return g.Tag
+	}
+	return "v" + g.Release
+}
+
+func (g Guide) header() string {
+	if g.Header != "" {
+		return g.Header
+	}
+	return "removed member"
 }
 
 // NumPy2 is NumPy's 2.0 migration guide, "Main namespace" table.
@@ -45,11 +109,12 @@ var NumPy2 = Guide{
 	Repo:    "numpy/numpy",
 	Path:    "doc/source/numpy_2_0_migration_guide.rst",
 	Section: "Main namespace",
+	Effect:  "code using it raises AttributeError",
 }
 
 // URL is the guide as it was at the release tag: its own provenance.
 func (g Guide) URL() string {
-	return fmt.Sprintf("https://raw.githubusercontent.com/%s/v%s/%s", g.Repo, g.Release, g.Path)
+	return fmt.Sprintf("https://raw.githubusercontent.com/%s/%s/%s", g.Repo, g.tag(), g.Path)
 }
 
 // Removal is one removed member and the guide's guideline for it.
@@ -58,12 +123,22 @@ type Removal struct {
 	Guideline   string
 	Replacement string // the one member to use instead, or ""
 	Excerpt     string // the table's header and the row
+	Dropped     string // why it isn't an event; "" when it is
 }
 
-// Parse reads the section's table: an RST simple table, the member in the
-// first column, the guideline in the second, a guideline continued on the next
-// lines indented to the second column.
+// Parse reads the section's table: one Removal per member, and one per row or
+// name it drops, with the reason in Dropped.
 func Parse(page []byte, g Guide) ([]Removal, error) {
+	if g.Format == FormatMarkdown {
+		return parseMarkdown(page, g)
+	}
+	return parseRST(page, g)
+}
+
+// parseRST reads an RST simple table, the member in the first column, the
+// guideline in the second, a guideline continued on the next lines indented to
+// the second column.
+func parseRST(page []byte, g Guide) ([]Removal, error) {
 	lines := strings.Split(strings.ReplaceAll(string(page), "\r\n", "\n"), "\n")
 	start := -1
 	for i, l := range lines {
@@ -90,7 +165,7 @@ func Parse(page []byte, g Guide) ([]Removal, error) {
 		col++
 	}
 	header := lines[border+1]
-	if !strings.HasPrefix(strings.ToLower(header), "removed member") {
+	if !strings.HasPrefix(strings.ToLower(header), strings.ToLower(g.header())) {
 		return nil, fmt.Errorf("the table under %q isn't the removed members: %q", g.Section, header)
 	}
 	head := strings.Join([]string{lines[border], header, lines[border+2]}, "\n")
@@ -152,12 +227,19 @@ func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) 
 	var events []event.EventV2
 	var rejected []error
 	for _, r := range removals {
+		if r.Dropped != "" {
+			log.Printf("%s %s: dropped %q: %s", g.Package, g.Release, r.Member, r.Dropped)
+			continue
+		}
 		subject := event.Subject{
 			Type: event.SubjectPackageRelease, Ecosystem: "pypi", Package: g.Package,
 			Change: event.PackageRemovedSymbol, Symbols: []string{r.Member},
 		}
-		desc := fmt.Sprintf("%s.%s was removed in %s %s: code using it raises AttributeError.", g.Module, r.Member, g.Package, g.Release)
-		if r.Replacement != "" {
+		desc := fmt.Sprintf("`%s` was removed in %s %s.", r.Member, g.Package, g.Release)
+		if g.Effect != "" {
+			desc = fmt.Sprintf("%s.%s was removed in %s %s: %s.", g.Module, r.Member, g.Package, g.Release, g.Effect)
+		}
+		if r.Replacement != "" && !g.NewReplacements {
 			subject.Change, subject.Replacement = event.PackageRenamedSymbol, r.Replacement
 		}
 		e := event.EventV2{
@@ -184,6 +266,6 @@ func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) 
 		Label:     g.URL(),
 		Events:    events,
 		Rejected:  rejected,
-		Baselines: []plugin.Spec{plugin.Baseline(g.Package, g.Release, "v"+g.Release, g.URL(), page, false, now)},
+		Baselines: []plugin.Spec{plugin.Baseline(g.Package, g.Release, g.tag(), g.URL(), page, false, now)},
 	}, nil
 }
