@@ -99,6 +99,17 @@ jobs:
             echo "::error::$next already exists."
             exit 1
           fi
+          # A new format plugin (a new plugins/<format>/ directory) deserves a minor, not a
+          # patch. A scheduled run can't decide that, so it skips and a maintainer releases by hand.
+          if [ "$EVENT" = "schedule" ] && [ -n "$latest" ]; then
+            new_formats=$(comm -13 <(git ls-tree -d --name-only "$latest" plugins/ | sort) <(git ls-tree -d --name-only HEAD plugins/ | sort))
+            if [ -n "$new_formats" ]; then
+              echo "::warning::New format plugin(s) since $latest: $new_formats. That's a minor release: run Release by hand with bump=minor."
+              echo "skip=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          fi
+
           echo "latest=${latest:-none}, bump=$BUMP -> $next at $head"
           echo "tag=$next" >> "$GITHUB_OUTPUT"
           echo "sha=$head" >> "$GITHUB_OUTPUT"
@@ -156,7 +167,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git tag -a "$TAG" "$SHA" -m "$TAG" -m "Released by the Release workflow ($EVENT_NAME, @$ACTOR)."
+          by="scheduled"
+          [ "$EVENT_NAME" = "workflow_dispatch" ] && by="run by @$ACTOR"
+          git tag -a "$TAG" "$SHA" -m "$TAG" -m "Released by the Release workflow ($by)."
           git push origin "refs/tags/$TAG"
 
       - name: publish the GitHub release

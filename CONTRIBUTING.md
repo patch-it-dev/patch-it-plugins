@@ -44,7 +44,7 @@ That adds `Signed-off-by: Your Name <you@example.com>`, matching the commit's au
 
 Releases are tags on `main` (`v0.x.y`), made only by the **Release** workflow. Nothing is tagged on push, and agents never tag or release.
 
-**Automatic, twice a week:** every Monday and Thursday at 14:00 UTC the workflow makes a **patch** release, but only if something was merged since the last tag; otherwise it does nothing. So a merged plugin reaches patch-it's hosted ingestion service within a few days.
+**Automatic, twice a week:** every Monday and Thursday at 14:00 UTC the workflow makes a **patch** release, but only if something was merged since the last tag; otherwise it does nothing. If the merges add a **new format plugin** (a new `plugins/<format>/` directory), the scheduled run skips with a warning instead: run it by hand with **minor**. So a merged plugin reaches patch-it's hosted ingestion service within a few days.
 
 **By hand, any time** (an urgent fix, or a **minor** release):
 
