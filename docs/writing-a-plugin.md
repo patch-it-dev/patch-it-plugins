@@ -48,7 +48,7 @@ A source that looks right on today's copy can be wrong as a history of changes. 
   - a release branch cut before an older branch's last minor didn't have it yet;
   - it described only an API client: a helper or a "custom request" method, marked `x-helper` or similar.
 
-  So the default rule for a spec is the `deprecationsOnly` filter in `plugins/openapi`: operation deprecations, plus removals of operations marked deprecated first. Keep an unmarked removal only if the history shows they're real.
+  So the default rule for a spec is the `deprecationsOnly` filter (`plugins/openapi/vercel.go`): operation deprecations, plus removals of operations marked deprecated first. Keep an unmarked removal only if the history shows they're real.
 - **Withdrawals:** a deprecation the provider takes back (`endpoint-reactivated`), a removed version that reappears. Replay the history in order, and let a withdrawal cancel what it withdraws.
 - **Property-level changes,** request and response. Response properties of a generated spec often churn by the hundred per release. Count before deciding; leaving them out is a fine first version.
 
@@ -58,7 +58,7 @@ Then check what's left against the provider's own words:
 - **Cross-check a removal with the release notes** ("Remove unfreeze REST endpoint" for the endpoint that left the spec).
 - **Probing the live API from outside rarely settles it.** Many APIs answer 401 or 403 to every path without credentials, real or made up.
 
-Write the numbers on the provider page ("108 operations left the spec; 5 had been marked deprecated"), so a reviewer can check the rule against them.
+Write the numbers on the provider page, as `providers/vercel.md` does for its spec's history, so a reviewer can check the rule against them.
 
 ### Pin, and pick a version a repo pins
 
