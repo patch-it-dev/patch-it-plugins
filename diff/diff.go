@@ -105,6 +105,14 @@ type Options struct {
 	// deprecated, for a spec that often says so in words and not in the
 	// `deprecated` flag. Nil reads only the flag.
 	DeprecatedSummary func(summary string) bool
+
+	// QuoteDeprecatedOperation makes a deprecation by the flag cite the whole
+	// operation, not the bare `true`: for a spec that says why in the
+	// operation's description ("This endpoint is deprecated - use the deploy
+	// endpoint"). The excerpt is the operation serialized with sorted keys, so
+	// `deprecated` comes before `description` and survives the 2,000-character
+	// cut (only a `callbacks` key would sort ahead of it).
+	QuoteDeprecatedOperation bool
 }
 
 // OperationDeprecated reports whether an operation object is marked
@@ -281,9 +289,12 @@ func (d *differ) paths(oldPaths, newPaths map[string]any) {
 			d.add(w, OperationRemoved, "", true, oldOp)
 		default:
 			if !d.opts.OperationDeprecated(oldOp) && d.opts.OperationDeprecated(newOp) {
-				if truthy(newOp["deprecated"]) {
+				switch {
+				case truthy(newOp["deprecated"]) && d.opts.QuoteDeprecatedOperation:
+					d.add(w, OperationDeprecated, "", false, newOp)
+				case truthy(newOp["deprecated"]):
 					d.add(w.child("deprecated"), OperationDeprecated, "", false, newOp["deprecated"])
-				} else {
+				default:
 					// Said in words: the summary is the evidence.
 					d.add(w.child("summary"), OperationDeprecated, "", false, newOp["summary"])
 				}

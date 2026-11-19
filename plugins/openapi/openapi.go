@@ -1,5 +1,5 @@
 // Package openapi is the source plugin for an API that publishes an OpenAPI
-// spec per release (Stripe, Datadog, GitLab, GitHub, Vercel): fetch the newest spec,
+// spec per release (Stripe, Datadog, GitLab, GitHub, Vercel, Supabase): fetch the newest spec,
 // diff it against the last one seen, normalize the changes into events, and
 // attach migration hints from the API's changelog when it has one. It can also
 // replay two given releases.
@@ -33,6 +33,9 @@ func init() {
 	// No Hints: Vercel's changelog is product news, not keyed by API change.
 	// Only operation deprecations and removals are kept: see vercelKeep.
 	plugin.Register(Plugin{Adapter: adapter.Vercel{}, Diff: vercelDiff, Keep: vercelKeep})
+	// No Hints: Supabase's changelog is platform news, not keyed by
+	// operation. Only operation deprecations and removals: see supabase.go.
+	plugin.Register(Plugin{Adapter: adapter.Supabase{}, Diff: supabaseDiff, Keep: supabaseKeep})
 }
 
 // requestSide keeps the changes to what callers send. GitLab's response

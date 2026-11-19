@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:880606fe624faa3f49480e13588a19e93562091d5a8f40c2a097f36fb329a604",
+    "api": "supabase",
+    "version": "2025-02-19",
+    "previous_version": "2025-02-10",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /v1/projects/{ref}/functions"
+    },
+    "description": "Operation POST /v1/projects/{ref}/functions marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/supabase/supabase/bf04ff6681062bde3edf9d646054b9a8b2ef286c/apps/docs/spec/api_v1_openapi.json",
+    "source_pointer": "/paths/~1v1~1projects~1{ref}~1functions/post",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"This endpoint is deprecated - use the deploy endpoint. Creates a function and adds it to the specified project.\",\"operationId\":\"v1-create-a-function\",\"parameters\":[{\"description\":\"Project ref\",\"in\":\"path\",\"name\":\"ref\",\"required\":true,\"schema\":{\"maxLength\":20,\"minLength\":20,\"type\":\"string\"}},{\"in\":\"query\",\"name\":\"slug\",\"required\":false,\"schema\":{\"pattern\":\"/^[A-Za-z0-9_-]+$/\",\"type\":\"string\"}},{\"in\":\"query\",\"name\":\"name\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"in\":\"query\",\"name\":\"verify_jwt\",\"required\":false,\"schema\":{\"type\":\"boolean\"}},{\"in\":\"query\",\"name\":\"import_map\",\"required\":false,\"schema\":{\"type\":\"boolean\"}},{\"in\":\"query\",\"name\":\"entrypoint_path\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"in\":\"query\",\"name\":\"import_map_path\",\"required\":false,\"schema\":{\"type\":\"string\"}}],\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/V1CreateFunctionBody\"}},\"application/vnd.denoland.eszip\":{\"schema\":{\"$ref\":\"#/components/schemas/V1CreateFunctionBody\"}}},\"required\":true},\"responses\":{\"201\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/FunctionResponse\"}}},\"description\":\"\"},\"403\":{\"description\":\"\"},\"500\":{\"description\":\"Failed to create project's function\"}},\"security\":[{\"bearer\":[]}],\"summary\":\"Create a function\",\"tags\":[\"Edge Functions\"]}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:9cdc7164ed43b50e19c232e8af7f43c3fbfe87aa18b96bf5e62d7e59ee47c7b0",
+    "api": "supabase",
+    "version": "2026-06-29",
+    "previous_version": "2026-06-22",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /v1/projects/{ref}/analytics/endpoints/logs.all"
+    },
+    "description": "Operation GET /v1/projects/{ref}/analytics/endpoints/logs.all marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/supabase/supabase/eb21ae25f7954ea1e5db34209ff69fce597b0ae3/apps/docs/spec/api_v1_openapi.json",
+    "source_pointer": "/paths/~1v1~1projects~1{ref}~1analytics~1endpoints~1logs.all/get",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Executes a SQL query on the project's logs.\\n\\nEither the `iso_timestamp_start` and `iso_timestamp_end` parameters must be provided.\\nIf both are not provided, only the last 1 minute of logs will be queried.\\nThe timestamp range must be no more than 24 hours and is rounded to the nearest minute. If the range is more than 24 hours, a validation error will be thrown.\\n\\nNote: Unless the `sql` parameter is provided, only edge_logs will be queried. See the [log query docs](/docs/guides/telemetry/logs?queryGroups=product\\u0026product=postgres\\u0026queryGroups=source\\u0026source=edge_logs#querying-with-the-logs-explorer:~:text=logs%20from%20the-,Sources,-drop%2Ddown%3A) for all available sources.\\n\",\"operationId\":\"v1-get-project-logs-all\",\"parameters\":[{\"description\":\"Project ref\",\"in\":\"path\",\"name\":\"ref\",\"required\":true,\"schema\":{\"example\":\"abcdefghijklmnopqrst\",\"maxLength\":20,\"minLength\":20,\"pattern\":\"^[a-z]+$\",\"type\":\"string\"}},{\"description\":\"Custom SQL query to execute on the logs. See [querying logs](/docs/guides/telemetry/logs?queryGroups=product\\u0026product=postgres\\u0026queryGroups=source\\u0026source=edge_logs#querying-with-the-logs-explorer) for more details.\",\"in\":\"query\",\"name\":\"sql\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"in\":\"query\",\"name\":\"iso_timestamp_start\",\"required\":false,\"schema\":{\"example\":\"2025-03-01T00:00:00Z\",\"format\":\"date-time\",\"type\":\"string\"}},{\"in\":\"query\",\"name\":\"iso_timestamp_end\",\"required\":false,\"schema\":{\"example\":\"2025-03-01T23:59:59Z\",\"format\":\"date-time\",\"type\":\"string\"}}],\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/AnalyticsResponse\"}}},\"description\":\"\"},\"401\":{\"description\":\"Unauthorized\"},\"402\":{\"description\":\"Usage exceeded. Enable additional usage to continue querying\"},\"403\":{\"description\":\"Forbidden action\"},\"429\":{\"description\":\"Rate limit exceeded\"}},\"security\":[{\"bearer\":[]},{\"fga_permissions\":[\"analytics_logs_read\"]}],\"summary\":\"Gets pr…",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

@@ -116,3 +116,19 @@ func TestPathTemplatesAmbiguousFallsBackToExactPaths(t *testing.T) {
 		t.Errorf("got %v, want GET /d/{name} removed", got)
 	}
 }
+
+// With QuoteDeprecatedOperation, a deprecation by the flag cites the whole
+// operation, where the vendor says why; without, the bare `true`.
+func TestQuoteDeprecatedOperation(t *testing.T) {
+	oldSpec := mustParse(t, pathsSpec(`"/f":{"post":{"description":"Creates a function."}}`))
+	newSpec := mustParse(t, pathsSpec(`"/f":{"post":{"deprecated":true,"description":"This endpoint is deprecated - use the deploy endpoint."}}`))
+	got := ChangesWith(oldSpec, newSpec, Options{QuoteDeprecatedOperation: true})
+	op, _ := got[0].Node.(map[string]any)
+	if len(got) != 1 || got[0].Kind != OperationDeprecated || got[0].Pointer != "/paths/~1f/post" || op["description"] != "This endpoint is deprecated - use the deploy endpoint." {
+		t.Errorf("got %+v, want one operation_deprecated citing the operation", got)
+	}
+	got = Changes(oldSpec, newSpec)
+	if len(got) != 1 || got[0].Pointer != "/paths/~1f/post/deprecated" || got[0].Node != true {
+		t.Errorf("without the option: %+v, want the flag cited", got)
+	}
+}
