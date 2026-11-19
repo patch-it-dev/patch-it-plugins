@@ -16,6 +16,7 @@ One page per plugin id: `providers/<api>.md`. Start from [`_template.md`](_templ
 | [gitlab.md](gitlab.md) | `gitlab` | `openapi` |
 | [vercel.md](vercel.md) | `vercel` | `openapi` |
 | [supabase.md](supabase.md) | `supabase` | `openapi` |
+| [algolia.md](algolia.md) | `algolia-search`, `algolia-ingestion`, `algolia-recommend` | `openapi` |
 | [openai-models.md](openai-models.md) | `openai-models` | `retirements` |
 | [anthropic-models.md](anthropic-models.md) | `anthropic-models` | `retirements` |
 | [anthropic.md](anthropic.md) | `anthropic` | `migrationguide` |
