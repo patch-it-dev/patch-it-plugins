@@ -187,3 +187,31 @@ func TestAlgoliaRecommendCustomRequestMoveIsNoEvent(t *testing.T) {
 		t.Errorf("unfiltered: %d /1{path} removals, want 4", removed)
 	}
 }
+
+// The client-only filter reads the operation a change is about, so it relies
+// on algoliaDiff quoting the whole operation for a deprecation (without
+// QuoteDeprecatedOperation the change carries the bare `true`). Through the
+// real differ, a deprecated helper and a deprecated custom-request method
+// make no event; a deprecated REST operation does.
+func TestAlgoliaClientOnlyFilterThroughTheDiffer(t *testing.T) {
+	spec := func(deprecated bool) *diff.Spec {
+		d := fmt.Sprint(deprecated)
+		s, err := diff.Parse([]byte(`{"openapi":"3.0.2","info":{"version":"x"},"paths":{
+			"/saveObjects":{"post":{"operationId":"saveObjects","x-helper":true,"deprecated":` + d + `,"responses":{}}},
+			"/{path}":{"get":{"operationId":"customGet","deprecated":` + d + `,"responses":{}}},
+			"/1/clusters":{"get":{"operationId":"listClusters","deprecated":` + d + `,"responses":{}}}}}`))
+		if err != nil {
+			t.Fatal(err)
+		}
+		return s
+	}
+	var kept []string
+	for _, c := range diff.ChangesWith(spec(false), spec(true), algoliaDiff) {
+		if algoliaKeep(c) {
+			kept = append(kept, c.Operation)
+		}
+	}
+	if len(kept) != 1 || kept[0] != "GET /1/clusters" {
+		t.Errorf("kept %v, want only GET /1/clusters", kept)
+	}
+}

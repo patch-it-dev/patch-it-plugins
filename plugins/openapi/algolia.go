@@ -24,6 +24,9 @@ var algoliaDiff = diff.Options{PathTemplates: true, QuoteDeprecatedOperation: tr
 // history was deprecated first; 13 were the client-only entries above (the
 // custom-request methods in all three specs on 2024-03-25, and /saveObjects).
 func algoliaKeep(c diff.Change) bool {
+	// c.Node is the operation only because algoliaDiff sets
+	// QuoteDeprecatedOperation (a removal carries the old operation anyway);
+	// TestAlgoliaClientOnlyFilterThroughTheDiffer pins that.
 	op, _ := c.Node.(map[string]any)
 	if clientOnly(op) {
 		return false
