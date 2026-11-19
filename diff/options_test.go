@@ -132,3 +132,69 @@ func TestQuoteDeprecatedOperation(t *testing.T) {
 		t.Errorf("without the option: %+v, want the flag cited", got)
 	}
 }
+
+var saysDeprecated = func(s string) bool { return strings.HasPrefix(s, "## Deprecated") }
+
+// A deprecation said only in the description is one when
+// DeprecatedDescription says so, and cites the description, even with
+// QuoteDeprecatedOperation (which is about the flag); without it, only the
+// flag counts.
+func TestDeprecatedDescription(t *testing.T) {
+	oldSpec := mustParse(t, pathsSpec(`"/rules/":{"get":{"summary":"List rules","description":"Return a list of rules."}}`))
+	newSpec := mustParse(t, pathsSpec(`"/rules/":{"get":{"summary":"List rules","description":"## Deprecated\nUse monitors.\n\nReturn a list of rules."}}`))
+
+	if got := Changes(oldSpec, newSpec); len(got) != 0 {
+		t.Errorf("without DeprecatedDescription: %v, want nothing", kinds(got))
+	}
+	got := ChangesWith(oldSpec, newSpec, Options{DeprecatedDescription: saysDeprecated, QuoteDeprecatedOperation: true})
+	if len(got) != 1 || got[0].Kind != OperationDeprecated || got[0].Pointer != "/paths/~1rules~1/get/description" ||
+		got[0].Node != "## Deprecated\nUse monitors.\n\nReturn a list of rules." {
+		t.Fatalf("got %+v, want one operation_deprecated citing the description", got)
+	}
+}
+
+// Said in the description first, flagged later: deprecated once, when the
+// words came. Flagged and said at once: the flag's evidence wins.
+func TestDeprecatedDescriptionThenFlag(t *testing.T) {
+	plain := mustParse(t, pathsSpec(`"/a":{"get":{"description":"A."}}`))
+	words := mustParse(t, pathsSpec(`"/a":{"get":{"description":"## Deprecated A."}}`))
+	both := mustParse(t, pathsSpec(`"/a":{"get":{"description":"## Deprecated A.","deprecated":true}}`))
+	opts := Options{DeprecatedDescription: saysDeprecated}
+	if got := ChangesWith(words, both, opts); len(got) != 0 {
+		t.Errorf("words then flag: %v, want nothing", kinds(got))
+	}
+	got := ChangesWith(plain, both, opts)
+	if len(got) != 1 || got[0].Pointer != "/paths/~1a/get/deprecated" {
+		t.Errorf("flag and words at once: %+v, want the flag cited", got)
+	}
+}
+
+// Summary and description both said so at once: the summary is cited.
+func TestDeprecatedSummaryBeforeDescription(t *testing.T) {
+	oldSpec := mustParse(t, pathsSpec(`"/a":{"get":{"summary":"A","description":"A."}}`))
+	newSpec := mustParse(t, pathsSpec(`"/a":{"get":{"summary":"A (deprecated)","description":"## Deprecated A."}}`))
+	got := ChangesWith(oldSpec, newSpec, Options{DeprecatedSummary: endsDeprecated, DeprecatedDescription: saysDeprecated})
+	if len(got) != 1 || got[0].Pointer != "/paths/~1a/get/summary" {
+		t.Errorf("got %+v, want the summary cited", got)
+	}
+}
+
+func TestOperationDeprecatedByDescription(t *testing.T) {
+	o := Options{DeprecatedDescription: saysDeprecated}
+	for _, c := range []struct {
+		op   map[string]any
+		want bool
+	}{
+		{map[string]any{"description": "## Deprecated\nUse B."}, true},
+		{map[string]any{"description": "Lists deprecation details."}, false},
+		{map[string]any{"summary": "## Deprecated"}, false},
+		{map[string]any{"description": 3}, false},
+	} {
+		if got := o.OperationDeprecated(c.op); got != c.want {
+			t.Errorf("%v: got %v, want %v", c.op, got, c.want)
+		}
+	}
+	if (Options{}).OperationDeprecated(map[string]any{"description": "## Deprecated"}) {
+		t.Error("zero Options reads the description")
+	}
+}

@@ -1,7 +1,7 @@
 {
   "_comment": "Generated from the plugin registry and docs/plugins.md by `make plugins-json` (go run ./cmd/list-plugins). Don't edit by hand.",
   "$schema": "./plugins.schema.json",
-  "count": 21,
+  "count": 22,
   "plugins": [
     {
       "id": "algolia-ingestion",
@@ -152,6 +152,16 @@
       "source_url": "https://github.com/redis/redis-doc/blob/master/commands.json",
       "status": "live",
       "provider_page": "providers/redis.md"
+    },
+    {
+      "id": "sentry",
+      "provider": "Sentry",
+      "layer": "api",
+      "watches": "REST API operations deprecated between releases of the spec, most of them in the operation's description",
+      "format": "openapi",
+      "source_url": "https://github.com/getsentry/sentry/releases",
+      "status": "live",
+      "provider_page": "providers/sentry.md"
     },
     {
       "id": "stripe",

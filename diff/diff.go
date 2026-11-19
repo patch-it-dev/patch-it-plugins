@@ -106,6 +106,13 @@ type Options struct {
 	// `deprecated` flag. Nil reads only the flag.
 	DeprecatedSummary func(summary string) bool
 
+	// DeprecatedDescription reports whether an operation's description marks
+	// it deprecated, for a spec that says so in the description's words
+	// ("## Deprecated", "This endpoint is DEPRECATED.") and seldom in the
+	// flag. Nil doesn't read the description. A deprecation said only there
+	// cites the description.
+	DeprecatedDescription func(description string) bool
+
 	// QuoteDeprecatedOperation makes a deprecation by the flag cite the whole
 	// operation, not the bare `true`: for a spec that says why in the
 	// operation's description ("This endpoint is deprecated - use the deploy
@@ -116,9 +123,15 @@ type Options struct {
 }
 
 // OperationDeprecated reports whether an operation object is marked
-// deprecated, by its flag or, when DeprecatedSummary is set, its summary.
+// deprecated, by its flag or, when DeprecatedSummary or DeprecatedDescription
+// is set, its summary or description.
 func (o Options) OperationDeprecated(op map[string]any) bool {
-	return truthy(op["deprecated"]) || o.summaryDeprecated(op)
+	return truthy(op["deprecated"]) || o.summaryDeprecated(op) || o.descriptionDeprecated(op)
+}
+
+func (o Options) descriptionDeprecated(op map[string]any) bool {
+	description, _ := op["description"].(string)
+	return o.DeprecatedDescription != nil && description != "" && o.DeprecatedDescription(description)
 }
 
 func (o Options) summaryDeprecated(op map[string]any) bool {
@@ -294,9 +307,12 @@ func (d *differ) paths(oldPaths, newPaths map[string]any) {
 					d.add(w, OperationDeprecated, "", false, newOp)
 				case truthy(newOp["deprecated"]):
 					d.add(w.child("deprecated"), OperationDeprecated, "", false, newOp["deprecated"])
-				default:
+				case d.opts.summaryDeprecated(newOp):
 					// Said in words: the summary is the evidence.
 					d.add(w.child("summary"), OperationDeprecated, "", false, newOp["summary"])
+				default:
+					// Said in the description's words: it is the evidence.
+					d.add(w.child("description"), OperationDeprecated, "", false, newOp["description"])
 				}
 			}
 			d.parameters(w, oldOp, newOp, pathParamRenames(pair.oldPath, pair.newPath))
