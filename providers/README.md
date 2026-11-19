@@ -25,5 +25,6 @@ One page per plugin id: `providers/<api>.md`. Start from [`_template.md`](_templ
 | [github-actions.md](github-actions.md) | `github-actions` | `feed` |
 | [vertex-ai-models.md](vertex-ai-models.md) | `vertex-ai-models` | `feed` |
 | [cloudflare.md](cloudflare.md) | `cloudflare` | `feed` |
+| [mongodb-atlas.md](mongodb-atlas.md) | `mongodb-atlas` | `apichangelog` |
 
 The list of plugins, with their status, is [docs/plugins.md](../docs/plugins.md).
