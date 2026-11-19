@@ -1,0 +1,254 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:2efa45f20c4794cb83d70cc75a4a098f03002e8ca698ae69be2f0a032fba4d43",
+    "api": "sentry",
+    "version": "2024-07-31",
+    "previous_version": "2024-07-31",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/0/projects/{organization_id_or_slug}/{project_id_or_slug}/user-feedback/"
+    },
+    "description": "Operation POST /api/0/projects/{organization_id_or_slug}/{project_id_or_slug}/user-feedback/ marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/getsentry/sentry-api-schema/4650a66a859e015cccef2c171b115633321768e9/openapi-derefed.json",
+    "source_pointer": "/paths/~1api~10~1projects~1{organization_id_or_slug}~1{project_id_or_slug}~1user-feedback~1/post/description",
+    "source_excerpt": "\"*This endpoint is DEPRECATED. We document it here for older SDKs and users who are still migrating to the [User Feedback Widget](https://docs.sentry.io/product/user-feedback/#user-feedback-widget) or [API](https://docs.sentry.io/platforms/javascript/user-feedback/#user-feedback-api)(multi-platform). If you are a new user, do not use this endpoint - unless you don't have a JS frontend, and your platform's SDK does not offer a feedback API.*\\n\\nFeedback must be received by the server no more than 30 minutes after the event was saved.\\n\\nAdditionally, within 5 minutes of submitting feedback it may also be overwritten. This is useful in situations where you may need to retry sending a request due to network failures.\\n\\nIf feedback is rejected due to a mutability threshold, a 409 status code will be returned.\\n\\nNote: Feedback may be submitted with DSN authentication (see auth documentation).\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:c9d7575990702109c5fe20bb8a1cf67654789f4e4a0977b4eb4d540093015e15",
+    "api": "sentry",
+    "version": "2025-07-25",
+    "previous_version": "2025-07-25",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/0/projects/{organization_id_or_slug}/{project_id_or_slug}/issues/"
+    },
+    "description": "Operation GET /api/0/projects/{organization_id_or_slug}/{project_id_or_slug}/issues/ marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/getsentry/sentry-api-schema/c2f638f601baadcb055aec4ca3c2ba9f2654c087/openapi-derefed.json",
+    "source_pointer": "/paths/~1api~10~1projects~1{organization_id_or_slug}~1{project_id_or_slug}~1issues~1/get/description",
+    "source_excerpt": "\"**Deprecated**: This endpoint has been replaced with the [Organization Issues endpoint](/api/events/list-an-organizations-issues/) which\\nsupports filtering on project and additional functionality.\\n\\nReturn a list of issues (groups) bound to a project.  All parameters are supplied as query string parameters. \\n\\n A default query of ``is:unresolved`` is applied. To return results with other statuses send an new query value (i.e. ``?query=`` for all results).\\n\\nThe ``statsPeriod`` parameter can be used to select the timeline stats which should be present. Possible values are: ``\\\"\\\"`` (disable),``\\\"24h\\\"`` (default), ``\\\"14d\\\"``\\n\\nUser feedback items from the [User Feedback Widget](https://docs.sentry.io/product/user-feedback/#user-feedback-widget) are built off the issue platform, so to return a list of user feedback items for a specific project, filter for `issue.category:feedback`.\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:6fc16106a310cfe991afc1001b20127813897fb5ae8a495c6b35f3877f844e73",
+    "api": "sentry",
+    "version": "2026-01-22",
+    "previous_version": "2026-01-21",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/0/organizations/{organization_id_or_slug}/alert-rules/"
+    },
+    "description": "Operation GET /api/0/organizations/{organization_id_or_slug}/alert-rules/ marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/getsentry/sentry-api-schema/1da1f31fac696201b1a7d20046fc199c8b1324b6/openapi-derefed.json",
+    "source_pointer": "/paths/~1api~10~1organizations~1{organization_id_or_slug}~1alert-rules~1/get/description",
+    "source_excerpt": "\"## Deprecated\\n🚧 Use [Fetch an Organization's Monitors](/api/monitors/fetch-an-organizations-monitors) and [Fetch Alerts](/api/monitors/fetch-alerts) instead.\\n\\n\\nReturn a list of active metric alert rules bound to an organization.\\n\\nA metric alert rule is a configuration that defines the conditions for triggering an alert.\\nIt specifies the metric type, function, time interval, and threshold\\nvalues that determine when an alert should be triggered. Metric alert rules are used to monitor\\nand notify you when certain metrics, like error count, latency, or failure rate, cross a\\npredefined threshold. These rules help you proactively identify and address issues in your\\nproject.\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:c2eb3298f4f871a01f9b5bf7b99e3731aa0328acc1f654b68308844bc8d9cdc7",
+    "api": "sentry",
+    "version": "2026-01-22",
+    "previous_version": "2026-01-21",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/0/organizations/{organization_id_or_slug}/alert-rules/"
+    },
+    "description": "Operation POST /api/0/organizations/{organization_id_or_slug}/alert-rules/ marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/getsentry/sentry-api-schema/1da1f31fac696201b1a7d20046fc199c8b1324b6/openapi-derefed.json",
+    "source_pointer": "/paths/~1api~10~1organizations~1{organization_id_or_slug}~1alert-rules~1/post/description",
+    "source_excerpt": "\"## Deprecated\\n🚧 Use [Create a Monitor for a Project](/api/monitors/create-a-monitor-for-a-project) and [Create an Alert for an Organization](/api/monitors/create-an-alert-for-an-organization) instead.\\n\\n\\nCreate a new metric alert rule for the given organization.\\n\\nA metric alert rule is a configuration that defines the conditions for triggering an alert.\\nIt specifies the metric type, function, time interval, and threshold\\nvalues that determine when an alert should be triggered. Metric alert rules are used to monitor\\nand notify you when certain metrics, like error count, latency, or failure rate, cross a\\npredefined threshold. These rules help you proactively identify and address issues in your\\nproject.\\n\\n## Metric Alert Rule Types\\nBelow are the types of metric alert rules you can create and the parameter values required\\nto set them up. All other parameters can be customized based on how you want the alert\\nrule to work. Scroll down to Body Parameters for more information. Visit the\\n[Alert Types](/product/alerts/alert-types/#metric-alerts) docs for more details on each\\nmetric alert rule type.\\n\\n### [Number of Errors](/product/alerts/alert-types/#number-of-errors)\\n- `eventTypes`: Any of `error` or `default`.\\n```json\\n{\\n    \\\"queryType\\\": 0,\\n    \\\"dataset\\\": \\\"events\\\",\\n    \\\"aggregate\\\": \\\"count()\\\",\\n    \\\"eventTypes\\\": [\\\"error\\\", \\\"default\\\"]\\n}\\n```\\n\\n### [Users Experiencing Errors](/product/alerts/alert-types/#users-experiencing-errors)\\n- `eventTypes`: Any of `error` or `default`.\\n```json\\n{\\n    \\\"queryType\\\": 0,\\n    \\\"dataset\\\": \\\"events\\\",\\n    \\\"aggregate\\\": \\\"count_unique(user)\\\"\\n}\\n```\\n\\n### [Crash Free Session Rate](/product/alerts/alert-types/#crash-free-session-rate)\\n```json\\n{\\n    \\\"queryType\\\": 2,\\n    \\\"dataset\\\": \\\"metrics\\\",\\n    \\\"aggregate\\\": \\\"percentage(sessions_crashed, sessions) AS _crash_rate_alert_aggregate\\\"\\n}\\n```\\n\\n### [Crash Free User Rate](/product/alerts/alert-types/#crash-free-user-rate)\\n```json\\n{\\n   …",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:7c4f21e09fe00c30d1239b95e167e7739e81ad21e7ede0234ae837277f60b590",
+    "api": "sentry",
+    "version": "2026-01-22",
+    "previous_version": "2026-01-21",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "DELETE /api/0/organizations/{organization_id_or_slug}/alert-rules/{alert_rule_id}/"
+    },
+    "description": "Operation DELETE /api/0/organizations/{organization_id_or_slug}/alert-rules/{alert_rule_id}/ marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/getsentry/sentry-api-schema/1da1f31fac696201b1a7d20046fc199c8b1324b6/openapi-derefed.json",
+    "source_pointer": "/paths/~1api~10~1organizations~1{organization_id_or_slug}~1alert-rules~1{alert_rule_id}~1/delete/description",
+    "source_excerpt": "\"## Deprecated\\n 🚧 Use [Delete a Monitor](/api/monitors/delete-a-monitor) and [Delete an Alert](/api/monitors/delete-an-alert) instead.\\n\\n Delete a specific metric alert rule.\\n\\n A metric alert rule is a configuration that defines the conditions for triggering an alert.\\n It specifies the metric type, function, time interval, and threshold\\n values that determine when an alert should be triggered. Metric alert rules are used to monitor\\n and notify you when certain metrics, like error count, latency, or failure rate, cross a\\n predefined threshold. These rules help you proactively identify and address issues in your\\n project.\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:5d93def1bfa9db7da29d9446fd4f5944df489f55033d585f951a2e4925afd4da",
+    "api": "sentry",
+    "version": "2026-01-22",
+    "previous_version": "2026-01-21",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/0/organizations/{organization_id_or_slug}/alert-rules/{alert_rule_id}/"
+    },
+    "description": "Operation GET /api/0/organizations/{organization_id_or_slug}/alert-rules/{alert_rule_id}/ marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/getsentry/sentry-api-schema/1da1f31fac696201b1a7d20046fc199c8b1324b6/openapi-derefed.json",
+    "source_pointer": "/paths/~1api~10~1organizations~1{organization_id_or_slug}~1alert-rules~1{alert_rule_id}~1/get/description",
+    "source_excerpt": "\"## Deprecated\\n🚧 Use [Fetch a Monitor](/api/monitors/fetch-a-monitor) and [Fetch an Alert](/api/monitors/fetch-an-alert) instead.\\n\\n\\nReturn details on an individual metric alert rule.\\n\\nA metric alert rule is a configuration that defines the conditions for triggering an alert.\\nIt specifies the metric type, function, time interval, and threshold\\nvalues that determine when an alert should be triggered. Metric alert rules are used to monitor\\nand notify you when certain metrics, like error count, latency, or failure rate, cross a\\npredefined threshold. These rules help you proactively identify and address issues in your\\nproject.\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:90402d61a2a48a93c0c095061b6dc457e189a52d4e5d84b68953d49b16c0c052",
+    "api": "sentry",
+    "version": "2026-01-22",
+    "previous_version": "2026-01-21",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "PUT /api/0/organizations/{organization_id_or_slug}/alert-rules/{alert_rule_id}/"
+    },
+    "description": "Operation PUT /api/0/organizations/{organization_id_or_slug}/alert-rules/{alert_rule_id}/ marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/getsentry/sentry-api-schema/1da1f31fac696201b1a7d20046fc199c8b1324b6/openapi-derefed.json",
+    "source_pointer": "/paths/~1api~10~1organizations~1{organization_id_or_slug}~1alert-rules~1{alert_rule_id}~1/put/description",
+    "source_excerpt": "\"## Deprecated\\n🚧 Use [Update a Monitor by ID](/api/monitors/update-a-monitor-by-id) and [Update an Alert by ID](/api/monitors/update-an-alert-by-id) instead.\\n\\n\\nUpdates a metric alert rule. See **Metric Alert Rule Types** under\\n[Create a Metric Alert Rule for an Organization](/api/alerts/create-a-metric-alert-rule-for-an-organization/#metric-alert-rule-types)\\nto see valid request body configurations for different types of metric alert rule types.\\n\\u003e Warning: Calling this endpoint fully overwrites the specified metric alert.\\n\\nA metric alert rule is a configuration that defines the conditions for triggering an alert.\\nIt specifies the metric type, function, time interval, and threshold\\nvalues that determine when an alert should be triggered. Metric alert rules are used to monitor\\nand notify you when certain metrics, like error count, latency, or failure rate, cross a\\npredefined threshold. These rules help you proactively identify and address issues in your\\nproject.\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
+    "fingerprint": "sha256:2f145e0f7dab69af5b768ce70659ca1bc83c0adcbc3d82e0d4c8282c70c4cded",
+    "api": "sentry",
+    "version": "2026-01-22",
+    "previous_version": "2026-01-21",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/0/projects/{organization_id_or_slug}/{project_id_or_slug}/rules/"
+    },
+    "description": "Operation GET /api/0/projects/{organization_id_or_slug}/{project_id_or_slug}/rules/ marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/getsentry/sentry-api-schema/1da1f31fac696201b1a7d20046fc199c8b1324b6/openapi-derefed.json",
+    "source_pointer": "/paths/~1api~10~1projects~1{organization_id_or_slug}~1{project_id_or_slug}~1rules~1/get/description",
+    "source_excerpt": "\"## Deprecated\\n🚧 Use [Fetch an Organization's Monitors](/api/monitors/fetch-an-organizations-monitors) and [Fetch Alerts](/api/monitors/fetch-alerts) instead.\\n\\n\\nReturn a list of active issue alert rules bound to a project.\\n\\nAn issue alert rule triggers whenever a new event is received for any issue in a project that matches the specified alert conditions. These conditions can include a resolved issue re-appearing or an issue affecting many users. Alert conditions have three parts:\\n- Triggers: specify what type of activity you'd like monitored or when an alert should be triggered.\\n- Filters: help control noise by triggering an alert only if the issue matches the specified criteria.\\n- Actions: specify what should happen when the trigger conditions are met and the filters match.\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 9,
+    "fingerprint": "sha256:9530af56a60f90dc66ad010d23cfbe27c1e4995ca7abaf025069e9a8a979c813",
+    "api": "sentry",
+    "version": "2026-01-22",
+    "previous_version": "2026-01-21",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/0/projects/{organization_id_or_slug}/{project_id_or_slug}/rules/"
+    },
+    "description": "Operation POST /api/0/projects/{organization_id_or_slug}/{project_id_or_slug}/rules/ marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/getsentry/sentry-api-schema/1da1f31fac696201b1a7d20046fc199c8b1324b6/openapi-derefed.json",
+    "source_pointer": "/paths/~1api~10~1projects~1{organization_id_or_slug}~1{project_id_or_slug}~1rules~1/post/description",
+    "source_excerpt": "\"## Deprecated\\n🚧 Use [Create a Monitor for a Project](/api/monitors/create-a-monitor-for-a-project) and [Create an Alert for an Organization](/api/monitors/create-an-alert-for-an-organization) instead.\\n\\n\\nCreate a new issue alert rule for the given project.\\n\\nAn issue alert rule triggers whenever a new event is received for any issue in a project that matches the specified alert conditions. These conditions can include a resolved issue re-appearing or an issue affecting many users. Alert conditions have three parts:\\n- Triggers: specify what type of activity you'd like monitored or when an alert should be triggered.\\n- Filters: help control noise by triggering an alert only if the issue matches the specified criteria.\\n- Actions: specify what should happen when the trigger conditions are met and the filters match.\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 10,
+    "fingerprint": "sha256:c4b2385ae7d1452194f50e65e09c90b5a370c23741e45655c2aef541b65aa70c",
+    "api": "sentry",
+    "version": "2026-01-22",
+    "previous_version": "2026-01-21",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "DELETE /api/0/projects/{organization_id_or_slug}/{project_id_or_slug}/rules/{rule_id}/"
+    },
+    "description": "Operation DELETE /api/0/projects/{organization_id_or_slug}/{project_id_or_slug}/rules/{rule_id}/ marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/getsentry/sentry-api-schema/1da1f31fac696201b1a7d20046fc199c8b1324b6/openapi-derefed.json",
+    "source_pointer": "/paths/~1api~10~1projects~1{organization_id_or_slug}~1{project_id_or_slug}~1rules~1{rule_id}~1/delete/description",
+    "source_excerpt": "\"## Deprecated\\n 🚧 Use [Delete an Alert](/api/monitors/delete-an-alert) instead.\\n\\n\\n Delete a specific issue alert rule.\\n\\n An issue alert rule triggers whenever a new event is received for any issue in a project that matches the specified alert conditions. These conditions can include a resolved issue re-appearing or an issue affecting many users. Alert conditions have three parts:\\n - Triggers: specify what type of activity you'd like monitored or when an alert should be triggered.\\n - Filters: help control noise by triggering an alert only if the issue matches the specified criteria.\\n - Actions: specify what should happen when the trigger conditions are met and the filters match.\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 11,
+    "fingerprint": "sha256:67cdb8021716e9e3bdd7fbe696b87099b0301943cba1cf66b5a8973e4db45fbb",
+    "api": "sentry",
+    "version": "2026-01-22",
+    "previous_version": "2026-01-21",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/0/projects/{organization_id_or_slug}/{project_id_or_slug}/rules/{rule_id}/"
+    },
+    "description": "Operation GET /api/0/projects/{organization_id_or_slug}/{project_id_or_slug}/rules/{rule_id}/ marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/getsentry/sentry-api-schema/1da1f31fac696201b1a7d20046fc199c8b1324b6/openapi-derefed.json",
+    "source_pointer": "/paths/~1api~10~1projects~1{organization_id_or_slug}~1{project_id_or_slug}~1rules~1{rule_id}~1/get/description",
+    "source_excerpt": "\"## Deprecated\\n🚧 Use [Fetch an Alert](/api/monitors/fetch-an-alert) instead.\\n\\n\\nReturn details on an individual issue alert rule.\\n\\nAn issue alert rule triggers whenever a new event is received for any issue in a project that matches the specified alert conditions. These conditions can include a resolved issue re-appearing or an issue affecting many users. Alert conditions have three parts:\\n- Triggers - specify what type of activity you'd like monitored or when an alert should be triggered.\\n- Filters - help control noise by triggering an alert only if the issue matches the specified criteria.\\n- Actions - specify what should happen when the trigger conditions are met and the filters match.\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 12,
+    "fingerprint": "sha256:4857ec490742153cbb2fc9d7acfdfe63f5fc5c1cb45f4df2a8d9c6a8de9ca484",
+    "api": "sentry",
+    "version": "2026-01-22",
+    "previous_version": "2026-01-21",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "PUT /api/0/projects/{organization_id_or_slug}/{project_id_or_slug}/rules/{rule_id}/"
+    },
+    "description": "Operation PUT /api/0/projects/{organization_id_or_slug}/{project_id_or_slug}/rules/{rule_id}/ marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/getsentry/sentry-api-schema/1da1f31fac696201b1a7d20046fc199c8b1324b6/openapi-derefed.json",
+    "source_pointer": "/paths/~1api~10~1projects~1{organization_id_or_slug}~1{project_id_or_slug}~1rules~1{rule_id}~1/put/description",
+    "source_excerpt": "\"## Deprecated\\n🚧 Use [Update an Alert by ID](/api/monitors/update-an-alert-by-id) instead.\\n\\n\\nUpdates an issue alert rule.\\n\\u003e Warning: Calling this endpoint fully overwrites the specified issue alert.\\n\\nAn issue alert rule triggers whenever a new event is received for any issue in a project that matches the specified alert conditions. These conditions can include a resolved issue re-appearing or an issue affecting many users. Alert conditions have three parts:\\n- Triggers - specify what type of activity you'd like monitored or when an alert should be triggered.\\n- Filters - help control noise by triggering an alert only if the issue matches the specified criteria.\\n- Actions - specify what should happen when the trigger conditions are met and the filters match.\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

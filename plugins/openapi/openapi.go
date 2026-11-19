@@ -1,9 +1,9 @@
 // Package openapi is the source plugin for an API that publishes an OpenAPI
 // spec per release (Stripe, Datadog, GitLab, GitHub, Vercel, Supabase,
-// Algolia, Elasticsearch): fetch the newest spec, diff it against the last
-// one seen, normalize the changes into events, and attach migration hints
-// from the API's changelog when it has one. It can also replay two given
-// releases.
+// Algolia, Elasticsearch, Sentry): fetch the newest spec, diff it against the
+// last one seen, normalize the changes into events, and attach migration
+// hints from the API's changelog when it has one. It can also replay two
+// given releases.
 package openapi
 
 import (
@@ -45,6 +45,10 @@ func init() {
 	// No Hints: Elastic's breaking-changes page is prose per area, not keyed
 	// by operation. See elasticsearch.go.
 	plugin.Register(Plugin{Adapter: adapter.Elasticsearch{}, Diff: elasticsearchDiff, Keep: elasticsearchKeep, RemovalsNeedANewVersion: true})
+	// No Hints: Sentry's changelog is product news, not keyed by operation.
+	// Operation deprecations only, most said in the description: see
+	// sentry.go.
+	plugin.Register(Plugin{Adapter: adapter.Sentry{}, Diff: sentryDiff, Keep: sentryKeep})
 }
 
 // requestSide keeps the changes to what callers send. GitLab's response
