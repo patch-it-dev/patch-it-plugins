@@ -1,6 +1,7 @@
 // Command list-plugins writes docs/plugins.json: every registered plugin
 // joined with its row in docs/plugins.md (id, provider, what it watches,
-// format plugin, source URL, status, provider page). It fails when the
+// format plugin, source URL, status, provider page), and sets the plugin
+// count on the README's badge. It fails when the
 // registry and the table disagree. Run it from the repo root:
 //
 //	go run ./cmd/list-plugins           # rewrite docs/plugins.json (make plugins-json)
@@ -43,13 +44,24 @@ func run(root, out string, check bool) error {
 		_, err := os.Stdout.Write(b)
 		return err
 	}
+	readmePath := filepath.Join(root, pluginlist.Readme)
+	readme, err := os.ReadFile(readmePath)
+	if err != nil {
+		return err
+	}
+	badged, _ := pluginlist.Badge(readme, len(plugins))
 	path := filepath.Join(root, out)
 	if check {
 		have, err := os.ReadFile(path)
-		if err != nil || !bytes.Equal(have, b) {
-			return fmt.Errorf("%s is out of date: run `make plugins-json` and commit it", out)
+		if err != nil || !bytes.Equal(have, b) || !bytes.Equal(readme, badged) {
+			return fmt.Errorf("%s or the README's plugins badge is out of date: run `make plugins-json` and commit them", out)
 		}
 		return nil
+	}
+	if !bytes.Equal(readme, badged) {
+		if err := os.WriteFile(readmePath, badged, 0o644); err != nil {
+			return err
+		}
 	}
 	return os.WriteFile(path, b, 0o644)
 }
