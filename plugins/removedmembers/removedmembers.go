@@ -69,6 +69,14 @@ type Guide struct {
 	// renamed_symbol the client would apply as a rename. NumPy 2.0's
 	// replacements already worked on 1.x, so it doesn't set this.
 	NewReplacements bool
+	// Paths gives a name the table writes in shorthand the path code imports
+	// it by, after Module ("EVENTS_ENDPOINT" -> "request.EVENTS_ENDPOINT"),
+	// checked by hand against the package at the release before. A guide's
+	// cell can list names that share a prefix only the first one spells out.
+	Paths map[string]string
+	// StillWork are names the table lists as removed but the same guide says
+	// still work or have no effect: no event, with the guide's reason.
+	StillWork map[string]string
 }
 
 // Format is how a guide writes its table.

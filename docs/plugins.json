@@ -147,7 +147,7 @@
       "id": "posthog",
       "provider": "PostHog",
       "layer": "sdk",
-      "watches": "Members removed or renamed in the posthog Python SDK 8.0.0",
+      "watches": "Members removed in the posthog Python SDK 8.0.0",
       "format": "removedmembers",
       "source_url": "https://github.com/PostHog/posthog-python/blob/posthog-v8.0.0/docs/migration-7.x-to-8.0.md",
       "status": "live",

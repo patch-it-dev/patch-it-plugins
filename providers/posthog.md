@@ -2,7 +2,7 @@
 
 ## What it watches
 
-Members removed from or renamed in the `posthog` Python SDK in 8.0.0 (`CaptureV1Error`, `CaptureMode`, `posthog.capture_v1`, `request.batch_post`…): code using one breaks on the upgrade. One event per member. Pinned to that release.
+Members removed from the `posthog` Python SDK in 8.0.0 (`CaptureMode`, `posthog.capture_v1`, `posthog.capture_v1.CaptureV1Error`, `posthog.request.batch_post`…): code using one breaks on the upgrade. One event per member. Pinned to that release.
 
 Format plugin: `removedmembers` (`plugins/removedmembers`), reading a Markdown table.
 
@@ -11,6 +11,7 @@ Format plugin: `removedmembers` (`plugins/removedmembers`), reading a Markdown t
 - **Source:** [`docs/migration-7.x-to-8.0.md` at posthog-v8.0.0](https://github.com/PostHog/posthog-python/blob/posthog-v8.0.0/docs/migration-7.x-to-8.0.md) (commit `6edff41425188056e48f6119457dc9bc0669ca99`), read raw at the tag. Checked on 2026-11-19. The guide isn't in the repo at posthog-v7.91.4, the release before, and is the same at posthog-v8.0.2. MIT.
 - **Why this one:** it's PostHog's own migration guide for the SDK's 8.0.0, and its "Fix removed APIs" section is a table of what 8.0.0 removed and what to use instead. A tag never changes, so the URL is its own citation, and 8.0.0 is a version a repo pins.
 - **Alternatives considered:**
+  - **`references/public_api_snapshot.txt`** in the same repo: a generated listing of the public API at every tag. Diffing it between two releases gives every removed name with its full path, but no reason, replacement or announcement. The plugin reads the guide, and the listing was used to check the paths of the guide's names.
   - **PostHog's REST API spec.** It's served only live, at <https://us.posthog.com/api/schema/>, and isn't committed anywhere, so there's no release to pin or replay. Its history, measured on 2026-11-19 over the two Wayback Machine snapshots of the schema (app.posthog.com, 2024-05-06 and 2025-11-09) and the live copy (about two and a half years):
     - operations: 391, 815, then 2,787;
     - deprecations: 0 in either snapshot. The live copy marks 8 operations `deprecated: true`, all on organization routes (`advanced_activity_logs`, `desktop_beta_terms`, `integrations`) that weren't in the 2025-11-09 snapshot: they arrived already deprecated, so no operation a caller used was deprecated in the window;
@@ -34,15 +35,15 @@ Format plugin: `removedmembers` (`plugins/removedmembers`), reading a Markdown t
 
   | Row | Events |
   |---|---|
-  | `capture_mode`, `CaptureMode`, `POSTHOG_CAPTURE_MODE` → Nothing | `removed_symbol` `capture_mode`, `CaptureMode`. `POSTHOG_CAPTURE_MODE` is an environment variable, not a member: dropped |
+  | `capture_mode`, `CaptureMode`, `POSTHOG_CAPTURE_MODE` → Nothing | `removed_symbol` `CaptureMode` (importable from `posthog`). `capture_mode` dropped: the guide's own "Rename deprecated settings" table says `posthog.capture_mode` still works or has no effect in 8.x.x, and the name also covers a `Client` argument and a module, which the row doesn't tell apart. `POSTHOG_CAPTURE_MODE` is an environment variable, not a member: dropped |
   | `gzip=True` → `capture_compression` | Dropped: an argument value of a call the row doesn't name (`removed_parameter` needs the call) |
-  | `CaptureV1Error` → `CaptureError` | `removed_symbol` `CaptureV1Error`, with `CaptureError` in the hint |
+  | `CaptureV1Error` → `CaptureError` | `removed_symbol` `capture_v1.CaptureV1Error` (its module), with `CaptureError` in the hint |
   | `posthog.capture_v1` → `posthog.capture_event` and `posthog.capture_send` | `removed_symbol` `capture_v1` (two replacements) |
-  | `request.batch_post`, `async_batch_post`, `EVENTS_ENDPOINT`, `AI_EVENTS_ENDPOINT` → Send events through a client | `removed_symbol` for each of the four |
+  | `request.batch_post`, `async_batch_post`, `EVENTS_ENDPOINT`, `AI_EVENTS_ENDPOINT` → Send events through a client | `removed_symbol` for each of the four, at the module the code has them in: `request.batch_post`, `_async_request.async_batch_post` (a private module), `request.EVENTS_ENDPOINT`, `request.AI_EVENTS_ENDPOINT`. The cell spells out `request.` only for the first. Checked against `references/public_api_snapshot.txt` and the code at posthog-v7.91.4 |
   | The `gzip` parameter of `request.post` and `request.flags` → Nothing | Dropped: prose. Not a `removed_parameter` either: both take `**kwargs` in 8.0.0, so `gzip=` raises nothing and is sent in the request body, as the guide says |
   | The `backoff` dependency → Your own requirements… | Dropped: prose, and a dependency |
 
-  8 events. The event's description says only that the member was removed: what code gets differs by member (an `ImportError`, a `TypeError` for a client argument, nothing for setting `posthog.capture_mode`, which the guide says has no effect).
+  7 events. The event's description says only that the member was removed: what code gets differs by member (an `ImportError` for most, an `AttributeError` for a module attribute).
 - **`CaptureV1Error` → `CaptureError` moves module too:** from `posthog.capture_v1` to `posthog`, and `CaptureError` is new in 8.0.0. The row says only the names; the guide says the rest a few paragraphs below ("Replace `from posthog.capture_v1 import CaptureV1Error` with `from posthog import CaptureError`. There is no alias.").
 - Ignores the guide's eight other tables (endpoints, AI lane arguments, error fields, retries, SDK identity, dropped events, options, and "Rename deprecated settings", whose old names still work in 8.x.x) and its prose (behavior changes such as property precedence and retries).
 

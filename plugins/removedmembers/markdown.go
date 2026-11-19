@@ -90,9 +90,14 @@ func parseMarkdown(page []byte, g Guide) ([]Removal, error) {
 		repl := soleName(cells[1], g.Module)
 		for _, n := range names {
 			r := Removal{Member: n, Guideline: guideline, Excerpt: excerpt}
+			if p, ok := g.Paths[n]; ok {
+				r.Member = p
+			}
 			switch {
 			case slices.Contains(g.EnvVars, n):
 				r.Dropped = "an environment variable, not a member of the package"
+			case g.StillWork[n] != "":
+				r.Dropped = g.StillWork[n]
 			case repl != "" && repl != n:
 				r.Replacement = repl
 			}

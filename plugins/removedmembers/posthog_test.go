@@ -42,14 +42,17 @@ func TestPostHogEachRowOfTheTable(t *testing.T) {
 	}
 	removed := want{change: event.PackageRemovedSymbol}
 	expect := map[string]want{
-		"capture_mode":       removed, // | Nothing
-		"CaptureMode":        removed,
-		"CaptureV1Error":     removed, // | `CaptureError`, new in 8.0.0 and in another module: in the hint, not a rename
-		"capture_v1":         removed, // two replacements: `posthog.capture_event` and `posthog.capture_send`
-		"request.batch_post": removed, // | Send events through a client
-		"async_batch_post":   removed,
-		"EVENTS_ENDPOINT":    removed,
-		"AI_EVENTS_ENDPOINT": removed,
+		"CaptureMode": removed, // | Nothing (capture_mode, in the same row, still works: dropped)
+		// | `CaptureError`, new in 8.0.0 and in another module: in the hint,
+		// not a rename. It's posthog.capture_v1's, written in full.
+		"capture_v1.CaptureV1Error": removed,
+		"capture_v1":                removed, // two replacements: `posthog.capture_event` and `posthog.capture_send`
+		// | Send events through a client. The cell spells out `request.` only
+		// for the first name; the others' real modules, from the code.
+		"request.batch_post":              removed,
+		"_async_request.async_batch_post": removed,
+		"request.EVENTS_ENDPOINT":         removed,
+		"request.AI_EVENTS_ENDPOINT":      removed,
 	}
 	if len(got) != len(expect) {
 		t.Errorf("%d events, want %d: %v", len(got), len(expect), got)
@@ -61,8 +64,9 @@ func TestPostHogEachRowOfTheTable(t *testing.T) {
 	}
 }
 
-// The pinned drop test. The guide has eight more tables and three rows of
-// this one that aren't removed members; none may become an event. Each is
+// The pinned drop test. The guide has eight more tables, and this one has
+// four rows (and one name) that aren't removed members; none may become an
+// event. Each is
 // shown to be there, and to read as names, so the test isn't vacuous.
 func TestPostHogDropsWhatIsNotARemovedMember(t *testing.T) {
 	events := posthogIngest(t)
@@ -87,6 +91,7 @@ func TestPostHogDropsWhatIsNotARemovedMember(t *testing.T) {
 	}
 	for _, member := range []string{
 		"POSTHOG_CAPTURE_MODE",
+		"capture_mode",
 		"`gzip=True`",
 		"The `gzip` parameter of `request.post` and `request.flags`",
 		"The `backoff` dependency",
@@ -95,10 +100,13 @@ func TestPostHogDropsWhatIsNotARemovedMember(t *testing.T) {
 			t.Errorf("%q: not read and dropped (%v)", member, dropped)
 		}
 	}
-	if len(dropped) != 4 {
-		t.Errorf("%d dropped, want 4: %v", len(dropped), dropped)
+	if len(dropped) != 5 {
+		t.Errorf("%d dropped, want 5: %v", len(dropped), dropped)
 	}
-	for _, name := range []string{"POSTHOG_CAPTURE_MODE", "gzip", "gzip=True", "request.post", "request.flags", "backoff", "capture_compression"} {
+	if !strings.Contains(dropped["capture_mode"], "Rename deprecated settings") {
+		t.Errorf("capture_mode: dropped for %q, want the guide's own reason", dropped["capture_mode"])
+	}
+	for _, name := range []string{"POSTHOG_CAPTURE_MODE", "capture_mode", "gzip", "gzip=True", "request.post", "request.flags", "backoff", "capture_compression"} {
 		if slices.Contains(symbols, name) {
 			t.Errorf("an event names %q", name)
 		}
