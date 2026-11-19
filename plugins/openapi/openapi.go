@@ -1,8 +1,8 @@
 // Package openapi is the source plugin for an API that publishes an OpenAPI
-// spec per release (Stripe, Datadog, GitLab, GitHub, Vercel, Supabase): fetch the newest spec,
-// diff it against the last one seen, normalize the changes into events, and
-// attach migration hints from the API's changelog when it has one. It can also
-// replay two given releases.
+// spec per release (Stripe, Datadog, GitLab, GitHub, Vercel, Supabase,
+// Algolia): fetch the newest spec, diff it against the last one seen,
+// normalize the changes into events, and attach migration hints from the
+// API's changelog when it has one. It can also replay two given releases.
 package openapi
 
 import (
@@ -36,6 +36,11 @@ func init() {
 	// No Hints: Supabase's changelog is platform news, not keyed by
 	// operation. Only operation deprecations and removals: see supabase.go.
 	plugin.Register(Plugin{Adapter: adapter.Supabase{}, Diff: supabaseDiff, Keep: supabaseKeep})
+	// No Hints: Algolia's changelog is a hosted product feed, not keyed by
+	// operation. One plugin per API spec: see algolia.go.
+	for _, spec := range []string{"search", "ingestion", "recommend"} {
+		plugin.Register(Plugin{Adapter: adapter.Algolia{Spec: spec}, Diff: algoliaDiff, Keep: algoliaKeep})
+	}
 }
 
 // requestSide keeps the changes to what callers send. GitLab's response
