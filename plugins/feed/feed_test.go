@@ -18,6 +18,7 @@ func TestGolden(t *testing.T) {
 	}{
 		{GitHubActions, "testdata/github-changelog-actions.rss.xml"},
 		{VertexAIModels, "testdata/vertex-ai-generative-ai.atom.xml"},
+		{CloudflareAPI, "testdata/cloudflare-api-deprecations.rss.xml"},
 	} {
 		t.Run(c.feed.API, func(t *testing.T) {
 			saved := kittest.Pages{c.feed.URL: c.file}

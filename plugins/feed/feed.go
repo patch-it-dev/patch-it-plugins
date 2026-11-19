@@ -33,6 +33,7 @@ import (
 func init() {
 	plugin.Register(Plugin{Feed: GitHubActions, Archiver: kit.Wayback{}})
 	plugin.Register(Plugin{Feed: VertexAIModels, Archiver: kit.Wayback{}})
+	plugin.Register(Plugin{Feed: CloudflareAPI, Archiver: kit.Wayback{}})
 }
 
 // Feed is one vendor feed and how to read its entries.

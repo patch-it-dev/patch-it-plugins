@@ -22,6 +22,7 @@ The table between the `plugins:start` and `plugins:end` markers is also publishe
 | [`urllib3`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/urllib3.md) | urllib3 | Removals and deprecations in release 2.0.0 | `changelog` | [urllib3/urllib3 CHANGES.rst](https://github.com/urllib3/urllib3/blob/2.0.0/CHANGES.rst) | live |
 | [`github-actions`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/github-actions.md) | GitHub | GitHub Actions retirements, such as runner images and the `runs-on` labels they remove | `feed` | [GitHub changelog, Actions label (RSS)](https://github.blog/changelog/label/actions/feed/) | live |
 | [`vertex-ai-models`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/vertex-ai-models.md) | Google | Generative AI model deprecations on Vertex AI | `feed` | [Vertex AI generative AI release notes (Atom)](https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml) | live |
+| [`cloudflare`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/cloudflare.md) | Cloudflare | REST API operations Cloudflare deprecates, breaking on their end-of-life date when it gives one | `feed` | [Cloudflare API deprecations (RSS)](https://developers.cloudflare.com/fundamentals/api/reference/deprecations/index.xml) | paused: merged, not in a tagged release yet, so patch-it's hosted ingestion service doesn't run it |
 <!-- plugins:end -->
 
 ## The columns

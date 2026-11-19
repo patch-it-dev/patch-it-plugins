@@ -7,7 +7,7 @@ import (
 )
 
 func TestRegistersItself(t *testing.T) {
-	for _, f := range []Feed{GitHubActions, VertexAIModels} {
+	for _, f := range []Feed{GitHubActions, VertexAIModels, CloudflareAPI} {
 		kittest.Registered(t, Plugin{Feed: f})
 	}
 }
