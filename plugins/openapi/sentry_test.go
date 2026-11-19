@@ -256,6 +256,12 @@ func TestSentryDeprecatedWords(t *testing.T) {
 		"Retrieves discover (also known as events) data for a given organization.\n\n**Eventsv2 Deprecation Note**: Users who may be using the `eventsv2` endpoint should update": false,
 		"Pass `expand=context` (experimental) to include each attribute's metadata:\na brief description, examples, and deprecation details.":                                     false,
 		"Returns deprecated fields too.": false,
+		// Sentry's own style for its notes, the colon inside the bold.
+		"**Deprecated:** Use the monitors endpoints instead.": true,
+		"## Deprecated 🚧\nUse monitors.":                      true,
+		// A heading about part of the operation, not the operation.
+		"## Deprecated fields\n- `status`":                false,
+		"### Deprecated parameters\n`cursor` is ignored.": false,
 	} {
 		if got := sentryDeprecatedDescription(desc); got != want {
 			t.Errorf("%.60q: got %v, want %v", desc, got, want)

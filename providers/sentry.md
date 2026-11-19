@@ -9,7 +9,7 @@ Format plugin: `openapi` (`plugins/openapi`), with `adapter.Sentry`.
 ## Why this source
 
 - **Source:** `openapi-derefed.json`, an asset of each `api@X.Y.Z` release of [getsentry/sentry](https://github.com/getsentry/sentry/releases), e.g. `https://github.com/getsentry/sentry/releases/download/api%402.16.0/openapi-derefed.json`.
-  - The plugin reads the release with the highest `api@` version, not the newest by date (`api@2.9.0` was published after `api@2.12.0`), leaving out drafts, prereleases and releases without the spec.
+  - The plugin reads the release with the highest `api@` version, not the newest by date (GitHub lists releases in an order that isn't version order), leaving out drafts, prereleases and releases without the spec.
   - A release asset is pinned by its release tag: the URL names the tag, and the tag names one release. GitHub does let a maintainer replace an asset in place, which a commit SHA would rule out; there's no SHA-pinned copy of the spec since it moved here.
   - Checked on 2026-11-19: 19 `api@` releases, `api@2.5.0` (2026-11-14) to `api@2.16.0` (2026-11-18).
 - **History:** until 2026-11-14 the spec was published in [getsentry/sentry-api-schema](https://github.com/getsentry/sentry-api-schema), committed as `openapi-derefed.json` (1,130 commits that changed it since 2020-08-25) and tagged `0.1.0` to `2.4.0` from 2026-02-10. That repo is archived ("@sentry/api has moved"); its `2.4.0` is byte for byte `api@2.5.0`. The adapter reads a tag or a commit of it too (`https://raw.githubusercontent.com/getsentry/sentry-api-schema/<tag or sha>/openapi-derefed.json`), so that history can be replayed.
@@ -52,6 +52,7 @@ Format plugin: `openapi` (`plugins/openapi`), with `adapter.Sentry`.
 ## Known gaps
 
 - **No removals.** When Sentry turns an endpoint off, the plugin has already reported its deprecation, if Sentry said so in the spec, and reports nothing else.
+- **The same deprecation can be reported twice** if Sentry removes the words from a description and puts them back on a later day: the diff keeps no memory, and each event is dated by its release. It hasn't happened in the history, and the two operations still deprecated today also carry the flag, which keeps them from it.
 - **A deprecation said another way isn't seen,** like "has been replaced" with no "deprecated", or a parameter deprecated in prose.
 - **Undocumented endpoints aren't watched.** The spec covers what Sentry documents publicly: 199 path items in `api@2.16.0`.
 - **Request and response property changes aren't events,** including deprecated parameters and fields.

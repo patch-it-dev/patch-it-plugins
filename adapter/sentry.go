@@ -61,8 +61,8 @@ func (s Sentry) api(path string) string {
 //
 // The releases listing is newest first by date, and getsentry/sentry
 // releases other things too (the server, "26.11.0"; npm packages,
-// "scraps@0.5.0"). The api@ releases' dates aren't in version order
-// (api@2.9.0 was published after api@2.12.0), so the newest is computed.
+// "scraps@0.5.0"). GitHub lists releases in an order that isn't version
+// order, so the newest is computed from the version.
 func (s Sentry) LatestTag(ctx context.Context) (string, error) {
 	body, err := fetch.Get(ctx, s.api("/repos/getsentry/sentry/releases?per_page=100"), githubHeaders())
 	if err != nil {

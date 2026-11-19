@@ -25,14 +25,18 @@ import (
 var sentryDiff = diff.Options{PathTemplates: true, QuoteDeprecatedOperation: true, DeprecatedDescription: sentryDeprecatedDescription}
 
 // sentryDeprecatedWords are the three ways the descriptions say it, over the
-// whole history: a "## Deprecated" heading, a line starting
-// "**Deprecated**:", and "This endpoint is deprecated" in any case ("*This
-// endpoint is DEPRECATED."). Not "deprecat" anywhere: that also matches
+// whole history: a "## Deprecated" heading with nothing else on its line, a
+// line starting "**Deprecated**:", and "This endpoint is deprecated" in any
+// case ("*This endpoint is DEPRECATED."). Also "**Deprecated:**", the colon
+// inside the bold: never used for a deprecation yet, but how Sentry writes
+// its other notes ("**Experimental:**", 45 times in api@2.16.0). Not a heading
+// with more words ("## Deprecated fields"), which would be about part of the
+// operation. Not "deprecat" anywhere: that also matches
 // three descriptions that aren't deprecations, GET .../events/'s "**Eventsv2
 // Deprecation Note**" (about another endpoint; 2022-06-16, and again under
 // the 2024-05-10 rename) and GET .../trace-items/attributes/'s "examples, and
 // deprecation details" (2026-10-15).
-var sentryDeprecatedWords = regexp.MustCompile(`(?im)^\s*(#+\s*deprecated\b|\*\*deprecated\*\*:)|\bthis endpoint is deprecated\b`)
+var sentryDeprecatedWords = regexp.MustCompile(`(?im)^\s*#+\s*deprecated[^\p{L}\p{N}\n]*$|^\s*\*\*deprecated(\*\*:|:\*\*)|\bthis endpoint is deprecated\b`)
 
 func sentryDeprecatedDescription(description string) bool {
 	return sentryDeprecatedWords.MatchString(description)
