@@ -30,13 +30,13 @@ Format plugin: `removedmembers` (`plugins/removedmembers`), reading a Markdown t
 ## What the plugin reads and ignores
 
 - Reads the table under "Fix removed APIs", `| Removed | Use instead |`. A row becomes one event per name, but only when its first cell is nothing but code spans naming members. Names are written as code writes them after the import: `posthog.` is stripped, other prefixes kept.
-- `renamed_symbol` when the "Use instead" cell is exactly one name; `removed_symbol` when it's "Nothing", advice, or two names. The 7 rows, checked against the code at posthog-v7.91.4 and posthog-v8.0.0:
+- `removed_symbol` for every name, with the "Use instead" cell in the migration hint. Not `renamed_symbol`, even when that cell is one name: every replacement is new in 8.0.0, so a renamed import would fail on 7.x, and `CaptureError` also moves module (below). The 7 rows, checked against the code at posthog-v7.91.4 and posthog-v8.0.0:
 
   | Row | Events |
   |---|---|
   | `capture_mode`, `CaptureMode`, `POSTHOG_CAPTURE_MODE` → Nothing | `removed_symbol` `capture_mode`, `CaptureMode`. `POSTHOG_CAPTURE_MODE` is an environment variable, not a member: dropped |
   | `gzip=True` → `capture_compression` | Dropped: an argument value of a call the row doesn't name (`removed_parameter` needs the call) |
-  | `CaptureV1Error` → `CaptureError` | `renamed_symbol` `CaptureV1Error` → `CaptureError` |
+  | `CaptureV1Error` → `CaptureError` | `removed_symbol` `CaptureV1Error`, with `CaptureError` in the hint |
   | `posthog.capture_v1` → `posthog.capture_event` and `posthog.capture_send` | `removed_symbol` `capture_v1` (two replacements) |
   | `request.batch_post`, `async_batch_post`, `EVENTS_ENDPOINT`, `AI_EVENTS_ENDPOINT` → Send events through a client | `removed_symbol` for each of the four |
   | The `gzip` parameter of `request.post` and `request.flags` → Nothing | Dropped: prose. Not a `removed_parameter` either: both take `**kwargs` in 8.0.0, so `gzip=` raises nothing and is sent in the request body, as the guide says |

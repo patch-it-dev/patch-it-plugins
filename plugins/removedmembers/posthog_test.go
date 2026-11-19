@@ -44,7 +44,7 @@ func TestPostHogEachRowOfTheTable(t *testing.T) {
 	expect := map[string]want{
 		"capture_mode":       removed, // | Nothing
 		"CaptureMode":        removed,
-		"CaptureV1Error":     {event.PackageRenamedSymbol, "CaptureError"},
+		"CaptureV1Error":     removed, // | `CaptureError`, new in 8.0.0 and in another module: in the hint, not a rename
 		"capture_v1":         removed, // two replacements: `posthog.capture_event` and `posthog.capture_send`
 		"request.batch_post": removed, // | Send events through a client
 		"async_batch_post":   removed,

@@ -47,7 +47,7 @@
   },
   {
     "id": 3,
-    "fingerprint": "sha256:dca238647e179e9675b96f43d34fe3ce776da42637c376b9fa65e7082f5175c7",
+    "fingerprint": "sha256:c2525d6931bc27b10c47c0b9022692f3ddbb727df2d510567fc4d4d3f2aa3c34",
     "api": "posthog",
     "version": "8.0.0",
     "change_type": "breaking",
@@ -56,11 +56,10 @@
       "type": "package_release",
       "ecosystem": "pypi",
       "package": "posthog",
-      "change": "renamed_symbol",
+      "change": "removed_symbol",
       "symbols": [
         "CaptureV1Error"
-      ],
-      "replacement": "CaptureError"
+      ]
     },
     "description": "`CaptureV1Error` was removed in posthog 8.0.0.",
     "migration_hint": "Use instead: `CaptureError` (posthog's migration guide for 8.0.0)",

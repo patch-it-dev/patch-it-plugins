@@ -23,11 +23,14 @@ package removedmembers
 //     a call the row doesn't name (Client's gzip argument, per the code); a
 //     removed_parameter needs the call, and guessing it isn't reading the
 //     guide.
-//   - `CaptureV1Error` | `CaptureError`: renamed_symbol. The module changes
-//     too, from posthog.capture_v1 to posthog, and CaptureError is new in 8.0.0:
-//     the row doesn't say so, the guide does a few paragraphs below ("Replace
-//     `from posthog.capture_v1 import CaptureV1Error` with `from posthog import
-//     CaptureError`. There is no alias.").
+//   - `CaptureV1Error` | `CaptureError`: removed_symbol, with CaptureError
+//     in the migration hint, not a renamed_symbol (NewReplacements):
+//     CaptureError is new in 8.0.0, so a renamed import fails on 7.x, and the
+//     module changes too, from posthog.capture_v1 to posthog, which renaming
+//     the name alone wouldn't fix. The row doesn't say so; the guide does a
+//     few paragraphs below ("Replace `from posthog.capture_v1 import
+//     CaptureV1Error` with `from posthog import CaptureError`. There is no
+//     alias.").
 //   - `posthog.capture_v1` | `posthog.capture_event` and
 //     `posthog.capture_send`: removed_symbol capture_v1 (the module; two
 //     replacements, so no rename).
@@ -55,4 +58,6 @@ var PostHog8 = Guide{
 	Format:  FormatMarkdown,
 	Header:  "Removed",
 	EnvVars: []string{"POSTHOG_CAPTURE_MODE"},
+	// Every replacement in the table is new in 8.0.0.
+	NewReplacements: true,
 }

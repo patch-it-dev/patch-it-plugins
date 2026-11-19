@@ -62,6 +62,13 @@ type Guide struct {
 	// by hand from the code, not guessed from a prefix (a package can have
 	// constants named like its environment variables).
 	EnvVars []string
+	// NewReplacements says the release's replacements are new in it: a
+	// rename fix wouldn't run on the release before, and may need a different
+	// import. A row with one replacement is then a removed_symbol, with the
+	// replacement in the migration hint (the guide's own cell), not a
+	// renamed_symbol the client would apply as a rename. NumPy 2.0's
+	// replacements already worked on 1.x, so it doesn't set this.
+	NewReplacements bool
 }
 
 // Format is how a guide writes its table.
@@ -224,7 +231,7 @@ func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) 
 		if g.Effect != "" {
 			desc = fmt.Sprintf("%s.%s was removed in %s %s: %s.", g.Module, r.Member, g.Package, g.Release, g.Effect)
 		}
-		if r.Replacement != "" {
+		if r.Replacement != "" && !g.NewReplacements {
 			subject.Change, subject.Replacement = event.PackageRenamedSymbol, r.Replacement
 		}
 		e := event.EventV2{
