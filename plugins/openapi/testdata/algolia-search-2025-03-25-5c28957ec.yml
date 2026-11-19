@@ -1,0 +1,648 @@
+openapi: 3.0.2
+info:
+  title: Search API
+  description: >
+    The Algolia Search API lets you search, configure, and manage your indices
+    and records.
+
+
+    ## Client libraries
+
+
+    Use Algolia's API clients and libraries to reliably integrate Algolia's APIs
+    with your apps.
+
+    The official API clients are covered by Algolia's [Service Level
+    Agreement](https://www.algolia.com/policies/sla/).
+
+
+    See: [Algolia's
+    ecosystem](https://www.algolia.com/doc/guides/getting-started/how-algolia-works/in-depth/ecosystem/)
+
+
+    ## Base URLs
+
+
+    The base URLs for requests to the Search API are:
+
+
+    - `https://{APPLICATION_ID}.algolia.net`
+
+    - `https://{APPLICATION_ID}-dsn.algolia.net`.
+      If your subscription includes a [Distributed Search Network](https://dashboard.algolia.com/infra),
+      this ensures that requests are sent to servers closest to users.
+
+    Both URLs provide high availability by distributing requests with load
+    balancing.
+
+
+    **All requests must use HTTPS.**
+
+
+    ## Retry strategy
+
+
+    To guarantee high availability, implement a retry strategy for all API
+    requests using the URLs of your servers as fallbacks:
+
+
+    - `https://{APPLICATION_ID}-1.algolianet.com`
+
+    - `https://{APPLICATION_ID}-2.algolianet.com`
+
+    - `https://{APPLICATION_ID}-3.algolianet.com`
+
+
+    These URLs use a different DNS provider than the primary URLs.
+
+    You should randomize this list to ensure an even load across the three
+    servers.
+
+
+    All Algolia API clients implement this retry strategy.
+
+
+    ## Authentication
+
+
+    To authenticate your API requests, add these headers:
+
+
+    - `x-algolia-application-id`. Your Algolia application ID.
+
+    - `x-algolia-api-key`. An API key with the necessary permissions to make the
+    request.
+      The required access control list (ACL) to make a request is listed in each endpoint's reference.
+
+    You can find your application ID and API key in the [Algolia
+    dashboard](https://dashboard.algolia.com/account).
+
+
+    ## Request format
+
+
+    Depending on the endpoint, request bodies are either JSON objects or arrays
+    of JSON objects,
+
+
+    ## Parameters
+
+
+    Parameters are passed as query parameters for GET and DELETE requests,
+
+    and in the request body for POST and PUT requests.
+
+
+    Query parameters must be
+    [URL-encoded](https://developer.mozilla.org/en-US/docs/Glossary/Percent-encoding).
+
+    Non-ASCII characters must be UTF-8 encoded.
+
+    Plus characters (`+`) are interpreted as spaces.
+
+    Arrays as query parameters must be one of:
+
+
+    - A comma-separated string: `attributesToRetrieve=title,description`
+
+    - A URL-encoded JSON array:
+    `attributesToRetrieve=%5B%22title%22,%22description%22%D`
+
+
+    ## Response status and errors
+
+
+    The Search API returns JSON responses.
+
+    Since JSON doesn't guarantee any specific ordering, don't rely on the order
+    of attributes in the API response.
+
+
+    Successful responses return a `2xx` status. Client errors return a `4xx`
+    status. Server errors are indicated by a `5xx` status.
+
+    Error responses have a `message` property with more information.
+
+
+    ## Version
+
+
+    The current version of the Search API is version 1, as indicated by the
+    `/1/` in each endpoint's URL.
+  version: 1.0.0
+paths:
+  /1/clusters/mapping:
+    post:
+      tags:
+        - search
+      operationId: assignUserId
+      x-acl:
+        - admin
+      summary: Assign or move a user ID
+      description: >
+        Assigns or moves a user ID to a cluster.
+
+
+        The time it takes to move a user is proportional to the amount of data
+        linked to the user ID.
+      parameters:
+        - $ref: '#/components/parameters/UserIDInHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              title: assignUserIdParams
+              type: object
+              description: Assign userID parameters.
+              additionalProperties: false
+              properties:
+                cluster:
+                  $ref: '#/components/schemas/clusterName'
+              required:
+                - cluster
+      responses:
+        '200':
+          $ref: '#/components/responses/CreatedAt'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '402':
+          $ref: '#/components/responses/FeatureNotEnabled'
+        '403':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '404':
+          $ref: '#/components/responses/IndexNotFound'
+    get:
+      tags:
+        - search
+      operationId: listUserIds
+      x-acl:
+        - admin
+      summary: List user IDs
+      description: >
+        Lists the userIDs assigned to a multi-cluster application.
+
+
+        Since it can take a few seconds to get the data from the different
+        clusters,
+
+        the response isn't real-time.
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/HitsPerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: listUserIdsResponse
+                type: object
+                description: User ID data.
+                properties:
+                  userIDs:
+                    type: array
+                    description: User IDs.
+                    items:
+                      $ref: '#/components/schemas/userId'
+                required:
+                  - userIDs
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '402':
+          $ref: '#/components/responses/FeatureNotEnabled'
+        '403':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '404':
+          $ref: '#/components/responses/IndexNotFound'
+  /1/clusters/mapping/batch:
+    post:
+      tags:
+        - search
+      operationId: batchAssignUserIds
+      x-acl:
+        - admin
+      summary: Assign multiple userIDs
+      description: |
+        Assigns multiple user IDs to a cluster.
+
+        **You can't move users with this operation**.
+      parameters:
+        - $ref: '#/components/parameters/UserIDInHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              title: batchAssignUserIdsParams
+              type: object
+              description: Assign userID parameters.
+              additionalProperties: false
+              properties:
+                cluster:
+                  $ref: '#/components/schemas/clusterName'
+                users:
+                  type: array
+                  description: User IDs to assign.
+                  example:
+                    - einstein
+                    - bohr
+                    - feynman
+                  items:
+                    type: string
+              required:
+                - cluster
+                - users
+      responses:
+        '200':
+          $ref: '#/components/responses/CreatedAt'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '402':
+          $ref: '#/components/responses/FeatureNotEnabled'
+        '403':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '404':
+          $ref: '#/components/responses/IndexNotFound'
+  /1/clusters/mapping/top:
+    get:
+      tags:
+        - search
+      operationId: getTopUserIds
+      x-acl:
+        - admin
+      summary: Get top user IDs
+      description: >
+        Get the IDs of the 10 users with the highest number of records per
+        cluster.
+
+
+        Since it can take a few seconds to get the data from the different
+        clusters,
+
+        the response isn't real-time.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: getTopUserIdsResponse
+                type: object
+                description: User IDs and clusters.
+                properties:
+                  topUsers:
+                    type: array
+                    description: >-
+                      Key-value pairs with cluster names as keys and lists of
+                      users with the highest number of records per cluster as
+                      values.
+                    items:
+                      type: object
+                      additionalProperties:
+                        x-additionalPropertiesName: cluster
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/userId'
+                required:
+                  - topUsers
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '402':
+          $ref: '#/components/responses/FeatureNotEnabled'
+        '403':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '404':
+          $ref: '#/components/responses/IndexNotFound'
+  /1/clusters/mapping/{userID}:
+    get:
+      tags:
+        - search
+      operationId: getUserId
+      x-acl:
+        - admin
+      summary: Retrieve user ID
+      description: >
+        Returns the user ID data stored in the mapping.
+
+
+        Since it can take a few seconds to get the data from the different
+        clusters,
+
+        the response isn't real-time.
+      parameters:
+        - $ref: '#/components/parameters/UserIDInPath'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/userId'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '402':
+          $ref: '#/components/responses/FeatureNotEnabled'
+        '403':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '404':
+          $ref: '#/components/responses/IndexNotFound'
+    delete:
+      tags:
+        - search
+      operationId: removeUserId
+      x-acl:
+        - admin
+      summary: Delete user ID
+      description: Deletes a user ID and its associated data from the clusters.
+      parameters:
+        - $ref: '#/components/parameters/UserIDInPath'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: removeUserIdResponse
+                type: object
+                additionalProperties: false
+                properties:
+                  deletedAt:
+                    $ref: '#/components/schemas/deletedAt'
+                required:
+                  - deletedAt
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '402':
+          $ref: '#/components/responses/FeatureNotEnabled'
+        '403':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '404':
+          $ref: '#/components/responses/IndexNotFound'
+  /1/clusters:
+    get:
+      tags:
+        - search
+      operationId: listClusters
+      x-acl:
+        - admin
+      summary: List clusters
+      description: Lists the available clusters in a multi-cluster setup.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: listClustersResponse
+                type: object
+                description: Clusters.
+                properties:
+                  topUsers:
+                    type: array
+                    description: >-
+                      Key-value pairs with cluster names as keys and lists of
+                      users with the highest number of records per cluster as
+                      values.
+                    items:
+                      $ref: '#/components/schemas/clusterName'
+                required:
+                  - topUsers
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '402':
+          $ref: '#/components/responses/FeatureNotEnabled'
+        '403':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '404':
+          $ref: '#/components/responses/IndexNotFound'
+  /1/clusters/mapping/search:
+    post:
+      tags:
+        - search
+      operationId: searchUserIds
+      x-use-read-transporter: true
+      x-cacheable: true
+      x-acl:
+        - admin
+      summary: Search for user IDs
+      description: >
+        Since it can take a few seconds to get the data from the different
+        clusters,
+
+        the response isn't real-time.
+
+
+        To ensure rapid updates, the user IDs index isn't built at the same time
+        as the mapping. Instead, it's built every 12 hours, at the same time as
+        the update of user ID usage. For example, if you add or move a user ID,
+        the search will show an old value until the next time the mapping is
+        rebuilt (every 12 hours).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              title: searchUserIdsParams
+              type: object
+              description: OK
+              additionalProperties: false
+              properties:
+                query:
+                  type: string
+                  description: >-
+                    Query to search. The search is a prefix search with [typo
+                    tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/)
+                    enabled. An empty query will retrieve all users.
+                clusterName:
+                  $ref: '#/components/schemas/clusterName'
+                page:
+                  $ref: '#/components/schemas/page'
+                hitsPerPage:
+                  $ref: '#/components/schemas/hitsPerPage'
+              required:
+                - query
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: searchUserIdsResponse
+                type: object
+                description: userIDs data.
+                properties:
+                  hits:
+                    type: array
+                    description: User objects that match the query.
+                    items:
+                      title: userHit
+                      type: object
+                      properties:
+                        userID:
+                          $ref: '#/components/schemas/userID'
+                        clusterName:
+                          $ref: '#/components/schemas/clusterName'
+                        nbRecords:
+                          $ref: '#/components/schemas/nbRecords'
+                        dataSize:
+                          $ref: '#/components/schemas/dataSize'
+                        objectID:
+                          type: string
+                          description: userID of the requested user. Same as userID.
+                        _highlightResult:
+                          title: userHighlightResult
+                          type: object
+                          properties:
+                            userID:
+                              $ref: '#/components/schemas/highlightResult'
+                            clusterName:
+                              $ref: '#/components/schemas/highlightResult'
+                          required:
+                            - userID
+                            - clusterName
+                      required:
+                        - userID
+                        - clusterName
+                        - nbRecords
+                        - dataSize
+                        - objectID
+                        - _highlightResult
+                  nbHits:
+                    $ref: '#/components/schemas/nbHits'
+                  page:
+                    $ref: '#/components/schemas/page'
+                  hitsPerPage:
+                    $ref: '#/components/schemas/parameters_hitsPerPage'
+                  updatedAt:
+                    $ref: '#/components/schemas/updatedAt'
+                required:
+                  - hits
+                  - nbHits
+                  - page
+                  - hitsPerPage
+                  - updatedAt
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '402':
+          $ref: '#/components/responses/FeatureNotEnabled'
+        '403':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '404':
+          $ref: '#/components/responses/IndexNotFound'
+  /1/clusters/mapping/pending:
+    get:
+      tags:
+        - search
+      operationId: hasPendingMappings
+      x-acl:
+        - admin
+      summary: Get migration and user mapping status
+      description: >
+        To determine when the time-consuming process of creating a large batch
+        of users or migrating users from one cluster to another is complete,
+        this operation retrieves the status of the process.
+      parameters:
+        - in: query
+          name: getClusters
+          description: >-
+            Whether to include the cluster's pending mapping state in the
+            response.
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: hasPendingMappingsResponse
+                type: object
+                additionalProperties: false
+                properties:
+                  pending:
+                    description: >-
+                      Whether there are clusters undergoing migration, creation,
+                      or deletion.
+                    type: boolean
+                  clusters:
+                    description: >
+                      Cluster pending mapping state: migrating, creating,
+                      deleting.
+                    type: object
+                    additionalProperties:
+                      type: array
+                      items:
+                        type: string
+                required:
+                  - pending
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '402':
+          $ref: '#/components/responses/FeatureNotEnabled'
+        '403':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '404':
+          $ref: '#/components/responses/IndexNotFound'
+  /saveObjects:
+    get:
+      x-helper: true
+      tags:
+        - search
+      operationId: saveObjects
+      summary: Saves the given array of objects in the given index
+      description: >
+        Helper: Saves the given array of objects in the given index. The
+        `chunkedBatch` helper is used under the hood, which creates a `batch`
+        requests with at most 1000 objects in it.
+      parameters:
+        - in: query
+          name: indexName
+          description: The `indexName` to save `objects` into.
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: objects
+          description: The objects to save in the index.
+          required: true
+          schema:
+            type: array
+            items:
+              type: object
+        - in: query
+          name: waitForTasks
+          description: >-
+            Whether or not we should wait until every `batch` tasks has been
+            processed, this operation may slow the total execution time of this
+            method but is more reliable.
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - in: query
+          name: batchSize
+          description: >-
+            The size of the chunk of `objects`. The number of `batch` calls will
+            be equal to `length(objects) / batchSize`. Defaults to 1000.
+          required: false
+          schema:
+            type: integer
+            default: 1000
+        - in: query
+          name: requestOptions
+          description: The request options to pass to the `batch` method.
+          required: false
+          schema:
+            type: object
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/batchResponse'
+        '400':
+          $ref: '#/components/responses/IndexNotFound'

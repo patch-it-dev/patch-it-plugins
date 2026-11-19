@@ -36,6 +36,7 @@ const (
 // Row is one row of the table, as written.
 type Row struct {
 	ID       string // the plugin id, without the backticks and link
+	Page     string // the provider page it links to: "algolia" for providers/algolia.md
 	Provider string
 	Layer    string // as written: "API", "AI models"
 	Watches  string
@@ -108,14 +109,11 @@ func ReadTable(md []byte) ([]Row, error) {
 		if m == nil {
 			return nil, fmt.Errorf("%s: plugin cell %q is not [`id`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/<id>.md)", Table, cells[0])
 		}
-		if m[1] != m[2] {
-			return nil, fmt.Errorf("%s: %s links to providers/%s.md, want providers/%s.md", Table, m[1], m[2], m[1])
-		}
 		f := cellFmt.FindStringSubmatch(cells[4])
 		if f == nil {
 			return nil, fmt.Errorf("%s: %s: format cell %q is not `format`", Table, m[1], cells[4])
 		}
-		rows = append(rows, Row{ID: m[1], Provider: cells[1], Layer: cells[2], Watches: cells[3], Format: f[1], Source: cells[5], Status: cells[6]})
+		rows = append(rows, Row{ID: m[1], Page: m[2], Provider: cells[1], Layer: cells[2], Watches: cells[3], Format: f[1], Source: cells[5], Status: cells[6]})
 	}
 	return rows, nil
 }
@@ -188,9 +186,10 @@ func List(root string) ([]Plugin, error) {
 		case ok && format != r.Format:
 			errs = append(errs, fmt.Errorf("%s: %s says format %q, but the plugin is in plugins/%s", Table, r.ID, r.Format, format))
 		}
-		page := "providers/" + r.ID + ".md"
+		// One page per provider: the algolia-* plugins share providers/algolia.md.
+		page := "providers/" + r.Page + ".md"
 		if _, err := os.Stat(filepath.Join(root, page)); err != nil {
-			errs = append(errs, fmt.Errorf("%s: no provider page %s (copy providers/_template.md)", r.ID, page))
+			errs = append(errs, fmt.Errorf("%s: %s links to %s, which doesn't exist (copy providers/_template.md)", Table, r.ID, page))
 		}
 		src := link.FindStringSubmatch(r.Source)
 		if src == nil {

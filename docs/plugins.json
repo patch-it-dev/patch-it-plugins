@@ -1,8 +1,41 @@
 {
   "_comment": "Generated from the plugin registry and docs/plugins.md by `make plugins-json` (go run ./cmd/list-plugins). Don't edit by hand.",
   "$schema": "./plugins.schema.json",
-  "count": 16,
+  "count": 20,
   "plugins": [
+    {
+      "id": "algolia-ingestion",
+      "provider": "Algolia",
+      "layer": "api",
+      "watches": "Ingestion API operations deprecated, and deprecated operations removed, between releases of the spec",
+      "format": "openapi",
+      "source_url": "https://github.com/algolia/api-clients-automation",
+      "status": "paused",
+      "status_note": "merged, not in a tagged release yet, so patch-it's hosted ingestion service doesn't run it",
+      "provider_page": "providers/algolia.md"
+    },
+    {
+      "id": "algolia-recommend",
+      "provider": "Algolia",
+      "layer": "api",
+      "watches": "Recommend API operations deprecated, and deprecated operations removed, between releases of the spec",
+      "format": "openapi",
+      "source_url": "https://github.com/algolia/api-clients-automation",
+      "status": "paused",
+      "status_note": "merged, not in a tagged release yet, so patch-it's hosted ingestion service doesn't run it",
+      "provider_page": "providers/algolia.md"
+    },
+    {
+      "id": "algolia-search",
+      "provider": "Algolia",
+      "layer": "api",
+      "watches": "Search API operations deprecated, and deprecated operations removed, between releases of the spec",
+      "format": "openapi",
+      "source_url": "https://github.com/algolia/api-clients-automation",
+      "status": "paused",
+      "status_note": "merged, not in a tagged release yet, so patch-it's hosted ingestion service doesn't run it",
+      "provider_page": "providers/algolia.md"
+    },
     {
       "id": "anthropic",
       "provider": "Anthropic",
@@ -104,6 +137,16 @@
       "source_url": "https://developers.openai.com/api/docs/deprecations",
       "status": "live",
       "provider_page": "providers/openai-models.md"
+    },
+    {
+      "id": "redis",
+      "provider": "Redis",
+      "layer": "runtime",
+      "watches": "Commands removed entirely from Redis's own command catalog between two snapshots",
+      "format": "catalog",
+      "source_url": "https://github.com/redis/redis-doc/blob/master/commands.json",
+      "status": "live",
+      "provider_page": "providers/redis.md"
     },
     {
       "id": "stripe",

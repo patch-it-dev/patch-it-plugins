@@ -21,11 +21,11 @@
           "provider": { "type": "string", "minLength": 1 },
           "layer": { "type": "string", "enum": ["api", "sdk", "package", "runtime", "ci", "ai-models"] },
           "watches": { "type": "string", "minLength": 1 },
-          "format": { "type": "string", "enum": ["openapi", "retirements", "migrationguide", "removedmembers", "changelog", "feed", "apichangelog"] },
+          "format": { "type": "string", "enum": ["openapi", "retirements", "migrationguide", "removedmembers", "changelog", "feed", "apichangelog", "catalog"] },
           "source_url": { "type": "string", "pattern": "^https://" },
           "status": { "type": "string", "enum": ["live", "paused", "planned"] },
           "status_note": { "type": "string", "description": "Why, for a paused plugin." },
-          "provider_page": { "type": "string", "pattern": "^providers/[a-z0-9][a-z0-9.-]*\\.md$" }
+          "provider_page": { "type": "string", "pattern": "^providers/[a-z0-9][a-z0-9.-]*\\.md$", "description": "One page per provider: plugins of the same provider may share it." }
         }
       }
     }

@@ -43,7 +43,7 @@ func TestReadTable(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	want := Row{ID: "foo-api", Provider: "Foo", Layer: "API", Watches: "Removed endpoints", Format: "openapi",
+	want := Row{ID: "foo-api", Page: "foo-api", Provider: "Foo", Layer: "API", Watches: "Removed endpoints", Format: "openapi",
 		Source: "[foo/spec](https://github.com/foo/spec) (`openapi.json`)", Status: "paused: not released yet"}
 	if len(rows) != 1 || rows[0] != want {
 		t.Errorf("rows = %+v, want [%+v]", rows, want)
@@ -52,9 +52,9 @@ func TestReadTable(t *testing.T) {
 
 func TestReadTableRejectsABadRow(t *testing.T) {
 	for name, row := range map[string]string{
-		"relative link":  "| [`foo`](../providers/foo.md) | Foo | API | x | `openapi` | [s](https://s.example) | live |",
-		"other page":     "| [`foo`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/bar.md) | Foo | API | x | `openapi` | [s](https://s.example) | live |",
-		"missing a cell": "| [`foo`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/foo.md) | Foo | `openapi` | [s](https://s.example) | live |",
+		"relative link":       "| [`foo`](../providers/foo.md) | Foo | API | x | `openapi` | [s](https://s.example) | live |",
+		"not a provider page": "| [`foo`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/docs/foo.md) | Foo | API | x | `openapi` | [s](https://s.example) | live |",
+		"missing a cell":      "| [`foo`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/foo.md) | Foo | `openapi` | [s](https://s.example) | live |",
 	} {
 		md := StartMarker + "\n" + row + "\n" + EndMarker
 		if _, err := ReadTable([]byte(md)); err == nil {

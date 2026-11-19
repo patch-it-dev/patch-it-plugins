@@ -1,0 +1,170 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:1e7a1a853da5f0cb442587af95ab66fcc9a20308d4295dfb287805399c7c41e7",
+    "api": "algolia-ingestion",
+    "version": "2025-01-22",
+    "previous_version": "2025-01-07",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /1/tasks"
+    },
+    "description": "Operation GET /1/tasks marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/algolia/api-clients-automation/released-2025-01-22-232affcac/specs/bundled/ingestion.yml",
+    "source_pointer": "/paths/~11~1tasks/get",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Retrieves a list of tasks using the v1 endpoint, please use `getTasks` instead.\",\"operationId\":\"listTasksV1\",\"parameters\":[{\"$ref\":\"#/components/parameters/itemsPerPage\"},{\"$ref\":\"#/components/parameters/page\"},{\"$ref\":\"#/components/parameters/action\"},{\"$ref\":\"#/components/parameters/enabled\"},{\"$ref\":\"#/components/parameters/sourceID\"},{\"$ref\":\"#/components/parameters/destinationID\"},{\"$ref\":\"#/components/parameters/triggerType\"},{\"$ref\":\"#/components/parameters/taskParameters_sort\"},{\"$ref\":\"#/components/parameters/order\"}],\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":false,\"description\":\"Configured tasks and pagination information.\",\"properties\":{\"pagination\":{\"$ref\":\"#/components/schemas/Pagination\"},\"tasks\":{\"items\":{\"$ref\":\"#/components/schemas/TaskV1\"},\"type\":\"array\"}},\"required\":[\"tasks\",\"pagination\"],\"title\":\"listTasksResponseV1\",\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"$ref\":\"#/components/responses/BadRequest\"}},\"summary\":\"List tasks V1\",\"tags\":[\"ingestion\"],\"x-acl\":[\"addObject\",\"deleteIndex\",\"editSettings\"]}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:17ec64b06df87ecb1eecafcb16e9e382db116527edca15062f451c572745f3ae",
+    "api": "algolia-ingestion",
+    "version": "2025-01-22",
+    "previous_version": "2025-01-07",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /1/tasks"
+    },
+    "description": "Operation POST /1/tasks marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/algolia/api-clients-automation/released-2025-01-22-232affcac/specs/bundled/ingestion.yml",
+    "source_pointer": "/paths/~11~1tasks/post",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Creates a new task using the v1 endpoint, please use `createTask` instead.\",\"operationId\":\"createTaskV1\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/TaskCreateV1\"}}},\"description\":\"Request body for creating a task.\",\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/TaskCreateResponse\"}}},\"description\":\"OK\"},\"400\":{\"$ref\":\"#/components/responses/BadRequest\"}},\"summary\":\"Create a task V1\",\"tags\":[\"ingestion\"],\"x-codegen-request-body-name\":\"taskCreate\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:4e9f82a0c9e7cabbc050af7fd66c4d4e71a90c18a695f1f8464d93cf7be864db",
+    "api": "algolia-ingestion",
+    "version": "2025-01-22",
+    "previous_version": "2025-01-07",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /1/tasks/search"
+    },
+    "description": "Operation POST /1/tasks/search marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/algolia/api-clients-automation/released-2025-01-22-232affcac/specs/bundled/ingestion.yml",
+    "source_pointer": "/paths/~11~1tasks~1search/post",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Searches for tasks using the v1 endpoint, please use `searchTasks` instead.\",\"operationId\":\"searchTasksV1\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/TaskSearch\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"$ref\":\"#/components/schemas/TaskV1\"},\"title\":\"searchTasksResponseV1\",\"type\":\"array\"}}},\"description\":\"OK\"},\"400\":{\"$ref\":\"#/components/responses/BadRequest\"}},\"summary\":\"Search for tasks V1\",\"tags\":[\"ingestion\"],\"x-acl\":[\"addObject\",\"deleteIndex\",\"editSettings\"]}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:df4563501aec2e6b427964f1ee51f9881e432fc2eed2c343953d78f43d79f317",
+    "api": "algolia-ingestion",
+    "version": "2025-01-22",
+    "previous_version": "2025-01-07",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "DELETE /1/tasks/{taskID}"
+    },
+    "description": "Operation DELETE /1/tasks/{taskID} marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/algolia/api-clients-automation/released-2025-01-22-232affcac/specs/bundled/ingestion.yml",
+    "source_pointer": "/paths/~11~1tasks~1{taskID}/delete",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Deletes a task by its ID using the v1 endpoint, please use `deleteTask` instead.\",\"operationId\":\"deleteTaskV1\",\"parameters\":[{\"$ref\":\"#/components/parameters/pathTaskID\"}],\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/DeleteResponse\"}}},\"description\":\"OK\"},\"400\":{\"$ref\":\"#/components/responses/BadRequest\"}},\"summary\":\"Delete a task\",\"tags\":[\"ingestion\"]}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:f53f0abf4924f3abed31f2d0d50b71e30c77295dc2b2a4fcfc426aeb64b3cf4e",
+    "api": "algolia-ingestion",
+    "version": "2025-01-22",
+    "previous_version": "2025-01-07",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /1/tasks/{taskID}"
+    },
+    "description": "Operation GET /1/tasks/{taskID} marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/algolia/api-clients-automation/released-2025-01-22-232affcac/specs/bundled/ingestion.yml",
+    "source_pointer": "/paths/~11~1tasks~1{taskID}/get",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Retrieves a task by its ID using the v1 endpoint, please use `getTask` instead.\",\"operationId\":\"getTaskV1\",\"parameters\":[{\"$ref\":\"#/components/parameters/pathTaskID\"}],\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/TaskV1\"}}},\"description\":\"OK\"},\"400\":{\"$ref\":\"#/components/responses/BadRequest\"}},\"summary\":\"Retrieve a task V1\",\"tags\":[\"ingestion\"],\"x-acl\":[\"addObject\",\"deleteIndex\",\"editSettings\"]}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:7dc53327e9239847c43e0d1fc140670139b4b755711875cc00b2d0126973cf69",
+    "api": "algolia-ingestion",
+    "version": "2025-01-22",
+    "previous_version": "2025-01-07",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "PATCH /1/tasks/{taskID}"
+    },
+    "description": "Operation PATCH /1/tasks/{taskID} marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/algolia/api-clients-automation/released-2025-01-22-232affcac/specs/bundled/ingestion.yml",
+    "source_pointer": "/paths/~11~1tasks~1{taskID}/patch",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Updates a task by its ID using the v1 endpoint, please use `updateTask` instead.\",\"operationId\":\"updateTaskV1\",\"parameters\":[{\"$ref\":\"#/components/parameters/pathTaskID\"}],\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/TaskUpdateV1\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/TaskUpdateResponse\"}}},\"description\":\"OK\"},\"400\":{\"$ref\":\"#/components/responses/BadRequest\"}},\"summary\":\"Update a task V1\",\"tags\":[\"ingestion\"],\"x-codegen-request-body-name\":\"taskUpdate\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:fbb43f00dfdd75418da24e766a926b0e48b824e8b6a000340a3a82ed87ec654f",
+    "api": "algolia-ingestion",
+    "version": "2025-01-22",
+    "previous_version": "2025-01-07",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "PUT /1/tasks/{taskID}/enable"
+    },
+    "description": "Operation PUT /1/tasks/{taskID}/enable marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/algolia/api-clients-automation/released-2025-01-22-232affcac/specs/bundled/ingestion.yml",
+    "source_pointer": "/paths/~11~1tasks~1{taskID}~1enable/put",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Enables a task using the v1 endpoint, please use `enableTask` instead.\",\"operationId\":\"enableTaskV1\",\"parameters\":[{\"$ref\":\"#/components/parameters/pathTaskID\"}],\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/TaskUpdateResponse\"}}},\"description\":\"OK\"},\"400\":{\"$ref\":\"#/components/responses/BadRequest\"}},\"summary\":\"Enable a task V1\",\"tags\":[\"ingestion\"],\"x-acl\":[\"addObject\",\"deleteIndex\",\"editSettings\"]}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
+    "fingerprint": "sha256:cefabf61328b95d67f3187e183dae0b8d54407d98b09b0d018e15f6b3d5f0d69",
+    "api": "algolia-ingestion",
+    "version": "2025-01-22",
+    "previous_version": "2025-01-07",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /1/tasks/{taskID}/run"
+    },
+    "description": "Operation POST /1/tasks/{taskID}/run marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/algolia/api-clients-automation/released-2025-01-22-232affcac/specs/bundled/ingestion.yml",
+    "source_pointer": "/paths/~11~1tasks~1{taskID}~1run/post",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Runs a task using the v1 endpoint, please use `runTask` instead. You can check the status of task runs with the observability endpoints.\",\"operationId\":\"runTaskV1\",\"parameters\":[{\"$ref\":\"#/components/parameters/pathTaskID\"}],\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/RunResponse\"}}},\"description\":\"OK\"},\"400\":{\"$ref\":\"#/components/responses/BadRequest\"}},\"summary\":\"Run a task V1\",\"tags\":[\"ingestion\"],\"x-acl\":[\"addObject\",\"deleteIndex\",\"editSettings\"]}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

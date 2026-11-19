@@ -1,0 +1,112 @@
+{
+    "FUNCTION CREATE": {
+        "acl_categories": [
+            "@write",
+            "@slow",
+            "@scripting"
+        ],
+        "arguments": [
+            {
+                "name": "engine-name",
+                "type": "string"
+            },
+            {
+                "name": "function-name",
+                "type": "string"
+            },
+            {
+                "name": "replace",
+                "optional": true,
+                "token": "REPLACE",
+                "type": "pure-token"
+            },
+            {
+                "name": "function-description",
+                "optional": true,
+                "token": "DESC",
+                "type": "string"
+            },
+            {
+                "name": "function-code",
+                "type": "string"
+            }
+        ],
+        "arity": -5,
+        "command_flags": [
+            "write",
+            "noscript"
+        ],
+        "complexity": "O(1) (considering compilation time is redundant)",
+        "group": "scripting",
+        "since": "7.0.0",
+        "summary": "Create a function with the given arguments (name, code, description)"
+    },
+    "FUNCTION INFO": {
+        "acl_categories": [
+            "@slow",
+            "@scripting"
+        ],
+        "arguments": [
+            {
+                "name": "function-name",
+                "type": "string"
+            },
+            {
+                "name": "withcode",
+                "optional": true,
+                "token": "WITHCODE",
+                "type": "pure-token"
+            }
+        ],
+        "arity": -3,
+        "command_flags": [
+            "noscript"
+        ],
+        "complexity": "O(1)",
+        "group": "scripting",
+        "since": "7.0.0",
+        "summary": "Return information about a function by function name"
+    },
+    "GET": {
+        "acl_categories": [
+            "@read",
+            "@string",
+            "@fast"
+        ],
+        "arguments": [
+            {
+                "key_spec_index": 0,
+                "name": "key",
+                "type": "key"
+            }
+        ],
+        "arity": 2,
+        "command_flags": [
+            "readonly",
+            "fast"
+        ],
+        "complexity": "O(1)",
+        "group": "string",
+        "key_specs": [
+            {
+                "begin_search": {
+                    "spec": {
+                        "index": 1
+                    },
+                    "type": "index"
+                },
+                "find_keys": {
+                    "spec": {
+                        "keystep": 1,
+                        "lastkey": 0,
+                        "limit": 0
+                    },
+                    "type": "range"
+                },
+                "read": true
+            }
+        ],
+        "since": "1.0.0",
+        "summary": "Get the value of a key"
+    }
+}
