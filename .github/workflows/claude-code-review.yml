@@ -1,0 +1,175 @@
+# Automatic Claude review of pull requests, built around this repo's rules
+# (AGENTS.md): the plugin list, provider pages, golden tests with dated quotes,
+# fetching only through the environment, precision over recall, and nothing
+# private in a public repo. It ends with a clear verdict.
+#
+# Runs once per PR: when it's opened (not as a draft), marked ready, or reopened.
+# New pushes don't re-run it, to save Claude usage. For a fresh review after
+# changes, a maintainer comments `@claude review` (claude.yml).
+#
+# Pull requests from forks: GitHub gives their runs no secrets, so this
+# workflow only runs for branches in this repository. On a fork's PR a
+# maintainer comments `@claude review` instead; claude.yml reviews it read-only
+# and never runs the fork's code. This workflow never uses `pull_request_target`.
+#
+# Auth: CLAUDE_CODE_OAUTH_TOKEN, a Claude subscription token from
+# `claude setup-token`. Until it's available the job skips with a notice.
+#
+# Note: a PR that edits this file can't run it. The action refuses to run a
+# workflow that differs from the one on main, so changes here only take effect
+# after they merge.
+name: Claude Code Review
+
+on:
+  pull_request:
+    types: [opened, ready_for_review, reopened]
+
+# One review per PR at a time; a newer trigger cancels the run it supersedes.
+concurrency:
+  group: claude-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  review:
+    # Drafts are work in progress; review them once they're marked ready.
+    # Only branches in this repository: a fork's run gets no secrets.
+    if: >-
+      github.event.pull_request.draft == false &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      pull-requests: write # the review comment and inline comments
+      issues: write # PR comments go through the issues API
+      id-token: write # the action authenticates as the Claude GitHub App
+    env:
+      # Skip quietly instead of failing red until the secret is available.
+      HAS_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN != '' }}
+    steps:
+      - name: Skip (CLAUDE_CODE_OAUTH_TOKEN not set)
+        if: env.HAS_TOKEN != 'true'
+        run: echo "::notice::CLAUDE_CODE_OAUTH_TOKEN is not set; skipping Claude review."
+
+      - uses: actions/checkout@v6
+        if: env.HAS_TOKEN == 'true'
+        with:
+          fetch-depth: 1
+
+      # Go, so Claude can verify by running instead of only reading.
+      - uses: actions/setup-go@v7
+        if: env.HAS_TOKEN == 'true'
+        with:
+          go-version-file: go.mod
+          cache-dependency-path: go.sum
+
+      - uses: anthropics/claude-code-action@v1
+        id: claude
+        if: env.HAS_TOKEN == 'true'
+        env:
+          # Any sub-agent Claude starts at the Opus tier also runs Opus 5.5.
+          ANTHROPIC_DEFAULT_OPUS_MODEL: claude-opus-5-5
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          # The action creates the review comment itself and Claude fills it in,
+          # so a review can never end in silence. Sticky: one comment per PR.
+          track_progress: true
+          use_sticky_comment: true
+          # Public repo: the run summary is public, so don't print Claude's report there.
+          display_report: false
+          prompt: |
+            REPO: ${{ github.repository }}
+            PR NUMBER: ${{ github.event.pull_request.number }}
+
+            Review this pull request against this repo's rules. Read AGENTS.md first: it
+            holds the rules for plugins, the public-repo rule, the commands and the layout.
+            CONTRIBUTING.md and .github/pull_request_template.md say the same for contributors.
+
+            HOW TO RUN COMMANDS: one plain command per Bash call. Pipes (|), redirects
+            (>), `&&`, `;` and `$(...)` are blocked and will waste a turn. Read files
+            with the Read tool, and search with Grep/Glob, never with cat, grep or find.
+
+            1. THE CHANGE. Read the PR title and body with `gh pr view <PR NUMBER>`, and
+               any issue it references with `gh issue view <number>`. Read the diff with
+               `gh pr diff <PR NUMBER>`, and changed files in full where the diff isn't
+               enough context.
+            2. THE PLUGIN LIST (AGENTS.md Rule 1). Every plugin added, removed, or with a
+               changed id, provider, source, what it watches, format plugin or status has
+               its row added, removed or updated in docs/plugins.md, between the
+               `<!-- plugins:start -->` and `<!-- plugins:end -->` markers, as a plain
+               Markdown table with absolute links only. Compare the registered plugins with
+               the table yourself; a missing row is blocking.
+            3. PROVIDER PAGE. Every new provider has providers/<api>.md copied from
+               providers/_template.md, with a real **Why this source**: the link, the date
+               it was checked, why it's the best source, the alternatives not used, and a
+               short quote. A changed source updates that page.
+            4. TESTS AND SOURCES. A golden test over a real saved copy of the source
+               (testdata/golden/<api>.json); a row in testdata/README.md for each file
+               (URL, date fetched, license, quote of the part the plugin reads); one pinned
+               drop test (a realistic input that produces no event); every event carries
+               the source URL and a quote. A golden file edited without the PR explaining
+               why the new output is right is blocking.
+            5. PLUGIN CODE. Fetch only through env.Get or kit/: no net/http outside the
+               fetch layer (fetch/, kit/, adapter/), no filesystem outside testdata/, no
+               database. Precision over recall: flag any path that could emit an event for
+               something that isn't a real change; a wrong event becomes a wrong pull
+               request in someone's repo. Don't change contract/fixtures/ here first (the
+               contract is owned upstream).
+            6. NOTHING PRIVATE (AGENTS.md Rule 2). This repo is public. Flag credentials,
+               tokens, keys, internal hostnames or service names, links to private repos,
+               dashboards or tickets, names or emails of customers or users, anything
+               about sales, and links to AI chat or agent sessions, in code, tests, docs,
+               commit messages and the PR description.
+            7. CORRECTNESS. Real problems only: code that won't build or run, wrong
+               results, broken edge cases. No style nitpicks. Put each specific problem as
+               an inline comment on its line.
+            8. VERIFY BY RUNNING. Run `go build ./...`, `go vet ./...`, `gofmt -l .`
+               (must print nothing), `go test -race ./...` and
+               `python3 scripts/leak_guard.py --all`. Report what you ran and what
+               happened; don't claim anything you didn't check.
+
+            Your final comment is what the author reads, and it is public. Start with ONE
+            verdict line: "✅ Ready to merge", "⚠️ Merge after fixes" or "❌ Not ready",
+            with a one-sentence reason. Then, concisely:
+            - **Rules**: a table of rule | status | evidence (plugin list, provider page,
+              golden test and quote, drop test, fetch only via env, nothing private)
+            - **Bugs**: blocking problems, or "none found"
+            - **Verified**: the commands you ran and their results
+            - **Non-blocking**: optional small suggestions, clearly marked as such
+            Be kind and specific: many authors here are outside contributors.
+            Never include a Claude session ID or claude.ai link.
+          # Read-only on GitHub, plus the Go toolchain and the leak guard to verify.
+          # No `gh pr comment` and no `gh api`: the action posts the review comment
+          # itself. Default permission mode: anything not listed here is denied.
+          claude_args: >-
+            --model claude-opus-5-5
+            --permission-mode default
+            --allowedTools "mcp__github_inline_comment__create_inline_comment,Read,Grep,Glob,Bash(gh pr view:*),Bash(gh pr diff:*),Bash(gh issue view:*),Bash(go build:*),Bash(go vet:*),Bash(go test:*),Bash(gofmt -l:*),Bash(python3 scripts/leak_guard.py:*)"
+            --disallowedTools "Edit,Write,MultiEdit,NotebookEdit,WebFetch,WebSearch,Bash(git push:*),Bash(git commit:*)"
+
+      # Diagnostics only: print the number of blocked tool calls and which tools,
+      # so a disappointing review can be fixed instead of guessed at. Public repo:
+      # it doesn't print Claude's message or the tool inputs.
+      - name: Log blocked tool calls
+        if: always() && env.HAS_TOKEN == 'true' && steps.claude.outputs.execution_file != ''
+        continue-on-error: true
+        env:
+          EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
+        run: |
+          python3 - <<'PY'
+          import json, os
+
+          try:
+              data = json.load(open(os.environ["EXECUTION_FILE"]))
+          except Exception as e:
+              print(f"No execution output to read: {e}")
+              raise SystemExit(0)
+
+          messages = data if isinstance(data, list) else [data]
+          result = next((m for m in reversed(messages) if m.get("type") == "result"), {})
+          denials = result.get("permission_denials") or []
+
+          print(f"=== Blocked tool calls: {len(denials)} ===")
+          for d in denials:
+              print(f"BLOCKED {d.get('tool_name')}")
+          PY

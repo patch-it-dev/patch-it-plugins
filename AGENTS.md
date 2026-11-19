@@ -48,7 +48,7 @@ Go module `github.com/patch-it-dev/patch-it-plugins`; the only dependency is `go
 ```
 plugin/                the Plugin interface, the registry, Env, Result, Spec (baselines)
 plugins/<format>/      one package per format plugin: openapi, retirements, migrationguide,
-                       removedmembers, changelog, feed; plugins/all imports every one
+                       removedmembers, changelog, feed, apichangelog; plugins/all imports every one
 kit/  kit/kittest/     Unchanged, Cite, Wayback; the test kit (Mem, Pages, Ingest, Golden)
 event/  migrate/       the change-event types from patch-it's contract (v1 + v2), v1 -> v2
 fetch/                 the HTTP fetch with retries and the ETag / Last-Modified cache
@@ -59,7 +59,8 @@ docs/plugins.md        the list of supported plugins (Rule 1)
 docs/                  contributor docs, including writing-a-plugin.md
 providers/<api>.md     one page per provider
 scripts/               leak_guard.py (hashed internal names), check_contract.py
-.github/               CODEOWNERS, PR template, workflows (CI_go, CI_dco, CI_leak_guard, CI_contract)
+.github/               CODEOWNERS, PR template, release-notes categories, workflows
+                       (CI_go, CI_dco, CI_leak_guard, CI_contract, Release)
 ```
 
 The [change-event contract](https://github.com/patch-it-dev/patch-it/tree/main/docs/contract) is owned by patch-it: don't change `contract/fixtures/` here first.
@@ -71,3 +72,7 @@ The [change-event contract](https://github.com/patch-it-dev/patch-it/tree/main/d
 - One plugin or fix per PR; fill in every checkbox of the PR template, including "added to docs/plugins.md".
 - AI-assisted commits keep their co-author trailer.
 - Never re-run, dispatch or retrigger CI to "see if it passes"; fix the cause and push.
+
+## Releases
+
+Agents never tag or release. A maintainer runs the **Release** workflow (see [CONTRIBUTING.md](CONTRIBUTING.md#releasing)). Never delete or move a tag.

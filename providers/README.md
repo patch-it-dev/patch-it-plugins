@@ -14,6 +14,9 @@ One page per plugin id: `providers/<api>.md`. Start from [`_template.md`](_templ
 | [datadog.md](datadog.md) | `datadog` | `openapi` |
 | [github.md](github.md) | `github` | `openapi` |
 | [gitlab.md](gitlab.md) | `gitlab` | `openapi` |
+| [vercel.md](vercel.md) | `vercel` | `openapi` |
+| [supabase.md](supabase.md) | `supabase` | `openapi` |
+| [algolia.md](algolia.md) | `algolia-search`, `algolia-ingestion`, `algolia-recommend` | `openapi` |
 | [openai-models.md](openai-models.md) | `openai-models` | `retirements` |
 | [anthropic-models.md](anthropic-models.md) | `anthropic-models` | `retirements` |
 | [anthropic.md](anthropic.md) | `anthropic` | `migrationguide` |
@@ -23,5 +26,7 @@ One page per plugin id: `providers/<api>.md`. Start from [`_template.md`](_templ
 | [github-actions.md](github-actions.md) | `github-actions` | `feed` |
 | [vertex-ai-models.md](vertex-ai-models.md) | `vertex-ai-models` | `feed` |
 | [redis.md](redis.md) | `redis` | `catalog` |
+| [cloudflare.md](cloudflare.md) | `cloudflare` | `feed` |
+| [mongodb-atlas.md](mongodb-atlas.md) | `mongodb-atlas` | `apichangelog` |
 
 The list of plugins, with their status, is [docs/plugins.md](../docs/plugins.md).

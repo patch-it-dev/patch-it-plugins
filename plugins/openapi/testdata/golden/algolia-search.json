@@ -1,0 +1,191 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:98c98629cbe46426329ba9fb60630c8bcc4194b191545aa008011f07252b5f5b",
+    "api": "algolia-search",
+    "version": "2025-04-01",
+    "previous_version": "2025-03-25",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /1/clusters"
+    },
+    "description": "Operation GET /1/clusters marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/algolia/api-clients-automation/released-2025-04-01-c19ee6afb/specs/bundled/search.yml",
+    "source_pointer": "/paths/~11~1clusters/get",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Lists the available clusters in a multi-cluster setup.\",\"operationId\":\"listClusters\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"description\":\"Clusters.\",\"properties\":{\"topUsers\":{\"description\":\"Key-value pairs with cluster names as keys and lists of users with the highest number of records per cluster as values.\",\"items\":{\"$ref\":\"#/components/schemas/clusterName\"},\"type\":\"array\"}},\"required\":[\"topUsers\"],\"title\":\"listClustersResponse\",\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"$ref\":\"#/components/responses/BadRequest\"},\"402\":{\"$ref\":\"#/components/responses/FeatureNotEnabled\"},\"403\":{\"$ref\":\"#/components/responses/MethodNotAllowed\"},\"404\":{\"$ref\":\"#/components/responses/IndexNotFound\"}},\"summary\":\"List clusters\",\"tags\":[\"search\"],\"x-acl\":[\"admin\"]}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:300b57a1485499d6a5fe3ff47e73b3dae695e2354ce20af1984db2345eb85334",
+    "api": "algolia-search",
+    "version": "2025-04-01",
+    "previous_version": "2025-03-25",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /1/clusters/mapping"
+    },
+    "description": "Operation GET /1/clusters/mapping marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/algolia/api-clients-automation/released-2025-04-01-c19ee6afb/specs/bundled/search.yml",
+    "source_pointer": "/paths/~11~1clusters~1mapping/get",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Lists the userIDs assigned to a multi-cluster application.\\n\\nSince it can take a few seconds to get the data from the different clusters,\\nthe response isn't real-time.\\n\",\"operationId\":\"listUserIds\",\"parameters\":[{\"$ref\":\"#/components/parameters/Page\"},{\"$ref\":\"#/components/parameters/HitsPerPage\"}],\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"description\":\"User ID data.\",\"properties\":{\"userIDs\":{\"description\":\"User IDs.\",\"items\":{\"$ref\":\"#/components/schemas/userId\"},\"type\":\"array\"}},\"required\":[\"userIDs\"],\"title\":\"listUserIdsResponse\",\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"$ref\":\"#/components/responses/BadRequest\"},\"402\":{\"$ref\":\"#/components/responses/FeatureNotEnabled\"},\"403\":{\"$ref\":\"#/components/responses/MethodNotAllowed\"},\"404\":{\"$ref\":\"#/components/responses/IndexNotFound\"}},\"summary\":\"List user IDs\",\"tags\":[\"search\"],\"x-acl\":[\"admin\"]}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:cef12aebf4a4a83fccea8645a0cf33c1d26468c547db8f103763278e78d38bca",
+    "api": "algolia-search",
+    "version": "2025-04-01",
+    "previous_version": "2025-03-25",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /1/clusters/mapping"
+    },
+    "description": "Operation POST /1/clusters/mapping marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/algolia/api-clients-automation/released-2025-04-01-c19ee6afb/specs/bundled/search.yml",
+    "source_pointer": "/paths/~11~1clusters~1mapping/post",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Assigns or moves a user ID to a cluster.\\n\\nThe time it takes to move a user is proportional to the amount of data linked to the user ID.\\n\",\"operationId\":\"assignUserId\",\"parameters\":[{\"$ref\":\"#/components/parameters/UserIDInHeader\"}],\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":false,\"description\":\"Assign userID parameters.\",\"properties\":{\"cluster\":{\"$ref\":\"#/components/schemas/clusterName\"}},\"required\":[\"cluster\"],\"title\":\"assignUserIdParams\",\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"$ref\":\"#/components/responses/CreatedAt\"},\"400\":{\"$ref\":\"#/components/responses/BadRequest\"},\"402\":{\"$ref\":\"#/components/responses/FeatureNotEnabled\"},\"403\":{\"$ref\":\"#/components/responses/MethodNotAllowed\"},\"404\":{\"$ref\":\"#/components/responses/IndexNotFound\"}},\"summary\":\"Assign or move a user ID\",\"tags\":[\"search\"],\"x-acl\":[\"admin\"]}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:3e264c501d2346c87750b601f3ec19cd16db54f253ebac636d2d4575f754cb76",
+    "api": "algolia-search",
+    "version": "2025-04-01",
+    "previous_version": "2025-03-25",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /1/clusters/mapping/batch"
+    },
+    "description": "Operation POST /1/clusters/mapping/batch marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/algolia/api-clients-automation/released-2025-04-01-c19ee6afb/specs/bundled/search.yml",
+    "source_pointer": "/paths/~11~1clusters~1mapping~1batch/post",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Assigns multiple user IDs to a cluster.\\n\\n**You can't move users with this operation**.\\n\",\"operationId\":\"batchAssignUserIds\",\"parameters\":[{\"$ref\":\"#/components/parameters/UserIDInHeader\"}],\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":false,\"description\":\"Assign userID parameters.\",\"properties\":{\"cluster\":{\"$ref\":\"#/components/schemas/clusterName\"},\"users\":{\"description\":\"User IDs to assign.\",\"example\":[\"einstein\",\"bohr\",\"feynman\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"}},\"required\":[\"cluster\",\"users\"],\"title\":\"batchAssignUserIdsParams\",\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"$ref\":\"#/components/responses/CreatedAt\"},\"400\":{\"$ref\":\"#/components/responses/BadRequest\"},\"402\":{\"$ref\":\"#/components/responses/FeatureNotEnabled\"},\"403\":{\"$ref\":\"#/components/responses/MethodNotAllowed\"},\"404\":{\"$ref\":\"#/components/responses/IndexNotFound\"}},\"summary\":\"Assign multiple userIDs\",\"tags\":[\"search\"],\"x-acl\":[\"admin\"]}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:3be2d780b21e3a2cac8cfc73c48a91171e7b77335c19d87f400d9c8618dd6e04",
+    "api": "algolia-search",
+    "version": "2025-04-01",
+    "previous_version": "2025-03-25",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /1/clusters/mapping/pending"
+    },
+    "description": "Operation GET /1/clusters/mapping/pending marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/algolia/api-clients-automation/released-2025-04-01-c19ee6afb/specs/bundled/search.yml",
+    "source_pointer": "/paths/~11~1clusters~1mapping~1pending/get",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"To determine when the time-consuming process of creating a large batch of users or migrating users from one cluster to another is complete, this operation retrieves the status of the process.\\n\",\"operationId\":\"hasPendingMappings\",\"parameters\":[{\"description\":\"Whether to include the cluster's pending mapping state in the response.\",\"in\":\"query\",\"name\":\"getClusters\",\"schema\":{\"type\":\"boolean\"}}],\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":false,\"properties\":{\"clusters\":{\"additionalProperties\":{\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"description\":\"Cluster pending mapping state: migrating, creating, deleting.\\n\",\"type\":\"object\"},\"pending\":{\"description\":\"Whether there are clusters undergoing migration, creation, or deletion.\",\"type\":\"boolean\"}},\"required\":[\"pending\"],\"title\":\"hasPendingMappingsResponse\",\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"$ref\":\"#/components/responses/BadRequest\"},\"402\":{\"$ref\":\"#/components/responses/FeatureNotEnabled\"},\"403\":{\"$ref\":\"#/components/responses/MethodNotAllowed\"},\"404\":{\"$ref\":\"#/components/responses/IndexNotFound\"}},\"summary\":\"Get migration and user mapping status\",\"tags\":[\"search\"],\"x-acl\":[\"admin\"]}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:9ef87419d739219194a79e3ba13a5c06c59d1ff0a6452a04c8a6200af27f87d5",
+    "api": "algolia-search",
+    "version": "2025-04-01",
+    "previous_version": "2025-03-25",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /1/clusters/mapping/search"
+    },
+    "description": "Operation POST /1/clusters/mapping/search marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/algolia/api-clients-automation/released-2025-04-01-c19ee6afb/specs/bundled/search.yml",
+    "source_pointer": "/paths/~11~1clusters~1mapping~1search/post",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Since it can take a few seconds to get the data from the different clusters,\\nthe response isn't real-time.\\n\\nTo ensure rapid updates, the user IDs index isn't built at the same time as the mapping. Instead, it's built every 12 hours, at the same time as the update of user ID usage. For example, if you add or move a user ID, the search will show an old value until the next time the mapping is rebuilt (every 12 hours).\\n\",\"operationId\":\"searchUserIds\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":false,\"description\":\"OK\",\"properties\":{\"clusterName\":{\"$ref\":\"#/components/schemas/clusterName\"},\"hitsPerPage\":{\"$ref\":\"#/components/schemas/hitsPerPage\"},\"page\":{\"$ref\":\"#/components/schemas/page\"},\"query\":{\"description\":\"Query to search. The search is a prefix search with [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/) enabled. An empty query will retrieve all users.\",\"type\":\"string\"}},\"required\":[\"query\"],\"title\":\"searchUserIdsParams\",\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"description\":\"userIDs data.\",\"properties\":{\"hits\":{\"description\":\"User objects that match the query.\",\"items\":{\"properties\":{\"_highlightResult\":{\"properties\":{\"clusterName\":{\"$ref\":\"#/components/schemas/highlightResult\"},\"userID\":{\"$ref\":\"#/components/schemas/highlightResult\"}},\"required\":[\"userID\",\"clusterName\"],\"title\":\"userHighlightResult\",\"type\":\"object\"},\"clusterName\":{\"$ref\":\"#/components/schemas/clusterName\"},\"dataSize\":{\"$ref\":\"#/components/schemas/dataSize\"},\"nbRecords\":{\"$ref\":\"#/components/schemas/nbRecords\"},\"objectID\":{\"description\":\"userID of the requested user. Same as userID.\",\"type\":\"string\"},\"userID\":{\"$ref\":\"#/components/schemas/userID\"}},\"required\":[\"userID\",\"clusterName\",\"nbRecords\",\"dataSize\",\"objectID\",\"_highlightResult\"],\"title\":\"userHit\",\"type\":\"object\"},\"type\":\"array\"},\"hitsPerPage\":{\"$ref\":…",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:933c2581c2ee22647cfc56e69694b562523e91658f8f80d14845f1d201921fdb",
+    "api": "algolia-search",
+    "version": "2025-04-01",
+    "previous_version": "2025-03-25",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /1/clusters/mapping/top"
+    },
+    "description": "Operation GET /1/clusters/mapping/top marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/algolia/api-clients-automation/released-2025-04-01-c19ee6afb/specs/bundled/search.yml",
+    "source_pointer": "/paths/~11~1clusters~1mapping~1top/get",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Get the IDs of the 10 users with the highest number of records per cluster.\\n\\nSince it can take a few seconds to get the data from the different clusters,\\nthe response isn't real-time.\\n\",\"operationId\":\"getTopUserIds\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"description\":\"User IDs and clusters.\",\"properties\":{\"topUsers\":{\"description\":\"Key-value pairs with cluster names as keys and lists of users with the highest number of records per cluster as values.\",\"items\":{\"additionalProperties\":{\"items\":{\"$ref\":\"#/components/schemas/userId\"},\"type\":\"array\",\"x-additionalPropertiesName\":\"cluster\"},\"type\":\"object\"},\"type\":\"array\"}},\"required\":[\"topUsers\"],\"title\":\"getTopUserIdsResponse\",\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"$ref\":\"#/components/responses/BadRequest\"},\"402\":{\"$ref\":\"#/components/responses/FeatureNotEnabled\"},\"403\":{\"$ref\":\"#/components/responses/MethodNotAllowed\"},\"404\":{\"$ref\":\"#/components/responses/IndexNotFound\"}},\"summary\":\"Get top user IDs\",\"tags\":[\"search\"],\"x-acl\":[\"admin\"]}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
+    "fingerprint": "sha256:86c3bf5e28959fbc84b0258d5df3824066ef30c2f1f87fb50070cf4d1f29736f",
+    "api": "algolia-search",
+    "version": "2025-04-01",
+    "previous_version": "2025-03-25",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "DELETE /1/clusters/mapping/{userID}"
+    },
+    "description": "Operation DELETE /1/clusters/mapping/{userID} marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/algolia/api-clients-automation/released-2025-04-01-c19ee6afb/specs/bundled/search.yml",
+    "source_pointer": "/paths/~11~1clusters~1mapping~1{userID}/delete",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Deletes a user ID and its associated data from the clusters.\",\"operationId\":\"removeUserId\",\"parameters\":[{\"$ref\":\"#/components/parameters/UserIDInPath\"}],\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":false,\"properties\":{\"deletedAt\":{\"$ref\":\"#/components/schemas/deletedAt\"}},\"required\":[\"deletedAt\"],\"title\":\"removeUserIdResponse\",\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"$ref\":\"#/components/responses/BadRequest\"},\"402\":{\"$ref\":\"#/components/responses/FeatureNotEnabled\"},\"403\":{\"$ref\":\"#/components/responses/MethodNotAllowed\"},\"404\":{\"$ref\":\"#/components/responses/IndexNotFound\"}},\"summary\":\"Delete user ID\",\"tags\":[\"search\"],\"x-acl\":[\"admin\"]}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 9,
+    "fingerprint": "sha256:590237cb63bae5005e8bcbcf50ee7e4e15a1fd2ec1b324788bc960e493a87b8a",
+    "api": "algolia-search",
+    "version": "2025-04-01",
+    "previous_version": "2025-03-25",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /1/clusters/mapping/{userID}"
+    },
+    "description": "Operation GET /1/clusters/mapping/{userID} marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/algolia/api-clients-automation/released-2025-04-01-c19ee6afb/specs/bundled/search.yml",
+    "source_pointer": "/paths/~11~1clusters~1mapping~1{userID}/get",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Returns the user ID data stored in the mapping.\\n\\nSince it can take a few seconds to get the data from the different clusters,\\nthe response isn't real-time.\\n\",\"operationId\":\"getUserId\",\"parameters\":[{\"$ref\":\"#/components/parameters/UserIDInPath\"}],\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/userId\"}}},\"description\":\"OK\"},\"400\":{\"$ref\":\"#/components/responses/BadRequest\"},\"402\":{\"$ref\":\"#/components/responses/FeatureNotEnabled\"},\"403\":{\"$ref\":\"#/components/responses/MethodNotAllowed\"},\"404\":{\"$ref\":\"#/components/responses/IndexNotFound\"}},\"summary\":\"Retrieve user ID\",\"tags\":[\"search\"],\"x-acl\":[\"admin\"]}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]
