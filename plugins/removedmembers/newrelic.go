@@ -72,6 +72,8 @@ var NewRelic11 = Guide{
 	Format:  FormatMarkdown,
 	Header:  "Legacy API",
 	Doc:     "release notes",
+	// The cells link to docs.newrelic.com by path ("/docs/agents/…").
+	LinkBase: "https://docs.newrelic.com",
 	Paths: map[string]string{
 		"accept_distributed_trace_payload": "agent.accept_distributed_trace_payload",
 		"add_custom_parameter":             "agent.add_custom_parameter",

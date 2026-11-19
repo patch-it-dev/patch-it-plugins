@@ -90,6 +90,11 @@ type Guide struct {
 	// Doc is what the hint calls the source: "<Package>'s <Doc> for
 	// <Release>". "" is "migration guide".
 	Doc string
+	// LinkBase makes the guide's site-relative links absolute in the hint
+	// ("](/docs/…)" -> "](<LinkBase>/docs/…)"): the hint is shown outside the
+	// vendor's site, in a pull request or an issue, where a relative link
+	// breaks. "" leaves links as written.
+	LinkBase string
 	// StillWork are names the table lists as removed but the same guide says
 	// still work or have no effect: no event, with the guide's reason.
 	StillWork map[string]string
@@ -272,7 +277,7 @@ func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) 
 			Breaking:      true,
 			Subject:       subject,
 			Description:   desc,
-			MigrationHint: fmt.Sprintf("%s (%s's %s for %s)", r.Guideline, g.Package, g.doc(), g.Release),
+			MigrationHint: fmt.Sprintf("%s (%s's %s for %s)", g.absoluteLinks(r.Guideline), g.Package, g.doc(), g.Release),
 			SourceURL:     g.URL(),
 			SourceExcerpt: r.Excerpt,
 			Confidence:    1.0,
@@ -291,4 +296,13 @@ func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) 
 		Rejected:  rejected,
 		Baselines: []plugin.Spec{plugin.Baseline(g.Package, g.Release, g.tag(), g.URL(), page, false, now)},
 	}, nil
+}
+
+// absoluteLinks prefixes LinkBase to every Markdown link target in s that
+// starts with "/".
+func (g Guide) absoluteLinks(s string) string {
+	if g.LinkBase == "" {
+		return s
+	}
+	return strings.ReplaceAll(s, "](/", "]("+strings.TrimSuffix(g.LinkBase, "/")+"/")
 }

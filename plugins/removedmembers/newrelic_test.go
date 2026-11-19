@@ -235,3 +235,17 @@ func newrelicIngest(t *testing.T) []event.EventV2 {
 	t.Helper()
 	return kittest.Ingest(t, Plugin{Guide: NewRelic11}, kittest.Pages{NewRelic11.URL(): newrelicSource})
 }
+
+// The hint is shown in a pull request or an issue, where a site-relative link
+// breaks: LinkBase makes the guide's links absolute, and leaves the rest.
+func TestAbsoluteLinks(t *testing.T) {
+	g := Guide{LinkBase: "https://docs.newrelic.com/"}
+	in := "Replacement API: [`notice_error()`](/docs/x/notice_error), see [here](https://example.test/y)"
+	want := "Replacement API: [`notice_error()`](https://docs.newrelic.com/docs/x/notice_error), see [here](https://example.test/y)"
+	if got := g.absoluteLinks(in); got != want {
+		t.Errorf("got %q, want %q", got, want)
+	}
+	if got := (Guide{}).absoluteLinks(in); got != in {
+		t.Errorf("no LinkBase changed the hint: %q", got)
+	}
+}
