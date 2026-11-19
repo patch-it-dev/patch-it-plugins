@@ -27,7 +27,7 @@ Format plugin: `apichangelog` (`plugins/apichangelog`), with the `MongoDBAtlas` 
 
 - **Reads** the change codes about a whole endpoint at one API version, replaying the days oldest first:
   - `endpoint-deprecated` and `resource-version-deprecated` become **`deprecation`** events, unless a later `endpoint-reactivated` withdraws them. MongoDB has reactivated 13 times. For example, `GET /api/atlas/v2/groups/{groupId}/clusters` at `2024-05-30` was deprecated on 2024-06-25 and reactivated the next day.
-  - `endpoint-removed` becomes a **`breaking`** event, unless the same endpoint and version shows up again on a later day (none has). All 38 in the file say the version "has reached its sunset date".
+  - `endpoint-removed` becomes a **`breaking`** event, unless the same endpoint and version shows up again on a later day (none has): then the removal goes, and so does any deprecation before it. A removal announced twice counts from its first announcement. All 38 in the file say the version "has reached its sunset date".
   - **`version`** is the API version the change is about (`2023-01-01`): the one a caller's `Accept` header names.
   - A deprecation counts from its first announcement since the last reactivation: the changelog repeats some.
 - **Cites** the file at its commit, with a JSON pointer to the change and the change itself as the excerpt: every field MongoDB wrote, in its order, whitespace aside.
@@ -39,6 +39,6 @@ Format plugin: `apichangelog` (`plugins/apichangelog`), with the `MongoDBAtlas` 
 
 - **Property-level breaking changes aren't events.** Examples are a request property removed (4), made required (11) or added as required (3), or an enum value no longer accepted (36), even where MongoDB marks them not backward compatible.
 - **The changelog doesn't always announce a deprecation before a removal.** None of the 38 removals had an `endpoint-deprecated` or `resource-version-deprecated` entry for the same endpoint and version in the changelog, so some removals arrive without an earlier deprecation event. The removal entries do say the sunset date was reached.
-- **A deprecation stored before its reactivation stays stored.** The plugin doesn't emit it again, but nothing withdraws an event already in the feed.
+- **An event stored before it's withdrawn stays stored:** a deprecation before its reactivation, or a removal before its version comes back. The plugin doesn't emit it again, but nothing withdraws an event already in the feed.
 - **The drivers aren't covered,** and they're what most application code uses.
 - **The patch-it client can't place these events yet.** Their `version` is a dated API version (`2023-01-01`), chosen per request in an `Accept` header, a scheme the client's version check doesn't know.

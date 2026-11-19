@@ -83,7 +83,9 @@ func TestPropertyChangesMakeNoEvent(t *testing.T) {
 		for _, v := range p.Versions {
 			for _, raw := range v.Changes {
 				var c change
-				json.Unmarshal(raw, &c)
+				if err := json.Unmarshal(raw, &c); err != nil {
+					t.Fatal(err)
+				}
 				if !c.BackwardCompatible {
 					notBC++
 				}
@@ -117,7 +119,9 @@ func TestReactivationWithdrawsTheDeprecation(t *testing.T) {
 			for _, v := range p.Versions {
 				for _, raw := range v.Changes {
 					var c change
-					json.Unmarshal(raw, &c)
+					if err := json.Unmarshal(raw, &c); err != nil {
+						t.Fatal(err)
+					}
 					if p.Path == "/api/atlas/v2/groups/{groupId}/clusters" && v.Version == "2024-05-30" {
 						codes[c.ChangeCode]++
 					}
@@ -189,6 +193,28 @@ func TestRemovalUndoneAndRawExcerpt(t *testing.T) {
 	}
 	if want := `{"change":"removed","changeCode":"endpoint-removed","backwardCompatible":false,"sunset":"2026-02-01"}`; fs[0].Excerpt != want {
 		t.Errorf("excerpt %s, want %s", fs[0].Excerpt, want)
+	}
+}
+
+// A removal announced twice keeps its first announcement. A version that's
+// deprecated, removed and then back has neither event.
+func TestRepeatedRemovalAndReturn(t *testing.T) {
+	day := func(date, path, code string) string {
+		return `{"date":"` + date + `","paths":[{"path":"` + path + `","httpMethod":"GET","versions":[{"version":"2023-01-01","changes":[{"change":"x","changeCode":"` + code + `","backwardCompatible":true}]}]}]}`
+	}
+	b := []byte("[" + strings.Join([]string{
+		day("2026-04-01", "/a", "endpoint-added"),
+		day("2026-03-01", "/b", "endpoint-removed"),
+		day("2026-02-01", "/b", "endpoint-removed"),
+		day("2026-02-01", "/a", "endpoint-removed"),
+		day("2026-01-01", "/a", "endpoint-deprecated"),
+	}, ",") + "]")
+	fs, err := MongoDBAtlas.Read(b)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(fs) != 1 || fs[0].Operation != "GET /b" || fs[0].Date != "2026-02-01" || fs[0].Pointer != "/2/paths/0/versions/0/changes/0" {
+		t.Errorf("got %+v, want GET /b's removal once, as announced on 2026-02-01", fs)
 	}
 }
 

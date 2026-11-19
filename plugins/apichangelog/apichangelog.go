@@ -118,9 +118,10 @@ type Finding struct {
 // replaying the days oldest first: a reactivation of an endpoint's version
 // withdraws its deprecation, and a deprecation after that is a new one. A
 // deprecation counts from the first time it's announced since the last
-// reactivation; the changelog repeats some. A removal is withdrawn if the
-// same endpoint and version shows up again on a later day (none of the 38 in
-// the file on 2026-11-18 does). The excerpt is the change as the file writes
+// reactivation; the changelog repeats some. A removal counts from its first
+// announcement too, and is withdrawn, with any deprecation before it, if the
+// same endpoint and version shows up again on a later day with anything but
+// another removal (none of the 38 in the file on 2026-11-18 does). The excerpt is the change as the file writes
 // it, whitespace aside.
 func (l Log) Read(b []byte) ([]Finding, error) {
 	var days []day
@@ -148,8 +149,11 @@ func (l Log) Read(b []byte) ([]Finding, error) {
 					}
 					op := p.Method + " " + p.Path
 					key := op + " " + v.Version
-					if r, ok := removed[key]; ok && r.f.Date < d.Date {
-						delete(removed, key) // it came back
+					if r, ok := removed[key]; ok && r.f.Date < d.Date && lifecycle[c.ChangeCode] != event.ChangeTypeBreaking {
+						// It came back. Whether its old deprecation still
+						// applies is unclear, so that goes too.
+						delete(removed, key)
+						delete(deprecated, key)
 					}
 					if c.ChangeCode == reactivated {
 						delete(deprecated, key)
