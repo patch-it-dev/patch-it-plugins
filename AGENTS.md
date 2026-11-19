@@ -6,7 +6,7 @@ Rules for AI coding agents (and humans) working in this repo. `CLAUDE.md` import
 
 **If you add a plugin, add its row to [`docs/plugins.md`](docs/plugins.md) in the same PR. If you change a plugin's id, provider, source, what it watches, format plugin or status, update its row in the same PR. If you remove one, remove its row.**
 
-The list of supported APIs on docs.patch-it.dev is generated from that file, so a plugin missing from it doesn't exist as far as users can tell. No CI check enforces this: you are the check. Before you finish, compare the registered plugins with the table and say in the PR that you did.
+The list of supported APIs on docs.patch-it.dev is generated from that file, so a plugin missing from it doesn't exist as far as users can tell. Then run `make plugins-json`: it regenerates [`docs/plugins.json`](docs/plugins.json) from the plugin registry and the table, and fails if a registered plugin has no row (or a row has no plugin, a wrong format or no provider page). `go test` fails while `docs/plugins.json` is out of date. The check can't tell whether a row's words are right: you are that check. Say in the PR that you compared them.
 
 Keep the table between the `<!-- plugins:start -->` and `<!-- plugins:end -->` markers a plain Markdown table, one row per plugin, absolute links only (the docs site copies it verbatim).
 
@@ -33,13 +33,14 @@ Refer to the service that runs these plugins as "patch-it's hosted ingestion ser
 
 ## Commands
 
+**Run `make check` before you say you're done.** It runs exactly what `CI_go` runs (each CI step is a Makefile target) plus the internal-names check over every tracked file; if it passes locally, those checks pass in CI.
+
 ```sh
-go build ./...
-go vet ./...
-gofmt -l .                    # must print nothing
-go test -race ./...
-python3 scripts/leak_guard.py --all   # the internal-names check over every tracked file
+make check          # tidy, build, gofmt, vet, the import allowlist, the net/http guard, go test -race, leak guard
+make plugins-json   # regenerate docs/plugins.json after adding or changing a plugin or its row
 ```
+
+One target at a time: `make tidy`, `make build`, `make fmt`, `make vet`, `make imports`, `make nethttp`, `make test`, `make leak-guard`. Use `make GO=/path/to/go check` for another Go.
 
 ## Layout
 
@@ -47,6 +48,7 @@ Go module `github.com/patch-it-dev/patch-it-plugins`; the only dependency is `go
 
 ```
 plugin/                the Plugin interface, the registry, Env, Result, Spec (baselines)
+cmd/list-plugins/      writes docs/plugins.json (make plugins-json); internal/pluginlist/ is its logic
 plugins/<format>/      one package per format plugin: openapi, retirements, migrationguide,
                        removedmembers, changelog, feed, apichangelog; plugins/all imports every one
 kit/  kit/kittest/     Unchanged, Cite, Wayback; the test kit (Mem, Pages, Ingest, Golden)
@@ -55,7 +57,8 @@ fetch/                 the HTTP fetch with retries and the ETag / Last-Modified 
 diff/ normalize/ hint/ adapter/   the OpenAPI diff engine and the spec adapters
 retire/  sdkguide/     deprecations-page and migration-guide readers
 contract/fixtures/     a copy of patch-it's change-event fixtures (CI_contract checks it)
-docs/plugins.md        the list of supported plugins (Rule 1)
+docs/plugins.md        the list of supported plugins (Rule 1); docs/plugins.json is generated from it
+Makefile               make check (what CI_go runs, plus the leak guard), make plugins-json
 docs/                  contributor docs, including writing-a-plugin.md
 providers/<api>.md     one page per provider
 scripts/               leak_guard.py (hashed internal names), check_contract.py

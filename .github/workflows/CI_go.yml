@@ -2,6 +2,7 @@
 # detector. Two guards keep plugins self-contained:
 #   - imports: only this module, the standard library and the approved dependencies;
 #   - network: net/http only in the fetch layer (fetch/, kit/, adapter/).
+# The steps are Makefile targets, so `make check` runs exactly this locally.
 # Until the Go code lands there is no go.mod, and every step after the first is skipped
 # with a notice, so the check passes.
 name: CI_go
@@ -43,57 +44,38 @@ jobs:
           go-version-file: go.mod
           cache-dependency-path: go.sum
 
+      # Each step is a Makefile target; `make check` runs the same ones (plus
+      # the internal-names check) locally.
       - name: go.mod and go.sum are tidy
         if: steps.go.outputs.present == 'true'
-        run: |
-          go mod tidy
-          if ! git diff --exit-code -- go.mod go.sum; then
-            echo "::error file=go.mod::go.mod/go.sum are not tidy. Run 'go mod tidy' and commit the result."
-            exit 1
-          fi
+        run: make tidy
 
       - name: go build
         if: steps.go.outputs.present == 'true'
-        run: go build ./...
+        run: make build
 
       - name: gofmt
         if: steps.go.outputs.present == 'true'
-        run: |
-          unformatted=$(gofmt -l .)
-          if [ -n "$unformatted" ]; then
-            for f in $unformatted; do echo "::error file=$f::not gofmt-formatted. Run 'gofmt -w .'."; done
-            exit 1
-          fi
+        run: make fmt
 
       - name: go vet
         if: steps.go.outputs.present == 'true'
-        run: go vet ./...
+        run: make vet
 
-      # An allowlist, so a plugin can't pull in a database driver, a cloud SDK or
-      # anything private. Adding a dependency means adding it here, in review.
+      # An allowlist (ALLOWED in the Makefile), so a plugin can't pull in a
+      # database driver, a cloud SDK or anything private. Adding a dependency
+      # means adding it there, in review.
       - name: imports are this module, the standard library or approved
         if: steps.go.outputs.present == 'true'
-        run: |
-          module=$(go list -m)
-          allowed="^($module(/|$)|gopkg\.in/yaml\.v3$)"
-          others=$(go list -deps -test -f '{{if not .Standard}}{{.ImportPath}}{{end}}' ./... | sed 's/ \[.*//' | sort -u | grep -vE "$allowed" || true)
-          if [ -n "$others" ]; then
-            echo "::error::imports outside the allowlist (CI_go.yml):"; echo "$others"; exit 1
-          fi
+        run: make imports
 
       # Plugins fetch through env.Get / kit, never on their own.
       - name: net/http only in the fetch layer
         if: steps.go.outputs.present == 'true'
-        run: |
-          module=$(go list -m)
-          bad=$(go list -f '{{.ImportPath}} {{join .Imports " "}}' ./... \
-            | grep -E '(^| )net/http( |$)' | cut -d' ' -f1 \
-            | grep -vE "^$module/(fetch|kit|adapter)(/|$)" || true)
-          if [ -n "$bad" ]; then
-            echo "::error::these packages import net/http; fetch through env.Get or kit instead:"; echo "$bad"; exit 1
-          fi
+        run: make nethttp
 
       # -race: the fetcher and the tests' HTTP servers run on other goroutines.
+      # Also fails when docs/plugins.json is out of date (make plugins-json).
       - name: go test
         if: steps.go.outputs.present == 'true'
-        run: go test -race -count=1 ./...
+        run: make test

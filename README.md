@@ -39,13 +39,10 @@ See **[docs/plugins.md](docs/plugins.md)**. The same list is on [docs.patch-it.d
 
 ## Run the tests
 
-Go (the version in `go.mod`), no other setup:
+Go (the version in `go.mod`), `make` and Python 3, no other setup:
 
 ```sh
-go build ./...
-go vet ./...
-gofmt -l .           # prints nothing when formatted
-go test -race ./...
+make check           # what CI runs: tidy, build, gofmt, vet, import and net/http guards, go test -race, leak guard
 ```
 
 The tests are offline: every plugin's test reads a saved copy of its source from `testdata/` and compares the events with a golden file. One package: `go test ./plugins/feed`. After an intended change to a plugin's output, `go test ./plugins/<name> -update` rewrites its golden files; review that diff like code.

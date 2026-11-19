@@ -11,7 +11,7 @@
 - [ ] One pinned drop test: a realistic input that produces no event
 - [ ] `providers/<api>.md` written or updated from `providers/_template.md`, including **Why this source**
 - [ ] Fetches only through `env.Get` / `kit/`
-- [ ] `go build ./... && go vet ./... && gofmt -l . && go test -race ./...` pass locally
+- [ ] `make check` passes locally (and `make plugins-json` was run if a plugin or its row changed)
 - [ ] Nothing private: no credentials, internal hosts, private links, customer names
 
 ## Notes for the reviewer
