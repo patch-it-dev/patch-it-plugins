@@ -58,6 +58,14 @@ The tests are offline: every plugin's test reads a saved copy of its source from
 
 Nothing else is read from the environment.
 
+## Releases
+
+Every release is a `v0.x.y` tag on `main` with a [GitHub release](https://github.com/patch-it-dev/patch-it-plugins/releases) and generated notes. Maintainers make them with the manual **Release** workflow ([how](CONTRIBUTING.md#releasing)); tags are never moved or deleted, so a bad release is fixed with a new patch version.
+
+```sh
+go get github.com/patch-it-dev/patch-it-plugins@latest
+```
+
 ## Contributing
 
 New providers and fixes are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) first (DCO sign-off, golden tests, adding your plugin to `docs/plugins.md`). AI coding agents: [AGENTS.md](AGENTS.md).
