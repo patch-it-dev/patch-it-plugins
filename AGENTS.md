@@ -79,4 +79,4 @@ The [change-event contract](https://github.com/patch-it-dev/patch-it/tree/main/d
 
 ## Releases
 
-Agents never tag or release. A maintainer runs the **Release** workflow (see [CONTRIBUTING.md](CONTRIBUTING.md#releasing)). Never delete or move a tag.
+Agents never tag or release. The **Release** workflow tags a patch release on its own every Monday and Thursday when something new was merged, and a maintainer can run it by hand (see [CONTRIBUTING.md](CONTRIBUTING.md#releasing)). Never delete or move a tag.
