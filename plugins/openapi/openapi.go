@@ -1,8 +1,9 @@
 // Package openapi is the source plugin for an API that publishes an OpenAPI
 // spec per release (Stripe, Datadog, GitLab, GitHub, Vercel, Supabase,
-// Algolia): fetch the newest spec, diff it against the last one seen,
-// normalize the changes into events, and attach migration hints from the
-// API's changelog when it has one. It can also replay two given releases.
+// Algolia, Elasticsearch): fetch the newest spec, diff it against the last
+// one seen, normalize the changes into events, and attach migration hints
+// from the API's changelog when it has one. It can also replay two given
+// releases.
 package openapi
 
 import (
@@ -41,6 +42,9 @@ func init() {
 	for _, spec := range []string{"search", "ingestion", "recommend"} {
 		plugin.Register(Plugin{Adapter: adapter.Algolia{Spec: spec}, Diff: algoliaDiff, Keep: algoliaKeep})
 	}
+	// No Hints: Elastic's breaking-changes page is prose per area, not keyed
+	// by operation. See elasticsearch.go.
+	plugin.Register(Plugin{Adapter: adapter.Elasticsearch{}, Diff: elasticsearchDiff, Keep: elasticsearchKeep, RemovalsNeedANewVersion: true})
 }
 
 // requestSide keeps the changes to what callers send. GitLab's response
@@ -64,6 +68,12 @@ type Plugin struct {
 	// Diff adapts the differ to the spec's conventions. The zero value is
 	// right for Stripe's.
 	Diff diff.Options
+	// RemovalsNeedANewVersion drops operation removals between two specs of
+	// the same version: for an API whose spec is fixed up on a release
+	// branch after the release, where a removal there is a correction to the
+	// spec, not a release removing an API (Elasticsearch removes APIs in a
+	// new minor or major, never in a patch).
+	RemovalsNeedANewVersion bool
 }
 
 func (p Plugin) Name() string { return p.Adapter.API() }
@@ -181,6 +191,18 @@ func (p Plugin) events(oldParsed, newParsed *diff.Spec, oldContent, newContent [
 		}
 		if dropped := len(changes) - len(kept); dropped > 0 {
 			log.Printf("%s %s: %d of %d changes dropped by the source's filter", src.API, src.Version, dropped, len(changes))
+		}
+		changes = kept
+	}
+	if p.RemovalsNeedANewVersion && src.Version == src.PreviousVersion {
+		kept := changes[:0:0]
+		for _, c := range changes {
+			if c.Kind != diff.OperationRemoved {
+				kept = append(kept, c)
+			}
+		}
+		if dropped := len(changes) - len(kept); dropped > 0 {
+			log.Printf("%s %s: %d removals dropped: same version as the last spec", src.API, src.Version, dropped)
 		}
 		changes = kept
 	}

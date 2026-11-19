@@ -1,0 +1,170 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:e6f9a24b6c0707867db8194dcf23dd20fe851e359236a9567c741e60daa220af",
+    "api": "elasticsearch",
+    "version": "9.0.0",
+    "previous_version": "8.19.0",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /_application/analytics"
+    },
+    "description": "Operation GET /_application/analytics marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/elastic/elasticsearch-specification/57ecfe5fda6976b94fc8b8830ecb51f4969dccd6/output/openapi/elasticsearch-openapi.json",
+    "source_pointer": "/paths/~1_application~1analytics/get",
+    "source_excerpt": "{\"deprecated\":true,\"operationId\":\"search-application-get-behavioral-analytics\",\"responses\":{\"200\":{\"$ref\":\"#/components/responses/search_application.get_behavioral_analytics-200\"}},\"summary\":\"Get behavioral analytics collections\",\"tags\":[\"analytics\"],\"x-metaTags\":[{\"content\":\"Elasticsearch\",\"name\":\"product_name\"}],\"x-state\":\"Technical preview; Added in 8.8.0\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:914a686914eb233286a5ea281f284296892936c059d663d7786bf7972c3e6ae8",
+    "api": "elasticsearch",
+    "version": "9.0.0",
+    "previous_version": "8.19.0",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /_application/analytics/{collection_name}/event/{event_type}"
+    },
+    "description": "Operation POST /_application/analytics/{collection_name}/event/{event_type} marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/elastic/elasticsearch-specification/57ecfe5fda6976b94fc8b8830ecb51f4969dccd6/output/openapi/elasticsearch-openapi.json",
+    "source_pointer": "/paths/~1_application~1analytics~1{collection_name}~1event~1{event_type}/post",
+    "source_excerpt": "{\"deprecated\":true,\"externalDocs\":{\"url\":\"https://www.elastic.co/guide/en/elasticsearch/reference/8.18/behavioral-analytics-event-reference.html\",\"x-previousVersionUrl\":\"https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-analytics-collection-event.html\"},\"operationId\":\"search-application-post-behavioral-analytics-event\",\"parameters\":[{\"deprecated\":false,\"description\":\"The name of the behavioral analytics collection.\",\"in\":\"path\",\"name\":\"collection_name\",\"required\":true,\"schema\":{\"$ref\":\"#/components/schemas/_types.Name\"},\"style\":\"simple\"},{\"deprecated\":false,\"description\":\"The analytics event type.\",\"in\":\"path\",\"name\":\"event_type\",\"required\":true,\"schema\":{\"$ref\":\"#/components/schemas/search_application._types.EventType\"},\"style\":\"simple\"},{\"deprecated\":false,\"description\":\"Whether the response type has to include more details\",\"in\":\"query\",\"name\":\"debug\",\"schema\":{\"type\":\"boolean\"},\"style\":\"form\"}],\"requestBody\":{\"content\":{\"application/json\":{\"examples\":{\"BehavioralAnalyticsEventPostRequestExample1\":{\"description\":\"Run `POST _application/analytics/my_analytics_collection/event/search_click` to send a `search_click` event to an analytics collection called `my_analytics_collection`.\",\"value\":\"{\\n  \\\"session\\\": {\\n    \\\"id\\\": \\\"1797ca95-91c9-4e2e-b1bd-9c38e6f386a9\\\"\\n  },\\n  \\\"user\\\": {\\n    \\\"id\\\": \\\"5f26f01a-bbee-4202-9298-81261067abbd\\\"\\n  },\\n  \\\"search\\\":{\\n    \\\"query\\\": \\\"search term\\\",\\n    \\\"results\\\": {\\n      \\\"items\\\": [\\n        {\\n          \\\"document\\\": {\\n            \\\"id\\\": \\\"123\\\",\\n            \\\"index\\\": \\\"products\\\"\\n          }\\n        }\\n      ],\\n      \\\"total_results\\\": 10\\n    },\\n    \\\"sort\\\": {\\n      \\\"name\\\": \\\"relevance\\\"\\n    },\\n    \\\"search_application\\\": \\\"website\\\"\\n  },\\n  \\\"document\\\":{\\n    \\\"id\\\": \\\"123\\\",\\n    \\\"index\\\": \\\"products\\\"\\n  }\\n}\"}},\"schema\":{\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"accepted\":{\"type\":\"boolean\"},\"event\":{\"type\":\"o…",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:ac4eb6548c39460a5ecce3f0c8c80aa59b458713afc81c081d126915c5ca116d",
+    "api": "elasticsearch",
+    "version": "9.0.0",
+    "previous_version": "8.19.0",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "DELETE /_application/analytics/{name}"
+    },
+    "description": "Operation DELETE /_application/analytics/{name} marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/elastic/elasticsearch-specification/57ecfe5fda6976b94fc8b8830ecb51f4969dccd6/output/openapi/elasticsearch-openapi.json",
+    "source_pointer": "/paths/~1_application~1analytics~1{name}/delete",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"The associated data stream is also deleted.\",\"operationId\":\"search-application-delete-behavioral-analytics\",\"parameters\":[{\"deprecated\":false,\"description\":\"The name of the analytics collection to be deleted\",\"in\":\"path\",\"name\":\"name\",\"required\":true,\"schema\":{\"$ref\":\"#/components/schemas/_types.Name\"},\"style\":\"simple\"}],\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/_types.AcknowledgedResponseBase\"}}},\"description\":\"\"}},\"summary\":\"Delete a behavioral analytics collection\",\"tags\":[\"analytics\"],\"x-metaTags\":[{\"content\":\"Elasticsearch\",\"name\":\"product_name\"}],\"x-state\":\"Technical preview; Added in 8.8.0\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:58610ad6c67e990ade54c586ad0cb021c4dcbb876454bb06a916f483b819e4bc",
+    "api": "elasticsearch",
+    "version": "9.0.0",
+    "previous_version": "8.19.0",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /_application/analytics/{name}"
+    },
+    "description": "Operation GET /_application/analytics/{name} marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/elastic/elasticsearch-specification/57ecfe5fda6976b94fc8b8830ecb51f4969dccd6/output/openapi/elasticsearch-openapi.json",
+    "source_pointer": "/paths/~1_application~1analytics~1{name}/get",
+    "source_excerpt": "{\"deprecated\":true,\"operationId\":\"search-application-get-behavioral-analytics-1\",\"parameters\":[{\"$ref\":\"#/components/parameters/search_application.get_behavioral_analytics-name\"}],\"responses\":{\"200\":{\"$ref\":\"#/components/responses/search_application.get_behavioral_analytics-200\"}},\"summary\":\"Get behavioral analytics collections\",\"tags\":[\"analytics\"],\"x-metaTags\":[{\"content\":\"Elasticsearch\",\"name\":\"product_name\"}],\"x-state\":\"Technical preview; Added in 8.8.0\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:cf1e119d61e7a9acd402b6547a3854f956ca26b905ac6f6fe288d198f2894a6f",
+    "api": "elasticsearch",
+    "version": "9.0.0",
+    "previous_version": "8.19.0",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "PUT /_application/analytics/{name}"
+    },
+    "description": "Operation PUT /_application/analytics/{name} marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/elastic/elasticsearch-specification/57ecfe5fda6976b94fc8b8830ecb51f4969dccd6/output/openapi/elasticsearch-openapi.json",
+    "source_pointer": "/paths/~1_application~1analytics~1{name}/put",
+    "source_excerpt": "{\"deprecated\":true,\"operationId\":\"search-application-put-behavioral-analytics\",\"parameters\":[{\"deprecated\":false,\"description\":\"The name of the analytics collection to be created or updated.\",\"in\":\"path\",\"name\":\"name\",\"required\":true,\"schema\":{\"$ref\":\"#/components/schemas/_types.Name\"},\"style\":\"simple\"}],\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/search_application.put_behavioral_analytics.AnalyticsAcknowledgeResponseBase\"}}},\"description\":\"\"}},\"summary\":\"Create a behavioral analytics collection\",\"tags\":[\"analytics\"],\"x-metaTags\":[{\"content\":\"Elasticsearch\",\"name\":\"product_name\"}],\"x-state\":\"Technical preview; Added in 8.8.0\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:245db5b4444fca5f4b864b5088d433ece32370538217d21dacc48d5cbb245eac",
+    "api": "elasticsearch",
+    "version": "9.0.0",
+    "previous_version": "8.19.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /{index}/_knn_search"
+    },
+    "description": "Operation GET /{index}/_knn_search removed.",
+    "source_url": "https://raw.githubusercontent.com/elastic/elasticsearch-specification/fd5d063c4824de5d33618b7fca4df0e6c1b8489f/output/openapi/elasticsearch-openapi.json",
+    "source_pointer": "/paths/~1{index}~1_knn_search/get",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"NOTE: The kNN search API has been replaced by the `knn` option in the search API.\\n\\nPerform a k-nearest neighbor (kNN) search on a dense_vector field and return the matching documents.\\nGiven a query vector, the API finds the k closest vectors and returns those documents as search hits.\\n\\nElasticsearch uses the HNSW algorithm to support efficient kNN search.\\nLike most kNN algorithms, HNSW is an approximate method that sacrifices result accuracy for improved search speed.\\nThis means the results returned are not always the true k closest neighbors.\\n\\nThe kNN search API supports restricting the search using a filter.\\nThe search will return the top k documents that also match the filter query.\\n\\nA kNN search response has the exact same structure as a search API response.\\nHowever, certain sections have a meaning specific to kNN search:\\n\\n* The document `_score` is determined by the similarity between the query and document vector.\\n* The `hits.total` object contains the total number of nearest neighbor candidates considered, which is `num_candidates * num_shards`. The `hits.total.relation` will always be `eq`, indicating an exact value.\",\"operationId\":\"knn-search\",\"parameters\":[{\"$ref\":\"#/components/parameters/knn_search-index\"},{\"$ref\":\"#/components/parameters/knn_search-routing\"}],\"requestBody\":{\"$ref\":\"#/components/requestBodies/knn_search\"},\"responses\":{\"200\":{\"$ref\":\"#/components/responses/knn_search-200\"}},\"summary\":\"Run a knn search\",\"tags\":[\"search\"],\"x-metaTags\":[{\"content\":\"Elasticsearch\",\"name\":\"product_name\"}],\"x-state\":\"Technical preview; Added in 8.0.0\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:e1850b21011cbdf095b88fbdbe1eaa522be2fab47912258bc06742f96bbbe44c",
+    "api": "elasticsearch",
+    "version": "9.0.0",
+    "previous_version": "8.19.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /{index}/_knn_search"
+    },
+    "description": "Operation POST /{index}/_knn_search removed.",
+    "source_url": "https://raw.githubusercontent.com/elastic/elasticsearch-specification/fd5d063c4824de5d33618b7fca4df0e6c1b8489f/output/openapi/elasticsearch-openapi.json",
+    "source_pointer": "/paths/~1{index}~1_knn_search/post",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"NOTE: The kNN search API has been replaced by the `knn` option in the search API.\\n\\nPerform a k-nearest neighbor (kNN) search on a dense_vector field and return the matching documents.\\nGiven a query vector, the API finds the k closest vectors and returns those documents as search hits.\\n\\nElasticsearch uses the HNSW algorithm to support efficient kNN search.\\nLike most kNN algorithms, HNSW is an approximate method that sacrifices result accuracy for improved search speed.\\nThis means the results returned are not always the true k closest neighbors.\\n\\nThe kNN search API supports restricting the search using a filter.\\nThe search will return the top k documents that also match the filter query.\\n\\nA kNN search response has the exact same structure as a search API response.\\nHowever, certain sections have a meaning specific to kNN search:\\n\\n* The document `_score` is determined by the similarity between the query and document vector.\\n* The `hits.total` object contains the total number of nearest neighbor candidates considered, which is `num_candidates * num_shards`. The `hits.total.relation` will always be `eq`, indicating an exact value.\",\"operationId\":\"knn-search-1\",\"parameters\":[{\"$ref\":\"#/components/parameters/knn_search-index\"},{\"$ref\":\"#/components/parameters/knn_search-routing\"}],\"requestBody\":{\"$ref\":\"#/components/requestBodies/knn_search\"},\"responses\":{\"200\":{\"$ref\":\"#/components/responses/knn_search-200\"}},\"summary\":\"Run a knn search\",\"tags\":[\"search\"],\"x-metaTags\":[{\"content\":\"Elasticsearch\",\"name\":\"product_name\"}],\"x-state\":\"Technical preview; Added in 8.0.0\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
+    "fingerprint": "sha256:eaae479ba14d5d2779649052f53e9c9f2987b4cd01b284e94e7a5cf177f8514c",
+    "api": "elasticsearch",
+    "version": "9.0.0",
+    "previous_version": "8.19.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /{index}/_unfreeze"
+    },
+    "description": "Operation POST /{index}/_unfreeze removed.",
+    "source_url": "https://raw.githubusercontent.com/elastic/elasticsearch-specification/fd5d063c4824de5d33618b7fca4df0e6c1b8489f/output/openapi/elasticsearch-openapi.json",
+    "source_pointer": "/paths/~1{index}~1_unfreeze/post",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"When a frozen index is unfrozen, the index goes through the normal recovery process and becomes writeable again.\\n\\n## Required authorization\\n\\n* Index privileges: `manage`\\n\",\"operationId\":\"indices-unfreeze\",\"parameters\":[{\"deprecated\":false,\"description\":\"Identifier for the index.\",\"in\":\"path\",\"name\":\"index\",\"required\":true,\"schema\":{\"$ref\":\"#/components/schemas/_types.IndexName\"},\"style\":\"simple\"},{\"deprecated\":false,\"description\":\"If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.\\nThis behavior applies even if the request targets other open indices.\",\"in\":\"query\",\"name\":\"allow_no_indices\",\"schema\":{\"default\":true,\"type\":\"boolean\"},\"style\":\"form\"},{\"deprecated\":false,\"description\":\"Type of index that wildcard patterns can match.\\nIf the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.\\nSupports comma-separated values, such as `open,hidden`.\\nValid values are: `all`, `open`, `closed`, `hidden`, `none`.\",\"in\":\"query\",\"name\":\"expand_wildcards\",\"schema\":{\"allOf\":[{\"$ref\":\"#/components/schemas/_types.ExpandWildcards\"}],\"default\":\"open\"},\"style\":\"form\"},{\"deprecated\":false,\"description\":\"If `false`, the request returns an error if it targets a missing or closed index.\",\"in\":\"query\",\"name\":\"ignore_unavailable\",\"schema\":{\"default\":false,\"type\":\"boolean\"},\"style\":\"form\"},{\"deprecated\":false,\"description\":\"Period to wait for a connection to the master node.\\nIf no response is received before the timeout expires, the request fails and returns an error.\",\"in\":\"query\",\"name\":\"master_timeout\",\"schema\":{\"allOf\":[{\"$ref\":\"#/components/schemas/_types.Duration\"}],\"default\":\"30s\"},\"style\":\"form\"},{\"deprecated\":false,\"description\":\"Period to wait for a response.\\nIf no response is received before the timeout expires, the request fails and returns an error.\",\"in\":\"query\",\"name\":\"timeout\",\"schema\":{…",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

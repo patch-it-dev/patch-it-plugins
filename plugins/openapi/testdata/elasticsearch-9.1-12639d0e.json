@@ -1,0 +1,526 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Elasticsearch Request & Response Specification",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://github.com/elastic/elasticsearch-specification/blob/main/LICENSE"
+    },
+    "version": ""
+  },
+  "paths": {
+    "/_autoscaling/policy/{name}": {
+      "get": {
+        "tags": [
+          "autoscaling"
+        ],
+        "summary": "Get an autoscaling policy",
+        "description": "NOTE: This feature is designed for indirect use by Elasticsearch Service, Elastic Cloud Enterprise, and Elastic Cloud on Kubernetes. Direct use is not supported.",
+        "externalDocs": {
+          "url": "https://www.elastic.co/docs/deploy-manage/autoscaling",
+          "x-previousVersionUrl": "https://www.elastic.co/guide/en/elasticsearch/reference/8.18/autoscaling-get-autoscaling-capacity.html"
+        },
+        "operationId": "autoscaling-get-autoscaling-policy",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Name of the autoscaling policy",
+            "required": true,
+            "deprecated": false,
+            "schema": {
+              "$ref": "#/components/schemas/_types.Name"
+            },
+            "style": "simple"
+          },
+          {
+            "in": "query",
+            "name": "master_timeout",
+            "description": "Period to wait for a connection to the master node.\nIf no response is received before the timeout expires, the request fails and returns an error.",
+            "deprecated": false,
+            "schema": {
+              "$ref": "#/components/schemas/_types.Duration"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autoscaling._types.AutoscalingPolicy"
+                },
+                "examples": {
+                  "GetAutoscalingPolicyResponseExample1": {
+                    "summary": "A successful response for retrieving an autoscaling policy.",
+                    "description": "This may be a response to `GET /_autoscaling/policy/my_autoscaling_policy`.",
+                    "value": "{\n   \"roles\": <roles>,\n   \"deciders\": <deciders>\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-state": "Generally available; Added in 7.11.0",
+        "x-metaTags": [
+          {
+            "content": "Elasticsearch",
+            "name": "product_name"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "autoscaling"
+        ],
+        "summary": "Create or update an autoscaling policy",
+        "description": "NOTE: This feature is designed for indirect use by Elasticsearch Service, Elastic Cloud Enterprise, and Elastic Cloud on Kubernetes. Direct use is not supported.",
+        "externalDocs": {
+          "url": "https://www.elastic.co/docs/deploy-manage/autoscaling",
+          "x-previousVersionUrl": "https://www.elastic.co/guide/en/elasticsearch/reference/8.18/autoscaling-put-autoscaling-policy.html"
+        },
+        "operationId": "autoscaling-put-autoscaling-policy",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Name of the autoscaling policy",
+            "required": true,
+            "deprecated": false,
+            "schema": {
+              "$ref": "#/components/schemas/_types.Name"
+            },
+            "style": "simple"
+          },
+          {
+            "in": "query",
+            "name": "master_timeout",
+            "description": "Period to wait for a connection to the master node.\nIf no response is received before the timeout expires, the request fails and returns an error.",
+            "deprecated": false,
+            "schema": {
+              "$ref": "#/components/schemas/_types.Duration"
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "timeout",
+            "description": "Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.",
+            "deprecated": false,
+            "schema": {
+              "$ref": "#/components/schemas/_types.Duration"
+            },
+            "style": "form"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/autoscaling._types.AutoscalingPolicy"
+              },
+              "examples": {
+                "PutAutoscalingPolicyRequestExample1": {
+                  "summary": "Creates or updates an autoscaling policy.",
+                  "value": "{\n  \"roles\": [],\n  \"deciders\": {\n    \"fixed\": {\n    }\n  }\n}"
+                },
+                "PutAutoscalingPolicyRequestExample2": {
+                  "summary": "Creates an autoscaling policy.",
+                  "description": "The API method and path for this request: `PUT /_autoscaling/policy/my_autoscaling_policy`. It creates `my_autoscaling_policy` using the fixed autoscaling decider, applying to the set of nodes having (only) the `data_hot` role.",
+                  "value": "{\n  \"roles\" : [ \"data_hot\" ],\n  \"deciders\": {\n    \"fixed\": {\n    }\n  }\n}"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_types.AcknowledgedResponseBase"
+                },
+                "examples": {
+                  "PutAutoscalingPolicyResponseExample1": {
+                    "summary": "A successful response when creating an autoscaling policy.",
+                    "value": "{\n  \"acknowledged\": true\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-state": "Generally available; Added in 7.11.0",
+        "x-metaTags": [
+          {
+            "content": "Elasticsearch",
+            "name": "product_name"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "autoscaling"
+        ],
+        "summary": "Delete an autoscaling policy",
+        "description": "NOTE: This feature is designed for indirect use by Elasticsearch Service, Elastic Cloud Enterprise, and Elastic Cloud on Kubernetes. Direct use is not supported.",
+        "externalDocs": {
+          "url": "https://www.elastic.co/docs/deploy-manage/autoscaling",
+          "x-previousVersionUrl": "https://www.elastic.co/guide/en/elasticsearch/reference/8.18/autoscaling-delete-autoscaling-policy.html"
+        },
+        "operationId": "autoscaling-delete-autoscaling-policy",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Name of the autoscaling policy",
+            "required": true,
+            "deprecated": false,
+            "schema": {
+              "$ref": "#/components/schemas/_types.Name"
+            },
+            "style": "simple"
+          },
+          {
+            "in": "query",
+            "name": "master_timeout",
+            "description": "Period to wait for a connection to the master node.\nIf no response is received before the timeout expires, the request fails and returns an error.",
+            "deprecated": false,
+            "schema": {
+              "$ref": "#/components/schemas/_types.Duration"
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "timeout",
+            "description": "Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.",
+            "deprecated": false,
+            "schema": {
+              "$ref": "#/components/schemas/_types.Duration"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_types.AcknowledgedResponseBase"
+                },
+                "examples": {
+                  "DeleteAutoscalingPolicyResponseExample1": {
+                    "summary": "A successful response of deleting one or more autoscaling policy.",
+                    "description": "This may be a response to either `DELETE /_autoscaling/policy/my_autoscaling_policy` or `DELETE /_autoscaling/policy/*`.\n",
+                    "value": "{\n  \"acknowledged\": true\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-state": "Generally available; Added in 7.11.0",
+        "x-metaTags": [
+          {
+            "content": "Elasticsearch",
+            "name": "product_name"
+          }
+        ]
+      }
+    },
+    "/_autoscaling/capacity": {
+      "get": {
+        "tags": [
+          "autoscaling"
+        ],
+        "summary": "Get the autoscaling capacity",
+        "description": "NOTE: This feature is designed for indirect use by Elasticsearch Service, Elastic Cloud Enterprise, and Elastic Cloud on Kubernetes. Direct use is not supported.\n\nThis API gets the current autoscaling capacity based on the configured autoscaling policy.\nIt will return information to size the cluster appropriately to the current workload.\n\nThe `required_capacity` is calculated as the maximum of the `required_capacity` result of all individual deciders that are enabled for the policy.\n\nThe operator should verify that the `current_nodes` match the operator’s knowledge of the cluster to avoid making autoscaling decisions based on stale or incomplete information.\n\nThe response contains decider-specific information you can use to diagnose how and why autoscaling determined a certain capacity was required.\nThis information is provided for diagnosis only.\nDo not use this information to make autoscaling decisions.",
+        "externalDocs": {
+          "url": "https://www.elastic.co/docs/deploy-manage/autoscaling",
+          "x-previousVersionUrl": "https://www.elastic.co/guide/en/elasticsearch/reference/8.18/autoscaling-get-autoscaling-capacity.html"
+        },
+        "operationId": "autoscaling-get-autoscaling-capacity",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "master_timeout",
+            "description": "Period to wait for a connection to the master node.\nIf no response is received before the timeout expires, the request fails and returns an error.",
+            "deprecated": false,
+            "schema": {
+              "$ref": "#/components/schemas/_types.Duration"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "policies": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "$ref": "#/components/schemas/autoscaling.get_autoscaling_capacity.AutoscalingDeciders"
+                      }
+                    }
+                  },
+                  "required": [
+                    "policies"
+                  ]
+                },
+                "examples": {
+                  "GetAutoscalingCapacityResponseExample1": {
+                    "summary": "A successful response for retrieving the current autoscaling capacity.",
+                    "description": "This may be a response to `GET /_autoscaling/capacity`.",
+                    "value": "{\n  policies: {}\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-state": "Generally available; Added in 7.11.0",
+        "x-metaTags": [
+          {
+            "content": "Elasticsearch",
+            "name": "product_name"
+          }
+        ]
+      }
+    },
+    "/_nodes/{node_id}/shutdown": {
+      "get": {
+        "tags": [
+          "shutdown"
+        ],
+        "summary": "Get the shutdown status",
+        "description": "Get information about nodes that are ready to be shut down, have shut down preparations still in progress, or have stalled.\nThe API returns status information for each part of the shut down process.\n\nNOTE: This feature is designed for indirect use by Elasticsearch Service, Elastic Cloud Enterprise, and Elastic Cloud on Kubernetes. Direct use is not supported.\n\nIf the operator privileges feature is enabled, you must be an operator to use this API.\n\n## Required authorization\n\n* Cluster privileges: `manage`\n",
+        "operationId": "shutdown-get-node-1",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/shutdown.get_node-node_id"
+          },
+          {
+            "$ref": "#/components/parameters/shutdown.get_node-master_timeout"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/shutdown.get_node-200"
+          }
+        },
+        "x-state": "Generally available; Added in 7.13.0",
+        "x-metaTags": [
+          {
+            "content": "Elasticsearch",
+            "name": "product_name"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "shutdown"
+        ],
+        "summary": "Prepare a node to be shut down",
+        "description": "NOTE: This feature is designed for indirect use by Elastic Cloud, Elastic Cloud Enterprise, and Elastic Cloud on Kubernetes. Direct use is not supported.\n\nIf you specify a node that is offline, it will be prepared for shut down when it rejoins the cluster.\n\nIf the operator privileges feature is enabled, you must be an operator to use this API.\n\nThe API migrates ongoing tasks and index shards to other nodes as needed to prepare a node to be restarted or shut down and removed from the cluster.\nThis ensures that Elasticsearch can be stopped safely with minimal disruption to the cluster.\n\nYou must specify the type of shutdown: `restart`, `remove`, or `replace`.\nIf a node is already being prepared for shutdown, you can use this API to change the shutdown type.\n\nIMPORTANT: This API does NOT terminate the Elasticsearch process.\nMonitor the node shutdown status to determine when it is safe to stop Elasticsearch.\n\n## Required authorization\n\n* Cluster privileges: `manage`\n",
+        "operationId": "shutdown-put-node",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "node_id",
+            "description": "The node identifier.\nThis parameter is not validated against the cluster's active nodes.\nThis enables you to register a node for shut down while it is offline.\nNo error is thrown if you specify an invalid node ID.",
+            "required": true,
+            "deprecated": false,
+            "schema": {
+              "$ref": "#/components/schemas/_types.NodeId"
+            },
+            "style": "simple"
+          },
+          {
+            "in": "query",
+            "name": "master_timeout",
+            "description": "The period to wait for a connection to the master node.\nIf no response is received before the timeout expires, the request fails and returns an error.",
+            "deprecated": false,
+            "schema": {
+              "$ref": "#/components/schemas/_types.Duration"
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "timeout",
+            "description": "The period to wait for a response.\nIf no response is received before the timeout expires, the request fails and returns an error.",
+            "deprecated": false,
+            "schema": {
+              "$ref": "#/components/schemas/_types.Duration"
+            },
+            "style": "form"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "description": "Valid values are restart, remove, or replace.\nUse restart when you need to temporarily shut down a node to perform an upgrade, make configuration changes, or perform other maintenance.\nBecause the node is expected to rejoin the cluster, data is not migrated off of the node.\nUse remove when you need to permanently remove a node from the cluster.\nThe node is not marked ready for shutdown until data is migrated off of the node Use replace to do a 1:1 replacement of a node with another node.\nCertain allocation decisions will be ignored (such as disk watermarks) in the interest of true replacement of the source node with the target node.\nDuring a replace-type shutdown, rollover and index creation may result in unassigned shards, and shrink may fail until the replacement is complete.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/shutdown._types.Type"
+                      }
+                    ]
+                  },
+                  "reason": {
+                    "description": "A human-readable reason that the node is being shut down.\nThis field provides information for other cluster operators; it does not affect the shut down process.",
+                    "type": "string"
+                  },
+                  "allocation_delay": {
+                    "description": "Only valid if type is restart.\nControls how long Elasticsearch will wait for the node to restart and join the cluster before reassigning its shards to other nodes.\nThis works the same as delaying allocation with the index.unassigned.node_left.delayed_timeout setting.\nIf you specify both a restart allocation delay and an index-level allocation delay, the longer of the two is used.",
+                    "type": "string"
+                  },
+                  "target_node_name": {
+                    "description": "Only valid if type is replace.\nSpecifies the name of the node that is replacing the node being shut down.\nShards from the shut down node are only allowed to be allocated to the target node, and no other data will be allocated to the target node.\nDuring relocation of data certain allocation rules are ignored, such as disk watermarks or user attribute filtering rules.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type",
+                  "reason"
+                ]
+              },
+              "examples": {
+                "ShutdownPutNodeRequestExample1": {
+                  "description": "Register a node for shutdown with `PUT /_nodes/USpTGYaBSIKbgSUJR2Z9lg/shutdown`. The `restart` type prepares the node to be restarted.\n",
+                  "value": "{\n  \"type\": \"restart\",\n  \"reason\": \"Demonstrating how the node shutdown API works\",\n  \"allocation_delay\": \"20m\"\n}"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_types.AcknowledgedResponseBase"
+                }
+              }
+            }
+          }
+        },
+        "x-state": "Generally available; Added in 7.13.0",
+        "x-metaTags": [
+          {
+            "content": "Elasticsearch",
+            "name": "product_name"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "shutdown"
+        ],
+        "summary": "Cancel node shutdown preparations",
+        "description": "Remove a node from the shutdown list so it can resume normal operations.\nYou must explicitly clear the shutdown request when a node rejoins the cluster or when a node has permanently left the cluster.\nShutdown requests are never removed automatically by Elasticsearch.\n\nNOTE: This feature is designed for indirect use by Elastic Cloud, Elastic Cloud Enterprise, and Elastic Cloud on Kubernetes.\nDirect use is not supported.\n\nIf the operator privileges feature is enabled, you must be an operator to use this API.\n\n## Required authorization\n\n* Cluster privileges: `manage`\n",
+        "operationId": "shutdown-delete-node",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "node_id",
+            "description": "The node id of node to be removed from the shutdown state",
+            "required": true,
+            "deprecated": false,
+            "schema": {
+              "$ref": "#/components/schemas/_types.NodeId"
+            },
+            "style": "simple"
+          },
+          {
+            "in": "query",
+            "name": "master_timeout",
+            "description": "Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.",
+            "deprecated": false,
+            "schema": {
+              "$ref": "#/components/schemas/_types.Duration"
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "timeout",
+            "description": "Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.",
+            "deprecated": false,
+            "schema": {
+              "$ref": "#/components/schemas/_types.Duration"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_types.AcknowledgedResponseBase"
+                },
+                "examples": {
+                  "ShutdownDeleteNodeResponseExample1": {
+                    "description": "A successful response from `DELETE /_nodes/USpTGYaBSIKbgSUJR2Z9lg/shutdown`.",
+                    "value": "{\n    \"acknowledged\": true\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-state": "Generally available; Added in 7.13.0",
+        "x-metaTags": [
+          {
+            "content": "Elasticsearch",
+            "name": "product_name"
+          }
+        ]
+      }
+    },
+    "/_nodes/shutdown": {
+      "get": {
+        "tags": [
+          "shutdown"
+        ],
+        "summary": "Get the shutdown status",
+        "description": "Get information about nodes that are ready to be shut down, have shut down preparations still in progress, or have stalled.\nThe API returns status information for each part of the shut down process.\n\nNOTE: This feature is designed for indirect use by Elasticsearch Service, Elastic Cloud Enterprise, and Elastic Cloud on Kubernetes. Direct use is not supported.\n\nIf the operator privileges feature is enabled, you must be an operator to use this API.\n\n## Required authorization\n\n* Cluster privileges: `manage`\n",
+        "operationId": "shutdown-get-node",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/shutdown.get_node-master_timeout"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/shutdown.get_node-200"
+          }
+        },
+        "x-state": "Generally available; Added in 7.13.0",
+        "x-metaTags": [
+          {
+            "content": "Elasticsearch",
+            "name": "product_name"
+          }
+        ]
+      }
+    }
+  }
+}
