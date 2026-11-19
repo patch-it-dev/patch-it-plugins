@@ -12,6 +12,7 @@
 - [ ] `providers/<api>.md` written or updated from `providers/_template.md`, including **Why this source**
 - [ ] Fetches only through `env.Get` / `kit/`
 - [ ] `make check` passes locally (and `make plugins-json` was run if a plugin or its row changed)
+- [ ] No `TODO(new-plugin)` left (`grep -rn 'TODO(new-plugin)' .` prints nothing)
 - [ ] Nothing private: no credentials, internal hosts, private links, customer names
 
 ## Notes for the reviewer

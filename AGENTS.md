@@ -23,6 +23,8 @@ Refer to the service that runs these plugins as "patch-it's hosted ingestion ser
 
 ## Rules for plugin code
 
+- **Start a new provider with `go run ./cmd/new-plugin --api <id> --provider <Name> --format <format>`**, then fill in every `TODO(new-plugin)`; none may be left when you open the PR.
+
 - **Fetch only through the environment** (`env.Get` or `kit/`). No `net/http` outside the fetch layer, no filesystem outside `testdata/`, no database.
 - **Golden test + dated source quote**: a saved copy of the real source in `testdata/`, a row in `testdata/README.md` (URL, date fetched, license, quote), and `testdata/golden/<api>.json` with the exact events.
 - **Precision over recall.** When unsure whether something is a change, don't emit an event.
@@ -50,6 +52,7 @@ Go module `github.com/patch-it-dev/patch-it-plugins`; the only dependency is `go
 ```
 plugin/                the Plugin interface, the registry, Env, Result, Spec (baselines)
 cmd/list-plugins/      writes docs/plugins.json (make plugins-json); internal/pluginlist/ is its logic
+cmd/new-plugin/        scaffolds a provider on a format plugin (go run ./cmd/new-plugin --help)
 plugins/<format>/      one package per format plugin: openapi, retirements, migrationguide,
                        removedmembers, changelog, feed, apichangelog, catalog; plugins/all imports every one
 kit/  kit/kittest/     Unchanged, Cite, Wayback; the test kit (Mem, Pages, Ingest, Golden)
