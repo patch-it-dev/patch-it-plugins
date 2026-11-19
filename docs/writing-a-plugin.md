@@ -117,14 +117,12 @@ Copy [`providers/_template.md`](../providers/_template.md) to `providers/<api>.m
 
 ## 8. Add the row to `docs/plugins.md`
 
-**Not optional** ([AGENTS.md](../AGENTS.md) rule 1). Add one row between the `plugins:start` and `plugins:end` markers: the id linked to its provider page, the provider, what it watches, the format plugin, the source, the status. Absolute links only: the docs site copies the table as it is. Changing a plugin's id, source or what it watches updates its row in the same PR.
+**Not optional** ([AGENTS.md](../AGENTS.md) rule 1). Add one row between the `plugins:start` and `plugins:end` markers: the id linked to its provider page, the provider, what it watches, the format plugin, the source, the status. Absolute links only: the docs site copies the table as it is. Changing a plugin's id, source or what it watches updates its row in the same PR. Then run `make plugins-json` to regenerate `docs/plugins.json`; it fails, naming the problem, if the registry and the table disagree.
 
 ## 9. Check and open the PR
 
 ```sh
-go build ./... && go vet ./... && gofmt -l . && go test -race ./...
-go mod tidy                               # no diff
-python3 scripts/leak_guard.py --all
+make check                                # what CI runs, plus the leak guard
 git commit -s -m "add the foo plugin"     # DCO sign-off
 ```
 
