@@ -179,6 +179,24 @@ func TestCloudflareDates(t *testing.T) {
 	if fs := readCloudflareAPI(field); len(fs) != 1 || fs[0].ChangeType != event.ChangeTypeDeprecation {
 		t.Errorf("a setting's removal: %+v, want deprecation", fs)
 	}
+	// A paragraph that mentions the API, but what's removed is something else
+	// (the Service Key item, given a list and a full date).
+	auth := cfEntry("<p>Deprecation date: March 19, 2026</p><p>End of life date: September 30, 2026</p><p>Service Key authentication for the Cloudflare API is deprecated and will be removed on September 30, 2026.</p>", item)
+	if fs := readCloudflareAPI(auth); len(fs) != 1 || fs[0].ChangeType != event.ChangeTypeDeprecation {
+		t.Errorf("an authentication method's removal: %+v, want deprecation", fs)
+	}
+	// The endpoints as what stops, as the Registrar and Zone Settings Batch
+	// items say it, and as Privacy Pass says it of the API.
+	for _, stop := range []string{
+		"After this date, the legacy endpoints will no longer be available.",
+		"After this date, the batch endpoints will no longer be available.",
+		"By the end of March 2024, the current public-facing API will be removed.",
+	} {
+		fs := readCloudflareAPI(cfEntry("<p>End of life date: March 31, 2027</p><p>"+stop+"</p>", item))
+		if len(fs) != 1 || fs[0].ChangeType != event.ChangeTypeBreaking {
+			t.Errorf("%q: %+v, want breaking", stop, fs)
+		}
+	}
 	noDates := cfEntry("", item)
 	noDates.Published = ""
 	if fs := readCloudflareAPI(noDates); len(fs) != 1 || fs[0].Dropped == "" {

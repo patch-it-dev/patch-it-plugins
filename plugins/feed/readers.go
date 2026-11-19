@@ -227,12 +227,14 @@ var (
 	cfColonParam = regexp.MustCompile(`:([A-Za-z_][A-Za-z0-9_]*)`)
 	cfEOL        = regexp.MustCompile(`(?i)^End of life date:`)
 	cfDeprecated = regexp.MustCompile(`(?i)^Deprecation date:`)
-	// cfStops is the item saying the endpoints stop: "After this date, the
-	// legacy endpoints will no longer be available." Only a paragraph counts,
-	// and only one about the endpoints or APIs: a list item under "Affected
-	// APIs:" saying "Mirage parameter will be removed" is about a field.
-	cfStops     = regexp.MustCompile(`(?i)\bwill no longer be (available|accessible|served)\b|\bwill be (removed|shut down|turned off)\b`)
-	cfEndpoints = regexp.MustCompile(`(?i)\b(endpoints?|APIs?|operations?)\b`)
+	// cfStops is the item saying the endpoints stop, with the endpoints as
+	// what stops: "After this date, the legacy endpoints will no longer be
+	// available." Only a paragraph counts: a list item under "Affected APIs:"
+	// saying "Mirage parameter will be removed" is about a field. And not a
+	// sentence that only mentions the API: "Service Key authentication for
+	// the Cloudflare API is deprecated and will be removed" is about the
+	// authentication.
+	cfStops     = regexp.MustCompile(`(?i)\b(endpoints?|APIs?|operations?) will (no longer be (available|accessible|served)|be (removed|shut down|turned off))\b`)
 	cfParagraph = regexp.MustCompile(`(?is)<p>(.*?)</p>`)
 	// cfNoAction is an item telling direct API callers nothing changes for
 	// them: "For users calling the API directly (not via the Cloudflare SDK),
@@ -281,7 +283,7 @@ func readCloudflareAPI(e Entry) []Finding {
 		}
 	}
 	for _, p := range cfParagraph.FindAllStringSubmatch(e.HTML, -1) {
-		if l := Text(p[1]); cfStops.MatchString(l) && cfEndpoints.MatchString(l) {
+		if l := Text(p[1]); cfStops.MatchString(l) {
 			stopLine = l
 			break
 		}
