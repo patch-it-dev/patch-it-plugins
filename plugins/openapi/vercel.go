@@ -46,14 +46,22 @@ func vercelDeprecatedSummary(summary string) bool {
 //
 // Additions are dropped too: nobody has to fix code for a new endpoint, and a
 // re-added one isn't new.
-func vercelKeep(c diff.Change) bool {
-	switch c.Kind {
-	case diff.OperationDeprecated:
-		return true
-	case diff.OperationRemoved:
-		op, _ := c.Node.(map[string]any)
-		return vercelDiff.OperationDeprecated(op)
-	default:
-		return false
+func vercelKeep(c diff.Change) bool { return deprecationsOnly(vercelDiff)(c) }
+
+// deprecationsOnly keeps operation deprecations, and removals of operations
+// the old spec had marked deprecated (by opts' reading of "marked"):
+// everything else is dropped. For a spec whose removals and property changes
+// were mostly not changes to the API (vercel, supabase).
+func deprecationsOnly(opts diff.Options) func(diff.Change) bool {
+	return func(c diff.Change) bool {
+		switch c.Kind {
+		case diff.OperationDeprecated:
+			return true
+		case diff.OperationRemoved:
+			op, _ := c.Node.(map[string]any)
+			return opts.OperationDeprecated(op)
+		default:
+			return false
+		}
 	}
 }
