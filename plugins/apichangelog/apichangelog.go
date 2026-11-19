@@ -16,6 +16,7 @@
 package apichangelog
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
@@ -69,8 +70,8 @@ type day struct {
 		Path     string `json:"path"`
 		Method   string `json:"httpMethod"`
 		Versions []struct {
-			Version string   `json:"version"`
-			Changes []change `json:"changes"`
+			Version string            `json:"version"`
+			Changes []json.RawMessage `json:"changes"`
 		} `json:"versions"`
 	} `json:"paths"`
 }
@@ -117,7 +118,10 @@ type Finding struct {
 // replaying the days oldest first: a reactivation of an endpoint's version
 // withdraws its deprecation, and a deprecation after that is a new one. A
 // deprecation counts from the first time it's announced since the last
-// reactivation; the changelog repeats some.
+// reactivation; the changelog repeats some. A removal is withdrawn if the
+// same endpoint and version shows up again on a later day (none of the 38 in
+// the file on 2026-11-18 does). The excerpt is the change as the file writes
+// it, whitespace aside.
 func (l Log) Read(b []byte) ([]Finding, error) {
 	var days []day
 	if err := json.Unmarshal(b, &days); err != nil {
@@ -137,9 +141,16 @@ func (l Log) Read(b []byte) ([]Finding, error) {
 		d := days[di]
 		for pi, p := range d.Paths {
 			for vi, v := range p.Versions {
-				for ci, c := range v.Changes {
+				for ci, raw := range v.Changes {
+					var c change
+					if err := json.Unmarshal(raw, &c); err != nil {
+						return nil, fmt.Errorf("day %s, %s %s: %w", d.Date, p.Method, p.Path, err)
+					}
 					op := p.Method + " " + p.Path
 					key := op + " " + v.Version
+					if r, ok := removed[key]; ok && r.f.Date < d.Date {
+						delete(removed, key) // it came back
+					}
 					if c.ChangeCode == reactivated {
 						delete(deprecated, key)
 						continue
@@ -148,14 +159,14 @@ func (l Log) Read(b []byte) ([]Finding, error) {
 					if !ok {
 						continue
 					}
-					ex, err := json.Marshal(c)
-					if err != nil {
+					var ex bytes.Buffer
+					if err := json.Compact(&ex, raw); err != nil {
 						return nil, err
 					}
 					f := Finding{
 						ChangeType: ct, Date: d.Date, Operation: op, Version: v.Version, Code: c.ChangeCode,
 						Pointer: fmt.Sprintf("/%d/paths/%d/versions/%d/changes/%d", di, pi, vi, ci),
-						Excerpt: string(ex),
+						Excerpt: ex.String(),
 					}
 					seq++
 					target := deprecated

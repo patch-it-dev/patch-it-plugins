@@ -27,10 +27,10 @@ Format plugin: `apichangelog` (`plugins/apichangelog`), with the `MongoDBAtlas` 
 
 - **Reads** the change codes about a whole endpoint at one API version, replaying the days oldest first:
   - `endpoint-deprecated` and `resource-version-deprecated` become **`deprecation`** events, unless a later `endpoint-reactivated` withdraws them. MongoDB has reactivated 13 times. For example, `GET /api/atlas/v2/groups/{groupId}/clusters` at `2024-05-30` was deprecated on 2024-06-25 and reactivated the next day.
-  - `endpoint-removed` becomes a **`breaking`** event. All 38 in the file say the version "has reached its sunset date".
+  - `endpoint-removed` becomes a **`breaking`** event, unless the same endpoint and version shows up again on a later day (none has). All 38 in the file say the version "has reached its sunset date".
   - **`version`** is the API version the change is about (`2023-01-01`): the one a caller's `Accept` header names.
   - A deprecation counts from its first announcement since the last reactivation: the changelog repeats some.
-- **Cites** the file at its commit, with a JSON pointer to the change and the change itself, as written in the file, as the excerpt.
+- **Cites** the file at its commit, with a JSON pointer to the change and the change itself as the excerpt: every field MongoDB wrote, in its order, whitespace aside.
 - **Ignores** every other change code. Most are additions. The other "not backward compatible" ones are property-level, and the flag is broad: a response enum gaining a value counts (68 times). Removed or newly required request properties are probably real breaks, but they aren't read until measured.
 - **Not read:** `api-path-removed-without-deprecation`. Its one entry (`GET …/streams/activeVpcPeeringConnections` at `2024-11-13`, 2025-01-10) comes with `endpoint-added` the same day, and the endpoint changes again later, so it wasn't removed. Also not read: `sunset-deleted`, whose one entry keeps the endpoint deprecated.
 - On the changelog released 2026-11-18 this gives 81 events: 43 deprecations still standing and 38 removals.

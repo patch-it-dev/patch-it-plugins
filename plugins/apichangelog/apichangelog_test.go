@@ -81,7 +81,9 @@ func TestPropertyChangesMakeNoEvent(t *testing.T) {
 	var notBC int
 	for _, p := range days[0].Paths {
 		for _, v := range p.Versions {
-			for _, c := range v.Changes {
+			for _, raw := range v.Changes {
+				var c change
+				json.Unmarshal(raw, &c)
 				if !c.BackwardCompatible {
 					notBC++
 				}
@@ -113,7 +115,9 @@ func TestReactivationWithdrawsTheDeprecation(t *testing.T) {
 	for _, d := range days {
 		for _, p := range d.Paths {
 			for _, v := range p.Versions {
-				for _, c := range v.Changes {
+				for _, raw := range v.Changes {
+					var c change
+					json.Unmarshal(raw, &c)
 					if p.Path == "/api/atlas/v2/groups/{groupId}/clusters" && v.Version == "2024-05-30" {
 						codes[c.ChangeCode]++
 					}
@@ -164,6 +168,27 @@ func TestLifeCycleReplay(t *testing.T) {
 	want := []string{"2026-01-15 GET /b deprecation", "2026-03-01 GET /a deprecation", "2026-05-01 GET /b breaking"}
 	if strings.Join(got, "; ") != strings.Join(want, "; ") {
 		t.Errorf("got %q, want %q", got, want)
+	}
+}
+
+// A removal followed by the same endpoint and version on a later day (an
+// `endpoint-added`, any change) didn't happen: no event. And the excerpt
+// keeps every field the vendor wrote, in its order.
+func TestRemovalUndoneAndRawExcerpt(t *testing.T) {
+	b := []byte(`[
+	 {"date":"2026-03-01","paths":[{"path":"/a","httpMethod":"GET","versions":[{"version":"2023-01-01","changes":[{"change":"endpoint added","changeCode":"endpoint-added","backwardCompatible":true}]}]}]},
+	 {"date":"2026-02-01","paths":[{"path":"/a","httpMethod":"GET","versions":[{"version":"2023-01-01","changes":[{"change":"removed","changeCode":"endpoint-removed","backwardCompatible":false}]}]},
+	                            {"path":"/b","httpMethod":"GET","versions":[{"version":"2023-01-01","changes":[{"change":"removed","changeCode":"endpoint-removed","backwardCompatible":false,"sunset":"2026-02-01"}]}]}]}
+	]`)
+	fs, err := MongoDBAtlas.Read(b)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(fs) != 1 || fs[0].Operation != "GET /b" {
+		t.Fatalf("got %+v, want only GET /b's removal", fs)
+	}
+	if want := `{"change":"removed","changeCode":"endpoint-removed","backwardCompatible":false,"sunset":"2026-02-01"}`; fs[0].Excerpt != want {
+		t.Errorf("excerpt %s, want %s", fs[0].Excerpt, want)
 	}
 }
 
