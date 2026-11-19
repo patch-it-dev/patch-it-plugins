@@ -25,6 +25,7 @@ Never scrape what the provider's `robots.txt` or terms disallow, and never read 
 | `plugins/removedmembers` | A package's table of removed members at a release tag | A `removedmembers.Guide` |
 | `plugins/changelog` | A `CHANGELOG.md` / `CHANGES.rst` / `HISTORY.rst` at a release tag | A `changelog.File` |
 | `plugins/feed` | An RSS or Atom feed | A `feed.Feed` with a reader for that vendor's entries |
+| `plugins/apichangelog` | A vendor's machine-readable API changelog in JSON (per day, endpoint and API version, oasdiff change codes), at the commit that last changed it | An `apichangelog.Log` |
 
 ## 3. The interface
 
