@@ -36,6 +36,41 @@ Use the provider's own, most machine-readable source. In order of preference:
 
 Never scrape what the provider's `robots.txt` or terms disallow, and never read a forum or a third-party blog. Write down what you chose and why in the provider page (step 8).
 
+### Measure the source over its history before trusting it
+
+A source that looks right on today's copy can be wrong as a history of changes. Before picking what the plugin keeps, download the source at every release (or a sample plus every release of a recent window), run the format's diff or reader over each consecutive pair, and count what comes out:
+
+- **Deprecations:** how many, and how the provider marks them. A flag (`deprecated: true`), words in a summary ("(deprecated)", "Deprecated:"), an extension (`x-cfDeprecation`), a change code. A flag the provider rarely sets misses most of them; a regex that matches "deprecated" anywhere matches operations *about* deprecated things.
+- **Removals, split by whether they were marked deprecated first.** In the specs measured so far, most removals with no deprecation before them weren't removals from the API:
+  - the spec moved or renamed the path (a path parameter renamed, `/site/` corrected to `/sites/`, a doubled base path fixed);
+  - an operation went to an internal spec, or was left out as not for direct use;
+  - an operation came back a few releases later;
+  - a release branch cut before an older branch's last minor didn't have it yet;
+  - it described only an API client: a helper or a "custom request" method, marked `x-helper` or similar.
+
+  So the default rule for a spec is the `deprecationsOnly` filter in `plugins/openapi`: operation deprecations, plus removals of operations marked deprecated first. Keep an unmarked removal only if the history shows they're real.
+- **Withdrawals:** a deprecation the provider takes back (`endpoint-reactivated`), a removed version that reappears. Replay the history in order, and let a withdrawal cancel what it withdraws.
+- **Property-level changes,** request and response. Response properties of a generated spec often churn by the hundred per release. Count before deciding; leaving them out is a fine first version.
+
+Then check what's left against the provider's own words:
+
+- **A shutdown needs the provider to say the thing stops.** An "end of life date" field alone isn't enough when the item's text says direct callers need no action, or names only a field or a value.
+- **Cross-check a removal with the release notes** ("Remove unfreeze REST endpoint" for the endpoint that left the spec).
+- **Probing the live API from outside rarely settles it.** Many APIs answer 401 or 403 to every path without credentials, real or made up.
+
+Write the numbers on the provider page ("108 operations left the spec; 5 had been marked deprecated"), so a reviewer can check the rule against them.
+
+### Pin, and pick a version a repo pins
+
+- **Cite what never changes:** a release tag, or the commit SHA of the release or of a branch's head. A moving branch or a live URL isn't a citation.
+- **"Newest" needs care:**
+  - a day can have several releases whose tag suffix says nothing about their order (break the tie by commit date);
+  - an older major's patch can be released after a newer minor (take the highest version, not GitHub's latest release);
+  - the newest branch may be unreleased (read the newest *released* one).
+- **`version`** is the API version the change arrived in, per the contract. If the API has none, use a package version a repo pins (an SDK release), or a date: a release date, an end of life.
+  - The patch-it client gates a package version as a package. It keeps a date-versioned API's events only if the API is in its list of date-versioned APIs, so **a new date-versioned API needs an entry there too**.
+  - Two specs of one version (fixes on a release branch) aren't a release: `RemovalsNeedANewVersion` drops removals between them.
+
 ## 3. Pick the format plugin
 
 | Format plugin | Reads | Add a provider by |
@@ -108,6 +143,9 @@ Save a real copy of what the plugin reads under your package's `testdata/` (or t
 
 - **Openly licensed files** (MIT, BSD, Apache, CC BY): keep them whole.
 - **Vendor documentation pages**: trim to what the plugin reads (the tables, the sections), copy every kept line unchanged, mark it "excerpt for testing; © the vendor", and say what you left out.
+- **A big spec or changelog**: trim to the paths or entries the tests need, and check the trimmed copy gives the same findings as the full file.
+  - A YAML or pretty-printed JSON spec can be trimmed by lines, every kept line unchanged.
+  - When events point into the file by array index (`/12/paths/3/…`), keep every position and replace what isn't read with `{}`, so each pointer names the same entry as in the real file.
 
 ## 6. Write the golden test
 
@@ -128,7 +166,7 @@ func TestGolden(t *testing.T) {
 
 ## 7. Pin a drop test and the registration
 
-- **One drop test**: a realistic input the plugin must *not* turn into an event (an unrelated section, a behavior change written as prose, a product name in a sentence). Precision over recall: a missed change is a bug we fix later; a wrong change is a wrong pull request in someone's repo.
+- **One drop test**: a realistic input the plugin must *not* turn into an event (an unrelated section, a behavior change written as prose, a product name in a sentence). Precision over recall: a missed change is a bug we fix later; a wrong change is a wrong pull request in someone's repo. Make it prove something: also run the same input with the filter off, and assert the noise it drops is there.
 - **`registered_test.go`**: `kittest.Registered(t, Plugin{…})` checks the package registered that plugin under that name.
 - **A new format plugin package**: add its blank import to [`plugins/all/all.go`](../plugins/all/all.go). `TestEveryPluginIsImported` fails until you do; the hosted service runs exactly what `plugins/all` imports.
 
@@ -148,3 +186,10 @@ git commit -s -m "add the foo plugin"     # DCO sign-off
 ```
 
 Fill in every box of the PR template. One plugin per PR.
+
+Before opening it, have the work reviewed by someone who re-derives it, not by rereading your own diff:
+- the history numbers, from the real source;
+- every claim on the provider page and in comments, against the code and the data;
+- whether any event would be wrong for a caller.
+
+Most of the bugs found in plugins so far were found this way: a deprecation the provider later withdrew, an end of life read as a shutdown, a count that didn't match the data.
