@@ -51,7 +51,7 @@ Go module `github.com/patch-it-dev/patch-it-plugins`; the only dependency is `go
 plugin/                the Plugin interface, the registry, Env, Result, Spec (baselines)
 cmd/list-plugins/      writes docs/plugins.json (make plugins-json); internal/pluginlist/ is its logic
 plugins/<format>/      one package per format plugin: openapi, retirements, migrationguide,
-                       removedmembers, changelog, feed, apichangelog; plugins/all imports every one
+                       removedmembers, changelog, feed, apichangelog, catalog; plugins/all imports every one
 kit/  kit/kittest/     Unchanged, Cite, Wayback; the test kit (Mem, Pages, Ingest, Golden)
 event/  migrate/       the change-event types from patch-it's contract (v1 + v2), v1 -> v2
 fetch/                 the HTTP fetch with retries and the ETag / Last-Modified cache
