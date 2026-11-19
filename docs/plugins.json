@@ -10,8 +10,7 @@
       "watches": "Ingestion API operations deprecated, and deprecated operations removed, between releases of the spec",
       "format": "openapi",
       "source_url": "https://github.com/algolia/api-clients-automation",
-      "status": "paused",
-      "status_note": "merged, not in a tagged release yet, so patch-it's hosted ingestion service doesn't run it",
+      "status": "live",
       "provider_page": "providers/algolia.md"
     },
     {
@@ -21,8 +20,7 @@
       "watches": "Recommend API operations deprecated, and deprecated operations removed, between releases of the spec",
       "format": "openapi",
       "source_url": "https://github.com/algolia/api-clients-automation",
-      "status": "paused",
-      "status_note": "merged, not in a tagged release yet, so patch-it's hosted ingestion service doesn't run it",
+      "status": "live",
       "provider_page": "providers/algolia.md"
     },
     {
@@ -32,8 +30,7 @@
       "watches": "Search API operations deprecated, and deprecated operations removed, between releases of the spec",
       "format": "openapi",
       "source_url": "https://github.com/algolia/api-clients-automation",
-      "status": "paused",
-      "status_note": "merged, not in a tagged release yet, so patch-it's hosted ingestion service doesn't run it",
+      "status": "live",
       "provider_page": "providers/algolia.md"
     },
     {
@@ -63,8 +60,7 @@
       "watches": "REST API operations Cloudflare deprecates, breaking on their end-of-life date when it gives one",
       "format": "feed",
       "source_url": "https://developers.cloudflare.com/fundamentals/api/reference/deprecations/index.xml",
-      "status": "paused",
-      "status_note": "merged, not in a tagged release yet, so patch-it's hosted ingestion service doesn't run it",
+      "status": "live",
       "provider_page": "providers/cloudflare.md"
     },
     {
@@ -114,8 +110,7 @@
       "watches": "Atlas Administration API versions deprecated and removed at their sunset date, per endpoint, from MongoDB's own API changelog",
       "format": "apichangelog",
       "source_url": "https://github.com/mongodb/openapi/blob/main/changelog/changelog.json",
-      "status": "paused",
-      "status_note": "merged, not in a tagged release yet, so patch-it's hosted ingestion service doesn't run it",
+      "status": "live",
       "provider_page": "providers/mongodb-atlas.md"
     },
     {
@@ -165,8 +160,7 @@
       "watches": "Management API operations deprecated, and deprecated operations removed, between commits of the spec",
       "format": "openapi",
       "source_url": "https://github.com/supabase/supabase",
-      "status": "paused",
-      "status_note": "merged, not in a tagged release yet, so patch-it's hosted ingestion service doesn't run it",
+      "status": "live",
       "provider_page": "providers/supabase.md"
     },
     {
@@ -196,8 +190,7 @@
       "watches": "REST API operations deprecated, and deprecated operations removed, between SDK releases of the spec",
       "format": "openapi",
       "source_url": "https://github.com/vercel/sdk",
-      "status": "paused",
-      "status_note": "merged, not in a tagged release yet, so patch-it's hosted ingestion service doesn't run it",
+      "status": "live",
       "provider_page": "providers/vercel.md"
     },
     {
