@@ -23,7 +23,7 @@ Refer to the service that runs these plugins as "patch-it's hosted ingestion ser
 
 ## Rules for plugin code
 
-- **Start a new provider with `go run ./cmd/new-plugin --api <id> --provider <Name> --format <format>`**, then fill in every `TODO(new-plugin)`; none may be left when you open the PR.
+- **Start a new provider with `go run ./cmd/new-plugin --api <id> --provider <Name> --format <format>`**, then fill in every `TODO(new-plugin)`; `make todos` (part of `make check` and CI_go) fails while one is left.
 
 - **Fetch only through the environment** (`env.Get` or `kit/`). No `net/http` outside the fetch layer, no filesystem outside `testdata/`, no database.
 - **Golden test + dated source quote**: a saved copy of the real source in `testdata/`, a row in `testdata/README.md` (URL, date fetched, license, quote), and `testdata/golden/<api>.json` with the exact events.
@@ -38,12 +38,12 @@ Refer to the service that runs these plugins as "patch-it's hosted ingestion ser
 **Run `make check` before you say you're done.** It runs exactly what `CI_go` runs (each CI step is a Makefile target) plus the internal-names check over every tracked file; if it passes locally, those checks pass in CI.
 
 ```sh
-make check          # tidy, build, gofmt, vet, the import allowlist, the net/http guard, go test -race, leak guard
+make check          # tidy, build, gofmt, vet, the import allowlist, the net/http guard, go test -race, no TODO(new-plugin) left, leak guard
 make check PATCH_IT=../patch-it   # also CI_contract: contract/fixtures/ against a patch-it checkout
 make plugins-json   # regenerate docs/plugins.json after adding or changing a plugin or its row
 ```
 
-One target at a time: `make tidy`, `make build`, `make fmt`, `make vet`, `make imports`, `make nethttp`, `make test`, `make leak-guard`, `make contract`. Use `make GO=/path/to/go check` for another Go.
+One target at a time: `make tidy`, `make build`, `make fmt`, `make vet`, `make imports`, `make nethttp`, `make test`, `make todos`, `make leak-guard`, `make contract`. Use `make GO=/path/to/go check` for another Go.
 
 ## Layout
 

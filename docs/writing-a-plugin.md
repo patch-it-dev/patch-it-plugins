@@ -23,7 +23,7 @@ It writes, and lists:
 - `providers/<api>.md` from the template (or nothing, with `--page`, when the provider already has one);
 - the row in `docs/plugins.md`, and `docs/plugins.json` regenerated.
 
-`go test ./...` passes right after; every place to fill in says `TODO(new-plugin)` (`grep -rn 'TODO(new-plugin)' .`). It refuses an id that's taken (registered, in `docs/plugins.md`, or a file it would write exists) and then changes nothing. The steps below are what you fill in.
+`go test ./...` passes right after; every place to fill in says `TODO(new-plugin)` (`grep -rn 'TODO(new-plugin)' .`), and `make check` (its `todos` step, also in CI_go) fails until none is left. It refuses an id that's taken (registered, in `docs/plugins.md`, or a file it would write exists) and then changes nothing. The steps below are what you fill in.
 
 ## 2. Pick the source
 
