@@ -1,0 +1,577 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Vercel SDK",
+    "description": "The [`@vercel/sdk`](https://www.npmjs.com/package/@vercel/sdk) is a type-safe Typescript SDK that allows you to access the resources and methods of the Vercel REST API. Learn how to [install it](https://vercel.com/docs/rest-api/sdk#installing-vercel-sdk) and [authenticate](https://vercel.com/docs/rest-api/sdk#authentication) with a Vercel access token.",
+    "contact": {
+      "email": "support@vercel.com",
+      "name": "Vercel Support",
+      "url": "https://vercel.com/support"
+    },
+    "version": "0.0.1"
+  },
+  "paths": {
+    "/v5/domains/buy": {
+      "post": {
+        "description": "This endpoint is deprecated and replaced with the endpoint [Buy a domain](https://vercel.com/docs/rest-api/reference/endpoints/domains-registrar/buy-a-domain). Purchases the specified domain.",
+        "operationId": "buyDomain",
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "summary": "Purchase a domain (deprecated)",
+        "tags": [
+          "domains"
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "domain": {
+                      "properties": {
+                        "uid": {
+                          "type": "string"
+                        },
+                        "ns": {
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "verified": {
+                          "type": "boolean"
+                        },
+                        "created": {
+                          "type": "number"
+                        },
+                        "pending": {
+                          "type": "boolean"
+                        }
+                      },
+                      "required": [
+                        "uid",
+                        "ns",
+                        "verified",
+                        "created",
+                        "pending"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "domain"
+                  ],
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "domain": {
+                      "properties": {
+                        "uid": {
+                          "type": "string"
+                        },
+                        "ns": {
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "verified": {
+                          "type": "boolean"
+                        },
+                        "created": {
+                          "type": "number"
+                        },
+                        "pending": {
+                          "type": "boolean"
+                        }
+                      },
+                      "required": [
+                        "uid",
+                        "ns",
+                        "verified",
+                        "created",
+                        "pending"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "domain"
+                  ],
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "One of the provided values in the request body is invalid."
+          },
+          "401": {
+            "description": "The request is not authorized."
+          },
+          "403": {
+            "description": "You do not have permission to access this resource."
+          },
+          "409": {
+            "description": ""
+          },
+          "429": {
+            "description": ""
+          },
+          "500": {
+            "description": ""
+          }
+        },
+        "parameters": [
+          {
+            "description": "The Team identifier to perform the request on behalf of.",
+            "in": "query",
+            "name": "teamId",
+            "schema": {
+              "type": "string",
+              "example": "team_1a2b3c4d5e6f7g8h9i0j1k2l"
+            }
+          },
+          {
+            "description": "The Team slug to perform the request on behalf of.",
+            "in": "query",
+            "name": "slug",
+            "schema": {
+              "type": "string",
+              "example": "my-team-url-slug"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "type": "object",
+                "required": [
+                  "name",
+                  "country",
+                  "firstName",
+                  "lastName",
+                  "address1",
+                  "city",
+                  "state",
+                  "postalCode",
+                  "phone",
+                  "email"
+                ],
+                "properties": {
+                  "name": {
+                    "description": "The domain name to purchase.",
+                    "type": "string",
+                    "example": "example.com"
+                  },
+                  "expectedPrice": {
+                    "description": "The price you expect to be charged for the purchase.",
+                    "type": "number",
+                    "example": 10
+                  },
+                  "renew": {
+                    "description": "Indicates whether the domain should be automatically renewed.",
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "country": {
+                    "description": "The country of the domain registrant",
+                    "type": "string",
+                    "example": "US"
+                  },
+                  "orgName": {
+                    "description": "The company name of the domain registrant",
+                    "type": "string",
+                    "example": "Acme Inc."
+                  },
+                  "firstName": {
+                    "description": "The first name of the domain registrant",
+                    "type": "string",
+                    "example": "Jane"
+                  },
+                  "lastName": {
+                    "description": "The last name of the domain registrant",
+                    "type": "string",
+                    "example": "Doe"
+                  },
+                  "address1": {
+                    "description": "The street address of the domain registrant",
+                    "type": "string",
+                    "example": "340 S Lemon Ave Suite 4133"
+                  },
+                  "city": {
+                    "description": "The city of the domain registrant",
+                    "type": "string",
+                    "example": "San Francisco"
+                  },
+                  "state": {
+                    "description": "The state of the domain registrant",
+                    "type": "string",
+                    "example": "CA"
+                  },
+                  "postalCode": {
+                    "description": "The postal code of the domain registrant",
+                    "type": "string",
+                    "example": "91789"
+                  },
+                  "phone": {
+                    "description": "The phone number of the domain registrant",
+                    "type": "string",
+                    "example": "+1.4158551452"
+                  },
+                  "email": {
+                    "description": "The email of the domain registrant",
+                    "type": "string",
+                    "example": "jane.doe@someplace.com"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        }
+      }
+    },
+    "/v4/domains/price": {
+      "get": {
+        "description": "This endpoint is deprecated and replaced with the endpoint [Get price data for a domain](https://vercel.com/docs/rest-api/reference/endpoints/domains-registrar/get-price-data-for-a-domain). Check the price to purchase a domain and how long a single purchase period is.",
+        "operationId": "checkDomainPrice",
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "summary": "Check the price for a domain (deprecated)",
+        "tags": [
+          "domains"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response which returns the price of the domain and the period.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "price": {
+                      "type": "number",
+                      "description": "The domain price in USD.",
+                      "example": 20
+                    },
+                    "period": {
+                      "type": "number",
+                      "description": "The number of years the domain could be held before paying again.",
+                      "example": 1
+                    }
+                  },
+                  "required": [
+                    "price",
+                    "period"
+                  ],
+                  "type": "object",
+                  "description": "Successful response which returns the price of the domain and the period."
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "One of the provided values in the request query is invalid."
+          },
+          "401": {
+            "description": "The request is not authorized."
+          },
+          "403": {
+            "description": "You do not have permission to access this resource."
+          },
+          "404": {
+            "description": ""
+          },
+          "500": {
+            "description": ""
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "description": "The name of the domain for which the price needs to be checked.",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "description": "The name of the domain for which the price needs to be checked.",
+              "type": "string",
+              "example": "example.com"
+            }
+          },
+          {
+            "name": "type",
+            "description": "In which status of the domain the price needs to be checked.",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "description": "In which status of the domain the price needs to be checked.",
+              "type": "string",
+              "enum": [
+                "new",
+                "renewal",
+                "transfer",
+                "redemption"
+              ],
+              "example": "new"
+            }
+          },
+          {
+            "description": "The Team identifier to perform the request on behalf of.",
+            "in": "query",
+            "name": "teamId",
+            "schema": {
+              "type": "string",
+              "example": "team_1a2b3c4d5e6f7g8h9i0j1k2l"
+            }
+          },
+          {
+            "description": "The Team slug to perform the request on behalf of.",
+            "in": "query",
+            "name": "slug",
+            "schema": {
+              "type": "string",
+              "example": "my-team-url-slug"
+            }
+          }
+        ]
+      }
+    },
+    "/v4/domains/status": {
+      "get": {
+        "description": "This endpoint is deprecated and replaced with the endpoint [Get availability for a domain](https://vercel.com/docs/rest-api/reference/endpoints/domains-registrar/get-availability-for-a-domain). Check if a domain name is available for purchase.",
+        "operationId": "checkDomainStatus",
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "summary": "Check a Domain Availability (deprecated)",
+        "tags": [
+          "domains"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response checking if a Domain's name is available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "available": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "available"
+                  ],
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "One of the provided values in the request query is invalid."
+          },
+          "401": {
+            "description": "The request is not authorized."
+          },
+          "403": {
+            "description": "You do not have permission to access this resource."
+          },
+          "408": {
+            "description": ""
+          },
+          "500": {
+            "description": ""
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "description": "The name of the domain for which we would like to check the status.",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "description": "The name of the domain for which we would like to check the status.",
+              "type": "string",
+              "example": "example.com"
+            }
+          },
+          {
+            "description": "The Team identifier to perform the request on behalf of.",
+            "in": "query",
+            "name": "teamId",
+            "schema": {
+              "type": "string",
+              "example": "team_1a2b3c4d5e6f7g8h9i0j1k2l"
+            }
+          },
+          {
+            "description": "The Team slug to perform the request on behalf of.",
+            "in": "query",
+            "name": "slug",
+            "schema": {
+              "type": "string",
+              "example": "my-team-url-slug"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/domains/{domain}/registry": {
+      "get": {
+        "description": "This endpoint is deprecated and replaced with the endpoint [Get a domain's transfer status](https://vercel.com/docs/rest-api/reference/endpoints/domains-registrar/get-a-domain-s-transfer-status). Fetch domain transfer availability or transfer status if a transfer is in progress.",
+        "operationId": "getDomainTransfer",
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "summary": "Get domain transfer info (deprecated)",
+        "tags": [
+          "domains"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "reason": {
+                          "type": "string"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "transferable": {
+                          "type": "boolean"
+                        },
+                        "transferPolicy": {
+                          "type": "string",
+                          "enum": [
+                            "charge-and-renew"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "reason",
+                        "status",
+                        "transferable",
+                        "transferPolicy"
+                      ],
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "transferable": {
+                          "type": "boolean",
+                          "description": "Whether or not the domain is transferable"
+                        },
+                        "transferPolicy": {
+                          "nullable": true,
+                          "type": "string",
+                          "enum": [
+                            "charge-and-renew",
+                            "no-charge-no-change",
+                            "no-change",
+                            "new-term",
+                            "not-supported"
+                          ],
+                          "description": "The domain's transfer policy (depends on TLD requirements). `charge-and-renew`: transfer will charge for renewal and will renew the existing domain's registration. `no-charge-no-change`: transfer will have no change to registration period and does not require charge. `no-change`: transfer charge is required, but no change in registration period. `new-term`: transfer charge is required and a new registry term is set based on the transfer date. `not-supported`: transfers are not supported for this domain or TLD. `null`: This TLD is not supported by Vercel's Registrar."
+                        },
+                        "reason": {
+                          "type": "string",
+                          "description": "Description associated with transferable state."
+                        },
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "completed",
+                            "undef",
+                            "pending_owner",
+                            "pending_admin",
+                            "pending_registry",
+                            "cancelled",
+                            "unknown"
+                          ],
+                          "description": "The current state of an ongoing transfer. `pending_owner`: Awaiting approval by domain's admin contact (every transfer begins with this status). If approval is not given within five days, the transfer is cancelled. `pending_admin`: Waiting for approval by Vercel Registrar admin. `pending_registry`: Awaiting registry approval (the transfer completes after 7 days unless it is declined by the current registrar). `completed`: The transfer completed successfully. `cancelled`: The transfer was cancelled. `undef`: No transfer exists for this domain. `unknown`: This TLD is not supported by Vercel's Registrar."
+                        }
+                      },
+                      "required": [
+                        "transferable",
+                        "transferPolicy",
+                        "reason",
+                        "status"
+                      ],
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "401": {
+            "description": "The request is not authorized."
+          },
+          "403": {
+            "description": "You do not have permission to access this resource."
+          },
+          "500": {
+            "description": ""
+          }
+        },
+        "parameters": [
+          {
+            "description": "The Team identifier to perform the request on behalf of.",
+            "in": "query",
+            "name": "teamId",
+            "schema": {
+              "type": "string",
+              "example": "team_1a2b3c4d5e6f7g8h9i0j1k2l"
+            }
+          },
+          {
+            "description": "The Team slug to perform the request on behalf of.",
+            "in": "query",
+            "name": "slug",
+            "schema": {
+              "type": "string",
+              "example": "my-team-url-slug"
+            }
+          },
+          {
+            "name": "domain",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "example.com"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

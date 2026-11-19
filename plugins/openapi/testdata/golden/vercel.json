@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:3ed13a96aa00836818e55222cab3da2dfa8a26582d5498f1af05c31f5d6f4069",
+    "api": "vercel",
+    "version": "1.13.5",
+    "previous_version": "1.13.4",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /v1/domains/{domain}/registry"
+    },
+    "description": "Operation GET /v1/domains/{domain}/registry marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/vercel/sdk/v1.13.5/vercel-spec.json",
+    "source_pointer": "/paths/~1v1~1domains~1{domain}~1registry/get/summary",
+    "source_excerpt": "\"Get domain transfer info (deprecated)\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:9063f28da001671b78c5c0095cc412ca28c892e2a0e87b8a26c15b954530cea4",
+    "api": "vercel",
+    "version": "1.13.5",
+    "previous_version": "1.13.4",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /v4/domains/price"
+    },
+    "description": "Operation GET /v4/domains/price marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/vercel/sdk/v1.13.5/vercel-spec.json",
+    "source_pointer": "/paths/~1v4~1domains~1price/get/summary",
+    "source_excerpt": "\"Check the price for a domain (deprecated)\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:13194122725cea31972cf361d8bf98a8f41aedb308e10a721fe800145f2afe51",
+    "api": "vercel",
+    "version": "1.13.5",
+    "previous_version": "1.13.4",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /v4/domains/status"
+    },
+    "description": "Operation GET /v4/domains/status marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/vercel/sdk/v1.13.5/vercel-spec.json",
+    "source_pointer": "/paths/~1v4~1domains~1status/get/summary",
+    "source_excerpt": "\"Check a Domain Availability (deprecated)\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:3230007e27b6de1ffbd000649cdd3e34ac9a31da35a9c650cdb573b5d8f939d6",
+    "api": "vercel",
+    "version": "1.13.5",
+    "previous_version": "1.13.4",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /v5/domains/buy"
+    },
+    "description": "Operation POST /v5/domains/buy marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/vercel/sdk/v1.13.5/vercel-spec.json",
+    "source_pointer": "/paths/~1v5~1domains~1buy/post/summary",
+    "source_excerpt": "\"Purchase a domain (deprecated)\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:4f1bb30450488badb2c18e52b206ebdd7c5b1265e2e13508351e4bf99d945d05",
+    "api": "vercel",
+    "version": "1.18.7",
+    "previous_version": "1.18.6",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /v4/domains/price"
+    },
+    "description": "Operation GET /v4/domains/price removed.",
+    "source_url": "https://raw.githubusercontent.com/vercel/sdk/v1.18.6/vercel-spec.json",
+    "source_pointer": "/paths/~1v4~1domains~1price/get",
+    "source_excerpt": "{\"description\":\"This endpoint is deprecated and replaced with the endpoint [Get price data for a domain](https://vercel.com/docs/rest-api/reference/endpoints/domains-registrar/get-price-data-for-a-domain). Check the price to purchase a domain and how long a single purchase period is.\",\"operationId\":\"checkDomainPrice\",\"parameters\":[{\"description\":\"The name of the domain for which the price needs to be checked.\",\"in\":\"query\",\"name\":\"name\",\"required\":true,\"schema\":{\"description\":\"The name of the domain for which the price needs to be checked.\",\"example\":\"example.com\",\"type\":\"string\"}},{\"description\":\"In which status of the domain the price needs to be checked.\",\"in\":\"query\",\"name\":\"type\",\"required\":false,\"schema\":{\"description\":\"In which status of the domain the price needs to be checked.\",\"enum\":[\"new\",\"renewal\",\"transfer\",\"redemption\"],\"example\":\"new\",\"type\":\"string\"}},{\"description\":\"The Team identifier to perform the request on behalf of.\",\"in\":\"query\",\"name\":\"teamId\",\"schema\":{\"example\":\"team_1a2b3c4d5e6f7g8h9i0j1k2l\",\"type\":\"string\"}},{\"description\":\"The Team slug to perform the request on behalf of.\",\"in\":\"query\",\"name\":\"slug\",\"schema\":{\"example\":\"my-team-url-slug\",\"type\":\"string\"}}],\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"description\":\"Successful response which returns the price of the domain and the period.\",\"properties\":{\"period\":{\"description\":\"The number of years the domain could be held before paying again.\",\"example\":1,\"type\":\"number\"},\"price\":{\"description\":\"The domain price in USD.\",\"example\":20,\"type\":\"number\"}},\"required\":[\"period\",\"price\"],\"type\":\"object\"}}},\"description\":\"Successful response which returns the price of the domain and the period.\"},\"400\":{\"description\":\"One of the provided values in the request query is invalid.\"},\"401\":{\"description\":\"The request is not authorized.\"},\"403\":{\"description\":\"You do not have permission to access this resource.\"},\"404\":{\"description\":\"\"},\"500\":{\"description\":\"\"}},\"security\":[{\"beare…",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:ab1fee5e9b4b891417f2c62350ae005c7e15241d877b242dfc437764201915ac",
+    "api": "vercel",
+    "version": "1.18.7",
+    "previous_version": "1.18.6",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /v4/domains/status"
+    },
+    "description": "Operation GET /v4/domains/status removed.",
+    "source_url": "https://raw.githubusercontent.com/vercel/sdk/v1.18.6/vercel-spec.json",
+    "source_pointer": "/paths/~1v4~1domains~1status/get",
+    "source_excerpt": "{\"description\":\"This endpoint is deprecated and replaced with the endpoint [Get availability for a domain](https://vercel.com/docs/rest-api/reference/endpoints/domains-registrar/get-availability-for-a-domain). Check if a domain name is available for purchase.\",\"operationId\":\"checkDomainStatus\",\"parameters\":[{\"description\":\"The name of the domain for which we would like to check the status.\",\"in\":\"query\",\"name\":\"name\",\"required\":true,\"schema\":{\"description\":\"The name of the domain for which we would like to check the status.\",\"example\":\"example.com\",\"type\":\"string\"}},{\"description\":\"The Team identifier to perform the request on behalf of.\",\"in\":\"query\",\"name\":\"teamId\",\"schema\":{\"example\":\"team_1a2b3c4d5e6f7g8h9i0j1k2l\",\"type\":\"string\"}},{\"description\":\"The Team slug to perform the request on behalf of.\",\"in\":\"query\",\"name\":\"slug\",\"schema\":{\"example\":\"my-team-url-slug\",\"type\":\"string\"}}],\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"available\":{\"type\":\"boolean\"}},\"required\":[\"available\"],\"type\":\"object\"}}},\"description\":\"Successful response checking if a Domain's name is available.\"},\"400\":{\"description\":\"One of the provided values in the request query is invalid.\"},\"401\":{\"description\":\"The request is not authorized.\"},\"403\":{\"description\":\"You do not have permission to access this resource.\"},\"408\":{\"description\":\"\"},\"500\":{\"description\":\"\"}},\"security\":[{\"bearerToken\":[]}],\"summary\":\"Check a Domain Availability (deprecated)\",\"tags\":[\"domains\"]}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]
