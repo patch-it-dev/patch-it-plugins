@@ -74,6 +74,11 @@ jobs:
         if: steps.go.outputs.present == 'true'
         run: make nethttp
 
+      # A provider scaffolded with new-plugin, with a TODO(new-plugin) left.
+      - name: no TODO(new-plugin) left
+        if: steps.go.outputs.present == 'true'
+        run: make todos
+
       # -race: the fetcher and the tests' HTTP servers run on other goroutines.
       # Also fails when docs/plugins.json is out of date (make plugins-json).
       - name: go test

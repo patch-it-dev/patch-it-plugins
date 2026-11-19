@@ -17,9 +17,9 @@ PYTHON ?= python3
 MODULE  := github.com/patch-it-dev/patch-it-plugins
 ALLOWED := ^($(MODULE)(/|$$)|gopkg\.in/yaml\.v3$$)
 
-.PHONY: check tidy build fmt vet imports nethttp test leak-guard contract plugins-json
+.PHONY: check tidy build fmt vet imports nethttp test todos leak-guard contract plugins-json
 
-check: tidy build fmt vet imports nethttp test leak-guard contract
+check: tidy build fmt vet imports nethttp test todos leak-guard contract
 	@echo "make check: all passed"
 
 # go.mod and go.sum are tidy.
@@ -61,6 +61,16 @@ nethttp:
 # Includes the check that docs/plugins.json is up to date (internal/pluginlist).
 test:
 	$(GO) test -race -count=1 ./...
+
+# A provider started with new-plugin is done when nothing it wrote still says
+# TODO(new-plugin).
+TODO_DIRS := plugins adapter retire sdkguide migrate providers docs/plugins.md
+todos:
+	@left=$$(grep -rl 'TODO(new-plugin)' $(TODO_DIRS) || true); \
+	if [ -n "$$left" ]; then \
+		for f in $$left; do echo "::error file=$$f::TODO(new-plugin) left: fill it in (grep -n 'TODO(new-plugin)' $$f)."; done; \
+		exit 1; \
+	fi
 
 # CI_leak_guard checks only what a PR adds (plus gitleaks); this checks every
 # tracked file.

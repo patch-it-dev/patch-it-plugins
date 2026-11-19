@@ -39,12 +39,12 @@ Refer to the service that runs these plugins as "patch-it's hosted ingestion ser
 **Run `make check` before you say you're done.** It runs exactly what `CI_go` runs (each CI step is a Makefile target) plus the internal-names check over every tracked file; if it passes locally, those checks pass in CI.
 
 ```sh
-make check          # tidy, build, gofmt, vet, the import allowlist, the net/http guard, go test -race, leak guard
+make check          # tidy, build, gofmt, vet, the import allowlist, the net/http guard, go test -race, no TODO(new-plugin) left, leak guard
 make check PATCH_IT=../patch-it   # also CI_contract: contract/fixtures/ against a patch-it checkout
 make plugins-json   # regenerate docs/plugins.json after adding or changing a plugin or its row
 ```
 
-One target at a time: `make tidy`, `make build`, `make fmt`, `make vet`, `make imports`, `make nethttp`, `make test`, `make leak-guard`, `make contract`. Use `make GO=/path/to/go check` for another Go.
+One target at a time: `make tidy`, `make build`, `make fmt`, `make vet`, `make imports`, `make nethttp`, `make test`, `make todos`, `make leak-guard`, `make contract`. Use `make GO=/path/to/go check` for another Go.
 
 ## Layout
 

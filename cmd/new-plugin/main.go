@@ -87,7 +87,7 @@ func formatNames() []string {
 var (
 	validID   = regexp.MustCompile(`^[a-z][a-z0-9]*(-[a-z0-9]+)*$`)
 	validURL  = regexp.MustCompile(`^https://[^\s|()]+$`)
-	cellSafe  = regexp.MustCompile(`^[^|\n` + "`" + `]+$`)
+	cellSafe  = regexp.MustCompile(`^[^|\n"\\` + "`" + `]+$`)
 	goosArchs = []string{"aix", "android", "darwin", "dragonfly", "freebsd", "hurd", "illumos", "ios", "js", "linux", "nacl", "netbsd", "openbsd", "plan9", "solaris", "wasip1", "windows", "zos",
 		"386", "amd64", "arm", "arm64", "loong64", "mips", "mipsle", "mips64", "mips64le", "ppc64", "ppc64le", "riscv64", "s390x", "wasm", "test"}
 )
@@ -110,7 +110,7 @@ func Run(o Options, out io.Writer) error {
 		return fmt.Errorf("--api %q: want lowercase letters, digits and single hyphens, starting with a letter (acme, acme-models), and not \"all\"", o.API)
 	}
 	if o.Provider == "" || !cellSafe.MatchString(o.Provider) {
-		return fmt.Errorf("--provider %q: want the provider's name, without | or backticks", o.Provider)
+		return fmt.Errorf("--provider %q: want the provider's name, without |, quotes, backslashes or backticks", o.Provider)
 	}
 	if o.Layer == "" {
 		o.Layer = f.layer
@@ -126,7 +126,7 @@ func Run(o Options, out io.Writer) error {
 	if o.Watches == "" {
 		o.Watches = "TODO: what it watches, in a few words"
 	} else if !cellSafe.MatchString(o.Watches) {
-		return fmt.Errorf("--watches: no | or backticks")
+		return fmt.Errorf("--watches: no |, quotes, backslashes or backticks")
 	}
 
 	sharedPage := false
@@ -299,7 +299,9 @@ Next steps (every place to fill in says TODO(new-plugin): grep -rn 'TODO(new-plu
 
 func fill(tmpl string, d any) string {
 	var b strings.Builder
-	template.Must(template.New("").Parse(tmpl)).Execute(&b, d)
+	if err := template.Must(template.New("").Parse(tmpl)).Execute(&b, d); err != nil {
+		panic(err) // the templates are constants: a failure is a bug here
+	}
 	return b.String()
 }
 
@@ -482,9 +484,9 @@ func readmeRows(readme []byte, files []string, source string) ([]byte, error) {
 		cells := []string{"`" + file + "`"}
 		for _, c := range cols[1:] {
 			switch {
-			case strings.Contains(c, "url"):
+			case strings.Contains(c, "url") || strings.Contains(c, "source"):
 				cells = append(cells, "TODO(new-plugin): "+source)
-			case strings.Contains(c, "saved") || strings.Contains(c, "date") || strings.Contains(c, "fetched"):
+			case strings.Contains(c, "saved") || strings.Contains(c, "date") || strings.Contains(c, "fetched") || strings.Contains(c, "checked"):
 				cells = append(cells, "TODO(new-plugin): YYYY-MM-DD")
 			case strings.Contains(c, "license"):
 				cells = append(cells, "TODO(new-plugin): the license; kept whole, or trimmed and why")
