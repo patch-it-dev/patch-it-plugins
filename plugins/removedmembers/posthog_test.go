@@ -21,9 +21,10 @@ func TestPostHogGolden(t *testing.T) {
 	kittest.Golden(t, "testdata/golden/posthog-8.0.0.json", posthogIngest(t))
 }
 
-// Each of the "Fix removed APIs" table's 7 rows, decided: a name with exactly
-// one name to use instead is a rename, a name with nothing or advice is a
-// removal, and what isn't a member of the package is no event.
+// Each of the "Fix removed APIs" table's 7 rows, decided: every name is a
+// removal, its "Use instead" in the hint (each replacement is new in 8.0.0,
+// so none is a rename), and what isn't a removed member of the package is no
+// event.
 func TestPostHogEachRowOfTheTable(t *testing.T) {
 	type want struct {
 		change      event.PackageChange

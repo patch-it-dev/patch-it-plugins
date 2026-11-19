@@ -50,6 +50,7 @@ Format plugin: `removedmembers` (`plugins/removedmembers`), reading a Markdown t
 ## Known gaps
 
 - PostHog's REST API itself (see above: no pinned spec, and nothing deprecated in its history).
+- **Importing the `posthog.capture_mode` module directly** (`from posthog.capture_mode import …`) breaks in 8.0.0 and gets no event of its own: the row's `capture_mode` is dropped because the guide says setting it still works. The usual use of that module, `CaptureMode`, is an event.
 - posthog-js and posthog-node, and PostHog's other SDKs.
 - Later majors of posthog-python: each is a new entry in this plugin.
 - Behavior changes in 8.0.0 that aren't removals (keyword-only arguments, property precedence, retries, routing of AI events).
