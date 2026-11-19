@@ -167,6 +167,18 @@ func TestCloudflareDates(t *testing.T) {
 			t.Errorf("%q: %s, want %s", dates, got, want)
 		}
 	}
+	// Mirage's shape with a full date: the only "will be removed" is a list
+	// item under "Affected APIs:", about a field, so it stays a deprecation.
+	mirage := cfEntry("<p>Deprecation date: November 3, 2025</p><p>End of life date: January 15, 2026</p>", item)
+	mirage.HTML += "<p>Affected APIs:</p><ul><li><code>POST /zones/{zone_id}/pagerules</code> - Mirage parameter will be removed.</li></ul>"
+	if fs := readCloudflareAPI(mirage); len(fs) != 1 || fs[0].ChangeType != event.ChangeTypeDeprecation || fs[0].Version != "2025-11-03" {
+		t.Errorf("a field's removal under Affected APIs: %+v, want deprecation 2025-11-03", fs)
+	}
+	// A paragraph that says something is removed, but not the endpoints.
+	field := cfEntry("<p>Deprecation date: November 3, 2025</p><p>End of life date: January 15, 2026</p><p>The mirage setting will be removed from the dashboard.</p>", item)
+	if fs := readCloudflareAPI(field); len(fs) != 1 || fs[0].ChangeType != event.ChangeTypeDeprecation {
+		t.Errorf("a setting's removal: %+v, want deprecation", fs)
+	}
 	noDates := cfEntry("", item)
 	noDates.Published = ""
 	if fs := readCloudflareAPI(noDates); len(fs) != 1 || fs[0].Dropped == "" {

@@ -217,7 +217,8 @@ func cells(row string) []string {
 }
 
 var (
-	// cfDeprecatedList is the "Deprecated APIs:" paragraph and the list after it.
+	// cfDeprecatedList is the "Deprecated APIs:" paragraph and the list after
+	// it. Only the first: no item on the feed (2026-11-19) has two.
 	cfDeprecatedList = regexp.MustCompile(`(?is)<p>\s*Deprecated APIs?:\s*</p>\s*<ul>(.*?)</ul>`)
 	// cfOperation is a list item that starts with one operation in code:
 	// "GET /zones/{zone_id}/settings", or as the oldest entries write it,
@@ -227,8 +228,12 @@ var (
 	cfEOL        = regexp.MustCompile(`(?i)^End of life date:`)
 	cfDeprecated = regexp.MustCompile(`(?i)^Deprecation date:`)
 	// cfStops is the item saying the endpoints stop: "After this date, the
-	// legacy endpoints will no longer be available."
-	cfStops = regexp.MustCompile(`(?i)\bwill no longer be (available|accessible|served)\b|\bwill be (removed|shut down|turned off)\b`)
+	// legacy endpoints will no longer be available." Only a paragraph counts,
+	// and only one about the endpoints or APIs: a list item under "Affected
+	// APIs:" saying "Mirage parameter will be removed" is about a field.
+	cfStops     = regexp.MustCompile(`(?i)\bwill no longer be (available|accessible|served)\b|\bwill be (removed|shut down|turned off)\b`)
+	cfEndpoints = regexp.MustCompile(`(?i)\b(endpoints?|APIs?|operations?)\b`)
+	cfParagraph = regexp.MustCompile(`(?is)<p>(.*?)</p>`)
 	// cfNoAction is an item telling direct API callers nothing changes for
 	// them: "For users calling the API directly (not via the Cloudflare SDK),
 	// no action is required."
@@ -273,8 +278,12 @@ func readCloudflareAPI(e Entry) []Finding {
 			eolLine = l
 		case depLine == "" && cfDeprecated.MatchString(l):
 			depLine = l
-		case stopLine == "" && cfStops.MatchString(l):
+		}
+	}
+	for _, p := range cfParagraph.FindAllStringSubmatch(e.HTML, -1) {
+		if l := Text(p[1]); cfStops.MatchString(l) && cfEndpoints.MatchString(l) {
 			stopLine = l
+			break
 		}
 	}
 	ct, date, dateLine := event.ChangeTypeDeprecation, Date(depLine), depLine
