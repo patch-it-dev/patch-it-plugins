@@ -13,7 +13,7 @@
 // opens as an issue: precision over recall.
 //
 // A guide's table is an RST simple table (NumPy) or a Markdown pipe table
-// (PostHog, markdown.go). A Markdown row may list several members in one cell;
+// (PostHog, New Relic, markdown.go). A Markdown row may list several members in one cell;
 // each is its own event, as each NumPy row is. A row the reader can't read as
 // members of the package (prose, an argument value, an environment variable)
 // is dropped and logged, never guessed at.
@@ -24,6 +24,7 @@ import (
 	"fmt"
 	"log"
 	"regexp"
+	"slices"
 	"strings"
 
 	"github.com/patch-it-dev/patch-it-plugins/event"
@@ -33,6 +34,7 @@ import (
 func init() {
 	plugin.Register(Plugin{Guide: NumPy2})
 	plugin.Register(Plugin{Guide: PostHog8})
+	plugin.Register(Plugin{Guide: NewRelic11})
 }
 
 // Guide is one package's guide to one release.
@@ -73,7 +75,21 @@ type Guide struct {
 	// it by, after Module ("EVENTS_ENDPOINT" -> "request.EVENTS_ENDPOINT"),
 	// checked by hand against the package at the release before. A guide's
 	// cell can list names that share a prefix only the first one spells out.
+	// It applies to a removed name and to a replacement alike.
 	Paths map[string]string
+	// DropIns, when set, are the only removed members (as the events name
+	// them, after Paths) whose one replacement is a drop-in: it existed in the
+	// release before, at the same path, with the same call signature and
+	// behavior, checked by hand against the code. Only they become a
+	// renamed_symbol, which the client applies as a rename; every other row
+	// with one replacement is a removed_symbol, the replacement in the
+	// migration hint (the guide's own cell). nil leaves it to the table: every
+	// row with one replacement is a rename (NumPy's guide says each works on
+	// 1.x), unless NewReplacements.
+	DropIns []string
+	// Doc is what the hint calls the source: "<Package>'s <Doc> for
+	// <Release>". "" is "migration guide".
+	Doc string
 	// StillWork are names the table lists as removed but the same guide says
 	// still work or have no effect: no event, with the guide's reason.
 	StillWork map[string]string
@@ -92,6 +108,13 @@ func (g Guide) tag() string {
 		return g.Tag
 	}
 	return "v" + g.Release
+}
+
+func (g Guide) doc() string {
+	if g.Doc != "" {
+		return g.Doc
+	}
+	return "migration guide"
 }
 
 func (g Guide) header() string {
@@ -239,7 +262,7 @@ func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) 
 		if g.Effect != "" {
 			desc = fmt.Sprintf("%s.%s was removed in %s %s: %s.", g.Module, r.Member, g.Package, g.Release, g.Effect)
 		}
-		if r.Replacement != "" && !g.NewReplacements {
+		if r.Replacement != "" && !g.NewReplacements && (g.DropIns == nil || slices.Contains(g.DropIns, r.Member)) {
 			subject.Change, subject.Replacement = event.PackageRenamedSymbol, r.Replacement
 		}
 		e := event.EventV2{
@@ -249,7 +272,7 @@ func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) 
 			Breaking:      true,
 			Subject:       subject,
 			Description:   desc,
-			MigrationHint: fmt.Sprintf("%s (%s's migration guide for %s)", r.Guideline, g.Package, g.Release),
+			MigrationHint: fmt.Sprintf("%s (%s's %s for %s)", r.Guideline, g.Package, g.doc(), g.Release),
 			SourceURL:     g.URL(),
 			SourceExcerpt: r.Excerpt,
 			Confidence:    1.0,

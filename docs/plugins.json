@@ -1,7 +1,7 @@
 {
   "_comment": "Generated from the plugin registry and docs/plugins.md by `make plugins-json` (go run ./cmd/list-plugins). Don't edit by hand.",
   "$schema": "./plugins.schema.json",
-  "count": 23,
+  "count": 24,
   "plugins": [
     {
       "id": "algolia-ingestion",
@@ -122,6 +122,16 @@
       "source_url": "https://github.com/mongodb/openapi/blob/main/changelog/changelog.json",
       "status": "live",
       "provider_page": "providers/mongodb-atlas.md"
+    },
+    {
+      "id": "newrelic",
+      "provider": "New Relic",
+      "layer": "sdk",
+      "watches": "Members removed in the New Relic Python agent 11.0.0",
+      "format": "removedmembers",
+      "source_url": "https://github.com/newrelic/docs-website/blob/f0b4f817bf9a7b76a78e26609369a8a7ce764c8e/src/content/docs/release-notes/agent-release-notes/python-release-notes/python-agent-110000.mdx",
+      "status": "live",
+      "provider_page": "providers/newrelic.md"
     },
     {
       "id": "numpy",
