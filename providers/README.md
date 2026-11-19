@@ -25,6 +25,7 @@ One page per plugin id: `providers/<api>.md`. Start from [`_template.md`](_templ
 | [urllib3.md](urllib3.md) | `urllib3` | `changelog` |
 | [github-actions.md](github-actions.md) | `github-actions` | `feed` |
 | [vertex-ai-models.md](vertex-ai-models.md) | `vertex-ai-models` | `feed` |
+| [redis.md](redis.md) | `redis` | `catalog` |
 | [cloudflare.md](cloudflare.md) | `cloudflare` | `feed` |
 | [mongodb-atlas.md](mongodb-atlas.md) | `mongodb-atlas` | `apichangelog` |
 
