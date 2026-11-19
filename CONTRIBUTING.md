@@ -2,6 +2,8 @@
 
 Thanks for helping patch-it watch more APIs. This file is the rulebook; [docs/writing-a-plugin.md](docs/writing-a-plugin.md) is the how-to.
 
+**Start a new provider with the starter:** `go run ./cmd/new-plugin --api <id> --provider <Name> --format <format>` writes the definition, its registration, a test over placeholder sources, the testdata rows, the provider page and the `docs/plugins.md` row; you fill in the `TODO(new-plugin)`s ([how](docs/writing-a-plugin.md#1-scaffold-it-with-new-plugin)).
+
 ## The rules
 
 1. **Add your plugin to [docs/plugins.md](docs/plugins.md).** Every new plugin gets a row; every change to a plugin's id, provider, source, what it watches or status updates its row. The list on docs.patch-it.dev is built from that file, so a plugin that isn't listed is invisible to users. Then run `make plugins-json` to regenerate [`docs/plugins.json`](docs/plugins.json); it fails if the registry and the table disagree, and the tests fail while the JSON is out of date.
