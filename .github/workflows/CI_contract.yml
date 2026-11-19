@@ -5,6 +5,15 @@
 #
 # patch-it is cloned anonymously, with no token. While patch-it isn't public yet the
 # clone can't see it, and the check passes with a notice.
+#
+# Whether patch-it is readable is asked of the API with this workflow's own token:
+# it can't read patch-it either (a private repo answers 404 to it, as to anyone),
+# but it isn't subject to the 60-an-hour limit GitHub puts on anonymous requests
+# from each runner's shared IP. Asked anonymously, a run got something other than
+# 404 (most likely 403 from that limit; the code wasn't logged), went on to clone,
+# and failed (PR #109, 2026-11-19). Only 404 skips; any
+# other answer but 200 fails, with the code, so a check that didn't run never
+# shows green.
 name: CI_contract
 
 on:
@@ -34,12 +43,18 @@ jobs:
         id: upstream
         env:
           GIT_TERMINAL_PROMPT: "0"
+          GH_TOKEN: ${{ github.token }}
         run: |
-          code=$(curl -s -o /dev/null -w '%{http_code}' https://api.github.com/repos/patch-it-dev/patch-it)
+          code=$(curl -s -o /dev/null -w '%{http_code}' --retry 2 \
+            -H "Authorization: Bearer $GH_TOKEN" https://api.github.com/repos/patch-it-dev/patch-it)
           if [ "$code" = "404" ]; then
-            echo "::notice::patch-it-dev/patch-it isn't publicly readable yet; skipping the contract check."
+            echo "::notice::patch-it-dev/patch-it isn't publicly readable yet (the API answered 404); skipping the contract check."
             echo "present=false" >> "$GITHUB_OUTPUT"
             exit 0
+          fi
+          if [ "$code" != "200" ]; then
+            echo "::error::Asked whether patch-it-dev/patch-it is readable, the GitHub API answered $code, not 200 or 404; the contract check didn't run."
+            exit 1
           fi
           git -c credential.helper= clone --quiet --depth 1 --filter=blob:none --sparse \
             https://github.com/patch-it-dev/patch-it upstream
