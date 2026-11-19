@@ -32,7 +32,8 @@ flowchart LR
    | Layer | Noticed (a plugin here watches it) | Fixed (patch-it writes the PR) |
    |---|---|---|
    | APIs: Stripe, GitHub, GitLab, Datadog, Vercel, Supabase, Algolia, MongoDB Atlas, Cloudflare | live | live |
-   | AI models: OpenAI, Anthropic and Vertex AI model retirements | live | live |
+   | AI models: OpenAI and Anthropic model retirements | live | live |
+   | AI models: Vertex AI model retirements | live | planned |
    | Packages and SDKs: NumPy, Textual, urllib3, the Anthropic Python SDK | live | in testing |
    | Runtimes: Redis | live | building |
    | CI: GitHub Actions runner retirements | live | planned |
