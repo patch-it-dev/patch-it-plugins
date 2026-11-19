@@ -107,7 +107,7 @@ Most providers are an entry for a shared format plugin (`openapi`, `retirements`
 ## Run the checks
 
 ```sh
-make check           # what CI runs: tidy, build, gofmt, vet, import and net/http guards, go test -race, leak guard
+make check           # what CI runs: tidy, build, gofmt, vet, import and net/http guards, go test -race, no TODO(new-plugin) left, leak guard
 ```
 
 The tests are offline: every plugin's test reads a saved copy of its source from `testdata/` and compares the events with a golden file. After an intended change to a plugin's output, `go test ./plugins/<name> -update` rewrites its golden files; review that diff like code.

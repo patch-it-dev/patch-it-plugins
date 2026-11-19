@@ -25,7 +25,7 @@ Refer to the service that runs these plugins as "patch-it's hosted ingestion ser
 
 ## Rules for plugin code
 
-- **Start a new provider with `go run ./cmd/new-plugin --api <id> --provider <Name> --format <format>`**, then fill in every `TODO(new-plugin)`; none may be left when you open the PR.
+- **Start a new provider with `go run ./cmd/new-plugin --api <id> --provider <Name> --format <format>`**, then fill in every `TODO(new-plugin)`; `make todos` (part of `make check` and CI_go) fails while one is left.
 - **Fetch only through the environment** (`env.Get` or `kit/`). No `net/http` outside the fetch layer, no filesystem outside `testdata/`, no database.
 - **Golden test + dated source quote**: a saved copy of the real source in `testdata/`, a row in `testdata/README.md` (URL, date fetched, license, quote), and `testdata/golden/<api>.json` with the exact events.
 - **Precision over recall.** When unsure whether something is a change, don't emit an event.
