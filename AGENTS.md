@@ -6,11 +6,13 @@ Rules for AI coding agents (and humans) working in this repo. `CLAUDE.md` import
 
 **If you add a plugin, add its row to [`docs/plugins.md`](docs/plugins.md) in the same PR. If you change a plugin's id, provider, source, what it watches, format plugin or status, update its row in the same PR. If you remove one, remove its row.**
 
-The list of supported APIs on docs.patch-it.dev is generated from that file, so a plugin missing from it doesn't exist as far as users can tell. Then run `make plugins-json`: it regenerates [`docs/plugins.json`](docs/plugins.json) from the plugin registry and the table, and fails if a registered plugin has no row (or a row has no plugin, a wrong format or no provider page). `go test` fails while `docs/plugins.json` is out of date. The check can't tell whether a row's words are right: you are that check. Say in the PR that you compared them.
+The list of supported APIs on docs.patch-it.dev is generated from that file, so a plugin missing from it doesn't exist as far as users can tell. Then run `make plugins-json`: it regenerates [`docs/plugins.json`](docs/plugins.json) from the plugin registry and the table (and the plugin count on the README's badge), and fails if a registered plugin has no row (or a row has no plugin, a wrong format or no provider page). `go test` fails while `docs/plugins.json` is out of date. The check can't tell whether a row's words are right: you are that check. Say in the PR that you compared them.
 
 Keep the table between the `<!-- plugins:start -->` and `<!-- plugins:end -->` markers a plain Markdown table, one row per plugin, absolute links only (the docs site copies it verbatim).
 
 ## Rule 2: this repo is public
+
+Public text (README, docs, descriptions) follows [docs/README-template.md](docs/README-template.md): its order, its words, its layer statuses.
 
 Everything you write here is public forever, including commit messages, branch names, PR titles and descriptions, and test data. Never write:
 
@@ -24,7 +26,6 @@ Refer to the service that runs these plugins as "patch-it's hosted ingestion ser
 ## Rules for plugin code
 
 - **Start a new provider with `go run ./cmd/new-plugin --api <id> --provider <Name> --format <format>`**, then fill in every `TODO(new-plugin)`; none may be left when you open the PR.
-
 - **Fetch only through the environment** (`env.Get` or `kit/`). No `net/http` outside the fetch layer, no filesystem outside `testdata/`, no database.
 - **Golden test + dated source quote**: a saved copy of the real source in `testdata/`, a row in `testdata/README.md` (URL, date fetched, license, quote), and `testdata/golden/<api>.json` with the exact events.
 - **Precision over recall.** When unsure whether something is a change, don't emit an event.

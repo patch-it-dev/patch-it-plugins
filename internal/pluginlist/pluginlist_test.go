@@ -77,3 +77,33 @@ func TestListWantsARowPerPlugin(t *testing.T) {
 		t.Errorf("err = %v, want stripe's missing row", err)
 	}
 }
+
+// The README's plugins badge is a static number: it must be the count in
+// docs/plugins.json (make plugins-json sets it), or the badge lies.
+func TestReadmeBadgeCountsThePlugins(t *testing.T) {
+	plugins, err := List(root)
+	if err != nil {
+		t.Fatal(err)
+	}
+	readme, err := os.ReadFile(filepath.Join(root, Readme))
+	if err != nil {
+		t.Fatal(err)
+	}
+	want, ok := Badge(readme, len(plugins))
+	if !ok {
+		t.Fatal("README.md has no plugins badge (img.shields.io/badge/plugins-<n>-...)")
+	}
+	if !bytes.Equal(readme, want) {
+		t.Errorf("README.md's plugins badge doesn't say %d: run `make plugins-json`", len(plugins))
+	}
+}
+
+func TestBadge(t *testing.T) {
+	got, ok := Badge([]byte("[![Plugins](https://img.shields.io/badge/plugins-20-3f5bf0)](docs/plugins.md)"), 21)
+	if !ok || string(got) != "[![Plugins](https://img.shields.io/badge/plugins-21-3f5bf0)](docs/plugins.md)" {
+		t.Errorf("Badge = %s, %v", got, ok)
+	}
+	if _, ok := Badge([]byte("no badge"), 1); ok {
+		t.Error("found a badge in none")
+	}
+}

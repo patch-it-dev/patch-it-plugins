@@ -16,6 +16,7 @@ import (
 	"reflect"
 	"regexp"
 	"slices"
+	"strconv"
 	"strings"
 
 	"github.com/patch-it-dev/patch-it-plugins/plugin"
@@ -206,6 +207,20 @@ func List(root string) ([]Plugin, error) {
 	}
 	slices.SortFunc(out, func(a, b Plugin) int { return strings.Compare(a.ID, b.ID) })
 	return out, nil
+}
+
+// Readme is the README, relative to the repo root: its plugins badge is a
+// static count that `make plugins-json` keeps right.
+const Readme = "README.md"
+
+var badge = regexp.MustCompile(`(img\.shields\.io/badge/plugins-)(\d+)(-)`)
+
+// Badge is readme with its plugins badge set to n. ok is false when it has none.
+func Badge(readme []byte, n int) (out []byte, ok bool) {
+	if !badge.Match(readme) {
+		return readme, false
+	}
+	return badge.ReplaceAll(readme, []byte("${1}"+strconv.Itoa(n)+"${3}")), true
 }
 
 // Marshal is docs/plugins.json for plugins, ending in a newline.
