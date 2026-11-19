@@ -1,0 +1,33 @@
+## Removed features
+
+* Removes various deprecated APIs
+
+  * The following APIs have been removed:
+
+    | Legacy API                                | Replacement API                                                                                                                                                                    |
+    |-------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+    | `accept_distributed_trace_payload`        | [`accept_distributed_trace_headers`](/docs/agents/python-agent/python-agent-api/acceptdistributedtraceheaders-python-agent-api)                                                    |
+    | `add_custom_parameter`                    | [`add_custom_attribute`](/docs/apm/agents/python-agent/python-agent-api/addcustomattribute-python-agent-api)                                                                       |
+    | `add_custom_parameters`                   | [`add_custom_attributes`](/docs/apm/agents/python-agent/python-agent-api/addcustomattributes-python-agent-api)                                                                     |
+    | `create_distributed_trace_payload`        | [`insert_distributed_trace_headers`](/docs/apm/agents/python-agent/python-agent-api/insertdistributedtraceheaders-python-agent-api)                                                |
+    | `get_browser_timing_footer`               | The functionality of this has been wrapped into [`get_browser_timing_header()`](/docs/apm/agents/python-agent/python-agent-api/getbrowsertimingheader-python-agent-api)            |
+    | `record_exception`                        | [`notice_error()`](/docs/agents/python-agent/python-agent-api/notice_error)                                                                                                        |
+    | `NewRelicLogHandler`                      | `NewRelicLogForwardingHandler`                                                                                                                                                     |
+    | `lambda_handler` & `LambdaHandlerWrapper` | These APIs have moved to the [`newrelic-lambda`](/docs/serverless-function-monitoring/aws-lambda-monitoring/instrument-lambda-function/sdk-based-instrumentation/#python) package. |
+
+* Removes various deprecated settings
+
+  * The following settings have been removed:
+
+    | Legacy Setting                          | Replacement Setting                                                                                                                                                                                                          |
+    |-----------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+    | `transaction_tracer.capture_attributes` | [`transaction_tracer.attributes.enabled`](/docs/apm/agents/python-agent/configuration/python-agent-configuration#cfg-tt-attributes-enabled)                                                                                 |
+    | `error_collector.capture_attributes`    | [`error_collector.attributes.enabled`](/docs/apm/agents/python-agent/configuration/python-agent-configuration#cfg-error-attributes-enabled)                                                                                 |
+    | `browser_monitoring.capture_attributes` | [`browser_monitoring.attributes.enabled`](/docs/apm/agents/python-agent/configuration/python-agent-configuration#cfg-browser-attributes-enabled)                                                                            |
+    | `analytics_events.enabled`              | [`transaction_events.enabled`](/docs/apm/agents/python-agent/configuration/python-agent-configuration#transaction-events-enabled)                                                                                            |
+    | `analytics_events.capture_attributes`   | [`transaction_events.attributes.enabled`](/docs/apm/agents/python-agent/configuration/python-agent-configuration#cfg-events-attributes-enabled)                                                                             |
+    | `error_collector.ignore_errors`         | [`error_collector.ignore_classes`](/docs/apm/agents/python-agent/configuration/python-agent-configuration#error-ignore)                                                                                                      |
+    | `strip_exception_messages.whitelist`    | [`strip_exception_messages.allowlist`](/docs/apm/agents/python-agent/configuration/python-agent-configuration#strip_exception_messages_allowlist)                                                                           |
+    | `ssl`                                   | This is now hardcoded to `true` so it has been removed as a setting option.                                                                                                                                                  |
+    | `ignored_params`                        | Use `newrelic.attributes.exclude = request.parameters.{name}` instead. Add each request parameter key to the `newrelic.attributes.exclude` list,  delimited by commas. Be sure to prepend the key with `request.parameters`. |
+    | `agent_limits.merge_stats_maximum`      | This is now completely ignored in favor of serverside config.                                                                                                                                                                |

@@ -14,6 +14,8 @@ var (
 	// "§, §, and §" (each § a code span).
 	nameList  = regexp.MustCompile(`^§(?:(?:,| and|, and| or|, or) §)*$`)
 	delimCell = regexp.MustCompile(`^:?-{3,}:?$`)
+	// A cell that is only a link around one code span: "[`name`](url)".
+	linkedSpan = regexp.MustCompile("^\\[(`[^`]+`)\\]\\([^()\\s]*\\)$")
 )
 
 // parseMarkdown reads a Markdown pipe table: the first one under the heading
@@ -24,7 +26,8 @@ var (
 // cell is nothing but code spans naming members ("`A`, `B`"). A cell of prose
 // ("The `backoff` dependency") or a span that isn't a name code writes
 // ("`gzip=True`") drops the whole row; a name in g.EnvVars drops that name. The replacement is the second cell
-// only when it's exactly one code span naming a member.
+// only when it's exactly one code span naming a member, or a link around one;
+// g.Paths applies to it as to the removed names.
 func parseMarkdown(page []byte, g Guide) ([]Removal, error) {
 	lines := strings.Split(strings.ReplaceAll(string(page), "\r\n", "\n"), "\n")
 	inFence := false
@@ -88,6 +91,10 @@ func parseMarkdown(page []byte, g Guide) ([]Removal, error) {
 			continue
 		}
 		repl := soleName(cells[1], g.Module)
+		replPath := repl
+		if p, ok := g.Paths[repl]; ok {
+			replPath = p
+		}
 		for _, n := range names {
 			r := Removal{Member: n, Guideline: guideline, Excerpt: excerpt}
 			if p, ok := g.Paths[n]; ok {
@@ -99,7 +106,7 @@ func parseMarkdown(page []byte, g Guide) ([]Removal, error) {
 			case g.StillWork[n] != "":
 				r.Dropped = g.StillWork[n]
 			case repl != "" && repl != n:
-				r.Replacement = repl
+				r.Replacement = replPath
 			}
 			out = append(out, r)
 		}
@@ -181,10 +188,15 @@ func memberNames(cell, module string) (names []string, why string) {
 }
 
 // soleName is the cell's one name when the cell is exactly one code span
-// naming a member, or "".
+// naming a member, or a link around one ("[`name`](url)": New Relic's
+// release notes link each replacement to its docs page), or "".
 func soleName(cell, module string) string {
+	cell = strings.TrimSpace(cell)
+	if l := linkedSpan.FindStringSubmatch(cell); l != nil {
+		cell = l[1]
+	}
 	m := codeSpan.FindStringSubmatch(cell)
-	if m == nil || m[0] != strings.TrimSpace(cell) {
+	if m == nil || m[0] != cell {
 		return ""
 	}
 	n, ok := cleanName(m[1], module)

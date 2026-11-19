@@ -32,6 +32,7 @@ The table between the `plugins:start` and `plugins:end` markers is also publishe
 | [`redis`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/redis.md) | Redis | runtime | Commands removed entirely from Redis's own command catalog between two snapshots | `catalog` | [redis/redis-doc `commands.json`](https://github.com/redis/redis-doc/blob/master/commands.json) | live |
 | [`cloudflare`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/cloudflare.md) | Cloudflare | API | REST API operations Cloudflare deprecates, breaking on their end-of-life date when it gives one | `feed` | [Cloudflare API deprecations (RSS)](https://developers.cloudflare.com/fundamentals/api/reference/deprecations/index.xml) | live |
 | [`posthog`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/posthog.md) | PostHog | SDK | Members removed in the posthog Python SDK 8.0.0 | `removedmembers` | [posthog-python 7.x to 8.0 migration guide](https://github.com/PostHog/posthog-python/blob/posthog-v8.0.0/docs/migration-7.x-to-8.0.md) | live |
+| [`newrelic`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/newrelic.md) | New Relic | SDK | Members removed in the New Relic Python agent 11.0.0 | `removedmembers` | [Python agent 11.0.0 release notes](https://github.com/newrelic/docs-website/blob/f0b4f817bf9a7b76a78e26609369a8a7ce764c8e/src/content/docs/release-notes/agent-release-notes/python-release-notes/python-agent-110000.mdx) | live |
 <!-- plugins:end -->
 
 ## The columns
@@ -46,4 +47,4 @@ The table between the `plugins:start` and `plugins:end` markers is also publishe
 | Source | The provider's own public page or file the plugin reads. Every event links back to it. |
 | Status | `live`: in the code on `main`. patch-it's hosted ingestion service runs it daily from the next release, which is cut automatically. `planned`: accepted, not written yet. `paused`: in the code but deliberately switched off, with the reason in the row. |
 
-Some plugins read one pinned release (`anthropic` 1.0.0, `numpy` 2.0.0, `posthog` 8.0.0, `textual` 0.86.0, `urllib3` 2.0.0): a newer release of the same package is a new entry in that plugin, not a new row, unless it changes the format.
+Some plugins read one pinned release (`anthropic` 1.0.0, `newrelic` 11.0.0, `numpy` 2.0.0, `posthog` 8.0.0, `textual` 0.86.0, `urllib3` 2.0.0): a newer release of the same package is a new entry in that plugin, not a new row, unless it changes the format.

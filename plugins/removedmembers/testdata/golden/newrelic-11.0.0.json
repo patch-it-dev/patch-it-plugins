@@ -1,0 +1,165 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:a2f86cae07b29326ca93be5f66515f27d1040d5f189e103911dd93ba739e0b96",
+    "api": "newrelic",
+    "version": "11.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "newrelic",
+      "change": "removed_symbol",
+      "symbols": [
+        "agent.accept_distributed_trace_payload"
+      ]
+    },
+    "description": "`agent.accept_distributed_trace_payload` was removed in newrelic 11.0.0.",
+    "migration_hint": "Replacement API: [`accept_distributed_trace_headers`](https://docs.newrelic.com/docs/agents/python-agent/python-agent-api/acceptdistributedtraceheaders-python-agent-api) (newrelic's release notes for 11.0.0)",
+    "source_url": "https://raw.githubusercontent.com/newrelic/docs-website/f0b4f817bf9a7b76a78e26609369a8a7ce764c8e/src/content/docs/release-notes/agent-release-notes/python-release-notes/python-agent-110000.mdx",
+    "source_excerpt": "Removed features\n    | Legacy API                                | Replacement API                                                                                                                                                                    |\n    |-------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n    | `accept_distributed_trace_payload`        | [`accept_distributed_trace_headers`](/docs/agents/python-agent/python-agent-api/acceptdistributedtraceheaders-python-agent-api)                                                    |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:dfc0f5f20b000248f48960b089533d37b2a98857ab86b34ef58bbadc2a79a331",
+    "api": "newrelic",
+    "version": "11.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "newrelic",
+      "change": "renamed_symbol",
+      "symbols": [
+        "agent.add_custom_parameter"
+      ],
+      "replacement": "agent.add_custom_attribute"
+    },
+    "description": "`agent.add_custom_parameter` was removed in newrelic 11.0.0.",
+    "migration_hint": "Replacement API: [`add_custom_attribute`](https://docs.newrelic.com/docs/apm/agents/python-agent/python-agent-api/addcustomattribute-python-agent-api) (newrelic's release notes for 11.0.0)",
+    "source_url": "https://raw.githubusercontent.com/newrelic/docs-website/f0b4f817bf9a7b76a78e26609369a8a7ce764c8e/src/content/docs/release-notes/agent-release-notes/python-release-notes/python-agent-110000.mdx",
+    "source_excerpt": "Removed features\n    | Legacy API                                | Replacement API                                                                                                                                                                    |\n    |-------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n    | `add_custom_parameter`                    | [`add_custom_attribute`](/docs/apm/agents/python-agent/python-agent-api/addcustomattribute-python-agent-api)                                                                       |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:76b3c3353469c9b8fa468e742f019b0a625fba73be37263cec6db0c8a616a512",
+    "api": "newrelic",
+    "version": "11.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "newrelic",
+      "change": "renamed_symbol",
+      "symbols": [
+        "agent.add_custom_parameters"
+      ],
+      "replacement": "agent.add_custom_attributes"
+    },
+    "description": "`agent.add_custom_parameters` was removed in newrelic 11.0.0.",
+    "migration_hint": "Replacement API: [`add_custom_attributes`](https://docs.newrelic.com/docs/apm/agents/python-agent/python-agent-api/addcustomattributes-python-agent-api) (newrelic's release notes for 11.0.0)",
+    "source_url": "https://raw.githubusercontent.com/newrelic/docs-website/f0b4f817bf9a7b76a78e26609369a8a7ce764c8e/src/content/docs/release-notes/agent-release-notes/python-release-notes/python-agent-110000.mdx",
+    "source_excerpt": "Removed features\n    | Legacy API                                | Replacement API                                                                                                                                                                    |\n    |-------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n    | `add_custom_parameters`                   | [`add_custom_attributes`](/docs/apm/agents/python-agent/python-agent-api/addcustomattributes-python-agent-api)                                                                     |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:cc82dac7778ed8efcd9e407d06f00b5bd3180f3c7d471363c6b5b0f55feaa6fa",
+    "api": "newrelic",
+    "version": "11.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "newrelic",
+      "change": "removed_symbol",
+      "symbols": [
+        "agent.create_distributed_trace_payload"
+      ]
+    },
+    "description": "`agent.create_distributed_trace_payload` was removed in newrelic 11.0.0.",
+    "migration_hint": "Replacement API: [`insert_distributed_trace_headers`](https://docs.newrelic.com/docs/apm/agents/python-agent/python-agent-api/insertdistributedtraceheaders-python-agent-api) (newrelic's release notes for 11.0.0)",
+    "source_url": "https://raw.githubusercontent.com/newrelic/docs-website/f0b4f817bf9a7b76a78e26609369a8a7ce764c8e/src/content/docs/release-notes/agent-release-notes/python-release-notes/python-agent-110000.mdx",
+    "source_excerpt": "Removed features\n    | Legacy API                                | Replacement API                                                                                                                                                                    |\n    |-------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n    | `create_distributed_trace_payload`        | [`insert_distributed_trace_headers`](/docs/apm/agents/python-agent/python-agent-api/insertdistributedtraceheaders-python-agent-api)                                                |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:c8d9b51b7477b5f17f7cd121463061fe58b21ebc7deeb51d64087eb84569b20a",
+    "api": "newrelic",
+    "version": "11.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "newrelic",
+      "change": "removed_symbol",
+      "symbols": [
+        "agent.get_browser_timing_footer"
+      ]
+    },
+    "description": "`agent.get_browser_timing_footer` was removed in newrelic 11.0.0.",
+    "migration_hint": "Replacement API: The functionality of this has been wrapped into [`get_browser_timing_header()`](https://docs.newrelic.com/docs/apm/agents/python-agent/python-agent-api/getbrowsertimingheader-python-agent-api) (newrelic's release notes for 11.0.0)",
+    "source_url": "https://raw.githubusercontent.com/newrelic/docs-website/f0b4f817bf9a7b76a78e26609369a8a7ce764c8e/src/content/docs/release-notes/agent-release-notes/python-release-notes/python-agent-110000.mdx",
+    "source_excerpt": "Removed features\n    | Legacy API                                | Replacement API                                                                                                                                                                    |\n    |-------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n    | `get_browser_timing_footer`               | The functionality of this has been wrapped into [`get_browser_timing_header()`](/docs/apm/agents/python-agent/python-agent-api/getbrowsertimingheader-python-agent-api)            |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:67f424f610fbafc21776c15219e51662c6f8b21d12db8039a104afe6a6ca6138",
+    "api": "newrelic",
+    "version": "11.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "newrelic",
+      "change": "removed_symbol",
+      "symbols": [
+        "agent.record_exception"
+      ]
+    },
+    "description": "`agent.record_exception` was removed in newrelic 11.0.0.",
+    "migration_hint": "Replacement API: [`notice_error()`](https://docs.newrelic.com/docs/agents/python-agent/python-agent-api/notice_error) (newrelic's release notes for 11.0.0)",
+    "source_url": "https://raw.githubusercontent.com/newrelic/docs-website/f0b4f817bf9a7b76a78e26609369a8a7ce764c8e/src/content/docs/release-notes/agent-release-notes/python-release-notes/python-agent-110000.mdx",
+    "source_excerpt": "Removed features\n    | Legacy API                                | Replacement API                                                                                                                                                                    |\n    |-------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n    | `record_exception`                        | [`notice_error()`](/docs/agents/python-agent/python-agent-api/notice_error)                                                                                                        |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:8940a71ce47a561fd62c949d2b0ba691cd8b7f7d0a5fa8366dc5d56d411bfbf2",
+    "api": "newrelic",
+    "version": "11.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "newrelic",
+      "change": "removed_symbol",
+      "symbols": [
+        "api.log.NewRelicLogHandler"
+      ]
+    },
+    "description": "`api.log.NewRelicLogHandler` was removed in newrelic 11.0.0.",
+    "migration_hint": "Replacement API: `NewRelicLogForwardingHandler` (newrelic's release notes for 11.0.0)",
+    "source_url": "https://raw.githubusercontent.com/newrelic/docs-website/f0b4f817bf9a7b76a78e26609369a8a7ce764c8e/src/content/docs/release-notes/agent-release-notes/python-release-notes/python-agent-110000.mdx",
+    "source_excerpt": "Removed features\n    | Legacy API                                | Replacement API                                                                                                                                                                    |\n    |-------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n    | `NewRelicLogHandler`                      | `NewRelicLogForwardingHandler`                                                                                                                                                     |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]
