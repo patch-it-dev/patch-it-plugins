@@ -1,7 +1,9 @@
 # Release: tag main's HEAD with the next version and publish a GitHub release.
 #
-# A maintainer runs it by hand: Actions -> Release -> Run workflow -> pick the bump.
-# It never runs on push, on a schedule or on a PR.
+# It runs on its own twice a week (Monday and Thursday, 14:00 UTC) as a patch release,
+# and only when something was merged since the last tag; otherwise it does nothing.
+# A maintainer can also run it by hand any time (Actions -> Release -> Run workflow ->
+# pick the bump), e.g. for an urgent fix or a minor release. It never runs on push or on a PR.
 #
 #   patch  v0.4.1 -> v0.4.2   fixes, new providers on an existing format plugin
 #   minor  v0.4.1 -> v0.5.0   new format plugins, new exported API, anything a user should read about
@@ -19,6 +21,8 @@
 name: Release
 
 on:
+  schedule:
+    - cron: "0 14 * * 1,4"   # Mon + Thu 14:00 UTC; scheduled runs are always a patch release
   workflow_dispatch:
     inputs:
       bump:
@@ -64,11 +68,17 @@ jobs:
       - name: next version
         id: version
         env:
-          BUMP: ${{ inputs.bump }}
+          BUMP: ${{ inputs.bump || 'patch' }}
+          EVENT: ${{ github.event_name }}
         run: |
           head=$(git rev-parse HEAD)
           existing=$(git tag --points-at "$head")
           if [ -n "$existing" ]; then
+            if [ "$EVENT" = "schedule" ]; then
+              echo "Nothing merged since $existing: no release this time."
+              echo "skip=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
             echo "::error::main's HEAD ($head) is already tagged: $existing. Nothing new to release."
             exit 1
           fi
@@ -94,9 +104,11 @@ jobs:
           echo "sha=$head" >> "$GITHUB_OUTPUT"
 
       - name: internal names (hashed), whole tree
+        if: steps.version.outputs.skip != 'true'
         run: python3 scripts/leak_guard.py --all
 
       - name: install gitleaks ${{ env.GITLEAKS_VERSION }}
+        if: steps.version.outputs.skip != 'true'
         run: |
           tarball="gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
           curl -fsSL -o "$RUNNER_TEMP/$tarball" "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/${tarball}"
@@ -104,20 +116,25 @@ jobs:
           tar -xzf "$RUNNER_TEMP/$tarball" -C "$RUNNER_TEMP" gitleaks
 
       - name: gitleaks, whole history
+        if: steps.version.outputs.skip != 'true'
         run: '"$RUNNER_TEMP/gitleaks" git --no-banner --redact --verbose .'
 
       - uses: actions/setup-go@d8cbb8045d7f43706b9177cceb36c1f91a6644d5 # v7.1.0
+        if: steps.version.outputs.skip != 'true'
         with:
           go-version-file: go.mod
           cache-dependency-path: go.sum
 
       - name: go build
+        if: steps.version.outputs.skip != 'true'
         run: go build ./...
 
       - name: go vet
+        if: steps.version.outputs.skip != 'true'
         run: go vet ./...
 
       - name: gofmt
+        if: steps.version.outputs.skip != 'true'
         run: |
           unformatted=$(gofmt -l .)
           if [ -n "$unformatted" ]; then
@@ -125,21 +142,25 @@ jobs:
           fi
 
       - name: go test
+        if: steps.version.outputs.skip != 'true'
         run: go test -race -count=1 ./...
 
       # Only reached when every check above passed.
       - name: create and push the annotated tag
+        if: steps.version.outputs.skip != 'true'
         env:
           TAG: ${{ steps.version.outputs.tag }}
           SHA: ${{ steps.version.outputs.sha }}
           ACTOR: ${{ github.actor }}
+          EVENT_NAME: ${{ github.event_name }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git tag -a "$TAG" "$SHA" -m "$TAG" -m "Released by @$ACTOR with the Release workflow."
+          git tag -a "$TAG" "$SHA" -m "$TAG" -m "Released by the Release workflow ($EVENT_NAME, @$ACTOR)."
           git push origin "refs/tags/$TAG"
 
       - name: publish the GitHub release
+        if: steps.version.outputs.skip != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ steps.version.outputs.tag }}

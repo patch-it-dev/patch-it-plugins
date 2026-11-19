@@ -38,11 +38,15 @@ That adds `Signed-off-by: Your Name <you@example.com>`, matching the commit's au
 | `CI_dco` | Every commit in the PR is signed off by its author |
 | `CI_leak_guard` | gitleaks over the PR's commits, and a check for known internal names (stored as hashes only). Also runs weekly over the whole repo |
 | `Claude Code Review` | Claude reviews the PR against the rules above, once (PRs from this repo's branches; forks: a maintainer comments `@claude review`). Advisory, not a required check |
-| `Release` | Not a check: a maintainer runs it by hand to tag a release (see [Releasing](#releasing)) |
+| `Release` | Not a check: tags a release on its own twice a week, or when a maintainer runs it (see [Releasing](#releasing)) |
 
 ## Releasing
 
-Releases are tags on `main` (`v0.x.y`), made only by the **Release** workflow, which a maintainer runs by hand. Nothing is tagged on push, and agents never tag or release.
+Releases are tags on `main` (`v0.x.y`), made only by the **Release** workflow. Nothing is tagged on push, and agents never tag or release.
+
+**Automatic, twice a week:** every Monday and Thursday at 14:00 UTC the workflow makes a **patch** release, but only if something was merged since the last tag; otherwise it does nothing. So a merged plugin reaches patch-it's hosted ingestion service within a few days.
+
+**By hand, any time** (an urgent fix, or a **minor** release):
 
 1. Merge the PRs that should go out.
 2. **Actions → Release → Run workflow** (branch `main`), pick the bump:
