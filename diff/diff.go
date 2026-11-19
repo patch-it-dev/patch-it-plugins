@@ -15,6 +15,7 @@ package diff
 import (
 	"encoding/json"
 	"fmt"
+	"regexp"
 	"sort"
 	"strings"
 
@@ -85,14 +86,51 @@ func Parse(data []byte) (*Spec, error) {
 // path (parameters, servers, summary) is not an operation.
 var methods = []string{"get", "put", "post", "delete", "patch", "head", "options", "trace"}
 
+// Options adapts the differ to a spec whose conventions aren't Stripe's. The
+// zero value is what Changes does.
+type Options struct {
+	// PathTemplates matches an operation across the two specs by its path
+	// with the parameter names left out, so GET /drives/{name} and
+	// GET /drives/{nameOrId} are one operation: a caller sends the same URL to
+	// both. Path parameters are then paired by their place in the path, not
+	// their name.
+	//
+	// The trade: a URL that keeps its shape but changes meaning
+	// (/teams/{teamId} becoming /teams/{slug}) reads as no change. And when
+	// one spec has two paths with the same template, they're paired by exact
+	// path instead, so a rename there still reads as a removal.
+	PathTemplates bool
+
+	// DeprecatedSummary reports whether an operation's summary marks it
+	// deprecated, for a spec that often says so in words and not in the
+	// `deprecated` flag. Nil reads only the flag.
+	DeprecatedSummary func(summary string) bool
+}
+
+// OperationDeprecated reports whether an operation object is marked
+// deprecated, by its flag or, when DeprecatedSummary is set, its summary.
+func (o Options) OperationDeprecated(op map[string]any) bool {
+	return truthy(op["deprecated"]) || o.summaryDeprecated(op)
+}
+
+func (o Options) summaryDeprecated(op map[string]any) bool {
+	summary, _ := op["summary"].(string)
+	return o.DeprecatedSummary != nil && summary != "" && o.DeprecatedSummary(summary)
+}
+
 // Changes reports what changed between two specs, oldest first. Either spec
 // being nil means there is nothing to compare, which is the first-run case.
 // Identical specs produce no changes.
 func Changes(oldSpec, newSpec *Spec) []Change {
+	return ChangesWith(oldSpec, newSpec, Options{})
+}
+
+// ChangesWith is Changes, adapted by opts.
+func ChangesWith(oldSpec, newSpec *Spec, opts Options) []Change {
 	if oldSpec == nil || newSpec == nil {
 		return nil
 	}
-	d := &differ{}
+	d := &differ{opts: opts}
 	d.paths(obj(oldSpec.doc["paths"]), obj(newSpec.doc["paths"]))
 	d.schemas(
 		obj(obj(oldSpec.doc["components"])["schemas"]),
@@ -112,6 +150,7 @@ func Changes(oldSpec, newSpec *Spec) []Change {
 }
 
 type differ struct {
+	opts    Options
 	changes []Change
 }
 
@@ -221,46 +260,134 @@ func classify(kind Kind, side event.Side) (event.ChangeType, bool, bool) {
 // ---------- request side: paths ----------
 
 func (d *differ) paths(oldPaths, newPaths map[string]any) {
-	for _, path := range union(oldPaths, newPaths) {
-		oldItem, newItem := obj(oldPaths[path]), obj(newPaths[path])
-		ptrOld := "/paths/" + escape(path)
-		ptrNew := ptrOld
-
-		for _, method := range methods {
-			oldOp, newOp := obj(oldItem[method]), obj(newItem[method])
-			if oldOp == nil && newOp == nil {
-				continue
-			}
-			w := where{
-				side:      event.SideRequest,
-				operation: strings.ToUpper(method) + " " + path,
-				ptrOld:    ptrOld + "/" + method,
-				ptrNew:    ptrNew + "/" + method,
-			}
-			switch {
-			case oldOp == nil:
-				d.add(w, OperationAdded, "", false, newOp)
-			case newOp == nil:
-				d.add(w, OperationRemoved, "", true, oldOp)
-			default:
-				if !truthy(oldOp["deprecated"]) && truthy(newOp["deprecated"]) {
+	for _, pair := range d.operations(oldPaths, newPaths) {
+		method := pair.method
+		oldOp := obj(obj(oldPaths[pair.oldPath])[method])
+		newOp := obj(obj(newPaths[pair.newPath])[method])
+		path := pair.newPath
+		if newOp == nil {
+			path = pair.oldPath
+		}
+		w := where{
+			side:      event.SideRequest,
+			operation: strings.ToUpper(method) + " " + path,
+			ptrOld:    "/paths/" + escape(pair.oldPath) + "/" + method,
+			ptrNew:    "/paths/" + escape(pair.newPath) + "/" + method,
+		}
+		switch {
+		case oldOp == nil:
+			d.add(w, OperationAdded, "", false, newOp)
+		case newOp == nil:
+			d.add(w, OperationRemoved, "", true, oldOp)
+		default:
+			if !d.opts.OperationDeprecated(oldOp) && d.opts.OperationDeprecated(newOp) {
+				if truthy(newOp["deprecated"]) {
 					d.add(w.child("deprecated"), OperationDeprecated, "", false, newOp["deprecated"])
+				} else {
+					// Said in words: the summary is the evidence.
+					d.add(w.child("summary"), OperationDeprecated, "", false, newOp["summary"])
 				}
-				d.parameters(w, oldOp, newOp)
-				d.requestBody(w, oldOp, newOp)
 			}
+			d.parameters(w, oldOp, newOp, pathParamRenames(pair.oldPath, pair.newPath))
+			d.requestBody(w, oldOp, newOp)
 		}
 	}
 }
 
+// opPair is one operation as each spec has it. The path is empty on the side
+// that lacks it; with PathTemplates the two paths may differ in their
+// parameter names.
+type opPair struct {
+	method, oldPath, newPath string
+}
+
+// operations pairs every operation in either spec with its counterpart in the
+// other, by method and path, or, with PathTemplates, by method and template.
+func (d *differ) operations(oldPaths, newPaths map[string]any) []opPair {
+	key := func(method, path string) string {
+		if d.opts.PathTemplates {
+			path = pathParam.ReplaceAllString(path, "{}")
+		}
+		return method + " " + path
+	}
+	index := func(paths map[string]any) map[string][]string {
+		ix := map[string][]string{}
+		for path, item := range paths {
+			for _, method := range methods {
+				if obj(obj(item)[method]) != nil {
+					k := key(method, path)
+					ix[k] = append(ix[k], path)
+				}
+			}
+		}
+		return ix
+	}
+	oldIx, newIx := index(oldPaths), index(newPaths)
+
+	var pairs []opPair
+	for _, k := range union(oldIx, newIx) {
+		method, _, _ := strings.Cut(k, " ")
+		oldList, newList := oldIx[k], newIx[k]
+		if len(oldList) <= 1 && len(newList) <= 1 {
+			p := opPair{method: method}
+			if len(oldList) == 1 {
+				p.oldPath = oldList[0]
+			}
+			if len(newList) == 1 {
+				p.newPath = newList[0]
+			}
+			pairs = append(pairs, p)
+			continue
+		}
+		// Two paths in one spec share the template, so it can't say which is
+		// which: pair them by exact path, as without PathTemplates.
+		all := map[string]struct{}{}
+		for _, p := range append(append([]string{}, oldList...), newList...) {
+			all[p] = struct{}{}
+		}
+		for _, path := range sortedKeys(all) {
+			p := opPair{method: method}
+			if _, ok := oldPaths[path]; ok && obj(obj(oldPaths[path])[method]) != nil {
+				p.oldPath = path
+			}
+			if _, ok := newPaths[path]; ok && obj(obj(newPaths[path])[method]) != nil {
+				p.newPath = path
+			}
+			pairs = append(pairs, p)
+		}
+	}
+	return pairs
+}
+
+// pathParam is one {parameter} in a path template.
+var pathParam = regexp.MustCompile(`\{[^}]*\}`)
+
+// pathParamRenames maps each path parameter's name in oldPath to its name in
+// newPath, by place, when the two paths are one template; nil otherwise.
+func pathParamRenames(oldPath, newPath string) map[string]string {
+	if oldPath == newPath || oldPath == "" || newPath == "" {
+		return nil
+	}
+	oldNames, newNames := pathParam.FindAllString(oldPath, -1), pathParam.FindAllString(newPath, -1)
+	if len(oldNames) != len(newNames) {
+		return nil
+	}
+	renames := map[string]string{}
+	for i := range oldNames {
+		renames[strings.Trim(oldNames[i], "{}")] = strings.Trim(newNames[i], "{}")
+	}
+	return renames
+}
+
 // parameters compares an operation's query and path parameters by name. Their
 // index in the array is not stable between versions, so it is only used to
-// point at the evidence.
-func (d *differ) parameters(w where, oldOp, newOp map[string]any) {
-	oldParams := byName(oldOp["parameters"])
-	oldPtr := indexByName(oldOp["parameters"])
-	newParams := byName(newOp["parameters"])
-	newPtr := indexByName(newOp["parameters"])
+// point at the evidence. renames gives the new name of each old path parameter
+// when the path's parameter names changed.
+func (d *differ) parameters(w where, oldOp, newOp map[string]any, renames map[string]string) {
+	oldParams := byName(oldOp["parameters"], renames)
+	oldPtr := indexByName(oldOp["parameters"], renames)
+	newParams := byName(newOp["parameters"], nil)
+	newPtr := indexByName(newOp["parameters"], nil)
 
 	for _, name := range union(oldParams, newParams) {
 		oldParam, newParam := obj(oldParams[name]), obj(newParams[name])
@@ -538,25 +665,38 @@ func stringSet(v any) map[string]struct{} {
 }
 
 // byName keys parameters by their name; indexByName remembers where each one
-// sat, so the pointer can address the right array element in each spec.
-func byName(v any) map[string]any {
+// sat, so the pointer can address the right array element in each spec. A path
+// parameter named in renames is keyed by its new name.
+func byName(v any, renames map[string]string) map[string]any {
 	params := map[string]any{}
 	for _, item := range arr(v) {
-		if name, ok := obj(item)["name"].(string); ok {
+		if name, ok := paramName(item, renames); ok {
 			params[name] = item
 		}
 	}
 	return params
 }
 
-func indexByName(v any) map[string]int {
+func indexByName(v any, renames map[string]string) map[string]int {
 	indexes := map[string]int{}
 	for i, item := range arr(v) {
-		if name, ok := obj(item)["name"].(string); ok {
+		if name, ok := paramName(item, renames); ok {
 			indexes[name] = i
 		}
 	}
 	return indexes
+}
+
+func paramName(item any, renames map[string]string) (string, bool) {
+	p := obj(item)
+	name, ok := p["name"].(string)
+	if !ok {
+		return "", false
+	}
+	if to, renamed := renames[name]; renamed && p["in"] == "path" {
+		return to, true
+	}
+	return name, true
 }
 
 // union lists every key in either map, sorted, so output order never depends

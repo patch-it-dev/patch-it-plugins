@@ -1,5 +1,5 @@
 // Package openapi is the source plugin for an API that publishes an OpenAPI
-// spec per release (Stripe, Datadog, GitLab, GitHub): fetch the newest spec,
+// spec per release (Stripe, Datadog, GitLab, GitHub, Vercel): fetch the newest spec,
 // diff it against the last one seen, normalize the changes into events, and
 // attach migration hints from the API's changelog when it has one. It can also
 // replay two given releases.
@@ -30,6 +30,9 @@ func init() {
 	// No Hints yet: GitHub's per-version CHANGELOG.md is prose with no table
 	// at all, so there's nothing for hint.Source to key on.
 	plugin.Register(Plugin{Adapter: adapter.GitHub{}})
+	// No Hints: Vercel's changelog is product news, not keyed by API change.
+	// Only operation deprecations and removals are kept: see vercelKeep.
+	plugin.Register(Plugin{Adapter: adapter.Vercel{}, Diff: vercelDiff, Keep: vercelKeep})
 }
 
 // requestSide keeps the changes to what callers send. GitLab's response
@@ -50,6 +53,9 @@ type Plugin struct {
 	// become events: for a spec whose structure changes more often than its
 	// API does. Nil keeps every change.
 	Keep func(diff.Change) bool
+	// Diff adapts the differ to the spec's conventions. The zero value is
+	// right for Stripe's.
+	Diff diff.Options
 }
 
 func (p Plugin) Name() string { return p.Adapter.API() }
@@ -99,6 +105,7 @@ func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) 
 		PreviousVersion: previousVersion,
 		NewSpecURL:      newSpec.SourceURL,
 		OldSpecURL:      oldSourceURL,
+		DetectedAt:      env.Now().UTC(),
 	})
 	p.attachHints(ctx, newSpec.Version, events)
 	converted, invalid := migrate.Fresh(events)
@@ -137,6 +144,7 @@ func (p Plugin) Replay(ctx context.Context, env plugin.Env, from, to string) (pl
 		PreviousVersion: oldSpec.Version,
 		NewSpecURL:      newSpec.SourceURL,
 		OldSpecURL:      oldSpec.SourceURL,
+		DetectedAt:      env.Now().UTC(),
 	})
 	p.attachHints(ctx, newSpec.Version, events)
 	now := env.Now()
@@ -155,7 +163,7 @@ func (p Plugin) Replay(ctx context.Context, env plugin.Env, from, to string) (pl
 // events diffs two parsed specs into events, applying Keep, and pointing each
 // event's source_pointer into the published file when the adapter reshaped it.
 func (p Plugin) events(oldParsed, newParsed *diff.Spec, oldContent, newContent []byte, src normalize.Source) ([]event.ChangeEvent, []error) {
-	changes := diff.Changes(oldParsed, newParsed)
+	changes := diff.ChangesWith(oldParsed, newParsed, p.Diff)
 	if p.Keep != nil {
 		kept := changes[:0:0]
 		for _, c := range changes {
