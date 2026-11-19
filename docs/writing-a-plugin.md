@@ -78,7 +78,7 @@ Write the numbers on the provider page, as `providers/vercel.md` does for its sp
 | `plugins/openapi` | An OpenAPI spec per release, diffed with `diff/` and turned into events by `normalize/` | An `adapter.Adapter` in `adapter/` (latest tag, fetch a tag's spec) and a `plugin.Register(Plugin{Adapter: …})` line |
 | `plugins/retirements` | A model provider's deprecations page (a table of date, model, replacement) | A `retire.Page` in `retire/providers.go` |
 | `plugins/migrationguide` | An SDK's migration guide at a release tag (removed request parameters) | A `sdkguide.Guide` in `sdkguide/` |
-| `plugins/removedmembers` | A package's table of removed members at a release tag | A `removedmembers.Guide` |
+| `plugins/removedmembers` | A package's table of removed members at a release tag (an RST simple table or a Markdown pipe table) | A `removedmembers.Guide` |
 | `plugins/changelog` | A `CHANGELOG.md` / `CHANGES.rst` / `HISTORY.rst` at a release tag | A `changelog.File` |
 | `plugins/feed` | An RSS or Atom feed | A `feed.Feed` with a reader for that vendor's entries |
 | `plugins/catalog` | A flat JSON catalog, one entry per name, with no release tags to pin — a commit SHA stands in | A `catalog.Catalog`, diffed between two snapshots for names that disappeared entirely |

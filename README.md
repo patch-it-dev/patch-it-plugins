@@ -10,7 +10,7 @@
 [![Go Reference](https://pkg.go.dev/badge/github.com/patch-it-dev/patch-it-plugins.svg)](https://pkg.go.dev/github.com/patch-it-dev/patch-it-plugins)
 [![Go version](https://img.shields.io/github/go-mod/go-version/patch-it-dev/patch-it-plugins)](go.mod)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-3f5bf0)](LICENSE)
-[![Plugins](https://img.shields.io/badge/plugins-21-3f5bf0)](docs/plugins.md)
+[![Plugins](https://img.shields.io/badge/plugins-22-3f5bf0)](docs/plugins.md)
 [![Docs](https://img.shields.io/badge/docs-docs.patch--it.dev-3f5bf0)](https://docs.patch-it.dev)
 [![Discussions](https://img.shields.io/github/discussions/patch-it-dev/patch-it-plugins)](https://github.com/patch-it-dev/patch-it-plugins/discussions)
 
