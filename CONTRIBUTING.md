@@ -28,6 +28,7 @@ That adds `Signed-off-by: Your Name <you@example.com>`, matching the commit's au
 - Commit subjects: short, lowercase, imperative (`add the foo plugin`, `fix stripe hint parsing`).
 - Run the tests before you push (see [README](README.md#run-the-tests)).
 - A maintainer listed in `.github/CODEOWNERS` reviews every PR.
+- **Reviews:** Claude also reviews each PR against the rules above, once, when it's opened or marked ready. PRs from forks get no secrets, so for those a maintainer comments `@claude review` and Claude reviews it read-only (it never runs a fork's code). Only maintainers can call `@claude`. Claude's review helps; a maintainer still decides.
 
 ## CI
 
@@ -36,6 +37,7 @@ That adds `Signed-off-by: Your Name <you@example.com>`, matching the commit's au
 | `CI_go` | `go mod tidy`, build, vet, gofmt, `go test -race`; plugins import only this module, the standard library and approved dependencies; `net/http` only in the fetch layer |
 | `CI_dco` | Every commit in the PR is signed off by its author |
 | `CI_leak_guard` | gitleaks over the PR's commits, and a check for known internal names (stored as hashes only). Also runs weekly over the whole repo |
+| `Claude Code Review` | Claude reviews the PR against the rules above, once (PRs from this repo's branches; forks: a maintainer comments `@claude review`). Advisory, not a required check |
 
 ## License
 
