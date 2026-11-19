@@ -1,10 +1,12 @@
 {
   "_comment": "Generated from the plugin registry and docs/plugins.md by `make plugins-json` (go run ./cmd/list-plugins). Don't edit by hand.",
+  "$schema": "./plugins.schema.json",
   "count": 16,
   "plugins": [
     {
       "id": "anthropic",
       "provider": "Anthropic",
+      "layer": "sdk",
       "watches": "Parameters removed from `messages.create()` and friends in the Python SDK 1.0",
       "format": "migrationguide",
       "source_url": "https://github.com/anthropics/anthropic-sdk-python/blob/v1.0.0/MIGRATION.md",
@@ -14,6 +16,7 @@
     {
       "id": "anthropic-models",
       "provider": "Anthropic",
+      "layer": "ai-models",
       "watches": "Model deprecations and retirement dates (Messages API models)",
       "format": "retirements",
       "source_url": "https://platform.claude.com/docs/en/about-claude/model-deprecations",
@@ -23,6 +26,7 @@
     {
       "id": "cloudflare",
       "provider": "Cloudflare",
+      "layer": "api",
       "watches": "REST API operations Cloudflare deprecates, breaking on their end-of-life date when it gives one",
       "format": "feed",
       "source_url": "https://developers.cloudflare.com/fundamentals/api/reference/deprecations/index.xml",
@@ -33,6 +37,7 @@
     {
       "id": "datadog",
       "provider": "Datadog",
+      "layer": "api",
       "watches": "API v2 changes between OpenAPI spec releases",
       "format": "openapi",
       "source_url": "https://github.com/DataDog/datadog-api-client-python",
@@ -42,6 +47,7 @@
     {
       "id": "github",
       "provider": "GitHub",
+      "layer": "api",
       "watches": "REST API changes between dated API versions",
       "format": "openapi",
       "source_url": "https://github.com/github/rest-api-description",
@@ -51,6 +57,7 @@
     {
       "id": "github-actions",
       "provider": "GitHub",
+      "layer": "ci",
       "watches": "GitHub Actions retirements, such as runner images and the `runs-on` labels they remove",
       "format": "feed",
       "source_url": "https://github.blog/changelog/label/actions/feed/",
@@ -60,6 +67,7 @@
     {
       "id": "gitlab",
       "provider": "GitLab",
+      "layer": "api",
       "watches": "REST API changes between releases, request side only (what callers send)",
       "format": "openapi",
       "source_url": "https://gitlab.com/gitlab-org/gitlab/-/tree/master/doc/api/openapi",
@@ -69,6 +77,7 @@
     {
       "id": "mongodb-atlas",
       "provider": "MongoDB",
+      "layer": "api",
       "watches": "Atlas Administration API versions deprecated and removed at their sunset date, per endpoint, from MongoDB's own API changelog",
       "format": "apichangelog",
       "source_url": "https://github.com/mongodb/openapi/blob/main/changelog/changelog.json",
@@ -79,6 +88,7 @@
     {
       "id": "numpy",
       "provider": "NumPy",
+      "layer": "package",
       "watches": "Members removed or renamed in the main namespace in NumPy 2.0",
       "format": "removedmembers",
       "source_url": "https://github.com/numpy/numpy/blob/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
@@ -88,6 +98,7 @@
     {
       "id": "openai-models",
       "provider": "OpenAI",
+      "layer": "ai-models",
       "watches": "Model deprecations and shutdown dates (Chat Completions and Responses text models)",
       "format": "retirements",
       "source_url": "https://developers.openai.com/api/docs/deprecations",
@@ -97,6 +108,7 @@
     {
       "id": "stripe",
       "provider": "Stripe",
+      "layer": "api",
       "watches": "REST API changes between OpenAPI spec releases (removed and renamed endpoints, parameters and fields), with migration hints from Stripe's API changelog",
       "format": "openapi",
       "source_url": "https://github.com/stripe/openapi",
@@ -106,6 +118,7 @@
     {
       "id": "supabase",
       "provider": "Supabase",
+      "layer": "api",
       "watches": "Management API operations deprecated, and deprecated operations removed, between commits of the spec",
       "format": "openapi",
       "source_url": "https://github.com/supabase/supabase",
@@ -116,6 +129,7 @@
     {
       "id": "textual",
       "provider": "Textual",
+      "layer": "package",
       "watches": "Removals and breaking changes in release 0.86.0",
       "format": "changelog",
       "source_url": "https://github.com/Textualize/textual/blob/v0.86.0/CHANGELOG.md",
@@ -125,6 +139,7 @@
     {
       "id": "urllib3",
       "provider": "urllib3",
+      "layer": "package",
       "watches": "Removals and deprecations in release 2.0.0",
       "format": "changelog",
       "source_url": "https://github.com/urllib3/urllib3/blob/2.0.0/CHANGES.rst",
@@ -134,6 +149,7 @@
     {
       "id": "vercel",
       "provider": "Vercel",
+      "layer": "api",
       "watches": "REST API operations deprecated, and deprecated operations removed, between SDK releases of the spec",
       "format": "openapi",
       "source_url": "https://github.com/vercel/sdk",
@@ -144,6 +160,7 @@
     {
       "id": "vertex-ai-models",
       "provider": "Google",
+      "layer": "ai-models",
       "watches": "Generative AI model deprecations on Vertex AI",
       "format": "feed",
       "source_url": "https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",

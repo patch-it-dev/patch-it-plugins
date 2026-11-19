@@ -37,6 +37,7 @@ const (
 type Row struct {
 	ID       string // the plugin id, without the backticks and link
 	Provider string
+	Layer    string // as written: "API", "AI models"
 	Watches  string
 	Format   string
 	Source   string // the cell, as written
@@ -47,6 +48,7 @@ type Row struct {
 type Plugin struct {
 	ID           string `json:"id"`
 	Provider     string `json:"provider"`
+	Layer        string `json:"layer"` // api, sdk, package, runtime, ci or ai-models
 	Watches      string `json:"watches"`
 	Format       string `json:"format"`
 	SourceURL    string `json:"source_url"`
@@ -58,6 +60,7 @@ type Plugin struct {
 // File is docs/plugins.json.
 type File struct {
 	Comment string   `json:"_comment"`
+	Schema  string   `json:"$schema"`
 	Count   int      `json:"count"`
 	Plugins []Plugin `json:"plugins"`
 }
@@ -68,6 +71,20 @@ var (
 	link     = regexp.MustCompile(`\]\((https?://[^)\s]+)\)`)
 	statuses = []string{"live", "paused", "planned"}
 )
+
+// Layers are the kinds of dependency a plugin covers: the table's word to
+// the JSON's.
+var Layers = map[string]string{
+	"API":       "api",
+	"SDK":       "sdk",
+	"package":   "package",
+	"runtime":   "runtime",
+	"CI":        "ci",
+	"AI models": "ai-models",
+}
+
+// Statuses are the values of a plugin's status.
+func Statuses() []string { return slices.Clone(statuses) }
 
 // ReadTable reads the rows between the markers of the plugin list.
 func ReadTable(md []byte) ([]Row, error) {
@@ -84,8 +101,8 @@ func ReadTable(md []byte) ([]Row, error) {
 			continue
 		}
 		cells := splitRow(l)
-		if len(cells) != 6 {
-			return nil, fmt.Errorf("%s: row %q has %d cells, want 6", Table, l, len(cells))
+		if len(cells) != 7 {
+			return nil, fmt.Errorf("%s: row %q has %d cells, want 7", Table, l, len(cells))
 		}
 		m := cellID.FindStringSubmatch(cells[0])
 		if m == nil {
@@ -94,11 +111,11 @@ func ReadTable(md []byte) ([]Row, error) {
 		if m[1] != m[2] {
 			return nil, fmt.Errorf("%s: %s links to providers/%s.md, want providers/%s.md", Table, m[1], m[2], m[1])
 		}
-		f := cellFmt.FindStringSubmatch(cells[3])
+		f := cellFmt.FindStringSubmatch(cells[4])
 		if f == nil {
-			return nil, fmt.Errorf("%s: %s: format cell %q is not `format`", Table, m[1], cells[3])
+			return nil, fmt.Errorf("%s: %s: format cell %q is not `format`", Table, m[1], cells[4])
 		}
-		rows = append(rows, Row{ID: m[1], Provider: cells[1], Watches: cells[2], Format: f[1], Source: cells[4], Status: cells[5]})
+		rows = append(rows, Row{ID: m[1], Provider: cells[1], Layer: cells[2], Watches: cells[3], Format: f[1], Source: cells[5], Status: cells[6]})
 	}
 	return rows, nil
 }
@@ -150,7 +167,7 @@ func List(root string) ([]Plugin, error) {
 		p, _ := plugin.Lookup(name)
 		registered[name] = Format(p)
 		if _, ok := byID[name]; !ok {
-			errs = append(errs, fmt.Errorf("%s is registered but has no row in %s: add one (AGENTS.md rule 1)", name, Table))
+			errs = append(errs, fmt.Errorf("%s is registered but has no row in %s: add one (AGENTS.md rule 1), then run `make plugins-json`", name, Table))
 		}
 	}
 	var out []Plugin
@@ -159,6 +176,10 @@ func List(root string) ([]Plugin, error) {
 		status, note = strings.TrimSpace(status), strings.TrimSpace(note)
 		if !slices.Contains(statuses, status) {
 			errs = append(errs, fmt.Errorf("%s: %s: status %q is not live, paused or planned", Table, r.ID, r.Status))
+		}
+		layer, known := Layers[r.Layer]
+		if !known {
+			errs = append(errs, fmt.Errorf("%s: %s: layer %q is not one of API, SDK, package, runtime, CI, AI models", Table, r.ID, r.Layer))
 		}
 		format, ok := registered[r.ID]
 		switch {
@@ -177,7 +198,7 @@ func List(root string) ([]Plugin, error) {
 			src = []string{"", ""}
 		}
 		out = append(out, Plugin{
-			ID: r.ID, Provider: r.Provider, Watches: r.Watches, Format: r.Format,
+			ID: r.ID, Provider: r.Provider, Layer: layer, Watches: r.Watches, Format: r.Format,
 			SourceURL: src[1], Status: status, StatusNote: note, ProviderPage: page,
 		})
 	}
@@ -196,6 +217,7 @@ func Marshal(plugins []Plugin) ([]byte, error) {
 	enc.SetEscapeHTML(false)
 	err := enc.Encode(File{
 		Comment: "Generated from the plugin registry and docs/plugins.md by `make plugins-json` (go run ./cmd/list-plugins). Don't edit by hand.",
+		Schema:  "./plugins.schema.json",
 		Count:   len(plugins),
 		Plugins: plugins,
 	})

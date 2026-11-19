@@ -1,9 +1,11 @@
 # `make check` is what CI runs on every pull request: the CI_go steps (each one
-# is a target here, and CI_go calls these same targets) plus the internal-names
-# check of CI_leak_guard over every tracked file. Run it before you open a PR.
+# is a target here, and CI_go calls these same targets), the internal-names
+# check of CI_leak_guard over every tracked file, and CI_contract's fixture
+# comparison when you point it at a patch-it checkout. Run it before you open a PR.
 #
-#   make check          everything below, in CI's order
-#   make plugins-json   regenerate docs/plugins.json from the registry and docs/plugins.md
+#   make check                       everything below, in CI's order
+#   make check PATCH_IT=../patch-it  also compare contract/fixtures/ with patch-it's
+#   make plugins-json                regenerate docs/plugins.json from the registry and docs/plugins.md
 #
 # The `::error` lines are GitHub annotations; locally they're plain messages.
 
@@ -15,9 +17,9 @@ PYTHON ?= python3
 MODULE  := github.com/patch-it-dev/patch-it-plugins
 ALLOWED := ^($(MODULE)(/|$$)|gopkg\.in/yaml\.v3$$)
 
-.PHONY: check tidy build fmt vet imports nethttp test leak-guard plugins-json
+.PHONY: check tidy build fmt vet imports nethttp test leak-guard contract plugins-json
 
-check: tidy build fmt vet imports nethttp test leak-guard
+check: tidy build fmt vet imports nethttp test leak-guard contract
 	@echo "make check: all passed"
 
 # go.mod and go.sum are tidy.
@@ -64,6 +66,16 @@ test:
 # tracked file.
 leak-guard:
 	$(PYTHON) scripts/leak_guard.py --all
+
+# CI_contract: contract/fixtures/ hold the same events as patch-it's fixtures/.
+# Needs a patch-it checkout; skipped without one, as CI_contract skips while
+# patch-it can't be read anonymously.
+contract:
+	@if [ -n "$(PATCH_IT)" ]; then \
+		$(PYTHON) scripts/check_contract.py "$(PATCH_IT)/fixtures"; \
+	else \
+		echo "contract: skipped (make check PATCH_IT=<a patch-it checkout> compares contract/fixtures/)"; \
+	fi
 
 plugins-json:
 	$(GO) run ./cmd/list-plugins

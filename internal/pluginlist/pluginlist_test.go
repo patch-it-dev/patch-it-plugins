@@ -35,15 +35,15 @@ func TestPluginsJSONIsUpToDate(t *testing.T) {
 
 func TestReadTable(t *testing.T) {
 	md := "intro\n" + StartMarker + "\n" +
-		"| Plugin (`--api`) | Provider | What it watches | Format plugin | Source | Status |\n" +
-		"|---|---|---|---|---|---|\n" +
-		"| [`foo-api`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/foo-api.md) | Foo | Removed endpoints | `openapi` | [foo/spec](https://github.com/foo/spec) (`openapi.json`) | paused: not released yet |\n" +
+		"| Plugin (`--api`) | Provider | Layer | What it watches | Format plugin | Source | Status |\n" +
+		"|---|---|---|---|---|---|---|\n" +
+		"| [`foo-api`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/foo-api.md) | Foo | API | Removed endpoints | `openapi` | [foo/spec](https://github.com/foo/spec) (`openapi.json`) | paused: not released yet |\n" +
 		EndMarker + "\n"
 	rows, err := ReadTable([]byte(md))
 	if err != nil {
 		t.Fatal(err)
 	}
-	want := Row{ID: "foo-api", Provider: "Foo", Watches: "Removed endpoints", Format: "openapi",
+	want := Row{ID: "foo-api", Provider: "Foo", Layer: "API", Watches: "Removed endpoints", Format: "openapi",
 		Source: "[foo/spec](https://github.com/foo/spec) (`openapi.json`)", Status: "paused: not released yet"}
 	if len(rows) != 1 || rows[0] != want {
 		t.Errorf("rows = %+v, want [%+v]", rows, want)
@@ -52,8 +52,8 @@ func TestReadTable(t *testing.T) {
 
 func TestReadTableRejectsABadRow(t *testing.T) {
 	for name, row := range map[string]string{
-		"relative link":  "| [`foo`](../providers/foo.md) | Foo | x | `openapi` | [s](https://s.example) | live |",
-		"other page":     "| [`foo`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/bar.md) | Foo | x | `openapi` | [s](https://s.example) | live |",
+		"relative link":  "| [`foo`](../providers/foo.md) | Foo | API | x | `openapi` | [s](https://s.example) | live |",
+		"other page":     "| [`foo`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/bar.md) | Foo | API | x | `openapi` | [s](https://s.example) | live |",
 		"missing a cell": "| [`foo`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/foo.md) | Foo | `openapi` | [s](https://s.example) | live |",
 	} {
 		md := StartMarker + "\n" + row + "\n" + EndMarker
