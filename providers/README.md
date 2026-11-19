@@ -22,5 +22,6 @@ One page per plugin id: `providers/<api>.md`. Start from [`_template.md`](_templ
 | [urllib3.md](urllib3.md) | `urllib3` | `changelog` |
 | [github-actions.md](github-actions.md) | `github-actions` | `feed` |
 | [vertex-ai-models.md](vertex-ai-models.md) | `vertex-ai-models` | `feed` |
+| [redis.md](redis.md) | `redis` | `catalog` |
 
 The list of plugins, with their status, is [docs/plugins.md](../docs/plugins.md).

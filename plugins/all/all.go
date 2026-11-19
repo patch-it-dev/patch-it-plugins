@@ -4,6 +4,7 @@
 package all
 
 import (
+	_ "github.com/patch-it-dev/patch-it-plugins/plugins/catalog"
 	_ "github.com/patch-it-dev/patch-it-plugins/plugins/changelog"
 	_ "github.com/patch-it-dev/patch-it-plugins/plugins/feed"
 	_ "github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide"

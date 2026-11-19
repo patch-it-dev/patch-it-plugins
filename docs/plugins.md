@@ -21,6 +21,7 @@ The table between the `plugins:start` and `plugins:end` markers is also publishe
 | [`urllib3`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/urllib3.md) | urllib3 | Removals and deprecations in release 2.0.0 | `changelog` | [urllib3/urllib3 CHANGES.rst](https://github.com/urllib3/urllib3/blob/2.0.0/CHANGES.rst) | live |
 | [`github-actions`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/github-actions.md) | GitHub | GitHub Actions retirements, such as runner images and the `runs-on` labels they remove | `feed` | [GitHub changelog, Actions label (RSS)](https://github.blog/changelog/label/actions/feed/) | live |
 | [`vertex-ai-models`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/vertex-ai-models.md) | Google | Generative AI model deprecations on Vertex AI | `feed` | [Vertex AI generative AI release notes (Atom)](https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml) | live |
+| [`redis`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/redis.md) | Redis | Commands removed entirely from Redis's own command catalog between two snapshots | `catalog` | [redis/redis-doc `commands.json`](https://github.com/redis/redis-doc/blob/master/commands.json) | live |
 <!-- plugins:end -->
 
 ## The columns
@@ -30,7 +31,7 @@ The table between the `plugins:start` and `plugins:end` markers is also publishe
 | Plugin | The id you pass as `--api` and the `api` field on every event it emits. Lowercase, unique. |
 | Provider | Whose API, SDK or package it is. |
 | What it watches | The kind of change it reports, in a few words. |
-| Format plugin | Which shared reader it is built on: `openapi` (a spec per release, diffed), `retirements` (a deprecations page), `migrationguide` (an SDK's migration guide), `removedmembers` (a package's table of removed members), `changelog` (a release changelog file), `feed` (an RSS or Atom feed). |
+| Format plugin | Which shared reader it is built on: `openapi` (a spec per release, diffed), `retirements` (a deprecations page), `migrationguide` (an SDK's migration guide), `removedmembers` (a package's table of removed members), `changelog` (a release changelog file), `feed` (an RSS or Atom feed), `catalog` (a structured JSON catalog of names, diffed between two snapshots). |
 | Source | The provider's own public page or file the plugin reads. Every event links back to it. |
 | Status | `live`: runs every day in patch-it's hosted service. `planned`: accepted, not written yet. `paused`: registered but not run, with the reason in the row. |
 
