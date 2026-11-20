@@ -80,6 +80,7 @@ Write the numbers on the provider page, as `providers/vercel.md` does for its sp
 | `plugins/migrationguide` | A guide that lists what a release removed, at the release's tag: an SDK's migration guide per new major (removed request parameters), or a package's table of removed members (an RST simple table or a Markdown pipe table) | A `sdkguide.Guide` in `plugins/migrationguide/sdkguide/`, or a `members.Guide` in `plugins/migrationguide/members/` |
 | `plugins/changelog` | A changelog: a `CHANGELOG.md` / `CHANGES.rst` / `HISTORY.rst`, each release's section at its tag (releases from PyPI or npm), or a vendor's machine-readable API changelog in JSON (per day, endpoint and API version, oasdiff change codes), commit by commit | A `changelog.File` with its `TagPrefix`, or a `changelog.Log` |
 | `plugins/catalog` | A flat JSON catalog, one entry per name, with no release tags to pin — a commit SHA stands in | A `catalog.Catalog`, diffed between two snapshots for names that disappeared entirely |
+| `plugins/apisurface` | A published package's public API, compared between two releases: the classes, functions, methods and parameters in each release's files (Python first: the wheel or sdist from PyPI) | A `apisurface.Package` (registry name, ecosystem, top-level module) and its `plugin.RegisterProvider` block |
 
 ## 4. The interface
 
@@ -123,6 +124,12 @@ Extract(ctx, env, from, to Snapshot) (Result, error)          // the changes fro
 - `Run` is built from the same parts: the newest version, extracted against the last baseline.
 
 A living page with no versions of its own (a deprecations page, a feed: a `notices` source) is read as it is now by `Run`, and each change to it is a dated version. Its history comes from the Web Archive: the `notices` kind lists every distinct capture (`WaybackCaptures`), reads each, and extracts what each one added, citing that capture, so a year of it can be backfilled by date with no stored copies.
+
+### The `apisurface` kind: reading a package's API without running it
+
+`plugins/apisurface` downloads a release's wheel (or sdist) through `env.Get`, opens it in memory (`archive/zip`, `archive/tar`: nothing is written to disk) and hands the `.py` and `.pyi` files to `plugins/apisurface/pysurface`, which reads them as text: logical lines, indentation, and the headers of `def`, `class`, `__all__` and `from … import`. Nothing in the package is imported, compiled or run. That's the safest way to read code someone else publishes, and it needs no dependency: a Python interpreter (the `ast` module) would mean running a second runtime next to the plugins, and the pure-Go Python parsers available follow old grammars and pull in a large module for what is a few hundred lines here. The cost is that only signatures are read, never what a body does, and anything the reader can't be sure of is left out (see `providers/openai-python-sdk.md`). Archive and file sizes are capped (`MaxFileBytes`, `MaxSourceBytes`), so a crafted release can't exhaust the runner.
+
+An event cites the newer release's file, and its excerpt quotes the definition's path and line in both releases. npm packages (`.d.ts` files) are next.
 
 ### Register the provider and its source
 

@@ -21,7 +21,7 @@ There's no list in this repo: `make plugins` prints every provider and source fr
 |---|---|
 | [`core/plugin/`](../core/plugin/) | The `Plugin` interface (`Run`; `ListVersions`, `ReadAt`, `Extract`), the registry of providers and sources (`RegisterProvider`, `Lookup`, `LookupSource`, `Providers`), `Env`, `Result` |
 | [`core/versions/`](../core/versions/) | Every version of a source: GitHub releases, tags and commits, PyPI, npm, a page's Web Archive captures (all, or the one at a date) |
-| [`plugins/`](../plugins/) | One package per kind, with its providers; `plugins/all` imports every one |
+| [`plugins/`](../plugins/) | One package per kind, with its providers (openapi, changelog, notices, migrationguide, catalog, apisurface); `plugins/all` imports every one |
 | [`cmd/new-plugin/`](../cmd/new-plugin/), [`cmd/list-plugins/`](../cmd/list-plugins/) | The starter for a new provider; the list of providers and sources, printed from the registry |
 | [`core/kit/`](../core/kit/), [`core/kit/kittest/`](../core/kit/kittest/), [`core/github/`](../core/github/), [`core/extract/`](../core/extract/) | What plugins share (the unchanged-page check, Wayback citing, the newest release or commit on GitHub, RSS/Atom and HTML text helpers) and the test kit (in-memory store, saved pages, golden files) |
 | [`core/event/`](../core/event/), [`core/migrate/`](../core/migrate/) | The change-event types of [patch-it's contract](https://github.com/patch-it-dev/patch-it/tree/main/docs/contract), and the v1 → v2 conversion |

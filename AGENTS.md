@@ -59,7 +59,7 @@ core/event/  core/migrate/     the change-event types from patch-it's contract (
 core/diff/ core/normalize/ core/hint/   the OpenAPI diff engine and its helpers
 plugins/<kind>/        one package per kind, with its providers: openapi (+ adapter/, one spec adapter
                        per provider), notices (+ retire/, feed/, eol/), migrationguide (+ sdkguide/,
-                       members/), changelog (Markdown, RST or JSON), catalog;
+                       members/), changelog (Markdown, RST or JSON), catalog, apisurface (+ pysurface/);
                        plugins/all imports every one
 plugins/removedmembers/ apichangelog/ retirements/ feed/ eol/   deprecated: merged into
                        migrationguide, changelog and notices, they only forward there
