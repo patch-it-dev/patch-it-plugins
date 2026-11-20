@@ -75,7 +75,7 @@ func TestPlanetScaleGolden(t *testing.T) {
 	p, base := planetscalePlugin(t)
 	const from, to = "e631095aa649a6797578a1d51d861b91e0568aa1", "fc13e09d0c18b893aabd3e02d175d13957bba677"
 	events := replayPlanetScale(t, p, from, to)
-	const branch = "/organizations/{organization}/databases/{database}/branches/{branch}"
+	const branch = "/v1/organizations/{organization}/databases/{database}/branches/{branch}"
 	want := map[string]bool{
 		"GET " + branch + "/bouncers/{bouncer}/resizes":    true,
 		"DELETE " + branch + "/bouncers/{bouncer}/resizes": true,
@@ -171,5 +171,50 @@ func TestPlanetScaleDeprecatedWords(t *testing.T) {
 	unmarked := diff.Change{Kind: diff.OperationRemoved, Node: map[string]any{"description": "\n### Authorization"}}
 	if !planetscaleKeep(marked) || planetscaleKeep(unmarked) {
 		t.Error("planetscaleKeep: want the marked removal only")
+	}
+}
+
+// planetscaleKept is what the plugin's options and keep rule make of two
+// inline specs.
+func planetscaleKept(t *testing.T, oldJSON, newJSON string) []diff.Change {
+	t.Helper()
+	o, err := diff.Parse([]byte(oldJSON))
+	if err != nil {
+		t.Fatal(err)
+	}
+	n, err := diff.Parse([]byte(newJSON))
+	if err != nil {
+		t.Fatal(err)
+	}
+	var kept []diff.Change
+	for _, c := range diff.ChangesWith(o, n, planetscaleDiff) {
+		if planetscaleKeep(c) {
+			kept = append(kept, c)
+		}
+	}
+	return kept
+}
+
+// PathTemplates: a deprecated operation whose path parameter is renamed is
+// the same URL, not a removal. Without it, the keep rule would report the
+// deprecated operation shut down.
+func TestPlanetScaleParameterRenameIsNotARemoval(t *testing.T) {
+	const op = `"get":{"description":"Deprecated. Use GET /b instead.","parameters":[{"name":"%s","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"OK"}}}`
+	oldSpec := `{"openapi":"3.0.1","paths":{"/a/{id}":{` + strings.Replace(op, "%s", "id", 1) + `}}}`
+	newSpec := `{"openapi":"3.0.1","paths":{"/a/{name}":{` + strings.Replace(op, "%s", "name", 1) + `}}}`
+	if kept := planetscaleKept(t, oldSpec, newSpec); len(kept) != 0 {
+		t.Errorf("kept %v, want nothing", kept)
+	}
+}
+
+// QuoteDeprecatedOperation: PlanetScale has never set the `deprecated` flag,
+// but if it starts to, the event quotes the operation, with its "Use X
+// instead", not a bare `true`.
+func TestPlanetScaleFlagQuotesTheOperation(t *testing.T) {
+	oldSpec := `{"openapi":"3.0.1","paths":{"/a":{"get":{"description":"Lists a.","responses":{"200":{"description":"OK"}}}}}}`
+	newSpec := `{"openapi":"3.0.1","paths":{"/a":{"get":{"deprecated":true,"description":"Lists a. Use GET /b instead.","responses":{"200":{"description":"OK"}}}}}}`
+	kept := planetscaleKept(t, oldSpec, newSpec)
+	if len(kept) != 1 || kept[0].Kind != diff.OperationDeprecated || kept[0].Pointer != "/paths/~1a/get" {
+		t.Errorf("kept %+v, want one deprecation citing /paths/~1a/get", kept)
 	}
 }

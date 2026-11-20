@@ -109,5 +109,18 @@ func (p PlanetScale) Fetch(ctx context.Context, sha string) (Spec, error) {
 	if err != nil {
 		return Spec{}, fmt.Errorf("converting planetscale spec %s to json: %w", sha, err)
 	}
+	// The server is "https://api.planetscale.com/v1" and the paths leave out
+	// /v1 (all 32 versions, checked 2026-11-19). Moved into the paths, an
+	// operation is named by the path a caller sends, and a spec that ever
+	// moved it (as Sentry's did) can't read as every deprecated operation
+	// removed.
+	if content, err = ServerBasePath(content); err != nil {
+		return Spec{}, fmt.Errorf("planetscale spec %s: %w", sha, err)
+	}
 	return Spec{Content: content, Version: commit.Commit.Committer.Date.UTC().Format("2006-01-02"), SourceURL: url}, nil
 }
+
+// SourcePointer: see BasePathPointer.
+func (PlanetScale) SourcePointer(content []byte) func(string) string { return BasePathPointer(content) }
+
+var _ Reshaper = PlanetScale{}

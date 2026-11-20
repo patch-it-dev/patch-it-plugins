@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:bb73b6dc4cc2b725576e42b174f0b4026ad3db2db5931c6c924a7e034b2af6fd",
+    "fingerprint": "sha256:12edd932544ab7968b2ad2cd824f69cb0c14e258cbc923ac87feed5880eaaa78",
     "api": "planetscale",
     "version": "2026-11-09",
     "previous_version": "2026-10-23",
@@ -11,9 +11,9 @@
       "type": "api_operation",
       "kind": "operation",
       "side": "request",
-      "operation": "DELETE /organizations/{organization}/databases/{database}/branches/{branch}/bouncers/{bouncer}/resizes"
+      "operation": "DELETE /v1/organizations/{organization}/databases/{database}/branches/{branch}/bouncers/{bouncer}/resizes"
     },
-    "description": "Operation DELETE /organizations/{organization}/databases/{database}/branches/{branch}/bouncers/{bouncer}/resizes marked deprecated.",
+    "description": "Operation DELETE /v1/organizations/{organization}/databases/{database}/branches/{branch}/bouncers/{bouncer}/resizes marked deprecated.",
     "source_url": "https://raw.githubusercontent.com/planetscale/terraform-provider-planetscale/fc13e09d0c18b893aabd3e02d175d13957bba677/schemas/openapi.yaml",
     "source_pointer": "/paths/~1organizations~1{organization}~1databases~1{database}~1branches~1{branch}~1bouncers~1{bouncer}~1resizes/delete/description",
     "source_excerpt": "\"Deprecated. Use DELETE /organizations/:organization/databases/:database/branches/:branch/change-requests/:id to cancel individual change requests instead.\\n### Authorization\\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\\n\\n**Service Token Accesses**\\n `write_database`\\n\\n**OAuth Scopes**\\n\\n | Resource | Scopes |\\n| :------- | :---------- |\\n| Organization | `write_databases` |\\n| Database | `write_database` |\"",
@@ -22,7 +22,7 @@
   },
   {
     "id": 2,
-    "fingerprint": "sha256:c3f56d94e9021c1551e70ebf19a3b79cee197ff14e6cc698956c616df9e70fa9",
+    "fingerprint": "sha256:9d65c2b858a48c37c43fc2d4cdcf41b581ecab8ad3aa5f598ea4e85542d606b9",
     "api": "planetscale",
     "version": "2026-11-09",
     "previous_version": "2026-10-23",
@@ -32,9 +32,9 @@
       "type": "api_operation",
       "kind": "operation",
       "side": "request",
-      "operation": "GET /organizations/{organization}/databases/{database}/branches/{branch}/bouncers/{bouncer}/resizes"
+      "operation": "GET /v1/organizations/{organization}/databases/{database}/branches/{branch}/bouncers/{bouncer}/resizes"
     },
-    "description": "Operation GET /organizations/{organization}/databases/{database}/branches/{branch}/bouncers/{bouncer}/resizes marked deprecated.",
+    "description": "Operation GET /v1/organizations/{organization}/databases/{database}/branches/{branch}/bouncers/{bouncer}/resizes marked deprecated.",
     "source_url": "https://raw.githubusercontent.com/planetscale/terraform-provider-planetscale/fc13e09d0c18b893aabd3e02d175d13957bba677/schemas/openapi.yaml",
     "source_pointer": "/paths/~1organizations~1{organization}~1databases~1{database}~1branches~1{branch}~1bouncers~1{bouncer}~1resizes/get/description",
     "source_excerpt": "\"Deprecated. Use GET /organizations/:organization/databases/:database/branches/:branch/change-requests with target_types[]=PostgresBouncer and target_id set to the bouncer ID instead.\\n### Authorization\\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\\n\\n**Service Token Accesses**\\n `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`\\n\\n**OAuth Scopes**\\n\\n | Resource | Scopes |\\n| :------- | :---------- |\\n| Organization | `read_branches` |\\n| Database | `read_branches` |\\n| Branch | `read_branch` |\"",
@@ -43,7 +43,7 @@
   },
   {
     "id": 3,
-    "fingerprint": "sha256:47eeb436d218d1d807fff05931826ac1f7e299bd2f55bde2affa1a92a296845e",
+    "fingerprint": "sha256:51bee34c435105c87184ba87b0b57fae2195ff2212833d6630c41150b7d8d011",
     "api": "planetscale",
     "version": "2026-11-09",
     "previous_version": "2026-10-23",
@@ -53,9 +53,9 @@
       "type": "api_operation",
       "kind": "operation",
       "side": "request",
-      "operation": "GET /organizations/{organization}/databases/{database}/branches/{branch}/neki-changes"
+      "operation": "GET /v1/organizations/{organization}/databases/{database}/branches/{branch}/neki-changes"
     },
-    "description": "Operation GET /organizations/{organization}/databases/{database}/branches/{branch}/neki-changes marked deprecated.",
+    "description": "Operation GET /v1/organizations/{organization}/databases/{database}/branches/{branch}/neki-changes marked deprecated.",
     "source_url": "https://raw.githubusercontent.com/planetscale/terraform-provider-planetscale/fc13e09d0c18b893aabd3e02d175d13957bba677/schemas/openapi.yaml",
     "source_pointer": "/paths/~1organizations~1{organization}~1databases~1{database}~1branches~1{branch}~1neki-changes/get/description",
     "source_excerpt": "\"Deprecated. Use GET /organizations/:organization/databases/:database/branches/:branch/change-requests instead.\\n### Authorization\\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\\n\\n**Service Token Accesses**\\n `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`\\n\\n**OAuth Scopes**\\n\\n | Resource | Scopes |\\n| :------- | :---------- |\\n| Organization | `read_branches` |\\n| Database | `read_branches` |\\n| Branch | `read_branch` |\"",
@@ -64,7 +64,7 @@
   },
   {
     "id": 4,
-    "fingerprint": "sha256:b3379ec5a0f3643259c8d5837a1db84f1d6c25b8eefa6c1e5cff162699a2b034",
+    "fingerprint": "sha256:414d4e35218966651f9ebb9baa9bef90d1a26dbb1722e53ec01b559ed6e1bd57",
     "api": "planetscale",
     "version": "2026-11-09",
     "previous_version": "2026-10-23",
@@ -74,9 +74,9 @@
       "type": "api_operation",
       "kind": "operation",
       "side": "request",
-      "operation": "DELETE /organizations/{organization}/databases/{database}/branches/{branch}/neki-changes/{id}"
+      "operation": "DELETE /v1/organizations/{organization}/databases/{database}/branches/{branch}/neki-changes/{id}"
     },
-    "description": "Operation DELETE /organizations/{organization}/databases/{database}/branches/{branch}/neki-changes/{id} marked deprecated.",
+    "description": "Operation DELETE /v1/organizations/{organization}/databases/{database}/branches/{branch}/neki-changes/{id} marked deprecated.",
     "source_url": "https://raw.githubusercontent.com/planetscale/terraform-provider-planetscale/fc13e09d0c18b893aabd3e02d175d13957bba677/schemas/openapi.yaml",
     "source_pointer": "/paths/~1organizations~1{organization}~1databases~1{database}~1branches~1{branch}~1neki-changes~1{id}/delete/description",
     "source_excerpt": "\"Deprecated. Use DELETE /organizations/:organization/databases/:database/branches/:branch/change-requests/:id instead.\\n### Authorization\\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\\n\\n**Service Token Accesses**\\n `write_database`\\n\\n**OAuth Scopes**\\n\\n | Resource | Scopes |\\n| :------- | :---------- |\\n| Organization | `write_databases` |\\n| Database | `write_database` |\"",
@@ -85,7 +85,7 @@
   },
   {
     "id": 5,
-    "fingerprint": "sha256:37f00e6877570c39686695e667ed1f5259da9424df9d48610b093149caa56a38",
+    "fingerprint": "sha256:542446b844dd8fc039e8148a9fbe9160f61e1b239e9889eb97227613d193f65c",
     "api": "planetscale",
     "version": "2026-11-09",
     "previous_version": "2026-10-23",
@@ -95,9 +95,9 @@
       "type": "api_operation",
       "kind": "operation",
       "side": "request",
-      "operation": "GET /organizations/{organization}/databases/{database}/branches/{branch}/neki-changes/{id}"
+      "operation": "GET /v1/organizations/{organization}/databases/{database}/branches/{branch}/neki-changes/{id}"
     },
-    "description": "Operation GET /organizations/{organization}/databases/{database}/branches/{branch}/neki-changes/{id} marked deprecated.",
+    "description": "Operation GET /v1/organizations/{organization}/databases/{database}/branches/{branch}/neki-changes/{id} marked deprecated.",
     "source_url": "https://raw.githubusercontent.com/planetscale/terraform-provider-planetscale/fc13e09d0c18b893aabd3e02d175d13957bba677/schemas/openapi.yaml",
     "source_pointer": "/paths/~1organizations~1{organization}~1databases~1{database}~1branches~1{branch}~1neki-changes~1{id}/get/description",
     "source_excerpt": "\"Deprecated. Use GET /organizations/:organization/databases/:database/branches/:branch/change-requests/:id instead.\\n### Authorization\\nA service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:\\n\\n**Service Token Accesses**\\n `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`\\n\\n**OAuth Scopes**\\n\\n | Resource | Scopes |\\n| :------- | :---------- |\\n| Organization | `read_branches` |\\n| Database | `read_branches` |\\n| Branch | `read_branch` |\"",

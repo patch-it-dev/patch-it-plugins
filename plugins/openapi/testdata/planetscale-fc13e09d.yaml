@@ -823,3 +823,5 @@ paths:
         | :------- | :---------- |
         | Organization | `write_databases` |
         | Database | `write_database` |
+servers:
+  - url: https://api.planetscale.com/v1
