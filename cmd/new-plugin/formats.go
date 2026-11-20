@@ -341,15 +341,15 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 	},
 
 	"apichangelog": {
-		kind:   "apichangelog",
+		kind:   "changelog",
 		layer:  "api",
-		defDir: "plugins/apichangelog",
-		def: `package apichangelog
+		defDir: "plugins/changelog",
+		def: `package changelog
 
 // {{.Ident}} is {{.Provider}}'s machine-readable API changelog.
 //
 // ` + todo + `: the repo and the file's path, and what you checked, with the
-// date, as apichangelog.go does for MongoDB Atlas.
+// date, as json.go does for MongoDB Atlas.
 var {{.Ident}} = Log{
 	API: "{{.ID}}", Vendor: "{{.Provider}}", Name: "TODO: the API's name, for sentences",
 	Repo: "TODO-owner/TODO-repo", Path: "changelog/changelog.json",

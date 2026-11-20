@@ -58,9 +58,10 @@ core/event/  core/migrate/     the change-event types from patch-it's contract (
 core/diff/ core/normalize/ core/hint/   the OpenAPI diff engine and its helpers
 plugins/<kind>/        one package per kind, with its providers: openapi (+ adapter/, one spec adapter
                        per provider), retirements (+ retire/), migrationguide (+ sdkguide/,
-                       members/), changelog, feed, apichangelog, catalog, eol;
+                       members/), changelog (Markdown, RST or JSON), feed, catalog, eol;
                        plugins/all imports every one
-plugins/removedmembers/   deprecated: merged into migrationguide, only forwards there
+plugins/removedmembers/ plugins/apichangelog/   deprecated: merged into migrationguide and
+                       changelog, they only forward there
 plugin/ event/ fetch/ migrate/ kit/ retire/ sdkguide/   deprecated old import paths: they only
                        forward to the packages above; don't add to them
 cmd/list-plugins/      prints the list from the registry (make plugins); internal/pluginlist/ is its logic

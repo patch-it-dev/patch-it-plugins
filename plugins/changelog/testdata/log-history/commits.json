@@ -1,0 +1,5 @@
+[
+ {"sha":"0000000000000000000000000000000000000003","html_url":"https://github.com/mongodb/openapi/commit/0000000000000000000000000000000000000003","commit":{"committer":{"date":"2026-03-01T00:00:00Z"}}},
+ {"sha":"0000000000000000000000000000000000000002","html_url":"https://github.com/mongodb/openapi/commit/0000000000000000000000000000000000000002","commit":{"committer":{"date":"2026-02-01T00:00:00Z"}}},
+ {"sha":"0000000000000000000000000000000000000001","html_url":"https://github.com/mongodb/openapi/commit/0000000000000000000000000000000000000001","commit":{"committer":{"date":"2026-01-01T00:00:00Z"}}}
+]

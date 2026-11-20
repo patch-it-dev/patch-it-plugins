@@ -236,6 +236,7 @@ func KindOf(p Plugin) string {
 // they read is read by the new kind, with the same events.
 var mergedKinds = map[string]string{
 	"removedmembers": "migrationguide",
+	"apichangelog":   "changelog",
 }
 
 // CanonicalKind is the kind name means now: name itself, or, for a kind

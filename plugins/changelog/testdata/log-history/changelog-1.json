@@ -1,0 +1,1 @@
+[{"date":"2026-01-01","paths":[{"path":"/a","httpMethod":"GET","versions":[{"version":"2023-01-01","changes":[{"change":"deprecated","changeCode":"endpoint-deprecated","backwardCompatible":true}]}]}]}]

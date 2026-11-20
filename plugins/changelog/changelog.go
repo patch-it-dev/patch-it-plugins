@@ -1,5 +1,9 @@
-// Package changelog is the source plugin for a package's changelog file
-// (CHANGELOG.md, CHANGES.rst, HISTORY.rst), read at a release's tag: one
+// Package changelog is the kind for a changelog, with a parser for each
+// shape: a package's changelog file in Markdown or reStructuredText (File;
+// this file, parse.go, classify.go), or a vendor's machine-readable API
+// changelog in JSON (Log; json.go). One Plugin reads either.
+//
+// A changelog file (CHANGELOG.md, CHANGES.rst, HISTORY.rst) is read at a release's tag: one
 // change event per bullet that plainly removes, renames or deprecates names
 // code uses. The tag never changes, so its URL is the event's provenance (no
 // snapshot) and a rerun stores nothing new: the fingerprints dedupe.
@@ -42,6 +46,15 @@ func init() {
 			Watches: "Names removed or deprecated in each release, from the release's section of CHANGES.rst at its tag",
 			URLs:    []string{"https://github.com/urllib3/urllib3/blob/main/CHANGES.rst", "https://pypi.org/project/urllib3/"},
 			Plugin:  Plugin{File: Urllib3},
+		}},
+	})
+	plugin.RegisterProvider(plugin.Provider{
+		ID: "mongodb", Name: "MongoDB", Category: plugin.CategoryDatabases, Homepage: "https://www.mongodb.com",
+		Sources: []plugin.Source{{
+			ID: "atlas-admin-api", Layer: plugin.LayerAPI, Page: "providers/mongodb-atlas.md",
+			Watches: "Atlas Administration API versions deprecated and removed at their sunset date, per endpoint, from MongoDB's own API changelog",
+			URLs:    []string{"https://github.com/mongodb/openapi/blob/main/changelog/changelog.json"},
+			Plugin:  Plugin{Log: MongoDBAtlas},
 		}},
 	})
 }
@@ -147,18 +160,32 @@ func (f File) added(sections []Section) map[string]bool {
 	return out
 }
 
-// Plugin reads a package's changelog: release by release (ListVersions,
-// ReadAt, Extract), or, with a pinned File, that one release.
+// Plugin reads one changelog, in one of two shapes: set File for a
+// Markdown or RST changelog (read release by release: ListVersions, ReadAt,
+// Extract; or, pinned, that one release), or Log for a JSON one (read commit
+// by commit: json.go).
 type Plugin struct {
 	File File
+	Log  Log
 }
 
-func (p Plugin) Name() string { return p.File.Package }
+// isLog is a JSON changelog.
+func (p Plugin) isLog() bool { return p.Log.API != "" }
+
+func (p Plugin) Name() string {
+	if p.isLog() {
+		return p.Log.API
+	}
+	return p.File.Package
+}
 
 // Run reads the pinned release, or the newest one on the registry, and
 // stores its events. A release's tag never changes, so a rerun stores nothing
 // new: the fingerprints dedupe.
 func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) {
+	if p.isLog() {
+		return p.runLog(ctx, env)
+	}
 	v := plugin.Version{ID: p.File.Release, Ref: p.File.Tag}
 	if p.File.Tag == "" {
 		vs, err := p.ListVersions(ctx, env)
@@ -185,6 +212,9 @@ func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) 
 // ListVersions is every final release of the package on its registry, oldest
 // first, each read at TagPrefix + version; a pinned File has its one release.
 func (p Plugin) ListVersions(ctx context.Context, env plugin.Env) ([]plugin.Version, error) {
+	if p.isLog() {
+		return p.listLog(ctx, env)
+	}
 	f := p.File
 	if f.Tag != "" {
 		return []plugin.Version{{ID: f.Release, Ref: f.Tag}}, nil
@@ -210,6 +240,9 @@ func (p Plugin) ListVersions(ctx context.Context, env plugin.Env) ([]plugin.Vers
 
 // ReadAt fetches the changelog at the release's tag.
 func (p Plugin) ReadAt(ctx context.Context, env plugin.Env, v plugin.Version) (plugin.Snapshot, error) {
+	if p.isLog() {
+		return p.readLog(ctx, env, v)
+	}
 	f := p.File
 	f.Release, f.Tag = v.ID, v.Ref
 	page, err := env.Get(ctx, f.URL())
@@ -224,6 +257,9 @@ func (p Plugin) ReadAt(ctx context.Context, env plugin.Env, v plugin.Version) (p
 // from's release. Releases are extracted pair by pair, so from is the release
 // right before to and to's section is everything between them.
 func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snapshot) (plugin.Result, error) {
+	if p.isLog() {
+		return p.extractLog(env, from, to)
+	}
 	f := p.File
 	f.Release, f.Tag = to.Version.ID, to.Version.Ref
 	heading, findings, err := f.Read(to.Content)
