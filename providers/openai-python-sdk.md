@@ -23,10 +23,11 @@ Kind: `apisurface` (`plugins/apisurface`), with the Python reader (`plugins/apis
 - Reads the `.py` and `.pyi` files under `openai/` as text, never importing or running them: module-level classes and functions, the methods of module-level classes, their parameters and defaults, `__all__`, and an `__init__`'s re-exports.
 - Ignores private names (a leading underscore, a module under a private one, a name left out of `__all__`), classes nested in classes, and tests.
 - Drops (and logs): an overloaded function's parameters; a removed parameter when the function now takes `**kwargs`; a new parameter without a default (the change-event contract has no subject for it yet).
-- A removal is a rename only when the same scope loses one and gains one of the same kind with identical parameters; anything less sure is a removal.
+- A removal is a rename only when the same scope loses one and gains one of the same kind with identical parameters, at least one of them besides `self`/`cls`; anything less sure is a removal.
+- Drops (and logs) a removal that may not be one: a symbol whose file the newer release has too big to read (`MaxFileBytes`); a method whose class is still there but whose bases changed, which one of its bases (followed through the package's own classes, private ones included) now defines, or which the class now defines as an attribute (`create = _create`, a property made a plain attribute).
 
 ## Known gaps
 
 - A class with no `__init__` of its own (the generated pydantic types) has no parameters to compare, so its rename reads as a removal of the old name, and its fields aren't compared.
-- Inherited methods aren't followed to the base class.
+- A method moved to a base class from outside the package (a dependency's class) is still read as removed when the bases themselves didn't change: the dependency's code isn't read.
 - Type changes (an annotation narrowed) aren't events.

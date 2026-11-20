@@ -43,6 +43,22 @@ type File struct {
 	Text string
 }
 
+// Class is what one class's body defines, for following a method that left
+// a class: its bases as written (the last part of a dotted name, without
+// [...]: "SyncAPIResource", "Generic"), and every name its body defines (defs
+// of any name, nested classes, attributes assigned or annotated).
+type Class struct {
+	Bases   []string `json:"bases,omitempty"`
+	Members []string `json:"members,omitempty"`
+}
+
+// Classes are the classes a method could have moved to, by name: every
+// module-level class in the package (private modules and names included)
+// that another class names as a base. Classes of the same name in two
+// modules are merged (their members together), which can only make a
+// moved method more likely to be found, never less.
+type Classes map[string]Class
+
 // module is one file read: its own definitions and how it re-exports others.
 type module struct {
 	name    string            // "openai.types.chat"
@@ -53,6 +69,7 @@ type module struct {
 	hasAll  bool
 	imports map[string][2]string // local name -> {module, name} from "from M import name as local"
 	stars   []string             // modules of "from M import *"
+	classes map[string]*Class    // module-level classes by name
 }
 
 var (
@@ -63,6 +80,8 @@ var (
 	strLit    = regexp.MustCompile(`^[rRuU]?(?:"([^"\\]*)"|'([^'\\]*)')$`)
 	name      = regexp.MustCompile(`^[A-Za-z_]\w*$`)
 	spaces    = regexp.MustCompile(`\s+`)
+	attrLine  = regexp.MustCompile(`^([A-Za-z_]\w*)\s*(?::|=[^=])`)
+	keywords  = map[string]bool{"else": true, "try": true, "finally": true, "except": true, "elif": true, "if": true, "while": true, "for": true, "with": true, "match": true, "case": true}
 )
 
 // Read is the public surface of the package whose files these are. A module
@@ -73,6 +92,99 @@ var (
 // one (re-exports included, in any module). A .pyi stub next to a
 // .py file is read instead of it.
 func Read(files []File) Surface {
+	mods := parseAll(files)
+	out := Surface{}
+	for _, m := range mods {
+		if private(m.name) {
+			continue
+		}
+		for _, n := range m.public(mods) {
+			for k, s := range resolve(mods, m, n, 0) {
+				out[m.name+"."+k] = s
+			}
+		}
+	}
+	return out
+}
+
+// ReadClasses is the package's Classes: every module-level class named as
+// another class's base.
+func ReadClasses(files []File) Classes {
+	all := map[string]*Class{}
+	for _, m := range parseAll(files) {
+		for n, c := range m.classes {
+			have := all[n]
+			if have == nil {
+				have = &Class{}
+				all[n] = have
+			}
+			have.Bases = appendNew(have.Bases, c.Bases...)
+			have.Members = appendNew(have.Members, c.Members...)
+		}
+	}
+	named := map[string]bool{}
+	for _, c := range all {
+		for _, b := range c.Bases {
+			named[b] = true
+		}
+	}
+	out := Classes{}
+	for n, c := range all {
+		if named[n] {
+			slices.Sort(c.Bases)
+			slices.Sort(c.Members)
+			out[n] = *c
+		}
+	}
+	return out
+}
+
+// appendNew appends the names list doesn't have yet.
+func appendNew(list []string, names ...string) []string {
+	for _, n := range names {
+		if !slices.Contains(list, n) {
+			list = append(list, n)
+		}
+	}
+	return list
+}
+
+// Bases are a class's bases as written in its signature ("class X(a.B[T],
+// C, metaclass=M):" is B, C): the last part of each dotted name, without
+// [...]; keyword arguments left out.
+func Bases(signature string) []string {
+	sig, _, _ := strings.Cut(signature, " / ") // a class's __init__ follows
+	if !strings.HasPrefix(sig, "class ") {
+		return nil
+	}
+	open := strings.IndexByte(sig, '(')
+	if open < 0 {
+		return nil
+	}
+	end := closing(sig, open)
+	if end < 0 {
+		return nil
+	}
+	var out []string
+	for _, raw := range splitTop(sig[open+1:end], ',') {
+		b := strings.TrimSpace(raw)
+		if b == "" || indexTop(b, '=') >= 0 {
+			continue
+		}
+		if i := strings.IndexByte(b, '['); i >= 0 {
+			b = b[:i]
+		}
+		b = strings.TrimSpace(b[strings.LastIndexByte(b, '.')+1:])
+		if b != "" {
+			out = append(out, b)
+		}
+	}
+	return out
+}
+
+// parseAll parses every .py and .pyi file, by module name; a .pyi stub next
+// to a .py file is read instead of it.
+func parseAll(files []File) map[string]*module {
 	byPath := map[string]File{}
 	for _, f := range files {
 		byPath[f.Path] = f
@@ -90,18 +202,7 @@ func Read(files []File) Surface {
 		m := parse(f)
 		mods[m.name] = m
 	}
-	out := Surface{}
-	for _, m := range mods {
-		if private(m.name) {
-			continue
-		}
-		for _, n := range m.public(mods) {
-			for k, s := range resolve(mods, m, n, 0) {
-				out[m.name+"."+k] = s
-			}
-		}
-	}
-	return out
+	return mods
 }
 
 // moduleName is "openai.types.chat" for "openai/types/chat/__init__.py".
@@ -222,7 +323,7 @@ type block struct {
 
 // parse reads one file's definitions, __all__ and imports.
 func parse(f File) *module {
-	m := &module{name: moduleName(f.Path), file: f.Path, defs: map[string]Symbol{}, imports: map[string][2]string{}}
+	m := &module{name: moduleName(f.Path), file: f.Path, defs: map[string]Symbol{}, imports: map[string][2]string{}, classes: map[string]*Class{}}
 	var stack []block
 	var decorators []string
 	for _, l := range logicalLines(f.Text) {
@@ -243,6 +344,22 @@ func parse(f File) *module {
 		nested := strings.Count(parent, ".") > 0 // a class inside a class: not read
 		t := l.text
 		opens := strings.HasSuffix(t, ":")
+		if c := m.classes[parent]; c != nil && !inDef {
+			// A name the class body defines: a def, a nested class, an
+			// attribute.
+			var n string
+			switch {
+			case defLine.MatchString(t):
+				n = defLine.FindStringSubmatch(t)[1]
+			case classLine.MatchString(t):
+				n = classLine.FindStringSubmatch(t)[1]
+			case attrLine.MatchString(t) && !keywords[attrLine.FindStringSubmatch(t)[1]]:
+				n = attrLine.FindStringSubmatch(t)[1]
+			}
+			if n != "" {
+				c.Members = appendNew(c.Members, n)
+			}
+		}
 		switch {
 		case strings.HasPrefix(t, "@"):
 			decorators = append(decorators, strings.TrimSpace(t[1:]))
@@ -266,6 +383,10 @@ func parse(f File) *module {
 			if !inDef && parent == "" {
 				m.defs[path] = Symbol{Kind: "class", File: f.Path, Line: l.num, Signature: header(t)}
 				m.order = append(m.order, path)
+				if m.classes[path] == nil {
+					m.classes[path] = &Class{}
+				}
+				m.classes[path].Bases = appendNew(m.classes[path].Bases, Bases(header(t))...)
 			}
 			kind := "class"
 			if inDef {
