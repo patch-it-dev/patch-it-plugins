@@ -52,6 +52,9 @@ func init() {
 	// No Hints: Neon's changelog is a weekly digest, not keyed by operation.
 	// Only operation deprecations and removals: see neon.go.
 	plugin.Register(Plugin{Adapter: adapter.Neon{}, Diff: neonDiff, Keep: neonKeep})
+	// No Hints: Convex has no API changelog; its news feed is product news.
+	// Only operation deprecations and removals: see convex.go.
+	plugin.Register(Plugin{Adapter: adapter.Convex{}, Diff: convexDiff, Keep: convexKeep})
 }
 
 // requestSide keeps the changes to what callers send. GitLab's response

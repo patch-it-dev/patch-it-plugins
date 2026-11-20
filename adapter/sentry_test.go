@@ -170,8 +170,13 @@ func TestSentryBasePathRefusesWhatItCantMove(t *testing.T) {
 	}
 }
 
+// A server whose whole origin is a variable (Convex's "{deployment-url}/api/v1")
+// still has a path to move.
 func TestServerPath(t *testing.T) {
 	for in, want := range map[string]string{
+		"{deployment-url}/api/v1":           "/api/v1",
+		"{deployment-url}/api/v1/":          "/api/v1",
+		"{deployment-url}":                  "",
 		"https://{region}.sentry.io/api/0":  "/api/0",
 		"https://{region}.sentry.io/api/0/": "/api/0",
 		"https://{region}.sentry.io":        "",
