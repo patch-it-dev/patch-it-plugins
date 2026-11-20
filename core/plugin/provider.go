@@ -67,6 +67,11 @@ const (
 	LayerInfra    Layer = "infra"
 )
 
+// Ecosystems are the package registries a Source's Packages name.
+func Ecosystems() []string {
+	return []string{"pypi", "npm", "go", "maven", "nuget", "rubygems", "cargo", "packagist"}
+}
+
 // Layers are every layer.
 func Layers() []Layer {
 	return []Layer{LayerAPI, LayerSDK, LayerPackage, LayerRuntime, LayerCI, LayerAIModels, LayerInfra}
@@ -103,6 +108,13 @@ type Source struct {
 	// Page is the source's page in this repo: "providers/algolia.md" (why
 	// this source, what it reads and ignores, its known gaps).
 	Page string
+	// Packages are the published packages whose changes this source
+	// covers, as "<ecosystem>:<name>" ("pypi:stripe", "npm:@vercel/sdk"):
+	// the package itself for a package or SDK source, the provider's
+	// official SDKs for an API source. What lets a lockfile entry find its
+	// sources without a table kept elsewhere. Only names checked by hand;
+	// none is fine when no package maps to the source.
+	Packages []string
 	// Plugin runs it. Its Name is the source's old slug ("algolia-search"):
 	// what `--api` selects and every event's `api` carries until patch-it's
 	// change-event contract switches to source ids.
@@ -212,6 +224,12 @@ func (p Provider) check() error {
 				return fmt.Errorf("source %q: URL %q isn't absolute", id, u)
 			}
 		}
+		for _, pkg := range s.Packages {
+			eco, name, ok := strings.Cut(pkg, ":")
+			if !ok || !slices.Contains(Ecosystems(), eco) || name == "" || strings.ContainsAny(name, " \t\n") {
+				return fmt.Errorf("source %q: package %q isn't <ecosystem>:<name>, the ecosystem one of plugin.Ecosystems()", id, pkg)
+			}
+		}
 		seen[s.ID] = true
 	}
 	return nil
@@ -276,6 +294,24 @@ func Sources() []SourceInfo {
 		out = append(out, s)
 	}
 	slices.SortFunc(out, func(a, b SourceInfo) int { return cmp.Compare(a.FullID(), b.FullID()) })
+	return out
+}
+
+// Aliases are the other names a source answers to (Lookup, LookupSource):
+// today its first name, the old slug ("algolia-search"), which events carry
+// in `api` and fingerprints hash.
+func (s SourceInfo) Aliases() []string { return []string{s.Alias()} }
+
+// ForPackage are the sources that cover a published package
+// ("pypi:stripe"), sorted by full id: how a lockfile entry finds what to
+// ask the feed for.
+func ForPackage(pkg string) []SourceInfo {
+	var out []SourceInfo
+	for _, s := range Sources() {
+		if slices.Contains(s.Source.Packages, pkg) {
+			out = append(out, s)
+		}
+	}
 	return out
 }
 

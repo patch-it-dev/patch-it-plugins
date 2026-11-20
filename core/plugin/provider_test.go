@@ -59,6 +59,11 @@ func TestRegisterProviderRefusesIncompleteMetadata(t *testing.T) {
 			s.Layer = "API"
 			return s
 		}()}},
+		"bad package": {ID: "x7", Name: "X", Category: CategoryAI, Homepage: "https://x.example", Sources: []Source{func() Source {
+			s := src("api", "x7")
+			s.Packages = []string{"pip:x"}
+			return s
+		}()}},
 		"wrong kind": {ID: "x6", Name: "X", Category: CategoryAI, Homepage: "https://x.example", Sources: []Source{func() Source {
 			s := src("api", "x6")
 			s.Kind = "openapi"
@@ -93,5 +98,19 @@ func TestMergedKindsKeepWorking(t *testing.T) {
 	}
 	if got := CanonicalKind("openapi"); got != "openapi" {
 		t.Errorf("CanonicalKind(openapi) = %q", got)
+	}
+}
+
+// A package names its sources, and a source answers to its first name.
+func TestForPackage(t *testing.T) {
+	s := src("pkg", "acme-test-pkg")
+	s.Packages = []string{"pypi:acme-test", "npm:@acme/test"}
+	RegisterProvider(acme(s))
+	got := ForPackage("npm:@acme/test")
+	if len(got) != 1 || got[0].FullID() != "acme-test/pkg" || strings.Join(got[0].Aliases(), ",") != "acme-test-pkg" {
+		t.Errorf("ForPackage = %+v", got)
+	}
+	if got := ForPackage("pypi:nobody"); len(got) != 0 {
+		t.Errorf("ForPackage(pypi:nobody) = %+v", got)
 	}
 }

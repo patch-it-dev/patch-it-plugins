@@ -136,13 +136,16 @@ func init() {
             ID: "urllib3", Layer: plugin.LayerPackage, Page: "providers/urllib3.md",
             Watches: "Names removed or deprecated in each release, …",
             URLs:    []string{"https://github.com/urllib3/urllib3/blob/main/CHANGES.rst"},
+            Packages: []string{"pypi:urllib3"},
             Plugin:  Plugin{File: Urllib3},
         }},
     })
 }
 ```
 
-`RegisterProvider` panics on missing metadata, a duplicate id, or a provider registered twice with a different name, category or homepage (a provider with sources in two kinds repeats the same ones). `plugin.Lookup` and `plugin.LookupSource` find a source by `provider/source` or by its old slug.
+`RegisterProvider` panics on missing metadata, a duplicate id, or a provider registered twice with a different name, category or homepage (a provider with sources in two kinds repeats the same ones). `plugin.Lookup` and `plugin.LookupSource` find a source by `provider/source` or by its old slug (its first name, which events carry in `api` and fingerprints hash).
+
+`Packages` are the published packages the source covers, `<ecosystem>:<name>` (`pypi:stripe`, `npm:@vercel/sdk`): the package itself for a package or SDK source, the provider's official SDKs for an API source. `plugin.ForPackage` finds a package's sources, so a customer's lockfile maps to sources with no table kept anywhere else. List only names you checked; none is fine.
 
 ### Fetching: `env.Get` and `core/kit/`
 

@@ -32,11 +32,14 @@
             "type": "array",
             "items": {
               "type": "object",
-              "required": ["id", "alias", "kind", "layer", "watches", "urls", "page"],
+              "required": ["id", "alias", "first_name", "aliases", "kind", "layer", "watches", "urls", "packages", "page"],
               "additionalProperties": false,
               "properties": {
                 "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*/[a-z0-9][a-z0-9-]*$", "description": "provider/source" },
                 "alias": { "type": "string", "pattern": "^[a-z0-9][a-z0-9.-]*$", "description": "The old slug: --api and every event's api field until patch-it's change-event contract switches to source ids." },
+                "first_name": { "type": "string", "pattern": "^[a-z0-9][a-z0-9.-]*$", "description": "The source's first name, its old slug: what fingerprints keep hashing after the contract switches to source ids." },
+                "aliases": { "type": "array", "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9.-]*$" }, "description": "Every other name the source answers to." },
+                "packages": { "type": "array", "items": { "type": "string", "pattern": "^(pypi|npm|go|maven|nuget|rubygems|cargo|packagist):[^\\s]+$" }, "description": "The published packages this source covers, as ecosystem:name, so a lockfile entry finds its sources." },
                 "kind": { "type": "string", "enum": ["openapi", "changelog", "notices", "migrationguide", "catalog"] },
                 "layer": { "type": "string", "enum": ["api", "sdk", "package", "runtime", "ci", "ai-models", "infra"] },
                 "watches": { "type": "string", "minLength": 1 },

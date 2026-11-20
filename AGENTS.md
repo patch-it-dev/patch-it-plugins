@@ -4,7 +4,7 @@ Rules for AI coding agents (and humans) working in this repo. `CLAUDE.md` import
 
 ## Rule 1: every new or changed provider or source has complete metadata in its registration
 
-**A source exists when its kind's package registers it with `plugin.RegisterProvider`, and its metadata lives only there: the provider's id, name, category and homepage, and each source's id, layer, what it watches, the URLs it reads and its page, `providers/<name>.md`.** Adding, changing or removing a source is a change to that registration (and to its page) in the same PR. There is no list to update: nothing in this repo, the docs site or anywhere else keeps one by hand.
+**A source exists when its kind's package registers it with `plugin.RegisterProvider`, and its metadata lives only there: the provider's id, name, category and homepage, and each source's id, layer, what it watches, the URLs it reads, the packages it covers (`pypi:stripe`) and its page, `providers/<name>.md`.** Adding, changing or removing a source is a change to that registration (and to its page) in the same PR. There is no list to update: nothing in this repo, the docs site or anywhere else keeps one by hand.
 
 `go run ./cmd/list-plugins` prints the list from the registry (JSON), and the Release workflow attaches it to every release as `plugins.json`; the docs site and patch-it's hosted ingestion service read it from there. `RegisterProvider` refuses incomplete metadata and `go test` fails when a source's page is missing, but no check can tell whether the words are right: you are that check. Say in the PR that you read them.
 

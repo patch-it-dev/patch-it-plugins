@@ -34,18 +34,20 @@ func init() {
 		ID: "textual", Name: "Textual", Category: plugin.CategoryPackages, Homepage: "https://textual.textualize.io",
 		Sources: []plugin.Source{{
 			ID: "textual", Layer: plugin.LayerPackage, Page: "providers/textual.md",
-			Watches: "Names removed, renamed or deprecated in each release, from the release's section of CHANGELOG.md at its tag",
-			URLs:    []string{"https://github.com/Textualize/textual/blob/main/CHANGELOG.md", "https://pypi.org/project/textual/"},
-			Plugin:  Plugin{File: Textual},
+			Watches:  "Names removed, renamed or deprecated in each release, from the release's section of CHANGELOG.md at its tag",
+			URLs:     []string{"https://github.com/Textualize/textual/blob/main/CHANGELOG.md", "https://pypi.org/project/textual/"},
+			Packages: []string{"pypi:textual"},
+			Plugin:   Plugin{File: Textual},
 		}},
 	})
 	plugin.RegisterProvider(plugin.Provider{
 		ID: "urllib3", Name: "urllib3", Category: plugin.CategoryPackages, Homepage: "https://urllib3.readthedocs.io",
 		Sources: []plugin.Source{{
 			ID: "urllib3", Layer: plugin.LayerPackage, Page: "providers/urllib3.md",
-			Watches: "Names removed or deprecated in each release, from the release's section of CHANGES.rst at its tag",
-			URLs:    []string{"https://github.com/urllib3/urllib3/blob/main/CHANGES.rst", "https://pypi.org/project/urllib3/"},
-			Plugin:  Plugin{File: Urllib3},
+			Watches:  "Names removed or deprecated in each release, from the release's section of CHANGES.rst at its tag",
+			URLs:     []string{"https://github.com/urllib3/urllib3/blob/main/CHANGES.rst", "https://pypi.org/project/urllib3/"},
+			Packages: []string{"pypi:urllib3"},
+			Plugin:   Plugin{File: Urllib3},
 		}},
 	})
 	plugin.RegisterProvider(plugin.Provider{

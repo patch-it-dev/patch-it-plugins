@@ -37,18 +37,20 @@ func init() {
 		ID: "openai", Name: "OpenAI", Category: plugin.CategoryAI, Homepage: "https://openai.com",
 		Sources: []plugin.Source{{
 			ID: "models", Layer: plugin.LayerAIModels, Page: "providers/openai-models.md",
-			Watches: "Model deprecations and shutdown dates (Chat Completions and Responses text models)",
-			URLs:    []string{"https://developers.openai.com/api/docs/deprecations"},
-			Plugin:  Plugin{Page: retire.OpenAI, Archiver: kit.Wayback{}},
+			Watches:  "Model deprecations and shutdown dates (Chat Completions and Responses text models)",
+			URLs:     []string{"https://developers.openai.com/api/docs/deprecations"},
+			Packages: []string{"pypi:openai", "npm:openai"},
+			Plugin:   Plugin{Page: retire.OpenAI, Archiver: kit.Wayback{}},
 		}},
 	})
 	plugin.RegisterProvider(plugin.Provider{
 		ID: "anthropic", Name: "Anthropic", Category: plugin.CategoryAI, Homepage: "https://www.anthropic.com",
 		Sources: []plugin.Source{{
 			ID: "models", Layer: plugin.LayerAIModels, Page: "providers/anthropic-models.md",
-			Watches: "Model deprecations and retirement dates (Messages API models)",
-			URLs:    []string{"https://platform.claude.com/docs/en/about-claude/model-deprecations"},
-			Plugin:  Plugin{Page: retire.Anthropic, Archiver: kit.Wayback{}},
+			Watches:  "Model deprecations and retirement dates (Messages API models)",
+			URLs:     []string{"https://platform.claude.com/docs/en/about-claude/model-deprecations"},
+			Packages: []string{"pypi:anthropic", "npm:@anthropic-ai/sdk"},
+			Plugin:   Plugin{Page: retire.Anthropic, Archiver: kit.Wayback{}},
 		}},
 	})
 	plugin.RegisterProvider(plugin.Provider{
@@ -73,9 +75,10 @@ func init() {
 		ID: "cloudflare", Name: "Cloudflare", Category: plugin.CategoryInfrastructure, Homepage: "https://www.cloudflare.com",
 		Sources: []plugin.Source{{
 			ID: "api", Layer: plugin.LayerAPI, Page: "providers/cloudflare.md",
-			Watches: "REST API operations Cloudflare deprecates, breaking on their end-of-life date when it gives one",
-			URLs:    []string{"https://developers.cloudflare.com/fundamentals/api/reference/deprecations/index.xml"},
-			Plugin:  Plugin{Page: feed.CloudflareAPI, Archiver: kit.Wayback{}},
+			Watches:  "REST API operations Cloudflare deprecates, breaking on their end-of-life date when it gives one",
+			URLs:     []string{"https://developers.cloudflare.com/fundamentals/api/reference/deprecations/index.xml"},
+			Packages: []string{"pypi:cloudflare", "npm:cloudflare"},
+			Plugin:   Plugin{Page: feed.CloudflareAPI, Archiver: kit.Wayback{}},
 		}},
 	})
 	plugin.RegisterProvider(plugin.Provider{
