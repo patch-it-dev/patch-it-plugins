@@ -4,7 +4,7 @@
 
 ## Checklist
 
-- [ ] **Metadata complete in the registration** (`plugin.RegisterProvider`: provider id, name, category, homepage; each source's id, layer, what it watches, URLs, page), and I read the words. There is no list to update. Not applicable: <!-- say why -->
+- [ ] **Metadata complete in the registration** (`plugin.RegisterProvider`: provider id, name, category, homepage; each source's id, kind, layer, what it watches, URLs, packages, page), and I read the words. There is no list to update. Not applicable: <!-- say why -->
 - [ ] Every commit is signed off (`git commit -s`, DCO)
 - [ ] Golden test over a real saved copy of the source (`testdata/golden/<api>.json`)
 - [ ] `testdata/README.md` lists each file: URL, date fetched, license, quote of the part the plugin reads

@@ -28,7 +28,7 @@ There's no list in this repo: `make plugins` prints every provider and source fr
 | [`core/diff/`](../core/diff/), [`core/normalize/`](../core/normalize/), [`core/hint/`](../core/hint/), [`plugins/openapi/adapter/`](../plugins/openapi/adapter/) | The OpenAPI diff engine: compare two specs, turn the changes into events, attach changelog hints; one adapter per spec provider |
 | [`plugins/notices/retire/`](../plugins/notices/retire/), [`plugins/notices/feed/`](../plugins/notices/feed/), [`plugins/notices/eol/`](../plugins/notices/eol/), [`plugins/migrationguide/sdkguide/`](../plugins/migrationguide/sdkguide/), [`plugins/migrationguide/members/`](../plugins/migrationguide/members/), [`core/fetch/`](../core/fetch/) | The notices readers (deprecations pages, feeds, end-of-life tables) and the migration-guide readers (removed parameters, removed members); the HTTP fetch and cache |
 | [`contract/fixtures/`](../contract/) | A copy of patch-it's change-event fixtures |
-| `plugin/`, `event/`, `fetch/`, `migrate/`, `kit/`, `kit/kittest/`, `retire/`, `sdkguide/`, `plugins/removedmembers/`, `plugins/apichangelog/`, `plugins/retirements/`, `plugins/feed/`, `plugins/eol/` | Deprecated: the old import paths, forwarding to the packages above until code that imports them moves |
+| `plugins/removedmembers/`, `plugins/apichangelog/`, `plugins/retirements/`, `plugins/feed/`, `plugins/eol/` | Deprecated: the old import paths, forwarding to the packages above until code that imports them moves |
 | [`providers/`](../providers/) | One page per provider: why that source, what the plugin reads |
 | [`docs/`](./) | [How to write a plugin](writing-a-plugin.md), the [README template](README-template.md) patch-it's public repos share |
 

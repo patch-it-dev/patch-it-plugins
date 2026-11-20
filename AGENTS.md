@@ -64,8 +64,6 @@ plugins/<kind>/        one package per kind, with its providers: openapi (+ adap
                        plugins/all imports every one
 plugins/removedmembers/ apichangelog/ retirements/ feed/ eol/   deprecated: merged into
                        migrationguide, changelog and notices, they only forward there
-plugin/ event/ fetch/ migrate/ kit/ retire/ sdkguide/   deprecated old import paths: they only
-                       forward to the packages above; don't add to them
 cmd/list-plugins/      prints the list from the registry (make plugins); internal/pluginlist/ is its logic
 cmd/new-plugin/        scaffolds a provider's source on a kind (make new-plugin ARGS=...; go run ./cmd/new-plugin --help)
 contract/fixtures/     a copy of patch-it's change-event fixtures (CI_contract checks it)
