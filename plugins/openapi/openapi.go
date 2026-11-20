@@ -214,105 +214,116 @@ type Plugin struct {
 
 func (p Plugin) Name() string { return p.Adapter.API() }
 
-// Run diffs the newest release against whatever was last stored.
+// Run diffs the newest release against whatever was last stored: the newest
+// version (LatestTag), ReadAt it, and Extract against the last baseline.
 func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) {
 	a := p.Adapter
 	tag, err := a.LatestTag(ctx)
 	if err != nil {
 		return plugin.Result{}, fmt.Errorf("finding latest tag: %w", err)
 	}
-	newSpec, err := a.Fetch(ctx, tag)
+	to, err := p.ReadAt(ctx, env, plugin.Version{ID: tag, Ref: tag})
 	if err != nil {
-		return plugin.Result{}, fmt.Errorf("fetching %s %s: %w", a.API(), tag, err)
+		return plugin.Result{}, err
 	}
 	last, err := env.Baselines.LastSpec(a.API())
 	if err != nil {
 		return plugin.Result{}, fmt.Errorf("loading last spec: %w", err)
 	}
-	if last != nil && last.SHA256 == plugin.SHA256(newSpec.Content) {
+	if last != nil && last.SHA256 == plugin.SHA256(to.Content) {
 		log.Printf("%s: no change (%s)", a.API(), tag)
 		return plugin.Result{}, nil
 	}
-
-	var oldParsed *diff.Spec
-	var previousVersion, oldSourceURL string
+	var from plugin.Snapshot
 	if last != nil {
-		oldParsed, err = diff.Parse(last.Content)
-		if err != nil {
-			return plugin.Result{}, fmt.Errorf("parsing stored spec: %w", err)
-		}
-		previousVersion = last.Version
-		oldSourceURL = last.SourceURL
+		from = plugin.Snapshot{Version: plugin.Version{ID: last.Version, Ref: last.Tag}, Content: last.Content, SourceURL: last.SourceURL}
 	}
-	newParsed, err := diff.Parse(newSpec.Content)
+	res, err := p.Extract(ctx, env, from, to)
 	if err != nil {
-		return plugin.Result{}, fmt.Errorf("parsing fetched spec: %w", err)
+		return plugin.Result{}, err
 	}
-
-	var oldContent []byte
-	if last != nil {
-		oldContent = last.Content
-	}
-	events, errs := p.events(oldParsed, newParsed, oldContent, newSpec.Content, normalize.Source{
-		API:             a.API(),
-		Version:         newSpec.Version,
-		PreviousVersion: previousVersion,
-		NewSpecURL:      newSpec.SourceURL,
-		OldSpecURL:      oldSourceURL,
-		DetectedAt:      env.Now().UTC(),
-	})
-	p.attachHints(ctx, newSpec.Version, events)
-	converted, invalid := migrate.Fresh(events)
-	return plugin.Result{
-		Label:     tag,
-		Events:    converted,
-		Rejected:  append(errs, invalid...),
-		Baselines: []plugin.Spec{plugin.Baseline(a.API(), newSpec.Version, tag, newSpec.SourceURL, newSpec.Content, false, env.Now())},
-	}, nil
+	res.Label = tag
+	res.Baselines = []plugin.Spec{plugin.Baseline(a.API(), to.Version.ID, tag, to.SourceURL, to.Content, false, env.Now())}
+	return res, nil
 }
 
 // Replay diffs two given releases. Both specs are saved marked as replays, so
 // the normal-run baseline never moves; the events are stored like any others:
 // that's how a historical change becomes something the feed can serve.
 func (p Plugin) Replay(ctx context.Context, env plugin.Env, from, to string) (plugin.Result, error) {
-	a := p.Adapter
-	oldSpec, err := a.Fetch(ctx, from)
+	old, err := p.ReadAt(ctx, env, plugin.Version{ID: from, Ref: from})
 	if err != nil {
-		return plugin.Result{}, fmt.Errorf("fetching %s %s: %w", a.API(), from, err)
+		return plugin.Result{}, err
 	}
-	newSpec, err := a.Fetch(ctx, to)
+	next, err := p.ReadAt(ctx, env, plugin.Version{ID: to, Ref: to})
 	if err != nil {
-		return plugin.Result{}, fmt.Errorf("fetching %s %s: %w", a.API(), to, err)
+		return plugin.Result{}, err
 	}
-	oldParsed, err := diff.Parse(oldSpec.Content)
+	res, err := p.Extract(ctx, env, old, next)
 	if err != nil {
-		return plugin.Result{}, fmt.Errorf("parsing %s: %w", from, err)
+		return plugin.Result{}, err
 	}
-	newParsed, err := diff.Parse(newSpec.Content)
+	now := env.Now()
+	res.Label = to
+	res.Baselines = []plugin.Spec{
+		plugin.Baseline(p.Adapter.API(), old.Version.ID, from, old.SourceURL, old.Content, true, now),
+		plugin.Baseline(p.Adapter.API(), next.Version.ID, to, next.SourceURL, next.Content, true, now),
+	}
+	return res, nil
+}
+
+// ListVersions is every release of the spec, oldest first, when the adapter
+// can list them (adapter.Lister); otherwise only the newest (LatestTag).
+func (p Plugin) ListVersions(ctx context.Context, _ plugin.Env) ([]plugin.Version, error) {
+	if l, ok := p.Adapter.(adapter.Lister); ok {
+		return l.Versions(ctx)
+	}
+	tag, err := p.Adapter.LatestTag(ctx)
 	if err != nil {
-		return plugin.Result{}, fmt.Errorf("parsing %s: %w", to, err)
+		return nil, fmt.Errorf("finding latest tag: %w", err)
 	}
-	events, errs := p.events(oldParsed, newParsed, oldSpec.Content, newSpec.Content, normalize.Source{
-		API:             a.API(),
-		Version:         newSpec.Version,
-		PreviousVersion: oldSpec.Version,
-		NewSpecURL:      newSpec.SourceURL,
-		OldSpecURL:      oldSpec.SourceURL,
+	return []plugin.Version{{ID: tag, Ref: tag}}, nil
+}
+
+// ReadAt fetches the spec at v.Ref. The snapshot's version ID is the version
+// the spec itself declares (what events carry), which may differ from the tag.
+func (p Plugin) ReadAt(ctx context.Context, _ plugin.Env, v plugin.Version) (plugin.Snapshot, error) {
+	s, err := p.Adapter.Fetch(ctx, v.Ref)
+	if err != nil {
+		return plugin.Snapshot{}, fmt.Errorf("fetching %s %s: %w", p.Adapter.API(), v.Ref, err)
+	}
+	v.ID = s.Version
+	return plugin.Snapshot{Version: v, Content: s.Content, SourceURL: s.SourceURL}, nil
+}
+
+// Extract diffs two snapshots of the spec into events, with to's version and
+// from's as previous_version. A zero from is an empty spec before the first.
+func (p Plugin) Extract(ctx context.Context, env plugin.Env, from, to plugin.Snapshot) (plugin.Result, error) {
+	var oldParsed *diff.Spec
+	if !from.IsZero() {
+		var err error
+		if oldParsed, err = diff.Parse(from.Content); err != nil {
+			return plugin.Result{}, fmt.Errorf("parsing the %s spec at %s: %w", p.Adapter.API(), from.Version.ID, err)
+		}
+	}
+	newParsed, err := diff.Parse(to.Content)
+	if err != nil {
+		return plugin.Result{}, fmt.Errorf("parsing the %s spec at %s: %w", p.Adapter.API(), to.Version.ID, err)
+	}
+	events, errs := p.events(oldParsed, newParsed, from.Content, to.Content, normalize.Source{
+		API:             p.Adapter.API(),
+		Version:         to.Version.ID,
+		PreviousVersion: from.Version.ID,
+		NewSpecURL:      to.SourceURL,
+		OldSpecURL:      from.SourceURL,
 		DetectedAt:      env.Now().UTC(),
 	})
-	p.attachHints(ctx, newSpec.Version, events)
-	now := env.Now()
+	p.attachHints(ctx, to.Version.ID, events)
 	converted, invalid := migrate.Fresh(events)
-	return plugin.Result{
-		Label:    to,
-		Events:   converted,
-		Rejected: append(errs, invalid...),
-		Baselines: []plugin.Spec{
-			plugin.Baseline(a.API(), oldSpec.Version, from, oldSpec.SourceURL, oldSpec.Content, true, now),
-			plugin.Baseline(a.API(), newSpec.Version, to, newSpec.SourceURL, newSpec.Content, true, now),
-		},
-	}, nil
+	return plugin.Result{Label: to.Version.Ref, Events: converted, Rejected: append(errs, invalid...)}, nil
 }
+
+var _ plugin.Versioned = Plugin{}
 
 // events diffs two parsed specs into events, applying Keep, and pointing each
 // event's source_pointer into the published file when the adapter reshaped it.

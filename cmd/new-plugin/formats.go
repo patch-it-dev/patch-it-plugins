@@ -298,15 +298,19 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 		defDir: "plugins/changelog",
 		def: `package changelog
 
-// {{.Ident}} is {{.Provider}}'s changelog at one release.
+// {{.Ident}} is {{.Provider}}'s changelog, read release by release (its
+// releases listed from the ecosystem's registry, each at TagPrefix+version).
 //
-// ` + todo + `: the ecosystem, the import name, the repo, the release's tag,
-// the release as the changelog heads it, and the changelog's path. Say what
-// you checked, with the date, as changelog.go does for Textual and urllib3.
+// ` + todo + `: the ecosystem, the import name, the repo, the tag prefix and
+// the changelog's path. Say what you checked, with the date, as changelog.go
+// does for Textual and urllib3.
 var {{.Ident}} = File{
 	Package: "{{.ID}}", Ecosystem: "pypi", Module: "{{.ID}}",
-	Repo: "TODO-owner/TODO-repo", Tag: "v1.0.0", Release: "1.0.0", Path: "CHANGELOG.md",
+	Repo: "TODO-owner/TODO-repo", TagPrefix: "v", Path: "CHANGELOG.md",
 }
+
+// {{.Ident}}Golden is the release the golden test pins.
+var {{.Ident}}Golden = {{.Ident}}.At("1.0.0")
 `,
 		register: `plugin.Register(Plugin{File: {{.Ident}}})`,
 		pluginOf: `Plugin{File: {{.Ident}}}`,
@@ -324,7 +328,7 @@ var {{.Ident}} = File{
 		ingest: `// {{.Lower}}Ingest runs the plugin over a saved copy of the changelog.
 func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 	t.Helper()
-	return kittest.Ingest(t, Plugin{File: {{.Ident}}}, kittest.Pages{ {{.Ident}}.URL(): file})
+	return kittest.Ingest(t, Plugin{File: {{.Ident}}Golden}, kittest.Pages{ {{.Ident}}Golden.URL(): file})
 }
 `,
 		imports: []string{"github.com/patch-it-dev/patch-it-plugins/core/event"},

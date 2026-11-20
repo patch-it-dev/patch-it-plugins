@@ -22,6 +22,7 @@ import (
 
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
 	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
+	"github.com/patch-it-dev/patch-it-plugins/core/versions"
 )
 
 func init() {
@@ -29,49 +30,65 @@ func init() {
 		ID: "textual", Name: "Textual", Category: plugin.CategoryPackages, Homepage: "https://textual.textualize.io",
 		Sources: []plugin.Source{{
 			ID: "textual", Layer: plugin.LayerPackage, Page: "providers/textual.md",
-			Watches: "Removals and breaking changes in release 0.86.0",
-			URLs:    []string{"https://github.com/Textualize/textual/blob/v0.86.0/CHANGELOG.md"},
-			Plugin:  Plugin{File: Textual0860},
+			Watches: "Names removed, renamed or deprecated in each release, from the release's section of CHANGELOG.md at its tag",
+			URLs:    []string{"https://github.com/Textualize/textual/blob/main/CHANGELOG.md", "https://pypi.org/project/textual/"},
+			Plugin:  Plugin{File: Textual},
 		}},
 	})
 	plugin.RegisterProvider(plugin.Provider{
 		ID: "urllib3", Name: "urllib3", Category: plugin.CategoryPackages, Homepage: "https://urllib3.readthedocs.io",
 		Sources: []plugin.Source{{
 			ID: "urllib3", Layer: plugin.LayerPackage, Page: "providers/urllib3.md",
-			Watches: "Removals and deprecations in release 2.0.0",
-			URLs:    []string{"https://github.com/urllib3/urllib3/blob/2.0.0/CHANGES.rst"},
-			Plugin:  Plugin{File: Urllib3200},
+			Watches: "Names removed or deprecated in each release, from the release's section of CHANGES.rst at its tag",
+			URLs:    []string{"https://github.com/urllib3/urllib3/blob/main/CHANGES.rst", "https://pypi.org/project/urllib3/"},
+			Plugin:  Plugin{File: Urllib3},
 		}},
 	})
 }
 
-// File is one package's changelog at one release.
+// File is one package's changelog. Unpinned (Tag and Release empty), it is
+// read release by release: every version on the package registry, the file at
+// that release's tag (TagPrefix + version). Pinned (At), it is one release.
 type File struct {
 	Package   string // the installed name and the events' api: "urllib3"
-	Ecosystem string // "pypi"
+	Ecosystem string // where its releases are listed: "pypi"
 	Module    string // the import name, stripped from a symbol's front: "urllib3"
 	Repo      string // owner/name on GitHub
-	Tag       string // the release's tag: "2.0.0", "v0.86.0"
-	Release   string // the release as the changelog heads it: "2.0.0"
+	TagPrefix string // a release's git tag is TagPrefix + its version: "v" for v0.86.0
 	Path      string // the changelog's path in the repo
+	Tag       string // pinned: the release's tag: "2.0.0", "v0.86.0"
+	Release   string // pinned: the release as the changelog heads it: "2.0.0"
 }
 
-// Textual0860 is Textual's Keep a Changelog CHANGELOG.md at v0.86.0 (checked
-// 2026-11-14: "## [0.86.0] - 2024-11-16", "### Removed", and "Breaking
-// change:" bullets under "### Changed").
-var Textual0860 = File{
+// At is f pinned to one release.
+func (f File) At(release string) File {
+	f.Release, f.Tag = release, f.TagPrefix+release
+	return f
+}
+
+// Textual is Textual's Keep a Changelog CHANGELOG.md (checked 2026-11-14 at
+// v0.86.0: "## [0.86.0] - 2024-11-16", "### Removed", and "Breaking change:"
+// bullets under "### Changed"), tagged v<version>.
+var Textual = File{
 	Package: "textual", Ecosystem: "pypi", Module: "textual",
-	Repo: "Textualize/textual", Tag: "v0.86.0", Release: "0.86.0", Path: "CHANGELOG.md",
+	Repo: "Textualize/textual", TagPrefix: "v", Path: "CHANGELOG.md",
 }
 
-// Urllib3200 is urllib3's CHANGES.rst at 2.0.0 (checked 2026-11-14: "2.0.0
-// (2023-04-26)" over "=====", "Removed" and "Deprecated" over "-----").
-var Urllib3200 = File{
+// Urllib3 is urllib3's CHANGES.rst (checked 2026-11-14 at 2.0.0: "2.0.0
+// (2023-04-26)" over "=====", "Removed" and "Deprecated" over "-----"),
+// tagged <version>.
+var Urllib3 = File{
 	Package: "urllib3", Ecosystem: "pypi", Module: "urllib3",
-	Repo: "urllib3/urllib3", Tag: "2.0.0", Release: "2.0.0", Path: "CHANGES.rst",
+	Repo: "urllib3/urllib3", Path: "CHANGES.rst",
 }
 
-// URL is the changelog as it was at the tag: its own provenance.
+// The releases the golden files pin.
+var (
+	Textual0860 = Textual.At("0.86.0")
+	Urllib3200  = Urllib3.At("2.0.0")
+)
+
+// URL is the changelog as it was at the (pinned) tag: its own provenance.
 func (f File) URL() string {
 	return fmt.Sprintf("https://raw.githubusercontent.com/%s/%s/%s", f.Repo, f.Tag, f.Path)
 }
@@ -130,20 +147,86 @@ func (f File) added(sections []Section) map[string]bool {
 	return out
 }
 
-// Plugin reads one changelog at one release.
+// Plugin reads a package's changelog: release by release (ListVersions,
+// ReadAt, Extract), or, with a pinned File, that one release.
 type Plugin struct {
 	File File
 }
 
 func (p Plugin) Name() string { return p.File.Package }
 
+// Run reads the pinned release, or the newest one on the registry, and
+// stores its events. A release's tag never changes, so a rerun stores nothing
+// new: the fingerprints dedupe.
 func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) {
+	v := plugin.Version{ID: p.File.Release, Ref: p.File.Tag}
+	if p.File.Tag == "" {
+		vs, err := p.ListVersions(ctx, env)
+		if err != nil {
+			return plugin.Result{}, err
+		}
+		if len(vs) == 0 {
+			return plugin.Result{}, fmt.Errorf("%s: no release listed", p.File.Package)
+		}
+		v = vs[len(vs)-1]
+	}
+	to, err := p.ReadAt(ctx, env, v)
+	if err != nil {
+		return plugin.Result{}, err
+	}
+	res, err := p.Extract(ctx, env, plugin.Snapshot{}, to)
+	if err != nil {
+		return plugin.Result{}, err
+	}
+	res.Baselines = []plugin.Spec{plugin.Baseline(p.File.Package, v.ID, v.Ref, to.SourceURL, to.Content, false, env.Now().UTC())}
+	return res, nil
+}
+
+// ListVersions is every final release of the package on its registry, oldest
+// first, each read at TagPrefix + version; a pinned File has its one release.
+func (p Plugin) ListVersions(ctx context.Context, env plugin.Env) ([]plugin.Version, error) {
 	f := p.File
+	if f.Tag != "" {
+		return []plugin.Version{{ID: f.Release, Ref: f.Tag}}, nil
+	}
+	var vs []plugin.Version
+	var err error
+	switch f.Ecosystem {
+	case "pypi":
+		vs, err = versions.PyPIReleases(ctx, env.Get, f.Package)
+	case "npm":
+		vs, err = versions.NPMReleases(ctx, env.Get, f.Package)
+	default:
+		return nil, fmt.Errorf("%s: no registry to list %q releases from", f.Package, f.Ecosystem)
+	}
+	if err != nil {
+		return nil, err
+	}
+	for i := range vs {
+		vs[i].Ref = f.TagPrefix + vs[i].ID
+	}
+	return vs, nil
+}
+
+// ReadAt fetches the changelog at the release's tag.
+func (p Plugin) ReadAt(ctx context.Context, env plugin.Env, v plugin.Version) (plugin.Snapshot, error) {
+	f := p.File
+	f.Release, f.Tag = v.ID, v.Ref
 	page, err := env.Get(ctx, f.URL())
 	if err != nil {
-		return plugin.Result{}, fmt.Errorf("fetching %s: %w", f.URL(), err)
+		return plugin.Snapshot{}, fmt.Errorf("fetching %s: %w", f.URL(), err)
 	}
-	heading, findings, err := f.Read(page)
+	return plugin.Snapshot{Version: v, Content: page, SourceURL: f.URL()}, nil
+}
+
+// Extract is the to release's section of the changelog: an event per bullet
+// that plainly removes, renames or deprecates a name, with previous_version
+// from's release. Releases are extracted pair by pair, so from is the release
+// right before to and to's section is everything between them.
+func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snapshot) (plugin.Result, error) {
+	f := p.File
+	f.Release, f.Tag = to.Version.ID, to.Version.Ref
+	heading, findings, err := f.Read(to.Content)
 	if err != nil {
 		return plugin.Result{}, fmt.Errorf("reading %s: %w", f.URL(), err)
 	}
@@ -161,17 +244,18 @@ func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) 
 			Change: c.Change, Symbols: c.Symbols, Replacement: c.Replacement,
 		}
 		e := event.EventV2{
-			API:           f.Package,
-			Version:       f.Release,
-			ChangeType:    c.ChangeType,
-			Breaking:      c.ChangeType == event.ChangeTypeBreaking,
-			Subject:       subject,
-			Description:   describe(f, c),
-			MigrationHint: cap2000(fmt.Sprintf("%s (%s's changelog for %s)", fd.Bullet.Text, f.Package, f.Release)),
-			SourceURL:     f.URL(),
-			SourceExcerpt: cap2000(heading + "\n" + fd.Section + "\n" + fd.Bullet.Raw),
-			Confidence:    1.0,
-			DetectedAt:    now,
+			API:             f.Package,
+			Version:         f.Release,
+			PreviousVersion: from.Version.ID,
+			ChangeType:      c.ChangeType,
+			Breaking:        c.ChangeType == event.ChangeTypeBreaking,
+			Subject:         subject,
+			Description:     describe(f, c),
+			MigrationHint:   cap2000(fmt.Sprintf("%s (%s's changelog for %s)", fd.Bullet.Text, f.Package, f.Release)),
+			SourceURL:       f.URL(),
+			SourceExcerpt:   cap2000(heading + "\n" + fd.Section + "\n" + fd.Bullet.Raw),
+			Confidence:      1.0,
+			DetectedAt:      now,
 		}
 		e.Fingerprint = event.FingerprintV2(e.API, e.Version, e.ChangeType, subject, "")
 		if err := e.Validate(); err != nil {
@@ -180,13 +264,10 @@ func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) 
 		}
 		events = append(events, e)
 	}
-	return plugin.Result{
-		Label:     f.URL(),
-		Events:    events,
-		Rejected:  rejected,
-		Baselines: []plugin.Spec{plugin.Baseline(f.Package, f.Release, f.Tag, f.URL(), page, false, now)},
-	}, nil
+	return plugin.Result{Label: f.URL(), Events: events, Rejected: rejected}, nil
 }
+
+var _ plugin.Versioned = Plugin{}
 
 func describe(f File, c Change) string {
 	names := "`" + strings.Join(c.Symbols, "`, `") + "`"

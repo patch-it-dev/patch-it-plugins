@@ -22,9 +22,9 @@ import (
 
 // Guide is one SDK's migration guide for one major release.
 type Guide struct {
-	API       string // the SDK's slug in change events, e.g. "anthropic"
+	API       string // the SDK's slug in change events and its PyPI name, e.g. "anthropic"
 	Repo      string // its GitHub repository, owner/name
-	Major     int    // the release the guide describes: 1 for "Migrating to v1"
+	Major     int    // pinned: the release the guide describes, 1 for "Migrating to v1"; 0 lists them
 	Operation string // the API operation the removed parameters were sent to
 	// Methods is what a table row's method cell must name for its parameters to
 	// count: the plain call, so a row about beta-only methods (where the same
@@ -37,14 +37,23 @@ type Guide struct {
 	Symbols []string
 }
 
-// AnthropicV1 is anthropic-sdk-python's guide to 1.0.0.
-var AnthropicV1 = Guide{
+// Anthropic is anthropic-sdk-python's MIGRATION.md, unpinned: read at the
+// first release of each major (Major 0; At pins it).
+var Anthropic = Guide{
 	API:       "anthropic",
 	Repo:      "anthropics/anthropic-sdk-python",
-	Major:     1,
 	Operation: "POST /v1/messages",
 	Methods:   "`messages.create()`",
 	Symbols:   []string{"messages.create", "messages.stream", "messages.parse"},
+}
+
+// AnthropicV1 is anthropic-sdk-python's guide to 1.0.0: what the golden pins.
+var AnthropicV1 = Anthropic.At(1)
+
+// At is g pinned to one major.
+func (g Guide) At(major int) Guide {
+	g.Major = major
+	return g
 }
 
 // Version is the release that removed the parameters.

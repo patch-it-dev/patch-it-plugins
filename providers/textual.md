@@ -2,7 +2,7 @@
 
 ## What it watches
 
-Removals and breaking changes in Textual 0.86.0, read from its changelog: symbols removed (`App.dark`, …) or renamed. One `package_release` event per changelog bullet the plugin can read with certainty. Pinned to that release.
+Removals and breaking changes in each Textual release, read from that release's section of its changelog: symbols removed (`App.dark`, …) or renamed. One `package_release` event per changelog bullet the plugin can read with certainty. The releases are listed from PyPI (final releases only) and each is read at its tag (`v<version>`); 0.86.0 is the release the golden test pins.
 
 Format plugin: `changelog` (`plugins/changelog`).
 
@@ -26,5 +26,5 @@ Format plugin: `changelog` (`plugins/changelog`).
 
 ## Known gaps
 
-- Only 0.86.0. Following each new release is planned.
+- A release is read at its tag; one whose tag or changelog section is missing fails that pair, it isn't guessed.
 - Breaking behavior changes written as prose aren't events.

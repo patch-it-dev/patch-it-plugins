@@ -65,7 +65,7 @@ var NewRelic11 = Guide{
 	Package: "newrelic",
 	Module:  "newrelic",
 	Release: "11.0.0",
-	Tag:     "f0b4f817bf9a7b76a78e26609369a8a7ce764c8e",
+	DocsRef: "f0b4f817bf9a7b76a78e26609369a8a7ce764c8e",
 	Repo:    "newrelic/docs-website",
 	Path:    "src/content/docs/release-notes/agent-release-notes/python-release-notes/python-agent-110000.mdx",
 	Section: "Removed features",

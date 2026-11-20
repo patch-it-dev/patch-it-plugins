@@ -4,7 +4,11 @@
 // fetch/, and diffing/normalizing/storing are shared, not adapter code.
 package adapter
 
-import "context"
+import (
+	"context"
+
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
+)
 
 // Spec is one fetched spec: its raw bytes, the API version it declares, and
 // the pinned URL it came from. It is not yet parsed or stored — that is
@@ -30,4 +34,12 @@ type Adapter interface {
 // fetched content and returns the mapping for that spec.
 type Reshaper interface {
 	SourcePointer(content []byte) func(ptr string) string
+}
+
+// Lister is an adapter that can list every version of its spec, oldest first
+// (a version's Ref is what Fetch takes): what lets a spec be diffed release by
+// release, not only newest against last. One without it is read at LatestTag
+// only.
+type Lister interface {
+	Versions(ctx context.Context) ([]plugin.Version, error)
 }

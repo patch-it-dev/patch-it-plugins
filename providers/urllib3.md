@@ -2,7 +2,7 @@
 
 ## What it watches
 
-Removals and deprecations in urllib3 2.0.0, read from its changelog: classes, methods and modules removed or renamed. One `package_release` event per bullet the plugin can read with certainty. Pinned to that release.
+Removals and deprecations in each urllib3 release, read from that release's section of its changelog: classes, methods and modules removed or renamed. One `package_release` event per bullet the plugin can read with certainty. The releases are listed from PyPI (final releases only) and each is read at its git tag (`<version>`); 2.0.0 is the release the golden test pins.
 
 Format plugin: `changelog` (`plugins/changelog`).
 
@@ -26,5 +26,5 @@ Format plugin: `changelog` (`plugins/changelog`).
 
 ## Known gaps
 
-- Only 2.0.0.
+- A release is read at its tag; one whose tag or changelog section is missing fails that pair, it isn't guessed.
 - Changed defaults (TLS versions, retries) are behavior changes and aren't events.
