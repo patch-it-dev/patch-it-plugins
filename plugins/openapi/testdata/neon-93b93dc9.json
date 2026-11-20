@@ -1,0 +1,175 @@
+{
+    "openapi": "3.0.3",
+    "servers": [
+        {
+            "url": "https://console.neon.tech/api/v2"
+        }
+    ],
+    "info": {
+        "title": "Neon API",
+        "description": "The Neon API is the management API for Neon. Use it to provision, configure, and manage resources such as projects, branches, databases, roles, functions, and object storage.\n\nSee the [Neon API reference](https://neon.com/docs/reference/api) for details, and [Manage API keys](https://neon.com/docs/manage/api-keys/) to create and use API keys.",
+        "version": "v2",
+        "license": {
+            "name": "Proprietary"
+        }
+    },
+    "paths": {
+        "/projects/{project_id}/auth/email_server": {
+            "parameters": [
+                {
+                    "name": "project_id",
+                    "in": "path",
+                    "description": "The Neon project ID",
+                    "required": true,
+                    "schema": {
+                        "type": "string",
+                        "pattern": "^[a-z0-9-]{1,60}$"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Retrieve email server configuration",
+                "description": "Deprecated. Use `/projects/{project_id}/branches/{branch_id}/auth/email_provider` instead. Removal scheduled for March 1, 2026.\n",
+                "tags": [
+                    "Auth (legacy)"
+                ],
+                "deprecated": true,
+                "x-sunset": "2026-03-01",
+                "operationId": "getNeonAuthEmailServer",
+                "responses": {
+                    "200": {
+                        "description": "Returns the email server configuration for the Neon Auth",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NeonAuthEmailServerConfigResponse"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/GeneralError"
+                    }
+                }
+            }
+        },
+        "/projects/{project_id}/branches/{branch_id}/auth/send_test_email": {
+            "parameters": [
+                {
+                    "name": "project_id",
+                    "in": "path",
+                    "description": "The Neon project ID",
+                    "required": true,
+                    "schema": {
+                        "type": "string",
+                        "pattern": "^[a-z0-9-]{1,60}$"
+                    }
+                },
+                {
+                    "name": "branch_id",
+                    "in": "path",
+                    "description": "The Neon branch ID",
+                    "required": true,
+                    "schema": {
+                        "type": "string",
+                        "pattern": "^[a-z0-9-]{1,60}$"
+                    }
+                }
+            ],
+            "post": {
+                "summary": "Send test email",
+                "description": "Sends a test email using the SMTP server settings supplied in the request body to verify connectivity and credentials.\nThe request body must include the full SMTP server settings\n(`host`, `port`, `username`, `password`, `sender_email`, `sender_name`) and the `recipient_email` address.\n\nDeprecated: to test a branch's already-saved configuration, use `sendNeonAuthEmailProviderTest`, which\nreuses the stored SMTP password server-side so the caller never has to re-supply (or be able to read) it.\nThis endpoint remains available for testing an unsaved full configuration and for non-Better-Auth providers.\n",
+                "deprecated": true,
+                "x-sunset": "2027-02-28",
+                "tags": [
+                    "Auth"
+                ],
+                "x-stability-level": "beta",
+                "operationId": "sendNeonAuthTestEmail",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SendNeonAuthTestEmailRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Response with the result of the test email send",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SendNeonAuthTestEmailResponse"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/GeneralError"
+                    }
+                }
+            }
+        },
+        "/projects/{project_id}/branches/{branch_id}/auth/email_provider/test": {
+            "parameters": [
+                {
+                    "name": "project_id",
+                    "in": "path",
+                    "description": "The Neon project ID",
+                    "required": true,
+                    "schema": {
+                        "type": "string",
+                        "pattern": "^[a-z0-9-]{1,60}$"
+                    }
+                },
+                {
+                    "name": "branch_id",
+                    "in": "path",
+                    "description": "The Neon branch ID",
+                    "required": true,
+                    "schema": {
+                        "type": "string",
+                        "pattern": "^[a-z0-9-]{1,60}$"
+                    }
+                }
+            ],
+            "post": {
+                "summary": "Send test email using the saved email provider",
+                "description": "Sends a test email using the branch's already-saved custom SMTP configuration. Only the\n`recipient_email` is provided \u2014 the stored SMTP settings and password are used server-side,\nso the caller does not need to re-supply (or be able to read) the password. This avoids the\nGET response's masked password being sent back, which would fail SMTP authentication.\n\nRequires a configured custom SMTP provider on a Better Auth integration. A shared provider,\na missing configuration, or a non-Better-Auth integration is rejected.\n",
+                "tags": [
+                    "Auth"
+                ],
+                "x-stability-level": "beta",
+                "operationId": "sendNeonAuthEmailProviderTest",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SendNeonAuthEmailProviderTestRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Response with the result of the test email send",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SendNeonAuthTestEmailResponse"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/GeneralError"
+                    }
+                }
+            }
+        }
+    }
+}

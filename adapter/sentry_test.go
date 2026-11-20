@@ -162,10 +162,10 @@ func TestSentryFetchSchemaTagOrCommit(t *testing.T) {
 }
 
 func TestSentryBasePathRefusesWhatItCantMove(t *testing.T) {
-	if _, err := sentryBasePath([]byte(`{"servers":[{"url":"https://x/api"}],"paths":{"/a":{},"a":{}}}`)); err == nil {
+	if _, err := ServerBasePath([]byte(`{"servers":[{"url":"https://x/api"}],"paths":{"/a":{},"a":{}}}`)); err == nil {
 		t.Error("a path without a leading /: want an error")
 	}
-	if _, err := sentryBasePath([]byte(`{"servers":[{"url":"https://x/api/0"},{"url":"https://y"}],"paths":{}}`)); err == nil {
+	if _, err := ServerBasePath([]byte(`{"servers":[{"url":"https://x/api/0"},{"url":"https://y"}],"paths":{}}`)); err == nil {
 		t.Error("servers with different paths: want an error")
 	}
 }
