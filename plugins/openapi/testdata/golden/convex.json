@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:3009cdf0f6116b14f13ec28bd6eca6aa3be6eabe66d34fb5db7454881671f770",
-    "api": "convex",
+    "fingerprint": "sha256:93a0aa0792cb89fc4d14ab40c6ef6dcfdfbdd333393c1f4721ab4b60603309e6",
+    "api": "convex/deployment-api",
     "version": "2026-11-05",
     "previous_version": "2026-10-30",
     "change_type": "deprecation",
@@ -22,8 +22,8 @@
   },
   {
     "id": 2,
-    "fingerprint": "sha256:a42a45fdc091e8fe2b4e151c38e131c3195f846cd26148ddc5db8d9d02b6cbac",
-    "api": "convex",
+    "fingerprint": "sha256:175e34aab0307fe16078ddc521e19db2b1134e4e7fd666a6000b4aab02069eb9",
+    "api": "convex/deployment-api",
     "version": "2026-11-05",
     "previous_version": "2026-10-30",
     "change_type": "deprecation",
@@ -43,8 +43,8 @@
   },
   {
     "id": 3,
-    "fingerprint": "sha256:930075f543a07bd23b16f582788fd8b8c079dc4bc2d3d6cd43c2acd583a995da",
-    "api": "convex",
+    "fingerprint": "sha256:190e855c8c48bbce6697171cd6e05be6ffe713c69e2ff89f469647a4c4e53abb",
+    "api": "convex/deployment-api",
     "version": "2026-11-05",
     "previous_version": "2026-10-30",
     "change_type": "deprecation",
@@ -64,8 +64,8 @@
   },
   {
     "id": 4,
-    "fingerprint": "sha256:f5a5c1ee8bb1ce5a406d952df079517005f92e83a2c09729e782ebf7e892af71",
-    "api": "convex",
+    "fingerprint": "sha256:187282ee12aefa2a977e85b647db8b327e008be175b5ede9416badb4810972ea",
+    "api": "convex/deployment-api",
     "version": "2026-11-05",
     "previous_version": "2026-10-30",
     "change_type": "deprecation",
@@ -85,8 +85,8 @@
   },
   {
     "id": 5,
-    "fingerprint": "sha256:be79bb14968226260e9856e3ec45a8e3ad5795f6ee67be1a380e59f1acc8ab92",
-    "api": "convex",
+    "fingerprint": "sha256:db13f14c31d4173ecb76578f5ce0a352d890a678b940333b5b548d516c14c357",
+    "api": "convex/deployment-api",
     "version": "2026-11-05",
     "previous_version": "2026-10-30",
     "change_type": "deprecation",
@@ -106,8 +106,8 @@
   },
   {
     "id": 6,
-    "fingerprint": "sha256:942f605d4201eddbb6b6b98d66dd306b6154248fca40225b5586aba1da633610",
-    "api": "convex",
+    "fingerprint": "sha256:94eaf5379beef172438857103486580fbb6952b2df56268b2887a6735b285160",
+    "api": "convex/deployment-api",
     "version": "2026-11-05",
     "previous_version": "2026-10-30",
     "change_type": "deprecation",

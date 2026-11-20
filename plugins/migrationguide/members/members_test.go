@@ -78,14 +78,14 @@ func TestTheGuideStoresOneEventPerMemberAndARerunNothing(t *testing.T) {
 	if len(events) != 56 {
 		t.Fatalf("%d events, want 56", len(events))
 	}
-	var float *event.EventV2
+	var float *event.Event
 	for i := range events {
 		if events[i].Subject.Symbols[0] == "float_" {
 			float = &events[i]
 		}
 	}
 	if float == nil || float.Subject.Change != event.PackageRenamedSymbol || float.Subject.Replacement != "float64" ||
-		float.API != "numpy" || float.Version != "2.0.0" || !strings.Contains(float.SourceExcerpt, "float\\_") {
+		float.API != "numpy/numpy" || float.Version != "2.0.0" || !strings.Contains(float.SourceExcerpt, "float\\_") {
 		t.Errorf("float_: %+v", float)
 	}
 }

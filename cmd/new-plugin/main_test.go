@@ -47,7 +47,7 @@ func TestScaffoldEveryKind(t *testing.T) {
 			t.Errorf("%s: no next steps in\n%s", f, out.String())
 		}
 	}
-	for _, args := range [][]string{{"build", "./..."}, {"vet", "./..."}, {"test", "-count=1", "./plugins/...", "./internal/...", "./core/migrate/..."}} {
+	for _, args := range [][]string{{"build", "./..."}, {"vet", "./..."}, {"test", "-count=1", "./plugins/...", "./internal/..."}} {
 		cmd := exec.Command(goCmd, args...)
 		cmd.Dir = root
 		if b, err := cmd.CombinedOutput(); err != nil {
@@ -81,7 +81,7 @@ func TestScaffoldEveryKind(t *testing.T) {
 // page, and the registration names the existing ones.
 func TestScaffoldSharesTheProviderPage(t *testing.T) {
 	root := copyRepo(t)
-	o := Options{Root: root, API: "algolia-analytics", Provider: "Algolia", Format: "openapi", Page: "algolia", Today: today}
+	o := Options{Root: root, ProviderID: "algolia", SourceID: "analytics", Kind: "openapi", Page: "algolia", Today: today}
 	if err := Run(o, io.Discard); err != nil {
 		t.Fatal(err)
 	}
@@ -107,17 +107,13 @@ func TestRefusesBadInput(t *testing.T) {
 		"other name":        {ProviderID: "stripe", Provider: "Stripe Inc", SourceID: "sdk", Kind: "apisurface"},
 		"bad category":      {ProviderID: "acme", Provider: "Acme", SourceID: "api", Kind: "openapi", Category: "toys"},
 		"bad package":       {ProviderID: "acme", Provider: "Acme", SourceID: "api", Kind: "openapi", Packages: []string{"pip:acme"}},
-		"first name taken":  {ProviderID: "acme", Provider: "Acme", SourceID: "api", Kind: "openapi", API: "stripe"},
-		"unknown format":    {API: "acme", Provider: "Acme", Format: "graphql"},
-		"uppercase id":      {API: "Acme", Provider: "Acme", Format: "feed"},
-		"double hyphen":     {API: "acme--x", Provider: "Acme", Format: "feed"},
-		"id all":            {API: "all", Provider: "Acme", Format: "feed"},
-		"registered id":     {API: "stripe", Provider: "Stripe", Format: "openapi"},
-		"no provider":       {API: "acme", Format: "feed"},
-		"pipe in name":      {API: "acme", Provider: "Ac|me", Format: "feed"},
-		"unknown layer":     {API: "acme", Provider: "Acme", Format: "feed", Layer: "database"},
-		"http source":       {API: "acme", Provider: "Acme", Format: "feed", Source: "http://acme.example/feed"},
-		"provider exists":   {API: "numpy", Provider: "NumPy", Format: "changelog"},
+		"uppercase id":      {ProviderID: "Acme", Provider: "Acme", SourceID: "api", Kind: "notices"},
+		"double hyphen":     {ProviderID: "acme", Provider: "Acme", SourceID: "a--x", Kind: "notices"},
+		"no provider name":  {ProviderID: "acme", SourceID: "api", Kind: "notices"},
+		"pipe in name":      {ProviderID: "acme", Provider: "Ac|me", SourceID: "api", Kind: "notices"},
+		"unknown layer":     {ProviderID: "acme", Provider: "Acme", SourceID: "api", Kind: "notices", Layer: "database"},
+		"http source":       {ProviderID: "acme", Provider: "Acme", SourceID: "api", Kind: "notices", URLs: []string{"http://acme.example/feed"}},
+		"provider exists":   {ProviderID: "numpy", Provider: "NumPy Inc", SourceID: "changes", Kind: "changelog"},
 	} {
 		o.Root, o.Today = root, today
 		if err := Run(o, io.Discard); err == nil {

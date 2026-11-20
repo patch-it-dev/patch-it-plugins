@@ -1,13 +1,14 @@
 [
   {
     "id": 0,
-    "fingerprint": "sha256:ff7dd3f4198ccc46ce89ac4c82249fe9e442478d8c3da6b713596249017f96fb",
-    "api": "stripe",
+    "fingerprint": "sha256:77d0d93b830cba06d786c98a2fc3d22c550a775d5ce5df87c43e042083dda138",
+    "api": "stripe/api",
     "version": "2026-08-26.dahlia",
     "previous_version": "2026-07-29.dahlia",
     "change_type": "breaking",
     "breaking": true,
-    "affected": {
+    "subject": {
+      "type": "api_operation",
       "kind": "schema_property",
       "side": "response",
       "schema": "payments_primitives_payment_records_resource_payment_method_card_details_resource_three_d_secure",

@@ -14,7 +14,6 @@ import (
 	"github.com/patch-it-dev/patch-it-plugins/core/diff"
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
 	"github.com/patch-it-dev/patch-it-plugins/core/hint"
-	"github.com/patch-it-dev/patch-it-plugins/core/migrate"
 	"github.com/patch-it-dev/patch-it-plugins/core/normalize"
 	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 	"github.com/patch-it-dev/patch-it-plugins/plugins/openapi/adapter"
@@ -250,32 +249,7 @@ func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) 
 		return plugin.Result{}, err
 	}
 	res.Label = tag
-	res.Baselines = []plugin.Spec{plugin.Baseline(a.API(), to.Version.ID, tag, to.SourceURL, to.Content, false, env.Now())}
-	return res, nil
-}
-
-// Replay diffs two given releases. Both specs are saved marked as replays, so
-// the normal-run baseline never moves; the events are stored like any others:
-// that's how a historical change becomes something the feed can serve.
-func (p Plugin) Replay(ctx context.Context, env plugin.Env, from, to string) (plugin.Result, error) {
-	old, err := p.ReadAt(ctx, env, plugin.Version{ID: from, Ref: from})
-	if err != nil {
-		return plugin.Result{}, err
-	}
-	next, err := p.ReadAt(ctx, env, plugin.Version{ID: to, Ref: to})
-	if err != nil {
-		return plugin.Result{}, err
-	}
-	res, err := p.Extract(ctx, env, old, next)
-	if err != nil {
-		return plugin.Result{}, err
-	}
-	now := env.Now()
-	res.Label = to
-	res.Baselines = []plugin.Spec{
-		plugin.Baseline(p.Adapter.API(), old.Version.ID, from, old.SourceURL, old.Content, true, now),
-		plugin.Baseline(p.Adapter.API(), next.Version.ID, to, next.SourceURL, next.Content, true, now),
-	}
+	res.Baselines = []plugin.Spec{plugin.Baseline(a.API(), to.Version.ID, tag, to.SourceURL, to.Content, env.Now())}
 	return res, nil
 }
 
@@ -326,15 +300,14 @@ func (p Plugin) Extract(ctx context.Context, env plugin.Env, from, to plugin.Sna
 		DetectedAt:      env.Now().UTC(),
 	})
 	p.attachHints(ctx, to.Version.ID, events)
-	converted, invalid := migrate.Fresh(events)
-	return plugin.Result{Label: to.Version.Ref, Events: converted, Rejected: append(errs, invalid...)}, nil
+	return plugin.Result{Label: to.Version.Ref, Events: events, Rejected: errs}, nil
 }
 
 var _ plugin.Versioned = Plugin{}
 
 // events diffs two parsed specs into events, applying Keep, and pointing each
 // event's source_pointer into the published file when the adapter reshaped it.
-func (p Plugin) events(oldParsed, newParsed *diff.Spec, oldContent, newContent []byte, src normalize.Source) ([]event.ChangeEvent, []error) {
+func (p Plugin) events(oldParsed, newParsed *diff.Spec, oldContent, newContent []byte, src normalize.Source) ([]event.Event, []error) {
 	changes := diff.ChangesWith(oldParsed, newParsed, p.Diff)
 	if p.Keep != nil {
 		kept := changes[:0:0]
@@ -380,7 +353,7 @@ func (p Plugin) events(oldParsed, newParsed *diff.Spec, oldContent, newContent [
 
 // attachHints looks the events up in the API's changelog for their version.
 // Never fails the run: a hint is help for the fix, not provenance for the event.
-func (p Plugin) attachHints(ctx context.Context, version string, events []event.ChangeEvent) {
+func (p Plugin) attachHints(ctx context.Context, version string, events []event.Event) {
 	if p.Hints == nil || len(events) == 0 {
 		return
 	}

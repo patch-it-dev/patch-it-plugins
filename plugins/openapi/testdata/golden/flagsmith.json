@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:9d8954a4311788d780d04796043dc3382369ea6856663403d91e0622ee46440b",
-    "api": "flagsmith",
+    "fingerprint": "sha256:6ce1b7cd44dbaf3c520bfffef67a4c7dac7eb7f4c0417d22bcf08ec6ae607785",
+    "api": "flagsmith/api",
     "version": "2.287.0",
     "previous_version": "2.286.0",
     "change_type": "breaking",
@@ -22,8 +22,8 @@
   },
   {
     "id": 2,
-    "fingerprint": "sha256:679f551f2accf69eb0af557218cc8c0ae617589fea24835cc12b9358e4b4b644",
-    "api": "flagsmith",
+    "fingerprint": "sha256:bd7cf93e078745edc76b9b1ef7a984132dc6a5216bb46e89ed8a2ffe8526f3ef",
+    "api": "flagsmith/api",
     "version": "2.287.0",
     "previous_version": "2.286.0",
     "change_type": "breaking",
@@ -43,8 +43,8 @@
   },
   {
     "id": 3,
-    "fingerprint": "sha256:f787d4463ba4f53083c9ebf3e686f3668606c61d8501c4256ebc4ad87a444668",
-    "api": "flagsmith",
+    "fingerprint": "sha256:05c83c262388466286bbb1b75ce4e063962258b70aa30a67d67c67a727989323",
+    "api": "flagsmith/api",
     "version": "2.287.0",
     "previous_version": "2.286.0",
     "change_type": "breaking",

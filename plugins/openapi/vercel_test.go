@@ -21,7 +21,7 @@ import (
 // real URL each one was copied from, the way adapter.Vercel.Fetch cites it.
 type fakeVercelAdapter struct{ latest string }
 
-func (fakeVercelAdapter) API() string { return "vercel" }
+func (fakeVercelAdapter) API() string { return "vercel/api" }
 
 func (f fakeVercelAdapter) LatestTag(context.Context) (string, error) { return f.latest, nil }
 
@@ -73,7 +73,7 @@ func TestVercelGolden(t *testing.T) {
 		}
 	}
 	// The removal, replayed.
-	if rejected, err := kittest.Replay(ctx, env, s, vercelPlugin(""), "v1.18.6", "v1.18.7"); err != nil || rejected {
+	if rejected, err := kittest.Pair(ctx, env, s, vercelPlugin(""), "v1.18.6", "v1.18.7"); err != nil || rejected {
 		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
 	}
 
@@ -117,7 +117,7 @@ func TestVercelGolden(t *testing.T) {
 	kittest.Golden(t, "testdata/golden/vercel.json", events)
 
 	// Replaying the same pair again must not duplicate the events.
-	if _, err := kittest.Replay(ctx, env, s, vercelPlugin(""), "v1.18.6", "v1.18.7"); err != nil {
+	if _, err := kittest.Pair(ctx, env, s, vercelPlugin(""), "v1.18.6", "v1.18.7"); err != nil {
 		t.Fatalf("second replay: %v", err)
 	}
 	if again := kittest.Stored(t, s); len(again) != len(events) {
@@ -129,7 +129,7 @@ func TestVercelGolden(t *testing.T) {
 func TestVercelSummaryDeprecationQuotesTheSummary(t *testing.T) {
 	ctx := context.Background()
 	s := openStore(t)
-	if _, err := kittest.Replay(ctx, vercelEnv(s), s, vercelPlugin(""), "v1.13.4", "v1.13.5"); err != nil {
+	if _, err := kittest.Pair(ctx, vercelEnv(s), s, vercelPlugin(""), "v1.13.4", "v1.13.5"); err != nil {
 		t.Fatal(err)
 	}
 	for _, e := range kittest.Stored(t, s) {
@@ -153,7 +153,7 @@ func TestVercelSummaryDeprecationQuotesTheSummary(t *testing.T) {
 func TestVercelDropsRemovalsThatWerentDeprecated(t *testing.T) {
 	ctx := context.Background()
 	s := openStore(t)
-	if rejected, err := kittest.Replay(ctx, vercelEnv(s), s, vercelPlugin(""), "v1.6.2", "v1.6.3"); err != nil || rejected {
+	if rejected, err := kittest.Pair(ctx, vercelEnv(s), s, vercelPlugin(""), "v1.6.2", "v1.6.3"); err != nil || rejected {
 		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
 	}
 	if events := kittest.Stored(t, s); len(events) != 0 {
@@ -168,7 +168,7 @@ func TestVercelDropsRemovalsThatWerentDeprecated(t *testing.T) {
 	s = openStore(t)
 	p := vercelPlugin("")
 	p.Keep = nil
-	if _, err := kittest.Replay(ctx, vercelEnv(s), s, p, "v1.6.2", "v1.6.3"); err != nil {
+	if _, err := kittest.Pair(ctx, vercelEnv(s), s, p, "v1.6.2", "v1.6.3"); err != nil {
 		t.Fatal(err)
 	}
 	var removals int
@@ -188,7 +188,7 @@ func TestVercelDropsRemovalsThatWerentDeprecated(t *testing.T) {
 func TestVercelPathParameterRenameIsNoChange(t *testing.T) {
 	ctx := context.Background()
 	s := openStore(t)
-	if rejected, err := kittest.Replay(ctx, vercelEnv(s), s, vercelPlugin(""), "v1.28.64", "v1.28.65"); err != nil || rejected {
+	if rejected, err := kittest.Pair(ctx, vercelEnv(s), s, vercelPlugin(""), "v1.28.64", "v1.28.65"); err != nil || rejected {
 		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
 	}
 	if events := kittest.Stored(t, s); len(events) != 0 {
@@ -202,7 +202,7 @@ func TestVercelPathParameterRenameIsNoChange(t *testing.T) {
 	s = openStore(t)
 	p := vercelPlugin("")
 	p.Diff.PathTemplates = false
-	if _, err := kittest.Replay(ctx, vercelEnv(s), s, p, "v1.28.64", "v1.28.65"); err != nil {
+	if _, err := kittest.Pair(ctx, vercelEnv(s), s, p, "v1.28.64", "v1.28.65"); err != nil {
 		t.Fatal(err)
 	}
 	events := kittest.Stored(t, s)

@@ -56,6 +56,7 @@ package members
 // fields, retries, dropped events, options, and "Rename deprecated settings",
 // whose old names still work) aren't under the heading, so they're never read.
 var PostHog8 = Guide{
+	API:       "posthog/python-sdk",
 	Package:   "posthog",
 	Module:    "posthog",
 	Release:   "8.0.0",

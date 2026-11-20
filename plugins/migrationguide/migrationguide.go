@@ -17,7 +17,6 @@ import (
 	"time"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
-	"github.com/patch-it-dev/patch-it-plugins/core/migrate"
 	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 	"github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide/members"
 	"github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide/sdkguide"
@@ -70,7 +69,7 @@ func init() {
 // guide is at each, and how its table reads. sdkguide.Guide and
 // members.Guide are the two readers.
 type Guide interface {
-	// Slug is the events' api and the source's old slug: "anthropic".
+	// Slug is the source id the events carry in api: "anthropic/python-sdk".
 	Slug() string
 	// Releases are the versions, oldest first, each with the ref its guide
 	// would be read at.
@@ -81,9 +80,9 @@ type Guide interface {
 	// has no guide (a release that isn't a new major).
 	GuideURL(v plugin.Version) string
 	// Read turns the guide, as read at to, into events with
-	// previous_version from: v1 events (converted here) or v2 ones, and the
-	// rows that failed to become events. err is a guide it can't read.
-	Read(page []byte, from, to plugin.Version, now time.Time) (v1 []event.ChangeEvent, v2 []event.EventV2, rejected []error, err error)
+	// previous_version from, and the rows that failed to become events. err
+	// is a guide it can't read.
+	Read(page []byte, from, to plugin.Version, now time.Time) (events []event.Event, rejected []error, err error)
 }
 
 // Plugin reads one source's migration guide.
@@ -107,7 +106,7 @@ func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) 
 	if err != nil {
 		return plugin.Result{}, err
 	}
-	res.Baselines = []plugin.Spec{plugin.Baseline(p.Name(), v.ID, v.Ref, to.SourceURL, to.Content, false, env.Now().UTC())}
+	res.Baselines = []plugin.Spec{plugin.Baseline(p.Name(), v.ID, v.Ref, to.SourceURL, to.Content, env.Now().UTC())}
 	return res, nil
 }
 
@@ -136,12 +135,11 @@ func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 	if to.Content == nil {
 		return plugin.Result{Label: to.Version.ID}, nil
 	}
-	v1, v2, rejected, err := p.Guide.Read(to.Content, from.Version, to.Version, env.Now().UTC())
+	events, rejected, err := p.Guide.Read(to.Content, from.Version, to.Version, env.Now().UTC())
 	if err != nil {
 		return plugin.Result{}, fmt.Errorf("reading %s: %w", to.SourceURL, err)
 	}
-	converted, invalid := migrate.Fresh(v1)
-	return plugin.Result{Label: to.SourceURL, Events: append(converted, v2...), Rejected: append(rejected, invalid...)}, nil
+	return plugin.Result{Label: to.SourceURL, Events: events, Rejected: rejected}, nil
 }
 
 var _ plugin.Versioned = Plugin{}

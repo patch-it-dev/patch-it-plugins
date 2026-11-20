@@ -35,7 +35,7 @@ type Algolia struct {
 
 var _ Adapter = Algolia{}
 
-func (a Algolia) API() string { return "algolia-" + a.Spec }
+func (a Algolia) API() string { return "algolia/" + a.Spec + "-api" }
 
 var algoliaTag = regexp.MustCompile(`^released-(\d{4}-\d{2}-\d{2})(-[0-9a-f]+)?$`)
 

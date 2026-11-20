@@ -98,10 +98,10 @@ func appwritePlugin(t *testing.T) (Plugin, string) {
 	return Plugin{Adapter: a, Diff: appwriteDiff, Keep: appwriteKeep}, srv.URL + "/raw/appwrite/specs"
 }
 
-func replayAppwrite(t *testing.T, p Plugin, from, to string) []event.EventV2 {
+func replayAppwrite(t *testing.T, p Plugin, from, to string) []event.Event {
 	t.Helper()
 	s := openStore(t)
-	if rejected, err := kittest.Replay(context.Background(), vercelEnv(s), s, p, from, to); err != nil || rejected {
+	if rejected, err := kittest.Pair(context.Background(), vercelEnv(s), s, p, from, to); err != nil || rejected {
 		t.Fatalf("replay %s -> %s: rejected=%v err=%v", from, to, rejected, err)
 	}
 	return kittest.Stored(t, s)
@@ -160,7 +160,7 @@ func TestAppwriteDropsRemovals(t *testing.T) {
 	p.Keep = nil
 	var removed int
 	for _, e := range replayAppwrite(t, p, appwrite24Old, appwrite24New) {
-		if e.ChangeType == event.ChangeTypeBreaking && e.Subject.Kind == event.AffectedKindOperation {
+		if e.ChangeType == event.ChangeTypeBreaking && e.Subject.Kind == event.KindOperation {
 			removed++
 		}
 	}

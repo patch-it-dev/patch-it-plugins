@@ -47,7 +47,7 @@ func TestCloudflareRegistrarEndOfLife(t *testing.T) {
 		if f.ChangeType != event.ChangeTypeBreaking || f.Version != "2026-09-27" {
 			t.Errorf("%s: %s %s, want breaking 2026-09-27", f.Subject.Operation, f.ChangeType, f.Version)
 		}
-		if f.Subject.Type != event.SubjectAPIOperation || f.Subject.Kind != event.AffectedKindOperation || f.Subject.Side != event.SideRequest {
+		if f.Subject.Type != event.SubjectAPIOperation || f.Subject.Kind != event.KindOperation || f.Subject.Side != event.SideRequest {
 			t.Errorf("%s: subject %+v", f.Subject.Operation, f.Subject)
 		}
 		for _, line := range []string{"API deprecations - Legacy Registrar Domain Management API", "End of life date: September 27, 2026",

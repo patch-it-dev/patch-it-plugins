@@ -1,5 +1,5 @@
 # contract/fixtures/ is a copy of patch-it's fixtures/ (the change-event contract
-# patch-it owns). This fails when the two drift apart, so core/event/ and core/migrate/ test
+# patch-it owns). This fails when the two drift apart, so core/event/ tests
 # the same events the patch-it client does. Only top-level "_comment" fields may
 # differ (scripts/check_contract.py).
 #

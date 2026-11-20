@@ -21,9 +21,9 @@ func (p testPlugin) Run(_ context.Context, env Env) (Result, error) {
 	if p.err != nil {
 		return Result{}, p.err
 	}
-	subject := event.Subject{Type: event.SubjectAPIOperation, Kind: event.AffectedKindOperation, Side: event.SideRequest, Operation: "POST /v1/things"}
-	e := event.EventV2{
-		Fingerprint:   event.FingerprintV2(p.name, "2", event.ChangeTypeNewFeature, subject, ""),
+	subject := event.Subject{Type: event.SubjectAPIOperation, Kind: event.KindOperation, Side: event.SideRequest, Operation: "POST /v1/things"}
+	e := event.Event{
+		Fingerprint:   event.Fingerprint(p.name, "2", event.ChangeTypeNewFeature, subject, ""),
 		API:           p.name,
 		Version:       "2",
 		ChangeType:    event.ChangeTypeNewFeature,
@@ -37,53 +37,47 @@ func (p testPlugin) Run(_ context.Context, env Env) (Result, error) {
 	content := []byte(`{"version":"2"}`)
 	return Result{
 		Label:     "v2",
-		Events:    []event.EventV2{e},
-		Baselines: []Spec{Baseline(p.name, "2", "v2", "https://example.test/spec/2.json", content, false, env.Now())},
+		Events:    []event.Event{e},
+		Baselines: []Spec{Baseline(p.name, "2", "v2", "https://example.test/spec/2.json", content, env.Now())},
 	}, nil
 }
 
-func TestAPluginRegisteredInATestIsFound(t *testing.T) {
-	register(t, testPlugin{name: "test-registered"})
-	if p, ok := Lookup("test-registered"); !ok || p.Name() != "test-registered" || !slices.Contains(Names(), "test-registered") {
+func TestASourceRegisteredInATestIsFound(t *testing.T) {
+	register(t, "test-registered")
+	if p, ok := Lookup("test-registered/api"); !ok || p.Name() != "test-registered/api" || !slices.Contains(Names(), "test-registered/api") {
 		t.Fatal("not registered")
 	}
 }
 
 func TestNamesAreSorted(t *testing.T) {
-	register(t, testPlugin{name: "test-b"})
-	register(t, testPlugin{name: "test-a"})
+	register(t, "test-b")
+	register(t, "test-a")
 	if !slices.IsSorted(Names()) {
 		t.Errorf("Names() = %v, want sorted", Names())
 	}
 }
 
-// register registers a test plugin for the rest of the test only, so the test
-// can run again (-count).
-func register(t *testing.T, p Plugin) {
+// register registers a test provider with one source, api, for the rest of
+// the test only, so the test can run again (-count).
+func register(t *testing.T, provider string) {
 	t.Helper()
-	Register(p)
+	RegisterProvider(Provider{ID: provider, Name: provider, Category: CategoryDevTools, Homepage: "https://example.test",
+		Sources: []Source{{ID: "api", Layer: LayerAPI, Watches: "w", URLs: []string{"https://example.test/spec"}, Page: "providers/test.md", Plugin: testPlugin{name: provider + "/api"}}}})
 	t.Cleanup(func() {
 		mu.Lock()
 		defer mu.Unlock()
-		delete(registry, p.Name())
+		delete(registry, provider+"/api")
+		delete(sources, provider+"/api")
+		delete(providers, provider)
 	})
 }
 
-func TestTwoPluginsCantShareAName(t *testing.T) {
-	register(t, testPlugin{name: "test-dup"})
+func TestTwoSourcesCantShareAnID(t *testing.T) {
+	register(t, "test-dup")
 	defer func() {
 		if recover() == nil {
-			t.Error("a second plugin named test-dup was registered")
+			t.Error("a second source test-dup/api was registered")
 		}
 	}()
-	Register(testPlugin{name: "test-dup"})
-}
-
-func TestAPluginCantBeNamedAll(t *testing.T) {
-	defer func() {
-		if recover() == nil {
-			t.Error(`a plugin named "all" was registered: --api all would hide it`)
-		}
-	}()
-	Register(testPlugin{name: "all"})
+	register(t, "test-dup")
 }

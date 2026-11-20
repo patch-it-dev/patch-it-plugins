@@ -65,7 +65,7 @@ test:
 
 # A provider started with new-plugin is done when nothing it wrote still says
 # TODO(new-plugin).
-TODO_DIRS := plugins core/migrate providers
+TODO_DIRS := plugins providers
 todos:
 	@left=$$(grep -rl 'TODO(new-plugin)' $(TODO_DIRS) || true); \
 	if [ -n "$$left" ]; then \

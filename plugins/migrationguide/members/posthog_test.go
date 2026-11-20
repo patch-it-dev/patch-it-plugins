@@ -38,7 +38,7 @@ func TestPostHogEachRowOfTheTable(t *testing.T) {
 		if len(e.Subject.Symbols) != 1 {
 			t.Fatalf("%v: one symbol per event", e.Subject.Symbols)
 		}
-		if e.API != "posthog" || e.Version != "8.0.0" || e.Subject.Ecosystem != "pypi" || e.Subject.Package != "posthog" ||
+		if e.API != "posthog/python-sdk" || e.Version != "8.0.0" || e.Subject.Ecosystem != "pypi" || e.Subject.Package != "posthog" ||
 			e.ChangeType != event.ChangeTypeBreaking || !strings.HasPrefix(e.SourceExcerpt, "Fix removed APIs\n| Removed | Use instead |") {
 			t.Errorf("%+v", e)
 		}
@@ -234,7 +234,7 @@ func TestMarkdownTable(t *testing.T) {
 }
 
 // posthogIngest runs the plugin over the saved guide.
-func posthogIngest(t *testing.T) []event.EventV2 {
+func posthogIngest(t *testing.T) []event.Event {
 	t.Helper()
 	return kittest.Ingest(t, migrationguide.Plugin{Guide: PostHog8}, kittest.Pages{PostHog8.URL(): posthogSource})
 }

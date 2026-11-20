@@ -20,7 +20,7 @@ import (
 // from YAML to JSON like adapter.Algolia.Fetch, and cited by the real URL.
 type fakeAlgoliaAdapter struct{ spec string }
 
-func (f fakeAlgoliaAdapter) API() string { return "algolia-" + f.spec }
+func (f fakeAlgoliaAdapter) API() string { return "algolia/" + f.spec + "-api" }
 
 func (fakeAlgoliaAdapter) LatestTag(context.Context) (string, error) {
 	return "", fmt.Errorf("replay only")
@@ -76,7 +76,7 @@ func TestAlgoliaGolden(t *testing.T) {
 		t.Run(c.spec, func(t *testing.T) {
 			ctx := context.Background()
 			s := openStore(t)
-			if rejected, err := kittest.Replay(ctx, vercelEnv(s), s, algoliaPlugin(c.spec), c.from, c.to); err != nil || rejected {
+			if rejected, err := kittest.Pair(ctx, vercelEnv(s), s, algoliaPlugin(c.spec), c.from, c.to); err != nil || rejected {
 				t.Fatalf("replay: rejected=%v err=%v", rejected, err)
 			}
 			events := kittest.Stored(t, s)
@@ -113,7 +113,7 @@ func TestAlgoliaDropsRemovalsThatWerentDeprecated(t *testing.T) {
 	ctx := context.Background()
 	const from, to = "released-2024-09-18-cc190fae3", "released-2024-09-19-a62c27d3b"
 	s := openStore(t)
-	if rejected, err := kittest.Replay(ctx, vercelEnv(s), s, algoliaPlugin("ingestion"), from, to); err != nil || rejected {
+	if rejected, err := kittest.Pair(ctx, vercelEnv(s), s, algoliaPlugin("ingestion"), from, to); err != nil || rejected {
 		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
 	}
 	if events := kittest.Stored(t, s); len(events) != 0 {
@@ -122,7 +122,7 @@ func TestAlgoliaDropsRemovalsThatWerentDeprecated(t *testing.T) {
 	s = openStore(t)
 	p := algoliaPlugin("ingestion")
 	p.Keep = nil
-	if _, err := kittest.Replay(ctx, vercelEnv(s), s, p, from, to); err != nil {
+	if _, err := kittest.Pair(ctx, vercelEnv(s), s, p, from, to); err != nil {
 		t.Fatal(err)
 	}
 	var removed int
@@ -165,7 +165,7 @@ func TestAlgoliaRecommendCustomRequestMoveIsNoEvent(t *testing.T) {
 	ctx := context.Background()
 	const from, to = "released-2024-03-19-2eac6f410", "released-2024-03-25-30207fcd0"
 	s := openStore(t)
-	if rejected, err := kittest.Replay(ctx, vercelEnv(s), s, algoliaPlugin("recommend"), from, to); err != nil || rejected {
+	if rejected, err := kittest.Pair(ctx, vercelEnv(s), s, algoliaPlugin("recommend"), from, to); err != nil || rejected {
 		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
 	}
 	if events := kittest.Stored(t, s); len(events) != 0 {
@@ -174,7 +174,7 @@ func TestAlgoliaRecommendCustomRequestMoveIsNoEvent(t *testing.T) {
 	s = openStore(t)
 	p := algoliaPlugin("recommend")
 	p.Keep = nil
-	if _, err := kittest.Replay(ctx, vercelEnv(s), s, p, from, to); err != nil {
+	if _, err := kittest.Pair(ctx, vercelEnv(s), s, p, from, to); err != nil {
 		t.Fatal(err)
 	}
 	var removed int

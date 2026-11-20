@@ -31,7 +31,7 @@ type Supabase struct{}
 
 var _ Adapter = Supabase{}
 
-func (Supabase) API() string { return "supabase" }
+func (Supabase) API() string { return "supabase/management-api" }
 
 // LatestTag is the SHA of the newest commit that changed the spec.
 func (Supabase) LatestTag(ctx context.Context) (string, error) {

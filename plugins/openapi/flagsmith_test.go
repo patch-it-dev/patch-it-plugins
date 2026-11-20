@@ -44,7 +44,7 @@ func TestFlagsmithRegistersItself(t *testing.T) {
 // trimmed from Version the same way adapter.Flagsmith.Fetch does.
 type fakeFlagsmithAdapter struct{}
 
-func (fakeFlagsmithAdapter) API() string { return "flagsmith" }
+func (fakeFlagsmithAdapter) API() string { return "flagsmith/api" }
 
 func (fakeFlagsmithAdapter) LatestTag(context.Context) (string, error) { return "v2.287.0", nil }
 
@@ -79,7 +79,7 @@ func TestFlagsmithGolden(t *testing.T) {
 	env := kittest.Env(t, nil)
 	sink := env.Baselines.(kittest.Sink)
 	p := Plugin{Adapter: fakeFlagsmithAdapter{}, Keep: requestSide}
-	if rejected, err := kittest.Replay(ctx, env, sink, p, "v2.286.0", "v2.287.0"); err != nil || rejected {
+	if rejected, err := kittest.Pair(ctx, env, sink, p, "v2.286.0", "v2.287.0"); err != nil || rejected {
 		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
 	}
 	kittest.Golden(t, "testdata/golden/flagsmith.json", kittest.Stored(t, sink))
@@ -92,7 +92,7 @@ func TestFlagsmithDropsADescriptionOnlyChange(t *testing.T) {
 	env := kittest.Env(t, nil)
 	sink := env.Baselines.(kittest.Sink)
 	p := Plugin{Adapter: fakeFlagsmithAdapter{}, Keep: requestSide}
-	if rejected, err := kittest.Replay(ctx, env, sink, p, "c3ef832", "f504f16"); err != nil || rejected {
+	if rejected, err := kittest.Pair(ctx, env, sink, p, "c3ef832", "f504f16"); err != nil || rejected {
 		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
 	}
 	if got := kittest.Stored(t, sink); len(got) != 0 {

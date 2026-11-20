@@ -15,7 +15,7 @@ import (
 // runner image retirement names the date ("The macOS 14 runner image will be
 // retired on November 2, 2026.") and lists the `runs-on` labels it removes.
 var GitHubActions = Feed{
-	API:    "github-actions",
+	API:    "github/actions",
 	Vendor: "GitHub",
 	URL:    "https://github.blog/changelog/label/actions/feed/",
 	Read:   readGitHubActions,
@@ -27,7 +27,7 @@ var GitHubActions = Feed{
 // deprecation is a "Deprecated" section with a table of model ids in <code>
 // (discontinued, recommended migration) and the date to move by.
 var VertexAIModels = Feed{
-	API:    "vertex-ai-models",
+	API:    "google/vertex-ai-models",
 	Vendor: "Google",
 	URL:    "https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
 	Read:   readVertexAI,
@@ -40,7 +40,7 @@ var VertexAIModels = Feed{
 // list item, kept apart from "Affected APIs:" (endpoints that only change),
 // and gives "Deprecation date:" and, for most since 2025, "End of life date:".
 var CloudflareAPI = Feed{
-	API:    "cloudflare",
+	API:    "cloudflare/api",
 	Vendor: "Cloudflare",
 	URL:    "https://developers.cloudflare.com/fundamentals/api/reference/deprecations/index.xml",
 	Read:   readCloudflareAPI,
@@ -335,7 +335,7 @@ func readCloudflareAPI(e Entry) []Finding {
 		out = append(out, Finding{
 			ChangeType:  ct,
 			Version:     date,
-			Subject:     event.Subject{Type: event.SubjectAPIOperation, Kind: event.AffectedKindOperation, Side: event.SideRequest, Operation: operation},
+			Subject:     event.Subject{Type: event.SubjectAPIOperation, Kind: event.KindOperation, Side: event.SideRequest, Operation: operation},
 			Description: desc,
 			Hint:        "Move to the replacement Cloudflare names in its deprecation notice: " + e.Link,
 			Excerpt:     excerpt(append(quote, "Deprecated APIs:", text)...),

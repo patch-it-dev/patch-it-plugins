@@ -56,10 +56,10 @@ func planetscalePlugin(t *testing.T) (Plugin, string) {
 	return Plugin{Adapter: a, Diff: planetscaleDiff, Keep: planetscaleKeep}, srv.URL + "/raw" + repo
 }
 
-func replayPlanetScale(t *testing.T, p Plugin, from, to string) []event.EventV2 {
+func replayPlanetScale(t *testing.T, p Plugin, from, to string) []event.Event {
 	t.Helper()
 	s := openStore(t)
-	if rejected, err := kittest.Replay(context.Background(), vercelEnv(s), s, p, from, to); err != nil || rejected {
+	if rejected, err := kittest.Pair(context.Background(), vercelEnv(s), s, p, from, to); err != nil || rejected {
 		t.Fatalf("replay %s -> %s: rejected=%v err=%v", from, to, rejected, err)
 	}
 	return kittest.Stored(t, s)
@@ -133,7 +133,7 @@ func TestPlanetScaleDropsRemovalsThatWerentDeprecated(t *testing.T) {
 	p.Keep = nil
 	var removed []string
 	for _, e := range replayPlanetScale(t, p, from, to) {
-		if e.Breaking && e.Subject.Kind == event.AffectedKindOperation && strings.HasSuffix(e.Description, " removed.") {
+		if e.Breaking && e.Subject.Kind == event.KindOperation && strings.HasSuffix(e.Description, " removed.") {
 			removed = append(removed, e.Subject.Operation)
 		}
 	}

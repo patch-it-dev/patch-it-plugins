@@ -16,7 +16,7 @@ import (
 // YAML to JSON the same way adapter.Datadog.Fetch does.
 type fakeDatadogAdapter struct{}
 
-func (fakeDatadogAdapter) API() string { return "datadog" }
+func (fakeDatadogAdapter) API() string { return "datadog/api" }
 
 func (fakeDatadogAdapter) LatestTag(context.Context) (string, error) { return "2.61.0", nil }
 
@@ -78,8 +78,8 @@ func TestDatadogReplayRecreatesTheRealPropertyRemoval(t *testing.T) {
 	// Acceptance criteria: every event carries source_url and a non-empty
 	// source_excerpt, and is placed on the real tags, not stand-ins.
 	for _, e := range events {
-		if e.API != "datadog" || e.Version != "2.61.0" || e.PreviousVersion != "2.60.0" {
-			t.Errorf("event %s: api=%s version=%s previous_version=%s, want datadog 2.61.0 from 2.60.0",
+		if e.API != "datadog/api" || e.Version != "2.61.0" || e.PreviousVersion != "2.60.0" {
+			t.Errorf("event %s: api=%s version=%s previous_version=%s, want datadog/api 2.61.0 from 2.60.0",
 				e.Subject.Property, e.API, e.Version, e.PreviousVersion)
 		}
 		if e.SourceURL == "" || e.SourceExcerpt == "" {

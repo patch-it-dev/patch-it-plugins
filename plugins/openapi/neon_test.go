@@ -30,7 +30,7 @@ var neonCommits = map[string][2]string{
 // copied from and reshaped, as adapter.Neon.Fetch cites and reshapes it.
 type fakeNeonAdapter struct{ latest string }
 
-func (fakeNeonAdapter) API() string { return "neon" }
+func (fakeNeonAdapter) API() string { return "neon/api" }
 
 func (f fakeNeonAdapter) LatestTag(context.Context) (string, error) { return f.latest, nil }
 
@@ -77,7 +77,7 @@ func neonPlugin(a adapter.Adapter) Plugin {
 func TestNeonGolden(t *testing.T) {
 	ctx := context.Background()
 	s := openStore(t)
-	if rejected, err := kittest.Replay(ctx, vercelEnv(s), s, neonPlugin(fakeNeonAdapter{}), "5c57d009", "93b93dc9"); err != nil || rejected {
+	if rejected, err := kittest.Pair(ctx, vercelEnv(s), s, neonPlugin(fakeNeonAdapter{}), "5c57d009", "93b93dc9"); err != nil || rejected {
 		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
 	}
 	events := kittest.Stored(t, s)
@@ -117,7 +117,7 @@ func TestNeonGolden(t *testing.T) {
 func TestNeonDropsRemovalsThatWerentDeprecated(t *testing.T) {
 	ctx := context.Background()
 	s := openStore(t)
-	if rejected, err := kittest.Replay(ctx, vercelEnv(s), s, neonPlugin(fakeNeonAdapter{}), "4c6b3be4", "4497de89"); err != nil || rejected {
+	if rejected, err := kittest.Pair(ctx, vercelEnv(s), s, neonPlugin(fakeNeonAdapter{}), "4c6b3be4", "4497de89"); err != nil || rejected {
 		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
 	}
 	if events := kittest.Stored(t, s); len(events) != 0 {
@@ -127,7 +127,7 @@ func TestNeonDropsRemovalsThatWerentDeprecated(t *testing.T) {
 	s = openStore(t)
 	p := neonPlugin(fakeNeonAdapter{})
 	p.Keep = nil
-	if _, err := kittest.Replay(ctx, vercelEnv(s), s, p, "4c6b3be4", "4497de89"); err != nil {
+	if _, err := kittest.Pair(ctx, vercelEnv(s), s, p, "4c6b3be4", "4497de89"); err != nil {
 		t.Fatal(err)
 	}
 	var removals []string
@@ -152,7 +152,7 @@ func TestNeonDropsRemovalsThatWerentDeprecated(t *testing.T) {
 // /consumption_history/account` endpoint has been removed."
 type neonAPIClient struct{}
 
-func (neonAPIClient) API() string { return "neon" }
+func (neonAPIClient) API() string { return "neon/api" }
 
 func (neonAPIClient) LatestTag(context.Context) (string, error) { return "2.7.3", nil }
 
@@ -178,7 +178,7 @@ func (neonAPIClient) Fetch(_ context.Context, version string) (adapter.Spec, err
 func TestNeonKeepsTheRemovalOfADeprecatedOperation(t *testing.T) {
 	ctx := context.Background()
 	s := openStore(t)
-	if rejected, err := kittest.Replay(ctx, vercelEnv(s), s, neonPlugin(neonAPIClient{}), "2.7.2", "2.7.3"); err != nil || rejected {
+	if rejected, err := kittest.Pair(ctx, vercelEnv(s), s, neonPlugin(neonAPIClient{}), "2.7.2", "2.7.3"); err != nil || rejected {
 		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
 	}
 	events := kittest.Stored(t, s)

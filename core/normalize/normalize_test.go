@@ -16,7 +16,7 @@ const (
 )
 
 var source = Source{
-	API:             "stripe",
+	API:             "stripe/api",
 	Version:         "2022-11-15",
 	PreviousVersion: "2022-08-01",
 	NewSpecURL:      newURL,
@@ -61,8 +61,8 @@ func TestEventsAreValidWithFullProvenance(t *testing.T) {
 	}
 
 	removed, added := events[0], events[1]
-	if removed.Affected.Kind != event.AffectedKindSchemaProperty || removed.Affected.Schema != "payment_intent" ||
-		removed.Affected.Property != "charges" || !removed.Breaking {
+	if removed.Subject.Kind != event.KindSchemaProperty || removed.Subject.Schema != "payment_intent" ||
+		removed.Subject.Property != "charges" || !removed.Breaking {
 		t.Errorf("charges removal mapped wrong: %+v", removed)
 	}
 	// Removals cite the old spec: the evidence is gone from the new one.
@@ -71,13 +71,13 @@ func TestEventsAreValidWithFullProvenance(t *testing.T) {
 	}
 	for _, e := range events {
 		if e.Confidence != 1.0 {
-			t.Errorf("%s: confidence %v, want 1.0 for a spec diff", e.Affected.Property, e.Confidence)
+			t.Errorf("%s: confidence %v, want 1.0 for a spec diff", e.Subject.Property, e.Confidence)
 		}
 		if e.Version != "2022-11-15" || e.PreviousVersion != "2022-08-01" || !e.DetectedAt.Equal(source.DetectedAt) {
-			t.Errorf("%s: version/time not carried over: %+v", e.Affected.Property, e)
+			t.Errorf("%s: version/time not carried over: %+v", e.Subject.Property, e)
 		}
 		if e.SourcePointer == "" || e.SourceExcerpt == "" {
-			t.Errorf("%s: missing pointer or excerpt", e.Affected.Property)
+			t.Errorf("%s: missing pointer or excerpt", e.Subject.Property)
 		}
 	}
 }

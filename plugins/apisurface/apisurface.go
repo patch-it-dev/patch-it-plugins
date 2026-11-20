@@ -48,20 +48,21 @@ func init() {
 
 // Package is one published package.
 type Package struct {
-	Name      string // on the registry, and the events' api: "openai"
+	ID        string // the source id the events carry: "openai/python-sdk"
+	Name      string // on the registry: "openai"
 	Ecosystem string // "pypi"
 	Module    string // the top-level import name: "openai"
 }
 
 // OpenAIPython is the openai package on PyPI.
-var OpenAIPython = Package{Name: "openai", Ecosystem: "pypi", Module: "openai"}
+var OpenAIPython = Package{ID: "openai/python-sdk", Name: "openai", Ecosystem: "pypi", Module: "openai"}
 
 // Plugin reads one package's releases.
 type Plugin struct {
 	Package Package
 }
 
-func (p Plugin) Name() string { return p.Package.Name }
+func (p Plugin) Name() string { return p.Package.ID }
 
 // Run reads the newest release and extracts it against the last one read
 // (the baseline), or against nothing on a first run: the surface it stores
@@ -75,7 +76,7 @@ func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) 
 		return plugin.Result{}, fmt.Errorf("%s: no release listed", p.Package.Name)
 	}
 	v := vs[len(vs)-1]
-	last, err := env.Baselines.LastSpec(p.Package.Name)
+	last, err := env.Baselines.LastSpec(p.Package.ID)
 	if err != nil {
 		return plugin.Result{}, fmt.Errorf("loading the last baseline of %s: %w", p.Package.Name, err)
 	}
@@ -95,7 +96,7 @@ func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) 
 	if err != nil {
 		return plugin.Result{}, err
 	}
-	res.Baselines = []plugin.Spec{plugin.Baseline(p.Package.Name, v.ID, v.Ref, to.SourceURL, to.Content, false, env.Now().UTC())}
+	res.Baselines = []plugin.Spec{plugin.Baseline(p.Package.ID, v.ID, v.Ref, to.SourceURL, to.Content, env.Now().UTC())}
 	return res, nil
 }
 
@@ -164,7 +165,7 @@ func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 		return plugin.Result{}, fmt.Errorf("reading the %s %s surface: %w", p.Package.Name, to.Version.ID, err)
 	}
 	now := env.Now().UTC()
-	var events []event.EventV2
+	var events []event.Event
 	var rejected []error
 	for _, c := range Compare(a, b) {
 		if c.Change == "" {
@@ -172,7 +173,7 @@ func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 			continue
 		}
 		e := p.event(c, from, to, a.Artifact, b.Artifact, now)
-		e.Fingerprint = event.FingerprintV2(e.API, e.Version, e.ChangeType, e.Subject, "")
+		e.Fingerprint = event.Fingerprint(e.API, e.Version, e.ChangeType, e.Subject, "")
 		if err := e.Validate(); err != nil {
 			rejected = append(rejected, fmt.Errorf("%s %s %s: %w", p.Package.Name, to.Version.ID, c.Symbol, err))
 			continue
@@ -185,7 +186,7 @@ func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 var _ plugin.Versioned = Plugin{}
 
 // event is one change as a change event.
-func (p Plugin) event(c Change, from, to plugin.Snapshot, fromFile, toFile string, now time.Time) event.EventV2 {
+func (p Plugin) event(c Change, from, to plugin.Snapshot, fromFile, toFile string, now time.Time) event.Event {
 	pkg := p.Package
 	sym := p.local(c.Symbol)
 	subject := event.Subject{Type: event.SubjectPackageRelease, Ecosystem: pkg.Ecosystem, Package: pkg.Name, Change: c.Change, Symbols: []string{sym}}
@@ -207,8 +208,8 @@ func (p Plugin) event(c Change, from, to plugin.Snapshot, fromFile, toFile strin
 		desc = fmt.Sprintf("`%s`'s parameter `%s` has no default in %s %s (it was `%s`): a call that leaves it out raises a TypeError.", sym, c.Parameter, pkg.Name, to.Version.ID, c.OldDefault)
 		hint = fmt.Sprintf("Pass `%s=%s` to `%s` to keep the old behavior.", c.Parameter, c.OldDefault, sym)
 	}
-	return event.EventV2{
-		API:             pkg.Name,
+	return event.Event{
+		API:             pkg.ID,
 		Version:         to.Version.ID,
 		PreviousVersion: from.Version.ID,
 		ChangeType:      event.ChangeTypeBreaking,

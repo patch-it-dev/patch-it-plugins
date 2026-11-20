@@ -11,25 +11,27 @@ type fake struct{ name string }
 func (f fake) Name() string                           { return f.name }
 func (fake) Run(context.Context, Env) (Result, error) { return Result{}, nil }
 
-func src(id, slug string) Source {
-	return Source{ID: id, Layer: LayerAPI, Watches: "w", URLs: []string{"https://example.com/spec"}, Page: "providers/acme.md", Plugin: fake{slug}}
+// src is a source of the provider whose id is provider, named by its id.
+func src(id, provider string) Source {
+	return Source{ID: id, Layer: LayerAPI, Watches: "w", URLs: []string{"https://example.com/spec"}, Page: "providers/acme.md", Plugin: fake{provider + "/" + id}}
 }
 
 func acme(sources ...Source) Provider {
 	return Provider{ID: "acme-test", Name: "Acme", Category: CategoryPayments, Homepage: "https://example.com", Sources: sources}
 }
 
-func TestRegisterProviderResolvesBothIDs(t *testing.T) {
-	RegisterProvider(acme(src("api", "acme-test-api")))
-	RegisterProvider(acme(src("sdk", "acme-test-sdk"))) // a second kind adds a source
-	for _, id := range []string{"acme-test/api", "acme-test-api"} {
-		s, ok := LookupSource(id)
-		if !ok || s.FullID() != "acme-test/api" || s.Alias() != "acme-test-api" || s.Source.Kind != "plugin" {
-			t.Errorf("LookupSource(%q) = %+v, %v", id, s, ok)
-		}
-		if p, ok := Lookup(id); !ok || p.Name() != "acme-test-api" {
-			t.Errorf("Lookup(%q) = %v, %v", id, p, ok)
-		}
+func TestRegisterProviderRegistersEachSourceByItsID(t *testing.T) {
+	RegisterProvider(acme(src("api", "acme-test")))
+	RegisterProvider(acme(src("sdk", "acme-test"))) // a second kind adds a source
+	s, ok := LookupSource("acme-test/api")
+	if !ok || s.FullID() != "acme-test/api" || s.Source.Kind != "plugin" {
+		t.Errorf("LookupSource = %+v, %v", s, ok)
+	}
+	if p, ok := Lookup("acme-test/api"); !ok || p.Name() != "acme-test/api" {
+		t.Errorf("Lookup = %v, %v", p, ok)
+	}
+	if _, ok := Lookup("acme-test-api"); ok {
+		t.Error("found a source by a name that isn't its id")
 	}
 	var got []string
 	for _, p := range Providers() {
@@ -46,6 +48,11 @@ func TestRegisterProviderResolvesBothIDs(t *testing.T) {
 
 func TestRegisterProviderRefusesIncompleteMetadata(t *testing.T) {
 	for name, p := range map[string]Provider{
+		"named by another id": acme(func() Source {
+			s := src("named", "acme-test")
+			s.Plugin = fake{"acme-test-named"}
+			return s
+		}()),
 		"no category":  {ID: "x1", Name: "X", Homepage: "https://x.example", Sources: []Source{src("api", "x1")}},
 		"no sources":   {ID: "x2", Name: "X", Category: CategoryAI, Homepage: "https://x.example"},
 		"bad homepage": {ID: "x3", Name: "X", Category: CategoryAI, Homepage: "x.example", Sources: []Source{src("api", "x3")}},
@@ -77,24 +84,24 @@ func TestRegisterProviderRefusesIncompleteMetadata(t *testing.T) {
 }
 
 func TestRegisterProviderRefusesConflictingProvider(t *testing.T) {
-	RegisterProvider(acme(src("one", "acme-test-one")))
+	RegisterProvider(acme(src("one", "acme-test")))
 	defer func() {
 		if recover() == nil {
 			t.Error("a provider registered again with another name didn't panic")
 		}
 	}()
-	p := acme(src("two", "acme-test-two"))
+	p := acme(src("two", "acme-test"))
 	p.Name = "Acme Corp"
 	RegisterProvider(p)
 }
 
-// A package names its sources, and a source answers to its first name.
+// A package names its sources.
 func TestForPackage(t *testing.T) {
-	s := src("pkg", "acme-test-pkg")
+	s := src("pkg", "acme-test")
 	s.Packages = []string{"pypi:acme-test", "npm:@acme/test"}
 	RegisterProvider(acme(s))
 	got := ForPackage("npm:@acme/test")
-	if len(got) != 1 || got[0].FullID() != "acme-test/pkg" || strings.Join(got[0].Aliases(), ",") != "acme-test-pkg" {
+	if len(got) != 1 || got[0].FullID() != "acme-test/pkg" {
 		t.Errorf("ForPackage = %+v", got)
 	}
 	if got := ForPackage("pypi:nobody"); len(got) != 0 {

@@ -38,7 +38,7 @@ type Elasticsearch struct{}
 
 var _ Adapter = Elasticsearch{}
 
-func (Elasticsearch) API() string { return "elasticsearch" }
+func (Elasticsearch) API() string { return "elastic/elasticsearch-api" }
 
 var (
 	esRelease = regexp.MustCompile(`^v(\d+)\.(\d+)\.(\d+)$`)

@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:a2f86cae07b29326ca93be5f66515f27d1040d5f189e103911dd93ba739e0b96",
-    "api": "newrelic",
+    "fingerprint": "sha256:7f09f0bebf3e229d1a8f43574c224b8a6e186b4e0228f62c793afd10156569fe",
+    "api": "newrelic/python-agent",
     "version": "11.0.0",
     "change_type": "breaking",
     "breaking": true,
@@ -24,8 +24,8 @@
   },
   {
     "id": 2,
-    "fingerprint": "sha256:dfc0f5f20b000248f48960b089533d37b2a98857ab86b34ef58bbadc2a79a331",
-    "api": "newrelic",
+    "fingerprint": "sha256:033c7dc942625f1d07ef976edf7dcc22b458dd2786eeab3d5a7a0889dfe100e3",
+    "api": "newrelic/python-agent",
     "version": "11.0.0",
     "change_type": "breaking",
     "breaking": true,
@@ -48,8 +48,8 @@
   },
   {
     "id": 3,
-    "fingerprint": "sha256:76b3c3353469c9b8fa468e742f019b0a625fba73be37263cec6db0c8a616a512",
-    "api": "newrelic",
+    "fingerprint": "sha256:2260cefe21b2807a9abc2144b46fd967e728f7e73dc2a489babb8ca0d77fa2b8",
+    "api": "newrelic/python-agent",
     "version": "11.0.0",
     "change_type": "breaking",
     "breaking": true,
@@ -72,8 +72,8 @@
   },
   {
     "id": 4,
-    "fingerprint": "sha256:cc82dac7778ed8efcd9e407d06f00b5bd3180f3c7d471363c6b5b0f55feaa6fa",
-    "api": "newrelic",
+    "fingerprint": "sha256:a26a9a7d453398aa11ba51c77edf340e83d0eee8657c87a8a25ee517729648ba",
+    "api": "newrelic/python-agent",
     "version": "11.0.0",
     "change_type": "breaking",
     "breaking": true,
@@ -95,8 +95,8 @@
   },
   {
     "id": 5,
-    "fingerprint": "sha256:c8d9b51b7477b5f17f7cd121463061fe58b21ebc7deeb51d64087eb84569b20a",
-    "api": "newrelic",
+    "fingerprint": "sha256:0d2b52b1e7f8601a5ccb6efa65ad4c028f2c8faceec43672af3f8e9f3de7183a",
+    "api": "newrelic/python-agent",
     "version": "11.0.0",
     "change_type": "breaking",
     "breaking": true,
@@ -118,8 +118,8 @@
   },
   {
     "id": 6,
-    "fingerprint": "sha256:67f424f610fbafc21776c15219e51662c6f8b21d12db8039a104afe6a6ca6138",
-    "api": "newrelic",
+    "fingerprint": "sha256:6dac3561485ac1b50b934c773fbdf9d34244b6a238d4ffba84649653093ae020",
+    "api": "newrelic/python-agent",
     "version": "11.0.0",
     "change_type": "breaking",
     "breaking": true,
@@ -141,8 +141,8 @@
   },
   {
     "id": 7,
-    "fingerprint": "sha256:8940a71ce47a561fd62c949d2b0ba691cd8b7f7d0a5fa8366dc5d56d411bfbf2",
-    "api": "newrelic",
+    "fingerprint": "sha256:726ecaafb7ec01c6471fa78cb1d90ba403489b8900b1d403c24f087e18cccbb7",
+    "api": "newrelic/python-agent",
     "version": "11.0.0",
     "change_type": "breaking",
     "breaking": true,

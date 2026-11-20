@@ -8,21 +8,21 @@ import "strings"
 // sends (a fine-tuned model is "ft:gpt-4-0613:org::id"), and the "-completions"
 // aliases belong to the legacy Completions endpoint.
 var OpenAI = Page{
-	API:       "openai-models",
-	Vendor:    "OpenAI",
-	URL:       "https://developers.openai.com/api/docs/deprecations.md",
-	Operation: "POST /v1/chat/completions",
-	Keep:      openAIText,
+	API:      "openai/models",
+	Provider: "openai",
+	Vendor:   "OpenAI",
+	URL:      "https://developers.openai.com/api/docs/deprecations.md",
+	Keep:     openAIText,
 }
 
 // Anthropic's model deprecations page (checked 2026-10-13): every model in
 // its deprecation history is a Messages API model.
 var Anthropic = Page{
-	API:       "anthropic-models",
-	Vendor:    "Anthropic",
-	URL:       "https://platform.claude.com/docs/en/about-claude/model-deprecations.md",
-	Operation: "POST /v1/messages",
-	Keep:      func(name string) bool { return strings.HasPrefix(name, "claude-") },
+	API:      "anthropic/models",
+	Provider: "anthropic",
+	Vendor:   "Anthropic",
+	URL:      "https://platform.claude.com/docs/en/about-claude/model-deprecations.md",
+	Keep:     func(name string) bool { return strings.HasPrefix(name, "claude-") },
 }
 
 var (

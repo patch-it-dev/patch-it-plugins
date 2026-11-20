@@ -1,6 +1,7 @@
 package notices
 
 import (
+	"strings"
 	"testing"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/kit/kittest"
@@ -22,7 +23,7 @@ func TestRetirementsGolden(t *testing.T) {
 			if archive.Calls != 1 {
 				t.Errorf("%d snapshots, want 1: the second run's page is unchanged", archive.Calls)
 			}
-			kittest.Golden(t, "testdata/golden/"+page.API+".json", got)
+			kittest.Golden(t, "testdata/golden/"+strings.ReplaceAll(page.API, "/", "-")+".json", got)
 		})
 	}
 }

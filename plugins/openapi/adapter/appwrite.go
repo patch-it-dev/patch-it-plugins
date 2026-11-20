@@ -28,7 +28,7 @@ var appwriteMethods = []string{"get", "put", "post", "delete", "patch", "head", 
 // Appwrite adapts Appwrite's REST API spec in appwrite/specs (BSD-3-Clause)
 // for the openapi plugin. The repo has one directory per server minor,
 // specs/<X.Y>.x/, and no tags or releases (checked 2026-11-19), so a tag here
-// is a commit SHA: the newest minor's spec at that commit. To replay an older
+// is a commit SHA: the newest minor's spec at that commit. To read an older
 // minor, a tag can name its directory, "1.8.x@<sha>".
 //
 // A directory holds one of two layouts:
@@ -59,7 +59,7 @@ type Appwrite struct {
 
 var _ Adapter = Appwrite{}
 
-func (Appwrite) API() string { return "appwrite" }
+func (Appwrite) API() string { return "appwrite/api" }
 
 func (a Appwrite) api(path string) string {
 	return cmp.Or(a.APIBase, "https://api.github.com") + "/repos/appwrite/specs" + path

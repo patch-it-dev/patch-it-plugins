@@ -48,7 +48,7 @@ func replay(ctx context.Context, s *kittest.Mem, a adapter.Adapter, from, to str
 }
 
 func replayWith(ctx context.Context, s *kittest.Mem, p Plugin, from, to string) (bool, error) {
-	return kittest.Replay(ctx, env(s), s, p, from, to)
+	return kittest.Pair(ctx, env(s), s, p, from, to)
 }
 
 // fakeAdapter serves specs from memory, one per tag, so the whole ingest flow
@@ -58,7 +58,7 @@ type fakeAdapter struct {
 	specs  map[string]string // tag -> spec JSON
 }
 
-func (fakeAdapter) API() string { return "stripe" }
+func (fakeAdapter) API() string { return "stripe/api" }
 
 func (f fakeAdapter) LatestTag(context.Context) (string, error) { return f.latest, nil }
 
@@ -131,7 +131,7 @@ func TestIngestStoresTheEventsItFinds(t *testing.T) {
 	}
 
 	// The baseline moved to v2 only after the events were safely stored.
-	last, _ := s.LastSpec("stripe")
+	last, _ := s.LastSpec("stripe/api")
 	if last == nil || last.Version != "version-v2" {
 		t.Errorf("baseline after the second run = %+v, want version-v2", last)
 	}
@@ -157,7 +157,7 @@ func TestReplayStoresEventsWithoutMovingTheBaseline(t *testing.T) {
 	if got := storedEvents(t, s); len(got) != 2 {
 		t.Errorf("replay stored %d events, want 2: %v", len(got), got)
 	}
-	if last, _ := s.LastSpec("stripe"); last != nil {
+	if last, _ := s.LastSpec("stripe/api"); last != nil {
 		t.Errorf("replay moved the baseline to %s; replays must never set it", last.Version)
 	}
 
@@ -200,7 +200,7 @@ func TestReplayAttachesMigrationHintsFromTheChangelog(t *testing.T) {
 		t.Fatalf("replay: %v", err)
 	}
 	events, _ := s.All()
-	var removed *event.EventV2
+	var removed *event.Event
 	for i := range events {
 		if events[i].Subject.Property == "charges" {
 			removed = &events[i]

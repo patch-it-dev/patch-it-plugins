@@ -30,10 +30,10 @@ func fakeDocs(t *testing.T) *httptest.Server {
 	return srv
 }
 
-func request(op, property string, ct event.ChangeType, hint string) event.ChangeEvent {
-	return event.ChangeEvent{
+func request(op, property string, ct event.ChangeType, hint string) event.Event {
+	return event.Event{
 		ChangeType: ct,
-		Affected: event.Affected{Kind: event.AffectedKindRequestParameter, Side: event.SideRequest,
+		Subject: event.Subject{Type: event.SubjectAPIOperation, Kind: event.KindRequestParameter, Side: event.SideRequest,
 			Operation: op, Property: property},
 		MigrationHint: hint,
 	}
@@ -175,13 +175,13 @@ func TestIndexFetchesAVersionsEntriesAndAttachesHints(t *testing.T) {
 	}
 
 	breaking := event.ChangeTypeBreaking
-	events := []event.ChangeEvent{
+	events := []event.Event{
 		request("POST /v1/checkout/sessions", "payment_method_types", breaking, "Stop sending payment_method_types."),
 		request("POST /v1/payment_intents/{intent}/confirm", "payment_method_types", breaking, ""),
 		request("POST /v1/payment_methods/{payment_method}", "payto", breaking, ""),
 		// Same parameter name, an operation no entry names: keeps its placeholder.
 		request("POST /v1/invoices", "payment_settings.payment_method_types[]", breaking, "placeholder"),
-		{ChangeType: breaking, Affected: event.Affected{Kind: event.AffectedKindSchemaProperty, Side: event.SideResponse,
+		{ChangeType: breaking, Subject: event.Subject{Type: event.SubjectAPIOperation, Kind: event.KindSchemaProperty, Side: event.SideResponse,
 			Schema: "payment_intent", Property: "charges"}},
 		// A collision found in review: the top-level billing_cycle_anchor type
 		// change on Subscription#update, and the nested one trial offers added.
@@ -233,7 +233,7 @@ func TestIndexFetchesAVersionsEntriesAndAttachesHints(t *testing.T) {
 func TestAnAddedRowNeverExplainsABreakingChange(t *testing.T) {
 	ix := NewIndex([]Entry{{URL: "https://x/added", WhatsNew: "Adds p.",
 		Rows: []Row{{Parameter: "p", Change: "Added", Targets: []Target{{Operation: "POST /v1/x", Path: "p"}}}}}})
-	events := []event.ChangeEvent{
+	events := []event.Event{
 		request("POST /v1/x", "p", event.ChangeTypeBreaking, "Stop sending p."),
 		request("POST /v1/x", "p", event.ChangeTypeNewFeature, ""),
 	}
@@ -250,7 +250,7 @@ func TestAnAddedRowNeverExplainsABreakingChange(t *testing.T) {
 func TestARemovedRowNeverExplainsAnAddition(t *testing.T) {
 	ix := NewIndex([]Entry{{URL: "https://x/removed", WhatsNew: "Removes p.",
 		Rows: []Row{{Parameter: "p", Change: "Removed", Targets: []Target{{Operation: "POST /v1/x", Path: "p"}}}}}})
-	events := []event.ChangeEvent{
+	events := []event.Event{
 		request("POST /v1/x", "p", event.ChangeTypeBreaking, ""),
 		request("POST /v1/x", "p", event.ChangeTypeNewFeature, ""),
 	}
@@ -281,7 +281,7 @@ func TestReleaseOf(t *testing.T) {
 func TestAHintIsCappedFromTheFrontAndKeepsItsSource(t *testing.T) {
 	ix := NewIndex([]Entry{{URL: "https://x", WhatsNew: strings.Repeat("a", 5000),
 		Rows: []Row{{Parameter: "p", Change: "Changed", Targets: []Target{{Operation: "POST /v1/x", Path: "p"}}}}}})
-	events := []event.ChangeEvent{request("POST /v1/x", "p", event.ChangeTypeBreaking, "Handle p as q.")}
+	events := []event.Event{request("POST /v1/x", "p", event.ChangeTypeBreaking, "Handle p as q.")}
 	ix.Attach(events)
 	got := events[0].MigrationHint
 	if n := len([]rune(got)); n > hintLimit {

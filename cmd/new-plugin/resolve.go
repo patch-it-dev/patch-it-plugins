@@ -8,28 +8,15 @@ import (
 	"io"
 	"os"
 	"path/filepath"
-	"regexp"
 	"slices"
 	"strings"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 )
 
-// resolve fills in the provider and source from the registry and the
-// flags: a registered provider's name, category and homepage, the first
-// name, and, for the deprecated flags, the ids from the name and --api.
+// resolve fills in the provider from the registry: a registered provider's
+// name, category and homepage.
 func (o *Options) resolve() error {
-	if o.ProviderID == "" && o.Provider != "" { // the old flags: --provider is the name
-		o.ProviderID = strings.Trim(regexp.MustCompile(`[^a-z0-9]+`).ReplaceAllString(strings.ToLower(o.Provider), "-"), "-")
-		for _, p := range plugin.Providers() {
-			if strings.EqualFold(p.Name, o.Provider) {
-				o.ProviderID = p.ID
-			}
-		}
-		if o.SourceID == "" {
-			o.SourceID = strings.TrimPrefix(o.API, o.ProviderID+"-")
-		}
-	}
 	if !validID.MatchString(o.ProviderID) {
 		return fmt.Errorf("--provider %q: want the provider's id, lowercase letters, digits and single hyphens (acme)", o.ProviderID)
 	}
@@ -53,12 +40,6 @@ func (o *Options) resolve() error {
 		}
 		if o.Homepage != "" && !validURL.MatchString(o.Homepage) {
 			return fmt.Errorf("--homepage %q: want an https URL", o.Homepage)
-		}
-	}
-	if o.API == "" {
-		o.API = o.ProviderID + "-" + o.SourceID
-		if o.SourceID == o.ProviderID {
-			o.API = o.ProviderID
 		}
 	}
 	return nil

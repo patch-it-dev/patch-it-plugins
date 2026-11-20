@@ -42,7 +42,7 @@ func TestNewRelicEachRowOfTheTable(t *testing.T) {
 		if len(e.Subject.Symbols) != 1 {
 			t.Fatalf("%v: one symbol per event", e.Subject.Symbols)
 		}
-		if e.API != "newrelic" || e.Version != "11.0.0" || e.Subject.Ecosystem != "pypi" || e.Subject.Package != "newrelic" ||
+		if e.API != "newrelic/python-agent" || e.Version != "11.0.0" || e.Subject.Ecosystem != "pypi" || e.Subject.Package != "newrelic" ||
 			e.ChangeType != event.ChangeTypeBreaking || !strings.HasPrefix(e.SourceExcerpt, "Removed features\n    | Legacy API ") ||
 			!strings.HasSuffix(e.MigrationHint, "(newrelic's release notes for 11.0.0)") {
 			t.Errorf("%+v", e)
@@ -190,7 +190,7 @@ func TestDropInsLimitsRenames(t *testing.T) {
 		"| `old_a` | [`new_a`](/a) |",
 		"| `old_b` | `new_b` |",
 	}, "\n")
-	g := Guide{Package: "acme", Module: "acme", Release: "2.0.0", Repo: "acme/acme", Path: "MIGRATION.md",
+	g := Guide{API: "acme/sdk", Package: "acme", Module: "acme", Release: "2.0.0", Repo: "acme/acme", Path: "MIGRATION.md",
 		Section: "Removed", Format: FormatMarkdown, Header: "Removed",
 		Paths: map[string]string{"old_a": "mod.old_a", "new_a": "mod.new_a"}}
 	run := func(g Guide) map[string]string {
@@ -234,7 +234,7 @@ func readNames(t *testing.T, page string, g Guide) []string {
 }
 
 // newrelicIngest runs the plugin over the saved excerpt.
-func newrelicIngest(t *testing.T) []event.EventV2 {
+func newrelicIngest(t *testing.T) []event.Event {
 	t.Helper()
 	return kittest.Ingest(t, migrationguide.Plugin{Guide: NewRelic11}, kittest.Pages{NewRelic11.URL(): newrelicSource})
 }

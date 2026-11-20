@@ -12,7 +12,7 @@ import (
 
 // What the migration-guide kind (plugins/migrationguide) asks of a guide.
 
-// Slug is the events' api and the source's old slug: the SDK's PyPI name.
+// Slug is the source id the events carry: "anthropic/python-sdk".
 func (g Guide) Slug() string { return g.API }
 
 // Releases is every final release of the SDK on PyPI, oldest first, each
@@ -21,7 +21,7 @@ func (g Guide) Releases(ctx context.Context, env plugin.Env) ([]plugin.Version, 
 	if g.Major != 0 {
 		return []plugin.Version{{ID: g.Version(), Ref: "v" + g.Version()}}, nil
 	}
-	vs, err := versions.PyPIReleases(ctx, env.Get, g.API)
+	vs, err := versions.PyPIReleases(ctx, env.Get, g.Package)
 	if err != nil {
 		return nil, err
 	}
@@ -62,21 +62,19 @@ func (g Guide) GuideURL(v plugin.Version) string {
 	return g.At(versions.Major(v.ID)).URL()
 }
 
-// Read is an event per request parameter the to major removed, read from
-// its guide, with previous_version from's release. They're v1 events
-// (the kind converts them to v2: core/migrate reads this package, so it
-// can't be called from here).
-func (g Guide) Read(page []byte, from, to plugin.Version, now time.Time) (v1 []event.ChangeEvent, _ []event.EventV2, rejected []error, err error) {
+// Read is an event per parameter the to major removed, read from its
+// guide, with previous_version from's release.
+func (g Guide) Read(page []byte, from, to plugin.Version, now time.Time) (_ []event.Event, rejected []error, err error) {
 	g = g.At(versions.Major(to.ID))
 	removals, err := Parse(page, g)
 	if err != nil {
-		return nil, nil, nil, err
+		return nil, nil, err
 	}
 	events, errs := Events(g, removals, now)
 	for i := range events {
 		events[i].PreviousVersion = from.ID
 	}
-	return events, nil, errs, nil
+	return events, errs, nil
 }
 
 // FirstOfMajor is true for X.0.0, the release a major's guide is tagged at.

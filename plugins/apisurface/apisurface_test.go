@@ -30,7 +30,7 @@ var saved = kittest.Pages{
 }
 
 // pair lists the releases, reads 1.1.1 and 1.1.2 and extracts the pair.
-func pair(t *testing.T) []event.EventV2 {
+func pair(t *testing.T) []event.Event {
 	t.Helper()
 	ctx, env := context.Background(), kittest.Env(t, saved)
 	p := Plugin{Package: OpenAIPython}

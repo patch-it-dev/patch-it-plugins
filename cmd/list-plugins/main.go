@@ -1,5 +1,5 @@
 // Command list-plugins prints what patch-it watches, as JSON: every registered
-// provider with its sources (id, old slug, kind, layer, what it watches, the
+// provider with its sources (id, kind, layer, what it watches, the
 // URLs it reads, its page), built from the plugin registry at run time. The
 // Release workflow attaches its output to each release as plugins.json; it is
 // never committed.

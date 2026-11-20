@@ -44,7 +44,7 @@ func TestReplayRecreatesTheRealFunctionCommandRemoval(t *testing.T) {
 	s := kittest.NewMem()
 	e := env(s, fixturePages(), t)
 
-	rejected, err := kittest.Replay(ctx, e, s, Plugin{Catalog: Redis}, oldRef, newRef)
+	rejected, err := kittest.Pair(ctx, e, s, Plugin{Catalog: Redis}, oldRef, newRef)
 	if err != nil || rejected {
 		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
 	}
@@ -75,8 +75,8 @@ func TestReplayRecreatesTheRealFunctionCommandRemoval(t *testing.T) {
 	// Acceptance criteria: every event carries source_url and a non-empty
 	// source_excerpt, is marked breaking, and is placed on the real refs.
 	for _, ev := range events {
-		if ev.API != "redis" || ev.Version != newRef || ev.PreviousVersion != oldRef {
-			t.Errorf("event %v: api=%s version=%s previous_version=%s, want redis %s from %s",
+		if ev.API != "redis/commands" || ev.Version != newRef || ev.PreviousVersion != oldRef {
+			t.Errorf("event %v: api=%s version=%s previous_version=%s, want redis/commands %s from %s",
 				ev.Subject.Symbols, ev.API, ev.Version, ev.PreviousVersion, newRef, oldRef)
 		}
 		if ev.ChangeType != event.ChangeTypeBreaking || !ev.Breaking {
@@ -91,7 +91,7 @@ func TestReplayRecreatesTheRealFunctionCommandRemoval(t *testing.T) {
 	}
 
 	// Replaying the same pair again must not duplicate the events.
-	if _, err := kittest.Replay(ctx, e, s, Plugin{Catalog: Redis}, oldRef, newRef); err != nil {
+	if _, err := kittest.Pair(ctx, e, s, Plugin{Catalog: Redis}, oldRef, newRef); err != nil {
 		t.Fatalf("second replay: %v", err)
 	}
 	if again, _ := s.All(); len(again) != len(events) {

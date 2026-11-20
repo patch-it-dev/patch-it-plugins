@@ -31,7 +31,7 @@ import (
 
 // Feed is one vendor feed and how to read its entries.
 type Feed struct {
-	API    string // the events' api: "github-actions"
+	API    string // the source id the events carry: "github/actions"
 	Vendor string // for sentences: "GitHub"
 	URL    string // the feed itself
 	Read   Reader
@@ -75,7 +75,7 @@ type Findings []Finding
 // Count is how many findings the feed gave.
 func (fs Findings) Count() int { return len(fs) }
 
-// Slug is the events' api: "github-actions".
+// Slug is the source id the events carry: "github/actions".
 func (f Feed) Slug() string { return f.API }
 
 // PageURL is the feed itself.
@@ -89,15 +89,15 @@ func (f Feed) Find(b []byte) (kit.Notices, error) {
 
 // Events are an event per finding, citing citeURL; a dropped finding is
 // logged with why.
-func (f Feed) Events(found kit.Notices, citeURL string, now time.Time) ([]event.ChangeEvent, []event.EventV2, []error) {
-	var events []event.EventV2
+func (f Feed) Events(found kit.Notices, citeURL string, now time.Time) ([]event.Event, []error) {
+	var events []event.Event
 	var rejected []error
 	for _, fd := range found.(Findings) {
 		if fd.Dropped != "" {
 			log.Printf("%s: dropped %s: %s", f.API, fd.Entry, fd.Dropped)
 			continue
 		}
-		e := event.EventV2{
+		e := event.Event{
 			API:           f.API,
 			Version:       fd.Version,
 			ChangeType:    fd.ChangeType,
@@ -110,12 +110,12 @@ func (f Feed) Events(found kit.Notices, citeURL string, now time.Time) ([]event.
 			Confidence:    1.0,
 			DetectedAt:    now,
 		}
-		e.Fingerprint = event.FingerprintV2(e.API, e.Version, e.ChangeType, e.Subject, "")
+		e.Fingerprint = event.Fingerprint(e.API, e.Version, e.ChangeType, e.Subject, "")
 		if err := e.Validate(); err != nil {
 			rejected = append(rejected, fmt.Errorf("%s %s: %w", f.API, fd.Entry, err))
 			continue
 		}
 		events = append(events, e)
 	}
-	return nil, events, rejected
+	return events, rejected
 }

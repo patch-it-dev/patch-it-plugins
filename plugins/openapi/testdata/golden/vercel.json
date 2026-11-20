@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:3ed13a96aa00836818e55222cab3da2dfa8a26582d5498f1af05c31f5d6f4069",
-    "api": "vercel",
+    "fingerprint": "sha256:ff56553007ba92c7da01fd7b944f1989a2a08ddd78f67e4d61757f507b93ca91",
+    "api": "vercel/api",
     "version": "1.13.5",
     "previous_version": "1.13.4",
     "change_type": "deprecation",
@@ -22,8 +22,8 @@
   },
   {
     "id": 2,
-    "fingerprint": "sha256:9063f28da001671b78c5c0095cc412ca28c892e2a0e87b8a26c15b954530cea4",
-    "api": "vercel",
+    "fingerprint": "sha256:bbc8995e4907e383935c8eb7eda04a71b49975160a4c2cfa67ca296011a5e48c",
+    "api": "vercel/api",
     "version": "1.13.5",
     "previous_version": "1.13.4",
     "change_type": "deprecation",
@@ -43,8 +43,8 @@
   },
   {
     "id": 3,
-    "fingerprint": "sha256:13194122725cea31972cf361d8bf98a8f41aedb308e10a721fe800145f2afe51",
-    "api": "vercel",
+    "fingerprint": "sha256:350f494abf46acc4721581386836895b85a3fab5cb1b285405ba8094d7e9ddf8",
+    "api": "vercel/api",
     "version": "1.13.5",
     "previous_version": "1.13.4",
     "change_type": "deprecation",
@@ -64,8 +64,8 @@
   },
   {
     "id": 4,
-    "fingerprint": "sha256:3230007e27b6de1ffbd000649cdd3e34ac9a31da35a9c650cdb573b5d8f939d6",
-    "api": "vercel",
+    "fingerprint": "sha256:e36c66e4c03dd109d47cfe6cc67a8f8809b46f23afa1ab9133b6270c0f7bf34d",
+    "api": "vercel/api",
     "version": "1.13.5",
     "previous_version": "1.13.4",
     "change_type": "deprecation",
@@ -85,8 +85,8 @@
   },
   {
     "id": 5,
-    "fingerprint": "sha256:4f1bb30450488badb2c18e52b206ebdd7c5b1265e2e13508351e4bf99d945d05",
-    "api": "vercel",
+    "fingerprint": "sha256:3abdd335e32e5c60ebe66fcbc7fc418a6c58c76f5402907977f1ada184f96733",
+    "api": "vercel/api",
     "version": "1.18.7",
     "previous_version": "1.18.6",
     "change_type": "breaking",
@@ -106,8 +106,8 @@
   },
   {
     "id": 6,
-    "fingerprint": "sha256:ab1fee5e9b4b891417f2c62350ae005c7e15241d877b242dfc437764201915ac",
-    "api": "vercel",
+    "fingerprint": "sha256:f982f8524edab06d1447ca7c478e0b4e153914e8f1d7a3781762e37338f3d895",
+    "api": "vercel/api",
     "version": "1.18.7",
     "previous_version": "1.18.6",
     "change_type": "breaking",

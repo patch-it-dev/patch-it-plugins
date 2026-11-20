@@ -70,7 +70,7 @@ func Env(t testing.TB, pages Pages) plugin.Env {
 // Ingest runs p twice and returns what the first run stored. Any rejected
 // event or error fails the test, and so does a second run over the same pages
 // that stores anything new: the fingerprints must dedupe.
-func Ingest(t testing.TB, p plugin.Plugin, pages Pages) []event.EventV2 {
+func Ingest(t testing.TB, p plugin.Plugin, pages Pages) []event.Event {
 	t.Helper()
 	env := Env(t, pages)
 	return IngestWith(t, env, p)
@@ -79,7 +79,7 @@ func Ingest(t testing.TB, p plugin.Plugin, pages Pages) []event.EventV2 {
 // IngestWith is Ingest over an Env the test built (its own archive, a baseline
 // already saved). env.Baselines is where the events are stored too, so it must
 // be a Sink, as Env's Mem is.
-func IngestWith(t testing.TB, env plugin.Env, p plugin.Plugin) []event.EventV2 {
+func IngestWith(t testing.TB, env plugin.Env, p plugin.Plugin) []event.Event {
 	t.Helper()
 	sink, ok := env.Baselines.(Sink)
 	if !ok {
@@ -99,7 +99,7 @@ func IngestWith(t testing.TB, env plugin.Env, p plugin.Plugin) []event.EventV2 {
 }
 
 // Stored is every event in s, in feed order, or the test fails.
-func Stored(t testing.TB, s Sink) []event.EventV2 {
+func Stored(t testing.TB, s Sink) []event.Event {
 	t.Helper()
 	all, err := s.All()
 	if err != nil {
@@ -110,19 +110,19 @@ func Stored(t testing.TB, s Sink) []event.EventV2 {
 
 // Golden compares events with the JSON file at path, or rewrites it with
 // -update. Every event must also be valid v2, or the golden would pin a bug.
-func Golden(t testing.TB, path string, events []event.EventV2) {
+func Golden(t testing.TB, path string, events []event.Event) {
 	t.Helper()
 	golden(t, path, events, *update)
 }
 
 // CompareGolden is Golden that never rewrites the file, even with -update:
 // for a test that checks someone else's golden file.
-func CompareGolden(t testing.TB, path string, events []event.EventV2) {
+func CompareGolden(t testing.TB, path string, events []event.Event) {
 	t.Helper()
 	golden(t, path, events, false)
 }
 
-func golden(t testing.TB, path string, events []event.EventV2, rewrite bool) {
+func golden(t testing.TB, path string, events []event.Event, rewrite bool) {
 	t.Helper()
 	for _, e := range events {
 		if err := e.Validate(); err != nil {
@@ -130,7 +130,7 @@ func golden(t testing.TB, path string, events []event.EventV2, rewrite bool) {
 		}
 	}
 	if events == nil {
-		events = []event.EventV2{}
+		events = []event.Event{}
 	}
 	var buf bytes.Buffer
 	enc := json.NewEncoder(&buf)

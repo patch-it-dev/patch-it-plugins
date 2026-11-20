@@ -65,7 +65,8 @@ func init() {
 // read release by release: every version on the package registry, the file at
 // that release's tag (TagPrefix + version). Pinned (At), it is one release.
 type File struct {
-	Package   string // the installed name and the events' api: "urllib3"
+	API       string // the source id the events carry: "urllib3/urllib3"
+	Package   string // the installed name: "urllib3"
 	Ecosystem string // where its releases are listed: "pypi"
 	Module    string // the import name, stripped from a symbol's front: "urllib3"
 	Repo      string // owner/name on GitHub
@@ -85,7 +86,7 @@ func (f File) At(release string) File {
 // v0.86.0: "## [0.86.0] - 2024-11-16", "### Removed", and "Breaking change:"
 // bullets under "### Changed"), tagged v<version>.
 var Textual = File{
-	Package: "textual", Ecosystem: "pypi", Module: "textual",
+	API: "textual/textual", Package: "textual", Ecosystem: "pypi", Module: "textual",
 	Repo: "Textualize/textual", TagPrefix: "v", Path: "CHANGELOG.md",
 }
 
@@ -93,7 +94,7 @@ var Textual = File{
 // (2023-04-26)" over "=====", "Removed" and "Deprecated" over "-----"),
 // tagged <version>.
 var Urllib3 = File{
-	Package: "urllib3", Ecosystem: "pypi", Module: "urllib3",
+	API: "urllib3/urllib3", Package: "urllib3", Ecosystem: "pypi", Module: "urllib3",
 	Repo: "urllib3/urllib3", Path: "CHANGES.rst",
 }
 
@@ -178,7 +179,7 @@ func (p Plugin) Name() string {
 	if p.isLog() {
 		return p.Log.API
 	}
-	return p.File.Package
+	return p.File.API
 }
 
 // Run reads the pinned release, or the newest one on the registry, and
@@ -207,7 +208,7 @@ func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) 
 	if err != nil {
 		return plugin.Result{}, err
 	}
-	res.Baselines = []plugin.Spec{plugin.Baseline(p.File.Package, v.ID, v.Ref, to.SourceURL, to.Content, false, env.Now().UTC())}
+	res.Baselines = []plugin.Spec{plugin.Baseline(p.File.API, v.ID, v.Ref, to.SourceURL, to.Content, env.Now().UTC())}
 	return res, nil
 }
 
@@ -269,7 +270,7 @@ func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 		return plugin.Result{}, fmt.Errorf("reading %s: %w", f.URL(), err)
 	}
 	now := env.Now().UTC()
-	var events []event.EventV2
+	var events []event.Event
 	var rejected []error
 	for _, fd := range findings {
 		if fd.Dropped != "" {
@@ -281,8 +282,8 @@ func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 			Type: event.SubjectPackageRelease, Ecosystem: f.Ecosystem, Package: f.Package,
 			Change: c.Change, Symbols: c.Symbols, Replacement: c.Replacement,
 		}
-		e := event.EventV2{
-			API:             f.Package,
+		e := event.Event{
+			API:             f.API,
 			Version:         f.Release,
 			PreviousVersion: from.Version.ID,
 			ChangeType:      c.ChangeType,
@@ -295,7 +296,7 @@ func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 			Confidence:      1.0,
 			DetectedAt:      now,
 		}
-		e.Fingerprint = event.FingerprintV2(e.API, e.Version, e.ChangeType, subject, "")
+		e.Fingerprint = event.Fingerprint(e.API, e.Version, e.ChangeType, subject, "")
 		if err := e.Validate(); err != nil {
 			rejected = append(rejected, fmt.Errorf("%s %s %v: %w", f.Package, f.Release, c.Symbols, err))
 			continue

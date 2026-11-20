@@ -31,7 +31,7 @@ var supabaseCommits = map[string][2]string{
 // copied from, as adapter.Supabase.Fetch cites it.
 type fakeSupabaseAdapter struct{ latest string }
 
-func (fakeSupabaseAdapter) API() string { return "supabase" }
+func (fakeSupabaseAdapter) API() string { return "supabase/management-api" }
 
 func (f fakeSupabaseAdapter) LatestTag(context.Context) (string, error) { return f.latest, nil }
 
@@ -75,7 +75,7 @@ func TestSupabaseGolden(t *testing.T) {
 			t.Fatalf("run %s: rejected=%v err=%v", tag, rejected, err)
 		}
 	}
-	if rejected, err := kittest.Replay(ctx, env, s, supabasePlugin(""), "693bdc38", "eb21ae25"); err != nil || rejected {
+	if rejected, err := kittest.Pair(ctx, env, s, supabasePlugin(""), "693bdc38", "eb21ae25"); err != nil || rejected {
 		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
 	}
 
@@ -123,7 +123,7 @@ func TestSupabaseGolden(t *testing.T) {
 func TestSupabaseDropsRemovalsThatWerentDeprecated(t *testing.T) {
 	ctx := context.Background()
 	s := openStore(t)
-	if rejected, err := kittest.Replay(ctx, vercelEnv(s), s, supabasePlugin(""), "8aef4a08", "90b71e3e"); err != nil || rejected {
+	if rejected, err := kittest.Pair(ctx, vercelEnv(s), s, supabasePlugin(""), "8aef4a08", "90b71e3e"); err != nil || rejected {
 		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
 	}
 	if events := kittest.Stored(t, s); len(events) != 0 {
@@ -133,7 +133,7 @@ func TestSupabaseDropsRemovalsThatWerentDeprecated(t *testing.T) {
 	s = openStore(t)
 	p := supabasePlugin("")
 	p.Keep = nil
-	if _, err := kittest.Replay(ctx, vercelEnv(s), s, p, "8aef4a08", "90b71e3e"); err != nil {
+	if _, err := kittest.Pair(ctx, vercelEnv(s), s, p, "8aef4a08", "90b71e3e"); err != nil {
 		t.Fatal(err)
 	}
 	var removals int
@@ -155,7 +155,7 @@ func TestSupabaseBranchParameterRenameIsNoChange(t *testing.T) {
 	s := openStore(t)
 	p := supabasePlugin("")
 	p.Keep = nil // even unfiltered: the operations are paired, not removed
-	if _, err := kittest.Replay(ctx, vercelEnv(s), s, p, "de806266", "a5fc0527"); err != nil {
+	if _, err := kittest.Pair(ctx, vercelEnv(s), s, p, "de806266", "a5fc0527"); err != nil {
 		t.Fatal(err)
 	}
 	for _, e := range kittest.Stored(t, s) {
@@ -165,7 +165,7 @@ func TestSupabaseBranchParameterRenameIsNoChange(t *testing.T) {
 	}
 	s = openStore(t)
 	p.Diff.PathTemplates = false
-	if _, err := kittest.Replay(ctx, vercelEnv(s), s, p, "de806266", "a5fc0527"); err != nil {
+	if _, err := kittest.Pair(ctx, vercelEnv(s), s, p, "de806266", "a5fc0527"); err != nil {
 		t.Fatal(err)
 	}
 	var removed int

@@ -35,7 +35,7 @@ import (
 
 // Log is one vendor's changelog file.
 type Log struct {
-	API    string // the events' api: "mongodb-atlas"
+	API    string // the source id the events carry: "mongodb/atlas-admin-api"
 	Vendor string // for sentences: "MongoDB"
 	Name   string // the API, for sentences: "Atlas Administration API"
 	Repo   string // owner/name on GitHub
@@ -50,7 +50,7 @@ type Log struct {
 // is built from it). Atlas versions each resource by date (`2023-01-01`),
 // chosen per request in the Accept header.
 var MongoDBAtlas = Log{
-	API: "mongodb-atlas", Vendor: "MongoDB", Name: "Atlas Administration API",
+	API: "mongodb/atlas-admin-api", Vendor: "MongoDB", Name: "Atlas Administration API",
 	Repo: "mongodb/openapi", Path: "changelog/changelog.json",
 }
 
@@ -223,7 +223,7 @@ func (p Plugin) runLog(ctx context.Context, env plugin.Env) (plugin.Result, erro
 	if err != nil {
 		return plugin.Result{}, err
 	}
-	res.Baselines = []plugin.Spec{plugin.Baseline(l.API, sha, sha, to.SourceURL, to.Content, false, env.Now().UTC())}
+	res.Baselines = []plugin.Spec{plugin.Baseline(l.API, sha, sha, to.SourceURL, to.Content, env.Now().UTC())}
 	return res, nil
 }
 
@@ -270,15 +270,15 @@ func (p Plugin) extractLog(env plugin.Env, from, to plugin.Snapshot) (plugin.Res
 		findings = kept
 	}
 	now := env.Now().UTC()
-	var events []event.EventV2
+	var events []event.Event
 	var rejected []error
 	for _, f := range findings {
-		e := event.EventV2{
+		e := event.Event{
 			API:           l.API,
 			Version:       f.Version,
 			ChangeType:    f.ChangeType,
 			Breaking:      f.ChangeType == event.ChangeTypeBreaking,
-			Subject:       event.Subject{Type: event.SubjectAPIOperation, Kind: event.AffectedKindOperation, Side: event.SideRequest, Operation: f.Operation},
+			Subject:       event.Subject{Type: event.SubjectAPIOperation, Kind: event.KindOperation, Side: event.SideRequest, Operation: f.Operation},
 			Description:   describeLog(l, f),
 			SourceURL:     to.SourceURL,
 			SourcePointer: f.Pointer,
@@ -286,7 +286,7 @@ func (p Plugin) extractLog(env plugin.Env, from, to plugin.Snapshot) (plugin.Res
 			Confidence:    1.0,
 			DetectedAt:    now,
 		}
-		e.Fingerprint = event.FingerprintV2(e.API, e.Version, e.ChangeType, e.Subject, "")
+		e.Fingerprint = event.Fingerprint(e.API, e.Version, e.ChangeType, e.Subject, "")
 		if err := e.Validate(); err != nil {
 			rejected = append(rejected, fmt.Errorf("%s %s %s: %w", l.API, f.Operation, f.Version, err))
 			continue

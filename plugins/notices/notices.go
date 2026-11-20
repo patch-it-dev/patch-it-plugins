@@ -24,7 +24,6 @@ import (
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
 	"github.com/patch-it-dev/patch-it-plugins/core/fetch"
 	"github.com/patch-it-dev/patch-it-plugins/core/kit"
-	"github.com/patch-it-dev/patch-it-plugins/core/migrate"
 	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 	"github.com/patch-it-dev/patch-it-plugins/core/versions"
 	"github.com/patch-it-dev/patch-it-plugins/plugins/notices/eol"
@@ -95,16 +94,15 @@ func init() {
 // Page is one live page of notices and how it reads: retire.Page,
 // feed.Feed and eol.Page.
 type Page interface {
-	// Slug is the events' api and the source's old slug: "openai-models".
+	// Slug is the source id the events carry in api: "openai/models".
 	Slug() string
 	// PageURL is the live page.
 	PageURL() string
 	// Find reads the page's notices.
 	Find(page []byte) (kit.Notices, error)
-	// Events turn what Find read into events citing citeURL: v1 events
-	// (converted here) or v2 ones, and the notices that failed to become
-	// events.
-	Events(found kit.Notices, citeURL string, now time.Time) (v1 []event.ChangeEvent, v2 []event.EventV2, rejected []error)
+	// Events turn what Find read into events citing citeURL, and the
+	// notices that failed to become events.
+	Events(found kit.Notices, citeURL string, now time.Time) ([]event.Event, []error)
 }
 
 // shapeGuarded is a Page whose read with far fewer notices than the last
@@ -165,12 +163,11 @@ func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) 
 	}
 
 	now := env.Now().UTC()
-	v1, v2, rejected := pg.Events(got, snapURL, now)
-	converted, invalid := migrate.Fresh(v1)
+	events, rejected := pg.Events(got, snapURL, now)
 	// The hash of the live page, so the next run compares like with like.
-	baseline := plugin.Baseline(api, now.Format("2006-01-02"), snapURL, snapURL, snap, false, now)
+	baseline := plugin.Baseline(api, now.Format("2006-01-02"), snapURL, snapURL, snap, now)
 	baseline.SHA256 = hash
-	return plugin.Result{Label: snapURL, Events: append(converted, v2...), Rejected: append(rejected, invalid...), Baselines: []plugin.Spec{baseline}}, nil
+	return plugin.Result{Label: snapURL, Events: events, Rejected: rejected, Baselines: []plugin.Spec{baseline}}, nil
 }
 
 // fetch reads the live page. When the page's reader asks for it
@@ -256,15 +253,14 @@ func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 	return plugin.Result{Label: to.SourceURL, Events: events, Rejected: rejected}, nil
 }
 
-// events reads one snapshot's notices into v2 events citing it.
-func (p Plugin) events(s plugin.Snapshot, now time.Time) ([]event.EventV2, []error, error) {
+// events reads one snapshot's notices into events citing it.
+func (p Plugin) events(s plugin.Snapshot, now time.Time) ([]event.Event, []error, error) {
 	found, err := p.Page.Find(s.Content)
 	if err != nil {
 		return nil, nil, fmt.Errorf("reading %s: %w", s.SourceURL, err)
 	}
-	v1, v2, rejected := p.Page.Events(found, s.SourceURL, now)
-	converted, invalid := migrate.Fresh(v1)
-	return append(converted, v2...), append(rejected, invalid...), nil
+	events, rejected := p.Page.Events(found, s.SourceURL, now)
+	return events, rejected, nil
 }
 
 var _ plugin.Versioned = Plugin{}

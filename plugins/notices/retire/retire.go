@@ -21,10 +21,10 @@ import (
 
 // Page is one provider's deprecations page and what its models are sent to.
 type Page struct {
-	API       string // the api slug the events carry, e.g. "openai-models"
-	Vendor    string // for sentences: "OpenAI"
-	URL       string // the page as markdown
-	Operation string // the provider's main call that takes a model name
+	API      string // the source id the events carry: "openai/models"
+	Provider string // the model subject's provider: "openai"
+	Vendor   string // for sentences: "OpenAI"
+	URL      string // the page as markdown
 	// Keep says whether a model name belongs to this source: the operations
 	// above take text models, not image, audio or embedding ones.
 	Keep func(name string) bool
@@ -191,33 +191,27 @@ func parseDate(s string) (string, error) {
 	return "", fmt.Errorf("not a date: %q", s)
 }
 
-// Events turns retirements into change events, one per model name: the
-// `model` parameter can no longer take that name, in any of the provider's
-// calls. affected.operation is the provider's main one; the patch-it client
-// looks for the name wherever it reaches the provider's SDK, so one event per
-// name gives one fix per repo, not one per operation for the same line.
-// version is the shutdown date, so a provider moving the date is a new event.
-// sourceURL is the snapshot the retirements were read from.
-func Events(p Page, rs []Retirement, sourceURL string, now time.Time) ([]event.ChangeEvent, []error) {
-	var events []event.ChangeEvent
+// Events turns retirements into change events, one per model name: a model
+// subject, the provider and the name, and the replacement when the provider
+// names exactly one model. The patch-it client looks for the name wherever
+// it reaches the provider's SDK, so one event per name gives one fix per
+// repo. version is the shutdown date, so a provider moving the date is a new
+// event. sourceURL is the snapshot the retirements were read from.
+func Events(p Page, rs []Retirement, sourceURL string, now time.Time) ([]event.Event, []error) {
+	var events []event.Event
 	var errs []error
 	for _, r := range rs {
-		affected := event.Affected{
-			Kind:      event.AffectedKindRequestParameter,
-			Side:      event.SideRequest,
-			Operation: p.Operation,
-			Property:  "model",
-			Value:     r.Model,
-		}
-		e := event.ChangeEvent{
-			Fingerprint:   event.Fingerprint(p.API, r.Date, event.ChangeTypeBreaking, affected, r.Model),
+		h := hint(p.Vendor, r)
+		subject := event.Subject{Type: event.SubjectModel, Provider: p.Provider, Name: r.Model, Replacement: replacement(r.Replacement)}
+		e := event.Event{
+			Fingerprint:   event.Fingerprint(p.API, r.Date, event.ChangeTypeBreaking, subject, ""),
 			API:           p.API,
 			Version:       r.Date,
 			ChangeType:    event.ChangeTypeBreaking,
 			Breaking:      true,
-			Affected:      affected,
+			Subject:       subject,
 			Description:   fmt.Sprintf("Model %q is shut down on %s: %s requests naming it fail from that date.", r.Model, r.Date, p.Vendor),
-			MigrationHint: hint(p.Vendor, r),
+			MigrationHint: h,
 			SourceURL:     sourceURL,
 			SourceExcerpt: r.Excerpt,
 			Confidence:    1.0,
@@ -230,6 +224,19 @@ func Events(p Page, rs []Retirement, sourceURL string, now time.Time) ([]event.C
 		events = append(events, e)
 	}
 	return events, errs
+}
+
+// replacement is the one model the provider names, when its replacement cell
+// is exactly one model name: not none, not several, not a model with a
+// setting (`gpt-5.6-sol` (`reasoning.mode: pro`)). The patch-it client opens
+// an issue for the rest.
+func replacement(cell string) string {
+	cell = strings.TrimSpace(cell)
+	name := First(cell)
+	if name == "" || cell != "`"+name+"`" {
+		return ""
+	}
+	return name
 }
 
 func hint(vendor string, r Retirement) string {

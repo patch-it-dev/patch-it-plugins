@@ -27,7 +27,7 @@ type Datadog struct{}
 
 var _ Adapter = Datadog{}
 
-func (Datadog) API() string { return "datadog" }
+func (Datadog) API() string { return "datadog/api" }
 
 // LatestTag asks GitHub for the client's newest release tag, e.g. "2.62.0".
 // Datadog has no release process of its own to ask instead: the spec has no

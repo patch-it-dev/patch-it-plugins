@@ -15,7 +15,7 @@ type Retirements []Retirement
 // Count is how many retirements the page lists.
 func (rs Retirements) Count() int { return len(rs) }
 
-// Slug is the events' api: "openai-models".
+// Slug is the source id the events carry: "openai/models".
 func (p Page) Slug() string { return p.API }
 
 // PageURL is the page, as markdown.
@@ -27,12 +27,9 @@ func (p Page) Find(page []byte) (kit.Notices, error) {
 	return Retirements(rs), err
 }
 
-// Events are a v1 event per retired model, citing citeURL (the kind
-// converts them to v2: core/migrate reads this package, so it can't be
-// called from here).
-func (p Page) Events(found kit.Notices, citeURL string, now time.Time) ([]event.ChangeEvent, []event.EventV2, []error) {
-	v1, errs := Events(p, found.(Retirements), citeURL, now)
-	return v1, nil, errs
+// Events are an event per retired model, citing citeURL.
+func (p Page) Events(found kit.Notices, citeURL string, now time.Time) ([]event.Event, []error) {
+	return Events(p, found.(Retirements), citeURL, now)
 }
 
 // ShapeGuard is on: past retirements stay on the page, so a read with far

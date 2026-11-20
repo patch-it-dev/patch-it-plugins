@@ -36,7 +36,8 @@ import (
 
 // Guide is one package's guide to one release.
 type Guide struct {
-	Package string // the PyPI name and the events' api: "numpy"
+	API     string // the source id the events carry: "numpy/numpy"
+	Package string // the PyPI name: "numpy"
 	Module  string // how the guide writes the module in a replacement: "np"
 	Release string // "2.0.0"
 	Repo    string // owner/name on GitHub
@@ -139,6 +140,7 @@ func (g Guide) header() string {
 
 // NumPy2 is NumPy's 2.0 migration guide, "Main namespace" table.
 var NumPy2 = Guide{
+	API:     "numpy/numpy",
 	Package: "numpy",
 	Module:  "np",
 	Release: "2.0.0",
@@ -240,8 +242,8 @@ func parseRST(page []byte, g Guide) ([]Removal, error) {
 	return out, nil
 }
 
-// Slug is the events' api and the source's old slug: the PyPI name.
-func (g Guide) Slug() string { return g.Package }
+// Slug is the source id the events carry: "numpy/numpy".
+func (g Guide) Slug() string { return g.API }
 
 // Current is the release the guide documents: what a plain run reads.
 func (g Guide) Current(context.Context, plugin.Env) (plugin.Version, error) {
@@ -272,10 +274,10 @@ func (g Guide) GuideURL(v plugin.Version) string {
 
 // Read is an event per removed member in the guide, with previous_version
 // from's release.
-func (g Guide) Read(page []byte, from, _ plugin.Version, now time.Time) (_ []event.ChangeEvent, events []event.EventV2, rejected []error, err error) {
+func (g Guide) Read(page []byte, from, _ plugin.Version, now time.Time) (events []event.Event, rejected []error, err error) {
 	removals, err := Parse(page, g)
 	if err != nil {
-		return nil, nil, nil, err
+		return nil, nil, err
 	}
 	for _, r := range removals {
 		if r.Dropped != "" {
@@ -293,8 +295,8 @@ func (g Guide) Read(page []byte, from, _ plugin.Version, now time.Time) (_ []eve
 		if r.Replacement != "" && !g.NewReplacements && (g.DropIns == nil || slices.Contains(g.DropIns, r.Member)) {
 			subject.Change, subject.Replacement = event.PackageRenamedSymbol, r.Replacement
 		}
-		e := event.EventV2{
-			API:             g.Package,
+		e := event.Event{
+			API:             g.API,
 			PreviousVersion: from.ID,
 			Version:         g.Release,
 			ChangeType:      event.ChangeTypeBreaking,
@@ -307,14 +309,14 @@ func (g Guide) Read(page []byte, from, _ plugin.Version, now time.Time) (_ []eve
 			Confidence:      1.0,
 			DetectedAt:      now,
 		}
-		e.Fingerprint = event.FingerprintV2(e.API, e.Version, e.ChangeType, subject, "")
+		e.Fingerprint = event.Fingerprint(e.API, e.Version, e.ChangeType, subject, "")
 		if err := e.Validate(); err != nil {
 			rejected = append(rejected, fmt.Errorf("%s %s: %w", g.Package, r.Member, err))
 			continue
 		}
 		events = append(events, e)
 	}
-	return nil, events, rejected, nil
+	return events, rejected, nil
 }
 
 // absoluteLinks prefixes LinkBase to every Markdown link target in s that

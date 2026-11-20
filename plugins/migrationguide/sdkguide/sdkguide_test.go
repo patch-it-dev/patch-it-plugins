@@ -58,8 +58,9 @@ func TestEventsAreValidAndCiteTheTag(t *testing.T) {
 		t.Fatalf("%d events, %v", len(events), errs)
 	}
 	e := events[0]
-	if e.API != "anthropic" || e.Version != "1.0.0" || !e.Breaking ||
-		e.Affected != (event.Affected{Kind: event.AffectedKindRequestParameter, Side: event.SideRequest, Operation: "POST /v1/messages", Property: "temperature"}) ||
+	if e.API != "anthropic/python-sdk" || e.Version != "1.0.0" || !e.Breaking ||
+		e.Subject.Type != event.SubjectPackageRelease || e.Subject.Package != "anthropic" || e.Subject.Change != event.PackageRemovedParameter ||
+		e.Subject.Parameter != "temperature" || strings.Join(e.Subject.Symbols, ",") != "messages.create,messages.stream,messages.parse" ||
 		e.SourceURL != "https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/v1.0.0/MIGRATION.md" {
 		t.Errorf("%+v", e)
 	}

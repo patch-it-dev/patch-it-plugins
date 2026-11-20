@@ -168,16 +168,22 @@ func TestEventsOnePerModel(t *testing.T) {
 		t.Fatalf("events %d, errs %v", len(events), errs)
 	}
 	e := events[0]
-	want := event.Affected{Kind: event.AffectedKindRequestParameter, Side: event.SideRequest, Operation: "POST /v1/chat/completions", Property: "model", Value: "gpt-4"}
-	if e.Affected != want {
-		t.Errorf("affected: %+v", e.Affected)
+	want := event.Subject{Type: event.SubjectModel, Provider: "openai", Name: "gpt-4", Replacement: "gpt-5.6-sol"}
+	if e.Subject.Type != want.Type || e.Subject.Provider != want.Provider || e.Subject.Name != want.Name || e.Subject.Replacement != want.Replacement {
+		t.Errorf("subject: %+v", e.Subject)
 	}
-	if e.API != "openai-models" || e.Version != "2026-10-23" || e.PreviousVersion != "" || !e.Breaking ||
+	if e.API != "openai/models" || e.Version != "2026-10-23" || e.PreviousVersion != "" || !e.Breaking ||
 		e.SourceURL != src || e.SourceExcerpt != rs[0].Excerpt || e.Confidence != 1.0 {
 		t.Errorf("event: %+v", e)
 	}
-	if e.Fingerprint != event.Fingerprint("openai-models", "2026-10-23", event.ChangeTypeBreaking, e.Affected, "gpt-4") {
-		t.Error("the fingerprint's detail is the model name")
+	if e.Fingerprint != event.Fingerprint("openai/models", "2026-10-23", event.ChangeTypeBreaking, e.Subject, "") {
+		t.Error("the fingerprint is the contract's formula over the model subject")
+	}
+	// The replacement is set only when the provider names exactly one model.
+	for cell, want := range map[string]string{"`gpt-5.6-sol`": "gpt-5.6-sol", "`a` or `b`": "", "`gpt-5.6-sol` (`reasoning.mode: pro`)": "", "none": ""} {
+		if got := replacement(cell); got != want {
+			t.Errorf("replacement(%q) = %q, want %q", cell, got, want)
+		}
 	}
 	if !strings.Contains(e.Description, `"gpt-4"`) || !strings.Contains(e.MigrationHint, "gpt-5.6-sol") {
 		t.Errorf("%q / %q", e.Description, e.MigrationHint)

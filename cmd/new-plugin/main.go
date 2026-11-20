@@ -24,9 +24,8 @@
 // there. `go test ./...` passes right after; every place to fill in says
 // TODO(new-plugin).
 //
-// It changes nothing when the provider/source id or the first name is
-// taken, or a file it would write exists. The old flags (--api, --provider
-// as the name, --format, --source as the URL) still work for one release.
+// It changes nothing when the provider/source id is taken, or a file it
+// would write exists.
 package main
 
 import (
@@ -71,19 +70,16 @@ type Options struct {
 	URLs     []string // the provider's pages or files it reads; none is a placeholder
 	Packages []string // the packages it covers, "pypi:acme"
 	Watches  string   // what the source watches, in a few words
-	Page     string   // the provider page, providers/<Page>.md; "" is the first name. An existing page is shared, not rewritten
-	API      string   // its first name, the old slug events carry in api; "" is <provider>-<source> (or the provider's id when they're the same)
-
-	// Deprecated: Format is a template ("openapi", "notices/feed") or an old
-	// format name ("feed"); Kind and Reader replace it. Source is the first
-	// URL (URLs replaces it).
-	Format string
-	Source string
+	Page     string   // the provider page, providers/<Page>.md; "" is <provider>-<source>. An existing page is shared, not rewritten
 
 	Today time.Time
 	// Go runs the go command afterwards: the golden file from the placeholders
 	// (go test -update).
 	Go bool
+
+	tmpl string // the template: a kind, or kind/reader
+	name string // the files' base name: <provider>-<source>, or the provider's id when they're the same
+	url  string // the first URL
 }
 
 // list is a repeatable flag.
@@ -95,33 +91,25 @@ func (l *list) Set(v string) error { *l = append(*l, v); return nil }
 func main() {
 	var o Options
 	var urls, packages list
-	var provider, source string
 	flag.StringVar(&o.Root, "root", ".", "the repo root")
-	flag.StringVar(&provider, "provider", "", "the provider's id, e.g. acme (with --format: its name, the old meaning)")
+	flag.StringVar(&o.ProviderID, "provider", "", "the provider's id, e.g. acme")
 	flag.StringVar(&o.Provider, "name", "", "the provider's name as it writes it, e.g. Acme (a registered provider's is kept)")
 	flag.StringVar(&o.Category, "category", "", "the provider's category: "+strings.Join(categories(), ", "))
 	flag.StringVar(&o.Homepage, "homepage", "", "the provider's own site, https://...")
-	flag.StringVar(&source, "source", "", "the source's id within the provider, e.g. api or python-sdk (with --format: its URL, the old meaning)")
+	flag.StringVar(&o.SourceID, "source", "", "the source's id within the provider, e.g. api or python-sdk")
 	flag.StringVar(&o.Kind, "kind", "", "the kind that reads it: "+strings.Join(kindNames(), ", "))
 	flag.StringVar(&o.Reader, "reader", "", "the kind's reader, for a kind with several: "+readerHelp())
 	flag.StringVar(&o.Layer, "layer", "", "the source's layer: api, sdk, package, runtime, ci, ai-models or infra (default: the kind's)")
 	flag.Var(&urls, "url", "a page or file the source reads, https://... (repeatable; default: a placeholder to fill in)")
 	flag.Var(&packages, "package", "a package the source covers, ecosystem:name, e.g. pypi:acme or npm:@acme/sdk (repeatable)")
 	flag.StringVar(&o.Watches, "watches", "", "what it watches, in a few words (default: a placeholder)")
-	flag.StringVar(&o.Page, "page", "", "the provider page, providers/<page>.md (default: the first name); a second source of a provider may share the existing page")
-	flag.StringVar(&o.API, "api", "", "the source's first name, the slug events carry in api (default: <provider>-<source>)")
-	flag.StringVar(&o.Format, "format", "", "deprecated, for one release: the old format names ("+strings.Join(legacyNames(), ", ")+"), with --api, --provider <Name> and --source <URL>")
+	flag.StringVar(&o.Page, "page", "", "the provider page, providers/<page>.md (default: <provider>-<source>); a second source of a provider may share the existing page")
 	flag.Parse()
 	o.URLs, o.Packages = urls, packages
-	if o.Format != "" {
-		o.Provider, o.Source = provider, source
-	} else {
-		o.ProviderID, o.SourceID = provider, source
-		if term() {
-			if err := ask(&o, bufio.NewReader(os.Stdin), os.Stdout); err != nil {
-				fmt.Fprintln(os.Stderr, "new-plugin:", err)
-				os.Exit(1)
-			}
+	if term() {
+		if err := ask(&o, bufio.NewReader(os.Stdin), os.Stdout); err != nil {
+			fmt.Fprintln(os.Stderr, "new-plugin:", err)
+			os.Exit(1)
 		}
 	}
 	o.Today = time.Now().UTC()
@@ -171,15 +159,6 @@ func readerHelp() string {
 	return strings.Join(parts, "; ")
 }
 
-func legacyNames() []string {
-	var names []string
-	for n := range legacyFormats {
-		names = append(names, n)
-	}
-	slices.Sort(names)
-	return names
-}
-
 func categories() []string {
 	var out []string
 	for _, c := range plugin.Categories() {
@@ -188,18 +167,8 @@ func categories() []string {
 	return out
 }
 
-// template is the template o asks for: from --kind and --reader, or the
-// deprecated --format.
+// template is the template o asks for: from --kind and --reader.
 func (o Options) template() (string, error) {
-	if o.Format != "" {
-		if t, ok := legacyFormats[o.Format]; ok {
-			return t, nil
-		}
-		if _, ok := formats[o.Format]; ok {
-			return o.Format, nil
-		}
-		return "", fmt.Errorf("--format %q: want one of %s", o.Format, strings.Join(legacyNames(), ", "))
-	}
 	if !slices.Contains(kindNames(), o.Kind) {
 		return "", fmt.Errorf("--kind %q: want one of %s", o.Kind, strings.Join(kindNames(), ", "))
 	}
@@ -223,10 +192,10 @@ var (
 
 // data is what the templates fill in.
 type data struct {
-	ID, Ident, Lower, Provider, Source, File, Format, Kind, Module, PyPI string
-	Slug                                                                 string // the provider, lowercase: a model subject's provider
-	SourceFile, DropFile, PluginOf, Ingest, Drop                         string
-	Imports                                                              []string
+	ID, Name, Ident, Lower, ProviderID, Provider, Source, File, Format, Kind, Module, PyPI string
+	Slug                                                                                   string // the provider, lowercase: a model subject's provider
+	SourceFile, DropFile, PluginOf, Ingest, Drop                                           string
+	Imports                                                                                []string
 }
 
 // Run scaffolds the source, or changes nothing and says why.
@@ -235,13 +204,15 @@ func Run(o Options, out io.Writer) error {
 	if err != nil {
 		return err
 	}
-	o.Format = tmpl
+	o.tmpl = tmpl
 	f := formats[tmpl]
 	if err := o.resolve(); err != nil {
 		return err
 	}
-	if !validID.MatchString(o.API) || o.API == "all" {
-		return fmt.Errorf("--api %q: want lowercase letters, digits and single hyphens, starting with a letter (acme, acme-models), and not \"all\"", o.API)
+	id := o.ProviderID + "/" + o.SourceID
+	o.name = o.ProviderID + "-" + o.SourceID
+	if o.SourceID == o.ProviderID {
+		o.name = o.ProviderID
 	}
 	if o.Provider == "" || !cellSafe.MatchString(o.Provider) {
 		return fmt.Errorf("--provider %q: want the provider's name, without |, quotes, backslashes or backticks", o.Provider)
@@ -252,15 +223,10 @@ func Run(o Options, out io.Writer) error {
 	if !slices.Contains(plugin.Layers(), plugin.Layer(o.Layer)) {
 		return fmt.Errorf("--layer %q: want one of %v", o.Layer, plugin.Layers())
 	}
-	if o.Source == "" && len(o.URLs) > 0 {
-		o.Source = o.URLs[0]
-	}
-	if o.Source == "" {
-		o.Source = "https://example.com/TODO-" + o.API + "-source"
-	}
 	if len(o.URLs) == 0 {
-		o.URLs = []string{o.Source}
+		o.URLs = []string{"https://example.com/TODO-" + o.name + "-source"}
 	}
+	o.url = o.URLs[0]
 	for _, u := range o.URLs {
 		if !validURL.MatchString(u) {
 			return fmt.Errorf("--url %q: want an https URL", u)
@@ -283,7 +249,7 @@ func Run(o Options, out io.Writer) error {
 
 	sharedPage := false
 	if o.Page == "" {
-		o.Page = o.API
+		o.Page = o.name
 	} else if !validID.MatchString(o.Page) {
 		return fmt.Errorf("--page %q: want the name of a page in providers/, without .md", o.Page)
 	} else if _, err := os.Stat(filepath.Join(o.Root, "providers", o.Page+".md")); err == nil {
@@ -291,14 +257,11 @@ func Run(o Options, out io.Writer) error {
 	}
 
 	// Taken? Check everything before writing anything.
-	if _, ok := plugin.Lookup(o.API); ok {
-		return fmt.Errorf("a source named %q is already registered: pick another --api (the first name)", o.API)
-	}
-	if _, ok := plugin.LookupSource(o.ProviderID + "/" + o.SourceID); ok {
-		return fmt.Errorf("source %s/%s is already registered: pick another --source", o.ProviderID, o.SourceID)
+	if _, ok := plugin.LookupSource(id); ok {
+		return fmt.Errorf("source %s is already registered: pick another --source", id)
 	}
 
-	d := data{ID: o.API, Provider: o.Provider, Source: o.Source, Format: o.Format, Kind: f.kind, PyPI: o.API}
+	d := data{ID: id, Name: o.name, ProviderID: o.ProviderID, Provider: o.Provider, Source: o.url, Format: o.tmpl, Kind: f.kind, PyPI: o.ProviderID}
 	for _, p := range o.Packages {
 		if name, ok := strings.CutPrefix(p, "pypi:"); ok {
 			d.PyPI = name
@@ -306,9 +269,9 @@ func Run(o Options, out io.Writer) error {
 		}
 	}
 	d.Module = strings.ReplaceAll(strings.ToLower(d.PyPI), "-", "_")
-	d.Ident = ident(o.API)
+	d.Ident = ident(o.name)
 	d.Lower = string(unicode.ToLower(rune(d.Ident[0]))) + d.Ident[1:]
-	d.File = fileBase(o.API)
+	d.File = fileBase(o.name)
 	d.Slug = strings.Trim(regexp.MustCompile(`[^a-z0-9]+`).ReplaceAllString(strings.ToLower(o.Provider), "-"), "-")
 	d.SourceFile = fill(f.source, d)
 	d.DropFile = dropName(d.SourceFile)
@@ -324,7 +287,7 @@ func Run(o Options, out io.Writer) error {
 
 	def, err := gofmt(fill(f.def, d))
 	if err != nil {
-		return fmt.Errorf("the %s template: %w", o.Format, err)
+		return fmt.Errorf("the %s template: %w", o.tmpl, err)
 	}
 	add(filepath.Join(f.defDir, d.File+".go"), def)
 	test, err := gofmt(fill(testFile, d))
@@ -342,7 +305,7 @@ func Run(o Options, out io.Writer) error {
 	add(filepath.Join(pkgDir, "testdata", d.DropFile), []byte(fill(drop, d)))
 	// What the placeholders give; rewritten with -update below, and again
 	// once the source is real.
-	add(filepath.Join(pkgDir, "testdata", "golden", o.API+".json"), []byte("[]\n"))
+	add(filepath.Join(pkgDir, "testdata", "golden", o.name+".json"), []byte("[]\n"))
 
 	if !sharedPage {
 		page, err := providerPage(o)
@@ -354,7 +317,7 @@ func Run(o Options, out io.Writer) error {
 
 	for path := range writes {
 		if _, err := os.Stat(filepath.Join(o.Root, path)); err == nil {
-			return fmt.Errorf("%s already exists: pick another --api, or remove what's left of an earlier run", path)
+			return fmt.Errorf("%s already exists: pick another --source, or remove what's left of an earlier run", path)
 		}
 	}
 	for _, dir := range []string{f.defDir, pkgDir} {
@@ -374,17 +337,12 @@ func Run(o Options, out io.Writer) error {
 	} else if ok {
 		edits[filepath.Join("plugins", "all", "all.go")] = all
 	}
-	if m := f.mapEntry; m != nil {
-		if edits[m.file], err = addMapEntry(filepath.Join(o.Root, m.file), m.varName, fill(m.entry, d)); err != nil {
-			return err
-		}
-	}
 	readmePath := filepath.Join(pkgDir, "testdata", "README.md")
 	readme, err := os.ReadFile(filepath.Join(o.Root, readmePath))
 	if err != nil {
 		return err
 	}
-	if edits[readmePath], err = readmeRows(readme, []string{d.SourceFile, d.DropFile}, o.Source); err != nil {
+	if edits[readmePath], err = readmeRows(readme, []string{d.SourceFile, d.DropFile}, o.url); err != nil {
 		return fmt.Errorf("%s: %w", readmePath, err)
 	}
 
@@ -407,7 +365,7 @@ func Run(o Options, out io.Writer) error {
 		paths = append(paths, path)
 	}
 	slices.Sort(paths)
-	fmt.Fprintf(out, "Scaffolded %s/%s (%s, first name %s, kind %s):\n", o.ProviderID, o.SourceID, o.Provider, o.API, o.Format)
+	fmt.Fprintf(out, "Scaffolded %s (%s, kind %s):\n", id, o.Provider, o.tmpl)
 	for _, p := range paths {
 		fmt.Fprintln(out, "  "+p)
 	}
@@ -421,7 +379,7 @@ func Run(o Options, out io.Writer) error {
 				return fmt.Errorf("the files are written, but `go %s` failed: %w\n%s", strings.Join(args, " "), err, b)
 			}
 		}
-		fmt.Fprintf(out, "  %s (from the placeholders)\n", filepath.Join(pkgDir, "testdata", "golden", o.API+".json"))
+		fmt.Fprintf(out, "  %s (from the placeholders)\n", filepath.Join(pkgDir, "testdata", "golden", o.name+".json"))
 	}
 	fmt.Fprint(out, fill(nextSteps, struct {
 		data
@@ -495,7 +453,7 @@ func identsFree(dir string, names ...string) error {
 			for _, decl := range file.Decls {
 				for _, n := range declNames(decl) {
 					if slices.Contains(names, n) {
-						return fmt.Errorf("%s already declares %s: pick another --api", path, n)
+						return fmt.Errorf("%s already declares %s: pick another --source", path, n)
 					}
 				}
 			}
@@ -606,39 +564,6 @@ func register(root, pkgDir, line string) (string, []byte, error) {
 	return "", nil, fmt.Errorf("found no init in %s that calls plugin.RegisterProvider", pkgDir)
 }
 
-// addMapEntry adds entry to the map literal varName is set to in path.
-func addMapEntry(path, varName, entry string) ([]byte, error) {
-	src, err := os.ReadFile(path)
-	if err != nil {
-		return nil, err
-	}
-	fset := token.NewFileSet()
-	file, err := parser.ParseFile(fset, path, src, parser.SkipObjectResolution)
-	if err != nil {
-		return nil, err
-	}
-	var lit *ast.CompositeLit
-	ast.Inspect(file, func(n ast.Node) bool {
-		if v, ok := n.(*ast.ValueSpec); ok && len(v.Names) == 1 && v.Names[0].Name == varName && len(v.Values) == 1 {
-			lit, _ = v.Values[0].(*ast.CompositeLit)
-		}
-		return lit == nil
-	})
-	if lit == nil {
-		return nil, fmt.Errorf("%s: no map literal %s to add %s to", path, varName, entry)
-	}
-	at := fset.Position(lit.Rbrace).Offset
-	var b bytes.Buffer
-	b.Write(src[:at])
-	if len(lit.Elts) > 0 && fset.Position(lit.Elts[len(lit.Elts)-1].End()).Line == fset.Position(lit.Rbrace).Line {
-		b.WriteString(", " + entry)
-	} else {
-		b.WriteString("\t" + entry + ",\n")
-	}
-	b.Write(src[at:])
-	return format.Source(b.Bytes())
-}
-
 // readmeRows adds a row per saved file to the first table of a testdata
 // README whose first column is the file, with a TODO in every other column.
 func readmeRows(readme []byte, files []string, source string) ([]byte, error) {
@@ -690,13 +615,6 @@ func readmeRows(readme []byte, files []string, source string) ([]byte, error) {
 	return []byte(strings.Join(lines, "\n")), nil
 }
 
-func linkText(url string) string {
-	if strings.Contains(url, "example.com/TODO") {
-		return "TODO: the source"
-	}
-	return strings.TrimPrefix(url, "https://")
-}
-
 // providerPage is providers/_template.md for this provider.
 func providerPage(o Options) ([]byte, error) {
 	tmpl, err := os.ReadFile(filepath.Join(o.Root, "providers", "_template.md"))
@@ -705,10 +623,10 @@ func providerPage(o Options) ([]byte, error) {
 	}
 	s := string(tmpl)
 	s = strings.ReplaceAll(s, "<Provider>", o.Provider)
-	s = strings.ReplaceAll(s, "<api>", o.API)
-	s = strings.ReplaceAll(s, "`<URL>`", "<"+o.Source+">")
+	s = strings.ReplaceAll(s, "`<provider>/<source>`", "`"+o.ProviderID+"/"+o.SourceID+"`")
+	s = strings.ReplaceAll(s, "`<URL>`", "<"+o.url+">")
 	s = strings.ReplaceAll(s, "`<YYYY-MM-DD>`", o.Today.Format("2006-01-02")+" (TODO(new-plugin): the date you checked it)")
-	s = strings.Replace(s, "Copy this file to `providers/"+o.API+".md` and fill every section. Delete these instructions.",
+	s = strings.Replace(s, "Copy this file to `providers/<provider>-<source>.md` and fill every section. Delete these instructions.",
 		"TODO(new-plugin): fill every section, then delete this line. Scaffolded by `go run ./cmd/new-plugin`.", 1)
 	return []byte(s), nil
 }

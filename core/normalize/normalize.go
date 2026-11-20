@@ -24,7 +24,7 @@ const excerptLimit = 2000
 // Source describes where a pair of specs came from, so each event can point
 // back at the exact document that proves it.
 type Source struct {
-	API             string    // "stripe"
+	API             string    // the source id: "stripe/api"
 	Version         string    // info.version of the new spec
 	PreviousVersion string    // info.version of the old spec
 	NewSpecURL      string    // pinned URL of the new spec, e.g. .../v2468/...
@@ -40,17 +40,17 @@ type Source struct {
 // is structural, so there is nothing to be unsure about: the change did happen
 // exactly as described. Whether it matters to a given repository is the
 // patch-it client's question, not this one's.
-func Events(changes []diff.Change, src Source) ([]event.ChangeEvent, []error) {
+func Events(changes []diff.Change, src Source) ([]event.Event, []error) {
 	detectedAt := src.DetectedAt
 	if detectedAt.IsZero() {
 		detectedAt = time.Now().UTC()
 	}
 
-	events := make([]event.ChangeEvent, 0, len(changes))
+	events := make([]event.Event, 0, len(changes))
 	var errs []error
 
 	for _, c := range changes {
-		affected := affectedFor(c)
+		subject := subjectFor(c)
 		sourceURL := src.NewSpecURL
 		if c.InOld {
 			sourceURL = src.OldSpecURL
@@ -62,14 +62,14 @@ func Events(changes []diff.Change, src Source) ([]event.ChangeEvent, []error) {
 			continue
 		}
 
-		e := event.ChangeEvent{
-			Fingerprint:     event.Fingerprint(src.API, src.Version, c.ChangeType, affected, c.Detail),
+		e := event.Event{
+			Fingerprint:     event.Fingerprint(src.API, src.Version, c.ChangeType, subject, c.Detail),
 			API:             src.API,
 			Version:         src.Version,
 			PreviousVersion: src.PreviousVersion,
 			ChangeType:      c.ChangeType,
 			Breaking:        c.Breaking,
-			Affected:        affected,
+			Subject:         subject,
 			Description:     describe(c),
 			MigrationHint:   migrationHint(c),
 			SourceURL:       sourceURL,
@@ -89,11 +89,12 @@ func Events(changes []diff.Change, src Source) ([]event.ChangeEvent, []error) {
 	return events, errs
 }
 
-// affectedFor maps a change's location onto the contract's four kinds. The
+// subjectFor maps a change's location onto the contract's four kinds. The
 // side already decides the pair: requests are addressed by operation, responses
 // by schema, and naming a property narrows either one.
-func affectedFor(c diff.Change) event.Affected {
-	a := event.Affected{
+func subjectFor(c diff.Change) event.Subject {
+	a := event.Subject{
+		Type:      event.SubjectAPIOperation,
 		Side:      c.Side,
 		Operation: c.Operation,
 		Schema:    c.Schema,
@@ -102,15 +103,15 @@ func affectedFor(c diff.Change) event.Affected {
 
 	switch {
 	case c.Side == event.SideRequest && c.Property != "":
-		a.Kind = event.AffectedKindRequestParameter
+		a.Kind = event.KindRequestParameter
 	case c.Side == event.SideRequest:
 		// A change to the request body's root schema has no property to name,
 		// so it is reported against the operation itself.
-		a.Kind = event.AffectedKindOperation
+		a.Kind = event.KindOperation
 	case c.Property != "":
-		a.Kind = event.AffectedKindSchemaProperty
+		a.Kind = event.KindSchemaProperty
 	default:
-		a.Kind = event.AffectedKindSchema
+		a.Kind = event.KindSchema
 	}
 	return a
 }

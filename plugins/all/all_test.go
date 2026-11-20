@@ -80,30 +80,19 @@ func TestImportingAllRegistersThePlugins(t *testing.T) {
 	}
 }
 
-// Every registered plugin is a source with complete metadata (RegisterProvider
-// checks the fields), reachable by its full id and its old slug, and its page
-// exists.
-func TestEveryPluginIsASourceWithMetadata(t *testing.T) {
-	covered := map[string]bool{}
+// Every registered source has complete metadata (RegisterProvider checks the
+// fields), is found by its id, and its page exists.
+func TestEverySourceHasMetadata(t *testing.T) {
 	for _, s := range plugin.Sources() {
-		covered[s.Alias()] = true
 		if _, err := os.Stat(filepath.Join("..", "..", s.Source.Page)); err != nil {
 			t.Errorf("%s: its page %s doesn't exist (copy providers/_template.md)", s.FullID(), s.Source.Page)
 		}
-		for _, id := range []string{s.FullID(), s.Alias()} {
-			got, ok := plugin.LookupSource(id)
-			if !ok || got.FullID() != s.FullID() {
-				t.Errorf("LookupSource(%q) = %q, %v; want %s", id, got.FullID(), ok, s.FullID())
-			}
-			if p, ok := plugin.Lookup(id); !ok || p.Name() != s.Alias() {
-				t.Errorf("Lookup(%q) didn't find %s", id, s.Alias())
-			}
+		if p, ok := plugin.Lookup(s.FullID()); !ok || p.Name() != s.FullID() {
+			t.Errorf("Lookup(%q) didn't find it", s.FullID())
 		}
 	}
-	for _, name := range plugin.Names() {
-		if !covered[name] {
-			t.Errorf("%s is registered with plugin.Register only: register it as a source of its provider (plugin.RegisterProvider) with its metadata", name)
-		}
+	if len(plugin.Names()) != len(plugin.Sources()) {
+		t.Errorf("%d plugins, %d sources", len(plugin.Names()), len(plugin.Sources()))
 	}
 }
 

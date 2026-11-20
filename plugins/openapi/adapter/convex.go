@@ -37,7 +37,7 @@ type Convex struct{}
 
 var _ Adapter = Convex{}
 
-func (Convex) API() string { return "convex" }
+func (Convex) API() string { return "convex/deployment-api" }
 
 // LatestTag is the SHA of the newest commit that changed the spec.
 func (Convex) LatestTag(ctx context.Context) (string, error) {

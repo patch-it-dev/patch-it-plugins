@@ -38,7 +38,7 @@ import (
 
 // Page is one vendor's end-of-life table.
 type Page struct {
-	API    string // the events' api: "salesforce"
+	API    string // the source id the events carry: "salesforce/rest-api"
 	Vendor string // for sentences: "Salesforce"
 	URL    string // the page, as HTML
 	// Operation names the one real, documented, version-rooted resource a
@@ -58,7 +58,7 @@ type Page struct {
 // policy text above the table says the notice is at least a year ahead of
 // retirement.
 var Salesforce = Page{
-	API: "salesforce", Vendor: "Salesforce",
+	API: "salesforce/rest-api", Vendor: "Salesforce",
 	URL:       "https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
 	Operation: func(v string) string { return "GET /services/data/v" + v + "/" },
 }
@@ -178,7 +178,7 @@ type Read []Finding
 // Count is how many findings the page gave.
 func (r Read) Count() int { return len(r) }
 
-// Slug is the events' api: "salesforce".
+// Slug is the source id the events carry: "salesforce/rest-api".
 func (pg Page) Slug() string { return pg.API }
 
 // PageURL is the page, as HTML.
@@ -197,22 +197,22 @@ func (Page) ArchiveWhenBlocked() bool { return true }
 
 // Events are an event per version number a row retires or deprecates,
 // citing citeURL; a dropped row is logged with why.
-func (pg Page) Events(found kit.Notices, citeURL string, now time.Time) ([]event.ChangeEvent, []event.EventV2, []error) {
-	var events []event.EventV2
+func (pg Page) Events(found kit.Notices, citeURL string, now time.Time) ([]event.Event, []error) {
+	var events []event.Event
 	var rejected []error
 	for _, f := range found.(Read) {
 		if f.Dropped != "" {
 			log.Printf("%s: dropped %s: %s", pg.API, f.Row, f.Dropped)
 			continue
 		}
-		e := event.EventV2{
+		e := event.Event{
 			API:        pg.API,
 			Version:    f.Version,
 			ChangeType: f.ChangeType,
 			Breaking:   f.ChangeType == event.ChangeTypeBreaking,
 			Subject: event.Subject{
 				Type:      event.SubjectAPIOperation,
-				Kind:      event.AffectedKindOperation,
+				Kind:      event.KindOperation,
 				Side:      event.SideRequest,
 				Operation: pg.Operation(f.Version),
 			},
@@ -223,14 +223,14 @@ func (pg Page) Events(found kit.Notices, citeURL string, now time.Time) ([]event
 			Confidence:    1.0,
 			DetectedAt:    now,
 		}
-		e.Fingerprint = event.FingerprintV2(e.API, e.Version, e.ChangeType, e.Subject, "")
+		e.Fingerprint = event.Fingerprint(e.API, e.Version, e.ChangeType, e.Subject, "")
 		if err := e.Validate(); err != nil {
 			rejected = append(rejected, fmt.Errorf("%s %s: %w", pg.API, f.Version, err))
 			continue
 		}
 		events = append(events, e)
 	}
-	return nil, events, rejected
+	return events, rejected
 }
 
 func describe(pg Page, f Finding) string {

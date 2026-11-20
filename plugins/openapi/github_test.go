@@ -14,7 +14,7 @@ import (
 // Datadog's, github's spec is already JSON, so there's no conversion step.
 type fakeGitHubAdapter struct{}
 
-func (fakeGitHubAdapter) API() string { return "github" }
+func (fakeGitHubAdapter) API() string { return "github/rest-api" }
 
 func (fakeGitHubAdapter) LatestTag(context.Context) (string, error) { return "2026-03-10", nil }
 
@@ -59,8 +59,8 @@ func TestGitHubReplayRecreatesTheRealPropertyRemoval(t *testing.T) {
 
 	// Acceptance criteria: the event carries source_url and a non-empty
 	// source_excerpt, and is placed on the real dated versions, not stand-ins.
-	if e.API != "github" || e.Version != "2026-03-10" || e.PreviousVersion != "2022-11-28" {
-		t.Errorf("event %s: api=%s version=%s previous_version=%s, want github 2026-03-10 from 2022-11-28",
+	if e.API != "github/rest-api" || e.Version != "2026-03-10" || e.PreviousVersion != "2022-11-28" {
+		t.Errorf("event %s: api=%s version=%s previous_version=%s, want github/rest-api 2026-03-10 from 2022-11-28",
 			e.Subject.Property, e.API, e.Version, e.PreviousVersion)
 	}
 	if e.SourceURL == "" || e.SourceExcerpt == "" {

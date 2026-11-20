@@ -84,7 +84,7 @@ func TestGitLabReplayRecreatesTheBitbucketAppPasswordRemoval(t *testing.T) {
 			t.Errorf("unexpected event: %s", e.Description)
 			continue
 		}
-		if e.API != "gitlab" || e.Version != "19.0.0" || e.PreviousVersion != "18.11.0" {
+		if e.API != "gitlab/rest-api" || e.Version != "19.0.0" || e.PreviousVersion != "18.11.0" {
 			t.Errorf("%s: api=%s version=%s previous=%s", e.Subject.Property, e.API, e.Version, e.PreviousVersion)
 		}
 		if string(e.ChangeType) != "breaking" || !e.Breaking {

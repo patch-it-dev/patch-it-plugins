@@ -22,7 +22,7 @@ type Spec struct {
 // Adapter is the shape every source adapter follows. Community and private
 // adapters implement the same three methods.
 type Adapter interface {
-	API() string                                         // lowercase slug, e.g. "stripe"
+	API() string                                         // the source id events carry, e.g. "stripe/api"
 	LatestTag(ctx context.Context) (string, error)       // newest release tag
 	Fetch(ctx context.Context, tag string) (Spec, error) // spec for that exact tag
 }

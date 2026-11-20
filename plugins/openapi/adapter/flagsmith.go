@@ -33,7 +33,7 @@ type Flagsmith struct{}
 
 var _ Adapter = Flagsmith{}
 
-func (Flagsmith) API() string { return "flagsmith" }
+func (Flagsmith) API() string { return "flagsmith/api" }
 
 // LatestTag asks GitHub for Flagsmith's newest release tag, e.g. "v2.293.0".
 // Flagsmith tags a release on (almost) every merge to main via release-please,

@@ -54,7 +54,7 @@ func TestUnchangedComparesWithTheLastBaseline(t *testing.T) {
 	if last, same, err := Unchanged(env, "x", []byte("page")); err != nil || same || last != nil {
 		t.Fatalf("first run: %v %v %v", last, same, err)
 	}
-	if err := env.Baselines.(kittest.Sink).SaveSpec(plugin.Baseline("x", "1", "t", "https://x.test", []byte("page"), false, time.Now())); err != nil {
+	if err := env.Baselines.(kittest.Sink).SaveSpec(plugin.Baseline("x", "1", "t", "https://x.test", []byte("page"), time.Now())); err != nil {
 		t.Fatal(err)
 	}
 	if _, same, _ := Unchanged(env, "x", []byte("page")); !same {

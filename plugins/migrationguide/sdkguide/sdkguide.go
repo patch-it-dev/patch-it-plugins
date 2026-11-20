@@ -22,29 +22,28 @@ import (
 
 // Guide is one SDK's migration guide for one major release.
 type Guide struct {
-	API       string // the SDK's slug in change events and its PyPI name, e.g. "anthropic"
-	Repo      string // its GitHub repository, owner/name
-	Major     int    // pinned: the release the guide describes, 1 for "Migrating to v1"; 0 lists them
-	Operation string // the API operation the removed parameters were sent to
+	API     string // the source id the events carry: "anthropic/python-sdk"
+	Package string // its PyPI name: "anthropic"
+	Repo    string // its GitHub repository, owner/name
+	Major   int    // pinned: the release the guide describes, 1 for "Migrating to v1"; 0 lists them
 	// Methods is what a table row's method cell must name for its parameters to
 	// count: the plain call, so a row about beta-only methods (where the same
 	// name can still be valid on a helper) isn't read as a removal.
 	Methods string
 	// Symbols are the calls the removed parameters can no longer be passed to, as
 	// code writes them after the import: the plain methods the guide's table names
-	// first (`messages.create()`, `messages.stream()`, `messages.parse()`). A v2
-	// event carries them (the change event contract).
+	// first (`messages.create()`, `messages.stream()`, `messages.parse()`).
 	Symbols []string
 }
 
 // Anthropic is anthropic-sdk-python's MIGRATION.md, unpinned: read at the
 // first release of each major (Major 0; At pins it).
 var Anthropic = Guide{
-	API:       "anthropic",
-	Repo:      "anthropics/anthropic-sdk-python",
-	Operation: "POST /v1/messages",
-	Methods:   "`messages.create()`",
-	Symbols:   []string{"messages.create", "messages.stream", "messages.parse"},
+	API:     "anthropic/python-sdk",
+	Package: "anthropic",
+	Repo:    "anthropics/anthropic-sdk-python",
+	Methods: "`messages.create()`",
+	Symbols: []string{"messages.create", "messages.stream", "messages.parse"},
 }
 
 // AnthropicV1 is anthropic-sdk-python's guide to 1.0.0: what the golden pins.
@@ -147,26 +146,24 @@ func cut(s string, n int) string {
 	return string([]rune(s)[:n-1]) + "…"
 }
 
-// Events turns removals into change events: one `breaking` request_parameter
-// event per parameter, on the operation the SDK's methods send it to.
-func Events(g Guide, rs []Removal, now time.Time) ([]event.ChangeEvent, []error) {
-	var events []event.ChangeEvent
+// Events turns removals into change events: one breaking removed_parameter
+// event per parameter, on the SDK calls it can no longer be passed to.
+func Events(g Guide, rs []Removal, now time.Time) ([]event.Event, []error) {
+	var events []event.Event
 	var errs []error
 	for _, r := range rs {
-		affected := event.Affected{
-			Kind:      event.AffectedKindRequestParameter,
-			Side:      event.SideRequest,
-			Operation: g.Operation,
-			Property:  r.Param,
+		subject := event.Subject{
+			Type: event.SubjectPackageRelease, Ecosystem: "pypi", Package: g.Package,
+			Change: event.PackageRemovedParameter, Parameter: r.Param, Symbols: g.Symbols,
 		}
-		e := event.ChangeEvent{
-			Fingerprint:   event.Fingerprint(g.API, g.Version(), event.ChangeTypeBreaking, affected, "removed"),
+		e := event.Event{
+			Fingerprint:   event.Fingerprint(g.API, g.Version(), event.ChangeTypeBreaking, subject, ""),
 			API:           g.API,
 			Version:       g.Version(),
 			ChangeType:    event.ChangeTypeBreaking,
 			Breaking:      true,
-			Affected:      affected,
-			Description:   fmt.Sprintf("Parameter %s removed from %s and its sibling methods in the %s SDK %s: passing it raises a TypeError.", r.Param, g.Methods, g.API, g.Version()),
+			Subject:       subject,
+			Description:   fmt.Sprintf("Parameter %s removed from %s and its sibling methods in the %s SDK %s: passing it raises a TypeError.", r.Param, g.Methods, g.Package, g.Version()),
 			MigrationHint: fmt.Sprintf("%s Source: %s", r.Instead, g.Page()),
 			SourceURL:     g.URL(),
 			SourceExcerpt: r.Excerpt,

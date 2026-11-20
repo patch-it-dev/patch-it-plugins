@@ -15,10 +15,10 @@ func TestMemStoresAsIngestDoes(t *testing.T) {
 // golden file's ids then depend only on the events it holds.
 func TestMemIdsHaveNoGaps(t *testing.T) {
 	m := NewMem()
-	if _, err := m.SaveEvents([]event.EventV2{sinkEvent(1), sinkEvent(1), sinkEvent(2)}); err != nil {
+	if _, err := m.SaveEvents([]event.Event{sinkEvent(1), sinkEvent(1), sinkEvent(2)}); err != nil {
 		t.Fatal(err)
 	}
-	if _, err := m.SaveEvents([]event.EventV2{sinkEvent(2), sinkEvent(3)}); err != nil {
+	if _, err := m.SaveEvents([]event.Event{sinkEvent(2), sinkEvent(3)}); err != nil {
 		t.Fatal(err)
 	}
 	all, _ := m.All()
@@ -43,5 +43,5 @@ func TestMemLastSpecIsACopy(t *testing.T) {
 }
 
 func sinkSpec(content string) plugin.Spec {
-	return plugin.Baseline("x", "1", "v1", "https://example.test/1", []byte(content), false, Clock)
+	return plugin.Baseline("x", "1", "v1", "https://example.test/1", []byte(content), Clock)
 }

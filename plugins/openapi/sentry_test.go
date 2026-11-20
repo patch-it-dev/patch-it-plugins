@@ -80,11 +80,11 @@ func sentryPlugin(t *testing.T) (Plugin, string) {
 	return Plugin{Adapter: a, Diff: sentryDiff, Keep: sentryKeep}, srv.URL + "/raw/getsentry/sentry-api-schema"
 }
 
-func replaySentry(t *testing.T, p Plugin, pairs ...[2]string) []event.EventV2 {
+func replaySentry(t *testing.T, p Plugin, pairs ...[2]string) []event.Event {
 	t.Helper()
 	s := openStore(t)
 	for _, pair := range pairs {
-		if rejected, err := kittest.Replay(context.Background(), vercelEnv(s), s, p, pair[0], pair[1]); err != nil || rejected {
+		if rejected, err := kittest.Pair(context.Background(), vercelEnv(s), s, p, pair[0], pair[1]); err != nil || rejected {
 			t.Fatalf("replay %s -> %s: rejected=%v err=%v", pair[0], pair[1], rejected, err)
 		}
 	}
@@ -173,7 +173,7 @@ func TestSentryFlagAfterWordsIsNotNew(t *testing.T) {
 // moving /api/0 into the paths.
 type rawSentry struct{}
 
-func (rawSentry) API() string                               { return "sentry" }
+func (rawSentry) API() string                               { return "sentry/api" }
 func (rawSentry) LatestTag(context.Context) (string, error) { return "", fmt.Errorf("replay only") }
 func (rawSentry) Fetch(_ context.Context, tag string) (adapter.Spec, error) {
 	body, err := os.ReadFile(sentryFile(tag))
@@ -195,7 +195,7 @@ func TestSentryBasePathMoveIsNoChange(t *testing.T) {
 	// pointer names a node in the file as published, without /api/0.
 	p.Keep = nil
 	for _, e := range replaySentry(t, p, [2]string{"2.0.1", "2.1.0"}) {
-		if e.ChangeType == event.ChangeTypeBreaking && e.Subject.Kind == event.AffectedKindOperation {
+		if e.ChangeType == event.ChangeTypeBreaking && e.Subject.Kind == event.KindOperation {
 			t.Errorf("unfiltered: %s %s", e.ChangeType, e.Subject.Operation)
 		}
 		ref := strings.TrimSuffix(strings.TrimPrefix(e.SourceURL, base+"/"), "/openapi-derefed.json")
@@ -208,7 +208,7 @@ func TestSentryBasePathMoveIsNoChange(t *testing.T) {
 	raw := Plugin{Adapter: rawSentry{}, Diff: sentryDiff}
 	var removed []string
 	for _, e := range replaySentry(t, raw, [2]string{"2.0.1", "2.1.0"}) {
-		if e.ChangeType == event.ChangeTypeBreaking && e.Subject.Kind == event.AffectedKindOperation {
+		if e.ChangeType == event.ChangeTypeBreaking && e.Subject.Kind == event.KindOperation {
 			removed = append(removed, e.Subject.Operation)
 		}
 	}

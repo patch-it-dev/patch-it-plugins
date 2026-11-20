@@ -26,7 +26,7 @@ var convexCommits = map[string][2]string{
 // copied from, as adapter.Convex.Fetch cites it.
 type fakeConvexAdapter struct{ latest string }
 
-func (fakeConvexAdapter) API() string { return "convex" }
+func (fakeConvexAdapter) API() string { return "convex/deployment-api" }
 
 func (f fakeConvexAdapter) LatestTag(context.Context) (string, error) { return f.latest, nil }
 
@@ -84,7 +84,7 @@ var convexReplacements = map[string]string{
 func TestConvexGolden(t *testing.T) {
 	ctx := context.Background()
 	s := openStore(t)
-	if rejected, err := kittest.Replay(ctx, vercelEnv(s), s, convexPlugin(""), "f35879bb", "5e5159cb"); err != nil || rejected {
+	if rejected, err := kittest.Pair(ctx, vercelEnv(s), s, convexPlugin(""), "f35879bb", "5e5159cb"); err != nil || rejected {
 		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
 	}
 	events := kittest.Stored(t, s)
@@ -137,7 +137,7 @@ func TestConvexGolden(t *testing.T) {
 func TestConvexDropsPropertyChangesThatWerentDeprecations(t *testing.T) {
 	ctx := context.Background()
 	s := openStore(t)
-	if rejected, err := kittest.Replay(ctx, vercelEnv(s), s, convexPlugin(""), "3f6edf7a", "3ead9091"); err != nil || rejected {
+	if rejected, err := kittest.Pair(ctx, vercelEnv(s), s, convexPlugin(""), "3f6edf7a", "3ead9091"); err != nil || rejected {
 		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
 	}
 	if events := kittest.Stored(t, s); len(events) != 0 {
@@ -148,7 +148,7 @@ func TestConvexDropsPropertyChangesThatWerentDeprecations(t *testing.T) {
 	s = openStore(t)
 	p := convexPlugin("")
 	p.Keep = nil
-	if _, err := kittest.Replay(ctx, vercelEnv(s), s, p, "3f6edf7a", "3ead9091"); err != nil {
+	if _, err := kittest.Pair(ctx, vercelEnv(s), s, p, "3f6edf7a", "3ead9091"); err != nil {
 		t.Fatal(err)
 	}
 	unfiltered := kittest.Stored(t, s)

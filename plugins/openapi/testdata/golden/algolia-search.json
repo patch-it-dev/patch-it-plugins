@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:98c98629cbe46426329ba9fb60630c8bcc4194b191545aa008011f07252b5f5b",
-    "api": "algolia-search",
+    "fingerprint": "sha256:185305649ae5f0070c023dbd84d3b8fa2fd69b0b9396e9bcf6ab865030bbff54",
+    "api": "algolia/search-api",
     "version": "2025-04-01",
     "previous_version": "2025-03-25",
     "change_type": "deprecation",
@@ -22,8 +22,8 @@
   },
   {
     "id": 2,
-    "fingerprint": "sha256:300b57a1485499d6a5fe3ff47e73b3dae695e2354ce20af1984db2345eb85334",
-    "api": "algolia-search",
+    "fingerprint": "sha256:2abd5794c049ff2047ac323f87f07289957eaa94026f57230857e3da4e0b4d9c",
+    "api": "algolia/search-api",
     "version": "2025-04-01",
     "previous_version": "2025-03-25",
     "change_type": "deprecation",
@@ -43,8 +43,8 @@
   },
   {
     "id": 3,
-    "fingerprint": "sha256:cef12aebf4a4a83fccea8645a0cf33c1d26468c547db8f103763278e78d38bca",
-    "api": "algolia-search",
+    "fingerprint": "sha256:10eb98743283aa78f98c179d431384a36df1f5e383cc427087c65ce25082532f",
+    "api": "algolia/search-api",
     "version": "2025-04-01",
     "previous_version": "2025-03-25",
     "change_type": "deprecation",
@@ -64,8 +64,8 @@
   },
   {
     "id": 4,
-    "fingerprint": "sha256:3e264c501d2346c87750b601f3ec19cd16db54f253ebac636d2d4575f754cb76",
-    "api": "algolia-search",
+    "fingerprint": "sha256:aba31879e97ea5de446ccdecdd94cfe51c9d939574f169f67d0264debd2b0dd1",
+    "api": "algolia/search-api",
     "version": "2025-04-01",
     "previous_version": "2025-03-25",
     "change_type": "deprecation",
@@ -85,8 +85,8 @@
   },
   {
     "id": 5,
-    "fingerprint": "sha256:3be2d780b21e3a2cac8cfc73c48a91171e7b77335c19d87f400d9c8618dd6e04",
-    "api": "algolia-search",
+    "fingerprint": "sha256:89631e91da5c783ab2b68d6c400a225118eaf31e4977caf323fd97633825092c",
+    "api": "algolia/search-api",
     "version": "2025-04-01",
     "previous_version": "2025-03-25",
     "change_type": "deprecation",
@@ -106,8 +106,8 @@
   },
   {
     "id": 6,
-    "fingerprint": "sha256:9ef87419d739219194a79e3ba13a5c06c59d1ff0a6452a04c8a6200af27f87d5",
-    "api": "algolia-search",
+    "fingerprint": "sha256:65043d5a11f9527a38ff560bd15771a2417670c3dd2d7e8631c0f5bd4fab926e",
+    "api": "algolia/search-api",
     "version": "2025-04-01",
     "previous_version": "2025-03-25",
     "change_type": "deprecation",
@@ -127,8 +127,8 @@
   },
   {
     "id": 7,
-    "fingerprint": "sha256:933c2581c2ee22647cfc56e69694b562523e91658f8f80d14845f1d201921fdb",
-    "api": "algolia-search",
+    "fingerprint": "sha256:beefe5487e2bae8dc4017249ce0580e1a0570a403466e9b700f98b10b594d184",
+    "api": "algolia/search-api",
     "version": "2025-04-01",
     "previous_version": "2025-03-25",
     "change_type": "deprecation",
@@ -148,8 +148,8 @@
   },
   {
     "id": 8,
-    "fingerprint": "sha256:86c3bf5e28959fbc84b0258d5df3824066ef30c2f1f87fb50070cf4d1f29736f",
-    "api": "algolia-search",
+    "fingerprint": "sha256:2b249c86f444ddda89abd95f7f78fc38b42df4f605c7fb7f298f37fc49bf4dd5",
+    "api": "algolia/search-api",
     "version": "2025-04-01",
     "previous_version": "2025-03-25",
     "change_type": "deprecation",
@@ -169,8 +169,8 @@
   },
   {
     "id": 9,
-    "fingerprint": "sha256:590237cb63bae5005e8bcbcf50ee7e4e15a1fd2ec1b324788bc960e493a87b8a",
-    "api": "algolia-search",
+    "fingerprint": "sha256:5b72de487e9077705f70e2ef2836ae72347896671c162b7f0e35812b71272850",
+    "api": "algolia/search-api",
     "version": "2025-04-01",
     "previous_version": "2025-03-25",
     "change_type": "deprecation",

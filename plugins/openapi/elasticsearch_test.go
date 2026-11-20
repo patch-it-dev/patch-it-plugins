@@ -24,7 +24,7 @@ var esHeads = map[string]string{
 
 type fakeESAdapter struct{}
 
-func (fakeESAdapter) API() string { return "elasticsearch" }
+func (fakeESAdapter) API() string { return "elastic/elasticsearch-api" }
 
 func (fakeESAdapter) LatestTag(context.Context) (string, error) { return "", fmt.Errorf("replay only") }
 
@@ -71,7 +71,7 @@ func TestElasticsearchNoRemovalWithinAMinor(t *testing.T) {
 	s := openStore(t)
 	p := esPlugin()
 	p.Adapter = sameMinor{}
-	if rejected, err := kittest.Replay(ctx, vercelEnv(s), s, p, "8.19", "9.0"); err != nil || rejected {
+	if rejected, err := kittest.Pair(ctx, vercelEnv(s), s, p, "8.19", "9.0"); err != nil || rejected {
 		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
 	}
 	n := map[event.ChangeType]int{}
@@ -92,7 +92,7 @@ func TestElasticsearchNoRemovalWithinAMinor(t *testing.T) {
 func TestElasticsearchGolden(t *testing.T) {
 	ctx := context.Background()
 	s := openStore(t)
-	if rejected, err := kittest.Replay(ctx, vercelEnv(s), s, esPlugin(), "8.19", "9.0"); err != nil || rejected {
+	if rejected, err := kittest.Pair(ctx, vercelEnv(s), s, esPlugin(), "8.19", "9.0"); err != nil || rejected {
 		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
 	}
 	events := kittest.Stored(t, s)
@@ -142,7 +142,7 @@ func TestElasticsearchGolden(t *testing.T) {
 func TestElasticsearchDropsUndeprecatedRemovals(t *testing.T) {
 	ctx := context.Background()
 	s := openStore(t)
-	if rejected, err := kittest.Replay(ctx, vercelEnv(s), s, esPlugin(), "9.1", "9.2"); err != nil || rejected {
+	if rejected, err := kittest.Pair(ctx, vercelEnv(s), s, esPlugin(), "9.1", "9.2"); err != nil || rejected {
 		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
 	}
 	if events := kittest.Stored(t, s); len(events) != 0 {
@@ -151,7 +151,7 @@ func TestElasticsearchDropsUndeprecatedRemovals(t *testing.T) {
 	s = openStore(t)
 	p := esPlugin()
 	p.Keep = nil
-	if _, err := kittest.Replay(ctx, vercelEnv(s), s, p, "9.1", "9.2"); err != nil {
+	if _, err := kittest.Pair(ctx, vercelEnv(s), s, p, "9.1", "9.2"); err != nil {
 		t.Fatal(err)
 	}
 	var removed int

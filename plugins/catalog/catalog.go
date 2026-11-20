@@ -1,7 +1,7 @@
 // Package catalog is the source plugin for a provider that publishes its
 // whole command or endpoint surface as one structured JSON file, one entry
-// keyed by name: fetch the newest snapshot, diff it against the last one
-// seen (or two given snapshots, to replay a historical change), and report
+// keyed by name: read it at a commit, compare it with the one read before,
+// and report
 // every name that disappeared entirely between them. Unlike openapi's typed
 // spec, an entry here is opaque: no request or response shape to walk, just
 // whether the name is still there. Redis first: its command surface has no
@@ -42,7 +42,7 @@ func init() {
 // Catalog is one provider's command or endpoint catalog: a single JSON
 // object, one key per entry, fetched at a git ref.
 type Catalog struct {
-	API       string // the events' api: "redis"
+	API       string // the source id the events carry: "redis/commands"
 	Ecosystem string // the package_release subject's ecosystem: "redis"
 	Package   string // the package_release subject's package: "redis"
 	Repo      string // owner/name on GitHub the catalog lives in
@@ -54,7 +54,7 @@ type Catalog struct {
 // release and read by redis.io's own command reference (checked 2026-11-18).
 // The repo has no tags, so a ref here is a commit SHA, not a release.
 var Redis = Catalog{
-	API: "redis", Ecosystem: "redis", Package: "redis",
+	API: "redis/commands", Ecosystem: "redis", Package: "redis",
 	Repo: "redis/redis-doc", Path: "commands.json",
 	RefsURL: "https://api.github.com/repos/redis/redis-doc/commits/master",
 }
@@ -129,37 +129,42 @@ func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) 
 		Label:     ref,
 		Events:    events,
 		Rejected:  rejected,
-		Baselines: []plugin.Spec{plugin.Baseline(c.API, ref, ref, c.URL(ref), newContent, false, now)},
+		Baselines: []plugin.Spec{plugin.Baseline(c.API, ref, ref, c.URL(ref), newContent, now)},
 	}, nil
 }
 
-// Replay diffs two given snapshots. Both are saved marked as replays, so the
-// normal-run baseline never moves; the events are stored like any others.
-func (p Plugin) Replay(ctx context.Context, env plugin.Env, from, to string) (plugin.Result, error) {
-	c := p.Catalog
-	oldContent, err := env.Get(ctx, c.URL(from))
+// ListVersions is the catalog repo's newest commit: the catalog has no
+// releases, so each commit read is a version, and the change into it is
+// extracted against the one read before.
+func (p Plugin) ListVersions(ctx context.Context, env plugin.Env) ([]plugin.Version, error) {
+	ref, err := p.latestRef(ctx, env)
 	if err != nil {
-		return plugin.Result{}, fmt.Errorf("fetching %s: %w", c.URL(from), err)
+		return nil, err
 	}
-	newContent, err := env.Get(ctx, c.URL(to))
+	return []plugin.Version{{ID: ref, Ref: ref}}, nil
+}
+
+// ReadAt fetches the catalog at v's commit.
+func (p Plugin) ReadAt(ctx context.Context, env plugin.Env, v plugin.Version) (plugin.Snapshot, error) {
+	url := p.Catalog.URL(v.Ref)
+	body, err := env.Get(ctx, url)
 	if err != nil {
-		return plugin.Result{}, fmt.Errorf("fetching %s: %w", c.URL(to), err)
+		return plugin.Snapshot{}, fmt.Errorf("fetching %s: %w", url, err)
 	}
-	now := env.Now()
-	events, rejected, err := p.events(oldContent, newContent, from, to, now)
+	return plugin.Snapshot{Version: v, Content: body, SourceURL: url}, nil
+}
+
+// Extract is an event per command in from's catalog that isn't in to's,
+// with previous_version from's commit. A zero from has nothing to compare.
+func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snapshot) (plugin.Result, error) {
+	events, rejected, err := p.events(from.Content, to.Content, from.Version.Ref, to.Version.Ref, env.Now())
 	if err != nil {
 		return plugin.Result{}, err
 	}
-	return plugin.Result{
-		Label:    to,
-		Events:   events,
-		Rejected: rejected,
-		Baselines: []plugin.Spec{
-			plugin.Baseline(c.API, from, from, c.URL(from), oldContent, true, now),
-			plugin.Baseline(c.API, to, to, c.URL(to), newContent, true, now),
-		},
-	}, nil
+	return plugin.Result{Label: to.Version.Ref, Events: events, Rejected: rejected}, nil
 }
+
+var _ plugin.Versioned = Plugin{}
 
 // latestRef asks GitHub for the catalog repo's newest commit.
 func (p Plugin) latestRef(ctx context.Context, env plugin.Env) (string, error) {
@@ -173,7 +178,7 @@ func (p Plugin) latestRef(ctx context.Context, env plugin.Env) (string, error) {
 // events diffs two parsed snapshots into events. oldContent is empty on a
 // plugin's first run (no baseline yet): diffing against no snapshot reports
 // nothing, the same as an unchanged one.
-func (p Plugin) events(oldContent, newContent []byte, from, to string, now time.Time) ([]event.EventV2, []error, error) {
+func (p Plugin) events(oldContent, newContent []byte, from, to string, now time.Time) ([]event.Event, []error, error) {
 	c := p.Catalog
 	newEntries, err := parse(newContent)
 	if err != nil {
@@ -187,14 +192,14 @@ func (p Plugin) events(oldContent, newContent []byte, from, to string, now time.
 		}
 	}
 
-	var events []event.EventV2
+	var events []event.Event
 	var rejected []error
 	for _, name := range removed(oldEntries, newEntries) {
 		subject := event.Subject{
 			Type: event.SubjectPackageRelease, Ecosystem: c.Ecosystem, Package: c.Package,
 			Change: event.PackageRemovedSymbol, Symbols: []string{name},
 		}
-		e := event.EventV2{
+		e := event.Event{
 			API: c.API, Version: to, PreviousVersion: from,
 			ChangeType:    event.ChangeTypeBreaking,
 			Breaking:      true,
@@ -205,7 +210,7 @@ func (p Plugin) events(oldContent, newContent []byte, from, to string, now time.
 			Confidence:    1.0,
 			DetectedAt:    now,
 		}
-		e.Fingerprint = event.FingerprintV2(e.API, e.Version, e.ChangeType, subject, "")
+		e.Fingerprint = event.Fingerprint(e.API, e.Version, e.ChangeType, subject, "")
 		if err := e.Validate(); err != nil {
 			rejected = append(rejected, fmt.Errorf("%s: %w", name, err))
 			continue

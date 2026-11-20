@@ -27,7 +27,7 @@ type Vercel struct{}
 
 var _ Adapter = Vercel{}
 
-func (Vercel) API() string { return "vercel" }
+func (Vercel) API() string { return "vercel/api" }
 
 // LatestTag asks GitHub for vercel/sdk's newest release tag, e.g. "v1.28.65".
 // The canary tags (v14.0.0-canary.9) aren't releases, so releases/latest never

@@ -50,7 +50,7 @@ type GitLab struct {
 
 var _ Adapter = GitLab{}
 
-func (GitLab) API() string { return "gitlab" }
+func (GitLab) API() string { return "gitlab/rest-api" }
 
 // LatestTag is the highest stable release tag, e.g. "v19.5.5-ee". The tags API
 // sorts by version, but its handling of the "-ee" suffix and of release

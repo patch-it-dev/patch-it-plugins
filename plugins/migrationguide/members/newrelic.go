@@ -62,6 +62,7 @@ package members
 // Setting |, lists configuration settings (newrelic.ini keys), not members
 // of the package: only the section's first table is read, so it never is.
 var NewRelic11 = Guide{
+	API:     "newrelic/python-agent",
 	Package: "newrelic",
 	Module:  "newrelic",
 	Release: "11.0.0",
