@@ -49,6 +49,9 @@ func init() {
 	// Operation deprecations only, most said in the description: see
 	// sentry.go.
 	plugin.Register(Plugin{Adapter: adapter.Sentry{}, Diff: sentryDiff, Keep: sentryKeep})
+	// No Hints: Convex has no API changelog; its news feed is product news.
+	// Only operation deprecations and removals: see convex.go.
+	plugin.Register(Plugin{Adapter: adapter.Convex{}, Diff: convexDiff, Keep: convexKeep})
 }
 
 // requestSide keeps the changes to what callers send. GitLab's response

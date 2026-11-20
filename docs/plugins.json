@@ -1,7 +1,7 @@
 {
   "_comment": "Generated from the plugin registry and docs/plugins.md by `make plugins-json` (go run ./cmd/list-plugins). Don't edit by hand.",
   "$schema": "./plugins.schema.json",
-  "count": 24,
+  "count": 25,
   "plugins": [
     {
       "id": "algolia-ingestion",
@@ -62,6 +62,16 @@
       "source_url": "https://developers.cloudflare.com/fundamentals/api/reference/deprecations/index.xml",
       "status": "live",
       "provider_page": "providers/cloudflare.md"
+    },
+    {
+      "id": "convex",
+      "provider": "Convex",
+      "layer": "api",
+      "watches": "Deployment API operations deprecated, and deprecated operations removed, between commits of the spec",
+      "format": "openapi",
+      "source_url": "https://github.com/get-convex/convex-backend",
+      "status": "live",
+      "provider_page": "providers/convex.md"
     },
     {
       "id": "datadog",
