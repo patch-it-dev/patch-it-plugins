@@ -1,0 +1,301 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Convex Deployment API",
+    "description": "Admin API for interacting with deployments.",
+    "license": {
+      "name": "LicenseRef-FSL-1.1-Apache-2.0",
+      "identifier": "LicenseRef-FSL-1.1-Apache-2.0"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "{deployment-url}/api/v1",
+      "description": "Your Convex deployment",
+      "variables": {
+        "deployment-url": {
+          "default": "https://happy-animal-123.convex.cloud",
+          "description": "Your deployment URL"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/list_log_streams": {
+      "get": {
+        "tags": [
+          "Log Streams"
+        ],
+        "summary": "List log streams",
+        "description": "List configs for all existing log streams in a deployment.\n\nDeprecated: use `GET /integrations` instead.",
+        "operationId": "list_log_streams",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LogStreamConfig"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true,
+        "security": [
+          {
+            "Deploy Key": []
+          },
+          {
+            "OAuth Team Token": []
+          },
+          {
+            "Team Token": []
+          },
+          {
+            "OAuth Project Token": []
+          }
+        ]
+      }
+    },
+    "/get_log_stream/{id}": {
+      "get": {
+        "tags": [
+          "Log Streams"
+        ],
+        "summary": "Get log stream",
+        "description": "Get the config for a specific log stream by id.\n\nDeprecated: use `GET /integrations/{id}` instead.",
+        "operationId": "get_log_stream",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of the log stream to retrieve",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogStreamConfig"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true,
+        "security": [
+          {
+            "Deploy Key": []
+          },
+          {
+            "OAuth Team Token": []
+          },
+          {
+            "Team Token": []
+          },
+          {
+            "OAuth Project Token": []
+          }
+        ]
+      }
+    },
+    "/delete_log_stream/{id}": {
+      "post": {
+        "tags": [
+          "Log Streams"
+        ],
+        "summary": "Delete log stream",
+        "description": "Delete the deployment's log stream with the given id.\n\nDeprecated: use `DELETE /integrations/{id}` instead.",
+        "operationId": "delete_log_stream",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of the log stream to delete",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": true,
+        "security": [
+          {
+            "Deploy Key": []
+          },
+          {
+            "OAuth Team Token": []
+          },
+          {
+            "Team Token": []
+          },
+          {
+            "OAuth Project Token": []
+          }
+        ]
+      }
+    },
+    "/create_log_stream": {
+      "post": {
+        "tags": [
+          "Log Streams"
+        ],
+        "summary": "Create log stream",
+        "description": "Create a new log stream for the deployment. Errors if a log stream of the\ngiven type already exists.\n\nDeprecated: use `POST /integrations` instead.",
+        "operationId": "create_log_stream",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateLogStreamArgs"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateLogStreamResponse"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true,
+        "security": [
+          {
+            "Deploy Key": []
+          },
+          {
+            "OAuth Team Token": []
+          },
+          {
+            "Team Token": []
+          },
+          {
+            "OAuth Project Token": []
+          }
+        ]
+      }
+    },
+    "/update_log_stream/{id}": {
+      "post": {
+        "tags": [
+          "Log Streams"
+        ],
+        "summary": "Update log stream",
+        "description": "Update an existing log stream for the deployment. Omit a field to keep the\nexisting value, and use `null` to unset a field.\n\nDeprecated: use `PATCH /integrations/{id}` instead.",
+        "operationId": "update_log_stream",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of the log stream to update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLogStreamArgs"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": true,
+        "security": [
+          {
+            "Deploy Key": []
+          },
+          {
+            "OAuth Team Token": []
+          },
+          {
+            "Team Token": []
+          },
+          {
+            "OAuth Project Token": []
+          }
+        ]
+      }
+    },
+    "/rotate_webhook_secret/{id}": {
+      "post": {
+        "tags": [
+          "Log Streams"
+        ],
+        "summary": "Rotate webhook log stream secret",
+        "description": "Rotate the secret for the webhook log stream.\n\nDeprecated: use `POST /integrations/{id}/rotate_webhook_secret` instead.",
+        "operationId": "rotate_webhook_secret",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of the webhook log stream for which to rotate the secret",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RotateLogStreamSecretResponse"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true,
+        "security": [
+          {
+            "Deploy Key": []
+          },
+          {
+            "OAuth Team Token": []
+          },
+          {
+            "Team Token": []
+          },
+          {
+            "OAuth Project Token": []
+          }
+        ]
+      }
+    }
+  }
+}

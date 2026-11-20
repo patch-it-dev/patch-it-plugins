@@ -1,0 +1,167 @@
+openapi: 3.0.3
+servers:
+- url: https://console.neon.tech/api/v2
+info:
+  title: Neon API
+  version: v2
+  license:
+    name: Proprietary
+paths:
+  /consumption_history/projects:
+    get:
+      summary: Retrieve project consumption metrics (legacy plans)
+      description: |
+        Retrieves consumption metrics for Scale, Business, and Enterprise plan projects. History begins at the time of upgrade.
+        Results are ordered by time in ascending order (oldest to newest).
+        Issuing a call to this API does not wake a project's compute endpoint.
+      tags:
+      - Consumption
+      operationId: getConsumptionHistoryPerProject
+      parameters:
+      - name: cursor
+        description: Specify the cursor value from the previous response to get 
+          the next batch of projects.
+        in: query
+        schema:
+          type: string
+      - name: limit
+        description: Specify a value from 1 to 100 to limit number of projects 
+          in the response.
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          default: 10
+          maximum: 100
+      - name: project_ids
+        description: |
+          Specify a list of project IDs to filter the response.
+          If omitted, the response will contain all projects.
+          A list of project IDs can be specified as an array of parameter values or as a comma-separated list in a single parameter value.
+          - As an array of parameter values: `project_ids=cold-poetry-09157238%20&project_ids=quiet-snow-71788278`
+          - As a comma-separated list in a single parameter value: `project_ids=cold-poetry-09157238,quiet-snow-71788278`
+        in: query
+        schema:
+          type: array
+          items:
+            pattern: "^([a-z0-9-]{1,60}(,[a-z0-9-]{1,60}){0,99})?$"
+            type: string
+          minItems: 0
+          maxItems: 100
+      - name: from
+        description: |
+          Specify the start `date-time` for the consumption period.
+          The `date-time` value is rounded according to the specified `granularity`.
+          For example, `2024-03-15T15:30:00Z` for `daily` granularity will be rounded to `2024-03-15T00:00:00Z`.
+          The specified `date-time` value must respect the specified `granularity`:
+          - For `hourly`, consumption metrics are limited to the last 168 hours.
+          - For `daily`, consumption metrics are limited to the last 60 days.
+          - For `monthly`, consumption metrics are limited to the last year.
+
+          The consumption history is available starting from `March 1, 2024, at 00:00:00 UTC`.
+        in: query
+        schema:
+          type: string
+          format: date-time
+        required: true
+      - name: to
+        description: |
+          Specify the end `date-time` for the consumption period.
+          The `date-time` value is rounded according to the specified granularity.
+          For example, `2024-03-15T15:30:00Z` for `daily` granularity will be rounded to `2024-03-15T00:00:00Z`.
+          The specified `date-time` value must respect the specified `granularity`:
+          - For `hourly`, consumption metrics are limited to the last 168 hours.
+          - For `daily`, consumption metrics are limited to the last 60 days.
+          - For `monthly`, consumption metrics are limited to the last year.
+        in: query
+        schema:
+          type: string
+          format: date-time
+        required: true
+      - name: granularity
+        description: |
+          Specify the granularity of consumption metrics.
+          Hourly, daily, and monthly metrics are available for the last 168 hours, 60 days,
+          and 1 year, respectively.
+        in: query
+        schema:
+          $ref: "#/components/schemas/ConsumptionHistoryGranularity"
+        required: true
+      - name: org_id
+        description: |
+          Specify the organization for which the project consumption metrics should be returned.
+          If this parameter is not provided, the endpoint will return the metrics for the
+          authenticated user's projects.
+        in: query
+        schema:
+          type: string
+          pattern: "^[a-z0-9-]{1,60}$"
+      - name: include_v1_metrics
+        description: |
+          The field is deprecated. Please use `metrics` instead.
+          If `metrics` is specified, this field is ignored.
+          Include metrics utilized in previous pricing models.
+          - **data_storage_bytes_hour**: The sum of the maximum observed storage values for each hour,
+            which never decreases.
+        in: query
+        deprecated: true
+        schema:
+          type: boolean
+      - name: metrics
+        description: |
+          Specify a list of metrics to include in the response.
+          If omitted, active_time, compute_time, written_data, synthetic_storage_size are returned.
+          Possible values:
+          - `active_time_seconds`
+          - `compute_time_seconds`
+          - `written_data_bytes`
+          - `synthetic_storage_size_bytes`
+          - `data_storage_bytes_hour`
+          - `logical_size_bytes`
+          - `logical_size_bytes_hour`
+
+          A list of metrics can be specified as an array of parameter values or as a comma-separated list in a single parameter value.
+          - As an array of parameter values: `metrics=cpu_seconds&metrics=ram_bytes`
+          - As a comma-separated list in a single parameter value: `metrics=cpu_seconds,ram_bytes`
+        in: query
+        schema:
+          $ref: "#/components/schemas/ConsumptionHistoryQueryMetrics"
+      responses:
+        200:
+          description: Returned project consumption metrics for the Neon account
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: "#/components/schemas/ConsumptionHistoryPerProjectResponse"
+                - $ref: "#/components/schemas/PaginationResponse"
+        403:
+          description: This endpoint is not available. It is only supported with
+            Scale, Business, and Enterprise plan accounts.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneralError"
+        404:
+          description: Account is not a member of the organization specified by 
+            `org_id`.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneralError"
+        406:
+          description: |
+            The specified `date-time` range is outside the boundaries of the specified `granularity`.
+            Adjust your `from` and `to` values or select a different `granularity`.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneralError"
+        429:
+          description: Too many requests
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneralError"
+        default:
+          $ref: "#/components/responses/GeneralError"

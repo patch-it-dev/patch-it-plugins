@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:3009cdf0f6116b14f13ec28bd6eca6aa3be6eabe66d34fb5db7454881671f770",
+    "api": "convex",
+    "version": "2026-11-05",
+    "previous_version": "2026-10-30",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/v1/create_log_stream"
+    },
+    "description": "Operation POST /api/v1/create_log_stream marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/get-convex/convex-backend/5e5159cbea5188e9da5400febda1b031a233eea0/npm-packages/@convex-dev/platform/deployment-openapi.json",
+    "source_pointer": "/paths/~1create_log_stream/post",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Create a new log stream for the deployment. Errors if a log stream of the\\ngiven type already exists.\\n\\nDeprecated: use `POST /integrations` instead.\",\"operationId\":\"create_log_stream\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/CreateLogStreamArgs\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/CreateLogStreamResponse\"}}},\"description\":\"\"}},\"security\":[{\"Deploy Key\":[]},{\"OAuth Team Token\":[]},{\"Team Token\":[]},{\"OAuth Project Token\":[]}],\"summary\":\"Create log stream\",\"tags\":[\"Log Streams\"]}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:a42a45fdc091e8fe2b4e151c38e131c3195f846cd26148ddc5db8d9d02b6cbac",
+    "api": "convex",
+    "version": "2026-11-05",
+    "previous_version": "2026-10-30",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/v1/delete_log_stream/{id}"
+    },
+    "description": "Operation POST /api/v1/delete_log_stream/{id} marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/get-convex/convex-backend/5e5159cbea5188e9da5400febda1b031a233eea0/npm-packages/@convex-dev/platform/deployment-openapi.json",
+    "source_pointer": "/paths/~1delete_log_stream~1{id}/post",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Delete the deployment's log stream with the given id.\\n\\nDeprecated: use `DELETE /integrations/{id}` instead.\",\"operationId\":\"delete_log_stream\",\"parameters\":[{\"description\":\"id of the log stream to delete\",\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"responses\":{\"200\":{\"description\":\"\"}},\"security\":[{\"Deploy Key\":[]},{\"OAuth Team Token\":[]},{\"Team Token\":[]},{\"OAuth Project Token\":[]}],\"summary\":\"Delete log stream\",\"tags\":[\"Log Streams\"]}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:930075f543a07bd23b16f582788fd8b8c079dc4bc2d3d6cd43c2acd583a995da",
+    "api": "convex",
+    "version": "2026-11-05",
+    "previous_version": "2026-10-30",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/v1/get_log_stream/{id}"
+    },
+    "description": "Operation GET /api/v1/get_log_stream/{id} marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/get-convex/convex-backend/5e5159cbea5188e9da5400febda1b031a233eea0/npm-packages/@convex-dev/platform/deployment-openapi.json",
+    "source_pointer": "/paths/~1get_log_stream~1{id}/get",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Get the config for a specific log stream by id.\\n\\nDeprecated: use `GET /integrations/{id}` instead.\",\"operationId\":\"get_log_stream\",\"parameters\":[{\"description\":\"id of the log stream to retrieve\",\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/LogStreamConfig\"}}},\"description\":\"\"}},\"security\":[{\"Deploy Key\":[]},{\"OAuth Team Token\":[]},{\"Team Token\":[]},{\"OAuth Project Token\":[]}],\"summary\":\"Get log stream\",\"tags\":[\"Log Streams\"]}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:f5a5c1ee8bb1ce5a406d952df079517005f92e83a2c09729e782ebf7e892af71",
+    "api": "convex",
+    "version": "2026-11-05",
+    "previous_version": "2026-10-30",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/v1/list_log_streams"
+    },
+    "description": "Operation GET /api/v1/list_log_streams marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/get-convex/convex-backend/5e5159cbea5188e9da5400febda1b031a233eea0/npm-packages/@convex-dev/platform/deployment-openapi.json",
+    "source_pointer": "/paths/~1list_log_streams/get",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"List configs for all existing log streams in a deployment.\\n\\nDeprecated: use `GET /integrations` instead.\",\"operationId\":\"list_log_streams\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"$ref\":\"#/components/schemas/LogStreamConfig\"},\"type\":\"array\"}}},\"description\":\"\"}},\"security\":[{\"Deploy Key\":[]},{\"OAuth Team Token\":[]},{\"Team Token\":[]},{\"OAuth Project Token\":[]}],\"summary\":\"List log streams\",\"tags\":[\"Log Streams\"]}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:be79bb14968226260e9856e3ec45a8e3ad5795f6ee67be1a380e59f1acc8ab92",
+    "api": "convex",
+    "version": "2026-11-05",
+    "previous_version": "2026-10-30",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/v1/rotate_webhook_secret/{id}"
+    },
+    "description": "Operation POST /api/v1/rotate_webhook_secret/{id} marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/get-convex/convex-backend/5e5159cbea5188e9da5400febda1b031a233eea0/npm-packages/@convex-dev/platform/deployment-openapi.json",
+    "source_pointer": "/paths/~1rotate_webhook_secret~1{id}/post",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Rotate the secret for the webhook log stream.\\n\\nDeprecated: use `POST /integrations/{id}/rotate_webhook_secret` instead.\",\"operationId\":\"rotate_webhook_secret\",\"parameters\":[{\"description\":\"id of the webhook log stream for which to rotate the secret\",\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/RotateLogStreamSecretResponse\"}}},\"description\":\"\"}},\"security\":[{\"Deploy Key\":[]},{\"OAuth Team Token\":[]},{\"Team Token\":[]},{\"OAuth Project Token\":[]}],\"summary\":\"Rotate webhook log stream secret\",\"tags\":[\"Log Streams\"]}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:942f605d4201eddbb6b6b98d66dd306b6154248fca40225b5586aba1da633610",
+    "api": "convex",
+    "version": "2026-11-05",
+    "previous_version": "2026-10-30",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/v1/update_log_stream/{id}"
+    },
+    "description": "Operation POST /api/v1/update_log_stream/{id} marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/get-convex/convex-backend/5e5159cbea5188e9da5400febda1b031a233eea0/npm-packages/@convex-dev/platform/deployment-openapi.json",
+    "source_pointer": "/paths/~1update_log_stream~1{id}/post",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Update an existing log stream for the deployment. Omit a field to keep the\\nexisting value, and use `null` to unset a field.\\n\\nDeprecated: use `PATCH /integrations/{id}` instead.\",\"operationId\":\"update_log_stream\",\"parameters\":[{\"description\":\"id of the log stream to update\",\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/UpdateLogStreamArgs\"}}},\"required\":true},\"responses\":{\"200\":{\"description\":\"\"}},\"security\":[{\"Deploy Key\":[]},{\"OAuth Team Token\":[]},{\"Team Token\":[]},{\"OAuth Project Token\":[]}],\"summary\":\"Update log stream\",\"tags\":[\"Log Streams\"]}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

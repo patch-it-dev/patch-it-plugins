@@ -118,7 +118,7 @@ func (r sentryReleaseInfo) hasSpec() bool {
 
 // Fetch downloads the spec of an api@X.Y.Z release (the release's asset), or
 // of a sentry-api-schema tag or commit (the file at it), and moves the
-// server URL's path into the paths: see sentryBasePath.
+// server URL's path into the paths: see ServerBasePath.
 //
 // Version is the release's publication date, or a commit's date
 // (YYYY-MM-DD): the API has no version of its own (`/api/0`, info.version
@@ -173,7 +173,7 @@ func (s Sentry) Fetch(ctx context.Context, tag string) (Spec, error) {
 	if err != nil {
 		return Spec{}, fmt.Errorf("fetching the sentry %s spec: %w", tag, err)
 	}
-	content, err := sentryBasePath(body)
+	content, err := ServerBasePath(body)
 	if err != nil {
 		return Spec{}, fmt.Errorf("sentry %s: %w", tag, err)
 	}
@@ -195,13 +195,18 @@ func sentryReleaseMeta(ctx context.Context, url, tag string) (sentryReleaseInfo,
 	return r, nil
 }
 
-// sentryBasePathKey is the root key Fetch records the server path it moved
+// basePathKey is the root key ServerBasePath records the server path it moved
 // into the paths under. The differ reads only paths and components, so the
 // key is never diffed.
-const sentryBasePathKey = "x-patch-it-base-path"
+const basePathKey = "x-patch-it-base-path"
 
-// sentryBasePath puts the server URL's path back at the front of every path.
+// ServerBasePath puts the server URL's path back at the front of every path,
+// so an operation is named by the path a caller sends ("GET /api/0/…"), and
+// a spec that moves the server's path into its paths (or out of them) reads
+// as the same operations, not as every operation removed and added again.
+// Used by every adapter whose API has a path in its server URL.
 //
+// Sentry did move it:
 // Until sentry-api-schema 2.0.1 the server was "https://{region}.sentry.io"
 // and the paths started "/api/0/"; from 2.1.0 (2026-11-13) the server is
 // "https://{region}.sentry.io/api/0" and the paths don't. The URLs a caller
@@ -213,7 +218,7 @@ const sentryBasePathKey = "x-patch-it-base-path"
 // A spec whose server has no path is returned byte for byte. The values are
 // otherwise unchanged (numbers kept as written); the path moved is recorded
 // for SourcePointer.
-func sentryBasePath(body []byte) ([]byte, error) {
+func ServerBasePath(body []byte) ([]byte, error) {
 	dec := json.NewDecoder(bytes.NewReader(body))
 	dec.UseNumber()
 	var doc map[string]any
@@ -241,17 +246,23 @@ func sentryBasePath(body []byte) ([]byte, error) {
 		moved[base+p] = item
 	}
 	doc["paths"] = moved
-	doc[sentryBasePathKey] = base
+	doc[basePathKey] = base
 	return json.Marshal(doc)
 }
 
 // serverPath is the path of a server URL ("/api/0" for
-// "https://{region}.sentry.io/api/0"), without a trailing slash; "" for
-// none. Read by hand: url.Parse refuses the {region} variable in the host.
+// "https://{region}.sentry.io/api/0", "/api/v1" for Convex's
+// "{deployment-url}/api/v1", whose whole origin is a variable), without a
+// trailing slash; "" for none. Read by hand: url.Parse refuses a variable in
+// the host.
 func serverPath(u string) string {
 	_, rest, ok := strings.Cut(u, "://")
 	if !ok {
-		return ""
+		if !strings.HasPrefix(u, "{") || !strings.Contains(u, "}") {
+			return ""
+		}
+		_, rest, _ = strings.Cut(u, "}")
+		return strings.TrimRight(rest, "/")
 	}
 	i := strings.Index(rest, "/")
 	if i < 0 {
@@ -260,10 +271,14 @@ func serverPath(u string) string {
 	return strings.TrimRight(rest[i:], "/")
 }
 
-// SourcePointer turns a pointer into a path Fetch prefixed with the server's
-// path back into one into the path as published. Every other pointer, and
-// every pointer into a spec Fetch didn't change, is already right.
-func (Sentry) SourcePointer(content []byte) func(string) string {
+// SourcePointer: see BasePathPointer.
+func (Sentry) SourcePointer(content []byte) func(string) string { return BasePathPointer(content) }
+
+// BasePathPointer turns a pointer into a path ServerBasePath prefixed with
+// the server's path back into one into the path as published. Every other
+// pointer, and every pointer into a spec ServerBasePath didn't change, is
+// already right.
+func BasePathPointer(content []byte) func(string) string {
 	var doc struct {
 		Base string `json:"x-patch-it-base-path"`
 	}
