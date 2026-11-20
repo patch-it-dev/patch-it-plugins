@@ -19,6 +19,7 @@ One page per plugin id: `providers/<api>.md`. Start from [`_template.md`](_templ
 | [algolia.md](algolia.md) | `algolia-search`, `algolia-ingestion`, `algolia-recommend` | `openapi` |
 | [elasticsearch.md](elasticsearch.md) | `elasticsearch` | `openapi` |
 | [sentry.md](sentry.md) | `sentry` | `openapi` |
+| [planetscale.md](planetscale.md) | `planetscale` | `openapi` |
 | [openai-models.md](openai-models.md) | `openai-models` | `retirements` |
 | [anthropic-models.md](anthropic-models.md) | `anthropic-models` | `retirements` |
 | [anthropic.md](anthropic.md) | `anthropic` | `migrationguide` |

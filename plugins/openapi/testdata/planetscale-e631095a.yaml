@@ -1,0 +1,1452 @@
+openapi: 3.0.1
+info:
+  title: PlanetScale API
+  description: |-
+    
+    <p>PlanetScale API</p>
+    &copy; 2026 PlanetScale, Inc.
+  version: v1
+  x-copyright: "&copy; 2026 PlanetScale, Inc."
+paths:
+  /organizations/{organization}/databases/{database}/branches/{branch}/bouncers/{bouncer}/resizes:
+    get:
+      tags:
+        - Bouncer resizes
+      operationId: list_bouncer_resize_requests
+      summary: Get bouncer resize requests
+      parameters:
+        - name: organization
+          in: path
+          required: true
+          description: "Organization name slug from `list_organizations`. Example: `acme`."
+          schema:
+            type: string
+        - name: database
+          in: path
+          required: true
+          description: "Database name slug from `list_databases`. Example: `app-db`."
+          schema:
+            type: string
+        - name: branch
+          in: path
+          required: true
+          description: "Branch name from `list_branches`. Example: `main`."
+          schema:
+            type: string
+        - name: bouncer
+          in: path
+          required: true
+          description: The name of the bouncer
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: If provided, specifies the page offset of returned results
+          schema:
+            type: integer
+            default: 1
+        - name: per_page
+          in: query
+          description: If provided, specifies the number of returned results
+          schema:
+            type: integer
+            default: 25
+      responses:
+        "200":
+          description: Returns bouncer resize requests
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: The response type. Always "list" for paginated responses.
+                  current_page:
+                    type: integer
+                    description: The current page number
+                  per_page:
+                    type: integer
+                    description: The maximum number of results per page
+                  next_page:
+                    type: integer
+                    description: The next page number, or null when this is the last page
+                    nullable: true
+                  next_page_url:
+                    type: string
+                    description: The next page of results, or null when this is the last page
+                    nullable: true
+                  prev_page:
+                    type: integer
+                    description: The previous page number, or null when this is the first page
+                    nullable: true
+                  prev_page_url:
+                    type: string
+                    description: The previous page of results, or null when this is the first page
+                    nullable: true
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: The ID of the bouncer resize
+                        state:
+                          type: string
+                          enum:
+                            - pending
+                            - resizing
+                            - canceled
+                            - completed
+                          description: The state of the bouncer resize
+                        replicas_per_cell:
+                          type: integer
+                          description: The number of replicas per cell for the bouncer after the resize
+                        target:
+                          type: string
+                          enum:
+                            - primary
+                            - replica
+                            - replica_az_affinity
+                          description: The backend target for the bouncer after the resize
+                        parameters:
+                          type: object
+                          additionalProperties: true
+                          description: The bouncer parameters
+                        previous_replicas_per_cell:
+                          type: integer
+                          description: The number of replicas per cell for the bouncer before the resize
+                        previous_target:
+                          type: string
+                          enum:
+                            - primary
+                            - replica
+                            - replica_az_affinity
+                          description: The backend target for the bouncer before the resize
+                        previous_parameters:
+                          type: object
+                          additionalProperties: true
+                          description: The previous bouncer parameters
+                        started_at:
+                          type: string
+                          description: The time the bouncer resize started
+                          nullable: true
+                        completed_at:
+                          type: string
+                          description: The time the bouncer resize completed
+                          nullable: true
+                        created_at:
+                          type: string
+                          description: The time the bouncer resize was created
+                        updated_at:
+                          type: string
+                          description: The time the bouncer resize was last updated
+                        actor:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              description: The ID of the actor
+                            display_name:
+                              type: string
+                              description: The name of the actor
+                            avatar_url:
+                              type: string
+                              description: The URL of the actor's avatar
+                          required:
+                            - id
+                            - display_name
+                            - avatar_url
+                        bouncer:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              description: The ID for the resource
+                            name:
+                              type: string
+                              description: The name for the resource
+                            created_at:
+                              type: string
+                              description: When the resource was created
+                            updated_at:
+                              type: string
+                              description: When the resource was last updated
+                            deleted_at:
+                              type: string
+                              description: When the resource was deleted, if deleted
+                              nullable: true
+                          required:
+                            - id
+                            - name
+                            - created_at
+                            - updated_at
+                            - deleted_at
+                        sku:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              description: The name of the Postgres bouncer SKU
+                            display_name:
+                              type: string
+                              description: The display name
+                            cpu:
+                              type: string
+                              description: The CPU allocation
+                            ram:
+                              type: integer
+                              description: The amount of memory in bytes
+                            sort_order:
+                              type: integer
+                              description: The sort order of the Postgres bouncer SKU
+                          required:
+                            - name
+                            - display_name
+                            - cpu
+                            - ram
+                            - sort_order
+                        previous_sku:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              description: The name of the Postgres bouncer SKU
+                            display_name:
+                              type: string
+                              description: The display name
+                            cpu:
+                              type: string
+                              description: The CPU allocation
+                            ram:
+                              type: integer
+                              description: The amount of memory in bytes
+                            sort_order:
+                              type: integer
+                              description: The sort order of the Postgres bouncer SKU
+                          required:
+                            - name
+                            - display_name
+                            - cpu
+                            - ram
+                            - sort_order
+                      required:
+                        - id
+                        - state
+                        - replicas_per_cell
+                        - target
+                        - parameters
+                        - previous_replicas_per_cell
+                        - previous_target
+                        - previous_parameters
+                        - started_at
+                        - completed_at
+                        - created_at
+                        - updated_at
+                        - actor
+                        - bouncer
+                        - sku
+                        - previous_sku
+                required:
+                  - type
+                  - current_page
+                  - per_page
+                  - next_page
+                  - next_page_url
+                  - prev_page
+                  - prev_page_url
+                  - data
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+        "429":
+          description: Too Many Requests. Reduce the frequency of requests and try again soon.
+        "500":
+          description: Internal Server Error
+      description: |-
+        
+        ### Authorization
+        A service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:
+
+        **Service Token Accesses**
+         `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`
+
+        **OAuth Scopes**
+
+         | Resource | Scopes |
+        | :------- | :---------- |
+        | Organization | `read_branches` |
+        | Database | `read_branches` |
+        | Branch | `read_branch` |
+    patch:
+      tags:
+        - Bouncer resizes
+      operationId: update_bouncer_resize_request
+      summary: Upsert a bouncer resize request
+      parameters:
+        - name: organization
+          in: path
+          required: true
+          description: "Organization name slug from `list_organizations`. Example: `acme`."
+          schema:
+            type: string
+        - name: database
+          in: path
+          required: true
+          description: "Database name slug from `list_databases`. Example: `app-db`."
+          schema:
+            type: string
+        - name: branch
+          in: path
+          required: true
+          description: "Branch name from `list_branches`. Example: `main`."
+          schema:
+            type: string
+        - name: bouncer
+          in: path
+          required: true
+          description: The name of the bouncer
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bouncer_size:
+                  type: string
+                  description: The bouncer size SKU name (e.g., 'PGB_5', 'PGB_10', 'PGB_20', 'PGB_40', 'PGB_80', 'PGB_160'). Defaults to 'PGB_5'.
+                replicas_per_cell:
+                  type: integer
+                  description: The number of PgBouncers per availability zone. Defaults to 1.
+                target:
+                  type: string
+                  description: The type of server the bouncer targets.
+                parameters:
+                  type: object
+                  additionalProperties: true
+                  description: "Bouncer configuration parameters nested by namespace (e.g., {\"pgbouncer\": {\"default_pool_size\": \"100\"}}). Use the 'List cluster parameters' endpoint to retrieve available parameters. Only parameters with namespace 'pgbouncer' can be updated."
+      responses:
+        "200":
+          description: Returns bouncer resize request
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The ID of the bouncer resize
+                  state:
+                    type: string
+                    enum:
+                      - pending
+                      - resizing
+                      - canceled
+                      - completed
+                    description: The state of the bouncer resize
+                  replicas_per_cell:
+                    type: integer
+                    description: The number of replicas per cell for the bouncer after the resize
+                  target:
+                    type: string
+                    enum:
+                      - primary
+                      - replica
+                      - replica_az_affinity
+                    description: The backend target for the bouncer after the resize
+                  parameters:
+                    type: object
+                    additionalProperties: true
+                    description: The bouncer parameters
+                  previous_replicas_per_cell:
+                    type: integer
+                    description: The number of replicas per cell for the bouncer before the resize
+                  previous_target:
+                    type: string
+                    enum:
+                      - primary
+                      - replica
+                      - replica_az_affinity
+                    description: The backend target for the bouncer before the resize
+                  previous_parameters:
+                    type: object
+                    additionalProperties: true
+                    description: The previous bouncer parameters
+                  started_at:
+                    type: string
+                    description: The time the bouncer resize started
+                    nullable: true
+                  completed_at:
+                    type: string
+                    description: The time the bouncer resize completed
+                    nullable: true
+                  created_at:
+                    type: string
+                    description: The time the bouncer resize was created
+                  updated_at:
+                    type: string
+                    description: The time the bouncer resize was last updated
+                  actor:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        description: The ID of the actor
+                      display_name:
+                        type: string
+                        description: The name of the actor
+                      avatar_url:
+                        type: string
+                        description: The URL of the actor's avatar
+                    required:
+                      - id
+                      - display_name
+                      - avatar_url
+                  bouncer:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        description: The ID for the resource
+                      name:
+                        type: string
+                        description: The name for the resource
+                      created_at:
+                        type: string
+                        description: When the resource was created
+                      updated_at:
+                        type: string
+                        description: When the resource was last updated
+                      deleted_at:
+                        type: string
+                        description: When the resource was deleted, if deleted
+                        nullable: true
+                    required:
+                      - id
+                      - name
+                      - created_at
+                      - updated_at
+                      - deleted_at
+                  sku:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: The name of the Postgres bouncer SKU
+                      display_name:
+                        type: string
+                        description: The display name
+                      cpu:
+                        type: string
+                        description: The CPU allocation
+                      ram:
+                        type: integer
+                        description: The amount of memory in bytes
+                      sort_order:
+                        type: integer
+                        description: The sort order of the Postgres bouncer SKU
+                    required:
+                      - name
+                      - display_name
+                      - cpu
+                      - ram
+                      - sort_order
+                  previous_sku:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: The name of the Postgres bouncer SKU
+                      display_name:
+                        type: string
+                        description: The display name
+                      cpu:
+                        type: string
+                        description: The CPU allocation
+                      ram:
+                        type: integer
+                        description: The amount of memory in bytes
+                      sort_order:
+                        type: integer
+                        description: The sort order of the Postgres bouncer SKU
+                    required:
+                      - name
+                      - display_name
+                      - cpu
+                      - ram
+                      - sort_order
+                required:
+                  - id
+                  - state
+                  - replicas_per_cell
+                  - target
+                  - parameters
+                  - previous_replicas_per_cell
+                  - previous_target
+                  - previous_parameters
+                  - started_at
+                  - completed_at
+                  - created_at
+                  - updated_at
+                  - actor
+                  - bouncer
+                  - sku
+                  - previous_sku
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "422":
+          description: Invalid parameters
+        "429":
+          description: Too Many Requests. Reduce the frequency of requests and try again soon.
+        "500":
+          description: Internal Server Error
+      description: |-
+        
+        ### Authorization
+        A service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:
+
+        **Service Token Accesses**
+         `write_database`
+
+        **OAuth Scopes**
+
+         | Resource | Scopes |
+        | :------- | :---------- |
+        | Organization | `write_databases` |
+        | Database | `write_database` |
+    delete:
+      tags:
+        - Bouncer resizes
+      operationId: cancel_bouncer_resize_request
+      summary: Cancel a resize request
+      parameters:
+        - name: organization
+          in: path
+          required: true
+          description: "Organization name slug from `list_organizations`. Example: `acme`."
+          schema:
+            type: string
+        - name: database
+          in: path
+          required: true
+          description: "Database name slug from `list_databases`. Example: `app-db`."
+          schema:
+            type: string
+        - name: branch
+          in: path
+          required: true
+          description: "Branch name from `list_branches`. Example: `main`."
+          schema:
+            type: string
+        - name: bouncer
+          in: path
+          required: true
+          description: The name of the bouncer
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Cancels a resize request
+          headers: {}
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+        "429":
+          description: Too Many Requests. Reduce the frequency of requests and try again soon.
+        "500":
+          description: Internal Server Error
+      description: |-
+        
+        ### Authorization
+        A service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:
+
+        **Service Token Accesses**
+         `write_database`
+
+        **OAuth Scopes**
+
+         | Resource | Scopes |
+        | :------- | :---------- |
+        | Organization | `write_databases` |
+        | Database | `write_database` |
+  /organizations/{organization}/databases/{database}/branches/{branch}/neki-changes:
+    get:
+      tags:
+        - api-neki_changes
+      operationId: list_neki_change_requests
+      summary: List change requests for a Neki branch
+      parameters:
+        - name: organization
+          in: path
+          required: true
+          description: "Organization name slug from `list_organizations`. Example: `acme`."
+          schema:
+            type: string
+        - name: database
+          in: path
+          required: true
+          description: "Database name slug from `list_databases`. Example: `app-db`."
+          schema:
+            type: string
+        - name: branch
+          in: path
+          required: true
+          description: "Branch name from `list_branches`. Example: `main`."
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: If provided, specifies the page offset of returned results
+          schema:
+            type: integer
+            default: 1
+        - name: per_page
+          in: query
+          description: If provided, specifies the number of returned results
+          schema:
+            type: integer
+            default: 25
+        - name: state
+          in: query
+          description: Filter change requests by state
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: target_types
+          in: query
+          description: "Filter change requests by target type. Must contain one or more of: NekiAdmin, NekiCluster, NekiConfigurationProfile, NekiExternalShard, or NekiRouter"
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: target_id
+          in: query
+          description: Filter change requests for one target. Requires exactly one target type
+          schema:
+            type: string
+        - name: period
+          in: query
+          description: Filter change requests by named period
+          schema:
+            type: string
+            enum:
+              - 15m
+              - 1h
+              - 3h
+              - 6h
+              - 12h
+              - 1d
+              - 2d
+              - 7d
+              - 8d
+        - name: completed_at
+          in: query
+          description: Filter change requests completed between two ISO 8601 timestamps
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Returns Neki change requests
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: The response type. Always "list" for paginated responses.
+                  current_page:
+                    type: integer
+                    description: The current page number
+                  per_page:
+                    type: integer
+                    description: The maximum number of results per page
+                  next_page:
+                    type: integer
+                    description: The next page number, or null when this is the last page
+                    nullable: true
+                  next_page_url:
+                    type: string
+                    description: The next page of results, or null when this is the last page
+                    nullable: true
+                  prev_page:
+                    type: integer
+                    description: The previous page number, or null when this is the first page
+                    nullable: true
+                  prev_page_url:
+                    type: string
+                    description: The previous page of results, or null when this is the first page
+                    nullable: true
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          enum:
+                            - NekiAdminChangeRequest
+                            - NekiClusterChangeRequest
+                            - NekiConfigurationProfileChangeRequest
+                            - NekiExternalShardChangeRequest
+                            - NekiRouterChangeRequest
+                          description: The type of change request
+                        id:
+                          type: string
+                          description: The ID of the change request
+                        state:
+                          type: string
+                          enum:
+                            - draft
+                            - pending
+                            - applying
+                            - canceled
+                            - completed
+                          description: The state of the change request
+                        can_delete:
+                          type: boolean
+                          description: Whether the change request can be deleted
+                        started_at:
+                          type: string
+                          description: The time the change request started
+                          nullable: true
+                        completed_at:
+                          type: string
+                          description: The time the change request completed
+                          nullable: true
+                        created_at:
+                          type: string
+                          description: The time the change request was created
+                        updated_at:
+                          type: string
+                          description: The time the change request was last updated
+                        actor:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              description: The ID of the actor
+                            display_name:
+                              type: string
+                              description: The name of the actor
+                            avatar_url:
+                              type: string
+                              description: The URL of the actor's avatar
+                          required:
+                            - id
+                            - display_name
+                            - avatar_url
+                        target_id:
+                          type: string
+                          description: The ID of the resource being changed
+                          nullable: true
+                        target_type:
+                          type: string
+                          enum:
+                            - NekiAdmin
+                            - NekiCluster
+                            - NekiConfigurationProfile
+                            - NekiExternalShard
+                            - NekiRouter
+                          description: The type of resource being changed
+                        target_name:
+                          type: string
+                          description: The name of the resource being changed
+                        admin_size:
+                          type: string
+                          description: The name of the admin size SKU
+                          nullable: true
+                        admin_size_display_name:
+                          type: string
+                          description: The display name of the admin size SKU
+                          nullable: true
+                        parameters:
+                          type: object
+                          additionalProperties: true
+                          description: The parameters requested for the target resource
+                          nullable: true
+                        previous_admin_size:
+                          type: string
+                          description: The previous name of the admin size SKU
+                          nullable: true
+                        previous_admin_size_display_name:
+                          type: string
+                          description: The previous display name of the admin size SKU
+                          nullable: true
+                        previous_parameters:
+                          type: object
+                          additionalProperties: true
+                          description: The target resource parameters before the change
+                          nullable: true
+                        replicas:
+                          type: integer
+                          description: The number of replicas
+                          nullable: true
+                        previous_replicas:
+                          type: integer
+                          description: The previous number of replicas
+                          nullable: true
+                        cluster_name:
+                          type: string
+                          description: The SKU representing the external sidecar size
+                          nullable: true
+                        cluster_display_name:
+                          type: string
+                          description: The display name of the cluster size SKU
+                          nullable: true
+                        previous_cluster_name:
+                          type: string
+                          description: The SKU representing the previous external sidecar size
+                          nullable: true
+                        previous_cluster_display_name:
+                          type: string
+                          description: The previous display name of the cluster size SKU
+                          nullable: true
+                        router_size:
+                          type: string
+                          description: The name of the router size SKU
+                          nullable: true
+                        router_size_display_name:
+                          type: string
+                          description: The display name of the router size SKU
+                          nullable: true
+                        replicas_per_cell:
+                          type: integer
+                          description: The number of replicas in each cell
+                          nullable: true
+                        autoscaling:
+                          type: boolean
+                          description: Whether the router scales horizontally within each cell
+                          nullable: true
+                        max_replicas_per_cell:
+                          type: integer
+                          description: The maximum number of replicas in each cell when autoscaling
+                          nullable: true
+                        target_cpu_utilization:
+                          type: integer
+                          description: The target average CPU utilization percentage when autoscaling, one of 40, 50, 60 or 70
+                          nullable: true
+                        previous_router_size:
+                          type: string
+                          description: The previous name of the router size SKU
+                          nullable: true
+                        previous_router_size_display_name:
+                          type: string
+                          description: The previous display name of the router size SKU
+                          nullable: true
+                        previous_replicas_per_cell:
+                          type: integer
+                          description: The previous number of replicas in each cell
+                          nullable: true
+                        previous_autoscaling:
+                          type: boolean
+                          description: The previous autoscaling state of the router
+                          nullable: true
+                        previous_max_replicas_per_cell:
+                          type: integer
+                          description: The previous maximum number of replicas in each cell
+                          nullable: true
+                        previous_target_cpu_utilization:
+                          type: integer
+                          description: The previous target average CPU utilization percentage
+                          nullable: true
+                        name:
+                          type: string
+                          description: The name of the configuration profile
+                          nullable: true
+                        previous_name:
+                          type: string
+                          description: The previous name of the configuration profile
+                          nullable: true
+                        cluster_size:
+                          type: string
+                          description: The name of the cluster size SKU
+                          nullable: true
+                        metal:
+                          type: boolean
+                          description: Whether the cluster size SKU uses metal instances
+                          nullable: true
+                        cluster_rank:
+                          type: integer
+                          description: The display order of the cluster size SKU
+                          nullable: true
+                        shards:
+                          type: integer
+                          description: The number of shards
+                          nullable: true
+                        postgres_image_version:
+                          type: string
+                          description: The PostgreSQL image
+                          nullable: true
+                        storage:
+                          type: object
+                          properties:
+                            minimum_storage_bytes:
+                              type: integer
+                              description: The minimum storage size in bytes
+                              nullable: true
+                            maximum_storage_bytes:
+                              type: integer
+                              description: The maximum storage size in bytes for autoscaling
+                              nullable: true
+                            storage_autoscaling:
+                              type: boolean
+                              description: Whether storage autoscaling is enabled
+                              nullable: true
+                            storage_iops:
+                              type: integer
+                              description: The storage IOPS
+                              nullable: true
+                            storage_throughput_mibs:
+                              type: integer
+                              description: The storage throughput in MiB/s
+                              nullable: true
+                          required:
+                            - minimum_storage_bytes
+                            - maximum_storage_bytes
+                            - storage_autoscaling
+                            - storage_iops
+                            - storage_throughput_mibs
+                          nullable: true
+                        previous_cluster_size:
+                          type: string
+                          description: The previous name of the cluster size SKU
+                          nullable: true
+                        previous_metal:
+                          type: boolean
+                          description: Whether the previous cluster size SKU used metal instances
+                          nullable: true
+                        previous_cluster_rank:
+                          type: integer
+                          description: The previous display order of the cluster size SKU
+                          nullable: true
+                        previous_shards:
+                          type: integer
+                          description: The previous number of shards
+                          nullable: true
+                        previous_postgres_image_version:
+                          type: string
+                          description: The previous PostgreSQL image
+                          nullable: true
+                        previous_storage:
+                          type: object
+                          properties:
+                            minimum_storage_bytes:
+                              type: integer
+                              description: The minimum storage size in bytes
+                              nullable: true
+                            maximum_storage_bytes:
+                              type: integer
+                              description: The maximum storage size in bytes for autoscaling
+                              nullable: true
+                            storage_autoscaling:
+                              type: boolean
+                              description: Whether storage autoscaling is enabled
+                              nullable: true
+                            storage_iops:
+                              type: integer
+                              description: The storage IOPS
+                              nullable: true
+                            storage_throughput_mibs:
+                              type: integer
+                              description: The storage throughput in MiB/s
+                              nullable: true
+                          required:
+                            - minimum_storage_bytes
+                            - maximum_storage_bytes
+                            - storage_autoscaling
+                            - storage_iops
+                            - storage_throughput_mibs
+                          nullable: true
+                      required:
+                        - type
+                        - id
+                        - state
+                        - can_delete
+                        - started_at
+                        - completed_at
+                        - created_at
+                        - updated_at
+                        - actor
+                        - target_id
+                        - target_type
+                        - target_name
+                required:
+                  - type
+                  - current_page
+                  - per_page
+                  - next_page
+                  - next_page_url
+                  - prev_page
+                  - prev_page_url
+                  - data
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+        "429":
+          description: Too Many Requests. Reduce the frequency of requests and try again soon.
+        "500":
+          description: Internal Server Error
+      description: |-
+        
+        ### Authorization
+        A service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:
+
+        **Service Token Accesses**
+         `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`
+
+        **OAuth Scopes**
+
+         | Resource | Scopes |
+        | :------- | :---------- |
+        | Organization | `read_branches` |
+        | Database | `read_branches` |
+        | Branch | `read_branch` |
+  /organizations/{organization}/databases/{database}/branches/{branch}/neki-changes/{id}:
+    get:
+      tags:
+        - api-neki_changes
+      operationId: get_neki_change_request
+      summary: Get a change request for a Neki branch
+      parameters:
+        - name: organization
+          in: path
+          required: true
+          description: "Organization name slug from `list_organizations`. Example: `acme`."
+          schema:
+            type: string
+        - name: database
+          in: path
+          required: true
+          description: "Database name slug from `list_databases`. Example: `app-db`."
+          schema:
+            type: string
+        - name: branch
+          in: path
+          required: true
+          description: "Branch name from `list_branches`. Example: `main`."
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          description: The ID of the change request
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Returns a Neki change request
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    enum:
+                      - NekiAdminChangeRequest
+                      - NekiClusterChangeRequest
+                      - NekiConfigurationProfileChangeRequest
+                      - NekiExternalShardChangeRequest
+                      - NekiRouterChangeRequest
+                    description: The type of change request
+                  id:
+                    type: string
+                    description: The ID of the change request
+                  state:
+                    type: string
+                    enum:
+                      - draft
+                      - pending
+                      - applying
+                      - canceled
+                      - completed
+                    description: The state of the change request
+                  can_delete:
+                    type: boolean
+                    description: Whether the change request can be deleted
+                  started_at:
+                    type: string
+                    description: The time the change request started
+                    nullable: true
+                  completed_at:
+                    type: string
+                    description: The time the change request completed
+                    nullable: true
+                  created_at:
+                    type: string
+                    description: The time the change request was created
+                  updated_at:
+                    type: string
+                    description: The time the change request was last updated
+                  actor:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        description: The ID of the actor
+                      display_name:
+                        type: string
+                        description: The name of the actor
+                      avatar_url:
+                        type: string
+                        description: The URL of the actor's avatar
+                    required:
+                      - id
+                      - display_name
+                      - avatar_url
+                  target_id:
+                    type: string
+                    description: The ID of the resource being changed
+                    nullable: true
+                  target_type:
+                    type: string
+                    enum:
+                      - NekiAdmin
+                      - NekiCluster
+                      - NekiConfigurationProfile
+                      - NekiExternalShard
+                      - NekiRouter
+                    description: The type of resource being changed
+                  target_name:
+                    type: string
+                    description: The name of the resource being changed
+                  admin_size:
+                    type: string
+                    description: The name of the admin size SKU
+                    nullable: true
+                  admin_size_display_name:
+                    type: string
+                    description: The display name of the admin size SKU
+                    nullable: true
+                  parameters:
+                    type: object
+                    additionalProperties: true
+                    description: The parameters requested for the target resource
+                    nullable: true
+                  previous_admin_size:
+                    type: string
+                    description: The previous name of the admin size SKU
+                    nullable: true
+                  previous_admin_size_display_name:
+                    type: string
+                    description: The previous display name of the admin size SKU
+                    nullable: true
+                  previous_parameters:
+                    type: object
+                    additionalProperties: true
+                    description: The target resource parameters before the change
+                    nullable: true
+                  replicas:
+                    type: integer
+                    description: The number of replicas
+                    nullable: true
+                  previous_replicas:
+                    type: integer
+                    description: The previous number of replicas
+                    nullable: true
+                  cluster_name:
+                    type: string
+                    description: The SKU representing the external sidecar size
+                    nullable: true
+                  cluster_display_name:
+                    type: string
+                    description: The display name of the cluster size SKU
+                    nullable: true
+                  previous_cluster_name:
+                    type: string
+                    description: The SKU representing the previous external sidecar size
+                    nullable: true
+                  previous_cluster_display_name:
+                    type: string
+                    description: The previous display name of the cluster size SKU
+                    nullable: true
+                  router_size:
+                    type: string
+                    description: The name of the router size SKU
+                    nullable: true
+                  router_size_display_name:
+                    type: string
+                    description: The display name of the router size SKU
+                    nullable: true
+                  replicas_per_cell:
+                    type: integer
+                    description: The number of replicas in each cell
+                    nullable: true
+                  autoscaling:
+                    type: boolean
+                    description: Whether the router scales horizontally within each cell
+                    nullable: true
+                  max_replicas_per_cell:
+                    type: integer
+                    description: The maximum number of replicas in each cell when autoscaling
+                    nullable: true
+                  target_cpu_utilization:
+                    type: integer
+                    description: The target average CPU utilization percentage when autoscaling, one of 40, 50, 60 or 70
+                    nullable: true
+                  previous_router_size:
+                    type: string
+                    description: The previous name of the router size SKU
+                    nullable: true
+                  previous_router_size_display_name:
+                    type: string
+                    description: The previous display name of the router size SKU
+                    nullable: true
+                  previous_replicas_per_cell:
+                    type: integer
+                    description: The previous number of replicas in each cell
+                    nullable: true
+                  previous_autoscaling:
+                    type: boolean
+                    description: The previous autoscaling state of the router
+                    nullable: true
+                  previous_max_replicas_per_cell:
+                    type: integer
+                    description: The previous maximum number of replicas in each cell
+                    nullable: true
+                  previous_target_cpu_utilization:
+                    type: integer
+                    description: The previous target average CPU utilization percentage
+                    nullable: true
+                  name:
+                    type: string
+                    description: The name of the configuration profile
+                    nullable: true
+                  previous_name:
+                    type: string
+                    description: The previous name of the configuration profile
+                    nullable: true
+                  cluster_size:
+                    type: string
+                    description: The name of the cluster size SKU
+                    nullable: true
+                  metal:
+                    type: boolean
+                    description: Whether the cluster size SKU uses metal instances
+                    nullable: true
+                  cluster_rank:
+                    type: integer
+                    description: The display order of the cluster size SKU
+                    nullable: true
+                  shards:
+                    type: integer
+                    description: The number of shards
+                    nullable: true
+                  postgres_image_version:
+                    type: string
+                    description: The PostgreSQL image
+                    nullable: true
+                  storage:
+                    type: object
+                    properties:
+                      minimum_storage_bytes:
+                        type: integer
+                        description: The minimum storage size in bytes
+                        nullable: true
+                      maximum_storage_bytes:
+                        type: integer
+                        description: The maximum storage size in bytes for autoscaling
+                        nullable: true
+                      storage_autoscaling:
+                        type: boolean
+                        description: Whether storage autoscaling is enabled
+                        nullable: true
+                      storage_iops:
+                        type: integer
+                        description: The storage IOPS
+                        nullable: true
+                      storage_throughput_mibs:
+                        type: integer
+                        description: The storage throughput in MiB/s
+                        nullable: true
+                    required:
+                      - minimum_storage_bytes
+                      - maximum_storage_bytes
+                      - storage_autoscaling
+                      - storage_iops
+                      - storage_throughput_mibs
+                    nullable: true
+                  previous_cluster_size:
+                    type: string
+                    description: The previous name of the cluster size SKU
+                    nullable: true
+                  previous_metal:
+                    type: boolean
+                    description: Whether the previous cluster size SKU used metal instances
+                    nullable: true
+                  previous_cluster_rank:
+                    type: integer
+                    description: The previous display order of the cluster size SKU
+                    nullable: true
+                  previous_shards:
+                    type: integer
+                    description: The previous number of shards
+                    nullable: true
+                  previous_postgres_image_version:
+                    type: string
+                    description: The previous PostgreSQL image
+                    nullable: true
+                  previous_storage:
+                    type: object
+                    properties:
+                      minimum_storage_bytes:
+                        type: integer
+                        description: The minimum storage size in bytes
+                        nullable: true
+                      maximum_storage_bytes:
+                        type: integer
+                        description: The maximum storage size in bytes for autoscaling
+                        nullable: true
+                      storage_autoscaling:
+                        type: boolean
+                        description: Whether storage autoscaling is enabled
+                        nullable: true
+                      storage_iops:
+                        type: integer
+                        description: The storage IOPS
+                        nullable: true
+                      storage_throughput_mibs:
+                        type: integer
+                        description: The storage throughput in MiB/s
+                        nullable: true
+                    required:
+                      - minimum_storage_bytes
+                      - maximum_storage_bytes
+                      - storage_autoscaling
+                      - storage_iops
+                      - storage_throughput_mibs
+                    nullable: true
+                required:
+                  - type
+                  - id
+                  - state
+                  - can_delete
+                  - started_at
+                  - completed_at
+                  - created_at
+                  - updated_at
+                  - actor
+                  - target_id
+                  - target_type
+                  - target_name
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Change request not found
+          headers: {}
+        "422":
+          description: Unprocessable Entity
+        "429":
+          description: Too Many Requests. Reduce the frequency of requests and try again soon.
+        "500":
+          description: Internal Server Error
+      description: |-
+        
+        ### Authorization
+        A service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:
+
+        **Service Token Accesses**
+         `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`
+
+        **OAuth Scopes**
+
+         | Resource | Scopes |
+        | :------- | :---------- |
+        | Organization | `read_branches` |
+        | Database | `read_branches` |
+        | Branch | `read_branch` |
+    delete:
+      tags:
+        - api-neki_changes
+      operationId: cancel_neki_change_request
+      summary: Cancel a change request for a Neki branch
+      parameters:
+        - name: organization
+          in: path
+          required: true
+          description: "Organization name slug from `list_organizations`. Example: `acme`."
+          schema:
+            type: string
+        - name: database
+          in: path
+          required: true
+          description: "Database name slug from `list_databases`. Example: `app-db`."
+          schema:
+            type: string
+        - name: branch
+          in: path
+          required: true
+          description: "Branch name from `list_branches`. Example: `main`."
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          description: The ID of the change request
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Change request canceled
+          headers: {}
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Change request not found
+          headers: {}
+        "422":
+          description: Change request cannot be canceled
+        "429":
+          description: Too Many Requests. Reduce the frequency of requests and try again soon.
+        "500":
+          description: Internal Server Error
+      description: |-
+        
+        ### Authorization
+        A service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:
+
+        **Service Token Accesses**
+         `write_database`
+
+        **OAuth Scopes**
+
+         | Resource | Scopes |
+        | :------- | :---------- |
+        | Organization | `write_databases` |
+        | Database | `write_database` |

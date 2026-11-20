@@ -1,0 +1,1828 @@
+openapi: 3.0.1
+info:
+  title: PlanetScale API
+  description: |-
+    
+    <p>PlanetScale API</p>
+    &copy; 2026 PlanetScale, Inc.
+  version: v1
+  x-copyright: "&copy; 2026 PlanetScale, Inc."
+paths:
+  /organizations/{organization}/databases/{database}/branches/{branch}/dedicated-read-replica-changes:
+    get:
+      tags:
+        - api-read_only_replica_changes
+      operationId: list_dedicated_read_replica_change_requests
+      summary: Get dedicated read replica change requests
+      parameters:
+        - name: organization
+          in: path
+          required: true
+          description: "Organization name slug from `list_organizations`. Example: `acme`."
+          schema:
+            type: string
+        - name: database
+          in: path
+          required: true
+          description: "Database name slug from `list_databases`. Example: `app-db`."
+          schema:
+            type: string
+        - name: branch
+          in: path
+          required: true
+          description: "Branch name from `list_branches`. Example: `main`."
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: If provided, specifies the page offset of returned results
+          schema:
+            type: integer
+            default: 1
+        - name: per_page
+          in: query
+          description: If provided, specifies the number of returned results
+          schema:
+            type: integer
+            default: 25
+        - name: period
+          in: query
+          description: Filter change requests by named period
+          schema:
+            type: string
+            enum:
+              - 15m
+              - 1h
+              - 3h
+              - 6h
+              - 12h
+              - 1d
+              - 2d
+              - 7d
+              - 8d
+        - name: completed_at
+          in: query
+          description: Filter change requests completed between two ISO 8601 timestamps
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Returns dedicated read replica change requests
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: The response type. Always "list" for paginated responses.
+                  current_page:
+                    type: integer
+                    description: The current page number
+                  per_page:
+                    type: integer
+                    description: The maximum number of results per page
+                  next_page:
+                    type: integer
+                    description: The next page number, or null when this is the last page
+                    nullable: true
+                  next_page_url:
+                    type: string
+                    description: The next page of results, or null when this is the last page
+                    nullable: true
+                  prev_page:
+                    type: integer
+                    description: The previous page number, or null when this is the first page
+                    nullable: true
+                  prev_page_url:
+                    type: string
+                    description: The previous page of results, or null when this is the first page
+                    nullable: true
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: The ID of the dedicated read replica change request
+                        state:
+                          type: string
+                          enum:
+                            - pending
+                            - resizing
+                            - canceled
+                            - completed
+                          description: The state of the change request
+                        cluster_name:
+                          type: string
+                          description: The new cluster size SKU
+                        cluster_display_name:
+                          type: string
+                          description: The new cluster size for display
+                        cluster_rank:
+                          type: integer
+                          description: The new cluster size sort order
+                        replicas:
+                          type: integer
+                          description: The new instance count
+                        parameters:
+                          type: object
+                          additionalProperties: true
+                          description: The new parameters
+                        minimum_storage_bytes:
+                          type: integer
+                          description: The new minimum storage size in bytes
+                          nullable: true
+                        maximum_storage_bytes:
+                          type: integer
+                          description: The new maximum storage size in bytes
+                          nullable: true
+                        storage_autoscaling:
+                          type: boolean
+                          description: Whether storage autoscaling is enabled
+                          nullable: true
+                        storage_type:
+                          type: string
+                          enum:
+                            - gp3
+                            - io2
+                            - pd_ssd
+                            - hyperdisk_balanced
+                            - premium_v2_lrs
+                          description: The new storage type
+                          nullable: true
+                        storage_iops:
+                          type: integer
+                          description: The new storage IOPS
+                          nullable: true
+                        storage_throughput_mibs:
+                          type: integer
+                          description: The new storage throughput in MiB/s
+                          nullable: true
+                        previous_cluster_name:
+                          type: string
+                          description: The previous cluster size SKU
+                        previous_cluster_display_name:
+                          type: string
+                          description: The previous cluster size for display
+                        previous_cluster_rank:
+                          type: integer
+                          description: The previous cluster size sort order
+                        previous_replicas:
+                          type: integer
+                          description: The previous instance count
+                        previous_parameters:
+                          type: object
+                          additionalProperties: true
+                          description: The previous parameters
+                        previous_minimum_storage_bytes:
+                          type: integer
+                          description: The previous minimum storage size in bytes
+                          nullable: true
+                        previous_maximum_storage_bytes:
+                          type: integer
+                          description: The previous maximum storage size in bytes
+                          nullable: true
+                        previous_storage_autoscaling:
+                          type: boolean
+                          description: Whether storage autoscaling was previously enabled
+                          nullable: true
+                        previous_storage_type:
+                          type: string
+                          description: The previous storage type
+                          nullable: true
+                        previous_storage_iops:
+                          type: integer
+                          description: The previous storage IOPS
+                          nullable: true
+                        previous_storage_throughput_mibs:
+                          type: integer
+                          description: The previous storage throughput in MiB/s
+                          nullable: true
+                        started_at:
+                          type: string
+                          description: When the change started
+                          nullable: true
+                        completed_at:
+                          type: string
+                          description: When the change completed
+                          nullable: true
+                        created_at:
+                          type: string
+                          description: When the change request was created
+                        updated_at:
+                          type: string
+                          description: When the change request was last updated
+                        actor:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              description: The ID of the actor
+                            display_name:
+                              type: string
+                              description: The name of the actor
+                            avatar_url:
+                              type: string
+                              description: The URL of the actor's avatar
+                          required:
+                            - id
+                            - display_name
+                            - avatar_url
+                        replica:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              description: The ID for the resource
+                            name:
+                              type: string
+                              description: The name for the resource
+                            created_at:
+                              type: string
+                              description: When the resource was created
+                            updated_at:
+                              type: string
+                              description: When the resource was last updated
+                            deleted_at:
+                              type: string
+                              description: When the resource was deleted, if deleted
+                              nullable: true
+                          required:
+                            - id
+                            - name
+                            - created_at
+                            - updated_at
+                            - deleted_at
+                      required:
+                        - id
+                        - state
+                        - cluster_name
+                        - cluster_display_name
+                        - cluster_rank
+                        - replicas
+                        - parameters
+                        - minimum_storage_bytes
+                        - maximum_storage_bytes
+                        - storage_autoscaling
+                        - storage_type
+                        - storage_iops
+                        - storage_throughput_mibs
+                        - previous_cluster_name
+                        - previous_cluster_display_name
+                        - previous_cluster_rank
+                        - previous_replicas
+                        - previous_parameters
+                        - previous_minimum_storage_bytes
+                        - previous_maximum_storage_bytes
+                        - previous_storage_autoscaling
+                        - previous_storage_type
+                        - previous_storage_iops
+                        - previous_storage_throughput_mibs
+                        - started_at
+                        - completed_at
+                        - created_at
+                        - updated_at
+                        - actor
+                        - replica
+                required:
+                  - type
+                  - current_page
+                  - per_page
+                  - next_page
+                  - next_page_url
+                  - prev_page
+                  - prev_page_url
+                  - data
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+        "429":
+          description: Too Many Requests. Reduce the frequency of requests and try again soon.
+        "500":
+          description: Internal Server Error
+      description: |-
+        
+        ### Authorization
+        A service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:
+
+        **Service Token Accesses**
+         `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`
+
+        **OAuth Scopes**
+
+         | Resource | Scopes |
+        | :------- | :---------- |
+        | Organization | `read_branches` |
+        | Database | `read_branches` |
+        | Branch | `read_branch` |
+  /organizations/{organization}/databases/{database}/branches/{branch}/dedicated-read-replicas:
+    get:
+      tags:
+        - Dedicated read replicas
+      operationId: list_dedicated_read_replicas
+      summary: List dedicated read replicas
+      parameters:
+        - name: organization
+          in: path
+          required: true
+          description: "Organization name slug from `list_organizations`. Example: `acme`."
+          schema:
+            type: string
+        - name: database
+          in: path
+          required: true
+          description: "Database name slug from `list_databases`. Example: `app-db`."
+          schema:
+            type: string
+        - name: branch
+          in: path
+          required: true
+          description: "Branch name from `list_branches`. Example: `main`."
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Returns dedicated read replicas
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: The ID of the dedicated read replica
+                    name:
+                      type: string
+                      description: The name of the dedicated read replica
+                    state:
+                      type: string
+                      description: "The state of the dedicated read replica: pending, ready, or deleting"
+                    replicas:
+                      type: integer
+                      description: The number of instances serving reads in this dedicated read replica
+                    cluster_name:
+                      type: string
+                      description: The SKU representing the cluster size of the dedicated read replica
+                    cluster_display_name:
+                      type: string
+                      description: The SKU representing the cluster size of the dedicated read replica, for display
+                    access_host_url:
+                      type: string
+                      description: The database connection host for the dedicated read replica
+                    private_access_host_url:
+                      type: string
+                      description: The private database connection host for the dedicated read replica
+                    private_connection_service_name:
+                      type: string
+                      description: The service name to set up private connectivity for the dedicated read replica
+                      nullable: true
+                    minimum_storage_bytes:
+                      type: integer
+                      description: The minimum storage size in bytes
+                      nullable: true
+                    maximum_storage_bytes:
+                      type: integer
+                      description: The maximum storage size in bytes
+                      nullable: true
+                    storage_autoscaling:
+                      type: boolean
+                      description: Whether storage autoscaling is enabled
+                      nullable: true
+                    storage_type:
+                      type: string
+                      enum:
+                        - gp3
+                        - io2
+                        - pd_ssd
+                        - hyperdisk_balanced
+                        - premium_v2_lrs
+                      description: The storage type
+                      nullable: true
+                    storage_iops:
+                      type: integer
+                      description: The storage IOPS
+                      nullable: true
+                    storage_throughput_mibs:
+                      type: integer
+                      description: The storage throughput in MiB/s
+                      nullable: true
+                    volume_modifications_blocked_until:
+                      type: string
+                      description: When volume modifications will be allowed again
+                      nullable: true
+                    created_at:
+                      type: string
+                      description: When the dedicated read replica was created
+                    updated_at:
+                      type: string
+                      description: When the dedicated read replica was last updated
+                    ready_at:
+                      type: string
+                      description: When the dedicated read replica was ready to serve queries
+                      nullable: true
+                    ready:
+                      type: boolean
+                      description: Whether or not the dedicated read replica is ready to serve queries
+                    actor:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: The ID of the actor
+                        display_name:
+                          type: string
+                          description: The name of the actor
+                        avatar_url:
+                          type: string
+                          description: The URL of the actor's avatar
+                      required:
+                        - id
+                        - display_name
+                        - avatar_url
+                    region:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: The ID of the region
+                        provider:
+                          type: string
+                          description: Provider for the region (ex. AWS)
+                        enabled:
+                          type: boolean
+                          description: Whether or not the region is currently active
+                        public_ip_addresses:
+                          items:
+                            type: string
+                          type: array
+                          description: Public IP addresses for the region
+                        display_name:
+                          type: string
+                          description: Name of the region
+                        location:
+                          type: string
+                          description: Location of the region
+                        slug:
+                          type: string
+                          description: The slug of the region
+                        current_default:
+                          type: boolean
+                          description: True if the region is the default for new branch creation
+                        mysql_supported:
+                          type: boolean
+                          description: Whether the region supports MySQL/Vitess databases
+                        postgresql_supported:
+                          type: boolean
+                          description: Whether the region supports PostgreSQL databases
+                        neki_supported:
+                          type: boolean
+                          description: Whether the region supports Neki databases
+                      required:
+                        - id
+                        - provider
+                        - enabled
+                        - public_ip_addresses
+                        - display_name
+                        - location
+                        - slug
+                        - current_default
+                        - mysql_supported
+                        - postgresql_supported
+                        - neki_supported
+                    parameters:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            description: The ID of the parameter
+                          namespace:
+                            type: string
+                            enum:
+                              - pgconf
+                            description: The namespace of the parameter
+                          name:
+                            type: string
+                            description: The name of the parameter
+                          display_name:
+                            type: string
+                            description: The display name of the parameter
+                          category:
+                            type: string
+                            description: The category of the parameter
+                          description:
+                            type: string
+                            description: The description of the parameter
+                          immutable:
+                            type: boolean
+                            description: Whether the parameter can be changed
+                          parameter_type:
+                            type: string
+                            enum:
+                              - integer
+                              - time
+                            description: The type of the parameter
+                          default_value:
+                            type: string
+                            description: The default value of the parameter, which is the primary's current value
+                          disabled_reason:
+                            type: string
+                            description: Why the parameter cannot be changed
+                            nullable: true
+                          value:
+                            type: string
+                            description: The configured value of the parameter
+                          required:
+                            type: boolean
+                            description: Whether the parameter is required
+                          created_at:
+                            type: string
+                            description: When the parameter was created
+                            nullable: true
+                          updated_at:
+                            type: string
+                            description: When the parameter was last updated
+                            nullable: true
+                          restart:
+                            type: boolean
+                            description: True if processes require a server restart on change
+                          max:
+                            type: number
+                            description: The maximum value of the parameter
+                          min:
+                            type: number
+                            description: The minimum value of the parameter, floored at the primary's current value
+                          url:
+                            type: string
+                            description: The URL of the parameter
+                          options:
+                            items:
+                              type: string
+                            type: array
+                            description: Valid options for the parameter value
+                          units:
+                            items:
+                              type: string
+                            type: array
+                            description: Display units for the parameter value
+                          actor:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                                description: The ID of the actor
+                              display_name:
+                                type: string
+                                description: The name of the actor
+                              avatar_url:
+                                type: string
+                                description: The URL of the actor's avatar
+                            required:
+                              - id
+                              - display_name
+                              - avatar_url
+                        required:
+                          - id
+                          - namespace
+                          - name
+                          - display_name
+                          - category
+                          - description
+                          - immutable
+                          - parameter_type
+                          - default_value
+                          - value
+                          - required
+                          - created_at
+                          - updated_at
+                          - restart
+                          - max
+                          - min
+                          - url
+                          - options
+                          - units
+                          - actor
+                  required:
+                    - id
+                    - name
+                    - state
+                    - replicas
+                    - cluster_name
+                    - cluster_display_name
+                    - access_host_url
+                    - private_access_host_url
+                    - private_connection_service_name
+                    - minimum_storage_bytes
+                    - maximum_storage_bytes
+                    - storage_autoscaling
+                    - storage_type
+                    - storage_iops
+                    - storage_throughput_mibs
+                    - volume_modifications_blocked_until
+                    - created_at
+                    - updated_at
+                    - ready_at
+                    - ready
+                    - actor
+                    - region
+                    - parameters
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+        "429":
+          description: Too Many Requests. Reduce the frequency of requests and try again soon.
+        "500":
+          description: Internal Server Error
+      description: |-
+        
+        ### Authorization
+        A service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:
+
+        **Service Token Accesses**
+         `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`
+
+        **OAuth Scopes**
+
+         | Resource | Scopes |
+        | :------- | :---------- |
+        | Organization | `read_branches` |
+        | Database | `read_branches` |
+        | Branch | `read_branch` |
+    post:
+      tags:
+        - Dedicated read replicas
+      operationId: create_dedicated_read_replica
+      summary: Create a dedicated read replica
+      parameters:
+        - name: organization
+          in: path
+          required: true
+          description: "Organization name slug from `list_organizations`. Example: `acme`."
+          schema:
+            type: string
+        - name: database
+          in: path
+          required: true
+          description: "Database name slug from `list_databases`. Example: `app-db`."
+          schema:
+            type: string
+        - name: branch
+          in: path
+          required: true
+          description: "Branch name from `list_branches`. Example: `main`."
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The dedicated read replica name
+                region:
+                  type: string
+                  description: The region slug for the dedicated read replica
+                replicas:
+                  type: integer
+                  description: The number of instances serving reads. Defaults to 1.
+                cluster_size:
+                  type: string
+                  description: The cluster size SKU name. Defaults to the primary cluster size.
+                storage:
+                  type: object
+                  properties:
+                    minimum_storage_bytes:
+                      type: integer
+                      description: The minimum storage size in bytes.
+                    maximum_storage_bytes:
+                      type: integer
+                      description: The maximum storage size in bytes for autoscaling.
+                    storage_autoscaling:
+                      type: boolean
+                      description: Whether storage autoscaling is enabled.
+                    storage_iops:
+                      type: integer
+                      description: The storage IOPS.
+                    storage_throughput_mibs:
+                      type: integer
+                      description: The storage throughput in MiB/s.
+              required:
+                - name
+                - region
+      responses:
+        "200":
+          description: Returns the new dedicated read replica
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The ID of the dedicated read replica
+                  name:
+                    type: string
+                    description: The name of the dedicated read replica
+                  state:
+                    type: string
+                    description: "The state of the dedicated read replica: pending, ready, or deleting"
+                  replicas:
+                    type: integer
+                    description: The number of instances serving reads in this dedicated read replica
+                  cluster_name:
+                    type: string
+                    description: The SKU representing the cluster size of the dedicated read replica
+                  cluster_display_name:
+                    type: string
+                    description: The SKU representing the cluster size of the dedicated read replica, for display
+                  access_host_url:
+                    type: string
+                    description: The database connection host for the dedicated read replica
+                  private_access_host_url:
+                    type: string
+                    description: The private database connection host for the dedicated read replica
+                  private_connection_service_name:
+                    type: string
+                    description: The service name to set up private connectivity for the dedicated read replica
+                    nullable: true
+                  minimum_storage_bytes:
+                    type: integer
+                    description: The minimum storage size in bytes
+                    nullable: true
+                  maximum_storage_bytes:
+                    type: integer
+                    description: The maximum storage size in bytes
+                    nullable: true
+                  storage_autoscaling:
+                    type: boolean
+                    description: Whether storage autoscaling is enabled
+                    nullable: true
+                  storage_type:
+                    type: string
+                    enum:
+                      - gp3
+                      - io2
+                      - pd_ssd
+                      - hyperdisk_balanced
+                      - premium_v2_lrs
+                    description: The storage type
+                    nullable: true
+                  storage_iops:
+                    type: integer
+                    description: The storage IOPS
+                    nullable: true
+                  storage_throughput_mibs:
+                    type: integer
+                    description: The storage throughput in MiB/s
+                    nullable: true
+                  volume_modifications_blocked_until:
+                    type: string
+                    description: When volume modifications will be allowed again
+                    nullable: true
+                  created_at:
+                    type: string
+                    description: When the dedicated read replica was created
+                  updated_at:
+                    type: string
+                    description: When the dedicated read replica was last updated
+                  ready_at:
+                    type: string
+                    description: When the dedicated read replica was ready to serve queries
+                    nullable: true
+                  ready:
+                    type: boolean
+                    description: Whether or not the dedicated read replica is ready to serve queries
+                  actor:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        description: The ID of the actor
+                      display_name:
+                        type: string
+                        description: The name of the actor
+                      avatar_url:
+                        type: string
+                        description: The URL of the actor's avatar
+                    required:
+                      - id
+                      - display_name
+                      - avatar_url
+                  region:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        description: The ID of the region
+                      provider:
+                        type: string
+                        description: Provider for the region (ex. AWS)
+                      enabled:
+                        type: boolean
+                        description: Whether or not the region is currently active
+                      public_ip_addresses:
+                        items:
+                          type: string
+                        type: array
+                        description: Public IP addresses for the region
+                      display_name:
+                        type: string
+                        description: Name of the region
+                      location:
+                        type: string
+                        description: Location of the region
+                      slug:
+                        type: string
+                        description: The slug of the region
+                      current_default:
+                        type: boolean
+                        description: True if the region is the default for new branch creation
+                      mysql_supported:
+                        type: boolean
+                        description: Whether the region supports MySQL/Vitess databases
+                      postgresql_supported:
+                        type: boolean
+                        description: Whether the region supports PostgreSQL databases
+                      neki_supported:
+                        type: boolean
+                        description: Whether the region supports Neki databases
+                    required:
+                      - id
+                      - provider
+                      - enabled
+                      - public_ip_addresses
+                      - display_name
+                      - location
+                      - slug
+                      - current_default
+                      - mysql_supported
+                      - postgresql_supported
+                      - neki_supported
+                  parameters:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: The ID of the parameter
+                        namespace:
+                          type: string
+                          enum:
+                            - pgconf
+                          description: The namespace of the parameter
+                        name:
+                          type: string
+                          description: The name of the parameter
+                        display_name:
+                          type: string
+                          description: The display name of the parameter
+                        category:
+                          type: string
+                          description: The category of the parameter
+                        description:
+                          type: string
+                          description: The description of the parameter
+                        immutable:
+                          type: boolean
+                          description: Whether the parameter can be changed
+                        parameter_type:
+                          type: string
+                          enum:
+                            - integer
+                            - time
+                          description: The type of the parameter
+                        default_value:
+                          type: string
+                          description: The default value of the parameter, which is the primary's current value
+                        disabled_reason:
+                          type: string
+                          description: Why the parameter cannot be changed
+                          nullable: true
+                        value:
+                          type: string
+                          description: The configured value of the parameter
+                        required:
+                          type: boolean
+                          description: Whether the parameter is required
+                        created_at:
+                          type: string
+                          description: When the parameter was created
+                          nullable: true
+                        updated_at:
+                          type: string
+                          description: When the parameter was last updated
+                          nullable: true
+                        restart:
+                          type: boolean
+                          description: True if processes require a server restart on change
+                        max:
+                          type: number
+                          description: The maximum value of the parameter
+                        min:
+                          type: number
+                          description: The minimum value of the parameter, floored at the primary's current value
+                        url:
+                          type: string
+                          description: The URL of the parameter
+                        options:
+                          items:
+                            type: string
+                          type: array
+                          description: Valid options for the parameter value
+                        units:
+                          items:
+                            type: string
+                          type: array
+                          description: Display units for the parameter value
+                        actor:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              description: The ID of the actor
+                            display_name:
+                              type: string
+                              description: The name of the actor
+                            avatar_url:
+                              type: string
+                              description: The URL of the actor's avatar
+                          required:
+                            - id
+                            - display_name
+                            - avatar_url
+                      required:
+                        - id
+                        - namespace
+                        - name
+                        - display_name
+                        - category
+                        - description
+                        - immutable
+                        - parameter_type
+                        - default_value
+                        - value
+                        - required
+                        - created_at
+                        - updated_at
+                        - restart
+                        - max
+                        - min
+                        - url
+                        - options
+                        - units
+                        - actor
+                required:
+                  - id
+                  - name
+                  - state
+                  - replicas
+                  - cluster_name
+                  - cluster_display_name
+                  - access_host_url
+                  - private_access_host_url
+                  - private_connection_service_name
+                  - minimum_storage_bytes
+                  - maximum_storage_bytes
+                  - storage_autoscaling
+                  - storage_type
+                  - storage_iops
+                  - storage_throughput_mibs
+                  - volume_modifications_blocked_until
+                  - created_at
+                  - updated_at
+                  - ready_at
+                  - ready
+                  - actor
+                  - region
+                  - parameters
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+        "429":
+          description: Too Many Requests. Reduce the frequency of requests and try again soon.
+        "500":
+          description: Internal Server Error
+      description: |-
+        
+        ### Authorization
+        A service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:
+
+        **Service Token Accesses**
+         `write_database`
+
+        **OAuth Scopes**
+
+         | Resource | Scopes |
+        | :------- | :---------- |
+        | Organization | `write_databases` |
+        | Database | `write_database` |
+  /organizations/{organization}/databases/{database}/branches/{branch}/dedicated-read-replicas/{dedicated_read_replica}:
+    get:
+      tags:
+        - Dedicated read replicas
+      operationId: get_dedicated_read_replica
+      summary: Get a dedicated read replica
+      parameters:
+        - name: organization
+          in: path
+          required: true
+          description: "Organization name slug from `list_organizations`. Example: `acme`."
+          schema:
+            type: string
+        - name: database
+          in: path
+          required: true
+          description: "Database name slug from `list_databases`. Example: `app-db`."
+          schema:
+            type: string
+        - name: branch
+          in: path
+          required: true
+          description: "Branch name from `list_branches`. Example: `main`."
+          schema:
+            type: string
+        - name: dedicated_read_replica
+          in: path
+          required: true
+          description: The name of the dedicated read replica
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Returns the dedicated read replica
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The ID of the dedicated read replica
+                  name:
+                    type: string
+                    description: The name of the dedicated read replica
+                  state:
+                    type: string
+                    description: "The state of the dedicated read replica: pending, ready, or deleting"
+                  replicas:
+                    type: integer
+                    description: The number of instances serving reads in this dedicated read replica
+                  cluster_name:
+                    type: string
+                    description: The SKU representing the cluster size of the dedicated read replica
+                  cluster_display_name:
+                    type: string
+                    description: The SKU representing the cluster size of the dedicated read replica, for display
+                  access_host_url:
+                    type: string
+                    description: The database connection host for the dedicated read replica
+                  private_access_host_url:
+                    type: string
+                    description: The private database connection host for the dedicated read replica
+                  private_connection_service_name:
+                    type: string
+                    description: The service name to set up private connectivity for the dedicated read replica
+                    nullable: true
+                  minimum_storage_bytes:
+                    type: integer
+                    description: The minimum storage size in bytes
+                    nullable: true
+                  maximum_storage_bytes:
+                    type: integer
+                    description: The maximum storage size in bytes
+                    nullable: true
+                  storage_autoscaling:
+                    type: boolean
+                    description: Whether storage autoscaling is enabled
+                    nullable: true
+                  storage_type:
+                    type: string
+                    enum:
+                      - gp3
+                      - io2
+                      - pd_ssd
+                      - hyperdisk_balanced
+                      - premium_v2_lrs
+                    description: The storage type
+                    nullable: true
+                  storage_iops:
+                    type: integer
+                    description: The storage IOPS
+                    nullable: true
+                  storage_throughput_mibs:
+                    type: integer
+                    description: The storage throughput in MiB/s
+                    nullable: true
+                  volume_modifications_blocked_until:
+                    type: string
+                    description: When volume modifications will be allowed again
+                    nullable: true
+                  created_at:
+                    type: string
+                    description: When the dedicated read replica was created
+                  updated_at:
+                    type: string
+                    description: When the dedicated read replica was last updated
+                  ready_at:
+                    type: string
+                    description: When the dedicated read replica was ready to serve queries
+                    nullable: true
+                  ready:
+                    type: boolean
+                    description: Whether or not the dedicated read replica is ready to serve queries
+                  actor:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        description: The ID of the actor
+                      display_name:
+                        type: string
+                        description: The name of the actor
+                      avatar_url:
+                        type: string
+                        description: The URL of the actor's avatar
+                    required:
+                      - id
+                      - display_name
+                      - avatar_url
+                  region:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        description: The ID of the region
+                      provider:
+                        type: string
+                        description: Provider for the region (ex. AWS)
+                      enabled:
+                        type: boolean
+                        description: Whether or not the region is currently active
+                      public_ip_addresses:
+                        items:
+                          type: string
+                        type: array
+                        description: Public IP addresses for the region
+                      display_name:
+                        type: string
+                        description: Name of the region
+                      location:
+                        type: string
+                        description: Location of the region
+                      slug:
+                        type: string
+                        description: The slug of the region
+                      current_default:
+                        type: boolean
+                        description: True if the region is the default for new branch creation
+                      mysql_supported:
+                        type: boolean
+                        description: Whether the region supports MySQL/Vitess databases
+                      postgresql_supported:
+                        type: boolean
+                        description: Whether the region supports PostgreSQL databases
+                      neki_supported:
+                        type: boolean
+                        description: Whether the region supports Neki databases
+                    required:
+                      - id
+                      - provider
+                      - enabled
+                      - public_ip_addresses
+                      - display_name
+                      - location
+                      - slug
+                      - current_default
+                      - mysql_supported
+                      - postgresql_supported
+                      - neki_supported
+                  parameters:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: The ID of the parameter
+                        namespace:
+                          type: string
+                          enum:
+                            - pgconf
+                          description: The namespace of the parameter
+                        name:
+                          type: string
+                          description: The name of the parameter
+                        display_name:
+                          type: string
+                          description: The display name of the parameter
+                        category:
+                          type: string
+                          description: The category of the parameter
+                        description:
+                          type: string
+                          description: The description of the parameter
+                        immutable:
+                          type: boolean
+                          description: Whether the parameter can be changed
+                        parameter_type:
+                          type: string
+                          enum:
+                            - integer
+                            - time
+                          description: The type of the parameter
+                        default_value:
+                          type: string
+                          description: The default value of the parameter, which is the primary's current value
+                        disabled_reason:
+                          type: string
+                          description: Why the parameter cannot be changed
+                          nullable: true
+                        value:
+                          type: string
+                          description: The configured value of the parameter
+                        required:
+                          type: boolean
+                          description: Whether the parameter is required
+                        created_at:
+                          type: string
+                          description: When the parameter was created
+                          nullable: true
+                        updated_at:
+                          type: string
+                          description: When the parameter was last updated
+                          nullable: true
+                        restart:
+                          type: boolean
+                          description: True if processes require a server restart on change
+                        max:
+                          type: number
+                          description: The maximum value of the parameter
+                        min:
+                          type: number
+                          description: The minimum value of the parameter, floored at the primary's current value
+                        url:
+                          type: string
+                          description: The URL of the parameter
+                        options:
+                          items:
+                            type: string
+                          type: array
+                          description: Valid options for the parameter value
+                        units:
+                          items:
+                            type: string
+                          type: array
+                          description: Display units for the parameter value
+                        actor:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              description: The ID of the actor
+                            display_name:
+                              type: string
+                              description: The name of the actor
+                            avatar_url:
+                              type: string
+                              description: The URL of the actor's avatar
+                          required:
+                            - id
+                            - display_name
+                            - avatar_url
+                      required:
+                        - id
+                        - namespace
+                        - name
+                        - display_name
+                        - category
+                        - description
+                        - immutable
+                        - parameter_type
+                        - default_value
+                        - value
+                        - required
+                        - created_at
+                        - updated_at
+                        - restart
+                        - max
+                        - min
+                        - url
+                        - options
+                        - units
+                        - actor
+                required:
+                  - id
+                  - name
+                  - state
+                  - replicas
+                  - cluster_name
+                  - cluster_display_name
+                  - access_host_url
+                  - private_access_host_url
+                  - private_connection_service_name
+                  - minimum_storage_bytes
+                  - maximum_storage_bytes
+                  - storage_autoscaling
+                  - storage_type
+                  - storage_iops
+                  - storage_throughput_mibs
+                  - volume_modifications_blocked_until
+                  - created_at
+                  - updated_at
+                  - ready_at
+                  - ready
+                  - actor
+                  - region
+                  - parameters
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+        "429":
+          description: Too Many Requests. Reduce the frequency of requests and try again soon.
+        "500":
+          description: Internal Server Error
+      description: |-
+        
+        ### Authorization
+        A service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:
+
+        **Service Token Accesses**
+         `read_branch`, `delete_branch`, `create_branch`, `connect_production_branch`, `connect_branch`
+
+        **OAuth Scopes**
+
+         | Resource | Scopes |
+        | :------- | :---------- |
+        | Organization | `read_branches` |
+        | Database | `read_branches` |
+        | Branch | `read_branch` |
+    patch:
+      tags:
+        - Dedicated read replicas
+      operationId: update_dedicated_read_replica
+      summary: Update a dedicated read replica
+      parameters:
+        - name: organization
+          in: path
+          required: true
+          description: "Organization name slug from `list_organizations`. Example: `acme`."
+          schema:
+            type: string
+        - name: database
+          in: path
+          required: true
+          description: "Database name slug from `list_databases`. Example: `app-db`."
+          schema:
+            type: string
+        - name: branch
+          in: path
+          required: true
+          description: "Branch name from `list_branches`. Example: `main`."
+          schema:
+            type: string
+        - name: dedicated_read_replica
+          in: path
+          required: true
+          description: The name of the dedicated read replica
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                replicas:
+                  type: integer
+                  description: The number of instances serving reads
+                cluster_size:
+                  type: string
+                  description: The cluster size SKU name
+                parameters:
+                  type: object
+                  additionalProperties: true
+                  description: "Configuration parameters nested by namespace (e.g., {\"pgconf\": {\"max_connections\": \"300\"}}). Values must be greater than or equal to the primary's."
+                storage:
+                  type: object
+                  properties:
+                    minimum_storage_bytes:
+                      type: integer
+                      description: The minimum storage size in bytes.
+                    maximum_storage_bytes:
+                      type: integer
+                      description: The maximum storage size in bytes for autoscaling.
+                    storage_autoscaling:
+                      type: boolean
+                      description: Whether storage autoscaling is enabled.
+                    storage_iops:
+                      type: integer
+                      description: The storage IOPS.
+                    storage_throughput_mibs:
+                      type: integer
+                      description: The storage throughput in MiB/s.
+      responses:
+        "200":
+          description: Returns the updated dedicated read replica
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The ID of the dedicated read replica
+                  name:
+                    type: string
+                    description: The name of the dedicated read replica
+                  state:
+                    type: string
+                    description: "The state of the dedicated read replica: pending, ready, or deleting"
+                  replicas:
+                    type: integer
+                    description: The number of instances serving reads in this dedicated read replica
+                  cluster_name:
+                    type: string
+                    description: The SKU representing the cluster size of the dedicated read replica
+                  cluster_display_name:
+                    type: string
+                    description: The SKU representing the cluster size of the dedicated read replica, for display
+                  access_host_url:
+                    type: string
+                    description: The database connection host for the dedicated read replica
+                  private_access_host_url:
+                    type: string
+                    description: The private database connection host for the dedicated read replica
+                  private_connection_service_name:
+                    type: string
+                    description: The service name to set up private connectivity for the dedicated read replica
+                    nullable: true
+                  minimum_storage_bytes:
+                    type: integer
+                    description: The minimum storage size in bytes
+                    nullable: true
+                  maximum_storage_bytes:
+                    type: integer
+                    description: The maximum storage size in bytes
+                    nullable: true
+                  storage_autoscaling:
+                    type: boolean
+                    description: Whether storage autoscaling is enabled
+                    nullable: true
+                  storage_type:
+                    type: string
+                    enum:
+                      - gp3
+                      - io2
+                      - pd_ssd
+                      - hyperdisk_balanced
+                      - premium_v2_lrs
+                    description: The storage type
+                    nullable: true
+                  storage_iops:
+                    type: integer
+                    description: The storage IOPS
+                    nullable: true
+                  storage_throughput_mibs:
+                    type: integer
+                    description: The storage throughput in MiB/s
+                    nullable: true
+                  volume_modifications_blocked_until:
+                    type: string
+                    description: When volume modifications will be allowed again
+                    nullable: true
+                  created_at:
+                    type: string
+                    description: When the dedicated read replica was created
+                  updated_at:
+                    type: string
+                    description: When the dedicated read replica was last updated
+                  ready_at:
+                    type: string
+                    description: When the dedicated read replica was ready to serve queries
+                    nullable: true
+                  ready:
+                    type: boolean
+                    description: Whether or not the dedicated read replica is ready to serve queries
+                  actor:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        description: The ID of the actor
+                      display_name:
+                        type: string
+                        description: The name of the actor
+                      avatar_url:
+                        type: string
+                        description: The URL of the actor's avatar
+                    required:
+                      - id
+                      - display_name
+                      - avatar_url
+                  region:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        description: The ID of the region
+                      provider:
+                        type: string
+                        description: Provider for the region (ex. AWS)
+                      enabled:
+                        type: boolean
+                        description: Whether or not the region is currently active
+                      public_ip_addresses:
+                        items:
+                          type: string
+                        type: array
+                        description: Public IP addresses for the region
+                      display_name:
+                        type: string
+                        description: Name of the region
+                      location:
+                        type: string
+                        description: Location of the region
+                      slug:
+                        type: string
+                        description: The slug of the region
+                      current_default:
+                        type: boolean
+                        description: True if the region is the default for new branch creation
+                      mysql_supported:
+                        type: boolean
+                        description: Whether the region supports MySQL/Vitess databases
+                      postgresql_supported:
+                        type: boolean
+                        description: Whether the region supports PostgreSQL databases
+                      neki_supported:
+                        type: boolean
+                        description: Whether the region supports Neki databases
+                    required:
+                      - id
+                      - provider
+                      - enabled
+                      - public_ip_addresses
+                      - display_name
+                      - location
+                      - slug
+                      - current_default
+                      - mysql_supported
+                      - postgresql_supported
+                      - neki_supported
+                  parameters:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: The ID of the parameter
+                        namespace:
+                          type: string
+                          enum:
+                            - pgconf
+                          description: The namespace of the parameter
+                        name:
+                          type: string
+                          description: The name of the parameter
+                        display_name:
+                          type: string
+                          description: The display name of the parameter
+                        category:
+                          type: string
+                          description: The category of the parameter
+                        description:
+                          type: string
+                          description: The description of the parameter
+                        immutable:
+                          type: boolean
+                          description: Whether the parameter can be changed
+                        parameter_type:
+                          type: string
+                          enum:
+                            - integer
+                            - time
+                          description: The type of the parameter
+                        default_value:
+                          type: string
+                          description: The default value of the parameter, which is the primary's current value
+                        disabled_reason:
+                          type: string
+                          description: Why the parameter cannot be changed
+                          nullable: true
+                        value:
+                          type: string
+                          description: The configured value of the parameter
+                        required:
+                          type: boolean
+                          description: Whether the parameter is required
+                        created_at:
+                          type: string
+                          description: When the parameter was created
+                          nullable: true
+                        updated_at:
+                          type: string
+                          description: When the parameter was last updated
+                          nullable: true
+                        restart:
+                          type: boolean
+                          description: True if processes require a server restart on change
+                        max:
+                          type: number
+                          description: The maximum value of the parameter
+                        min:
+                          type: number
+                          description: The minimum value of the parameter, floored at the primary's current value
+                        url:
+                          type: string
+                          description: The URL of the parameter
+                        options:
+                          items:
+                            type: string
+                          type: array
+                          description: Valid options for the parameter value
+                        units:
+                          items:
+                            type: string
+                          type: array
+                          description: Display units for the parameter value
+                        actor:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              description: The ID of the actor
+                            display_name:
+                              type: string
+                              description: The name of the actor
+                            avatar_url:
+                              type: string
+                              description: The URL of the actor's avatar
+                          required:
+                            - id
+                            - display_name
+                            - avatar_url
+                      required:
+                        - id
+                        - namespace
+                        - name
+                        - display_name
+                        - category
+                        - description
+                        - immutable
+                        - parameter_type
+                        - default_value
+                        - value
+                        - required
+                        - created_at
+                        - updated_at
+                        - restart
+                        - max
+                        - min
+                        - url
+                        - options
+                        - units
+                        - actor
+                required:
+                  - id
+                  - name
+                  - state
+                  - replicas
+                  - cluster_name
+                  - cluster_display_name
+                  - access_host_url
+                  - private_access_host_url
+                  - private_connection_service_name
+                  - minimum_storage_bytes
+                  - maximum_storage_bytes
+                  - storage_autoscaling
+                  - storage_type
+                  - storage_iops
+                  - storage_throughput_mibs
+                  - volume_modifications_blocked_until
+                  - created_at
+                  - updated_at
+                  - ready_at
+                  - ready
+                  - actor
+                  - region
+                  - parameters
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "422":
+          description: Invalid parameters
+        "429":
+          description: Too Many Requests. Reduce the frequency of requests and try again soon.
+        "500":
+          description: Internal Server Error
+      description: |-
+        
+        ### Authorization
+        A service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:
+
+        **Service Token Accesses**
+         `write_database`
+
+        **OAuth Scopes**
+
+         | Resource | Scopes |
+        | :------- | :---------- |
+        | Organization | `write_databases` |
+        | Database | `write_database` |
+    delete:
+      tags:
+        - Dedicated read replicas
+      operationId: delete_dedicated_read_replica
+      summary: Delete a dedicated read replica
+      parameters:
+        - name: organization
+          in: path
+          required: true
+          description: "Organization name slug from `list_organizations`. Example: `acme`."
+          schema:
+            type: string
+        - name: database
+          in: path
+          required: true
+          description: "Database name slug from `list_databases`. Example: `app-db`."
+          schema:
+            type: string
+        - name: branch
+          in: path
+          required: true
+          description: "Branch name from `list_branches`. Example: `main`."
+          schema:
+            type: string
+        - name: dedicated_read_replica
+          in: path
+          required: true
+          description: The name of the dedicated read replica
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Deletes the dedicated read replica
+          headers: {}
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+        "429":
+          description: Too Many Requests. Reduce the frequency of requests and try again soon.
+        "500":
+          description: Internal Server Error
+      description: |-
+        
+        ### Authorization
+        A service token or OAuth token must have at least one of the following access or scopes in order to use this API endpoint:
+
+        **Service Token Accesses**
+         `write_database`
+
+        **OAuth Scopes**
+
+         | Resource | Scopes |
+        | :------- | :---------- |
+        | Organization | `write_databases` |
+        | Database | `write_database` |
