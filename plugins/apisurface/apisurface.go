@@ -109,11 +109,12 @@ func (p Plugin) ListVersions(ctx context.Context, env plugin.Env) ([]plugin.Vers
 	}
 }
 
-// snapshot is what ReadAt keeps of a release: its public surface, and
-// what couldn't be read.
-type snapshot struct {
+// Release is what ReadAt keeps of a release: its public surface, the
+// classes a method could move to, and what couldn't be read.
+type Release struct {
 	Artifact string            `json:"artifact"`
 	Surface  pysurface.Surface `json:"surface"`
+	Classes  pysurface.Classes `json:"classes,omitempty"`
 	Skipped  []string          `json:"skipped,omitempty"` // files over the size limit
 }
 
@@ -140,7 +141,7 @@ func (p Plugin) ReadAt(ctx context.Context, env plugin.Env, v plugin.Version) (p
 	for _, s := range skipped {
 		log.Printf("%s %s: %s skipped: over %d bytes", pkg.Name, v.ID, s, MaxFileBytes)
 	}
-	content, err := json.Marshal(snapshot{Artifact: a.Filename, Surface: pysurface.Read(files), Skipped: skipped})
+	content, err := json.Marshal(Release{Artifact: a.Filename, Surface: pysurface.Read(files), Classes: pysurface.ReadClasses(files), Skipped: skipped})
 	if err != nil {
 		return plugin.Snapshot{}, err
 	}
@@ -155,7 +156,7 @@ func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 	if from.IsZero() {
 		return plugin.Result{Label: to.Version.ID}, nil
 	}
-	var a, b snapshot
+	var a, b Release
 	if err := json.Unmarshal(from.Content, &a); err != nil {
 		return plugin.Result{}, fmt.Errorf("reading the %s %s surface: %w", p.Package.Name, from.Version.ID, err)
 	}
@@ -165,7 +166,7 @@ func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 	now := env.Now().UTC()
 	var events []event.EventV2
 	var rejected []error
-	for _, c := range Compare(a.Surface, b.Surface) {
+	for _, c := range Compare(a, b) {
 		if c.Change == "" {
 			log.Printf("%s %s: not an event: %s", p.Package.Name, to.Version.ID, c.Note)
 			continue
@@ -260,9 +261,16 @@ type Change struct {
 // renamed symbols (a member of a removed class isn't listed again), then
 // for every symbol in both, removed parameters and parameters that lost
 // their default. A rename is one removed and one added symbol of the same
-// kind under the same parent with the same parameters; anything less sure
-// is a removal.
-func Compare(a, b pysurface.Surface) []Change {
+// kind under the same parent with the same parameters, at least one of
+// them besides self or cls; anything less sure is a removal.
+//
+// What looks removed but may not be is a note, not an event: a symbol
+// defined in a file b couldn't read (over the size limit), and a method
+// whose class is still there but whose bases changed, which one of its
+// bases (or theirs) now defines, or which the class now defines as an
+// attribute (create = _create, a property made a plain attribute).
+func Compare(ra, rb Release) []Change {
+	a, b := ra.Surface, rb.Surface
 	var out []Change
 	removed := map[string]bool{}
 	byParent := map[string][2][]string{} // parent+kind -> removed, added
@@ -287,7 +295,7 @@ func Compare(a, b pysurface.Surface) []Change {
 	for _, g := range byParent {
 		if len(g[0]) == 1 && len(g[1]) == 1 {
 			old, now := a[g[0][0]], b[g[1][0]]
-			if old.Params != nil && !old.Overloaded && !now.Overloaded && slices.Equal(old.Params, now.Params) && len(old.Params) > 0 {
+			if old.Params != nil && !old.Overloaded && !now.Overloaded && slices.Equal(old.Params, now.Params) && len(callerParams(old.Params)) > 0 {
 				renamed[g[0][0]] = g[1][0]
 			}
 		}
@@ -297,6 +305,10 @@ func Compare(a, b pysurface.Surface) []Change {
 			continue // its class is reported
 		}
 		before := a[k]
+		if why := notGone(k, before, ra, rb); why != "" {
+			out = append(out, Change{Symbol: k, Note: fmt.Sprintf("%s: not in the newer release, but %s", k, why)})
+			continue
+		}
 		c := Change{Change: event.PackageRemovedSymbol, Kind: before.Kind, Symbol: k, Before: &before}
 		if r, ok := renamed[k]; ok {
 			after := b[r]
@@ -338,6 +350,65 @@ func Compare(a, b pysurface.Surface) []Change {
 		return strings.Compare(x.Symbol+" "+x.Parameter+" "+x.Note, y.Symbol+" "+y.Parameter+" "+y.Note)
 	})
 	return out
+}
+
+// callerParams are the parameters a caller passes: a leading self or cls
+// left out.
+func callerParams(ps []pysurface.Param) []pysurface.Param {
+	if len(ps) > 0 && (ps[0].Name == "self" || ps[0].Name == "cls") {
+		return ps[1:]
+	}
+	return ps
+}
+
+// notGone says why symbol k, defined as before in a and missing from b's
+// surface, may still be there in b; "" when it's gone.
+func notGone(k string, before pysurface.Symbol, a, b Release) string {
+	if slices.Contains(b.Skipped, before.File) {
+		return fmt.Sprintf("%s, where it was defined, was too big to read", before.File)
+	}
+	if before.Kind != "method" {
+		return ""
+	}
+	cls, ok := b.Surface[parentOf(k)]
+	if !ok || cls.Kind != "class" {
+		return ""
+	}
+	name := k[strings.LastIndexByte(k, '.')+1:]
+	oldBases, bases := pysurface.Bases(a.Surface[parentOf(k)].Signature), pysurface.Bases(cls.Signature)
+	if !slices.Equal(oldBases, bases) {
+		return fmt.Sprintf("its class's bases changed (%s to %s)", strings.Join(oldBases, ", "), strings.Join(bases, ", "))
+	}
+	if own, ok := b.Classes[className(cls.Signature)]; ok && slices.Contains(own.Members, name) {
+		return "its class still defines the name (now an attribute)"
+	}
+	seen := map[string]bool{}
+	for len(bases) > 0 {
+		base := bases[0]
+		bases = bases[1:]
+		if seen[base] {
+			continue
+		}
+		seen[base] = true
+		c, ok := b.Classes[base]
+		if !ok {
+			continue // not the package's: unchanged, as the bases are
+		}
+		if slices.Contains(c.Members, name) {
+			return fmt.Sprintf("its base class %s defines it", base)
+		}
+		bases = append(bases, c.Bases...)
+	}
+	return ""
+}
+
+// className is "Completions" for "class Completions(SyncAPIResource): ...".
+func className(signature string) string {
+	n := strings.TrimPrefix(signature, "class ")
+	if i := strings.IndexAny(n, "(: "); i >= 0 {
+		n = n[:i]
+	}
+	return n
 }
 
 // parentOf is "openai.OpenAI" for "openai.OpenAI.create".
