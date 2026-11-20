@@ -43,7 +43,7 @@ Format plugin: `openapi` (`plugins/openapi`), with `adapter.Appwrite`.
 ## Known gaps
 
 - **Removals aren't events.** The spec doesn't mark them first, so real ones are missed. The SDK changelogs say them ("* Breaking: removed `X`"); a `changelog` plugin per SDK could read them.
-- **Deprecations from before the plugin's first run aren't events,** nor ones that came with a new minor's directory already flagged. The Databases to TablesDB deprecations of 1.8.0 can be replayed (`1.7.x@<sha>` to `<sha>`), and a run never sees them.
+- **Deprecations from before the plugin's first run aren't events,** nor operations that first appear already flagged. When the newest minor changes, the plugin diffs the new directory against the previous minor's last spec, so an operation that was unflagged there and is flagged in the new one is an event. The Databases to TablesDB deprecations of 1.8.0 can be replayed (`1.7.x@<sha>` to `<sha>`), and a run never sees them.
 - **The layout changed once (2.0.x) and may again.** The adapter fails, rather than guess, when a directory has neither file.
 - **Spec commits aren't releases.** A deprecation's `version` is the day the spec changed, which can trail the release. Two commits on one day share a `version`.
 - **Client and console operations aren't watched.** Only what a server SDK can call.
