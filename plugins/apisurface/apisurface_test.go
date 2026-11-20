@@ -128,7 +128,7 @@ func TestCompare(t *testing.T) {
 		"acme.Kept.with_kwargs": sym("method", prm("self", "either", ""), prm("kw", "kwargs", "")),
 	}
 	var got []string
-	for _, c := range Compare(a, b) {
+	for _, c := range Compare(Release{Surface: a}, Release{Surface: b}) {
 		if c.Change == "" {
 			got = append(got, "note "+c.Symbol)
 			continue
@@ -145,6 +145,103 @@ func TestCompare(t *testing.T) {
 	}
 	if strings.Join(got, "\n") != strings.Join(want, "\n") {
 		t.Errorf("got\n%s\nwant\n%s", strings.Join(got, "\n"), strings.Join(want, "\n"))
+	}
+}
+
+// changes is Compare's output as lines, as TestCompare writes them.
+func changes(a, b Release) []string {
+	var got []string
+	for _, c := range Compare(a, b) {
+		if c.Change == "" {
+			got = append(got, "note "+c.Symbol)
+			continue
+		}
+		got = append(got, string(c.Change)+" "+c.Symbol+" "+c.Parameter+c.Replacement)
+	}
+	return got
+}
+
+func cls(sig string, params ...pysurface.Param) pysurface.Symbol {
+	s := sym("class", params...)
+	s.Signature = sig
+	return s
+}
+
+// A method that keeps only self in common with the one added beside it
+// isn't a rename: close(self) gone and aclose(self) added is a removal.
+func TestSelfAloneIsNoRename(t *testing.T) {
+	self := prm("self", "either", "")
+	a := Release{Surface: pysurface.Surface{
+		"acme.C":       cls("class C:"),
+		"acme.C.close": sym("method", self),
+		"acme.C.send":  sym("method", self, prm("body", "either", "")),
+	}}
+	b := Release{Surface: pysurface.Surface{
+		"acme.C":         cls("class C:"),
+		"acme.C.aclose":  sym("method", self),
+		"acme.C.send_v2": sym("method", self, prm("body", "either", "")),
+	}}
+	// Two removed, two added: neither pairs one to one, so both are
+	// removals; then one of each, with a real parameter in common, is a
+	// rename.
+	want := "removed_symbol acme.C.close \nremoved_symbol acme.C.send "
+	if got := strings.Join(changes(a, b), "\n"); got != want {
+		t.Errorf("got\n%s\nwant\n%s", got, want)
+	}
+	delete(a.Surface, "acme.C.close")
+	delete(b.Surface, "acme.C.aclose")
+	if got := strings.Join(changes(a, b), "\n"); got != "renamed_symbol acme.C.send acme.C.send_v2" {
+		t.Errorf("with a real parameter: %s", got)
+	}
+	a.Surface = pysurface.Surface{"acme.C": cls("class C:"), "acme.C.close": sym("method", self)}
+	b.Surface = pysurface.Surface{"acme.C": cls("class C:"), "acme.C.aclose": sym("method", self)}
+	if got := strings.Join(changes(a, b), "\n"); got != "removed_symbol acme.C.close " {
+		t.Errorf("self only: %s", got)
+	}
+}
+
+// A file the newer release couldn't read (over the size limit) is a gap,
+// not a removal of everything in it.
+func TestASkippedFileRemovesNothing(t *testing.T) {
+	big := sym("class")
+	big.File = "acme/big.py"
+	gone := sym("function")
+	a := Release{Surface: pysurface.Surface{"acme.Big": big, "acme.big.Big": big, "acme.gone": gone}}
+	b := Release{Surface: pysurface.Surface{}, Skipped: []string{"acme/big.py"}}
+	want := "note acme.Big\nnote acme.big.Big\nremoved_symbol acme.gone "
+	if got := strings.Join(changes(a, b), "\n"); got != want {
+		t.Errorf("got\n%s\nwant\n%s", got, want)
+	}
+}
+
+// A method that left its class for a base class, or became an attribute,
+// or whose class's bases changed, is still there: a note. One its class
+// and bases don't define is gone.
+func TestAMethodMovedUpIsNotRemoved(t *testing.T) {
+	self := prm("self", "either", "")
+	a := Release{Surface: pysurface.Surface{
+		"acme.Completions":        cls("class Completions(SyncAPIResource):"),
+		"acme.Completions.create": sym("method", self),
+		"acme.Completions.list":   sym("method", self),
+		"acme.Completions.models": sym("method", self),
+		"acme.Completions.gone":   sym("method", self),
+		"acme.Files":              cls("class Files(SyncAPIResource):"),
+		"acme.Files.upload":       sym("method", self),
+	}}
+	b := Release{
+		Surface: pysurface.Surface{
+			"acme.Completions": cls("class Completions(SyncAPIResource):"),
+			"acme.Files":       cls("class Files(SyncAPIResource, _Uploads):"),
+		},
+		Classes: pysurface.Classes{
+			"Completions":     {Bases: []string{"SyncAPIResource"}, Members: []string{"models"}},
+			"SyncAPIResource": {Bases: []string{"_Base"}, Members: []string{"create"}},
+			"_Base":           {Members: []string{"list"}},
+		},
+	}
+	want := "note acme.Completions.create\nremoved_symbol acme.Completions.gone \nnote acme.Completions.list\nnote acme.Completions.models\nnote acme.Files.upload"
+	if got := strings.Join(changes(a, b), "\n"); got != want {
+		t.Errorf("got\n%s\nwant\n%s", got, want)
 	}
 }
 
