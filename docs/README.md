@@ -3,6 +3,7 @@
 | Page | What's in it |
 |---|---|
 | [plugins.schema.json](plugins.schema.json) | The shape of `plugins.json`, the list of providers and sources that `go run ./cmd/list-plugins` prints from the registry and each release attaches. No list is committed. |
+| [how-it-works.md](how-it-works.md) | Providers, sources and kinds; what a plugin does, version by version; the layout, the checks, releases. |
 | [README-template.md](README-template.md) | The shape every public patch-it repo's README follows: sections, badge set, words, images. |
 | [writing-a-plugin.md](writing-a-plugin.md) | How to add a provider: the `Plugin` interface, fetching through `env.Get` and `kit/`, saving the source, the golden test with `kittest`, the provider page and the source's metadata in its registration. |
 
