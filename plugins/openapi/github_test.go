@@ -6,7 +6,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/patch-it-dev/patch-it-plugins/adapter"
+	"github.com/patch-it-dev/patch-it-plugins/plugins/openapi/adapter"
 )
 
 // fakeGitHubAdapter serves the real, trimmed spec excerpts saved under

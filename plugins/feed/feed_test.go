@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/patch-it-dev/patch-it-plugins/kit/kittest"
+	"github.com/patch-it-dev/patch-it-plugins/core/kit/kittest"
 )
 
 // The two feeds as saved on 2026-11-14 (testdata/README.md), each through the

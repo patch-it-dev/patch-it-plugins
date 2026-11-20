@@ -8,9 +8,9 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/patch-it-dev/patch-it-plugins/migrate"
-	"github.com/patch-it-dev/patch-it-plugins/plugin"
-	"github.com/patch-it-dev/patch-it-plugins/sdkguide"
+	"github.com/patch-it-dev/patch-it-plugins/core/migrate"
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
+	"github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide/sdkguide"
 )
 
 func init() {

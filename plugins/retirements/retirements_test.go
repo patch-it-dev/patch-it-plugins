@@ -7,9 +7,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/patch-it-dev/patch-it-plugins/kit/kittest"
-	"github.com/patch-it-dev/patch-it-plugins/plugin"
-	"github.com/patch-it-dev/patch-it-plugins/retire"
+	"github.com/patch-it-dev/patch-it-plugins/core/kit/kittest"
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
+	"github.com/patch-it-dev/patch-it-plugins/plugins/retirements/retire"
 )
 
 const deprecations = `### 2026-04-22: Legacy GPT model snapshots

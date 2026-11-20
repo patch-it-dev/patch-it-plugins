@@ -5,7 +5,8 @@
 //	go run ./cmd/new-plugin --api acme --provider Acme --format openapi
 //
 // It writes the provider's definition in the format's package (or the reader
-// package the format uses: adapter/, retire/, sdkguide/), adds its
+// package the format uses: plugins/openapi/adapter/, plugins/retirements/retire/,
+// plugins/migrationguide/sdkguide/), adds its
 // plugin.Register line to plugins/<format>'s init, a test (registered, golden,
 // drop) over placeholder sources with an empty golden file, a row in that
 // testdata/README.md, providers/<api>.md from providers/_template.md and a
@@ -35,8 +36,8 @@ import (
 	"time"
 	"unicode"
 
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 	"github.com/patch-it-dev/patch-it-plugins/internal/pluginlist"
-	"github.com/patch-it-dev/patch-it-plugins/plugin"
 	_ "github.com/patch-it-dev/patch-it-plugins/plugins/all"
 )
 
@@ -167,7 +168,7 @@ func Run(o Options, out io.Writer) error {
 	d.PluginOf = fill(f.pluginOf, d)
 	d.Ingest = fill(f.ingest, d)
 	d.Drop = fill(f.drop, d)
-	d.Imports = append(slices.Clone(f.imports), "testing", "github.com/patch-it-dev/patch-it-plugins/kit/kittest")
+	d.Imports = append(slices.Clone(f.imports), "testing", "github.com/patch-it-dev/patch-it-plugins/core/kit/kittest")
 	slices.Sort(d.Imports)
 
 	pkgDir := "plugins/" + o.Format

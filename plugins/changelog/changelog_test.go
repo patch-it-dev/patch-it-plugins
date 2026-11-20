@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/patch-it-dev/patch-it-plugins/kit/kittest"
+	"github.com/patch-it-dev/patch-it-plugins/core/kit/kittest"
 )
 
 // Two real changelogs at their release tags (testdata/README.md) in, every

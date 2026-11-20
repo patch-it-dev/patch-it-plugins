@@ -3,7 +3,7 @@ package removedmembers
 import (
 	"testing"
 
-	"github.com/patch-it-dev/patch-it-plugins/kit/kittest"
+	"github.com/patch-it-dev/patch-it-plugins/core/kit/kittest"
 )
 
 // The guide at tag v2.0.0 (saved 2026-11-04) in, every event out.

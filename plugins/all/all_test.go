@@ -10,7 +10,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/patch-it-dev/patch-it-plugins/plugin"
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 )
 
 // Every package next to this one that registers a plugin is imported here, so

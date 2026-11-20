@@ -3,7 +3,7 @@ package openapi
 import (
 	"regexp"
 
-	"github.com/patch-it-dev/patch-it-plugins/diff"
+	"github.com/patch-it-dev/patch-it-plugins/core/diff"
 )
 
 // vercelDiff is how Vercel's spec says what it says:

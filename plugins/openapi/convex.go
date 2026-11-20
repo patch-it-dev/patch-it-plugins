@@ -1,6 +1,6 @@
 package openapi
 
-import "github.com/patch-it-dev/patch-it-plugins/diff"
+import "github.com/patch-it-dev/patch-it-plugins/core/diff"
 
 // convexDiff is how the Convex Deployment API spec says what it says:
 //

@@ -4,7 +4,7 @@
 
 Request parameters removed from `messages.create()` and its siblings in anthropic-sdk-python 1.0.0 (`temperature`, `top_p`, `top_k`): passing one is a `TypeError`. One breaking event per parameter. Pinned to that release.
 
-Format plugin: `migrationguide` (`plugins/migrationguide`), reading with `sdkguide/`.
+Format plugin: `migrationguide` (`plugins/migrationguide`), reading with `plugins/migrationguide/sdkguide/`.
 
 ## Why this source
 

@@ -1,7 +1,7 @@
 {
   "_comment": "Generated from the plugin registry and docs/plugins.md by `make plugins-json` (go run ./cmd/list-plugins). Don't edit by hand.",
   "$schema": "./plugins.schema.json",
-  "count": 29,
+  "count": 30,
   "plugins": [
     {
       "id": "algolia-ingestion",

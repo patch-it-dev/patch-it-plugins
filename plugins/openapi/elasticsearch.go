@@ -1,6 +1,6 @@
 package openapi
 
-import "github.com/patch-it-dev/patch-it-plugins/diff"
+import "github.com/patch-it-dev/patch-it-plugins/core/diff"
 
 // elasticsearchDiff reads Elastic's spec like Supabase's: deprecations by the
 // `deprecated` flag, quoting the whole operation, and path templates matched.

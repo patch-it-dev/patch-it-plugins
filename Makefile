@@ -52,7 +52,7 @@ imports:
 nethttp:
 	@bad=$$($(GO) list -f '{{.ImportPath}} {{join .Imports " "}}' ./... \
 		| grep -E '(^| )net/http( |$$)' | cut -d' ' -f1 \
-		| grep -vE '^$(MODULE)/(fetch|kit|adapter)(/|$$)' || true); \
+		| grep -vE '^$(MODULE)/(core/fetch|core/kit|plugins/openapi/adapter)(/|$$)' || true); \
 	if [ -n "$$bad" ]; then \
 		echo "::error::these packages import net/http; fetch through env.Get or kit instead:"; echo "$$bad"; exit 1; \
 	fi
@@ -64,7 +64,7 @@ test:
 
 # A provider started with new-plugin is done when nothing it wrote still says
 # TODO(new-plugin).
-TODO_DIRS := plugins adapter retire sdkguide migrate providers docs/plugins.md
+TODO_DIRS := plugins core/migrate providers docs/plugins.md
 todos:
 	@left=$$(grep -rl 'TODO(new-plugin)' $(TODO_DIRS) || true); \
 	if [ -n "$$left" ]; then \

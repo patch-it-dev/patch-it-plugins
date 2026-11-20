@@ -9,10 +9,10 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/patch-it-dev/patch-it-plugins/kit"
-	"github.com/patch-it-dev/patch-it-plugins/migrate"
-	"github.com/patch-it-dev/patch-it-plugins/plugin"
-	"github.com/patch-it-dev/patch-it-plugins/retire"
+	"github.com/patch-it-dev/patch-it-plugins/core/kit"
+	"github.com/patch-it-dev/patch-it-plugins/core/migrate"
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
+	"github.com/patch-it-dev/patch-it-plugins/plugins/retirements/retire"
 )
 
 func init() {

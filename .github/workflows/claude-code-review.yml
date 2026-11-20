@@ -110,7 +110,7 @@ jobs:
                the source URL and a quote. A golden file edited without the PR explaining
                why the new output is right is blocking.
             5. PLUGIN CODE. Fetch only through env.Get or kit/: no net/http outside the
-               fetch layer (fetch/, kit/, adapter/), no filesystem outside testdata/, no
+               fetch layer (core/fetch/, core/kit/, plugins/openapi/adapter/), no filesystem outside testdata/, no
                database. Precision over recall: flag any path that could emit an event for
                something that isn't a real change; a wrong event becomes a wrong pull
                request in someone's repo. Don't change contract/fixtures/ here first (the

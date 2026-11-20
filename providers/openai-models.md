@@ -4,7 +4,7 @@
 
 OpenAI models that are being shut down: every text model name code sends to the Chat Completions or Responses API, with its shutdown date and the replacement OpenAI recommends. One breaking event per model name.
 
-Format plugin: `retirements` (`plugins/retirements`), reading with `retire/`.
+Format plugin: `retirements` (`plugins/retirements`), reading with `plugins/retirements/retire/`.
 
 ## Why this source
 

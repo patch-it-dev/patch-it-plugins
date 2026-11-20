@@ -26,7 +26,7 @@ Refer to the service that runs these plugins as "patch-it's hosted ingestion ser
 ## Rules for plugin code
 
 - **Start a new provider with `go run ./cmd/new-plugin --api <id> --provider <Name> --format <format>`**, then fill in every `TODO(new-plugin)`; `make todos` (part of `make check` and CI_go) fails while one is left.
-- **Fetch only through the environment** (`env.Get` or `kit/`). No `net/http` outside the fetch layer, no filesystem outside `testdata/`, no database.
+- **Fetch only through the environment** (`env.Get` or `core/kit/`). No `net/http` outside the fetch layer, no filesystem outside `testdata/`, no database.
 - **Golden test + dated source quote**: a saved copy of the real source in `testdata/`, a row in `testdata/README.md` (URL, date fetched, license, quote), and `testdata/golden/<api>.json` with the exact events.
 - **Precision over recall.** When unsure whether something is a change, don't emit an event.
 - **One pinned drop test** per plugin: a realistic input that must produce no event.
@@ -51,16 +51,20 @@ One target at a time: `make tidy`, `make build`, `make fmt`, `make vet`, `make i
 Go module `github.com/patch-it-dev/patch-it-plugins`; the only dependency is `gopkg.in/yaml.v3`.
 
 ```
-plugin/                the Plugin interface, the registry, Env, Result, Spec (baselines)
+core/plugin/           the Plugin interface, the registry, Env, Result, Spec (baselines)
+core/fetch/            the HTTP fetch with retries and the ETag / Last-Modified cache
+core/github/           the newest release / commit on GitHub, and a commit's SHA and date (one place)
+core/kit/  core/kit/kittest/   Unchanged, Cite, Wayback; the test kit (Mem, Pages, Ingest, Golden)
+core/event/  core/migrate/     the change-event types from patch-it's contract (v1 + v2), v1 -> v2
+core/diff/ core/normalize/ core/hint/   the OpenAPI diff engine and its helpers
+plugins/<kind>/        one package per kind, with its providers: openapi (+ adapter/, one spec adapter
+                       per provider), retirements (+ retire/), migrationguide (+ sdkguide/),
+                       removedmembers, changelog, feed, apichangelog, catalog, eol;
+                       plugins/all imports every one
+plugin/ event/ fetch/ migrate/ kit/ retire/ sdkguide/   deprecated old import paths: they only
+                       forward to the packages above; don't add to them
 cmd/list-plugins/      writes docs/plugins.json (make plugins-json); internal/pluginlist/ is its logic
 cmd/new-plugin/        scaffolds a provider on a format plugin (go run ./cmd/new-plugin --help)
-plugins/<format>/      one package per format plugin: openapi, retirements, migrationguide,
-                       removedmembers, changelog, feed, apichangelog, catalog; plugins/all imports every one
-kit/  kit/kittest/     Unchanged, Cite, Wayback; the test kit (Mem, Pages, Ingest, Golden)
-event/  migrate/       the change-event types from patch-it's contract (v1 + v2), v1 -> v2
-fetch/                 the HTTP fetch with retries and the ETag / Last-Modified cache
-diff/ normalize/ hint/ adapter/   the OpenAPI diff engine and the spec adapters
-retire/  sdkguide/     deprecations-page and migration-guide readers
 contract/fixtures/     a copy of patch-it's change-event fixtures (CI_contract checks it)
 docs/plugins.md        the list of supported plugins (Rule 1); docs/plugins.json is generated from it
 Makefile               make check (what CI_go runs, plus the leak guard), make plugins-json

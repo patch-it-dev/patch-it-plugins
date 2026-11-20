@@ -19,7 +19,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/patch-it-dev/patch-it-plugins/plugin"
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 )
 
 // Table is the plugin list, relative to the repo root.

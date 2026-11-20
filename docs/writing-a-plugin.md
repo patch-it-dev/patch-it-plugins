@@ -17,7 +17,7 @@ go run ./cmd/new-plugin --api acme --provider Acme --format openapi
 
 It writes, and lists:
 
-- the provider's definition, in the package the format reads it from (`adapter/`, `retire/`, `sdkguide/` or `plugins/<format>/`), and its `plugin.Register` line in that format's `init` (plus the `migrate/` map entry that `retirements` and `migrationguide` need);
+- the provider's definition, in the package the format reads it from (`plugins/openapi/adapter/`, `plugins/retirements/retire/`, `plugins/migrationguide/sdkguide/` or `plugins/<format>/`), and its `plugin.Register` line in that format's `init` (plus the `core/migrate/` map entry that `retirements` and `migrationguide` need);
 - `plugins/<format>/<api>_test.go`: the registration test, a golden test and a pinned drop test, over placeholder sources in `testdata/`, with the golden file written from them;
 - a row per saved file in that `testdata/README.md` (URL, date, license, quote to fill in);
 - `providers/<api>.md` from the template (or nothing, with `--page`, when the provider already has one);
@@ -75,9 +75,9 @@ Write the numbers on the provider page, as `providers/vercel.md` does for its sp
 
 | Format plugin | Reads | Add a provider by |
 |---|---|---|
-| `plugins/openapi` | An OpenAPI spec per release, diffed with `diff/` and turned into events by `normalize/` | An `adapter.Adapter` in `adapter/` (latest tag, fetch a tag's spec) and a `plugin.Register(Plugin{Adapter: …})` line |
-| `plugins/retirements` | A model provider's deprecations page (a table of date, model, replacement) | A `retire.Page` in `retire/providers.go` |
-| `plugins/migrationguide` | An SDK's migration guide at a release tag (removed request parameters) | A `sdkguide.Guide` in `sdkguide/` |
+| `plugins/openapi` | An OpenAPI spec per release, diffed with `core/diff/` and turned into events by `core/normalize/` | An `adapter.Adapter` in `plugins/openapi/adapter/` (latest tag, fetch a tag's spec) and a `plugin.Register(Plugin{Adapter: …})` line |
+| `plugins/retirements` | A model provider's deprecations page (a table of date, model, replacement) | A `retire.Page` in `plugins/retirements/retire/providers.go` |
+| `plugins/migrationguide` | An SDK's migration guide at a release tag (removed request parameters) | A `sdkguide.Guide` in `plugins/migrationguide/sdkguide/` |
 | `plugins/removedmembers` | A package's table of removed members at a release tag (an RST simple table or a Markdown pipe table) | A `removedmembers.Guide` |
 | `plugins/changelog` | A `CHANGELOG.md` / `CHANGES.rst` / `HISTORY.rst` at a release tag | A `changelog.File` |
 | `plugins/feed` | An RSS or Atom feed | A `feed.Feed` with a reader for that vendor's entries |
@@ -87,7 +87,7 @@ Write the numbers on the provider page, as `providers/vercel.md` does for its sp
 
 ## 4. The interface
 
-A plugin implements `plugin.Plugin` (package [`plugin/`](../plugin/plugin.go)):
+A plugin implements `plugin.Plugin` (package [`core/plugin/`](../core/plugin/plugin.go)):
 
 ```go
 type Plugin interface {
@@ -126,9 +126,9 @@ func init() {
 
 `Register` panics on a duplicate name or the name `all`.
 
-### Fetching: `env.Get` and `kit/`
+### Fetching: `env.Get` and `core/kit/`
 
-- Fetch **only** with `env.Get`. It caches by `ETag` / `Last-Modified`, retries, and in tests serves saved files. `CI_go` fails a package outside `fetch/`, `kit/` and `adapter/` that imports `net/http`.
+- Fetch **only** with `env.Get`. It caches by `ETag` / `Last-Modified`, retries, and in tests serves saved files. `CI_go` fails a package outside `core/fetch/`, `core/kit/` and `plugins/openapi/adapter/` that imports `net/http`.
 - `kit.Unchanged(env, api, body)`: true when the page hashes to the last baseline. Return early: an unchanged source costs one GET and nothing else.
 - `kit.Cite(ctx, archiver, url, read, want)`: for a **live page**. Takes a Wayback Machine snapshot, reads it with your own reader and checks it says exactly what the live page said. Make the events from the snapshot and cite its URL. No snapshot, no events.
 - `plugin.Baseline(api, version, tag, sourceURL, content, replay, now)`: the baseline to return.
@@ -140,7 +140,7 @@ The event format is [patch-it's change-event contract](https://github.com/patch-
 
 ## 5. Save the source
 
-Save a real copy of what the plugin reads under your package's `testdata/` (or the reader package's, like `retire/testdata/`). Add a row to that directory's `README.md`: file, URL, date fetched, license, and a short quote of the part the plugin reads.
+Save a real copy of what the plugin reads under your package's `testdata/` (or the reader package's, like `plugins/retirements/retire/testdata/`). Add a row to that directory's `README.md`: file, URL, date fetched, license, and a short quote of the part the plugin reads.
 
 - **Openly licensed files** (MIT, BSD, Apache, CC BY): keep them whole.
 - **Vendor documentation pages**: trim to what the plugin reads (the tables, the sections), copy every kept line unchanged, mark it "excerpt for testing; © the vendor", and say what you left out.
@@ -150,7 +150,7 @@ Save a real copy of what the plugin reads under your package's `testdata/` (or t
 
 ## 6. Write the golden test
 
-The test kit, `kit/kittest`, runs the plugin with no network, no database and a fixed clock:
+The test kit, `core/kit/kittest`, runs the plugin with no network, no database and a fixed clock:
 
 ```go
 func TestGolden(t *testing.T) {

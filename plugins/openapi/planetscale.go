@@ -3,7 +3,7 @@ package openapi
 import (
 	"regexp"
 
-	"github.com/patch-it-dev/patch-it-plugins/diff"
+	"github.com/patch-it-dev/patch-it-plugins/core/diff"
 )
 
 // planetscaleDiff is how the PlanetScale API spec says what it says:

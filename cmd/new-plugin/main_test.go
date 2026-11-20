@@ -38,7 +38,7 @@ func TestScaffoldEveryFormat(t *testing.T) {
 			t.Errorf("%s: no next steps in\n%s", f, out.String())
 		}
 	}
-	for _, args := range [][]string{{"build", "./..."}, {"vet", "./..."}, {"test", "-count=1", "./plugins/...", "./internal/...", "./migrate/..."}} {
+	for _, args := range [][]string{{"build", "./..."}, {"vet", "./..."}, {"test", "-count=1", "./plugins/...", "./internal/...", "./core/migrate/..."}} {
 		cmd := exec.Command(goCmd, args...)
 		cmd.Dir = root
 		if b, err := cmd.CombinedOutput(); err != nil {

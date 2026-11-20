@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/patch-it-dev/patch-it-plugins/event"
+	"github.com/patch-it-dev/patch-it-plugins/core/event"
 )
 
 // GitHubActions is the GitHub changelog's Actions label, RSS 2.0 (checked

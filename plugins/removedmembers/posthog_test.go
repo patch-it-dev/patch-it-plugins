@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/patch-it-dev/patch-it-plugins/event"
-	"github.com/patch-it-dev/patch-it-plugins/kit/kittest"
+	"github.com/patch-it-dev/patch-it-plugins/core/event"
+	"github.com/patch-it-dev/patch-it-plugins/core/kit/kittest"
 )
 
 // The guide as published at tag posthog-v8.0.0 (fetched 2026-11-19), whole.

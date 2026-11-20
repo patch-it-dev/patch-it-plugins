@@ -10,10 +10,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/patch-it-dev/patch-it-plugins/adapter"
-	"github.com/patch-it-dev/patch-it-plugins/event"
-	"github.com/patch-it-dev/patch-it-plugins/kit/kittest"
-	"github.com/patch-it-dev/patch-it-plugins/plugin"
+	"github.com/patch-it-dev/patch-it-plugins/core/event"
+	"github.com/patch-it-dev/patch-it-plugins/core/kit/kittest"
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
+	"github.com/patch-it-dev/patch-it-plugins/plugins/openapi/adapter"
 )
 
 // fakeVercelAdapter serves the trimmed, unedited excerpts of vercel/sdk's
@@ -219,9 +219,9 @@ func TestVercelDeprecatedSummary(t *testing.T) {
 		"Deprecated: Use DELETE /v1/drives/:name. Requires ...":  true,
 		"Deprecated: true. Update Resource Secrets (Deprecated)": true,
 		"Get a list of deprecated Node.js versions":              false,
-		"Undeprecated thing":                               false,
-		"Deprecated runtimes for a project":                false,
-		"Update a project (deprecated fields are ignored)": false,
+		"Undeprecated thing":                                     false,
+		"Deprecated runtimes for a project":                      false,
+		"Update a project (deprecated fields are ignored)":       false,
 		"": false,
 	} {
 		if got := vercelDeprecatedSummary(summary); got != want {

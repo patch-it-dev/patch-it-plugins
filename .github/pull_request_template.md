@@ -10,7 +10,7 @@
 - [ ] `testdata/README.md` lists each file: URL, date fetched, license, quote of the part the plugin reads
 - [ ] One pinned drop test: a realistic input that produces no event
 - [ ] `providers/<api>.md` written or updated from `providers/_template.md`, including **Why this source**
-- [ ] Fetches only through `env.Get` / `kit/`
+- [ ] Fetches only through `env.Get` / `core/kit/`
 - [ ] `make check` passes locally (and `make plugins-json` was run if a plugin or its row changed)
 - [ ] Nothing private: no credentials, internal hosts, private links, customer names
 
