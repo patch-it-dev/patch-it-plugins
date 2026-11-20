@@ -251,12 +251,18 @@ func ServerBasePath(body []byte) ([]byte, error) {
 }
 
 // serverPath is the path of a server URL ("/api/0" for
-// "https://{region}.sentry.io/api/0"), without a trailing slash; "" for
-// none. Read by hand: url.Parse refuses the {region} variable in the host.
+// "https://{region}.sentry.io/api/0", "/api/v1" for Convex's
+// "{deployment-url}/api/v1", whose whole origin is a variable), without a
+// trailing slash; "" for none. Read by hand: url.Parse refuses a variable in
+// the host.
 func serverPath(u string) string {
 	_, rest, ok := strings.Cut(u, "://")
 	if !ok {
-		return ""
+		if !strings.HasPrefix(u, "{") || !strings.Contains(u, "}") {
+			return ""
+		}
+		_, rest, _ = strings.Cut(u, "}")
+		return strings.TrimRight(rest, "/")
 	}
 	i := strings.Index(rest, "/")
 	if i < 0 {

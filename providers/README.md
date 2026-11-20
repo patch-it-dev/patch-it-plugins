@@ -20,6 +20,7 @@ One page per plugin id: `providers/<api>.md`. Start from [`_template.md`](_templ
 | [elasticsearch.md](elasticsearch.md) | `elasticsearch` | `openapi` |
 | [sentry.md](sentry.md) | `sentry` | `openapi` |
 | [neon.md](neon.md) | `neon` | `openapi` |
+| [convex.md](convex.md) | `convex` | `openapi` |
 | [planetscale.md](planetscale.md) | `planetscale` | `openapi` |
 | [openai-models.md](openai-models.md) | `openai-models` | `retirements` |
 | [anthropic-models.md](anthropic-models.md) | `anthropic-models` | `retirements` |
