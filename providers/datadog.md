@@ -1,4 +1,4 @@
-# Datadog (`datadog`)
+# Datadog (`datadog/api`)
 
 ## What it watches
 

@@ -1,4 +1,4 @@
-# Textual (`textual`)
+# Textual (`textual/textual`)
 
 ## What it watches
 

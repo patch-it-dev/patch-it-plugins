@@ -1,4 +1,4 @@
-# Supabase (`supabase`)
+# Supabase (`supabase/management-api`)
 
 ## What it watches
 

@@ -1,4 +1,4 @@
-# Stripe (`stripe`)
+# Stripe (`stripe/api`)
 
 ## What it watches
 

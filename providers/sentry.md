@@ -1,4 +1,4 @@
-# Sentry (`sentry`)
+# Sentry (`sentry/api`)
 
 ## What it watches
 

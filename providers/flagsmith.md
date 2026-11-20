@@ -1,4 +1,4 @@
-# Flagsmith (`flagsmith`)
+# Flagsmith (`flagsmith/api`)
 
 ## What it watches
 

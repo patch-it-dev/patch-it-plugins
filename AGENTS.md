@@ -25,10 +25,10 @@ Refer to the service that runs these plugins as "patch-it's hosted ingestion ser
 
 - **Start a new source with `make new-plugin ARGS='--provider <id> --name <Name> --source <id> --kind <kind>'`** (`go run ./cmd/new-plugin`; [which kind](docs/which-kind.md)), then fill in every `TODO(new-plugin)`; `make todos` (part of `make check` and CI_go) fails while one is left.
 - **Fetch only through the environment** (`env.Get` or `core/kit/`). No `net/http` outside the fetch layer, no filesystem outside `testdata/`, no database.
-- **Golden test + dated source quote**: a saved copy of the real source in `testdata/`, a row in `testdata/README.md` (URL, date fetched, license, quote), and `testdata/golden/<api>.json` with the exact events.
+- **Golden test + dated source quote**: a saved copy of the real source in `testdata/`, a row in `testdata/README.md` (URL, date fetched, license, quote), and `testdata/golden/<provider>-<source>.json` with the exact events.
 - **Precision over recall.** When unsure whether something is a change, don't emit an event.
 - **One pinned drop test** per plugin: a realistic input that must produce no event.
-- **`providers/<api>.md`** for every provider, copied from `providers/_template.md`, including **Why this source**: the link, the date it was checked, why it's the best source, the alternatives not used, and a short quote.
+- **`providers/<provider>-<source>.md`** for every provider, copied from `providers/_template.md`, including **Why this source**: the link, the date it was checked, why it's the best source, the alternatives not used, and a short quote.
 - **No source, no event**: every event carries the source URL and a quote.
 - Don't edit golden files to make a test pass without explaining in the PR why the new output is right.
 
@@ -56,7 +56,7 @@ core/github/           the newest release / commit on GitHub, and a commit's SHA
 core/versions/         every version of a source: GitHub releases, tags and commits, PyPI, npm, Web Archive captures
 core/kit/  core/kit/kittest/   Unchanged, Cite, Wayback, Notices; the test kit (Mem, Pages, Ingest, Golden)
 core/extract/          what readers of prose share: RSS/Atom entries, HTML as text, dates, code spans
-core/event/  core/migrate/     the change-event types from patch-it's contract (v1 + v2), v1 -> v2
+core/event/            the change event of patch-it's contract: types, fingerprint, validation
 core/diff/ core/normalize/ core/hint/   the OpenAPI diff engine and its helpers
 plugins/<kind>/        one package per kind, with its providers: openapi (+ adapter/, one spec adapter
                        per provider), notices (+ retire/, feed/, eol/), migrationguide (+ sdkguide/,
@@ -67,7 +67,7 @@ cmd/new-plugin/        scaffolds a provider's source on a kind (make new-plugin 
 contract/fixtures/     a copy of patch-it's change-event fixtures (CI_contract checks it)
 Makefile               make check (what CI_go runs, plus the leak guard), make plugins
 docs/                  contributor docs, including writing-a-plugin.md
-providers/<api>.md     one page per provider
+providers/<provider>-<source>.md   one page per provider
 scripts/               leak_guard.py (hashed internal names), check_contract.py
 .github/               CODEOWNERS, PR template, release-notes categories, workflows
                        (CI_go, CI_dco, CI_leak_guard, CI_contract, Release)

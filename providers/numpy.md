@@ -1,4 +1,4 @@
-# NumPy (`numpy`)
+# NumPy (`numpy/numpy`)
 
 ## What it watches
 

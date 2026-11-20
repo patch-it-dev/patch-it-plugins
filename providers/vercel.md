@@ -1,4 +1,4 @@
-# Vercel (`vercel`)
+# Vercel (`vercel/api`)
 
 ## What it watches
 

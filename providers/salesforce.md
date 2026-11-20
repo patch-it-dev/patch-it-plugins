@@ -1,4 +1,4 @@
-# Salesforce (`salesforce`)
+# Salesforce (`salesforce/rest-api`)
 
 ## What it watches
 

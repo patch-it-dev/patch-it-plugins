@@ -1,4 +1,4 @@
-# Redis (`redis`)
+# Redis (`redis/commands`)
 
 ## What it watches
 

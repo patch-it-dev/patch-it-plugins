@@ -1,6 +1,6 @@
 # Providers
 
-One page per plugin id: `providers/<api>.md`. Start from [`_template.md`](_template.md). Each page says:
+One page per provider: `providers/<provider>-<source>.md`, or the provider's own page shared by its sources. Start from [`_template.md`](_template.md). Each page says:
 
 - **What the plugin watches.**
 - **Why this source:** the link the plugin reads, when it was checked, why it's the most reliable place this provider announces breaking changes, which other sources were considered and why they weren't used, and one short quote from it.

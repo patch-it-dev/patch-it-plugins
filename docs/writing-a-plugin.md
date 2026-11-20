@@ -15,7 +15,7 @@ make new-plugin ARGS='--provider acme --name Acme --category devtools --homepage
 # --kind: openapi, changelog, notices, migrationguide, catalog, apisurface
 # --reader, for a kind with several: changelog markdown|json, notices deprecations|feed, migrationguide sdk|members
 # optional: --layer api|sdk|package|runtime|ci|ai-models|infra (default: the kind's), --watches "...",
-#           --page acme (share an existing providers/ page), --api acme-api (the first name; default <provider>-<source>)
+#           --page acme (share an existing providers/ page; default <provider>-<source>)
 ```
 
 Run in a terminal without the flags, it asks for them: the provider's id, then (for a new provider) its name, category and homepage, then the source's id, kind, reader, layer, URLs, packages and what it watches. A second source of a registered provider needs only `--provider`, `--source` and `--kind`: the name, category and homepage come from the registry. One run adds one source; run it again for the next.
@@ -23,12 +23,12 @@ Run in a terminal without the flags, it asks for them: the provider's id, then (
 It writes, and lists:
 
 - the source's definition in the package its kind reads it from (`plugins/openapi/adapter/`, `plugins/notices/retire/`, `plugins/notices/feed/`, `plugins/migrationguide/sdkguide/`, `plugins/migrationguide/members/` or `plugins/<kind>/`), with the version wiring the kind needs from it: an OpenAPI adapter's `LatestTag`, `Fetch` and `Versions` to write; every other kind lists, reads and extracts versions itself;
-- its `plugin.RegisterProvider` block (the provider and the source with every metadata field, packages included) in the kind's `init` (plus the `core/migrate/` map entry that the deprecations-page and SDK-guide readers need), and the kind's import in `plugins/all` if it's a new kind;
-- `plugins/<kind>/<first name>_test.go`: the registration test, a golden test and a pinned drop test, over placeholder sources in `testdata/`, with the golden file written from them;
+- its `plugin.RegisterProvider` block (the provider and the source with every metadata field, packages included) in the kind's `init`, and the kind's import in `plugins/all` if it's a new kind;
+- `plugins/<kind>/<provider>_<source>_test.go`: the registration test, a golden test and a pinned drop test, over placeholder sources in `testdata/`, with the golden file written from them;
 - a row per saved file in that `testdata/README.md` (URL, date, license, quote to fill in);
-- `providers/<first name>.md` from the template (or nothing, with `--page`, when the provider already has one);
+- `providers/<provider>-<source>.md` from the template (or nothing, with `--page`, when the provider already has one);
 
-`go test ./...` passes right after; every place to fill in says `TODO(new-plugin)` (`grep -rn 'TODO(new-plugin)' .`), and `make check` (its `todos` step, also in CI_go) fails until none is left. It refuses a `provider/source` id or a first name that's taken, or a file it would write that exists, and then changes nothing. The old flags (`--api acme --provider Acme --format feed --source <URL>`) still work for one release.
+`go test ./...` passes right after; every place to fill in says `TODO(new-plugin)` (`grep -rn 'TODO(new-plugin)' .`), and `make check` (its `todos` step, also in CI_go) fails until none is left. It refuses a `provider/source` id that's taken, or a file it would write that exists, and then changes nothing.
 
 ## 2. Pick the source
 
@@ -95,7 +95,7 @@ A plugin implements `plugin.Plugin` (package [`core/plugin/`](../core/plugin/plu
 
 ```go
 type Plugin interface {
-    Name() string                                    // the source's old slug: --api and every event's `api`
+    Name() string                                    // the source's id, provider/source: every event's `api`
     Run(ctx context.Context, env Env) (Result, error) // the newest version against the baseline it saved last
 }
 
@@ -107,7 +107,7 @@ type Env struct {
 
 type Result struct {
     Label     string          // what was read, for the run summary
-    Events    []event.EventV2 // valid events
+    Events    []event.Event   // valid events
     Rejected  []error         // changes that failed to become valid events
     Baselines []Spec          // what was read, saved after the events
 }
@@ -129,6 +129,7 @@ Extract(ctx, env, from, to Snapshot) (Result, error)          // the changes fro
 - **Read at** a version's `Ref` (a tag, a commit SHA, an archive URL) and return the exact URL read as the snapshot's `SourceURL`: it's the events' citation.
 - **Extract** sets `previous_version` to `from`'s version; `from` may be zero (nothing before). It returns no baselines.
 - `Run` is built from the same parts: the newest version, extracted against the last baseline.
+- Test a version pair with `kittest.Pair(ctx, env, sink, plugin, from, to)`: both versions read, the change extracted, its events stored.
 
 A living page with no versions of its own (a deprecations page, a feed: a `notices` source) is read as it is now by `Run`, and each change to it is a dated version. Its history comes from the Web Archive: the `notices` kind lists every distinct capture (`WaybackCaptures`), reads each, and extracts what each one added, citing that capture, so a year of it can be backfilled by date with no stored copies.
 
@@ -157,7 +158,7 @@ func init() {
 }
 ```
 
-`RegisterProvider` panics on missing metadata, a duplicate id, or a provider registered twice with a different name, category or homepage (a provider with sources in two kinds repeats the same ones). `plugin.Lookup` and `plugin.LookupSource` find a source by `provider/source` or by its old slug (its first name, which events carry in `api` and fingerprints hash).
+`RegisterProvider` panics on missing metadata, a duplicate id, or a provider registered twice with a different name, category or homepage (a provider with sources in two kinds repeats the same ones). `plugin.Lookup` and `plugin.LookupSource` find a source by its id, `provider/source`. The plugin's `Name` is that id: what every event carries in `api`, and what the fingerprint hashes.
 
 `Packages` are the published packages the source covers, `<ecosystem>:<name>` (`pypi:stripe`, `npm:@vercel/sdk`): the package itself for a package or SDK source, the provider's official SDKs for an API source. `plugin.ForPackage` finds a package's sources, so a customer's lockfile maps to sources with no table kept anywhere else. List only names you checked; none is fine.
 
@@ -166,13 +167,12 @@ func init() {
 - Fetch **only** with `env.Get`. It caches by `ETag` / `Last-Modified`, retries, and in tests serves saved files. `CI_go` fails a package outside `core/fetch/`, `core/kit/` and `plugins/openapi/adapter/` that imports `net/http`.
 - `kit.Unchanged(env, api, body)`: true when the page hashes to the last baseline. Return early: an unchanged source costs one GET and nothing else.
 - `kit.Cite(ctx, archiver, url, read, want)`: for a **live page**. Takes a Wayback Machine snapshot, reads it with your own reader and checks it says exactly what the live page said. Make the events from the snapshot and cite its URL. No snapshot, no events.
-- `plugin.Baseline(api, version, tag, sourceURL, content, replay, now)`: the baseline `Run` returns.
+- `plugin.Baseline(api, version, tag, sourceURL, content, now)`: the baseline `Run` returns.
 - `github.LatestRelease`, `github.LatestCommit`, `github.Commit`, `github.Head` ([`core/github`](../core/github/github.go)): the newest release or commit on GitHub, one place; don't decode GitHub's responses yourself.
-- Older kinds build v1 `event.ChangeEvent`s and convert them with `migrate.Fresh`; new code builds `event.EventV2` directly.
 
 ### Events
 
-The event format is [patch-it's change-event contract](https://github.com/patch-it-dev/patch-it/tree/main/docs/contract); `core/event/` is its Go binding. Every event has a typed `subject` (`api_operation`, `model`, `package_release`, `ci_runtime`), a `change_type` (`breaking`, `deprecation`, …), a `version`, a `fingerprint` (`event.FingerprintV2`), and **a `source_url` and `source_excerpt`: no source, no event**. Call `Validate()`; an invalid event goes in `Result.Rejected`, not `Events`.
+The event format is [patch-it's change-event contract](https://github.com/patch-it-dev/patch-it/tree/main/docs/contract); `core/event/` is its Go binding. Every event has a typed `subject` (`api_operation`, `model`, `package_release`, `ci_runtime`), a `change_type` (`breaking`, `deprecation`, …), a `version`, a `fingerprint` (`event.Fingerprint`), and **a `source_url` and `source_excerpt`: no source, no event**. Call `Validate()`; an invalid event goes in `Result.Rejected`, not `Events`.
 
 ## 5. Save the source
 

@@ -1,4 +1,4 @@
-# PostHog (`posthog`)
+# PostHog (`posthog/python-sdk`)
 
 ## What it watches
 

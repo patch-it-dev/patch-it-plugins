@@ -1,4 +1,4 @@
-# OpenAI Python SDK (`openai`)
+# OpenAI Python SDK (`openai/python-sdk`)
 
 ## What it watches
 

@@ -1,4 +1,4 @@
-# PlanetScale (`planetscale`)
+# PlanetScale (`planetscale/api`)
 
 ## What it watches
 

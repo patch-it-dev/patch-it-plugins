@@ -1,4 +1,4 @@
-# Appwrite (`appwrite`)
+# Appwrite (`appwrite/api`)
 
 ## What it watches
 

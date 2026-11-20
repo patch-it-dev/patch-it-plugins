@@ -1,4 +1,4 @@
-# Elasticsearch (`elasticsearch`)
+# Elasticsearch (`elastic/elasticsearch-api`)
 
 ## What it watches
 

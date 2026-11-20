@@ -1,4 +1,4 @@
-# Anthropic model retirements (`anthropic-models`)
+# Anthropic model retirements (`anthropic/models`)
 
 ## What it watches
 

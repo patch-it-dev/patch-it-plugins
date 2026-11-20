@@ -1,4 +1,4 @@
-# MongoDB Atlas (`mongodb-atlas`)
+# MongoDB Atlas (`mongodb/atlas-admin-api`)
 
 ## What it watches
 

@@ -1,4 +1,4 @@
-# OpenAI model retirements (`openai-models`)
+# OpenAI model retirements (`openai/models`)
 
 ## What it watches
 

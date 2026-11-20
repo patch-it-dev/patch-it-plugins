@@ -1,6 +1,6 @@
 # How it works
 
-A **provider** (Stripe, OpenAI, GitHub…) has one category and one or more **sources**: each one place it announces changes (an OpenAPI spec repo, a changelog, a deprecations page, a feed), read by one **kind** of plugin (`plugins/<kind>/`), at one **layer** of a customer's stack. A source's id is `provider/source` (`stripe/api`, `openai/models`); its old slug (`stripe`, `openai-models`) is what events carry in `api` until patch-it's change-event contract switches to source ids. Every provider and source is registered in code with its metadata (`plugin.RegisterProvider`): that registration is the only list.
+A **provider** (Stripe, OpenAI, GitHub…) has one category and one or more **sources**: each one place it announces changes (an OpenAPI spec repo, a changelog, a deprecations page, a feed), read by one **kind** of plugin (`plugins/<kind>/`), at one **layer** of a customer's stack. A source's id is `provider/source` (`stripe/api`, `openai/models`): what its events carry in `api`. Every provider and source is registered in code with its metadata (`plugin.RegisterProvider`): that registration is the only list.
 
 ## What a plugin does
 
@@ -24,7 +24,7 @@ There's no list in this repo: `make plugins` prints every provider and source fr
 | [`plugins/`](../plugins/) | One package per kind, with its providers (openapi, changelog, notices, migrationguide, catalog, apisurface); `plugins/all` imports every one |
 | [`cmd/new-plugin/`](../cmd/new-plugin/), [`cmd/list-plugins/`](../cmd/list-plugins/) | The starter for a new provider; the list of providers and sources, printed from the registry |
 | [`core/kit/`](../core/kit/), [`core/kit/kittest/`](../core/kit/kittest/), [`core/github/`](../core/github/), [`core/extract/`](../core/extract/) | What plugins share (the unchanged-page check, Wayback citing, the newest release or commit on GitHub, RSS/Atom and HTML text helpers) and the test kit (in-memory store, saved pages, golden files) |
-| [`core/event/`](../core/event/), [`core/migrate/`](../core/migrate/) | The change-event types of [patch-it's contract](https://github.com/patch-it-dev/patch-it/tree/main/docs/contract), and the v1 → v2 conversion |
+| [`core/event/`](../core/event/) | The change event of [patch-it's contract](https://github.com/patch-it-dev/patch-it/tree/main/docs/contract): its types, fingerprint and validation |
 | [`core/diff/`](../core/diff/), [`core/normalize/`](../core/normalize/), [`core/hint/`](../core/hint/), [`plugins/openapi/adapter/`](../plugins/openapi/adapter/) | The OpenAPI diff engine: compare two specs, turn the changes into events, attach changelog hints; one adapter per spec provider |
 | [`plugins/notices/retire/`](../plugins/notices/retire/), [`plugins/notices/feed/`](../plugins/notices/feed/), [`plugins/notices/eol/`](../plugins/notices/eol/), [`plugins/migrationguide/sdkguide/`](../plugins/migrationguide/sdkguide/), [`plugins/migrationguide/members/`](../plugins/migrationguide/members/), [`core/fetch/`](../core/fetch/) | The notices readers (deprecations pages, feeds, end-of-life tables) and the migration-guide readers (removed parameters, removed members); the HTTP fetch and cache |
 | [`contract/fixtures/`](../contract/) | A copy of patch-it's change-event fixtures |

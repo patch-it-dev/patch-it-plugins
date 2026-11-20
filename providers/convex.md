@@ -1,4 +1,4 @@
-# Convex (`convex`)
+# Convex (`convex/deployment-api`)
 
 ## What it watches
 

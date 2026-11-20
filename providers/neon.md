@@ -1,4 +1,4 @@
-# Neon (`neon`)
+# Neon (`neon/api`)
 
 ## What it watches
 

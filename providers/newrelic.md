@@ -1,4 +1,4 @@
-# New Relic (`newrelic`)
+# New Relic (`newrelic/python-agent`)
 
 ## What it watches
 

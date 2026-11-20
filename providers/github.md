@@ -1,4 +1,4 @@
-# GitHub REST API (`github`)
+# GitHub REST API (`github/rest-api`)
 
 ## What it watches
 

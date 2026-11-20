@@ -1,4 +1,4 @@
-# Algolia (`algolia-search`, `algolia-ingestion`, `algolia-recommend`)
+# Algolia (`algolia/search-api`, `algolia/ingestion-api`, `algolia/recommend-api`)
 
 ## What it watches
 

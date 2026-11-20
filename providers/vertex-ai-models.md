@@ -1,4 +1,4 @@
-# Vertex AI generative models (`vertex-ai-models`)
+# Vertex AI generative models (`google/vertex-ai-models`)
 
 ## What it watches
 

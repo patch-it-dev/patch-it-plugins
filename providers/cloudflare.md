@@ -1,4 +1,4 @@
-# Cloudflare (`cloudflare`)
+# Cloudflare (`cloudflare/api`)
 
 ## What it watches
 

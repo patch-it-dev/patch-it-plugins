@@ -1,4 +1,4 @@
-# Anthropic Python SDK (`anthropic`)
+# Anthropic Python SDK (`anthropic/python-sdk`)
 
 ## What it watches
 

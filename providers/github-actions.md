@@ -1,4 +1,4 @@
-# GitHub Actions runner images (`github-actions`)
+# GitHub Actions runner images (`github/actions`)
 
 ## What it watches
 

@@ -1,4 +1,4 @@
-# GitLab REST API (`gitlab`)
+# GitLab REST API (`gitlab/rest-api`)
 
 ## What it watches
 
