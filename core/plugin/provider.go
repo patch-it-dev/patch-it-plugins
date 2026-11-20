@@ -204,7 +204,7 @@ func (p Provider) check() error {
 			return fmt.Errorf("source %q has no URLs", id)
 		case !strings.HasPrefix(s.Page, "providers/") || !strings.HasSuffix(s.Page, ".md"):
 			return fmt.Errorf("source %q: Page %q isn't providers/<name>.md", id, s.Page)
-		case s.Kind != "" && s.Kind != KindOf(s.Plugin):
+		case s.Kind != "" && CanonicalKind(s.Kind) != KindOf(s.Plugin):
 			return fmt.Errorf("source %q: Kind %q, but its plugin is in plugins/%s", id, s.Kind, KindOf(s.Plugin))
 		}
 		for _, u := range s.URLs {
@@ -230,6 +230,22 @@ func KindOf(p Plugin) string {
 		t = t.Elem()
 	}
 	return path.Base(t.PkgPath())
+}
+
+// mergedKinds are the kinds merged into another, by their old name: what
+// they read is read by the new kind, with the same events.
+var mergedKinds = map[string]string{
+	"removedmembers": "migrationguide",
+}
+
+// CanonicalKind is the kind name means now: name itself, or, for a kind
+// merged into another ("removedmembers"), the kind that reads its sources
+// now ("migrationguide"). Code that still says an old kind keeps working.
+func CanonicalKind(name string) string {
+	if k, ok := mergedKinds[name]; ok {
+		return k
+	}
+	return name
 }
 
 // Providers are the registered providers with their sources, sorted by id

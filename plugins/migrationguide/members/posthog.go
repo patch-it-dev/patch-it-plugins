@@ -1,4 +1,4 @@
-package removedmembers
+package members
 
 // PostHog8 is the posthog Python SDK's guide to 8.0.0,
 // docs/migration-7.x-to-8.0.md at tag posthog-v8.0.0 (commit

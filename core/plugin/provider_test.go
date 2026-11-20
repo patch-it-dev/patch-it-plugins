@@ -82,3 +82,16 @@ func TestRegisterProviderRefusesConflictingProvider(t *testing.T) {
 	p.Name = "Acme Corp"
 	RegisterProvider(p)
 }
+
+// A kind merged into another still names it: a source registered with the
+// old name passes the check, and the old name reads as the new one.
+func TestMergedKindsKeepWorking(t *testing.T) {
+	for old, now := range mergedKinds {
+		if got := CanonicalKind(old); got != now {
+			t.Errorf("CanonicalKind(%q) = %q, want %q", old, got, now)
+		}
+	}
+	if got := CanonicalKind("openapi"); got != "openapi" {
+		t.Errorf("CanonicalKind(openapi) = %q", got)
+	}
+}

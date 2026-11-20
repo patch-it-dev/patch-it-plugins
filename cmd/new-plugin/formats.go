@@ -4,6 +4,7 @@ package main
 // definition goes, the line that registers it, the placeholder sources its
 // test reads, and how the test runs it.
 type formatSpec struct {
+	kind     string            // the kind: the plugins/<kind> package that registers and tests it
 	layer    string            // the source's default layer (plugin.Layers())
 	defDir   string            // the package directory the definition goes in
 	def      string            // the definition file (template)
@@ -30,6 +31,7 @@ const todo = "TODO(new-plugin)"
 
 var formats = map[string]formatSpec{
 	"feed": {
+		kind:   "feed",
 		layer:  "api",
 		defDir: "plugins/feed",
 		def: `package feed
@@ -80,6 +82,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 	},
 
 	"retirements": {
+		kind:   "retirements",
 		layer:  "ai-models",
 		defDir: "plugins/retirements/retire",
 		def: `package retire
@@ -153,6 +156,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 	},
 
 	"migrationguide": {
+		kind:   "migrationguide",
 		layer:  "sdk",
 		defDir: "plugins/migrationguide/sdkguide",
 		def: `package sdkguide
@@ -219,9 +223,10 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 	},
 
 	"removedmembers": {
+		kind:   "migrationguide",
 		layer:  "package",
-		defDir: "plugins/removedmembers",
-		def: `package removedmembers
+		defDir: "plugins/migrationguide/members",
+		def: `package members
 
 // {{.Ident}} is {{.Provider}}'s migration guide to a release, with its table
 // of removed members.
@@ -238,8 +243,8 @@ var {{.Ident}} = Guide{
 	Section: "Removed members",
 }
 `,
-		register: `plugin.Register(Plugin{Guide: {{.Ident}}})`,
-		pluginOf: `Plugin{Guide: {{.Ident}}}`,
+		register: `plugin.Register(Plugin{Guide: members.{{.Ident}}})`,
+		pluginOf: `Plugin{Guide: members.{{.Ident}}}`,
 		fixtures: map[string]string{"{{.File}}-migration-guide.rst": `.. ` + todo + `: a placeholder. Replace it with a real copy of the guide at the release tag and list it in README.md.
 
 Removed members
@@ -278,7 +283,7 @@ placeholder_elsewhere   Not in the main table.
 func Test{{.Ident}}DropsANonChange(t *testing.T) {
 	for _, e := range {{.Lower}}Ingest(t, {{.Lower}}Drop) {
 		if slices.Contains(e.Subject.Symbols, "placeholder_elsewhere") {
-			t.Errorf("event for placeholder_elsewhere, which isn't under %q", {{.Ident}}.Section)
+			t.Errorf("event for placeholder_elsewhere, which isn't under %q", members.{{.Ident}}.Section)
 		}
 	}
 }
@@ -287,13 +292,14 @@ func Test{{.Ident}}DropsANonChange(t *testing.T) {
 		ingest: `// {{.Lower}}Ingest runs the plugin over a saved copy of the guide.
 func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 	t.Helper()
-	return kittest.Ingest(t, Plugin{Guide: {{.Ident}}}, kittest.Pages{ {{.Ident}}.URL(): file})
+	return kittest.Ingest(t, Plugin{Guide: members.{{.Ident}}}, kittest.Pages{members.{{.Ident}}.URL(): file})
 }
 `,
-		imports: []string{"slices", "github.com/patch-it-dev/patch-it-plugins/core/event"},
+		imports: []string{"slices", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide/members"},
 	},
 
 	"changelog": {
+		kind:   "changelog",
 		layer:  "package",
 		defDir: "plugins/changelog",
 		def: `package changelog
@@ -335,6 +341,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 	},
 
 	"apichangelog": {
+		kind:   "apichangelog",
 		layer:  "api",
 		defDir: "plugins/apichangelog",
 		def: `package apichangelog
@@ -372,6 +379,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 	},
 
 	"catalog": {
+		kind:   "catalog",
 		layer:  "runtime",
 		defDir: "plugins/catalog",
 		def: `package catalog
@@ -421,6 +429,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 	},
 
 	"openapi": {
+		kind:   "openapi",
 		layer:  "api",
 		defDir: "plugins/openapi/adapter",
 		def: `package adapter
@@ -497,7 +506,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 }
 
 // testFile is the generated test, the same for every format.
-const testFile = `package {{.Format}}
+const testFile = `package {{.Kind}}
 
 import (
 {{range .Imports}}	"{{.}}"
@@ -518,7 +527,7 @@ func Test{{.Ident}}RegistersItself(t *testing.T) {
 // The golden test: the saved source in, every event out.
 // ` + todo + `: once the source is real, run
 //
-//	go test ./plugins/{{.Format}} -run Test{{.Ident}}Golden -update
+//	go test ./plugins/{{.Kind}} -run Test{{.Ident}}Golden -update
 //
 // and read testdata/golden/{{.ID}}.json like code: every event in it is a
 // pull request someone may get.

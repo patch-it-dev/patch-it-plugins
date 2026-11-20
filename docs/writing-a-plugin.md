@@ -10,7 +10,7 @@ Pick the source and the kind that reads it (steps 2 and 3), then let the starter
 
 ```sh
 go run ./cmd/new-plugin --api acme --provider Acme --format openapi
-# --format: openapi, retirements, migrationguide, removedmembers, changelog, feed, apichangelog, catalog
+# --format: openapi, retirements, migrationguide, removedmembers (a migrationguide source), changelog, feed, apichangelog, catalog
 # optional: --source https://... (the provider's source), --watches "...", --layer api|sdk|package|runtime|ci|ai-models|infra,
 #           --page acme (a second source of a provider shares its page in providers/)
 ```
@@ -76,8 +76,7 @@ Write the numbers on the provider page, as `providers/vercel.md` does for its sp
 |---|---|---|
 | `plugins/openapi` | An OpenAPI spec per release, diffed with `core/diff/` and turned into events by `core/normalize/` | An `adapter.Adapter` in `plugins/openapi/adapter/` (latest tag, fetch a tag's spec; `Versions` to list every release) and a `plugin.RegisterProvider` block |
 | `plugins/retirements` | A model provider's deprecations page (a table of date, model, replacement) | A `retire.Page` in `plugins/retirements/retire/providers.go` |
-| `plugins/migrationguide` | An SDK's migration guide at the tag of each new major (removed request parameters) | A `sdkguide.Guide` in `plugins/migrationguide/sdkguide/` |
-| `plugins/removedmembers` | A package's table of removed members at a release tag (an RST simple table or a Markdown pipe table) | A `removedmembers.Guide` |
+| `plugins/migrationguide` | A guide that lists what a release removed, at the release's tag: an SDK's migration guide per new major (removed request parameters), or a package's table of removed members (an RST simple table or a Markdown pipe table) | A `sdkguide.Guide` in `plugins/migrationguide/sdkguide/`, or a `members.Guide` in `plugins/migrationguide/members/` |
 | `plugins/changelog` | A `CHANGELOG.md` / `CHANGES.rst` / `HISTORY.rst`, each release's section at its tag (releases from PyPI or npm) | A `changelog.File` with its `TagPrefix` |
 | `plugins/feed` | An RSS or Atom feed | A `feed.Feed` with a reader for that vendor's entries |
 | `plugins/catalog` | A flat JSON catalog, one entry per name, with no release tags to pin — a commit SHA stands in | A `catalog.Catalog`, diffed between two snapshots for names that disappeared entirely |

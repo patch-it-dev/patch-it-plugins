@@ -26,9 +26,9 @@ There's no list in this repo: `make plugins` prints every provider and source fr
 | [`core/kit/`](../core/kit/), [`core/kit/kittest/`](../core/kit/kittest/), [`core/github/`](../core/github/) | What plugins share (the unchanged-page check, Wayback citing, the newest release or commit on GitHub) and the test kit (in-memory store, saved pages, golden files) |
 | [`core/event/`](../core/event/), [`core/migrate/`](../core/migrate/) | The change-event types of [patch-it's contract](https://github.com/patch-it-dev/patch-it/tree/main/docs/contract), and the v1 → v2 conversion |
 | [`core/diff/`](../core/diff/), [`core/normalize/`](../core/normalize/), [`core/hint/`](../core/hint/), [`plugins/openapi/adapter/`](../plugins/openapi/adapter/) | The OpenAPI diff engine: compare two specs, turn the changes into events, attach changelog hints; one adapter per spec provider |
-| [`plugins/retirements/retire/`](../plugins/retirements/retire/), [`plugins/migrationguide/sdkguide/`](../plugins/migrationguide/sdkguide/), [`core/fetch/`](../core/fetch/) | The deprecations-page and migration-guide readers; the HTTP fetch and cache |
+| [`plugins/retirements/retire/`](../plugins/retirements/retire/), [`plugins/migrationguide/sdkguide/`](../plugins/migrationguide/sdkguide/), [`plugins/migrationguide/members/`](../plugins/migrationguide/members/), [`core/fetch/`](../core/fetch/) | The deprecations-page and migration-guide readers (removed parameters, removed members); the HTTP fetch and cache |
 | [`contract/fixtures/`](../contract/) | A copy of patch-it's change-event fixtures |
-| `plugin/`, `event/`, `fetch/`, `migrate/`, `kit/`, `kit/kittest/`, `retire/`, `sdkguide/` | Deprecated: the old import paths, forwarding to the packages above until code that imports them moves |
+| `plugin/`, `event/`, `fetch/`, `migrate/`, `kit/`, `kit/kittest/`, `retire/`, `sdkguide/`, `plugins/removedmembers/` | Deprecated: the old import paths, forwarding to the packages above until code that imports them moves |
 | [`providers/`](../providers/) | One page per provider: why that source, what the plugin reads |
 | [`docs/`](./) | [How to write a plugin](writing-a-plugin.md), the [README template](README-template.md) patch-it's public repos share |
 

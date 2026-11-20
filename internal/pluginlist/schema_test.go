@@ -95,7 +95,8 @@ func TestSchemaEnumsMatchTheRegistry(t *testing.T) {
 		t.Fatal(err)
 	}
 	for _, k := range kinds {
-		if name := filepath.Base(k); name != "all" && !slices.Contains(src["kind"].Enum, name) {
+		// A merged kind's old package only forwards: no source has its name.
+		if name := filepath.Base(k); name != "all" && plugin.CanonicalKind(name) == name && !slices.Contains(src["kind"].Enum, name) {
 			t.Errorf("kind %s is missing from the schema's kind enum", name)
 		}
 	}

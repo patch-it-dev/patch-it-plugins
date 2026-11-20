@@ -4,7 +4,7 @@
 
 Members removed from the `posthog` Python SDK in 8.0.0 (`CaptureMode`, `posthog.capture_v1`, `posthog.capture_v1.CaptureV1Error`, `posthog.request.batch_post`…): code using one breaks on the upgrade. One event per member. Pinned to that release.
 
-Format plugin: `removedmembers` (`plugins/removedmembers`), reading a Markdown table.
+Kind: `migrationguide` (`plugins/migrationguide`), with the removed-members reader (`plugins/migrationguide/members`), reading a Markdown table.
 
 ## Why this source
 

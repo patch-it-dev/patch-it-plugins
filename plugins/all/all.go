@@ -11,6 +11,5 @@ import (
 	_ "github.com/patch-it-dev/patch-it-plugins/plugins/feed"
 	_ "github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide"
 	_ "github.com/patch-it-dev/patch-it-plugins/plugins/openapi"
-	_ "github.com/patch-it-dev/patch-it-plugins/plugins/removedmembers"
 	_ "github.com/patch-it-dev/patch-it-plugins/plugins/retirements"
 )

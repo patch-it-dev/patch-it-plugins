@@ -1,6 +1,6 @@
 # Saved removed-members guides
 
-The golden files under `golden/` are what the plugin stores from them (`go test ./plugins/removedmembers -update`).
+The golden files, `../../testdata/golden/{numpy-2.0.0,posthog-8.0.0,newrelic-11.0.0}.json`, are what the migration-guide kind stores from them (`go test ./plugins/migrationguide/members -update`).
 
 | File | URL | Fetched | License | Quote |
 |---|---|---|---|---|

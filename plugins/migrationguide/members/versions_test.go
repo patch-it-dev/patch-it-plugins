@@ -1,4 +1,4 @@
-package removedmembers
+package members_test
 
 import (
 	"context"
@@ -8,6 +8,9 @@ import (
 
 	"github.com/patch-it-dev/patch-it-plugins/core/kit/kittest"
 	"github.com/patch-it-dev/patch-it-plugins/core/versions"
+
+	"github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide"
+	. "github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide/members" // the reader under test
 )
 
 // The package's releases come from PyPI; only the pair into the release the
@@ -17,7 +20,7 @@ func TestOnlyTheGuidesReleaseHasEvents(t *testing.T) {
 		"https://pypi.org/pypi/numpy/json": "testdata/pypi-numpy-excerpt.json",
 		NumPy2.URL():                       "testdata/numpy_2_0_migration_guide-v2.0.0.rst",
 	})
-	p := Plugin{Guide: NumPy2}
+	p := migrationguide.Plugin{Guide: NumPy2}
 	ctx := context.Background()
 	vs, err := p.ListVersions(ctx, env)
 	if err != nil {
@@ -54,7 +57,7 @@ func TestOnlyTheGuidesReleaseHasEvents(t *testing.T) {
 // Each release's ref follows the guide's tag shape.
 func TestTagsFollowTheGuide(t *testing.T) {
 	for g, want := range map[*Guide]string{&NumPy2: "v2.0.0", &PostHog8: "posthog-v8.0.0", &NewRelic11: "f0b4f817bf9a7b76a78e26609369a8a7ce764c8e"} {
-		if got := g.tag(); got != want {
+		if got := g.Tag(); got != want {
 			t.Errorf("%s: tag %q, want %q", g.Package, got, want)
 		}
 	}

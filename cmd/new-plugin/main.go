@@ -94,10 +94,10 @@ var (
 
 // data is what the templates fill in.
 type data struct {
-	ID, Ident, Lower, Provider, Source, File, Format string
-	Slug                                             string // the provider, lowercase: a model subject's provider
-	SourceFile, DropFile, PluginOf, Ingest, Drop     string
-	Imports                                          []string
+	ID, Ident, Lower, Provider, Source, File, Format, Kind string
+	Slug                                                   string // the provider, lowercase: a model subject's provider
+	SourceFile, DropFile, PluginOf, Ingest, Drop           string
+	Imports                                                []string
 }
 
 // Run scaffolds the plugin, or changes nothing and says why.
@@ -143,7 +143,7 @@ func Run(o Options, out io.Writer) error {
 		return fmt.Errorf("a plugin named %q is already registered: pick another --api", o.API)
 	}
 
-	d := data{ID: o.API, Provider: o.Provider, Source: o.Source, Format: o.Format}
+	d := data{ID: o.API, Provider: o.Provider, Source: o.Source, Format: o.Format, Kind: f.kind}
 	d.Ident = ident(o.API)
 	d.Lower = string(unicode.ToLower(rune(d.Ident[0]))) + d.Ident[1:]
 	d.File = fileBase(o.API)
@@ -156,7 +156,7 @@ func Run(o Options, out io.Writer) error {
 	d.Imports = append(slices.Clone(f.imports), "testing", "github.com/patch-it-dev/patch-it-plugins/core/kit/kittest")
 	slices.Sort(d.Imports)
 
-	pkgDir := "plugins/" + o.Format
+	pkgDir := "plugins/" + f.kind
 	writes := map[string][]byte{}
 	add := func(path string, b []byte) { writes[path] = b }
 
@@ -267,13 +267,13 @@ func Run(o Options, out io.Writer) error {
 const nextSteps = `
 Next steps (every place to fill in says TODO(new-plugin): grep -rn 'TODO(new-plugin)' .):
   1. Save a real copy of the source over the placeholder:
-       curl -fsSL -o plugins/{{.Format}}/testdata/{{.SourceFile}} '<the source URL>'
-     and a realistic input that must not become an event as plugins/{{.Format}}/testdata/{{.DropFile}}.
-     Fill in their rows in plugins/{{.Format}}/testdata/README.md (URL, date fetched, license, quote).
+       curl -fsSL -o plugins/{{.Kind}}/testdata/{{.SourceFile}} '<the source URL>'
+     and a realistic input that must not become an event as plugins/{{.Kind}}/testdata/{{.DropFile}}.
+     Fill in their rows in plugins/{{.Kind}}/testdata/README.md (URL, date fetched, license, quote).
   2. Fill in the definition (the TODOs in the file next to the Register line for {{.Ident}}).{{if .Extra}}
      {{.Extra}}{{end}}
   3. Write the golden file, then read it like code:
-       go test ./plugins/{{.Format}} -run Test{{.Ident}} -update
+       go test ./plugins/{{.Kind}} -run Test{{.Ident}} -update
   4. {{if .Shared}}Add {{.ID}} to providers/{{.Page}}.md (shared with the provider's other plugins){{else}}Fill in providers/{{.Page}}.md{{end}}, above all "Why this source", and the source's
      metadata in its RegisterProvider block (what it watches, its URLs; a new provider's category and
      homepage). go run ./cmd/list-plugins prints the list with it; there is no list to edit.

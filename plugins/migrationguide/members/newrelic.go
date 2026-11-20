@@ -1,4 +1,4 @@
-package removedmembers
+package members
 
 // NewRelic11 is New Relic's release note for the Python agent 11.0.0 (the
 // `newrelic` package on PyPI), in newrelic/docs-website at commit

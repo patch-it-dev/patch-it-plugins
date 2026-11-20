@@ -1,4 +1,4 @@
-package removedmembers
+package members_test
 
 import (
 	"os"
@@ -9,6 +9,9 @@ import (
 
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
 	"github.com/patch-it-dev/patch-it-plugins/core/kit/kittest"
+
+	"github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide"
+	. "github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide/members" // the reader under test
 )
 
 // An excerpt of the release note at commit f0b4f817 (fetched 2026-11-19): the
@@ -16,12 +19,12 @@ import (
 const newrelicSource = "testdata/python-agent-110000-f0b4f817.mdx"
 
 func TestNewRelicRegistersItself(t *testing.T) {
-	kittest.Registered(t, Plugin{Guide: NewRelic11})
+	kittest.Registered(t, migrationguide.Plugin{Guide: NewRelic11})
 }
 
 // The golden test: the saved excerpt in, every event out.
 func TestNewRelicGolden(t *testing.T) {
-	kittest.Golden(t, "testdata/golden/newrelic-11.0.0.json", newrelicIngest(t))
+	kittest.Golden(t, "../testdata/golden/newrelic-11.0.0.json", newrelicIngest(t))
 }
 
 // Each of the "Legacy API" table's 8 rows, decided: a rename only for the two
@@ -171,8 +174,8 @@ func TestSoleNameReadsALinkedName(t *testing.T) {
 		"[`x=1`](/docs/x)":                      "",
 		"[`a`](/a) and [`b`](/b)":               "",
 	} {
-		if got := soleName(cell, "acme"); got != want {
-			t.Errorf("soleName(%q) = %q, want %q", cell, got, want)
+		if got := SoleName(cell, "acme"); got != want {
+			t.Errorf("SoleName(%q) = %q, want %q", cell, got, want)
 		}
 	}
 }
@@ -192,7 +195,7 @@ func TestDropInsLimitsRenames(t *testing.T) {
 		Paths: map[string]string{"old_a": "mod.old_a", "new_a": "mod.new_a"}}
 	run := func(g Guide) map[string]string {
 		out := map[string]string{}
-		for _, e := range kittest.Ingest(t, Plugin{Guide: g}, kittest.Pages{g.URL(): writeTemp(t, page)}) {
+		for _, e := range kittest.Ingest(t, migrationguide.Plugin{Guide: g}, kittest.Pages{g.URL(): writeTemp(t, page)}) {
 			out[e.Subject.Symbols[0]] = string(e.Subject.Change) + " " + e.Subject.Replacement
 		}
 		return out
@@ -233,7 +236,7 @@ func readNames(t *testing.T, page string, g Guide) []string {
 // newrelicIngest runs the plugin over the saved excerpt.
 func newrelicIngest(t *testing.T) []event.EventV2 {
 	t.Helper()
-	return kittest.Ingest(t, Plugin{Guide: NewRelic11}, kittest.Pages{NewRelic11.URL(): newrelicSource})
+	return kittest.Ingest(t, migrationguide.Plugin{Guide: NewRelic11}, kittest.Pages{NewRelic11.URL(): newrelicSource})
 }
 
 // The hint is shown in a pull request or an issue, where a site-relative link
@@ -242,10 +245,10 @@ func TestAbsoluteLinks(t *testing.T) {
 	g := Guide{LinkBase: "https://docs.newrelic.com/"}
 	in := "Replacement API: [`notice_error()`](/docs/x/notice_error), see [here](https://example.test/y)"
 	want := "Replacement API: [`notice_error()`](https://docs.newrelic.com/docs/x/notice_error), see [here](https://example.test/y)"
-	if got := g.absoluteLinks(in); got != want {
+	if got := g.AbsoluteLinks(in); got != want {
 		t.Errorf("got %q, want %q", got, want)
 	}
-	if got := (Guide{}).absoluteLinks(in); got != in {
+	if got := (Guide{}).AbsoluteLinks(in); got != in {
 		t.Errorf("no LinkBase changed the hint: %q", got)
 	}
 }

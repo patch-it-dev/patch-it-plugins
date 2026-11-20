@@ -1,4 +1,4 @@
-package removedmembers
+package members_test
 
 import (
 	"slices"
@@ -7,18 +7,21 @@ import (
 
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
 	"github.com/patch-it-dev/patch-it-plugins/core/kit/kittest"
+
+	"github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide"
+	. "github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide/members" // the reader under test
 )
 
 // The guide as published at tag posthog-v8.0.0 (fetched 2026-11-19), whole.
 const posthogSource = "testdata/migration-7.x-to-8.0-posthog-v8.0.0.md"
 
 func TestPostHogRegistersItself(t *testing.T) {
-	kittest.Registered(t, Plugin{Guide: PostHog8})
+	kittest.Registered(t, migrationguide.Plugin{Guide: PostHog8})
 }
 
 // The golden test: the saved guide in, every event out.
 func TestPostHogGolden(t *testing.T) {
-	kittest.Golden(t, "testdata/golden/posthog-8.0.0.json", posthogIngest(t))
+	kittest.Golden(t, "../testdata/golden/posthog-8.0.0.json", posthogIngest(t))
 }
 
 // Each of the "Fix removed APIs" table's 7 rows, decided: every name is a
@@ -155,8 +158,8 @@ func TestPipeCells(t *testing.T) {
 		"| `request.batch_post`, `EVENTS_ENDPOINT` |": {"`request.batch_post`, `EVENTS_ENDPOINT`"},
 		"| one | two | three |":                       {"one", "two", "three"},
 	} {
-		if got := pipeCells(row); !slices.Equal(got, want) {
-			t.Errorf("pipeCells(%q) = %q, want %q", row, got, want)
+		if got := PipeCells(row); !slices.Equal(got, want) {
+			t.Errorf("PipeCells(%q) = %q, want %q", row, got, want)
 		}
 	}
 }
@@ -233,5 +236,5 @@ func TestMarkdownTable(t *testing.T) {
 // posthogIngest runs the plugin over the saved guide.
 func posthogIngest(t *testing.T) []event.EventV2 {
 	t.Helper()
-	return kittest.Ingest(t, Plugin{Guide: PostHog8}, kittest.Pages{PostHog8.URL(): posthogSource})
+	return kittest.Ingest(t, migrationguide.Plugin{Guide: PostHog8}, kittest.Pages{PostHog8.URL(): posthogSource})
 }
