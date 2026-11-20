@@ -21,7 +21,7 @@ You need Go (the version in `go.mod`), `make` and Python 3.
    ```
 2. **Fill in every `TODO(new-plugin)`**: the reader, the provider and source metadata in its `plugin.RegisterProvider` block, a saved copy of the source in `testdata/`, and "Why this source" in `providers/acme.md`. Then write the golden file and read it like code:
    ```sh
-   go test ./plugins/feed -run TestAcme -update
+   go test ./plugins/notices -run TestAcme -update
    ```
 3. **Check it the way CI will, and open the PR** (`git commit -s`, one provider per PR):
    ```sh

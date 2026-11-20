@@ -16,7 +16,7 @@ import (
 
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
 	"github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide/sdkguide"
-	"github.com/patch-it-dev/patch-it-plugins/plugins/retirements/retire"
+	"github.com/patch-it-dev/patch-it-plugins/plugins/notices/retire"
 )
 
 // providers are the model retirement slugs and who retires the models.

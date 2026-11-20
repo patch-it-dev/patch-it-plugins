@@ -1,6 +1,6 @@
 # Saved model deprecations pages
 
-The two providers' deprecations pages, as markdown (each page's URL plus `.md`). `retire`'s tests and the `openai-models` / `anthropic-models` golden tests (`plugins/retirements`) read them.
+The two providers' deprecations pages, as markdown (each page's URL plus `.md`). `retire`'s tests and the `openai-models` / `anthropic-models` golden tests (`plugins/notices`) read them.
 
 **License:** excerpts for testing; © OpenAI and © Anthropic respectively. Not covered by this repo's license.
 

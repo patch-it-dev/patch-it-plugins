@@ -1,4 +1,8 @@
-package feed
+// Package extract is what readers of prose share: an RSS or Atom feed's
+// entries, an HTML fragment as plain text or lines, its sections by
+// heading, a "Month D, YYYY" date, the code spans in it. A reader of any
+// kind uses it; it knows no vendor.
+package extract
 
 import (
 	"bytes"
@@ -53,10 +57,10 @@ type atom struct {
 	} `xml:"entry"`
 }
 
-// Parse reads an RSS 2.0 or Atom feed, whichever the root element says. A
+// ParseFeed reads an RSS 2.0 or Atom feed, whichever the root element says. A
 // feed with no entries is an error: a feed that moved or changed shape must
 // not read as a quiet week.
-func Parse(b []byte) ([]Entry, error) {
+func ParseFeed(b []byte) ([]Entry, error) {
 	var root struct{ XMLName xml.Name }
 	if err := xml.NewDecoder(bytes.NewReader(b)).Decode(&root); err != nil {
 		return nil, fmt.Errorf("not a feed: %w", err)

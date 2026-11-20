@@ -4,7 +4,7 @@
 
 Salesforce's REST API version policy: whole numbered API version ranges (`/services/data/vNN.N/`) that Salesforce's own end-of-life page says are already retired (every resource under that version returns `410:GONE`) or scheduled to be.
 
-Format plugin: `eol` (`plugins/eol`), with the `Salesforce` page.
+Kind: `notices` (`plugins/notices`), with the end-of-life reader (`plugins/notices/eol`) and its `Salesforce` page.
 
 ## Why this source
 

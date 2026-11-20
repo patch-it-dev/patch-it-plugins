@@ -31,9 +31,9 @@ const todo = "TODO(new-plugin)"
 
 var formats = map[string]formatSpec{
 	"feed": {
-		kind:   "feed",
+		kind:   "notices",
 		layer:  "api",
-		defDir: "plugins/feed",
+		defDir: "plugins/notices/feed",
 		def: `package feed
 
 // {{.Ident}} is {{.Provider}}'s feed of changes.
@@ -60,8 +60,8 @@ func read{{.Ident}}(e Entry) []Finding {
 	return nil
 }
 `,
-		register: `plugin.Register(Plugin{Feed: {{.Ident}}, Archiver: kit.Wayback{}})`,
-		pluginOf: `Plugin{Feed: {{.Ident}}}`,
+		register: `plugin.Register(Plugin{Page: feed.{{.Ident}}, Archiver: kit.Wayback{}})`,
+		pluginOf: `Plugin{Page: feed.{{.Ident}}}`,
 		fixtures: map[string]string{"{{.File}}.rss.xml": `<?xml version="1.0" encoding="UTF-8"?>
 <!-- ` + todo + `: a placeholder. Replace it with a real copy of {{.Source}} (curl -o) and list it in README.md. -->
 <rss version="2.0"><channel><title>placeholder</title><link>https://example.com/</link><description>placeholder</description>
@@ -73,18 +73,18 @@ func read{{.Ident}}(e Entry) []Finding {
 // through a test archive that serves the same copy.
 func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 	t.Helper()
-	saved := kittest.Pages{ {{.Ident}}.URL: file}
+	saved := kittest.Pages{feed.{{.Ident}}.URL: file}
 	archive := &kittest.Archive{T: t, Pages: saved}
-	return kittest.IngestWith(t, kittest.Env(t, saved), Plugin{Feed: {{.Ident}}, Archiver: archive})
+	return kittest.IngestWith(t, kittest.Env(t, saved), Plugin{Page: feed.{{.Ident}}, Archiver: archive})
 }
 `,
-		imports: []string{"github.com/patch-it-dev/patch-it-plugins/core/event"},
+		imports: []string{"github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/plugins/notices/feed"},
 	},
 
 	"retirements": {
-		kind:   "retirements",
+		kind:   "notices",
 		layer:  "ai-models",
-		defDir: "plugins/retirements/retire",
+		defDir: "plugins/notices/retire",
 		def: `package retire
 
 import "strings"
@@ -152,7 +152,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 	return kittest.IngestWith(t, kittest.Env(t, saved), Plugin{Page: retire.{{.Ident}}, Archiver: archive})
 }
 `,
-		imports: []string{"encoding/json", "strings", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/plugins/retirements/retire"},
+		imports: []string{"encoding/json", "strings", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/plugins/notices/retire"},
 	},
 
 	"migrationguide": {

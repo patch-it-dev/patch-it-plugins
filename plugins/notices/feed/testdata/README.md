@@ -1,7 +1,7 @@
 # Saved feeds
 
-Real copies, saved once with `curl`. The golden files under `golden/` are what
-the plugin stores from them (`go test ./plugins/feed -update`).
+Real copies, saved once with `curl`. The golden files, `../../testdata/golden/<api>.json`,
+are what the notices kind stores from them (`go test ./plugins/notices -update`).
 
 | File | URL | Saved | License | Quote |
 |---|---|---|---|---|

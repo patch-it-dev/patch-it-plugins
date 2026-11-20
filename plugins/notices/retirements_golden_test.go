@@ -1,16 +1,16 @@
-package retirements
+package notices
 
 import (
 	"testing"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/kit/kittest"
-	"github.com/patch-it-dev/patch-it-plugins/plugins/retirements/retire"
+	"github.com/patch-it-dev/patch-it-plugins/plugins/notices/retire"
 )
 
 // Both providers' saved pages (2026-10-13) in, every event out. The archive
 // serves the same copy as the snapshot, so the events cite it; a second run
 // over the unchanged page asks for no snapshot.
-func TestGolden(t *testing.T) {
+func TestRetirementsGolden(t *testing.T) {
 	for file, page := range map[string]retire.Page{
 		"openai-deprecations.md":    retire.OpenAI,
 		"anthropic-deprecations.md": retire.Anthropic,

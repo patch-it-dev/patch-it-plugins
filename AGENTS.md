@@ -53,15 +53,16 @@ core/plugin/           the Plugin interface (Run; ListVersions, ReadAt, Extract)
 core/fetch/            the HTTP fetch with retries and the ETag / Last-Modified cache
 core/github/           the newest release / commit on GitHub, and a commit's SHA and date (one place)
 core/versions/         every version of a source: GitHub releases, tags and commits, PyPI, npm, the Web Archive at a date
-core/kit/  core/kit/kittest/   Unchanged, Cite, Wayback; the test kit (Mem, Pages, Ingest, Golden)
+core/kit/  core/kit/kittest/   Unchanged, Cite, Wayback, Notices; the test kit (Mem, Pages, Ingest, Golden)
+core/extract/          what readers of prose share: RSS/Atom entries, HTML as text, dates, code spans
 core/event/  core/migrate/     the change-event types from patch-it's contract (v1 + v2), v1 -> v2
 core/diff/ core/normalize/ core/hint/   the OpenAPI diff engine and its helpers
 plugins/<kind>/        one package per kind, with its providers: openapi (+ adapter/, one spec adapter
-                       per provider), retirements (+ retire/), migrationguide (+ sdkguide/,
-                       members/), changelog (Markdown, RST or JSON), feed, catalog, eol;
+                       per provider), notices (+ retire/, feed/, eol/), migrationguide (+ sdkguide/,
+                       members/), changelog (Markdown, RST or JSON), catalog;
                        plugins/all imports every one
-plugins/removedmembers/ plugins/apichangelog/   deprecated: merged into migrationguide and
-                       changelog, they only forward there
+plugins/removedmembers/ apichangelog/ retirements/ feed/ eol/   deprecated: merged into
+                       migrationguide, changelog and notices, they only forward there
 plugin/ event/ fetch/ migrate/ kit/ retire/ sdkguide/   deprecated old import paths: they only
                        forward to the packages above; don't add to them
 cmd/list-plugins/      prints the list from the registry (make plugins); internal/pluginlist/ is its logic

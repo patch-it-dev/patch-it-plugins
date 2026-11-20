@@ -4,7 +4,7 @@
 
 Generative AI model endpoints on Google Cloud's Vertex AI that Google deprecates: one `model` event per model id in a "Discontinued endpoints" table, with the replacement when the row names exactly one.
 
-Format plugin: `feed` (`plugins/feed`), with the `VertexAIModels` reader.
+Kind: `notices` (`plugins/notices`), with the feed reader (`plugins/notices/feed`) and its `VertexAIModels` feed.
 
 ## Why this source
 

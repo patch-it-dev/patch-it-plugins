@@ -10,14 +10,15 @@ Pick the source and the kind that reads it (steps 2 and 3), then let the starter
 
 ```sh
 go run ./cmd/new-plugin --api acme --provider Acme --format openapi
-# --format: openapi, retirements, migrationguide, removedmembers (a migrationguide source), changelog, feed, apichangelog (a JSON changelog source), catalog
+# --format: openapi, retirements and feed (notices sources), migrationguide, removedmembers (a migrationguide source),
+#           changelog, apichangelog (a JSON changelog source), catalog
 # optional: --source https://... (the provider's source), --watches "...", --layer api|sdk|package|runtime|ci|ai-models|infra,
 #           --page acme (a second source of a provider shares its page in providers/)
 ```
 
 It writes, and lists:
 
-- the provider's definition, in the package the format reads it from (`plugins/openapi/adapter/`, `plugins/retirements/retire/`, `plugins/migrationguide/sdkguide/` or `plugins/<format>/`), and its `plugin.RegisterProvider` block (the provider and the source with their metadata) in that format's `init` (plus the `core/migrate/` map entry that `retirements` and `migrationguide` need);
+- the provider's definition, in the package the format reads it from (`plugins/openapi/adapter/`, `plugins/notices/retire/`, `plugins/notices/feed/`, `plugins/migrationguide/sdkguide/` or `plugins/<format>/`), and its `plugin.RegisterProvider` block (the provider and the source with their metadata) in that format's `init` (plus the `core/migrate/` map entry that the deprecations-page and SDK-guide readers need);
 - `plugins/<format>/<api>_test.go`: the registration test, a golden test and a pinned drop test, over placeholder sources in `testdata/`, with the golden file written from them;
 - a row per saved file in that `testdata/README.md` (URL, date, license, quote to fill in);
 - `providers/<api>.md` from the template (or nothing, with `--page`, when the provider already has one);
@@ -75,12 +76,10 @@ Write the numbers on the provider page, as `providers/vercel.md` does for its sp
 | Kind | Reads | Add a source by |
 |---|---|---|
 | `plugins/openapi` | An OpenAPI spec per release, diffed with `core/diff/` and turned into events by `core/normalize/` | An `adapter.Adapter` in `plugins/openapi/adapter/` (latest tag, fetch a tag's spec; `Versions` to list every release) and a `plugin.RegisterProvider` block |
-| `plugins/retirements` | A model provider's deprecations page (a table of date, model, replacement) | A `retire.Page` in `plugins/retirements/retire/providers.go` |
+| `plugins/notices` | A live page of dated notices: a model provider's deprecations page (a table of date, model, replacement), a vendor's RSS or Atom feed, a vendor's table of whole API version ranges and their support status | A `retire.Page` in `plugins/notices/retire/providers.go`, a `feed.Feed` with a reader for that vendor's entries in `plugins/notices/feed/`, or an `eol.Page` in `plugins/notices/eol/` (`--format` doesn't scaffold this one yet) |
 | `plugins/migrationguide` | A guide that lists what a release removed, at the release's tag: an SDK's migration guide per new major (removed request parameters), or a package's table of removed members (an RST simple table or a Markdown pipe table) | A `sdkguide.Guide` in `plugins/migrationguide/sdkguide/`, or a `members.Guide` in `plugins/migrationguide/members/` |
 | `plugins/changelog` | A changelog: a `CHANGELOG.md` / `CHANGES.rst` / `HISTORY.rst`, each release's section at its tag (releases from PyPI or npm), or a vendor's machine-readable API changelog in JSON (per day, endpoint and API version, oasdiff change codes), commit by commit | A `changelog.File` with its `TagPrefix`, or a `changelog.Log` |
-| `plugins/feed` | An RSS or Atom feed | A `feed.Feed` with a reader for that vendor's entries |
 | `plugins/catalog` | A flat JSON catalog, one entry per name, with no release tags to pin — a commit SHA stands in | A `catalog.Catalog`, diffed between two snapshots for names that disappeared entirely |
-| `plugins/eol` | A vendor's own table of whole API version ranges and their support status (supported, deprecated, retired) | An `eol.Page`; `--format` doesn't scaffold this one yet, write it by hand |
 
 ## 4. The interface
 
@@ -160,7 +159,7 @@ The event format is [patch-it's change-event contract](https://github.com/patch-
 
 ## 5. Save the source
 
-Save a real copy of what the plugin reads under your package's `testdata/` (or the reader package's, like `plugins/retirements/retire/testdata/`). Add a row to that directory's `README.md`: file, URL, date fetched, license, and a short quote of the part the plugin reads.
+Save a real copy of what the plugin reads under your package's `testdata/` (or the reader package's, like `plugins/notices/retire/testdata/`). Add a row to that directory's `README.md`: file, URL, date fetched, license, and a short quote of the part the plugin reads.
 
 - **Openly licensed files** (MIT, BSD, Apache, CC BY): keep them whole.
 - **Vendor documentation pages**: trim to what the plugin reads (the tables, the sections), copy every kept line unchanged, mark it "excerpt for testing; © the vendor", and say what you left out.
