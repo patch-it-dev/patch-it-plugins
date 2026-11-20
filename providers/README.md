@@ -22,6 +22,7 @@ One page per plugin id: `providers/<api>.md`. Start from [`_template.md`](_templ
 | [neon.md](neon.md) | `neon` | `openapi` |
 | [convex.md](convex.md) | `convex` | `openapi` |
 | [planetscale.md](planetscale.md) | `planetscale` | `openapi` |
+| [appwrite.md](appwrite.md) | `appwrite` | `openapi` |
 | [openai-models.md](openai-models.md) | `openai-models` | `retirements` |
 | [anthropic-models.md](anthropic-models.md) | `anthropic-models` | `retirements` |
 | [anthropic.md](anthropic.md) | `anthropic` | `migrationguide` |

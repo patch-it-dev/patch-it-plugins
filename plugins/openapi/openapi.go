@@ -1,9 +1,9 @@
 // Package openapi is the source plugin for an API that publishes an OpenAPI
 // spec per release (Stripe, Datadog, GitLab, GitHub, Vercel, Supabase,
-// Algolia, Elasticsearch, Sentry, Neon, Convex, PlanetScale): fetch the newest
-// spec, diff it against the last one seen, normalize the changes into events,
-// and attach migration hints from the API's changelog when it has one. It can
-// also replay two given releases.
+// Algolia, Elasticsearch, Sentry, Neon, Convex, PlanetScale, Appwrite): fetch
+// the newest spec, diff it against the last one seen, normalize the changes
+// into events, and attach migration hints from the API's changelog when it
+// has one. It can also replay two given releases.
 package openapi
 
 import (
@@ -59,6 +59,10 @@ func init() {
 	// operation. Operation deprecations only, said in the description: see
 	// planetscale.go.
 	plugin.Register(Plugin{Adapter: adapter.PlanetScale{}, Diff: planetscaleDiff, Keep: planetscaleKeep})
+	// No Hints: Appwrite's changelog is product news, not keyed by operation.
+	// Operation deprecations only, SDK method renames left out: see
+	// appwrite.go.
+	plugin.Register(Plugin{Adapter: adapter.Appwrite{}, Diff: appwriteDiff, Keep: appwriteKeep})
 }
 
 // requestSide keeps the changes to what callers send. GitLab's response

@@ -1,0 +1,1745 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.7.4",
+        "title": "Appwrite",
+        "description": "Appwrite backend as a service cuts up to 70% of the time and costs required for building a modern application. We abstract and simplify common development tasks behind a REST APIs, to help you develop your app in a fast and secure way. For full API documentation and tutorials go to [https:\/\/appwrite.io\/docs](https:\/\/appwrite.io\/docs)",
+        "termsOfService": "https:\/\/appwrite.io\/policy\/terms",
+        "contact": {
+            "name": "Appwrite Team",
+            "url": "https:\/\/appwrite.io\/support",
+            "email": "team@appwrite.io"
+        },
+        "license": {
+            "name": "BSD-3-Clause",
+            "url": "https:\/\/raw.githubusercontent.com\/appwrite\/appwrite\/master\/LICENSE"
+        }
+    },
+    "servers": [
+        {
+            "url": "https:\/\/cloud.appwrite.io\/v1"
+        },
+        {
+            "url": "https:\/\/<REGION>.cloud.appwrite.io\/v1"
+        }
+    ],
+    "paths": {
+        "\/account\/mfa\/authenticators\/{type}": {
+            "post": {
+                "summary": "Create authenticator",
+                "operationId": "accountCreateMfaAuthenticator",
+                "tags": [
+                    "account"
+                ],
+                "description": "Add an authenticator app to be used as an MFA factor. Verify the authenticator using the [verify authenticator](\/docs\/references\/cloud\/client-web\/account#updateMfaAuthenticator) method.",
+                "responses": {
+                    "200": {
+                        "description": "MFAType",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/mfaType"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-appwrite": {
+                    "method": "createMfaAuthenticator",
+                    "group": "mfa",
+                    "weight": 47,
+                    "cookies": false,
+                    "type": "",
+                    "deprecated": false,
+                    "demo": "account\/create-mfa-authenticator.md",
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/account\/create-mfa-authenticator.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "account",
+                    "platforms": [
+                        "client",
+                        "server"
+                    ],
+                    "packaging": false,
+                    "auth": {
+                        "Project": [],
+                        "Session": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Session": [],
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "type",
+                        "description": "Type of authenticator. Must be `totp`",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "totp",
+                            "enum": [
+                                "totp"
+                            ],
+                            "x-enum-name": "AuthenticatorType",
+                            "x-enum-keys": []
+                        },
+                        "in": "path"
+                    }
+                ]
+            },
+            "put": {
+                "summary": "Update authenticator (confirmation)",
+                "operationId": "accountUpdateMfaAuthenticator",
+                "tags": [
+                    "account"
+                ],
+                "description": "Verify an authenticator app after adding it using the [add authenticator](\/docs\/references\/cloud\/client-web\/account#createMfaAuthenticator) method.",
+                "responses": {
+                    "200": {
+                        "description": "User",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/user"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-appwrite": {
+                    "method": "updateMfaAuthenticator",
+                    "group": "mfa",
+                    "weight": 48,
+                    "cookies": false,
+                    "type": "",
+                    "deprecated": false,
+                    "demo": "account\/update-mfa-authenticator.md",
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/account\/update-mfa-authenticator.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "account",
+                    "platforms": [
+                        "client",
+                        "server"
+                    ],
+                    "packaging": false,
+                    "auth": {
+                        "Project": [],
+                        "Session": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Session": [],
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "type",
+                        "description": "Type of authenticator.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "totp",
+                            "enum": [
+                                "totp"
+                            ],
+                            "x-enum-name": "AuthenticatorType",
+                            "x-enum-keys": []
+                        },
+                        "in": "path"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "otp": {
+                                        "type": "string",
+                                        "description": "Valid verification token.",
+                                        "x-example": "<OTP>"
+                                    }
+                                },
+                                "required": [
+                                    "otp"
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete authenticator",
+                "operationId": "accountDeleteMfaAuthenticator",
+                "tags": [
+                    "account"
+                ],
+                "description": "Delete an authenticator for a user by ID.",
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    }
+                },
+                "x-appwrite": {
+                    "method": "deleteMfaAuthenticator",
+                    "group": "mfa",
+                    "weight": 52,
+                    "cookies": false,
+                    "type": "",
+                    "deprecated": false,
+                    "demo": "account\/delete-mfa-authenticator.md",
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/account\/delete-mfa-authenticator.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "account",
+                    "platforms": [
+                        "client",
+                        "server"
+                    ],
+                    "packaging": false,
+                    "auth": {
+                        "Project": [],
+                        "Session": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Session": [],
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "type",
+                        "description": "Type of authenticator.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "totp",
+                            "enum": [
+                                "totp"
+                            ],
+                            "x-enum-name": "AuthenticatorType",
+                            "x-enum-keys": []
+                        },
+                        "in": "path"
+                    }
+                ]
+            }
+        },
+        "\/account\/mfa\/factors": {
+            "get": {
+                "summary": "List factors",
+                "operationId": "accountListMfaFactors",
+                "tags": [
+                    "account"
+                ],
+                "description": "List the factors available on the account to be used as a MFA challange.",
+                "responses": {
+                    "200": {
+                        "description": "MFAFactors",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/mfaFactors"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-appwrite": {
+                    "method": "listMfaFactors",
+                    "group": "mfa",
+                    "weight": 46,
+                    "cookies": false,
+                    "type": "",
+                    "deprecated": false,
+                    "demo": "account\/list-mfa-factors.md",
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/account\/list-mfa-factors.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "account",
+                    "platforms": [
+                        "client",
+                        "server"
+                    ],
+                    "packaging": false,
+                    "auth": {
+                        "Project": [],
+                        "Session": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Session": [],
+                        "JWT": []
+                    }
+                ]
+            }
+        },
+        "\/account\/mfa\/recovery-codes": {
+            "get": {
+                "summary": "List MFA recovery codes",
+                "operationId": "accountGetMfaRecoveryCodes",
+                "tags": [
+                    "account"
+                ],
+                "description": "Get recovery codes that can be used as backup for MFA flow. Before getting codes, they must be generated using [createMfaRecoveryCodes](\/docs\/references\/cloud\/client-web\/account#createMfaRecoveryCodes) method. An OTP challenge is required to read recovery codes.",
+                "responses": {
+                    "200": {
+                        "description": "MFA Recovery Codes",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/mfaRecoveryCodes"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-appwrite": {
+                    "method": "getMfaRecoveryCodes",
+                    "group": "mfa",
+                    "weight": 51,
+                    "cookies": false,
+                    "type": "",
+                    "deprecated": false,
+                    "demo": "account\/get-mfa-recovery-codes.md",
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/account\/get-mfa-recovery-codes.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "account",
+                    "platforms": [
+                        "client",
+                        "server"
+                    ],
+                    "packaging": false,
+                    "auth": {
+                        "Project": [],
+                        "Session": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Session": [],
+                        "JWT": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Create MFA recovery codes",
+                "operationId": "accountCreateMfaRecoveryCodes",
+                "tags": [
+                    "account"
+                ],
+                "description": "Generate recovery codes as backup for MFA flow. It's recommended to generate and show then immediately after user successfully adds their authehticator. Recovery codes can be used as a MFA verification type in [createMfaChallenge](\/docs\/references\/cloud\/client-web\/account#createMfaChallenge) method.",
+                "responses": {
+                    "201": {
+                        "description": "MFA Recovery Codes",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/mfaRecoveryCodes"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-appwrite": {
+                    "method": "createMfaRecoveryCodes",
+                    "group": "mfa",
+                    "weight": 49,
+                    "cookies": false,
+                    "type": "",
+                    "deprecated": false,
+                    "demo": "account\/create-mfa-recovery-codes.md",
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/account\/create-mfa-recovery-codes.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "account",
+                    "platforms": [
+                        "client",
+                        "server"
+                    ],
+                    "packaging": false,
+                    "auth": {
+                        "Project": [],
+                        "Session": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Session": [],
+                        "JWT": []
+                    }
+                ]
+            },
+            "patch": {
+                "summary": "Update MFA recovery codes (regenerate)",
+                "operationId": "accountUpdateMfaRecoveryCodes",
+                "tags": [
+                    "account"
+                ],
+                "description": "Regenerate recovery codes that can be used as backup for MFA flow. Before regenerating codes, they must be first generated using [createMfaRecoveryCodes](\/docs\/references\/cloud\/client-web\/account#createMfaRecoveryCodes) method. An OTP challenge is required to regenreate recovery codes.",
+                "responses": {
+                    "200": {
+                        "description": "MFA Recovery Codes",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/mfaRecoveryCodes"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-appwrite": {
+                    "method": "updateMfaRecoveryCodes",
+                    "group": "mfa",
+                    "weight": 50,
+                    "cookies": false,
+                    "type": "",
+                    "deprecated": false,
+                    "demo": "account\/update-mfa-recovery-codes.md",
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/account\/update-mfa-recovery-codes.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "account",
+                    "platforms": [
+                        "client",
+                        "server"
+                    ],
+                    "packaging": false,
+                    "auth": {
+                        "Project": [],
+                        "Session": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Session": [],
+                        "JWT": []
+                    }
+                ]
+            }
+        },
+        "\/messaging\/messages\/sms": {
+            "post": {
+                "summary": "Create SMS",
+                "operationId": "messagingCreateSms",
+                "tags": [
+                    "messaging"
+                ],
+                "description": "Create a new SMS message.",
+                "responses": {
+                    "201": {
+                        "description": "Message",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/message"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-appwrite": {
+                    "method": "createSms",
+                    "group": "messages",
+                    "weight": 360,
+                    "cookies": false,
+                    "type": "",
+                    "deprecated": false,
+                    "demo": "messaging\/create-sms.md",
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/messaging\/create-sms.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "messages.write",
+                    "platforms": [
+                        "console",
+                        "server"
+                    ],
+                    "packaging": false,
+                    "auth": {
+                        "Project": [],
+                        "Key": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "messageId": {
+                                        "type": "string",
+                                        "description": "Message ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.",
+                                        "x-example": "<MESSAGE_ID>"
+                                    },
+                                    "content": {
+                                        "type": "string",
+                                        "description": "SMS Content.",
+                                        "x-example": "<CONTENT>"
+                                    },
+                                    "topics": {
+                                        "type": "array",
+                                        "description": "List of Topic IDs.",
+                                        "x-example": null,
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "users": {
+                                        "type": "array",
+                                        "description": "List of User IDs.",
+                                        "x-example": null,
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "targets": {
+                                        "type": "array",
+                                        "description": "List of Targets IDs.",
+                                        "x-example": null,
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "draft": {
+                                        "type": "boolean",
+                                        "description": "Is message a draft",
+                                        "x-example": false
+                                    },
+                                    "scheduledAt": {
+                                        "type": "string",
+                                        "description": "Scheduled delivery time for message in [ISO 8601](https:\/\/www.iso.org\/iso-8601-date-and-time-format.html) format. DateTime value must be in future.",
+                                        "x-example": null
+                                    }
+                                },
+                                "required": [
+                                    "messageId",
+                                    "content"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/messaging\/messages\/sms\/{messageId}": {
+            "patch": {
+                "summary": "Update SMS",
+                "operationId": "messagingUpdateSms",
+                "tags": [
+                    "messaging"
+                ],
+                "description": "Update an SMS message by its unique ID. This endpoint only works on messages that are in draft status. Messages that are already processing, sent, or failed cannot be updated.\n",
+                "responses": {
+                    "200": {
+                        "description": "Message",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/message"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-appwrite": {
+                    "method": "updateSms",
+                    "group": "messages",
+                    "weight": 367,
+                    "cookies": false,
+                    "type": "",
+                    "deprecated": false,
+                    "demo": "messaging\/update-sms.md",
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/messaging\/update-sms.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "messages.write",
+                    "platforms": [
+                        "console",
+                        "server"
+                    ],
+                    "packaging": false,
+                    "auth": {
+                        "Project": [],
+                        "Key": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "messageId",
+                        "description": "Message ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<MESSAGE_ID>"
+                        },
+                        "in": "path"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "topics": {
+                                        "type": "array",
+                                        "description": "List of Topic IDs.",
+                                        "x-example": null,
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "users": {
+                                        "type": "array",
+                                        "description": "List of User IDs.",
+                                        "x-example": null,
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "targets": {
+                                        "type": "array",
+                                        "description": "List of Targets IDs.",
+                                        "x-example": null,
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "content": {
+                                        "type": "string",
+                                        "description": "Email Content.",
+                                        "x-example": "<CONTENT>"
+                                    },
+                                    "draft": {
+                                        "type": "boolean",
+                                        "description": "Is message a draft",
+                                        "x-example": false
+                                    },
+                                    "scheduledAt": {
+                                        "type": "string",
+                                        "description": "Scheduled delivery time for message in [ISO 8601](https:\/\/www.iso.org\/iso-8601-date-and-time-format.html) format. DateTime value must be in future.",
+                                        "x-example": null
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/messaging\/providers\/apns": {
+            "post": {
+                "summary": "Create APNS provider",
+                "operationId": "messagingCreateApnsProvider",
+                "tags": [
+                    "messaging"
+                ],
+                "description": "Create a new Apple Push Notification service provider.",
+                "responses": {
+                    "201": {
+                        "description": "Provider",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/provider"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-appwrite": {
+                    "method": "createApnsProvider",
+                    "group": "providers",
+                    "weight": 333,
+                    "cookies": false,
+                    "type": "",
+                    "deprecated": false,
+                    "demo": "messaging\/create-apns-provider.md",
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/messaging\/create-apns-provider.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "providers.write",
+                    "platforms": [
+                        "console",
+                        "server"
+                    ],
+                    "packaging": false,
+                    "auth": {
+                        "Project": [],
+                        "Key": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "providerId": {
+                                        "type": "string",
+                                        "description": "Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.",
+                                        "x-example": "<PROVIDER_ID>"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Provider name.",
+                                        "x-example": "<NAME>"
+                                    },
+                                    "authKey": {
+                                        "type": "string",
+                                        "description": "APNS authentication key.",
+                                        "x-example": "<AUTH_KEY>"
+                                    },
+                                    "authKeyId": {
+                                        "type": "string",
+                                        "description": "APNS authentication key ID.",
+                                        "x-example": "<AUTH_KEY_ID>"
+                                    },
+                                    "teamId": {
+                                        "type": "string",
+                                        "description": "APNS team ID.",
+                                        "x-example": "<TEAM_ID>"
+                                    },
+                                    "bundleId": {
+                                        "type": "string",
+                                        "description": "APNS bundle ID.",
+                                        "x-example": "<BUNDLE_ID>"
+                                    },
+                                    "sandbox": {
+                                        "type": "boolean",
+                                        "description": "Use APNS sandbox environment.",
+                                        "x-example": false
+                                    },
+                                    "enabled": {
+                                        "type": "boolean",
+                                        "description": "Set as enabled.",
+                                        "x-example": false
+                                    }
+                                },
+                                "required": [
+                                    "providerId",
+                                    "name"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/messaging\/providers\/apns\/{providerId}": {
+            "patch": {
+                "summary": "Update APNS provider",
+                "operationId": "messagingUpdateApnsProvider",
+                "tags": [
+                    "messaging"
+                ],
+                "description": "Update a Apple Push Notification service provider by its unique ID.",
+                "responses": {
+                    "200": {
+                        "description": "Provider",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/provider"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-appwrite": {
+                    "method": "updateApnsProvider",
+                    "group": "providers",
+                    "weight": 346,
+                    "cookies": false,
+                    "type": "",
+                    "deprecated": false,
+                    "demo": "messaging\/update-apns-provider.md",
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/messaging\/update-apns-provider.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "providers.write",
+                    "platforms": [
+                        "console",
+                        "server"
+                    ],
+                    "packaging": false,
+                    "auth": {
+                        "Project": [],
+                        "Key": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "providerId",
+                        "description": "Provider ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<PROVIDER_ID>"
+                        },
+                        "in": "path"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Provider name.",
+                                        "x-example": "<NAME>"
+                                    },
+                                    "enabled": {
+                                        "type": "boolean",
+                                        "description": "Set as enabled.",
+                                        "x-example": false
+                                    },
+                                    "authKey": {
+                                        "type": "string",
+                                        "description": "APNS authentication key.",
+                                        "x-example": "<AUTH_KEY>"
+                                    },
+                                    "authKeyId": {
+                                        "type": "string",
+                                        "description": "APNS authentication key ID.",
+                                        "x-example": "<AUTH_KEY_ID>"
+                                    },
+                                    "teamId": {
+                                        "type": "string",
+                                        "description": "APNS team ID.",
+                                        "x-example": "<TEAM_ID>"
+                                    },
+                                    "bundleId": {
+                                        "type": "string",
+                                        "description": "APNS bundle ID.",
+                                        "x-example": "<BUNDLE_ID>"
+                                    },
+                                    "sandbox": {
+                                        "type": "boolean",
+                                        "description": "Use APNS sandbox environment.",
+                                        "x-example": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/messaging\/providers\/fcm": {
+            "post": {
+                "summary": "Create FCM provider",
+                "operationId": "messagingCreateFcmProvider",
+                "tags": [
+                    "messaging"
+                ],
+                "description": "Create a new Firebase Cloud Messaging provider.",
+                "responses": {
+                    "201": {
+                        "description": "Provider",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/provider"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-appwrite": {
+                    "method": "createFcmProvider",
+                    "group": "providers",
+                    "weight": 332,
+                    "cookies": false,
+                    "type": "",
+                    "deprecated": false,
+                    "demo": "messaging\/create-fcm-provider.md",
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/messaging\/create-fcm-provider.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "providers.write",
+                    "platforms": [
+                        "console",
+                        "server"
+                    ],
+                    "packaging": false,
+                    "auth": {
+                        "Project": [],
+                        "Key": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "providerId": {
+                                        "type": "string",
+                                        "description": "Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.",
+                                        "x-example": "<PROVIDER_ID>"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Provider name.",
+                                        "x-example": "<NAME>"
+                                    },
+                                    "serviceAccountJSON": {
+                                        "type": "object",
+                                        "description": "FCM service account JSON.",
+                                        "x-example": "{}"
+                                    },
+                                    "enabled": {
+                                        "type": "boolean",
+                                        "description": "Set as enabled.",
+                                        "x-example": false
+                                    }
+                                },
+                                "required": [
+                                    "providerId",
+                                    "name"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/messaging\/providers\/fcm\/{providerId}": {
+            "patch": {
+                "summary": "Update FCM provider",
+                "operationId": "messagingUpdateFcmProvider",
+                "tags": [
+                    "messaging"
+                ],
+                "description": "Update a Firebase Cloud Messaging provider by its unique ID.",
+                "responses": {
+                    "200": {
+                        "description": "Provider",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/provider"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-appwrite": {
+                    "method": "updateFcmProvider",
+                    "group": "providers",
+                    "weight": 345,
+                    "cookies": false,
+                    "type": "",
+                    "deprecated": false,
+                    "demo": "messaging\/update-fcm-provider.md",
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/messaging\/update-fcm-provider.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "providers.write",
+                    "platforms": [
+                        "console",
+                        "server"
+                    ],
+                    "packaging": false,
+                    "auth": {
+                        "Project": [],
+                        "Key": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "providerId",
+                        "description": "Provider ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<PROVIDER_ID>"
+                        },
+                        "in": "path"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Provider name.",
+                                        "x-example": "<NAME>"
+                                    },
+                                    "enabled": {
+                                        "type": "boolean",
+                                        "description": "Set as enabled.",
+                                        "x-example": false
+                                    },
+                                    "serviceAccountJSON": {
+                                        "type": "object",
+                                        "description": "FCM service account JSON.",
+                                        "x-example": "{}"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/messaging\/providers\/smtp": {
+            "post": {
+                "summary": "Create SMTP provider",
+                "operationId": "messagingCreateSmtpProvider",
+                "tags": [
+                    "messaging"
+                ],
+                "description": "Create a new SMTP provider.",
+                "responses": {
+                    "201": {
+                        "description": "Provider",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/provider"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-appwrite": {
+                    "method": "createSmtpProvider",
+                    "group": "providers",
+                    "weight": 326,
+                    "cookies": false,
+                    "type": "",
+                    "deprecated": false,
+                    "demo": "messaging\/create-smtp-provider.md",
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/messaging\/create-smtp-provider.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "providers.write",
+                    "platforms": [
+                        "console",
+                        "server"
+                    ],
+                    "packaging": false,
+                    "auth": {
+                        "Project": [],
+                        "Key": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "providerId": {
+                                        "type": "string",
+                                        "description": "Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.",
+                                        "x-example": "<PROVIDER_ID>"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Provider name.",
+                                        "x-example": "<NAME>"
+                                    },
+                                    "host": {
+                                        "type": "string",
+                                        "description": "SMTP hosts. Either a single hostname or multiple semicolon-delimited hostnames. You can also specify a different port for each host such as `smtp1.example.com:25;smtp2.example.com`. You can also specify encryption type, for example: `tls:\/\/smtp1.example.com:587;ssl:\/\/smtp2.example.com:465\"`. Hosts will be tried in order.",
+                                        "x-example": "<HOST>"
+                                    },
+                                    "port": {
+                                        "type": "integer",
+                                        "description": "The default SMTP server port.",
+                                        "x-example": 1
+                                    },
+                                    "username": {
+                                        "type": "string",
+                                        "description": "Authentication username.",
+                                        "x-example": "<USERNAME>"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "description": "Authentication password.",
+                                        "x-example": "<PASSWORD>"
+                                    },
+                                    "encryption": {
+                                        "type": "string",
+                                        "description": "Encryption type. Can be omitted, 'ssl', or 'tls'",
+                                        "x-example": "none",
+                                        "enum": [
+                                            "none",
+                                            "ssl",
+                                            "tls"
+                                        ],
+                                        "x-enum-name": "SmtpEncryption",
+                                        "x-enum-keys": []
+                                    },
+                                    "autoTLS": {
+                                        "type": "boolean",
+                                        "description": "Enable SMTP AutoTLS feature.",
+                                        "x-example": false
+                                    },
+                                    "mailer": {
+                                        "type": "string",
+                                        "description": "The value to use for the X-Mailer header.",
+                                        "x-example": "<MAILER>"
+                                    },
+                                    "fromName": {
+                                        "type": "string",
+                                        "description": "Sender Name.",
+                                        "x-example": "<FROM_NAME>"
+                                    },
+                                    "fromEmail": {
+                                        "type": "string",
+                                        "description": "Sender email address.",
+                                        "x-example": "email@example.com"
+                                    },
+                                    "replyToName": {
+                                        "type": "string",
+                                        "description": "Name set in the reply to field for the mail. Default value is sender name.",
+                                        "x-example": "<REPLY_TO_NAME>"
+                                    },
+                                    "replyToEmail": {
+                                        "type": "string",
+                                        "description": "Email set in the reply to field for the mail. Default value is sender email.",
+                                        "x-example": "email@example.com"
+                                    },
+                                    "enabled": {
+                                        "type": "boolean",
+                                        "description": "Set as enabled.",
+                                        "x-example": false
+                                    }
+                                },
+                                "required": [
+                                    "providerId",
+                                    "name",
+                                    "host"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/messaging\/providers\/smtp\/{providerId}": {
+            "patch": {
+                "summary": "Update SMTP provider",
+                "operationId": "messagingUpdateSmtpProvider",
+                "tags": [
+                    "messaging"
+                ],
+                "description": "Update a SMTP provider by its unique ID.",
+                "responses": {
+                    "200": {
+                        "description": "Provider",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/provider"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-appwrite": {
+                    "method": "updateSmtpProvider",
+                    "group": "providers",
+                    "weight": 339,
+                    "cookies": false,
+                    "type": "",
+                    "deprecated": false,
+                    "demo": "messaging\/update-smtp-provider.md",
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/messaging\/update-smtp-provider.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "providers.write",
+                    "platforms": [
+                        "console",
+                        "server"
+                    ],
+                    "packaging": false,
+                    "auth": {
+                        "Project": [],
+                        "Key": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "providerId",
+                        "description": "Provider ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<PROVIDER_ID>"
+                        },
+                        "in": "path"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Provider name.",
+                                        "x-example": "<NAME>"
+                                    },
+                                    "host": {
+                                        "type": "string",
+                                        "description": "SMTP hosts. Either a single hostname or multiple semicolon-delimited hostnames. You can also specify a different port for each host such as `smtp1.example.com:25;smtp2.example.com`. You can also specify encryption type, for example: `tls:\/\/smtp1.example.com:587;ssl:\/\/smtp2.example.com:465\"`. Hosts will be tried in order.",
+                                        "x-example": "<HOST>"
+                                    },
+                                    "port": {
+                                        "type": "integer",
+                                        "description": "SMTP port.",
+                                        "x-example": 1
+                                    },
+                                    "username": {
+                                        "type": "string",
+                                        "description": "Authentication username.",
+                                        "x-example": "<USERNAME>"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "description": "Authentication password.",
+                                        "x-example": "<PASSWORD>"
+                                    },
+                                    "encryption": {
+                                        "type": "string",
+                                        "description": "Encryption type. Can be 'ssl' or 'tls'",
+                                        "x-example": "none",
+                                        "enum": [
+                                            "none",
+                                            "ssl",
+                                            "tls"
+                                        ],
+                                        "x-enum-name": "SmtpEncryption",
+                                        "x-enum-keys": []
+                                    },
+                                    "autoTLS": {
+                                        "type": "boolean",
+                                        "description": "Enable SMTP AutoTLS feature.",
+                                        "x-example": false
+                                    },
+                                    "mailer": {
+                                        "type": "string",
+                                        "description": "The value to use for the X-Mailer header.",
+                                        "x-example": "<MAILER>"
+                                    },
+                                    "fromName": {
+                                        "type": "string",
+                                        "description": "Sender Name.",
+                                        "x-example": "<FROM_NAME>"
+                                    },
+                                    "fromEmail": {
+                                        "type": "string",
+                                        "description": "Sender email address.",
+                                        "x-example": "email@example.com"
+                                    },
+                                    "replyToName": {
+                                        "type": "string",
+                                        "description": "Name set in the Reply To field for the mail. Default value is Sender Name.",
+                                        "x-example": "<REPLY_TO_NAME>"
+                                    },
+                                    "replyToEmail": {
+                                        "type": "string",
+                                        "description": "Email set in the Reply To field for the mail. Default value is Sender Email.",
+                                        "x-example": "<REPLY_TO_EMAIL>"
+                                    },
+                                    "enabled": {
+                                        "type": "boolean",
+                                        "description": "Set as enabled.",
+                                        "x-example": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/users\/{userId}\/mfa": {
+            "patch": {
+                "summary": "Update MFA",
+                "operationId": "usersUpdateMfa",
+                "tags": [
+                    "users"
+                ],
+                "description": "Enable or disable MFA on a user account.",
+                "responses": {
+                    "200": {
+                        "description": "User",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/user"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-appwrite": {
+                    "method": "updateMfa",
+                    "group": "users",
+                    "weight": 266,
+                    "cookies": false,
+                    "type": "",
+                    "deprecated": false,
+                    "demo": "users\/update-mfa.md",
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/users\/update-user-mfa.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "users.write",
+                    "platforms": [
+                        "server"
+                    ],
+                    "packaging": false,
+                    "auth": {
+                        "Project": [],
+                        "Key": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "description": "User ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<USER_ID>"
+                        },
+                        "in": "path"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "mfa": {
+                                        "type": "boolean",
+                                        "description": "Enable or disable MFA.",
+                                        "x-example": false
+                                    }
+                                },
+                                "required": [
+                                    "mfa"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/users\/{userId}\/mfa\/authenticators\/{type}": {
+            "delete": {
+                "summary": "Delete authenticator",
+                "operationId": "usersDeleteMfaAuthenticator",
+                "tags": [
+                    "users"
+                ],
+                "description": "Delete an authenticator app.",
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    }
+                },
+                "x-appwrite": {
+                    "method": "deleteMfaAuthenticator",
+                    "group": "mfa",
+                    "weight": 271,
+                    "cookies": false,
+                    "type": "",
+                    "deprecated": false,
+                    "demo": "users\/delete-mfa-authenticator.md",
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/users\/delete-mfa-authenticator.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "users.write",
+                    "platforms": [
+                        "server"
+                    ],
+                    "packaging": false,
+                    "auth": {
+                        "Project": [],
+                        "Key": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "description": "User ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<USER_ID>"
+                        },
+                        "in": "path"
+                    },
+                    {
+                        "name": "type",
+                        "description": "Type of authenticator.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "totp",
+                            "enum": [
+                                "totp"
+                            ],
+                            "x-enum-name": "AuthenticatorType",
+                            "x-enum-keys": []
+                        },
+                        "in": "path"
+                    }
+                ]
+            }
+        },
+        "\/users\/{userId}\/mfa\/factors": {
+            "get": {
+                "summary": "List factors",
+                "operationId": "usersListMfaFactors",
+                "tags": [
+                    "users"
+                ],
+                "description": "List the factors available on the account to be used as a MFA challange.",
+                "responses": {
+                    "200": {
+                        "description": "MFAFactors",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/mfaFactors"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-appwrite": {
+                    "method": "listMfaFactors",
+                    "group": "mfa",
+                    "weight": 267,
+                    "cookies": false,
+                    "type": "",
+                    "deprecated": false,
+                    "demo": "users\/list-mfa-factors.md",
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/users\/list-mfa-factors.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "users.read",
+                    "platforms": [
+                        "server"
+                    ],
+                    "packaging": false,
+                    "auth": {
+                        "Project": [],
+                        "Key": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "description": "User ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<USER_ID>"
+                        },
+                        "in": "path"
+                    }
+                ]
+            }
+        },
+        "\/users\/{userId}\/mfa\/recovery-codes": {
+            "get": {
+                "summary": "Get MFA recovery codes",
+                "operationId": "usersGetMfaRecoveryCodes",
+                "tags": [
+                    "users"
+                ],
+                "description": "Get recovery codes that can be used as backup for MFA flow by User ID. Before getting codes, they must be generated using [createMfaRecoveryCodes](\/docs\/references\/cloud\/client-web\/account#createMfaRecoveryCodes) method.",
+                "responses": {
+                    "200": {
+                        "description": "MFA Recovery Codes",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/mfaRecoveryCodes"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-appwrite": {
+                    "method": "getMfaRecoveryCodes",
+                    "group": "mfa",
+                    "weight": 268,
+                    "cookies": false,
+                    "type": "",
+                    "deprecated": false,
+                    "demo": "users\/get-mfa-recovery-codes.md",
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/users\/get-mfa-recovery-codes.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "users.read",
+                    "platforms": [
+                        "server"
+                    ],
+                    "packaging": false,
+                    "auth": {
+                        "Project": [],
+                        "Key": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "description": "User ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<USER_ID>"
+                        },
+                        "in": "path"
+                    }
+                ]
+            },
+            "put": {
+                "summary": "Update MFA recovery codes (regenerate)",
+                "operationId": "usersUpdateMfaRecoveryCodes",
+                "tags": [
+                    "users"
+                ],
+                "description": "Regenerate recovery codes that can be used as backup for MFA flow by User ID. Before regenerating codes, they must be first generated using [createMfaRecoveryCodes](\/docs\/references\/cloud\/client-web\/account#createMfaRecoveryCodes) method.",
+                "responses": {
+                    "200": {
+                        "description": "MFA Recovery Codes",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/mfaRecoveryCodes"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-appwrite": {
+                    "method": "updateMfaRecoveryCodes",
+                    "group": "mfa",
+                    "weight": 270,
+                    "cookies": false,
+                    "type": "",
+                    "deprecated": false,
+                    "demo": "users\/update-mfa-recovery-codes.md",
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/users\/update-mfa-recovery-codes.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "users.write",
+                    "platforms": [
+                        "server"
+                    ],
+                    "packaging": false,
+                    "auth": {
+                        "Project": [],
+                        "Key": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "description": "User ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<USER_ID>"
+                        },
+                        "in": "path"
+                    }
+                ]
+            },
+            "patch": {
+                "summary": "Create MFA recovery codes",
+                "operationId": "usersCreateMfaRecoveryCodes",
+                "tags": [
+                    "users"
+                ],
+                "description": "Generate recovery codes used as backup for MFA flow for User ID. Recovery codes can be used as a MFA verification type in [createMfaChallenge](\/docs\/references\/cloud\/client-web\/account#createMfaChallenge) method by client SDK.",
+                "responses": {
+                    "201": {
+                        "description": "MFA Recovery Codes",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/mfaRecoveryCodes"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-appwrite": {
+                    "method": "createMfaRecoveryCodes",
+                    "group": "mfa",
+                    "weight": 269,
+                    "cookies": false,
+                    "type": "",
+                    "deprecated": false,
+                    "demo": "users\/create-mfa-recovery-codes.md",
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/users\/create-mfa-recovery-codes.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "users.write",
+                    "platforms": [
+                        "server"
+                    ],
+                    "packaging": false,
+                    "auth": {
+                        "Project": [],
+                        "Key": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "description": "User ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<USER_ID>"
+                        },
+                        "in": "path"
+                    }
+                ]
+            }
+        }
+    }
+}

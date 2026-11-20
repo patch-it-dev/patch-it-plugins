@@ -1,0 +1,1405 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.9.5",
+        "title": "Appwrite",
+        "description": "Appwrite backend as a service cuts up to 70% of the time and costs required for building a modern application. We abstract and simplify common development tasks behind a REST APIs, to help you develop your app in a fast and secure way. For full API documentation and tutorials go to [https:\/\/appwrite.io\/docs](https:\/\/appwrite.io\/docs)",
+        "termsOfService": "https:\/\/appwrite.io\/policy\/terms",
+        "contact": {
+            "name": "Appwrite Team",
+            "url": "https:\/\/appwrite.io\/support",
+            "email": "team@appwrite.io"
+        },
+        "license": {
+            "name": "BSD-3-Clause",
+            "url": "https:\/\/raw.githubusercontent.com\/appwrite\/appwrite\/master\/LICENSE"
+        }
+    },
+    "servers": [
+        {
+            "url": "https:\/\/cloud.appwrite.io\/v1",
+            "description": "Appwrite Cloud endpoint."
+        },
+        {
+            "url": "https:\/\/{region}.cloud.appwrite.io\/v1",
+            "description": "Appwrite Cloud regional endpoint. Replace `{region}` with your project region.",
+            "variables": {
+                "region": {
+                    "default": "fra",
+                    "description": "Appwrite Cloud region."
+                }
+            }
+        }
+    ],
+    "paths": {
+        "\/databases\/transactions": {
+            "get": {
+                "summary": "List transactions",
+                "operationId": "databasesListTransactions",
+                "tags": [
+                    "databases"
+                ],
+                "description": "List transactions across all databases.",
+                "responses": {
+                    "200": {
+                        "description": "Transaction List",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/transactionList"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-appwrite": {
+                    "method": "listTransactions",
+                    "group": "transactions",
+                    "cookies": false,
+                    "type": "",
+                    "demo": "databases\/list-transactions.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "rows.read",
+                    "platforms": [
+                        "console",
+                        "server",
+                        "client"
+                    ],
+                    "packaging": false,
+                    "public": true,
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/databases\/list-transactions.md",
+                    "auth": {
+                        "Project": [],
+                        "Key": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": [],
+                        "Session": [],
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "queries",
+                        "description": "Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https:\/\/appwrite.io\/docs\/queries).",
+                        "required": false,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "default": []
+                        },
+                        "in": "query"
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Create transaction",
+                "operationId": "databasesCreateTransaction",
+                "tags": [
+                    "databases"
+                ],
+                "description": "Create a new transaction.",
+                "responses": {
+                    "201": {
+                        "description": "Transaction",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/transaction"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-appwrite": {
+                    "method": "createTransaction",
+                    "group": "transactions",
+                    "cookies": false,
+                    "type": "",
+                    "demo": "databases\/create-transaction.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "documents.write",
+                    "platforms": [
+                        "console",
+                        "server",
+                        "client"
+                    ],
+                    "packaging": false,
+                    "public": true,
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/databases\/create-transaction.md",
+                    "auth": {
+                        "Project": [],
+                        "Key": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": [],
+                        "Session": [],
+                        "JWT": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "ttl": {
+                                        "type": "integer",
+                                        "description": "Seconds before the transaction expires.",
+                                        "default": 300,
+                                        "x-example": 60,
+                                        "format": "int32"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/databases\/transactions\/{transactionId}": {
+            "get": {
+                "summary": "Get transaction",
+                "operationId": "databasesGetTransaction",
+                "tags": [
+                    "databases"
+                ],
+                "description": "Get a transaction by its unique ID.",
+                "responses": {
+                    "200": {
+                        "description": "Transaction",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/transaction"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-appwrite": {
+                    "method": "getTransaction",
+                    "group": "transactions",
+                    "cookies": false,
+                    "type": "",
+                    "demo": "databases\/get-transaction.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "rows.read",
+                    "platforms": [
+                        "console",
+                        "server",
+                        "client"
+                    ],
+                    "packaging": false,
+                    "public": true,
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/databases\/get-transaction.md",
+                    "auth": {
+                        "Project": [],
+                        "Key": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": [],
+                        "Session": [],
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "transactionId",
+                        "description": "Transaction ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<TRANSACTION_ID>"
+                        },
+                        "in": "path"
+                    }
+                ]
+            },
+            "patch": {
+                "summary": "Update transaction",
+                "operationId": "databasesUpdateTransaction",
+                "tags": [
+                    "databases"
+                ],
+                "description": "Update a transaction, to either commit or roll back its operations.",
+                "responses": {
+                    "200": {
+                        "description": "Transaction",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/transaction"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-appwrite": {
+                    "method": "updateTransaction",
+                    "group": "transactions",
+                    "cookies": false,
+                    "type": "",
+                    "demo": "databases\/update-transaction.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "documents.write",
+                    "platforms": [
+                        "console",
+                        "server",
+                        "client"
+                    ],
+                    "packaging": false,
+                    "public": true,
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/databases\/update-transaction.md",
+                    "auth": {
+                        "Project": [],
+                        "Key": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": [],
+                        "Session": [],
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "transactionId",
+                        "description": "Transaction ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<TRANSACTION_ID>"
+                        },
+                        "in": "path"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "commit": {
+                                        "type": "boolean",
+                                        "description": "Commit transaction?",
+                                        "default": false,
+                                        "x-example": false
+                                    },
+                                    "rollback": {
+                                        "type": "boolean",
+                                        "description": "Rollback transaction?",
+                                        "default": false,
+                                        "x-example": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete transaction",
+                "operationId": "databasesDeleteTransaction",
+                "tags": [
+                    "databases"
+                ],
+                "description": "Delete a transaction by its unique ID.",
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    }
+                },
+                "deprecated": false,
+                "x-appwrite": {
+                    "method": "deleteTransaction",
+                    "group": "transactions",
+                    "cookies": false,
+                    "type": "",
+                    "demo": "databases\/delete-transaction.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "documents.write",
+                    "platforms": [
+                        "console",
+                        "server",
+                        "client"
+                    ],
+                    "packaging": false,
+                    "public": true,
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/databases\/delete-transaction.md",
+                    "auth": {
+                        "Project": [],
+                        "Key": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": [],
+                        "Session": [],
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "transactionId",
+                        "description": "Transaction ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<TRANSACTION_ID>"
+                        },
+                        "in": "path"
+                    }
+                ]
+            }
+        },
+        "\/databases\/transactions\/{transactionId}\/operations": {
+            "post": {
+                "summary": "Create operations",
+                "operationId": "databasesCreateOperations",
+                "tags": [
+                    "databases"
+                ],
+                "description": "Create multiple operations in a single transaction.",
+                "responses": {
+                    "201": {
+                        "description": "Transaction",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/transaction"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-appwrite": {
+                    "method": "createOperations",
+                    "group": "transactions",
+                    "cookies": false,
+                    "type": "",
+                    "demo": "databases\/create-operations.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "documents.write",
+                    "platforms": [
+                        "console",
+                        "server",
+                        "client"
+                    ],
+                    "packaging": false,
+                    "public": true,
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/databases\/create-operations.md",
+                    "auth": {
+                        "Project": [],
+                        "Key": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": [],
+                        "Session": [],
+                        "JWT": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "transactionId",
+                        "description": "Transaction ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<TRANSACTION_ID>"
+                        },
+                        "in": "path"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "operations": {
+                                        "type": "array",
+                                        "description": "Array of staged operations.",
+                                        "default": [],
+                                        "x-example": "[\n\t    {\n\t        \"action\": \"create\",\n\t        \"databaseId\": \"<DATABASE_ID>\",\n\t        \"collectionId\": \"<COLLECTION_ID>\",\n\t        \"documentId\": \"<DOCUMENT_ID>\",\n\t        \"data\": {\n\t            \"name\": \"Walter O'Brien\"\n\t        }\n\t    }\n\t]",
+                                        "items": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/databases\/{databaseId}\/collections\/{collectionId}\/attributes\/longtext": {
+            "post": {
+                "summary": "Create longtext attribute",
+                "operationId": "databasesCreateLongtextAttribute",
+                "tags": [
+                    "databases"
+                ],
+                "description": "Create a longtext attribute.\n",
+                "responses": {
+                    "202": {
+                        "description": "AttributeLongtext",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/attributeLongtext"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-appwrite": {
+                    "method": "createLongtextAttribute",
+                    "group": "attributes",
+                    "cookies": false,
+                    "type": "",
+                    "demo": "databases\/create-longtext-attribute.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "collections.write",
+                    "platforms": [
+                        "console",
+                        "server"
+                    ],
+                    "packaging": false,
+                    "public": true,
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/databases\/create-longtext-attribute.md",
+                    "auth": {
+                        "Project": [],
+                        "Key": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "databaseId",
+                        "description": "Database ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<DATABASE_ID>"
+                        },
+                        "in": "path"
+                    },
+                    {
+                        "name": "collectionId",
+                        "description": "Collection ID. You can create a new collection using the Database service [server integration](https:\/\/appwrite.io\/docs\/server\/databases#databasesCreateCollection).",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<COLLECTION_ID>"
+                        },
+                        "in": "path"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "key": {
+                                        "type": "string",
+                                        "description": "Attribute Key.",
+                                        "x-example": null
+                                    },
+                                    "required": {
+                                        "type": "boolean",
+                                        "description": "Is attribute required?",
+                                        "x-example": false
+                                    },
+                                    "default": {
+                                        "type": "string",
+                                        "description": "Default value for attribute when not provided. Cannot be set when attribute is required.",
+                                        "x-example": "<DEFAULT>",
+                                        "x-nullable": true
+                                    },
+                                    "array": {
+                                        "type": "boolean",
+                                        "description": "Is attribute an array?",
+                                        "default": false,
+                                        "x-example": false
+                                    },
+                                    "encrypt": {
+                                        "type": "boolean",
+                                        "description": "Toggle encryption for the attribute. Encryption enhances security by not storing any plain text values in the database. However, encrypted attributes cannot be queried.",
+                                        "default": false,
+                                        "x-example": false
+                                    }
+                                },
+                                "required": [
+                                    "key",
+                                    "required"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/databases\/{databaseId}\/collections\/{collectionId}\/attributes\/longtext\/{key}": {
+            "patch": {
+                "summary": "Update longtext attribute",
+                "operationId": "databasesUpdateLongtextAttribute",
+                "tags": [
+                    "databases"
+                ],
+                "description": "Update a longtext attribute. Changing the `default` value will not update already existing documents.\n",
+                "responses": {
+                    "200": {
+                        "description": "AttributeLongtext",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/attributeLongtext"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-appwrite": {
+                    "method": "updateLongtextAttribute",
+                    "group": "attributes",
+                    "cookies": false,
+                    "type": "",
+                    "demo": "databases\/update-longtext-attribute.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "collections.write",
+                    "platforms": [
+                        "console",
+                        "server"
+                    ],
+                    "packaging": false,
+                    "public": true,
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/databases\/update-longtext-attribute.md",
+                    "auth": {
+                        "Project": [],
+                        "Key": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "databaseId",
+                        "description": "Database ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<DATABASE_ID>"
+                        },
+                        "in": "path"
+                    },
+                    {
+                        "name": "collectionId",
+                        "description": "Collection ID. You can create a new collection using the Database service [server integration](https:\/\/appwrite.io\/docs\/server\/databases#databasesCreateCollection).",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<COLLECTION_ID>"
+                        },
+                        "in": "path"
+                    },
+                    {
+                        "name": "key",
+                        "description": "Attribute Key.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "path"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "required": {
+                                        "type": "boolean",
+                                        "description": "Is attribute required?",
+                                        "x-example": false
+                                    },
+                                    "default": {
+                                        "type": "string",
+                                        "description": "Default value for attribute when not provided. Cannot be set when attribute is required.",
+                                        "x-example": "<DEFAULT>",
+                                        "x-nullable": true
+                                    },
+                                    "newKey": {
+                                        "type": "string",
+                                        "description": "New Attribute Key.",
+                                        "x-example": null,
+                                        "x-nullable": true
+                                    }
+                                },
+                                "required": [
+                                    "required",
+                                    "default"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/databases\/{databaseId}\/collections\/{collectionId}\/attributes\/mediumtext": {
+            "post": {
+                "summary": "Create mediumtext attribute",
+                "operationId": "databasesCreateMediumtextAttribute",
+                "tags": [
+                    "databases"
+                ],
+                "description": "Create a mediumtext attribute.\n",
+                "responses": {
+                    "202": {
+                        "description": "AttributeMediumtext",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/attributeMediumtext"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-appwrite": {
+                    "method": "createMediumtextAttribute",
+                    "group": "attributes",
+                    "cookies": false,
+                    "type": "",
+                    "demo": "databases\/create-mediumtext-attribute.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "collections.write",
+                    "platforms": [
+                        "console",
+                        "server"
+                    ],
+                    "packaging": false,
+                    "public": true,
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/databases\/create-mediumtext-attribute.md",
+                    "auth": {
+                        "Project": [],
+                        "Key": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "databaseId",
+                        "description": "Database ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<DATABASE_ID>"
+                        },
+                        "in": "path"
+                    },
+                    {
+                        "name": "collectionId",
+                        "description": "Collection ID. You can create a new collection using the Database service [server integration](https:\/\/appwrite.io\/docs\/server\/databases#databasesCreateCollection).",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<COLLECTION_ID>"
+                        },
+                        "in": "path"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "key": {
+                                        "type": "string",
+                                        "description": "Attribute Key.",
+                                        "x-example": null
+                                    },
+                                    "required": {
+                                        "type": "boolean",
+                                        "description": "Is attribute required?",
+                                        "x-example": false
+                                    },
+                                    "default": {
+                                        "type": "string",
+                                        "description": "Default value for attribute when not provided. Cannot be set when attribute is required.",
+                                        "x-example": "<DEFAULT>",
+                                        "x-nullable": true
+                                    },
+                                    "array": {
+                                        "type": "boolean",
+                                        "description": "Is attribute an array?",
+                                        "default": false,
+                                        "x-example": false
+                                    },
+                                    "encrypt": {
+                                        "type": "boolean",
+                                        "description": "Toggle encryption for the attribute. Encryption enhances security by not storing any plain text values in the database. However, encrypted attributes cannot be queried.",
+                                        "default": false,
+                                        "x-example": false
+                                    }
+                                },
+                                "required": [
+                                    "key",
+                                    "required"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/databases\/{databaseId}\/collections\/{collectionId}\/attributes\/mediumtext\/{key}": {
+            "patch": {
+                "summary": "Update mediumtext attribute",
+                "operationId": "databasesUpdateMediumtextAttribute",
+                "tags": [
+                    "databases"
+                ],
+                "description": "Update a mediumtext attribute. Changing the `default` value will not update already existing documents.\n",
+                "responses": {
+                    "200": {
+                        "description": "AttributeMediumtext",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/attributeMediumtext"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-appwrite": {
+                    "method": "updateMediumtextAttribute",
+                    "group": "attributes",
+                    "cookies": false,
+                    "type": "",
+                    "demo": "databases\/update-mediumtext-attribute.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "collections.write",
+                    "platforms": [
+                        "console",
+                        "server"
+                    ],
+                    "packaging": false,
+                    "public": true,
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/databases\/update-mediumtext-attribute.md",
+                    "auth": {
+                        "Project": [],
+                        "Key": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "databaseId",
+                        "description": "Database ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<DATABASE_ID>"
+                        },
+                        "in": "path"
+                    },
+                    {
+                        "name": "collectionId",
+                        "description": "Collection ID. You can create a new collection using the Database service [server integration](https:\/\/appwrite.io\/docs\/server\/databases#databasesCreateCollection).",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<COLLECTION_ID>"
+                        },
+                        "in": "path"
+                    },
+                    {
+                        "name": "key",
+                        "description": "Attribute Key.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "path"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "required": {
+                                        "type": "boolean",
+                                        "description": "Is attribute required?",
+                                        "x-example": false
+                                    },
+                                    "default": {
+                                        "type": "string",
+                                        "description": "Default value for attribute when not provided. Cannot be set when attribute is required.",
+                                        "x-example": "<DEFAULT>",
+                                        "x-nullable": true
+                                    },
+                                    "newKey": {
+                                        "type": "string",
+                                        "description": "New Attribute Key.",
+                                        "x-example": null,
+                                        "x-nullable": true
+                                    }
+                                },
+                                "required": [
+                                    "required",
+                                    "default"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/databases\/{databaseId}\/collections\/{collectionId}\/attributes\/text": {
+            "post": {
+                "summary": "Create text attribute",
+                "operationId": "databasesCreateTextAttribute",
+                "tags": [
+                    "databases"
+                ],
+                "description": "Create a text attribute.\n",
+                "responses": {
+                    "202": {
+                        "description": "AttributeText",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/attributeText"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-appwrite": {
+                    "method": "createTextAttribute",
+                    "group": "attributes",
+                    "cookies": false,
+                    "type": "",
+                    "demo": "databases\/create-text-attribute.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "collections.write",
+                    "platforms": [
+                        "console",
+                        "server"
+                    ],
+                    "packaging": false,
+                    "public": true,
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/databases\/create-text-attribute.md",
+                    "auth": {
+                        "Project": [],
+                        "Key": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "databaseId",
+                        "description": "Database ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<DATABASE_ID>"
+                        },
+                        "in": "path"
+                    },
+                    {
+                        "name": "collectionId",
+                        "description": "Collection ID. You can create a new collection using the Database service [server integration](https:\/\/appwrite.io\/docs\/server\/databases#databasesCreateCollection).",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<COLLECTION_ID>"
+                        },
+                        "in": "path"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "key": {
+                                        "type": "string",
+                                        "description": "Attribute Key.",
+                                        "x-example": null
+                                    },
+                                    "required": {
+                                        "type": "boolean",
+                                        "description": "Is attribute required?",
+                                        "x-example": false
+                                    },
+                                    "default": {
+                                        "type": "string",
+                                        "description": "Default value for attribute when not provided. Cannot be set when attribute is required.",
+                                        "x-example": "<DEFAULT>",
+                                        "x-nullable": true
+                                    },
+                                    "array": {
+                                        "type": "boolean",
+                                        "description": "Is attribute an array?",
+                                        "default": false,
+                                        "x-example": false
+                                    },
+                                    "encrypt": {
+                                        "type": "boolean",
+                                        "description": "Toggle encryption for the attribute. Encryption enhances security by not storing any plain text values in the database. However, encrypted attributes cannot be queried.",
+                                        "default": false,
+                                        "x-example": false
+                                    }
+                                },
+                                "required": [
+                                    "key",
+                                    "required"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/databases\/{databaseId}\/collections\/{collectionId}\/attributes\/text\/{key}": {
+            "patch": {
+                "summary": "Update text attribute",
+                "operationId": "databasesUpdateTextAttribute",
+                "tags": [
+                    "databases"
+                ],
+                "description": "Update a text attribute. Changing the `default` value will not update already existing documents.\n",
+                "responses": {
+                    "200": {
+                        "description": "AttributeText",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/attributeText"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-appwrite": {
+                    "method": "updateTextAttribute",
+                    "group": "attributes",
+                    "cookies": false,
+                    "type": "",
+                    "demo": "databases\/update-text-attribute.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "collections.write",
+                    "platforms": [
+                        "console",
+                        "server"
+                    ],
+                    "packaging": false,
+                    "public": true,
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/databases\/update-text-attribute.md",
+                    "auth": {
+                        "Project": [],
+                        "Key": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "databaseId",
+                        "description": "Database ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<DATABASE_ID>"
+                        },
+                        "in": "path"
+                    },
+                    {
+                        "name": "collectionId",
+                        "description": "Collection ID. You can create a new collection using the Database service [server integration](https:\/\/appwrite.io\/docs\/server\/databases#databasesCreateCollection).",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<COLLECTION_ID>"
+                        },
+                        "in": "path"
+                    },
+                    {
+                        "name": "key",
+                        "description": "Attribute Key.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "path"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "required": {
+                                        "type": "boolean",
+                                        "description": "Is attribute required?",
+                                        "x-example": false
+                                    },
+                                    "default": {
+                                        "type": "string",
+                                        "description": "Default value for attribute when not provided. Cannot be set when attribute is required.",
+                                        "x-example": "<DEFAULT>",
+                                        "x-nullable": true
+                                    },
+                                    "newKey": {
+                                        "type": "string",
+                                        "description": "New Attribute Key.",
+                                        "x-example": null,
+                                        "x-nullable": true
+                                    }
+                                },
+                                "required": [
+                                    "required",
+                                    "default"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/databases\/{databaseId}\/collections\/{collectionId}\/attributes\/varchar": {
+            "post": {
+                "summary": "Create varchar attribute",
+                "operationId": "databasesCreateVarcharAttribute",
+                "tags": [
+                    "databases"
+                ],
+                "description": "Create a varchar attribute.\n",
+                "responses": {
+                    "202": {
+                        "description": "AttributeVarchar",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/attributeVarchar"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-appwrite": {
+                    "method": "createVarcharAttribute",
+                    "group": "attributes",
+                    "cookies": false,
+                    "type": "",
+                    "demo": "databases\/create-varchar-attribute.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "collections.write",
+                    "platforms": [
+                        "console",
+                        "server"
+                    ],
+                    "packaging": false,
+                    "public": true,
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/databases\/create-varchar-attribute.md",
+                    "auth": {
+                        "Project": [],
+                        "Key": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "databaseId",
+                        "description": "Database ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<DATABASE_ID>"
+                        },
+                        "in": "path"
+                    },
+                    {
+                        "name": "collectionId",
+                        "description": "Collection ID. You can create a new collection using the Database service [server integration](https:\/\/appwrite.io\/docs\/server\/databases#databasesCreateCollection).",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<COLLECTION_ID>"
+                        },
+                        "in": "path"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "key": {
+                                        "type": "string",
+                                        "description": "Attribute Key.",
+                                        "x-example": null
+                                    },
+                                    "size": {
+                                        "type": "integer",
+                                        "description": "Attribute size for varchar attributes, in number of characters. Maximum size is 16381.",
+                                        "x-example": 1,
+                                        "format": "int32"
+                                    },
+                                    "required": {
+                                        "type": "boolean",
+                                        "description": "Is attribute required?",
+                                        "x-example": false
+                                    },
+                                    "default": {
+                                        "type": "string",
+                                        "description": "Default value for attribute when not provided. Cannot be set when attribute is required.",
+                                        "x-example": "<DEFAULT>",
+                                        "x-nullable": true
+                                    },
+                                    "array": {
+                                        "type": "boolean",
+                                        "description": "Is attribute an array?",
+                                        "default": false,
+                                        "x-example": false
+                                    },
+                                    "encrypt": {
+                                        "type": "boolean",
+                                        "description": "Toggle encryption for the attribute. Encryption enhances security by not storing any plain text values in the database. However, encrypted attributes cannot be queried.",
+                                        "default": false,
+                                        "x-example": false
+                                    }
+                                },
+                                "required": [
+                                    "key",
+                                    "size",
+                                    "required"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/databases\/{databaseId}\/collections\/{collectionId}\/attributes\/varchar\/{key}": {
+            "patch": {
+                "summary": "Update varchar attribute",
+                "operationId": "databasesUpdateVarcharAttribute",
+                "tags": [
+                    "databases"
+                ],
+                "description": "Update a varchar attribute. Changing the `default` value will not update already existing documents.\n",
+                "responses": {
+                    "200": {
+                        "description": "AttributeVarchar",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/attributeVarchar"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-appwrite": {
+                    "method": "updateVarcharAttribute",
+                    "group": "attributes",
+                    "cookies": false,
+                    "type": "",
+                    "demo": "databases\/update-varchar-attribute.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "collections.write",
+                    "platforms": [
+                        "console",
+                        "server"
+                    ],
+                    "packaging": false,
+                    "public": true,
+                    "edit": "https:\/\/github.com\/appwrite\/appwrite\/edit\/master\/docs\/references\/databases\/update-varchar-attribute.md",
+                    "auth": {
+                        "Project": [],
+                        "Key": []
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "databaseId",
+                        "description": "Database ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<DATABASE_ID>"
+                        },
+                        "in": "path"
+                    },
+                    {
+                        "name": "collectionId",
+                        "description": "Collection ID. You can create a new collection using the Database service [server integration](https:\/\/appwrite.io\/docs\/server\/databases#databasesCreateCollection).",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "x-example": "<COLLECTION_ID>"
+                        },
+                        "in": "path"
+                    },
+                    {
+                        "name": "key",
+                        "description": "Attribute Key.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "path"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "required": {
+                                        "type": "boolean",
+                                        "description": "Is attribute required?",
+                                        "x-example": false
+                                    },
+                                    "default": {
+                                        "type": "string",
+                                        "description": "Default value for attribute when not provided. Cannot be set when attribute is required.",
+                                        "x-example": "<DEFAULT>",
+                                        "x-nullable": true
+                                    },
+                                    "size": {
+                                        "type": "integer",
+                                        "description": "Maximum size of the varchar attribute.",
+                                        "x-example": 1,
+                                        "format": "int32",
+                                        "x-nullable": true
+                                    },
+                                    "newKey": {
+                                        "type": "string",
+                                        "description": "New Attribute Key.",
+                                        "x-example": null,
+                                        "x-nullable": true
+                                    }
+                                },
+                                "required": [
+                                    "required",
+                                    "default"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

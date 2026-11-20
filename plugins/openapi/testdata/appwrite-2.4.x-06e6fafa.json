@@ -1,0 +1,1317 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "2.4.0",
+        "title": "Appwrite",
+        "description": "Appwrite backend as a service cuts up to 70% of the time and costs required for building a modern application. We abstract and simplify common development tasks behind a REST APIs, to help you develop your app in a fast and secure way. For full API documentation and tutorials go to [https:\/\/appwrite.io\/docs](https:\/\/appwrite.io\/docs)",
+        "termsOfService": "https:\/\/appwrite.io\/policy\/terms",
+        "contact": {
+            "name": "Appwrite Team",
+            "url": "https:\/\/appwrite.io\/support",
+            "email": "team@appwrite.io"
+        },
+        "license": {
+            "name": "BSD-3-Clause",
+            "url": "https:\/\/raw.githubusercontent.com\/appwrite\/appwrite\/master\/LICENSE"
+        }
+    },
+    "servers": [
+        {
+            "url": "https:\/\/cloud.appwrite.io\/v1",
+            "description": "Appwrite Cloud endpoint."
+        },
+        {
+            "url": "https:\/\/{region}.cloud.appwrite.io\/v1",
+            "description": "Appwrite Cloud regional endpoint. Replace `{region}` with your project region.",
+            "variables": {
+                "region": {
+                    "default": "fra",
+                    "description": "Appwrite Cloud region."
+                }
+            }
+        }
+    ],
+    "paths": {
+        "\/account\/recovery\/otp": {
+            "post": {
+                "summary": "Create password recovery (OTP)",
+                "operationId": "accountCreateRecoveryOTP",
+                "tags": [
+                    "account"
+                ],
+                "description": "Use this endpoint to send a 6-digit password recovery code to the user's email address. Unlike [createRecovery](https:\/\/appwrite.io\/docs\/references\/cloud\/client-web\/account#createRecovery), this method requires no redirect URL, which makes it suitable for mobile and desktop apps that cannot host a recovery page. Learn more about how to [complete the recovery process](https:\/\/appwrite.io\/docs\/references\/cloud\/client-web\/account#updateRecoveryOTP). The code sent to the user's email address is valid for 15 minutes.\n\nEnable the **phrase** parameter to include a randomly generated security phrase in both the email and the response. Showing that phrase in your app lets the user confirm the email genuinely came from your request, which helps protect against phishing.\n",
+                "responses": {
+                    "201": {
+                        "description": "Token",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/token"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-appwrite": {
+                    "group": "recovery",
+                    "demo": "account\/create-recovery-otp.md",
+                    "rate-limit": 10,
+                    "rate-time": 3600,
+                    "rate-key": [
+                        "url:{url},email:{param-email}",
+                        "url:{url},ip:{ip}"
+                    ],
+                    "scope": "sessions.write",
+                    "platforms": [
+                        "console",
+                        "client"
+                    ],
+                    "packaging": false,
+                    "public": true,
+                    "auth": {
+                        "console": {
+                            "Project": []
+                        },
+                        "client": {
+                            "Project": []
+                        },
+                        "server": {
+                            "Project": [],
+                            "Session": []
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Session": [],
+                        "JWT": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "description": "User email.",
+                                        "type": "string",
+                                        "example": "email@example.com",
+                                        "format": "email"
+                                    },
+                                    "phrase": {
+                                        "description": "Toggle for security phrase. If enabled, email will be sent with a randomly generated phrase and the phrase will also be included in the response. Confirming phrases match increases the security of your authentication flow.",
+                                        "type": "boolean",
+                                        "default": false,
+                                        "example": false
+                                    }
+                                },
+                                "required": [
+                                    "email"
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update password recovery (OTP)",
+                "operationId": "accountUpdateRecoveryOTP",
+                "tags": [
+                    "account"
+                ],
+                "description": "Use this endpoint to complete the user password recovery process using the 6-digit code that was emailed by [createRecoveryOTP](https:\/\/appwrite.io\/docs\/references\/cloud\/client-web\/account#createRecoveryOTP). Pass the **userId** of the user along with the **secret** code from the email and the new **password** to set. If confirmed, this route will return a 200 status code, the code is consumed and the user's password is updated.\n",
+                "responses": {
+                    "200": {
+                        "description": "Token",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/token"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-appwrite": {
+                    "group": "recovery",
+                    "demo": "account\/update-recovery-otp.md",
+                    "rate-limit": 10,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},userId:{param-userId}",
+                    "scope": "sessions.write",
+                    "platforms": [
+                        "console",
+                        "client"
+                    ],
+                    "packaging": false,
+                    "public": true,
+                    "auth": {
+                        "console": {
+                            "Project": []
+                        },
+                        "client": {
+                            "Project": []
+                        },
+                        "server": {
+                            "Project": [],
+                            "Session": []
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Session": [],
+                        "JWT": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "userId": {
+                                        "description": "User ID.",
+                                        "type": "string",
+                                        "example": "<USER_ID>"
+                                    },
+                                    "secret": {
+                                        "description": "Valid recovery OTP code.",
+                                        "type": "string",
+                                        "example": "<SECRET>"
+                                    },
+                                    "password": {
+                                        "description": "New user password. Must be between 8 and 256 chars.",
+                                        "type": "string",
+                                        "example": "password",
+                                        "format": "password"
+                                    }
+                                },
+                                "required": [
+                                    "userId",
+                                    "secret",
+                                    "password"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/account\/sessions\/id-token": {
+            "post": {
+                "summary": "Create ID token session",
+                "operationId": "accountCreateIdTokenSession",
+                "tags": [
+                    "account"
+                ],
+                "description": "Allow the user to login to their account using an OpenID Connect ID token obtained natively from the OAuth2 provider, for example via Google Credential Manager on Android or Sign in with Apple on iOS. No browser or redirect is involved: the ID token is verified against the provider's published signing keys and a session is created in a single request.\n\nNative sign-in is switched on per provider with its nativeEnabled setting. It is independent of the browser-based flow's enabled setting, which has no effect on this endpoint. The token's audience must match the provider's configured client ID or one of its native client IDs; tokens issued for any other client ID are rejected. For Sign in with Apple, register your app's bundle ID as a native client ID. For Google, the web client ID used by Credential Manager is usually the configured client ID; add your Android and iOS client IDs as native client IDs if your app requests tokens for them.\n\nPass the raw nonce used when requesting the ID token so it can be validated against the token's nonce claim. When signing in with Apple, the nonce is required: hash it with SHA-256 before passing it to the Apple SDK, and send the raw value here - Apple tokens requested without a nonce are rejected. For Google the nonce is optional: it is validated whenever the token carries one, and ignored when the provider issued the token without one. Apple only returns the user's name on the first authorization, and never inside the ID token - capture it on the client and pass it via the name parameter.\n\nIf there is already an active session, the new session will be attached to the logged-in account. If there are no active sessions, the server will attempt to look for a user with the same email address as the verified email received from the provider and attach the new session to the existing user. If no matching user is found - the server will create a new user.\n\nThis flow does not return provider refresh tokens. You may pass an access token the provider handed your client, along with its lifetime, to store it on the session - but Appwrite cannot renew it once it expires. If your app needs long-lived access to provider APIs, use the browser-based OAuth2 flow instead.\n\nA user is limited to 10 active sessions at a time by default. [Learn more about session limits](https:\/\/appwrite.io\/docs\/authentication-security#limits).\n",
+                "responses": {
+                    "201": {
+                        "description": "Session",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/session"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-appwrite": {
+                    "group": "sessions",
+                    "demo": "account\/create-id-token-session.md",
+                    "rate-limit": 10,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "sessions.write",
+                    "platforms": [
+                        "console",
+                        "client"
+                    ],
+                    "packaging": false,
+                    "public": true,
+                    "auth": {
+                        "console": {
+                            "Project": []
+                        },
+                        "client": {
+                            "Project": []
+                        },
+                        "server": {
+                            "Project": [],
+                            "Session": []
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Session": [],
+                        "JWT": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "provider": {
+                                        "description": "OAuth2 provider that issued the ID token. Currently, supported providers are: apple, google.",
+                                        "type": "string",
+                                        "example": "apple",
+                                        "title": "IdTokenProvider",
+                                        "oneOf": [
+                                            {
+                                                "type": "string",
+                                                "enum": [
+                                                    "apple"
+                                                ],
+                                                "title": "apple"
+                                            },
+                                            {
+                                                "type": "string",
+                                                "enum": [
+                                                    "google"
+                                                ],
+                                                "title": "google"
+                                            }
+                                        ]
+                                    },
+                                    "idToken": {
+                                        "description": "OpenID Connect ID token (JWT) obtained natively from the provider, for example via Google Credential Manager or Sign in with Apple.",
+                                        "type": "string",
+                                        "example": "<ID_TOKEN>"
+                                    },
+                                    "nonce": {
+                                        "description": "Raw nonce used when requesting the ID token. Required for Apple, and whenever the token carries a nonce claim, which must match it. Ignored when the provider issued the token without a nonce.",
+                                        "type": "string",
+                                        "default": "",
+                                        "example": "<NONCE>"
+                                    },
+                                    "accessToken": {
+                                        "description": "Provider access token to store alongside the session for calling provider APIs. Never used for authentication.",
+                                        "type": "string",
+                                        "default": "",
+                                        "example": "<ACCESS_TOKEN>"
+                                    },
+                                    "accessTokenExpiry": {
+                                        "description": "Seconds until the provider access token expires, as reported by the provider. Stored so clients can tell when the stored token goes stale.",
+                                        "type": "integer",
+                                        "default": 0,
+                                        "example": 0,
+                                        "format": "int32"
+                                    },
+                                    "name": {
+                                        "description": "User name. Only used when creating a new user and the ID token has no name claim, such as on the first Sign in with Apple authorization.",
+                                        "type": "string",
+                                        "default": "",
+                                        "example": "<NAME>"
+                                    }
+                                },
+                                "required": [
+                                    "provider",
+                                    "idToken"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/account\/verifications\/email\/otp": {
+            "post": {
+                "summary": "Create email verification (OTP)",
+                "operationId": "accountCreateEmailVerificationOTP",
+                "tags": [
+                    "account"
+                ],
+                "description": "Use this endpoint to send a 6-digit verification code to the currently logged in user's email address. Unlike [createEmailVerification](https:\/\/appwrite.io\/docs\/references\/cloud\/client-web\/account#createEmailVerification), this method requires no redirect URL, which makes it suitable for mobile and desktop apps that cannot host a verification page. Learn more about how to [complete the verification process](https:\/\/appwrite.io\/docs\/references\/cloud\/client-web\/account#updateEmailVerificationOTP). The code sent to the user's email address is valid for 15 minutes.\n\nEnable the **phrase** parameter to include a randomly generated security phrase in both the email and the response. Showing that phrase in your app lets the user confirm the email genuinely came from your request, which helps protect against phishing.\n",
+                "responses": {
+                    "201": {
+                        "description": "Token",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/token"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-appwrite": {
+                    "group": "verification",
+                    "demo": "account\/create-email-verification-otp.md",
+                    "rate-limit": 10,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},userId:{userId}",
+                    "scope": "account",
+                    "platforms": [
+                        "console",
+                        "client"
+                    ],
+                    "packaging": false,
+                    "public": true,
+                    "auth": {
+                        "console": {
+                            "Project": []
+                        },
+                        "client": {
+                            "Project": []
+                        },
+                        "server": {
+                            "Project": [],
+                            "Session": []
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Session": [],
+                        "JWT": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "phrase": {
+                                        "description": "Toggle for security phrase. If enabled, email will be sent with a randomly generated phrase and the phrase will also be included in the response. Confirming phrases match increases the security of your authentication flow.",
+                                        "type": "boolean",
+                                        "default": false,
+                                        "example": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update email verification (OTP)",
+                "operationId": "accountUpdateEmailVerificationOTP",
+                "tags": [
+                    "account"
+                ],
+                "description": "Use this endpoint to complete the user email verification process using the 6-digit code that was emailed by [createEmailVerificationOTP](https:\/\/appwrite.io\/docs\/references\/cloud\/client-web\/account#createEmailVerificationOTP). Pass the **userId** of the user being verified along with the **secret** code from the email. If confirmed, this route will return a 200 status code and the code is consumed.\n",
+                "responses": {
+                    "200": {
+                        "description": "Token",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/token"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-appwrite": {
+                    "group": "verification",
+                    "demo": "account\/update-email-verification-otp.md",
+                    "rate-limit": 10,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},userId:{param-userId}",
+                    "scope": "public",
+                    "platforms": [
+                        "console",
+                        "client"
+                    ],
+                    "packaging": false,
+                    "public": true,
+                    "auth": {
+                        "console": {
+                            "Project": []
+                        },
+                        "client": {
+                            "Project": []
+                        },
+                        "server": {
+                            "Project": [],
+                            "Session": []
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Session": [],
+                        "JWT": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "userId": {
+                                        "description": "User ID.",
+                                        "type": "string",
+                                        "example": "<USER_ID>"
+                                    },
+                                    "secret": {
+                                        "description": "Valid verification OTP code.",
+                                        "type": "string",
+                                        "example": "<SECRET>"
+                                    }
+                                },
+                                "required": [
+                                    "userId",
+                                    "secret"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/avatars\/photo": {
+            "get": {
+                "summary": "Get user photo",
+                "operationId": "avatarsGetPhoto",
+                "tags": [
+                    "avatars"
+                ],
+                "description": "Returns the best available profile photo for a user. The endpoint tries each source in priority order and returns the first successful result: a custom uploaded photo (see avatars.updatePhoto), OAuth2 identity photo, Gravatar, Libravatar, Appwrite Initials, built-in static fallback.\n\nPassing `userId` \u2014 `current()` for the authenticated user \u2014 resolves the photo from everything known about that user: identity photos, email, and name. An explicit `emailHash` or `name` then overrides just that value, and the user's remaining sources stay in the chain. Without `userId`, passing `emailHash` and\/or `name` resolves the avatar from those values alone: the hash is looked up on Gravatar and Libravatar, the name is rendered as initials, and the session user stays out of the chain so their own photo never shadows the avatar being asked for. When nothing is passed, the photo resolves for the currently authenticated user. Emails are only ever accepted pre-hashed, so no address ends up in a URL.",
+                "responses": {
+                    "200": {
+                        "description": "Image",
+                        "content": {
+                            "image\/*": {
+                                "schema": {
+                                    "type": "string",
+                                    "format": "binary"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-appwrite": {
+                    "group": null,
+                    "demo": "avatars\/get-photo.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "avatars.read",
+                    "platforms": [
+                        "console",
+                        "client",
+                        "server"
+                    ],
+                    "packaging": false,
+                    "public": true,
+                    "auth": {
+                        "console": {
+                            "Project": [],
+                            "ImpersonateUserId": []
+                        },
+                        "client": {
+                            "Project": [],
+                            "ImpersonateUserId": []
+                        },
+                        "server": {
+                            "Project": [],
+                            "Session": [],
+                            "ImpersonateUserId": []
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Session": [],
+                        "Key": [],
+                        "JWT": []
+                    },
+                    {
+                        "Project": [],
+                        "Session": [],
+                        "Key": [],
+                        "JWT": [],
+                        "ImpersonateUserId": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "width",
+                        "description": "Output image width in pixels. Pass an integer between 0 and 2000. Defaults to 256.",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": 0,
+                            "default": 256
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "height",
+                        "description": "Output image height in pixels. Pass an integer between 0 and 2000. Defaults to 256.",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": 0,
+                            "default": 256
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "quality",
+                        "description": "Output image quality between 0 and 100. Defaults to 100.",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": 0,
+                            "default": 100
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "output",
+                        "description": "Output image format. Defaults to 'png'.",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "png",
+                            "default": "png"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "rating",
+                        "description": "Maximum image rating to fetch from Gravatar\/Libravatar. Defaults to 'g'.",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "g",
+                            "default": "g"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "userId",
+                        "description": "User ID to resolve the photo for. Pass 'current()' for the currently authenticated user. When omitted, the session user is used only if no emailHash and no name is passed.",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "current()",
+                            "default": ""
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "emailHash",
+                        "description": "SHA256 hash of the lowercase, trimmed email address to look up on Gravatar and Libravatar instead of the user's own email. Pass the hash, never the address itself.",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "<EMAIL_HASH>",
+                            "default": ""
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "name",
+                        "description": "Name to render initials from instead of the user's own name. Max length: 128 chars.",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "<NAME>",
+                            "default": ""
+                        },
+                        "in": "query"
+                    }
+                ]
+            },
+            "put": {
+                "summary": "Update photo",
+                "operationId": "avatarsUpdatePhoto",
+                "tags": [
+                    "avatars"
+                ],
+                "description": "Update the profile photo of the currently authenticated user. The uploaded image takes priority over every other photo source, including OAuth2 identity photos, Gravatar, and Libravatar. Updating an already customized photo replaces it. The image must be at most 5MB and is sent in a single request.",
+                "responses": {
+                    "200": {
+                        "description": "Account",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/account"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-appwrite": {
+                    "group": null,
+                    "demo": "avatars\/update-photo.md",
+                    "rate-limit": 60,
+                    "rate-time": 60,
+                    "rate-key": "ip:{ip},method:{method},url:{url},userId:{userId}",
+                    "scope": "avatars.write",
+                    "platforms": [
+                        "console"
+                    ],
+                    "packaging": false,
+                    "public": true,
+                    "auth": {
+                        "console": {
+                            "Project": []
+                        },
+                        "client": {
+                            "Project": []
+                        },
+                        "server": {
+                            "Project": [],
+                            "Session": []
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Session": [],
+                        "JWT": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart\/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "file": {
+                                        "description": "Binary image file of at most 5MB. Allowed file types are png, jpg, jpeg, and webp.",
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "required": [
+                                    "file"
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete photo",
+                "operationId": "avatarsDeletePhoto",
+                "tags": [
+                    "avatars"
+                ],
+                "description": "Delete the profile photo of the currently authenticated user and store the built-in static placeholder in its place. The placeholder is the user's photo from then on, so it takes priority over every other photo source \u2014 OAuth2 identity photos, Gravatar, Libravatar, and initials \u2014 until a new photo is uploaded with avatars.updatePhoto.",
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    }
+                },
+                "deprecated": false,
+                "x-appwrite": {
+                    "group": null,
+                    "demo": "avatars\/delete-photo.md",
+                    "rate-limit": 60,
+                    "rate-time": 60,
+                    "rate-key": "ip:{ip},method:{method},url:{url},userId:{userId}",
+                    "scope": "avatars.write",
+                    "platforms": [
+                        "console"
+                    ],
+                    "packaging": false,
+                    "public": true,
+                    "auth": {
+                        "console": {
+                            "Project": []
+                        },
+                        "client": {
+                            "Project": []
+                        },
+                        "server": {
+                            "Project": [],
+                            "Session": []
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Session": [],
+                        "JWT": []
+                    }
+                ]
+            }
+        },
+        "\/messaging\/providers\/appwrite": {
+            "post": {
+                "summary": "Create Appwrite provider",
+                "operationId": "messagingCreateAppwriteProvider",
+                "tags": [
+                    "messaging"
+                ],
+                "description": "Create a new Appwrite push provider.",
+                "responses": {
+                    "201": {
+                        "description": "Provider",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/provider"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-appwrite": {
+                    "group": "providers",
+                    "demo": "messaging\/create-appwrite-provider.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "providers.write",
+                    "platforms": [
+                        "console"
+                    ],
+                    "packaging": false,
+                    "public": true,
+                    "auth": {
+                        "console": {
+                            "Project": []
+                        },
+                        "server": {
+                            "Project": [],
+                            "Key": []
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "providerId": {
+                                        "description": "Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.",
+                                        "type": "string",
+                                        "example": "<PROVIDER_ID>"
+                                    },
+                                    "name": {
+                                        "description": "Provider name.",
+                                        "type": "string",
+                                        "example": "<NAME>"
+                                    },
+                                    "enabled": {
+                                        "description": "Set as enabled.",
+                                        "type": "boolean",
+                                        "example": false,
+                                        "nullable": true
+                                    },
+                                    "qos": {
+                                        "description": "Default QoS for topics on this provider (0 or 1). Null lets the subscriber choose.",
+                                        "type": "integer",
+                                        "example": 0,
+                                        "format": "int32",
+                                        "nullable": true
+                                    },
+                                    "expiry": {
+                                        "description": "Default message retention in seconds for offline delivery. Max 7 days (604800).",
+                                        "type": "integer",
+                                        "example": 0,
+                                        "format": "int32",
+                                        "nullable": true
+                                    }
+                                },
+                                "required": [
+                                    "providerId",
+                                    "name"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/messaging\/providers\/appwrite\/{providerId}": {
+            "patch": {
+                "summary": "Update Appwrite provider",
+                "operationId": "messagingUpdateAppwriteProvider",
+                "tags": [
+                    "messaging"
+                ],
+                "description": "Update an Appwrite push provider by its unique ID.",
+                "responses": {
+                    "200": {
+                        "description": "Provider",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/provider"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-appwrite": {
+                    "group": "providers",
+                    "demo": "messaging\/update-appwrite-provider.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "providers.write",
+                    "platforms": [
+                        "console"
+                    ],
+                    "packaging": false,
+                    "public": true,
+                    "auth": {
+                        "console": {
+                            "Project": []
+                        },
+                        "server": {
+                            "Project": [],
+                            "Key": []
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "providerId",
+                        "description": "Provider ID.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "<PROVIDER_ID>"
+                        },
+                        "in": "path"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "description": "Provider name.",
+                                        "type": "string",
+                                        "default": "",
+                                        "example": "<NAME>"
+                                    },
+                                    "enabled": {
+                                        "description": "Set as enabled.",
+                                        "type": "boolean",
+                                        "example": false,
+                                        "nullable": true
+                                    },
+                                    "qos": {
+                                        "description": "Default QoS for topics on this provider (0 or 1). Null lets the subscriber choose.",
+                                        "type": "integer",
+                                        "example": 0,
+                                        "format": "int32",
+                                        "nullable": true
+                                    },
+                                    "expiry": {
+                                        "description": "Default message retention in seconds for offline delivery. Max 7 days (604800).",
+                                        "type": "integer",
+                                        "example": 0,
+                                        "format": "int32",
+                                        "nullable": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/project\/oauth2\/kakao": {
+            "patch": {
+                "summary": "Update project OAuth2 Kakao",
+                "operationId": "projectUpdateOAuth2Kakao",
+                "tags": [
+                    "project"
+                ],
+                "description": "Update the project OAuth2 Kakao configuration.",
+                "responses": {
+                    "200": {
+                        "description": "OAuth2Kakao",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/oAuth2Kakao"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-appwrite": {
+                    "group": "oauth2",
+                    "demo": "project\/update-o-auth-2-kakao.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "project.oauth2.write",
+                    "platforms": [
+                        "console"
+                    ],
+                    "packaging": false,
+                    "public": true,
+                    "auth": {
+                        "console": {
+                            "Project": []
+                        },
+                        "server": {
+                            "Project": [],
+                            "Key": []
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "clientId": {
+                                        "description": "'REST API key' of Kakao OAuth2 app. For example: 839ff5000000000000000000013206de",
+                                        "type": "string",
+                                        "example": "<CLIENT_ID>",
+                                        "nullable": true
+                                    },
+                                    "clientSecret": {
+                                        "description": "'Client Secret' of Kakao OAuth2 app. For example: jLNVOK00000000000000000000yJebea. Generate it under Kakao Login > Security and set its status to enabled",
+                                        "type": "string",
+                                        "example": "<CLIENT_SECRET>",
+                                        "nullable": true
+                                    },
+                                    "prompt": {
+                                        "description": "Array of Kakao OAuth2 prompt values. If \"none\" is included, it must be the only element. \"none\" means: don't display any authentication or consent screens. \"login\" means: prompt the user to re-authenticate. \"create\" means: prompt the user to sign up. \"select_account\" means: prompt the user to select an account. Pass an empty array to use the Kakao default.",
+                                        "type": "array",
+                                        "items": {
+                                            "title": "ProjectOAuth2KakaoPrompt",
+                                            "type": "string",
+                                            "oneOf": [
+                                                {
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "none"
+                                                    ],
+                                                    "title": "none"
+                                                },
+                                                {
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "login"
+                                                    ],
+                                                    "title": "login"
+                                                },
+                                                {
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "create"
+                                                    ],
+                                                    "title": "create"
+                                                },
+                                                {
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "select_account"
+                                                    ],
+                                                    "title": "select_account"
+                                                }
+                                            ]
+                                        },
+                                        "nullable": true
+                                    },
+                                    "enabled": {
+                                        "description": "OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.",
+                                        "type": "boolean",
+                                        "example": false,
+                                        "nullable": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/project\/oauth2\/tiktok": {
+            "patch": {
+                "summary": "Update project OAuth2 TikTok",
+                "operationId": "projectUpdateOAuth2TikTok",
+                "tags": [
+                    "project"
+                ],
+                "description": "Update the project OAuth2 TikTok configuration.",
+                "responses": {
+                    "200": {
+                        "description": "OAuth2TikTok",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/oAuth2TikTok"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-appwrite": {
+                    "group": "oauth2",
+                    "demo": "project\/update-o-auth-2-tik-tok.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "project.oauth2.write",
+                    "platforms": [
+                        "console"
+                    ],
+                    "packaging": false,
+                    "public": true,
+                    "auth": {
+                        "console": {
+                            "Project": []
+                        },
+                        "server": {
+                            "Project": [],
+                            "Key": []
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "clientId": {
+                                        "description": "'Client key' of TikTok OAuth2 app. For example: awz000000000tyw0",
+                                        "type": "string",
+                                        "example": "<CLIENT_ID>",
+                                        "nullable": true
+                                    },
+                                    "clientSecret": {
+                                        "description": "'Client secret' of TikTok OAuth2 app. For example: 6wXewM00000000000000000000yXnite",
+                                        "type": "string",
+                                        "example": "<CLIENT_SECRET>",
+                                        "nullable": true
+                                    },
+                                    "enabled": {
+                                        "description": "OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.",
+                                        "type": "boolean",
+                                        "example": false,
+                                        "nullable": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/project\/oauth2\/webflow": {
+            "patch": {
+                "summary": "Update project OAuth2 Webflow",
+                "operationId": "projectUpdateOAuth2Webflow",
+                "tags": [
+                    "project"
+                ],
+                "description": "Update the project OAuth2 Webflow configuration.",
+                "responses": {
+                    "200": {
+                        "description": "OAuth2Webflow",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/oAuth2Webflow"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-appwrite": {
+                    "group": "oauth2",
+                    "demo": "project\/update-o-auth-2-webflow.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": "project.oauth2.write",
+                    "platforms": [
+                        "console"
+                    ],
+                    "packaging": false,
+                    "public": true,
+                    "auth": {
+                        "console": {
+                            "Project": []
+                        },
+                        "server": {
+                            "Project": [],
+                            "Key": []
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "clientId": {
+                                        "description": "'Client ID' of Webflow OAuth2 app. For example: 8bb20000000000000000000000000000000000000000000000000000000040dd",
+                                        "type": "string",
+                                        "example": "<CLIENT_ID>",
+                                        "nullable": true
+                                    },
+                                    "clientSecret": {
+                                        "description": "'Client Secret' of Webflow OAuth2 app. For example: 59bf00000000000000000000000000000000000000000000000000000000fe59",
+                                        "type": "string",
+                                        "example": "<CLIENT_SECRET>",
+                                        "nullable": true
+                                    },
+                                    "enabled": {
+                                        "description": "OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.",
+                                        "type": "boolean",
+                                        "example": false,
+                                        "nullable": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/project\/policies\/password-pwned": {
+            "patch": {
+                "summary": "Update password pwned policy",
+                "operationId": "projectUpdatePasswordPwnedPolicy",
+                "tags": [
+                    "project"
+                ],
+                "description": "Updating this policy allows you to control if passwords are checked against the Have I Been Pwned breach database. When enabled, every password a user signs up, signs in or resets with is checked and the result is recorded on the user as `passwordPwned`. On its own the policy only records. Enable `users` to reject a breached password when a user signs up or sets a new password, and `sessions` to refuse a sign-in with a breached password until it is reset. Only the first five characters of the password hash are ever shared with the service. Options left out keep their current value.",
+                "responses": {
+                    "200": {
+                        "description": "Project",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/project"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-appwrite": {
+                    "group": "policies",
+                    "demo": "project\/update-password-pwned-policy.md",
+                    "rate-limit": 0,
+                    "rate-time": 3600,
+                    "rate-key": "url:{url},ip:{ip}",
+                    "scope": [
+                        "policies.write",
+                        "project.policies.write"
+                    ],
+                    "platforms": [
+                        "console"
+                    ],
+                    "packaging": false,
+                    "public": true,
+                    "auth": {
+                        "console": {
+                            "Project": []
+                        },
+                        "server": {
+                            "Project": [],
+                            "Key": []
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Project": [],
+                        "Key": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "enabled": {
+                                        "description": "Toggle password pwned policy. Set to true to check passwords against known data breaches and record the result on the user, or false to never check. Default is true. On its own this only records; use `users` and `sessions` to block. When changing this policy, existing passwords remain valid.",
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "sessions": {
+                                        "description": "Whether a sign-in with a breached password is refused until the password is reset. Default is false, which allows the sign-in and only records the result.",
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "users": {
+                                        "description": "Whether a breached password is rejected when a user signs up or sets a new password. Default is false, which allows the password and only records the result.",
+                                        "type": "boolean",
+                                        "example": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

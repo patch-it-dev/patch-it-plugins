@@ -1,7 +1,7 @@
 {
   "_comment": "Generated from the plugin registry and docs/plugins.md by `make plugins-json` (go run ./cmd/list-plugins). Don't edit by hand.",
   "$schema": "./plugins.schema.json",
-  "count": 27,
+  "count": 28,
   "plugins": [
     {
       "id": "algolia-ingestion",
@@ -52,6 +52,16 @@
       "source_url": "https://platform.claude.com/docs/en/about-claude/model-deprecations",
       "status": "live",
       "provider_page": "providers/anthropic-models.md"
+    },
+    {
+      "id": "appwrite",
+      "provider": "Appwrite",
+      "layer": "api",
+      "watches": "REST API operations a server SDK calls that are deprecated between commits of the spec, SDK method renames left out",
+      "format": "openapi",
+      "source_url": "https://github.com/appwrite/specs",
+      "status": "live",
+      "provider_page": "providers/appwrite.md"
     },
     {
       "id": "cloudflare",
