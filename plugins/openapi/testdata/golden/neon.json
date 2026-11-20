@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:a5205e8a365c22a111e52a4684a3fcc9dc5ab470760b37bf14d565d4be8503f2",
+    "api": "neon",
+    "version": "2026-08-23",
+    "previous_version": "2026-08-17",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /projects/{project_id}/branches/{branch_id}/auth/send_test_email"
+    },
+    "description": "Operation POST /projects/{project_id}/branches/{branch_id}/auth/send_test_email marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/neondatabase/neon-pkgs/93b93dc9e4d1b4ab48dac6c8ccba76b35541b476/packages/sdk/spec/neon-openapi.json",
+    "source_pointer": "/paths/~1projects~1{project_id}~1branches~1{branch_id}~1auth~1send_test_email/post",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Sends a test email using the SMTP server settings supplied in the request body to verify connectivity and credentials.\\nThe request body must include the full SMTP server settings\\n(`host`, `port`, `username`, `password`, `sender_email`, `sender_name`) and the `recipient_email` address.\\n\\nDeprecated: to test a branch's already-saved configuration, use `sendNeonAuthEmailProviderTest`, which\\nreuses the stored SMTP password server-side so the caller never has to re-supply (or be able to read) it.\\nThis endpoint remains available for testing an unsaved full configuration and for non-Better-Auth providers.\\n\",\"operationId\":\"sendNeonAuthTestEmail\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/SendNeonAuthTestEmailRequest\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/SendNeonAuthTestEmailResponse\"}}},\"description\":\"Response with the result of the test email send\"},\"default\":{\"$ref\":\"#/components/responses/GeneralError\"}},\"summary\":\"Send test email\",\"tags\":[\"Auth\"],\"x-stability-level\":\"beta\",\"x-sunset\":\"2027-02-28\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

@@ -1,0 +1,56 @@
+{
+    "openapi": "3.0.3",
+    "servers": [
+        {
+            "url": "https://console.neon.tech/api/v2"
+        }
+    ],
+    "info": {
+        "title": "Neon API",
+        "description": "The Neon API is the management API for Neon. Use it to provision, configure, and manage resources such as projects, branches, databases, roles, functions, and object storage.\n\nSee the [Neon API reference](https://neon.com/docs/reference/api) for details, and [Manage API keys](https://neon.com/docs/manage/api-keys/) to create and use API keys.",
+        "version": "v2",
+        "license": {
+            "name": "Proprietary"
+        }
+    },
+    "paths": {
+        "/projects/{project_id}/recover": {
+            "parameters": [
+                {
+                    "name": "project_id",
+                    "in": "path",
+                    "description": "The Neon project ID",
+                    "required": true,
+                    "schema": {
+                        "type": "string",
+                        "pattern": "^[a-z0-9-]{1,60}$"
+                    }
+                }
+            ],
+            "post": {
+                "summary": "Recover a deleted project",
+                "description": "Recovers a deleted project within the 7-day deletion recovery period.\nRestores branches, endpoints, settings, and connection strings.\nSome integrations require manual reconfiguration after recovery.\nTo list recoverable projects, use `GET /projects?recoverable=true`.\n",
+                "tags": [
+                    "Project"
+                ],
+                "operationId": "recoverProject",
+                "x-stability-level": "beta",
+                "responses": {
+                    "200": {
+                        "description": "Returned the recovered project",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProjectRecoverResponse"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/GeneralError"
+                    }
+                }
+            }
+        }
+    }
+}
