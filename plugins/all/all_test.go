@@ -1,8 +1,10 @@
 package all
 
 import (
+	"go/ast"
 	"go/parser"
 	"go/token"
+	"io/fs"
 	"os"
 	"path/filepath"
 	"slices"
@@ -117,4 +119,79 @@ func TestWhichKindNamesEveryKind(t *testing.T) {
 			t.Errorf("%s's kind, %s, isn't an answer in docs/which-kind.md", s.FullID(), s.Source.Kind)
 		}
 	}
+}
+
+// Every package under plugins/ is a kind that registers its sources, or a
+// reader package inside one (plugins/<kind>/<reader>/); and none only
+// forwards to another package (type aliases and re-exported values, no code
+// of its own).
+func TestEveryPackageIsAKindOrPartOfOne(t *testing.T) {
+	dirs, err := os.ReadDir("..")
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, d := range dirs {
+		if d.IsDir() && d.Name() != "all" && !registers(t, filepath.Join("..", d.Name())) {
+			t.Errorf("plugins/%s registers no source: a kind registers its sources, a reader lives inside its kind", d.Name())
+		}
+	}
+	err = filepath.WalkDir("..", func(p string, d fs.DirEntry, err error) error {
+		if err != nil || !d.IsDir() || d.Name() == "testdata" {
+			if d != nil && d.IsDir() && d.Name() == "testdata" {
+				return filepath.SkipDir
+			}
+			return err
+		}
+		if forwardsOnly(t, p) {
+			t.Errorf("%s only forwards to another package: import that package instead", p)
+		}
+		return nil
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+// forwardsOnly reports whether a package's non-test code is nothing but type
+// aliases and values copied from other packages.
+func forwardsOnly(t *testing.T, dir string) bool {
+	t.Helper()
+	files, err := filepath.Glob(filepath.Join(dir, "*.go"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	decls := 0
+	for _, f := range files {
+		if strings.HasSuffix(f, "_test.go") {
+			continue
+		}
+		file, err := parser.ParseFile(token.NewFileSet(), f, nil, 0)
+		if err != nil {
+			t.Fatal(err)
+		}
+		for _, decl := range file.Decls {
+			g, ok := decl.(*ast.GenDecl)
+			if !ok {
+				return false // a func: code of its own
+			}
+			for _, spec := range g.Specs {
+				switch s := spec.(type) {
+				case *ast.ImportSpec:
+					continue
+				case *ast.TypeSpec:
+					if !s.Assign.IsValid() {
+						return false
+					}
+				case *ast.ValueSpec:
+					for _, v := range s.Values {
+						if _, sel := v.(*ast.SelectorExpr); !sel {
+							return false
+						}
+					}
+				}
+				decls++
+			}
+		}
+	}
+	return decls > 0
 }

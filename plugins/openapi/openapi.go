@@ -56,7 +56,7 @@ func init() {
 	})
 	// No Hints yet: GitHub's per-version CHANGELOG.md is prose with no table
 	// at all, so there's nothing for hint.Source to key on. (GitHub's Actions
-	// source is registered by plugins/feed.)
+	// source is registered by plugins/notices.)
 	plugin.RegisterProvider(plugin.Provider{
 		ID: "github", Name: "GitHub", Category: plugin.CategoryDevTools, Homepage: "https://github.com",
 		Sources: []plugin.Source{{

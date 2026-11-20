@@ -62,8 +62,6 @@ plugins/<kind>/        one package per kind, with its providers: openapi (+ adap
                        per provider), notices (+ retire/, feed/, eol/), migrationguide (+ sdkguide/,
                        members/), changelog (Markdown, RST or JSON), catalog, apisurface (+ pysurface/);
                        plugins/all imports every one
-plugins/removedmembers/ apichangelog/ retirements/ feed/ eol/   deprecated: merged into
-                       migrationguide, changelog and notices, they only forward there
 cmd/list-plugins/      prints the list from the registry (make plugins); internal/pluginlist/ is its logic
 cmd/new-plugin/        scaffolds a provider's source on a kind (make new-plugin ARGS=...; go run ./cmd/new-plugin --help)
 contract/fixtures/     a copy of patch-it's change-event fixtures (CI_contract checks it)
