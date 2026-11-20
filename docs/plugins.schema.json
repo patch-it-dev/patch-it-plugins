@@ -21,7 +21,7 @@
           "provider": { "type": "string", "minLength": 1 },
           "layer": { "type": "string", "enum": ["api", "sdk", "package", "runtime", "ci", "ai-models"] },
           "watches": { "type": "string", "minLength": 1 },
-          "format": { "type": "string", "enum": ["openapi", "retirements", "migrationguide", "removedmembers", "changelog", "feed", "apichangelog", "catalog"] },
+          "format": { "type": "string", "enum": ["openapi", "retirements", "migrationguide", "removedmembers", "changelog", "feed", "apichangelog", "catalog", "eol"] },
           "source_url": { "type": "string", "pattern": "^https://" },
           "status": { "type": "string", "enum": ["live", "paused", "planned"] },
           "status_note": { "type": "string", "description": "Why, for a paused plugin." },

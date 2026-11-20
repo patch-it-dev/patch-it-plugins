@@ -40,8 +40,14 @@ type Replayer interface {
 // that client instead.
 type Env struct {
 	Baselines BaselineReader
-	Get       func(ctx context.Context, url string) ([]byte, error)
-	Now       func() time.Time
+	// Get fetches one URL. In both the hosted ingestion service and the test
+	// kit, this is fetch.Cache.Get (kit/kittest's Pages.Get wraps saved files
+	// the same way): a non-2xx, non-304 response fails with a *fetch.StatusError
+	// naming the status, returned as is, so errors.As finds it. A plugin that
+	// branches on the status (eol, when the provider's own site blocks a plain
+	// GET) can rely on that.
+	Get func(ctx context.Context, url string) ([]byte, error)
+	Now func() time.Time
 }
 
 // BaselineReader is the one thing a plugin reads back: the baseline its last

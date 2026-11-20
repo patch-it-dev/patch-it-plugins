@@ -83,6 +83,7 @@ Write the numbers on the provider page, as `providers/vercel.md` does for its sp
 | `plugins/feed` | An RSS or Atom feed | A `feed.Feed` with a reader for that vendor's entries |
 | `plugins/catalog` | A flat JSON catalog, one entry per name, with no release tags to pin — a commit SHA stands in | A `catalog.Catalog`, diffed between two snapshots for names that disappeared entirely |
 | `plugins/apichangelog` | A vendor's machine-readable API changelog in JSON (per day, endpoint and API version, oasdiff change codes), at the commit that last changed it | An `apichangelog.Log` |
+| `plugins/eol` | A vendor's own table of whole API version ranges and their support status (supported, deprecated, retired) | An `eol.Page`; `--format` doesn't scaffold this one yet, write it by hand |
 
 ## 4. The interface
 
