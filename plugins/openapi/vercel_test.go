@@ -219,9 +219,9 @@ func TestVercelDeprecatedSummary(t *testing.T) {
 		"Deprecated: Use DELETE /v1/drives/:name. Requires ...":  true,
 		"Deprecated: true. Update Resource Secrets (Deprecated)": true,
 		"Get a list of deprecated Node.js versions":              false,
-		"Undeprecated thing":                               false,
-		"Deprecated runtimes for a project":                false,
-		"Update a project (deprecated fields are ignored)": false,
+		"Undeprecated thing":                                     false,
+		"Deprecated runtimes for a project":                      false,
+		"Update a project (deprecated fields are ignored)":       false,
 		"": false,
 	} {
 		if got := vercelDeprecatedSummary(summary); got != want {
