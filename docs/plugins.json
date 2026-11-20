@@ -1,7 +1,7 @@
 {
   "_comment": "Generated from the plugin registry and docs/plugins.md by `make plugins-json` (go run ./cmd/list-plugins). Don't edit by hand.",
   "$schema": "./plugins.schema.json",
-  "count": 28,
+  "count": 29,
   "plugins": [
     {
       "id": "algolia-ingestion",
@@ -102,6 +102,16 @@
       "source_url": "https://github.com/elastic/elasticsearch-specification",
       "status": "live",
       "provider_page": "providers/elasticsearch.md"
+    },
+    {
+      "id": "flagsmith",
+      "provider": "Flagsmith",
+      "layer": "api",
+      "watches": "REST API changes between releases of Flagsmith's own OpenAPI spec (removed endpoints and request parameters)",
+      "format": "openapi",
+      "source_url": "https://github.com/Flagsmith/flagsmith/blob/main/openapi.yaml",
+      "status": "live",
+      "provider_page": "providers/flagsmith.md"
     },
     {
       "id": "github",

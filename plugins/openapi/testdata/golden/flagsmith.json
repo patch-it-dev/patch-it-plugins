@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:9d8954a4311788d780d04796043dc3382369ea6856663403d91e0622ee46440b",
+    "api": "flagsmith",
+    "version": "2.287.0",
+    "previous_version": "2.286.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/experiments/environments/{environment_key}/delete-segment-override/"
+    },
+    "description": "Operation POST /api/experiments/environments/{environment_key}/delete-segment-override/ removed.",
+    "source_url": "https://raw.githubusercontent.com/Flagsmith/flagsmith/v2.286.0/openapi.yaml",
+    "source_pointer": "/paths/~1api~1experiments~1environments~1{environment_key}~1delete-segment-override~1/post",
+    "source_excerpt": "{\"description\":\"\\n    **EXPERIMENTAL ENDPOINT** - Subject to change without notice.\\n\\n    Deletes a segment override for a feature in the given environment.\\n\\n    **Feature Identification:**\\n    - Use `feature.name` OR `feature.id` (mutually exclusive)\\n    - Feature must belong to the environment's project\\n\\n    **Segment Identification:**\\n    - Use `segment.id` (required)\\n\\n    The segment override must exist for the given feature/environment combination.\\n    Returns 400 if the segment override does not exist.\\n    \",\"operationId\":\"api_experiments_environments_delete_segment_override_create\",\"parameters\":[{\"description\":\"The environment API key\",\"in\":\"path\",\"name\":\"environment_key\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/DeleteSegmentOverride\"}},\"application/x-www-form-urlencoded\":{\"schema\":{\"$ref\":\"#/components/schemas/DeleteSegmentOverride\"}},\"multipart/form-data\":{\"schema\":{\"$ref\":\"#/components/schemas/DeleteSegmentOverride\"}}},\"required\":true},\"responses\":{\"204\":{\"description\":\"No response body\"}},\"security\":[{\"tokenAuth\":[]},{\"Master API Key\":[]}],\"summary\":\"Delete segment override\",\"tags\":[\"experimental\"]}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:679f551f2accf69eb0af557218cc8c0ae617589fea24835cc12b9358e4b4b644",
+    "api": "flagsmith",
+    "version": "2.287.0",
+    "previous_version": "2.286.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/experiments/environments/{environment_key}/update-flag-v1/"
+    },
+    "description": "Operation POST /api/experiments/environments/{environment_key}/update-flag-v1/ removed.",
+    "source_url": "https://raw.githubusercontent.com/Flagsmith/flagsmith/v2.286.0/openapi.yaml",
+    "source_pointer": "/paths/~1api~1experiments~1environments~1{environment_key}~1update-flag-v1~1/post",
+    "source_excerpt": "{\"description\":\"\\n    **EXPERIMENTAL ENDPOINT** - Subject to change without notice.\\n\\n    Updates a single feature state within an environment. You can update either:\\n    - The environment default state (when no segment is specified)\\n    - A specific segment override (when segment.id is provided)\\n\\n    **Feature Identification:**\\n    - Use `feature.name` OR `feature.id` (mutually exclusive)\\n\\n    **Value Format:**\\n    - The `value` field is always a string representation\\n    - The `type` field tells the server how to parse it\\n    - Available types: integer, string, boolean\\n    - Examples:\\n      - `{\\\"type\\\": \\\"integer\\\", \\\"value\\\": \\\"42\\\"}`\\n      - `{\\\"type\\\": \\\"boolean\\\", \\\"value\\\": \\\"true\\\"}`\\n      - `{\\\"type\\\": \\\"string\\\", \\\"value\\\": \\\"hello\\\"}`\\n\\n    **Segment Priority:**\\n    - Optional `segment.priority` field controls ordering\\n    - If field value is null or the field is omitted, lowest priority is assumed\\n    \",\"operationId\":\"api_experiments_environments_update_flag_v1_create\",\"parameters\":[{\"description\":\"The environment API key\",\"in\":\"path\",\"name\":\"environment_key\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/UpdateFlag\"}},\"application/x-www-form-urlencoded\":{\"schema\":{\"$ref\":\"#/components/schemas/UpdateFlag\"}},\"multipart/form-data\":{\"schema\":{\"$ref\":\"#/components/schemas/UpdateFlag\"}}},\"required\":true},\"responses\":{\"204\":{\"description\":\"No response body\"}},\"security\":[{\"tokenAuth\":[]},{\"Master API Key\":[]}],\"summary\":\"Update single feature state\",\"tags\":[\"experimental\"]}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:f787d4463ba4f53083c9ebf3e686f3668606c61d8501c4256ebc4ad87a444668",
+    "api": "flagsmith",
+    "version": "2.287.0",
+    "previous_version": "2.286.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/experiments/environments/{environment_key}/update-flag-v2/"
+    },
+    "description": "Operation POST /api/experiments/environments/{environment_key}/update-flag-v2/ removed.",
+    "source_url": "https://raw.githubusercontent.com/Flagsmith/flagsmith/v2.286.0/openapi.yaml",
+    "source_pointer": "/paths/~1api~1experiments~1environments~1{environment_key}~1update-flag-v2~1/post",
+    "source_excerpt": "{\"description\":\"\\n    **EXPERIMENTAL ENDPOINT** - Subject to change without notice.\\n\\n    Updates multiple feature states in a single request. This endpoint allows\\n    you to configure an entire feature (environment default + all segment overrides)\\n    in one operation.\\n\\n    **What You Can Update:**\\n    - Environment default state (required)\\n    - Multiple segment overrides (optional)\\n    - Priority ordering for each segment\\n\\n    **Feature Identification:**\\n    - Use `feature.name` OR `feature.id` (mutually exclusive)\\n\\n    **Value Format:**\\n    - The `value` field is always a string representation\\n    - The `type` field tells the server how to parse it\\n    - Available types: integer, string, boolean\\n    - Examples:\\n      - `{\\\"type\\\": \\\"string\\\", \\\"value\\\": \\\"production\\\"}`\\n      - `{\\\"type\\\": \\\"integer\\\", \\\"value\\\": \\\"100\\\"}`\\n      - `{\\\"type\\\": \\\"boolean\\\", \\\"value\\\": \\\"false\\\"}`\\n\\n    **Segment Overrides:**\\n    - Provide array of segment override configurations\\n    - Each override must specify: segment_id, enabled, value\\n    - Optional priority field controls ordering\\n    - Duplicate segment_id values are not allowed\\n\\n    \",\"operationId\":\"api_experiments_environments_update_flag_v2_create\",\"parameters\":[{\"description\":\"The environment API key\",\"in\":\"path\",\"name\":\"environment_key\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/UpdateFlagV2\"}},\"application/x-www-form-urlencoded\":{\"schema\":{\"$ref\":\"#/components/schemas/UpdateFlagV2\"}},\"multipart/form-data\":{\"schema\":{\"$ref\":\"#/components/schemas/UpdateFlagV2\"}}},\"required\":true},\"responses\":{\"204\":{\"description\":\"No response body\"}},\"security\":[{\"tokenAuth\":[]},{\"Master API Key\":[]}],\"summary\":\"Update multiple feature states\",\"tags\":[\"experimental\"]}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]
