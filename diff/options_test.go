@@ -198,3 +198,47 @@ func TestOperationDeprecatedByDescription(t *testing.T) {
 		t.Error("zero Options reads the description")
 	}
 }
+
+// With QuoteDeprecated, a deprecation by the flag cites the node it points at
+// under the operation; an operation without that node cites as before.
+func TestQuoteDeprecated(t *testing.T) {
+	plain := mustParse(t, pathsSpec(`"/t":{"post":{"description":"Create."},"get":{}}`))
+	newSpec := mustParse(t, pathsSpec(`"/t":{"post":{"deprecated":true,"description":"Create.","x-v":{"deprecated":{"since":"1.8.0","replaceWith":"tables.create"}}},"get":{"deprecated":true}}`))
+	got := ChangesWith(plain, newSpec, Options{QuoteDeprecated: "/x-v/deprecated", QuoteDeprecatedOperation: true})
+	if len(got) != 2 {
+		t.Fatalf("got %v, want two deprecations", kinds(got))
+	}
+	byOp := map[string]Change{}
+	for _, c := range got {
+		byOp[c.Operation] = c
+	}
+	post := byOp["POST /t"]
+	if q, _ := post.Node.(map[string]any); post.Pointer != "/paths/~1t/post/x-v/deprecated" || q["replaceWith"] != "tables.create" {
+		t.Errorf("POST: %+v, want the extension cited", post)
+	}
+	if get := byOp["GET /t"]; get.Pointer != "/paths/~1t/get" {
+		t.Errorf("GET, without the node: %+v, want the whole operation cited", get)
+	}
+}
+
+// With FlagNotDeprecation, a flag it rejects isn't a deprecation, and an
+// operation flagged that way that becomes deprecated for real is one then.
+func TestFlagNotDeprecation(t *testing.T) {
+	plain := mustParse(t, pathsSpec(`"/a":{"get":{}}`))
+	renamed := mustParse(t, pathsSpec(`"/a":{"get":{"deprecated":true,"x-why":"renamed"}}`))
+	real := mustParse(t, pathsSpec(`"/a":{"get":{"deprecated":true,"x-why":"gone"}}`))
+	opts := Options{FlagNotDeprecation: func(op map[string]any) bool { return op["x-why"] == "renamed" }}
+	if got := ChangesWith(plain, renamed, opts); len(got) != 0 {
+		t.Errorf("rejected flag: %v, want nothing", kinds(got))
+	}
+	if got := ChangesWith(plain, renamed, Options{}); len(got) != 1 {
+		t.Errorf("without the option: %v, want the deprecation", kinds(got))
+	}
+	got := ChangesWith(renamed, real, opts)
+	if len(got) != 1 || got[0].Kind != OperationDeprecated || got[0].Pointer != "/paths/~1a/get/deprecated" {
+		t.Errorf("rejected then real: %+v, want one deprecation", got)
+	}
+	if opts.OperationDeprecated(map[string]any{"deprecated": true, "x-why": "renamed"}) {
+		t.Error("OperationDeprecated believes a rejected flag")
+	}
+}

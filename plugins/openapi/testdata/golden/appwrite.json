@@ -1,0 +1,296 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:2818da4b58b897f5c9c83a9355ee19782c7e698dcf268e4bb91a5be4cedae129",
+    "api": "appwrite",
+    "version": "1.9.5",
+    "previous_version": "1.9.5",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /databases/transactions"
+    },
+    "description": "Operation GET /databases/transactions marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/appwrite/specs/7d74bf9f3c0c990745e822f5935bcfaca310fd06/specs/1.9.x/open-api3-1.9.x-server.json",
+    "source_pointer": "/paths/~1databases~1transactions/get/x-appwrite/deprecated",
+    "source_excerpt": "{\"replaceWith\":\"tablesDB.listTransactions\",\"since\":\"1.8.0\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:036c1afc3738d24431f2c04227bb01f881d9382417f1c7b79f7d1f1cfc4cb619",
+    "api": "appwrite",
+    "version": "1.9.5",
+    "previous_version": "1.9.5",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /databases/transactions"
+    },
+    "description": "Operation POST /databases/transactions marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/appwrite/specs/7d74bf9f3c0c990745e822f5935bcfaca310fd06/specs/1.9.x/open-api3-1.9.x-server.json",
+    "source_pointer": "/paths/~1databases~1transactions/post/x-appwrite/deprecated",
+    "source_excerpt": "{\"replaceWith\":\"tablesDB.createTransaction\",\"since\":\"1.8.0\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:0fa0441207b019db9f6230dab29a2921cafe06b603620fe95b9b350a32614c34",
+    "api": "appwrite",
+    "version": "1.9.5",
+    "previous_version": "1.9.5",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "DELETE /databases/transactions/{transactionId}"
+    },
+    "description": "Operation DELETE /databases/transactions/{transactionId} marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/appwrite/specs/7d74bf9f3c0c990745e822f5935bcfaca310fd06/specs/1.9.x/open-api3-1.9.x-server.json",
+    "source_pointer": "/paths/~1databases~1transactions~1{transactionId}/delete/x-appwrite/deprecated",
+    "source_excerpt": "{\"replaceWith\":\"tablesDB.deleteTransaction\",\"since\":\"1.8.0\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:54e3cdfeea949e4772d2aa28bdf1834e68975c4751889ca3d25e0f4712de657a",
+    "api": "appwrite",
+    "version": "1.9.5",
+    "previous_version": "1.9.5",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /databases/transactions/{transactionId}"
+    },
+    "description": "Operation GET /databases/transactions/{transactionId} marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/appwrite/specs/7d74bf9f3c0c990745e822f5935bcfaca310fd06/specs/1.9.x/open-api3-1.9.x-server.json",
+    "source_pointer": "/paths/~1databases~1transactions~1{transactionId}/get/x-appwrite/deprecated",
+    "source_excerpt": "{\"replaceWith\":\"tablesDB.getTransaction\",\"since\":\"1.8.0\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:4a25dba4764fa6d9b86d2019bd641cea0c68643160bf186020a72015f780875c",
+    "api": "appwrite",
+    "version": "1.9.5",
+    "previous_version": "1.9.5",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "PATCH /databases/transactions/{transactionId}"
+    },
+    "description": "Operation PATCH /databases/transactions/{transactionId} marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/appwrite/specs/7d74bf9f3c0c990745e822f5935bcfaca310fd06/specs/1.9.x/open-api3-1.9.x-server.json",
+    "source_pointer": "/paths/~1databases~1transactions~1{transactionId}/patch/x-appwrite/deprecated",
+    "source_excerpt": "{\"replaceWith\":\"tablesDB.updateTransaction\",\"since\":\"1.8.0\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:5d309ddb79e409e7360538d8b6e15e65c4c6bcb6196a43dbe298fd8d2ce04ac6",
+    "api": "appwrite",
+    "version": "1.9.5",
+    "previous_version": "1.9.5",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /databases/transactions/{transactionId}/operations"
+    },
+    "description": "Operation POST /databases/transactions/{transactionId}/operations marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/appwrite/specs/7d74bf9f3c0c990745e822f5935bcfaca310fd06/specs/1.9.x/open-api3-1.9.x-server.json",
+    "source_pointer": "/paths/~1databases~1transactions~1{transactionId}~1operations/post/x-appwrite/deprecated",
+    "source_excerpt": "{\"replaceWith\":\"tablesDB.createOperations\",\"since\":\"1.8.0\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:3c6f71dc8e690e6c4f09204bdb100e347853794fb974faf8057569ed43ee3e83",
+    "api": "appwrite",
+    "version": "1.9.5",
+    "previous_version": "1.9.5",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /databases/{databaseId}/collections/{collectionId}/attributes/longtext"
+    },
+    "description": "Operation POST /databases/{databaseId}/collections/{collectionId}/attributes/longtext marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/appwrite/specs/7d74bf9f3c0c990745e822f5935bcfaca310fd06/specs/1.9.x/open-api3-1.9.x-server.json",
+    "source_pointer": "/paths/~1databases~1{databaseId}~1collections~1{collectionId}~1attributes~1longtext/post/x-appwrite/deprecated",
+    "source_excerpt": "{\"replaceWith\":\"tablesDB.createLongtextColumn\",\"since\":\"1.8.0\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
+    "fingerprint": "sha256:5ce4bde92237b928d9095dd3b3a489a50a576ce2193168cbe8a42e3c1fc581fc",
+    "api": "appwrite",
+    "version": "1.9.5",
+    "previous_version": "1.9.5",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "PATCH /databases/{databaseId}/collections/{collectionId}/attributes/longtext/{key}"
+    },
+    "description": "Operation PATCH /databases/{databaseId}/collections/{collectionId}/attributes/longtext/{key} marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/appwrite/specs/7d74bf9f3c0c990745e822f5935bcfaca310fd06/specs/1.9.x/open-api3-1.9.x-server.json",
+    "source_pointer": "/paths/~1databases~1{databaseId}~1collections~1{collectionId}~1attributes~1longtext~1{key}/patch/x-appwrite/deprecated",
+    "source_excerpt": "{\"replaceWith\":\"tablesDB.updateLongtextColumn\",\"since\":\"1.8.0\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 9,
+    "fingerprint": "sha256:e4196475da31bde80bb82de02202a3b1da92e663361e29421bfa89e7b7f8c09e",
+    "api": "appwrite",
+    "version": "1.9.5",
+    "previous_version": "1.9.5",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /databases/{databaseId}/collections/{collectionId}/attributes/mediumtext"
+    },
+    "description": "Operation POST /databases/{databaseId}/collections/{collectionId}/attributes/mediumtext marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/appwrite/specs/7d74bf9f3c0c990745e822f5935bcfaca310fd06/specs/1.9.x/open-api3-1.9.x-server.json",
+    "source_pointer": "/paths/~1databases~1{databaseId}~1collections~1{collectionId}~1attributes~1mediumtext/post/x-appwrite/deprecated",
+    "source_excerpt": "{\"replaceWith\":\"tablesDB.createMediumtextColumn\",\"since\":\"1.8.0\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 10,
+    "fingerprint": "sha256:5a51623a86b22252bcbaebedeaa77a4608e2b9a7684aae47f2b1d1775e063b35",
+    "api": "appwrite",
+    "version": "1.9.5",
+    "previous_version": "1.9.5",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "PATCH /databases/{databaseId}/collections/{collectionId}/attributes/mediumtext/{key}"
+    },
+    "description": "Operation PATCH /databases/{databaseId}/collections/{collectionId}/attributes/mediumtext/{key} marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/appwrite/specs/7d74bf9f3c0c990745e822f5935bcfaca310fd06/specs/1.9.x/open-api3-1.9.x-server.json",
+    "source_pointer": "/paths/~1databases~1{databaseId}~1collections~1{collectionId}~1attributes~1mediumtext~1{key}/patch/x-appwrite/deprecated",
+    "source_excerpt": "{\"replaceWith\":\"tablesDB.updateMediumtextColumn\",\"since\":\"1.8.0\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 11,
+    "fingerprint": "sha256:2d856b5de3c85083113531289e288e2d885df35a33e788fe924cd3eca713c6af",
+    "api": "appwrite",
+    "version": "1.9.5",
+    "previous_version": "1.9.5",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /databases/{databaseId}/collections/{collectionId}/attributes/text"
+    },
+    "description": "Operation POST /databases/{databaseId}/collections/{collectionId}/attributes/text marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/appwrite/specs/7d74bf9f3c0c990745e822f5935bcfaca310fd06/specs/1.9.x/open-api3-1.9.x-server.json",
+    "source_pointer": "/paths/~1databases~1{databaseId}~1collections~1{collectionId}~1attributes~1text/post/x-appwrite/deprecated",
+    "source_excerpt": "{\"replaceWith\":\"tablesDB.createTextColumn\",\"since\":\"1.8.0\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 12,
+    "fingerprint": "sha256:630f92b0380411ade789ccd99a285702729de139c849722c24161b62439ecaca",
+    "api": "appwrite",
+    "version": "1.9.5",
+    "previous_version": "1.9.5",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "PATCH /databases/{databaseId}/collections/{collectionId}/attributes/text/{key}"
+    },
+    "description": "Operation PATCH /databases/{databaseId}/collections/{collectionId}/attributes/text/{key} marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/appwrite/specs/7d74bf9f3c0c990745e822f5935bcfaca310fd06/specs/1.9.x/open-api3-1.9.x-server.json",
+    "source_pointer": "/paths/~1databases~1{databaseId}~1collections~1{collectionId}~1attributes~1text~1{key}/patch/x-appwrite/deprecated",
+    "source_excerpt": "{\"replaceWith\":\"tablesDB.updateTextColumn\",\"since\":\"1.8.0\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 13,
+    "fingerprint": "sha256:c83df968cf8a2a630a01992691e82973bcd990a54e3d9363721d12d7c89d41a9",
+    "api": "appwrite",
+    "version": "1.9.5",
+    "previous_version": "1.9.5",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /databases/{databaseId}/collections/{collectionId}/attributes/varchar"
+    },
+    "description": "Operation POST /databases/{databaseId}/collections/{collectionId}/attributes/varchar marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/appwrite/specs/7d74bf9f3c0c990745e822f5935bcfaca310fd06/specs/1.9.x/open-api3-1.9.x-server.json",
+    "source_pointer": "/paths/~1databases~1{databaseId}~1collections~1{collectionId}~1attributes~1varchar/post/x-appwrite/deprecated",
+    "source_excerpt": "{\"replaceWith\":\"tablesDB.createVarcharColumn\",\"since\":\"1.8.0\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 14,
+    "fingerprint": "sha256:2d470fd05117935022c3e99f8524b722ac1f496d7777010e8b2fda4aa8a2ddf8",
+    "api": "appwrite",
+    "version": "1.9.5",
+    "previous_version": "1.9.5",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "PATCH /databases/{databaseId}/collections/{collectionId}/attributes/varchar/{key}"
+    },
+    "description": "Operation PATCH /databases/{databaseId}/collections/{collectionId}/attributes/varchar/{key} marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/appwrite/specs/7d74bf9f3c0c990745e822f5935bcfaca310fd06/specs/1.9.x/open-api3-1.9.x-server.json",
+    "source_pointer": "/paths/~1databases~1{databaseId}~1collections~1{collectionId}~1attributes~1varchar~1{key}/patch/x-appwrite/deprecated",
+    "source_excerpt": "{\"replaceWith\":\"tablesDB.updateVarcharColumn\",\"since\":\"1.8.0\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

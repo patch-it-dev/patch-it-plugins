@@ -120,13 +120,53 @@ type Options struct {
 	// `deprecated` comes before `description` and survives the 2,000-character
 	// cut (only a `callbacks` key would sort ahead of it).
 	QuoteDeprecatedOperation bool
+
+	// QuoteDeprecated is a JSON pointer, relative to the operation, to the
+	// node a deprecation by the flag cites instead of the bare `true` or the
+	// whole operation: for a spec that says why in an extension of its own
+	// (Appwrite's "/x-appwrite/deprecated", {"since", "replaceWith"}), which
+	// would sort last in the whole operation and be lost to the
+	// 2,000-character cut. "" (the zero value), or an operation without that
+	// node, cites as before.
+	QuoteDeprecated string
+
+	// FlagNotDeprecation reports whether an operation's `deprecated` flag
+	// is not about the operation itself, for a spec that sets the flag for
+	// something narrower (Appwrite flags an operation when one of its SDK
+	// method names is renamed and the route stays). Such an operation reads
+	// as not deprecated by the flag, before and after, so it becoming
+	// deprecated for real later is still a change. Nil believes every flag.
+	FlagNotDeprecation func(op map[string]any) bool
 }
 
 // OperationDeprecated reports whether an operation object is marked
-// deprecated, by its flag or, when DeprecatedSummary or DeprecatedDescription
-// is set, its summary or description.
+// deprecated, by its flag (unless FlagNotDeprecation says it isn't about the
+// operation) or, when DeprecatedSummary or DeprecatedDescription is set, its
+// summary or description.
 func (o Options) OperationDeprecated(op map[string]any) bool {
-	return truthy(op["deprecated"]) || o.summaryDeprecated(op) || o.descriptionDeprecated(op)
+	return o.flagDeprecated(op) || o.summaryDeprecated(op) || o.descriptionDeprecated(op)
+}
+
+func (o Options) flagDeprecated(op map[string]any) bool {
+	return truthy(op["deprecated"]) && (o.FlagNotDeprecation == nil || !o.FlagNotDeprecation(op))
+}
+
+// quoted is the node QuoteDeprecated points at in op, if it's set and there.
+func (o Options) quoted(op map[string]any) (any, bool) {
+	if o.QuoteDeprecated == "" || !strings.HasPrefix(o.QuoteDeprecated, "/") {
+		return nil, false
+	}
+	var node any = op
+	for _, tok := range strings.Split(o.QuoteDeprecated[1:], "/") {
+		m, ok := node.(map[string]any)
+		if !ok {
+			return nil, false
+		}
+		if node, ok = m[unescape(tok)]; !ok {
+			return nil, false
+		}
+	}
+	return node, true
 }
 
 func (o Options) descriptionDeprecated(op map[string]any) bool {
@@ -302,10 +342,15 @@ func (d *differ) paths(oldPaths, newPaths map[string]any) {
 			d.add(w, OperationRemoved, "", true, oldOp)
 		default:
 			if !d.opts.OperationDeprecated(oldOp) && d.opts.OperationDeprecated(newOp) {
+				quoted, hasQuoted := d.opts.quoted(newOp)
 				switch {
-				case truthy(newOp["deprecated"]) && d.opts.QuoteDeprecatedOperation:
+				case d.opts.flagDeprecated(newOp) && hasQuoted:
+					qw := w
+					qw.ptrNew += d.opts.QuoteDeprecated
+					d.add(qw, OperationDeprecated, "", false, quoted)
+				case d.opts.flagDeprecated(newOp) && d.opts.QuoteDeprecatedOperation:
 					d.add(w, OperationDeprecated, "", false, newOp)
-				case truthy(newOp["deprecated"]):
+				case d.opts.flagDeprecated(newOp):
 					d.add(w.child("deprecated"), OperationDeprecated, "", false, newOp["deprecated"])
 				case d.opts.summaryDeprecated(newOp):
 					// Said in words: the summary is the evidence.
@@ -758,4 +803,9 @@ func joinProp(prefix, name string) string {
 // escape encodes a JSON Pointer token per RFC 6901.
 func escape(token string) string {
 	return strings.NewReplacer("~", "~0", "/", "~1").Replace(token)
+}
+
+// unescape decodes a JSON Pointer token per RFC 6901.
+func unescape(token string) string {
+	return strings.NewReplacer("~1", "/", "~0", "~").Replace(token)
 }

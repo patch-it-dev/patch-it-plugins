@@ -49,6 +49,10 @@ func init() {
 	// Operation deprecations only, most said in the description: see
 	// sentry.go.
 	plugin.Register(Plugin{Adapter: adapter.Sentry{}, Diff: sentryDiff, Keep: sentryKeep})
+	// No Hints: Appwrite's changelog is product news, not keyed by operation.
+	// Operation deprecations only, SDK method renames left out: see
+	// appwrite.go.
+	plugin.Register(Plugin{Adapter: adapter.Appwrite{}, Diff: appwriteDiff, Keep: appwriteKeep})
 }
 
 // requestSide keeps the changes to what callers send. GitLab's response
