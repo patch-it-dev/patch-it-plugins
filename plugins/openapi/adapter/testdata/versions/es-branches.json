@@ -1,0 +1,101 @@
+[
+  {
+    "ref": "refs/heads/7.14"
+  },
+  {
+    "ref": "refs/heads/7.15"
+  },
+  {
+    "ref": "refs/heads/7.16"
+  },
+  {
+    "ref": "refs/heads/7.17"
+  },
+  {
+    "ref": "refs/heads/8.0"
+  },
+  {
+    "ref": "refs/heads/8.1"
+  },
+  {
+    "ref": "refs/heads/8.10"
+  },
+  {
+    "ref": "refs/heads/8.11"
+  },
+  {
+    "ref": "refs/heads/8.12"
+  },
+  {
+    "ref": "refs/heads/8.13"
+  },
+  {
+    "ref": "refs/heads/8.14"
+  },
+  {
+    "ref": "refs/heads/8.15"
+  },
+  {
+    "ref": "refs/heads/8.16"
+  },
+  {
+    "ref": "refs/heads/8.17"
+  },
+  {
+    "ref": "refs/heads/8.18"
+  },
+  {
+    "ref": "refs/heads/8.19"
+  },
+  {
+    "ref": "refs/heads/8.2"
+  },
+  {
+    "ref": "refs/heads/8.3"
+  },
+  {
+    "ref": "refs/heads/8.4"
+  },
+  {
+    "ref": "refs/heads/8.5"
+  },
+  {
+    "ref": "refs/heads/8.6"
+  },
+  {
+    "ref": "refs/heads/8.7"
+  },
+  {
+    "ref": "refs/heads/8.8"
+  },
+  {
+    "ref": "refs/heads/8.9"
+  },
+  {
+    "ref": "refs/heads/9.0"
+  },
+  {
+    "ref": "refs/heads/9.1"
+  },
+  {
+    "ref": "refs/heads/9.2"
+  },
+  {
+    "ref": "refs/heads/9.3"
+  },
+  {
+    "ref": "refs/heads/9.4"
+  },
+  {
+    "ref": "refs/heads/9.5"
+  },
+  {
+    "ref": "refs/heads/9.6"
+  },
+  {
+    "ref": "refs/heads/gh-pages"
+  },
+  {
+    "ref": "refs/heads/main"
+  }
+]

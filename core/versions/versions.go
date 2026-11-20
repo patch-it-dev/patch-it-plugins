@@ -1,7 +1,7 @@
 // Package versions lists a source's versions from where they're published:
 // a GitHub repo's releases, tags or the commits that changed a file, a
-// package's releases on PyPI or npm, and the Web Archive's capture of a page
-// at a date. Every list comes back oldest first, as plugin.Version.
+// package's releases on PyPI or npm, and a living page's captures in the Web
+// Archive (every distinct one, or the one closest to a date). Every list comes back oldest first, as plugin.Version.
 //
 // Each function takes how to fetch (a plugin's env.Get, or github.Get for the
 // GitHub API with its token), so tests serve saved responses.
@@ -35,6 +35,13 @@ var (
 
 // MaxPages caps how many pages of 100 a GitHub list reads (1,000 entries).
 const MaxPages = 10
+
+// GitHubPages reads a GitHub list endpoint (base, with or without a query)
+// page by page, 100 at a time, until a short page or MaxPages: for a list
+// the functions here don't cover (a release's assets, another host's base).
+func GitHubPages[T any](ctx context.Context, get Getter, base string) ([]T, error) {
+	return pages[T](ctx, get, base)
+}
 
 // pages reads a GitHub list endpoint page by page until a short page.
 func pages[T any](ctx context.Context, get Getter, base string) ([]T, error) {
@@ -236,6 +243,63 @@ func WaybackAt(ctx context.Context, get Getter, page string, at time.Time) (plug
 		return plugin.Version{}, fmt.Errorf("the Web Archive's capture of %s has timestamp %q", page, c.Timestamp)
 	}
 	return plugin.Version{ID: taken.Format(time.DateOnly), Released: taken, Ref: c.URL, URL: c.URL}, nil
+}
+
+// WaybackCaptures are the versions of a living page (one that only shows its
+// newest state: a deprecations page, a feed) as the Web Archive captured it
+// between from and to (zero: no bound), oldest first, from its CDX API: one
+// version per distinct content, so captures of an unchanged page collapse
+// into the first of them, and a page that changes back is a new version.
+// Two distinct captures on one day keep the later one: a version's ID is
+// its day (YYYY-MM-DD). The Ref is the capture's original bytes
+// (web.archive.org/web/<timestamp>id_/<page>), the URL the capture a person
+// sees and an event cites.
+//
+// One request, made with get: the caller's fetch is what spaces requests
+// out and names the client (patch-it's hosted ingestion service fetches one
+// at a time per host, with its own User-Agent).
+func WaybackCaptures(ctx context.Context, get Getter, page string, from, to time.Time) ([]plugin.Version, error) {
+	q := url.Values{"url": {page}, "output": {"json"}, "fl": {"timestamp,original,digest"}, "filter": {"statuscode:200"}, "collapse": {"digest"}}
+	if !from.IsZero() {
+		q.Set("from", from.UTC().Format("20060102150405"))
+	}
+	if !to.IsZero() {
+		q.Set("to", to.UTC().Format("20060102150405"))
+	}
+	body, err := get(ctx, Wayback+"/cdx/search/cdx?"+q.Encode())
+	if err != nil {
+		return nil, fmt.Errorf("listing the Web Archive's captures of %s: %w", page, err)
+	}
+	var rows [][]string
+	if len(strings.TrimSpace(string(body))) > 0 {
+		if err := json.Unmarshal(body, &rows); err != nil {
+			return nil, fmt.Errorf("parsing the Web Archive's captures of %s: %w", page, err)
+		}
+	}
+	var out []plugin.Version
+	lastDigest := ""
+	for i, r := range rows {
+		if i == 0 || len(r) < 3 { // the header row: ["timestamp","original","digest"]
+			continue
+		}
+		taken, err := time.Parse("20060102150405", r[0])
+		if err != nil || r[2] == lastDigest {
+			continue
+		}
+		lastDigest = r[2]
+		v := plugin.Version{
+			ID: taken.Format(time.DateOnly), Released: taken,
+			Ref: "https://web.archive.org/web/" + r[0] + "id_/" + r[1],
+			URL: "https://web.archive.org/web/" + r[0] + "/" + r[1],
+		}
+		if n := len(out); n > 0 && out[n-1].ID == v.ID {
+			out[n-1] = v
+			continue
+		}
+		out = append(out, v)
+	}
+	slices.SortStableFunc(out, func(a, b plugin.Version) int { return a.Released.Compare(b.Released) })
+	return out, nil
 }
 
 var (

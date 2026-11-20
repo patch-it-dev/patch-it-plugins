@@ -52,7 +52,7 @@ Go module `github.com/patch-it-dev/patch-it-plugins`; the only dependency is `go
 core/plugin/           the Plugin interface (Run; ListVersions, ReadAt, Extract), the registry of providers and sources, Env, Result
 core/fetch/            the HTTP fetch with retries and the ETag / Last-Modified cache
 core/github/           the newest release / commit on GitHub, and a commit's SHA and date (one place)
-core/versions/         every version of a source: GitHub releases, tags and commits, PyPI, npm, the Web Archive at a date
+core/versions/         every version of a source: GitHub releases, tags and commits, PyPI, npm, Web Archive captures
 core/kit/  core/kit/kittest/   Unchanged, Cite, Wayback, Notices; the test kit (Mem, Pages, Ingest, Golden)
 core/extract/          what readers of prose share: RSS/Atom entries, HTML as text, dates, code spans
 core/event/  core/migrate/     the change-event types from patch-it's contract (v1 + v2), v1 -> v2

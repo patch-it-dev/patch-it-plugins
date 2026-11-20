@@ -14,6 +14,7 @@
 package notices
 
 import (
+	"cmp"
 	"context"
 	"errors"
 	"fmt"
@@ -25,6 +26,7 @@ import (
 	"github.com/patch-it-dev/patch-it-plugins/core/kit"
 	"github.com/patch-it-dev/patch-it-plugins/core/migrate"
 	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
+	"github.com/patch-it-dev/patch-it-plugins/core/versions"
 	"github.com/patch-it-dev/patch-it-plugins/plugins/notices/eol"
 	"github.com/patch-it-dev/patch-it-plugins/plugins/notices/feed"
 	"github.com/patch-it-dev/patch-it-plugins/plugins/notices/retire"
@@ -199,3 +201,67 @@ func (p Plugin) fetch(ctx context.Context, env plugin.Env, pageURL string) (body
 	}
 	return body, archivedURL, nil
 }
+
+// A living page has no versions of its own, so its history is the Web
+// Archive's: every distinct capture is a version, dated (I19.11). A backfill
+// reads the page at each capture and extracts each consecutive pair, the
+// same events a run on that day would have stored, each citing its capture.
+
+// ListVersions is every distinct Web Archive capture of the page, oldest
+// first (versions.WaybackCaptures); the caller keeps the ones in its window.
+func (p Plugin) ListVersions(ctx context.Context, env plugin.Env) ([]plugin.Version, error) {
+	return versions.WaybackCaptures(ctx, env.Get, p.Page.PageURL(), time.Time{}, time.Time{})
+}
+
+// ReadAt reads the page as the capture v holds it: the capture's original
+// bytes (v.Ref), cited by its address (v.URL).
+func (p Plugin) ReadAt(ctx context.Context, env plugin.Env, v plugin.Version) (plugin.Snapshot, error) {
+	body, err := env.Get(ctx, v.Ref)
+	if err != nil {
+		return plugin.Snapshot{}, fmt.Errorf("fetching %s as captured on %s: %w", p.Page.PageURL(), v.ID, err)
+	}
+	return plugin.Snapshot{Version: v, Content: body, SourceURL: cmp.Or(v.URL, v.Ref)}, nil
+}
+
+// Extract is an event per notice on the page at to that wasn't at from
+// (every one when from is zero), citing to's capture. The events keep the
+// notice's own version (its date or API version), so previous_version stays
+// empty: from is an earlier day of the page, not an earlier release.
+func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snapshot) (plugin.Result, error) {
+	now := env.Now().UTC()
+	events, rejected, err := p.events(to, now)
+	if err != nil {
+		return plugin.Result{}, err
+	}
+	if !from.IsZero() {
+		before, _, err := p.events(from, now)
+		if err != nil {
+			return plugin.Result{}, err
+		}
+		had := map[string]bool{}
+		for _, e := range before {
+			had[e.Fingerprint] = true
+		}
+		kept := events[:0:0]
+		for _, e := range events {
+			if !had[e.Fingerprint] {
+				kept = append(kept, e)
+			}
+		}
+		events = kept
+	}
+	return plugin.Result{Label: to.SourceURL, Events: events, Rejected: rejected}, nil
+}
+
+// events reads one snapshot's notices into v2 events citing it.
+func (p Plugin) events(s plugin.Snapshot, now time.Time) ([]event.EventV2, []error, error) {
+	found, err := p.Page.Find(s.Content)
+	if err != nil {
+		return nil, nil, fmt.Errorf("reading %s: %w", s.SourceURL, err)
+	}
+	v1, v2, rejected := p.Page.Events(found, s.SourceURL, now)
+	converted, invalid := migrate.Fresh(v1)
+	return append(converted, v2...), append(rejected, invalid...), nil
+}
+
+var _ plugin.Versioned = Plugin{}

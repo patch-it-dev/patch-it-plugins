@@ -4,7 +4,7 @@ A **provider** (Stripe, OpenAI, GitHub…) has one category and one or more **so
 
 ## What a plugin does
 
-0. **List the versions.** A source with versions (a spec's releases, a package on PyPI or npm, a guide per major) lists every one, oldest first (`ListVersions`, from `core/versions`: GitHub releases, tags and commits, PyPI, npm, the Web Archive at a date). Each consecutive pair is read and compared once (`ReadAt`, `Extract`), so a customer several versions behind gets every step of the upgrade. A living page with no versions (a deprecations page, a feed) is read as it is now; each change to it is a dated version.
+0. **List the versions.** A source with versions (a spec's releases, a package on PyPI or npm, a guide per major) lists every one, oldest first (`ListVersions`, from `core/versions`: GitHub releases, tags and commits, PyPI, npm, a living page's Web Archive captures). Each consecutive pair is read and compared once (`ReadAt`, `Extract`), so a customer several versions behind gets every step of the upgrade. A living page with no versions (a deprecations page, a feed) is read as it is now; each change to it is a dated version, and its past ones are its Web Archive captures.
 1. **Fetch.** The plugin asks its environment for the source (`env.Get`); it never opens connections itself. Pages that change in place are also cited through a Web Archive snapshot, so the link in an event keeps showing what the plugin read.
 2. **Compare.** It compares two versions of the source: two OpenAPI specs, two versions of a deprecations page, a release's changelog section against the release before. `Run` does the newest version against the last one it saw (the baseline); `Extract` does any pair.
 3. **Emit events.** Each change becomes one event in [patch-it's change-event format](https://github.com/patch-it-dev/patch-it/tree/main/docs/contract): what changed, how bad it is (breaking, deprecation, behavior change, non-breaking), the date it takes effect, and the source URL with a quote. **No source, no event.** When unsure, a plugin emits nothing: a wrong event would become a wrong pull request.
@@ -20,7 +20,7 @@ There's no list in this repo: `make plugins` prints every provider and source fr
 | Path | What's there |
 |---|---|
 | [`core/plugin/`](../core/plugin/) | The `Plugin` interface (`Run`; `ListVersions`, `ReadAt`, `Extract`), the registry of providers and sources (`RegisterProvider`, `Lookup`, `LookupSource`, `Providers`), `Env`, `Result` |
-| [`core/versions/`](../core/versions/) | Every version of a source: GitHub releases, tags and commits, PyPI, npm, the Web Archive at a date |
+| [`core/versions/`](../core/versions/) | Every version of a source: GitHub releases, tags and commits, PyPI, npm, a page's Web Archive captures (all, or the one at a date) |
 | [`plugins/`](../plugins/) | One package per kind, with its providers; `plugins/all` imports every one |
 | [`cmd/new-plugin/`](../cmd/new-plugin/), [`cmd/list-plugins/`](../cmd/list-plugins/) | The starter for a new provider; the list of providers and sources, printed from the registry |
 | [`core/kit/`](../core/kit/), [`core/kit/kittest/`](../core/kit/kittest/), [`core/github/`](../core/github/), [`core/extract/`](../core/extract/) | What plugins share (the unchanged-page check, Wayback citing, the newest release or commit on GitHub, RSS/Atom and HTML text helpers) and the test kit (in-memory store, saved pages, golden files) |

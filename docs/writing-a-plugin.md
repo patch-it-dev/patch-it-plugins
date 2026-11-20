@@ -117,12 +117,12 @@ ReadAt(ctx, env, v Version) (Snapshot, error)                 // the source at o
 Extract(ctx, env, from, to Snapshot) (Result, error)          // the changes from one to the next
 ```
 
-- **List** with [`core/versions`](../core/versions/versions.go): `GitHubReleases`, `GitHubTags`, `GitHubCommits` (the commits that changed a file), `PyPIReleases`, `NPMReleases`, `WaybackAt` (a page as it was on a date). Never pin a tag in code: a version you need for a golden test is a pinned *case* in the test (`changelog.Urllib3.At("2.0.0")`), not the registered source.
+- **List** with [`core/versions`](../core/versions/versions.go): `GitHubReleases`, `GitHubTags`, `GitHubCommits` (the commits that changed a file), `PyPIReleases`, `NPMReleases`, `WaybackCaptures` (every distinct Web Archive capture of a living page, dated), `WaybackAt` (a page as it was on a date), `GitHubPages` (any other GitHub list, page by page). An OpenAPI adapter lists its own versions (`adapter.Lister`): every adapter does. Never pin a tag in code: a version you need for a golden test is a pinned *case* in the test (`changelog.Urllib3.At("2.0.0")`), not the registered source.
 - **Read at** a version's `Ref` (a tag, a commit SHA, an archive URL) and return the exact URL read as the snapshot's `SourceURL`: it's the events' citation.
 - **Extract** sets `previous_version` to `from`'s version; `from` may be zero (nothing before). It returns no baselines.
 - `Run` is built from the same parts: the newest version, extracted against the last baseline.
 
-A living page with no versions of its own (a deprecations page, a feed) only has `Run`: it's read as it is now, and each change to it is a dated version.
+A living page with no versions of its own (a deprecations page, a feed: a `notices` source) is read as it is now by `Run`, and each change to it is a dated version. Its history comes from the Web Archive: the `notices` kind lists every distinct capture (`WaybackCaptures`), reads each, and extracts what each one added, citing that capture, so a year of it can be backfilled by date with no stored copies.
 
 ### Register the provider and its source
 
