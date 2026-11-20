@@ -8,7 +8,7 @@ import (
 )
 
 func TestRegistersItself(t *testing.T) {
-	for _, a := range []adapter.Adapter{adapter.Stripe{}, adapter.Datadog{}, adapter.GitLab{}, adapter.GitHub{}, adapter.Vercel{}, adapter.Supabase{}, adapter.Algolia{Spec: "search"}, adapter.Algolia{Spec: "ingestion"}, adapter.Algolia{Spec: "recommend"}, adapter.Elasticsearch{}, adapter.Sentry{}, adapter.Neon{}, adapter.Convex{}} {
+	for _, a := range []adapter.Adapter{adapter.Stripe{}, adapter.Datadog{}, adapter.GitLab{}, adapter.GitHub{}, adapter.Vercel{}, adapter.Supabase{}, adapter.Algolia{Spec: "search"}, adapter.Algolia{Spec: "ingestion"}, adapter.Algolia{Spec: "recommend"}, adapter.Elasticsearch{}, adapter.Sentry{}, adapter.Neon{}, adapter.Convex{}, adapter.PlanetScale{}} {
 		kittest.Registered(t, Plugin{Adapter: a})
 	}
 }

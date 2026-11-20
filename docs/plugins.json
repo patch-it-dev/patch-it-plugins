@@ -1,7 +1,7 @@
 {
   "_comment": "Generated from the plugin registry and docs/plugins.md by `make plugins-json` (go run ./cmd/list-plugins). Don't edit by hand.",
   "$schema": "./plugins.schema.json",
-  "count": 26,
+  "count": 27,
   "plugins": [
     {
       "id": "algolia-ingestion",
@@ -172,6 +172,16 @@
       "source_url": "https://developers.openai.com/api/docs/deprecations",
       "status": "live",
       "provider_page": "providers/openai-models.md"
+    },
+    {
+      "id": "planetscale",
+      "provider": "PlanetScale",
+      "layer": "api",
+      "watches": "API operations deprecated, and deprecated operations removed, between commits of the spec, said in the operation's description",
+      "format": "openapi",
+      "source_url": "https://github.com/planetscale/terraform-provider-planetscale",
+      "status": "live",
+      "provider_page": "providers/planetscale.md"
     },
     {
       "id": "posthog",
