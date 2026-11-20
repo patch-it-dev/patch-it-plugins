@@ -52,7 +52,8 @@ func (Neon) LatestTag(ctx context.Context) (string, error) {
 	return commits[0].SHA, nil
 }
 
-// Fetch downloads the spec at commit sha.
+// Fetch downloads the spec at commit sha and moves the server URL's path into
+// the paths: see ServerBasePath.
 //
 // Version is the commit's date (YYYY-MM-DD): the API's only version is the
 // `/api/v2` in its URL (info.version a fixed "v2" in all 23 commits, checked
@@ -87,5 +88,19 @@ func (Neon) Fetch(ctx context.Context, sha string) (Spec, error) {
 	if !json.Valid(body) {
 		return Spec{}, fmt.Errorf("neon spec %s is not valid json", sha)
 	}
-	return Spec{Content: body, Version: commit.Commit.Committer.Date.UTC().Format("2006-01-02"), SourceURL: url}, nil
+	// The server is "https://console.neon.tech/api/v2" and the paths don't
+	// repeat /api/v2 (all 23 commits, checked 2026-11-19). Moved into the
+	// paths, an operation is named by the path a caller sends, and a spec
+	// that ever moved it (as Sentry's did) can't read as every deprecated
+	// operation removed.
+	content, err := ServerBasePath(body)
+	if err != nil {
+		return Spec{}, fmt.Errorf("neon spec %s: %w", sha, err)
+	}
+	return Spec{Content: content, Version: commit.Commit.Committer.Date.UTC().Format("2006-01-02"), SourceURL: url}, nil
 }
+
+// SourcePointer: see BasePathPointer.
+func (Neon) SourcePointer(content []byte) func(string) string { return BasePathPointer(content) }
+
+var _ Reshaper = Neon{}

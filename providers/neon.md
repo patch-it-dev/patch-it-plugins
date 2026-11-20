@@ -22,9 +22,10 @@ Format plugin: `openapi` (`plugins/openapi`), with `adapter.Neon`.
 
 ## How the provider announces changes
 
+- **Operations are named by the path a caller sends,** `POST /api/v2/projects/…`: the spec's server is `https://console.neon.tech/api/v2` and its paths leave out `/api/v2`, so the adapter moves it into the paths (as Sentry's does with `/api/0`). Quotes cite the spec as published. If Neon ever moves `/api/v2` between the server and the paths, the operations stay the same, rather than every deprecated one reading as removed.
 - **No API version beyond `/api/v2`.** `info.version` is `v2` in all 23 commits, so the event's `version` is the date of the spec commit, the closest thing to the API version a change arrived in.
 - **The spec changes about once a week**, mostly new operations (144 operations on 2026-06-24, 194 on 2026-11-17).
-- **Deprecations use the flag.** In all 23 commits no operation says "deprecat", "removal scheduled" or "sunset" without it. Each flagged operation also has an `x-sunset` date, and most descriptions say "Removal scheduled for <date>" or "use X instead".
+- **Deprecations use the flag.** In all 23 commits no operation is described as deprecated without it. Two unflagged operations deprecate a parameter in words (`include_v1_metrics` on `GET /consumption_history/projects`, and `name` on `POST …/snapshots/{snapshot_id}/restore`); those are parameter deprecations, not operation ones, so they make no event. Each flagged operation also has an `x-sunset` date, and most descriptions say "Removal scheduled for <date>" or "use X instead".
 - **Sunset dates aren't removal dates.** On 2026-11-17, 14 operations say "Removal scheduled for March 1, 2026" (`x-sunset` 2026-03-01) and one "Removal scheduled for July 1, 2026", and all 15 are still in the spec, the live one included (checked 2026-11-19).
 - **The changelog announces API deprecations and removals in prose:** `GET /consumption_history/account` was "deprecated, with a planned sunset of June 1, 2026" (2026-04-03) and "has been removed" (2026-06-19).
 

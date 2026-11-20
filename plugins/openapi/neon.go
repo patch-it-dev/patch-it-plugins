@@ -6,7 +6,9 @@ import "github.com/patch-it-dev/patch-it-plugins/diff"
 //
 //   - Deprecations use the `deprecated` flag, and only the flag: in the 23
 //     commits of neondatabase/neon-pkgs's copy (2026-06-24 to 2026-11-17) no
-//     operation says "deprecat", "removal scheduled" or "sunset" without it.
+//     operation is described as deprecated without it. (Two unflagged
+//     operations deprecate a parameter in words; those aren't operation
+//     deprecations.)
 //     A flagged operation's description says why or when ("Deprecated: to
 //     test a branch's already-saved configuration, use
 //     `sendNeonAuthEmailProviderTest`", "Removal scheduled for March 1,

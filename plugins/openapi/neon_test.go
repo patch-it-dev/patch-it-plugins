@@ -27,7 +27,7 @@ var neonCommits = map[string][2]string{
 }
 
 // fakeNeonAdapter serves the saved copies, cited by the real URL each was
-// copied from, as adapter.Neon.Fetch cites it.
+// copied from and reshaped, as adapter.Neon.Fetch cites and reshapes it.
 type fakeNeonAdapter struct{ latest string }
 
 func (fakeNeonAdapter) API() string { return "neon" }
@@ -43,7 +43,17 @@ func (fakeNeonAdapter) Fetch(_ context.Context, tag string) (adapter.Spec, error
 	if err != nil {
 		return adapter.Spec{}, err
 	}
-	return adapter.Spec{Content: body, Version: c[1], SourceURL: neonURL(tag)}, nil
+	// As adapter.Neon.Fetch does: /api/v2 moved from the server URL into the
+	// paths.
+	content, err := adapter.ServerBasePath(body)
+	if err != nil {
+		return adapter.Spec{}, err
+	}
+	return adapter.Spec{Content: content, Version: c[1], SourceURL: neonURL(tag)}, nil
+}
+
+func (fakeNeonAdapter) SourcePointer(content []byte) func(string) string {
+	return adapter.BasePathPointer(content)
 }
 
 func neonFile(tag string) string { return "testdata/neon-" + tag + ".json" }
@@ -78,7 +88,7 @@ func TestNeonGolden(t *testing.T) {
 		t.Fatalf("stored %d events, want 1", len(events))
 	}
 	e := events[0]
-	if e.Subject.Operation != "POST /projects/{project_id}/branches/{branch_id}/auth/send_test_email" || e.Version != "2026-08-23" || e.PreviousVersion != "2026-08-17" {
+	if e.Subject.Operation != "POST /api/v2/projects/{project_id}/branches/{branch_id}/auth/send_test_email" || e.Version != "2026-08-23" || e.PreviousVersion != "2026-08-17" {
 		t.Errorf("got %s %s (after %s)", e.Subject.Operation, e.Version, e.PreviousVersion)
 	}
 	if e.ChangeType != event.ChangeTypeDeprecation || e.Breaking {
@@ -126,7 +136,7 @@ func TestNeonDropsRemovalsThatWerentDeprecated(t *testing.T) {
 			removals = append(removals, e.Subject.Operation)
 		}
 	}
-	if len(removals) != 1 || removals[0] != "POST /projects/{project_id}/branches/{branch_id}/recover" {
+	if len(removals) != 1 || removals[0] != "POST /api/v2/projects/{project_id}/branches/{branch_id}/recover" {
 		t.Errorf("unfiltered removals %v, want only POST .../branches/{branch_id}/recover", removals)
 	}
 }
@@ -159,6 +169,9 @@ func (neonAPIClient) Fetch(_ context.Context, version string) (adapter.Spec, err
 	if err != nil {
 		return adapter.Spec{}, err
 	}
+	if content, err = adapter.ServerBasePath(content); err != nil { // as adapter.Neon.Fetch does
+		return adapter.Spec{}, err
+	}
 	return adapter.Spec{Content: content, Version: version, SourceURL: "https://registry.npmjs.org/@neondatabase/api-client/-/api-client-" + version + ".tgz"}, nil
 }
 
@@ -176,7 +189,7 @@ func TestNeonKeepsTheRemovalOfADeprecatedOperation(t *testing.T) {
 		t.Fatalf("stored %d events, want 1", len(events))
 	}
 	e := events[0]
-	if e.Subject.Operation != "GET /consumption_history/account" || e.ChangeType != event.ChangeTypeBreaking || !e.Breaking {
+	if e.Subject.Operation != "GET /api/v2/consumption_history/account" || e.ChangeType != event.ChangeTypeBreaking || !e.Breaking {
 		t.Errorf("got %s %s breaking=%v, want GET /consumption_history/account removed", e.Subject.Operation, e.ChangeType, e.Breaking)
 	}
 	if !strings.Contains(e.SourceExcerpt, `"deprecated":true`) {
