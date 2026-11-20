@@ -19,7 +19,7 @@ Format plugin: `openapi` (`plugins/openapi`), with `adapter.Convex`.
   - **The SDK changelogs** (`convex` on npm, `get-convex/convex-js` `CHANGELOG.md`; `convex-py`). One flat list of bullets per version (95 versions in `convex-js`), with no removed or deprecated sections for the `changelog` plugin to read.
   - **[Convex News](https://news.convex.dev/)** (RSS at `https://news.convex.dev/rss/`). Product news and announcements, newest post 2026-09-21; it doesn't name API operations.
   - **The `@convex-dev/platform` npm package** (0.1.11). Its tarball has only `package.json` and the generated client, not the specs.
-- **Quote:** "Deprecated: use `GET /integrations` instead." (`GET /list_log_streams`, deprecated in the spec on 2026-11-05)
+- **Quote:** "Deprecated: use `GET /integrations` instead." (`GET /api/v1/list_log_streams`, deprecated in the spec on 2026-11-05)
 
 ## How the provider announces changes
 
@@ -32,12 +32,12 @@ Format plugin: `openapi` (`plugins/openapi`), with `adapter.Convex`.
 - **Reads:** the spec at the newest commit, diffed against the last one. Two events come out of it:
   - **Deprecations:** an operation that gains the `deprecated` flag. The event quotes the whole operation, so the replacement Convex names is in the excerpt.
   - **Removals (breaking):** an operation that leaves the spec after the previous spec had marked it deprecated. None yet.
-- **Operations are named as the spec writes them,** relative to the server URL `{deployment-url}/api/v1`: `GET /list_log_streams` is `GET {deployment-url}/api/v1/list_log_streams`. The server URL has been `/api/v1` since the first commit.
+- **Operations are named by the path a caller sends,** `GET /api/v1/list_log_streams`: the server URL is `{deployment-url}/api/v1` (since the first commit) and the spec's paths leave out `/api/v1`, so the adapter moves it into the paths (as Sentry's does with `/api/0`). Quotes cite the spec as published. If Convex ever moves `/api/v1` between the server and the paths, the operations stay the same, rather than every deprecated one reading as removed.
 - **Matches operations by path template,** as for every spec here. No path parameter has been renamed in this spec yet.
 - **Ignores everything else:**
-  - **Request and response property changes,** and new operations. Over the history the differ finds 18 property removals, 16 type changes and 10 schema removals, most of them in the data sync, usage-limit and S3 export APIs. The drop test is one of them: on 2026-07-14 (`3ead9091`, "Remove name from usage limits") the optional `name` left the usage-limit request and response; the commit says it "was never editable in the UI (always `None` on create, only echoed back)", and the request type at that commit doesn't reject unknown fields, so a caller still sending it isn't refused.
+  - **Request and response property changes,** and new operations. Over the history the differ finds 18 property removals, 16 type changes, 10 schema removals and 3 properties no longer required, most of them in the data sync, usage-limit and S3 export APIs. The drop test is one of them: on 2026-07-14 (`3ead9091`, "Remove name from usage limits") the optional `name` left the usage-limit request and response; the commit says it "was never editable in the UI (always `None` on create, only echoed back)", and the request type at that commit doesn't reject unknown fields, so a caller still sending it isn't refused.
   - **Removals of operations that were never deprecated.** None in the history: no operation has left the spec.
-- Over the 68 commits this keeps 6 events, all deprecations on 2026-11-05: `GET /list_log_streams`, `GET /get_log_stream/{id}`, `POST /create_log_stream`, `POST /update_log_stream/{id}`, `POST /delete_log_stream/{id}`, `POST /rotate_webhook_secret/{id}`.
+- Over the 68 commits this keeps 6 events, all deprecations on 2026-11-05: `GET /api/v1/list_log_streams`, `GET /api/v1/get_log_stream/{id}`, `POST /api/v1/create_log_stream`, `POST /api/v1/update_log_stream/{id}`, `POST /api/v1/delete_log_stream/{id}`, `POST /api/v1/rotate_webhook_secret/{id}`.
 - **Replays** a historical pair (`Replay`, from `f35879bb` to `5e5159cb`) and recreates those six; the golden test also runs them as a daily ingest. The drop test replays `3f6edf7a` to `3ead9091`.
 
 ## Known gaps

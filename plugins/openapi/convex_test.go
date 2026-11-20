@@ -39,7 +39,17 @@ func (fakeConvexAdapter) Fetch(_ context.Context, tag string) (adapter.Spec, err
 	if err != nil {
 		return adapter.Spec{}, err
 	}
-	return adapter.Spec{Content: body, Version: c[1], SourceURL: convexURL(tag)}, nil
+	// As adapter.Convex.Fetch does: /api/v1 moved from the server URL into
+	// the paths.
+	content, err := adapter.ServerBasePath(body)
+	if err != nil {
+		return adapter.Spec{}, err
+	}
+	return adapter.Spec{Content: content, Version: c[1], SourceURL: convexURL(tag)}, nil
+}
+
+func (fakeConvexAdapter) SourcePointer(content []byte) func(string) string {
+	return adapter.BasePathPointer(content)
 }
 
 func convexFile(tag string) string { return "testdata/convex-" + tag + ".json" }
@@ -58,12 +68,12 @@ func convexPlugin(latest string) Plugin {
 // instead (added 2026-10-30). The commit that deprecated them says "The
 // routes still work, so existing callers and older dashboards keep working."
 var convexReplacements = map[string]string{
-	"GET /list_log_streams":            "`GET /integrations`",
-	"GET /get_log_stream/{id}":         "`GET /integrations/{id}`",
-	"POST /create_log_stream":          "`POST /integrations`",
-	"POST /update_log_stream/{id}":     "`PATCH /integrations/{id}`",
-	"POST /delete_log_stream/{id}":     "`DELETE /integrations/{id}`",
-	"POST /rotate_webhook_secret/{id}": "`POST /integrations/{id}/rotate_webhook_secret`",
+	"GET /api/v1/list_log_streams":            "`GET /integrations`",
+	"GET /api/v1/get_log_stream/{id}":         "`GET /integrations/{id}`",
+	"POST /api/v1/create_log_stream":          "`POST /integrations`",
+	"POST /api/v1/update_log_stream/{id}":     "`PATCH /integrations/{id}`",
+	"POST /api/v1/delete_log_stream/{id}":     "`DELETE /integrations/{id}`",
+	"POST /api/v1/rotate_webhook_secret/{id}": "`POST /integrations/{id}/rotate_webhook_secret`",
 }
 
 // The golden test: the only deprecations in the Deployment API spec's

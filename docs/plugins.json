@@ -1,7 +1,7 @@
 {
   "_comment": "Generated from the plugin registry and docs/plugins.md by `make plugins-json` (go run ./cmd/list-plugins). Don't edit by hand.",
   "$schema": "./plugins.schema.json",
-  "count": 25,
+  "count": 26,
   "plugins": [
     {
       "id": "algolia-ingestion",
@@ -132,6 +132,16 @@
       "source_url": "https://github.com/mongodb/openapi/blob/main/changelog/changelog.json",
       "status": "live",
       "provider_page": "providers/mongodb-atlas.md"
+    },
+    {
+      "id": "neon",
+      "provider": "Neon",
+      "layer": "api",
+      "watches": "Neon API operations deprecated, and deprecated operations removed, between commits of the spec",
+      "format": "openapi",
+      "source_url": "https://github.com/neondatabase/neon-pkgs",
+      "status": "live",
+      "provider_page": "providers/neon.md"
     },
     {
       "id": "newrelic",

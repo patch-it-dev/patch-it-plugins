@@ -20,7 +20,8 @@ var convexDiff = diff.Options{PathTemplates: true, QuoteDeprecatedOperation: tru
 // No operation has left the spec. Everything else is dropped:
 //
 //   - Request and response property changes: 18 property removals, 16 type
-//     changes and 10 schema removals over the history, most of them in the
+//     changes, 10 schema removals and 3 properties no longer required over
+//     the history, most of them in the
 //     data sync, usage-limit and S3 export APIs. On 2026-07-14 the optional
 //     `name` left the usage-limit request and response, while the server
 //     didn't refuse a request that still sent it: see the drop test.

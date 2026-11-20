@@ -92,5 +92,19 @@ func (Convex) Fetch(ctx context.Context, sha string) (Spec, error) {
 	if !json.Valid(body) {
 		return Spec{}, fmt.Errorf("convex spec %s is not valid json", sha)
 	}
-	return Spec{Content: body, Version: commit.Commit.Committer.Date.UTC().Format("2006-01-02"), SourceURL: url}, nil
+	// The server is "{deployment-url}/api/v1" and the paths leave out /api/v1
+	// (all 68 commits, checked 2026-11-19). Moved into the paths, an
+	// operation is named by the path a caller sends, and a spec that ever
+	// moved it (as Sentry's did) can't read as every deprecated operation
+	// removed.
+	content, err := ServerBasePath(body)
+	if err != nil {
+		return Spec{}, fmt.Errorf("convex spec %s: %w", sha, err)
+	}
+	return Spec{Content: content, Version: commit.Commit.Committer.Date.UTC().Format("2006-01-02"), SourceURL: url}, nil
 }
+
+// SourcePointer: see BasePathPointer.
+func (Convex) SourcePointer(content []byte) func(string) string { return BasePathPointer(content) }
+
+var _ Reshaper = Convex{}

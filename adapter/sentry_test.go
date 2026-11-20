@@ -162,16 +162,21 @@ func TestSentryFetchSchemaTagOrCommit(t *testing.T) {
 }
 
 func TestSentryBasePathRefusesWhatItCantMove(t *testing.T) {
-	if _, err := sentryBasePath([]byte(`{"servers":[{"url":"https://x/api"}],"paths":{"/a":{},"a":{}}}`)); err == nil {
+	if _, err := ServerBasePath([]byte(`{"servers":[{"url":"https://x/api"}],"paths":{"/a":{},"a":{}}}`)); err == nil {
 		t.Error("a path without a leading /: want an error")
 	}
-	if _, err := sentryBasePath([]byte(`{"servers":[{"url":"https://x/api/0"},{"url":"https://y"}],"paths":{}}`)); err == nil {
+	if _, err := ServerBasePath([]byte(`{"servers":[{"url":"https://x/api/0"},{"url":"https://y"}],"paths":{}}`)); err == nil {
 		t.Error("servers with different paths: want an error")
 	}
 }
 
+// A server whose whole origin is a variable (Convex's "{deployment-url}/api/v1")
+// still has a path to move.
 func TestServerPath(t *testing.T) {
 	for in, want := range map[string]string{
+		"{deployment-url}/api/v1":           "/api/v1",
+		"{deployment-url}/api/v1/":          "/api/v1",
+		"{deployment-url}":                  "",
 		"https://{region}.sentry.io/api/0":  "/api/0",
 		"https://{region}.sentry.io/api/0/": "/api/0",
 		"https://{region}.sentry.io":        "",
