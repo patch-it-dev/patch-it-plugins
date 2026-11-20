@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"strings"
 	"testing"
 
 	"github.com/patch-it-dev/patch-it-plugins/adapter"
@@ -39,8 +40,8 @@ func TestFlagsmithRegistersItself(t *testing.T) {
 }
 
 // fakeFlagsmithAdapter serves the saved copies, cited by the real URL each
-// was copied from, converted from YAML to JSON the same way
-// adapter.Flagsmith.Fetch does.
+// was copied from, converted from YAML to JSON and the tag's leading "v"
+// trimmed from Version the same way adapter.Flagsmith.Fetch does.
 type fakeFlagsmithAdapter struct{}
 
 func (fakeFlagsmithAdapter) API() string { return "flagsmith" }
@@ -66,7 +67,7 @@ func (fakeFlagsmithAdapter) Fetch(_ context.Context, tag string) (adapter.Spec, 
 	}
 	return adapter.Spec{
 		Content:   content,
-		Version:   tag,
+		Version:   strings.TrimPrefix(tag, "v"),
 		SourceURL: "https://raw.githubusercontent.com/Flagsmith/flagsmith/" + tag + "/openapi.yaml",
 	}, nil
 }

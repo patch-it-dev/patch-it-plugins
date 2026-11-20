@@ -1,10 +1,10 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:56cceb283eac03f24d241fb6325520fb4f9f6276a8e5dcd9965c624bee3c019f",
+    "fingerprint": "sha256:9d8954a4311788d780d04796043dc3382369ea6856663403d91e0622ee46440b",
     "api": "flagsmith",
-    "version": "v2.287.0",
-    "previous_version": "v2.286.0",
+    "version": "2.287.0",
+    "previous_version": "2.286.0",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -22,10 +22,10 @@
   },
   {
     "id": 2,
-    "fingerprint": "sha256:78b79fa245ba1e6d6d6937e51d8475e7a940f5552b7c041ee65aa5631b6a6f4d",
+    "fingerprint": "sha256:679f551f2accf69eb0af557218cc8c0ae617589fea24835cc12b9358e4b4b644",
     "api": "flagsmith",
-    "version": "v2.287.0",
-    "previous_version": "v2.286.0",
+    "version": "2.287.0",
+    "previous_version": "2.286.0",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -43,10 +43,10 @@
   },
   {
     "id": 3,
-    "fingerprint": "sha256:0de1e213e5f35167e7187239a94a8e0b99121a5f8f4b60c7745607cf7937f092",
+    "fingerprint": "sha256:f787d4463ba4f53083c9ebf3e686f3668606c61d8501c4256ebc4ad87a444668",
     "api": "flagsmith",
-    "version": "v2.287.0",
-    "previous_version": "v2.286.0",
+    "version": "2.287.0",
+    "previous_version": "2.286.0",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
