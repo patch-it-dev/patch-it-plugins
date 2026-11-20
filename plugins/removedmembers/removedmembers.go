@@ -27,14 +27,39 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/patch-it-dev/patch-it-plugins/event"
-	"github.com/patch-it-dev/patch-it-plugins/plugin"
+	"github.com/patch-it-dev/patch-it-plugins/core/event"
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
+	"github.com/patch-it-dev/patch-it-plugins/core/versions"
 )
 
 func init() {
-	plugin.Register(Plugin{Guide: NumPy2})
-	plugin.Register(Plugin{Guide: PostHog8})
-	plugin.Register(Plugin{Guide: NewRelic11})
+	plugin.RegisterProvider(plugin.Provider{
+		ID: "numpy", Name: "NumPy", Category: plugin.CategoryPackages, Homepage: "https://numpy.org",
+		Sources: []plugin.Source{{
+			ID: "numpy", Layer: plugin.LayerPackage, Page: "providers/numpy.md",
+			Watches: "Members removed or renamed in the main namespace in NumPy 2.0",
+			URLs:    []string{"https://github.com/numpy/numpy/blob/v2.0.0/doc/source/numpy_2_0_migration_guide.rst"},
+			Plugin:  Plugin{Guide: NumPy2},
+		}},
+	})
+	plugin.RegisterProvider(plugin.Provider{
+		ID: "posthog", Name: "PostHog", Category: plugin.CategoryAnalytics, Homepage: "https://posthog.com",
+		Sources: []plugin.Source{{
+			ID: "python-sdk", Layer: plugin.LayerSDK, Page: "providers/posthog.md",
+			Watches: "Members removed in the posthog Python SDK 8.0.0",
+			URLs:    []string{"https://github.com/PostHog/posthog-python/blob/posthog-v8.0.0/docs/migration-7.x-to-8.0.md"},
+			Plugin:  Plugin{Guide: PostHog8},
+		}},
+	})
+	plugin.RegisterProvider(plugin.Provider{
+		ID: "newrelic", Name: "New Relic", Category: plugin.CategoryMonitoring, Homepage: "https://newrelic.com",
+		Sources: []plugin.Source{{
+			ID: "python-agent", Layer: plugin.LayerSDK, Page: "providers/newrelic.md",
+			Watches: "Members removed in the New Relic Python agent 11.0.0",
+			URLs:    []string{"https://github.com/newrelic/docs-website/blob/f0b4f817bf9a7b76a78e26609369a8a7ce764c8e/src/content/docs/release-notes/agent-release-notes/python-release-notes/python-agent-110000.mdx"},
+			Plugin:  Plugin{Guide: NewRelic11},
+		}},
+	})
 }
 
 // Guide is one package's guide to one release.
@@ -46,8 +71,13 @@ type Guide struct {
 	Path    string // the guide's path in the repo at the release tag
 	Section string // the heading the table is under
 
-	// Tag is the release tag; "" is "v" + Release.
-	Tag string
+	// TagPrefix makes a release's git tag: TagPrefix + version ("" is "v":
+	// v2.0.0; PostHog's is "posthog-v"). The guide is read at Release's tag.
+	TagPrefix string
+	// DocsRef, when the guide isn't in the package's own repo but in a docs
+	// repo with no release tags (New Relic's release notes), is the commit
+	// of Repo the guide is read at.
+	DocsRef string
 	// Format is how the table is written: FormatRST (the default) or
 	// FormatMarkdown.
 	Format Format
@@ -108,11 +138,17 @@ const (
 	FormatMarkdown Format = "markdown"
 )
 
-func (g Guide) tag() string {
-	if g.Tag != "" {
-		return g.Tag
+func (g Guide) tag() string { return g.tagOf(g.Release) }
+
+// tagOf is the git ref a release of the package is read at.
+func (g Guide) tagOf(release string) string {
+	if g.DocsRef != "" {
+		return g.DocsRef
 	}
-	return "v" + g.Release
+	if g.TagPrefix != "" {
+		return g.TagPrefix + release
+	}
+	return "v" + release
 }
 
 func (g Guide) doc() string {
@@ -239,15 +275,58 @@ type Plugin struct {
 
 func (p Plugin) Name() string { return p.Guide.Package }
 
-// Run reads the guide at its tag. The tag never changes, so a rerun stores
-// nothing new: the fingerprints dedupe.
+// Run reads the guide at its release's tag. The tag never changes, so a
+// rerun stores nothing new: the fingerprints dedupe.
 func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) {
 	g := p.Guide
+	v := plugin.Version{ID: g.Release, Ref: g.tag()}
+	to, err := p.ReadAt(ctx, env, v)
+	if err != nil {
+		return plugin.Result{}, err
+	}
+	res, err := p.Extract(ctx, env, plugin.Snapshot{}, to)
+	if err != nil {
+		return plugin.Result{}, err
+	}
+	res.Baselines = []plugin.Spec{plugin.Baseline(g.Package, g.Release, g.tag(), g.URL(), to.Content, false, env.Now().UTC())}
+	return res, nil
+}
+
+// ListVersions is every final release of the package on PyPI, oldest first,
+// each with the ref its guide would be read at.
+func (p Plugin) ListVersions(ctx context.Context, env plugin.Env) ([]plugin.Version, error) {
+	vs, err := versions.PyPIReleases(ctx, env.Get, p.Guide.Package)
+	if err != nil {
+		return nil, err
+	}
+	for i := range vs {
+		vs[i].Ref = p.Guide.tagOf(vs[i].ID)
+	}
+	return vs, nil
+}
+
+// ReadAt fetches the guide when v is the release it documents; any other
+// release has no guide and reads as nothing (a snapshot with no content).
+func (p Plugin) ReadAt(ctx context.Context, env plugin.Env, v plugin.Version) (plugin.Snapshot, error) {
+	g := p.Guide
+	if v.ID != g.Release {
+		return plugin.Snapshot{Version: v}, nil
+	}
 	page, err := env.Get(ctx, g.URL())
 	if err != nil {
-		return plugin.Result{}, fmt.Errorf("fetching %s: %w", g.URL(), err)
+		return plugin.Snapshot{}, fmt.Errorf("fetching %s: %w", g.URL(), err)
 	}
-	removals, err := Parse(page, g)
+	return plugin.Snapshot{Version: v, Content: page, SourceURL: g.URL()}, nil
+}
+
+// Extract is an event per removed member in the to release's guide, with
+// previous_version from's release; a release with no guide has none.
+func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snapshot) (plugin.Result, error) {
+	g := p.Guide
+	if to.Content == nil {
+		return plugin.Result{Label: to.Version.ID}, nil
+	}
+	removals, err := Parse(to.Content, g)
 	if err != nil {
 		return plugin.Result{}, fmt.Errorf("reading %s: %w", g.URL(), err)
 	}
@@ -271,17 +350,18 @@ func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) 
 			subject.Change, subject.Replacement = event.PackageRenamedSymbol, r.Replacement
 		}
 		e := event.EventV2{
-			API:           g.Package,
-			Version:       g.Release,
-			ChangeType:    event.ChangeTypeBreaking,
-			Breaking:      true,
-			Subject:       subject,
-			Description:   desc,
-			MigrationHint: fmt.Sprintf("%s (%s's %s for %s)", g.absoluteLinks(r.Guideline), g.Package, g.doc(), g.Release),
-			SourceURL:     g.URL(),
-			SourceExcerpt: r.Excerpt,
-			Confidence:    1.0,
-			DetectedAt:    now,
+			API:             g.Package,
+			PreviousVersion: from.Version.ID,
+			Version:         g.Release,
+			ChangeType:      event.ChangeTypeBreaking,
+			Breaking:        true,
+			Subject:         subject,
+			Description:     desc,
+			MigrationHint:   fmt.Sprintf("%s (%s's %s for %s)", g.absoluteLinks(r.Guideline), g.Package, g.doc(), g.Release),
+			SourceURL:       g.URL(),
+			SourceExcerpt:   r.Excerpt,
+			Confidence:      1.0,
+			DetectedAt:      now,
 		}
 		e.Fingerprint = event.FingerprintV2(e.API, e.Version, e.ChangeType, subject, "")
 		if err := e.Validate(); err != nil {
@@ -290,13 +370,10 @@ func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) 
 		}
 		events = append(events, e)
 	}
-	return plugin.Result{
-		Label:     g.URL(),
-		Events:    events,
-		Rejected:  rejected,
-		Baselines: []plugin.Spec{plugin.Baseline(g.Package, g.Release, g.tag(), g.URL(), page, false, now)},
-	}, nil
+	return plugin.Result{Label: g.URL(), Events: events, Rejected: rejected}, nil
 }
+
+var _ plugin.Versioned = Plugin{}
 
 // absoluteLinks prefixes LinkBase to every Markdown link target in s that
 // starts with "/".

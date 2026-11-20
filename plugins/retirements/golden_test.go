@@ -3,8 +3,8 @@ package retirements
 import (
 	"testing"
 
-	"github.com/patch-it-dev/patch-it-plugins/kit/kittest"
-	"github.com/patch-it-dev/patch-it-plugins/retire"
+	"github.com/patch-it-dev/patch-it-plugins/core/kit/kittest"
+	"github.com/patch-it-dev/patch-it-plugins/plugins/retirements/retire"
 )
 
 // Both providers' saved pages (2026-10-13) in, every event out. The archive
@@ -16,7 +16,7 @@ func TestGolden(t *testing.T) {
 		"anthropic-deprecations.md": retire.Anthropic,
 	} {
 		t.Run(page.API, func(t *testing.T) {
-			saved := kittest.Pages{page.URL: "../../retire/testdata/" + file}
+			saved := kittest.Pages{page.URL: "retire/testdata/" + file}
 			archive := &kittest.Archive{T: t, Pages: saved}
 			got := kittest.IngestWith(t, kittest.Env(t, saved), Plugin{Page: page, Archiver: archive})
 			if archive.Calls != 1 {

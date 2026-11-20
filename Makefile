@@ -5,7 +5,7 @@
 #
 #   make check                       everything below, in CI's order
 #   make check PATCH_IT=../patch-it  also compare contract/fixtures/ with patch-it's
-#   make plugins-json                regenerate docs/plugins.json from the registry and docs/plugins.md
+#   make plugins                     print the providers and sources from the registry (JSON)
 #
 # The `::error` lines are GitHub annotations; locally they're plain messages.
 
@@ -17,7 +17,7 @@ PYTHON ?= python3
 MODULE  := github.com/patch-it-dev/patch-it-plugins
 ALLOWED := ^($(MODULE)(/|$$)|gopkg\.in/yaml\.v3$$)
 
-.PHONY: check tidy build fmt vet imports nethttp test todos leak-guard contract plugins-json
+.PHONY: check tidy build fmt vet imports nethttp test todos leak-guard contract plugins
 
 check: tidy build fmt vet imports nethttp test todos leak-guard contract
 	@echo "make check: all passed"
@@ -52,19 +52,18 @@ imports:
 nethttp:
 	@bad=$$($(GO) list -f '{{.ImportPath}} {{join .Imports " "}}' ./... \
 		| grep -E '(^| )net/http( |$$)' | cut -d' ' -f1 \
-		| grep -vE '^$(MODULE)/(fetch|kit|adapter)(/|$$)' || true); \
+		| grep -vE '^$(MODULE)/(core/fetch|core/kit|plugins/openapi/adapter)(/|$$)' || true); \
 	if [ -n "$$bad" ]; then \
 		echo "::error::these packages import net/http; fetch through env.Get or kit instead:"; echo "$$bad"; exit 1; \
 	fi
 
 # -race: the fetcher and the tests' HTTP servers run on other goroutines.
-# Includes the check that docs/plugins.json is up to date (internal/pluginlist).
 test:
 	$(GO) test -race -count=1 ./...
 
 # A provider started with new-plugin is done when nothing it wrote still says
 # TODO(new-plugin).
-TODO_DIRS := plugins adapter retire sdkguide migrate providers docs/plugins.md
+TODO_DIRS := plugins core/migrate providers
 todos:
 	@left=$$(grep -rl 'TODO(new-plugin)' $(TODO_DIRS) || true); \
 	if [ -n "$$left" ]; then \
@@ -87,5 +86,7 @@ contract:
 		echo "contract: skipped (make check PATCH_IT=<a patch-it checkout> compares contract/fixtures/)"; \
 	fi
 
-plugins-json:
-	$(GO) run ./cmd/list-plugins
+# The list of what patch-it watches, from the registry. Never committed: the
+# Release workflow attaches it to each release as plugins.json.
+plugins:
+	@$(GO) run ./cmd/list-plugins

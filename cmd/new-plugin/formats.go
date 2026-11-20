@@ -4,7 +4,7 @@ package main
 // definition goes, the line that registers it, the placeholder sources its
 // test reads, and how the test runs it.
 type formatSpec struct {
-	layer    string            // default layer for docs/plugins.md
+	layer    string            // the source's default layer (plugin.Layers())
 	defDir   string            // the package directory the definition goes in
 	def      string            // the definition file (template)
 	register string            // the plugin.Register line added to plugins/<format>'s init (template)
@@ -30,7 +30,7 @@ const todo = "TODO(new-plugin)"
 
 var formats = map[string]formatSpec{
 	"feed": {
-		layer:  "API",
+		layer:  "api",
 		defDir: "plugins/feed",
 		def: `package feed
 
@@ -76,12 +76,12 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 	return kittest.IngestWith(t, kittest.Env(t, saved), Plugin{Feed: {{.Ident}}, Archiver: archive})
 }
 `,
-		imports: []string{"github.com/patch-it-dev/patch-it-plugins/event"},
+		imports: []string{"github.com/patch-it-dev/patch-it-plugins/core/event"},
 	},
 
 	"retirements": {
-		layer:  "AI models",
-		defDir: "retire",
+		layer:  "ai-models",
+		defDir: "plugins/retirements/retire",
 		def: `package retire
 
 import "strings"
@@ -104,7 +104,7 @@ var {{.Ident}} = Page{
 }
 `,
 		register: `plugin.Register(Plugin{Page: retire.{{.Ident}}, Archiver: kit.Wayback{}})`,
-		mapEntry: &mapEntry{"migrate/migrate.go", "providers", `retire.{{.Ident}}.API: "{{.Slug}}"`},
+		mapEntry: &mapEntry{"core/migrate/migrate.go", "providers", `retire.{{.Ident}}.API: "{{.Slug}}"`},
 		pluginOf: `Plugin{Page: retire.{{.Ident}}}`,
 		fixtures: map[string]string{"{{.File}}-deprecations.md": `# Placeholder deprecations page
 
@@ -149,12 +149,12 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 	return kittest.IngestWith(t, kittest.Env(t, saved), Plugin{Page: retire.{{.Ident}}, Archiver: archive})
 }
 `,
-		imports: []string{"encoding/json", "strings", "github.com/patch-it-dev/patch-it-plugins/event", "github.com/patch-it-dev/patch-it-plugins/retire"},
+		imports: []string{"encoding/json", "strings", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/plugins/retirements/retire"},
 	},
 
 	"migrationguide": {
-		layer:  "SDK",
-		defDir: "sdkguide",
+		layer:  "sdk",
+		defDir: "plugins/migrationguide/sdkguide",
 		def: `package sdkguide
 
 // {{.Ident}} is {{.Provider}}'s SDK guide to a major release (MIGRATION.md at
@@ -173,7 +173,7 @@ var {{.Ident}} = Guide{
 }
 `,
 		register: `plugin.Register(Plugin{Guide: sdkguide.{{.Ident}}})`,
-		mapEntry: &mapEntry{"migrate/migrate.go", "guides", `sdkguide.{{.Ident}}.API: sdkguide.{{.Ident}}`},
+		mapEntry: &mapEntry{"core/migrate/migrate.go", "guides", `sdkguide.{{.Ident}}.API: sdkguide.{{.Ident}}`},
 		pluginOf: `Plugin{Guide: sdkguide.{{.Ident}}}`,
 		fixtures: map[string]string{"{{.File}}-MIGRATION.md": `# Migrating to v1
 
@@ -215,7 +215,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 	return kittest.Ingest(t, Plugin{Guide: sdkguide.{{.Ident}}}, kittest.Pages{sdkguide.{{.Ident}}.URL(): file})
 }
 `,
-		imports: []string{"encoding/json", "strings", "github.com/patch-it-dev/patch-it-plugins/event", "github.com/patch-it-dev/patch-it-plugins/sdkguide"},
+		imports: []string{"encoding/json", "strings", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide/sdkguide"},
 	},
 
 	"removedmembers": {
@@ -290,7 +290,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 	return kittest.Ingest(t, Plugin{Guide: {{.Ident}}}, kittest.Pages{ {{.Ident}}.URL(): file})
 }
 `,
-		imports: []string{"slices", "github.com/patch-it-dev/patch-it-plugins/event"},
+		imports: []string{"slices", "github.com/patch-it-dev/patch-it-plugins/core/event"},
 	},
 
 	"changelog": {
@@ -298,15 +298,19 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 		defDir: "plugins/changelog",
 		def: `package changelog
 
-// {{.Ident}} is {{.Provider}}'s changelog at one release.
+// {{.Ident}} is {{.Provider}}'s changelog, read release by release (its
+// releases listed from the ecosystem's registry, each at TagPrefix+version).
 //
-// ` + todo + `: the ecosystem, the import name, the repo, the release's tag,
-// the release as the changelog heads it, and the changelog's path. Say what
-// you checked, with the date, as changelog.go does for Textual and urllib3.
+// ` + todo + `: the ecosystem, the import name, the repo, the tag prefix and
+// the changelog's path. Say what you checked, with the date, as changelog.go
+// does for Textual and urllib3.
 var {{.Ident}} = File{
 	Package: "{{.ID}}", Ecosystem: "pypi", Module: "{{.ID}}",
-	Repo: "TODO-owner/TODO-repo", Tag: "v1.0.0", Release: "1.0.0", Path: "CHANGELOG.md",
+	Repo: "TODO-owner/TODO-repo", TagPrefix: "v", Path: "CHANGELOG.md",
 }
+
+// {{.Ident}}Golden is the release the golden test pins.
+var {{.Ident}}Golden = {{.Ident}}.At("1.0.0")
 `,
 		register: `plugin.Register(Plugin{File: {{.Ident}}})`,
 		pluginOf: `Plugin{File: {{.Ident}}}`,
@@ -324,14 +328,14 @@ var {{.Ident}} = File{
 		ingest: `// {{.Lower}}Ingest runs the plugin over a saved copy of the changelog.
 func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 	t.Helper()
-	return kittest.Ingest(t, Plugin{File: {{.Ident}}}, kittest.Pages{ {{.Ident}}.URL(): file})
+	return kittest.Ingest(t, Plugin{File: {{.Ident}}Golden}, kittest.Pages{ {{.Ident}}Golden.URL(): file})
 }
 `,
-		imports: []string{"github.com/patch-it-dev/patch-it-plugins/event"},
+		imports: []string{"github.com/patch-it-dev/patch-it-plugins/core/event"},
 	},
 
 	"apichangelog": {
-		layer:  "API",
+		layer:  "api",
 		defDir: "plugins/apichangelog",
 		def: `package apichangelog
 
@@ -364,7 +368,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 	})
 }
 `,
-		imports: []string{"github.com/patch-it-dev/patch-it-plugins/event"},
+		imports: []string{"github.com/patch-it-dev/patch-it-plugins/core/event"},
 	},
 
 	"catalog": {
@@ -413,12 +417,12 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 	return kittest.Stored(t, sink)
 }
 `,
-		imports: []string{"context", "github.com/patch-it-dev/patch-it-plugins/event"},
+		imports: []string{"context", "github.com/patch-it-dev/patch-it-plugins/core/event"},
 	},
 
 	"openapi": {
-		layer:  "API",
-		defDir: "adapter",
+		layer:  "api",
+		defDir: "plugins/openapi/adapter",
 		def: `package adapter
 
 import (
@@ -440,12 +444,12 @@ func ({{.Ident}}) API() string { return "{{.ID}}" }
 
 // LatestTag is the newest release of the spec.
 func ({{.Ident}}) LatestTag(ctx context.Context) (string, error) {
-	return "", fmt.Errorf("{{.ID}}: LatestTag isn't written yet (adapter/{{.File}}.go)")
+	return "", fmt.Errorf("{{.ID}}: LatestTag isn't written yet (plugins/openapi/adapter/{{.File}}.go)")
 }
 
 // Fetch downloads the spec at tag.
 func ({{.Ident}}) Fetch(ctx context.Context, tag string) (Spec, error) {
-	return Spec{}, fmt.Errorf("{{.ID}}: Fetch isn't written yet (adapter/{{.File}}.go)")
+	return Spec{}, fmt.Errorf("{{.ID}}: Fetch isn't written yet (plugins/openapi/adapter/{{.File}}.go)")
 }
 `,
 		register: `plugin.Register(Plugin{Adapter: adapter.{{.Ident}}{}})`,
@@ -487,8 +491,8 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 	return kittest.Stored(t, sink)
 }
 `,
-		imports: []string{"context", "fmt", "os", "github.com/patch-it-dev/patch-it-plugins/adapter", "github.com/patch-it-dev/patch-it-plugins/event"},
-		next:    "Write LatestTag and Fetch in adapter/{{.File}}.go (fetch.Get only); add Diff/Keep to the Register line if the spec needs them (see vercel.go).",
+		imports: []string{"context", "fmt", "os", "github.com/patch-it-dev/patch-it-plugins/plugins/openapi/adapter", "github.com/patch-it-dev/patch-it-plugins/core/event"},
+		next:    "Write LatestTag and Fetch in plugins/openapi/adapter/{{.File}}.go (fetch.Get only); add Diff/Keep to the Register line if the spec needs them (see vercel.go).",
 	},
 }
 

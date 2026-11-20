@@ -10,7 +10,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/patch-it-dev/patch-it-plugins/plugin"
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 )
 
 // Every package next to this one that registers a plugin is imported here, so
@@ -44,7 +44,8 @@ func TestEveryPluginIsImported(t *testing.T) {
 	}
 }
 
-// registers reports whether a package's non-test code calls plugin.Register.
+// registers reports whether a package's non-test code calls
+// plugin.RegisterProvider (or plugin.Register).
 func registers(t *testing.T, dir string) bool {
 	t.Helper()
 	files, err := filepath.Glob(filepath.Join(dir, "*.go"))
@@ -59,7 +60,7 @@ func registers(t *testing.T, dir string) bool {
 		if err != nil {
 			t.Fatal(err)
 		}
-		if strings.Contains(string(b), "plugin.Register(") {
+		if strings.Contains(string(b), "plugin.Register(") || strings.Contains(string(b), "plugin.RegisterProvider(") {
 			return true
 		}
 	}
@@ -74,5 +75,32 @@ func TestImportingAllRegistersThePlugins(t *testing.T) {
 	}
 	if !slices.IsSorted(names) || len(slices.Compact(slices.Clone(names))) != len(names) {
 		t.Errorf("names %v: want sorted and unique", names)
+	}
+}
+
+// Every registered plugin is a source with complete metadata (RegisterProvider
+// checks the fields), reachable by its full id and its old slug, and its page
+// exists.
+func TestEveryPluginIsASourceWithMetadata(t *testing.T) {
+	covered := map[string]bool{}
+	for _, s := range plugin.Sources() {
+		covered[s.Alias()] = true
+		if _, err := os.Stat(filepath.Join("..", "..", s.Source.Page)); err != nil {
+			t.Errorf("%s: its page %s doesn't exist (copy providers/_template.md)", s.FullID(), s.Source.Page)
+		}
+		for _, id := range []string{s.FullID(), s.Alias()} {
+			got, ok := plugin.LookupSource(id)
+			if !ok || got.FullID() != s.FullID() {
+				t.Errorf("LookupSource(%q) = %q, %v; want %s", id, got.FullID(), ok, s.FullID())
+			}
+			if p, ok := plugin.Lookup(id); !ok || p.Name() != s.Alias() {
+				t.Errorf("Lookup(%q) didn't find %s", id, s.Alias())
+			}
+		}
+	}
+	for _, name := range plugin.Names() {
+		if !covered[name] {
+			t.Errorf("%s is registered with plugin.Register only: register it as a source of its provider (plugin.RegisterProvider) with its metadata", name)
+		}
 	}
 }

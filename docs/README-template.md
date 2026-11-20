@@ -4,15 +4,16 @@ Every public patch-it repo's README has the same shape, so a developer landing o
 
 ## The sections, in order
 
+A README is **one screen**. Everything else goes in `docs/` and is linked.
+
 | # | Section | What goes in it |
 |---|---|---|
-| 1 | **What** (one line, bold, under the title) | What *this repo* is, in one sentence, in the product's words. For a part of patch-it, say which part of the story it is ("how patch-it notices, on its own, that something changed"). |
-| 2 | **Why** (one short paragraph) | The one-liner for patch-it: when anything your code depends on changes (APIs, packages, SDKs, runtimes, CI, AI models), patch-it finds the code that breaks and opens the pull request that fixes it. In your CI, on your key. "You get the fix, not the alert." Then one sentence on why this repo matters to that. |
-| 3 | **Badges** (one line of them) | The badge set below, in that order. |
-| 4 | **Visual** | One picture of the flow: a mermaid diagram (GitHub renders it) until there's a GIF or screenshot. Left to right, ending in "pull request in your repo". |
-| 5 | **The story** ("What patch-it does") | In this order, one or two lines each: (1) **it notices on its own** (it watches the change itself; no one assigns an alert; also changes with no version bump, like a model or API shut down on a date); (2) **it writes the fix** (an AI model on your key writes the code change, your CI runs your tests on the pull request like any PR, you review and merge it; never say patch-it tests the fix); (3) **proof** ("8 pull requests merged by outside maintainers", no other counts); (4) **layers covered**, as a table with two status columns, **Noticed** (a plugin watches it) and **Fixed** (patch-it writes the PR), each `live`, `in testing`, `building` or `planned`, never ahead of the truth; (5) **how to start** (a link to docs.patch-it.dev). |
-| 6 | **Quickstart** (three or four steps, one screen) | The shortest path from a clean clone to the repo's main job, each step a command that runs as written, with the output to expect. Details live in linked docs. |
-| 7 | **How it works, and links** | A short "how it works", the layout if the repo has code, how to run its checks, releases, contributing (with Discussions and good first issues), license, and docs.patch-it.dev. |
+| 1 | **What** (two lines at most, bold first sentence, under the title) | What *this repo* is, in the product's words. For a part of patch-it, say which part of the story it is ("how patch-it notices, on its own, that something changed"). |
+| 2 | **Badges** (one line of them) | The badge set below, in that order. |
+| 3 | **Quickstart** (three steps) | The shortest path from a clean clone to the repo's main job, each step a command that runs as written. |
+| 4 | **Links** | `docs/` pages (how-to, how it works), CONTRIBUTING, AGENTS, Discussions, good first issues, license, docs.patch-it.dev. |
+
+**Never a list of what's covered** (providers, plugins, layers with statuses, counts): those change at run time and the code is their only source. Say how to find them (the docs site, `make plugins`) instead.
 
 ## The badge set
 
@@ -23,7 +24,7 @@ In this order; drop one only if it can't be honest for the repo (no release yet:
 3. **Language version**: e.g. `https://img.shields.io/github/go-mod/go-version/patch-it-dev/<repo>`.
 4. **Latest release**, once there is one: `https://img.shields.io/github/v/release/patch-it-dev/<repo>`.
 5. **License**: `https://img.shields.io/badge/license-<spdx>-3f5bf0`.
-6. **A count the repo is about**, only if a test keeps it right (patch-it-plugins: the plugins badge, set by `make plugins-json` and checked by `go test`).
+6. **No counts.** A badge that counts plugins, providers or anything else that changes at run time is a hand-kept list in disguise: link the docs instead.
 7. **Docs**: `https://img.shields.io/badge/docs-docs.patch--it.dev-3f5bf0`.
 8. **Discussions**: `https://img.shields.io/github/discussions/patch-it-dev/<repo>`.
 
@@ -48,52 +49,17 @@ Use only images that are already public, linked by URL, never copied in: Patchy 
 
 # <repo>
 
-**<What this repo is, in one line.>**
-
-**Why:** when anything your code depends on changes (APIs, packages, SDKs, runtimes, CI, AI models), [patch-it](https://patch-it.dev) finds the code that breaks and opens the pull request that fixes it. In your CI, on your key. You get the fix, not the alert. <Why this repo matters to that.>
+**<What this repo is, in one line.>** <One more line at most.>
 
 <badges, in the order above>
 
-```mermaid
-flowchart LR
-  A["A dependency changes"] --> B["<this repo's part>"] --> C["Pull request in your repo"]
-```
+## <Quickstart: the repo's main job in three steps>
 
-## What patch-it does
+1. ...
+2. ...
+3. ...
 
-1. **It notices on its own.** ...
-2. **It writes the fix.** ...
-3. **Proof:** 8 pull requests opened by the early version have been merged by outside maintainers.
-4. **What it covers:**
+## More
 
-   | Layer | Noticed | Fixed |
-   |---|---|---|
-   | APIs | live | live |
-   | AI models | live | live |
-   | Packages and SDKs | live | in testing |
-   | Runtimes | live | building |
-   | CI | live | planned |
-
-5. **Start:** [docs.patch-it.dev](https://docs.patch-it.dev).
-
-## <Quickstart: the repo's main job in three or four steps>
-
-## How it works
-
-## Contributing
-
-## License
+- <links to docs/, CONTRIBUTING, AGENTS, Discussions, license, docs.patch-it.dev>
 ````
-
-Keep the layer statuses the same in every repo, and change them everywhere at once when one moves.
-
-## When a repo goes public
-
-The README is half of it. The same day, in the repo's settings:
-
-1. **Description**: one line in the same words (what the repo is, the layers, "You get the fix, not the alert"), under 350 characters, no version-bot names, never API-only.
-2. **Website**: `https://docs.patch-it.dev` (or the page in the docs about this repo).
-3. **Topics**: from `dependencies`, `breaking-changes`, `api-changes`, `api`, `sdk`, `ai-models`, `ci`, `pull-requests`, `automation`, plus the repo's language and what it is (`go`, `plugins`, `documentation`, …).
-4. **Discussions** on, if people will ask questions there; keep the categories Q&A, Ideas, Show and tell and Announcements.
-5. **Social preview** (Settings → General → Social preview; GitHub has no API for it): a 1280×640 PNG, dark background from the brand tokens, the plain wordmark, Patchy on a cream tile, IBM Plex, the repo's one line. No gradients or glows.
-6. Check a shared link to the repo shows its own card.

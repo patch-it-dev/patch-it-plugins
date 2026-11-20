@@ -26,7 +26,7 @@ Format plugin: `openapi` (`plugins/openapi`), with `adapter.Flagsmith` and a req
 
 ## What the plugin reads and ignores
 
-- **Reads** whole operations removed between two tags, and the request-side changes `diff/` already tracks for every `openapi`-format provider (removed or newly-required parameters and request fields).
+- **Reads** whole operations removed between two tags, and the request-side changes `core/diff/` already tracks for every `openapi`-format provider (removed or newly-required parameters and request fields).
 - **Drops response-side changes**, same reason as GitLab (`requestSide`): a request body's schema is a named, shared component (`UpdateFlagV2`, `FeatureValue`), not inlined like GitLab's hash-named bodies, so the differ reports its removal as its own "schema removed" change, side `response` by default, whether or not the operations that used it are actually gone. Of the 11 changes between `v2.286.0` and `v2.287.0`, 8 are these schema-level echoes of the 3 real operation removals; the filter drops them and keeps the 3 operations.
 - The replay fixture: `v2.286.0` to `v2.287.0` (2026-10-15 to 2026-10-20), where PR [#8736](https://github.com/Flagsmith/flagsmith/pull/8736) ("Remove the experimental flag update endpoints") removed `POST /api/experiments/environments/{environment_key}/delete-segment-override/`, `.../update-flag-v1/` and `.../update-flag-v2/` and their eight request-body schemas, listed under "Features" in the [v2.287.0 release](https://github.com/Flagsmith/flagsmith/releases/tag/v2.287.0). All three were marked experimental from the day they shipped; `/api/__future__/...` is where Flagsmith puts their eventual, stable replacements.
 

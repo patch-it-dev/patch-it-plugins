@@ -25,15 +25,39 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/patch-it-dev/patch-it-plugins/event"
-	"github.com/patch-it-dev/patch-it-plugins/kit"
-	"github.com/patch-it-dev/patch-it-plugins/plugin"
+	"github.com/patch-it-dev/patch-it-plugins/core/event"
+	"github.com/patch-it-dev/patch-it-plugins/core/kit"
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 )
 
 func init() {
-	plugin.Register(Plugin{Feed: GitHubActions, Archiver: kit.Wayback{}})
-	plugin.Register(Plugin{Feed: VertexAIModels, Archiver: kit.Wayback{}})
-	plugin.Register(Plugin{Feed: CloudflareAPI, Archiver: kit.Wayback{}})
+	plugin.RegisterProvider(plugin.Provider{
+		ID: "github", Name: "GitHub", Category: plugin.CategoryDevTools, Homepage: "https://github.com",
+		Sources: []plugin.Source{{
+			ID: "actions", Layer: plugin.LayerCI, Page: "providers/github-actions.md",
+			Watches: "GitHub Actions retirements, such as runner images and the `runs-on` labels they remove",
+			URLs:    []string{"https://github.blog/changelog/label/actions/feed/"},
+			Plugin:  Plugin{Feed: GitHubActions, Archiver: kit.Wayback{}},
+		}},
+	})
+	plugin.RegisterProvider(plugin.Provider{
+		ID: "google", Name: "Google", Category: plugin.CategoryAI, Homepage: "https://cloud.google.com",
+		Sources: []plugin.Source{{
+			ID: "vertex-ai-models", Layer: plugin.LayerAIModels, Page: "providers/vertex-ai-models.md",
+			Watches: "Generative AI model deprecations on Vertex AI",
+			URLs:    []string{"https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml"},
+			Plugin:  Plugin{Feed: VertexAIModels, Archiver: kit.Wayback{}},
+		}},
+	})
+	plugin.RegisterProvider(plugin.Provider{
+		ID: "cloudflare", Name: "Cloudflare", Category: plugin.CategoryInfrastructure, Homepage: "https://www.cloudflare.com",
+		Sources: []plugin.Source{{
+			ID: "api", Layer: plugin.LayerAPI, Page: "providers/cloudflare.md",
+			Watches: "REST API operations Cloudflare deprecates, breaking on their end-of-life date when it gives one",
+			URLs:    []string{"https://developers.cloudflare.com/fundamentals/api/reference/deprecations/index.xml"},
+			Plugin:  Plugin{Feed: CloudflareAPI, Archiver: kit.Wayback{}},
+		}},
+	})
 }
 
 // Feed is one vendor feed and how to read its entries.

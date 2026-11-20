@@ -6,7 +6,7 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/patch-it-dev/patch-it-plugins/event"
+	"github.com/patch-it-dev/patch-it-plugins/core/event"
 )
 
 // Kind is what a section (or a bullet's own prefix) says its changes are.

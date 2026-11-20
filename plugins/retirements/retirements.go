@@ -9,15 +9,31 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/patch-it-dev/patch-it-plugins/kit"
-	"github.com/patch-it-dev/patch-it-plugins/migrate"
-	"github.com/patch-it-dev/patch-it-plugins/plugin"
-	"github.com/patch-it-dev/patch-it-plugins/retire"
+	"github.com/patch-it-dev/patch-it-plugins/core/kit"
+	"github.com/patch-it-dev/patch-it-plugins/core/migrate"
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
+	"github.com/patch-it-dev/patch-it-plugins/plugins/retirements/retire"
 )
 
 func init() {
-	plugin.Register(Plugin{Page: retire.OpenAI, Archiver: kit.Wayback{}})
-	plugin.Register(Plugin{Page: retire.Anthropic, Archiver: kit.Wayback{}})
+	plugin.RegisterProvider(plugin.Provider{
+		ID: "openai", Name: "OpenAI", Category: plugin.CategoryAI, Homepage: "https://openai.com",
+		Sources: []plugin.Source{{
+			ID: "models", Layer: plugin.LayerAIModels, Page: "providers/openai-models.md",
+			Watches: "Model deprecations and shutdown dates (Chat Completions and Responses text models)",
+			URLs:    []string{"https://developers.openai.com/api/docs/deprecations"},
+			Plugin:  Plugin{Page: retire.OpenAI, Archiver: kit.Wayback{}},
+		}},
+	})
+	plugin.RegisterProvider(plugin.Provider{
+		ID: "anthropic", Name: "Anthropic", Category: plugin.CategoryAI, Homepage: "https://www.anthropic.com",
+		Sources: []plugin.Source{{
+			ID: "models", Layer: plugin.LayerAIModels, Page: "providers/anthropic-models.md",
+			Watches: "Model deprecations and retirement dates (Messages API models)",
+			URLs:    []string{"https://platform.claude.com/docs/en/about-claude/model-deprecations"},
+			Plugin:  Plugin{Page: retire.Anthropic, Archiver: kit.Wayback{}},
+		}},
+	})
 }
 
 // Plugin reads one provider's page.

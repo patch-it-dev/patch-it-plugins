@@ -22,12 +22,21 @@ import (
 	"sort"
 	"time"
 
-	"github.com/patch-it-dev/patch-it-plugins/event"
-	"github.com/patch-it-dev/patch-it-plugins/plugin"
+	"github.com/patch-it-dev/patch-it-plugins/core/event"
+	"github.com/patch-it-dev/patch-it-plugins/core/github"
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 )
 
 func init() {
-	plugin.Register(Plugin{Catalog: Redis})
+	plugin.RegisterProvider(plugin.Provider{
+		ID: "redis", Name: "Redis", Category: plugin.CategoryDatabases, Homepage: "https://redis.io",
+		Sources: []plugin.Source{{
+			ID: "commands", Layer: plugin.LayerRuntime, Page: "providers/redis.md",
+			Watches: "Commands removed entirely from Redis's own command catalog between two snapshots",
+			URLs:    []string{"https://github.com/redis/redis-doc/blob/master/commands.json"},
+			Plugin:  Plugin{Catalog: Redis},
+		}},
+	})
 }
 
 // Catalog is one provider's command or endpoint catalog: a single JSON
@@ -154,20 +163,11 @@ func (p Plugin) Replay(ctx context.Context, env plugin.Env, from, to string) (pl
 
 // latestRef asks GitHub for the catalog repo's newest commit.
 func (p Plugin) latestRef(ctx context.Context, env plugin.Env) (string, error) {
-	body, err := env.Get(ctx, p.Catalog.RefsURL)
+	sha, err := github.Head(ctx, env.Get, p.Catalog.RefsURL)
 	if err != nil {
 		return "", fmt.Errorf("looking up the newest commit: %w", err)
 	}
-	var commit struct {
-		SHA string `json:"sha"`
-	}
-	if err := json.Unmarshal(body, &commit); err != nil {
-		return "", fmt.Errorf("parsing the commit lookup: %w", err)
-	}
-	if commit.SHA == "" {
-		return "", fmt.Errorf("the commit lookup named no sha")
-	}
-	return commit.SHA, nil
+	return sha, nil
 }
 
 // events diffs two parsed snapshots into events. oldContent is empty on a

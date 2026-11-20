@@ -23,13 +23,22 @@ import (
 	"log"
 	"sort"
 
-	"github.com/patch-it-dev/patch-it-plugins/event"
-	"github.com/patch-it-dev/patch-it-plugins/kit"
-	"github.com/patch-it-dev/patch-it-plugins/plugin"
+	"github.com/patch-it-dev/patch-it-plugins/core/event"
+	"github.com/patch-it-dev/patch-it-plugins/core/github"
+	"github.com/patch-it-dev/patch-it-plugins/core/kit"
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 )
 
 func init() {
-	plugin.Register(Plugin{Log: MongoDBAtlas})
+	plugin.RegisterProvider(plugin.Provider{
+		ID: "mongodb", Name: "MongoDB", Category: plugin.CategoryDatabases, Homepage: "https://www.mongodb.com",
+		Sources: []plugin.Source{{
+			ID: "atlas-admin-api", Layer: plugin.LayerAPI, Page: "providers/mongodb-atlas.md",
+			Watches: "Atlas Administration API versions deprecated and removed at their sunset date, per endpoint, from MongoDB's own API changelog",
+			URLs:    []string{"https://github.com/mongodb/openapi/blob/main/changelog/changelog.json"},
+			Plugin:  Plugin{Log: MongoDBAtlas},
+		}},
+	})
 }
 
 // Log is one vendor's changelog file.
@@ -209,20 +218,10 @@ func (p Plugin) Name() string { return p.Log.API }
 // Run reads the file at the newest commit that changed it.
 func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) {
 	l := p.Log
-	body, err := env.Get(ctx, l.CommitsURL())
+	sha, err := github.LatestCommit(ctx, env.Get, l.CommitsURL())
 	if err != nil {
-		return plugin.Result{}, fmt.Errorf("looking up %s's newest changelog commit: %w", l.API, err)
+		return plugin.Result{}, fmt.Errorf("looking up %s's newest changelog commit (%s in %s): %w", l.API, l.Path, l.Repo, err)
 	}
-	var commits []struct {
-		SHA string `json:"sha"`
-	}
-	if err := json.Unmarshal(body, &commits); err != nil {
-		return plugin.Result{}, fmt.Errorf("parsing github's commits response: %w", err)
-	}
-	if len(commits) == 0 || commits[0].SHA == "" {
-		return plugin.Result{}, fmt.Errorf("github lists no commit that changed %s in %s", l.Path, l.Repo)
-	}
-	sha := commits[0].SHA
 	url := l.URL(sha)
 	page, err := env.Get(ctx, url)
 	if err != nil {

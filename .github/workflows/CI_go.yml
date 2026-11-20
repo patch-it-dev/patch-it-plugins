@@ -1,7 +1,7 @@
 # The plugins build, are formatted and vetted, and their tests pass with the race
 # detector. Two guards keep plugins self-contained:
 #   - imports: only this module, the standard library and the approved dependencies;
-#   - network: net/http only in the fetch layer (fetch/, kit/, adapter/).
+#   - network: net/http only in the fetch layer (core/fetch/, core/kit/, plugins/openapi/adapter/).
 # The steps are Makefile targets, so `make check` runs exactly this locally.
 # Until the Go code lands there is no go.mod, and every step after the first is skipped
 # with a notice, so the check passes.
@@ -80,7 +80,6 @@ jobs:
         run: make todos
 
       # -race: the fetcher and the tests' HTTP servers run on other goroutines.
-      # Also fails when docs/plugins.json is out of date (make plugins-json).
       - name: go test
         if: steps.go.outputs.present == 'true'
         run: make test

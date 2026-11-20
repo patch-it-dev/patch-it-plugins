@@ -6,9 +6,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/patch-it-dev/patch-it-plugins/fetch"
-	"github.com/patch-it-dev/patch-it-plugins/kit/kittest"
-	"github.com/patch-it-dev/patch-it-plugins/plugin"
+	"github.com/patch-it-dev/patch-it-plugins/core/fetch"
+	"github.com/patch-it-dev/patch-it-plugins/core/kit/kittest"
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 )
 
 func TestRegistersItself(t *testing.T) {

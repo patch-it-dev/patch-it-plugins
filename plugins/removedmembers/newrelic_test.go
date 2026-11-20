@@ -7,8 +7,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/patch-it-dev/patch-it-plugins/event"
-	"github.com/patch-it-dev/patch-it-plugins/kit/kittest"
+	"github.com/patch-it-dev/patch-it-plugins/core/event"
+	"github.com/patch-it-dev/patch-it-plugins/core/kit/kittest"
 )
 
 // An excerpt of the release note at commit f0b4f817 (fetched 2026-11-19): the

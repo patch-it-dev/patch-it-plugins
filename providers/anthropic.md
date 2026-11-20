@@ -4,11 +4,11 @@
 
 Request parameters removed from `messages.create()` and its siblings in anthropic-sdk-python 1.0.0 (`temperature`, `top_p`, `top_k`): passing one is a `TypeError`. One breaking event per parameter. Pinned to that release.
 
-Format plugin: `migrationguide` (`plugins/migrationguide`), reading with `sdkguide/`.
+Format plugin: `migrationguide` (`plugins/migrationguide`), reading with `plugins/migrationguide/sdkguide/`.
 
 ## Why this source
 
-- **Source:** [MIGRATION.md at v1.0.0](https://github.com/anthropics/anthropic-sdk-python/blob/v1.0.0/MIGRATION.md), read raw at the tag (`https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/v1.0.0/MIGRATION.md`). Checked on 2026-10-17.
+- **Source:** MIGRATION.md at the first release of each major ([at v1.0.0](https://github.com/anthropics/anthropic-sdk-python/blob/v1.0.0/MIGRATION.md)), the majors listed from PyPI; read raw at the tag (`https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/v1.0.0/MIGRATION.md`). Checked on 2026-10-17.
 - **Why this one:** it's the SDK maintainers' own guide to the major release, with a table of the methods, the removed parameter and what to use instead. A tag never changes, so the URL is its own permanent citation.
 - **Alternatives considered:** the GitHub release notes and `CHANGELOG.md` (list commits, not "what to use instead"); diffing the SDK's code between versions (finds signature changes but not the maintainers' advice, and is a lot more machinery); Anthropic's model deprecations page (mentions the change, but it's the models page).
 - **Quote:** "Removed: deprecated request parameters" (section heading), with the row "`temperature`, `top_p`, `top_k` | Remove them."

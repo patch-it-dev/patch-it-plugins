@@ -10,7 +10,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/patch-it-dev/patch-it-plugins/adapter"
+	"github.com/patch-it-dev/patch-it-plugins/plugins/openapi/adapter"
 	"gopkg.in/yaml.v3"
 )
 

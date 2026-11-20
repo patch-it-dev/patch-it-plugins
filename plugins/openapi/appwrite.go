@@ -1,6 +1,6 @@
 package openapi
 
-import "github.com/patch-it-dev/patch-it-plugins/diff"
+import "github.com/patch-it-dev/patch-it-plugins/core/diff"
 
 // appwriteDiff is how Appwrite's spec says what it says:
 //

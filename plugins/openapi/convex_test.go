@@ -7,9 +7,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/patch-it-dev/patch-it-plugins/adapter"
-	"github.com/patch-it-dev/patch-it-plugins/event"
-	"github.com/patch-it-dev/patch-it-plugins/kit/kittest"
+	"github.com/patch-it-dev/patch-it-plugins/core/event"
+	"github.com/patch-it-dev/patch-it-plugins/core/kit/kittest"
+	"github.com/patch-it-dev/patch-it-plugins/plugins/openapi/adapter"
 )
 
 // convexCommits are the spec commits saved under testdata/ (trimmed to the

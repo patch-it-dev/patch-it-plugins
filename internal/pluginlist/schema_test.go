@@ -8,66 +8,95 @@ import (
 	"regexp"
 	"slices"
 	"testing"
+
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 )
 
-// docs/plugins.json validates against docs/plugins.schema.json. The checker
-// below knows only the keywords that schema uses (type, required,
+// What list-plugins prints validates against docs/plugins.schema.json. The
+// checker below knows only the keywords that schema uses (type, required,
 // properties, additionalProperties, items, enum, pattern, minLength): the
 // module takes no dependency for a JSON Schema library.
-func TestPluginsJSONMatchesTheSchema(t *testing.T) {
+func TestTheListMatchesTheSchema(t *testing.T) {
 	var schema, doc any
-	for file, v := range map[string]*any{"docs/plugins.schema.json": &schema, JSON: &doc} {
-		b, err := os.ReadFile(filepath.Join(root, file))
+	b, err := os.ReadFile(filepath.Join(root, "docs/plugins.schema.json"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := json.Unmarshal(b, &schema); err != nil {
+		t.Fatal(err)
+	}
+	for _, ref := range []string{"main", "v9.9.9"} {
+		out, err := Marshal(Build(ref))
 		if err != nil {
 			t.Fatal(err)
 		}
-		if err := json.Unmarshal(b, v); err != nil {
-			t.Fatalf("%s: %v", file, err)
+		if err := json.Unmarshal(out, &doc); err != nil {
+			t.Fatal(err)
 		}
-	}
-	for _, err := range validate(schema.(map[string]any), doc, "$") {
-		t.Error(err)
+		for _, err := range validate(schema.(map[string]any), doc, "$") {
+			t.Error(err)
+		}
 	}
 }
 
-// The schema's enums are the values the generator writes.
-func TestSchemaEnumsMatchTheGenerator(t *testing.T) {
+// The schema's enums are the values the registry allows, and every kind.
+func TestSchemaEnumsMatchTheRegistry(t *testing.T) {
 	b, err := os.ReadFile(filepath.Join(root, "docs/plugins.schema.json"))
 	if err != nil {
 		t.Fatal(err)
 	}
 	var s struct {
 		Properties struct {
-			Plugins struct {
+			Categories struct {
 				Items struct {
-					Properties map[string]struct {
-						Enum []string `json:"enum"`
+					Enum []string `json:"enum"`
+				} `json:"items"`
+			} `json:"categories"`
+			Providers struct {
+				Items struct {
+					Properties struct {
+						Category struct {
+							Enum []string `json:"enum"`
+						} `json:"category"`
+						Sources struct {
+							Items struct {
+								Properties map[string]struct {
+									Enum []string `json:"enum"`
+								} `json:"properties"`
+							} `json:"items"`
+						} `json:"sources"`
 					} `json:"properties"`
 				} `json:"items"`
-			} `json:"plugins"`
+			} `json:"providers"`
 		} `json:"properties"`
 	}
 	if err := json.Unmarshal(b, &s); err != nil {
 		t.Fatal(err)
 	}
-	props := s.Properties.Plugins.Items.Properties
-	var layers []string
-	for _, l := range Layers {
-		layers = append(layers, l)
+	var categories, layers []string
+	for _, c := range plugin.Categories() {
+		categories = append(categories, string(c))
 	}
-	for name, want := range map[string][]string{"layer": layers, "status": Statuses()} {
-		got := slices.Sorted(slices.Values(props[name].Enum))
-		if !slices.Equal(got, slices.Sorted(slices.Values(want))) {
-			t.Errorf("schema enum for %s = %v, want %v", name, got, want)
+	for _, l := range plugin.Layers() {
+		layers = append(layers, string(l))
+	}
+	src := s.Properties.Providers.Items.Properties.Sources.Items.Properties
+	for name, c := range map[string]struct{ got, want []string }{
+		"categories":         {s.Properties.Categories.Items.Enum, categories},
+		"providers.category": {s.Properties.Providers.Items.Properties.Category.Enum, categories},
+		"sources.layer":      {src["layer"].Enum, layers},
+	} {
+		if !slices.Equal(slices.Sorted(slices.Values(c.got)), slices.Sorted(slices.Values(c.want))) {
+			t.Errorf("schema enum %s = %v, want %v", name, c.got, c.want)
 		}
 	}
-	formats, err := filepath.Glob(filepath.Join(root, "plugins", "*"))
+	kinds, err := filepath.Glob(filepath.Join(root, "plugins", "*"))
 	if err != nil {
 		t.Fatal(err)
 	}
-	for _, f := range formats {
-		if name := filepath.Base(f); name != "all" && !slices.Contains(props["format"].Enum, name) {
-			t.Errorf("format plugin %s is missing from the schema's format enum", name)
+	for _, k := range kinds {
+		if name := filepath.Base(k); name != "all" && !slices.Contains(src["kind"].Enum, name) {
+			t.Errorf("kind %s is missing from the schema's kind enum", name)
 		}
 	}
 }
