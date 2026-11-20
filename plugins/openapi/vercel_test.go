@@ -212,20 +212,27 @@ func TestVercelPathParameterRenameIsNoChange(t *testing.T) {
 }
 
 func TestVercelDeprecatedSummary(t *testing.T) {
-	for summary, want := range map[string]bool{
-		// Every word-only deprecation form in vercel/sdk's history.
-		"Check the price for a domain (deprecated)":              true,
-		"Retrieves a list of all the Log Drains (deprecated)":    true,
-		"Deprecated: Use DELETE /v1/drives/:name. Requires ...":  true,
-		"Deprecated: true. Update Resource Secrets (Deprecated)": true,
-		"Get a list of deprecated Node.js versions":              false,
-		"Undeprecated thing":                                     false,
-		"Deprecated runtimes for a project":                      false,
-		"Update a project (deprecated fields are ignored)":       false,
-		"": false,
+	// Every word-only deprecation form in vercel/sdk's history.
+	for _, summary := range []string{
+		"Check the price for a domain (deprecated)",
+		"Retrieves a list of all the Log Drains (deprecated)",
+		"Deprecated: Use DELETE /v1/drives/:name. Requires ...",
+		"Deprecated: true. Update Resource Secrets (Deprecated)",
 	} {
-		if got := vercelDeprecatedSummary(summary); got != want {
-			t.Errorf("%q: got %v, want %v", summary, got, want)
+		if !vercelDeprecatedSummary(summary) {
+			t.Errorf("%q: not read as deprecated", summary)
+		}
+	}
+	// Mentions of the word that aren't a deprecation, and no summary at all.
+	for _, summary := range []string{
+		"Get a list of deprecated Node.js versions",
+		"Undeprecated thing",
+		"Deprecated runtimes for a project",
+		"Update a project (deprecated fields are ignored)",
+		"",
+	} {
+		if vercelDeprecatedSummary(summary) {
+			t.Errorf("%q: read as deprecated", summary)
 		}
 	}
 }
