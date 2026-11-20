@@ -11,9 +11,10 @@
 // Salesforce's docs site is the one difference from retirements and feed: it
 // answers 403 to a plain GET (checked 2026-11-20, including with a browser
 // User-Agent), so Run's direct read of the live page fails every time. The
-// Wayback Machine's own save-page-now request succeeds against it anyway
-// (checked the same day), so Run falls back to a fresh snapshot, used
-// directly as both the content and its own citation, kit.Cite's
+// Wayback Machine's own save-page-now request succeeds against it anyway,
+// and its capture parses to the same findings the live page would (checked
+// the same day), so Run falls back to a fresh snapshot on a 401 or 403,
+// used directly as both the content and its own citation, kit.Cite's
 // double-check skipped: there is no separate live read left to agree with.
 //
 // Unlike retirements (one named model per row) and feed (an RSS or Atom
@@ -70,6 +71,7 @@ var Salesforce = Page{
 // Row is one version range and what its status cell says, cleaned of HTML.
 type Row struct {
 	From, To int    // inclusive, both ends; From == To for a single version
+	Label    string // the first cell's own text, word for word ("Versions 31.0 through 40.0")
 	Status   string // every <p> in the status cell, joined with a space
 }
 
@@ -85,10 +87,16 @@ type Finding struct {
 }
 
 var (
-	table    = regexp.MustCompile(`(?is)<tbody>(.*?)</tbody>`)
-	row      = regexp.MustCompile(`(?is)<tr>(.*?)</tr>`)
-	cell     = regexp.MustCompile(`(?is)<td>(.*?)</td>`)
-	tag      = regexp.MustCompile(`<[^>]+>`)
+	table = regexp.MustCompile(`(?is)<tbody>(.*?)</tbody>`)
+	row   = regexp.MustCompile(`(?is)<tr>(.*?)</tr>`)
+	// cell tolerates an attribute (<td class="…">): a future style change
+	// shouldn't make every row unreadable.
+	cell = regexp.MustCompile(`(?is)<td[^>]*>(.*?)</td>`)
+	tag  = regexp.MustCompile(`<[^>]+>`)
+	// versions reads only the whole-number part of a version ("31.0 through
+	// 40.0" -> 31, 40): every version on the page today is a whole number.
+	// Salesforce has never shipped a minor REST API version, but this would
+	// silently drop one ("31.5") rather than fail loudly if that changed.
 	versions = regexp.MustCompile(`(?i)Versions?\s+(\d+)(?:\.\d+)?(?:\s+through\s+(\d+)(?:\.\d+)?)?`)
 	retired  = regexp.MustCompile(`(?i)As of ([^,]+), these versions are retired and unavailable\.`)
 	deprecd  = regexp.MustCompile(`(?i)Deprecated and unsupported from ([^.]+)\.\s*Retired from ([^.]+)\.`)
@@ -112,7 +120,8 @@ func Parse(page []byte) ([]Row, error) {
 		if len(cells) < 2 {
 			continue
 		}
-		vm := versions.FindStringSubmatch(text(cells[0][1]))
+		label := text(cells[0][1])
+		vm := versions.FindStringSubmatch(label)
 		if vm == nil {
 			continue
 		}
@@ -121,7 +130,7 @@ func Parse(page []byte) ([]Row, error) {
 		if vm[2] != "" {
 			to, _ = strconv.Atoi(vm[2])
 		}
-		out = append(out, Row{From: from, To: to, Status: text(cells[1][1])})
+		out = append(out, Row{From: from, To: to, Label: label, Status: text(cells[1][1])})
 	}
 	if len(out) == 0 {
 		return nil, fmt.Errorf("no version rows found: the page's shape may have changed")
@@ -138,10 +147,7 @@ func Findings(page []byte) ([]Finding, error) {
 	}
 	var out []Finding
 	for _, r := range rows {
-		label := fmt.Sprintf("Versions %d.0 through %d.0", r.From, r.To)
-		if r.From == r.To {
-			label = fmt.Sprintf("Version %d.0", r.From)
-		}
+		label := r.Label
 		excerpt := label + " | " + r.Status
 
 		var ct event.ChangeType
@@ -246,21 +252,27 @@ func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) 
 	return plugin.Result{Label: snapURL, Events: events, Rejected: rejected, Baselines: []plugin.Spec{baseline}}, nil
 }
 
-// liveOrArchived reads pageURL directly. When the provider blocks a plain
-// fetch with a 4xx (Salesforce's docs site, every time, checked 2026-11-20),
-// it falls back to a fresh Wayback Machine snapshot, taken right now by the
-// archive's own crawler rather than patch-it's, and returns that content
-// with its own permanent URL in archivedURL: it needs no further citation
-// step, having come from the archive already. A non-4xx error (a timeout, a
-// 5xx) is returned as is: retrying it against the archive would hide a
-// transient failure as a real page, not fix one.
+// liveOrArchived reads pageURL directly. When the provider's own site
+// blocks a plain fetch with 401 or 403 (Salesforce's docs site, every time,
+// checked 2026-11-20; confirmed the same day that a real Wayback Machine
+// save-page-now capture of this exact page parses to the same findings as
+// the live page would), it falls back to a fresh Wayback Machine snapshot,
+// taken right now by the archive's own crawler rather than patch-it's, and
+// returns that content with its own permanent URL in archivedURL: it needs
+// no further citation step, having come from the archive already.
+//
+// Only 401 and 403 fall back. A 404 or 410 means the page moved, not that
+// it's blocked: asking the archive to snapshot a page that's gone would
+// waste the call and hide the real cause behind the archive's own error.
+// A 429 or a 5xx is returned as is: retrying it against the archive would
+// hide a transient failure as a real page, not fix one.
 func liveOrArchived(ctx context.Context, env plugin.Env, a kit.Archiver, pageURL string) (body []byte, archivedURL string, err error) {
 	body, err = env.Get(ctx, pageURL)
 	if err == nil {
 		return body, "", nil
 	}
 	var se *fetch.StatusError
-	if !errors.As(err, &se) || se.StatusCode < 400 || se.StatusCode >= 500 {
+	if !errors.As(err, &se) || (se.StatusCode != 401 && se.StatusCode != 403) {
 		return nil, "", err
 	}
 	archivedURL, body, archErr := a.Snapshot(ctx, pageURL)
