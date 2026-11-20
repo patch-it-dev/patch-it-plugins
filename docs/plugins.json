@@ -1,7 +1,7 @@
 {
   "_comment": "Generated from the plugin registry and docs/plugins.md by `make plugins-json` (go run ./cmd/list-plugins). Don't edit by hand.",
   "$schema": "./plugins.schema.json",
-  "count": 28,
+  "count": 29,
   "plugins": [
     {
       "id": "algolia-ingestion",
@@ -212,6 +212,16 @@
       "source_url": "https://github.com/redis/redis-doc/blob/master/commands.json",
       "status": "live",
       "provider_page": "providers/redis.md"
+    },
+    {
+      "id": "salesforce",
+      "provider": "Salesforce",
+      "layer": "api",
+      "watches": "REST API version ranges deprecated and retired, from Salesforce's own API end-of-life policy page",
+      "format": "eol",
+      "source_url": "https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+      "status": "live",
+      "provider_page": "providers/salesforce.md"
     },
     {
       "id": "sentry",

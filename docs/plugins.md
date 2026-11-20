@@ -37,6 +37,7 @@ The table between the `plugins:start` and `plugins:end` markers is also publishe
 | [`posthog`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/posthog.md) | PostHog | SDK | Members removed in the posthog Python SDK 8.0.0 | `removedmembers` | [posthog-python 7.x to 8.0 migration guide](https://github.com/PostHog/posthog-python/blob/posthog-v8.0.0/docs/migration-7.x-to-8.0.md) | live |
 | [`newrelic`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/newrelic.md) | New Relic | SDK | Members removed in the New Relic Python agent 11.0.0 | `removedmembers` | [Python agent 11.0.0 release notes](https://github.com/newrelic/docs-website/blob/f0b4f817bf9a7b76a78e26609369a8a7ce764c8e/src/content/docs/release-notes/agent-release-notes/python-release-notes/python-agent-110000.mdx) | live |
 | [`appwrite`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/appwrite.md) | Appwrite | API | REST API operations a server SDK calls that are deprecated between commits of the spec, SDK method renames left out | `openapi` | [appwrite/specs](https://github.com/appwrite/specs) (`specs/<X.Y>.x/open-api3-<X.Y>.x.json`, the newest minor) | live |
+| [`salesforce`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/salesforce.md) | Salesforce | API | REST API version ranges deprecated and retired, from Salesforce's own API end-of-life policy page | `eol` | [Salesforce API End-of-Life Policy](https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html) | live |
 <!-- plugins:end -->
 
 ## The columns
@@ -47,7 +48,7 @@ The table between the `plugins:start` and `plugins:end` markers is also publishe
 | Provider | Whose API, SDK or package it is. |
 | Layer | Which kind of dependency it covers: `API`, `SDK`, `package`, `runtime`, `CI` or `AI models`. |
 | What it watches | The kind of change it reports, in a few words. |
-| Format plugin | Which shared reader it is built on: `openapi` (a spec per release, diffed), `retirements` (a deprecations page), `migrationguide` (an SDK's migration guide), `removedmembers` (a package's table of removed members, in RST or Markdown), `changelog` (a release changelog file), `feed` (an RSS or Atom feed), `catalog` (a structured JSON catalog of names, diffed between two snapshots), `apichangelog` (a vendor's machine-readable API changelog, in JSON). |
+| Format plugin | Which shared reader it is built on: `openapi` (a spec per release, diffed), `retirements` (a deprecations page), `migrationguide` (an SDK's migration guide), `removedmembers` (a package's table of removed members, in RST or Markdown), `changelog` (a release changelog file), `feed` (an RSS or Atom feed), `catalog` (a structured JSON catalog of names, diffed between two snapshots), `apichangelog` (a vendor's machine-readable API changelog, in JSON), `eol` (a vendor's own table of whole API version ranges and their support status). |
 | Source | The provider's own public page or file the plugin reads. Every event links back to it. |
 | Status | `live`: in the code on `main`. patch-it's hosted ingestion service runs it daily from the next release, which is cut automatically. `planned`: accepted, not written yet. `paused`: in the code but deliberately switched off, with the reason in the row. |
 

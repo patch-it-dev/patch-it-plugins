@@ -36,5 +36,6 @@ One page per plugin id: `providers/<api>.md`. Start from [`_template.md`](_templ
 | [redis.md](redis.md) | `redis` | `catalog` |
 | [cloudflare.md](cloudflare.md) | `cloudflare` | `feed` |
 | [mongodb-atlas.md](mongodb-atlas.md) | `mongodb-atlas` | `apichangelog` |
+| [salesforce.md](salesforce.md) | `salesforce` | `eol` |
 
 The list of plugins, with their status, is [docs/plugins.md](../docs/plugins.md).

@@ -1,0 +1,682 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:5712d5a3f809b2edd3032446bfe6a0a654eb113f1f7e0e80b0d673132dced685",
+    "api": "salesforce",
+    "version": "31.0",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v31.0/"
+    },
+    "description": "Salesforce REST API version 31.0 is deprecated and scheduled for retirement: unsupported from Summer ’27, retired from Summer ’28.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 31.0 through 40.0 | Supported. Deprecated and unsupported from Summer ’27. Retired from Summer ’28.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:d5cd04d4a65a7ba09f4a71e7c346a4be3309451212787016d5c614498b556516",
+    "api": "salesforce",
+    "version": "32.0",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v32.0/"
+    },
+    "description": "Salesforce REST API version 32.0 is deprecated and scheduled for retirement: unsupported from Summer ’27, retired from Summer ’28.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 31.0 through 40.0 | Supported. Deprecated and unsupported from Summer ’27. Retired from Summer ’28.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:c009d4f0635e311b34acfbb6696c6d2aacbcd7c102ebc56d13036044f10910bf",
+    "api": "salesforce",
+    "version": "33.0",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v33.0/"
+    },
+    "description": "Salesforce REST API version 33.0 is deprecated and scheduled for retirement: unsupported from Summer ’27, retired from Summer ’28.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 31.0 through 40.0 | Supported. Deprecated and unsupported from Summer ’27. Retired from Summer ’28.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:08ef4a0e2b7798dd6e15087bfc30505dd412de40c553d3617f3d4533730b3931",
+    "api": "salesforce",
+    "version": "34.0",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v34.0/"
+    },
+    "description": "Salesforce REST API version 34.0 is deprecated and scheduled for retirement: unsupported from Summer ’27, retired from Summer ’28.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 31.0 through 40.0 | Supported. Deprecated and unsupported from Summer ’27. Retired from Summer ’28.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:f8b44ec3074f7f9d2ea45e3d2e681dc7e0bfca83a3c046d188e90a63295c06bd",
+    "api": "salesforce",
+    "version": "35.0",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v35.0/"
+    },
+    "description": "Salesforce REST API version 35.0 is deprecated and scheduled for retirement: unsupported from Summer ’27, retired from Summer ’28.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 31.0 through 40.0 | Supported. Deprecated and unsupported from Summer ’27. Retired from Summer ’28.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:edc028b547f9ed0ec5559febeb2ea9a04eb681e4d53fd15fe98961d110fbe3d3",
+    "api": "salesforce",
+    "version": "36.0",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v36.0/"
+    },
+    "description": "Salesforce REST API version 36.0 is deprecated and scheduled for retirement: unsupported from Summer ’27, retired from Summer ’28.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 31.0 through 40.0 | Supported. Deprecated and unsupported from Summer ’27. Retired from Summer ’28.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:a00a996c75520031b4df78d500f327f9b9c94706753f2e8beb8ec123ee3e37e1",
+    "api": "salesforce",
+    "version": "37.0",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v37.0/"
+    },
+    "description": "Salesforce REST API version 37.0 is deprecated and scheduled for retirement: unsupported from Summer ’27, retired from Summer ’28.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 31.0 through 40.0 | Supported. Deprecated and unsupported from Summer ’27. Retired from Summer ’28.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
+    "fingerprint": "sha256:ae8c254aa2eeb784a0cda9eaafeedf617991223b3ebcdf6c12bfd56e496712f9",
+    "api": "salesforce",
+    "version": "38.0",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v38.0/"
+    },
+    "description": "Salesforce REST API version 38.0 is deprecated and scheduled for retirement: unsupported from Summer ’27, retired from Summer ’28.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 31.0 through 40.0 | Supported. Deprecated and unsupported from Summer ’27. Retired from Summer ’28.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 9,
+    "fingerprint": "sha256:5f738a2088c9e818c5da229746de80ff1966e94b454eddcd1ea7e2fb6323bb27",
+    "api": "salesforce",
+    "version": "39.0",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v39.0/"
+    },
+    "description": "Salesforce REST API version 39.0 is deprecated and scheduled for retirement: unsupported from Summer ’27, retired from Summer ’28.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 31.0 through 40.0 | Supported. Deprecated and unsupported from Summer ’27. Retired from Summer ’28.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 10,
+    "fingerprint": "sha256:01287da0f76665a83b6d2cf46f99ea4b189e3b5e4a3f1370d03e59da9928fc09",
+    "api": "salesforce",
+    "version": "40.0",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v40.0/"
+    },
+    "description": "Salesforce REST API version 40.0 is deprecated and scheduled for retirement: unsupported from Summer ’27, retired from Summer ’28.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 31.0 through 40.0 | Supported. Deprecated and unsupported from Summer ’27. Retired from Summer ’28.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 11,
+    "fingerprint": "sha256:3196e696d971115984b011f675c6625471769a9bed370f39fa34697cabb2a568",
+    "api": "salesforce",
+    "version": "21.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v21.0/"
+    },
+    "description": "Salesforce REST API version 21.0 is retired, as of Summer ’25: it returns 410:GONE for every resource.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 21.0 through 30.0 | As of Summer ’25, these versions are retired and unavailable.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 12,
+    "fingerprint": "sha256:b01efdc1068b028b253b16195c3a40220f2c38a47692b039c972ad860fd04aa5",
+    "api": "salesforce",
+    "version": "22.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v22.0/"
+    },
+    "description": "Salesforce REST API version 22.0 is retired, as of Summer ’25: it returns 410:GONE for every resource.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 21.0 through 30.0 | As of Summer ’25, these versions are retired and unavailable.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 13,
+    "fingerprint": "sha256:6d416539f96a25434c34a311bbc0f5c946c07a9a2f87bcb3c58b04e0d47fb15f",
+    "api": "salesforce",
+    "version": "23.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v23.0/"
+    },
+    "description": "Salesforce REST API version 23.0 is retired, as of Summer ’25: it returns 410:GONE for every resource.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 21.0 through 30.0 | As of Summer ’25, these versions are retired and unavailable.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 14,
+    "fingerprint": "sha256:54e2b6dde407bf4e2cbe571daf71c7759c625b079c6e7fc9e0b9ed630745edcf",
+    "api": "salesforce",
+    "version": "24.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v24.0/"
+    },
+    "description": "Salesforce REST API version 24.0 is retired, as of Summer ’25: it returns 410:GONE for every resource.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 21.0 through 30.0 | As of Summer ’25, these versions are retired and unavailable.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 15,
+    "fingerprint": "sha256:0c4183136450ca1afccd23bf6e4e9f25f08f2a0470c55032e0724312b616a7e1",
+    "api": "salesforce",
+    "version": "25.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v25.0/"
+    },
+    "description": "Salesforce REST API version 25.0 is retired, as of Summer ’25: it returns 410:GONE for every resource.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 21.0 through 30.0 | As of Summer ’25, these versions are retired and unavailable.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 16,
+    "fingerprint": "sha256:2f8518fb4d77876618e24c6848977e471825e305404f234c349b9af56e731078",
+    "api": "salesforce",
+    "version": "26.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v26.0/"
+    },
+    "description": "Salesforce REST API version 26.0 is retired, as of Summer ’25: it returns 410:GONE for every resource.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 21.0 through 30.0 | As of Summer ’25, these versions are retired and unavailable.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 17,
+    "fingerprint": "sha256:44ed65c3d55263ee40bdf9324715ad0b31c727f927a172a38cc0162bf796d325",
+    "api": "salesforce",
+    "version": "27.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v27.0/"
+    },
+    "description": "Salesforce REST API version 27.0 is retired, as of Summer ’25: it returns 410:GONE for every resource.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 21.0 through 30.0 | As of Summer ’25, these versions are retired and unavailable.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 18,
+    "fingerprint": "sha256:3da22cdfd664c8f52ebb476cd278bfdeb460918c50d8b0184a542ce091fd72e8",
+    "api": "salesforce",
+    "version": "28.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v28.0/"
+    },
+    "description": "Salesforce REST API version 28.0 is retired, as of Summer ’25: it returns 410:GONE for every resource.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 21.0 through 30.0 | As of Summer ’25, these versions are retired and unavailable.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 19,
+    "fingerprint": "sha256:f3d260b9acef562eaf5f530d3a253176d878d7788bf827441745ee93b32c6787",
+    "api": "salesforce",
+    "version": "29.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v29.0/"
+    },
+    "description": "Salesforce REST API version 29.0 is retired, as of Summer ’25: it returns 410:GONE for every resource.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 21.0 through 30.0 | As of Summer ’25, these versions are retired and unavailable.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 20,
+    "fingerprint": "sha256:01ccee5cbdd725ba99be6328151e1366be0efa49d6431a3b0e93bb09a3676131",
+    "api": "salesforce",
+    "version": "30.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v30.0/"
+    },
+    "description": "Salesforce REST API version 30.0 is retired, as of Summer ’25: it returns 410:GONE for every resource.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 21.0 through 30.0 | As of Summer ’25, these versions are retired and unavailable.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 21,
+    "fingerprint": "sha256:e9867faae1b6920e6c39cedeaf143997102f9a91d9515a442e1cc4f9cffae820",
+    "api": "salesforce",
+    "version": "7.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v7.0/"
+    },
+    "description": "Salesforce REST API version 7.0 is retired, as of Summer ’22: it returns 410:GONE for every resource.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 7.0 through 20.0 | As of Summer ’22, these versions are retired and unavailable.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 22,
+    "fingerprint": "sha256:d35aebdfad2134fd75a451817b2a347633eed5d94a53e96b1665bb800d557863",
+    "api": "salesforce",
+    "version": "8.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v8.0/"
+    },
+    "description": "Salesforce REST API version 8.0 is retired, as of Summer ’22: it returns 410:GONE for every resource.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 7.0 through 20.0 | As of Summer ’22, these versions are retired and unavailable.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 23,
+    "fingerprint": "sha256:f5af0d2c541f41c371b8dbfe80cb9abeedb7758c6fd8a79d0251c1b763578549",
+    "api": "salesforce",
+    "version": "9.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v9.0/"
+    },
+    "description": "Salesforce REST API version 9.0 is retired, as of Summer ’22: it returns 410:GONE for every resource.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 7.0 through 20.0 | As of Summer ’22, these versions are retired and unavailable.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 24,
+    "fingerprint": "sha256:1975b2eb2a035e983a81cfe32fa432edaa62ec0ab7b1d7aea1b542f194ca6170",
+    "api": "salesforce",
+    "version": "10.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v10.0/"
+    },
+    "description": "Salesforce REST API version 10.0 is retired, as of Summer ’22: it returns 410:GONE for every resource.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 7.0 through 20.0 | As of Summer ’22, these versions are retired and unavailable.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 25,
+    "fingerprint": "sha256:39d1421f1d4675f662bd0d3e984fd813de2ba740438c09d9ecdd96f9c5e517cc",
+    "api": "salesforce",
+    "version": "11.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v11.0/"
+    },
+    "description": "Salesforce REST API version 11.0 is retired, as of Summer ’22: it returns 410:GONE for every resource.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 7.0 through 20.0 | As of Summer ’22, these versions are retired and unavailable.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 26,
+    "fingerprint": "sha256:9a3cb32fac90139da92e6e9de3e67261309654ee5ee2fc0f149133af811ad96e",
+    "api": "salesforce",
+    "version": "12.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v12.0/"
+    },
+    "description": "Salesforce REST API version 12.0 is retired, as of Summer ’22: it returns 410:GONE for every resource.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 7.0 through 20.0 | As of Summer ’22, these versions are retired and unavailable.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 27,
+    "fingerprint": "sha256:ac37dc2324273bc9523c0ff620f7de402ad0e6350d930c9f6f2d4c3644e2a956",
+    "api": "salesforce",
+    "version": "13.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v13.0/"
+    },
+    "description": "Salesforce REST API version 13.0 is retired, as of Summer ’22: it returns 410:GONE for every resource.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 7.0 through 20.0 | As of Summer ’22, these versions are retired and unavailable.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 28,
+    "fingerprint": "sha256:4364f685eb1cb5b90db0a979bc329dc7df0a03ca0e85626c981a5119f0acdd41",
+    "api": "salesforce",
+    "version": "14.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v14.0/"
+    },
+    "description": "Salesforce REST API version 14.0 is retired, as of Summer ’22: it returns 410:GONE for every resource.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 7.0 through 20.0 | As of Summer ’22, these versions are retired and unavailable.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 29,
+    "fingerprint": "sha256:c26fd727091b806bd34d1761e4b7801d24256e7567e9c65dd41171c6e3b7b1ff",
+    "api": "salesforce",
+    "version": "15.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v15.0/"
+    },
+    "description": "Salesforce REST API version 15.0 is retired, as of Summer ’22: it returns 410:GONE for every resource.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 7.0 through 20.0 | As of Summer ’22, these versions are retired and unavailable.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 30,
+    "fingerprint": "sha256:0241eda116305ecfd420fa6f42900e4db478297db732a21beff08b1e21ae96b6",
+    "api": "salesforce",
+    "version": "16.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v16.0/"
+    },
+    "description": "Salesforce REST API version 16.0 is retired, as of Summer ’22: it returns 410:GONE for every resource.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 7.0 through 20.0 | As of Summer ’22, these versions are retired and unavailable.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 31,
+    "fingerprint": "sha256:b95ba1dc0afc72b21b40e934ec2d8549da5bf406a5cae9feaba94e7a0fb7ec63",
+    "api": "salesforce",
+    "version": "17.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v17.0/"
+    },
+    "description": "Salesforce REST API version 17.0 is retired, as of Summer ’22: it returns 410:GONE for every resource.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 7.0 through 20.0 | As of Summer ’22, these versions are retired and unavailable.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 32,
+    "fingerprint": "sha256:44912e7a1618ccf57e957a8219609236f6757381eb4f590c66f95978fffe5af2",
+    "api": "salesforce",
+    "version": "18.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v18.0/"
+    },
+    "description": "Salesforce REST API version 18.0 is retired, as of Summer ’22: it returns 410:GONE for every resource.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 7.0 through 20.0 | As of Summer ’22, these versions are retired and unavailable.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 33,
+    "fingerprint": "sha256:94cefbc9eb19323ce7fcf84fc0ee7b2f0a9064046959c52c64bfa755e3ba13c6",
+    "api": "salesforce",
+    "version": "19.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v19.0/"
+    },
+    "description": "Salesforce REST API version 19.0 is retired, as of Summer ’22: it returns 410:GONE for every resource.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 7.0 through 20.0 | As of Summer ’22, these versions are retired and unavailable.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 34,
+    "fingerprint": "sha256:8f15f28dabaee09688f5588d5c939c72053f0c6002bb4c239c48eb22ba20e3cc",
+    "api": "salesforce",
+    "version": "20.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /services/data/v20.0/"
+    },
+    "description": "Salesforce REST API version 20.0 is retired, as of Summer ’22: it returns 410:GONE for every resource.",
+    "migration_hint": "Pin a newer Salesforce REST API version: https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html names which ones are still supported.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
+    "source_excerpt": "Versions 7.0 through 20.0 | As of Summer ’22, these versions are retired and unavailable.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]
