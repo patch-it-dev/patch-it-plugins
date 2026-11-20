@@ -2,11 +2,11 @@
 
 Thanks for helping patch-it watch more APIs. This file is the rulebook; [docs/writing-a-plugin.md](docs/writing-a-plugin.md) is the how-to.
 
-**Start a new provider with the starter:** `go run ./cmd/new-plugin --api <id> --provider <Name> --format <format>` writes the definition, its registration, a test over placeholder sources, the testdata rows, the provider page and the `docs/plugins.md` row; you fill in the `TODO(new-plugin)`s ([how](docs/writing-a-plugin.md#1-scaffold-it-with-new-plugin)).
+**Start a new provider with the starter:** `go run ./cmd/new-plugin --api <id> --provider <Name> --format <format>` writes the definition, its registration, a test over placeholder sources, the testdata rows, the provider page, and the source's metadata in its `RegisterProvider` block; you fill in the `TODO(new-plugin)`s ([how](docs/writing-a-plugin.md#1-scaffold-it-with-new-plugin)).
 
 ## The rules
 
-1. **Add your plugin to [docs/plugins.md](docs/plugins.md).** Every new plugin gets a row; every change to a plugin's id, provider, source, what it watches or status updates its row. The list on docs.patch-it.dev is built from that file, so a plugin that isn't listed is invisible to users. Then run `make plugins-json` to regenerate [`docs/plugins.json`](docs/plugins.json); it fails if the registry and the table disagree, and the tests fail while the JSON is out of date.
+1. **Give every provider and source complete metadata in its registration.** A source exists when its kind's package registers it with `plugin.RegisterProvider`: the provider's id, name, category and homepage, and the source's id, layer, what it watches, the URLs it reads and its page. That registration is the only list: `make plugins` prints it, each release carries it as `plugins.json`, and docs.patch-it.dev reads it from there. Nothing else to update.
 2. **Fetch only through the environment.** Plugins get their sources from `env.Get` or the helpers in `core/kit/`, never from `net/http` directly, the filesystem or a database. That keeps tests offline and lets the hosted service cache, retry and rate-limit politely.
 3. **Every plugin has a golden test** over a real saved copy of its source: `testdata/<file>` in, `testdata/golden/<api>.json` out. `testdata/README.md` lists each file with its URL, the date you fetched it, its license, and a short quote of the part your plugin reads. Keep openly licensed files whole; trim vendor documentation pages to what the test needs.
 4. **Precision over recall.** A missed change is a bug we can fix later. A wrong change becomes a wrong pull request in someone's repo. When in doubt, don't emit.
@@ -36,7 +36,7 @@ That adds `Signed-off-by: Your Name <you@example.com>`, matching the commit's au
 
 | Workflow | What it checks |
 |---|---|
-| `CI_go` | `go mod tidy`, build, vet, gofmt, `go test -race` (including that `docs/plugins.json` is up to date); plugins import only this module, the standard library and approved dependencies; `net/http` only in the fetch layer. Each step is a [Makefile](Makefile) target: `make check` runs them all locally |
+| `CI_go` | `go mod tidy`, build, vet, gofmt, `go test -race` (including that every registered source has its metadata and page); plugins import only this module, the standard library and approved dependencies; `net/http` only in the fetch layer. Each step is a [Makefile](Makefile) target: `make check` runs them all locally |
 | `CI_dco` | Every commit in the PR is signed off by its author |
 | `CI_leak_guard` | gitleaks over the PR's commits, and a check for known internal names (stored as hashes only). Also runs weekly over the whole repo |
 | `Claude Code Review` | Claude reviews the PR against the rules above, once (PRs from this repo's branches; forks: a maintainer comments `@claude review`). Advisory, not a required check |
@@ -55,7 +55,7 @@ Releases are tags on `main` (`v0.x.y`), made only by the **Release** workflow. N
    - **patch** (`v0.4.1` → `v0.4.2`): fixes, a new provider on an existing format plugin, docs;
    - **minor** (`v0.4.1` → `v0.5.0`): a new format plugin, new exported API, anything users should read about.
 3. The workflow refuses if `main`'s HEAD is already tagged, then runs, on that exact commit, the internal-names check over every file, gitleaks over the whole history, `go build`, `go vet`, `gofmt` and `go test -race`. Any failure stops it before a tag exists.
-4. When everything passes it pushes an annotated tag and publishes a GitHub release with generated notes (grouped by the PR's label: `plugin`/`enhancement`, `bug`, `documentation`; see [`.github/release.yml`](.github/release.yml)).
+4. When everything passes it pushes an annotated tag and publishes a GitHub release with generated notes (grouped by the PR's label: `plugin`/`enhancement`, `bug`, `documentation`; see [`.github/release.yml`](.github/release.yml)). The release carries one asset, `plugins.json`: the list of providers and sources printed from the registry at that tag (`go run ./cmd/list-plugins`). It is the only published list; nothing in the repo keeps one, and docs.patch-it.dev reads `https://github.com/patch-it-dev/patch-it-plugins/releases/latest/download/plugins.json`.
 
 `v1.0.0` (and any later major) is not a button: it is a deliberate decision a maintainer makes and tags by hand.
 

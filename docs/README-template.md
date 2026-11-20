@@ -23,7 +23,7 @@ In this order; drop one only if it can't be honest for the repo (no release yet:
 3. **Language version**: e.g. `https://img.shields.io/github/go-mod/go-version/patch-it-dev/<repo>`.
 4. **Latest release**, once there is one: `https://img.shields.io/github/v/release/patch-it-dev/<repo>`.
 5. **License**: `https://img.shields.io/badge/license-<spdx>-3f5bf0`.
-6. **A count the repo is about**, only if a test keeps it right (patch-it-plugins: the plugins badge, set by `make plugins-json` and checked by `go test`).
+6. **No counts.** A badge that counts plugins, providers or anything else that changes at run time is a hand-kept list in disguise: link the docs instead.
 7. **Docs**: `https://img.shields.io/badge/docs-docs.patch--it.dev-3f5bf0`.
 8. **Discussions**: `https://img.shields.io/github/discussions/patch-it-dev/<repo>`.
 

@@ -17,13 +17,12 @@ go run ./cmd/new-plugin --api acme --provider Acme --format openapi
 
 It writes, and lists:
 
-- the provider's definition, in the package the format reads it from (`plugins/openapi/adapter/`, `plugins/retirements/retire/`, `plugins/migrationguide/sdkguide/` or `plugins/<format>/`), and its `plugin.Register` line in that format's `init` (plus the `core/migrate/` map entry that `retirements` and `migrationguide` need);
+- the provider's definition, in the package the format reads it from (`plugins/openapi/adapter/`, `plugins/retirements/retire/`, `plugins/migrationguide/sdkguide/` or `plugins/<format>/`), and its `plugin.RegisterProvider` block (the provider and the source with their metadata) in that format's `init` (plus the `core/migrate/` map entry that `retirements` and `migrationguide` need);
 - `plugins/<format>/<api>_test.go`: the registration test, a golden test and a pinned drop test, over placeholder sources in `testdata/`, with the golden file written from them;
 - a row per saved file in that `testdata/README.md` (URL, date, license, quote to fill in);
 - `providers/<api>.md` from the template (or nothing, with `--page`, when the provider already has one);
-- the row in `docs/plugins.md`, and `docs/plugins.json` regenerated.
 
-`go test ./...` passes right after; every place to fill in says `TODO(new-plugin)` (`grep -rn 'TODO(new-plugin)' .`), and `make check` (its `todos` step, also in CI_go) fails until none is left. It refuses an id that's taken (registered, in `docs/plugins.md`, or a file it would write exists) and then changes nothing. The steps below are what you fill in.
+`go test ./...` passes right after; every place to fill in says `TODO(new-plugin)` (`grep -rn 'TODO(new-plugin)' .`), and `make check` (its `todos` step, also in CI_go) fails until none is left. It refuses an id that's taken (registered, or a file it would write exists) and then changes nothing. The steps below are what you fill in.
 
 ## 2. Pick the source
 
@@ -175,9 +174,9 @@ func TestGolden(t *testing.T) {
 
 Copy [`providers/_template.md`](../providers/_template.md) to `providers/<api>.md` and fill in every section: what it watches; **why this source** (the link, the date you checked it, why it's the best place this provider announces breaking changes, the alternatives you didn't use and why, one short quote); how the provider announces changes; what the plugin reads and ignores; known gaps.
 
-## 9. Add the row to `docs/plugins.md`
+## 9. Fill in the metadata in the registration
 
-**Not optional** ([AGENTS.md](../AGENTS.md) rule 1). Add one row between the `plugins:start` and `plugins:end` markers: the id linked to its provider page, the provider, what it watches, the format plugin, the source, the status. Absolute links only: the docs site copies the table as it is. Changing a plugin's id, source or what it watches updates its row in the same PR. Then run `make plugins-json` to regenerate `docs/plugins.json`; it fails, naming the problem, if the registry and the table disagree.
+**Not optional** ([AGENTS.md](../AGENTS.md) rule 1). The `plugin.RegisterProvider` block the starter wrote is the only place the source is listed: the provider's id, name, category (`plugin.Categories()`) and homepage, and the source's id (`<provider>/<source>`), layer (`plugin.Layers()`), what it watches, the URLs it reads and its page. A second source of a provider repeats the provider's id, name, category and homepage exactly. `make plugins` prints the list with it; each release attaches that list as `plugins.json`, which docs.patch-it.dev and patch-it's hosted ingestion service read. There's nothing else to update.
 
 ## 10. Check and open the PR
 

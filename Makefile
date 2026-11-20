@@ -5,7 +5,7 @@
 #
 #   make check                       everything below, in CI's order
 #   make check PATCH_IT=../patch-it  also compare contract/fixtures/ with patch-it's
-#   make plugins-json                regenerate docs/plugins.json from the registry and docs/plugins.md
+#   make plugins                     print the providers and sources from the registry (JSON)
 #
 # The `::error` lines are GitHub annotations; locally they're plain messages.
 
@@ -17,7 +17,7 @@ PYTHON ?= python3
 MODULE  := github.com/patch-it-dev/patch-it-plugins
 ALLOWED := ^($(MODULE)(/|$$)|gopkg\.in/yaml\.v3$$)
 
-.PHONY: check tidy build fmt vet imports nethttp test todos leak-guard contract plugins-json
+.PHONY: check tidy build fmt vet imports nethttp test todos leak-guard contract plugins
 
 check: tidy build fmt vet imports nethttp test todos leak-guard contract
 	@echo "make check: all passed"
@@ -58,13 +58,12 @@ nethttp:
 	fi
 
 # -race: the fetcher and the tests' HTTP servers run on other goroutines.
-# Includes the check that docs/plugins.json is up to date (internal/pluginlist).
 test:
 	$(GO) test -race -count=1 ./...
 
 # A provider started with new-plugin is done when nothing it wrote still says
 # TODO(new-plugin).
-TODO_DIRS := plugins core/migrate providers docs/plugins.md
+TODO_DIRS := plugins core/migrate providers
 todos:
 	@left=$$(grep -rl 'TODO(new-plugin)' $(TODO_DIRS) || true); \
 	if [ -n "$$left" ]; then \
@@ -87,5 +86,7 @@ contract:
 		echo "contract: skipped (make check PATCH_IT=<a patch-it checkout> compares contract/fixtures/)"; \
 	fi
 
-plugins-json:
-	$(GO) run ./cmd/list-plugins
+# The list of what patch-it watches, from the registry. Never committed: the
+# Release workflow attaches it to each release as plugins.json.
+plugins:
+	@$(GO) run ./cmd/list-plugins

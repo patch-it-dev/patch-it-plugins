@@ -7,14 +7,14 @@
 // It writes the provider's definition in the format's package (or the reader
 // package the format uses: plugins/openapi/adapter/, plugins/retirements/retire/,
 // plugins/migrationguide/sdkguide/), adds its
-// plugin.Register line to plugins/<format>'s init, a test (registered, golden,
-// drop) over placeholder sources with an empty golden file, a row in that
-// testdata/README.md, providers/<api>.md from providers/_template.md and a
-// row in docs/plugins.md, then regenerates docs/plugins.json. `go test ./...`
+// plugin.RegisterProvider block (the source's metadata) to plugins/<format>'s
+// init, a test (registered, golden, drop) over placeholder sources with an
+// empty golden file, a row in that testdata/README.md, and providers/<api>.md
+// from providers/_template.md. `go test ./...`
 // passes right after; every place to fill in says TODO(new-plugin).
 //
-// It changes nothing when the id is taken (registered, in docs/plugins.md, or
-// a file it would write exists).
+// It changes nothing when the id is taken (registered, or a file it would
+// write exists).
 package main
 
 import (
@@ -37,7 +37,6 @@ import (
 	"unicode"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
-	"github.com/patch-it-dev/patch-it-plugins/internal/pluginlist"
 	_ "github.com/patch-it-dev/patch-it-plugins/plugins/all"
 )
 
@@ -47,13 +46,13 @@ type Options struct {
 	API      string // the plugin id: --api and every event's api
 	Provider string // whose API, SDK or package
 	Format   string // the format plugin
-	Layer    string // the docs/plugins.md layer; "" is the format's default
+	Layer    string // the source's layer (plugin.Layers()); "" is the format's default
 	Source   string // the provider's source URL; "" is a placeholder
-	Watches  string // the docs/plugins.md "what it watches" cell
+	Watches  string // what the source watches, in a few words
 	Page     string // the provider page, providers/<Page>.md; "" is the id. An existing page is shared, not rewritten
 	Today    time.Time
 	// Go runs the go command afterwards: the golden file from the placeholders
-	// (go test -update) and docs/plugins.json (go run ./cmd/list-plugins).
+	// (go test -update).
 	Go bool
 }
 
@@ -63,7 +62,7 @@ func main() {
 	flag.StringVar(&o.API, "api", "", "the plugin id, e.g. acme or acme-models (lowercase letters, digits, hyphens)")
 	flag.StringVar(&o.Provider, "provider", "", "the provider's name, e.g. Acme")
 	flag.StringVar(&o.Format, "format", "", "the format plugin: "+strings.Join(formatNames(), ", "))
-	flag.StringVar(&o.Layer, "layer", "", "the layer in docs/plugins.md: API, SDK, package, runtime, CI or \"AI models\" (default: the format's)")
+	flag.StringVar(&o.Layer, "layer", "", "the source's layer: api, sdk, package, runtime, ci, ai-models or infra (default: the format's)")
 	flag.StringVar(&o.Source, "source", "", "the provider's source URL (default: a placeholder to fill in)")
 	flag.StringVar(&o.Watches, "watches", "", "what it watches, in a few words (default: a placeholder)")
 	flag.StringVar(&o.Page, "page", "", "the provider page, providers/<page>.md (default: the --api id); one page per provider, so a second plugin of a provider names the existing page")
@@ -116,8 +115,8 @@ func Run(o Options, out io.Writer) error {
 	if o.Layer == "" {
 		o.Layer = f.layer
 	}
-	if _, ok := pluginlist.Layers[o.Layer]; !ok {
-		return fmt.Errorf("--layer %q: want API, SDK, package, runtime, CI or \"AI models\"", o.Layer)
+	if !slices.Contains(plugin.Layers(), plugin.Layer(o.Layer)) {
+		return fmt.Errorf("--layer %q: want one of %v", o.Layer, plugin.Layers())
 	}
 	if o.Source == "" {
 		o.Source = "https://example.com/TODO-" + o.API + "-source"
@@ -142,20 +141,6 @@ func Run(o Options, out io.Writer) error {
 	// Taken? Check everything before writing anything.
 	if _, ok := plugin.Lookup(o.API); ok {
 		return fmt.Errorf("a plugin named %q is already registered: pick another --api", o.API)
-	}
-	tablePath := filepath.Join(o.Root, pluginlist.Table)
-	table, err := os.ReadFile(tablePath)
-	if err != nil {
-		return fmt.Errorf("%v (run from the repo root, or pass --root)", err)
-	}
-	rows, err := pluginlist.ReadTable(table)
-	if err != nil {
-		return err
-	}
-	for _, r := range rows {
-		if r.ID == o.API {
-			return fmt.Errorf("%s already has a row for %q: pick another --api", pluginlist.Table, o.API)
-		}
 	}
 
 	d := data{ID: o.API, Provider: o.Provider, Source: o.Source, Format: o.Format}
@@ -235,9 +220,6 @@ func Run(o Options, out io.Writer) error {
 	if edits[readmePath], err = readmeRows(readme, []string{d.SourceFile, d.DropFile}, o.Source); err != nil {
 		return fmt.Errorf("%s: %w", readmePath, err)
 	}
-	if edits[pluginlist.Table], err = tableRow(table, o, d); err != nil {
-		return err
-	}
 
 	// Write.
 	var paths []string
@@ -265,7 +247,6 @@ func Run(o Options, out io.Writer) error {
 	if o.Go {
 		for _, args := range [][]string{
 			{"test", "./" + pkgDir, "-run", "^Test" + d.Ident + "Golden$", "-update"},
-			{"run", "./cmd/list-plugins"},
 		} {
 			cmd := exec.Command("go", args...)
 			cmd.Dir = o.Root
@@ -273,7 +254,7 @@ func Run(o Options, out io.Writer) error {
 				return fmt.Errorf("the files are written, but `go %s` failed: %w\n%s", strings.Join(args, " "), err, b)
 			}
 		}
-		fmt.Fprintf(out, "  %s (from the placeholders)\n  docs/plugins.json (regenerated)\n", filepath.Join(pkgDir, "testdata", "golden", o.API+".json"))
+		fmt.Fprintf(out, "  %s (from the placeholders)\n", filepath.Join(pkgDir, "testdata", "golden", o.API+".json"))
 	}
 	fmt.Fprint(out, fill(nextSteps, struct {
 		data
@@ -293,8 +274,9 @@ Next steps (every place to fill in says TODO(new-plugin): grep -rn 'TODO(new-plu
      {{.Extra}}{{end}}
   3. Write the golden file, then read it like code:
        go test ./plugins/{{.Format}} -run Test{{.Ident}} -update
-  4. {{if .Shared}}Add {{.ID}} to providers/{{.Page}}.md (shared with the provider's other plugins){{else}}Fill in providers/{{.Page}}.md{{end}}, above all "Why this source", and the row in docs/plugins.md
-     (what it watches, the source; a plugin in the code is live), then: make plugins-json
+  4. {{if .Shared}}Add {{.ID}} to providers/{{.Page}}.md (shared with the provider's other plugins){{else}}Fill in providers/{{.Page}}.md{{end}}, above all "Why this source", and the source's
+     metadata in its RegisterProvider block (what it watches, its URLs; a new provider's category and
+     homepage). go run ./cmd/list-plugins prints the list with it; there is no list to edit.
   5. make check, then open the PR (git commit -s).
 `
 
@@ -401,7 +383,7 @@ func providerBlock(o Options, d data, line string) string {
 			URLs:    []string{%q},
 			Plugin:  %s,
 		}},
-	})`, id, o.Provider, category, homepage, source, pluginlist.Layers[o.Layer], "providers/"+o.Page+".md", o.Watches, o.Source, expr)
+	})`, id, o.Provider, category, homepage, source, o.Layer, "providers/"+o.Page+".md", o.Watches, o.Source, expr)
 }
 
 // register adds line at the end of the init func that registers pkgDir's
@@ -527,21 +509,6 @@ func readmeRows(readme []byte, files []string, source string) ([]byte, error) {
 	}
 	lines = slices.Insert(lines, end, rows...)
 	return []byte(strings.Join(lines, "\n")), nil
-}
-
-// tableRow adds the plugin's row at the end of docs/plugins.md's table.
-func tableRow(table []byte, o Options, d data) ([]byte, error) {
-	end := bytes.Index(table, []byte(pluginlist.EndMarker))
-	if end < 0 {
-		return nil, fmt.Errorf("%s: no %s", pluginlist.Table, pluginlist.EndMarker)
-	}
-	row := fmt.Sprintf("| [`%s`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/%s.md) | %s | %s | %s | `%s` | [%s](%s) | live |\n",
-		o.API, o.Page, o.Provider, o.Layer, o.Watches, o.Format, linkText(o.Source), o.Source)
-	var b bytes.Buffer
-	b.Write(table[:end])
-	b.WriteString(row)
-	b.Write(table[end:])
-	return b.Bytes(), nil
 }
 
 func linkText(url string) string {

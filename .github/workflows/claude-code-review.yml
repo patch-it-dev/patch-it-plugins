@@ -93,12 +93,12 @@ jobs:
                any issue it references with `gh issue view <number>`. Read the diff with
                `gh pr diff <PR NUMBER>`, and changed files in full where the diff isn't
                enough context.
-            2. THE PLUGIN LIST (AGENTS.md Rule 1). Every plugin added, removed, or with a
-               changed id, provider, source, what it watches, format plugin or status has
-               its row added, removed or updated in docs/plugins.md, between the
-               `<!-- plugins:start -->` and `<!-- plugins:end -->` markers, as a plain
-               Markdown table with absolute links only. Compare the registered plugins with
-               the table yourself; a missing row is blocking.
+            2. THE METADATA (AGENTS.md Rule 1). Every source added or changed is
+               registered with plugin.RegisterProvider with complete, accurate metadata:
+               the provider's id, name, category and homepage; each source's id, layer,
+               what it watches, the URLs it reads and its page. There is no hand-kept list
+               (no docs/plugins.md, no plugins.json in the repo): one reappearing is
+               blocking.
             3. PROVIDER PAGE. Every new provider has providers/<api>.md copied from
                providers/_template.md, with a real **Why this source**: the link, the date
                it was checked, why it's the best source, the alternatives not used, and a

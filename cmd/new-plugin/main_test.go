@@ -17,7 +17,7 @@ import (
 var today = time.Date(2026, 11, 19, 0, 0, 0, 0, time.UTC)
 
 // A plugin of every format, scaffolded into a copy of the repo: the copy
-// builds, vets and passes its tests, and docs/plugins.json lists them all.
+// builds, vets and passes its tests, and list-plugins lists them all.
 // Then the same command again changes nothing.
 func TestScaffoldEveryFormat(t *testing.T) {
 	if testing.Short() {
@@ -45,19 +45,21 @@ func TestScaffoldEveryFormat(t *testing.T) {
 			t.Fatalf("go %s: %v\n%s", strings.Join(args, " "), err, b)
 		}
 	}
-	listed, err := os.ReadFile(filepath.Join(root, "docs", "plugins.json"))
+	list := exec.Command(goCmd, "run", "./cmd/list-plugins")
+	list.Dir = root
+	listed, err := list.Output()
 	if err != nil {
-		t.Fatal(err)
+		t.Fatalf("go run ./cmd/list-plugins: %v", err)
 	}
 	for _, f := range formatNames() {
-		if !bytes.Contains(listed, []byte(`"id": "acme-`+f+`"`)) {
-			t.Errorf("docs/plugins.json doesn't list acme-%s", f)
+		if !bytes.Contains(listed, []byte(`"alias": "acme-`+f+`"`)) {
+			t.Errorf("list-plugins doesn't list acme-%s", f)
 		}
 	}
 
 	before := tree(t, root)
 	err = Run(Options{Root: root, API: "acme-feed", Provider: "Acme Corp", Format: "feed", Today: today, Go: true}, io.Discard)
-	if err == nil || !strings.Contains(err.Error(), "already has a row") {
+	if err == nil || !strings.Contains(err.Error(), "already exists") {
 		t.Errorf("second run: err = %v, want the id taken", err)
 	}
 	if after := tree(t, root); !slices.Equal(before, after) {
@@ -65,8 +67,8 @@ func TestScaffoldEveryFormat(t *testing.T) {
 	}
 }
 
-// A second plugin of a provider shares its page: no new page, and the row
-// links the existing one.
+// A second source of a provider shares its page and its provider: no new
+// page, and the registration names the existing ones.
 func TestScaffoldSharesTheProviderPage(t *testing.T) {
 	root := copyRepo(t)
 	o := Options{Root: root, API: "algolia-analytics", Provider: "Algolia", Format: "openapi", Page: "algolia", Today: today}
@@ -76,9 +78,11 @@ func TestScaffoldSharesTheProviderPage(t *testing.T) {
 	if _, err := os.Stat(filepath.Join(root, "providers", "algolia-analytics.md")); err == nil {
 		t.Error("wrote providers/algolia-analytics.md; want the shared providers/algolia.md")
 	}
-	table, _ := os.ReadFile(filepath.Join(root, "docs", "plugins.md"))
-	if !bytes.Contains(table, []byte("[`algolia-analytics`](https://github.com/patch-it-dev/patch-it-plugins/blob/main/providers/algolia.md)")) {
-		t.Error("the row doesn't link providers/algolia.md")
+	reg, _ := os.ReadFile(filepath.Join(root, "plugins", "openapi", "openapi.go"))
+	for _, want := range []string{`ID: "algolia", Name: "Algolia"`, `ID: "analytics"`, `Page: "providers/algolia.md"`, `plugin.Category("search")`} {
+		if !bytes.Contains(reg, []byte(want)) {
+			t.Errorf("the registration has no %s", want)
+		}
 	}
 }
 

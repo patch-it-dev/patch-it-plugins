@@ -4,7 +4,7 @@ package main
 // definition goes, the line that registers it, the placeholder sources its
 // test reads, and how the test runs it.
 type formatSpec struct {
-	layer    string            // default layer for docs/plugins.md
+	layer    string            // the source's default layer (plugin.Layers())
 	defDir   string            // the package directory the definition goes in
 	def      string            // the definition file (template)
 	register string            // the plugin.Register line added to plugins/<format>'s init (template)
@@ -30,7 +30,7 @@ const todo = "TODO(new-plugin)"
 
 var formats = map[string]formatSpec{
 	"feed": {
-		layer:  "API",
+		layer:  "api",
 		defDir: "plugins/feed",
 		def: `package feed
 
@@ -80,7 +80,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 	},
 
 	"retirements": {
-		layer:  "AI models",
+		layer:  "ai-models",
 		defDir: "plugins/retirements/retire",
 		def: `package retire
 
@@ -153,7 +153,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 	},
 
 	"migrationguide": {
-		layer:  "SDK",
+		layer:  "sdk",
 		defDir: "plugins/migrationguide/sdkguide",
 		def: `package sdkguide
 
@@ -331,7 +331,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 	},
 
 	"apichangelog": {
-		layer:  "API",
+		layer:  "api",
 		defDir: "plugins/apichangelog",
 		def: `package apichangelog
 
@@ -417,7 +417,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 	},
 
 	"openapi": {
-		layer:  "API",
+		layer:  "api",
 		defDir: "plugins/openapi/adapter",
 		def: `package adapter
 

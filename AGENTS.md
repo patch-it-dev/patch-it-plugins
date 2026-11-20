@@ -2,13 +2,11 @@
 
 Rules for AI coding agents (and humans) working in this repo. `CLAUDE.md` imports this file.
 
-## Rule 1: every new or changed plugin goes in `docs/plugins.md`
+## Rule 1: every new or changed provider or source has complete metadata in its registration
 
-**If you add a plugin, add its row to [`docs/plugins.md`](docs/plugins.md) in the same PR. If you change a plugin's id, provider, source, what it watches, format plugin or status, update its row in the same PR. If you remove one, remove its row.**
+**A source exists when its kind's package registers it with `plugin.RegisterProvider`, and its metadata lives only there: the provider's id, name, category and homepage, and each source's id, layer, what it watches, the URLs it reads and its page, `providers/<name>.md`.** Adding, changing or removing a source is a change to that registration (and to its page) in the same PR. There is no list to update: nothing in this repo, the docs site or anywhere else keeps one by hand.
 
-The list of supported APIs on docs.patch-it.dev is generated from that file, so a plugin missing from it doesn't exist as far as users can tell. Then run `make plugins-json`: it regenerates [`docs/plugins.json`](docs/plugins.json) from the plugin registry and the table (and the plugin count on the README's badge), and fails if a registered plugin has no row (or a row has no plugin, a wrong format or no provider page). `go test` fails while `docs/plugins.json` is out of date. The check can't tell whether a row's words are right: you are that check. Say in the PR that you compared them.
-
-Keep the table between the `<!-- plugins:start -->` and `<!-- plugins:end -->` markers a plain Markdown table, one row per plugin, absolute links only (the docs site copies it verbatim).
+`go run ./cmd/list-plugins` prints the list from the registry (JSON), and the Release workflow attaches it to every release as `plugins.json`; the docs site and patch-it's hosted ingestion service read it from there. `RegisterProvider` refuses incomplete metadata and `go test` fails when a source's page is missing, but no check can tell whether the words are right: you are that check. Say in the PR that you read them.
 
 ## Rule 2: this repo is public
 
@@ -41,7 +39,7 @@ Refer to the service that runs these plugins as "patch-it's hosted ingestion ser
 ```sh
 make check          # tidy, build, gofmt, vet, the import allowlist, the net/http guard, go test -race, no TODO(new-plugin) left, leak guard
 make check PATCH_IT=../patch-it   # also CI_contract: contract/fixtures/ against a patch-it checkout
-make plugins-json   # regenerate docs/plugins.json after adding or changing a plugin or its row
+make plugins        # print the list of providers and sources from the registry (what each release attaches as plugins.json)
 ```
 
 One target at a time: `make tidy`, `make build`, `make fmt`, `make vet`, `make imports`, `make nethttp`, `make test`, `make todos`, `make leak-guard`, `make contract`. Use `make GO=/path/to/go check` for another Go.
@@ -63,11 +61,10 @@ plugins/<kind>/        one package per kind, with its providers: openapi (+ adap
                        plugins/all imports every one
 plugin/ event/ fetch/ migrate/ kit/ retire/ sdkguide/   deprecated old import paths: they only
                        forward to the packages above; don't add to them
-cmd/list-plugins/      writes docs/plugins.json (make plugins-json); internal/pluginlist/ is its logic
+cmd/list-plugins/      prints the list from the registry (make plugins); internal/pluginlist/ is its logic
 cmd/new-plugin/        scaffolds a provider on a format plugin (go run ./cmd/new-plugin --help)
 contract/fixtures/     a copy of patch-it's change-event fixtures (CI_contract checks it)
-docs/plugins.md        the list of supported plugins (Rule 1); docs/plugins.json is generated from it
-Makefile               make check (what CI_go runs, plus the leak guard), make plugins-json
+Makefile               make check (what CI_go runs, plus the leak guard), make plugins
 docs/                  contributor docs, including writing-a-plugin.md
 providers/<api>.md     one page per provider
 scripts/               leak_guard.py (hashed internal names), check_contract.py
@@ -81,7 +78,7 @@ The [change-event contract](https://github.com/patch-it-dev/patch-it/tree/main/d
 
 - Sign off every commit: `git commit -s` (DCO; `CI_dco` checks it).
 - Subjects short, lowercase, imperative: `add the foo plugin`.
-- One plugin or fix per PR; fill in every checkbox of the PR template, including "added to docs/plugins.md".
+- One plugin or fix per PR; fill in every checkbox of the PR template, including "metadata complete in the registration".
 - AI-assisted commits keep their co-author trailer.
 - Never re-run, dispatch or retrigger CI to "see if it passes"; fix the cause and push.
 

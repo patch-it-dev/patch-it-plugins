@@ -10,7 +10,6 @@
 [![Go Reference](https://pkg.go.dev/badge/github.com/patch-it-dev/patch-it-plugins.svg)](https://pkg.go.dev/github.com/patch-it-dev/patch-it-plugins)
 [![Go version](https://img.shields.io/github/go-mod/go-version/patch-it-dev/patch-it-plugins)](go.mod)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-3f5bf0)](LICENSE)
-[![Plugins](https://img.shields.io/badge/plugins-30-3f5bf0)](docs/plugins.md)
 [![Docs](https://img.shields.io/badge/docs-docs.patch--it.dev-3f5bf0)](https://docs.patch-it.dev)
 [![Discussions](https://img.shields.io/github/discussions/patch-it-dev/patch-it-plugins)](https://github.com/patch-it-dev/patch-it-plugins/discussions)
 
@@ -27,18 +26,7 @@ flowchart LR
 1. **It notices on its own.** A plugin here sees the change where the provider announces it, and patch-it picks it up from there: no alert to triage, no ticket to assign. That includes changes that never bump a version, like an AI model or an API shut down on a date.
 2. **It writes the fix.** An AI model (on your own key) reads the change and the lines it affects and writes the code change. It arrives as a pull request: your CI runs your tests on it, like any PR, and you review and merge it. The code change, not just the version.
 3. **Proof:** 8 pull requests opened by the early version have been merged by outside maintainers.
-4. **What it covers:**
-
-   | Layer | Noticed (a plugin here watches it) | Fixed (patch-it writes the PR) |
-   |---|---|---|
-   | APIs: Stripe, GitHub, GitLab, Datadog, Vercel, Supabase, Algolia, MongoDB Atlas, Cloudflare | live | live |
-   | AI models: OpenAI and Anthropic model retirements | live | live |
-   | AI models: Vertex AI model retirements | live | planned |
-   | Packages and SDKs: NumPy, Textual, urllib3, the Anthropic Python SDK | live | in testing |
-   | Runtimes: Redis | live | building |
-   | CI: GitHub Actions runner retirements | live | planned |
-
-   As of 2026-11-19; every plugin is in [docs/plugins.md](docs/plugins.md).
+4. **What it covers:** APIs, AI models, packages and SDKs, runtimes and CI. The current list of providers and sources is generated from the code: see [docs.patch-it.dev](https://docs.patch-it.dev/supported-apis/plugins/), or run `make plugins`.
 
 5. **Start:** [docs.patch-it.dev](https://docs.patch-it.dev) sets up the GitHub Action in your repo. To have it watch a provider it doesn't cover yet, add a plugin (below).
 
@@ -54,7 +42,6 @@ go run ./cmd/new-plugin --api acme --provider Acme --format feed --source "$URL"
 ```
 ```
 Scaffolded acme (Acme, format feed):
-  docs/plugins.md
   plugins/feed/acme.go (new)
   plugins/feed/acme_test.go (new)
   ...
@@ -71,7 +58,7 @@ go test ./plugins/feed -run TestAcme -update   # writes testdata/golden/acme.jso
 **3. Check it, the way CI will.**
 
 ```sh
-make plugins-json && make check
+make check
 ```
 ```
 ...
@@ -90,7 +77,7 @@ Most providers are an entry for a shared format plugin (`openapi`, `retirements`
 
 ## Supported plugins
 
-**[docs/plugins.md](docs/plugins.md)** lists every plugin: provider, layer, what it watches, its source. The same list is on [docs.patch-it.dev](https://docs.patch-it.dev/supported-apis/plugins/), and as JSON in [docs/plugins.json](docs/plugins.json) (`make plugins-json`).
+There's no list in this repo: each provider and source is registered in code with its metadata (`plugin.RegisterProvider`). `make plugins` prints the list as JSON, every release attaches it as `plugins.json`, and [docs.patch-it.dev](https://docs.patch-it.dev/supported-apis/plugins/) shows it.
 
 ## Layout
 
@@ -98,7 +85,7 @@ Most providers are an entry for a shared format plugin (`openapi`, `retirements`
 |---|---|
 | [`core/plugin/`](core/plugin/) | The `Plugin` interface, the registry (`Register`, `Lookup`, `Names`), `Env`, `Result` |
 | [`plugins/`](plugins/) | The format plugins; `plugins/all` imports every one |
-| [`cmd/new-plugin/`](cmd/new-plugin/), [`cmd/list-plugins/`](cmd/list-plugins/) | The starter for a new provider; the generator of `docs/plugins.json` |
+| [`cmd/new-plugin/`](cmd/new-plugin/), [`cmd/list-plugins/`](cmd/list-plugins/) | The starter for a new provider; the list of providers and sources, printed from the registry |
 | [`core/kit/`](core/kit/), [`core/kit/kittest/`](core/kit/kittest/), [`core/github/`](core/github/) | What plugins share (the unchanged-page check, Wayback citing, the newest release or commit on GitHub) and the test kit (in-memory store, saved pages, golden files) |
 | [`core/event/`](core/event/), [`core/migrate/`](core/migrate/) | The change-event types of [patch-it's contract](https://github.com/patch-it-dev/patch-it/tree/main/docs/contract), and the v1 → v2 conversion |
 | [`core/diff/`](core/diff/), [`core/normalize/`](core/normalize/), [`core/hint/`](core/hint/), [`plugins/openapi/adapter/`](plugins/openapi/adapter/) | The OpenAPI diff engine: compare two specs, turn the changes into events, attach changelog hints; one adapter per spec provider |
@@ -106,7 +93,7 @@ Most providers are an entry for a shared format plugin (`openapi`, `retirements`
 | [`contract/fixtures/`](contract/) | A copy of patch-it's change-event fixtures |
 | `plugin/`, `event/`, `fetch/`, `migrate/`, `kit/`, `kit/kittest/`, `retire/`, `sdkguide/` | Deprecated: the old import paths, forwarding to the packages above until code that imports them moves |
 | [`providers/`](providers/) | One page per provider: why that source, what the plugin reads |
-| [`docs/`](docs/) | [The plugin list](docs/plugins.md), [how to write a plugin](docs/writing-a-plugin.md), the [README template](docs/README-template.md) patch-it's public repos share |
+| [`docs/`](docs/) | [How to write a plugin](docs/writing-a-plugin.md), the [README template](docs/README-template.md) patch-it's public repos share |
 
 ## Run the checks
 

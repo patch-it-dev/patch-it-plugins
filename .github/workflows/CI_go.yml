@@ -80,7 +80,6 @@ jobs:
         run: make todos
 
       # -race: the fetcher and the tests' HTTP servers run on other goroutines.
-      # Also fails when docs/plugins.json is out of date (make plugins-json).
       - name: go test
         if: steps.go.outputs.present == 'true'
         run: make test
