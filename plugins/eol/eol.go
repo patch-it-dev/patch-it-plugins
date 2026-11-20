@@ -4,14 +4,26 @@
 // (deprecation); a row that only says "Supported." names nothing to report.
 //
 // There is no spec to diff, like retirements and feed: the page is read as it
-// is now, and the events cite a Wayback Machine snapshot of it, never the
-// live page (kit/). Unlike retirements (one named model per row) and feed
-// (an RSS or Atom entry), a row here names a whole range of version numbers
-// and no replacement: moving up to any newer version clears it.
+// is now, and (as with them) the events cite a Wayback Machine snapshot of
+// it, taken after a successful read of the live page, so the citation always
+// says what the plugin actually saw.
+//
+// Salesforce's docs site is the one difference from retirements and feed: it
+// answers 403 to a plain GET (checked 2026-11-20, including with a browser
+// User-Agent), so Run's direct read of the live page fails every time. The
+// Wayback Machine's own save-page-now request succeeds against it anyway
+// (checked the same day), so Run falls back to a fresh snapshot, used
+// directly as both the content and its own citation, kit.Cite's
+// double-check skipped: there is no separate live read left to agree with.
+//
+// Unlike retirements (one named model per row) and feed (an RSS or Atom
+// entry), a row here names a whole range of version numbers and no
+// replacement: moving up to any newer version clears it.
 package eol
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"log"
 	"regexp"
@@ -19,6 +31,7 @@ import (
 	"strings"
 
 	"github.com/patch-it-dev/patch-it-plugins/event"
+	"github.com/patch-it-dev/patch-it-plugins/fetch"
 	"github.com/patch-it-dev/patch-it-plugins/kit"
 	"github.com/patch-it-dev/patch-it-plugins/plugin"
 )
@@ -165,10 +178,10 @@ type Plugin struct {
 func (p Plugin) Name() string { return p.Page.API }
 
 // Run reads the page as it is now. An unchanged page since the last run costs
-// one GET and no snapshot.
+// one GET and no snapshot, unless the live page is blocked: see liveOrArchived.
 func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) {
 	pg := p.Page
-	live, err := env.Get(ctx, pg.URL)
+	live, archived, err := liveOrArchived(ctx, env, p.Archiver, pg.URL)
 	if err != nil {
 		return plugin.Result{}, fmt.Errorf("fetching %s: %w", pg.URL, err)
 	}
@@ -186,9 +199,13 @@ func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) 
 	if err != nil {
 		return plugin.Result{}, fmt.Errorf("reading %s: %w", pg.URL, err)
 	}
-	snapURL, snap, got, err := kit.Cite(ctx, p.Archiver, pg.URL, Findings, want)
-	if err != nil {
-		return plugin.Result{}, err
+
+	snapURL, snap, got := archived, live, want
+	if snapURL == "" {
+		snapURL, snap, got, err = kit.Cite(ctx, p.Archiver, pg.URL, Findings, want)
+		if err != nil {
+			return plugin.Result{}, err
+		}
 	}
 
 	now := env.Now().UTC()
@@ -227,6 +244,30 @@ func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) 
 	baseline := plugin.Baseline(pg.API, now.Format("2006-01-02"), snapURL, snapURL, snap, false, now)
 	baseline.SHA256 = hash
 	return plugin.Result{Label: snapURL, Events: events, Rejected: rejected, Baselines: []plugin.Spec{baseline}}, nil
+}
+
+// liveOrArchived reads pageURL directly. When the provider blocks a plain
+// fetch with a 4xx (Salesforce's docs site, every time, checked 2026-11-20),
+// it falls back to a fresh Wayback Machine snapshot, taken right now by the
+// archive's own crawler rather than patch-it's, and returns that content
+// with its own permanent URL in archivedURL: it needs no further citation
+// step, having come from the archive already. A non-4xx error (a timeout, a
+// 5xx) is returned as is: retrying it against the archive would hide a
+// transient failure as a real page, not fix one.
+func liveOrArchived(ctx context.Context, env plugin.Env, a kit.Archiver, pageURL string) (body []byte, archivedURL string, err error) {
+	body, err = env.Get(ctx, pageURL)
+	if err == nil {
+		return body, "", nil
+	}
+	var se *fetch.StatusError
+	if !errors.As(err, &se) || se.StatusCode < 400 || se.StatusCode >= 500 {
+		return nil, "", err
+	}
+	archivedURL, body, archErr := a.Snapshot(ctx, pageURL)
+	if archErr != nil {
+		return nil, "", fmt.Errorf("fetching it directly failed (%w), and so did asking the Wayback Machine to: %w", err, archErr)
+	}
+	return body, archivedURL, nil
 }
 
 func describe(pg Page, f Finding) string {
