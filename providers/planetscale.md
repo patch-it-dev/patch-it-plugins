@@ -4,7 +4,7 @@
 
 The PlanetScale API (`api.planetscale.com/v1`): operations PlanetScale marks deprecated, and removals of operations it had marked deprecated, between two versions of the API's OpenAPI spec. PlanetScale says it in the operation's description, never with the `deprecated` flag.
 
-Format plugin: `openapi` (`plugins/openapi`), with `adapter.PlanetScale`.
+Kind: `openapi` (`plugins/openapi`), with `adapter.PlanetScale`.
 
 ## Why this source
 

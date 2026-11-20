@@ -4,7 +4,7 @@
 
 Datadog's API v2, release by release: endpoints, request and response properties and schemas removed or changed between two versions of the OpenAPI spec Datadog generates its official clients from.
 
-Format plugin: `openapi` (`plugins/openapi`), with `adapter.Datadog`.
+Kind: `openapi` (`plugins/openapi`), with `adapter.Datadog`.
 
 ## Why this source
 

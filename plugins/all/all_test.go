@@ -104,3 +104,17 @@ func TestEveryPluginIsASourceWithMetadata(t *testing.T) {
 		}
 	}
 }
+
+// Every registered source's kind is an answer of docs/which-kind.md, so the
+// guide sends every source somewhere.
+func TestWhichKindNamesEveryKind(t *testing.T) {
+	guide, err := os.ReadFile("../../docs/which-kind.md")
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, s := range plugin.Sources() {
+		if !strings.Contains(string(guide), "| `"+s.Source.Kind+"` |") {
+			t.Errorf("%s's kind, %s, isn't an answer in docs/which-kind.md", s.FullID(), s.Source.Kind)
+		}
+	}
+}

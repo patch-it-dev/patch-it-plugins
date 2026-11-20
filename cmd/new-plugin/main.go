@@ -1,23 +1,36 @@
-// Command new-plugin scaffolds a provider on one of the format plugins, so a
-// contributor only fills in what is specific to the provider. Run it from the
-// repo root:
+// Command new-plugin scaffolds a source of a provider on one of the kinds,
+// so a contributor only fills in what is specific to it. Run it from the
+// repo root (or `make new-plugin ARGS='...'`):
 //
-//	go run ./cmd/new-plugin --api acme --provider Acme --format openapi
+//	go run ./cmd/new-plugin --provider acme --name Acme --category devtools \
+//	    --homepage https://acme.example --source api --kind openapi \
+//	    --url https://github.com/acme/openapi --package pypi:acme
 //
-// It writes the provider's definition in the format's package (or the reader
-// package the format uses: plugins/openapi/adapter/, plugins/retirements/retire/,
-// plugins/migrationguide/sdkguide/), adds its
-// plugin.RegisterProvider block (the source's metadata) to plugins/<format>'s
-// init, a test (registered, golden, drop) over placeholder sources with an
-// empty golden file, a row in that testdata/README.md, and providers/<api>.md
-// from providers/_template.md. `go test ./...`
-// passes right after; every place to fill in says TODO(new-plugin).
+// A flag left out is asked for when the command runs in a terminal; a
+// second source of a registered provider needs only --provider, --source
+// and --kind (the provider's name, category and homepage come from the
+// registry). Run it once per source.
 //
-// It changes nothing when the id is taken (registered, or a file it would
-// write exists).
+// It writes the source's definition in the kind's package (or the reader
+// package the kind uses: plugins/openapi/adapter/, plugins/notices/retire/,
+// plugins/notices/feed/, plugins/migrationguide/sdkguide/,
+// plugins/migrationguide/members/), with the version wiring the kind needs
+// from it (an OpenAPI adapter's Versions; every other kind lists, reads and
+// extracts versions itself), adds the plugin.RegisterProvider block (the
+// provider and the source with their metadata) to the kind's init, a test
+// (registered, golden, drop) over placeholder sources with an empty golden
+// file, a row in that testdata/README.md, providers/<page>.md from
+// providers/_template.md, and the kind's import in plugins/all when it isn't
+// there. `go test ./...` passes right after; every place to fill in says
+// TODO(new-plugin).
+//
+// It changes nothing when the provider/source id or the first name is
+// taken, or a file it would write exists. The old flags (--api, --provider
+// as the name, --format, --source as the URL) still work for one release.
 package main
 
 import (
+	"bufio"
 	"bytes"
 	"flag"
 	"fmt"
@@ -42,31 +55,75 @@ import (
 
 // Options are the command's flags.
 type Options struct {
-	Root     string // the repo root
-	API      string // the plugin id: --api and every event's api
-	Provider string // whose API, SDK or package
-	Format   string // the format plugin
-	Layer    string // the source's layer (plugin.Layers()); "" is the format's default
-	Source   string // the provider's source URL; "" is a placeholder
-	Watches  string // what the source watches, in a few words
-	Page     string // the provider page, providers/<Page>.md; "" is the id. An existing page is shared, not rewritten
-	Today    time.Time
+	Root string // the repo root
+
+	// The provider.
+	ProviderID string // lowercase slug: "acme"
+	Provider   string // its name, as it writes it: "Acme"
+	Category   string // one of plugin.Categories(); a registered provider's is kept
+	Homepage   string // its own site
+
+	// The source.
+	SourceID string   // unique within the provider: "api", "python-sdk"
+	Kind     string   // the kind that reads it: plugins/<Kind>
+	Reader   string   // for a kind with several readers: "feed" for notices; "" is the kind's default
+	Layer    string   // the source's layer (plugin.Layers()); "" is the template's default
+	URLs     []string // the provider's pages or files it reads; none is a placeholder
+	Packages []string // the packages it covers, "pypi:acme"
+	Watches  string   // what the source watches, in a few words
+	Page     string   // the provider page, providers/<Page>.md; "" is the first name. An existing page is shared, not rewritten
+	API      string   // its first name, the old slug events carry in api; "" is <provider>-<source> (or the provider's id when they're the same)
+
+	// Deprecated: Format is a template ("openapi", "notices/feed") or an old
+	// format name ("feed"); Kind and Reader replace it. Source is the first
+	// URL (URLs replaces it).
+	Format string
+	Source string
+
+	Today time.Time
 	// Go runs the go command afterwards: the golden file from the placeholders
 	// (go test -update).
 	Go bool
 }
 
+// list is a repeatable flag.
+type list []string
+
+func (l *list) String() string     { return strings.Join(*l, ",") }
+func (l *list) Set(v string) error { *l = append(*l, v); return nil }
+
 func main() {
 	var o Options
+	var urls, packages list
+	var provider, source string
 	flag.StringVar(&o.Root, "root", ".", "the repo root")
-	flag.StringVar(&o.API, "api", "", "the plugin id, e.g. acme or acme-models (lowercase letters, digits, hyphens)")
-	flag.StringVar(&o.Provider, "provider", "", "the provider's name, e.g. Acme")
-	flag.StringVar(&o.Format, "format", "", "the format plugin: "+strings.Join(formatNames(), ", "))
-	flag.StringVar(&o.Layer, "layer", "", "the source's layer: api, sdk, package, runtime, ci, ai-models or infra (default: the format's)")
-	flag.StringVar(&o.Source, "source", "", "the provider's source URL (default: a placeholder to fill in)")
+	flag.StringVar(&provider, "provider", "", "the provider's id, e.g. acme (with --format: its name, the old meaning)")
+	flag.StringVar(&o.Provider, "name", "", "the provider's name as it writes it, e.g. Acme (a registered provider's is kept)")
+	flag.StringVar(&o.Category, "category", "", "the provider's category: "+strings.Join(categories(), ", "))
+	flag.StringVar(&o.Homepage, "homepage", "", "the provider's own site, https://...")
+	flag.StringVar(&source, "source", "", "the source's id within the provider, e.g. api or python-sdk (with --format: its URL, the old meaning)")
+	flag.StringVar(&o.Kind, "kind", "", "the kind that reads it: "+strings.Join(kindNames(), ", "))
+	flag.StringVar(&o.Reader, "reader", "", "the kind's reader, for a kind with several: "+readerHelp())
+	flag.StringVar(&o.Layer, "layer", "", "the source's layer: api, sdk, package, runtime, ci, ai-models or infra (default: the kind's)")
+	flag.Var(&urls, "url", "a page or file the source reads, https://... (repeatable; default: a placeholder to fill in)")
+	flag.Var(&packages, "package", "a package the source covers, ecosystem:name, e.g. pypi:acme or npm:@acme/sdk (repeatable)")
 	flag.StringVar(&o.Watches, "watches", "", "what it watches, in a few words (default: a placeholder)")
-	flag.StringVar(&o.Page, "page", "", "the provider page, providers/<page>.md (default: the --api id); one page per provider, so a second plugin of a provider names the existing page")
+	flag.StringVar(&o.Page, "page", "", "the provider page, providers/<page>.md (default: the first name); a second source of a provider may share the existing page")
+	flag.StringVar(&o.API, "api", "", "the source's first name, the slug events carry in api (default: <provider>-<source>)")
+	flag.StringVar(&o.Format, "format", "", "deprecated, for one release: the old format names ("+strings.Join(legacyNames(), ", ")+"), with --api, --provider <Name> and --source <URL>")
 	flag.Parse()
+	o.URLs, o.Packages = urls, packages
+	if o.Format != "" {
+		o.Provider, o.Source = provider, source
+	} else {
+		o.ProviderID, o.SourceID = provider, source
+		if term() {
+			if err := ask(&o, bufio.NewReader(os.Stdin), os.Stdout); err != nil {
+				fmt.Fprintln(os.Stderr, "new-plugin:", err)
+				os.Exit(1)
+			}
+		}
+	}
 	o.Today = time.Now().UTC()
 	o.Go = true
 	if err := Run(o, os.Stdout); err != nil {
@@ -75,6 +132,7 @@ func main() {
 	}
 }
 
+// formatNames are the templates: a kind, or kind/reader.
 func formatNames() []string {
 	var names []string
 	for n := range formats {
@@ -82,6 +140,77 @@ func formatNames() []string {
 	}
 	slices.Sort(names)
 	return names
+}
+
+// kindNames are the kinds a template scaffolds.
+func kindNames() []string {
+	var names []string
+	for n := range formats {
+		k, _, _ := strings.Cut(n, "/")
+		if !slices.Contains(names, k) {
+			names = append(names, k)
+		}
+	}
+	slices.Sort(names)
+	return names
+}
+
+func readerHelp() string {
+	var parts []string
+	for _, k := range kindNames() {
+		var rs []string
+		for _, n := range formatNames() {
+			if kind, r, ok := strings.Cut(n, "/"); ok && kind == k {
+				rs = append(rs, r)
+			}
+		}
+		if len(rs) > 0 {
+			parts = append(parts, k+": "+strings.Join(rs, "|")+" (default "+defaultReaders[k]+")")
+		}
+	}
+	return strings.Join(parts, "; ")
+}
+
+func legacyNames() []string {
+	var names []string
+	for n := range legacyFormats {
+		names = append(names, n)
+	}
+	slices.Sort(names)
+	return names
+}
+
+func categories() []string {
+	var out []string
+	for _, c := range plugin.Categories() {
+		out = append(out, string(c))
+	}
+	return out
+}
+
+// template is the template o asks for: from --kind and --reader, or the
+// deprecated --format.
+func (o Options) template() (string, error) {
+	if o.Format != "" {
+		if t, ok := legacyFormats[o.Format]; ok {
+			return t, nil
+		}
+		if _, ok := formats[o.Format]; ok {
+			return o.Format, nil
+		}
+		return "", fmt.Errorf("--format %q: want one of %s", o.Format, strings.Join(legacyNames(), ", "))
+	}
+	if !slices.Contains(kindNames(), o.Kind) {
+		return "", fmt.Errorf("--kind %q: want one of %s", o.Kind, strings.Join(kindNames(), ", "))
+	}
+	if _, ok := formats[o.Kind]; ok && o.Reader == "" {
+		return o.Kind, nil
+	}
+	r := cmp(o.Reader, defaultReaders[o.Kind])
+	if _, ok := formats[o.Kind+"/"+r]; !ok {
+		return "", fmt.Errorf("--reader %q: kind %s's readers are %s", o.Reader, o.Kind, readerHelp())
+	}
+	return o.Kind + "/" + r, nil
 }
 
 var (
@@ -94,17 +223,22 @@ var (
 
 // data is what the templates fill in.
 type data struct {
-	ID, Ident, Lower, Provider, Source, File, Format, Kind string
-	Slug                                                   string // the provider, lowercase: a model subject's provider
-	SourceFile, DropFile, PluginOf, Ingest, Drop           string
-	Imports                                                []string
+	ID, Ident, Lower, Provider, Source, File, Format, Kind, Module, PyPI string
+	Slug                                                                 string // the provider, lowercase: a model subject's provider
+	SourceFile, DropFile, PluginOf, Ingest, Drop                         string
+	Imports                                                              []string
 }
 
-// Run scaffolds the plugin, or changes nothing and says why.
+// Run scaffolds the source, or changes nothing and says why.
 func Run(o Options, out io.Writer) error {
-	f, ok := formats[o.Format]
-	if !ok {
-		return fmt.Errorf("--format %q: want one of %s", o.Format, strings.Join(formatNames(), ", "))
+	tmpl, err := o.template()
+	if err != nil {
+		return err
+	}
+	o.Format = tmpl
+	f := formats[tmpl]
+	if err := o.resolve(); err != nil {
+		return err
 	}
 	if !validID.MatchString(o.API) || o.API == "all" {
 		return fmt.Errorf("--api %q: want lowercase letters, digits and single hyphens, starting with a letter (acme, acme-models), and not \"all\"", o.API)
@@ -118,10 +252,28 @@ func Run(o Options, out io.Writer) error {
 	if !slices.Contains(plugin.Layers(), plugin.Layer(o.Layer)) {
 		return fmt.Errorf("--layer %q: want one of %v", o.Layer, plugin.Layers())
 	}
+	if o.Source == "" && len(o.URLs) > 0 {
+		o.Source = o.URLs[0]
+	}
 	if o.Source == "" {
 		o.Source = "https://example.com/TODO-" + o.API + "-source"
-	} else if !validURL.MatchString(o.Source) {
-		return fmt.Errorf("--source %q: want an https URL", o.Source)
+	}
+	if len(o.URLs) == 0 {
+		o.URLs = []string{o.Source}
+	}
+	for _, u := range o.URLs {
+		if !validURL.MatchString(u) {
+			return fmt.Errorf("--url %q: want an https URL", u)
+		}
+	}
+	if len(o.Packages) == 0 && f.kind == "apisurface" {
+		o.Packages = []string{"pypi:" + o.ProviderID}
+	}
+	for _, p := range o.Packages {
+		eco, name, ok := strings.Cut(p, ":")
+		if !ok || !slices.Contains(plugin.Ecosystems(), eco) || name == "" || !cellSafe.MatchString(name) || strings.ContainsAny(name, " \t") {
+			return fmt.Errorf("--package %q: want ecosystem:name, the ecosystem one of %v", p, plugin.Ecosystems())
+		}
 	}
 	if o.Watches == "" {
 		o.Watches = "TODO: what it watches, in a few words"
@@ -140,10 +292,20 @@ func Run(o Options, out io.Writer) error {
 
 	// Taken? Check everything before writing anything.
 	if _, ok := plugin.Lookup(o.API); ok {
-		return fmt.Errorf("a plugin named %q is already registered: pick another --api", o.API)
+		return fmt.Errorf("a source named %q is already registered: pick another --api (the first name)", o.API)
+	}
+	if _, ok := plugin.LookupSource(o.ProviderID + "/" + o.SourceID); ok {
+		return fmt.Errorf("source %s/%s is already registered: pick another --source", o.ProviderID, o.SourceID)
 	}
 
-	d := data{ID: o.API, Provider: o.Provider, Source: o.Source, Format: o.Format, Kind: f.kind}
+	d := data{ID: o.API, Provider: o.Provider, Source: o.Source, Format: o.Format, Kind: f.kind, PyPI: o.API}
+	for _, p := range o.Packages {
+		if name, ok := strings.CutPrefix(p, "pypi:"); ok {
+			d.PyPI = name
+			break
+		}
+	}
+	d.Module = strings.ReplaceAll(strings.ToLower(d.PyPI), "-", "_")
 	d.Ident = ident(o.API)
 	d.Lower = string(unicode.ToLower(rune(d.Ident[0]))) + d.Ident[1:]
 	d.File = fileBase(o.API)
@@ -207,6 +369,11 @@ func Run(o Options, out io.Writer) error {
 		return err
 	}
 	edits := map[string][]byte{mainFile: registered}
+	if all, ok, err := importInAll(o.Root, f.kind); err != nil {
+		return err
+	} else if ok {
+		edits[filepath.Join("plugins", "all", "all.go")] = all
+	}
 	if m := f.mapEntry; m != nil {
 		if edits[m.file], err = addMapEntry(filepath.Join(o.Root, m.file), m.varName, fill(m.entry, d)); err != nil {
 			return err
@@ -240,7 +407,7 @@ func Run(o Options, out io.Writer) error {
 		paths = append(paths, path)
 	}
 	slices.Sort(paths)
-	fmt.Fprintf(out, "Scaffolded %s (%s, format %s):\n", o.API, o.Provider, o.Format)
+	fmt.Fprintf(out, "Scaffolded %s/%s (%s, first name %s, kind %s):\n", o.ProviderID, o.SourceID, o.Provider, o.API, o.Format)
 	for _, p := range paths {
 		fmt.Fprintln(out, "  "+p)
 	}
@@ -360,30 +527,42 @@ func declNames(decl ast.Decl) []string {
 	return nil
 }
 
-// providerBlock turns a format's "plugin.Register(<plugin>)" line into the
-// provider's registration with its metadata: a provider already registered
-// (a second source of Algolia) keeps its id, category and homepage; a new one
-// gets placeholders that say TODO(new-plugin).
+// providerBlock turns a template's "plugin.Register(<plugin>)" line into
+// the provider's registration with its metadata: a provider already
+// registered (a second source of Algolia) keeps its name, category and
+// homepage; a new one gets what the flags say, or placeholders that say
+// TODO(new-plugin).
 func providerBlock(o Options, d data, line string) string {
 	expr := strings.TrimSuffix(strings.TrimPrefix(line, "plugin.Register("), ")")
-	id, category, homepage := d.Slug, "plugin.CategoryDevTools, // TODO(new-plugin): the provider's category, one of plugin.Categories()\n\t\t", `"https://example.com/TODO-`+d.Slug+`-homepage", // TODO(new-plugin): the provider's own site`+"\n\t\t"
-	for _, p := range plugin.Providers() {
-		if strings.EqualFold(p.Name, o.Provider) {
-			id, category, homepage = p.ID, fmt.Sprintf("%q,", p.Category), fmt.Sprintf("%q,", p.Homepage)
-			category = "plugin.Category(" + strings.TrimSuffix(category, ",") + "),"
-		}
+	category := "plugin.CategoryDevTools, // TODO(new-plugin): the provider's category, one of plugin.Categories()\n\t\t"
+	if o.Category != "" {
+		category = fmt.Sprintf("plugin.Category(%q),", o.Category)
 	}
-	source := strings.TrimPrefix(o.API, id+"-")
+	homepage := `"https://example.com/TODO-` + o.ProviderID + `-homepage", // TODO(new-plugin): the provider's own site` + "\n\t\t"
+	if o.Homepage != "" {
+		homepage = fmt.Sprintf("%q,", o.Homepage)
+	}
+	var urls, pkgs []string
+	for _, u := range o.URLs {
+		urls = append(urls, fmt.Sprintf("%q", u))
+	}
+	for _, p := range o.Packages {
+		pkgs = append(pkgs, fmt.Sprintf("%q", p))
+	}
+	packages := ""
+	if len(pkgs) > 0 {
+		packages = fmt.Sprintf("\n\t\t\tPackages: []string{%s},", strings.Join(pkgs, ", "))
+	}
 	return fmt.Sprintf(`plugin.RegisterProvider(plugin.Provider{
 		ID: %q, Name: %q,
 		Category: %s Homepage: %s
 		Sources: []plugin.Source{{
 			ID: %q, Layer: %q, Page: %q,
 			Watches: %q,
-			URLs:    []string{%q},
+			URLs:    []string{%s},%s
 			Plugin:  %s,
 		}},
-	})`, id, o.Provider, category, homepage, source, o.Layer, "providers/"+o.Page+".md", o.Watches, o.Source, expr)
+	})`, o.ProviderID, o.Provider, category, homepage, o.SourceID, o.Layer, "providers/"+o.Page+".md", o.Watches, strings.Join(urls, ", "), packages, expr)
 }
 
 // register adds line at the end of the init func that registers pkgDir's

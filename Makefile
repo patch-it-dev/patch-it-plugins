@@ -6,6 +6,8 @@
 #   make check                       everything below, in CI's order
 #   make check PATCH_IT=../patch-it  also compare contract/fixtures/ with patch-it's
 #   make plugins                     print the providers and sources from the registry (JSON)
+#   make new-plugin ARGS='--provider acme --source api --kind openapi'
+#                                    scaffold a source (cmd/new-plugin; asks for what's missing)
 #
 # The `::error` lines are GitHub annotations; locally they're plain messages.
 
@@ -17,7 +19,7 @@ PYTHON ?= python3
 MODULE  := github.com/patch-it-dev/patch-it-plugins
 ALLOWED := ^($(MODULE)(/|$$)|gopkg\.in/yaml\.v3$$)
 
-.PHONY: check tidy build fmt vet imports nethttp test todos leak-guard contract plugins
+.PHONY: check tidy build fmt vet imports nethttp test todos leak-guard contract plugins new-plugin
 
 check: tidy build fmt vet imports nethttp test todos leak-guard contract
 	@echo "make check: all passed"
@@ -90,3 +92,8 @@ contract:
 # Release workflow attaches it to each release as plugins.json.
 plugins:
 	@$(GO) run ./cmd/list-plugins
+
+# Scaffold a provider's source on a kind: cmd/new-plugin with ARGS. In a
+# terminal it asks for whatever ARGS leaves out.
+new-plugin:
+	$(GO) run ./cmd/new-plugin $(ARGS)

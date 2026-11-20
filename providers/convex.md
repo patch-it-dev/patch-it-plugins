@@ -4,7 +4,7 @@
 
 The Convex Deployment API (`{deployment-url}/api/v1`, the platform API for managing one deployment: environment variables, log streams and integrations, usage limits, data sync): operations Convex marks deprecated, and removals of operations it had marked deprecated, between two versions of the API's OpenAPI spec.
 
-Format plugin: `openapi` (`plugins/openapi`), with `adapter.Convex`.
+Kind: `openapi` (`plugins/openapi`), with `adapter.Convex`.
 
 ## Why this source
 

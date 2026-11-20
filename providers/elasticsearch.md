@@ -4,7 +4,7 @@
 
 The Elasticsearch REST API, minor version by minor version: operations Elastic marks deprecated, and removals of operations it had marked deprecated, between two versions of the OpenAPI spec generated from Elastic's API specification.
 
-Format plugin: `openapi` (`plugins/openapi`), with `adapter.Elasticsearch`.
+Kind: `openapi` (`plugins/openapi`), with `adapter.Elasticsearch`.
 
 ## Why this source
 

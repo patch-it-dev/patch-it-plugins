@@ -4,7 +4,7 @@
 
 Redis's command surface: commands that disappear entirely from `redis-doc`'s own catalog of every command, between two snapshots of it.
 
-Format plugin: `catalog` (`plugins/catalog`), new in this change — no existing format plugin reads a flat JSON catalog keyed by name; see "Alternatives considered" for the formats checked and ruled out first.
+Kind: `catalog` (`plugins/catalog`), new in this change — no existing format plugin reads a flat JSON catalog keyed by name; see "Alternatives considered" for the formats checked and ruled out first.
 
 ## Why this source
 

@@ -4,7 +4,7 @@
 
 The Supabase Management API (`api.supabase.com/v1`): operations Supabase marks deprecated, and removals of operations it had marked deprecated, between two versions of the API's OpenAPI spec.
 
-Format plugin: `openapi` (`plugins/openapi`), with `adapter.Supabase`.
+Kind: `openapi` (`plugins/openapi`), with `adapter.Supabase`.
 
 ## Why this source
 

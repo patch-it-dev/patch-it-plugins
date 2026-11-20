@@ -4,7 +4,7 @@
 
 Stripe's REST API, release by release: endpoints, parameters, fields, schemas and enum values that are removed, renamed, retyped or added between two versions of Stripe's own OpenAPI spec. Breaking events carry Stripe's own explanation from its API changelog as the migration hint when the changelog has one.
 
-Format plugin: `openapi` (`plugins/openapi`), with `adapter.Stripe` and the changelog hint source in `hint/`.
+Kind: `openapi` (`plugins/openapi`), with `adapter.Stripe` and the changelog hint source in `hint/`.
 
 ## Why this source
 

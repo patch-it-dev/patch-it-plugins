@@ -4,7 +4,7 @@
 
 GitLab's REST API (`/api/v4`) between releases, **request side only**: endpoints removed, and parameters callers send that are removed, renamed or newly required.
 
-Format plugin: `openapi` (`plugins/openapi`), with `adapter.GitLab` and a request-side filter (`openapi.Plugin.Keep`).
+Kind: `openapi` (`plugins/openapi`), with `adapter.GitLab` and a request-side filter (`openapi.Plugin.Keep`).
 
 ## Why this source
 

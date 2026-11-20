@@ -29,8 +29,27 @@ type mapEntry struct {
 
 const todo = "TODO(new-plugin)"
 
+// legacyFormats are the old --format names, each the template it is now.
+var legacyFormats = map[string]string{
+	"feed":           "notices/feed",
+	"retirements":    "notices/deprecations",
+	"migrationguide": "migrationguide/sdk",
+	"removedmembers": "migrationguide/members",
+	"changelog":      "changelog/markdown",
+	"apichangelog":   "changelog/json",
+	"catalog":        "catalog",
+	"openapi":        "openapi",
+}
+
+// defaultReaders are the reader --kind picks when --reader is left out.
+var defaultReaders = map[string]string{
+	"notices":        "deprecations",
+	"migrationguide": "sdk",
+	"changelog":      "markdown",
+}
+
 var formats = map[string]formatSpec{
-	"feed": {
+	"notices/feed": {
 		kind:   "notices",
 		layer:  "api",
 		defDir: "plugins/notices/feed",
@@ -81,7 +100,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 		imports: []string{"github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/plugins/notices/feed"},
 	},
 
-	"retirements": {
+	"notices/deprecations": {
 		kind:   "notices",
 		layer:  "ai-models",
 		defDir: "plugins/notices/retire",
@@ -155,7 +174,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 		imports: []string{"encoding/json", "strings", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/plugins/notices/retire"},
 	},
 
-	"migrationguide": {
+	"migrationguide/sdk": {
 		kind:   "migrationguide",
 		layer:  "sdk",
 		defDir: "plugins/migrationguide/sdkguide",
@@ -222,7 +241,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 		imports: []string{"encoding/json", "strings", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide/sdkguide"},
 	},
 
-	"removedmembers": {
+	"migrationguide/members": {
 		kind:   "migrationguide",
 		layer:  "package",
 		defDir: "plugins/migrationguide/members",
@@ -298,7 +317,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 		imports: []string{"slices", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide/members"},
 	},
 
-	"changelog": {
+	"changelog/markdown": {
 		kind:   "changelog",
 		layer:  "package",
 		defDir: "plugins/changelog",
@@ -340,7 +359,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 		imports: []string{"github.com/patch-it-dev/patch-it-plugins/core/event"},
 	},
 
-	"apichangelog": {
+	"changelog/json": {
 		kind:   "changelog",
 		layer:  "api",
 		defDir: "plugins/changelog",
@@ -437,6 +456,8 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 import (
 	"context"
 	"fmt"
+
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 )
 
 // {{.Ident}} adapts {{.Provider}}'s OpenAPI spec for the openapi plugin.
@@ -459,6 +480,14 @@ func ({{.Ident}}) LatestTag(ctx context.Context) (string, error) {
 // Fetch downloads the spec at tag.
 func ({{.Ident}}) Fetch(ctx context.Context, tag string) (Spec, error) {
 	return Spec{}, fmt.Errorf("{{.ID}}: Fetch isn't written yet (plugins/openapi/adapter/{{.File}}.go)")
+}
+
+// Versions are every release of the spec, oldest first, each with the Ref
+// Fetch takes: what lets every pair of releases be diffed, not only the
+// newest. ` + todo + `: list them with core/versions (GitHubReleases,
+// GitHubCommits, GitHubTags), as versions.go does for the other adapters.
+func ({{.Ident}}) Versions(ctx context.Context) ([]plugin.Version, error) {
+	return nil, fmt.Errorf("{{.ID}}: Versions isn't written yet (plugins/openapi/adapter/{{.File}}.go)")
 }
 `,
 		register: `plugin.Register(Plugin{Adapter: adapter.{{.Ident}}{}})`,
@@ -501,7 +530,89 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 }
 `,
 		imports: []string{"context", "fmt", "os", "github.com/patch-it-dev/patch-it-plugins/plugins/openapi/adapter", "github.com/patch-it-dev/patch-it-plugins/core/event"},
-		next:    "Write LatestTag and Fetch in plugins/openapi/adapter/{{.File}}.go (fetch.Get only); add Diff/Keep to the Register line if the spec needs them (see vercel.go).",
+		next:    "Write LatestTag, Fetch and Versions in plugins/openapi/adapter/{{.File}}.go (fetch.Get only); add Diff/Keep to the Register line if the spec needs them (see vercel.go).",
+	},
+	"apisurface": {
+		kind:   "apisurface",
+		layer:  "sdk",
+		defDir: "plugins/apisurface",
+		def: `package apisurface
+
+// {{.Ident}} is {{.Provider}}'s package on PyPI, its public API read from each
+// release's wheel.
+//
+// ` + todo + `: check the name on PyPI and the top-level module code
+// imports (from --package, or guessed). Say
+// what you checked, with the date: that the wheel holds the package's .py
+// (or .pyi) files.
+var {{.Ident}} = Package{Name: "{{.PyPI}}", Ecosystem: "pypi", Module: "{{.Module}}"}
+`,
+		register: `plugin.Register(Plugin{Package: {{.Ident}}})`,
+		pluginOf: `Plugin{Package: {{.Ident}}}`,
+		fixtures: map[string]string{
+			"{{.File}}-old.py": "# ` + todo + `: a placeholder for the older release's module. Save the real release's wheel instead (see apisurface_test.go).\ndef placeholder(a, b=1):\n    pass\n",
+			"{{.File}}-new.py": "# ` + todo + `: a placeholder for the newer release's module: it drops b, one event.\ndef placeholder(a):\n    pass\n",
+		},
+		// The drop test's newer release: the older one again, nothing gone.
+		dropFile: "# ` + todo + `: a placeholder: a release that only adds or changes private names.\ndef placeholder(a, b=1):\n    pass\n\ndef _private(x):\n    pass\n",
+		source:   "{{.File}}-new.py",
+		ingest: `// {{.Lower}}Ingest compares two releases: 1.0.0, a wheel holding
+// testdata/{{.File}}-old.py as {{.Module}}/__init__.py, and 1.1.0, one
+// holding file. The wheels are built here so the placeholders are text.
+// ` + todo + `: save the two real wheels (trimmed if they're large, as
+// apisurface_test.go's are) and serve them instead.
+func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
+	t.Helper()
+	wheel := func(src string) []byte {
+		var buf bytes.Buffer
+		zw := zip.NewWriter(&buf)
+		w, err := zw.Create("{{.Module}}/__init__.py")
+		if err != nil {
+			t.Fatal(err)
+		}
+		w.Write(kittest.Read(t, src))
+		if err := zw.Close(); err != nil {
+			t.Fatal(err)
+		}
+		return buf.Bytes()
+	}
+	files := map[string][]byte{
+		"https://pypi.org/pypi/{{.PyPI}}/json":       []byte(` + "`" + `{"releases": {"1.0.0": [{"upload_time_iso_8601": "2026-01-01T00:00:00Z"}], "1.1.0": [{"upload_time_iso_8601": "2026-02-01T00:00:00Z"}]}}` + "`" + `),
+		"https://pypi.org/pypi/{{.PyPI}}/1.0.0/json": []byte(` + "`" + `{"urls": [{"packagetype": "bdist_wheel", "filename": "{{.Module}}-1.0.0-py3-none-any.whl", "url": "https://example.com/{{.Module}}-1.0.0-py3-none-any.whl"}]}` + "`" + `),
+		"https://pypi.org/pypi/{{.PyPI}}/1.1.0/json": []byte(` + "`" + `{"urls": [{"packagetype": "bdist_wheel", "filename": "{{.Module}}-1.1.0-py3-none-any.whl", "url": "https://example.com/{{.Module}}-1.1.0-py3-none-any.whl"}]}` + "`" + `),
+		"https://example.com/{{.Module}}-1.0.0-py3-none-any.whl": wheel("testdata/{{.File}}-old.py"),
+		"https://example.com/{{.Module}}-1.1.0-py3-none-any.whl": wheel(file),
+	}
+	env := kittest.Env(t, nil)
+	env.Get = func(_ context.Context, url string) ([]byte, error) {
+		if b, ok := files[url]; ok {
+			return b, nil
+		}
+		t.Errorf("fetched %s, which the test didn't save", url)
+		return nil, fmt.Errorf("no saved copy of %s", url)
+	}
+	ctx, p := context.Background(), Plugin{Package: {{.Ident}}}
+	vs, err := p.ListVersions(ctx, env)
+	if err != nil || len(vs) != 2 {
+		t.Fatalf("versions %v: %v", vs, err)
+	}
+	from, err := p.ReadAt(ctx, env, vs[0])
+	if err != nil {
+		t.Fatal(err)
+	}
+	to, err := p.ReadAt(ctx, env, vs[1])
+	if err != nil {
+		t.Fatal(err)
+	}
+	res, err := p.Extract(ctx, env, from, to)
+	if err != nil || len(res.Rejected) > 0 {
+		t.Fatalf("%v %v", err, res.Rejected)
+	}
+	return res.Events
+}
+`,
+		imports: []string{"archive/zip", "bytes", "context", "fmt", "github.com/patch-it-dev/patch-it-plugins/core/event"},
+		next:    "Save two real wheels of the package and serve them in {{.Lower}}Ingest; the kind reads their .py files, never runs them.",
 	},
 }
 

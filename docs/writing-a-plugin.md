@@ -1,29 +1,34 @@
 # Writing a plugin
 
-A **provider** (Stripe, OpenAI, Kubernetes…) has a **category** and one or more **sources**. A source is one place the provider announces changes; it is read by one **kind** of plugin (the `plugins/<kind>` package: `openapi`, `changelog`, `feed`, …), covers one **layer** (`api`, `sdk`, `package`, `runtime`, `ci`, `ai-models`, `infra`), and has **versions**. Its id is `provider/source` (`stripe/api`, `algolia/search-api`). This guide walks through adding a source, from picking it to the PR. The rules are in [CONTRIBUTING.md](../CONTRIBUTING.md); this is the how-to. How the pieces fit: [how-it-works.md](how-it-works.md).
+A **provider** (Stripe, OpenAI, Kubernetes…) has a **category** and one or more **sources**. A source is one place the provider announces changes; it is read by one **kind** of plugin (the `plugins/<kind>` package: `openapi`, `changelog`, `notices`, `migrationguide`, `catalog`, `apisurface`), covers one **layer** (`api`, `sdk`, `package`, `runtime`, `ci`, `ai-models`, `infra`), and has **versions**. Its id is `provider/source` (`stripe/api`, `algolia/search-api`). This guide walks through adding a source, from picking it to the PR. The rules are in [CONTRIBUTING.md](../CONTRIBUTING.md); this is the how-to. How the pieces fit: [how-it-works.md](how-it-works.md).
 
-**Most new sources don't need new code.** They are a new entry for an existing kind: a new `changelog.File`, a new `retire.Page`, a new `feed.Feed` reader, a new OpenAPI adapter. Write a new kind only when none of them reads your source. There is no "Kubernetes kind" or "Terraform kind": Kubernetes API removals are a migration-guide or notices source, a client SDK is a package source, a Terraform provider is a changelog source.
+**Most new sources don't need new code.** They are a new entry for an existing kind: a new `changelog.File`, a new `retire.Page`, a new `feed.Feed` reader, a new OpenAPI adapter, a new `apisurface.Package`. Write a new kind only when none of them reads your source. There is no "Kubernetes kind" or "Terraform kind": Kubernetes API removals are a migration-guide or notices source, a client SDK is a package source, a Terraform provider is a changelog source.
 
 ## 1. Scaffold it with `new-plugin`
 
-Pick the source and the kind that reads it (steps 2 and 3), then let the starter write everything around the provider:
+Pick the source and the kind that reads it (steps 2 and 3, and [which kind fits my provider?](which-kind.md)), then let the starter write everything around it:
 
 ```sh
-go run ./cmd/new-plugin --api acme --provider Acme --format openapi
-# --format: openapi, retirements and feed (notices sources), migrationguide, removedmembers (a migrationguide source),
-#           changelog, apichangelog (a JSON changelog source), catalog
-# optional: --source https://... (the provider's source), --watches "...", --layer api|sdk|package|runtime|ci|ai-models|infra,
-#           --page acme (a second source of a provider shares its page in providers/)
+make new-plugin ARGS='--provider acme --name Acme --category devtools --homepage https://acme.example \
+  --source api --kind openapi --url https://github.com/acme/openapi --package pypi:acme --package npm:acme'
+# the same: go run ./cmd/new-plugin --provider acme ...
+# --kind: openapi, changelog, notices, migrationguide, catalog, apisurface
+# --reader, for a kind with several: changelog markdown|json, notices deprecations|feed, migrationguide sdk|members
+# optional: --layer api|sdk|package|runtime|ci|ai-models|infra (default: the kind's), --watches "...",
+#           --page acme (share an existing providers/ page), --api acme-api (the first name; default <provider>-<source>)
 ```
+
+Run in a terminal without the flags, it asks for them: the provider's id, then (for a new provider) its name, category and homepage, then the source's id, kind, reader, layer, URLs, packages and what it watches. A second source of a registered provider needs only `--provider`, `--source` and `--kind`: the name, category and homepage come from the registry. One run adds one source; run it again for the next.
 
 It writes, and lists:
 
-- the provider's definition, in the package the format reads it from (`plugins/openapi/adapter/`, `plugins/notices/retire/`, `plugins/notices/feed/`, `plugins/migrationguide/sdkguide/` or `plugins/<format>/`), and its `plugin.RegisterProvider` block (the provider and the source with their metadata) in that format's `init` (plus the `core/migrate/` map entry that the deprecations-page and SDK-guide readers need);
-- `plugins/<format>/<api>_test.go`: the registration test, a golden test and a pinned drop test, over placeholder sources in `testdata/`, with the golden file written from them;
+- the source's definition in the package its kind reads it from (`plugins/openapi/adapter/`, `plugins/notices/retire/`, `plugins/notices/feed/`, `plugins/migrationguide/sdkguide/`, `plugins/migrationguide/members/` or `plugins/<kind>/`), with the version wiring the kind needs from it: an OpenAPI adapter's `LatestTag`, `Fetch` and `Versions` to write; every other kind lists, reads and extracts versions itself;
+- its `plugin.RegisterProvider` block (the provider and the source with every metadata field, packages included) in the kind's `init` (plus the `core/migrate/` map entry that the deprecations-page and SDK-guide readers need), and the kind's import in `plugins/all` if it's a new kind;
+- `plugins/<kind>/<first name>_test.go`: the registration test, a golden test and a pinned drop test, over placeholder sources in `testdata/`, with the golden file written from them;
 - a row per saved file in that `testdata/README.md` (URL, date, license, quote to fill in);
-- `providers/<api>.md` from the template (or nothing, with `--page`, when the provider already has one);
+- `providers/<first name>.md` from the template (or nothing, with `--page`, when the provider already has one);
 
-`go test ./...` passes right after; every place to fill in says `TODO(new-plugin)` (`grep -rn 'TODO(new-plugin)' .`), and `make check` (its `todos` step, also in CI_go) fails until none is left. It refuses an id that's taken (registered, or a file it would write exists) and then changes nothing. The steps below are what you fill in.
+`go test ./...` passes right after; every place to fill in says `TODO(new-plugin)` (`grep -rn 'TODO(new-plugin)' .`), and `make check` (its `todos` step, also in CI_go) fails until none is left. It refuses a `provider/source` id or a first name that's taken, or a file it would write that exists, and then changes nothing. The old flags (`--api acme --provider Acme --format feed --source <URL>`) still work for one release.
 
 ## 2. Pick the source
 
@@ -73,10 +78,12 @@ Write the numbers on the provider page, as `providers/vercel.md` does for its sp
 
 ## 3. Pick the kind
 
+[Which kind fits my provider?](which-kind.md) asks the questions; the table says what each kind reads.
+
 | Kind | Reads | Add a source by |
 |---|---|---|
 | `plugins/openapi` | An OpenAPI spec per release, diffed with `core/diff/` and turned into events by `core/normalize/` | An `adapter.Adapter` in `plugins/openapi/adapter/` (latest tag, fetch a tag's spec; `Versions` to list every release) and a `plugin.RegisterProvider` block |
-| `plugins/notices` | A live page of dated notices: a model provider's deprecations page (a table of date, model, replacement), a vendor's RSS or Atom feed, a vendor's table of whole API version ranges and their support status | A `retire.Page` in `plugins/notices/retire/providers.go`, a `feed.Feed` with a reader for that vendor's entries in `plugins/notices/feed/`, or an `eol.Page` in `plugins/notices/eol/` (`--format` doesn't scaffold this one yet) |
+| `plugins/notices` | A live page of dated notices: a model provider's deprecations page (a table of date, model, replacement), a vendor's RSS or Atom feed, a vendor's table of whole API version ranges and their support status | A `retire.Page` in `plugins/notices/retire/providers.go`, a `feed.Feed` with a reader for that vendor's entries in `plugins/notices/feed/`, or an `eol.Page` in `plugins/notices/eol/` (`new-plugin` doesn't scaffold this reader yet) |
 | `plugins/migrationguide` | A guide that lists what a release removed, at the release's tag: an SDK's migration guide per new major (removed request parameters), or a package's table of removed members (an RST simple table or a Markdown pipe table) | A `sdkguide.Guide` in `plugins/migrationguide/sdkguide/`, or a `members.Guide` in `plugins/migrationguide/members/` |
 | `plugins/changelog` | A changelog: a `CHANGELOG.md` / `CHANGES.rst` / `HISTORY.rst`, each release's section at its tag (releases from PyPI or npm), or a vendor's machine-readable API changelog in JSON (per day, endpoint and API version, oasdiff change codes), commit by commit | A `changelog.File` with its `TagPrefix`, or a `changelog.Log` |
 | `plugins/catalog` | A flat JSON catalog, one entry per name, with no release tags to pin — a commit SHA stands in | A `catalog.Catalog`, diffed between two snapshots for names that disappeared entirely |

@@ -4,7 +4,7 @@
 
 The Appwrite REST API as a server SDK calls it (the operations an Appwrite server SDK, in a repo's backend code, can call): operations Appwrite marks deprecated between two commits of its OpenAPI spec. SDK method renames that don't deprecate the route are left out, and so are removals.
 
-Format plugin: `openapi` (`plugins/openapi`), with `adapter.Appwrite`.
+Kind: `openapi` (`plugins/openapi`), with `adapter.Appwrite`.
 
 ## Why this source
 

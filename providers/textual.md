@@ -4,7 +4,7 @@
 
 Removals and breaking changes in each Textual release, read from that release's section of its changelog: symbols removed (`App.dark`, …) or renamed. One `package_release` event per changelog bullet the plugin can read with certainty. The releases are listed from PyPI (final releases only) and each is read at its tag (`v<version>`); 0.86.0 is the release the golden test pins.
 
-Format plugin: `changelog` (`plugins/changelog`).
+Kind: `changelog` (`plugins/changelog`).
 
 ## Why this source
 

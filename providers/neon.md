@@ -4,7 +4,7 @@
 
 The Neon API (`console.neon.tech/api/v2`), the management API for Neon projects, branches, computes, databases and roles: operations Neon marks deprecated, and removals of operations it had marked deprecated, between two versions of the API's OpenAPI spec.
 
-Format plugin: `openapi` (`plugins/openapi`), with `adapter.Neon`.
+Kind: `openapi` (`plugins/openapi`), with `adapter.Neon`.
 
 ## Why this source
 

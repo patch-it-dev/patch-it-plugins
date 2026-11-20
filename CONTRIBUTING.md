@@ -2,7 +2,7 @@
 
 Thanks for helping patch-it watch more APIs. This file is the rulebook; [docs/writing-a-plugin.md](docs/writing-a-plugin.md) is the how-to.
 
-**Start a new provider with the starter:** `go run ./cmd/new-plugin --api <id> --provider <Name> --format <format>` writes the definition, its registration, a test over placeholder sources, the testdata rows, the provider page, and the source's metadata in its `RegisterProvider` block; you fill in the `TODO(new-plugin)`s ([how](docs/writing-a-plugin.md#1-scaffold-it-with-new-plugin)).
+**Start a new provider with the starter:** `make new-plugin ARGS='--provider <id> --source <id> --kind <kind>'` ([which kind?](docs/which-kind.md); in a terminal it asks for the rest) writes the definition, its registration, a test over placeholder sources, the testdata rows, the provider page, and the source's metadata in its `RegisterProvider` block; you fill in the `TODO(new-plugin)`s ([how](docs/writing-a-plugin.md#1-scaffold-it-with-new-plugin)).
 
 ## The rules
 
@@ -46,14 +46,14 @@ That adds `Signed-off-by: Your Name <you@example.com>`, matching the commit's au
 
 Releases are tags on `main` (`v0.x.y`), made only by the **Release** workflow. Nothing is tagged on push, and agents never tag or release.
 
-**Automatic, twice a week:** every Monday and Thursday at 14:00 UTC the workflow makes a **patch** release, but only if something was merged since the last tag; otherwise it does nothing. If the merges add a **new format plugin** (a new `plugins/<format>/` directory), the scheduled run skips with a warning instead: run it by hand with **minor**. So a merged plugin reaches patch-it's hosted ingestion service within a few days.
+**Automatic, twice a week:** every Monday and Thursday at 14:00 UTC the workflow makes a **patch** release, but only if something was merged since the last tag; otherwise it does nothing. If the merges add a **new kind** (a new `plugins/<kind>/` directory), the scheduled run skips with a warning instead: run it by hand with **minor**. So a merged plugin reaches patch-it's hosted ingestion service within a few days.
 
 **By hand, any time** (an urgent fix, or a **minor** release):
 
 1. Merge the PRs that should go out.
 2. **Actions → Release → Run workflow** (branch `main`), pick the bump:
-   - **patch** (`v0.4.1` → `v0.4.2`): fixes, a new provider on an existing format plugin, docs;
-   - **minor** (`v0.4.1` → `v0.5.0`): a new format plugin, new exported API, anything users should read about.
+   - **patch** (`v0.4.1` → `v0.4.2`): fixes, a new source on an existing kind, docs;
+   - **minor** (`v0.4.1` → `v0.5.0`): a new kind, new exported API, anything users should read about.
 3. The workflow refuses if `main`'s HEAD is already tagged, then runs, on that exact commit, the internal-names check over every file, gitleaks over the whole history, `go build`, `go vet`, `gofmt` and `go test -race`. Any failure stops it before a tag exists.
 4. When everything passes it pushes an annotated tag and publishes a GitHub release with generated notes (grouped by the PR's label: `plugin`/`enhancement`, `bug`, `documentation`; see [`.github/release.yml`](.github/release.yml)). The release carries one asset, `plugins.json`: the list of providers and sources printed from the registry at that tag (`go run ./cmd/list-plugins`). It is the only published list; nothing in the repo keeps one, and docs.patch-it.dev reads `https://github.com/patch-it-dev/patch-it-plugins/releases/latest/download/plugins.json`.
 

@@ -4,7 +4,7 @@
 
 Sentry's public REST API (`https://{region}.sentry.io/api/0/...`): operations Sentry deprecates, between releases of its OpenAPI spec. Most of them it deprecates in the operation's description, not with the `deprecated` flag.
 
-Format plugin: `openapi` (`plugins/openapi`), with `adapter.Sentry`.
+Kind: `openapi` (`plugins/openapi`), with `adapter.Sentry`.
 
 ## Why this source
 

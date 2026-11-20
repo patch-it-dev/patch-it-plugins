@@ -4,7 +4,7 @@
 
 Vercel's REST API, release by release: operations Vercel marks deprecated, and deprecated operations it then removes, between two versions of the OpenAPI spec Vercel generates its official SDK (`@vercel/sdk`) from.
 
-Format plugin: `openapi` (`plugins/openapi`), with `adapter.Vercel`.
+Kind: `openapi` (`plugins/openapi`), with `adapter.Vercel`.
 
 ## Why this source
 
