@@ -1,0 +1,49 @@
+openapi: 3.1.0
+info:
+  title: Flagsmith API
+  version: v1
+  description: 'Flagsmith''s Core and SDK APIs. Check out <a href=''https://docs.flagsmith.com''>Flagsmith documentation</a>.'
+  contact:
+    email: support@flagsmith.com
+  license:
+    name: BSD License
+    identifier: BSD-3-Clause
+servers:
+  - url: 'https://api.flagsmith.com'
+    description: Flagsmith API
+paths: {}
+components:
+  schemas:
+    FeatureValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/FeatureValueTypeEnum'
+        value:
+          type: string
+      required:
+        - type
+        - value
+    FeatureValueTypeEnum:
+      description: |-
+        * `integer` - integer
+        * `string` - string
+        * `boolean` - boolean
+      type: string
+      enum:
+        - integer
+        - string
+        - boolean
+    MultivariateValue:
+      type: object
+      properties:
+        multivariate_feature_option:
+          type: integer
+        percentage_allocation:
+          type: number
+          format: double
+          maximum: 100
+          minimum: 0
+      required:
+        - multivariate_feature_option
+        - percentage_allocation

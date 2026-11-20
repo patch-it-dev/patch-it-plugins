@@ -63,6 +63,12 @@ func init() {
 	// Operation deprecations only, SDK method renames left out: see
 	// appwrite.go.
 	plugin.Register(Plugin{Adapter: adapter.Appwrite{}, Diff: appwriteDiff, Keep: appwriteKeep})
+	// No Hints: Flagsmith's release notes are product news, not keyed by
+	// operation. requestSide, same reason as GitLab's: a named request-body
+	// schema shared by several operations (FeatureValue, SegmentOverride)
+	// reads as its own removal, side "response" by the differ's default,
+	// whether or not any operation that used it is actually gone.
+	plugin.Register(Plugin{Adapter: adapter.Flagsmith{}, Keep: requestSide})
 }
 
 // requestSide keeps the changes to what callers send. GitLab's response

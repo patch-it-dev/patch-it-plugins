@@ -104,6 +104,16 @@
       "provider_page": "providers/elasticsearch.md"
     },
     {
+      "id": "flagsmith",
+      "provider": "Flagsmith",
+      "layer": "api",
+      "watches": "REST API changes between releases of Flagsmith's own OpenAPI spec (removed endpoints and request parameters)",
+      "format": "openapi",
+      "source_url": "https://github.com/Flagsmith/flagsmith/blob/main/openapi.yaml",
+      "status": "live",
+      "provider_page": "providers/flagsmith.md"
+    },
+    {
       "id": "github",
       "provider": "GitHub",
       "layer": "api",

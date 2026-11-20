@@ -1,0 +1,36 @@
+openapi: 3.1.0
+info:
+  title: Flagsmith API
+  version: v1
+  description: 'Flagsmith''s Core and SDK APIs. Check out <a href=''https://docs.flagsmith.com''>Flagsmith documentation</a>.'
+  contact:
+    email: support@flagsmith.com
+  license:
+    name: BSD License
+    identifier: BSD-3-Clause
+servers:
+  - url: 'https://api.flagsmith.com'
+    description: Flagsmith API
+paths: {}
+components:
+  schemas:
+    TokenExchangeResponse:
+      type: object
+      properties:
+        access_token:
+          description: Short-lived access token for the Management API.
+          type: string
+        token_type:
+          description: Always "Bearer".
+          type: string
+        expires_in:
+          description: Access token lifetime in seconds.
+          type: integer
+      required:
+        - access_token
+  securitySchemes:
+    Master API Key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'For Management API endpoints. <a href=''https://docs.flagsmith.com/integrating-with-flagsmith/flagsmith-api-overview/management-api''>Find out more</a>.'
