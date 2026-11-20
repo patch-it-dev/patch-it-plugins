@@ -3,6 +3,7 @@ package openapi
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -14,7 +15,8 @@ import (
 	"github.com/patch-it-dev/patch-it-plugins/kit/kittest"
 )
 
-// The appwrite/specs commits the tests read (checked 2026-11-19).
+// The appwrite/specs commits the tests read (checked 2026-11-19), and their
+// committer dates, as GitHub gives them.
 const (
 	appwrite19Old = "8c00ba356b01d43fbc6c88c60fb2a4fc99e04b40" // 2026-06-19
 	appwrite19New = "7d74bf9f3c0c990745e822f5935bcfaca310fd06" // 2026-06-24
@@ -22,6 +24,14 @@ const (
 	appwrite24New = "06e6fafa4d1ae3c815843ff0b02a56e6e5582756" // 2026-10-12
 	appwrite18    = "ac705cd3e9d5e3a0693b7e40189eb1e66883e341" // 2026-02-18
 )
+
+var appwriteDates = map[string]string{
+	appwrite19Old: "2026-06-19T03:20:24Z",
+	appwrite19New: "2026-06-24T02:33:08Z",
+	appwrite24Old: "2026-10-08T15:06:26Z",
+	appwrite24New: "2026-10-12T18:11:38Z",
+	appwrite18:    "2026-02-18T08:20:16Z",
+}
 
 // What GitHub lists in specs/ at each commit, as it did on 2026-11-19.
 var (
@@ -55,6 +65,10 @@ func appwritePlugin(t *testing.T) (Plugin, string) {
 		p, ref := r.URL.Path, r.URL.Query().Get("ref")
 		var names []string
 		switch {
+		case strings.HasPrefix(p, repo+"/commits/") && appwriteDates[strings.TrimPrefix(p, repo+"/commits/")] != "":
+			sha := strings.TrimPrefix(p, repo+"/commits/")
+			fmt.Fprintf(w, `{"sha":%q,"commit":{"committer":{"date":%q}}}`, sha, appwriteDates[sha])
+			return
 		case p == repo+"/contents/specs" && appwriteDirs[ref] != "":
 			names = strings.Fields(appwriteDirs[ref])
 		case strings.HasPrefix(p, repo+"/contents/specs/") && appwriteFiles[ref+"/"+strings.TrimPrefix(p, repo+"/contents/specs/")] != nil:
@@ -102,8 +116,10 @@ func TestAppwriteRegistersItself(t *testing.T) {
 // 1.9.x server spec flagged 14 more operations, 83 to 97: the six
 // /databases/transactions operations and the longtext, mediumtext, text and
 // varchar attribute operations of the legacy Databases API, each "since"
-// 1.8.0 and replaced with a TablesDB method. None is an SDK method rename,
-// so the filter keeps all 14. Each event quotes x-appwrite.deprecated.
+// 1.8.0 and replaced with a TablesDB method. None is an SDK method rename or
+// has a live method ("methods": []), so the filter keeps all 14. Each event
+// is named by the path a caller sends (/v1/...), dated by the commit, and
+// quotes x-appwrite.deprecated in the file as published.
 func TestAppwriteGolden(t *testing.T) {
 	p, base := appwritePlugin(t)
 	events := replayAppwrite(t, p, appwrite19Old, appwrite19New)
@@ -113,7 +129,8 @@ func TestAppwriteGolden(t *testing.T) {
 	file := appwriteFiles[appwrite19New+"/1.9.x"]["open-api3-1.9.x-server.json"]
 	url := base + "/" + appwrite19New + "/specs/1.9.x/open-api3-1.9.x-server.json"
 	for _, e := range events {
-		if e.ChangeType != event.ChangeTypeDeprecation || e.Breaking || e.Version != "1.9.5" || e.SourceURL != url {
+		if e.ChangeType != event.ChangeTypeDeprecation || e.Breaking || e.Version != "2026-06-24" || e.SourceURL != url ||
+			!strings.Contains(e.Subject.Operation, " /v1/databases/") || strings.HasPrefix(e.SourcePointer, "/paths/~1v1") {
 			t.Errorf("%s: %s %s from %s", e.Subject.Operation, e.ChangeType, e.Version, e.SourceURL)
 		}
 		if !strings.HasSuffix(e.SourcePointer, "/x-appwrite/deprecated") || jsonNode(t, file, e.SourcePointer) != e.SourceExcerpt {
@@ -172,16 +189,16 @@ func TestAppwriteDropsSDKMethodRenames(t *testing.T) {
 		t.Fatalf("every flag read: %d events, want 21", len(events))
 	}
 	for _, e := range events {
-		if e.Version != "1.8.1" || e.PreviousVersion != "1.7.4" {
+		if e.Version != "2026-02-18" || e.PreviousVersion != "2026-02-18" {
 			t.Errorf("%s: %s -> %s", e.Subject.Operation, e.PreviousVersion, e.Version)
 		}
 	}
 }
 
-func TestAppwriteMethodRename(t *testing.T) {
+func TestAppwriteMethodLevel(t *testing.T) {
 	methods := []any{
-		map[string]any{"namespace": "account", "name": "createMfaChallenge"},
-		map[string]any{"namespace": "account", "name": "createMFAChallenge"},
+		map[string]any{"namespace": "account", "name": "createMfaChallenge", "deprecated": map[string]any{"since": "1.8.0"}},
+		map[string]any{"namespace": "account", "name": "createMFAChallenge", "deprecated": map[string]any{"since": "1.8.0"}},
 	}
 	for name, c := range map[string]struct {
 		replaceWith string
@@ -196,11 +213,36 @@ func TestAppwriteMethodRename(t *testing.T) {
 			"deprecated": map[string]any{"since": "1.8.0", "replaceWith": c.replaceWith},
 			"methods":    methods,
 		}}
-		if got := appwriteMethodRename(op); got != c.want {
+		if got := appwriteMethodLevel(op); got != c.want {
 			t.Errorf("%s: got %v, want %v", name, got, c.want)
 		}
 	}
-	if appwriteMethodRename(map[string]any{"deprecated": true}) {
-		t.Error("an operation without x-appwrite reads as a rename")
+	for name, c := range map[string]struct {
+		methods []any
+		want    bool
+	}{
+		// A live method remains: the route stays, whatever replaceWith says.
+		"one method not deprecated": {[]any{
+			map[string]any{"namespace": "databases", "name": "createX", "deprecated": map[string]any{"since": "1.8.0"}},
+			map[string]any{"namespace": "databases", "name": "createY"},
+		}, true},
+		"deprecated: false": {[]any{map[string]any{"namespace": "databases", "name": "createX", "deprecated": false}}, true},
+		"every method deprecated": {[]any{
+			map[string]any{"namespace": "databases", "name": "createX", "deprecated": map[string]any{"since": "1.8.0"}},
+		}, false},
+		// As the 14 golden operations are: read by the flag.
+		"no methods":     {[]any{}, false},
+		"methods absent": {nil, false},
+	} {
+		xa := map[string]any{"deprecated": map[string]any{"since": "1.8.0", "replaceWith": "tablesDB.createZ"}}
+		if c.methods != nil {
+			xa["methods"] = c.methods
+		}
+		if got := appwriteMethodLevel(map[string]any{"deprecated": true, "x-appwrite": xa}); got != c.want {
+			t.Errorf("%s: got %v, want %v", name, got, c.want)
+		}
+	}
+	if appwriteMethodLevel(map[string]any{"deprecated": true}) {
+		t.Error("an operation without x-appwrite reads as method-level")
 	}
 }

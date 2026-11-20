@@ -10,6 +10,7 @@ import (
 	"slices"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/patch-it-dev/patch-it-plugins/fetch"
 )
@@ -86,9 +87,13 @@ func (a Appwrite) LatestTag(ctx context.Context) (string, error) {
 // Fetch downloads the spec at a commit: the newest minor's directory, or the
 // one the tag names ("1.8.x@<sha>").
 //
-// Version is the spec's info.version, the Appwrite server version it
-// describes ("1.9.5", "2.7.2"): the version the server SDKs send as
-// X-Appwrite-Response-Format.
+// Version is the commit's date (YYYY-MM-DD), not the spec's info.version
+// ("1.9.5"), the server version it describes: a repo pins an SDK
+// (node-appwrite 32.0.0, the Python SDK 28.0.0), versioned apart from the
+// server, so a server version can't be placed against the pin, and the
+// specs commits don't line up with server releases anyway.
+//
+// The server URL's path (/v1) is moved into the paths: see ServerBasePath.
 func (a Appwrite) Fetch(ctx context.Context, tag string) (Spec, error) {
 	dir, sha, named := strings.Cut(tag, "@")
 	if !named {
@@ -96,6 +101,23 @@ func (a Appwrite) Fetch(ctx context.Context, tag string) (Spec, error) {
 	}
 	if !appwriteCommit.MatchString(sha) || (named && !appwriteDir.MatchString(dir)) {
 		return Spec{}, fmt.Errorf("%q is neither a full appwrite/specs commit sha nor <X.Y>.x@<sha>", tag)
+	}
+	meta, err := fetch.Get(ctx, a.api("/commits/"+sha), githubHeaders())
+	if err != nil {
+		return Spec{}, fmt.Errorf("looking up appwrite/specs commit %s: %w", sha, err)
+	}
+	var commit struct {
+		Commit struct {
+			Committer struct {
+				Date time.Time `json:"date"`
+			} `json:"committer"`
+		} `json:"commit"`
+	}
+	if err := json.Unmarshal(meta, &commit); err != nil {
+		return Spec{}, fmt.Errorf("parsing github commit %s: %w", sha, err)
+	}
+	if commit.Commit.Committer.Date.IsZero() {
+		return Spec{}, fmt.Errorf("github commit %s has no date", sha)
 	}
 	if dir == "" {
 		dirs, err := a.list(ctx, "specs", sha)
@@ -130,19 +152,20 @@ func (a Appwrite) Fetch(ctx context.Context, tag string) (Spec, error) {
 			return Spec{}, fmt.Errorf("appwrite spec %s: %w", tag, err)
 		}
 	}
-	var doc struct {
-		Info struct {
-			Version string `json:"version"`
-		} `json:"info"`
+	// Every server is "https://cloud.appwrite.io/v1" or a regional
+	// "https://{region}.cloud.appwrite.io/v1" ("<REGION>" up to 1.8.x), and
+	// the paths don't repeat /v1.
+	content, err := ServerBasePath(body)
+	if err != nil {
+		return Spec{}, fmt.Errorf("appwrite spec %s: %w", tag, err)
 	}
-	if err := json.Unmarshal(body, &doc); err != nil {
-		return Spec{}, fmt.Errorf("appwrite spec %s is not valid json: %w", tag, err)
-	}
-	if doc.Info.Version == "" {
-		return Spec{}, fmt.Errorf("appwrite spec %s has no info.version", tag)
-	}
-	return Spec{Content: body, Version: doc.Info.Version, SourceURL: url}, nil
+	return Spec{Content: content, Version: commit.Commit.Committer.Date.UTC().Format("2006-01-02"), SourceURL: url}, nil
 }
+
+// SourcePointer: see BasePathPointer.
+func (Appwrite) SourcePointer(content []byte) func(string) string { return BasePathPointer(content) }
+
+var _ Reshaper = Appwrite{}
 
 // list is the names in a directory of appwrite/specs at a commit.
 func (a Appwrite) list(ctx context.Context, path, sha string) ([]string, error) {
@@ -187,6 +210,8 @@ func newestAppwriteDir(names []string) string {
 // x-appwrite.platforms has "server", and drops a path left with none. The
 // kept values are unchanged (numbers kept as written) and nothing moves, so
 // a pointer into what's kept names the same node in the published file.
+// None kept is an error, not an empty spec: it means the platforms moved or
+// were renamed, and an empty spec would read as nothing deprecated.
 func appwriteServerOnly(body []byte) ([]byte, error) {
 	dec := json.NewDecoder(bytes.NewReader(body))
 	dec.UseNumber()
@@ -213,6 +238,9 @@ func appwriteServerOnly(body []byte) ([]byte, error) {
 		if left == 0 {
 			delete(paths, p)
 		}
+	}
+	if len(paths) == 0 {
+		return nil, fmt.Errorf("no operation has \"server\" in x-appwrite.platforms")
 	}
 	return json.Marshal(doc)
 }

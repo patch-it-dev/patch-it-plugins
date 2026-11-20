@@ -16,33 +16,40 @@ import "github.com/patch-it-dev/patch-it-plugins/diff"
 //     "account.createMFAChallenge", which is the same operation's other
 //     name in x-appwrite.methods (createMfaChallenge became
 //     createMFAChallenge). The route isn't deprecated, so that flag isn't
-//     read as a deprecation: see appwriteMethodRename.
+//     read as a deprecation: see appwriteMethodLevel.
 //   - Path parameters are matched by place, as for the other specs.
 var appwriteDiff = diff.Options{
 	PathTemplates:      true,
 	QuoteDeprecated:    "/x-appwrite/deprecated",
-	FlagNotDeprecation: appwriteMethodRename,
+	FlagNotDeprecation: appwriteMethodLevel,
 }
 
-// appwriteMethodRename reports whether an operation's deprecation is the
-// rename of one of its SDK methods: x-appwrite.deprecated.replaceWith names
-// a method of the same operation's x-appwrite.methods
-// ("<namespace>.<name>"). 23 of the 99 operations flagged in 2.7.x's server
-// operations are, all flagged since 1.8.0 (1.8.x's server document at
-// ac705cd3 has the same 23).
-func appwriteMethodRename(op map[string]any) bool {
+// appwriteMethodLevel reports whether an operation's `deprecated` flag is
+// about its SDK methods, not its route:
+//
+//   - x-appwrite.deprecated.replaceWith names a method of the same
+//     operation's x-appwrite.methods ("<namespace>.<name>"): a rename;
+//   - or a method in x-appwrite.methods isn't itself deprecated: the
+//     operation still has a live SDK method, so the route stays.
+//
+// An operation with no methods listed (the 14 of the golden test have
+// "methods": []) is read by its flag. In 2.7.x's server operations the two
+// rules pick the same 23 of the 99 flagged, all flagged since 1.8.0
+// (1.8.x's server document at ac705cd3 has the same 23); each has a live
+// method named by replaceWith.
+func appwriteMethodLevel(op map[string]any) bool {
 	xa, _ := op["x-appwrite"].(map[string]any)
 	dep, _ := xa["deprecated"].(map[string]any)
 	replaceWith, _ := dep["replaceWith"].(string)
-	if replaceWith == "" {
-		return false
-	}
 	methods, _ := xa["methods"].([]any)
 	for _, m := range methods {
 		method, _ := m.(map[string]any)
 		namespace, _ := method["namespace"].(string)
 		name, _ := method["name"].(string)
-		if name != "" && namespace+"."+name == replaceWith {
+		if replaceWith != "" && name != "" && namespace+"."+name == replaceWith {
+			return true
+		}
+		if d, ok := method["deprecated"]; !ok || d == nil || d == false {
 			return true
 		}
 	}
@@ -53,15 +60,15 @@ func appwriteMethodRename(op map[string]any) bool {
 // operation's removal. Read as Fetch reads it (the newest minor's server
 // operations at each of the 139 commits on appwrite/specs' main, 2026-02-17
 // to 2026-11-17), the spec's history has 14 deprecations, all on
-// 2026-06-24 (see the golden test), and 78 operations leaving it (from the spec, or from the server
-// platform), only one
-// marked deprecated first, and that one a path move: PATCH
+// 2026-06-24 (see the golden test), and 78 operations leaving it (from
+// the spec, or from the server platform). Only one was marked deprecated
+// first, and that one was a path move: PATCH
 // /databases/{databaseId}/collections/{collectionId}/attributes/{key}/relationship
 // became .../attributes/relationship/{key} on 2026-03-20. Of the others, 13
-// are back in the spec now: 2.4.x's single document took the server platform
-// off them on 2026-10-12 as not yet in a released SDK, and 2.5.x had them
-// on it again the next day. Nothing in the spec says when an operation stops answering, so a
-// removal isn't an event.
+// are back now: 2.4.x's single document took the server platform off them
+// on 2026-10-12 as not yet in a released SDK, and 2.5.x had them on it again
+// the next day. Nothing in the spec says when an operation stops answering,
+// so a removal isn't an event.
 //
 // Property changes and new operations are dropped too, as for vercel.
 func appwriteKeep(c diff.Change) bool { return c.Kind == diff.OperationDeprecated }
