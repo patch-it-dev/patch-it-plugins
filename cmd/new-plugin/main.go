@@ -217,7 +217,7 @@ func Run(o Options, out io.Writer) error {
 	}
 
 	// The edits to existing files.
-	mainFile, registered, err := register(o.Root, pkgDir, fill(f.register, d))
+	mainFile, registered, err := register(o.Root, pkgDir, providerBlock(o, d, fill(f.register, d)))
 	if err != nil {
 		return err
 	}
@@ -378,6 +378,32 @@ func declNames(decl ast.Decl) []string {
 	return nil
 }
 
+// providerBlock turns a format's "plugin.Register(<plugin>)" line into the
+// provider's registration with its metadata: a provider already registered
+// (a second source of Algolia) keeps its id, category and homepage; a new one
+// gets placeholders that say TODO(new-plugin).
+func providerBlock(o Options, d data, line string) string {
+	expr := strings.TrimSuffix(strings.TrimPrefix(line, "plugin.Register("), ")")
+	id, category, homepage := d.Slug, "plugin.CategoryDevTools, // TODO(new-plugin): the provider's category, one of plugin.Categories()\n\t\t", `"https://example.com/TODO-`+d.Slug+`-homepage", // TODO(new-plugin): the provider's own site`+"\n\t\t"
+	for _, p := range plugin.Providers() {
+		if strings.EqualFold(p.Name, o.Provider) {
+			id, category, homepage = p.ID, fmt.Sprintf("%q,", p.Category), fmt.Sprintf("%q,", p.Homepage)
+			category = "plugin.Category(" + strings.TrimSuffix(category, ",") + "),"
+		}
+	}
+	source := strings.TrimPrefix(o.API, id+"-")
+	return fmt.Sprintf(`plugin.RegisterProvider(plugin.Provider{
+		ID: %q, Name: %q,
+		Category: %s Homepage: %s
+		Sources: []plugin.Source{{
+			ID: %q, Layer: %q, Page: %q,
+			Watches: %q,
+			URLs:    []string{%q},
+			Plugin:  %s,
+		}},
+	})`, id, o.Provider, category, homepage, source, pluginlist.Layers[o.Layer], "providers/"+o.Page+".md", o.Watches, o.Source, expr)
+}
+
 // register adds line at the end of the init func that registers pkgDir's
 // plugins, next to the others.
 func register(root, pkgDir, line string) (string, []byte, error) {
@@ -400,7 +426,7 @@ func register(root, pkgDir, line string) (string, []byte, error) {
 		}
 		for _, decl := range file.Decls {
 			fn, ok := decl.(*ast.FuncDecl)
-			if !ok || fn.Name.Name != "init" || fn.Recv != nil || !bytes.Contains(src[fn.Pos()-1:fn.End()-1], []byte("plugin.Register(")) {
+			if !ok || fn.Name.Name != "init" || fn.Recv != nil || !bytes.Contains(src[fn.Pos()-1:fn.End()-1], []byte("plugin.Register")) {
 				continue
 			}
 			at := fset.Position(fn.Body.Rbrace).Offset
@@ -416,7 +442,7 @@ func register(root, pkgDir, line string) (string, []byte, error) {
 			return rel, out, nil
 		}
 	}
-	return "", nil, fmt.Errorf("found no init in %s that calls plugin.Register", pkgDir)
+	return "", nil, fmt.Errorf("found no init in %s that calls plugin.RegisterProvider", pkgDir)
 }
 
 // addMapEntry adds entry to the map literal varName is set to in path.

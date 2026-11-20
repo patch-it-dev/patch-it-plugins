@@ -187,6 +187,20 @@ func List(root string) ([]Plugin, error) {
 		case ok && format != r.Format:
 			errs = append(errs, fmt.Errorf("%s: %s says format %q, but the plugin is in plugins/%s", Table, r.ID, r.Format, format))
 		}
+		// The row says what the source's registration says (moving to the
+		// registration only: until then, both).
+		if s, ok := plugin.LookupSource(r.ID); ok {
+			switch {
+			case s.Provider.Name != r.Provider:
+				errs = append(errs, fmt.Errorf("%s: %s: provider %q, but its registration says %q", Table, r.ID, r.Provider, s.Provider.Name))
+			case string(s.Source.Layer) != layer:
+				errs = append(errs, fmt.Errorf("%s: %s: layer %q, but its registration says %q", Table, r.ID, layer, s.Source.Layer))
+			case s.Source.Watches != r.Watches:
+				errs = append(errs, fmt.Errorf("%s: %s: what it watches differs from its registration's Watches", Table, r.ID))
+			case "providers/"+r.Page+".md" != s.Source.Page:
+				errs = append(errs, fmt.Errorf("%s: %s: links providers/%s.md, but its registration's Page is %s", Table, r.ID, r.Page, s.Source.Page))
+			}
+		}
 		// One page per provider: the algolia-* plugins share providers/algolia.md.
 		page := "providers/" + r.Page + ".md"
 		if _, err := os.Stat(filepath.Join(root, page)); err != nil {

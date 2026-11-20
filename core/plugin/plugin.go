@@ -99,15 +99,22 @@ func Register(p Plugin) {
 	registry[p.Name()] = p
 }
 
-// Lookup finds a registered plugin by name.
+// Lookup finds a registered plugin by name: its old slug ("algolia-search")
+// or its source's full id ("algolia/search-api").
 func Lookup(name string) (Plugin, bool) {
 	mu.Lock()
 	defer mu.Unlock()
-	p, ok := registry[name]
-	return p, ok
+	if p, ok := registry[name]; ok {
+		return p, true
+	}
+	if s, ok := sources[name]; ok {
+		return s.Source.Plugin, true
+	}
+	return nil, false
 }
 
-// Names are the registered plugins, sorted.
+// Names are the registered plugins' old slugs, sorted: what `--api all` runs.
+// Sources lists them with their full ids and metadata.
 func Names() []string {
 	mu.Lock()
 	defer mu.Unlock()

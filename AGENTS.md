@@ -51,7 +51,7 @@ One target at a time: `make tidy`, `make build`, `make fmt`, `make vet`, `make i
 Go module `github.com/patch-it-dev/patch-it-plugins`; the only dependency is `gopkg.in/yaml.v3`.
 
 ```
-core/plugin/           the Plugin interface, the registry, Env, Result, Spec (baselines)
+core/plugin/           the Plugin interface, the registry of providers and their sources (metadata), Env, Result, Spec
 core/fetch/            the HTTP fetch with retries and the ETag / Last-Modified cache
 core/github/           the newest release / commit on GitHub, and a commit's SHA and date (one place)
 core/kit/  core/kit/kittest/   Unchanged, Cite, Wayback; the test kit (Mem, Pages, Ingest, Golden)

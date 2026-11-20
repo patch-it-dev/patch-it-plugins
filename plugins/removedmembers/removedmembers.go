@@ -32,9 +32,33 @@ import (
 )
 
 func init() {
-	plugin.Register(Plugin{Guide: NumPy2})
-	plugin.Register(Plugin{Guide: PostHog8})
-	plugin.Register(Plugin{Guide: NewRelic11})
+	plugin.RegisterProvider(plugin.Provider{
+		ID: "numpy", Name: "NumPy", Category: plugin.CategoryPackages, Homepage: "https://numpy.org",
+		Sources: []plugin.Source{{
+			ID: "numpy", Layer: plugin.LayerPackage, Page: "providers/numpy.md",
+			Watches: "Members removed or renamed in the main namespace in NumPy 2.0",
+			URLs:    []string{"https://github.com/numpy/numpy/blob/v2.0.0/doc/source/numpy_2_0_migration_guide.rst"},
+			Plugin:  Plugin{Guide: NumPy2},
+		}},
+	})
+	plugin.RegisterProvider(plugin.Provider{
+		ID: "posthog", Name: "PostHog", Category: plugin.CategoryAnalytics, Homepage: "https://posthog.com",
+		Sources: []plugin.Source{{
+			ID: "python-sdk", Layer: plugin.LayerSDK, Page: "providers/posthog.md",
+			Watches: "Members removed in the posthog Python SDK 8.0.0",
+			URLs:    []string{"https://github.com/PostHog/posthog-python/blob/posthog-v8.0.0/docs/migration-7.x-to-8.0.md"},
+			Plugin:  Plugin{Guide: PostHog8},
+		}},
+	})
+	plugin.RegisterProvider(plugin.Provider{
+		ID: "newrelic", Name: "New Relic", Category: plugin.CategoryMonitoring, Homepage: "https://newrelic.com",
+		Sources: []plugin.Source{{
+			ID: "python-agent", Layer: plugin.LayerSDK, Page: "providers/newrelic.md",
+			Watches: "Members removed in the New Relic Python agent 11.0.0",
+			URLs:    []string{"https://github.com/newrelic/docs-website/blob/f0b4f817bf9a7b76a78e26609369a8a7ce764c8e/src/content/docs/release-notes/agent-release-notes/python-release-notes/python-agent-110000.mdx"},
+			Plugin:  Plugin{Guide: NewRelic11},
+		}},
+	})
 }
 
 // Guide is one package's guide to one release.

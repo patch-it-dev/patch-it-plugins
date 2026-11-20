@@ -25,8 +25,24 @@ import (
 )
 
 func init() {
-	plugin.Register(Plugin{File: Textual0860})
-	plugin.Register(Plugin{File: Urllib3200})
+	plugin.RegisterProvider(plugin.Provider{
+		ID: "textual", Name: "Textual", Category: plugin.CategoryPackages, Homepage: "https://textual.textualize.io",
+		Sources: []plugin.Source{{
+			ID: "textual", Layer: plugin.LayerPackage, Page: "providers/textual.md",
+			Watches: "Removals and breaking changes in release 0.86.0",
+			URLs:    []string{"https://github.com/Textualize/textual/blob/v0.86.0/CHANGELOG.md"},
+			Plugin:  Plugin{File: Textual0860},
+		}},
+	})
+	plugin.RegisterProvider(plugin.Provider{
+		ID: "urllib3", Name: "urllib3", Category: plugin.CategoryPackages, Homepage: "https://urllib3.readthedocs.io",
+		Sources: []plugin.Source{{
+			ID: "urllib3", Layer: plugin.LayerPackage, Page: "providers/urllib3.md",
+			Watches: "Removals and deprecations in release 2.0.0",
+			URLs:    []string{"https://github.com/urllib3/urllib3/blob/2.0.0/CHANGES.rst"},
+			Plugin:  Plugin{File: Urllib3200},
+		}},
+	})
 }
 
 // File is one package's changelog at one release.

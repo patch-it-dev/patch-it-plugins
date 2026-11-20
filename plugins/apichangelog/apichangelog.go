@@ -30,7 +30,15 @@ import (
 )
 
 func init() {
-	plugin.Register(Plugin{Log: MongoDBAtlas})
+	plugin.RegisterProvider(plugin.Provider{
+		ID: "mongodb", Name: "MongoDB", Category: plugin.CategoryDatabases, Homepage: "https://www.mongodb.com",
+		Sources: []plugin.Source{{
+			ID: "atlas-admin-api", Layer: plugin.LayerAPI, Page: "providers/mongodb-atlas.md",
+			Watches: "Atlas Administration API versions deprecated and removed at their sunset date, per endpoint, from MongoDB's own API changelog",
+			URLs:    []string{"https://github.com/mongodb/openapi/blob/main/changelog/changelog.json"},
+			Plugin:  Plugin{Log: MongoDBAtlas},
+		}},
+	})
 }
 
 // Log is one vendor's changelog file.

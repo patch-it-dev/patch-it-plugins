@@ -28,7 +28,15 @@ import (
 )
 
 func init() {
-	plugin.Register(Plugin{Catalog: Redis})
+	plugin.RegisterProvider(plugin.Provider{
+		ID: "redis", Name: "Redis", Category: plugin.CategoryDatabases, Homepage: "https://redis.io",
+		Sources: []plugin.Source{{
+			ID: "commands", Layer: plugin.LayerRuntime, Page: "providers/redis.md",
+			Watches: "Commands removed entirely from Redis's own command catalog between two snapshots",
+			URLs:    []string{"https://github.com/redis/redis-doc/blob/master/commands.json"},
+			Plugin:  Plugin{Catalog: Redis},
+		}},
+	})
 }
 
 // Catalog is one provider's command or endpoint catalog: a single JSON

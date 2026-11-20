@@ -14,7 +14,15 @@ import (
 )
 
 func init() {
-	plugin.Register(Plugin{Guide: sdkguide.AnthropicV1})
+	plugin.RegisterProvider(plugin.Provider{
+		ID: "anthropic", Name: "Anthropic", Category: plugin.CategoryAI, Homepage: "https://www.anthropic.com",
+		Sources: []plugin.Source{{
+			ID: "python-sdk", Layer: plugin.LayerSDK, Page: "providers/anthropic.md",
+			Watches: "Parameters removed from `messages.create()` and friends in the Python SDK 1.0",
+			URLs:    []string{"https://github.com/anthropics/anthropic-sdk-python/blob/v1.0.0/MIGRATION.md"},
+			Plugin:  Plugin{Guide: sdkguide.AnthropicV1},
+		}},
+	})
 }
 
 // Plugin reads one SDK's guide to one major release.

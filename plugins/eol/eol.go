@@ -38,7 +38,15 @@ import (
 )
 
 func init() {
-	plugin.Register(Plugin{Page: Salesforce, Archiver: kit.Wayback{}})
+	plugin.RegisterProvider(plugin.Provider{
+		ID: "salesforce", Name: "Salesforce", Category: plugin.CategoryCRM, Homepage: "https://www.salesforce.com",
+		Sources: []plugin.Source{{
+			ID: "rest-api", Layer: plugin.LayerAPI, Page: "providers/salesforce.md",
+			Watches: "REST API version ranges deprecated and retired, from Salesforce's own API end-of-life policy page",
+			URLs:    []string{"https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html"},
+			Plugin:  Plugin{Page: Salesforce, Archiver: kit.Wayback{}},
+		}},
+	})
 }
 
 // Page is one vendor's end-of-life table.
