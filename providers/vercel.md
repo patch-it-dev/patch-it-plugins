@@ -36,7 +36,7 @@ Kind: `openapi` (`plugins/openapi`), with `adapter.Vercel`.
   - **Request properties.** 478 breaking request-property changes, most of them union members compared by position as their order moved. Outside unions there were 142, and 27 of those reverted later.
   - **New operations.** Nobody has to fix code for a new endpoint.
 - Over the 207 releases, this keeps 26 events: 22 deprecations, and the removal of the four Legacy Domains operations, all four of which Vercel shut down.
-- **Replays** a historical pair (`Replay`, from `v1.18.6` to `v1.18.7`) and recreates the removal of `GET /v4/domains/price` and `GET /v4/domains/status`. The golden test also runs the deprecation of all four operations (`v1.13.4` to `v1.13.5`). The drop tests replay an unmarked removal (`v1.6.2` to `v1.6.3`) and the path-parameter rename (`v1.28.64` to `v1.28.65`).
+- **Reads** a historical pair (a version pair, `v1.18.6` → `v1.18.7`) and recreates the removal of `GET /v4/domains/price` and `GET /v4/domains/status`. The golden test also runs the deprecation of all four operations (`v1.13.4` to `v1.13.5`). The drop tests replay an unmarked removal (`v1.6.2` to `v1.6.3`) and the path-parameter rename (`v1.28.64` to `v1.28.65`).
 
 ## Known gaps
 

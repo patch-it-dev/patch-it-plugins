@@ -66,7 +66,7 @@ type Spec struct {
 // Result is what one run found.
 type Result struct {
 	Label     string        // what was read, for the summary: a tag, a snapshot, a URL
-	Events    []event.Event // valid v2 events, to store
+	Events    []event.Event // valid events, to store
 	Rejected  []error       // changes that failed to become valid events
 	Baselines []Spec        // what the run read, saved after the events
 }

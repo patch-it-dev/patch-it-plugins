@@ -98,11 +98,11 @@ func appwritePlugin(t *testing.T) (Plugin, string) {
 	return Plugin{Adapter: a, Diff: appwriteDiff, Keep: appwriteKeep}, srv.URL + "/raw/appwrite/specs"
 }
 
-func replayAppwrite(t *testing.T, p Plugin, from, to string) []event.Event {
+func pairAppwrite(t *testing.T, p Plugin, from, to string) []event.Event {
 	t.Helper()
 	s := openStore(t)
 	if rejected, err := kittest.Pair(context.Background(), vercelEnv(s), s, p, from, to); err != nil || rejected {
-		t.Fatalf("replay %s -> %s: rejected=%v err=%v", from, to, rejected, err)
+		t.Fatalf("pair %s -> %s: rejected=%v err=%v", from, to, rejected, err)
 	}
 	return kittest.Stored(t, s)
 }
@@ -122,7 +122,7 @@ func TestAppwriteRegistersItself(t *testing.T) {
 // quotes x-appwrite.deprecated in the file as published.
 func TestAppwriteGolden(t *testing.T) {
 	p, base := appwritePlugin(t)
-	events := replayAppwrite(t, p, appwrite19Old, appwrite19New)
+	events := pairAppwrite(t, p, appwrite19Old, appwrite19New)
 	if len(events) != 14 {
 		t.Fatalf("%d events, want 14", len(events))
 	}
@@ -153,13 +153,13 @@ func TestAppwriteGolden(t *testing.T) {
 // day. As the adapter reads it, 13 removals; no event: removals never are.
 func TestAppwriteDropsRemovals(t *testing.T) {
 	p, _ := appwritePlugin(t)
-	if events := replayAppwrite(t, p, appwrite24Old, appwrite24New); len(events) != 0 {
+	if events := pairAppwrite(t, p, appwrite24Old, appwrite24New); len(events) != 0 {
 		t.Fatalf("%d events, want none: %s", len(events), events[0].Subject.Operation)
 	}
 	// Unfiltered, the same pair reports the 13 removals.
 	p.Keep = nil
 	var removed int
-	for _, e := range replayAppwrite(t, p, appwrite24Old, appwrite24New) {
+	for _, e := range pairAppwrite(t, p, appwrite24Old, appwrite24New) {
 		if e.ChangeType == event.ChangeTypeBreaking && e.Subject.Kind == event.KindOperation {
 			removed++
 		}
@@ -180,11 +180,11 @@ func TestAppwriteDropsRemovals(t *testing.T) {
 // flag, 21.
 func TestAppwriteDropsSDKMethodRenames(t *testing.T) {
 	p, _ := appwritePlugin(t)
-	if events := replayAppwrite(t, p, "1.7.x@"+appwrite18, appwrite18); len(events) != 0 {
+	if events := pairAppwrite(t, p, "1.7.x@"+appwrite18, appwrite18); len(events) != 0 {
 		t.Fatalf("%d events, want none: %s", len(events), events[0].Subject.Operation)
 	}
 	p.Diff.FlagNotDeprecation = nil
-	events := replayAppwrite(t, p, "1.7.x@"+appwrite18, appwrite18)
+	events := pairAppwrite(t, p, "1.7.x@"+appwrite18, appwrite18)
 	if len(events) != 21 {
 		t.Fatalf("every flag read: %d events, want 21", len(events))
 	}

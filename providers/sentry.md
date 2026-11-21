@@ -47,7 +47,7 @@ Kind: `openapi` (`plugins/openapi`), with `adapter.Sentry`.
     - Compared as published, 446 operations left the spec: the 289 more are the 2026-11-13 move of `/api/0`, `GET .../issues/` and `POST .../user-feedback/` among them, both flagged deprecated. A rule keeping removals of deprecated operations would report those two shut down.
   - **Property changes, and new operations.**
 - **History:** 13 events over the whole history, all deprecations: the 13 above, none withdrawn. By the flag alone it would be 3, two of them dated 2026-06-16 instead of 2024 and 2025.
-- **Replays** the three description deprecations in the golden test (sentry-api-schema commits `ead7f0cf` → `4650a66a`, `d64149d6` → `c2f638f6`, `47231e61` → `1da1f31f`). The drop test replays `2.0.1` → `2.1.0`, the `/api/0` move. Other tests replay `0.223.0` → `0.224.0` (the flag after the words) and the two commits that added the "deprecation" wording that isn't a deprecation.
+- **Reads** the three description deprecations in the golden test (sentry-api-schema commits `ead7f0cf` → `4650a66a`, `d64149d6` → `c2f638f6`, `47231e61` → `1da1f31f`). The drop test replays `2.0.1` → `2.1.0`, the `/api/0` move. Other tests replay `0.223.0` → `0.224.0` (the flag after the words) and the two commits that added the "deprecation" wording that isn't a deprecation.
 
 ## Known gaps
 

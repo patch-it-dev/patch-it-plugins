@@ -24,7 +24,7 @@ Kind: `openapi` (`plugins/openapi`), with `adapter.Stripe` and the changelog hin
 
 - Reads: the whole spec at the newest tag, diffed against the last one it saw (`core/diff/`, `core/normalize/`). `$ref`s are never followed: a change inside a shared schema is reported once, on that schema, not once per endpoint that uses it.
 - Hints: for each breaking event, the changelog entry for that version whose "REST API" table names the same parameter and operation; the entry's "What's new" text and link become `migration_hint`. An entry describing an addition never explains a removal, and the reverse.
-- Replays a historical pair (`Replay`, from `v207` to `v208`) and recreates the 2022-11-15 change (38 events, 36 breaking).
+- Reads a historical pair (a version pair, `v207` → `v208`) and recreates the 2022-11-15 change (38 events, 36 breaking).
 - `latest/openapi.spec3.json` can lag a version bump by several tags; the plugin follows the file, not the release notes.
 
 ## Known gaps

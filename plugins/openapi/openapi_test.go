@@ -43,11 +43,11 @@ func ingest(ctx context.Context, s *kittest.Mem, a adapter.Adapter) (bool, error
 	return kittest.Run(ctx, env(s), s, newPlugin(a, noChangelog))
 }
 
-func replay(ctx context.Context, s *kittest.Mem, a adapter.Adapter, from, to string) (bool, error) {
-	return replayWith(ctx, s, newPlugin(a, noChangelog), from, to)
+func pair(ctx context.Context, s *kittest.Mem, a adapter.Adapter, from, to string) (bool, error) {
+	return pairWith(ctx, s, newPlugin(a, noChangelog), from, to)
 }
 
-func replayWith(ctx context.Context, s *kittest.Mem, p Plugin, from, to string) (bool, error) {
+func pairWith(ctx context.Context, s *kittest.Mem, p Plugin, from, to string) (bool, error) {
 	return kittest.Pair(ctx, env(s), s, p, from, to)
 }
 
@@ -145,29 +145,29 @@ func TestIngestStoresTheEventsItFinds(t *testing.T) {
 	}
 }
 
-// Replay (--from/--to) is how the demo change gets recreated: it must store the
-// events, and it must never move the normal-run baseline.
-func TestReplayStoresEventsWithoutMovingTheBaseline(t *testing.T) {
+// A version pair (ReadAt both sides, Extract) stores its events and no
+// baseline: a backfill never moves what the next run compares with.
+func TestAPairStoresEventsAndNoBaseline(t *testing.T) {
 	ctx := context.Background()
 	s := openStore(t)
 
-	if _, err := replay(ctx, s, fakeAdapter{specs: specs}, "v1", "v2"); err != nil {
-		t.Fatalf("replay: %v", err)
+	if _, err := pair(ctx, s, fakeAdapter{specs: specs}, "v1", "v2"); err != nil {
+		t.Fatalf("pair: %v", err)
 	}
 	if got := storedEvents(t, s); len(got) != 2 {
-		t.Errorf("replay stored %d events, want 2: %v", len(got), got)
+		t.Errorf("the pair stored %d events, want 2: %v", len(got), got)
 	}
 	if last, _ := s.LastSpec("stripe/api"); last != nil {
-		t.Errorf("replay moved the baseline to %s; replays must never set it", last.Version)
+		t.Errorf("the pair set a baseline (%s); Extract returns none", last.Version)
 	}
 
-	// Replaying the same pair again stores nothing new.
+	// Reading the same pair again stores nothing new.
 	before := len(storedEvents(t, s))
-	if _, err := replay(ctx, s, fakeAdapter{specs: specs}, "v1", "v2"); err != nil {
-		t.Fatalf("second replay: %v", err)
+	if _, err := pair(ctx, s, fakeAdapter{specs: specs}, "v1", "v2"); err != nil {
+		t.Fatalf("second read of the pair: %v", err)
 	}
 	if after := len(storedEvents(t, s)); after != before {
-		t.Errorf("repeating a replay added events: %d -> %d", before, after)
+		t.Errorf("reading the pair again added events: %d -> %d", before, after)
 	}
 }
 
@@ -176,8 +176,8 @@ func TestReplayStoresEventsWithoutMovingTheBaseline(t *testing.T) {
 func TestIngestStoresEventsWhenTheChangelogIsUnreachable(t *testing.T) {
 	ctx := context.Background()
 	s := openStore(t)
-	if _, err := replay(ctx, s, fakeAdapter{specs: specs}, "v1", "v2"); err != nil {
-		t.Fatalf("replay: %v", err)
+	if _, err := pair(ctx, s, fakeAdapter{specs: specs}, "v1", "v2"); err != nil {
+		t.Fatalf("pair: %v", err)
 	}
 	events, _ := s.All()
 	if len(events) != 2 {
@@ -186,7 +186,7 @@ func TestIngestStoresEventsWhenTheChangelogIsUnreachable(t *testing.T) {
 }
 
 // With a changelog, the entry's text and link become the event's migration hint.
-func TestReplayAttachesMigrationHintsFromTheChangelog(t *testing.T) {
+func TestAPairAttachesMigrationHintsFromTheChangelog(t *testing.T) {
 	withHints := fakeHints{entries: []hint.Entry{{
 		Title:    "Removes the charges attribute from the PaymentIntent object",
 		URL:      "https://docs.stripe.com/changelog/2022-11-15/removes-charges-attribute-paymentintent",
@@ -196,8 +196,8 @@ func TestReplayAttachesMigrationHintsFromTheChangelog(t *testing.T) {
 
 	ctx := context.Background()
 	s := openStore(t)
-	if _, err := replayWith(ctx, s, newPlugin(fakeAdapter{specs: specs}, withHints), "v1", "v2"); err != nil {
-		t.Fatalf("replay: %v", err)
+	if _, err := pairWith(ctx, s, newPlugin(fakeAdapter{specs: specs}, withHints), "v1", "v2"); err != nil {
+		t.Fatalf("pair: %v", err)
 	}
 	events, _ := s.All()
 	var removed *event.Event

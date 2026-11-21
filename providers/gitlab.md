@@ -24,7 +24,7 @@ Kind: `openapi` (`plugins/openapi`), with `adapter.GitLab` and a request-side fi
 - **Response-side changes are dropped.** Between 18.11 and 19.0 the generator retyped hundreds of response properties (default `string` to the real type) while GitLab returned the same JSON; reporting them would be wrong pull requests. Precision over recall: only request-side changes are kept.
 - Request bodies are named by a hash of their content (`RequestBody_<hex>`), so adding one field renames the schema. The adapter inlines those bodies back under their operations, and each event's pointer still names the node in the published file.
 - Release candidates are skipped; tags are sorted numerically.
-- The OpenAPI 3 file exists from `v18.10.0-ee`; 19.0 is the first major release that can be replayed (`Replay` from `v18.11.0-ee` to `v19.0.0-ee`).
+- The OpenAPI 3 file exists from `v18.10.0-ee`; 19.0 is the first major release that can be replayed (the pair `v18.11.0-ee` → `v19.0.0-ee`).
 
 ## Known gaps
 

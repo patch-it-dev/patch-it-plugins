@@ -62,7 +62,7 @@ func supabasePlugin(latest string) Plugin {
 // Management API spec's history. On 2025-02-19, POST
 // /v1/projects/{ref}/functions ("This endpoint is deprecated - use the deploy
 // endpoint."), here as a daily ingest. On 2026-06-29, GET
-// /v1/projects/{ref}/analytics/endpoints/logs.all, the replay fixture: the
+// /v1/projects/{ref}/analytics/endpoints/logs.all, the pair fixture: the
 // flag alone, no reason yet. (On 2026-09-30 its description became "This
 // endpoint has been removed and always responds with `410 Gone`", with the
 // operation still in the spec: a change of words, which no diff sees.)
@@ -76,7 +76,7 @@ func TestSupabaseGolden(t *testing.T) {
 		}
 	}
 	if rejected, err := kittest.Pair(ctx, env, s, supabasePlugin(""), "693bdc38", "eb21ae25"); err != nil || rejected {
-		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
+		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}
 
 	events := kittest.Stored(t, s)
@@ -124,7 +124,7 @@ func TestSupabaseDropsRemovalsThatWerentDeprecated(t *testing.T) {
 	ctx := context.Background()
 	s := openStore(t)
 	if rejected, err := kittest.Pair(ctx, vercelEnv(s), s, supabasePlugin(""), "8aef4a08", "90b71e3e"); err != nil || rejected {
-		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
+		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}
 	if events := kittest.Stored(t, s); len(events) != 0 {
 		t.Fatalf("stored %d events, want none", len(events))

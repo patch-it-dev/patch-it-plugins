@@ -149,7 +149,7 @@ func TestReactivationWithdrawsTheDeprecation(t *testing.T) {
 // Deprecated, reactivated, deprecated again: one deprecation, the second.
 // Deprecated, then removed: both. And "api path removed without deprecation"
 // isn't read (its one real entry was an endpoint that stayed).
-func TestLifeCycleReplay(t *testing.T) {
+func TestLifeCycleInOrder(t *testing.T) {
 	ch := func(code string) string {
 		return `{"change":"x","changeCode":"` + code + `","backwardCompatible":true}`
 	}

@@ -3,7 +3,8 @@
 // Algolia, Elasticsearch, Sentry, Neon, Convex, PlanetScale, Appwrite): fetch
 // the newest spec, diff it against the last one seen, normalize the changes
 // into events, and attach migration hints from the API's changelog when it
-// has one. It can also replay two given releases.
+// has one. Every release is listed and each consecutive pair diffed
+// (ListVersions, ReadAt, Extract).
 package openapi
 
 import (

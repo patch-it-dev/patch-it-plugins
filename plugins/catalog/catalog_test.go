@@ -33,20 +33,20 @@ func fixturePages() kittest.Pages {
 	}
 }
 
-// The golden test and the replay fixture in one: testdata/redis-doc-cc0427b.json
+// The golden test and the pair fixture in one: testdata/redis-doc-cc0427b.json
 // and redis-doc-06f3598.json are real, trimmed excerpts of redis-doc's
 // commands.json at those two commits (checked 2026-11-18). Between them,
 // FUNCTION CREATE and FUNCTION INFO disappear, FUNCTION LOAD appears, and GET
 // (an unrelated, long-lived command) is unchanged. This is the pair the
 // plugin's Replay from oldRef to newRef recreates.
-func TestReplayRecreatesTheRealFunctionCommandRemoval(t *testing.T) {
+func TestPairRecreatesTheRealFunctionCommandRemoval(t *testing.T) {
 	ctx := context.Background()
 	s := kittest.NewMem()
 	e := env(s, fixturePages(), t)
 
 	rejected, err := kittest.Pair(ctx, e, s, Plugin{Catalog: Redis}, oldRef, newRef)
 	if err != nil || rejected {
-		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
+		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}
 
 	events, err := s.All()
@@ -90,12 +90,12 @@ func TestReplayRecreatesTheRealFunctionCommandRemoval(t *testing.T) {
 		}
 	}
 
-	// Replaying the same pair again must not duplicate the events.
+	// Reading the same pair again must not duplicate the events.
 	if _, err := kittest.Pair(ctx, e, s, Plugin{Catalog: Redis}, oldRef, newRef); err != nil {
-		t.Fatalf("second replay: %v", err)
+		t.Fatalf("second read of the pair: %v", err)
 	}
 	if again, _ := s.All(); len(again) != len(events) {
-		t.Errorf("repeating the replay added events: %d -> %d", len(events), len(again))
+		t.Errorf("reading the pair again added events: %d -> %d", len(events), len(again))
 	}
 }
 

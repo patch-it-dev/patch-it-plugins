@@ -42,7 +42,7 @@ Kind: `openapi` (`plugins/openapi`), with `adapter.Elasticsearch`.
 - **History:** over 8.14 to 9.6, this keeps 26 events.
   - **23 deprecations.** For example, the rollup and legacy `_template` endpoints (8.17), `/_application/analytics` (9.0), and `POST /_ml/anomaly_detectors/{job_id}/_flush` (9.1).
   - **3 removals, in 9.0:** GET and POST `/{index}/_knn_search`, and POST `/{index}/_unfreeze`.
-- **Replays** 8.19 → 9.0 in the golden test. The drop test replays 9.1 → 9.2.
+- **Reads** 8.19 → 9.0 in the golden test. The drop test replays 9.1 → 9.2.
 
 ## Known gaps
 

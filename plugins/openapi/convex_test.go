@@ -85,7 +85,7 @@ func TestConvexGolden(t *testing.T) {
 	ctx := context.Background()
 	s := openStore(t)
 	if rejected, err := kittest.Pair(ctx, vercelEnv(s), s, convexPlugin(""), "f35879bb", "5e5159cb"); err != nil || rejected {
-		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
+		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}
 	events := kittest.Stored(t, s)
 	if len(events) != len(convexReplacements) {
@@ -138,7 +138,7 @@ func TestConvexDropsPropertyChangesThatWerentDeprecations(t *testing.T) {
 	ctx := context.Background()
 	s := openStore(t)
 	if rejected, err := kittest.Pair(ctx, vercelEnv(s), s, convexPlugin(""), "3f6edf7a", "3ead9091"); err != nil || rejected {
-		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
+		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}
 	if events := kittest.Stored(t, s); len(events) != 0 {
 		t.Fatalf("stored %d events, want none", len(events))

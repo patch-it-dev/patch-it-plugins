@@ -23,7 +23,7 @@ type fakeAlgoliaAdapter struct{ spec string }
 func (f fakeAlgoliaAdapter) API() string { return "algolia/" + f.spec + "-api" }
 
 func (fakeAlgoliaAdapter) LatestTag(context.Context) (string, error) {
-	return "", fmt.Errorf("replay only")
+	return "", fmt.Errorf("pairs only")
 }
 
 func (f fakeAlgoliaAdapter) Fetch(_ context.Context, tag string) (adapter.Spec, error) {
@@ -77,7 +77,7 @@ func TestAlgoliaGolden(t *testing.T) {
 			ctx := context.Background()
 			s := openStore(t)
 			if rejected, err := kittest.Pair(ctx, vercelEnv(s), s, algoliaPlugin(c.spec), c.from, c.to); err != nil || rejected {
-				t.Fatalf("replay: rejected=%v err=%v", rejected, err)
+				t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 			}
 			events := kittest.Stored(t, s)
 			if len(events) != c.ops {
@@ -114,7 +114,7 @@ func TestAlgoliaDropsRemovalsThatWerentDeprecated(t *testing.T) {
 	const from, to = "released-2024-09-18-cc190fae3", "released-2024-09-19-a62c27d3b"
 	s := openStore(t)
 	if rejected, err := kittest.Pair(ctx, vercelEnv(s), s, algoliaPlugin("ingestion"), from, to); err != nil || rejected {
-		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
+		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}
 	if events := kittest.Stored(t, s); len(events) != 0 {
 		t.Fatalf("%d events, want none", len(events))
@@ -166,7 +166,7 @@ func TestAlgoliaRecommendCustomRequestMoveIsNoEvent(t *testing.T) {
 	const from, to = "released-2024-03-19-2eac6f410", "released-2024-03-25-30207fcd0"
 	s := openStore(t)
 	if rejected, err := kittest.Pair(ctx, vercelEnv(s), s, algoliaPlugin("recommend"), from, to); err != nil || rejected {
-		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
+		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}
 	if events := kittest.Stored(t, s); len(events) != 0 {
 		t.Fatalf("%d events, want none", len(events))

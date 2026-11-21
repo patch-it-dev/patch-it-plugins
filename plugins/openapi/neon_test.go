@@ -67,7 +67,7 @@ func neonPlugin(a adapter.Adapter) Plugin {
 	return Plugin{Adapter: a, Diff: neonDiff, Keep: neonKeep}
 }
 
-// The golden test, the replay fixture: the one operation Neon deprecated in
+// The golden test, the pair fixture: the one operation Neon deprecated in
 // neon-pkgs's copy of the spec. On 2026-08-23 POST
 // /projects/{project_id}/branches/{branch_id}/auth/send_test_email (beta)
 // gained the flag, an x-sunset of 2027-02-28 and "Deprecated: to test a
@@ -78,7 +78,7 @@ func TestNeonGolden(t *testing.T) {
 	ctx := context.Background()
 	s := openStore(t)
 	if rejected, err := kittest.Pair(ctx, vercelEnv(s), s, neonPlugin(fakeNeonAdapter{}), "5c57d009", "93b93dc9"); err != nil || rejected {
-		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
+		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}
 	events := kittest.Stored(t, s)
 	if len(events) != 1 {
@@ -118,7 +118,7 @@ func TestNeonDropsRemovalsThatWerentDeprecated(t *testing.T) {
 	ctx := context.Background()
 	s := openStore(t)
 	if rejected, err := kittest.Pair(ctx, vercelEnv(s), s, neonPlugin(fakeNeonAdapter{}), "4c6b3be4", "4497de89"); err != nil || rejected {
-		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
+		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}
 	if events := kittest.Stored(t, s); len(events) != 0 {
 		t.Fatalf("stored %d events, want none", len(events))
@@ -179,7 +179,7 @@ func TestNeonKeepsTheRemovalOfADeprecatedOperation(t *testing.T) {
 	ctx := context.Background()
 	s := openStore(t)
 	if rejected, err := kittest.Pair(ctx, vercelEnv(s), s, neonPlugin(neonAPIClient{}), "2.7.2", "2.7.3"); err != nil || rejected {
-		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
+		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}
 	events := kittest.Stored(t, s)
 	if len(events) != 1 {

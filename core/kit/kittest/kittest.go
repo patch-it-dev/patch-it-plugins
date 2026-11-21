@@ -109,7 +109,7 @@ func Stored(t testing.TB, s Sink) []event.Event {
 }
 
 // Golden compares events with the JSON file at path, or rewrites it with
-// -update. Every event must also be valid v2, or the golden would pin a bug.
+// -update. Every event must also be valid, or the golden would pin a bug.
 func Golden(t testing.TB, path string, events []event.Event) {
 	t.Helper()
 	golden(t, path, events, *update)

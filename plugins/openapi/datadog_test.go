@@ -38,20 +38,20 @@ func (fakeDatadogAdapter) Fetch(_ context.Context, tag string) (adapter.Spec, er
 	return adapter.Spec{Content: content, Version: tag, SourceURL: sourceURL}, nil
 }
 
-// The golden test and the replay fixture in one: testdata/datadog-2.60.0.yaml
+// The golden test and the pair fixture in one: testdata/datadog-2.60.0.yaml
 // and datadog-2.61.0.yaml are real, trimmed excerpts of
 // datadog-api-client-python's bundled spec at those two tags (checked
 // 2026-11-13). Between them, PR #4045 removed queried_tags_window_seconds and
 // related_asset_tags from TagIndexingRuleDynamicTags — a real historical
 // breaking change, not an invented one. This is the pair
-// the plugin's Replay from 2.60.0 to 2.61.0 recreates.
-func TestDatadogReplayRecreatesTheRealPropertyRemoval(t *testing.T) {
+// the pair 2.60.0 → 2.61.0 recreates.
+func TestDatadogPairRecreatesTheRealPropertyRemoval(t *testing.T) {
 	ctx := context.Background()
 	s := openStore(t)
 
-	rejected, err := replayWith(ctx, s, Plugin{Adapter: fakeDatadogAdapter{}}, "2.60.0", "2.61.0")
+	rejected, err := pairWith(ctx, s, Plugin{Adapter: fakeDatadogAdapter{}}, "2.60.0", "2.61.0")
 	if err != nil || rejected {
-		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
+		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}
 
 	events, err := s.All()
@@ -87,11 +87,11 @@ func TestDatadogReplayRecreatesTheRealPropertyRemoval(t *testing.T) {
 		}
 	}
 
-	// Replaying the same pair again must not duplicate the events.
-	if _, err := replayWith(ctx, s, Plugin{Adapter: fakeDatadogAdapter{}}, "2.60.0", "2.61.0"); err != nil {
-		t.Fatalf("second replay: %v", err)
+	// Reading the same pair again must not duplicate the events.
+	if _, err := pairWith(ctx, s, Plugin{Adapter: fakeDatadogAdapter{}}, "2.60.0", "2.61.0"); err != nil {
+		t.Fatalf("second read of the pair: %v", err)
 	}
 	if again, _ := s.All(); len(again) != len(events) {
-		t.Errorf("repeating the replay added events: %d -> %d", len(events), len(again))
+		t.Errorf("reading the pair again added events: %d -> %d", len(events), len(again))
 	}
 }

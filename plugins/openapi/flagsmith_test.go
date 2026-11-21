@@ -72,7 +72,7 @@ func (fakeFlagsmithAdapter) Fetch(_ context.Context, tag string) (adapter.Spec, 
 	}, nil
 }
 
-// The golden test and the replay fixture: the real removal of the three
+// The golden test and the pair fixture: the real removal of the three
 // experimental flag-update endpoints between v2.286.0 and v2.287.0.
 func TestFlagsmithGolden(t *testing.T) {
 	ctx := context.Background()
@@ -80,7 +80,7 @@ func TestFlagsmithGolden(t *testing.T) {
 	sink := env.Baselines.(kittest.Sink)
 	p := Plugin{Adapter: fakeFlagsmithAdapter{}, Keep: requestSide}
 	if rejected, err := kittest.Pair(ctx, env, sink, p, "v2.286.0", "v2.287.0"); err != nil || rejected {
-		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
+		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}
 	kittest.Golden(t, "testdata/golden/flagsmith.json", kittest.Stored(t, sink))
 }
@@ -93,7 +93,7 @@ func TestFlagsmithDropsADescriptionOnlyChange(t *testing.T) {
 	sink := env.Baselines.(kittest.Sink)
 	p := Plugin{Adapter: fakeFlagsmithAdapter{}, Keep: requestSide}
 	if rejected, err := kittest.Pair(ctx, env, sink, p, "c3ef832", "f504f16"); err != nil || rejected {
-		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
+		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}
 	if got := kittest.Stored(t, sink); len(got) != 0 {
 		t.Errorf("%d events from a description-only change, want none", len(got))

@@ -24,7 +24,7 @@ func gitlabPlugin(t *testing.T) (Plugin, string) {
 	return Plugin{Adapter: adapter.GitLab{SpecURLTemplate: tmpl}, Keep: requestSide}, tmpl
 }
 
-// The golden test and the replay fixture in one: testdata/gitlab-v18.11.0-ee.yaml
+// The golden test and the pair fixture in one: testdata/gitlab-v18.11.0-ee.yaml
 // and gitlab-v19.0.0-ee.yaml are trimmed, unedited excerpts of GitLab's
 // OpenAPI spec at those two tags (checked 2026-11-15). GitLab 19.0 removed app
 // passwords from the Bitbucket Cloud import API ("Using app passwords with
@@ -32,19 +32,19 @@ func gitlabPlugin(t *testing.T) (Plugin, string) {
 // docs.gitlab.com/update/deprecations): bitbucket_username and
 // bitbucket_app_password are gone from POST /api/v4/import/bitbucket, and
 // bitbucket_email and bitbucket_api_token became required. This is the pair
-// the plugin's Replay from v18.11.0-ee to v19.0.0-ee recreates.
+// the pair v18.11.0-ee → v19.0.0-ee recreates.
 //
 // The excerpts also keep APIEntitiesBadge, whose id went from the generator's
 // default "string" to "integer" in the same release while the API kept
 // returning the same JSON: the response-side noise requestSide drops.
-func TestGitLabReplayRecreatesTheBitbucketAppPasswordRemoval(t *testing.T) {
+func TestGitLabPairRecreatesTheBitbucketAppPasswordRemoval(t *testing.T) {
 	ctx := context.Background()
 	s := openStore(t)
 	p, tmpl := gitlabPlugin(t)
 
-	rejected, err := replayWith(ctx, s, p, "v18.11.0-ee", "v19.0.0-ee")
+	rejected, err := pairWith(ctx, s, p, "v18.11.0-ee", "v19.0.0-ee")
 	if err != nil || rejected {
-		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
+		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}
 	events, err := s.All()
 	if err != nil {
@@ -110,12 +110,12 @@ func TestGitLabReplayRecreatesTheBitbucketAppPasswordRemoval(t *testing.T) {
 		}
 	}
 
-	// Replaying the same pair again must not duplicate the events.
-	if _, err := replayWith(ctx, s, p, "v18.11.0-ee", "v19.0.0-ee"); err != nil {
-		t.Fatalf("second replay: %v", err)
+	// Reading the same pair again must not duplicate the events.
+	if _, err := pairWith(ctx, s, p, "v18.11.0-ee", "v19.0.0-ee"); err != nil {
+		t.Fatalf("second read of the pair: %v", err)
 	}
 	if again, _ := s.All(); len(again) != len(events) {
-		t.Errorf("repeating the replay added events: %d -> %d", len(events), len(again))
+		t.Errorf("reading the pair again added events: %d -> %d", len(events), len(again))
 	}
 }
 
@@ -127,8 +127,8 @@ func TestGitLabResponseSideNoiseIsWhatTheFilterDrops(t *testing.T) {
 	p, _ := gitlabPlugin(t)
 	p.Keep = nil
 
-	if _, err := replayWith(ctx, s, p, "v18.11.0-ee", "v19.0.0-ee"); err != nil {
-		t.Fatalf("replay: %v", err)
+	if _, err := pairWith(ctx, s, p, "v18.11.0-ee", "v19.0.0-ee"); err != nil {
+		t.Fatalf("pair: %v", err)
 	}
 	events, _ := s.All()
 	var badge bool
@@ -138,7 +138,7 @@ func TestGitLabResponseSideNoiseIsWhatTheFilterDrops(t *testing.T) {
 		}
 	}
 	if !badge {
-		t.Error("unfiltered replay has no APIEntitiesBadge.id event; the fixture no longer shows what requestSide is for")
+		t.Error("unfiltered pair has no APIEntitiesBadge.id event; the fixture no longer shows what requestSide is for")
 	}
 }
 

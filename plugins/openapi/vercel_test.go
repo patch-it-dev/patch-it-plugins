@@ -58,7 +58,7 @@ func vercelEnv(s *kittest.Mem) plugin.Env {
 // Domains API is now deprecated. ... Sunset date: 2025-11-09."
 // (vercel.com/changelog/new-domains-registrar-api-for-domain-search-pricing-purchase-and-management).
 // v1.18.7 (2026-01-09) removed two of them; both now answer "This endpoint has
-// been sunsetted on November 9, 2025." The second pair is the replay fixture:
+// been sunsetted on November 9, 2025." The second pair is the pair fixture:
 // one real historical breaking change. The same release added the five
 // /v1/connect/networks operations, which the filter drops, saved here as one.
 func TestVercelGolden(t *testing.T) {
@@ -72,9 +72,9 @@ func TestVercelGolden(t *testing.T) {
 			t.Fatalf("run %s: rejected=%v err=%v", tag, rejected, err)
 		}
 	}
-	// The removal, replayed.
+	// The removal, as a pair.
 	if rejected, err := kittest.Pair(ctx, env, s, vercelPlugin(""), "v1.18.6", "v1.18.7"); err != nil || rejected {
-		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
+		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}
 
 	events := kittest.Stored(t, s)
@@ -116,12 +116,12 @@ func TestVercelGolden(t *testing.T) {
 
 	kittest.Golden(t, "testdata/golden/vercel.json", events)
 
-	// Replaying the same pair again must not duplicate the events.
+	// Reading the same pair again must not duplicate the events.
 	if _, err := kittest.Pair(ctx, env, s, vercelPlugin(""), "v1.18.6", "v1.18.7"); err != nil {
-		t.Fatalf("second replay: %v", err)
+		t.Fatalf("second read of the pair: %v", err)
 	}
 	if again := kittest.Stored(t, s); len(again) != len(events) {
-		t.Errorf("repeating the replay added events: %d -> %d", len(events), len(again))
+		t.Errorf("reading the pair again added events: %d -> %d", len(events), len(again))
 	}
 }
 
@@ -154,7 +154,7 @@ func TestVercelDropsRemovalsThatWerentDeprecated(t *testing.T) {
 	ctx := context.Background()
 	s := openStore(t)
 	if rejected, err := kittest.Pair(ctx, vercelEnv(s), s, vercelPlugin(""), "v1.6.2", "v1.6.3"); err != nil || rejected {
-		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
+		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}
 	if events := kittest.Stored(t, s); len(events) != 0 {
 		for _, e := range events {
@@ -178,7 +178,7 @@ func TestVercelDropsRemovalsThatWerentDeprecated(t *testing.T) {
 		}
 	}
 	if removals == 0 {
-		t.Error("unfiltered replay removes no /v1/log-drains operation; the fixture no longer shows the noise")
+		t.Error("unfiltered pair removes no /v1/log-drains operation; the fixture no longer shows the noise")
 	}
 }
 
@@ -189,7 +189,7 @@ func TestVercelPathParameterRenameIsNoChange(t *testing.T) {
 	ctx := context.Background()
 	s := openStore(t)
 	if rejected, err := kittest.Pair(ctx, vercelEnv(s), s, vercelPlugin(""), "v1.28.64", "v1.28.65"); err != nil || rejected {
-		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
+		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}
 	if events := kittest.Stored(t, s); len(events) != 0 {
 		for _, e := range events {

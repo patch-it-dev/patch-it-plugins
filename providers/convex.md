@@ -38,7 +38,7 @@ Kind: `openapi` (`plugins/openapi`), with `adapter.Convex`.
   - **Request and response property changes,** and new operations. Over the history the differ finds 18 property removals, 16 type changes, 10 schema removals and 3 properties no longer required, most of them in the data sync, usage-limit and S3 export APIs. The drop test is one of them: on 2026-07-14 (`3ead9091`, "Remove name from usage limits") the optional `name` left the usage-limit request and response; the commit says it "was never editable in the UI (always `None` on create, only echoed back)", and the request type at that commit doesn't reject unknown fields, so a caller still sending it isn't refused.
   - **Removals of operations that were never deprecated.** None in the history: no operation has left the spec.
 - Over the 68 commits this keeps 6 events, all deprecations on 2026-11-05: `GET /api/v1/list_log_streams`, `GET /api/v1/get_log_stream/{id}`, `POST /api/v1/create_log_stream`, `POST /api/v1/update_log_stream/{id}`, `POST /api/v1/delete_log_stream/{id}`, `POST /api/v1/rotate_webhook_secret/{id}`.
-- **Replays** a historical pair (`Replay`, from `f35879bb` to `5e5159cb`) and recreates those six; the golden test also runs them as a daily ingest. The drop test replays `3f6edf7a` to `3ead9091`.
+- **Reads** a historical pair (a version pair, `f35879bb` → `5e5159cb`) and recreates those six; the golden test also runs them as a daily ingest. The drop test replays `3f6edf7a` to `3ead9091`.
 
 ## Known gaps
 
