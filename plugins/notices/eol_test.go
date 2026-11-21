@@ -2,11 +2,13 @@ package notices
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"testing"
 	"time"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/fetch"
+	"github.com/patch-it-dev/patch-it-plugins/core/kit"
 	"github.com/patch-it-dev/patch-it-plugins/core/kit/kittest"
 	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 	"github.com/patch-it-dev/patch-it-plugins/plugins/notices/eol"
@@ -60,12 +62,12 @@ func TestDropsAStillSupportedBand(t *testing.T) {
 	}
 }
 
-// eol.Salesforce's docs site answers 403 to a plain GET; the live page is never
-// reachable through env.Get. Read must fall back to the Wayback Machine's own
-// fetch and use its snapshot directly, not fail outright. 401 falls back the
-// same way.
+// eol.Salesforce's docs site answers 403 to a plain GET, or 503 from its CDN;
+// the live page is never reachable through env.Get. Read must fall back to
+// the Wayback Machine's own fetch and use its snapshot directly, not fail
+// outright. 401 falls back the same way.
 func TestFallsBackToTheArchiveWhenTheLiveFetchIsBlocked(t *testing.T) {
-	for _, code := range []int{401, 403} {
+	for _, code := range []int{401, 403, 503} {
 		t.Run(fmt.Sprint(code), func(t *testing.T) {
 			saved := kittest.Pages{eol.Salesforce.URL: "eol/testdata/salesforce-api-rest-eol-2026-10-31.html"}
 			archive := &kittest.Archive{T: t, Pages: saved}
@@ -97,10 +99,10 @@ func TestFallsBackToTheArchiveWhenTheLiveFetchIsBlocked(t *testing.T) {
 }
 
 // A real failure (not the provider blocking a plain fetch) must stay a
-// failure: falling back to the archive for a timeout or a 5xx would hide it
-// as a real page.
+// failure: falling back to the archive for a timeout, a moved page or a 5xx
+// the reader doesn't name would hide it as a real page.
 func TestDoesNotFallBackOnATransientError(t *testing.T) {
-	for _, code := range []int{404, 429, 503} {
+	for _, code := range []int{404, 429, 500, 502} {
 		t.Run(fmt.Sprint(code), func(t *testing.T) {
 			env := plugin.Env{
 				Get: func(context.Context, string) ([]byte, error) {
@@ -116,4 +118,38 @@ func TestDoesNotFallBackOnATransientError(t *testing.T) {
 			}
 		})
 	}
+}
+
+// A blocked page that the archive can't capture, or whose capture holds no
+// table (a block page saved in its place), fails the read: the run records
+// an error, never "nothing changed" and never a skip.
+func TestABlockedPageTheArchiveCantReadIsAFailedRun(t *testing.T) {
+	blocked := plugin.Env{
+		Get: func(context.Context, string) ([]byte, error) {
+			return nil, &fetch.StatusError{URL: eol.Salesforce.URL, StatusCode: 403}
+		},
+		Now: func() time.Time { return kittest.Clock },
+	}
+	last := plugin.Snapshot{Version: plugin.Version{ID: "2026-11-01T00:00:00Z"}, Content: []byte("<table></table>"), CompareHash: "x"}
+	for name, archive := range map[string]kit.Archiver{
+		"no snapshot":  failingArchive{},
+		"a block page": blockPage{},
+	} {
+		_, err := Plugin{Page: eol.Salesforce, Archiver: archive}.Read(context.Background(), blocked, last)
+		if err == nil || errors.Is(err, plugin.ErrNothingToRead) {
+			t.Errorf("%s: %v, want a failure that isn't plugin.ErrNothingToRead", name, err)
+		}
+	}
+}
+
+type failingArchive struct{}
+
+func (failingArchive) Snapshot(context.Context, string) (string, []byte, error) {
+	return "", nil, errors.New("the Wayback Machine didn't snapshot it")
+}
+
+type blockPage struct{}
+
+func (blockPage) Snapshot(_ context.Context, u string) (string, []byte, error) {
+	return "https://web.archive.org/web/20261121000000/" + u, []byte("<html><body>Access Denied</body></html>"), nil
 }

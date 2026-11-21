@@ -7,5 +7,6 @@ var (
 	SoleName  = soleName
 )
 
-func (g Guide) Tag() string                   { return g.tag() }
+func (g Guide) TagOf(release string) string   { return g.tagOf(release) }
+func (g Guide) CommitsURL(major int) string   { return g.commitsURL(major) }
 func (g Guide) AbsoluteLinks(s string) string { return g.absoluteLinks(s) }

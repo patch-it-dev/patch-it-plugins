@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:fe20f958f779ea71cf22a7ab8f02ed3c6b50d393e95dc617b3d6fac6371f41f2",
+    "api": "openai/api",
+    "version": "2026-10-28",
+    "previous_version": "2026-10-27",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /v1/audio/translations"
+    },
+    "description": "Operation POST /v1/audio/translations marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/openai/openai-openapi/aa880040fa7b23c8a7e3618b5ca757ecec71de95/openapi.yaml",
+    "source_pointer": "/paths/~1audio~1translations/post",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Translates audio into English.\\n\\nThis endpoint supports only `whisper-1`. The endpoint and model are deprecated\\nand scheduled to shut down on February 26, 2027. Migrate to\\n`/v1/realtime/translations`, which requires a separate integration. See the\\n[deprecation schedule](https://developers.openai.com/api/docs/deprecations)\\nfor details.\\n\",\"operationId\":\"createTranslation\",\"requestBody\":{\"content\":{\"multipart/form-data\":{\"schema\":{\"$ref\":\"#/components/schemas/CreateTranslationRequest\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"oneOf\":[{\"$ref\":\"#/components/schemas/CreateTranslationResponseJson\"},{\"$ref\":\"#/components/schemas/CreateTranslationResponseVerboseJson\"}]}},\"text/plain\":{\"schema\":{\"type\":\"string\"}}},\"description\":\"OK\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/ErrorResponse\"}}},\"description\":\"Invalid audio input or request parameters.\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/ErrorResponse\"}},\"text/plain\":{\"schema\":{\"description\":\"JSON-encoded error text containing an error object and the HTTP status.\",\"type\":\"string\"}}},\"description\":\"Authentication failed because the API key is missing or revoked, or the client IP is not authorized.\"},\"403\":{\"content\":{\"text/plain\":{\"schema\":{\"description\":\"JSON-encoded error text containing an error object and the HTTP status.\",\"type\":\"string\"}}},\"description\":\"Access to a personal API organization is blocked by the organization policy.\"},\"413\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/ErrorResponse\"}}},\"description\":\"The audio request exceeds the supported size limit.\"},\"429\":{\"$ref\":\"#/components/responses/InferenceRateLimited\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/ErrorResponse\"}}},\"description\":\"The audio could not be processed.\"},\"502\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/sche…",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

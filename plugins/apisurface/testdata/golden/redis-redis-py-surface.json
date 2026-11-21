@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:1878031bbc3f39a2f6b2bdcceebf1dfa13d96a05e96566d43caaa197dd01646d",
+    "api": "redis/redis-py-surface",
+    "version": "8.1.0",
+    "previous_version": "8.0.1",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "redis",
+      "change": "removed_symbol",
+      "symbols": [
+        "maint_notifications.OSSMaintNotificationsHandler.get_handler_for_connection"
+      ]
+    },
+    "description": "The method `maint_notifications.OSSMaintNotificationsHandler.get_handler_for_connection` was removed in redis 8.1.0: code using it fails.",
+    "migration_hint": "redis 8.1.0 has no `maint_notifications.OSSMaintNotificationsHandler.get_handler_for_connection`: see the package's release notes for what replaces it.",
+    "source_url": "https://files.pythonhosted.org/packages/66/9d/c5731f6e3608663d4d3656fd8d3aecee8b509c3082818f5a13eae925baea/redis-8.1.0-py3-none-any.whl",
+    "source_excerpt": "redis 8.0.1 (redis-8.0.1-py3-none-any.whl), redis/maint_notifications.py line 1073: def get_handler_for_connection(self)\nredis 8.1.0 (redis-8.1.0-py3-none-any.whl): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

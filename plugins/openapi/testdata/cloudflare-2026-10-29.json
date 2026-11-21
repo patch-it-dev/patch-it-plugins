@@ -1,0 +1,1200 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "description": "Welcome to Cloudflare's API documentation site. We are experimenting with an updated version of our API documentation - check out [developers.cloudflare.com/api-next/](https://developers.cloudflare.com/api-next/) to test out the new experience.\n\nTo get started using Cloudflare's products and services via the API, refer to [how to interact with Cloudflare](https://developers.cloudflare.com/fundamentals/basic-tasks/interact-with-cloudflare/), which covers using tools like [Terraform](https://developers.cloudflare.com/terraform/#cloudflare-terraform) and the [official SDKs](https://developers.cloudflare.com/fundamentals/api/reference/sdks/) to maintain your Cloudflare resources.\n\nUsing the Cloudflare API requires authentication so that Cloudflare knows who is making requests and what permissions you have. Create an API token to grant access to the API to perform actions. You can also authenticate with [API keys](https://developers.cloudflare.com/fundamentals/api/get-started/keys/), but these keys have [several limitations](https://developers.cloudflare.com/fundamentals/api/get-started/keys/#limitations) that make them less secure than API tokens. Whenever possible, use API tokens to interact with the Cloudflare API.\n\nTo create an API token, from the Cloudflare dashboard, go to My Profile > API Tokens and select Create Token. For more information on how to create and troubleshoot API tokens, refer to\nour [API fundamentals](https://developers.cloudflare.com/fundamentals/api/).\n\nFor information regarding rate limits, refer to our [API Rate Limits](https://developers.cloudflare.com/cloudflare-for-platforms/workers-for-platforms/platform/limits/#api-rate-limits).\n\nTotally new to Cloudflare? [Start here](https://developers.cloudflare.com/fundamentals/get-started/).",
+    "license": {
+      "name": "BSD-3-Clause",
+      "url": "https://opensource.org/licenses/BSD-3-Clause"
+    },
+    "title": "Cloudflare API",
+    "version": "4.0.0"
+  },
+  "servers": [
+    {
+      "description": "Client API",
+      "url": "https://api.cloudflare.com/client/v4"
+    }
+  ],
+  "paths": {
+    "/accounts/move": {
+      "post": {
+        "operationId": "Accounts_batchMoveAccounts",
+        "summary": "Batch move accounts",
+        "description": "Batch move a collection of accounts to a specific organization. ⚠️ Not implemented.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "account_ids": {
+                    "description": "Move these accounts to the destination organization.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "destination_organization_id": {
+                    "description": "Move accounts to this organization ID.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "account_ids",
+                  "destination_organization_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      },
+                      "maxItems": 0
+                    },
+                    "messages": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/organizations-api_V4Message"
+                      }
+                    },
+                    "result": {
+                      "$ref": "#/components/schemas/organizations-api_BatchAccountMoveResponse"
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "errors",
+                    "messages",
+                    "result"
+                  ]
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/organizations-api_V4ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_email": [],
+            "api_key": []
+          }
+        ],
+        "tags": [
+          "Accounts"
+        ],
+        "x-fern-availability": "alpha",
+        "x-fern-ignore": true,
+        "x-fern-sdk-group-name": "accounts.batch",
+        "x-fern-sdk-method-name": "move"
+      }
+    },
+    "/accounts/{account_id}/registrar/domains": {
+      "get": {
+        "operationId": "registrar-domains-list-domains",
+        "summary": "List domains",
+        "description": "Lists domains handled by Registrar.",
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/registrar-api_identifier"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List domains response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/registrar-api_domain_response_collection"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "List domains response failure.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/registrar-api_api-response-common-failure"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true,
+        "security": [
+          {
+            "api_email": [],
+            "api_key": [],
+            "api_token": []
+          }
+        ],
+        "tags": [
+          "Registrar Domains"
+        ],
+        "x-api-token-group": null,
+        "x-fern-ignore": true,
+        "x-fern-sdk-group-name": "registrar.legacy",
+        "x-fern-sdk-method-name": "list-domains",
+        "x-stainless-deprecation-message": "This operation is deprecated and will reach end of life on September 27, 2026. Use the new Registrar API endpoints (domain-search, domain-check, registrations) instead. Refer to https://developers.cloudflare.com/fundamentals/api/reference/deprecations/ for details."
+      }
+    },
+    "/accounts/{account_id}/registrar/domains/{domain_name}": {
+      "get": {
+        "operationId": "registrar-domains-get-domain",
+        "summary": "Get domain",
+        "description": "Show individual domain.",
+        "parameters": [
+          {
+            "name": "domain_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/registrar-api_domain_name"
+            }
+          },
+          {
+            "name": "account_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/registrar-api_identifier"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get domain response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/registrar-api_domain_response_single"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Get domain response failure.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/registrar-api_api-response-common-failure"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true,
+        "security": [
+          {
+            "api_email": [],
+            "api_key": [],
+            "api_token": []
+          }
+        ],
+        "tags": [
+          "Registrar Domains"
+        ],
+        "x-api-token-group": null,
+        "x-fern-ignore": true,
+        "x-fern-sdk-group-name": "registrar.legacy",
+        "x-fern-sdk-method-name": "get-domain",
+        "x-stainless-deprecation-message": "This operation is deprecated and will reach end of life on September 27, 2026. Use the new Registrar API endpoints (domain-search, domain-check, registrations) instead. Refer to https://developers.cloudflare.com/fundamentals/api/reference/deprecations/ for details."
+      },
+      "put": {
+        "operationId": "registrar-domains-update-domain",
+        "summary": "Update domain",
+        "description": "Updates an individual domain.",
+        "parameters": [
+          {
+            "name": "domain_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/registrar-api_domain_name"
+            }
+          },
+          {
+            "name": "account_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/registrar-api_identifier"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/registrar-api_domain_update_properties"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update domain response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/registrar-api_domain_response_single"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Update domain response failure.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/registrar-api_api-response-common-failure"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true,
+        "security": [
+          {
+            "api_email": [],
+            "api_key": [],
+            "api_token": []
+          }
+        ],
+        "tags": [
+          "Registrar Domains"
+        ],
+        "x-api-token-group": null,
+        "x-fern-ignore": true,
+        "x-fern-sdk-group-name": "registrar.legacy",
+        "x-fern-sdk-method-name": "update-domain",
+        "x-stainless-deprecation-message": "This operation is deprecated and will reach end of life on September 27, 2026. Use the new Registrar API endpoints (domain-search, domain-check, registrations) instead. Refer to https://developers.cloudflare.com/fundamentals/api/reference/deprecations/ for details."
+      }
+    },
+    "/accounts/{account_id}/registrar/registrations": {
+      "get": {
+        "operationId": "registrar-domain-registration-list",
+        "summary": "List Registrations",
+        "description": "Returns a paginated list of domain registrations owned by the account.\n\nThis endpoint uses cursor-based pagination. Results are ordered by registration\ndate by default. To fetch the next page, pass the `cursor` value from the\n`result_info` object in the response as the `cursor` query parameter in\nyour next request. An empty `cursor` string indicates there are no more\npages.\n",
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "Cloudflare account ID.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/registrar-api_identifier"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/registrar-api_cursor_pagination_cursor"
+          },
+          {
+            "$ref": "#/components/parameters/registrar-api_cursor_pagination_per_page"
+          },
+          {
+            "$ref": "#/components/parameters/registrar-api_cursor_pagination_direction"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "Column to sort results by. Defaults to registration date (`registry_created_at`) when omitted.",
+            "schema": {
+              "type": "string",
+              "default": "registry_created_at",
+              "enum": [
+                "registry_created_at",
+                "registry_expires_at",
+                "name"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of registrations for the account.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "empty_account": {
+                    "summary": "Account with no registrations",
+                    "value": {
+                      "errors": [],
+                      "messages": [],
+                      "result": [],
+                      "result_info": {
+                        "count": 0,
+                        "cursor": "",
+                        "per_page": 20
+                      },
+                      "success": true
+                    }
+                  },
+                  "multiple_domains": {
+                    "summary": "Account with multiple domains",
+                    "value": {
+                      "errors": [],
+                      "messages": [],
+                      "result": [
+                        {
+                          "auto_renew": true,
+                          "created_at": "2025-01-15T10:00:00Z",
+                          "domain_name": "example.com",
+                          "expires_at": "2026-01-15T10:00:00Z",
+                          "locked": true,
+                          "privacy_mode": "redaction",
+                          "status": "active"
+                        },
+                        {
+                          "auto_renew": false,
+                          "created_at": "2025-03-20T14:30:00Z",
+                          "domain_name": "mybrand.dev",
+                          "expires_at": "2026-03-20T14:30:00Z",
+                          "locked": true,
+                          "privacy_mode": "redaction",
+                          "status": "active"
+                        }
+                      ],
+                      "result_info": {
+                        "count": 2,
+                        "cursor": "",
+                        "per_page": 20
+                      },
+                      "success": true
+                    }
+                  },
+                  "next_page": {
+                    "description": "Response when fetching the next page by passing the cursor from a previous response. The empty cursor indicates this is the last page.",
+                    "summary": "Next page of results (last page)",
+                    "value": {
+                      "errors": [],
+                      "messages": [],
+                      "result": [
+                        {
+                          "auto_renew": true,
+                          "created_at": "2025-04-01T09:00:00Z",
+                          "domain_name": "charlie.org",
+                          "expires_at": "2026-04-01T09:00:00Z",
+                          "locked": true,
+                          "privacy_mode": "redaction",
+                          "status": "active"
+                        }
+                      ],
+                      "result_info": {
+                        "count": 1,
+                        "cursor": "",
+                        "per_page": 20
+                      },
+                      "success": true
+                    }
+                  },
+                  "paginated": {
+                    "summary": "First page with more results available",
+                    "value": {
+                      "errors": [],
+                      "messages": [],
+                      "result": [
+                        {
+                          "auto_renew": true,
+                          "created_at": "2024-01-15T09:30:00Z",
+                          "domain_name": "acmecorp.com",
+                          "expires_at": "2026-01-15T09:30:00Z",
+                          "locked": true,
+                          "privacy_mode": "redaction",
+                          "status": "active"
+                        },
+                        {
+                          "auto_renew": true,
+                          "created_at": "2024-02-20T14:00:00Z",
+                          "domain_name": "brightwave.net",
+                          "expires_at": "2026-02-20T14:00:00Z",
+                          "locked": true,
+                          "privacy_mode": "redaction",
+                          "status": "active"
+                        },
+                        {
+                          "auto_renew": true,
+                          "created_at": "2024-03-05T11:15:00Z",
+                          "domain_name": "cloudpeak.org",
+                          "expires_at": "2026-03-05T11:15:00Z",
+                          "locked": true,
+                          "privacy_mode": "redaction",
+                          "status": "active"
+                        },
+                        {
+                          "auto_renew": true,
+                          "created_at": "2024-03-22T08:45:00Z",
+                          "domain_name": "solarpanel.io",
+                          "expires_at": "2026-03-22T08:45:00Z",
+                          "locked": true,
+                          "privacy_mode": "off",
+                          "status": "active"
+                        },
+                        {
+                          "auto_renew": false,
+                          "created_at": "2024-04-10T16:00:00Z",
+                          "domain_name": "greenleaf.dev",
+                          "expires_at": "2026-04-10T16:00:00Z",
+                          "locked": true,
+                          "privacy_mode": "redaction",
+                          "status": "active"
+                        },
+                        {
+                          "auto_renew": true,
+                          "created_at": "2024-05-03T10:30:00Z",
+                          "domain_name": "swiftrunner.app",
+                          "expires_at": "2026-05-03T10:30:00Z",
+                          "locked": true,
+                          "privacy_mode": "redaction",
+                          "status": "active"
+                        },
+                        {
+                          "auto_renew": false,
+                          "created_at": "2024-05-18T13:00:00Z",
+                          "domain_name": "northerntrail.co",
+                          "expires_at": "2025-05-18T13:00:00Z",
+                          "locked": true,
+                          "privacy_mode": "redaction",
+                          "status": "expired"
+                        },
+                        {
+                          "auto_renew": true,
+                          "created_at": "2024-06-01T07:20:00Z",
+                          "domain_name": "pixelforge.xyz",
+                          "expires_at": "2026-06-01T07:20:00Z",
+                          "locked": false,
+                          "privacy_mode": "redaction",
+                          "status": "active"
+                        },
+                        {
+                          "auto_renew": true,
+                          "created_at": "2024-06-25T15:45:00Z",
+                          "domain_name": "oceandrift.com",
+                          "expires_at": "2026-06-25T15:45:00Z",
+                          "locked": true,
+                          "privacy_mode": "redaction",
+                          "status": "active"
+                        },
+                        {
+                          "auto_renew": true,
+                          "created_at": "2024-07-12T09:00:00Z",
+                          "domain_name": "rocketlaunch.net",
+                          "expires_at": "2026-07-12T09:00:00Z",
+                          "locked": true,
+                          "privacy_mode": "off",
+                          "status": "active"
+                        },
+                        {
+                          "auto_renew": false,
+                          "created_at": "2024-08-08T12:30:00Z",
+                          "domain_name": "blueprintlab.io",
+                          "expires_at": "2026-08-08T12:30:00Z",
+                          "locked": true,
+                          "privacy_mode": "redaction",
+                          "status": "active"
+                        },
+                        {
+                          "auto_renew": true,
+                          "created_at": "2024-09-01T18:00:00Z",
+                          "domain_name": "maplewood.org",
+                          "expires_at": "2026-09-01T18:00:00Z",
+                          "locked": true,
+                          "privacy_mode": "redaction",
+                          "status": "active"
+                        },
+                        {
+                          "auto_renew": false,
+                          "created_at": "2024-09-20T10:15:00Z",
+                          "domain_name": "thunderbolt.dev",
+                          "expires_at": "2025-09-20T10:15:00Z",
+                          "locked": false,
+                          "privacy_mode": "off",
+                          "status": "expired"
+                        },
+                        {
+                          "auto_renew": true,
+                          "created_at": "2024-10-05T14:45:00Z",
+                          "domain_name": "silverbranch.app",
+                          "expires_at": "2026-10-05T14:45:00Z",
+                          "locked": true,
+                          "privacy_mode": "redaction",
+                          "status": "active"
+                        },
+                        {
+                          "auto_renew": true,
+                          "created_at": "2024-11-11T08:00:00Z",
+                          "domain_name": "nightowl.co",
+                          "expires_at": "2026-11-11T08:00:00Z",
+                          "locked": true,
+                          "privacy_mode": "redaction",
+                          "status": "active"
+                        },
+                        {
+                          "auto_renew": true,
+                          "created_at": "2024-12-01T11:30:00Z",
+                          "domain_name": "crimsongate.com",
+                          "expires_at": "2026-12-01T11:30:00Z",
+                          "locked": true,
+                          "privacy_mode": "redaction",
+                          "status": "active"
+                        },
+                        {
+                          "auto_renew": false,
+                          "created_at": "2025-01-07T16:20:00Z",
+                          "domain_name": "frostedpine.net",
+                          "expires_at": "2027-01-07T16:20:00Z",
+                          "locked": true,
+                          "privacy_mode": "redaction",
+                          "status": "active"
+                        },
+                        {
+                          "auto_renew": true,
+                          "created_at": "2025-01-25T09:50:00Z",
+                          "domain_name": "horizonline.xyz",
+                          "expires_at": "2027-01-25T09:50:00Z",
+                          "locked": true,
+                          "privacy_mode": "redaction",
+                          "status": "active"
+                        },
+                        {
+                          "auto_renew": true,
+                          "created_at": "2025-02-14T13:00:00Z",
+                          "domain_name": "coppervine.io",
+                          "expires_at": "2027-02-14T13:00:00Z",
+                          "locked": true,
+                          "privacy_mode": "off",
+                          "status": "active"
+                        },
+                        {
+                          "auto_renew": true,
+                          "created_at": "2025-03-02T07:40:00Z",
+                          "domain_name": "starlitpath.org",
+                          "expires_at": "2027-03-02T07:40:00Z",
+                          "locked": true,
+                          "privacy_mode": "redaction",
+                          "status": "active"
+                        }
+                      ],
+                      "result_info": {
+                        "count": 20,
+                        "cursor": "eyJ0IjoiMjAyNS0wNi0xNVQxMjowMDowMC4wMDAwMDBaIiwibiI6ImJyYXZvLm5ldCJ9",
+                        "per_page": 20
+                      },
+                      "success": true
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/registrar-api_registration-response-collection"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "List registrations failure.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalid_cursor": {
+                    "summary": "Invalid cursor",
+                    "value": {
+                      "errors": [
+                        {
+                          "code": 10000,
+                          "message": "Invalid pagination cursor"
+                        }
+                      ],
+                      "messages": [],
+                      "result": null,
+                      "success": false
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/registrar-api_api-response-common-failure"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_token": []
+          },
+          {
+            "api_email": [],
+            "api_key": []
+          }
+        ],
+        "tags": [
+          "Registrar Registration"
+        ],
+        "x-fern-availability": "generally-available",
+        "x-fern-sdk-group-name": "registrar.registrations",
+        "x-fern-sdk-method-name": "list"
+      },
+      "post": {
+        "operationId": "registrar-domain-registration-create",
+        "summary": "Create Registration",
+        "description": "Starts a domain registration workflow. This is a billable operation — successful\nregistration charges the account's default payment method. All successful\ndomain registrations are non-refundable — once the workflow completes with\n`state: succeeded`, the charge cannot be reversed.\n\n### Prerequisites\n- The account must have a billing profile with a valid default payment method.\n  Set this up at `https://dash.cloudflare.com/{account_id}/billing/payment-info`.\n- The account must not already be at the maximum supported domain limit.\n  A single account may own up to 500 domains in total across registrations\n  created through either the dashboard or this API.\n- The domain must be on a supported extension for programmatic registration.\n- Use `POST /domain-check` immediately before calling this endpoint to confirm\n  real-time availability and pricing.\n\n### Supported extensions\n\nThis API supports programmatic registration for all extensions supported by\nthe dashboard experience, with the following exceptions:\n\n`giving`, `mom`, `inc`, `lol`, `sh`, `link`, `cc`, `new`\n\nCloudflare Registrar supports 400+ extensions in the dashboard. Extensions\nlisted above can be registered at\n`https://dash.cloudflare.com/{account_id}/domains/registrations`.\n\n### Express mode\nThe only required field is `domain_name`. If `contacts` is omitted, the system\nuses the account's default address book entry as the registrant. If no default\nexists and no contact is provided, the request fails. Set up a default address\nbook entry and accept the required agreement at\n`https://dash.cloudflare.com/{account_id}/domains/registrations`.\n\n### Defaults\n- `years`: defaults to the extension's minimum registration period (1 year for\n  most extensions, but varies — for example, `.ai` (if supported) requires a minimum of 2 years).\n- `auto_renew`: defaults to `false`. Setting it to `true` is an explicit\n  opt-in authorizing Cloudflare to charge the account's default payment\n  method up to 30 days before domain expiry to renew the registration.\n  Renewal pricing may change over time based on registry pricing.\n- `privacy_mode`: defaults to `redaction`.\n\n### Premium domains\nPremium domain registration is not currently supported by this API.\nIf `POST /domain-check` returns `tier: premium`, do not call this\nendpoint for that domain.\n\n### Response behavior\nBy default, the server holds the connection for a bounded, server-defined\namount of time while the registration completes. Most registrations finish\nwithin this window and return `201 Created` with a completed workflow status.\n\nIf the registration is still processing after this synchronous wait window,\nthe server returns `202 Accepted`. Poll the URL in `links.self` to track progress.\n\nTo skip the wait and receive an immediate `202`, send `Prefer: respond-async`.\n",
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "Cloudflare account ID. Required for all Registrar API operations.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/registrar-api_identifier"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Set to `respond-async` to receive an immediate `202 Accepted` without\nwaiting for the operation to complete (RFC 7240).\n\nThe header may be combined with other preferences using standard\ncomma-separated syntax.\n",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "examples": {
+                "ca_with_contact_extensions": {
+                  "description": "CA registrations require a registrant legal type.\nProvide the required value in `contact_extensions` as described\nby the live .ca registration schema.\n",
+                  "summary": "Register a .ca domain with legal type",
+                  "value": {
+                    "auto_renew": false,
+                    "contact_extensions": {
+                      "ca_legal_type": "CCT"
+                    },
+                    "contacts": {
+                      "registrant": {
+                        "email": "ada@example.ca",
+                        "phone": "+1.6135550100",
+                        "postal_info": {
+                          "address": {
+                            "city": "Ottawa",
+                            "country_code": "CA",
+                            "postal_code": "K1A 0B1",
+                            "state": true,
+                            "street": "123 Queen St"
+                          },
+                          "name": "Ada Lovelace",
+                          "organization": "Example Canada Inc"
+                        }
+                      }
+                    },
+                    "domain_name": "my-brand-example.ca",
+                    "years": 1
+                  }
+                },
+                "io_with_role_contacts": {
+                  "description": "Some extension schemas accept additional standard contact roles such as `technical`, `administrator`, and `billing`. When these roles are provided explicitly, Cloudflare preserves the supplied role-specific contact data instead of deriving it from `contacts.registrant`.",
+                  "summary": "Register with explicit role contacts",
+                  "value": {
+                    "auto_renew": false,
+                    "contacts": {
+                      "administrator": {
+                        "email": "katherine@example.io",
+                        "phone": "+1.5555550102",
+                        "postal_info": {
+                          "address": {
+                            "city": "San Francisco",
+                            "country_code": "US",
+                            "postal_code": "94103",
+                            "state": "CA",
+                            "street": "789 Mission St"
+                          },
+                          "name": "Katherine Johnson",
+                          "organization": "Example Admin Inc"
+                        }
+                      },
+                      "billing": {
+                        "email": "dorothy@example.io",
+                        "phone": "+1.5555550103",
+                        "postal_info": {
+                          "address": {
+                            "city": "San Francisco",
+                            "country_code": "US",
+                            "postal_code": "94105",
+                            "state": "CA",
+                            "street": "101 Howard St"
+                          },
+                          "name": "Dorothy Vaughan",
+                          "organization": "Example Billing Inc"
+                        }
+                      },
+                      "registrant": {
+                        "email": "ada@example.io",
+                        "phone": "+1.5555555555",
+                        "postal_info": {
+                          "address": {
+                            "city": "Austin",
+                            "country_code": "US",
+                            "postal_code": "78701",
+                            "state": "TX",
+                            "street": "123 Main St"
+                          },
+                          "name": "Ada Lovelace",
+                          "organization": "Example Inc"
+                        }
+                      },
+                      "technical": {
+                        "email": "grace@example.io",
+                        "phone": "+1.5555550101",
+                        "postal_info": {
+                          "address": {
+                            "city": "San Francisco",
+                            "country_code": "US",
+                            "postal_code": "94105",
+                            "state": "CA",
+                            "street": "456 Market St"
+                          },
+                          "name": "Grace Hopper",
+                          "organization": "Example Technical Inc"
+                        }
+                      }
+                    },
+                    "domain_name": "my-brand-example.io",
+                    "years": 1
+                  }
+                },
+                "minimal": {
+                  "description": "The simplest registration request uses the following defaults.\n- `years` defaults to the extension's minimum registration period (typically 1 year).\n- `auto_renew` defaults to `false`.\n- `privacy_mode` defaults to `redaction`.\n- Registrant contact falls back to the account's default address book entry.\n",
+                  "summary": "Minimal registration — just a domain name",
+                  "value": {
+                    "domain_name": "my-new-startup.com"
+                  }
+                },
+                "multi_year": {
+                  "description": "Register a domain for 3 years.",
+                  "summary": "Register for multiple years",
+                  "value": {
+                    "domain_name": "longterm-project.dev",
+                    "years": 3
+                  }
+                },
+                "uk_with_contact_extensions": {
+                  "description": ".uk registrations can require registrant type information. For\norganization registrants, include the company number when the\nlive registration schema requires it.\n",
+                  "summary": "Register a .uk domain with registrant type",
+                  "value": {
+                    "auto_renew": false,
+                    "contact_extensions": {
+                      "company_number": "12345678",
+                      "registrant_type": "LTD"
+                    },
+                    "contacts": {
+                      "registrant": {
+                        "email": "ada@example.co.uk",
+                        "phone": "+44.2071234567",
+                        "postal_info": {
+                          "address": {
+                            "city": "London",
+                            "country_code": "GB",
+                            "postal_code": "SW1A 1AA",
+                            "state": "London",
+                            "street": "1 Example Street"
+                          },
+                          "name": "Ada Lovelace",
+                          "organization": "Example UK Ltd"
+                        }
+                      }
+                    },
+                    "domain_name": "my-brand-example.uk",
+                    "years": 1
+                  }
+                },
+                "us_with_contact_extensions": {
+                  "description": "Some extensions require registry-specific contact extension\nvalues in addition to the standard registrant contact. The\nextension discovery endpoint is authoritative for the required\nkeys and allowed values.\n",
+                  "summary": "Register a .us domain with contact extensions",
+                  "value": {
+                    "auto_renew": false,
+                    "contact_extensions": {
+                      "application_purpose": "P3",
+                      "nexus_category": "C11"
+                    },
+                    "contacts": {
+                      "registrant": {
+                        "email": "ada@example.com",
+                        "phone": "+1.5555555555",
+                        "postal_info": {
+                          "address": {
+                            "city": "Austin",
+                            "country_code": "US",
+                            "postal_code": "78701",
+                            "state": "TX",
+                            "street": "123 Main St"
+                          },
+                          "name": "Ada Lovelace",
+                          "organization": "Example Inc"
+                        }
+                      }
+                    },
+                    "domain_name": "my-brand-example.us",
+                    "years": 1
+                  }
+                },
+                "with_contact": {
+                  "description": "Provide registrant contact data inline if the account does not have\na default address book entry, or to override it for this registration.\n`postal_info.name` is the complete contact name in one field.\nSome registries require a complete personal name, including a\nfamily or last name where applicable, but this API does not\naccept separate first-name and last-name fields.\n",
+                  "summary": "Register with explicit registrant contact",
+                  "value": {
+                    "auto_renew": true,
+                    "contacts": {
+                      "registrant": {
+                        "email": "ada@example.com",
+                        "phone": "+1.5555555555",
+                        "postal_info": {
+                          "address": {
+                            "city": "Austin",
+                            "country_code": "US",
+                            "postal_code": "78701",
+                            "state": "TX",
+                            "street": "123 Main St"
+                          },
+                          "name": "Ada Lovelace",
+                          "organization": "Example Inc"
+                        }
+                      }
+                    },
+                    "domain_name": "example.com",
+                    "years": 1
+                  }
+                }
+              },
+              "schema": {
+                "$ref": "#/components/schemas/registrar-api_registration_create_request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Registration completed successfully within the synchronous wait window.\nThe workflow status will have `state: succeeded` and `completed: true`.\n",
+            "headers": {
+              "Preference-Applied": {
+                "description": "Echoed when the server honored a `Prefer` header.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "examples": {
+                  "completed": {
+                    "summary": "Registration completed within timeout (most common)",
+                    "value": {
+                      "errors": [],
+                      "messages": [],
+                      "result": {
+                        "completed": true,
+                        "context": {
+                          "domain_name": "example.com",
+                          "registration": {
+                            "auto_renew": true,
+                            "created_at": "2025-10-27T10:00:00Z",
+                            "domain_name": "example.com",
+                            "expires_at": "2026-10-27T10:00:00Z",
+                            "locked": true,
+                            "privacy_mode": "redaction",
+                            "status": "active"
+                          }
+                        },
+                        "created_at": "2025-10-27T10:00:00Z",
+                        "links": {
+                          "resource": "/accounts/abc/registrar/registrations/example.com",
+                          "self": "/accounts/abc/registrar/registrations/example.com/registration-status"
+                        },
+                        "state": "succeeded",
+                        "updated_at": "2025-10-27T10:00:03Z"
+                      },
+                      "success": true
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/registrar-api_workflow-status-response-single"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Registration is still processing. This occurs when the operation did\nnot complete within the synchronous wait window, or when `Prefer: respond-async`\nwas sent. Poll the URL in `links.self` to track progress.\n",
+            "headers": {
+              "Location": {
+                "description": "URL of the workflow status resource (same as `links.self`).",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Preference-Applied": {
+                "description": "Set to `respond-async` when the server honored the preference.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "examples": {
+                  "still_processing": {
+                    "summary": "Registration still in progress",
+                    "value": {
+                      "errors": [],
+                      "messages": [],
+                      "result": {
+                        "completed": false,
+                        "context": {
+                          "domain_name": "example.com"
+                        },
+                        "created_at": "2025-10-27T10:00:00Z",
+                        "links": {
+                          "resource": "/accounts/abc/registrar/registrations/example.com",
+                          "self": "/accounts/abc/registrar/registrations/example.com/registration-status"
+                        },
+                        "state": "in_progress",
+                        "updated_at": "2025-10-27T10:00:10Z"
+                      },
+                      "success": true
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/registrar-api_workflow-status-response-single"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Create registration failure.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "account_domain_limit_exceeded": {
+                    "description": "The account already owns the maximum supported number of domains.\nDomains created through either the dashboard or this API count\ntoward the same account-wide limit.\n",
+                    "summary": "Account has reached the domain limit",
+                    "value": {
+                      "errors": [
+                        {
+                          "code": 10000,
+                          "message": "Domain limit reached: you cannot register more than 500 domains.",
+                          "source": {
+                            "pointer": "/domain_name"
+                          }
+                        }
+                      ],
+                      "messages": [],
+                      "result": null,
+                      "success": false
+                    }
+                  },
+                  "domain_name_required": {
+                    "description": "The required `domain_name` field was not provided.",
+                    "summary": "Missing domain name",
+                    "value": {
+                      "errors": [
+                        {
+                          "code": 10000,
+                          "message": "domain_name is required",
+                          "source": {
+                            "pointer": "/domain_name"
+                          }
+                        }
+                      ],
+                      "messages": [],
+                      "result": null,
+                      "success": false
+                    }
+                  },
+                  "invalid_auto_renew": {
+                    "description": "The `auto_renew` field must be a boolean if present.",
+                    "summary": "Invalid auto_renew value",
+                    "value": {
+                      "errors": [
+                        {
+                          "code": 10000,
+                          "message": "Must be a boolean",
+                          "source": {
+                            "pointer": "/auto_renew"
+                          }
+                        }
+                      ],
+                      "messages": [],
+                      "result": null,
+                      "success": false
+                    }
+                  },
+                  "missing_contact": {
+                    "description": "The request did not include a registrant contact, and the account\nhas no default address book entry to fall back to. Either provide\ncontacts.registrant in the request or set up a default address\nbook entry at `https://dash.cloudflare.com/{account_id}/domains/registrations`.\n",
+                    "summary": "No registrant contact and no default address book entry",
+                    "value": {
+                      "errors": [
+                        {
+                          "code": 10000,
+                          "message": "No registrant contact provided and no default address book entry found for this account."
+                        }
+                      ],
+                      "messages": [],
+                      "result": null,
+                      "success": false
+                    }
+                  },
+                  "registration_not_supported": {
+                    "description": "The extension is not supported for registration through this API.\nThis includes extensions that are unsupported by the API or do\nnot support the required registration contact flow.\n",
+                    "summary": "Registration not supported for extension",
+                    "value": {
+                      "errors": [
+                        {
+                          "code": 10000,
+                          "message": "Registration is not supported for this extension"
+                        }
+                      ],
+                      "messages": [],
+                      "result": null,
+                      "success": false
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/registrar-api_api-response-common-failure"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_token": []
+          },
+          {
+            "api_email": [],
+            "api_key": []
+          }
+        ],
+        "tags": [
+          "Registrar Registration"
+        ],
+        "x-fern-availability": "generally-available",
+        "x-fern-sdk-group-name": "registrar.registrations",
+        "x-fern-sdk-method-name": "create"
+      }
+    },
+    "/tenants/{tenant_id}": {
+      "get": {
+        "operationId": "Tenants_retrieveTenant",
+        "summary": "Get tenant details",
+        "description": "Retrieves a tenant's identity, status, metadata, contacts, and organizational units.",
+        "parameters": [
+          {
+            "name": "tenant_id",
+            "in": "path",
+            "description": "The ID of the tenant to retrieve.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      },
+                      "maxItems": 0
+                    },
+                    "messages": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/organizations-api_V4Message"
+                      }
+                    },
+                    "result": {
+                      "$ref": "#/components/schemas/organizations-api_Tenant"
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "errors",
+                    "messages",
+                    "result"
+                  ]
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/organizations-api_V4ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_email": [],
+            "api_key": []
+          }
+        ],
+        "tags": [
+          "Tenants"
+        ],
+        "x-fern-availability": "generally-available",
+        "x-fern-sdk-group-name": "tenant",
+        "x-fern-sdk-method-name": "get"
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "stripe",
+  "version": "23.0.1",
+  "dist": {
+    "tarball": "https://registry.npmjs.org/stripe/-/stripe-23.0.1.tgz"
+  }
+}

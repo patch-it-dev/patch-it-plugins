@@ -1,0 +1,20 @@
+{
+  "info": {
+    "name": "urllib3",
+    "version": "2.5.0"
+  },
+  "urls": [
+    {
+      "filename": "urllib3-2.5.0-py3-none-any.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/a7/c2/fe1e52489ae3122415c51f387e221dd0773709bad6c6cdaa599e8a2c5185/urllib3-2.5.0-py3-none-any.whl",
+      "yanked": false
+    },
+    {
+      "filename": "urllib3-2.5.0.tar.gz",
+      "packagetype": "sdist",
+      "url": "https://files.pythonhosted.org/packages/15/22/9ee70a2574a4f4599c47dd506532914ce044817c7752a79b6a51286319bc/urllib3-2.5.0.tar.gz",
+      "yanked": false
+    }
+  ]
+}

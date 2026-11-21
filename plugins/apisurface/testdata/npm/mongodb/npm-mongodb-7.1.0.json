@@ -1,0 +1,7 @@
+{
+  "name": "mongodb",
+  "version": "7.1.0",
+  "dist": {
+    "tarball": "https://registry.npmjs.org/mongodb/-/mongodb-7.1.0.tgz"
+  }
+}

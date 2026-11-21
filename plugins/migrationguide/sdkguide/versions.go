@@ -2,7 +2,6 @@ package sdkguide
 
 import (
 	"context"
-	"fmt"
 	"time"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
@@ -34,16 +33,17 @@ func (g Guide) Releases(ctx context.Context, env plugin.Env) ([]plugin.Version, 
 // GuideURL is the guide at v's tag when v is the first release of its major
 // (X.0.0): only a new major has a guide to read. Any other release has none
 // ("").
-func (g Guide) GuideURL(v plugin.Version) string {
-	if !FirstOfMajor(v.ID) {
-		return ""
+func (g Guide) GuideURL(_ context.Context, _ plugin.Env, v plugin.Version) (string, error) {
+	if !versions.FirstOfMajor(v.ID) {
+		return "", nil
 	}
-	return g.At(versions.Major(v.ID)).URL()
+	return g.At(versions.Major(v.ID)).URL(), nil
 }
 
 // Read is an event per parameter the to major removed, read from its
-// guide, with previous_version from's release.
-func (g Guide) Read(page []byte, from, to plugin.Version, now time.Time) (_ []event.Event, rejected []error, err error) {
+// guide (at the major's tag: sourceURL), with previous_version from's
+// release.
+func (g Guide) Read(page []byte, _ string, from, to plugin.Version, now time.Time) (_ []event.Event, rejected []error, err error) {
 	g = g.At(versions.Major(to.ID))
 	removals, err := Parse(page, g)
 	if err != nil {
@@ -51,10 +51,4 @@ func (g Guide) Read(page []byte, from, to plugin.Version, now time.Time) (_ []ev
 	}
 	events, errs := Events(g, removals, from.ID, now)
 	return events, errs, nil
-}
-
-// FirstOfMajor is true for X.0.0, the release a major's guide is tagged at.
-func FirstOfMajor(v string) bool {
-	m := versions.Major(v)
-	return m > 0 && v == fmt.Sprintf("%d.0.0", m)
 }

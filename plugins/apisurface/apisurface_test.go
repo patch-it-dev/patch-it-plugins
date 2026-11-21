@@ -56,7 +56,7 @@ func pair(t *testing.T) []event.Event {
 // same class.)
 func TestGolden(t *testing.T) {
 	got := pair(t)
-	kittest.Golden(t, "testdata/golden/openai-1.1.2.json", got)
+	kittest.Golden(t, "testdata/golden/openai-python-surface.json", got)
 	for _, e := range got {
 		if e.PreviousVersion != "1.1.1" || e.Version != "1.1.2" || e.SourceURL != wheel112 || !strings.Contains(e.SourceExcerpt, "openai/types/beta/asssitant_deleted.py line ") {
 			t.Errorf("%v: %s<-%s, excerpt %q", e.Subject.Symbols, e.Version, e.PreviousVersion, e.SourceExcerpt)
@@ -255,3 +255,123 @@ func TestSourceFilesStayInThePackage(t *testing.T) {
 }
 
 var _ plugin.Versioned = Plugin{}
+
+// A class or function gone from a module's surface while the module still
+// binds the name is still importable: the class made an alias of another
+// (anthropic 2.5.0: DeadlineExceededError = GatewayTimeoutError), names
+// re-exported from a private module (google-genai 3.4.0's interactions),
+// or a module that star-imports from where names can't be listed. A note,
+// not an event. A name the module no longer binds at all is gone.
+func TestANameTheModuleStillBindsIsNotRemoved(t *testing.T) {
+	read := func(files map[string]string) Release {
+		var fs []pysurface.File
+		for p, text := range files {
+			fs = append(fs, pysurface.File{Path: p, Text: text})
+		}
+		return Release{Surface: pysurface.Read(fs), Classes: pysurface.ReadClasses(fs), Bindings: pysurface.ReadBindings(fs)}
+	}
+	a := read(map[string]string{
+		"acme/__init__.py":     "from ._exceptions import DeadlineExceededError, Gone\n",
+		"acme/_exceptions.py":  "class DeadlineExceededError(Exception): pass\nclass Gone(Exception): pass\n",
+		"acme/interactions.py": "class Webhook:\n    def __init__(self, url): pass\n",
+		"acme/starred.py":      "class Agent:\n    def __init__(self, name): pass\n",
+	})
+	b := read(map[string]string{
+		"acme/__init__.py":     "from ._exceptions import DeadlineExceededError\n",
+		"acme/_exceptions.py":  "class GatewayTimeoutError(Exception): pass\nDeadlineExceededError = GatewayTimeoutError\n",
+		"acme/interactions.py": "from ._gen.webhooks import Webhook\n",
+		"acme/starred.py":      "from ._gen.agents import *\n",
+	})
+	want := "note acme.DeadlineExceededError\nremoved_symbol acme.Gone \nnote acme.interactions.Webhook\nnote acme.starred.Agent"
+	if got := strings.Join(changes(a, b), "\n"); got != want {
+		t.Errorf("got\n%s\nwant\n%s", got, want)
+	}
+}
+
+// A method made a staticmethod loses self, which no caller passes:
+// supabase 1.0.0's SupabaseRealtimeClient.get_payload_records. Not a removed
+// parameter. (cls likewise, for a classmethod made static.)
+func TestSelfGoneIsNoRemovedParameter(t *testing.T) {
+	self := prm("self", "either", "")
+	a := Release{Surface: pysurface.Surface{"acme.C": cls("class C:"), "acme.C.records": sym("method", self, prm("payload", "either", ""))}}
+	b := Release{Surface: pysurface.Surface{"acme.C": cls("class C:"), "acme.C.records": sym("method", prm("payload", "either", ""))}}
+	if got := changes(a, b); len(got) != 0 {
+		t.Errorf("got %v, want nothing", got)
+	}
+}
+
+// TypeScript passes arguments by position: a parameter renamed in place is
+// no change; one gone off the end (with no rest parameter now) is removed;
+// one optional before and required now, under the same name, lost its
+// "default"; a new required one at the end is a note.
+func TestPositionalParameters(t *testing.T) {
+	pos := func(name string, optional bool) pysurface.Param {
+		return pysurface.Param{Name: name, Kind: "positional", HasDef: optional}
+	}
+	rest := pysurface.Param{Name: "args", Kind: "args", HasDef: true}
+	a := Release{Positional: true, Surface: pysurface.Surface{
+		"acme.renamed":  sym("function", pos("a", false), pos("b", true)),
+		"acme.shorter":  sym("function", pos("a", false), pos("b", true), pos("c", true)),
+		"acme.rest":     sym("function", pos("a", false), pos("b", true)),
+		"acme.req":      sym("function", pos("a", false), pos("opts", true)),
+		"acme.grew":     sym("function", pos("a", false)),
+		"acme.inserted": sym("function", pos("a", false), pos("b", true)),
+	}}
+	b := Release{Positional: true, Surface: pysurface.Surface{
+		"acme.renamed":  sym("function", pos("x", false), pos("y", true)),
+		"acme.shorter":  sym("function", pos("a", false)),
+		"acme.rest":     sym("function", pos("a", false), rest),
+		"acme.req":      sym("function", pos("a", false), pos("opts", false)),
+		"acme.grew":     sym("function", pos("a", false), pos("b", false)),
+		"acme.inserted": sym("function", pos("a", false), pos("x", false), pos("b", true)),
+	}}
+	// A required parameter inserted before an optional one (inserted) is a
+	// note: the optional one wasn't made required, it moved.
+	want := "note acme.grew\nnote acme.inserted\nchanged_default acme.req opts\nremoved_parameter acme.shorter b\nremoved_parameter acme.shorter c"
+	if got := strings.Join(changes(a, b), "\n"); got != want {
+		t.Errorf("got\n%s\nwant\n%s", got, want)
+	}
+}
+
+// One declaration reachable at several import paths is one change, its
+// paths in Also, the shortest first: openai's AgentSessionBudgetReachedEvent
+// is exported by openai/resources/beta, .../beta/agents and
+// .../beta/agents/agents.
+func TestOneDeclarationIsOneChange(t *testing.T) {
+	d := sym("class")
+	d.File, d.Line = "acme/agents.d.ts", 7
+	other := sym("class")
+	other.File, other.Line = "acme/other.d.ts", 3
+	a := Release{Surface: pysurface.Surface{"acme.beta.Event": d, "acme.beta.agents.Event": d, "acme/x.Event": d, "acme.Other": other}}
+	got := Compare(a, Release{Surface: pysurface.Surface{}})
+	if len(got) != 2 || got[0].Symbol != "acme.Other" || got[1].Symbol != "acme/x.Event" || strings.Join(got[1].Also, ",") != "acme.beta.Event,acme.beta.agents.Event" {
+		for _, c := range got {
+			t.Logf("%s %v", c.Symbol, c.Also)
+		}
+		t.Errorf("got %d changes", len(got))
+	}
+}
+
+// npm: a member of a name now re-exported from another package, or now a
+// value or a type (whose members aren't read) may still be there
+// (@sentry/node 11.13.0's logger, a namespace made a const object); a method gone from a class that extends a class of
+// another package may be that class's (@neondatabase/serverless 1.0.0's
+// Pool.connect, pg's). Notes.
+func TestNPMNotesForWhatAnotherPackageMayHold(t *testing.T) {
+	a := Release{Positional: true, Surface: pysurface.Surface{
+		"acme.logger": sym("namespace"), "acme.logger.info": sym("function"),
+		"acme.log2": sym("namespace"), "acme.log2.info": sym("function"),
+		"acme.Pool": cls("class Pool extends Pool_2"), "acme.Pool.connect": sym("method"),
+		"acme.Own": cls("class Own extends Base"), "acme.Own.gone": sym("method"),
+	}, Classes: pysurface.Classes{"Pool": {Bases: []string{"Pool_2"}}, "Own": {Bases: []string{"Base"}}, "Base": {}}}
+	b := Release{Positional: true, Surface: pysurface.Surface{
+		"acme.logger": {Kind: "export", File: "x.d.ts", Line: 1, Signature: "export { logger } from \"@acme/core\""},
+		"acme.log2":   sym("variable"),
+		"acme.Pool":   cls("class Pool extends Pool_2"),
+		"acme.Own":    cls("class Own extends Base"),
+	}, Classes: pysurface.Classes{"Pool": {Bases: []string{"Pool_2"}}, "Own": {Bases: []string{"Base"}}, "Base": {}}}
+	want := "removed_symbol acme.Own.gone \nnote acme.Pool.connect\nnote acme.log2.info\nnote acme.logger.info"
+	if got := strings.Join(changes(a, b), "\n"); got != want {
+		t.Errorf("got\n%s\nwant\n%s", got, want)
+	}
+}

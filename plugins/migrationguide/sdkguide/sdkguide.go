@@ -47,9 +47,6 @@ var Anthropic = Guide{
 	Symbols: []string{"messages.create", "messages.stream", "messages.parse"},
 }
 
-// AnthropicV1 is anthropic-sdk-python's guide to 1.0.0: what the golden pins.
-var AnthropicV1 = Anthropic.At(1)
-
 // At is g pinned to one major.
 func (g Guide) At(major int) Guide {
 	g.Major = major

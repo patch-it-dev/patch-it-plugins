@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:8de16d9483ebddec7ba905f374643a198f9ebd65ffe881f6eaafd614dafa1a64",
+    "api": "redis/ioredis",
+    "version": "5.0.0",
+    "previous_version": "4.31.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "ioredis",
+      "change": "removed_symbol",
+      "symbols": [
+        "Redis.serverInfo"
+      ]
+    },
+    "description": "`Redis.serverInfo` was removed in ioredis 5.0.0: code using it fails.",
+    "migration_hint": "`Redis#serverInfo` is removed. This field is never documented so you very likely have never used it. (ioredis's changelog for 5.0.0)",
+    "source_url": "https://raw.githubusercontent.com/redis/ioredis/v5.0.0/CHANGELOG.md",
+    "source_excerpt": "# [5.0.0](https://github.com/luin/ioredis/compare/v4.28.5...v5.0.0) (2022-03-26)\nBREAKING CHANGES\n* `Redis#serverInfo` is removed. This field is never documented so\nyou very likely have never used it.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

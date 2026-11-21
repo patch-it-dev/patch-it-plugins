@@ -1,0 +1,194 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:f0c7d39b5f7637c7ff0fa723b2600b82acea056fca8dd0e00461c323b93cfd92",
+    "api": "sentry/python-changelog",
+    "version": "2.0.0",
+    "previous_version": "1.45.1",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "sentry-sdk",
+      "change": "removed_symbol",
+      "symbols": [
+        "tracing.Span.new_span"
+      ]
+    },
+    "description": "`tracing.Span.new_span` was removed in sentry-sdk 2.0.0: code using it fails.",
+    "migration_hint": "Removed `sentry_sdk.tracing.Span.new_span`. Use `sentry_sdk.tracing.Span.start_child` instead. (sentry-sdk's changelog for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/getsentry/sentry-python/2.0.0/CHANGELOG.md",
+    "source_excerpt": "## 2.0.0\nRemoved\n- Removed `sentry_sdk.tracing.Span.new_span`. Use `sentry_sdk.tracing.Span.start_child` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:3e2dd515421c964b45beeb1d408742904a22f2734f16400cd4dd7d3deb161b39",
+    "api": "sentry/python-changelog",
+    "version": "2.0.0",
+    "previous_version": "1.45.1",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "sentry-sdk",
+      "change": "removed_symbol",
+      "symbols": [
+        "tracing.Transaction.new_span"
+      ]
+    },
+    "description": "`tracing.Transaction.new_span` was removed in sentry-sdk 2.0.0: code using it fails.",
+    "migration_hint": "Removed `sentry_sdk.tracing.Transaction.new_span`. Use `sentry_sdk.tracing.Transaction.start_child` instead. (sentry-sdk's changelog for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/getsentry/sentry-python/2.0.0/CHANGELOG.md",
+    "source_excerpt": "## 2.0.0\nRemoved\n- Removed `sentry_sdk.tracing.Transaction.new_span`. Use `sentry_sdk.tracing.Transaction.start_child` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:1eda15f0db1d4c4b77515fad862379d9e5dde46a6599b2112366b81432a835ab",
+    "api": "sentry/python-changelog",
+    "version": "2.0.0",
+    "previous_version": "1.45.1",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "sentry-sdk",
+      "change": "removed_symbol",
+      "symbols": [
+        "utils.Auth.store_api_url"
+      ]
+    },
+    "description": "`utils.Auth.store_api_url` was removed in sentry-sdk 2.0.0: code using it fails.",
+    "migration_hint": "Removed `sentry_sdk.utils.Auth.store_api_url`. (sentry-sdk's changelog for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/getsentry/sentry-python/2.0.0/CHANGELOG.md",
+    "source_excerpt": "## 2.0.0\nRemoved\n- Removed `sentry_sdk.utils.Auth.store_api_url`.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:e7bf8f003f2bc635b49dda1611d52077b42ee8239ab466e79341dbfa7d4e289c",
+    "api": "sentry/python-changelog",
+    "version": "2.0.0",
+    "previous_version": "1.45.1",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "sentry-sdk",
+      "change": "removed_symbol",
+      "symbols": [
+        "tracing_utils_py2.py"
+      ]
+    },
+    "description": "`tracing_utils_py2.py` was removed in sentry-sdk 2.0.0: code using it fails.",
+    "migration_hint": "Removed `tracing_utils_py2.py`. The `start_child_span_decorator` is now in `sentry_sdk.tracing_utils`. (sentry-sdk's changelog for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/getsentry/sentry-python/2.0.0/CHANGELOG.md",
+    "source_excerpt": "## 2.0.0\nRemoved\n- Removed `tracing_utils_py2.py`. The `start_child_span_decorator` is now in `sentry_sdk.tracing_utils`.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:3907408c839ca3323d9d3618c649c1ecb3ab9341022e4da40fed5f2ef788655f",
+    "api": "sentry/python-changelog",
+    "version": "2.0.0",
+    "previous_version": "1.45.1",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "sentry-sdk",
+      "change": "removed_symbol",
+      "symbols": [
+        "profiler.Scheduler.stop_profiling"
+      ]
+    },
+    "description": "`profiler.Scheduler.stop_profiling` was removed in sentry-sdk 2.0.0: code using it fails.",
+    "migration_hint": "Removed the `sentry_sdk.profiler.Scheduler.stop_profiling` method. Any calls to this method can simply be removed, since this was a no-op method. (sentry-sdk's changelog for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/getsentry/sentry-python/2.0.0/CHANGELOG.md",
+    "source_excerpt": "## 2.0.0\nRemoved\n- Removed the `sentry_sdk.profiler.Scheduler.stop_profiling` method. Any calls to this method can simply be removed, since this was a no-op method.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:267c491f2b9d0d8aecfc5322d8bc8361cd4325bcdfe89e083d22d36f95b783ac",
+    "api": "sentry/python-changelog",
+    "version": "2.0.0",
+    "previous_version": "1.45.1",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "sentry-sdk",
+      "change": "removed_symbol",
+      "symbols": [
+        "configure_scope"
+      ]
+    },
+    "description": "`configure_scope` is deprecated in sentry-sdk 2.0.0: a later release may remove it.",
+    "migration_hint": "`configure_scope` is deprecated. Use the new isolation scope directly via `Scope.get_isolation_scope()` instead. (sentry-sdk's changelog for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/getsentry/sentry-python/2.0.0/CHANGELOG.md",
+    "source_excerpt": "## 2.0.0\nDeprecated\n- `configure_scope` is deprecated. Use the new isolation scope directly via `Scope.get_isolation_scope()` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:50850b1709f2eb184c4c9c06ca7e03526b392d864286ad444696bea22dd27302",
+    "api": "sentry/python-changelog",
+    "version": "2.0.0",
+    "previous_version": "1.45.1",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "sentry-sdk",
+      "change": "removed_symbol",
+      "symbols": [
+        "push_scope"
+      ]
+    },
+    "description": "`push_scope` is deprecated in sentry-sdk 2.0.0: a later release may remove it.",
+    "migration_hint": "`push_scope` is deprecated. Use the new `new_scope` context manager to fork the necessary scopes. (sentry-sdk's changelog for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/getsentry/sentry-python/2.0.0/CHANGELOG.md",
+    "source_excerpt": "## 2.0.0\nDeprecated\n- `push_scope` is deprecated. Use the new `new_scope` context manager to fork the necessary scopes.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
+    "fingerprint": "sha256:2c94e0b51f757d22c715faac37426deb5f991e822636564ff18f87449121719c",
+    "api": "sentry/python-changelog",
+    "version": "2.0.0",
+    "previous_version": "1.45.1",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "sentry-sdk",
+      "change": "removed_symbol",
+      "symbols": [
+        "transport.Transport.capture_event"
+      ]
+    },
+    "description": "`transport.Transport.capture_event` is deprecated in sentry-sdk 2.0.0: a later release may remove it.",
+    "migration_hint": "Deprecated `sentry_sdk.transport.Transport.capture_event`. Please use `sentry_sdk.transport.Transport.capture_envelope`, instead. (sentry-sdk's changelog for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/getsentry/sentry-python/2.0.0/CHANGELOG.md",
+    "source_excerpt": "## 2.0.0\nDeprecated\n- Deprecated `sentry_sdk.transport.Transport.capture_event`. Please use `sentry_sdk.transport.Transport.capture_envelope`, instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

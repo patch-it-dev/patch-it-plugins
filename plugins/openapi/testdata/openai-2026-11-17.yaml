@@ -1,0 +1,84 @@
+openapi: 3.1.0
+info:
+  title: OpenAI API
+  description: The OpenAI REST API. Please see
+    https://platform.openai.com/docs/api-reference for more details.
+  version: 2.3.0
+  termsOfService: https://openai.com/policies/terms-of-use
+  contact:
+    name: OpenAI Support
+    url: https://help.openai.com/
+  license:
+    name: MIT
+    identifier: MIT
+servers:
+  - url: https://api.openai.com/v1
+components:
+  schemas:
+    SessionBudgetControlParams:
+      type: object
+      properties:
+        limit:
+          type:
+            - integer
+            - "null"
+          format: int64
+          minimum: 1
+          maximum: 4503599627370495
+          description: Positive USD cents, or null to remove the limit.
+      required:
+        - limit
+      additionalProperties: false
+      description: Sets the session-wide limit without changing recorded spend.
+    SessionBudgetControlResource:
+      type: object
+      properties:
+        limit:
+          type:
+            - integer
+            - "null"
+          format: int64
+          minimum: 1
+          maximum: 4503599627370495
+          description: The configured positive limit in USD cents, or null when unlimited.
+        consumed:
+          type:
+            - integer
+            - "null"
+          minimum: 0
+          description: Best-effort recorded spend floored to whole USD cents, or null when
+            unavailable.
+      required:
+        - limit
+        - consumed
+      additionalProperties: false
+      description: Session-wide spending limit and best-effort consumption, including
+        unlimited sessions.
+    SessionEventAgentSessionBudgetReached:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - agent.session.budget_reached
+          default: agent.session.budget_reached
+          x-stainless-const: true
+          description: The type of the object. Always `agent.session.budget_reached`.
+        event_id:
+          type: string
+          minLength: 0
+          description: The unique ID of the event.
+        session:
+          $ref: "#/components/schemas/SessionResource"
+          description: The paused session.
+        obfuscation:
+          type: string
+          minLength: 0
+          description: Random alphanumeric padding. Present when stream obfuscation is
+            enabled.
+      required:
+        - type
+        - event_id
+        - session
+      additionalProperties: false
+      description: Emitted when a session pauses because its spending limit was reached.

@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:9b49062284e88bb168adc4b850ea1d2d8f847d648c0b8a81f2c79913a7e9c10c",
+    "api": "cloudflare/typescript",
+    "version": "7.1.0",
+    "previous_version": "7.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "cloudflare",
+      "change": "renamed_symbol",
+      "symbols": [
+        "cloudforceOne.threatEvents.indicatorTypes"
+      ],
+      "replacement": "cloudforceOne.threatEvents.indicators"
+    },
+    "description": "`cloudforceOne.threatEvents.indicatorTypes` was renamed to `cloudforceOne.threatEvents.indicators` in cloudflare 7.1.0: code using the old name fails.",
+    "migration_hint": "`cloudforceOne.threatEvents.indicatorTypes` has been renamed to `cloudforceOne.threatEvents.indicators` (cloudflare's changelog for 7.1.0)",
+    "source_url": "https://raw.githubusercontent.com/cloudflare/cloudflare-typescript/v7.1.0/CHANGELOG.md",
+    "source_excerpt": "## 7.1.0 (2026-08-17)\nBreaking Changes\n- `cloudforceOne.threatEvents.indicatorTypes` has been renamed to `cloudforceOne.threatEvents.indicators`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

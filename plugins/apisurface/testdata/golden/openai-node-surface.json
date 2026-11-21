@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:f8e5184f69dd30d9ba8a4114bad2a46b3f15d2bf599f036edd875dfd577179ba",
+    "api": "openai/node-surface",
+    "version": "7.60.0",
+    "previous_version": "7.59.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "openai",
+      "change": "removed_symbol",
+      "symbols": [
+        "openai/resources/beta.AgentSessionBudgetReachedEvent",
+        "openai/resources/beta/agents.AgentSessionBudgetReachedEvent",
+        "openai/resources/beta/agents/agents.AgentSessionBudgetReachedEvent"
+      ]
+    },
+    "description": "The interface `openai/resources/beta.AgentSessionBudgetReachedEvent` was removed in openai 7.60.0: code using it fails.",
+    "migration_hint": "openai 7.60.0 has no `openai/resources/beta.AgentSessionBudgetReachedEvent`: see the package's release notes for what replaces it.",
+    "source_url": "https://registry.npmjs.org/openai/-/openai-7.60.0.tgz",
+    "source_excerpt": "openai 7.59.0 (openai-7.59.0.tgz), resources/beta/agents/agents.d.mts line 1188: interface AgentSessionBudgetReachedEvent\nopenai 7.60.0 (openai-7.60.0.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

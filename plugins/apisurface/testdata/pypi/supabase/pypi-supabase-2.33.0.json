@@ -1,0 +1,20 @@
+{
+  "info": {
+    "name": "supabase",
+    "version": "2.33.0"
+  },
+  "urls": [
+    {
+      "filename": "supabase-2.33.0-py3-none-any.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/8d/48/1a8f57fdaf882f1dcd7836352e33829c1d455c6cfc387d2b0fb1e99ffdb6/supabase-2.33.0-py3-none-any.whl",
+      "yanked": false
+    },
+    {
+      "filename": "supabase-2.33.0.tar.gz",
+      "packagetype": "sdist",
+      "url": "https://files.pythonhosted.org/packages/5e/ef/67310d1a638c36cbe09fe73afc5b9f09e9cd5b9b55e9744d90e35e6be4a1/supabase-2.33.0.tar.gz",
+      "yanked": false
+    }
+  ]
+}

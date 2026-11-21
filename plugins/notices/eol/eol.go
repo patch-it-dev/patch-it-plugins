@@ -10,14 +10,15 @@
 // says what the plugin actually saw.
 //
 // Salesforce's docs site is the one difference from the other notices
-// readers: it answers 403 to a plain GET (checked 2026-11-20, including with
-// a browser User-Agent), so a direct read of the live page fails every time. The
-// Wayback Machine's own save-page-now request succeeds against it anyway,
-// and its capture parses to the same findings the live page would (checked
-// the same day), so the kind falls back to a fresh snapshot on a 401 or 403
-// (ArchiveWhenBlocked),
+// readers: it blocks a plain GET, with 403 (checked 2026-11-20, including
+// with a browser User-Agent) or, from its CDN (AkamaiNetStorage), 503
+// (checked 2026-11-21), so a direct read of the live page fails every time.
+// The Wayback Machine's own crawler reads it anyway (its capture of
+// 2026-11-20 parses to the same findings the live page would), so the kind
+// falls back to a fresh snapshot on those statuses (ArchiveWhenBlocked),
 // used directly as both the content and its own citation, kit.Cite's
 // double-check skipped: there is no separate live read left to agree with.
+// A snapshot that can't be taken, or holds no table, fails the run.
 //
 // Unlike retirements (one named model per row) and feed (an RSS or Atom
 // entry), a row here names a whole range of version numbers and no
@@ -191,10 +192,10 @@ func (pg Page) Find(page []byte) (kit.Notices, error) {
 	return Read(fs), err
 }
 
-// ArchiveWhenBlocked is on: Salesforce's docs site answers 403 to a plain
-// GET, so the kind reads a fresh Wayback Machine snapshot instead (see the
-// package comment).
-func (Page) ArchiveWhenBlocked() bool { return true }
+// ArchiveWhenBlocked is the statuses Salesforce's docs site blocks a plain
+// GET with (401 and 403; 503 from its CDN), so the kind reads a fresh
+// Wayback Machine snapshot instead (see the package comment).
+func (Page) ArchiveWhenBlocked() []int { return []int{401, 403, 503} }
 
 // Events are an event per version number a row retires or deprecates,
 // citing citeURL, with previous as previous_version (each is an

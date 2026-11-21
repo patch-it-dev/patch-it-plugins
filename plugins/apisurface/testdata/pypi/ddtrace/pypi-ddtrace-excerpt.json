@@ -1,0 +1,1335 @@
+{
+  "info": {
+    "name": "ddtrace"
+  },
+  "releases": {
+    "4.12.3": [
+      {
+        "filename": "ddtrace-4.12.3-cp310-cp310-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:01:42.674000Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp310-cp310-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:01:49.214976Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:01:51.121363Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:01:53.018402Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp310-cp310-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:01:55.081355Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp310-cp310-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:01:57.666409Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp310-cp310-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:01:59.888382Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp310-cp310-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:02:01.667725Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp311-cp311-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:02:03.573311Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp311-cp311-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:02:05.397088Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:02:07.392964Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:02:09.777271Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp311-cp311-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:02:12.482552Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp311-cp311-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:02:14.779823Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp311-cp311-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:02:17.010774Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp311-cp311-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:02:19.370825Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp311-cp311-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:02:21.374955Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp312-cp312-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:02:23.402361Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp312-cp312-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:02:25.580505Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:02:27.817982Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:02:30.381024Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp312-cp312-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:02:33.053574Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp312-cp312-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:02:35.875239Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp312-cp312-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:02:38.535209Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp312-cp312-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:02:40.802172Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp312-cp312-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:02:43.259917Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp313-cp313-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:02:45.733239Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp313-cp313-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:02:48.191282Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:02:51.245207Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:02:53.942418Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp313-cp313-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:02:56.981732Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp313-cp313-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:02:59.939038Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp313-cp313-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:03:02.749957Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp313-cp313-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:03:05.455640Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp313-cp313-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:03:08.796549Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp314-cp314-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:03:12.576484Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp314-cp314-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:03:15.246505Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:03:18.000234Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:03:20.981365Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp314-cp314-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:03:24.182683Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp314-cp314-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:03:27.164807Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp314-cp314-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:03:30.226148Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp314-cp314-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:03:33.013773Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp314-cp314-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:03:35.773227Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp315-cp315-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:03:38.710427Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp315-cp315-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:03:41.567317Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp315-cp315-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:03:44.523538Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp315-cp315-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:03:47.737201Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp39-cp39-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:03:50.953887Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp39-cp39-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:03:53.948322Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp39-cp39-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:03:57.617386Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:04:01.101209Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp39-cp39-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:04:04.485749Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp39-cp39-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:04:08.004668Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp39-cp39-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:04:11.516331Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3-cp39-cp39-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T19:04:14.609420Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.12.3.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-08-13T19:04:17.850962Z",
+        "yanked": false
+      }
+    ],
+    "4.13.0": [
+      {
+        "filename": "ddtrace-4.13.0-cp310-cp310-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:03:16.323901Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp310-cp310-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:03:21.531986Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:03:23.313235Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:03:25.645010Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp310-cp310-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:03:27.697418Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp310-cp310-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:03:29.948584Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp310-cp310-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:03:32.443882Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp310-cp310-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:03:34.283915Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp311-cp311-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:03:36.315858Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp311-cp311-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:03:38.037429Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:03:40.195137Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:03:42.598606Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp311-cp311-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:03:44.991421Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp311-cp311-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:03:47.677959Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp311-cp311-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:03:50.103694Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp311-cp311-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:03:52.091982Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp311-cp311-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:03:54.428216Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp312-cp312-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:03:57.031422Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp312-cp312-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:03:59.047899Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:04:01.501391Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:04:04.220046Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp312-cp312-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:04:06.935855Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp312-cp312-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:04:09.627260Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp312-cp312-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:04:12.281337Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp312-cp312-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:04:14.709291Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp312-cp312-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:04:17.477173Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp313-cp313-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:04:19.848061Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp313-cp313-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:04:22.232638Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:04:24.641292Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:04:27.468512Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp313-cp313-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:04:30.377840Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp313-cp313-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:04:33.552769Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp313-cp313-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:04:36.523585Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp313-cp313-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:04:39.055314Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp313-cp313-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:04:41.815055Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp314-cp314-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:04:44.289279Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp314-cp314-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:04:47.172852Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:04:49.857970Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:04:52.978409Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp314-cp314-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:04:56.162539Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp314-cp314-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:04:59.473176Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp314-cp314-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:05:03.205437Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp314-cp314-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:05:06.770116Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp314-cp314-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:05:09.597377Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp315-cp315-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:05:12.384940Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp315-cp315-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:05:15.688717Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp315-cp315-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:05:18.768305Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp315-cp315-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:05:21.998591Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp39-cp39-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:05:25.422088Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp39-cp39-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:05:28.579239Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp39-cp39-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:05:31.709735Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:05:35.276975Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp39-cp39-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:05:38.881404Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp39-cp39-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:05:42.344056Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp39-cp39-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:05:45.907830Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0-cp39-cp39-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-11T16:05:49.430450Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.13.0.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-08-11T16:05:52.662029Z",
+        "yanked": false
+      }
+    ],
+    "4.16.0": [
+      {
+        "filename": "ddtrace-4.16.0-cp310-cp310-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:21:46.513889Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp310-cp310-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:21:48.383933Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:21:50.451569Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:21:52.320234Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp310-cp310-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:21:54.435511Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp310-cp310-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:21:56.702176Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp310-cp310-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:21:58.767338Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp310-cp310-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:22:00.393139Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp311-cp311-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:22:03.965163Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp311-cp311-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:22:05.692027Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:22:07.737216Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:22:09.872834Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp311-cp311-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:22:12.127065Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp311-cp311-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:22:14.377599Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp311-cp311-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:22:16.746482Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp311-cp311-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:22:18.661024Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp311-cp311-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:22:20.753379Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp312-cp312-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:22:23.223580Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp312-cp312-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:22:25.707057Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:22:28.208905Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:22:30.726427Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp312-cp312-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:22:33.308235Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp312-cp312-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:22:35.736736Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp312-cp312-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:22:38.474254Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp312-cp312-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:22:40.864863Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp312-cp312-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:22:43.475495Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp313-cp313-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:22:45.811154Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp313-cp313-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:22:48.286335Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:22:51.344099Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:22:54.336669Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp313-cp313-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:22:57.107741Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp313-cp313-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:23:00.441940Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp313-cp313-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:23:03.459558Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp313-cp313-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:23:05.978223Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp313-cp313-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:23:08.651518Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp314-cp314-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:23:11.727984Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp314-cp314-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:23:14.469446Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:23:17.568484Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:23:21.369905Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp314-cp314-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:23:25.237314Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp314-cp314-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:23:28.635848Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp314-cp314-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:23:32.051278Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp314-cp314-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:23:35.045156Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp314-cp314-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:23:38.122608Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp39-cp39-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:23:41.783842Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp39-cp39-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:23:45.500134Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp39-cp39-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:23:49.386282Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:23:52.824031Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp39-cp39-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:23:56.395978Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp39-cp39-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:23:59.942690Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp39-cp39-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:24:03.591519Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0-cp39-cp39-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-16T09:24:06.806439Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.0.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-10-16T09:24:10.133379Z",
+        "yanked": false
+      }
+    ],
+    "4.16.1": [
+      {
+        "filename": "ddtrace-4.16.1-cp310-cp310-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:11:58.454691Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp310-cp310-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:02.723695Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:04.486488Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:06.472108Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp310-cp310-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:08.634730Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp310-cp310-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:10.988398Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp310-cp310-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:12.734978Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp310-cp310-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:14.191639Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp311-cp311-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:15.735685Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp311-cp311-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:17.199963Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:19.081073Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:20.919949Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp311-cp311-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:22.793396Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp311-cp311-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:24.496070Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp311-cp311-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:26.778387Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp311-cp311-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:28.924672Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp311-cp311-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:30.498651Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp312-cp312-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:32.036093Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp312-cp312-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:34.178712Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:36.741940Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:38.473643Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp312-cp312-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:40.387148Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp312-cp312-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:42.160022Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp312-cp312-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:44.078678Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp312-cp312-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:45.374352Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp312-cp312-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:46.979699Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp313-cp313-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:48.412967Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp313-cp313-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:49.747610Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:51.869323Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:53.796613Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp313-cp313-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:56.220877Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp313-cp313-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:58.156837Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp313-cp313-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:12:59.945971Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp313-cp313-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:13:01.309624Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp313-cp313-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:13:02.926515Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp314-cp314-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:13:04.316640Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp314-cp314-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:13:05.727077Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:13:07.342550Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:13:09.115180Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp314-cp314-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:13:11.243140Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp314-cp314-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:13:13.092117Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp314-cp314-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:13:15.121937Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp314-cp314-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:13:16.896115Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp314-cp314-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:13:18.325616Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp39-cp39-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:13:20.430467Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp39-cp39-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:13:22.433354Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp39-cp39-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:13:24.181740Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:13:25.901549Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp39-cp39-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:13:27.632433Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp39-cp39-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:13:29.573800Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp39-cp39-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:13:31.774078Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1-cp39-cp39-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-28T05:13:33.262589Z",
+        "yanked": false
+      },
+      {
+        "filename": "ddtrace-4.16.1.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-10-28T05:13:34.524133Z",
+        "yanked": false
+      }
+    ]
+  }
+}

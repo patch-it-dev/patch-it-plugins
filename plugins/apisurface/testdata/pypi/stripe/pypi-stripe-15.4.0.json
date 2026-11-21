@@ -1,0 +1,20 @@
+{
+  "info": {
+    "name": "stripe",
+    "version": "15.4.0"
+  },
+  "urls": [
+    {
+      "filename": "stripe-15.4.0-py3-none-any.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/00/e1/3047b4e244cc78bb598b0d5fcab6632b8bf8a4d526f2e840c4f4de02c989/stripe-15.4.0-py3-none-any.whl",
+      "yanked": false
+    },
+    {
+      "filename": "stripe-15.4.0.tar.gz",
+      "packagetype": "sdist",
+      "url": "https://files.pythonhosted.org/packages/b0/e5/2dcf53bed6061f615d5cd03a89a311c2ca969a5b1e415d6fcfa2965ec0b6/stripe-15.4.0.tar.gz",
+      "yanked": false
+    }
+  ]
+}

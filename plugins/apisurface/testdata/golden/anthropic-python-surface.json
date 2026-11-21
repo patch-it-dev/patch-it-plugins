@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:1f4a2ac2fdc57fd5e725b4001ac2ed0a0dbfb30e368afee10ca5972306f05078",
+    "api": "anthropic/python-surface",
+    "version": "2.7.0",
+    "previous_version": "2.6.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "anthropic",
+      "change": "removed_symbol",
+      "symbols": [
+        "types.beta.BetaBillingFrozenError",
+        "types.beta.beta_billing_frozen_error.BetaBillingFrozenError"
+      ]
+    },
+    "description": "The class `types.beta.BetaBillingFrozenError` was removed in anthropic 2.7.0: code using it fails.",
+    "migration_hint": "anthropic 2.7.0 has no `types.beta.BetaBillingFrozenError`: see the package's release notes for what replaces it.",
+    "source_url": "https://files.pythonhosted.org/packages/8a/da/ed144ab553eb2bc7b5febbfb37858f28b33ec332c37f0fdf260012ae3fe2/anthropic-2.7.0-py3-none-any.whl",
+    "source_excerpt": "anthropic 2.6.0 (anthropic-2.6.0-py3-none-any.whl), anthropic/types/beta/beta_billing_frozen_error.py line 9: class BetaBillingFrozenError(PermissionDeniedError)\nanthropic 2.7.0 (anthropic-2.7.0-py3-none-any.whl): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:156879f4c4b9366cece472b438dd3c0363a2596d1b9f980ff99a215ff3efd0dd",
+    "api": "anthropic/python-surface",
+    "version": "2.7.0",
+    "previous_version": "2.6.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "anthropic",
+      "change": "removed_symbol",
+      "symbols": [
+        "types.beta.BetaBillingFrozenErrorDetails",
+        "types.beta.beta_billing_frozen_error_details.BetaBillingFrozenErrorDetails"
+      ]
+    },
+    "description": "The class `types.beta.BetaBillingFrozenErrorDetails` was removed in anthropic 2.7.0: code using it fails.",
+    "migration_hint": "anthropic 2.7.0 has no `types.beta.BetaBillingFrozenErrorDetails`: see the package's release notes for what replaces it.",
+    "source_url": "https://files.pythonhosted.org/packages/8a/da/ed144ab553eb2bc7b5febbfb37858f28b33ec332c37f0fdf260012ae3fe2/anthropic-2.7.0-py3-none-any.whl",
+    "source_excerpt": "anthropic 2.6.0 (anthropic-2.6.0-py3-none-any.whl), anthropic/types/beta/beta_billing_frozen_error_details.py line 8: class BetaBillingFrozenErrorDetails(BaseModel)\nanthropic 2.7.0 (anthropic-2.7.0-py3-none-any.whl): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

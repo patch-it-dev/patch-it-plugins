@@ -27,6 +27,7 @@ var defaultReaders = map[string]string{
 	"notices":        "deprecations",
 	"migrationguide": "sdk",
 	"changelog":      "markdown",
+	"apisurface":     "pypi", // npm when a --package is npm:
 }
 
 var formats = map[string]formatSpec{
@@ -159,16 +160,15 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 		defDir: "plugins/migrationguide/sdkguide",
 		def: `package sdkguide
 
-// {{.Ident}} is {{.Provider}}'s SDK guide to a major release (MIGRATION.md at
-// the release tag).
+// {{.Ident}} is {{.Provider}}'s SDK guide to each major release (MIGRATION.md
+// at the major's first tag), its releases listed from PyPI.
 //
-// ` + todo + `: the PyPI name, the repo, the major release and the calls the
-// guide's table names. Say what you checked, with the date.
+// ` + todo + `: the PyPI name, the repo and the calls the guide's table
+// names. Say what you checked, with the date.
 var {{.Ident}} = Guide{
 	API:     "{{.ID}}",
 	Package: "{{.PyPI}}",
 	Repo:    "TODO-owner/TODO-repo",
-	Major:   1,
 	Methods: "` + "`TODO.create()`" + `",
 	Symbols: []string{"TODO.create"},
 }
@@ -216,9 +216,10 @@ const {{.Lower}}Previous = "0.0.0"
 
 // {{.Lower}}Ingest is the version pair {{.Lower}}Previous -> the guide's
 // major over a saved copy of the guide.
+// ` + todo + `: the major the saved guide is for.
 func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
-	g := sdkguide.{{.Ident}}
+	g := sdkguide.{{.Ident}}.At(1)
 	env := kittest.Env(t, kittest.Pages{g.URL(): file})
 	return kittest.Versions(t, env, Plugin{Guide: g},
 		plugin.Version{ID: {{.Lower}}Previous, Ref: "v" + {{.Lower}}Previous}, plugin.Version{ID: g.Version(), Ref: "v" + g.Version()})
@@ -233,19 +234,19 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 		defDir: "plugins/migrationguide/members",
 		def: `package members
 
-// {{.Ident}} is {{.Provider}}'s migration guide to a release, with its table
-// of removed members.
+// {{.Ident}} is {{.Provider}}'s migration guide to each major, with its table
+// of removed members, read at the major's first tag.
 //
-// ` + todo + `: the package, how the guide writes the module, the release,
-// the repo, the guide's path at the release tag and the heading the table is
-// under. Say what you checked, with the date.
+// ` + todo + `: the package, how the guide writes the module, the repo, the
+// guide's path at a major's tag ({major} for its number, {prev} for the one
+// before) and the heading the table is under. Say what you checked, with the
+// date.
 var {{.Ident}} = Guide{
 	API:     "{{.ID}}",
 	Package: "{{.PyPI}}",
 	Module:  "{{.Module}}",
-	Release: "1.0.0",
 	Repo:    "TODO-owner/TODO-repo",
-	Path:    "TODO/migration_guide.rst",
+	Path:    "TODO/migration_guide_{major}.rst",
 	Section: "Removed members",
 }
 `,
@@ -300,13 +301,17 @@ func Test{{.Ident}}DropsANonChange(t *testing.T) {
 // ` + todo + `: the real release before it.
 const {{.Lower}}Previous = "0.0.0"
 
-// {{.Lower}}Ingest is the version pair {{.Lower}}Previous -> the guide's
-// release over a saved copy of the guide.
+// {{.Lower}}Release is the major's first release the saved guide is for.
+// ` + todo + `: the real release.
+const {{.Lower}}Release = "1.0.0"
+
+// {{.Lower}}Ingest is the version pair {{.Lower}}Previous ->
+// {{.Lower}}Release over a saved copy of the guide.
 func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
 	g := members.{{.Ident}}
-	env := kittest.Env(t, kittest.Pages{g.URL(): file})
-	return kittest.Versions(t, env, Plugin{Guide: g}, plugin.Version{ID: {{.Lower}}Previous}, plugin.Version{ID: g.Release})
+	env := kittest.Env(t, kittest.Pages{g.RawURL("v"+{{.Lower}}Release, 1): file})
+	return kittest.Versions(t, env, Plugin{Guide: g}, plugin.Version{ID: {{.Lower}}Previous}, plugin.Version{ID: {{.Lower}}Release})
 }
 `,
 		imports: []string{"slices", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/core/plugin", "github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide/members"},
@@ -328,9 +333,6 @@ var {{.Ident}} = File{
 	API: "{{.ID}}", Package: "{{.PyPI}}", Ecosystem: "pypi", Module: "{{.Module}}",
 	Repo: "TODO-owner/TODO-repo", TagPrefix: "v", Path: "CHANGELOG.md",
 }
-
-// {{.Ident}}Golden is the release the golden test pins.
-var {{.Ident}}Golden = {{.Ident}}.At("1.0.0")
 `,
 		register: `plugin.Register(Plugin{File: {{.Ident}}})`,
 		pluginOf: `Plugin{File: {{.Ident}}}`,
@@ -345,7 +347,12 @@ var {{.Ident}}Golden = {{.Ident}}.At("1.0.0")
 - A placeholder entry.
 `},
 		source: "{{.File}}-CHANGELOG.md",
-		ingest: `// {{.Lower}}Previous is the release before {{.Ident}}Golden's on the
+		ingest: `// {{.Ident}}Golden is the release the golden test pins: only a test names
+// one.
+// ` + todo + `: the real release.
+var {{.Ident}}Golden = {{.Ident}}.At("1.0.0")
+
+// {{.Lower}}Previous is the release before {{.Ident}}Golden's on the
 // registry: the pair's older side.
 // ` + todo + `: the real release before it.
 const {{.Lower}}Previous = "0.0.0"
@@ -421,40 +428,46 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 		defDir: "plugins/catalog",
 		def: `package catalog
 
-// {{.Ident}} is {{.Provider}}'s catalog: one JSON object, one key per command
-// or endpoint, at a git ref.
+import "regexp"
+
+// {{.Ident}} is {{.Provider}}'s command catalog: one JSON file per command in a
+// directory of its repo, read at each release tag, as Redis's is (redis.go).
 //
 // ` + todo + `: the ecosystem and package for the events' subject, the repo,
-// the catalog's path and the commits API URL for the newest ref. Say what you
-// checked, with the date, as catalog.go does for Redis.
-var {{.Ident}} = Catalog{
+// the directory and the release tags' shape. Say what you checked, with the
+// date, as redis.go does for Redis.
+var {{.Ident}} = Commands{
 	API: "{{.ID}}", Ecosystem: "{{.ProviderID}}", Package: "{{.ProviderID}}",
-	Repo: "TODO-owner/TODO-repo", Path: "TODO/commands.json",
-	RefsURL: "https://api.github.com/repos/TODO-owner/TODO-repo/commits/main",
+	Repo: "TODO-owner/TODO-repo", Dir: "TODO/commands",
+	Release: regexp.MustCompile(` + "`" + `^v?(\d+\.\d+\.\d+)$` + "`" + `),
 }
 `,
-		register: `plugin.Register(Plugin{Catalog: {{.Ident}}})`,
-		pluginOf: `Plugin{Catalog: {{.Ident}}}`,
+		register: `plugin.Register({{.Ident}})`,
+		pluginOf: `{{.Ident}}`,
 		fixtures: map[string]string{
-			"{{.File}}-old.json": "{\"PLACEHOLDER\": {}}\n",
-			"{{.File}}-new.json": "{\"PLACEHOLDER\": {}}\n",
+			"{{.File}}-old.json":         "[{\"name\": \"placeholder.json\", \"type\": \"file\"}, {\"name\": \"kept.json\", \"type\": \"file\"}]\n",
+			"{{.File}}-new.json":         "[{\"name\": \"kept.json\", \"type\": \"file\"}]\n",
+			"{{.File}}-placeholder.json": "{\"PLACEHOLDER\": {\"summary\": \"a placeholder\"}}\n",
 		},
-		source: "{{.File}}-new.json",
-		ingest: `// The two refs the saved snapshots are at.
-// ` + todo + `: the real commits, oldest first.
+		dropFile: "[{\"name\": \"placeholder.json\", \"type\": \"file\"}, {\"name\": \"kept.json\", \"type\": \"file\"}, {\"name\": \"added.json\", \"type\": \"file\"}]\n",
+		source:   "{{.File}}-new.json",
+		ingest: `// The two releases the saved listings are at.
+// ` + todo + `: the real tags, oldest first.
 const (
-	{{.Lower}}OldRef = "0000000000000000000000000000000000000000"
-	{{.Lower}}NewRef = "1111111111111111111111111111111111111111"
+	{{.Lower}}OldRef = "v1.0.0"
+	{{.Lower}}NewRef = "v2.0.0"
 )
 
-// {{.Lower}}Ingest extracts the change from the saved old snapshot to file.
+// {{.Lower}}Ingest is the version pair from the saved old listing to file,
+// the newer release's listing; a file gone from it is read at the old tag.
 func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
 	env := kittest.Env(t, kittest.Pages{
-		{{.Ident}}.URL({{.Lower}}OldRef): "testdata/{{.File}}-old.json",
-		{{.Ident}}.URL({{.Lower}}NewRef): file,
+		{{.Ident}}.listingURL({{.Lower}}OldRef): "testdata/{{.File}}-old.json",
+		{{.Ident}}.listingURL({{.Lower}}NewRef): file,
+		{{.Ident}}.FileURL({{.Lower}}OldRef, "placeholder.json"): "testdata/{{.File}}-placeholder.json",
 	})
-	return kittest.Versions(t, env, Plugin{Catalog: {{.Ident}}},
+	return kittest.Versions(t, env, {{.Ident}},
 		plugin.Version{ID: {{.Lower}}OldRef, Ref: {{.Lower}}OldRef}, plugin.Version{ID: {{.Lower}}NewRef, Ref: {{.Lower}}NewRef})
 }
 `,
@@ -541,7 +554,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 		imports: []string{"context", "fmt", "os", "github.com/patch-it-dev/patch-it-plugins/plugins/openapi/adapter", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/core/plugin"},
 		next:    "Write LatestTag, Fetch and Versions in plugins/openapi/adapter/{{.File}}.go (fetch.Get only); add Diff/Keep to the Register line if the spec needs them (see vercel.go).",
 	},
-	"apisurface": {
+	"apisurface/pypi": {
 		kind:   "apisurface",
 		layer:  "sdk",
 		defDir: "plugins/apisurface",
@@ -610,6 +623,82 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 `,
 		imports: []string{"archive/zip", "bytes", "context", "fmt", "github.com/patch-it-dev/patch-it-plugins/core/event"},
 		next:    "Save two real wheels of the package and serve them in {{.Lower}}Ingest; the kind reads their .py files, never runs them.",
+	},
+	"apisurface/npm": {
+		kind:   "apisurface",
+		layer:  "sdk",
+		defDir: "plugins/apisurface",
+		def: `package apisurface
+
+// {{.Ident}} is {{.Provider}}'s package on npm, its public API read from each
+// release's TypeScript declarations.
+//
+// ` + todo + `: check the name on npm, and that its tarball has .d.ts
+// files (package.json's "types" or "exports"). Say what you checked, with
+// the date.
+var {{.Ident}} = npmPackage("{{.ID}}", "{{.NPM}}")
+`,
+		register: `plugin.Register(Plugin{Package: {{.Ident}}})`,
+		pluginOf: `Plugin{Package: {{.Ident}}}`,
+		fixtures: map[string]string{
+			"{{.File}}-old.d.ts": "// ` + todo + `: a placeholder for the older release's declarations. Save the real release's tarball instead (see npm_test.go).\nexport declare function placeholder(a: string, b?: number): void;\n",
+			"{{.File}}-new.d.ts": "// ` + todo + `: a placeholder for the newer release's declarations: b is no longer optional, one event.\nexport declare function placeholder(a: string, b: number): void;\n",
+		},
+		// The drop test's newer release: the older one again, a name added.
+		dropFile: "// ` + todo + `: a placeholder: a release that only adds.\nexport declare function placeholder(a: string, b?: number): void;\nexport declare function added(): void;\n",
+		source:   "{{.File}}-new.d.ts",
+		ingest: `// {{.Lower}}Ingest compares two releases: 1.0.0, a tarball holding
+// testdata/{{.File}}-old.d.ts as index.d.ts, and 1.1.0, one holding file.
+// The tarballs are built here so the placeholders are text.
+// ` + todo + `: save the two real tarballs (trimmed if they're large, as
+// npm_test.go's are) and serve them instead.
+func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
+	t.Helper()
+	tarball := func(src string) []byte {
+		var buf bytes.Buffer
+		gz := gzip.NewWriter(&buf)
+		tw := tar.NewWriter(gz)
+		for name, body := range map[string][]byte{
+			"package/package.json": []byte(` + "`" + `{"name": "{{.NPM}}", "types": "index.d.ts"}` + "`" + `),
+			"package/index.d.ts":   kittest.Read(t, src),
+		} {
+			if err := tw.WriteHeader(&tar.Header{Name: name, Mode: 0o644, Size: int64(len(body)), Typeflag: tar.TypeReg}); err != nil {
+				t.Fatal(err)
+			}
+			tw.Write(body)
+		}
+		if err := tw.Close(); err != nil {
+			t.Fatal(err)
+		}
+		gz.Close()
+		return buf.Bytes()
+	}
+	reg := "https://registry.npmjs.org/" + strings.ReplaceAll("{{.NPM}}", "/", "%2F")
+	files := map[string][]byte{
+		reg:            []byte(` + "`" + `{"versions": {"1.0.0": {}, "1.1.0": {}}, "time": {"1.0.0": "2026-01-01T00:00:00Z", "1.1.0": "2026-02-01T00:00:00Z"}}` + "`" + `),
+		reg + "/1.0.0": []byte(` + "`" + `{"dist": {"tarball": "https://example.com/{{.File}}-1.0.0.tgz"}}` + "`" + `),
+		reg + "/1.1.0": []byte(` + "`" + `{"dist": {"tarball": "https://example.com/{{.File}}-1.1.0.tgz"}}` + "`" + `),
+		"https://example.com/{{.File}}-1.0.0.tgz": tarball("testdata/{{.File}}-old.d.ts"),
+		"https://example.com/{{.File}}-1.1.0.tgz": tarball(file),
+	}
+	env := kittest.Env(t, nil)
+	env.Get = func(_ context.Context, url string) ([]byte, error) {
+		if b, ok := files[url]; ok {
+			return b, nil
+		}
+		t.Errorf("fetched %s, which the test didn't save", url)
+		return nil, fmt.Errorf("no saved copy of %s", url)
+	}
+	ctx, p := context.Background(), Plugin{Package: {{.Ident}}}
+	vs, err := p.ListVersions(ctx, env)
+	if err != nil || len(vs) != 2 {
+		t.Fatalf("versions %v: %v", vs, err)
+	}
+	return kittest.Versions(t, env, p, vs[0], vs[1])
+}
+`,
+		imports: []string{"archive/tar", "bytes", "compress/gzip", "context", "fmt", "strings", "github.com/patch-it-dev/patch-it-plugins/core/event"},
+		next:    "Save two real tarballs of the package and serve them in {{.Lower}}Ingest; the kind reads their .d.ts files, never runs them.",
 	},
 }
 

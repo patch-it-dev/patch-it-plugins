@@ -1,0 +1,20 @@
+{
+  "info": {
+    "name": "textual",
+    "version": "8.2.5"
+  },
+  "urls": [
+    {
+      "filename": "textual-8.2.5-py3-none-any.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/cd/01/c4555f9c8a692ff83d84930150540f743ce94c89234f9e9a15ff4baba3a8/textual-8.2.5-py3-none-any.whl",
+      "yanked": false
+    },
+    {
+      "filename": "textual-8.2.5.tar.gz",
+      "packagetype": "sdist",
+      "url": "https://files.pythonhosted.org/packages/62/1e/1eedc5bac184d00aaa5f9a99095f7e266af3ec46fa926c1051be5d358da1/textual-8.2.5.tar.gz",
+      "yanked": false
+    }
+  ]
+}

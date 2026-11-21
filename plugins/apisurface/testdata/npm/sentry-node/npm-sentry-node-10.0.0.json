@@ -1,0 +1,7 @@
+{
+  "name": "@sentry/node",
+  "version": "10.0.0",
+  "dist": {
+    "tarball": "https://registry.npmjs.org/@sentry/node/-/node-10.0.0.tgz"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "@anthropic-ai/sdk",
+  "versions": {
+    "1.6.0": {
+      "name": "@anthropic-ai/sdk",
+      "version": "1.6.0"
+    },
+    "1.7.0": {
+      "name": "@anthropic-ai/sdk",
+      "version": "1.7.0"
+    },
+    "1.8.0": {
+      "name": "@anthropic-ai/sdk",
+      "version": "1.8.0"
+    }
+  },
+  "time": {
+    "1.6.0": "2026-11-05T19:05:25.552Z",
+    "1.7.0": "2026-11-09T18:56:57.201Z",
+    "1.8.0": "2026-11-10T16:38:44.845Z"
+  }
+}

@@ -23,7 +23,7 @@ func (p Page) PageURL() string { return p.URL }
 
 // Find reads every retirement on the page.
 func (p Page) Find(page []byte) (kit.Notices, error) {
-	rs, err := Parse(page, p.Keep)
+	rs, err := Parse(p.Format.Pipes(page), p.Keep)
 	return Retirements(rs), err
 }
 

@@ -1,0 +1,1291 @@
+{
+  "info": {
+    "name": "pymongo"
+  },
+  "releases": {
+    "4.15.4": [
+      {
+        "filename": "pymongo-4.15.4-cp310-cp310-macosx_10_9_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:50:22.286341Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp310-cp310-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:50:24.171670Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp310-cp310-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:50:25.635785Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:50:27.162100Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp310-cp310-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:50:29.322399Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp310-cp310-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:50:31.326385Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:50:33.339675Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp310-cp310-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:50:35.214436Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp310-cp310-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:50:36.621193Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp310-cp310-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:50:38.573146Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp311-cp311-macosx_10_9_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:50:40.275615Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp311-cp311-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:50:41.842274Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp311-cp311-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:50:43.801837Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:50:45.479134Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp311-cp311-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:50:47.517680Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp311-cp311-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:50:49.183384Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:50:51.568923Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp311-cp311-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:50:53.362965Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp311-cp311-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:50:55.198288Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp311-cp311-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:50:57.164358Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp312-cp312-macosx_10_13_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:50:59.056684Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp312-cp312-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:00.683487Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp312-cp312-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:02.392077Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:04.353843Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp312-cp312-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:06.222326Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp312-cp312-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:07.893684Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:09.574627Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp312-cp312-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:11.670402Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp312-cp312-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:13.283023Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp312-cp312-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:15.981633Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp313-cp313-macosx_10_13_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:17.693649Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp313-cp313-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:19.580892Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp313-cp313-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:21.262625Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:23.248555Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp313-cp313-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:25.294594Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp313-cp313-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:27.162640Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:29.136671Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp313-cp313-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:31.254905Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp313-cp313-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:33.118195Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp313-cp313-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:35.130495Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp314-cp314-macosx_10_15_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:36.808414Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp314-cp314-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:38.551782Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp314-cp314-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:40.657024Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:42.651777Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp314-cp314-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:44.372660Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp314-cp314-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:46.548693Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:48.335663Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp314-cp314t-macosx_10_15_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:57.266633Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp314-cp314t-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:59.114482Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp314-cp314t-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:52:01.006969Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp314-cp314t-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:52:03.029674Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp314-cp314t-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:52:04.968030Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp314-cp314t-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:52:07.164621Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp314-cp314t-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:52:09.016401Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp314-cp314t-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:52:11.138522Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp314-cp314t-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:52:13.324814Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp314-cp314t-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:52:15.185742Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp314-cp314-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:50.775696Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp314-cp314-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:52.691597Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp314-cp314-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:51:54.442530Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp39-cp39-macosx_10_9_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:52:17.338433Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp39-cp39-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:52:19.472375Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp39-cp39-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:52:21.350180Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp39-cp39-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:52:23.243430Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp39-cp39-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:52:25.170560Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp39-cp39-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:52:27.098213Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:52:29.366486Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp39-cp39-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:52:31.333548Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp39-cp39-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:52:33.246544Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4-cp39-cp39-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-11-11T20:52:35.044477Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.4.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2025-11-11T20:52:37.310562Z",
+        "yanked": false
+      }
+    ],
+    "4.15.5": [
+      {
+        "filename": "pymongo-4.15.5-cp310-cp310-macosx_10_9_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:42:12.090377Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp310-cp310-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:42:14.396639Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp310-cp310-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:42:16.147663Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:42:18.018407Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp310-cp310-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:42:19.898924Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp310-cp310-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:42:21.709027Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:42:23.605573Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp310-cp310-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:42:25.438994Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp310-cp310-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:42:26.889005Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp310-cp310-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:42:28.668057Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp311-cp311-macosx_10_9_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:42:30.496151Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp311-cp311-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:42:31.862575Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp311-cp311-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:42:33.829738Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:42:35.805470Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp311-cp311-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:42:37.737720Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp311-cp311-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:42:39.610947Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:42:41.323913Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp311-cp311-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:42:42.814135Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp311-cp311-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:42:45.025361Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp311-cp311-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:42:47.190697Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp312-cp312-macosx_10_13_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:42:48.812992Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp312-cp312-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:42:50.832963Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp312-cp312-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:42:53.402347Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:42:56.187231Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp312-cp312-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:42:57.913576Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp312-cp312-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:00.626195Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:02.320548Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp312-cp312-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:04.699371Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp312-cp312-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:06.555894Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp312-cp312-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:08.801386Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp313-cp313-macosx_10_13_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:11.074817Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp313-cp313-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:13.345824Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp313-cp313-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:15.225934Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:16.869087Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp313-cp313-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:19.559807Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp313-cp313-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:21.214288Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:23.415173Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp313-cp313-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:26.081243Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp313-cp313-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:27.816554Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp313-cp313-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:29.371214Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp314-cp314-macosx_10_15_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:31.580238Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp314-cp314-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:33.690786Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp314-cp314-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:35.769368Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:37.479109Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp314-cp314-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:39.866723Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp314-cp314-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:42.002139Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:43.924145Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp314-cp314t-macosx_10_15_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:51.432522Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp314-cp314t-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:53.131399Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp314-cp314t-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:55.141835Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp314-cp314t-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:57.188554Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp314-cp314t-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:59.463242Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp314-cp314t-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:44:01.415942Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp314-cp314t-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:44:03.427432Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp314-cp314t-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:44:05.318281Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp314-cp314t-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:44:07.215833Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp314-cp314t-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:44:09.048760Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp314-cp314-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:45.732955Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp314-cp314-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:47.756034Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp314-cp314-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:43:49.677724Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp39-cp39-macosx_10_9_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:44:10.880954Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp39-cp39-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:44:12.611285Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp39-cp39-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:44:14.597624Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp39-cp39-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:44:16.456814Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp39-cp39-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:44:18.508774Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp39-cp39-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:44:20.729795Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:44:23.288112Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp39-cp39-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:44:25.082337Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp39-cp39-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:44:26.974299Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5-cp39-cp39-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-12-02T18:44:29.067407Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.15.5.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2025-12-02T18:44:30.992955Z",
+        "yanked": false
+      }
+    ],
+    "4.16.0": [
+      {
+        "filename": "pymongo-4.16.0-cp310-cp310-macosx_10_9_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:03:40.302955Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp310-cp310-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:03:42.130864Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp310-cp310-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:03:44.126459Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:03:45.520275Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp310-cp310-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:03:47.030594Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp310-cp310-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:03:48.377780Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:03:50.205679Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp310-cp310-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:03:52.701443Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp310-cp310-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:03:57.671238Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp310-cp310-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:03:59.100445Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp311-cp311-macosx_10_9_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:00.628171Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp311-cp311-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:02.213465Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp311-cp311-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:03.942859Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:05.387249Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp311-cp311-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:08.458209Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp311-cp311-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:10.355079Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:11.760062Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp311-cp311-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:13.522273Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp311-cp311-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:14.923892Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp311-cp311-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:17.099560Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp312-cp312-macosx_10_13_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:19.173855Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp312-cp312-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:20.861811Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp312-cp312-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:22.219301Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:24.055183Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp312-cp312-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:25.964316Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp312-cp312-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:28.745663Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:30.331469Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp312-cp312-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:32.124755Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp312-cp312-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:33.685354Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp312-cp312-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:35.594769Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp313-cp313-macosx_10_13_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:38.303327Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp313-cp313-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:39.669547Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp313-cp313-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:41.368046Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:42.965863Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp313-cp313-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:44.652911Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp313-cp313-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:46.228214Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:48.017971Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp313-cp313-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:49.538171Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp313-cp313-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:51.382267Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp313-cp313-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:52.904118Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp314-cp314-macosx_10_15_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:54.359318Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp314-cp314-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:56.642139Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp314-cp314-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:58.255385Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:04:59.788681Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp314-cp314-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:05:01.942914Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp314-cp314-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:05:03.576715Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:05:05.459718Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp314-cp314t-macosx_10_15_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:05:11.702577Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp314-cp314t-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:05:13.182547Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp314-cp314t-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:05:14.981050Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp314-cp314t-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:05:16.794332Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp314-cp314t-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:05:18.498656Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp314-cp314t-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:05:20.073884Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp314-cp314t-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:05:22.052163Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp314-cp314t-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:05:23.888608Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp314-cp314t-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:05:26.874034Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp314-cp314t-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:05:28.470516Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp314-cp314-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:05:07.018867Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp314-cp314-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:05:08.499963Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp314-cp314-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:05:09.944314Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp39-cp39-macosx_10_9_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:05:30.090943Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp39-cp39-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:05:31.593219Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp39-cp39-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:05:33.128804Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp39-cp39-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:05:34.703778Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp39-cp39-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:05:37.465674Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp39-cp39-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:05:38.974337Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:05:40.783772Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp39-cp39-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:05:42.322112Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp39-cp39-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:05:44.287256Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0-cp39-cp39-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-07T18:05:46.183169Z",
+        "yanked": false
+      },
+      {
+        "filename": "pymongo-4.16.0.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-01-07T18:05:48.107072Z",
+        "yanked": false
+      }
+    ]
+  }
+}

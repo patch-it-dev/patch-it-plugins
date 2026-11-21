@@ -2,6 +2,7 @@ package pluginlist
 
 import (
 	"encoding/json"
+	"slices"
 	"strings"
 	"testing"
 
@@ -42,8 +43,9 @@ func TestBuildListsEveryRegisteredSource(t *testing.T) {
 	}
 }
 
-// One provider, several sources: Algolia's three APIs.
-func TestAlgoliaIsOneProviderWithThreeSources(t *testing.T) {
+// One provider, several sources: Algolia's three APIs (and its other
+// sources), merged across kinds into one provider.
+func TestAlgoliaIsOneProviderWithItsSources(t *testing.T) {
 	b, err := Marshal(Build("v1.2.3"))
 	if err != nil {
 		t.Fatal(err)
@@ -63,8 +65,10 @@ func TestAlgoliaIsOneProviderWithThreeSources(t *testing.T) {
 				t.Errorf("%s: page %s isn't at the release", s.ID, s.Page)
 			}
 		}
-		if got := strings.Join(ids, " "); got != "algolia/ingestion-api algolia/recommend-api algolia/search-api" {
-			t.Errorf("algolia's sources: %s", got)
+		for _, want := range []string{"algolia/ingestion-api", "algolia/recommend-api", "algolia/search-api"} {
+			if !slices.Contains(ids, want) {
+				t.Errorf("algolia's sources %v lack %s", ids, want)
+			}
 		}
 		return
 	}

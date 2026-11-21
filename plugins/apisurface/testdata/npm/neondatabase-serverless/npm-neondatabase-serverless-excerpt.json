@@ -1,0 +1,22 @@
+{
+  "name": "@neondatabase/serverless",
+  "versions": {
+    "0.10.4": {
+      "name": "@neondatabase/serverless",
+      "version": "0.10.4"
+    },
+    "1.0.0": {
+      "name": "@neondatabase/serverless",
+      "version": "1.0.0"
+    },
+    "1.0.1": {
+      "name": "@neondatabase/serverless",
+      "version": "1.0.1"
+    }
+  },
+  "time": {
+    "0.10.4": "2024-11-25T12:56:54.358Z",
+    "1.0.0": "2025-03-25T10:06:46.324Z",
+    "1.0.1": "2025-06-06T13:09:20.406Z"
+  }
+}

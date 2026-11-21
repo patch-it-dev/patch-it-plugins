@@ -17,7 +17,7 @@ import (
 func TestOnlyANewMajorHasAGuide(t *testing.T) {
 	env := kittest.Env(t, kittest.Pages{
 		"https://pypi.org/pypi/anthropic/json": "testdata/pypi-anthropic-excerpt.json",
-		sdkguide.AnthropicV1.URL():             "sdkguide/testdata/anthropic-MIGRATION-v1.0.0.md",
+		anthropicGuideV1.URL():                 "sdkguide/testdata/anthropic-MIGRATION-v1.0.0.md",
 	})
 	p := Plugin{Guide: sdkguide.Anthropic}
 	ctx := context.Background()

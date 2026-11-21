@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:33ec654be5153a8dffb6be8b4d82cf635aa1a7e01e70e5f212df9938ff3c2213",
+    "api": "openai/python-surface",
+    "version": "1.1.2",
+    "previous_version": "1.1.1",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "openai",
+      "change": "removed_symbol",
+      "symbols": [
+        "types.beta.AsssitantDeleted",
+        "types.beta.asssitant_deleted.AsssitantDeleted"
+      ]
+    },
+    "description": "The class `types.beta.AsssitantDeleted` was removed in openai 1.1.2: code using it fails.",
+    "migration_hint": "openai 1.1.2 has no `types.beta.AsssitantDeleted`: see the package's release notes for what replaces it.",
+    "source_url": "https://files.pythonhosted.org/packages/dd/82/b92f73453ea318c0d46f31aeb56e9d94a42606c010fb72a513f4a3cd4bac/openai-1.1.2-py3-none-any.whl",
+    "source_excerpt": "openai 1.1.1 (openai-1.1.1-py3-none-any.whl), openai/types/beta/asssitant_deleted.py line 10: class AsssitantDeleted(BaseModel)\nopenai 1.1.2 (openai-1.1.2-py3-none-any.whl): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

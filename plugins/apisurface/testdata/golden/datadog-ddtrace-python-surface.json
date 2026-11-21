@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:cdb19d8281035dc270d7d8ad7862e7599f85478447495cdb19cec3f91ab01629",
+    "api": "datadog/ddtrace-python-surface",
+    "version": "4.13.0",
+    "previous_version": "4.12.3",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "ddtrace",
+      "change": "removed_symbol",
+      "symbols": [
+        "appsec.ai_guard.integrations.resolve_strands_hook_provider"
+      ]
+    },
+    "description": "The function `appsec.ai_guard.integrations.resolve_strands_hook_provider` was removed in ddtrace 4.13.0: code using it fails.",
+    "migration_hint": "ddtrace 4.13.0 has no `appsec.ai_guard.integrations.resolve_strands_hook_provider`: see the package's release notes for what replaces it.",
+    "source_url": "https://files.pythonhosted.org/packages/52/97/9d4ec43fa15991f195e62795e1d46fb158cab3df29c370d272889b8f8640/ddtrace-4.13.0-cp310-cp310-macosx_14_0_arm64.whl",
+    "source_excerpt": "ddtrace 4.12.3 (ddtrace-4.12.3-cp310-cp310-macosx_14_0_arm64.whl), ddtrace/appsec/ai_guard/integrations/__init__.py line 67: def resolve_strands_hook_provider() -> type\nddtrace 4.13.0 (ddtrace-4.13.0-cp310-cp310-macosx_14_0_arm64.whl): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:33db11018d71b128747314730a3f88e6969963c997e8431f85eec530722341ce",
+    "api": "datadog/ddtrace-python-surface",
+    "version": "4.13.0",
+    "previous_version": "4.12.3",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "ddtrace",
+      "change": "removed_symbol",
+      "symbols": [
+        "appsec.ai_guard.integrations.resolve_strands_plugin"
+      ]
+    },
+    "description": "The function `appsec.ai_guard.integrations.resolve_strands_plugin` was removed in ddtrace 4.13.0: code using it fails.",
+    "migration_hint": "ddtrace 4.13.0 has no `appsec.ai_guard.integrations.resolve_strands_plugin`: see the package's release notes for what replaces it.",
+    "source_url": "https://files.pythonhosted.org/packages/52/97/9d4ec43fa15991f195e62795e1d46fb158cab3df29c370d272889b8f8640/ddtrace-4.13.0-cp310-cp310-macosx_14_0_arm64.whl",
+    "source_excerpt": "ddtrace 4.12.3 (ddtrace-4.12.3-cp310-cp310-macosx_14_0_arm64.whl), ddtrace/appsec/ai_guard/integrations/__init__.py line 56: def resolve_strands_plugin() -> type\nddtrace 4.13.0 (ddtrace-4.13.0-cp310-cp310-macosx_14_0_arm64.whl): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

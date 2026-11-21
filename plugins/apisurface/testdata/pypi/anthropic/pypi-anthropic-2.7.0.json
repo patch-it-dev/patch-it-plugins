@@ -1,0 +1,20 @@
+{
+  "info": {
+    "name": "anthropic",
+    "version": "2.7.0"
+  },
+  "urls": [
+    {
+      "filename": "anthropic-2.7.0-py3-none-any.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/8a/da/ed144ab553eb2bc7b5febbfb37858f28b33ec332c37f0fdf260012ae3fe2/anthropic-2.7.0-py3-none-any.whl",
+      "yanked": false
+    },
+    {
+      "filename": "anthropic-2.7.0.tar.gz",
+      "packagetype": "sdist",
+      "url": "https://files.pythonhosted.org/packages/80/d3/cedfb7ed99b796c3b6b01bcb8e189f793d4eedb05979149c0b2113c5511c/anthropic-2.7.0.tar.gz",
+      "yanked": false
+    }
+  ]
+}

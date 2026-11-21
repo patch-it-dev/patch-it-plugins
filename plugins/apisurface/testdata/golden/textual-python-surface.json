@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:3a43284a8323a843e371f3ea498b3bfbc57267a1ae88fc05d73ef4d02a805d6d",
+    "api": "textual/python-surface",
+    "version": "8.2.6",
+    "previous_version": "8.2.5",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "textual",
+      "change": "removed_parameter",
+      "symbols": [
+        "walk.walk_selectable_widgets"
+      ],
+      "parameter": "bounded"
+    },
+    "description": "`walk.walk_selectable_widgets` no longer takes the parameter `bounded` in textual 8.2.6: passing it raises a TypeError.",
+    "migration_hint": "Stop passing `bounded` to `walk.walk_selectable_widgets`; its signature in 8.2.6 is quoted in the source excerpt.",
+    "source_url": "https://files.pythonhosted.org/packages/b8/b4/c2b876f445e52522824cb900f2c7db3a7c24f89d20449ef278b4195d0ecb/textual-8.2.6-py3-none-any.whl",
+    "source_excerpt": "textual 8.2.5 (textual-8.2.5-py3-none-any.whl), textual/walk.py line 176: def walk_selectable_widgets( root: DOMNode, bounds: Shape, bounded: set[DOMNode] ) -> Iterable[Widget]\ntextual 8.2.6 (textual-8.2.6-py3-none-any.whl), textual/walk.py line 176: def walk_selectable_widgets( root: Widget, bounds: Shape, containers: set[DOMNode] ) -> Iterable[Widget]",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

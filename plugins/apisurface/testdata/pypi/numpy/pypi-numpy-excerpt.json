@@ -1,0 +1,973 @@
+{
+  "info": {
+    "name": "numpy"
+  },
+  "releases": {
+    "2.4.6": [
+      {
+        "filename": "numpy-2.4.6-cp311-cp311-macosx_10_9_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:33:13.503322Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp311-cp311-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:33:17.795046Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp311-cp311-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:33:20.654003Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp311-cp311-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:33:22.987746Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp311-cp311-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:33:26.620531Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:33:29.955928Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp311-cp311-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:33:34.724547Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp311-cp311-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:33:38.217285Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp311-cp311-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:33:41.331922Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp311-cp311-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:33:44.131802Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp311-cp311-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:33:50.725281Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp312-cp312-macosx_10_13_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:33:54.065074Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp312-cp312-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:33:57.621567Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp312-cp312-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:34:00.302502Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp312-cp312-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:34:02.852919Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:34:05.485939Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:34:09.265355Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp312-cp312-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:34:13.053777Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp312-cp312-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:34:17.024190Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp312-cp312-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:34:20.300957Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp312-cp312-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:34:23.095920Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp312-cp312-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:34:25.876665Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp313-cp313-macosx_10_13_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:34:29.410217Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp313-cp313-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:34:33.013467Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp313-cp313-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:34:36.132599Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp313-cp313-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:34:38.484555Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp313-cp313-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:34:41.257853Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:34:45.075155Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp313-cp313-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:34:49.065012Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp313-cp313-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:34:52.709051Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp313-cp313t-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:35:05.468210Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp313-cp313t-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:35:08.693038Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp313-cp313t-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:35:11.459033Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp313-cp313t-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:35:14.790426Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp313-cp313t-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:35:18.836475Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp313-cp313t-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:35:22.520032Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp313-cp313t-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:35:26.398686Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp313-cp313t-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:35:29.387434Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp313-cp313t-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:35:32.175108Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp313-cp313t-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:35:35.465365Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp313-cp313-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:34:55.618070Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp313-cp313-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:34:58.928358Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp313-cp313-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:35:02.167977Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp314-cp314-macosx_10_15_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:35:38.353351Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp314-cp314-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:35:42.140257Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp314-cp314-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:35:45.377634Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp314-cp314-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:35:47.926365Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp314-cp314-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:35:50.863074Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:35:54.752683Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp314-cp314-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:35:58.355706Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp314-cp314-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:36:02.845963Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp314-cp314t-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:36:16.473678Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp314-cp314t-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:36:19.767450Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp314-cp314t-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:36:22.266227Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp314-cp314t-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:36:25.713356Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp314-cp314t-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:36:29.652739Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp314-cp314t-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:36:33.449330Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp314-cp314t-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:36:37.369975Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp314-cp314t-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:36:40.817567Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp314-cp314t-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:36:43.996246Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp314-cp314t-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:36:47.114476Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp314-cp314-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:36:05.920955Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp314-cp314-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:36:09.107376Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-cp314-cp314-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:36:12.766289Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-pp311-pypy311_pp73-macosx_10_15_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:36:50.673446Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-pp311-pypy311_pp73-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:36:53.879889Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-pp311-pypy311_pp73-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:36:57.194282Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-pp311-pypy311_pp73-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:36:59.575982Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-pp311-pypy311_pp73-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:37:02.674994Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-pp311-pypy311_pp73-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:37:06.327613Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6-pp311-pypy311_pp73-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-18T23:37:09.715812Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.4.6.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-05-18T23:37:14.070174Z",
+        "yanked": false
+      }
+    ],
+    "2.5.0": [
+      {
+        "filename": "numpy-2.5.0-cp312-cp312-macosx_10_13_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:56:16.657410Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp312-cp312-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:56:19.813151Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp312-cp312-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:56:22.173812Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp312-cp312-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:56:23.914139Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:56:25.631691Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:56:28.009641Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp312-cp312-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:56:30.260509Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp312-cp312-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:56:32.410752Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp312-cp312-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:56:34.657453Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp312-cp312-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:56:36.240074Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp312-cp312-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:56:38.733438Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp313-cp313-macosx_10_13_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:56:40.799299Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp313-cp313-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:56:43.094970Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp313-cp313-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:56:45.503509Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp313-cp313-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:56:47.567245Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp313-cp313-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:56:49.352065Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:56:51.542183Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp313-cp313-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:56:55.401649Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp313-cp313-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:56:57.750207Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp313-cp313-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:57:00.016739Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp313-cp313-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:57:01.815440Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp313-cp313-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:57:03.961417Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp314-cp314-macosx_10_15_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:57:06.253771Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp314-cp314-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:57:08.547112Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp314-cp314-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:57:11.012554Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp314-cp314-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:57:12.919623Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp314-cp314-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:57:14.717741Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:57:16.906054Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp314-cp314-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:57:19.165283Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp314-cp314-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:57:21.638552Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp314-cp314t-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:57:30.104290Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp314-cp314t-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:57:32.193724Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp314-cp314t-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:57:33.933545Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp314-cp314t-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:57:35.677375Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp314-cp314t-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:57:38.159122Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp314-cp314t-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:57:40.447179Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp314-cp314t-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:57:42.875472Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp314-cp314t-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:57:45.101575Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp314-cp314t-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:57:46.935734Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp314-cp314t-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:57:49.313351Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp314-cp314-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:57:23.844076Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp314-cp314-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:57:25.945155Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0-cp314-cp314-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-21T20:57:28.175999Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.0.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-06-21T20:57:51.950384Z",
+        "yanked": false
+      }
+    ],
+    "2.5.1": [
+      {
+        "filename": "numpy-2.5.1-cp312-cp312-macosx_10_13_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:06:12.423099Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp312-cp312-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:06:15.726377Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp312-cp312-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:06:17.913325Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp312-cp312-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:06:20.020849Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:06:21.621674Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:06:24.064248Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp312-cp312-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:06:26.690334Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp312-cp312-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:06:29.521168Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp312-cp312-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:06:32.571101Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp312-cp312-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:06:34.926817Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp312-cp312-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:06:37.785775Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp313-cp313-macosx_10_13_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:06:40.370578Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp313-cp313-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:06:42.768291Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp313-cp313-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:06:45.466864Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp313-cp313-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:06:47.288955Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp313-cp313-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:06:49.494850Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:06:52.061614Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp313-cp313-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:06:54.605021Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp313-cp313-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:06:57.540930Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp313-cp313-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:07:00.140504Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp313-cp313-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:07:02.387954Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp313-cp313-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:07:04.878713Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp314-cp314-macosx_10_15_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:07:07.374865Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp314-cp314-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:07:09.907544Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp314-cp314-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:07:12.227015Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp314-cp314-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:07:14.368374Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp314-cp314-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:07:16.272325Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:07:19.021186Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp314-cp314-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:07:22.015328Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp314-cp314-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:07:24.941334Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp314-cp314t-macosx_11_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:07:34.941201Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp314-cp314t-macosx_14_0_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:07:37.495942Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp314-cp314t-macosx_14_0_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:07:39.563367Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp314-cp314t-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:07:41.682168Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp314-cp314t-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:07:44.611711Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp314-cp314t-musllinux_1_2_aarch64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:07:47.694556Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp314-cp314t-musllinux_1_2_x86_64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:07:50.684168Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp314-cp314t-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:07:53.445951Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp314-cp314t-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:07:55.384791Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp314-cp314t-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:07:58.506781Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp314-cp314-win32.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:07:27.622239Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp314-cp314-win_amd64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:07:29.887234Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1-cp314-cp314-win_arm64.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-04T17:07:32.568543Z",
+        "yanked": false
+      },
+      {
+        "filename": "numpy-2.5.1.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-07-04T17:08:00.933002Z",
+        "yanked": false
+      }
+    ]
+  }
+}

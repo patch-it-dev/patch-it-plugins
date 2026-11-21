@@ -4,18 +4,24 @@
 // or renamed, a parameter that is gone, or one that lost its default (callers
 // must now pass it), is an event.
 //
-// Python first: every release on PyPI (ListVersions), the release's wheel
-// (or sdist) read without running any of it (ReadAt: pysurface/ reads the
-// .py and .pyi files as text), and the two surfaces compared (Extract). Each
-// event cites the release file and quotes the definition's file and line in
-// both releases. npm (.d.ts) is a follow-up.
+// Every release on PyPI or npm (ListVersions), the release's files read
+// without running any of them (ReadAt: pysurface/ reads a wheel's or sdist's
+// .py and .pyi files as text; dtsurface/ reads an npm tarball's TypeScript
+// declarations, .d.ts, .d.mts and .d.cts, as text), and the two surfaces
+// compared (Extract): Python's parameters by name, TypeScript's by
+// position. Each event cites the release file and quotes the definition's
+// file and line in both releases; one declaration reachable at several
+// import paths is one event.
 //
 // What isn't read, on purpose (precision over recall): private names (a
-// leading underscore, a private module, a name left out of __all__),
-// classes nested in classes, overloaded functions' parameters, a removed
+// leading underscore, a module under a private one or one named internal
+// or vendor, a name left out of __all__), classes nested in classes,
+// overloaded functions' and properties' parameters, self and cls, a removed
 // parameter when the function now takes **kwargs (passing it still works),
-// and a parameter newly added without a default (patch-it's change-event
-// contract has no subject for it yet: logged).
+// a name its module still binds (an alias, an import, a star import or a
+// module __getattr__ that can't be listed), and a parameter newly added
+// without a default (patch-it's change-event contract has no subject for it
+// yet: logged).
 package apisurface
 
 import (
@@ -33,29 +39,13 @@ import (
 	"github.com/patch-it-dev/patch-it-plugins/plugins/apisurface/pysurface"
 )
 
-func init() {
-	plugin.RegisterProvider(plugin.Provider{
-		ID: "openai", Name: "OpenAI", Category: plugin.CategoryAI, Homepage: "https://openai.com",
-		Sources: []plugin.Source{{
-			ID: "python-sdk", Layer: plugin.LayerSDK, Page: "providers/openai-python-sdk.md",
-			Watches:  "Classes, functions, methods and parameters removed or renamed in the public API of the openai Python package, release by release, read from each release's wheel",
-			URLs:     []string{"https://pypi.org/project/openai/", "https://github.com/openai/openai-python"},
-			Packages: []string{"pypi:openai"},
-			Plugin:   Plugin{Package: OpenAIPython},
-		}},
-	})
-}
-
 // Package is one published package.
 type Package struct {
-	ID        string // the source id the events carry: "openai/python-sdk"
+	ID        string // the source id the events carry: "openai/python-surface"
 	Name      string // on the registry: "openai"
-	Ecosystem string // "pypi"
-	Module    string // the top-level import name: "openai"
+	Ecosystem string // "pypi" or "npm"
+	Module    string // the top-level import name: "openai"; an npm package's own name
 }
-
-// OpenAIPython is the openai package on PyPI.
-var OpenAIPython = Package{ID: "openai/python-sdk", Name: "openai", Ecosystem: "pypi", Module: "openai"}
 
 // Plugin reads one package's releases.
 type Plugin struct {
@@ -69,6 +59,8 @@ func (p Plugin) ListVersions(ctx context.Context, env plugin.Env) ([]plugin.Vers
 	switch p.Package.Ecosystem {
 	case "pypi":
 		return versions.PyPIReleases(ctx, env.Get, p.Package.Name)
+	case "npm":
+		return versions.NPMReleases(ctx, env.Get, p.Package.Name)
 	default:
 		return nil, fmt.Errorf("%s: reading a %q package's API isn't supported yet", p.Package.Name, p.Package.Ecosystem)
 	}
@@ -77,17 +69,25 @@ func (p Plugin) ListVersions(ctx context.Context, env plugin.Env) ([]plugin.Vers
 // Release is what ReadAt keeps of a release: its public surface, the
 // classes a method could move to, and what couldn't be read.
 type Release struct {
-	Artifact string            `json:"artifact"`
-	Surface  pysurface.Surface `json:"surface"`
-	Classes  pysurface.Classes `json:"classes,omitempty"`
-	Skipped  []string          `json:"skipped,omitempty"` // files over the size limit
+	Artifact string             `json:"artifact"`
+	Surface  pysurface.Surface  `json:"surface"`
+	Classes  pysurface.Classes  `json:"classes,omitempty"`
+	Bindings pysurface.Bindings `json:"bindings,omitempty"` // what each public module binds
+	Skipped  []string           `json:"skipped,omitempty"`  // files over the size limit
+	// Positional is a release whose calls pass arguments by position
+	// (npm, read from TypeScript declarations): parameters compare by
+	// place, not by name.
+	Positional bool `json:"positional,omitempty"`
 }
 
-// ReadAt downloads the release's wheel (or sdist) and reads its public
-// surface. The snapshot's content is the surface as JSON, its SourceURL the
+// ReadAt downloads the release's wheel (or sdist), or an npm release's
+// tarball (readNPM), and reads its public surface. The snapshot's content is the surface as JSON, its SourceURL the
 // file read.
 func (p Plugin) ReadAt(ctx context.Context, env plugin.Env, v plugin.Version) (plugin.Snapshot, error) {
 	pkg := p.Package
+	if pkg.Ecosystem == "npm" {
+		return p.readNPM(ctx, env, v)
+	}
 	a, err := pickArtifact(ctx, env, pkg.Name, v.ID)
 	if err != nil {
 		return plugin.Snapshot{}, err
@@ -106,7 +106,7 @@ func (p Plugin) ReadAt(ctx context.Context, env plugin.Env, v plugin.Version) (p
 	for _, s := range skipped {
 		log.Printf("%s %s: %s skipped: over %d bytes", pkg.Name, v.ID, s, MaxFileBytes)
 	}
-	content, err := json.Marshal(Release{Artifact: a.Filename, Surface: pysurface.Read(files), Classes: pysurface.ReadClasses(files), Skipped: skipped})
+	content, err := json.Marshal(Release{Artifact: a.Filename, Surface: pysurface.Read(files), Classes: pysurface.ReadClasses(files), Bindings: pysurface.ReadBindings(files), Skipped: skipped})
 	if err != nil {
 		return plugin.Snapshot{}, err
 	}
@@ -154,6 +154,9 @@ func (p Plugin) event(c Change, from, to plugin.Snapshot, fromFile, toFile strin
 	pkg := p.Package
 	sym := p.local(c.Symbol)
 	subject := event.Subject{Type: event.SubjectPackageRelease, Ecosystem: pkg.Ecosystem, Package: pkg.Name, Change: c.Change, Symbols: []string{sym}}
+	for _, a := range c.Also {
+		subject.Symbols = append(subject.Symbols, p.local(a))
+	}
 	var desc, hint string
 	switch c.Change {
 	case event.PackageRenamedSymbol:
@@ -166,11 +169,18 @@ func (p Plugin) event(c Change, from, to plugin.Snapshot, fromFile, toFile strin
 	case event.PackageRemovedParameter:
 		subject.Parameter = c.Parameter
 		desc = fmt.Sprintf("`%s` no longer takes the parameter `%s` in %s %s: passing it raises a TypeError.", sym, c.Parameter, pkg.Name, to.Version.ID)
+		if pkg.Ecosystem == "npm" {
+			desc = fmt.Sprintf("`%s` no longer takes the parameter `%s` in %s %s: TypeScript rejects a call that passes it.", sym, c.Parameter, pkg.Name, to.Version.ID)
+		}
 		hint = fmt.Sprintf("Stop passing `%s` to `%s`; its signature in %s is quoted in the source excerpt.", c.Parameter, sym, to.Version.ID)
 	case event.PackageChangedDefault:
 		subject.Parameter = c.Parameter
 		desc = fmt.Sprintf("`%s`'s parameter `%s` has no default in %s %s (it was `%s`): a call that leaves it out raises a TypeError.", sym, c.Parameter, pkg.Name, to.Version.ID, c.OldDefault)
 		hint = fmt.Sprintf("Pass `%s=%s` to `%s` to keep the old behavior.", c.Parameter, c.OldDefault, sym)
+		if pkg.Ecosystem == "npm" {
+			desc = fmt.Sprintf("`%s`'s parameter `%s` is no longer optional in %s %s: TypeScript rejects a call that leaves it out.", sym, c.Parameter, pkg.Name, to.Version.ID)
+			hint = fmt.Sprintf("Pass `%s` to `%s`; its signature in %s is quoted in the source excerpt.", c.Parameter, sym, to.Version.ID)
+		}
 	}
 	return event.Event{
 		API:             pkg.ID,
@@ -220,6 +230,9 @@ type Change struct {
 	Before      *pysurface.Symbol // its definition in the older release
 	After       *pysurface.Symbol // in the newer one; nil when gone
 	Note        string
+	// Also are the other import paths of the same declaration with the
+	// same change: one declaration is one change.
+	Also []string
 }
 
 // Compare lists what changed from a to b, sorted by symbol: removed and
@@ -230,7 +243,9 @@ type Change struct {
 // them besides self or cls; anything less sure is a removal.
 //
 // What looks removed but may not be is a note, not an event: a symbol
-// defined in a file b couldn't read (over the size limit), and a method
+// defined in a file b couldn't read (over the size limit), a name its
+// module still binds in b (an alias, an import, a star import from where
+// names can't be listed), and a method
 // whose class is still there but whose bases changed, which one of its
 // bases (or theirs) now defines, or which the class now defines as an
 // attribute (create = _create, a property made a plain attribute).
@@ -287,10 +302,14 @@ func Compare(ra, rb Release) []Change {
 			continue
 		}
 		before, after := old, now
+		if rb.Positional {
+			out = append(out, comparePositional(k, old, now, &before, &after)...)
+			continue
+		}
 		kwargs := slices.ContainsFunc(now.Params, func(p pysurface.Param) bool { return p.Kind == "kwargs" })
-		for _, op := range old.Params {
-			if op.Kind == "args" || op.Kind == "kwargs" {
-				continue
+		for i, op := range old.Params {
+			if op.Kind == "args" || op.Kind == "kwargs" || (i == 0 && (op.Name == "self" || op.Name == "cls")) {
+				continue // a caller never passes self or cls
 			}
 			i := slices.IndexFunc(now.Params, func(p pysurface.Param) bool { return p.Name == op.Name })
 			switch {
@@ -311,9 +330,83 @@ func Compare(ra, rb Release) []Change {
 			}
 		}
 	}
+	out = merge(out)
 	slices.SortFunc(out, func(x, y Change) int {
 		return strings.Compare(x.Symbol+" "+x.Parameter+" "+x.Note, y.Symbol+" "+y.Parameter+" "+y.Note)
 	})
+	return out
+}
+
+// merge makes the changes one declaration has at several import paths
+// (a class defined in one module and re-exported by its package) one
+// change: the shortest path is its Symbol, the others its Also.
+func merge(cs []Change) []Change {
+	type key struct {
+		change                     event.PackageChange
+		file, name, sig, parameter string
+		line                       int
+	}
+	groups := map[key][]int{}
+	var out []Change
+	for i, c := range cs {
+		if c.Before == nil || (c.Change != event.PackageRemovedSymbol && c.Change != event.PackageRemovedParameter && c.Change != event.PackageChangedDefault) {
+			out = append(out, c)
+			continue
+		}
+		k := key{c.Change, c.Before.File, c.Symbol[strings.LastIndexByte(c.Symbol, '.')+1:], c.Before.Signature, c.Parameter, c.Before.Line}
+		groups[k] = append(groups[k], i)
+	}
+	for _, idx := range groups {
+		slices.SortFunc(idx, func(x, y int) int {
+			a, b := cs[x].Symbol, cs[y].Symbol
+			if len(a) != len(b) {
+				return len(a) - len(b)
+			}
+			return strings.Compare(a, b)
+		})
+		c := cs[idx[0]]
+		for _, i := range idx[1:] {
+			c.Also = append(c.Also, cs[i].Symbol)
+		}
+		slices.Sort(c.Also)
+		out = append(out, c)
+	}
+	return out
+}
+
+// comparePositional compares two signatures whose arguments are passed by
+// position (TypeScript): a parameter gone off the end, when the newer one
+// takes no rest parameter, is removed; one optional before and required now,
+// under the same name, lost its default (under another name, a parameter
+// may have been inserted before it: a note); a rename alone is no change. A required parameter added at the
+// end is a note (no subject for it in the contract yet).
+func comparePositional(k string, old, now pysurface.Symbol, before, after *pysurface.Symbol) []Change {
+	var out []Change
+	rest := slices.ContainsFunc(now.Params, func(p pysurface.Param) bool { return p.Kind == "args" })
+	for i, op := range old.Params {
+		if op.Kind == "args" {
+			break
+		}
+		switch {
+		case i >= len(now.Params) && rest:
+			out = append(out, Change{Symbol: k, Note: fmt.Sprintf("%s: parameter %s gone, but a rest parameter still takes it", k, op.Name)})
+		case i >= len(now.Params):
+			out = append(out, Change{Change: event.PackageRemovedParameter, Kind: old.Kind, Symbol: k, Parameter: op.Name, Before: before, After: after})
+		case now.Params[i].Kind == "args":
+			return out
+		case op.HasDef && !now.Params[i].HasDef && now.Params[i].Name == op.Name:
+			out = append(out, Change{Change: event.PackageChangedDefault, Kind: old.Kind, Symbol: k, Parameter: op.Name, Before: before, After: after})
+		case op.HasDef && !now.Params[i].HasDef:
+			// Another name at the place: a parameter inserted before it,
+			// or a rename. Which one can't be told for sure.
+			out = append(out, Change{Symbol: k, Note: fmt.Sprintf("%s: parameter %d is now %s, required (was %s, optional)", k, i+1, now.Params[i].Name, op.Name)})
+		}
+	}
+	for i := len(old.Params); i < len(now.Params); i++ {
+		if np := now.Params[i]; !np.HasDef && np.Kind != "args" && !slices.ContainsFunc(old.Params, func(p pysurface.Param) bool { return p.Kind == "args" }) {
+			out = append(out, Change{Symbol: k, Note: fmt.Sprintf("%s: new required parameter %s (no subject for it in the contract yet)", k, np.Name)})
+		}
+	}
 	return out
 }
 
@@ -332,7 +425,24 @@ func notGone(k string, before pysurface.Symbol, a, b Release) string {
 	if slices.Contains(b.Skipped, before.File) {
 		return fmt.Sprintf("%s, where it was defined, was too big to read", before.File)
 	}
-	if before.Kind != "method" {
+	if mod, ok := b.Bindings[parentOf(k)]; ok {
+		name := k[strings.LastIndexByte(k, '.')+1:]
+		switch {
+		case slices.Contains(mod.Names, name):
+			return fmt.Sprintf("%s still binds the name (an alias, an import or a value now)", parentOf(k))
+		case mod.Star:
+			return fmt.Sprintf("%s star-imports names that can't be listed", parentOf(k))
+		}
+	}
+	if parent, ok := b.Surface[parentOf(k)]; ok {
+		switch parent.Kind {
+		case "export":
+			return fmt.Sprintf("%s is now re-exported from another package, whose members aren't read", parentOf(k))
+		case "variable", "interface", "type":
+			return fmt.Sprintf("%s is now a %s, whose members aren't read", parentOf(k), parent.Kind)
+		}
+	}
+	if before.Kind != "method" && before.Kind != "property" {
 		return ""
 	}
 	cls, ok := b.Surface[parentOf(k)]
@@ -346,6 +456,15 @@ func notGone(k string, before pysurface.Symbol, a, b Release) string {
 	}
 	if own, ok := b.Classes[className(cls.Signature)]; ok && slices.Contains(own.Members, name) {
 		return "its class still defines the name (now an attribute)"
+	}
+	if b.Positional {
+		// TypeScript: a base class from another package isn't read, and
+		// may define it.
+		for _, base := range b.Classes[className(cls.Signature)].Bases {
+			if _, ours := b.Classes[base]; !ours {
+				return fmt.Sprintf("its class extends %s, from another package, which may define it", base)
+			}
+		}
 	}
 	seen := map[string]bool{}
 	for len(bases) > 0 {

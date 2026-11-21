@@ -1,10 +1,8 @@
-// Package openapi is the source plugin for an API that publishes an OpenAPI
-// spec per release (Stripe, Datadog, GitLab, GitHub, Vercel, Supabase,
-// Algolia, Elasticsearch, Sentry, Neon, Convex, PlanetScale, Appwrite): fetch
-// the newest spec, diff it against the last one seen, normalize the changes
-// into events, and attach migration hints from the API's changelog when it
-// has one. Every release is listed and each consecutive pair diffed
-// (ListVersions, ReadAt, Extract).
+// Package openapi is the kind for an API that publishes an OpenAPI spec per
+// release (a tag, a release, or the commits that changed the spec): every
+// release is listed, each consecutive pair diffed (ListVersions, ReadAt,
+// Extract), the changes normalized into events, and migration hints
+// attached from the API's changelog when it has one.
 package openapi
 
 import (
@@ -145,7 +143,7 @@ func init() {
 		Sources: []plugin.Source{{
 			ID: "deployment-api", Layer: plugin.LayerAPI, Page: "providers/convex.md",
 			Watches: "Deployment API operations deprecated, and deprecated operations removed, between commits of the spec",
-			URLs:    []string{"https://github.com/get-convex/convex-backend"},
+			URLs:    []string{"https://github.com/convex/convex-backend"},
 			Plugin:  Plugin{Adapter: adapter.Convex{}, Diff: convexDiff, Keep: convexKeep},
 		}},
 	})
@@ -186,6 +184,43 @@ func init() {
 			Watches: "REST API changes between releases of Flagsmith's own OpenAPI spec (removed endpoints and request parameters)",
 			URLs:    []string{"https://github.com/Flagsmith/flagsmith/blob/main/openapi.yaml"},
 			Plugin:  Plugin{Adapter: adapter.Flagsmith{}, Keep: requestSide},
+		}},
+	})
+	// No Hints: OpenAI's changelog is product news, not keyed by operation.
+	// Only operation deprecations and removals: see openai.go.
+	plugin.RegisterProvider(plugin.Provider{
+		ID: "openai", Name: "OpenAI", Category: plugin.CategoryAI, Homepage: "https://openai.com",
+		Sources: []plugin.Source{{
+			ID: "api", Layer: plugin.LayerAPI, Page: "providers/openai-api.md",
+			Watches:  "REST API operations deprecated, and deprecated operations removed, day by day in the spec OpenAI's SDKs are generated from",
+			URLs:     []string{"https://github.com/openai/openai-openapi/blob/main/openapi.yaml"},
+			Packages: []string{"pypi:openai", "npm:openai"},
+			Plugin:   Plugin{Adapter: adapter.OpenAI{}, Diff: openaiDiff, Keep: openaiKeep},
+		}},
+	})
+	// No Hints: Cloudflare's changelog is product news, not keyed by
+	// operation. Only operation deprecations and removals: see cloudflare.go.
+	// (cloudflare/api is the deprecations feed, registered by plugins/notices.)
+	plugin.RegisterProvider(plugin.Provider{
+		ID: "cloudflare", Name: "Cloudflare", Category: plugin.CategoryInfrastructure, Homepage: "https://www.cloudflare.com",
+		Sources: []plugin.Source{{
+			ID: "api-spec", Layer: plugin.LayerAPI, Page: "providers/cloudflare-api-spec.md",
+			Watches:  "API operations deprecated, and deprecated operations removed, day by day in the spec Cloudflare's SDKs and Terraform provider are generated from",
+			URLs:     []string{"https://github.com/cloudflare/api-schemas/blob/main/openapi.json"},
+			Packages: []string{"pypi:cloudflare", "npm:cloudflare"},
+			Plugin:   Plugin{Adapter: adapter.Cloudflare{}, Diff: cloudflareDiff, Keep: cloudflareKeep},
+		}},
+	})
+	// No Hints: the Atlas changelog is its own source (mongodb/atlas-admin-api,
+	// kind changelog). Only operation deprecations and removals: see
+	// mongodb.go.
+	plugin.RegisterProvider(plugin.Provider{
+		ID: "mongodb", Name: "MongoDB", Category: plugin.CategoryDatabases, Homepage: "https://www.mongodb.com",
+		Sources: []plugin.Source{{
+			ID: "atlas-admin-spec", Layer: plugin.LayerAPI, Page: "providers/mongodb-atlas-admin-spec.md",
+			Watches: "Atlas Administration API v2 operations deprecated, and deprecated operations removed, day by day in MongoDB's published spec",
+			URLs:    []string{"https://github.com/mongodb/openapi/blob/main/openapi/v2.json"},
+			Plugin:  Plugin{Adapter: adapter.MongoDBAtlas{}, Diff: atlasDiff, Keep: atlasKeep},
 		}},
 	})
 }

@@ -206,7 +206,7 @@ func hash(b []byte) string {
 // name, category and homepage not asked again.
 func TestAsksWhatIsMissing(t *testing.T) {
 	o := Options{ProviderID: "stripe"}
-	in := bufio.NewReader(strings.NewReader("python-sdk\napisurface\nsdk\nhttps://pypi.org/project/stripe/\npypi:stripe\nRemoved names\n"))
+	in := bufio.NewReader(strings.NewReader("python-sdk\napisurface\npypi\nsdk\nhttps://pypi.org/project/stripe/\npypi:stripe\nRemoved names\n"))
 	var out bytes.Buffer
 	if err := ask(&o, in, &out); err != nil {
 		t.Fatal(err)

@@ -1,0 +1,63 @@
+{
+  "info": {
+    "name": "supabase"
+  },
+  "releases": {
+    "0.7.1": [
+      {
+        "filename": "supabase-0.7.1-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2022-10-11T06:54:00.544550Z",
+        "yanked": false
+      },
+      {
+        "filename": "supabase-0.7.1.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2022-10-11T06:54:02.064005Z",
+        "yanked": false
+      }
+    ],
+    "1.0.0": [
+      {
+        "filename": "supabase-1.0.0-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2023-02-05T15:22:13.168562Z",
+        "yanked": false
+      },
+      {
+        "filename": "supabase-1.0.0.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2023-02-05T15:22:16.812930Z",
+        "yanked": false
+      }
+    ],
+    "2.33.0": [
+      {
+        "filename": "supabase-2.33.0-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-15T19:14:22.260798Z",
+        "yanked": false
+      },
+      {
+        "filename": "supabase-2.33.0.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-10-15T19:14:23.505086Z",
+        "yanked": false
+      }
+    ],
+    "2.34.0": [
+      {
+        "filename": "supabase-2.34.0-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-11-03T16:49:20.091383Z",
+        "yanked": false
+      },
+      {
+        "filename": "supabase-2.34.0.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-11-03T16:49:25.714016Z",
+        "yanked": false
+      }
+    ]
+  }
+}

@@ -133,3 +133,96 @@ func TestReadClasses(t *testing.T) {
 		t.Errorf("bases %v", b)
 	}
 }
+
+// A property's setter isn't a method of its own: it doesn't replace the
+// getter, and a property's parameters (self, then the value a setter takes)
+// aren't compared: callers never pass them.
+func TestAPropertyHasNoParametersToCompare(t *testing.T) {
+	s := Read([]File{{"acme/span.py", "class Span:\n    @property\n    def name(self) -> str:\n        return self._name\n\n    @name.setter\n    def name(self, value: str) -> None:\n        self._name = value\n\n    @functools.cached_property\n    def size(self):\n        return 1\n"}})
+	n, ok := s["acme.span.Span.name"]
+	if !ok || n.Params != nil || n.Line != 3 {
+		t.Errorf("name: %+v", n)
+	}
+	if sz := s["acme.span.Span.size"]; sz.Params != nil {
+		t.Errorf("size: %+v", sz)
+	}
+}
+
+// A module that star-imports another module of the package re-exports its
+// public names, __init__ or not: `from . import *` makes them importable.
+func TestAStarImportReExportsAnywhere(t *testing.T) {
+	s := Read([]File{
+		{"acme/__init__.py", "from ._sync.client import Client\n"},
+		{"acme/_sync/client.py", "class Client:\n    def __init__(self, url):\n        pass\n"},
+		{"acme/client.py", "import acme as _package\n\nfrom . import *\n\n__all__ = _package.__all__ + (\"Extra\",)\n"},
+	})
+	if _, ok := s["acme.client.Client"]; !ok {
+		t.Errorf("acme.client.Client missing: %v", s)
+	}
+}
+
+// The names each public module binds at its top level, whatever they are:
+// what lets a name that is no longer a class or function the package
+// defines (now an alias, or imported from elsewhere) read as still there.
+func TestReadBindings(t *testing.T) {
+	b := ReadBindings([]File{
+		{"acme/__init__.py", "from ._exceptions import GatewayTimeoutError, DeadlineExceededError\n"},
+		{"acme/_exceptions.py", "class GatewayTimeoutError(Exception): pass\nDeadlineExceededError = GatewayTimeoutError\n"},
+		{"acme/interactions.py", "import typing as t\nimport os\nfrom ._gen.types import *\nfrom ._gen.webhooks import Webhook, WebhookInput as WebhookCreateParams\nif t.TYPE_CHECKING:\n    Alias: t.TypeAlias = int\ndef f(): pass\nclass C:\n    inner = 1\n"},
+	})
+	got, _ := json.Marshal(b)
+	want := `{"acme":{"names":["DeadlineExceededError","GatewayTimeoutError"]},"acme.interactions":{"names":["Alias","C","Webhook","WebhookCreateParams","f","os","t"],"star":true}}`
+	if string(got) != want {
+		t.Errorf("got  %s\nwant %s", got, want)
+	}
+}
+
+// A module under a package named internal is the package's own business, as
+// one starting with "_" is (ddtrace.internal, ddtrace.contrib.internal), and
+// so is vendored code (ddtrace.vendor).
+func TestAnInternalModuleIsPrivate(t *testing.T) {
+	s := Read([]File{
+		{"acme/internal/util.py", "def helper(): pass\n"},
+		{"acme/vendor/jsonpath/__init__.py", "class Child: pass\n"},
+		{"acme/contrib/internal/grpc.py", "def patch(): pass\n"},
+		{"acme/contrib/grpc.py", "def patch(): pass\n"},
+	})
+	if len(s) != 1 {
+		t.Errorf("got %v, want only acme.contrib.grpc.patch", s)
+	}
+	if _, ok := s["acme.contrib.grpc.patch"]; !ok {
+		t.Errorf("missing acme.contrib.grpc.patch: %v", s)
+	}
+}
+
+// A module with a module-level __getattr__ (PEP 562) can hand out any name,
+// lazily: ddtrace 4.13.0's appsec.ai_guard forwards its old names to their
+// new home that way. Its names can't be listed: Star.
+func TestAModuleGetattrBindsAnyName(t *testing.T) {
+	b := ReadBindings([]File{{"acme/old.py", "import typing\n\n_PUBLIC = frozenset({\"Client\"})\n\ndef __getattr__(name: str) -> typing.Any:\n    return 1\n"}})
+	if !b["acme.old"].Star {
+		t.Errorf("got %+v, want Star", b["acme.old"])
+	}
+}
+
+// A package's __init__ re-exports what it imports from its own modules;
+// what it imports from elsewhere in the package (a logger from
+// ddtrace.internal into ddtrace.appsec.ai_guard.integrations) is its own
+// business, as in any other module, unless __all__ names it.
+func TestAnInitReExportsOnlyFromItsOwnModules(t *testing.T) {
+	s := Read([]File{
+		{"acme/__init__.py", ""},
+		{"acme/_log.py", "def get_logger(): pass\n"},
+		{"acme/sub/__init__.py", "from .._log import get_logger\nfrom ._impl import Client\nfrom acme.sub._impl import Other\n"},
+		{"acme/sub/_impl.py", "class Client: pass\nclass Other: pass\n"},
+		{"acme/listed/__init__.py", "from .._log import get_logger\n__all__ = [\"get_logger\"]\n"},
+	})
+	for _, k := range []string{"acme.sub.Client", "acme.sub.Other", "acme.listed.get_logger"} {
+		if _, ok := s[k]; !ok {
+			t.Errorf("missing %s", k)
+		}
+	}
+	if _, ok := s["acme.sub.get_logger"]; ok {
+		t.Errorf("acme.sub.get_logger is the module's own import, not a re-export")
+	}
+}

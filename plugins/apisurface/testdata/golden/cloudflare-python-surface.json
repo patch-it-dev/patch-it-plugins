@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:d1c7eddabd9cb9b74e7bd17ae72c88a0abace63313633534cca074d4d0886d40",
+    "api": "cloudflare/python-surface",
+    "version": "5.4.0",
+    "previous_version": "5.3.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "cloudflare",
+      "change": "removed_symbol",
+      "symbols": [
+        "resources.iam.oauth_scopes.oauth_scopes.AsyncOAuthScopesResource"
+      ]
+    },
+    "description": "The class `resources.iam.oauth_scopes.oauth_scopes.AsyncOAuthScopesResource` was removed in cloudflare 5.4.0: code using it fails.",
+    "migration_hint": "cloudflare 5.4.0 has no `resources.iam.oauth_scopes.oauth_scopes.AsyncOAuthScopesResource`: see the package's release notes for what replaces it.",
+    "source_url": "https://files.pythonhosted.org/packages/c2/bf/20002f7398cb5dc2f289cccd19777aa8869d40d5b01961ccbe8e25e094a6/cloudflare-5.4.0-py3-none-any.whl",
+    "source_excerpt": "cloudflare 5.3.0 (cloudflare-5.3.0-py3-none-any.whl), cloudflare/resources/iam/oauth_scopes/oauth_scopes.py line 68: class AsyncOAuthScopesResource(AsyncAPIResource)\ncloudflare 5.4.0 (cloudflare-5.4.0-py3-none-any.whl): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:ffcad893350bec2b3de31300151ade456487a0c615bf3790c1a7f798ff514ab6",
+    "api": "cloudflare/python-surface",
+    "version": "5.4.0",
+    "previous_version": "5.3.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "cloudflare",
+      "change": "removed_symbol",
+      "symbols": [
+        "resources.iam.oauth_scopes.oauth_scopes.OAuthScopesResource"
+      ]
+    },
+    "description": "The class `resources.iam.oauth_scopes.oauth_scopes.OAuthScopesResource` was removed in cloudflare 5.4.0: code using it fails.",
+    "migration_hint": "cloudflare 5.4.0 has no `resources.iam.oauth_scopes.oauth_scopes.OAuthScopesResource`: see the package's release notes for what replaces it.",
+    "source_url": "https://files.pythonhosted.org/packages/c2/bf/20002f7398cb5dc2f289cccd19777aa8869d40d5b01961ccbe8e25e094a6/cloudflare-5.4.0-py3-none-any.whl",
+    "source_excerpt": "cloudflare 5.3.0 (cloudflare-5.3.0-py3-none-any.whl), cloudflare/resources/iam/oauth_scopes/oauth_scopes.py line 23: class OAuthScopesResource(SyncAPIResource)\ncloudflare 5.4.0 (cloudflare-5.4.0-py3-none-any.whl): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:9eb8385dbf1dc3e9251143e3c841884e9110146737388022fdc8138fae556b17",
+    "api": "cloudflare/python-surface",
+    "version": "5.4.0",
+    "previous_version": "5.3.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "cloudflare",
+      "change": "removed_symbol",
+      "symbols": [
+        "types.aisearch.instance_create_params.SourceParamsWebCrawlerCrawlOptions"
+      ]
+    },
+    "description": "The class `types.aisearch.instance_create_params.SourceParamsWebCrawlerCrawlOptions` was removed in cloudflare 5.4.0: code using it fails.",
+    "migration_hint": "cloudflare 5.4.0 has no `types.aisearch.instance_create_params.SourceParamsWebCrawlerCrawlOptions`: see the package's release notes for what replaces it.",
+    "source_url": "https://files.pythonhosted.org/packages/c2/bf/20002f7398cb5dc2f289cccd19777aa8869d40d5b01961ccbe8e25e094a6/cloudflare-5.4.0-py3-none-any.whl",
+    "source_excerpt": "cloudflare 5.3.0 (cloudflare-5.3.0-py3-none-any.whl), cloudflare/types/aisearch/instance_create_params.py line 305: class SourceParamsWebCrawlerCrawlOptions(TypedDict, total=False)\ncloudflare 5.4.0 (cloudflare-5.4.0-py3-none-any.whl): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

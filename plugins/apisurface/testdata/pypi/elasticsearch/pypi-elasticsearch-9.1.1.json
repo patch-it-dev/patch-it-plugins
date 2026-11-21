@@ -1,0 +1,20 @@
+{
+  "info": {
+    "name": "elasticsearch",
+    "version": "9.1.1"
+  },
+  "urls": [
+    {
+      "filename": "elasticsearch-9.1.1-py3-none-any.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/cf/4c/c0c95d3d881732a5d1b28e12c9be4dea5953ade71810f94565bd5bd2101a/elasticsearch-9.1.1-py3-none-any.whl",
+      "yanked": false
+    },
+    {
+      "filename": "elasticsearch-9.1.1.tar.gz",
+      "packagetype": "sdist",
+      "url": "https://files.pythonhosted.org/packages/59/6a/5eecef6f1ac8005b04714405cb65971d46031bd897e47c29af86e0f87353/elasticsearch-9.1.1.tar.gz",
+      "yanked": false
+    }
+  ]
+}

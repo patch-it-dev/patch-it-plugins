@@ -1,0 +1,3872 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:7346605295a60d8a503f9e83d3619ada16fb7cd8d4f3113bd02b098d59780dbb",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "removed_symbol",
+      "symbols": [
+        "octokit.reactions.deleteLegacy"
+      ]
+    },
+    "description": "`octokit.reactions.deleteLegacy` was removed in @octokit/rest 18.0.0: code using it fails.",
+    "migration_hint": "deprecated `octokit.reactions.deleteLegacy()` has been removed (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* deprecated `octokit.reactions.deleteLegacy()` has been removed",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:9823a872f7fdb4461a202ae0551180d30a4c985ddca4f5d48927dbf2a627433e",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "removed_symbol",
+      "symbols": [
+        "octokit.repos.getDownloads"
+      ]
+    },
+    "description": "`octokit.repos.getDownloads` was removed in @octokit/rest 18.0.0: code using it fails.",
+    "migration_hint": "deprecated `octokit.repos.getDownloads()` has been removed (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* deprecated `octokit.repos.getDownloads()` has been removed",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:ac50fc715c309bebd661f264a1af1b856e5df06a402a25a6258e238a36c2916c",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "removed_symbol",
+      "symbols": [
+        "octokit.repos.listDownloads"
+      ]
+    },
+    "description": "`octokit.repos.listDownloads` was removed in @octokit/rest 18.0.0: code using it fails.",
+    "migration_hint": "deprecated `octokit.repos.listDownloads()` has been removed (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* deprecated `octokit.repos.listDownloads()` has been removed",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:28a663913391615c706e8b329b625262157456628b614edf1142ad5559a5f20a",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "removed_symbol",
+      "symbols": [
+        "octokit.repos.deleteDownloads"
+      ]
+    },
+    "description": "`octokit.repos.deleteDownloads` was removed in @octokit/rest 18.0.0: code using it fails.",
+    "migration_hint": "deprecated `octokit.repos.deleteDownloads()` has been removed (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* deprecated `octokit.repos.deleteDownloads()` has been removed",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:f793b3902e37fad3b84f33f7bf2abca06ff2542453818399f1a42f54b7291bfb",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.actions.createOrUpdateSecretForRepo"
+      ],
+      "replacement": "octokit.actions.createOrUpdateRepoSecret"
+    },
+    "description": "`octokit.actions.createOrUpdateSecretForRepo` was renamed to `octokit.actions.createOrUpdateRepoSecret` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.actions.createOrUpdateSecretForRepo()` has been renamed to `octokit.actions.createOrUpdateRepoSecret()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.actions.createOrUpdateSecretForRepo()` has been renamed to `octokit.actions.createOrUpdateRepoSecret()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:27bb2b60a14ba4ad7b29a9a6ac03082538471cdece17c29e6f7fa826b057165b",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.actions.createRegistrationToken"
+      ],
+      "replacement": "octokit.actions.createRegistrationTokenForRepo"
+    },
+    "description": "`octokit.actions.createRegistrationToken` was renamed to `octokit.actions.createRegistrationTokenForRepo` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.actions.createRegistrationToken()` has been renamed to `octokit.actions.createRegistrationTokenForRepo()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.actions.createRegistrationToken()` has been renamed to `octokit.actions.createRegistrationTokenForRepo()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:afca515e8fc947d24ae9aed30944288210885ea419d6b0b534b71ba4298c64f7",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.actions.createRemoveToken"
+      ],
+      "replacement": "octokit.actions.createRemoveTokenForRepo"
+    },
+    "description": "`octokit.actions.createRemoveToken` was renamed to `octokit.actions.createRemoveTokenForRepo` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.actions.createRemoveToken()` has been renamed to `octokit.actions.createRemoveTokenForRepo()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.actions.createRemoveToken()` has been renamed to `octokit.actions.createRemoveTokenForRepo()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
+    "fingerprint": "sha256:e6a04c3cb9fd5c7e17133ffb9835a2bbecb644fb5478f7a3ee439632fbe60761",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.actions.deleteSecretFromRepo"
+      ],
+      "replacement": "octokit.actions.deleteRepoSecret"
+    },
+    "description": "`octokit.actions.deleteSecretFromRepo` was renamed to `octokit.actions.deleteRepoSecret` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.actions.deleteSecretFromRepo()` has been renamed to `octokit.actions.deleteRepoSecret()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.actions.deleteSecretFromRepo()` has been renamed to `octokit.actions.deleteRepoSecret()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 9,
+    "fingerprint": "sha256:4d2da3a274da28e8e7ffcad880498be355d81862ec43be7e2bb61a07ccc1dd2f",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.actions.downloadWorkflowJobLogs"
+      ],
+      "replacement": "octokit.actions.downloadJobLogsForWorkflowRun"
+    },
+    "description": "`octokit.actions.downloadWorkflowJobLogs` was renamed to `octokit.actions.downloadJobLogsForWorkflowRun` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.actions.downloadWorkflowJobLogs()` has been renamed to `octokit.actions.downloadJobLogsForWorkflowRun()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.actions.downloadWorkflowJobLogs()` has been renamed to `octokit.actions.downloadJobLogsForWorkflowRun()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 10,
+    "fingerprint": "sha256:c950bcf5763ca154fe69d27385adce25b560412e07323189b9ef110639245de6",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.actions.getPublicKey"
+      ],
+      "replacement": "octokit.actions.getRepoPublicKey"
+    },
+    "description": "`octokit.actions.getPublicKey` was renamed to `octokit.actions.getRepoPublicKey` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.actions.getPublicKey()` has been renamed to `octokit.actions.getRepoPublicKey()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.actions.getPublicKey()` has been renamed to `octokit.actions.getRepoPublicKey()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 11,
+    "fingerprint": "sha256:e34def959c46203fb33e875a2694a1fdef7333ee5183b58bbde51145ec7078a0",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.actions.getSecret"
+      ],
+      "replacement": "octokit.actions.getRepoSecret"
+    },
+    "description": "`octokit.actions.getSecret` was renamed to `octokit.actions.getRepoSecret` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.actions.getSecret()` has been renamed to `octokit.actions.getRepoSecret()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.actions.getSecret()` has been renamed to `octokit.actions.getRepoSecret()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 12,
+    "fingerprint": "sha256:90476c4789cabe1d89ec09cd44746190d1aec3a28f86d732926dc514a059b213",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.actions.getSelfHostedRunner"
+      ],
+      "replacement": "octokit.actions.getSelfHostedRunnerForRepo"
+    },
+    "description": "`octokit.actions.getSelfHostedRunner` was renamed to `octokit.actions.getSelfHostedRunnerForRepo` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.actions.getSelfHostedRunner()` has been renamed to `octokit.actions.getSelfHostedRunnerForRepo()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.actions.getSelfHostedRunner()` has been renamed to `octokit.actions.getSelfHostedRunnerForRepo()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 13,
+    "fingerprint": "sha256:c0fdc459058c40182fc3407ae2e3c4cd50c42ceec139ea38fee5603ab2b9357c",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.actions.getWorkflowJob"
+      ],
+      "replacement": "octokit.actions.getJobForWorkflowRun"
+    },
+    "description": "`octokit.actions.getWorkflowJob` was renamed to `octokit.actions.getJobForWorkflowRun` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.actions.getWorkflowJob()` has been renamed to `octokit.actions.getJobForWorkflowRun()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.actions.getWorkflowJob()` has been renamed to `octokit.actions.getJobForWorkflowRun()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 14,
+    "fingerprint": "sha256:ff35254e0653b12e636d59d498ac6a70547b3b08cbc67a996d108273460e190e",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.actions.listDownloadsForSelfHostedRunnerApplication"
+      ],
+      "replacement": "octokit.actions.listRunnerApplicationsForRepo"
+    },
+    "description": "`octokit.actions.listDownloadsForSelfHostedRunnerApplication` was renamed to `octokit.actions.listRunnerApplicationsForRepo` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.actions.listDownloadsForSelfHostedRunnerApplication()` has been renamed to `octokit.actions.listRunnerApplicationsForRepo()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.actions.listDownloadsForSelfHostedRunnerApplication()` has been renamed to `octokit.actions.listRunnerApplicationsForRepo()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 15,
+    "fingerprint": "sha256:a6744cbcfcc6187fcbada68fbc61e0e5602890390476fea26de1a8d8feb13da4",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.actions.listRepoWorkflowRuns"
+      ],
+      "replacement": "octokit.actions.listWorkflowRunsForRepo"
+    },
+    "description": "`octokit.actions.listRepoWorkflowRuns` was renamed to `octokit.actions.listWorkflowRunsForRepo` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.actions.listRepoWorkflowRuns()` has been renamed to `octokit.actions.listWorkflowRunsForRepo()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.actions.listRepoWorkflowRuns()` has been renamed to `octokit.actions.listWorkflowRunsForRepo()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 16,
+    "fingerprint": "sha256:752e55220d58109ee4e271fbe3c210bfcfc74e9f80d7996570f826d6d022e55e",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.actions.listSecretsForRepo"
+      ],
+      "replacement": "octokit.actions.listRepoSecrets"
+    },
+    "description": "`octokit.actions.listSecretsForRepo` was renamed to `octokit.actions.listRepoSecrets` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.actions.listSecretsForRepo()` has been renamed to `octokit.actions.listRepoSecrets()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.actions.listSecretsForRepo()` has been renamed to `octokit.actions.listRepoSecrets()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 17,
+    "fingerprint": "sha256:8daa9394a0122191ecbdca59bf225b38d8ef9f2264e82d661329a340eaa6299e",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.actions.listWorkflowJobLogs"
+      ],
+      "replacement": "octokit.actions.downloadJobLogsForWorkflowRun"
+    },
+    "description": "`octokit.actions.listWorkflowJobLogs` was renamed to `octokit.actions.downloadJobLogsForWorkflowRun` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.actions.listWorkflowJobLogs()` has been renamed to `octokit.actions.downloadWorkflowJobLogs()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.actions.listWorkflowJobLogs()` has been renamed to `octokit.actions.downloadWorkflowJobLogs()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 18,
+    "fingerprint": "sha256:f962c621b96725de03e304500f367cfab682a08451769e0f7f0482deebccc4e1",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.actions.listWorkflowRunLogs"
+      ],
+      "replacement": "octokit.actions.downloadWorkflowRunLogs"
+    },
+    "description": "`octokit.actions.listWorkflowRunLogs` was renamed to `octokit.actions.downloadWorkflowRunLogs` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.actions.listWorkflowRunLogs()` has been renamed to `octokit.actions.downloadWorkflowRunLogs()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.actions.listWorkflowRunLogs()` has been renamed to `octokit.actions.downloadWorkflowRunLogs()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 19,
+    "fingerprint": "sha256:3303ff30c12b772b6445e646da0516a6e466eb0de0b77b5571e9ab7f88698f05",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.actions.removeSelfHostedRunner"
+      ],
+      "replacement": "octokit.actions.deleteSelfHostedRunnerFromRepo"
+    },
+    "description": "`octokit.actions.removeSelfHostedRunner` was renamed to `octokit.actions.deleteSelfHostedRunnerFromRepo` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.actions.removeSelfHostedRunner()` has been renamed to `octokit.actions.deleteSelfHostedRunnerFromRepo()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.actions.removeSelfHostedRunner()` has been renamed to `octokit.actions.deleteSelfHostedRunnerFromRepo()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 20,
+    "fingerprint": "sha256:c64628a600f49f6a00e3f84787eb730dad7bd553b2adffa78ff5bf486be6c06c",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.activity.checkStarringRepo"
+      ],
+      "replacement": "octokit.activity.checkRepoIsStarredByAuthenticatedUser"
+    },
+    "description": "`octokit.activity.checkStarringRepo` was renamed to `octokit.activity.checkRepoIsStarredByAuthenticatedUser` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.activity.checkStarringRepo()` has been renamed to `octokit.activity.checkRepoIsStarredByAuthenticatedUser()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.activity.checkStarringRepo()` has been renamed to `octokit.activity.checkRepoIsStarredByAuthenticatedUser()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 21,
+    "fingerprint": "sha256:f94a28ad62a3fabb11b5960cc106437c1abcc04ddef00edd8c3f41d3a3422aa2",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.activity.getThreadSubscription"
+      ],
+      "replacement": "octokit.activity.getThreadSubscriptionForAuthenticatedUser"
+    },
+    "description": "`octokit.activity.getThreadSubscription` was renamed to `octokit.activity.getThreadSubscriptionForAuthenticatedUser` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.activity.getThreadSubscription()` has been renamed to `octokit.activity.getThreadSubscriptionForAuthenticatedUser()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.activity.getThreadSubscription()` has been renamed to `octokit.activity.getThreadSubscriptionForAuthenticatedUser()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 22,
+    "fingerprint": "sha256:ab317cbc00b0e86a8e1aee1c2db5286a41425d333cd62c516221892bf8dc0733",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.activity.listEventsForOrg"
+      ],
+      "replacement": "octokit.activity.listOrgEventsForAuthenticatedUser"
+    },
+    "description": "`octokit.activity.listEventsForOrg` was renamed to `octokit.activity.listOrgEventsForAuthenticatedUser` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.activity.listEventsForOrg()` has been renamed to `octokit.activity.listOrgEventsForAuthenticatedUser()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.activity.listEventsForOrg()` has been renamed to `octokit.activity.listOrgEventsForAuthenticatedUser()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 23,
+    "fingerprint": "sha256:48be6dafbdfa9927c0ca6ef9ec4a64f0eb9939420622c911a5f3cc7c97abb2f5",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.activity.listEventsForUser"
+      ],
+      "replacement": "octokit.activity.listEventsForAuthenticatedUser"
+    },
+    "description": "`octokit.activity.listEventsForUser` was renamed to `octokit.activity.listEventsForAuthenticatedUser` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.activity.listEventsForUser()` has been renamed to `octokit.activity.listEventsForAuthenticatedUser()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.activity.listEventsForUser()` has been renamed to `octokit.activity.listEventsForAuthenticatedUser()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 24,
+    "fingerprint": "sha256:e9380031c342e83651c069375e7b76872d751389b33fd5b376de8e81cac9569b",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.activity.listFeeds"
+      ],
+      "replacement": "octokit.activity.getFeeds"
+    },
+    "description": "`octokit.activity.listFeeds` was renamed to `octokit.activity.getFeeds` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.activity.listFeeds()` has been renamed to `octokit.activity.getFeeds()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.activity.listFeeds()` has been renamed to `octokit.activity.getFeeds()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 25,
+    "fingerprint": "sha256:bac5dea9a6ba8ef26ac12c34fc300b41eabf3b82e431cbcf48811f67e25e76a5",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.activity.listNotifications"
+      ],
+      "replacement": "octokit.activity.listNotificationsForAuthenticatedUser"
+    },
+    "description": "`octokit.activity.listNotifications` was renamed to `octokit.activity.listNotificationsForAuthenticatedUser` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.activity.listNotifications()` has been renamed to `octokit.activity.listNotificationsForAuthenticatedUser()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.activity.listNotifications()` has been renamed to `octokit.activity.listNotificationsForAuthenticatedUser()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 26,
+    "fingerprint": "sha256:8c2386395360aafc7b5af73c27d5384c986ac216d450b5f5c5ab2a111b820ea7",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.activity.listNotificationsForRepo"
+      ],
+      "replacement": "octokit.activity.listRepoNotificationsForAuthenticatedUser"
+    },
+    "description": "`octokit.activity.listNotificationsForRepo` was renamed to `octokit.activity.listRepoNotificationsForAuthenticatedUser` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.activity.listNotificationsForRepo()` has been renamed to `octokit.activity.listRepoNotificationsForAuthenticatedUser()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.activity.listNotificationsForRepo()` has been renamed to `octokit.activity.listRepoNotificationsForAuthenticatedUser()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 27,
+    "fingerprint": "sha256:a7201f28e3c1ebd272438b11959103d60c10c80e62efa65f912d9818d53a68ce",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.activity.listPublicEventsForOrg"
+      ],
+      "replacement": "octokit.activity.listPublicOrgEvents"
+    },
+    "description": "`octokit.activity.listPublicEventsForOrg` was renamed to `octokit.activity.listPublicOrgEvents` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.activity.listPublicEventsForOrg()` has been renamed to `octokit.activity.listPublicOrgEvents()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.activity.listPublicEventsForOrg()` has been renamed to `octokit.activity.listPublicOrgEvents()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 28,
+    "fingerprint": "sha256:bd0b7c06774a62b8a29f73e775da53e857837d87fe83e17652c6c2f51f79e2d5",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.activity.markAsRead"
+      ],
+      "replacement": "octokit.activity.markNotificationsAsRead"
+    },
+    "description": "`octokit.activity.markAsRead` was renamed to `octokit.activity.markNotificationsAsRead` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.activity.markAsRead()` has been renamed to `octokit.activity.markNotificationsAsRead()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.activity.markAsRead()` has been renamed to `octokit.activity.markNotificationsAsRead()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 29,
+    "fingerprint": "sha256:f4d61dad655a7d40febafec0502ccb41c170eb498646f7cd85da64a732e39409",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.activity.markNotificationsAsReadForRepo"
+      ],
+      "replacement": "octokit.activity.markRepoNotificationsAsRead"
+    },
+    "description": "`octokit.activity.markNotificationsAsReadForRepo` was renamed to `octokit.activity.markRepoNotificationsAsRead` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.activity.markNotificationsAsReadForRepo()` has been renamed to `octokit.activity.markRepoNotificationsAsRead()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.activity.markNotificationsAsReadForRepo()` has been renamed to `octokit.activity.markRepoNotificationsAsRead()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 30,
+    "fingerprint": "sha256:fcf8f77780d170a9892040b49e44a7ca015cd75da2ac8ca390ffe5258de22b64",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.activity.starRepo"
+      ],
+      "replacement": "octokit.activity.starRepoForAuthenticatedUser"
+    },
+    "description": "`octokit.activity.starRepo` was renamed to `octokit.activity.starRepoForAuthenticatedUser` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.activity.starRepo()` has been renamed to `octokit.activity.starRepoForAuthenticatedUser()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.activity.starRepo()` has been renamed to `octokit.activity.starRepoForAuthenticatedUser()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 31,
+    "fingerprint": "sha256:d60186f7c500297caf0f0c6665f00aab131ce67f98d04c64224d49c26fccd8d9",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.activity.unstarRepo"
+      ],
+      "replacement": "octokit.activity.unstarRepoForAuthenticatedUser"
+    },
+    "description": "`octokit.activity.unstarRepo` was renamed to `octokit.activity.unstarRepoForAuthenticatedUser` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.activity.unstarRepo()` has been renamed to `octokit.activity.unstarRepoForAuthenticatedUser()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.activity.unstarRepo()` has been renamed to `octokit.activity.unstarRepoForAuthenticatedUser()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 32,
+    "fingerprint": "sha256:4c857d2ab2998289dff65c527f1491bb54637e3d59291c154b90a2008f062abe",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.apps.checkAccountIsAssociatedWithAny"
+      ],
+      "replacement": "octokit.apps.getSubscriptionPlanForAccount"
+    },
+    "description": "`octokit.apps.checkAccountIsAssociatedWithAny` was renamed to `octokit.apps.getSubscriptionPlanForAccount` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.apps.checkAccountIsAssociatedWithAny()` has been renamed to `octokit.apps.getSubscriptionPlanForAccount()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.apps.checkAccountIsAssociatedWithAny()` has been renamed to `octokit.apps.getSubscriptionPlanForAccount()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 33,
+    "fingerprint": "sha256:2268133e9521d5d2edc5b76982bcf01d4816549cd8f665486ece6f429642c312",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.apps.checkAccountIsAssociatedWithAnyStubbed"
+      ],
+      "replacement": "octokit.apps.getSubscriptionPlanForAccountStubbed"
+    },
+    "description": "`octokit.apps.checkAccountIsAssociatedWithAnyStubbed` was renamed to `octokit.apps.getSubscriptionPlanForAccountStubbed` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.apps.checkAccountIsAssociatedWithAnyStubbed()` has been renamed to `octokit.apps.getSubscriptionPlanForAccountStubbed()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.apps.checkAccountIsAssociatedWithAnyStubbed()` has been renamed to `octokit.apps.getSubscriptionPlanForAccountStubbed()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 34,
+    "fingerprint": "sha256:5d5121b5c65764301b7e539284f472e1a136870571c1400f43dc33813660f2ff",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.apps.createInstallationToken"
+      ],
+      "replacement": "octokit.apps.createInstallationAccessToken"
+    },
+    "description": "`octokit.apps.createInstallationToken` was renamed to `octokit.apps.createInstallationAccessToken` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.apps.createInstallationToken()` has been renamed to `octokit.apps.createInstallationAccessToken()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.apps.createInstallationToken()` has been renamed to `octokit.apps.createInstallationAccessToken()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 35,
+    "fingerprint": "sha256:bf89c2650c24b5008685d440baccd12a134a8b30226a9544af3d9239f7cc0dd3",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.apps.listAccountsUserOrOrgOnPlan"
+      ],
+      "replacement": "octokit.apps.listAccountsForPlan"
+    },
+    "description": "`octokit.apps.listAccountsUserOrOrgOnPlan` was renamed to `octokit.apps.listAccountsForPlan` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.apps.listAccountsUserOrOrgOnPlan()` has been renamed to `octokit.apps.listAccountsForPlan()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.apps.listAccountsUserOrOrgOnPlan()` has been renamed to `octokit.apps.listAccountsForPlan()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 36,
+    "fingerprint": "sha256:9f9d927ae4f2d393b96143ef99cb25fa206f6d239395fe2619e281a344f3f7a8",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.apps.listAccountsUserOrOrgOnPlanStubbed"
+      ],
+      "replacement": "octokit.apps.listAccountsForPlanStubbed"
+    },
+    "description": "`octokit.apps.listAccountsUserOrOrgOnPlanStubbed` was renamed to `octokit.apps.listAccountsForPlanStubbed` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.apps.listAccountsUserOrOrgOnPlanStubbed()` has been renamed to `octokit.apps.listAccountsForPlanStubbed()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.apps.listAccountsUserOrOrgOnPlanStubbed()` has been renamed to `octokit.apps.listAccountsForPlanStubbed()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 37,
+    "fingerprint": "sha256:14f6f825b679f39df2880d23d978e714825f7002ef94dc56cd88e7a90dcc7914",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.apps.listMarketplacePurchasesForAuthenticatedUser"
+      ],
+      "replacement": "octokit.apps.listSubscriptionsForAuthenticatedUser"
+    },
+    "description": "`octokit.apps.listMarketplacePurchasesForAuthenticatedUser` was renamed to `octokit.apps.listSubscriptionsForAuthenticatedUser` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.apps.listMarketplacePurchasesForAuthenticatedUser()` has been renamed to `octokit.apps.listSubscriptionsForAuthenticatedUser()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.apps.listMarketplacePurchasesForAuthenticatedUser()` has been renamed to `octokit.apps.listSubscriptionsForAuthenticatedUser()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 38,
+    "fingerprint": "sha256:34a966a425831a78412315602d241ff77d750d79f15f51d525f41cf0a4bba7ff",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.apps.listMarketplacePurchasesForAuthenticatedUserStubbed"
+      ],
+      "replacement": "octokit.apps.listSubscriptionsForAuthenticatedUserStubbed"
+    },
+    "description": "`octokit.apps.listMarketplacePurchasesForAuthenticatedUserStubbed` was renamed to `octokit.apps.listSubscriptionsForAuthenticatedUserStubbed` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.apps.listMarketplacePurchasesForAuthenticatedUserStubbed()` has been renamed to `octokit.apps.listSubscriptionsForAuthenticatedUserStubbed()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.apps.listMarketplacePurchasesForAuthenticatedUserStubbed()` has been renamed to `octokit.apps.listSubscriptionsForAuthenticatedUserStubbed()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 39,
+    "fingerprint": "sha256:b72a3ea90d6ed9f6fef22eab54b21265f1234ea016e1f21ff98ea5fda48a7948",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.apps.listRepos"
+      ],
+      "replacement": "octokit.apps.listReposAccessibleToInstallation"
+    },
+    "description": "`octokit.apps.listRepos` was renamed to `octokit.apps.listReposAccessibleToInstallation` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.apps.listRepos()` has been renamed to `octokit.apps.listReposAccessibleToInstallation()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.apps.listRepos()` has been renamed to `octokit.apps.listReposAccessibleToInstallation()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 40,
+    "fingerprint": "sha256:62bb329bb30de21e9f46e834a095e9080829d4e6d10fa43ee9c2f9ff58e82883",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.apps.revokeInstallationToken"
+      ],
+      "replacement": "octokit.apps.revokeInstallationAccessToken"
+    },
+    "description": "`octokit.apps.revokeInstallationToken` was renamed to `octokit.apps.revokeInstallationAccessToken` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.apps.revokeInstallationToken()` has been renamed to `octokit.apps.revokeInstallationAccessToken()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.apps.revokeInstallationToken()` has been renamed to `octokit.apps.revokeInstallationAccessToken()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 41,
+    "fingerprint": "sha256:d1881d623c1648ae16d5eb9649753be2029e23833bf877f64d49b06028eb49d5",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.codesOfConduct.listConductCodes"
+      ],
+      "replacement": "octokit.codesOfConduct.getAllCodesOfConduct"
+    },
+    "description": "`octokit.codesOfConduct.listConductCodes` was renamed to `octokit.codesOfConduct.getAllCodesOfConduct` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.codesOfConduct.listConductCodes()` has been renamed to `octokit.codesOfConduct.getAllCodesOfConduct()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.codesOfConduct.listConductCodes()` has been renamed to `octokit.codesOfConduct.getAllCodesOfConduct()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 42,
+    "fingerprint": "sha256:3ddaba3bb5093be91b02192b50aaf136558008d5706c757ee03b28b08d2690ae",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.gists.listPublicForUser"
+      ],
+      "replacement": "octokit.gists.listForUser"
+    },
+    "description": "`octokit.gists.listPublicForUser` was renamed to `octokit.gists.listForUser` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.gists.listPublicForUser()` has been renamed to `octokit.gists.listForUser()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.gists.listPublicForUser()` has been renamed to `octokit.gists.listForUser()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 43,
+    "fingerprint": "sha256:4ac822049c406c18b70939e0a05725f595ea9a328f3024128ab697812b66613a",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.gitignore.listTemplates"
+      ],
+      "replacement": "octokit.gitignore.getAllTemplates"
+    },
+    "description": "`octokit.gitignore.listTemplates` was renamed to `octokit.gitignore.getAllTemplates` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.gitignore.listTemplates()` has been renamed to `octokit.gitignore.getAllTemplates()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.gitignore.listTemplates()` has been renamed to `octokit.gitignore.getAllTemplates()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 44,
+    "fingerprint": "sha256:55acdf9569039189a017cd6ce40de0a5b1d6b071d074615f8dd7f263155382de",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.interactions.addOrUpdateRestrictionsForOrg"
+      ],
+      "replacement": "octokit.interactions.setRestrictionsForOrg"
+    },
+    "description": "`octokit.interactions.addOrUpdateRestrictionsForOrg` was renamed to `octokit.interactions.setRestrictionsForOrg` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.interactions.addOrUpdateRestrictionsForOrg()` has been renamed to `octokit.interactions.setRestrictionsForOrg()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.interactions.addOrUpdateRestrictionsForOrg()` has been renamed to `octokit.interactions.setRestrictionsForOrg()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 45,
+    "fingerprint": "sha256:be92bda8c88a656fca393fc6ac4c868201d5d276c3a45260febb6650b6ae6711",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.interactions.addOrUpdateRestrictionsForRepo"
+      ],
+      "replacement": "octokit.interactions.setRestrictionsForRepo"
+    },
+    "description": "`octokit.interactions.addOrUpdateRestrictionsForRepo` was renamed to `octokit.interactions.setRestrictionsForRepo` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.interactions.addOrUpdateRestrictionsForRepo()` has been renamed to `octokit.interactions.setRestrictionsForRepo()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.interactions.addOrUpdateRestrictionsForRepo()` has been renamed to `octokit.interactions.setRestrictionsForRepo()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 46,
+    "fingerprint": "sha256:ccc31db150c56bcbab5d7c6eea1debe778f1c2b07e1dd7355fe2c4ec5a5b1112",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.issues.checkAssignee"
+      ],
+      "replacement": "octokit.issues.checkUserCanBeAssigned"
+    },
+    "description": "`octokit.issues.checkAssignee` was renamed to `octokit.issues.checkUserCanBeAssigned` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.issues.checkAssignee()` has been renamed to `octokit.issues.checkUserCanBeAssigned()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.issues.checkAssignee()` has been renamed to `octokit.issues.checkUserCanBeAssigned()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 47,
+    "fingerprint": "sha256:a4bb961a4d907f06fecd1fb6bc1bc841c88b85d52eee8d759dcf8ed719516a3a",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.issues.listMilestonesForRepo"
+      ],
+      "replacement": "octokit.issues.listMilestones"
+    },
+    "description": "`octokit.issues.listMilestonesForRepo` was renamed to `octokit.issues.listMilestones` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.issues.listMilestonesForRepo()` has been renamed to `octokit.issues.listMilestones()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.issues.listMilestonesForRepo()` has been renamed to `octokit.issues.listMilestones()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 48,
+    "fingerprint": "sha256:0818a57cf793e8f92ae08352c403949ad7ff62e7568e59eb85b95f64a294e673",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.issues.removeLabels"
+      ],
+      "replacement": "octokit.issues.removeAllLabels"
+    },
+    "description": "`octokit.issues.removeLabels` was renamed to `octokit.issues.removeAllLabels` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.issues.removeLabels()` has been renamed to `octokit.issues.removeAllLabels()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.issues.removeLabels()` has been renamed to `octokit.issues.removeAllLabels()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 49,
+    "fingerprint": "sha256:b265f67369b15a1363763d0fde40341b091f1b6a9bba5390a78ef7c16913694f",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.issues.replaceAllLabels"
+      ],
+      "replacement": "octokit.issues.setLabels"
+    },
+    "description": "`octokit.issues.replaceAllLabels` was renamed to `octokit.issues.setLabels` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.issues.replaceAllLabels()` has been renamed to `octokit.issues.setLabels()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.issues.replaceAllLabels()` has been renamed to `octokit.issues.setLabels()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 50,
+    "fingerprint": "sha256:7d13a3635452dacedd37349d27a604dfe920f62c362f7aceadfc287352481d2a",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.issues.replaceLabels"
+      ],
+      "replacement": "octokit.issues.setLabels"
+    },
+    "description": "`octokit.issues.replaceLabels` was renamed to `octokit.issues.setLabels` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.issues.replaceLabels()` has been renamed to `octokit.issues.replaceAllLabels()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.issues.replaceLabels()` has been renamed to `octokit.issues.replaceAllLabels()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 51,
+    "fingerprint": "sha256:df37dbc777c749ce1777a44242650ec5f091ffa7a96c2c3e8791cafaa3e995f7",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.licenses.listCommonlyUsed"
+      ],
+      "replacement": "octokit.licenses.getAllCommonlyUsed"
+    },
+    "description": "`octokit.licenses.listCommonlyUsed` was renamed to `octokit.licenses.getAllCommonlyUsed` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.licenses.listCommonlyUsed()` has been renamed to `octokit.licenses.getAllCommonlyUsed()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.licenses.listCommonlyUsed()` has been renamed to `octokit.licenses.getAllCommonlyUsed()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 52,
+    "fingerprint": "sha256:1e7cd120eb2740f0d1d00913e56f4eac2334117c005052ae0b0c4a3e950f2f5c",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.migrations.getImportProgress"
+      ],
+      "replacement": "octokit.migrations.getImportStatus"
+    },
+    "description": "`octokit.migrations.getImportProgress` was renamed to `octokit.migrations.getImportStatus` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.migrations.getImportProgress()` has been renamed to `octokit.migrations.getImportStatus()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.migrations.getImportProgress()` has been renamed to `octokit.migrations.getImportStatus()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 53,
+    "fingerprint": "sha256:ee1640648d8f811e542e9ebee364747c475dd9af0fcd0b842571c83524b378cc",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.orgs.addOrUpdateMembership"
+      ],
+      "replacement": "octokit.orgs.setMembershipForUser"
+    },
+    "description": "`octokit.orgs.addOrUpdateMembership` was renamed to `octokit.orgs.setMembershipForUser` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.orgs.addOrUpdateMembership()` has been renamed to `octokit.orgs.setMembershipForUser()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.orgs.addOrUpdateMembership()` has been renamed to `octokit.orgs.setMembershipForUser()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 54,
+    "fingerprint": "sha256:824a3822a92b7ce429b69545f99bf71849a6c52ef41329248bd711a2f731080d",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.orgs.checkMembership"
+      ],
+      "replacement": "octokit.orgs.checkMembershipForUser"
+    },
+    "description": "`octokit.orgs.checkMembership` was renamed to `octokit.orgs.checkMembershipForUser` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.orgs.checkMembership()` has been renamed to `octokit.orgs.checkMembershipForUser()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.orgs.checkMembership()` has been renamed to `octokit.orgs.checkMembershipForUser()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 55,
+    "fingerprint": "sha256:55edb28155127226864a427a22c3ab29709b1e37b741f84836054f03f994bda7",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.orgs.checkPublicMembership"
+      ],
+      "replacement": "octokit.orgs.checkPublicMembershipForUser"
+    },
+    "description": "`octokit.orgs.checkPublicMembership` was renamed to `octokit.orgs.checkPublicMembershipForUser` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.orgs.checkPublicMembership()` has been renamed to `octokit.orgs.checkPublicMembershipForUser()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.orgs.checkPublicMembership()` has been renamed to `octokit.orgs.checkPublicMembershipForUser()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 56,
+    "fingerprint": "sha256:a254e61bdcbf9e374f27b3928c14b637548e98e04189164a3ace305abdd81ae4",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.orgs.concealMembership"
+      ],
+      "replacement": "octokit.orgs.removePublicMembershipForAuthenticatedUser"
+    },
+    "description": "`octokit.orgs.concealMembership` was renamed to `octokit.orgs.removePublicMembershipForAuthenticatedUser` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.orgs.concealMembership()` has been renamed to `octokit.orgs.removePublicMembershipForAuthenticatedUser()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.orgs.concealMembership()` has been renamed to `octokit.orgs.removePublicMembershipForAuthenticatedUser()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 57,
+    "fingerprint": "sha256:f1b618c2c84df71ecc0f3a34cdf022098b2e6639f1822fc071a47e53f96eedf4",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.orgs.createHook"
+      ],
+      "replacement": "octokit.orgs.createWebhook"
+    },
+    "description": "`octokit.orgs.createHook` was renamed to `octokit.orgs.createWebhook` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.orgs.createHook()` has been renamed to `octokit.orgs.createWebhook()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.orgs.createHook()` has been renamed to `octokit.orgs.createWebhook()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 58,
+    "fingerprint": "sha256:541e578b34e1218ce58b984b9135cbe280fc384f95168398341ccb865344bbff",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.orgs.deleteHook"
+      ],
+      "replacement": "octokit.orgs.deleteWebhook"
+    },
+    "description": "`octokit.orgs.deleteHook` was renamed to `octokit.orgs.deleteWebhook` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.orgs.deleteHook()` has been renamed to `octokit.orgs.deleteWebhook()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.orgs.deleteHook()` has been renamed to `octokit.orgs.deleteWebhook()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 59,
+    "fingerprint": "sha256:c6a9e94135fdf155f19c4f8e4f5bee1d4b564ad8072165fab420595517640b06",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.orgs.getHook"
+      ],
+      "replacement": "octokit.orgs.getWebhook"
+    },
+    "description": "`octokit.orgs.getHook` was renamed to `octokit.orgs.getWebhook` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.orgs.getHook()` has been renamed to `octokit.orgs.getWebhook()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.orgs.getHook()` has been renamed to `octokit.orgs.getWebhook()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 60,
+    "fingerprint": "sha256:083b481de6cfe3e81be54481b3634a2764765171eedaed7d47c80fa1d59197a7",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.orgs.getMembership"
+      ],
+      "replacement": "octokit.orgs.getMembershipForUser"
+    },
+    "description": "`octokit.orgs.getMembership` was renamed to `octokit.orgs.getMembershipForUser` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.orgs.getMembership()` has been renamed to `octokit.orgs.getMembershipForUser()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.orgs.getMembership()` has been renamed to `octokit.orgs.getMembershipForUser()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 61,
+    "fingerprint": "sha256:c1ce6079ab5ea6a0e527f57d32715e65bc1020287c6fb77862e7c884619efef4",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.orgs.listHooks"
+      ],
+      "replacement": "octokit.orgs.listWebhooks"
+    },
+    "description": "`octokit.orgs.listHooks` was renamed to `octokit.orgs.listWebhooks` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.orgs.listHooks()` has been renamed to `octokit.orgs.listWebhooks()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.orgs.listHooks()` has been renamed to `octokit.orgs.listWebhooks()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 62,
+    "fingerprint": "sha256:0da1f3ae0e244bc6018e36170dd9fba54b1b5e836fe47107d6d81047cb46e36c",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.orgs.listInstallations"
+      ],
+      "replacement": "octokit.orgs.listAppInstallations"
+    },
+    "description": "`octokit.orgs.listInstallations` was renamed to `octokit.orgs.listAppInstallations` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.orgs.listInstallations()` has been renamed to `octokit.orgs.listAppInstallations()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.orgs.listInstallations()` has been renamed to `octokit.orgs.listAppInstallations()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 63,
+    "fingerprint": "sha256:7c2ef16a06a589a5b74503e6d48f059915e0d851d5d6ae66f618ce8e3dc1d2c8",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.orgs.listMemberships"
+      ],
+      "replacement": "octokit.orgs.listMembershipsForAuthenticatedUser"
+    },
+    "description": "`octokit.orgs.listMemberships` was renamed to `octokit.orgs.listMembershipsForAuthenticatedUser` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.orgs.listMemberships()` has been renamed to `octokit.orgs.listMembershipsForAuthenticatedUser()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.orgs.listMemberships()` has been renamed to `octokit.orgs.listMembershipsForAuthenticatedUser()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 64,
+    "fingerprint": "sha256:4f3eef12b54f24faa041850b3bf113afe260658522a1dcc64bec5926b3e12c15",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.orgs.pingHook"
+      ],
+      "replacement": "octokit.orgs.pingWebhook"
+    },
+    "description": "`octokit.orgs.pingHook` was renamed to `octokit.orgs.pingWebhook` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.orgs.pingHook()` has been renamed to `octokit.orgs.pingWebhook()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.orgs.pingHook()` has been renamed to `octokit.orgs.pingWebhook()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 65,
+    "fingerprint": "sha256:6a951682206a393915e87a27099ba77ce6c7f6514951982a4adcd29351153bcc",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.orgs.publicizeMembership"
+      ],
+      "replacement": "octokit.orgs.setPublicMembershipForAuthenticatedUser"
+    },
+    "description": "`octokit.orgs.publicizeMembership` was renamed to `octokit.orgs.setPublicMembershipForAuthenticatedUser` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.orgs.publicizeMembership()` has been renamed to `octokit.orgs.setPublicMembershipForAuthenticatedUser()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.orgs.publicizeMembership()` has been renamed to `octokit.orgs.setPublicMembershipForAuthenticatedUser()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 66,
+    "fingerprint": "sha256:a8881525b444a63568d4dad07c12f37f05a8a63a700125ff8d6bbc17365d6941",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.orgs.removeMembership"
+      ],
+      "replacement": "octokit.orgs.removeMembershipForUser"
+    },
+    "description": "`octokit.orgs.removeMembership` was renamed to `octokit.orgs.removeMembershipForUser` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.orgs.removeMembership()` has been renamed to `octokit.orgs.removeMembershipForUser()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.orgs.removeMembership()` has been renamed to `octokit.orgs.removeMembershipForUser()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 67,
+    "fingerprint": "sha256:d41d182a815ee932e3c2ca104be8981501b588af6006e4ee12746ad958f636b1",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.orgs.updateHook"
+      ],
+      "replacement": "octokit.orgs.updateWebhook"
+    },
+    "description": "`octokit.orgs.updateHook` was renamed to `octokit.orgs.updateWebhook` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.orgs.updateHook()` has been renamed to `octokit.orgs.updateWebhook()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.orgs.updateHook()` has been renamed to `octokit.orgs.updateWebhook()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 68,
+    "fingerprint": "sha256:737ccb9444ed2d2aeff7654f3053efbf7a836c61fbe3b31f6dd2a4adae662e1d",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.orgs.updateMembership"
+      ],
+      "replacement": "octokit.orgs.updateMembershipForAuthenticatedUser"
+    },
+    "description": "`octokit.orgs.updateMembership` was renamed to `octokit.orgs.updateMembershipForAuthenticatedUser` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.orgs.updateMembership()` has been renamed to `octokit.orgs.updateMembershipForAuthenticatedUser()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.orgs.updateMembership()` has been renamed to `octokit.orgs.updateMembershipForAuthenticatedUser()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 69,
+    "fingerprint": "sha256:05b37bf19851abe7f49fbef39890e47489893866861ecbccbea2072e0d8f0d7a",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.projects.reviewUserPermissionLevel"
+      ],
+      "replacement": "octokit.projects.getPermissionForUser"
+    },
+    "description": "`octokit.projects.reviewUserPermissionLevel` was renamed to `octokit.projects.getPermissionForUser` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.projects.reviewUserPermissionLevel()` has been renamed to `octokit.projects.getPermissionForUser()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.projects.reviewUserPermissionLevel()` has been renamed to `octokit.projects.getPermissionForUser()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 70,
+    "fingerprint": "sha256:a85c6e2b9d52f9da4d7baedde3bf372e23222cc6ffe215bb6f5ed2a4d8d4ce05",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.pulls.createComment"
+      ],
+      "replacement": "octokit.pulls.createReviewComment"
+    },
+    "description": "`octokit.pulls.createComment` was renamed to `octokit.pulls.createReviewComment` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.pulls.createComment()` has been renamed to `octokit.pulls.createReviewComment()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.pulls.createComment()` has been renamed to `octokit.pulls.createReviewComment()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 71,
+    "fingerprint": "sha256:6b675fa77d791b868bfb58f2ed9f403a45cea493f5a6bbc2e416b2fffb60d2bf",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.pulls.createReviewCommentReply"
+      ],
+      "replacement": "octokit.pulls.createReplyForReviewComment"
+    },
+    "description": "`octokit.pulls.createReviewCommentReply` was renamed to `octokit.pulls.createReplyForReviewComment` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.pulls.createReviewCommentReply()` has been renamed to `octokit.pulls.createReplyForReviewComment()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.pulls.createReviewCommentReply()` has been renamed to `octokit.pulls.createReplyForReviewComment()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 72,
+    "fingerprint": "sha256:d829865a8955fa9b70e19d81d915558d552cda05aeb6e97ff63e536c0ac231bc",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.pulls.createReviewRequest"
+      ],
+      "replacement": "octokit.pulls.requestReviewers"
+    },
+    "description": "`octokit.pulls.createReviewRequest` was renamed to `octokit.pulls.requestReviewers` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.pulls.createReviewRequest()` has been renamed to `octokit.pulls.requestReviewers()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.pulls.createReviewRequest()` has been renamed to `octokit.pulls.requestReviewers()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 73,
+    "fingerprint": "sha256:3bdc4cab562bd13ae8eaeb4d43b10961af690030bffeb6d7d6076a646ae97c94",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.pulls.deleteComment"
+      ],
+      "replacement": "octokit.pulls.deleteReviewComment"
+    },
+    "description": "`octokit.pulls.deleteComment` was renamed to `octokit.pulls.deleteReviewComment` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.pulls.deleteComment()` has been renamed to `octokit.pulls.deleteReviewComment()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.pulls.deleteComment()` has been renamed to `octokit.pulls.deleteReviewComment()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 74,
+    "fingerprint": "sha256:871a7fde342bc342ebe3656b121b80d5f92c8cde6a95df9b7c56aa40de10a950",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.pulls.deleteReviewRequest"
+      ],
+      "replacement": "octokit.pulls.removeRequestedReviewers"
+    },
+    "description": "`octokit.pulls.deleteReviewRequest` was renamed to `octokit.pulls.removeRequestedReviewers` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.pulls.deleteReviewRequest()` has been renamed to `octokit.pulls.removeRequestedReviewers()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.pulls.deleteReviewRequest()` has been renamed to `octokit.pulls.removeRequestedReviewers()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 75,
+    "fingerprint": "sha256:09c35a9ad2751c68083abd9e1a1ecfb80ab81bd9bffd691c4df596569be18428",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.pulls.getComment"
+      ],
+      "replacement": "octokit.pulls.getReviewComment"
+    },
+    "description": "`octokit.pulls.getComment` was renamed to `octokit.pulls.getReviewComment` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.pulls.getComment()` has been renamed to `octokit.pulls.getReviewComment()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.pulls.getComment()` has been renamed to `octokit.pulls.getReviewComment()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 76,
+    "fingerprint": "sha256:88c2c83d4cc51d2f12538803aca720891962cf8cc27e900a010fdd0748572957",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.pulls.getCommentsForReview"
+      ],
+      "replacement": "octokit.pulls.listCommentsForReview"
+    },
+    "description": "`octokit.pulls.getCommentsForReview` was renamed to `octokit.pulls.listCommentsForReview` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.pulls.getCommentsForReview()` has been renamed to `octokit.pulls.listCommentsForReview()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.pulls.getCommentsForReview()` has been renamed to `octokit.pulls.listCommentsForReview()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 77,
+    "fingerprint": "sha256:9b79b4a9dc937323b01c63bd3f1eb41c407307d2e988c48830b1e1779c0bc4eb",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.pulls.listComments"
+      ],
+      "replacement": "octokit.pulls.listReviewComments"
+    },
+    "description": "`octokit.pulls.listComments` was renamed to `octokit.pulls.listReviewComments` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.pulls.listComments()` has been renamed to `octokit.pulls.listReviewComments()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.pulls.listComments()` has been renamed to `octokit.pulls.listReviewComments()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 78,
+    "fingerprint": "sha256:3398529594699fc49bb19fee43fdc639e349744c32ce4803f199cac83392c310",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.pulls.listCommentsForRepo"
+      ],
+      "replacement": "octokit.pulls.listReviewCommentsForRepo"
+    },
+    "description": "`octokit.pulls.listCommentsForRepo` was renamed to `octokit.pulls.listReviewCommentsForRepo` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.pulls.listCommentsForRepo()` has been renamed to `octokit.pulls.listReviewCommentsForRepo()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.pulls.listCommentsForRepo()` has been renamed to `octokit.pulls.listReviewCommentsForRepo()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 79,
+    "fingerprint": "sha256:adb8a82688316a8486b328cbf85bb0bfff02825bb3ec7da4ae06b1dbc3cf2b94",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.pulls.listReviewRequests"
+      ],
+      "replacement": "octokit.pulls.listRequestedReviewers"
+    },
+    "description": "`octokit.pulls.listReviewRequests` was renamed to `octokit.pulls.listRequestedReviewers` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.pulls.listReviewRequests()` has been renamed to `octokit.pulls.listRequestedReviewers()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.pulls.listReviewRequests()` has been renamed to `octokit.pulls.listRequestedReviewers()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 80,
+    "fingerprint": "sha256:d42a364aba21463adb4aa4e5a95dd81ecaa7d2f37b63c4a3e5f60b4f7de9f23f",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.pulls.updateComment"
+      ],
+      "replacement": "octokit.pulls.updateReviewComment"
+    },
+    "description": "`octokit.pulls.updateComment` was renamed to `octokit.pulls.updateReviewComment` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.pulls.updateComment()` has been renamed to `octokit.pulls.updateReviewComment()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.pulls.updateComment()` has been renamed to `octokit.pulls.updateReviewComment()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 81,
+    "fingerprint": "sha256:5f8fa38b7fcc1d11b8a81e95ed2d4a634ab0165c5ed914fdc85ca64914820f34",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "removed_symbol",
+      "symbols": [
+        "octokit.reactions.delete"
+      ]
+    },
+    "description": "`octokit.reactions.delete` was removed in @octokit/rest 18.0.0: code using it fails.",
+    "migration_hint": "`octokit.reactions.delete()` has been renamed to `octokit.reactions.deleteLegacy()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.reactions.delete()` has been renamed to `octokit.reactions.deleteLegacy()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 82,
+    "fingerprint": "sha256:b16b1db8cd7cb008f34747b40aa9f6de3b485a8bc02a781f40425bfffcc958ba",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.addDeployKey"
+      ],
+      "replacement": "octokit.repos.createDeployKey"
+    },
+    "description": "`octokit.repos.addDeployKey` was renamed to `octokit.repos.createDeployKey` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.addDeployKey()` has been renamed to `octokit.repos.createDeployKey()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.addDeployKey()` has been renamed to `octokit.repos.createDeployKey()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 83,
+    "fingerprint": "sha256:3f9bf4bb647ff88d11e39bd224eb5cc926a54ff850ec72a6a11cdcb89f9657cd",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.addProtectedBranchAdminEnforcement"
+      ],
+      "replacement": "octokit.repos.setAdminBranchProtection"
+    },
+    "description": "`octokit.repos.addProtectedBranchAdminEnforcement` was renamed to `octokit.repos.setAdminBranchProtection` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.addProtectedBranchAdminEnforcement()` has been renamed to `octokit.repos.setAdminBranchProtection()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.addProtectedBranchAdminEnforcement()` has been renamed to `octokit.repos.setAdminBranchProtection()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 84,
+    "fingerprint": "sha256:0b2f3fb1ed68715c452d065c3bcae93d420af60891799ceeb4d9c9fcc3db0770",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.addProtectedBranchAppRestrictions"
+      ],
+      "replacement": "octokit.repos.addAppAccessRestrictions"
+    },
+    "description": "`octokit.repos.addProtectedBranchAppRestrictions` was renamed to `octokit.repos.addAppAccessRestrictions` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.addProtectedBranchAppRestrictions()` has been renamed to `octokit.repos.addAppAccessRestrictions()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.addProtectedBranchAppRestrictions()` has been renamed to `octokit.repos.addAppAccessRestrictions()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 85,
+    "fingerprint": "sha256:e175a33924607891a580e004d1a40f259c38eb43c5d31058b473715620fb126a",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.addProtectedBranchRequiredSignatures"
+      ],
+      "replacement": "octokit.repos.createCommitSignatureProtection"
+    },
+    "description": "`octokit.repos.addProtectedBranchRequiredSignatures` was renamed to `octokit.repos.createCommitSignatureProtection` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.addProtectedBranchRequiredSignatures()` has been renamed to `octokit.repos.createCommitSignatureProtection()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.addProtectedBranchRequiredSignatures()` has been renamed to `octokit.repos.createCommitSignatureProtection()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 86,
+    "fingerprint": "sha256:3133725705f1c5db2d7873ef2f624074e8053e56f7572496b97ddab6bb43f754",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.addProtectedBranchRequiredStatusChecksContexts"
+      ],
+      "replacement": "octokit.repos.addStatusCheckContexts"
+    },
+    "description": "`octokit.repos.addProtectedBranchRequiredStatusChecksContexts` was renamed to `octokit.repos.addStatusCheckContexts` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.addProtectedBranchRequiredStatusChecksContexts()` has been renamed to `octokit.repos.addStatusCheckContexts()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.addProtectedBranchRequiredStatusChecksContexts()` has been renamed to `octokit.repos.addStatusCheckContexts()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 87,
+    "fingerprint": "sha256:f68412ad7dfbc1576f27b98b740a71fa09c69524a6e7561532f8024a7f2cead0",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.addProtectedBranchTeamRestrictions"
+      ],
+      "replacement": "octokit.repos.addTeamAccessRestrictions"
+    },
+    "description": "`octokit.repos.addProtectedBranchTeamRestrictions` was renamed to `octokit.repos.addTeamAccessRestrictions` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.addProtectedBranchTeamRestrictions()` has been renamed to `octokit.repos.addTeamAccessRestrictions()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.addProtectedBranchTeamRestrictions()` has been renamed to `octokit.repos.addTeamAccessRestrictions()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 88,
+    "fingerprint": "sha256:3351e373cb387fd1d2f1c5f117b502fad7daa7e5e3c17a3a7bafd6a3227798eb",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.addProtectedBranchUserRestrictions"
+      ],
+      "replacement": "octokit.repos.addUserAccessRestrictions"
+    },
+    "description": "`octokit.repos.addProtectedBranchUserRestrictions` was renamed to `octokit.repos.addUserAccessRestrictions` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.addProtectedBranchUserRestrictions()` has been renamed to `octokit.repos.addUserAccessRestrictions()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.addProtectedBranchUserRestrictions()` has been renamed to `octokit.repos.addUserAccessRestrictions()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 89,
+    "fingerprint": "sha256:6492c3c70963d20962178d05b8dad30445dedb5f8a76c2ec1654121f220f67f8",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.createHook"
+      ],
+      "replacement": "octokit.repos.createWebhook"
+    },
+    "description": "`octokit.repos.createHook` was renamed to `octokit.repos.createWebhook` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.createHook()` has been renamed to `octokit.repos.createWebhook()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.createHook()` has been renamed to `octokit.repos.createWebhook()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 90,
+    "fingerprint": "sha256:58ea0a86659baaf8c7fa1f0178055c439d5464c351adda9c23f269e247160ed2",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.createOrUpdateFile"
+      ],
+      "replacement": "octokit.repos.createOrUpdateFileContents"
+    },
+    "description": "`octokit.repos.createOrUpdateFile` was renamed to `octokit.repos.createOrUpdateFileContents` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.createOrUpdateFile()` has been renamed to `octokit.repos.createOrUpdateFileContents()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.createOrUpdateFile()` has been renamed to `octokit.repos.createOrUpdateFileContents()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 91,
+    "fingerprint": "sha256:aa81fddf88da73a0b4e52cad80ffd11193891f61027291c14187b4e16cd0b8e3",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.createStatus"
+      ],
+      "replacement": "octokit.repos.createCommitStatus"
+    },
+    "description": "`octokit.repos.createStatus` was renamed to `octokit.repos.createCommitStatus` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.createStatus()` has been renamed to `octokit.repos.createCommitStatus()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.createStatus()` has been renamed to `octokit.repos.createCommitStatus()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 92,
+    "fingerprint": "sha256:ccf1b40eb36e5fa61a3a498bd312eab0709c82cb1c8d8fccd0717aaba3ac130e",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.deleteHook"
+      ],
+      "replacement": "octokit.repos.deleteWebhook"
+    },
+    "description": "`octokit.repos.deleteHook` was renamed to `octokit.repos.deleteWebhook` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.deleteHook()` has been renamed to `octokit.repos.deleteWebhook()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.deleteHook()` has been renamed to `octokit.repos.deleteWebhook()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 93,
+    "fingerprint": "sha256:cf91d2ded6985a006fc4e0570548e5988f3ebd51fc5b7e8f7f6bdccaa391a99f",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.disablePagesSite"
+      ],
+      "replacement": "octokit.repos.deletePagesSite"
+    },
+    "description": "`octokit.repos.disablePagesSite` was renamed to `octokit.repos.deletePagesSite` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.disablePagesSite()` has been renamed to `octokit.repos.deletePagesSite()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.disablePagesSite()` has been renamed to `octokit.repos.deletePagesSite()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 94,
+    "fingerprint": "sha256:afeda36fdf800fc9aebb6e85df88a213961141a5c8fe5579ebca5ecd5d8c83db",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.enablePagesSite"
+      ],
+      "replacement": "octokit.repos.createPagesSite"
+    },
+    "description": "`octokit.repos.enablePagesSite` was renamed to `octokit.repos.createPagesSite` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.enablePagesSite()` has been renamed to `octokit.repos.createPagesSite()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.enablePagesSite()` has been renamed to `octokit.repos.createPagesSite()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 95,
+    "fingerprint": "sha256:65c2061fbe2ba6731d1599058352f7199389832969d072c1128f54b11d05e230",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.getArchiveLink"
+      ],
+      "replacement": "octokit.repos.downloadArchive"
+    },
+    "description": "`octokit.repos.getArchiveLink` was renamed to `octokit.repos.downloadArchive` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.getArchiveLink()` has been renamed to `octokit.repos.downloadArchive()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.getArchiveLink()` has been renamed to `octokit.repos.downloadArchive()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 96,
+    "fingerprint": "sha256:5276c5382b8c0a8f15f5446f3b5cefbd00c5bdad99c4277868cd8e9ed6f7ed34",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.getContents"
+      ],
+      "replacement": "octokit.repos.getContent"
+    },
+    "description": "`octokit.repos.getContents` was renamed to `octokit.repos.getContent` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.getContents()` has been renamed to `octokit.repos.getContent()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.getContents()` has been renamed to `octokit.repos.getContent()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 97,
+    "fingerprint": "sha256:201dda9bb3c79f6e94c0024456e3e616ff16bbf57e5f1ac5821cea2f1cf8150d",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.getHook"
+      ],
+      "replacement": "octokit.repos.getWebhook"
+    },
+    "description": "`octokit.repos.getHook` was renamed to `octokit.repos.getWebhook` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.getHook()` has been renamed to `octokit.repos.getWebhook()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.getHook()` has been renamed to `octokit.repos.getWebhook()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 98,
+    "fingerprint": "sha256:969909273d4733d8c5189fde845c1f377c5cf05d4a6bf20647e79e67bfcc1e9f",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.getProtectedBranchAdminEnforcement"
+      ],
+      "replacement": "octokit.repos.getAdminBranchProtection"
+    },
+    "description": "`octokit.repos.getProtectedBranchAdminEnforcement` was renamed to `octokit.repos.getAdminBranchProtection` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.getProtectedBranchAdminEnforcement()` has been renamed to `octokit.repos.getAdminBranchProtection()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.getProtectedBranchAdminEnforcement()` has been renamed to `octokit.repos.getAdminBranchProtection()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 99,
+    "fingerprint": "sha256:cbca59943bcf10d8631a3fc6085610563e55512347ecce26daec671d0e9431dd",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.getProtectedBranchPullRequestReviewEnforcement"
+      ],
+      "replacement": "octokit.repos.getPullRequestReviewProtection"
+    },
+    "description": "`octokit.repos.getProtectedBranchPullRequestReviewEnforcement` was renamed to `octokit.repos.getPullRequestReviewProtection` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.getProtectedBranchPullRequestReviewEnforcement()` has been renamed to `octokit.repos.getPullRequestReviewProtection()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.getProtectedBranchPullRequestReviewEnforcement()` has been renamed to `octokit.repos.getPullRequestReviewProtection()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 100,
+    "fingerprint": "sha256:999f816a65a6a1b0fede85f0309df18ccbe7c16fcf15ce4720a323a8a5356a14",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.getProtectedBranchRequiredSignatures"
+      ],
+      "replacement": "octokit.repos.getCommitSignatureProtection"
+    },
+    "description": "`octokit.repos.getProtectedBranchRequiredSignatures` was renamed to `octokit.repos.getCommitSignatureProtection` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.getProtectedBranchRequiredSignatures()` has been renamed to `octokit.repos.getCommitSignatureProtection()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.getProtectedBranchRequiredSignatures()` has been renamed to `octokit.repos.getCommitSignatureProtection()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 101,
+    "fingerprint": "sha256:4b093fb05e8c9c6e2b5fe8eb7a85e669b70eef09c39a255e2e70629c9a1b3827",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.getProtectedBranchRequiredStatusChecks"
+      ],
+      "replacement": "octokit.repos.getStatusChecksProtection"
+    },
+    "description": "`octokit.repos.getProtectedBranchRequiredStatusChecks` was renamed to `octokit.repos.getStatusChecksProtection` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.getProtectedBranchRequiredStatusChecks()` has been renamed to `octokit.repos.getStatusChecksProtection()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.getProtectedBranchRequiredStatusChecks()` has been renamed to `octokit.repos.getStatusChecksProtection()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 102,
+    "fingerprint": "sha256:8df4d9e003cb1bb7160a7e8f5487d03a39fb75f9434f37897af71bd00d1f51ac",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.getProtectedBranchRestrictions"
+      ],
+      "replacement": "octokit.repos.getAccessRestrictions"
+    },
+    "description": "`octokit.repos.getProtectedBranchRestrictions` was renamed to `octokit.repos.getAccessRestrictions` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.getProtectedBranchRestrictions()` has been renamed to `octokit.repos.getAccessRestrictions()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.getProtectedBranchRestrictions()` has been renamed to `octokit.repos.getAccessRestrictions()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 103,
+    "fingerprint": "sha256:6a72ac4c041ab94d77f36250156dd82087ebeeafb81e6add9fbb5d1131c0db93",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.list"
+      ],
+      "replacement": "octokit.repos.listForAuthenticatedUser"
+    },
+    "description": "`octokit.repos.list` was renamed to `octokit.repos.listForAuthenticatedUser` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.list()` has been renamed to `octokit.repos.listForAuthenticatedUser()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.list()` has been renamed to `octokit.repos.listForAuthenticatedUser()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 104,
+    "fingerprint": "sha256:948b037066e31c183a713ca6158db88da690b5c2321a461632f8d87f4b8bb0ad",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.listAssetsForRelease"
+      ],
+      "replacement": "octokit.repos.listReleaseAssets"
+    },
+    "description": "`octokit.repos.listAssetsForRelease` was renamed to `octokit.repos.listReleaseAssets` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.listAssetsForRelease()` has been renamed to `octokit.repos.listReleaseAssets()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.listAssetsForRelease()` has been renamed to `octokit.repos.listReleaseAssets()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 105,
+    "fingerprint": "sha256:511782657df66357abda2a455faca151d7c3a4144a8518933dc7c9e2dce1782a",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.listCommitComments"
+      ],
+      "replacement": "octokit.repos.listCommitCommentsForRepo"
+    },
+    "description": "`octokit.repos.listCommitComments` was renamed to `octokit.repos.listCommitCommentsForRepo` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.listCommitComments()` has been renamed to `octokit.repos.listCommitCommentsForRepo()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.listCommitComments()` has been renamed to `octokit.repos.listCommitCommentsForRepo()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 106,
+    "fingerprint": "sha256:fd3d90b1195c74d58b2d2cf24af1ca0ffe759bd0cfcd6adaf395246f75ccbbf0",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.listHooks"
+      ],
+      "replacement": "octokit.repos.listWebhooks"
+    },
+    "description": "`octokit.repos.listHooks` was renamed to `octokit.repos.listWebhooks` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.listHooks()` has been renamed to `octokit.repos.listWebhooks()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.listHooks()` has been renamed to `octokit.repos.listWebhooks()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 107,
+    "fingerprint": "sha256:7dae791a06ad21b7f73187d2051888eb8294d3bfe11f639cb3b4848772275aeb",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.listProtectedBranchRequiredStatusChecksContexts"
+      ],
+      "replacement": "octokit.repos.getAllStatusCheckContexts"
+    },
+    "description": "`octokit.repos.listProtectedBranchRequiredStatusChecksContexts` was renamed to `octokit.repos.getAllStatusCheckContexts` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.listProtectedBranchRequiredStatusChecksContexts()` has been renamed to `octokit.repos.getAllStatusCheckContexts()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.listProtectedBranchRequiredStatusChecksContexts()` has been renamed to `octokit.repos.getAllStatusCheckContexts()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 108,
+    "fingerprint": "sha256:0d64d56f5f0d0558be44d114a08bc73e253ff51280b023454e97470f848b094e",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.listStatusesForRef"
+      ],
+      "replacement": "octokit.repos.listCommitStatusesForRef"
+    },
+    "description": "`octokit.repos.listStatusesForRef` was renamed to `octokit.repos.listCommitStatusesForRef` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.listStatusesForRef()` has been renamed to `octokit.repos.listCommitStatusesForRef()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.listStatusesForRef()` has been renamed to `octokit.repos.listCommitStatusesForRef()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 109,
+    "fingerprint": "sha256:4d2c16e9c1a60ad8a2c9bf3e016b7cb01ec40a733855597ab519b59c4e34cb27",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.listTopics"
+      ],
+      "replacement": "octokit.repos.getAllTopics"
+    },
+    "description": "`octokit.repos.listTopics` was renamed to `octokit.repos.getAllTopics` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.listTopics()` has been renamed to `octokit.repos.getAllTopics()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.listTopics()` has been renamed to `octokit.repos.getAllTopics()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 110,
+    "fingerprint": "sha256:5220a97d44e18009a08d1493c82c31ed89f7a380fe52e4e4b91888a2e9c14607",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.pingHook"
+      ],
+      "replacement": "octokit.repos.pingWebhook"
+    },
+    "description": "`octokit.repos.pingHook` was renamed to `octokit.repos.pingWebhook` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.pingHook()` has been renamed to `octokit.repos.pingWebhook()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.pingHook()` has been renamed to `octokit.repos.pingWebhook()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 111,
+    "fingerprint": "sha256:3082547c00d1a2bc75fcd795ecdd9ec3bfd0c486613ba5d1cd6160551fccae19",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.removeBranchProtection"
+      ],
+      "replacement": "octokit.repos.deleteBranchProtection"
+    },
+    "description": "`octokit.repos.removeBranchProtection` was renamed to `octokit.repos.deleteBranchProtection` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.removeBranchProtection()` has been renamed to `octokit.repos.deleteBranchProtection()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.removeBranchProtection()` has been renamed to `octokit.repos.deleteBranchProtection()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 112,
+    "fingerprint": "sha256:89a804a8a0193deb79e22db6297806674022652ab3934d6fbbc517d5b26515b7",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.removeDeployKey"
+      ],
+      "replacement": "octokit.repos.deleteDeployKey"
+    },
+    "description": "`octokit.repos.removeDeployKey` was renamed to `octokit.repos.deleteDeployKey` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.removeDeployKey()` has been renamed to `octokit.repos.deleteDeployKey()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.removeDeployKey()` has been renamed to `octokit.repos.deleteDeployKey()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 113,
+    "fingerprint": "sha256:5c67c09fe113d34269b0f1544e7f609d95ce172add27807878174fe4cc8b53b4",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.removeProtectedBranchAdminEnforcement"
+      ],
+      "replacement": "octokit.repos.deleteAdminBranchProtection"
+    },
+    "description": "`octokit.repos.removeProtectedBranchAdminEnforcement` was renamed to `octokit.repos.deleteAdminBranchProtection` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.removeProtectedBranchAdminEnforcement()` has been renamed to `octokit.repos.deleteAdminBranchProtection()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.removeProtectedBranchAdminEnforcement()` has been renamed to `octokit.repos.deleteAdminBranchProtection()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 114,
+    "fingerprint": "sha256:59549be63889f93a82841a40cb83d4b61624b9ede06d0deae72d33e8c3060482",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.removeProtectedBranchAppRestrictions"
+      ],
+      "replacement": "octokit.repos.removeAppAccessRestrictions"
+    },
+    "description": "`octokit.repos.removeProtectedBranchAppRestrictions` was renamed to `octokit.repos.removeAppAccessRestrictions` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.removeProtectedBranchAppRestrictions()` has been renamed to `octokit.repos.removeAppAccessRestrictions()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.removeProtectedBranchAppRestrictions()` has been renamed to `octokit.repos.removeAppAccessRestrictions()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 115,
+    "fingerprint": "sha256:05a8e25e653e02d70494e8a5ed1f60b12e2cd5df03979aeedbaef58a87334547",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.removeProtectedBranchPullRequestReviewEnforcement"
+      ],
+      "replacement": "octokit.repos.deletePullRequestReviewProtection"
+    },
+    "description": "`octokit.repos.removeProtectedBranchPullRequestReviewEnforcement` was renamed to `octokit.repos.deletePullRequestReviewProtection` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.removeProtectedBranchPullRequestReviewEnforcement()` has been renamed to `octokit.repos.deletePullRequestReviewProtection()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.removeProtectedBranchPullRequestReviewEnforcement()` has been renamed to `octokit.repos.deletePullRequestReviewProtection()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 116,
+    "fingerprint": "sha256:768eb43858498da543c0e6a7da615e102363d5b87dac4d8addea5f6827f1e574",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.removeProtectedBranchRequiredSignatures"
+      ],
+      "replacement": "octokit.repos.deleteCommitSignatureProtection"
+    },
+    "description": "`octokit.repos.removeProtectedBranchRequiredSignatures` was renamed to `octokit.repos.deleteCommitSignatureProtection` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.removeProtectedBranchRequiredSignatures()` has been renamed to `octokit.repos.deleteCommitSignatureProtection()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.removeProtectedBranchRequiredSignatures()` has been renamed to `octokit.repos.deleteCommitSignatureProtection()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 117,
+    "fingerprint": "sha256:f9d9f4cf8b32027a2d5b76735538cc653992640c31464483622d9efee2947fce",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.removeProtectedBranchRequiredStatusChecks"
+      ],
+      "replacement": "octokit.repos.removeStatusChecksProtection"
+    },
+    "description": "`octokit.repos.removeProtectedBranchRequiredStatusChecks` was renamed to `octokit.repos.removeStatusChecksProtection` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.removeProtectedBranchRequiredStatusChecks()` has been renamed to `octokit.repos.removeStatusChecksProtection()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.removeProtectedBranchRequiredStatusChecks()` has been renamed to `octokit.repos.removeStatusChecksProtection()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 118,
+    "fingerprint": "sha256:411852b04fc8e25656f1107864de40aea34bf277685c8b5df30a19e1ac64048d",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.removeProtectedBranchRequiredStatusChecksContexts"
+      ],
+      "replacement": "octokit.repos.removeStatusCheckContexts"
+    },
+    "description": "`octokit.repos.removeProtectedBranchRequiredStatusChecksContexts` was renamed to `octokit.repos.removeStatusCheckContexts` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.removeProtectedBranchRequiredStatusChecksContexts()` has been renamed to `octokit.repos.removeStatusCheckContexts()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.removeProtectedBranchRequiredStatusChecksContexts()` has been renamed to `octokit.repos.removeStatusCheckContexts()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 119,
+    "fingerprint": "sha256:286618b297f1284c1d693b534b7ddb2f207dfba807fceeabc39dbef6d9016511",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.removeProtectedBranchRestrictions"
+      ],
+      "replacement": "octokit.repos.deleteAccessRestrictions"
+    },
+    "description": "`octokit.repos.removeProtectedBranchRestrictions` was renamed to `octokit.repos.deleteAccessRestrictions` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.removeProtectedBranchRestrictions()` has been renamed to `octokit.repos.deleteAccessRestrictions()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.removeProtectedBranchRestrictions()` has been renamed to `octokit.repos.deleteAccessRestrictions()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 120,
+    "fingerprint": "sha256:c9cc68f7242b647cee6d37e174952096689a9afde4f13cfada069a9b18f0290b",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.removeProtectedBranchTeamRestrictions"
+      ],
+      "replacement": "octokit.repos.removeTeamAccessRestrictions"
+    },
+    "description": "`octokit.repos.removeProtectedBranchTeamRestrictions` was renamed to `octokit.repos.removeTeamAccessRestrictions` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.removeProtectedBranchTeamRestrictions()` has been renamed to `octokit.repos.removeTeamAccessRestrictions()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.removeProtectedBranchTeamRestrictions()` has been renamed to `octokit.repos.removeTeamAccessRestrictions()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 121,
+    "fingerprint": "sha256:6d6707240845aae6a6ef92667b2a0dce475bc6a6a97b70d6698b84d4a85f5ba6",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.removeProtectedBranchUserRestrictions"
+      ],
+      "replacement": "octokit.repos.removeUserAccessRestrictions"
+    },
+    "description": "`octokit.repos.removeProtectedBranchUserRestrictions` was renamed to `octokit.repos.removeUserAccessRestrictions` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.removeProtectedBranchUserRestrictions()` has been renamed to `octokit.repos.removeUserAccessRestrictions()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.removeProtectedBranchUserRestrictions()` has been renamed to `octokit.repos.removeUserAccessRestrictions()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 122,
+    "fingerprint": "sha256:9297eba58857da3431bea1b525778687c8f4bf6013aa5abdd7c29fb91d9fcf5b",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.replaceProtectedBranchAppRestrictions"
+      ],
+      "replacement": "octokit.repos.setAppAccessRestrictions"
+    },
+    "description": "`octokit.repos.replaceProtectedBranchAppRestrictions` was renamed to `octokit.repos.setAppAccessRestrictions` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.replaceProtectedBranchAppRestrictions()` has been renamed to `octokit.repos.setAppAccessRestrictions()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.replaceProtectedBranchAppRestrictions()` has been renamed to `octokit.repos.setAppAccessRestrictions()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 123,
+    "fingerprint": "sha256:ef7a6abdc7422fd58ba7498c3dae4cc42910ddcf0786534ca62a47b5dbfa78f2",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.replaceProtectedBranchRequiredStatusChecksContexts"
+      ],
+      "replacement": "octokit.repos.setStatusCheckContexts"
+    },
+    "description": "`octokit.repos.replaceProtectedBranchRequiredStatusChecksContexts` was renamed to `octokit.repos.setStatusCheckContexts` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.replaceProtectedBranchRequiredStatusChecksContexts()` has been renamed to `octokit.repos.setStatusCheckContexts()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.replaceProtectedBranchRequiredStatusChecksContexts()` has been renamed to `octokit.repos.setStatusCheckContexts()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 124,
+    "fingerprint": "sha256:e9cb9f177ccd5efd887ea1618bf09be234b35b21780632b39dc7f9840a992964",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.replaceProtectedBranchTeamRestrictions"
+      ],
+      "replacement": "octokit.repos.setTeamAccessRestrictions"
+    },
+    "description": "`octokit.repos.replaceProtectedBranchTeamRestrictions` was renamed to `octokit.repos.setTeamAccessRestrictions` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.replaceProtectedBranchTeamRestrictions()` has been renamed to `octokit.repos.setTeamAccessRestrictions()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.replaceProtectedBranchTeamRestrictions()` has been renamed to `octokit.repos.setTeamAccessRestrictions()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 125,
+    "fingerprint": "sha256:2c875dde2a8da9f6d8cf46f150965c8d41d4a8e8849d5f7c66ad13e8924725ad",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.replaceProtectedBranchUserRestrictions"
+      ],
+      "replacement": "octokit.repos.setUserAccessRestrictions"
+    },
+    "description": "`octokit.repos.replaceProtectedBranchUserRestrictions` was renamed to `octokit.repos.setUserAccessRestrictions` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.replaceProtectedBranchUserRestrictions()` has been renamed to `octokit.repos.setUserAccessRestrictions()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.replaceProtectedBranchUserRestrictions()` has been renamed to `octokit.repos.setUserAccessRestrictions()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 126,
+    "fingerprint": "sha256:d55d95a5399b045ec501ddca9148fb58ef4c0dfebc25127f86ede5e03dff931a",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.replaceTopics"
+      ],
+      "replacement": "octokit.repos.replaceAllTopics"
+    },
+    "description": "`octokit.repos.replaceTopics` was renamed to `octokit.repos.replaceAllTopics` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.replaceTopics()` has been renamed to `octokit.repos.replaceAllTopics()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.replaceTopics()` has been renamed to `octokit.repos.replaceAllTopics()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 127,
+    "fingerprint": "sha256:8f135939ca7aa9f36fa16aa3f010bfd67a9101afa666979a9128790a0f411820",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.requestPageBuild"
+      ],
+      "replacement": "octokit.repos.requestPagesBuild"
+    },
+    "description": "`octokit.repos.requestPageBuild` was renamed to `octokit.repos.requestPagesBuild` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.requestPageBuild()` has been renamed to `octokit.repos.requestPagesBuild()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.requestPageBuild()` has been renamed to `octokit.repos.requestPagesBuild()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 128,
+    "fingerprint": "sha256:380e12790535d24d156ff320b02ba8a48ae797df94a425c22b88e842b825ed22",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.retrieveCommunityProfileMetrics"
+      ],
+      "replacement": "octokit.repos.getCommunityProfileMetrics"
+    },
+    "description": "`octokit.repos.retrieveCommunityProfileMetrics` was renamed to `octokit.repos.getCommunityProfileMetrics` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.retrieveCommunityProfileMetrics()` has been renamed to `octokit.repos.getCommunityProfileMetrics()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.retrieveCommunityProfileMetrics()` has been renamed to `octokit.repos.getCommunityProfileMetrics()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 129,
+    "fingerprint": "sha256:b6e3f46268b2fc04b657c9fb0688ab85f2a4cea2607536bb9b0f1ed509dbf921",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.testPushHook"
+      ],
+      "replacement": "octokit.repos.testPushWebhook"
+    },
+    "description": "`octokit.repos.testPushHook` was renamed to `octokit.repos.testPushWebhook` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.testPushHook()` has been renamed to `octokit.repos.testPushWebhook()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.testPushHook()` has been renamed to `octokit.repos.testPushWebhook()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 130,
+    "fingerprint": "sha256:d54e6523d776109243c741a2c15e6784aab8f34ca7782dad5c1bd40b71b485d6",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.updateHook"
+      ],
+      "replacement": "octokit.repos.updateWebhook"
+    },
+    "description": "`octokit.repos.updateHook` was renamed to `octokit.repos.updateWebhook` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.updateHook()` has been renamed to `octokit.repos.updateWebhook()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.updateHook()` has been renamed to `octokit.repos.updateWebhook()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 131,
+    "fingerprint": "sha256:846588a0a61f9480e24c3a7e4ea48420526f9e1cbdbe5e03258538324552221f",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.updateProtectedBranchPullRequestReviewEnforcement"
+      ],
+      "replacement": "octokit.repos.updatePullRequestReviewProtection"
+    },
+    "description": "`octokit.repos.updateProtectedBranchPullRequestReviewEnforcement` was renamed to `octokit.repos.updatePullRequestReviewProtection` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.updateProtectedBranchPullRequestReviewEnforcement()` has been renamed to `octokit.repos.updatePullRequestReviewProtection()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.updateProtectedBranchPullRequestReviewEnforcement()` has been renamed to `octokit.repos.updatePullRequestReviewProtection()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 132,
+    "fingerprint": "sha256:de7c071d5a76899d3bd868d0d5e88714c25706febd203ef24d3f3c0f53811538",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.repos.updateProtectedBranchRequiredStatusChecks"
+      ],
+      "replacement": "octokit.repos.updateStatusChecksProtection"
+    },
+    "description": "`octokit.repos.updateProtectedBranchRequiredStatusChecks` was renamed to `octokit.repos.updateStatusChecksProtection` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.repos.updateProtectedBranchRequiredStatusChecks()` has been renamed to `octokit.repos.updateStatusChecksProtection()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.repos.updateProtectedBranchRequiredStatusChecks()` has been renamed to `octokit.repos.updateStatusChecksProtection()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 133,
+    "fingerprint": "sha256:a94ce88718cc5907aeceb622ea23629bba1380c254fe34ed48fa1f7870cbc181",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.teams.addOrUpdateMembershipInOrg"
+      ],
+      "replacement": "octokit.teams.addOrUpdateMembershipForUserInOrg"
+    },
+    "description": "`octokit.teams.addOrUpdateMembershipInOrg` was renamed to `octokit.teams.addOrUpdateMembershipForUserInOrg` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.teams.addOrUpdateMembershipInOrg()` has been renamed to `octokit.teams.addOrUpdateMembershipForUserInOrg()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.teams.addOrUpdateMembershipInOrg()` has been renamed to `octokit.teams.addOrUpdateMembershipForUserInOrg()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 134,
+    "fingerprint": "sha256:4e9f40f958a430b6bfb53e4a144b45252b16b9c195c839d0be258d842790f141",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.teams.addOrUpdateProjectInOrg"
+      ],
+      "replacement": "octokit.teams.addOrUpdateProjectPermissionsInOrg"
+    },
+    "description": "`octokit.teams.addOrUpdateProjectInOrg` was renamed to `octokit.teams.addOrUpdateProjectPermissionsInOrg` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.teams.addOrUpdateProjectInOrg()` has been renamed to `octokit.teams.addOrUpdateProjectPermissionsInOrg()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.teams.addOrUpdateProjectInOrg()` has been renamed to `octokit.teams.addOrUpdateProjectPermissionsInOrg()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 135,
+    "fingerprint": "sha256:05bba68c891af4e61923bcc405021e23fd37de19a74230372af02be6b2c16fc3",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.teams.addOrUpdateRepoInOrg"
+      ],
+      "replacement": "octokit.teams.addOrUpdateRepoPermissionsInOrg"
+    },
+    "description": "`octokit.teams.addOrUpdateRepoInOrg` was renamed to `octokit.teams.addOrUpdateRepoPermissionsInOrg` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.teams.addOrUpdateRepoInOrg()` has been renamed to `octokit.teams.addOrUpdateRepoPermissionsInOrg()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.teams.addOrUpdateRepoInOrg()` has been renamed to `octokit.teams.addOrUpdateRepoPermissionsInOrg()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 136,
+    "fingerprint": "sha256:e87ec583c77b3191e1424b49e6ea8bb519f5e6c17702ef4f65bb55d910aedecd",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.teams.checkManagesRepoInOrg"
+      ],
+      "replacement": "octokit.teams.checkPermissionsForRepoInOrg"
+    },
+    "description": "`octokit.teams.checkManagesRepoInOrg` was renamed to `octokit.teams.checkPermissionsForRepoInOrg` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.teams.checkManagesRepoInOrg()` has been renamed to `octokit.teams.checkPermissionsForRepoInOrg()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.teams.checkManagesRepoInOrg()` has been renamed to `octokit.teams.checkPermissionsForRepoInOrg()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 137,
+    "fingerprint": "sha256:ea9876f4a20b1e343982f78426b70fe83d42bcc941428a37004587e8c99b0eee",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.teams.getMembershipInOrg"
+      ],
+      "replacement": "octokit.teams.getMembershipForUserInOrg"
+    },
+    "description": "`octokit.teams.getMembershipInOrg` was renamed to `octokit.teams.getMembershipForUserInOrg` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.teams.getMembershipInOrg()` has been renamed to `octokit.teams.getMembershipForUserInOrg()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.teams.getMembershipInOrg()` has been renamed to `octokit.teams.getMembershipForUserInOrg()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 138,
+    "fingerprint": "sha256:a4951373818460b316f4bd03de63874b449dca257155cafb353392652d5ee757",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.teams.removeMembershipInOrg"
+      ],
+      "replacement": "octokit.teams.removeMembershipForUserInOrg"
+    },
+    "description": "`octokit.teams.removeMembershipInOrg` was renamed to `octokit.teams.removeMembershipForUserInOrg` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.teams.removeMembershipInOrg()` has been renamed to `octokit.teams.removeMembershipForUserInOrg()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.teams.removeMembershipInOrg()` has been renamed to `octokit.teams.removeMembershipForUserInOrg()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 139,
+    "fingerprint": "sha256:7dbef5f36043e3f2f1bb5db51aedbfc9db92e5f6a9e957fff370e6793d21ab58",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.teams.reviewProjectInOrg"
+      ],
+      "replacement": "octokit.teams.checkPermissionsForProjectInOrg"
+    },
+    "description": "`octokit.teams.reviewProjectInOrg` was renamed to `octokit.teams.checkPermissionsForProjectInOrg` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.teams.reviewProjectInOrg()` has been renamed to `octokit.teams.checkPermissionsForProjectInOrg()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.teams.reviewProjectInOrg()` has been renamed to `octokit.teams.checkPermissionsForProjectInOrg()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 140,
+    "fingerprint": "sha256:f168ff7edb669d82aad6d50382807f10def9ff46a72bab3e2a5fc7a2d5e8a146",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.users.addEmails"
+      ],
+      "replacement": "octokit.users.addEmailsForAuthenticated"
+    },
+    "description": "`octokit.users.addEmails` was renamed to `octokit.users.addEmailsForAuthenticated` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.users.addEmails()` has been renamed to `octokit.users.addEmailsForAuthenticated()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.users.addEmails()` has been renamed to `octokit.users.addEmailsForAuthenticated()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 141,
+    "fingerprint": "sha256:cc6378fbc15a76abb7bee944dccfa6dd61f46add20e47c7d6d8cb083e721bc87",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.users.checkFollowing"
+      ],
+      "replacement": "octokit.users.checkPersonIsFollowedByAuthenticated"
+    },
+    "description": "`octokit.users.checkFollowing` was renamed to `octokit.users.checkPersonIsFollowedByAuthenticated` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.users.checkFollowing()` has been renamed to `octokit.users.checkPersonIsFollowedByAuthenticated()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.users.checkFollowing()` has been renamed to `octokit.users.checkPersonIsFollowedByAuthenticated()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 142,
+    "fingerprint": "sha256:c0eb1ee003508c6188f2a7f72b3431f6f73a022a03949a283a9a9568c3b20b91",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.users.createGpgKey"
+      ],
+      "replacement": "octokit.users.createGpgKeyForAuthenticated"
+    },
+    "description": "`octokit.users.createGpgKey` was renamed to `octokit.users.createGpgKeyForAuthenticated` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.users.createGpgKey()` has been renamed to `octokit.users.createGpgKeyForAuthenticated()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.users.createGpgKey()` has been renamed to `octokit.users.createGpgKeyForAuthenticated()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 143,
+    "fingerprint": "sha256:f257ed61eb4d4cc46b4a7b53c47a20d200abe951c0b53d69b98f2ba073e8c235",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.users.createPublicKey"
+      ],
+      "replacement": "octokit.users.createPublicSshKeyForAuthenticated"
+    },
+    "description": "`octokit.users.createPublicKey` was renamed to `octokit.users.createPublicSshKeyForAuthenticated` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.users.createPublicKey()` has been renamed to `octokit.users.createPublicSshKeyForAuthenticated()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.users.createPublicKey()` has been renamed to `octokit.users.createPublicSshKeyForAuthenticated()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 144,
+    "fingerprint": "sha256:48736a61ccbb5360ee19f7a41e5933be095fa8b06a6aa3d944f2cc07bf19864e",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.users.deleteEmails"
+      ],
+      "replacement": "octokit.users.deleteEmailsForAuthenticated"
+    },
+    "description": "`octokit.users.deleteEmails` was renamed to `octokit.users.deleteEmailsForAuthenticated` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.users.deleteEmails()` has been renamed to `octokit.users.deleteEmailsForAuthenticated()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.users.deleteEmails()` has been renamed to `octokit.users.deleteEmailsForAuthenticated()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 145,
+    "fingerprint": "sha256:dce0ae3d8025f82af0e2a4c6e6a311521430d617670d23b6b0073f2b07cecb50",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.users.deleteGpgKey"
+      ],
+      "replacement": "octokit.users.deleteGpgKeyForAuthenticated"
+    },
+    "description": "`octokit.users.deleteGpgKey` was renamed to `octokit.users.deleteGpgKeyForAuthenticated` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.users.deleteGpgKey()` has been renamed to `octokit.users.deleteGpgKeyForAuthenticated()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.users.deleteGpgKey()` has been renamed to `octokit.users.deleteGpgKeyForAuthenticated()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 146,
+    "fingerprint": "sha256:4e3f02a6148b21b9771f571077f3a1642ef943361eed95cd2eed00c70b959a1d",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.users.deletePublicKey"
+      ],
+      "replacement": "octokit.users.deletePublicSshKeyForAuthenticated"
+    },
+    "description": "`octokit.users.deletePublicKey` was renamed to `octokit.users.deletePublicSshKeyForAuthenticated` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.users.deletePublicKey()` has been renamed to `octokit.users.deletePublicSshKeyForAuthenticated()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.users.deletePublicKey()` has been renamed to `octokit.users.deletePublicSshKeyForAuthenticated()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 147,
+    "fingerprint": "sha256:1808b2e7149f1515ae910bf40b3188819e2131a6c5a5ac4845a25002e1fd73e4",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.users.getGpgKey"
+      ],
+      "replacement": "octokit.users.getGpgKeyForAuthenticated"
+    },
+    "description": "`octokit.users.getGpgKey` was renamed to `octokit.users.getGpgKeyForAuthenticated` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.users.getGpgKey()` has been renamed to `octokit.users.getGpgKeyForAuthenticated()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.users.getGpgKey()` has been renamed to `octokit.users.getGpgKeyForAuthenticated()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 148,
+    "fingerprint": "sha256:c976bebdb6a16401066635da15a695ba5f931c9ae02f33f928dcba061ce8fe70",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.users.getPublicKey"
+      ],
+      "replacement": "octokit.users.getPublicSshKeyForAuthenticated"
+    },
+    "description": "`octokit.users.getPublicKey` was renamed to `octokit.users.getPublicSshKeyForAuthenticated` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.users.getPublicKey()` has been renamed to `octokit.users.getPublicSshKeyForAuthenticated()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.users.getPublicKey()` has been renamed to `octokit.users.getPublicSshKeyForAuthenticated()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 149,
+    "fingerprint": "sha256:7216061a17e74de3af6673c0ff4feb472dbc357b2df444df8b5401f15ff353b6",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.users.listBlocked"
+      ],
+      "replacement": "octokit.users.listBlockedByAuthenticated"
+    },
+    "description": "`octokit.users.listBlocked` was renamed to `octokit.users.listBlockedByAuthenticated` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.users.listBlocked()` has been renamed to `octokit.users.listBlockedByAuthenticated()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.users.listBlocked()` has been renamed to `octokit.users.listBlockedByAuthenticated()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 150,
+    "fingerprint": "sha256:3e8949078c15c3f008b2e615869f2f63d0ee63974d8adfbafbd5a97ab94d5e95",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.users.listEmails"
+      ],
+      "replacement": "octokit.users.listEmailsForAuthenticated"
+    },
+    "description": "`octokit.users.listEmails` was renamed to `octokit.users.listEmailsForAuthenticated` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.users.listEmails()` has been renamed to `octokit.users.listEmailsForAuthenticated()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.users.listEmails()` has been renamed to `octokit.users.listEmailsForAuthenticated()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 151,
+    "fingerprint": "sha256:ad23c18e59a47990e2e2d6a00bb759d4682955405ec01b3a3a2326e56c973572",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.users.listFollowingForAuthenticatedUser"
+      ],
+      "replacement": "octokit.users.listFollowedByAuthenticated"
+    },
+    "description": "`octokit.users.listFollowingForAuthenticatedUser` was renamed to `octokit.users.listFollowedByAuthenticated` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.users.listFollowingForAuthenticatedUser()` has been renamed to `octokit.users.listFollowedByAuthenticated()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.users.listFollowingForAuthenticatedUser()` has been renamed to `octokit.users.listFollowedByAuthenticated()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 152,
+    "fingerprint": "sha256:d3ceed01b0bf6db784a227d2a6fff3029369f09ea02e50a4bca20156d67331cf",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.users.listGpgKeys"
+      ],
+      "replacement": "octokit.users.listGpgKeysForAuthenticated"
+    },
+    "description": "`octokit.users.listGpgKeys` was renamed to `octokit.users.listGpgKeysForAuthenticated` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.users.listGpgKeys()` has been renamed to `octokit.users.listGpgKeysForAuthenticated()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.users.listGpgKeys()` has been renamed to `octokit.users.listGpgKeysForAuthenticated()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 153,
+    "fingerprint": "sha256:87d334d013d3f34b5f1225f3da96b1d08e352be3c07f93cb7408cfc8b7cbfe8a",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.users.listPublicEmails"
+      ],
+      "replacement": "octokit.users.listPublicEmailsForAuthenticatedUser"
+    },
+    "description": "`octokit.users.listPublicEmails` was renamed to `octokit.users.listPublicEmailsForAuthenticatedUser` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.users.listPublicEmails()` has been renamed to `octokit.users.listPublicEmailsForAuthenticatedUser()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.users.listPublicEmails()` has been renamed to `octokit.users.listPublicEmailsForAuthenticatedUser()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 154,
+    "fingerprint": "sha256:d69ddf7dbac3efc3b3d5f74a22b6a060acee8b09541fd9be8393523d51936ecf",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.users.listPublicKeys"
+      ],
+      "replacement": "octokit.users.listPublicSshKeysForAuthenticated"
+    },
+    "description": "`octokit.users.listPublicKeys` was renamed to `octokit.users.listPublicSshKeysForAuthenticated` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.users.listPublicKeys()` has been renamed to `octokit.users.listPublicSshKeysForAuthenticated()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.users.listPublicKeys()` has been renamed to `octokit.users.listPublicSshKeysForAuthenticated()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 155,
+    "fingerprint": "sha256:5ea214e6596178c5b74e677fc613f0a1e1fbc98357f782c1e93376fdc1099532",
+    "api": "github/octokit-rest",
+    "version": "18.0.0",
+    "previous_version": "17.11.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@octokit/rest",
+      "change": "renamed_symbol",
+      "symbols": [
+        "octokit.users.togglePrimaryEmailVisibility"
+      ],
+      "replacement": "octokit.users.setPrimaryEmailVisibilityForAuthenticated"
+    },
+    "description": "`octokit.users.togglePrimaryEmailVisibility` was renamed to `octokit.users.setPrimaryEmailVisibilityForAuthenticated` in @octokit/rest 18.0.0: code using the old name fails.",
+    "migration_hint": "`octokit.users.togglePrimaryEmailVisibility()` has been renamed to `octokit.users.setPrimaryEmailVisibilityForAuthenticated()` (@octokit/rest's release notes for 18.0.0)",
+    "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
+    "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.users.togglePrimaryEmailVisibility()` has been renamed to `octokit.users.setPrimaryEmailVisibilityForAuthenticated()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

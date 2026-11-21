@@ -50,5 +50,5 @@ Kind: `openapi` (`plugins/openapi`), with `adapter.Neon`.
 - **Lag.** neon-pkgs commits the spec when someone acts on the drift check, days after the live spec changes. On 2026-11-19 the live spec had one operation more than the newest commit.
 - **History before 2026-06-24** isn't in neon-pkgs, so deprecations and removals before then (`GET /consumption_history/account`, removed by 2026-06-19) aren't replayable from this source.
 - **Only the management API is covered,** not the serverless driver (`@neondatabase/serverless`) or the Data API.
-- **Two spec commits on one day would share a `version`.** It hasn't happened in the history.
+- **Two spec commits on one day are one version,** read at the day's last commit: the event's `version` is a day.
 - **The patch-it client needs `neon` in its list of date-versioned APIs.** The events' `version` is a date (`2026-08-23`), because the API has no version; without the entry, the client reads it as a package version and can't place these events. That list is in the client used by patch-it's hosted ingestion service, not in this repo.

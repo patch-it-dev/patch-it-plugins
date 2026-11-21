@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:b5aae06f772fb7dcc360be1f7c1900c83cfa7532e60dc959053d5504a98f89ab",
+    "api": "sentry/python-surface",
+    "version": "2.74.0",
+    "previous_version": "2.73.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "sentry-sdk",
+      "change": "removed_symbol",
+      "symbols": [
+        "utils.to_timestamp"
+      ]
+    },
+    "description": "The function `utils.to_timestamp` was removed in sentry-sdk 2.74.0: code using it fails.",
+    "migration_hint": "sentry-sdk 2.74.0 has no `utils.to_timestamp`: see the package's release notes for what replaces it.",
+    "source_url": "https://files.pythonhosted.org/packages/55/b1/736d4b4b308694b0071844a533522ac06669ad61751687b94edfbf863f17/sentry_sdk-2.74.0-py3-none-any.whl",
+    "source_excerpt": "sentry-sdk 2.73.0 (sentry_sdk-2.73.0-py3-none-any.whl), sentry_sdk/utils.py line 251: def to_timestamp(value: \"datetime\") -> float\nsentry-sdk 2.74.0 (sentry_sdk-2.74.0-py3-none-any.whl): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]
