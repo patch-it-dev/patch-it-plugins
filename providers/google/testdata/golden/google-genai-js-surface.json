@@ -1,6 +1,72 @@
 [
   {
     "id": 1,
+    "fingerprint": "sha256:514171c3e08b523b85436f4d1112e98feabf005c3e71d2cc866720fd4170125c",
+    "api": "google/genai-js-surface",
+    "version": "1.0.0",
+    "previous_version": "0.15.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@google/genai",
+      "change": "added_symbol",
+      "symbols": [
+        "CreateAuthTokenConfig"
+      ]
+    },
+    "description": "New interface `CreateAuthTokenConfig` in @google/genai 1.0.0.",
+    "source_url": "https://registry.npmjs.org/@google/genai/-/genai-1.0.0.tgz",
+    "source_excerpt": "@google/genai 0.15.0 (genai-0.15.0.tgz): not defined\n@google/genai 1.0.0 (genai-1.0.0.tgz), dist/genai.d.ts line 913: interface CreateAuthTokenConfig",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:196cd84b225a2a35314f9fd7227e1e81127d3c159af48faaf511145711e8c231",
+    "api": "google/genai-js-surface",
+    "version": "1.0.0",
+    "previous_version": "0.15.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@google/genai",
+      "change": "added_symbol",
+      "symbols": [
+        "LiveEphemeralParameters"
+      ]
+    },
+    "description": "New interface `LiveEphemeralParameters` in @google/genai 1.0.0.",
+    "source_url": "https://registry.npmjs.org/@google/genai/-/genai-1.0.0.tgz",
+    "source_excerpt": "@google/genai 0.15.0 (genai-0.15.0.tgz): not defined\n@google/genai 1.0.0 (genai-1.0.0.tgz), dist/genai.d.ts line 3538: interface LiveEphemeralParameters",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:8cf4562d500e93d9f3b0c0ecbadc2d19b2227798b1fca99ba256fafe723bc2b1",
+    "api": "google/genai-js-surface",
+    "version": "1.0.0",
+    "previous_version": "0.15.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@google/genai",
+      "change": "added_symbol",
+      "symbols": [
+        "LiveMusicSession"
+      ]
+    },
+    "description": "New class `LiveMusicSession` in @google/genai 1.0.0.",
+    "source_url": "https://registry.npmjs.org/@google/genai/-/genai-1.0.0.tgz",
+    "source_excerpt": "@google/genai 0.15.0 (genai-0.15.0.tgz): not defined\n@google/genai 1.0.0 (genai-1.0.0.tgz), dist/genai.d.ts line 3745: class LiveMusicSession / constructor(conn: WebSocket_2, apiClient: ApiClient)",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
     "fingerprint": "sha256:3c4bc51d5938fb29c383e15feec7d6b4e5aff01b9f17058a466d89fd6a2a3cac",
     "api": "google/genai-js-surface",
     "version": "1.0.0",
@@ -23,7 +89,95 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 2,
+    "id": 5,
+    "fingerprint": "sha256:ff36461273d9caf1bf40472ce6386c8b4d8a6ba66697ec05bf697e74b019d2cf",
+    "api": "google/genai-js-surface",
+    "version": "1.0.0",
+    "previous_version": "0.15.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@google/genai",
+      "change": "added_symbol",
+      "symbols": [
+        "LiveMusicSetWeightedPromptsParameters"
+      ]
+    },
+    "description": "New interface `LiveMusicSetWeightedPromptsParameters` in @google/genai 1.0.0.",
+    "source_url": "https://registry.npmjs.org/@google/genai/-/genai-1.0.0.tgz",
+    "source_excerpt": "@google/genai 0.15.0 (genai-0.15.0.tgz): not defined\n@google/genai 1.0.0 (genai-1.0.0.tgz), dist/genai.d.ts line 3816: interface LiveMusicSetWeightedPromptsParameters",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:feae944c399bbdc80e557f0fae5031b242af343caa244ac5b3cbe126155561e8",
+    "api": "google/genai-js-surface",
+    "version": "1.0.0",
+    "previous_version": "0.15.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@google/genai",
+      "change": "added_symbol",
+      "symbols": [
+        "@google/genai/node.CreateAuthTokenConfig"
+      ]
+    },
+    "description": "New interface `@google/genai/node.CreateAuthTokenConfig` in @google/genai 1.0.0.",
+    "source_url": "https://registry.npmjs.org/@google/genai/-/genai-1.0.0.tgz",
+    "source_excerpt": "@google/genai 0.15.0 (genai-0.15.0.tgz): not defined\n@google/genai 1.0.0 (genai-1.0.0.tgz), dist/node/node.d.ts line 913: interface CreateAuthTokenConfig",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:c2777d2fc09efa4a9c5bedc0fd38650920cacecaca122aedaf2dbbdda0b346d1",
+    "api": "google/genai-js-surface",
+    "version": "1.0.0",
+    "previous_version": "0.15.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@google/genai",
+      "change": "added_symbol",
+      "symbols": [
+        "@google/genai/node.LiveEphemeralParameters"
+      ]
+    },
+    "description": "New interface `@google/genai/node.LiveEphemeralParameters` in @google/genai 1.0.0.",
+    "source_url": "https://registry.npmjs.org/@google/genai/-/genai-1.0.0.tgz",
+    "source_excerpt": "@google/genai 0.15.0 (genai-0.15.0.tgz): not defined\n@google/genai 1.0.0 (genai-1.0.0.tgz), dist/node/node.d.ts line 3550: interface LiveEphemeralParameters",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
+    "fingerprint": "sha256:aa9a89d53ac6f3c859242c79710039e140afa21ba00795281a2e28e62f2c36a4",
+    "api": "google/genai-js-surface",
+    "version": "1.0.0",
+    "previous_version": "0.15.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@google/genai",
+      "change": "added_symbol",
+      "symbols": [
+        "@google/genai/node.LiveMusicSession"
+      ]
+    },
+    "description": "New class `@google/genai/node.LiveMusicSession` in @google/genai 1.0.0.",
+    "source_url": "https://registry.npmjs.org/@google/genai/-/genai-1.0.0.tgz",
+    "source_excerpt": "@google/genai 0.15.0 (genai-0.15.0.tgz): not defined\n@google/genai 1.0.0 (genai-1.0.0.tgz), dist/node/node.d.ts line 3757: class LiveMusicSession / constructor(conn: WebSocket_2, apiClient: ApiClient)",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 9,
     "fingerprint": "sha256:ec64180f7fd0eddfd7bd972c4862b42da57bb3b8b5fb16a761f927d675f5b6d6",
     "api": "google/genai-js-surface",
     "version": "1.0.0",
@@ -46,7 +200,95 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 3,
+    "id": 10,
+    "fingerprint": "sha256:b756d60b2dd70029aab2bfee0d5143cf7921b56ab3f74a750b27c496925de672",
+    "api": "google/genai-js-surface",
+    "version": "1.0.0",
+    "previous_version": "0.15.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@google/genai",
+      "change": "added_symbol",
+      "symbols": [
+        "@google/genai/node.LiveMusicSetWeightedPromptsParameters"
+      ]
+    },
+    "description": "New interface `@google/genai/node.LiveMusicSetWeightedPromptsParameters` in @google/genai 1.0.0.",
+    "source_url": "https://registry.npmjs.org/@google/genai/-/genai-1.0.0.tgz",
+    "source_excerpt": "@google/genai 0.15.0 (genai-0.15.0.tgz): not defined\n@google/genai 1.0.0 (genai-1.0.0.tgz), dist/node/node.d.ts line 3828: interface LiveMusicSetWeightedPromptsParameters",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 11,
+    "fingerprint": "sha256:d8fa2f7eb0d0f76bd6c4116ac10f960b08fbe5d320e5e6147779828f05679520",
+    "api": "google/genai-js-surface",
+    "version": "1.0.0",
+    "previous_version": "0.15.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@google/genai",
+      "change": "added_symbol",
+      "symbols": [
+        "@google/genai/web.CreateAuthTokenConfig"
+      ]
+    },
+    "description": "New interface `@google/genai/web.CreateAuthTokenConfig` in @google/genai 1.0.0.",
+    "source_url": "https://registry.npmjs.org/@google/genai/-/genai-1.0.0.tgz",
+    "source_excerpt": "@google/genai 0.15.0 (genai-0.15.0.tgz): not defined\n@google/genai 1.0.0 (genai-1.0.0.tgz), dist/web/web.d.ts line 913: interface CreateAuthTokenConfig",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 12,
+    "fingerprint": "sha256:e63faa60be50652f9cded5d3dbdc2d0fb432246b414c5544a46d9318c83ffc40",
+    "api": "google/genai-js-surface",
+    "version": "1.0.0",
+    "previous_version": "0.15.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@google/genai",
+      "change": "added_symbol",
+      "symbols": [
+        "@google/genai/web.LiveEphemeralParameters"
+      ]
+    },
+    "description": "New interface `@google/genai/web.LiveEphemeralParameters` in @google/genai 1.0.0.",
+    "source_url": "https://registry.npmjs.org/@google/genai/-/genai-1.0.0.tgz",
+    "source_excerpt": "@google/genai 0.15.0 (genai-0.15.0.tgz): not defined\n@google/genai 1.0.0 (genai-1.0.0.tgz), dist/web/web.d.ts line 3543: interface LiveEphemeralParameters",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 13,
+    "fingerprint": "sha256:5425a10aec56f5e9d38cfa636675f52845f522dc599f939855e6d98af7c01823",
+    "api": "google/genai-js-surface",
+    "version": "1.0.0",
+    "previous_version": "0.15.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@google/genai",
+      "change": "added_symbol",
+      "symbols": [
+        "@google/genai/web.LiveMusicSession"
+      ]
+    },
+    "description": "New class `@google/genai/web.LiveMusicSession` in @google/genai 1.0.0.",
+    "source_url": "https://registry.npmjs.org/@google/genai/-/genai-1.0.0.tgz",
+    "source_excerpt": "@google/genai 0.15.0 (genai-0.15.0.tgz): not defined\n@google/genai 1.0.0 (genai-1.0.0.tgz), dist/web/web.d.ts line 3750: class LiveMusicSession / constructor(conn: WebSocket_2, apiClient: ApiClient)",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 14,
     "fingerprint": "sha256:dc3d0647e0d3b5bac9c81cf053789a818a5a6dcaf99d7bceb0433eb072962574",
     "api": "google/genai-js-surface",
     "version": "1.0.0",
@@ -65,6 +307,28 @@
     "migration_hint": "@google/genai 1.0.0 has no `@google/genai/web.LiveMusicSetClientContentParameters`: see the package's release notes for what replaces it.",
     "source_url": "https://registry.npmjs.org/@google/genai/-/genai-1.0.0.tgz",
     "source_excerpt": "@google/genai 0.15.0 (genai-0.15.0.tgz), dist/web/web.d.ts line 3762: interface LiveMusicSetClientContentParameters\n@google/genai 1.0.0 (genai-1.0.0.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 15,
+    "fingerprint": "sha256:6c8b272dca8352d30e92f341093f4ee54070d301bcf8a8500460fc32644771ac",
+    "api": "google/genai-js-surface",
+    "version": "1.0.0",
+    "previous_version": "0.15.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@google/genai",
+      "change": "added_symbol",
+      "symbols": [
+        "@google/genai/web.LiveMusicSetWeightedPromptsParameters"
+      ]
+    },
+    "description": "New interface `@google/genai/web.LiveMusicSetWeightedPromptsParameters` in @google/genai 1.0.0.",
+    "source_url": "https://registry.npmjs.org/@google/genai/-/genai-1.0.0.tgz",
+    "source_excerpt": "@google/genai 0.15.0 (genai-0.15.0.tgz): not defined\n@google/genai 1.0.0 (genai-1.0.0.tgz), dist/web/web.d.ts line 3821: interface LiveMusicSetWeightedPromptsParameters",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   }

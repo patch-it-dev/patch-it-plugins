@@ -39,6 +39,55 @@
   },
   {
     "id": 2,
+    "fingerprint": "sha256:0419aab8ffcf6b2735d09901d8c232c76cb07c0cadaea0b7efb78f871e8f328a",
+    "api": "anthropic/typescript-surface",
+    "version": "1.7.0",
+    "previous_version": "1.6.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@anthropic-ai/sdk",
+      "change": "added_symbol",
+      "symbols": [
+        "Anthropic.Beta.BetaWebhookUserProfileProgramStatusUpdatedEventData",
+        "@anthropic-ai/sdk/client.Anthropic.Beta.BetaWebhookUserProfileProgramStatusUpdatedEventData",
+        "@anthropic-ai/sdk/resources.Beta.BetaWebhookUserProfileProgramStatusUpdatedEventData",
+        "@anthropic-ai/sdk/resources/beta.Beta.BetaWebhookUserProfileProgramStatusUpdatedEventData",
+        "@anthropic-ai/sdk/resources/beta/beta.Beta.BetaWebhookUserProfileProgramStatusUpdatedEventData"
+      ]
+    },
+    "description": "New export `Anthropic.Beta.BetaWebhookUserProfileProgramStatusUpdatedEventData` in @anthropic-ai/sdk 1.7.0.",
+    "source_url": "https://registry.npmjs.org/@anthropic-ai/sdk/-/sdk-1.7.0.tgz",
+    "source_excerpt": "@anthropic-ai/sdk 1.6.0 (sdk-1.6.0.tgz): not defined\n@anthropic-ai/sdk 1.7.0 (sdk-1.7.0.tgz), resources/beta/beta.d.mts line 0: import BetaWebhookUserProfileProgramStatusUpdatedEventData from \"./webhooks.mjs\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:5689223c5f1f55946c5cd58b32df3021b6c4e599c37815ad470e7e942431ea43",
+    "api": "anthropic/typescript-surface",
+    "version": "1.7.0",
+    "previous_version": "1.6.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@anthropic-ai/sdk",
+      "change": "added_symbol",
+      "symbols": [
+        "Anthropic.SandboxEgressRestrictedError",
+        "@anthropic-ai/sdk/client.Anthropic.SandboxEgressRestrictedError"
+      ]
+    },
+    "description": "New export `Anthropic.SandboxEgressRestrictedError` in @anthropic-ai/sdk 1.7.0.",
+    "source_url": "https://registry.npmjs.org/@anthropic-ai/sdk/-/sdk-1.7.0.tgz",
+    "source_excerpt": "@anthropic-ai/sdk 1.6.0 (sdk-1.6.0.tgz): not defined\n@anthropic-ai/sdk 1.7.0 (sdk-1.7.0.tgz), client.d.mts line 0: import SandboxEgressRestrictedError from \"./resources/shared.mjs\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
     "fingerprint": "sha256:f08ae2d3202434c0f859c333ee95f3c4c652fe79c55014713a4096d555f554bc",
     "api": "anthropic/typescript-surface",
     "version": "1.7.0",
@@ -59,6 +108,28 @@
     "migration_hint": "@anthropic-ai/sdk 1.7.0 has no `@anthropic-ai/sdk/resources/beta.BetaBillingFrozenErrorDetails`: see the package's release notes for what replaces it.",
     "source_url": "https://registry.npmjs.org/@anthropic-ai/sdk/-/sdk-1.7.0.tgz",
     "source_excerpt": "@anthropic-ai/sdk 1.6.0 (sdk-1.6.0.tgz), resources/beta/organization/organization.d.mts line 84: interface BetaBillingFrozenErrorDetails\n@anthropic-ai/sdk 1.7.0 (sdk-1.7.0.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:d6792645a142688df34c4f275c3dc7f8a86aecfdaa05f4005cb3db13d9a9d294",
+    "api": "anthropic/typescript-surface",
+    "version": "1.7.0",
+    "previous_version": "1.6.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@anthropic-ai/sdk",
+      "change": "added_symbol",
+      "symbols": [
+        "@anthropic-ai/sdk/resources/beta.BetaWebhookUserProfileProgramStatusUpdatedEventData"
+      ]
+    },
+    "description": "New export `@anthropic-ai/sdk/resources/beta.BetaWebhookUserProfileProgramStatusUpdatedEventData` in @anthropic-ai/sdk 1.7.0.",
+    "source_url": "https://registry.npmjs.org/@anthropic-ai/sdk/-/sdk-1.7.0.tgz",
+    "source_excerpt": "@anthropic-ai/sdk 1.6.0 (sdk-1.6.0.tgz): not defined\n@anthropic-ai/sdk 1.7.0 (sdk-1.7.0.tgz), resources/beta/index.d.mts line 17: export { BetaWebhookUserProfileProgramStatusUpdatedEventData } from \"./webhooks.mjs\"",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   }

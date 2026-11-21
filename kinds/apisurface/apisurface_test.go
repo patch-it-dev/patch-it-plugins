@@ -98,9 +98,9 @@ func TestSelfAloneIsNoRename(t *testing.T) {
 		"acme.C.send_v2": sym("method", self, prm("body", "either", "")),
 	}}
 	// Two removed, two added: neither pairs one to one, so both are
-	// removals; then one of each, with a real parameter in common, is a
-	// rename.
-	want := "removed_symbol acme.C.close \nremoved_symbol acme.C.send "
+	// removals, and the two new ones additions; then one of each, with a
+	// real parameter in common, is a rename.
+	want := "added_symbol acme.C.aclose \nremoved_symbol acme.C.close \nremoved_symbol acme.C.send \nadded_symbol acme.C.send_v2 "
 	if got := strings.Join(changes(a, b), "\n"); got != want {
 		t.Errorf("got\n%s\nwant\n%s", got, want)
 	}
@@ -111,7 +111,7 @@ func TestSelfAloneIsNoRename(t *testing.T) {
 	}
 	a.Surface = pysurface.Surface{"acme.C": cls("class C:"), "acme.C.close": sym("method", self)}
 	b.Surface = pysurface.Surface{"acme.C": cls("class C:"), "acme.C.aclose": sym("method", self)}
-	if got := strings.Join(changes(a, b), "\n"); got != "removed_symbol acme.C.close " {
+	if got := strings.Join(changes(a, b), "\n"); got != "added_symbol acme.C.aclose \nremoved_symbol acme.C.close " {
 		t.Errorf("self only: %s", got)
 	}
 }

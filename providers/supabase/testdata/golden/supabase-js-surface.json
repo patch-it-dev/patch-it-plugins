@@ -1,6 +1,50 @@
 [
   {
     "id": 1,
+    "fingerprint": "sha256:a2b87b353cc835e70f79016f58cda8d4205f6d9da44ec38da07a7fc2a9ad9b74",
+    "api": "supabase/js-surface",
+    "version": "2.0.0",
+    "previous_version": "1.35.7",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@supabase/supabase-js",
+      "change": "added_symbol",
+      "symbols": [
+        "SupabaseClient.channel"
+      ]
+    },
+    "description": "New method `SupabaseClient.channel` in @supabase/supabase-js 2.0.0.",
+    "source_url": "https://registry.npmjs.org/@supabase/supabase-js/-/supabase-js-2.0.0.tgz",
+    "source_excerpt": "@supabase/supabase-js 1.35.7 (supabase-js-1.35.7.tgz): not defined\n@supabase/supabase-js 2.0.0 (supabase-js-2.0.0.tgz), dist/module/SupabaseClient.d.ts line 80: channel(name: string, opts?: RealtimeChannelOptions): RealtimeChannel",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:cee85c8a87254b3b08acf9bb9162e0a5bb21f7b99e1a4f16b3dc7035f9dea661",
+    "api": "supabase/js-surface",
+    "version": "2.0.0",
+    "previous_version": "1.35.7",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@supabase/supabase-js",
+      "change": "added_symbol",
+      "symbols": [
+        "SupabaseClient.getChannels"
+      ]
+    },
+    "description": "New method `SupabaseClient.getChannels` in @supabase/supabase-js 2.0.0.",
+    "source_url": "https://registry.npmjs.org/@supabase/supabase-js/-/supabase-js-2.0.0.tgz",
+    "source_excerpt": "@supabase/supabase-js 1.35.7 (supabase-js-1.35.7.tgz): not defined\n@supabase/supabase-js 2.0.0 (supabase-js-2.0.0.tgz), dist/module/SupabaseClient.d.ts line 84: getChannels(): RealtimeChannel[]",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
     "fingerprint": "sha256:87c811b15734f3d780657fa1ca375a4a7f586daa1d6290e3aa985eec0b28df46",
     "api": "supabase/js-surface",
     "version": "2.0.0",
@@ -23,7 +67,29 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 2,
+    "id": 4,
+    "fingerprint": "sha256:4b2edbc6d71d15ccec9c122c482a9c34358f876ecd6fc3e35460b07869c43d51",
+    "api": "supabase/js-surface",
+    "version": "2.0.0",
+    "previous_version": "1.35.7",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@supabase/supabase-js",
+      "change": "added_symbol",
+      "symbols": [
+        "SupabaseClient.removeAllChannels"
+      ]
+    },
+    "description": "New method `SupabaseClient.removeAllChannels` in @supabase/supabase-js 2.0.0.",
+    "source_url": "https://registry.npmjs.org/@supabase/supabase-js/-/supabase-js-2.0.0.tgz",
+    "source_excerpt": "@supabase/supabase-js 1.35.7 (supabase-js-1.35.7.tgz): not defined\n@supabase/supabase-js 2.0.0 (supabase-js-2.0.0.tgz), dist/module/SupabaseClient.d.ts line 95: removeAllChannels(): Promise<(\"ok\" | \"timed out\" | \"error\")[]>",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
     "fingerprint": "sha256:9e744cb3c8fd5836ac1a51a6d9993cc748ca2784f6a95283c1f75fcfe4e23f5d",
     "api": "supabase/js-surface",
     "version": "2.0.0",
@@ -46,7 +112,29 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 3,
+    "id": 6,
+    "fingerprint": "sha256:9263f5620ef41511176efbb804ce84d07032258051224a2dc3cd551dc80737d7",
+    "api": "supabase/js-surface",
+    "version": "2.0.0",
+    "previous_version": "1.35.7",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@supabase/supabase-js",
+      "change": "added_symbol",
+      "symbols": [
+        "SupabaseClient.removeChannel"
+      ]
+    },
+    "description": "New method `SupabaseClient.removeChannel` in @supabase/supabase-js 2.0.0.",
+    "source_url": "https://registry.npmjs.org/@supabase/supabase-js/-/supabase-js-2.0.0.tgz",
+    "source_excerpt": "@supabase/supabase-js 1.35.7 (supabase-js-1.35.7.tgz): not defined\n@supabase/supabase-js 2.0.0 (supabase-js-2.0.0.tgz), dist/module/SupabaseClient.d.ts line 91: removeChannel(channel: RealtimeChannel): Promise<\"ok\" | \"timed out\" | \"error\">",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
     "fingerprint": "sha256:2f76e317aca4dd879a2a042a376c329d31432c0f59a74996661f61acaaa724ab",
     "api": "supabase/js-surface",
     "version": "2.0.0",

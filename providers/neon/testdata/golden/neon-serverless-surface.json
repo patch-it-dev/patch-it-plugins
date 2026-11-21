@@ -1,6 +1,204 @@
 [
   {
     "id": 1,
+    "fingerprint": "sha256:d11d8bd9663c096b759ddb1d34937c89f284a0af5d30c09cb3a78019c637e344",
+    "api": "neon/serverless-surface",
+    "version": "1.0.0",
+    "previous_version": "0.10.4",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@neondatabase/serverless",
+      "change": "added_symbol",
+      "symbols": [
+        "FetchEndpointOptions"
+      ]
+    },
+    "description": "New interface `FetchEndpointOptions` in @neondatabase/serverless 1.0.0.",
+    "source_url": "https://registry.npmjs.org/@neondatabase/serverless/-/serverless-1.0.0.tgz",
+    "source_excerpt": "@neondatabase/serverless 0.10.4 (serverless-0.10.4.tgz): not defined\n@neondatabase/serverless 1.0.0 (serverless-1.0.0.tgz), index.d.mts line 262: interface FetchEndpointOptions",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:5d9597c0fcdb6c1d3f17db2899a54b22b9128ad2714ae382651c1c3852463687",
+    "api": "neon/serverless-surface",
+    "version": "1.0.0",
+    "previous_version": "0.10.4",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@neondatabase/serverless",
+      "change": "added_symbol",
+      "symbols": [
+        "ProcessQueryResultOptions"
+      ]
+    },
+    "description": "New interface `ProcessQueryResultOptions` in @neondatabase/serverless 1.0.0.",
+    "source_url": "https://registry.npmjs.org/@neondatabase/serverless/-/serverless-1.0.0.tgz",
+    "source_excerpt": "@neondatabase/serverless 0.10.4 (serverless-0.10.4.tgz): not defined\n@neondatabase/serverless 1.0.0 (serverless-1.0.0.tgz), index.d.mts line 776: interface ProcessQueryResultOptions",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:793d0dc734fe092703e0b0d910c77a8309f63a32af3b9a2e0a9b7ae646053bb2",
+    "api": "neon/serverless-surface",
+    "version": "1.0.0",
+    "previous_version": "0.10.4",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@neondatabase/serverless",
+      "change": "added_symbol",
+      "symbols": [
+        "SqlTemplate"
+      ]
+    },
+    "description": "New class `SqlTemplate` in @neondatabase/serverless 1.0.0.",
+    "source_url": "https://registry.npmjs.org/@neondatabase/serverless/-/serverless-1.0.0.tgz",
+    "source_excerpt": "@neondatabase/serverless 0.10.4 (serverless-0.10.4.tgz): not defined\n@neondatabase/serverless 1.0.0 (serverless-1.0.0.tgz), index.d.mts line 830: class SqlTemplate / constructor(strings: ReadonlyArray<string>, values: any[])",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:b8fe2886fd02ef0a48fb13ff4d52a05984da59e451fb88738538b95f99c48756",
+    "api": "neon/serverless-surface",
+    "version": "1.0.0",
+    "previous_version": "0.10.4",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@neondatabase/serverless",
+      "change": "added_symbol",
+      "symbols": [
+        "TrustedCert"
+      ]
+    },
+    "description": "New class `TrustedCert` in @neondatabase/serverless 1.0.0.",
+    "source_url": "https://registry.npmjs.org/@neondatabase/serverless/-/serverless-1.0.0.tgz",
+    "source_excerpt": "@neondatabase/serverless 0.10.4 (serverless-0.10.4.tgz): not defined\n@neondatabase/serverless 1.0.0 (serverless-1.0.0.tgz), index.d.mts line 864: class TrustedCert extends Cert",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:216ee68f4c1d032f647520212cbde7b682f62637abed6cc28a747450c1609706",
+    "api": "neon/serverless-surface",
+    "version": "1.0.0",
+    "previous_version": "0.10.4",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@neondatabase/serverless",
+      "change": "added_symbol",
+      "symbols": [
+        "UnsafeRawSql"
+      ]
+    },
+    "description": "New class `UnsafeRawSql` in @neondatabase/serverless 1.0.0.",
+    "source_url": "https://registry.npmjs.org/@neondatabase/serverless/-/serverless-1.0.0.tgz",
+    "source_excerpt": "@neondatabase/serverless 0.10.4 (serverless-0.10.4.tgz): not defined\n@neondatabase/serverless 1.0.0 (serverless-1.0.0.tgz), index.d.mts line 871: class UnsafeRawSql / constructor(sql: string)",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:34282aa46ec8f98769183a55d8e6a68be53284145079aa633ca17442d9c2498b",
+    "api": "neon/serverless-surface",
+    "version": "1.0.0",
+    "previous_version": "0.10.4",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@neondatabase/serverless",
+      "change": "added_symbol",
+      "symbols": [
+        "WebSocketConstructor"
+      ]
+    },
+    "description": "New interface `WebSocketConstructor` in @neondatabase/serverless 1.0.0.",
+    "source_url": "https://registry.npmjs.org/@neondatabase/serverless/-/serverless-1.0.0.tgz",
+    "source_excerpt": "@neondatabase/serverless 0.10.4 (serverless-0.10.4.tgz): not defined\n@neondatabase/serverless 1.0.0 (serverless-1.0.0.tgz), index.d.mts line 876: interface WebSocketConstructor",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:ca6fe8d71b38097705938e7c10b48c1dc4e784ee21bbbc93cd133a5f407fa482",
+    "api": "neon/serverless-surface",
+    "version": "1.0.0",
+    "previous_version": "0.10.4",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@neondatabase/serverless",
+      "change": "added_symbol",
+      "symbols": [
+        "WebSocketLike"
+      ]
+    },
+    "description": "New interface `WebSocketLike` in @neondatabase/serverless 1.0.0.",
+    "source_url": "https://registry.npmjs.org/@neondatabase/serverless/-/serverless-1.0.0.tgz",
+    "source_excerpt": "@neondatabase/serverless 0.10.4 (serverless-0.10.4.tgz): not defined\n@neondatabase/serverless 1.0.0 (serverless-1.0.0.tgz), index.d.mts line 880: interface WebSocketLike",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
+    "fingerprint": "sha256:36100fb326dcd324e9885c63be1555ec811907807160c8fd563dfae3bdd7b2b7",
+    "api": "neon/serverless-surface",
+    "version": "1.0.0",
+    "previous_version": "0.10.4",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@neondatabase/serverless",
+      "change": "added_symbol",
+      "symbols": [
+        "WebSocketReadQueue"
+      ]
+    },
+    "description": "New class `WebSocketReadQueue` in @neondatabase/serverless 1.0.0.",
+    "source_url": "https://registry.npmjs.org/@neondatabase/serverless/-/serverless-1.0.0.tgz",
+    "source_excerpt": "@neondatabase/serverless 0.10.4 (serverless-0.10.4.tgz): not defined\n@neondatabase/serverless 1.0.0 (serverless-1.0.0.tgz), index.d.mts line 888: class WebSocketReadQueue extends ReadQueue / constructor(socket: WebSocket)",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 9,
+    "fingerprint": "sha256:f0d1b5d00476f555b916fa876e324af55b349024c8a93cd198cc26e3d8e404ca",
+    "api": "neon/serverless-surface",
+    "version": "1.0.0",
+    "previous_version": "0.10.4",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@neondatabase/serverless",
+      "change": "added_symbol",
+      "symbols": [
+        "_bundleExt"
+      ]
+    },
+    "description": "New variable `_bundleExt` in @neondatabase/serverless 1.0.0.",
+    "source_url": "https://registry.npmjs.org/@neondatabase/serverless/-/serverless-1.0.0.tgz",
+    "source_excerpt": "@neondatabase/serverless 0.10.4 (serverless-0.10.4.tgz): not defined\n@neondatabase/serverless 1.0.0 (serverless-1.0.0.tgz), index.d.mts line 55: const _bundleExt: \"js\" | \"mjs\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 10,
     "fingerprint": "sha256:8ad70579778a2e9058ff551ad659ce8f7168e3457255b4f48d3bfa1e0309ecdd",
     "api": "neon/serverless-surface",
     "version": "1.0.0",
@@ -19,6 +217,50 @@
     "migration_hint": "@neondatabase/serverless 1.0.0 has no `native`: see the package's release notes for what replaces it.",
     "source_url": "https://registry.npmjs.org/@neondatabase/serverless/-/serverless-1.0.0.tgz",
     "source_excerpt": "@neondatabase/serverless 0.10.4 (serverless-0.10.4.tgz), index.d.mts line 8: export { native } from \"pg\"\n@neondatabase/serverless 1.0.0 (serverless-1.0.0.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 11,
+    "fingerprint": "sha256:437d5baaf6dd8502de92e2ee5c4be6e2fdc06ca8dfcbec1a5e4875e420dcbcb4",
+    "api": "neon/serverless-surface",
+    "version": "1.0.0",
+    "previous_version": "0.10.4",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@neondatabase/serverless",
+      "change": "added_symbol",
+      "symbols": [
+        "startTls"
+      ]
+    },
+    "description": "New function `startTls` in @neondatabase/serverless 1.0.0.",
+    "source_url": "https://registry.npmjs.org/@neondatabase/serverless/-/serverless-1.0.0.tgz",
+    "source_excerpt": "@neondatabase/serverless 0.10.4 (serverless-0.10.4.tgz): not defined\n@neondatabase/serverless 1.0.0 (serverless-1.0.0.tgz), index.d.mts line 843: function startTls(host: string, rootCertsDatabase: RootCertsDatabase | string, networkRead: (bytes: number) => Promise<Uint8Array | undefined>, networkWrite: (data: Uint8Array) => void, { useSNI, requireServerTlsExtKeyUsage, requireDigitalSigKeyUsage, writePreData, expectPreData, commentPreData }?: { useSNI?: boolean; requireServerTlsExtKeyUsage?: boolean; requireDigitalSigKeyUsage?: boolean; writ…",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 12,
+    "fingerprint": "sha256:3be5119be612fb04f8ba8908fe52d80d320bee64609ae1af39b71b6817059718",
+    "api": "neon/serverless-surface",
+    "version": "1.0.0",
+    "previous_version": "0.10.4",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@neondatabase/serverless",
+      "change": "added_symbol",
+      "symbols": [
+        "subtls"
+      ]
+    },
+    "description": "New interface `subtls` in @neondatabase/serverless 1.0.0.",
+    "source_url": "https://registry.npmjs.org/@neondatabase/serverless/-/serverless-1.0.0.tgz",
+    "source_excerpt": "@neondatabase/serverless 0.10.4 (serverless-0.10.4.tgz): not defined\n@neondatabase/serverless 1.0.0 (serverless-1.0.0.tgz), index.d.mts line 858: interface subtls",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   }

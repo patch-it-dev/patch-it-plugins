@@ -1,6 +1,72 @@
 [
   {
     "id": 1,
+    "fingerprint": "sha256:1139ecf981ac19e86e01712e65e081bb2e30896bac4bfe354f4b439ca87e8b73",
+    "api": "stripe/node-surface",
+    "version": "23.0.0",
+    "previous_version": "22.6.2",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "stripe",
+      "change": "added_symbol",
+      "symbols": [
+        "Stripe.AppsInstallCreatedEvent"
+      ]
+    },
+    "description": "New export `Stripe.AppsInstallCreatedEvent` in stripe 23.0.0.",
+    "source_url": "https://registry.npmjs.org/stripe/-/stripe-23.0.0.tgz",
+    "source_excerpt": "stripe 22.6.2 (stripe-22.6.2.tgz): not defined\nstripe 23.0.0 (stripe-23.0.0.tgz), esm/stripe.esm.node.d.ts line 0: import AppsInstallCreatedEvent from \"./resources/Events.js\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:a7b31fa723256df40fad9ea599126bd0dae50d6612306547dbae8dd1a63155ab",
+    "api": "stripe/node-surface",
+    "version": "23.0.0",
+    "previous_version": "22.6.2",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "stripe",
+      "change": "added_symbol",
+      "symbols": [
+        "Stripe.AppsInstallDeletedEvent"
+      ]
+    },
+    "description": "New export `Stripe.AppsInstallDeletedEvent` in stripe 23.0.0.",
+    "source_url": "https://registry.npmjs.org/stripe/-/stripe-23.0.0.tgz",
+    "source_excerpt": "stripe 22.6.2 (stripe-22.6.2.tgz): not defined\nstripe 23.0.0 (stripe-23.0.0.tgz), esm/stripe.esm.node.d.ts line 0: import AppsInstallDeletedEvent from \"./resources/Events.js\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:0a0becd0e559bb814acab8d8fac2b1cfd42404c454c3a3643c9238c67cad8328",
+    "api": "stripe/node-surface",
+    "version": "23.0.0",
+    "previous_version": "22.6.2",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "stripe",
+      "change": "added_symbol",
+      "symbols": [
+        "Stripe.AppsInstallUpdatedEvent"
+      ]
+    },
+    "description": "New export `Stripe.AppsInstallUpdatedEvent` in stripe 23.0.0.",
+    "source_url": "https://registry.npmjs.org/stripe/-/stripe-23.0.0.tgz",
+    "source_excerpt": "stripe 22.6.2 (stripe-22.6.2.tgz): not defined\nstripe 23.0.0 (stripe-23.0.0.tgz), esm/stripe.esm.node.d.ts line 0: import AppsInstallUpdatedEvent from \"./resources/Events.js\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
     "fingerprint": "sha256:76de4b15e9c0f3a02f420e1848e6e2ce518f2575fdd92eda8027b31ce884e2de",
     "api": "stripe/node-surface",
     "version": "23.0.0",
@@ -23,7 +89,73 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 2,
+    "id": 5,
+    "fingerprint": "sha256:8ce7a696b86dfbcf0b0def5cda28b0a2f4395be33f0b9a792bfb06019b41e627",
+    "api": "stripe/node-surface",
+    "version": "23.0.0",
+    "previous_version": "22.6.2",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "stripe",
+      "change": "added_symbol",
+      "symbols": [
+        "Stripe.ProductCatalog"
+      ]
+    },
+    "description": "New export `Stripe.ProductCatalog` in stripe 23.0.0.",
+    "source_url": "https://registry.npmjs.org/stripe/-/stripe-23.0.0.tgz",
+    "source_excerpt": "stripe 22.6.2 (stripe-22.6.2.tgz): not defined\nstripe 23.0.0 (stripe-23.0.0.tgz), esm/stripe.esm.node.d.ts line 0: import ProductCatalog from \"./resources/ProductCatalog/index.js\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:6615d0d89b253d08fdeaeb702bfa14288d8dcc4ba330216f09c9a8132c60bba7",
+    "api": "stripe/node-surface",
+    "version": "23.0.0",
+    "previous_version": "22.6.2",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "stripe",
+      "change": "added_symbol",
+      "symbols": [
+        "Stripe.SubscriptionPauseParams"
+      ]
+    },
+    "description": "New export `Stripe.SubscriptionPauseParams` in stripe 23.0.0.",
+    "source_url": "https://registry.npmjs.org/stripe/-/stripe-23.0.0.tgz",
+    "source_excerpt": "stripe 22.6.2 (stripe-22.6.2.tgz): not defined\nstripe 23.0.0 (stripe-23.0.0.tgz), esm/stripe.esm.node.d.ts line 0: import SubscriptionPauseParams from \"./resources/Subscriptions.js\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:aea8d2202acce39efddfbd32ea209b929af87ead1454eef66393dfe887a79676",
+    "api": "stripe/node-surface",
+    "version": "23.0.0",
+    "previous_version": "22.6.2",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "stripe",
+      "change": "added_symbol",
+      "symbols": [
+        "Stripe.ThreeDSecure"
+      ]
+    },
+    "description": "New export `Stripe.ThreeDSecure` in stripe 23.0.0.",
+    "source_url": "https://registry.npmjs.org/stripe/-/stripe-23.0.0.tgz",
+    "source_excerpt": "stripe 22.6.2 (stripe-22.6.2.tgz): not defined\nstripe 23.0.0 (stripe-23.0.0.tgz), esm/stripe.esm.node.d.ts line 0: import ThreeDSecure from \"./resources/ThreeDSecure/index.js\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
     "fingerprint": "sha256:b3ac4dd442c1fa7f0a8fd743cf940c0dd57d440a50924a91d6a9fc6ce6ed6cfe",
     "api": "stripe/node-surface",
     "version": "23.0.0",
@@ -42,6 +174,72 @@
     "migration_hint": "stripe 23.0.0 has no `Stripe.constructEventWithoutVerification`: see the package's release notes for what replaces it.",
     "source_url": "https://registry.npmjs.org/stripe/-/stripe-23.0.0.tgz",
     "source_excerpt": "stripe 22.6.2 (stripe-22.6.2.tgz), esm/stripe.esm.node.d.ts line 347: constructEventWithoutVerification(payload: string): Event\nstripe 23.0.0 (stripe-23.0.0.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 9,
+    "fingerprint": "sha256:5c075dbd0704a996621ce79b1024b4ebda858c67828221bef0d8e2ef9f7005bb",
+    "api": "stripe/node-surface",
+    "version": "23.0.0",
+    "previous_version": "22.6.2",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "stripe",
+      "change": "added_symbol",
+      "symbols": [
+        "Stripe.productCatalog"
+      ]
+    },
+    "description": "New property `Stripe.productCatalog` in stripe 23.0.0.",
+    "source_url": "https://registry.npmjs.org/stripe/-/stripe-23.0.0.tgz",
+    "source_excerpt": "stripe 22.6.2 (stripe-22.6.2.tgz): not defined\nstripe 23.0.0 (stripe-23.0.0.tgz), esm/stripe.esm.node.d.ts line 231: productCatalog: ProductCatalog",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 10,
+    "fingerprint": "sha256:2a006c465b3935926ca78389bc8f4143840a38c36e00c409c09adeac015dc73b",
+    "api": "stripe/node-surface",
+    "version": "23.0.0",
+    "previous_version": "22.6.2",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "stripe",
+      "change": "added_symbol",
+      "symbols": [
+        "Stripe.threeDSecure"
+      ]
+    },
+    "description": "New property `Stripe.threeDSecure` in stripe 23.0.0.",
+    "source_url": "https://registry.npmjs.org/stripe/-/stripe-23.0.0.tgz",
+    "source_excerpt": "stripe 22.6.2 (stripe-22.6.2.tgz): not defined\nstripe 23.0.0 (stripe-23.0.0.tgz), esm/stripe.esm.node.d.ts line 238: threeDSecure: ThreeDSecure",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 11,
+    "fingerprint": "sha256:74a9d98ff3bb87317381d4cd6ec730259e4753faa400af7ede6dd715075bdb46",
+    "api": "stripe/node-surface",
+    "version": "23.0.0",
+    "previous_version": "22.6.2",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "stripe",
+      "change": "added_symbol",
+      "symbols": [
+        "Stripe.withStripeContext"
+      ]
+    },
+    "description": "New method `Stripe.withStripeContext` in stripe 23.0.0.",
+    "source_url": "https://registry.npmjs.org/stripe/-/stripe-23.0.0.tgz",
+    "source_excerpt": "stripe 22.6.2 (stripe-22.6.2.tgz): not defined\nstripe 23.0.0 (stripe-23.0.0.tgz), esm/stripe.esm.node.d.ts line 353: withStripeContext(stripeContext: StripeContext | null | undefined): Stripe",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   }

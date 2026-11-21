@@ -51,6 +51,30 @@
   },
   {
     "id": 3,
+    "fingerprint": "sha256:2dd0e62b359bedfa0b4bc5db999f2cf293e719cd1586ce13b9f9a957150e70d0",
+    "api": "supabase/python-surface",
+    "version": "1.0.0",
+    "previous_version": "0.7.1",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "supabase",
+      "change": "added_parameter",
+      "symbols": [
+        "SupabaseAuthClient",
+        "lib.auth_client.SupabaseAuthClient"
+      ],
+      "parameter": "http_client"
+    },
+    "description": "`SupabaseAuthClient` takes a new optional parameter `http_client` in supabase 1.0.0.",
+    "source_url": "https://files.pythonhosted.org/packages/8d/7b/42e5e27e4c9f4f5e24c0d3294b7448948b97963c69d634c664b7beaaae4b/supabase-1.0.0-py3-none-any.whl",
+    "source_excerpt": "supabase 0.7.1 (supabase-0.7.1-py3-none-any.whl), supabase/lib/auth_client.py line 13: class SupabaseAuthClient(SyncGoTrueClient) / def __init__( self, *, url: str, headers: Dict[str, str] = {}, auto_refresh_token: bool = True, persist_session: bool = True, local_storage: SyncSupportedStorage = SyncMemoryStorage(), cookie_options: CookieOptions = CookieOptions.parse_obj(COOKIE_OPTIONS), api: Optional[SyncGoTrueAPI] = None, replace_default_headers: bool = False, )\nsupabase 1.0.0 (supabase-1.0.0-py3-none-any.whl), supabase/lib/auth_client.py line 14: class SupabaseAuthClient(SyncGoTrueClient) / def __init__( self, *, url: str, headers: Dict[str, str] = {}, storage_key: Union[str, None] = None, auto_refresh_token: bool = True, persist_session: bool = True, storage: SyncSupportedStorage = SyncMemoryStorage(), http_client: Union[SyncClient, None] = None, )",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
     "fingerprint": "sha256:90fdf200c73977ab7800fca5b0854ff86f1f49c62e61f814b7609423f5b05459",
     "api": "supabase/python-surface",
     "version": "1.0.0",
@@ -75,7 +99,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 4,
+    "id": 5,
     "fingerprint": "sha256:b4bb8ebb041ac0485fd8e1732fc5ad14ae4fddec09ce71a32fd587b3d2754e7a",
     "api": "supabase/python-surface",
     "version": "1.0.0",
@@ -100,7 +124,99 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 5,
+    "id": 6,
+    "fingerprint": "sha256:4882caabdf08c54bef06a785731080fb519fbbba8b0f04a1d1158a6630072468",
+    "api": "supabase/python-surface",
+    "version": "1.0.0",
+    "previous_version": "0.7.1",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "supabase",
+      "change": "added_parameter",
+      "symbols": [
+        "SupabaseAuthClient",
+        "lib.auth_client.SupabaseAuthClient"
+      ],
+      "parameter": "storage"
+    },
+    "description": "`SupabaseAuthClient` takes a new optional parameter `storage` in supabase 1.0.0.",
+    "source_url": "https://files.pythonhosted.org/packages/8d/7b/42e5e27e4c9f4f5e24c0d3294b7448948b97963c69d634c664b7beaaae4b/supabase-1.0.0-py3-none-any.whl",
+    "source_excerpt": "supabase 0.7.1 (supabase-0.7.1-py3-none-any.whl), supabase/lib/auth_client.py line 13: class SupabaseAuthClient(SyncGoTrueClient) / def __init__( self, *, url: str, headers: Dict[str, str] = {}, auto_refresh_token: bool = True, persist_session: bool = True, local_storage: SyncSupportedStorage = SyncMemoryStorage(), cookie_options: CookieOptions = CookieOptions.parse_obj(COOKIE_OPTIONS), api: Optional[SyncGoTrueAPI] = None, replace_default_headers: bool = False, )\nsupabase 1.0.0 (supabase-1.0.0-py3-none-any.whl), supabase/lib/auth_client.py line 14: class SupabaseAuthClient(SyncGoTrueClient) / def __init__( self, *, url: str, headers: Dict[str, str] = {}, storage_key: Union[str, None] = None, auto_refresh_token: bool = True, persist_session: bool = True, storage: SyncSupportedStorage = SyncMemoryStorage(), http_client: Union[SyncClient, None] = None, )",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:c2850825ef1d7ad8992a82a7aeab3ef4fcdd70ab32576934102894c53d82d202",
+    "api": "supabase/python-surface",
+    "version": "1.0.0",
+    "previous_version": "0.7.1",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "supabase",
+      "change": "added_parameter",
+      "symbols": [
+        "SupabaseAuthClient",
+        "lib.auth_client.SupabaseAuthClient"
+      ],
+      "parameter": "storage_key"
+    },
+    "description": "`SupabaseAuthClient` takes a new optional parameter `storage_key` in supabase 1.0.0.",
+    "source_url": "https://files.pythonhosted.org/packages/8d/7b/42e5e27e4c9f4f5e24c0d3294b7448948b97963c69d634c664b7beaaae4b/supabase-1.0.0-py3-none-any.whl",
+    "source_excerpt": "supabase 0.7.1 (supabase-0.7.1-py3-none-any.whl), supabase/lib/auth_client.py line 13: class SupabaseAuthClient(SyncGoTrueClient) / def __init__( self, *, url: str, headers: Dict[str, str] = {}, auto_refresh_token: bool = True, persist_session: bool = True, local_storage: SyncSupportedStorage = SyncMemoryStorage(), cookie_options: CookieOptions = CookieOptions.parse_obj(COOKIE_OPTIONS), api: Optional[SyncGoTrueAPI] = None, replace_default_headers: bool = False, )\nsupabase 1.0.0 (supabase-1.0.0-py3-none-any.whl), supabase/lib/auth_client.py line 14: class SupabaseAuthClient(SyncGoTrueClient) / def __init__( self, *, url: str, headers: Dict[str, str] = {}, storage_key: Union[str, None] = None, auto_refresh_token: bool = True, persist_session: bool = True, storage: SyncSupportedStorage = SyncMemoryStorage(), http_client: Union[SyncClient, None] = None, )",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
+    "fingerprint": "sha256:3a83e020422925a3664e274d2d51d0ac69d1b37abc0f99ff5b35d928b1842678",
+    "api": "supabase/python-surface",
+    "version": "1.0.0",
+    "previous_version": "0.7.1",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "supabase",
+      "change": "added_symbol",
+      "symbols": [
+        "client.SupabaseException"
+      ]
+    },
+    "description": "New class `client.SupabaseException` in supabase 1.0.0.",
+    "source_url": "https://files.pythonhosted.org/packages/8d/7b/42e5e27e4c9f4f5e24c0d3294b7448948b97963c69d634c664b7beaaae4b/supabase-1.0.0-py3-none-any.whl",
+    "source_excerpt": "supabase 0.7.1 (supabase-0.7.1-py3-none-any.whl): not defined\nsupabase 1.0.0 (supabase-1.0.0-py3-none-any.whl), supabase/client.py line 15: class SupabaseException(Exception) / def __init__(self, message: str)",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 9,
+    "fingerprint": "sha256:177b2e6ec90294492bea4d8f105c7bc258713180e2182ceead48cb220c3c8db4",
+    "api": "supabase/python-surface",
+    "version": "1.0.0",
+    "previous_version": "0.7.1",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "supabase",
+      "change": "added_symbol",
+      "symbols": [
+        "lib.auth_client.SyncClient"
+      ]
+    },
+    "description": "New class `lib.auth_client.SyncClient` in supabase 1.0.0.",
+    "source_url": "https://files.pythonhosted.org/packages/8d/7b/42e5e27e4c9f4f5e24c0d3294b7448948b97963c69d634c664b7beaaae4b/supabase-1.0.0-py3-none-any.whl",
+    "source_excerpt": "supabase 0.7.1 (supabase-0.7.1-py3-none-any.whl): not defined\nsupabase 1.0.0 (supabase-1.0.0-py3-none-any.whl), supabase/lib/auth_client.py line 9: class SyncClient(BaseClient)",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 10,
     "fingerprint": "sha256:2e8f57d805d1e6759157434c063fb8254be8f38523cc17e908d2089e4558c165",
     "api": "supabase/python-surface",
     "version": "1.0.0",
@@ -118,6 +234,29 @@
     },
     "description": "`lib.client_options.ClientOptions.replace` no longer takes the parameter `local_storage` in supabase 1.0.0: passing it raises a TypeError.",
     "migration_hint": "Stop passing `local_storage` to `lib.client_options.ClientOptions.replace`; its signature in 1.0.0 is quoted in the source excerpt.",
+    "source_url": "https://files.pythonhosted.org/packages/8d/7b/42e5e27e4c9f4f5e24c0d3294b7448948b97963c69d634c664b7beaaae4b/supabase-1.0.0-py3-none-any.whl",
+    "source_excerpt": "supabase 0.7.1 (supabase-0.7.1-py3-none-any.whl), supabase/lib/client_options.py line 42: def replace( self, schema: Optional[str] = None, headers: Optional[Dict[str, str]] = None, auto_refresh_token: Optional[bool] = None, persist_session: Optional[bool] = None, local_storage: Optional[SyncSupportedStorage] = None, realtime: Optional[Dict[str, Any]] = None, fetch: Optional[Callable] = None, timeout: Union[int, float, Timeout] = DEFAULT_POSTGREST_CLIENT_TIMEOUT, ) -> \"ClientOptions\"\nsupabase 1.0.0 (supabase-1.0.0-py3-none-any.whl), supabase/lib/client_options.py line 42: def replace( self, schema: Optional[str] = None, headers: Optional[Dict[str, str]] = None, auto_refresh_token: Optional[bool] = None, persist_session: Optional[bool] = None, storage: Optional[SyncSupportedStorage] = None, realtime: Optional[Dict[str, Any]] = None, fetch: Optional[Callable] = None, timeout: Union[int, float, Timeout] = DEFAULT_POSTGREST_CLIENT_TIMEOUT, ) -> \"ClientOptions\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 11,
+    "fingerprint": "sha256:7cb7775a55ca199aec03c7ed97ad3d275e40165fcba3a912f3f4bb809b8dc3a6",
+    "api": "supabase/python-surface",
+    "version": "1.0.0",
+    "previous_version": "0.7.1",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "supabase",
+      "change": "added_parameter",
+      "symbols": [
+        "lib.client_options.ClientOptions.replace"
+      ],
+      "parameter": "storage"
+    },
+    "description": "`lib.client_options.ClientOptions.replace` takes a new optional parameter `storage` in supabase 1.0.0.",
     "source_url": "https://files.pythonhosted.org/packages/8d/7b/42e5e27e4c9f4f5e24c0d3294b7448948b97963c69d634c664b7beaaae4b/supabase-1.0.0-py3-none-any.whl",
     "source_excerpt": "supabase 0.7.1 (supabase-0.7.1-py3-none-any.whl), supabase/lib/client_options.py line 42: def replace( self, schema: Optional[str] = None, headers: Optional[Dict[str, str]] = None, auto_refresh_token: Optional[bool] = None, persist_session: Optional[bool] = None, local_storage: Optional[SyncSupportedStorage] = None, realtime: Optional[Dict[str, Any]] = None, fetch: Optional[Callable] = None, timeout: Union[int, float, Timeout] = DEFAULT_POSTGREST_CLIENT_TIMEOUT, ) -> \"ClientOptions\"\nsupabase 1.0.0 (supabase-1.0.0-py3-none-any.whl), supabase/lib/client_options.py line 42: def replace( self, schema: Optional[str] = None, headers: Optional[Dict[str, str]] = None, auto_refresh_token: Optional[bool] = None, persist_session: Optional[bool] = None, storage: Optional[SyncSupportedStorage] = None, realtime: Optional[Dict[str, Any]] = None, fetch: Optional[Callable] = None, timeout: Union[int, float, Timeout] = DEFAULT_POSTGREST_CLIENT_TIMEOUT, ) -> \"ClientOptions\"",
     "confidence": 1,
