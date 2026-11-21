@@ -29,7 +29,8 @@ var saved = kittest.Pages{
 	wheel112: "testdata/openai-1.1.2-py3-none-any.trimmed.whl",
 }
 
-// pair lists the releases, reads 1.1.1 and 1.1.2 and extracts the pair.
+// pair lists the releases, reads 1.1.1 and 1.1.2 and extracts the pair, as
+// patch-it's hosted ingestion service does, into the test kit's store.
 func pair(t *testing.T) []event.Event {
 	t.Helper()
 	ctx, env := context.Background(), kittest.Env(t, saved)
@@ -46,22 +47,7 @@ func pair(t *testing.T) []event.Event {
 		t.Fatalf("versions %s", got)
 	}
 	last := versions.Pairs(vs)[1]
-	from, err := p.ReadAt(ctx, env, last[0])
-	if err != nil {
-		t.Fatal(err)
-	}
-	to, err := p.ReadAt(ctx, env, last[1])
-	if err != nil {
-		t.Fatal(err)
-	}
-	if to.SourceURL != wheel112 {
-		t.Errorf("source %s", to.SourceURL)
-	}
-	res, err := p.Extract(ctx, env, from, to)
-	if err != nil || len(res.Rejected) > 0 {
-		t.Fatalf("%v %v", err, res.Rejected)
-	}
-	return res.Events
+	return kittest.Versions(t, env, p, last[0], last[1])
 }
 
 // openai 1.1.2 renamed the misspelled AsssitantDeleted to AssistantDeleted,
@@ -72,7 +58,7 @@ func TestGolden(t *testing.T) {
 	got := pair(t)
 	kittest.Golden(t, "testdata/golden/openai-1.1.2.json", got)
 	for _, e := range got {
-		if e.PreviousVersion != "1.1.1" || e.Version != "1.1.2" || !strings.Contains(e.SourceExcerpt, "openai/types/beta/asssitant_deleted.py line ") {
+		if e.PreviousVersion != "1.1.1" || e.Version != "1.1.2" || e.SourceURL != wheel112 || !strings.Contains(e.SourceExcerpt, "openai/types/beta/asssitant_deleted.py line ") {
 			t.Errorf("%v: %s<-%s, excerpt %q", e.Subject.Symbols, e.Version, e.PreviousVersion, e.SourceExcerpt)
 		}
 	}
