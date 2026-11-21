@@ -2,6 +2,7 @@ package changelog
 
 import (
 	"context"
+	"errors"
 	"strings"
 	"testing"
 
@@ -93,5 +94,39 @@ func TestUnsureBulletsAreDropped(t *testing.T) {
 				t.Errorf("%s: drop %d is %q, want %q…", c.file.Package, i, drops[i].Bullet.Text, want)
 			}
 		}
+	}
+}
+
+// A Go module's events name the module as code imports it at that major.
+func TestAGoModuleIsNamedByItsMajor(t *testing.T) {
+	f := File{Package: "github.com/acme/acme-go", Ecosystem: "go"}
+	for release, want := range map[string]string{"73.0.0": "github.com/acme/acme-go/v73", "1.4.0": "github.com/acme/acme-go", "0.31.0": "github.com/acme/acme-go"} {
+		if got := f.At(release).installed(); got != want {
+			t.Errorf("%s: %s, want %s", release, got, want)
+		}
+	}
+}
+
+// A release's notes on GitHub are read whole: any heading level starts a
+// section, a code fence is skipped, and notes for another tag or none at
+// all are never read as "no breaking changes".
+func TestReleaseNotesAreReadWhole(t *testing.T) {
+	f := File{Package: "acme", Repo: "acme/acme", TagPrefix: "v", Notes: true}.At("2.0.0")
+	body := "## BREAKING CHANGES\\n\\n* `acme.old()` has been removed\\n\\n```\\n- `acme.example()` has been removed\\n```\\n\\n### Features\\n\\n* add `acme.new()`\\n"
+	_, fs, err := f.Read([]byte(`{"tag_name": "v2.0.0", "name": "v2.0.0", "body": "` + body + `"}`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(fs) != 1 || fs[0].Dropped != "" || strings.Join(fs[0].Change.Symbols, ",") != "acme.old" {
+		t.Errorf("findings %+v", fs)
+	}
+	if f.Cite() != "https://github.com/acme/acme/releases/tag/v2.0.0" || f.URL() != "https://api.github.com/repos/acme/acme/releases/tags/v2.0.0" {
+		t.Errorf("cite %s, url %s", f.Cite(), f.URL())
+	}
+	if _, _, err := f.Read([]byte(`{"tag_name": "v1.9.0", "body": "x"}`)); err == nil {
+		t.Error("another release's notes: want an error")
+	}
+	if _, _, err := f.Read([]byte(`{"tag_name": "v2.0.0", "body": ""}`)); !errors.Is(err, plugin.ErrNothingToRead) {
+		t.Errorf("no notes: %v, want plugin.ErrNothingToRead", err)
 	}
 }

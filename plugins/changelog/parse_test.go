@@ -61,6 +61,19 @@ func TestOnlyAPlainSentenceNamesItsSymbols(t *testing.T) {
 		{KindDeprecation, "Deprecated ``pkg.contrib.x`` module which will be removed in pkg v2.1.0 (#1)", "deprecation removed_symbol contrib.x"},
 		{KindMixed, "Removed `X`", "breaking removed_symbol X"},
 		{KindMixed, "Deprecated `Y`", "deprecation removed_symbol Y"},
+		// The SDK changelogs' shapes: a mark that makes a bullet breaking, and
+		// an area, issue or commit read past.
+		{KindNone, "⚠️ [#1914](https://x.test/1914) Remove deprecated `StripeObject.request()` method", "breaking removed_symbol StripeObject.request"},
+		{KindNone, "⚠️ Remove `RedirectUrl` from `LoginLinkCreateOptions`. The property was deprecated.", "breaking removed_symbol LoginLinkCreateOptions.RedirectUrl"},
+		{KindNone, "**[BREAKING]** Removed the attribute `default_branch_protected` from the resource `neon_project`.", "breaking removed_symbol neon_project.default_branch_protected"},
+		{KindNone, "feat(core)!: Remove `BaseClient` ([#17071](https://x.test/17071))", "breaking removed_symbol BaseClient"},
+		{KindBreaking, "**ssl:** The `Host`, `Status`, and `ValidationMethod` types have been removed from `pkg.types.ssl`.", "breaking removed_symbol types.ssl.Host,types.ssl.Status,types.ssl.ValidationMethod"},
+		{KindBreaking, "fc05013: Remove `Capture.Library` and `Exception.Library`. Set `$lib` instead.", "breaking removed_symbol Capture.Library,Exception.Library"},
+		{KindBreaking, "`octokit.users.listEmails()` has been renamed to `octokit.users.listEmailsForAuthenticated()`", "breaking renamed_symbol octokit.users.listEmails>octokit.users.listEmailsForAuthenticated"},
+		{KindBreaking, "`Redis#serverInfo` is removed. This field is never documented.", "breaking removed_symbol Redis.serverInfo"},
+		{KindDeprecation, "Tracing - Deprecates `ddtrace.filters.FilterRequestsOnUrl`.", "deprecation removed_symbol ddtrace.filters.FilterRequestsOnUrl"},
+		{SectionKind("Major Changes"), "Remove `X`", "breaking removed_symbol X"},
+		{SectionKind("⚠ BREAKING CHANGES"), "**api:** add support for new API version 2026-10-21", "drop"},
 		// Not plain: dropped.
 		{KindBreaking, "Drop support for Python 3.7. (#2813)", "drop"},
 		{KindBreaking, "Removed `limit_rules` from Stylesheet.apply", "drop"},

@@ -13,6 +13,7 @@ golden files under `golden/` are what the plugin stores from them
 
 | File | URL | Saved | License | Use |
 |---|---|---|---|---|
+| `versions/stripe-go-tags.json`, `versions/octokit-rest-releases.json` | https://api.github.com/repos/stripe/stripe-go/tags, https://api.github.com/repos/octokit/rest.js/releases (shape only) | written for the test, 2026-11-20 | not saved copies: a few real tag names and releases in the shape of GitHub's API (a pre-release, a draft and a tag of another series among them) | for the version-listing test only (tags for an ecosystem with no registry lister, releases for release notes); no golden reads them |
 | `pypi-urllib3-excerpt.json` | https://pypi.org/pypi/urllib3/json (shape only) | written for the test, 2026-11-20 | not a saved copy: four releases in the shape of PyPI's JSON API (`releases` → files with `upload_time_iso_8601`, `yanked`), dates approximate, a pre-release among them | for the version-listing test only (ListVersions, consecutive pairs); no golden reads it |
 
 ## JSON changelogs
