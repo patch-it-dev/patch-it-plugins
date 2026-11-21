@@ -1,0 +1,20 @@
+{
+  "info": {
+    "name": "textual",
+    "version": "8.2.7"
+  },
+  "urls": [
+    {
+      "filename": "textual-8.2.7-py3-none-any.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/a8/f5/c1e18bc0707300a0e90204343abbf7d7acd6fb7ebe03a6d4893b99a234b8/textual-8.2.7-py3-none-any.whl",
+      "yanked": false
+    },
+    {
+      "filename": "textual-8.2.7.tar.gz",
+      "packagetype": "sdist",
+      "url": "https://files.pythonhosted.org/packages/9b/7a/c519db0aba5024f86e71e9631810bfdd6866ed2c8695bd7fa34b90e7ef59/textual-8.2.7.tar.gz",
+      "yanked": false
+    }
+  ]
+}

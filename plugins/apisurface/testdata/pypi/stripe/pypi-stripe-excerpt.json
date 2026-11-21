@@ -1,0 +1,63 @@
+{
+  "info": {
+    "name": "stripe"
+  },
+  "releases": {
+    "15.4.0": [
+      {
+        "filename": "stripe-15.4.0-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-29T23:36:19.802451Z",
+        "yanked": false
+      },
+      {
+        "filename": "stripe-15.4.0.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-07-29T23:36:21.722514Z",
+        "yanked": false
+      }
+    ],
+    "15.5.0": [
+      {
+        "filename": "stripe-15.5.0-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-10T22:11:11.080533Z",
+        "yanked": false
+      },
+      {
+        "filename": "stripe-15.5.0.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-08-10T22:11:13.011344Z",
+        "yanked": false
+      }
+    ],
+    "15.6.2": [
+      {
+        "filename": "stripe-15.6.2-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-27T00:41:24.504711Z",
+        "yanked": false
+      },
+      {
+        "filename": "stripe-15.6.2.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-10-27T00:41:27.203786Z",
+        "yanked": false
+      }
+    ],
+    "16.0.0": [
+      {
+        "filename": "stripe-16.0.0-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-01T00:42:01.650495Z",
+        "yanked": false
+      },
+      {
+        "filename": "stripe-16.0.0.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-10-01T00:42:03.388384Z",
+        "yanked": false
+      }
+    ]
+  }
+}

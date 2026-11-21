@@ -26,8 +26,14 @@ func releases(ctx context.Context, repo string, keep func(string) bool) ([]plugi
 	return versions.GitHubReleases(ctx, github.Get, repo, keep)
 }
 
+// commits are the days a file changed, each read at the day's last commit
+// (Daily).
 func commits(ctx context.Context, repo, path string) ([]plugin.Version, error) {
-	return versions.GitHubCommits(ctx, github.Get, repo, path)
+	vs, err := versions.GitHubCommits(ctx, github.Get, repo, path)
+	if err != nil {
+		return nil, err
+	}
+	return Daily(vs), nil
 }
 
 // Versions are stripe/openapi's releases.
@@ -233,9 +239,9 @@ func (a Algolia) Versions(ctx context.Context) ([]plugin.Version, error) {
 	return out, nil
 }
 
-// Versions are the commits on appwrite/specs' default branch that changed
-// specs/, oldest first: the ID is the commit's date (Fetch's Version), the
-// Ref its SHA, read at the newest minor's directory.
+// Versions are the days appwrite/specs' default branch changed specs/,
+// oldest first, each at the day's last commit (Daily): the ID is the date
+// (Fetch's Version), the Ref the SHA, read at the newest minor's directory.
 func (a Appwrite) Versions(ctx context.Context) ([]plugin.Version, error) {
 	cs, err := versions.GitHubPages[struct {
 		SHA    string `json:"sha"`
@@ -258,7 +264,7 @@ func (a Appwrite) Versions(ctx context.Context) ([]plugin.Version, error) {
 		out = append(out, plugin.Version{ID: at.Format(time.DateOnly), Released: at, Ref: c.SHA, URL: c.URL})
 	}
 	slices.SortStableFunc(out, func(a, b plugin.Version) int { return a.Released.Compare(b.Released) })
-	return out, nil
+	return Daily(out), nil
 }
 
 var (
@@ -269,3 +275,18 @@ var (
 	_ Lister = Algolia{}
 	_ Lister = Appwrite{}
 )
+
+// Daily keeps one version per day of vs (oldest first, IDs dates, as
+// versions.GitHubCommits lists them): the day's last commit, so a spec
+// committed several times a day has one version per day, each ID once.
+func Daily(vs []plugin.Version) []plugin.Version {
+	var out []plugin.Version
+	for _, v := range vs {
+		if n := len(out); n > 0 && out[n-1].ID == v.ID {
+			out[n-1] = v
+			continue
+		}
+		out = append(out, v)
+	}
+	return out
+}

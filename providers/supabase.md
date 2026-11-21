@@ -42,5 +42,5 @@ Kind: `openapi` (`plugins/openapi`), with `adapter.Supabase`.
 - **A shutdown said only in words isn't an event.** On 2026-09-30 the `logs.all` description became "This endpoint has been removed and always responds with `410 Gone`", but the operation stayed in the spec. The diff sees no structural change.
 - **Removals Supabase didn't mark first aren't events,** even if the endpoint really went away.
 - **Only the Management API is covered.** The APIs most apps call (the Data API through PostgREST, Auth, Storage, Realtime) and the SDKs are not.
-- **Two spec commits on one day share a `version`.** It happened on four days in the history. The events stay distinct, because the operation is part of the fingerprint, but the second run's `previous_version` equals its `version`.
+- **Two spec commits on one day are one version** (four days in the history), read at the day's last commit: a change made and undone the same day isn't seen.
 - **The patch-it client can't place these events yet.** Their `version` is a date (`2026-06-29`), because the API has no version. The client's version check reads an `api_operation` version as a package version, so it needs the same rule for date-versioned API events that `cloudflare`'s need.

@@ -1,0 +1,350 @@
+{
+  "info": {
+    "name": "ddtrace",
+    "version": "4.12.3"
+  },
+  "urls": [
+    {
+      "filename": "ddtrace-4.12.3-cp310-cp310-macosx_14_0_arm64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/d7/18/90b574aa3c046bd9f4862b0353d8f8a42aeba504c601c3235bd8d91f057f/ddtrace-4.12.3-cp310-cp310-macosx_14_0_arm64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp310-cp310-macosx_14_0_x86_64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/37/09/85d11c03617f0be9e512634c471ae5e2d1033916df62786a78be462db266/ddtrace-4.12.3-cp310-cp310-macosx_14_0_x86_64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/2f/71/ab8d453bc5ecd8ebce03b1a3f3de6349dc52ea61956fe84e71e60ce39d39/ddtrace-4.12.3-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/1e/94/1c608b3915b66d8be5c2d4826d48eb2ddb69e9e3558fd72ba0b7223470b3/ddtrace-4.12.3-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp310-cp310-musllinux_1_2_aarch64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/c6/9f/f685f39e018c53bb0f2b3ac8d1c83de47137dd013908314d9f6269dd9075/ddtrace-4.12.3-cp310-cp310-musllinux_1_2_aarch64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp310-cp310-musllinux_1_2_x86_64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/2e/0f/295fd81f9e52d5d315ffab6894a9e2a04533056eaa62bb637eed75e0557b/ddtrace-4.12.3-cp310-cp310-musllinux_1_2_x86_64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp310-cp310-win32.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/b7/9c/ccb0df81738b72a988625bd9cf266ef2de5d5c3c55d7d2cfa8ba3f85fba3/ddtrace-4.12.3-cp310-cp310-win32.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp310-cp310-win_amd64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/e6/58/8975f2abe767af68c464f5ff9d1272b7fc8b355b89f862e26a9cd568f807/ddtrace-4.12.3-cp310-cp310-win_amd64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp311-cp311-macosx_14_0_arm64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/24/92/ff6c81bc8260fe882a68d9727442362f0b83d6974b6bde10dbe51c9eaa1d/ddtrace-4.12.3-cp311-cp311-macosx_14_0_arm64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp311-cp311-macosx_14_0_x86_64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/e5/37/6cd17c83efec4a5ed5c8a5d881a87ea33c74e797572caf24ac11d8d97600/ddtrace-4.12.3-cp311-cp311-macosx_14_0_x86_64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/71/8f/7d1ee9b87bdeb90d56eb29d61b813da8f249973e64f72c2b8a61f5021636/ddtrace-4.12.3-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/63/84/46d82c4bea87cf3d6516ec5429dcfca0ace8fd5e908674f1177ebb31d647/ddtrace-4.12.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp311-cp311-musllinux_1_2_aarch64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/22/00/843dc614b0f5aa2fa33ec1245f04cc2af3bc9654566d74795aaeaf5440e3/ddtrace-4.12.3-cp311-cp311-musllinux_1_2_aarch64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp311-cp311-musllinux_1_2_x86_64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/66/b7/0da6d05435e72e1a7790dfa9a76a5e1af2de18875cc3d8a01e0cae869f67/ddtrace-4.12.3-cp311-cp311-musllinux_1_2_x86_64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp311-cp311-win32.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/3b/4f/63253f132d19f95160574f06a429b3d3c8b27b49b319bd45f9ce00edb041/ddtrace-4.12.3-cp311-cp311-win32.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp311-cp311-win_amd64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/81/5f/5b2f7b1a75714a348e4e55fa051fdb3399819a473ba27ff9305c67ecc550/ddtrace-4.12.3-cp311-cp311-win_amd64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp311-cp311-win_arm64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/3c/2f/34cb50fb2411618707ae04dda79332d088487c48738749a00b89db4d50cd/ddtrace-4.12.3-cp311-cp311-win_arm64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp312-cp312-macosx_14_0_arm64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/e6/bc/d3a474e6a5379da25ac0bb18e0ef6b51e203948a178d57abd19bb56a20a7/ddtrace-4.12.3-cp312-cp312-macosx_14_0_arm64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp312-cp312-macosx_14_0_x86_64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/0c/9b/aa40fa4dbcd2309f6cb838c959e06d220cc2345dc8ef6d4ae81b48529558/ddtrace-4.12.3-cp312-cp312-macosx_14_0_x86_64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/6c/dd/c9a7d107b428b1f9beedc87f704913b9536dd9ce43185ec57d1e8ea7597d/ddtrace-4.12.3-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/71/68/0d303278ddbcd064f10ece4fa07fc202eedea4eeb483907067a976e2361e/ddtrace-4.12.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp312-cp312-musllinux_1_2_aarch64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/f9/29/dc87e8ea3670e6fa06b9236420ae94d3f673a378efe14253feec02e02664/ddtrace-4.12.3-cp312-cp312-musllinux_1_2_aarch64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp312-cp312-musllinux_1_2_x86_64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/65/e0/1cca2ff5cd01d252fd771b5b3812c151ec3e3cd0ef09e3a38bfc4e4eed9d/ddtrace-4.12.3-cp312-cp312-musllinux_1_2_x86_64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp312-cp312-win32.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/8b/25/1aaaa0a2f20ebb7f1812755855395149778f03fd45f85a8cc0e44c849332/ddtrace-4.12.3-cp312-cp312-win32.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp312-cp312-win_amd64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/92/50/fb4499bd3054d2ef13ce5a6f00ff7cdf9571d4e2cba777a2899853bcebea/ddtrace-4.12.3-cp312-cp312-win_amd64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp312-cp312-win_arm64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/78/d7/826860fb79eb5abcc6a1d3e1bc4e9aa57f5c13148105271cdaf3b71e08e2/ddtrace-4.12.3-cp312-cp312-win_arm64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp313-cp313-macosx_14_0_arm64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/69/63/96d07df6efbb2a78bc9cc0ef7b4a8e5bd32f2999bd4c87869d9c7faa63b7/ddtrace-4.12.3-cp313-cp313-macosx_14_0_arm64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp313-cp313-macosx_14_0_x86_64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/4b/ff/48db89bd7c619b6d915a15001665fb0a709f6471de8fad9139dc578d3c5c/ddtrace-4.12.3-cp313-cp313-macosx_14_0_x86_64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/63/09/a8a82113d29ae445d41ff97fe18eb4965e52bd4d35b75c85592965125c94/ddtrace-4.12.3-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/0c/ad/7325507b79f2ba61453156fc429ded605350b66a17e5ee4b31970aa61c32/ddtrace-4.12.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp313-cp313-musllinux_1_2_aarch64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/f3/e6/840ec1338d32c3a80eaa727c31934e2ca6081c49a41d344505b4b166ddf2/ddtrace-4.12.3-cp313-cp313-musllinux_1_2_aarch64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp313-cp313-musllinux_1_2_x86_64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/6c/1a/a712f0325fd7374581ff1bd29619bd04acf3f112a49d79d55694a847d198/ddtrace-4.12.3-cp313-cp313-musllinux_1_2_x86_64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp313-cp313-win32.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/0c/34/f7c7e55eaa948e675dfa0d5642b66f8071ef9414a9ed6be07c9a46146181/ddtrace-4.12.3-cp313-cp313-win32.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp313-cp313-win_amd64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/6e/ac/0911c26cec9e155ae98131877387f99433d3328ceb5aaa37bac40d970987/ddtrace-4.12.3-cp313-cp313-win_amd64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp313-cp313-win_arm64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/b0/ab/16fe8ecbb013bef50fb65968f4e183ffc3bbfd60028fa7571394652d292a/ddtrace-4.12.3-cp313-cp313-win_arm64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp314-cp314-macosx_14_0_arm64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/88/29/364686ef010b97c691be015c624d9663a298756f04d54726691c98758b6a/ddtrace-4.12.3-cp314-cp314-macosx_14_0_arm64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp314-cp314-macosx_14_0_x86_64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/e0/c4/f71ca43c67fbe4e52bd41dc0a32cd36b7a4be163868796f81d20f2f24261/ddtrace-4.12.3-cp314-cp314-macosx_14_0_x86_64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/63/8a/8396fbe7ef9afa12f2175099a5f356eab64a0dcd56497c30f866c5a70e8f/ddtrace-4.12.3-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/a2/33/f5a252fc5cef0f89a4546bb9bbaf92786ae63972e40cf834a5503dc9cac5/ddtrace-4.12.3-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp314-cp314-musllinux_1_2_aarch64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/6e/07/0eb2f6794595b74ab6e950c539344c40d1c6737b738846a7481122e8a33c/ddtrace-4.12.3-cp314-cp314-musllinux_1_2_aarch64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp314-cp314-musllinux_1_2_x86_64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/0c/45/4c8d8bc507a05dc0d6abfa31037648ae0d68d390aad201f878e8d4ff7223/ddtrace-4.12.3-cp314-cp314-musllinux_1_2_x86_64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp314-cp314-win32.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/fb/b8/8a8a630294cdb705ec848c41c220f9fcb9751e943f93e3305b6762e4dd74/ddtrace-4.12.3-cp314-cp314-win32.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp314-cp314-win_amd64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/5c/69/50965ff0b24067b9f467094f5810f5a5200a817e015490cfd574ed7a79f9/ddtrace-4.12.3-cp314-cp314-win_amd64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp314-cp314-win_arm64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/82/fc/59d38433b8a0976ab5a92da72d4f9cd6c740830099b635128c61caed28c2/ddtrace-4.12.3-cp314-cp314-win_arm64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp315-cp315-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/6f/8c/1e696778faa49ccb9fc22ea7349323c8d037479bf061974f4cd3d6016bf7/ddtrace-4.12.3-cp315-cp315-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp315-cp315-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/aa/fe/af07c44113c81b3c790dbdd43a0661ab5742e7a722eeffde1c5233587aa6/ddtrace-4.12.3-cp315-cp315-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp315-cp315-musllinux_1_2_aarch64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/ad/34/9aeb685033d136ec70ac6e8dc1e8d6c3099feb5084bce97e6a5a48f0b8c6/ddtrace-4.12.3-cp315-cp315-musllinux_1_2_aarch64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp315-cp315-musllinux_1_2_x86_64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/a7/32/b6e1160c6b9a82fcd40cad8648bae5a7366c20c89ab97db52d535057fdfc/ddtrace-4.12.3-cp315-cp315-musllinux_1_2_x86_64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp39-cp39-macosx_14_0_arm64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/f3/34/e7c515f9c4859662a0ad04b047e3ed84a710c1affe8e38515ab28803bc8a/ddtrace-4.12.3-cp39-cp39-macosx_14_0_arm64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp39-cp39-macosx_14_0_x86_64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/58/c3/a920f60214dc423eb9be5e4e488909790583ee56871416459c330cc0f07c/ddtrace-4.12.3-cp39-cp39-macosx_14_0_x86_64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp39-cp39-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/6f/69/996e3b6635e62b4b19204a93cce1a7f0d6091162504331b11992b0a6ec27/ddtrace-4.12.3-cp39-cp39-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/07/77/d55510e1cca152f6ef87ec10840f303e0ef8863144841e5c45c289ff64eb/ddtrace-4.12.3-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp39-cp39-musllinux_1_2_aarch64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/8c/ac/0cd9925246d27f2748723cab1af4e4d2a7b36ce4a07540c9a265c5f9af9c/ddtrace-4.12.3-cp39-cp39-musllinux_1_2_aarch64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp39-cp39-musllinux_1_2_x86_64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/91/6a/18a1c3e88dbca26a53b2a4ecf4c2b70adf27fa48cdb71e9be399f3f2a844/ddtrace-4.12.3-cp39-cp39-musllinux_1_2_x86_64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp39-cp39-win32.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/04/ed/fe4fb0dac82dde0e93ac30e6c32bc788f35c7083c8bff89b2c0b4e92631a/ddtrace-4.12.3-cp39-cp39-win32.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3-cp39-cp39-win_amd64.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/76/27/0491e5e1b5ce665d0ac3293b2d4132049258ab0280f98ae8489475643b87/ddtrace-4.12.3-cp39-cp39-win_amd64.whl",
+      "yanked": false
+    },
+    {
+      "filename": "ddtrace-4.12.3.tar.gz",
+      "packagetype": "sdist",
+      "url": "https://files.pythonhosted.org/packages/6e/1a/52429a8eb4ff7004a043c9bfe00aa72801b6ecf6d5a95977301bef67c5f7/ddtrace-4.12.3.tar.gz",
+      "yanked": false
+    }
+  ]
+}

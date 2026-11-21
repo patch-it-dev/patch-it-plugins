@@ -1,0 +1,7 @@
+{
+  "name": "@redis/client",
+  "version": "5.0.0",
+  "dist": {
+    "tarball": "https://registry.npmjs.org/@redis/client/-/client-5.0.0.tgz"
+  }
+}

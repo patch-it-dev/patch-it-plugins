@@ -1,0 +1,49 @@
+{
+  "info": {
+    "name": "algoliasearch"
+  },
+  "releases": {
+    "4.44.1": [
+      {
+        "filename": "algoliasearch-4.44.1-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-23T12:45:29.085784Z",
+        "yanked": false
+      },
+      {
+        "filename": "algoliasearch-4.44.1.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-06-23T12:45:31.213741Z",
+        "yanked": false
+      }
+    ],
+    "4.44.3": [
+      {
+        "filename": "algoliasearch-4.44.3-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-08T08:23:19.671979Z",
+        "yanked": false
+      },
+      {
+        "filename": "algoliasearch-4.44.3.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-07-08T08:23:21.596935Z",
+        "yanked": false
+      }
+    ],
+    "4.44.4": [
+      {
+        "filename": "algoliasearch-4.44.4-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-15T15:16:28.967917Z",
+        "yanked": false
+      },
+      {
+        "filename": "algoliasearch-4.44.4.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-07-15T15:16:30.545400Z",
+        "yanked": false
+      }
+    ]
+  }
+}

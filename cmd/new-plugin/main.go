@@ -176,6 +176,9 @@ func (o Options) template() (string, error) {
 		return o.Kind, nil
 	}
 	r := cmp(o.Reader, defaultReaders[o.Kind])
+	if o.Kind == "apisurface" && o.Reader == "" && slices.ContainsFunc(o.Packages, func(p string) bool { return strings.HasPrefix(p, "npm:") }) {
+		r = "npm" // the package's ecosystem picks the reader
+	}
 	if _, ok := formats[o.Kind+"/"+r]; !ok {
 		return "", fmt.Errorf("--reader %q: kind %s's readers are %s", o.Reader, o.Kind, readerHelp())
 	}
@@ -192,10 +195,10 @@ var (
 
 // data is what the templates fill in.
 type data struct {
-	ID, Name, Ident, Lower, ProviderID, Provider, Source, File, Format, Kind, Module, PyPI string
-	Slug                                                                                   string // the provider, lowercase: a model subject's provider
-	SourceFile, DropFile, PluginOf, Ingest, Drop                                           string
-	Imports                                                                                []string
+	ID, Name, Ident, Lower, ProviderID, Provider, Source, File, Format, Kind, Module, PyPI, NPM string
+	Slug                                                                                        string // the provider, lowercase: a model subject's provider
+	SourceFile, DropFile, PluginOf, Ingest, Drop                                                string
+	Imports                                                                                     []string
 }
 
 // Run scaffolds the source, or changes nothing and says why.
@@ -233,7 +236,7 @@ func Run(o Options, out io.Writer) error {
 		}
 	}
 	if len(o.Packages) == 0 && f.kind == "apisurface" {
-		o.Packages = []string{"pypi:" + o.ProviderID}
+		o.Packages = []string{strings.TrimPrefix(o.tmpl, "apisurface/") + ":" + o.ProviderID}
 	}
 	for _, p := range o.Packages {
 		eco, name, ok := strings.Cut(p, ":")
@@ -265,6 +268,13 @@ func Run(o Options, out io.Writer) error {
 	for _, p := range o.Packages {
 		if name, ok := strings.CutPrefix(p, "pypi:"); ok {
 			d.PyPI = name
+			break
+		}
+	}
+	d.NPM = o.ProviderID
+	for _, p := range o.Packages {
+		if name, ok := strings.CutPrefix(p, "npm:"); ok {
+			d.NPM = name
 			break
 		}
 	}

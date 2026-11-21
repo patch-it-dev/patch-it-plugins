@@ -1,0 +1,17 @@
+openapi: 3.1.0
+info:
+  title: OpenAI API
+  description: The OpenAI REST API. Please see
+    https://platform.openai.com/docs/api-reference for more details.
+  version: 2.3.0
+  termsOfService: https://openai.com/policies/terms-of-use
+  contact:
+    name: OpenAI Support
+    url: https://help.openai.com/
+  license:
+    name: MIT
+    identifier: MIT
+servers:
+  - url: https://api.openai.com/v1
+components:
+  schemas:

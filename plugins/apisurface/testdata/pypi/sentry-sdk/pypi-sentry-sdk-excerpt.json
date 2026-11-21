@@ -1,0 +1,63 @@
+{
+  "info": {
+    "name": "sentry-sdk"
+  },
+  "releases": {
+    "2.67.1": [
+      {
+        "filename": "sentry_sdk-2.67.1-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-10T13:05:54.213856Z",
+        "yanked": false
+      },
+      {
+        "filename": "sentry_sdk-2.67.1.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-08-10T13:05:55.892057Z",
+        "yanked": false
+      }
+    ],
+    "2.68.0": [
+      {
+        "filename": "sentry_sdk-2.68.0-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-08-13T09:06:19.735449Z",
+        "yanked": false
+      },
+      {
+        "filename": "sentry_sdk-2.68.0.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-08-13T09:06:21.268768Z",
+        "yanked": false
+      }
+    ],
+    "2.73.0": [
+      {
+        "filename": "sentry_sdk-2.73.0-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-10-22T09:08:47.880164Z",
+        "yanked": false
+      },
+      {
+        "filename": "sentry_sdk-2.73.0.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-10-22T09:08:49.630391Z",
+        "yanked": false
+      }
+    ],
+    "2.74.0": [
+      {
+        "filename": "sentry_sdk-2.74.0-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-11-05T14:50:25.767248Z",
+        "yanked": false
+      },
+      {
+        "filename": "sentry_sdk-2.74.0.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-11-05T14:50:27.444387Z",
+        "yanked": false
+      }
+    ]
+  }
+}

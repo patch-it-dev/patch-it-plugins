@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:8ad70579778a2e9058ff551ad659ce8f7168e3457255b4f48d3bfa1e0309ecdd",
+    "api": "neon/serverless-surface",
+    "version": "1.0.0",
+    "previous_version": "0.10.4",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@neondatabase/serverless",
+      "change": "removed_symbol",
+      "symbols": [
+        "native"
+      ]
+    },
+    "description": "The export `native` was removed in @neondatabase/serverless 1.0.0: code using it fails.",
+    "migration_hint": "@neondatabase/serverless 1.0.0 has no `native`: see the package's release notes for what replaces it.",
+    "source_url": "https://registry.npmjs.org/@neondatabase/serverless/-/serverless-1.0.0.tgz",
+    "source_excerpt": "@neondatabase/serverless 0.10.4 (serverless-0.10.4.tgz), index.d.mts line 8: export { native } from \"pg\"\n@neondatabase/serverless 1.0.0 (serverless-1.0.0.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

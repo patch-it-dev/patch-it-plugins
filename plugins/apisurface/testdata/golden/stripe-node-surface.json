@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:76de4b15e9c0f3a02f420e1848e6e2ce518f2575fdd92eda8027b31ce884e2de",
+    "api": "stripe/node-surface",
+    "version": "23.0.0",
+    "previous_version": "22.6.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "stripe",
+      "change": "removed_symbol",
+      "symbols": [
+        "Stripe.ErrorType"
+      ]
+    },
+    "description": "The namespace `Stripe.ErrorType` was removed in stripe 23.0.0: code using it fails.",
+    "migration_hint": "stripe 23.0.0 has no `Stripe.ErrorType`: see the package's release notes for what replaces it.",
+    "source_url": "https://registry.npmjs.org/stripe/-/stripe-23.0.0.tgz",
+    "source_excerpt": "stripe 22.6.2 (stripe-22.6.2.tgz), esm/stripe.esm.node.d.ts line 482: namespace ErrorType\nstripe 23.0.0 (stripe-23.0.0.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:b3ac4dd442c1fa7f0a8fd743cf940c0dd57d440a50924a91d6a9fc6ce6ed6cfe",
+    "api": "stripe/node-surface",
+    "version": "23.0.0",
+    "previous_version": "22.6.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "stripe",
+      "change": "removed_symbol",
+      "symbols": [
+        "Stripe.constructEventWithoutVerification"
+      ]
+    },
+    "description": "The method `Stripe.constructEventWithoutVerification` was removed in stripe 23.0.0: code using it fails.",
+    "migration_hint": "stripe 23.0.0 has no `Stripe.constructEventWithoutVerification`: see the package's release notes for what replaces it.",
+    "source_url": "https://registry.npmjs.org/stripe/-/stripe-23.0.0.tgz",
+    "source_excerpt": "stripe 22.6.2 (stripe-22.6.2.tgz), esm/stripe.esm.node.d.ts line 347: constructEventWithoutVerification(payload: string): Event\nstripe 23.0.0 (stripe-23.0.0.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

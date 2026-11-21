@@ -1,0 +1,20 @@
+{
+  "info": {
+    "name": "redis",
+    "version": "7.4.1"
+  },
+  "urls": [
+    {
+      "filename": "redis-7.4.1-py3-none-any.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/4a/2e/2677f3f93dae0497e7e33b6637302e7f3744efc553f34231183e32584885/redis-7.4.1-py3-none-any.whl",
+      "yanked": false
+    },
+    {
+      "filename": "redis-7.4.1.tar.gz",
+      "packagetype": "sdist",
+      "url": "https://files.pythonhosted.org/packages/51/93/05e7d4a65285066a74f48697f9b9cde5cfce71398033d69ed83c3d98f5c9/redis-7.4.1.tar.gz",
+      "yanked": false
+    }
+  ]
+}

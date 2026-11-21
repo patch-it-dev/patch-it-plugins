@@ -1,0 +1,63 @@
+{
+  "info": {
+    "name": "google-genai"
+  },
+  "releases": {
+    "0.8.0": [
+      {
+        "filename": "google_genai-0.8.0-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-01-30T23:25:26.272578Z",
+        "yanked": false
+      },
+      {
+        "filename": "google_genai-0.8.0.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2025-01-30T23:25:28.291157Z",
+        "yanked": false
+      }
+    ],
+    "1.0.0": [
+      {
+        "filename": "google_genai-1.0.0-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-02-05T15:09:19.498658Z",
+        "yanked": false
+      },
+      {
+        "filename": "google_genai-1.0.0.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2025-02-05T15:09:20.899221Z",
+        "yanked": false
+      }
+    ],
+    "3.3.0": [
+      {
+        "filename": "google_genai-3.3.0-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-11-12T19:56:59.174240Z",
+        "yanked": false
+      },
+      {
+        "filename": "google_genai-3.3.0.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-11-12T19:57:01.020137Z",
+        "yanked": false
+      }
+    ],
+    "3.4.0": [
+      {
+        "filename": "google_genai-3.4.0-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-11-16T21:45:11.203522Z",
+        "yanked": false
+      },
+      {
+        "filename": "google_genai-3.4.0.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-11-16T21:45:13.063902Z",
+        "yanked": false
+      }
+    ]
+  }
+}

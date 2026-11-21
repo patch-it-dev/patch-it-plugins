@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:87c811b15734f3d780657fa1ca375a4a7f586daa1d6290e3aa985eec0b28df46",
+    "api": "supabase/js-surface",
+    "version": "2.0.0",
+    "previous_version": "1.35.7",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@supabase/supabase-js",
+      "change": "removed_symbol",
+      "symbols": [
+        "SupabaseClient.getSubscriptions"
+      ]
+    },
+    "description": "The method `SupabaseClient.getSubscriptions` was removed in @supabase/supabase-js 2.0.0: code using it fails.",
+    "migration_hint": "@supabase/supabase-js 2.0.0 has no `SupabaseClient.getSubscriptions`: see the package's release notes for what replaces it.",
+    "source_url": "https://registry.npmjs.org/@supabase/supabase-js/-/supabase-js-2.0.0.tgz",
+    "source_excerpt": "@supabase/supabase-js 1.35.7 (supabase-js-1.35.7.tgz), dist/module/SupabaseClient.d.ts line 100: getSubscriptions(): RealtimeSubscription[]\n@supabase/supabase-js 2.0.0 (supabase-js-2.0.0.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:9e744cb3c8fd5836ac1a51a6d9993cc748ca2784f6a95283c1f75fcfe4e23f5d",
+    "api": "supabase/js-surface",
+    "version": "2.0.0",
+    "previous_version": "1.35.7",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@supabase/supabase-js",
+      "change": "removed_symbol",
+      "symbols": [
+        "SupabaseClient.removeAllSubscriptions"
+      ]
+    },
+    "description": "The method `SupabaseClient.removeAllSubscriptions` was removed in @supabase/supabase-js 2.0.0: code using it fails.",
+    "migration_hint": "@supabase/supabase-js 2.0.0 has no `SupabaseClient.removeAllSubscriptions`: see the package's release notes for what replaces it.",
+    "source_url": "https://registry.npmjs.org/@supabase/supabase-js/-/supabase-js-2.0.0.tgz",
+    "source_excerpt": "@supabase/supabase-js 1.35.7 (supabase-js-1.35.7.tgz), dist/module/SupabaseClient.d.ts line 78: removeAllSubscriptions(): Promise<{ data: { subscription: RealtimeSubscription; }; error: Error | null; }[]>\n@supabase/supabase-js 2.0.0 (supabase-js-2.0.0.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:2f76e317aca4dd879a2a042a376c329d31432c0f59a74996661f61acaaa724ab",
+    "api": "supabase/js-surface",
+    "version": "2.0.0",
+    "previous_version": "1.35.7",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@supabase/supabase-js",
+      "change": "removed_symbol",
+      "symbols": [
+        "SupabaseClient.removeSubscription"
+      ]
+    },
+    "description": "The method `SupabaseClient.removeSubscription` was removed in @supabase/supabase-js 2.0.0: code using it fails.",
+    "migration_hint": "@supabase/supabase-js 2.0.0 has no `SupabaseClient.removeSubscription`: see the package's release notes for what replaces it.",
+    "source_url": "https://registry.npmjs.org/@supabase/supabase-js/-/supabase-js-2.0.0.tgz",
+    "source_excerpt": "@supabase/supabase-js 1.35.7 (supabase-js-1.35.7.tgz), dist/module/SupabaseClient.d.ts line 89: removeSubscription(subscription: RealtimeSubscription): Promise<{ data: { openSubscriptions: number; }; error: Error | null; }>\n@supabase/supabase-js 2.0.0 (supabase-js-2.0.0.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

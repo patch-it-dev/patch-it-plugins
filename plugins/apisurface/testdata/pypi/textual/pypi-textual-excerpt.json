@@ -1,0 +1,49 @@
+{
+  "info": {
+    "name": "textual"
+  },
+  "releases": {
+    "8.2.5": [
+      {
+        "filename": "textual-8.2.5-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-04-30T08:03:01.421544Z",
+        "yanked": false
+      },
+      {
+        "filename": "textual-8.2.5.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-04-30T08:02:58.956419Z",
+        "yanked": false
+      }
+    ],
+    "8.2.6": [
+      {
+        "filename": "textual-8.2.6-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-13T09:56:14.687225Z",
+        "yanked": false
+      },
+      {
+        "filename": "textual-8.2.6.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-05-13T09:56:12.281987Z",
+        "yanked": false
+      }
+    ],
+    "8.2.7": [
+      {
+        "filename": "textual-8.2.7-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-19T10:52:51.773269Z",
+        "yanked": false
+      },
+      {
+        "filename": "textual-8.2.7.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-05-19T10:52:49.531168Z",
+        "yanked": false
+      }
+    ]
+  }
+}

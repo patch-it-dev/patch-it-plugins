@@ -70,13 +70,32 @@ type module struct {
 	imports map[string][2]string // local name -> {module, name} from "from M import name as local"
 	stars   []string             // modules of "from M import *"
 	classes map[string]*Class    // module-level classes by name
+	bound   map[string]bool      // every name bound at the top level
+	extStar bool                 // a "from M import *" from outside the package
 }
+
+// Binding is what one public module binds at its top level: every name
+// (classes and functions, assignments and annotations, imports from
+// anywhere), and Star when names can't all be listed: it star-imports a
+// module outside the package (or not in the release's files), or defines a
+// module-level __getattr__.
+type Binding struct {
+	Names []string `json:"names,omitempty"`
+	Star  bool     `json:"star,omitempty"`
+}
+
+// Bindings are the public modules' Bindings by module name ("acme.client"):
+// what tells a class or function that is gone from a module's surface from
+// a name the module still binds (an alias, a re-export, an import), which
+// code can still import.
+type Bindings map[string]Binding
 
 var (
 	defLine   = regexp.MustCompile(`^(?:async\s+)?def\s+([A-Za-z_]\w*)\s*\(`)
 	classLine = regexp.MustCompile(`^class\s+([A-Za-z_]\w*)\s*[(:]`)
 	allLine   = regexp.MustCompile(`^__all__\s*(?::[^=]*)?=\s*[\[(](.*)[\])]\s*$`)
 	fromLine  = regexp.MustCompile(`^from\s+(\.*[\w.]*)\s+import\s+(.+)$`)
+	plainImp  = regexp.MustCompile(`^import\s+(.+)$`)
 	strLit    = regexp.MustCompile(`^[rRuU]?(?:"([^"\\]*)"|'([^'\\]*)')$`)
 	name      = regexp.MustCompile(`^[A-Za-z_]\w*$`)
 	spaces    = regexp.MustCompile(`\s+`)
@@ -126,6 +145,47 @@ func ReadClasses(files []File) Classes {
 		slices.Sort(c.Bases)
 		slices.Sort(c.Members)
 		out[n] = *c
+	}
+	return out
+}
+
+// ReadBindings is the package's Bindings: every public module's top-level
+// names. A star import from another module of the package adds that
+// module's public names.
+func ReadBindings(files []File) Bindings {
+	mods := parseAll(files)
+	out := Bindings{}
+	for _, m := range mods {
+		if private(m.name) {
+			continue
+		}
+		// A module-level __getattr__ (PEP 562) can hand out any name.
+		b := Binding{Star: m.extStar || m.bound["__getattr__"]}
+		names := map[string]bool{}
+		for n := range m.bound {
+			if !strings.HasPrefix(n, "_") {
+				names[n] = true
+			}
+		}
+		for _, st := range m.stars {
+			t, ok := mods[st]
+			if !ok {
+				b.Star = true
+				continue
+			}
+			if t != m {
+				for _, n := range t.public(mods) {
+					names[n] = true
+				}
+			}
+		}
+		for n := range names {
+			b.Names = append(b.Names, n)
+		}
+		slices.Sort(b.Names)
+		if len(b.Names) > 0 || b.Star {
+			out[m.name] = b
+		}
 	}
 	return out
 }
@@ -203,10 +263,11 @@ func moduleName(p string) string {
 	return strings.ReplaceAll(p, "/", ".")
 }
 
-// private is a module with a part starting with "_", or a test module.
+// private is a module with a part starting with "_" or named internal or
+// vendor (vendored code), or a test module.
 func private(mod string) bool {
 	for _, part := range strings.Split(mod, ".") {
-		if strings.HasPrefix(part, "_") || part == "tests" || part == "test" || strings.HasPrefix(part, "test_") {
+		if strings.HasPrefix(part, "_") || part == "internal" || part == "vendor" || part == "tests" || part == "test" || strings.HasPrefix(part, "test_") {
 			return true
 		}
 	}
@@ -232,18 +293,20 @@ func (m *module) public(mods map[string]*module) []string {
 		}
 	}
 	// Imported names are the package's API only where a package says so:
-	// its __init__ (re-exports) or __all__. Elsewhere an import is the
-	// module's own business.
-	if !m.isInit() {
-		return out
-	}
-	locals := make([]string, 0, len(m.imports))
-	for n := range m.imports {
-		locals = append(locals, n)
-	}
-	slices.Sort(locals)
-	for _, n := range locals {
-		add(n)
+	// its __init__ (re-exports from its own modules), __all__, or a star
+	// import, which exists to re-export ("from . import *"). Elsewhere an
+	// import is the module's own business.
+	if m.isInit() {
+		locals := make([]string, 0, len(m.imports))
+		for n, imp := range m.imports {
+			if imp[0] == m.name || strings.HasPrefix(imp[0], m.name+".") {
+				locals = append(locals, n) // from its own modules: a re-export
+			}
+		}
+		slices.Sort(locals)
+		for _, n := range locals {
+			add(n)
+		}
 	}
 	for _, s := range m.stars {
 		if t, ok := mods[s]; ok && t != m {
@@ -314,7 +377,7 @@ type block struct {
 
 // parse reads one file's definitions, __all__ and imports.
 func parse(f File) *module {
-	m := &module{name: moduleName(f.Path), file: f.Path, defs: map[string]Symbol{}, imports: map[string][2]string{}, classes: map[string]*Class{}}
+	m := &module{name: moduleName(f.Path), file: f.Path, defs: map[string]Symbol{}, imports: map[string][2]string{}, classes: map[string]*Class{}, bound: map[string]bool{}}
 	var stack []block
 	var decorators []string
 	for _, l := range logicalLines(f.Text) {
@@ -350,6 +413,9 @@ func parse(f File) *module {
 			if n != "" {
 				c.Members = appendNew(c.Members, n)
 			}
+		}
+		if parent == "" && !inDef {
+			m.bind(t)
 		}
 		switch {
 		case strings.HasPrefix(t, "@"):
@@ -399,8 +465,51 @@ func parse(f File) *module {
 	return m
 }
 
+// bind records the names a top-level line binds: a def or class, an
+// assignment or annotation, an import of any module.
+func (m *module) bind(t string) {
+	switch {
+	case defLine.MatchString(t):
+		m.bound[defLine.FindStringSubmatch(t)[1]] = true
+	case classLine.MatchString(t):
+		m.bound[classLine.FindStringSubmatch(t)[1]] = true
+	case fromLine.MatchString(t):
+		fm := fromLine.FindStringSubmatch(t)
+		names := strings.TrimSpace(strings.Trim(strings.TrimSpace(fm[2]), "()"))
+		if names == "*" {
+			if absolute(m, fm[1]) == "" {
+				m.extStar = true
+			}
+			return
+		}
+		for _, item := range splitTop(names, ',') {
+			f := strings.Fields(item)
+			switch {
+			case len(f) == 1 && name.MatchString(f[0]):
+				m.bound[f[0]] = true
+			case len(f) == 3 && f[1] == "as" && name.MatchString(f[2]):
+				m.bound[f[2]] = true
+			}
+		}
+	case plainImp.MatchString(t):
+		for _, item := range splitTop(plainImp.FindStringSubmatch(t)[1], ',') {
+			f := strings.Fields(item)
+			switch {
+			case len(f) == 1:
+				m.bound[strings.SplitN(f[0], ".", 2)[0]] = true
+			case len(f) == 3 && f[1] == "as" && name.MatchString(f[2]):
+				m.bound[f[2]] = true
+			}
+		}
+	case attrLine.MatchString(t) && !keywords[attrLine.FindStringSubmatch(t)[1]]:
+		m.bound[attrLine.FindStringSubmatch(t)[1]] = true
+	}
+}
+
 // addDef records a function, or a method of a module-level class; a
-// class's __init__ becomes the class's own parameters.
+// class's __init__ becomes the class's own parameters. A property's setter
+// or deleter isn't recorded (the getter is the symbol), and a property's
+// parameters aren't read: callers never pass them.
 func (m *module) addDef(path, parent string, l line, text string, decorators []string) {
 	n := path[strings.LastIndex(path, ".")+1:]
 	params, ok := params(text)
@@ -421,6 +530,16 @@ func (m *module) addDef(path, parent string, l line, text string, decorators []s
 	}
 	if strings.HasPrefix(n, "_") {
 		return
+	}
+	if slices.ContainsFunc(decorators, func(d string) bool {
+		return strings.HasSuffix(d, ".setter") || strings.HasSuffix(d, ".deleter")
+	}) {
+		return
+	}
+	if slices.ContainsFunc(decorators, func(d string) bool {
+		return d == "property" || d == "cached_property" || strings.HasSuffix(d, ".cached_property")
+	}) {
+		params = nil
 	}
 	kind := "function"
 	if parent != "" {

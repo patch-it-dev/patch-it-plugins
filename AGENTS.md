@@ -61,7 +61,7 @@ core/event/            the change event of patch-it's contract: types, fingerpri
 core/diff/ core/normalize/ core/hint/   the OpenAPI diff engine and its helpers
 plugins/<kind>/        one package per kind, with its providers: openapi (+ adapter/, one spec adapter
                        per provider), notices (+ retire/, feed/, eol/), migrationguide (+ sdkguide/,
-                       members/), changelog (Markdown, RST, GitHub release notes or JSON), catalog, apisurface (+ pysurface/);
+                       members/), changelog (Markdown, RST, GitHub release notes or JSON), catalog, apisurface (+ pysurface/, dtsurface/);
                        plugins/all imports every one
 cmd/list-plugins/      prints the list from the registry (make plugins); internal/pluginlist/ is its logic
 cmd/new-plugin/        scaffolds a provider's source on a kind (make new-plugin ARGS=...; go run ./cmd/new-plugin --help)

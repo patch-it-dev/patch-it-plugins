@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:bf859db9c8dc9bc0989b717158e6c8da3c33a351ddcd06320d39d164399983a1",
+    "api": "mongodb/atlas-admin-spec",
+    "version": "2025-02-20",
+    "previous_version": "2025-02-18",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/atlas/v2/users"
+    },
+    "description": "Operation POST /api/atlas/v2/users marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/28b2c6fc35a44b3272d7afbcaae380e1d28f0e45/openapi/v2.json",
+    "source_pointer": "/paths/~1api~1atlas~1v2~1users/post",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Creates one MongoDB Cloud user account. A MongoDB Cloud user account grants access to only the MongoDB Cloud application. To grant database access, create a database user. MongoDB Cloud sends an email to the users you specify, inviting them to join the project. Invited users don't have access to the project until they accept the invitation. Invitations expire after 30 days.\\n\\n MongoDB Cloud limits MongoDB Cloud user membership to a maximum of 250 MongoDB Cloud users per team. MongoDB Cloud limits MongoDB Cloud user membership to 500 MongoDB Cloud users per project and 500 MongoDB Cloud users per organization, which includes the combined membership of all projects in the organization. MongoDB Cloud raises an error if an operation exceeds these limits. For example, if you have an organization with five projects, and each project has 100 MongoDB Cloud users, and each MongoDB Cloud user belongs to only one project, you can't add any MongoDB Cloud users to this organization without first removing existing MongoDB Cloud users from the organization.\\n\\n To use this resource, the requesting API Key can have any role.\",\"operationId\":\"createUser\",\"parameters\":[{\"$ref\":\"#/components/parameters/envelope\"},{\"$ref\":\"#/components/parameters/pretty\"}],\"requestBody\":{\"content\":{\"application/vnd.atlas.2023-01-01+json\":{\"schema\":{\"$ref\":\"#/components/schemas/CloudAppUser\"}}},\"description\":\"MongoDB Cloud user account to create.\",\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/vnd.atlas.2023-01-01+json\":{\"schema\":{\"$ref\":\"#/components/schemas/CloudAppUser\"},\"x-sunset\":\"2026-07-31\",\"x-xgen-version\":\"2023-01-01\"}},\"description\":\"OK\"},\"401\":{\"$ref\":\"#/components/responses/unauthorized\"},\"404\":{\"$ref\":\"#/components/responses/notFound\"},\"500\":{\"$ref\":\"#/components/responses/internalServerError\"}},\"summary\":\"Create One MongoDB Cloud User\",\"tags\":[\"MongoDB Cloud Users\"],\"x-xgen-docs-url\":\"https://mongodb.com/docs/atlas/reference/api-resources-sp…",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:a3aa3511e381f1383080ebb27a53c93e640767f1fae251996ed22cf82886f4e3",
+    "api": "mongodb/atlas-admin-spec",
+    "version": "2025-02-20",
+    "previous_version": "2025-02-18",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/users/byName/{userName}"
+    },
+    "description": "Operation GET /api/atlas/v2/users/byName/{userName} marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/28b2c6fc35a44b3272d7afbcaae380e1d28f0e45/openapi/v2.json",
+    "source_pointer": "/paths/~1api~1atlas~1v2~1users~1byName~1{userName}/get",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Returns the details for one MongoDB Cloud user account with the specified username. You can't use this endpoint to return information about an API Key. To return information about an API Key, use the [Return One Organization](#tag/Organizations/operation/getOrganization) API Key endpoint. To use this resource, the requesting API Key can have any role.\",\"operationId\":\"getUserByUsername\",\"parameters\":[{\"$ref\":\"#/components/parameters/envelope\"},{\"$ref\":\"#/components/parameters/pretty\"},{\"description\":\"Email address that belongs to the MongoDB Cloud user account. You cannot modify this address after creating the user.\",\"in\":\"path\",\"name\":\"userName\",\"required\":true,\"schema\":{\"pattern\":\"^[a-z0-9!#$%\\u0026'*+/=?^_`{|}~-]+(?:\\\\.[a-z0-9!#$%\\u0026'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$\",\"type\":\"string\"}}],\"responses\":{\"200\":{\"content\":{\"application/vnd.atlas.2023-01-01+json\":{\"schema\":{\"$ref\":\"#/components/schemas/CloudAppUser\"},\"x-sunset\":\"2026-07-31\",\"x-xgen-version\":\"2023-01-01\"}},\"description\":\"OK\"},\"401\":{\"$ref\":\"#/components/responses/unauthorized\"},\"404\":{\"$ref\":\"#/components/responses/notFound\"},\"500\":{\"$ref\":\"#/components/responses/internalServerError\"}},\"summary\":\"Return One MongoDB Cloud User using Their Username\",\"tags\":[\"MongoDB Cloud Users\"],\"x-xgen-docs-url\":\"https://mongodb.com/docs/atlas/reference/api-resources-spec/v2/#tag/MongoDB-Cloud-Users/operation/getUserByUsername\",\"x-xgen-owner-team\":\"IAM\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:7cde782926abc9ce73653bdf74193a84217753231a334852e60ab894674a0bbb",
+    "api": "mongodb/atlas-admin-spec",
+    "version": "2025-02-20",
+    "previous_version": "2025-02-18",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/users/{userId}"
+    },
+    "description": "Operation GET /api/atlas/v2/users/{userId} marked deprecated.",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/28b2c6fc35a44b3272d7afbcaae380e1d28f0e45/openapi/v2.json",
+    "source_pointer": "/paths/~1api~1atlas~1v2~1users~1{userId}/get",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Returns the details for one MongoDB Cloud user account with the specified unique identifier for the user. You can't use this endpoint to return information on an API Key. To return information about an API Key, use the [Return One Organization](#tag/Organizations/operation/getOrganization) API Key endpoint. You can always retrieve your own user account. If you are the owner of a MongoDB Cloud organization or project, you can also retrieve the user profile for any user with membership in that organization or project. To use this resource, the requesting API Key can have any role.\",\"operationId\":\"getUser\",\"parameters\":[{\"$ref\":\"#/components/parameters/envelope\"},{\"$ref\":\"#/components/parameters/pretty\"},{\"description\":\"Unique 24-hexadecimal digit string that identifies this user.\",\"in\":\"path\",\"name\":\"userId\",\"required\":true,\"schema\":{\"pattern\":\"^([a-f0-9]{24})$\",\"type\":\"string\"}}],\"responses\":{\"200\":{\"content\":{\"application/vnd.atlas.2023-01-01+json\":{\"schema\":{\"$ref\":\"#/components/schemas/CloudAppUser\"},\"x-sunset\":\"2044-01-01\",\"x-xgen-version\":\"2023-01-01\"}},\"description\":\"OK\"},\"401\":{\"$ref\":\"#/components/responses/unauthorized\"},\"404\":{\"$ref\":\"#/components/responses/notFound\"},\"500\":{\"$ref\":\"#/components/responses/internalServerError\"}},\"summary\":\"Return One MongoDB Cloud User using Its ID\",\"tags\":[\"MongoDB Cloud Users\"],\"x-xgen-docs-url\":\"https://mongodb.com/docs/atlas/reference/api-resources-spec/v2/#tag/MongoDB-Cloud-Users/operation/getUser\",\"x-xgen-owner-team\":\"IAM\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

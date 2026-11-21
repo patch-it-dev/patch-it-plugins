@@ -1,0 +1,20 @@
+{
+  "info": {
+    "name": "algoliasearch",
+    "version": "4.44.1"
+  },
+  "urls": [
+    {
+      "filename": "algoliasearch-4.44.1-py3-none-any.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/a8/a7/74795993b739e721583653812155f0719159b79268b6eb4452594dc103fa/algoliasearch-4.44.1-py3-none-any.whl",
+      "yanked": false
+    },
+    {
+      "filename": "algoliasearch-4.44.1.tar.gz",
+      "packagetype": "sdist",
+      "url": "https://files.pythonhosted.org/packages/8c/b1/4e6b91ca878e97fb2912e3208be50080e8a29070400417e63bd9e34392a4/algoliasearch-4.44.1.tar.gz",
+      "yanked": false
+    }
+  ]
+}
