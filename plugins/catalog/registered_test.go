@@ -8,4 +8,5 @@ import (
 
 func TestRegistersItself(t *testing.T) {
 	kittest.Registered(t, Redis)
+	kittest.Registered(t, GitHubGraphQL)
 }

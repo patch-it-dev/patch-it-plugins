@@ -1,0 +1,68 @@
+[
+  {
+    "id": 0,
+    "fingerprint": "sha256:374a42057d876bacc8a9e5d18b4f125fd2d7f4dfcdc368d1c196c06f50a1b6cd",
+    "api": "github/graphql",
+    "version": "2026-03-03",
+    "previous_version": "2026-02-13",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "schema_property",
+      "side": "response",
+      "schema": "CheckAnnotation",
+      "property": "databaseId"
+    },
+    "description": "GitHub's GraphQL API removes CheckAnnotation.databaseId on 2027-01-01: code that queries or sends it fails from that date.",
+    "migration_hint": "databaseId will be removed. Use fullDatabaseId instead. databaseId will be removed because it does not support 64-bit signed integer identifiers.",
+    "source_url": "https://raw.githubusercontent.com/github/docs/3a14e541873e834edf32b43b71911fe80d109a70/src/graphql/data/fpt/upcoming-changes.json",
+    "source_excerpt": "{\"location\":\"CheckAnnotation.databaseId\",\"description\":\"<p><code>databaseId</code> will be removed. Use <code>fullDatabaseId</code> instead.</p>\",\"reason\":\"<p><code>databaseId</code> will be removed because it does not support 64-bit signed integer identifiers.</p>\",\"date\":\"2027-01-01\",\"criticality\":\"breaking\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 0,
+    "fingerprint": "sha256:ae550ac646b551d5e0423e8d6cfe766459c957948648b5f1213a7548079cb347",
+    "api": "github/graphql",
+    "version": "2026-03-03",
+    "previous_version": "2026-02-13",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "schema_property",
+      "side": "response",
+      "schema": "Artifact",
+      "property": "databaseId"
+    },
+    "description": "GitHub's GraphQL API removes Artifact.databaseId on 2027-01-01: code that queries or sends it fails from that date.",
+    "migration_hint": "databaseId will be removed. Use fullDatabaseId instead. databaseId will be removed because it does not support 64-bit signed integer identifiers.",
+    "source_url": "https://raw.githubusercontent.com/github/docs/3a14e541873e834edf32b43b71911fe80d109a70/src/graphql/data/fpt/upcoming-changes.json",
+    "source_excerpt": "{\"location\":\"Artifact.databaseId\",\"description\":\"<p><code>databaseId</code> will be removed. Use <code>fullDatabaseId</code> instead.</p>\",\"reason\":\"<p><code>databaseId</code> will be removed because it does not support 64-bit signed integer identifiers.</p>\",\"date\":\"2027-01-01\",\"criticality\":\"breaking\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 0,
+    "fingerprint": "sha256:21cde6a2daefa5e6b7933f6e6b521818282d60efd757e4c69edd4da1958aaf0d",
+    "api": "github/graphql",
+    "version": "2026-05-22",
+    "previous_version": "2026-03-03",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "schema_property",
+      "side": "response",
+      "schema": "User",
+      "property": "viewerRelevantRepositories"
+    },
+    "description": "GitHub's GraphQL API removes User.viewerRelevantRepositories on 2026-10-01: code that queries or sends it fails from that date.",
+    "migration_hint": "viewerRelevantRepositories will be removed. Use viewerCopilotChatRepositorySuggestions instead. viewerRelevantRepositories has been renamed to viewerCopilotChatRepositorySuggestions.",
+    "source_url": "https://raw.githubusercontent.com/github/docs/a934f06d211bef668253e3826c118a4e559dc1ba/src/graphql/data/fpt/upcoming-changes.json",
+    "source_excerpt": "{\"location\":\"User.viewerRelevantRepositories\",\"description\":\"<p><code>viewerRelevantRepositories</code> will be removed. Use viewerCopilotChatRepositorySuggestions instead.</p>\",\"reason\":\"<p><code>viewerRelevantRepositories</code> has been renamed to <code>viewerCopilotChatRepositorySuggestions</code>.</p>\",\"date\":\"2026-10-01\",\"criticality\":\"breaking\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

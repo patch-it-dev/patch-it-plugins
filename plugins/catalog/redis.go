@@ -155,7 +155,7 @@ func (c Commands) Extract(ctx context.Context, env plugin.Env, from, to plugin.S
 			DetectedAt:    env.Now().UTC(),
 		})
 	}
-	events, rejected := finish(c.API, made)
+	events, rejected := finish(c.API, made, nil)
 	return plugin.Result{Events: events, Rejected: rejected}, nil
 }
 
