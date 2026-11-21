@@ -63,8 +63,8 @@ func TestListedVersionsCarryWhatTheyPin(t *testing.T) {
 	}
 }
 
-// A changelog that can't be fetched leaves the listing as it is, pinning
-// nothing; a source without Pins never fetches it.
+// A changelog that can't be fetched at the newest two tags leaves the listing
+// as it is, pinning nothing; a source without Pins never fetches it.
 func TestPinsAreReadOnlyWhenTheyCanBe(t *testing.T) {
 	tags := kittest.Read(t, "testdata/versions/stripe-go-tags-pins.json")
 	var fetched []string
@@ -78,6 +78,9 @@ func TestPinsAreReadOnlyWhenTheyCanBe(t *testing.T) {
 	vs, err := Plugin{File: StripeGo}.ListVersions(context.Background(), env)
 	if err != nil || len(vs) != 3 {
 		t.Fatalf("%v, %d versions", err, len(vs))
+	}
+	if len(fetched) != 3 { // the tags, then the newest two releases' changelogs
+		t.Errorf("fetched %v", fetched)
 	}
 	for _, v := range vs {
 		if !v.MapsTo.IsZero() {
@@ -101,5 +104,30 @@ func TestAnUnsurePinIsNone(t *testing.T) {
 		"## 1.0.0 - 2025-12-01\n* This release changes the pinned API version to `2025-11-01.a`.\n"))
 	if want := map[string]string{"1.0.0": "2025-11-01.a"}; !maps.Equal(got, want) {
 		t.Errorf("got %v, want %v", got, want)
+	}
+	// A "# comment" in a code example doesn't end the release's section.
+	got = pins([]byte("## 3.0.0 - 2026-02-01\n```sh\n# upgrade\n```\nThis release changes the pinned API version to `2026-02-01.c`.\n"))
+	if want := map[string]string{"3.0.0": "2026-02-01.c"}; !maps.Equal(got, want) {
+		t.Errorf("after a code block: got %v, want %v", got, want)
+	}
+}
+
+// When the newest release's tag can't be read yet, the one before's
+// changelog says what the earlier releases pin.
+func TestPinsFallBackToTheTagBefore(t *testing.T) {
+	tags := kittest.Read(t, "testdata/versions/stripe-go-tags-pins.json")
+	file := kittest.Read(t, "testdata/pins/stripe-go-87.2.0-CHANGELOG.md")
+	env := plugin.Env{Get: func(_ context.Context, url string) ([]byte, error) {
+		switch {
+		case strings.Contains(url, "/tags?"):
+			return tags, nil
+		case url == StripeGo.At("86.4.2").URL():
+			return file, nil
+		}
+		return nil, errors.New("404")
+	}}
+	vs, err := Plugin{File: StripeGo}.ListVersions(context.Background(), env)
+	if err != nil || len(vs) != 3 || vs[0].MapsTo.Version != "2026-05-27.dahlia" {
+		t.Errorf("%v %+v", err, vs)
 	}
 }

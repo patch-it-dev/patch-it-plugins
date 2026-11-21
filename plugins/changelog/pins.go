@@ -38,6 +38,19 @@ func pins(file []byte) map[string]string {
 	out, conflict := map[string]string{}, map[string]bool{}
 	release, fenced := "", false
 	for _, l := range strings.Split(strings.ReplaceAll(string(file), "\r\n", "\n"), "\n") {
+		// A code block first: a "# comment" in an example isn't a heading.
+		// A release's heading closes a block its section left open.
+		if m := mdRelease.FindStringSubmatch(l); m != nil && strings.HasPrefix(l, "## ") {
+			release, fenced = m[1], false
+			continue
+		}
+		if strings.HasPrefix(strings.TrimSpace(l), "```") {
+			fenced = !fenced
+			continue
+		}
+		if fenced {
+			continue
+		}
 		if strings.HasPrefix(l, "## ") || strings.HasPrefix(l, "# ") {
 			release = ""
 			if m := mdRelease.FindStringSubmatch(l); m != nil {
@@ -45,11 +58,7 @@ func pins(file []byte) map[string]string {
 			}
 			continue
 		}
-		if strings.HasPrefix(strings.TrimSpace(l), "```") {
-			fenced = !fenced
-			continue
-		}
-		if release == "" || fenced {
+		if release == "" {
 			continue
 		}
 		l = strings.ReplaceAll(l, "**", "")
@@ -70,14 +79,21 @@ func pins(file []byte) map[string]string {
 
 // pinned sets each version's MapsTo to what its section states it pins (f.Pins),
 // read from the changelog at the newest version's tag, which has every
-// earlier release's section. A changelog that can't be fetched leaves the
-// versions as listed: what they pin is read on a later listing.
+// earlier release's section, or at the one before when that tag can't be read
+// (a release on the registry before its tag is pushed). A changelog that
+// can't be fetched leaves the versions as listed: what they pin is read on a
+// later listing.
 func (f File) pinned(ctx context.Context, env plugin.Env, vs []plugin.Version) []plugin.Version {
 	if f.Pins == "" || f.Notes || len(vs) == 0 {
 		return vs
 	}
-	newest := f.At(vs[len(vs)-1].ID)
-	page, err := env.Get(ctx, newest.URL())
+	var page []byte
+	var err error
+	for i := len(vs) - 1; i >= 0 && i >= len(vs)-2; i-- {
+		if page, err = env.Get(ctx, f.At(vs[i].ID).URL()); err == nil {
+			break
+		}
+	}
 	if err != nil {
 		log.Printf("%s: what its releases pin isn't read this time: %v", f.API, err)
 		return vs
