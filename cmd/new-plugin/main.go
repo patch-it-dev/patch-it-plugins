@@ -593,7 +593,10 @@ func addSource(path, source string, imports []string) ([]byte, error) {
 			return sources == nil
 		}
 		sel, ok := call.Fun.(*ast.SelectorExpr)
-		if pkg, isIdent := sel.X.(*ast.Ident); !ok || !isIdent || pkg.Name != "plugin" || sel.Sel.Name != "RegisterProvider" || len(call.Args) != 1 {
+		if !ok {
+			return true // append(...), make(...): not the registration
+		}
+		if pkg, isIdent := sel.X.(*ast.Ident); !isIdent || pkg.Name != "plugin" || sel.Sel.Name != "RegisterProvider" || len(call.Args) != 1 {
 			return true
 		}
 		lit, ok := call.Args[0].(*ast.CompositeLit)

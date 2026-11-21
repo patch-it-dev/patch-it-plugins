@@ -96,8 +96,8 @@ func forbidden(file, path string) string {
 }
 
 // testKit reports whether a package (a path from the repo's root) is a test
-// kit: core/kit/kittest, or a kind's <kind>test.
+// kit: core/kit/kittest, or a kind's kinds/<kind>/<kind>test.
 func testKit(pkg string) bool {
-	base := pkg[strings.LastIndex(pkg, "/")+1:]
-	return pkg == "core/kit/kittest" || (strings.HasPrefix(pkg, "kinds/") && strings.HasSuffix(base, "test"))
+	parts := strings.Split(pkg, "/")
+	return pkg == "core/kit/kittest" || (len(parts) == 3 && parts[0] == "kinds" && parts[2] == parts[1]+"test")
 }

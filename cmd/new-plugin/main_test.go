@@ -113,6 +113,30 @@ func TestScaffoldAddsASourceToItsProvider(t *testing.T) {
 	}
 }
 
+// A provider.go with other calls above its registration (a package-level
+// var, a helper) still gets the source inside its RegisterProvider call.
+func TestScaffoldFindsTheRegistrationAmongOtherCalls(t *testing.T) {
+	root := copyRepo(t)
+	path := filepath.Join(root, "providers", "textual", "provider.go")
+	src, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	src = bytes.Replace(src, []byte("\nfunc init() {"), []byte("\nvar _ = len(\"x\")\n\nfunc helper() []int { return append([]int{}, 1) }\n\nfunc init() {"), 1)
+	if err := os.WriteFile(path, src, 0o644); err != nil {
+		t.Fatal(err)
+	}
+	o := Options{Root: root, ProviderID: "textual", SourceID: "docs", Kind: "notices", Reader: "feed", Today: today}
+	if err := Run(o, io.Discard); err != nil {
+		t.Fatal(err)
+	}
+	reg, _ := os.ReadFile(path)
+	at := bytes.Index(reg, []byte("plugin.RegisterProvider("))
+	if at < 0 || !bytes.Contains(reg[at:], []byte(`ID: "docs"`)) || bytes.Count(reg, []byte(`ID: "docs"`)) != 1 {
+		t.Errorf("the source isn't inside the registration:\n%s", reg)
+	}
+}
+
 func TestRefusesBadInput(t *testing.T) {
 	root := copyRepo(t)
 	before := tree(t, root)
