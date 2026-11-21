@@ -21,6 +21,7 @@ var graphqlCommits = []plugin.Version{
 	{ID: "2026-02-13", Ref: "fc7cedfe9c6b2c0a40fd213cd18c0afc774b67fc"},
 	{ID: "2026-03-03", Ref: "3a14e541873e834edf32b43b71911fe80d109a70"},
 	{ID: "2026-05-22", Ref: "a934f06d211bef668253e3826c118a4e559dc1ba"},
+	{ID: "2026-06-23", Ref: "c5738e5815fff90d38f0166f7c9949bfb664e003"},
 }
 
 func graphqlPages() kittest.Pages {
@@ -36,10 +37,11 @@ func graphqlPair(t *testing.T, from, to plugin.Version) []event.Event {
 	return kittest.Versions(t, kittest.Env(t, graphqlPages()), GitHubGraphQL, from, to)
 }
 
-// The golden test: three consecutive commits, two pairs. 2026-03-03 adds
-// Artifact.databaseId and CheckAnnotation.databaseId (removed on
-// 2027-01-01, in the file's order), 2026-05-22 adds User.viewerRelevantRepositories (2026-10-01).
-// Every entry the commits share is no event.
+// The golden test: four consecutive commits, three pairs. 2026-03-03 adds
+// CheckAnnotation.databaseId and Artifact.databaseId (removed on
+// 2027-01-01, in the file's order), 2026-05-22 User.viewerRelevantRepositories
+// and 2026-06-23 CopilotAgentTask.type (both 2026-10-01). Every entry the
+// commits share is no event.
 func TestGraphQLGolden(t *testing.T) {
 	var got []event.Event
 	var names []string
@@ -49,7 +51,7 @@ func TestGraphQLGolden(t *testing.T) {
 			names = append(names, fmt.Sprintf("%s->%s %s.%s", e.PreviousVersion, e.Version, e.Subject.Schema, e.Subject.Property))
 		}
 	}
-	want := "2026-02-13->2026-03-03 CheckAnnotation.databaseId | 2026-02-13->2026-03-03 Artifact.databaseId | 2026-03-03->2026-05-22 User.viewerRelevantRepositories"
+	want := "2026-02-13->2026-03-03 CheckAnnotation.databaseId | 2026-02-13->2026-03-03 Artifact.databaseId | 2026-03-03->2026-05-22 User.viewerRelevantRepositories | 2026-05-22->2026-06-23 CopilotAgentTask.type"
 	if strings.Join(names, " | ") != want {
 		t.Errorf("got  %s\nwant %s", strings.Join(names, " | "), want)
 	}

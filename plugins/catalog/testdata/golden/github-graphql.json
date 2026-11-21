@@ -64,5 +64,27 @@
     "source_excerpt": "{\"location\":\"User.viewerRelevantRepositories\",\"description\":\"<p><code>viewerRelevantRepositories</code> will be removed. Use viewerCopilotChatRepositorySuggestions instead.</p>\",\"reason\":\"<p><code>viewerRelevantRepositories</code> has been renamed to <code>viewerCopilotChatRepositorySuggestions</code>.</p>\",\"date\":\"2026-10-01\",\"criticality\":\"breaking\"}",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 0,
+    "fingerprint": "sha256:b4af55cfbb4e8839f80f7ca24cdf3538311549d929eba6580053ce367967c63d",
+    "api": "github/graphql",
+    "version": "2026-06-23",
+    "previous_version": "2026-05-22",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "schema_property",
+      "side": "response",
+      "schema": "CopilotAgentTask",
+      "property": "type"
+    },
+    "description": "GitHub's GraphQL API removes CopilotAgentTask.type on 2026-10-01: code that queries or sends it fails from that date.",
+    "migration_hint": "type will be removed. Use codingAgentFilter and codingAgentTypeFilter instead. type will be removed.",
+    "source_url": "https://raw.githubusercontent.com/github/docs/c5738e5815fff90d38f0166f7c9949bfb664e003/src/graphql/data/fpt/upcoming-changes.json",
+    "source_excerpt": "{\"location\":\"CopilotAgentTask.type\",\"description\":\"<p><code>type</code> will be removed. Use <code>codingAgentFilter</code> and <code>codingAgentTypeFilter</code> instead.</p>\",\"reason\":\"<p><code>type</code> will be removed.</p>\",\"date\":\"2026-10-01\",\"criticality\":\"breaking\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
   }
 ]
