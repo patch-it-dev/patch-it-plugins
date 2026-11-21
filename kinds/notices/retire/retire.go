@@ -167,16 +167,15 @@ func Parse(page []byte, keep func(string) bool) ([]Retirement, error) {
 	return out, nil
 }
 
-// retiring says a status cell is a model on its way out or gone
-// ("Deprecated", "Shutdown", "Shut down", "Retired"). Any other status
-// (a postponed or withdrawn retirement) is not a retirement, so the row
-// is not read as one: precision over recall.
+// retiring says a status cell is a model on its way out or gone: exactly
+// "Deprecated", "Shutdown", "Shut down" or "Retired", whatever the case and
+// emphasis. Any other status ("Postponed", "Deprecation postponed", "Not
+// deprecated") is not a retirement, so the row is not read as one:
+// precision over recall, an unexpected wording fails safe.
 func retiring(status string) bool {
-	s := strings.ToLower(plain(status))
-	for _, w := range []string{"deprecat", "shutdown", "shut down", "retire"} {
-		if strings.Contains(s, w) {
-			return true
-		}
+	switch strings.ToLower(plain(status)) {
+	case "deprecated", "shutdown", "shut down", "retired":
+		return true
 	}
 	return false
 }

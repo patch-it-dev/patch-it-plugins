@@ -71,7 +71,7 @@ Kind: `notices` (`kinds/notices`), reading with the deprecations-page reader, `k
 ### What the plugin reads and ignores
 
 - Reads every table with a shutdown or retirement date column, a model column and a replacement column. Each backticked name in the model cell is one model (aliases after an escaped pipe too). The feature and endpoint table has no model column, so it isn't read.
-- A model listed twice keeps the row with the latest notice date (the first row on a page without that column); a newer "To be announced", or a status that isn't a retirement (only `Deprecated`, `Shutdown` or `Retired` are), withdraws an older date.
+- A model listed twice keeps the row with the latest notice date (the first row on a page without that column); a newer "To be announced", or a status that isn't a retirement (only exactly `Deprecated`, `Shutdown`, `Shut down` or `Retired` are; "Deprecation postponed" isn't), withdraws an older date.
 - A replacement that is itself retired is followed to one that still works (`gpt-3.5-turbo-0613` → `gpt-3.5-turbo` → `gpt-5.6-terra`), and the hint says so.
 - Keeps every `gpt-<number>` model (a new generation needs no change) and the `o1`, `o3`, `o4`, `chatgpt-`, `computer-use` and `codex-` names. Ignores image, audio, realtime, transcription, embedding and moderation models, fine-tuned bases (`ft-gpt-4`; code sends `ft:gpt-4-0613:org::id`) and the legacy `-completions` aliases: the events are for the operations that take text models.
 - Every event cites a Wayback Machine snapshot of the page, never the live page, and is read from that snapshot. No snapshot, or one that differs from the live page, stores nothing that run. A page that suddenly lists far fewer retirements fails the run (a renamed column probably hid a table).
