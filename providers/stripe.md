@@ -30,7 +30,7 @@ Kind: `openapi` (`plugins/openapi`), with `adapter.Stripe` and the changelog hin
 
 - Releases before v2191 (2026-03-11) don't name their API version, so versions older than `2026-02-25.clover` aren't listed: naming them would mean reading every old spec or guessing.
 - While a version is the newest, the release it's read at moves as Stripe publishes more of it. The pair into it is compared once, at the release current then.
-
+- If Stripe ever moved its SDK spec on to the next version before `latest/openapi.spec3.json` had declared the current one, that version's release would stop moving and it would fail to read on every run, loudly. It hasn't happened: at each listed version's release (v2203 … v2600) the file declares that version (checked 2026-11-21); v2602 is the lag described above.
 - Changes the spec doesn't express (behavior changes, webhook payload semantics) are only in the changelog, which isn't read for events.
 - Enum value removals and some tax-related changes have no parameter row in the changelog, so those events keep the normalizer's one-line hint.
 - Webhooks use the version set when the endpoint was created; the events don't say which webhook endpoints are affected.
