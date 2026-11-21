@@ -50,5 +50,5 @@ func init() {
 	npm(plugin.Provider{ID: "redis", Name: "Redis", Category: plugin.CategoryDatabases, Homepage: "https://redis.io"}, RedisNode, "https://github.com/redis/node-redis", "npm:redis")
 	npm(plugin.Provider{ID: "supabase", Name: "Supabase", Category: plugin.CategoryDatabases, Homepage: "https://supabase.com"}, SupabaseJS, "https://github.com/supabase/supabase-js")
 	npm(plugin.Provider{ID: "neon", Name: "Neon", Category: plugin.CategoryDatabases, Homepage: "https://neon.com"}, NeonServerless, "https://github.com/neondatabase/serverless")
-	npm(plugin.Provider{ID: "convex", Name: "Convex", Category: plugin.CategoryDatabases, Homepage: "https://www.convex.dev"}, ConvexJS, "https://github.com/get-convex/convex-js")
+	npm(plugin.Provider{ID: "convex", Name: "Convex", Category: plugin.CategoryDatabases, Homepage: "https://www.convex.dev"}, ConvexJS, "https://github.com/convex/convex-js")
 }

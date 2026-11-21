@@ -8,7 +8,7 @@ Kind: `apisurface` (`plugins/apisurface`), with the TypeScript declaration reade
 
 ## Why this source
 
-- **Source:** the release tarballs on the npm registry (<https://www.npmjs.com/package/convex>), each version's `dist.tarball`, read as published; the code is at <https://github.com/get-convex/convex-js>. Checked on 2026-11-21.
+- **Source:** the release tarballs on the npm registry (<https://www.npmjs.com/package/convex>), each version's `dist.tarball`, read as published; the code is at <https://github.com/convex/convex-js>. Checked on 2026-11-21.
 - **Why this one:** the declarations in the tarball are exactly what TypeScript checks a customer's code against after `npm install convex@<version>`, and what editors show JavaScript users. A published tarball never changes, so its URL is its own citation, and the line quoted is in it.
 - **Alternatives considered:** CHANGELOG.md.
 - **Quote:** `type QueryOptions<Query extends FunctionReference<"query">>` (`dist/esm-types/browser/query_options.d.ts` line 9) at 1.35.0, gone at 1.35.1.
