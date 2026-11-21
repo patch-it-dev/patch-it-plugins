@@ -2,11 +2,13 @@ package gitlab
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"strings"
 	"testing"
 
+	"github.com/patch-it-dev/patch-it-plugins/core/event"
 	"github.com/patch-it-dev/patch-it-plugins/core/kit/kittest"
 	"github.com/patch-it-dev/patch-it-plugins/kinds/openapi"
 	"github.com/patch-it-dev/patch-it-plugins/kinds/openapi/openapitest"
@@ -22,14 +24,14 @@ func gitlabPlugin(t *testing.T) (openapi.Plugin, string) {
 	return openapi.Plugin{Adapter: GitLab{SpecURLTemplate: tmpl}, Keep: openapi.RequestSide}, tmpl
 }
 
-// The golden test and the pair fixture in one: testdata/gitlab-v18.11.0-ee.yaml
-// and gitlab-v19.0.0-ee.yaml are trimmed, unedited excerpts of GitLab's
-// OpenAPI spec at those two tags (checked 2026-11-15). GitLab 19.0 removed app
+// The golden test (testdata/golden/gitlab-rest-api.json) and the pair
+// fixture in one: testdata/gitlab-v18.11.0-ee.yaml and gitlab-v19.0.0-ee.yaml
+// are trimmed, unedited excerpts of GitLab's OpenAPI spec at those two tags (checked 2026-11-15). GitLab 19.0 removed app
 // passwords from the Bitbucket Cloud import API ("Using app passwords with
 // Bitbucket Cloud import GitLab API", announced 18.9, on
 // docs.gitlab.com/update/deprecations): bitbucket_username and
 // bitbucket_app_password are gone from POST /api/v4/import/bitbucket, and
-// bitbucket_email and bitbucket_api_token became required. This is the pair
+// bitbucket_email and bitbucket_api_token became required. This is the change
 // the pair v18.11.0-ee → v19.0.0-ee recreates.
 //
 // The excerpts also keep APIEntitiesBadge, whose id went from the generator's
@@ -107,6 +109,18 @@ func TestGitLabPairRecreatesTheBitbucketAppPasswordRemoval(t *testing.T) {
 			t.Errorf("%s: excerpt %s, but %s#%s holds %s", e.Subject.Property, e.SourceExcerpt, file, e.SourcePointer, got)
 		}
 	}
+
+	// The golden file names the spec where GitLab publishes it, not the local
+	// server that stood in for it.
+	real := map[string]string{
+		oldURL: fmt.Sprintf(gitlabSpecURLTemplate, "v18.11.0-ee"),
+		newURL: fmt.Sprintf(gitlabSpecURLTemplate, "v19.0.0-ee"),
+	}
+	golden := append([]event.Event(nil), events...)
+	for i := range golden {
+		golden[i].SourceURL = real[golden[i].SourceURL]
+	}
+	kittest.Golden(t, "testdata/golden/gitlab-rest-api.json", golden)
 
 	// Reading the same pair again must not duplicate the events.
 	if _, err := kittest.Pair(ctx, openapitest.Env(s), s, p, "v18.11.0-ee", "v19.0.0-ee"); err != nil {
