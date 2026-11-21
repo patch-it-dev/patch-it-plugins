@@ -93,30 +93,24 @@ jobs:
                any issue it references with `gh issue view <number>`. Read the diff with
                `gh pr diff <PR NUMBER>`, and changed files in full where the diff isn't
                enough context.
-            2. THE METADATA (AGENTS.md Rule 1). Every source added or changed is in its
-               provider's providers/<provider>/provider.go, the provider's one
-               plugin.RegisterProvider call, with complete, accurate metadata: the
-               provider's id, name, category and homepage; each source's id, layer, what
-               it watches, the URLs it reads and the packages it covers. There is no
-               hand-kept list (no docs/plugins.md, no plugins.json in the repo): one
-               reappearing is blocking.
-            3. PROVIDER PAGE. Every source has a section in its provider's page,
-               providers/<provider>/README.md (a new provider's from
-               docs/provider-template.md), with a real **Why this source**: the link, the
-               date it was checked, why it's the best source, the alternatives not used,
-               and a short quote. A changed source updates its section.
+            2. THE METADATA (AGENTS.md Rule 1). Every source added or changed is
+               registered with plugin.RegisterProvider with complete, accurate metadata:
+               the provider's id, name, category and homepage; each source's id, layer,
+               what it watches, the URLs it reads and its page. There is no hand-kept list
+               (no docs/plugins.md, no plugins.json in the repo): one reappearing is
+               blocking.
+            3. PROVIDER PAGE. Every new provider has providers/<api>.md copied from
+               providers/_template.md, with a real **Why this source**: the link, the date
+               it was checked, why it's the best source, the alternatives not used, and a
+               short quote. A changed source updates that page.
             4. TESTS AND SOURCES. A golden test over a real saved copy of the source
-               (providers/<provider>/testdata/golden/<provider>-<source>.json); a row in
-               the provider's testdata/README.md for each file
+               (testdata/golden/<api>.json); a row in testdata/README.md for each file
                (URL, date fetched, license, quote of the part the plugin reads); one pinned
                drop test (a realistic input that produces no event); every event carries
                the source URL and a quote. A golden file edited without the PR explaining
                why the new output is right is blocking.
-            5. PLUGIN CODE. How to read lives in kinds/<kind>/ and imports no provider;
-               what to read lives in providers/<provider>/ and imports only core/ and
-               kinds/, never another provider: code specific to one provider in a kind
-               is blocking. Fetch only through env.Get or kit/: no net/http outside the
-               fetch layer (core/fetch/, core/kit/), no filesystem outside testdata/, no
+            5. PLUGIN CODE. Fetch only through env.Get or kit/: no net/http outside the
+               fetch layer (core/fetch/, core/kit/, plugins/openapi/adapter/), no filesystem outside testdata/, no
                database. Precision over recall: flag any path that could emit an event for
                something that isn't a real change; a wrong event becomes a wrong pull
                request in someone's repo. Don't change contract/fixtures/ here first (the
