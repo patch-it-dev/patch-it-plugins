@@ -4,9 +4,11 @@
 package mongodb
 
 import (
+	"github.com/patch-it-dev/patch-it-plugins/core/kit"
 	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 	"github.com/patch-it-dev/patch-it-plugins/kinds/apisurface"
 	"github.com/patch-it-dev/patch-it-plugins/kinds/changelog"
+	"github.com/patch-it-dev/patch-it-plugins/kinds/notices"
 	"github.com/patch-it-dev/patch-it-plugins/kinds/openapi"
 )
 
@@ -28,6 +30,15 @@ func init() {
 				Watches: "Atlas Administration API versions deprecated and removed at their sunset date, per endpoint, from MongoDB's own API changelog",
 				URLs:    []string{"https://github.com/mongodb/openapi/blob/main/changelog/changelog.json"},
 				Plugin:  changelog.Plugin{Log: AtlasAdminAPI},
+			},
+			{
+				ID: "server", Layer: plugin.LayerRuntime,
+				Watches: "MongoDB Server versions and their end-of-life dates, from MongoDB's software lifecycle schedules",
+				URLs:    []string{"https://www.mongodb.com/legal/support-policy/lifecycles"},
+				// Anchors: two releases long past their end of life, which the table keeps
+				// (3.0: February 28, 2018; 4.4: February 29, 2024).
+				Shape:  plugin.Shape{Anchors: []plugin.Anchor{{Entry: "3.0", Checked: "2026-11-21"}, {Entry: "4.4", Checked: "2026-11-21"}}},
+				Plugin: notices.Plugin{Page: Server, Archiver: kit.Wayback{}},
 			},
 			apisurface.PyPI(PymongoSurface, plugin.LayerSDK, "https://github.com/mongodb/mongo-python-driver"),
 			apisurface.NPM(NodeSurface, "https://github.com/mongodb/node-mongodb-native"),

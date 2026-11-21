@@ -34,6 +34,16 @@ func init() {
 				Shape:  plugin.Shape{Anchors: []plugin.Anchor{{Entry: "gpt-4-0613", Checked: "2026-11-21"}, {Entry: "gpt-3.5-turbo-0301", Checked: "2026-11-21"}}},
 				Plugin: notices.Plugin{Page: Models, Archiver: kit.Wayback{}},
 			},
+			{
+				ID: "deprecations", Layer: plugin.LayerAPI,
+				Watches:  "REST API endpoints OpenAI shuts down, named by their path, with the shutdown date, from the deprecations page's feature and endpoint tables",
+				URLs:     []string{"https://developers.openai.com/api/docs/deprecations"},
+				Packages: []string{"pypi:openai", "npm:openai"},
+				// Anchors: two endpoints shut down long ago, kept in the page's "Past
+				// deprecations" table (/v1/edits: Jan 4, 2024; /v1/engines: Dec 3, 2022).
+				Shape:  plugin.Shape{Anchors: []plugin.Anchor{{Entry: "/v1/edits", Checked: "2026-11-21"}, {Entry: "/v1/engines", Checked: "2026-11-21"}}},
+				Plugin: notices.Plugin{Page: Deprecations, Archiver: kit.Wayback{}},
+			},
 			apisurface.PyPI(PythonSurface, plugin.LayerSDK, "https://github.com/openai/openai-python"),
 			apisurface.NPM(NodeSurface, "https://github.com/openai/openai-node"),
 		},

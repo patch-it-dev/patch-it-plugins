@@ -6,10 +6,12 @@ package redis
 import (
 	"regexp"
 
+	"github.com/patch-it-dev/patch-it-plugins/core/kit"
 	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 	"github.com/patch-it-dev/patch-it-plugins/kinds/apisurface"
 	"github.com/patch-it-dev/patch-it-plugins/kinds/catalog"
 	"github.com/patch-it-dev/patch-it-plugins/kinds/changelog"
+	"github.com/patch-it-dev/patch-it-plugins/kinds/notices"
 )
 
 func init() {
@@ -21,6 +23,15 @@ func init() {
 				Watches: "Commands removed entirely, or new, between two Redis releases, from the command definitions in the server's own source (src/commands/) at each release tag",
 				URLs:    []string{"https://github.com/redis/redis/tree/unstable/src/commands", "https://github.com/redis/redis/releases"},
 				Plugin:  Commands,
+			},
+			{
+				ID: "software-lifecycle", Layer: plugin.LayerRuntime,
+				Watches: "Redis Software (Redis Enterprise) cluster versions and their end-of-life dates, from Redis's product lifecycle page",
+				URLs:    []string{"https://redis.io/docs/latest/operate/rs/installing-upgrading/product-lifecycle/"},
+				// Anchors: two versions past their end of life the table keeps
+				// (5.2: December 31, 2019; 6.0: May 31, 2022).
+				Shape:  plugin.Shape{Anchors: []plugin.Anchor{{Entry: "5.2", Checked: "2026-11-21"}, {Entry: "6.0", Checked: "2026-11-21"}}},
+				Plugin: notices.Plugin{Page: SoftwareLifecycle, Archiver: kit.Wayback{}},
 			},
 			changelog.SDK("ioredis", Ioredis, "npm:ioredis"),
 			apisurface.PyPI(RedisPySurface, plugin.LayerSDK, "https://github.com/redis/redis-py"),

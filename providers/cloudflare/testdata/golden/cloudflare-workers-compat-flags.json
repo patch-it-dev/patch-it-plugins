@@ -1,0 +1,40 @@
+[
+  {
+    "id": 0,
+    "fingerprint": "sha256:231eec928ec743fa7a89f54888e100828c80201f73d767ac81bb28108fb34115",
+    "api": "cloudflare/workers-compat-flags",
+    "version": "2026-12-01",
+    "change": "breaking",
+    "subject": {
+      "type": "flag",
+      "provider": "cloudflare",
+      "name": "temporal",
+      "setting": "compatibility_flags"
+    },
+    "description": "Cloudflare Workers turn on temporal by default from compatibility date 2026-12-01: code whose compatibility date is on or after it gets the new behavior.",
+    "migration_hint": "Check the code against the new behavior before moving its compatibility date to 2026-12-01 or later. To move the date without it, add \"no_temporal\" to compatibility_flags.",
+    "source_url": "https://raw.githubusercontent.com/cloudflare/workerd/e9e1914f23cf37164329b24e8441ac2d46b956e0/src/workerd/io/compatibility-date.capnp",
+    "source_excerpt": "temporal @200 :Bool $compatEnableFlag(\"temporal\") $compatDisableFlag(\"no_temporal\") $compatEnableDate(\"2026-12-01\");",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 0,
+    "fingerprint": "sha256:a45220579c86ae3d0b999dfe646e2b67ff5a396d9e6a538231d8dd92daead7e9",
+    "api": "cloudflare/workers-compat-flags",
+    "version": "2026-11-24",
+    "change": "breaking",
+    "subject": {
+      "type": "flag",
+      "provider": "cloudflare",
+      "name": "nodejs_process_version_24",
+      "setting": "compatibility_flags"
+    },
+    "description": "Cloudflare Workers turn on nodejs_process_version_24 by default from compatibility date 2026-11-24: code whose compatibility date is on or after it gets the new behavior.",
+    "migration_hint": "Check the code against the new behavior before moving its compatibility date to 2026-11-24 or later. To move the date without it, add \"no_nodejs_process_version_24\" to compatibility_flags.",
+    "source_url": "https://raw.githubusercontent.com/cloudflare/workerd/22400fed99d386b3ba2e90126dec7ed55ce9b1ea/src/workerd/io/compatibility-date.capnp",
+    "source_excerpt": "nodeJsProcessVersion24 @202 :Bool $compatEnableFlag(\"nodejs_process_version_24\") $compatDisableFlag(\"no_nodejs_process_version_24\") $compatEnableDate(\"2026-11-24\");",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

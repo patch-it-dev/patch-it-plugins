@@ -40,6 +40,38 @@ Kind: `catalog` (`kinds/catalog`), the `Commands` reader (`kinds/catalog/command
 - Module commands (`FT.*`, `JSON.*`, `TS.*`…) live in the modules' own repos, not in `src/commands/`.
 - `node-redis` and `redis-py`'s own breaking changes aren't watched here: they're client SDKs, a separate source.
 
+## Redis Software end of life (`redis/software-lifecycle`)
+
+### What it watches
+
+Redis Software (Redis Enterprise) cluster versions and the date each reaches end of life: one `runtime` event per version (`runtime: redis-software`, `version: 7.4`), dated by its end of life.
+
+Kind: `notices` (`kinds/notices`), read by `kinds/notices/lifecycle` with the provider's table reader ([`software_lifecycle.go`](software_lifecycle.go)).
+
+### Why this source
+
+- **Source:** [Redis Software product lifecycle](https://redis.io/docs/latest/operate/rs/installing-upgrading/product-lifecycle/), the "Cluster version end-of-life schedule" table. Checked on 2026-11-21.
+- **Why this one:** Redis's own schedule, every cluster version from 5.2 with its end-of-life date, kept after the date.
+- **Alternatives considered:**
+  - **A Redis Open Source lifecycle page:** none exists (`/legal/redis-oss-lifecycle-policy/` is a 404).
+  - **The same page's database version table:** the Redis database versions a cluster runs, another runtime (see Known gaps).
+- **Quote:** "7.4 – February 2024 | November 30, 2026"
+
+### How the provider announces changes
+
+- A new cluster version gets a row with "-" until Redis sets its end of life, then a date.
+
+### What the plugin reads and ignores
+
+- **Reads** the table whose header is "Version - Release date", "End of Life (EOL)": a row "X.Y – <month year>" with a plain date is a `breaking` `runtime` event, `version` the date, no `previous_version`.
+- **Ignores** a row with "-" (8.2 on 2026-11-21) and the page's other tables (upgrade paths, bundled database versions, the database version schedule).
+- **The golden test** reads the page saved on 2026-11-21: 12 versions, 11 events. **The drop test** checks that 8.2 is read with no date and no database version row is read.
+
+### Known gaps
+
+- The database version schedule ("Redis 8.0 | STS | December 1, 2026") isn't read: it's the Redis database inside Redis Software, a `runtime` with `platform: redis-software`, left for its own source.
+- The client doesn't fix `runtime` events yet: it lists them.
+
 ## ioredis (`redis/ioredis`)
 
 ### What it watches

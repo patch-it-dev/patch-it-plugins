@@ -1,0 +1,200 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:97648107ca0501f792209d077865a24e2af43a58718981e72f155fea4980d506",
+    "api": "redis/software-lifecycle",
+    "version": "2028-07-31",
+    "change": "breaking",
+    "subject": {
+      "type": "runtime",
+      "runtime": "redis-software",
+      "version": "8.0"
+    },
+    "description": "Redis Software 8.0 reaches end of life on 2028-07-31: no fixes or support for it from that date.",
+    "migration_hint": "Move to a Redis Software version whose end of life is later; the table lists each one's date.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://redis.io/docs/latest/operate/rs/installing-upgrading/product-lifecycle/",
+    "source_excerpt": "Cluster version end-of-life schedule\nVersion - Release date | End of Life (EOL)\n8.0 – October 2025 | July 31, 2028",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:3a3b95f6d2bd2fb7906a96453973a270397e7926012626c302aa759bca76b8df",
+    "api": "redis/software-lifecycle",
+    "version": "2027-10-30",
+    "change": "breaking",
+    "subject": {
+      "type": "runtime",
+      "runtime": "redis-software",
+      "version": "7.22"
+    },
+    "description": "Redis Software 7.22 reaches end of life on 2027-10-30: no fixes or support for it from that date.",
+    "migration_hint": "Move to a Redis Software version whose end of life is later; the table lists each one's date.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://redis.io/docs/latest/operate/rs/installing-upgrading/product-lifecycle/",
+    "source_excerpt": "Cluster version end-of-life schedule\nVersion - Release date | End of Life (EOL)\n7.22 – May 2025 | October 30, 2027",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:1017494ec937d1065a249a155f4ef4e4dbfa98efbe75ab1fe9cc4a2b3f99e589",
+    "api": "redis/software-lifecycle",
+    "version": "2027-05-30",
+    "change": "breaking",
+    "subject": {
+      "type": "runtime",
+      "runtime": "redis-software",
+      "version": "7.8"
+    },
+    "description": "Redis Software 7.8 reaches end of life on 2027-05-30: no fixes or support for it from that date.",
+    "migration_hint": "Move to a Redis Software version whose end of life is later; the table lists each one's date.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://redis.io/docs/latest/operate/rs/installing-upgrading/product-lifecycle/",
+    "source_excerpt": "Cluster version end-of-life schedule\nVersion - Release date | End of Life (EOL)\n7.8 – November 2024 | May 30, 2027",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:e9d17926a25fe7d1319b62c199363e17a603a5d949d4f83befceb81c158036c1",
+    "api": "redis/software-lifecycle",
+    "version": "2026-11-30",
+    "change": "breaking",
+    "subject": {
+      "type": "runtime",
+      "runtime": "redis-software",
+      "version": "7.4"
+    },
+    "description": "Redis Software 7.4 reaches end of life on 2026-11-30: no fixes or support for it from that date.",
+    "migration_hint": "Move to a Redis Software version whose end of life is later; the table lists each one's date.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://redis.io/docs/latest/operate/rs/installing-upgrading/product-lifecycle/",
+    "source_excerpt": "Cluster version end-of-life schedule\nVersion - Release date | End of Life (EOL)\n7.4 – February 2024 | November 30, 2026",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:54dd5452a645d65238b7f25046d3cbb99c9b654a2d38509d1a05ecfdbda699d6",
+    "api": "redis/software-lifecycle",
+    "version": "2026-02-28",
+    "change": "breaking",
+    "subject": {
+      "type": "runtime",
+      "runtime": "redis-software",
+      "version": "7.2"
+    },
+    "description": "Redis Software 7.2 reaches end of life on 2026-02-28: no fixes or support for it from that date.",
+    "migration_hint": "Move to a Redis Software version whose end of life is later; the table lists each one's date.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://redis.io/docs/latest/operate/rs/installing-upgrading/product-lifecycle/",
+    "source_excerpt": "Cluster version end-of-life schedule\nVersion - Release date | End of Life (EOL)\n7.2 – August 2023 | February 28, 2026",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:ae57f605235702009f9aaca2f0e1759a5819a8186a7f6b03aa4d61457e3041c3",
+    "api": "redis/software-lifecycle",
+    "version": "2025-08-31",
+    "change": "breaking",
+    "subject": {
+      "type": "runtime",
+      "runtime": "redis-software",
+      "version": "6.4"
+    },
+    "description": "Redis Software 6.4 reaches end of life on 2025-08-31: no fixes or support for it from that date.",
+    "migration_hint": "Move to a Redis Software version whose end of life is later; the table lists each one's date.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://redis.io/docs/latest/operate/rs/installing-upgrading/product-lifecycle/",
+    "source_excerpt": "Cluster version end-of-life schedule\nVersion - Release date | End of Life (EOL)\n6.4 – February 2023 | August 31, 2025",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:c17ea266a2df2a12f57af9632cde14efdb00fb397aecf35ea747acf9482bdddb",
+    "api": "redis/software-lifecycle",
+    "version": "2025-02-28",
+    "change": "breaking",
+    "subject": {
+      "type": "runtime",
+      "runtime": "redis-software",
+      "version": "6.2"
+    },
+    "description": "Redis Software 6.2 reaches end of life on 2025-02-28: no fixes or support for it from that date.",
+    "migration_hint": "Move to a Redis Software version whose end of life is later; the table lists each one's date.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://redis.io/docs/latest/operate/rs/installing-upgrading/product-lifecycle/",
+    "source_excerpt": "Cluster version end-of-life schedule\nVersion - Release date | End of Life (EOL)\n6.2 – August 2021 | February 28, 2025",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
+    "fingerprint": "sha256:4fceb2a8c0bb5b9be5fcc86d6d45313e0de5b5c7b76ea8d63b8ef590ea7b75fb",
+    "api": "redis/software-lifecycle",
+    "version": "2022-05-31",
+    "change": "breaking",
+    "subject": {
+      "type": "runtime",
+      "runtime": "redis-software",
+      "version": "6.0"
+    },
+    "description": "Redis Software 6.0 reaches end of life on 2022-05-31: no fixes or support for it from that date.",
+    "migration_hint": "Move to a Redis Software version whose end of life is later; the table lists each one's date.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://redis.io/docs/latest/operate/rs/installing-upgrading/product-lifecycle/",
+    "source_excerpt": "Cluster version end-of-life schedule\nVersion - Release date | End of Life (EOL)\n6.0 – May 2020 | May 31, 2022",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 9,
+    "fingerprint": "sha256:85f42efb4d24de6ddda54ca7b236dff8675f51bad5fb738844713675ffa7af58",
+    "api": "redis/software-lifecycle",
+    "version": "2021-10-31",
+    "change": "breaking",
+    "subject": {
+      "type": "runtime",
+      "runtime": "redis-software",
+      "version": "5.6"
+    },
+    "description": "Redis Software 5.6 reaches end of life on 2021-10-31: no fixes or support for it from that date.",
+    "migration_hint": "Move to a Redis Software version whose end of life is later; the table lists each one's date.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://redis.io/docs/latest/operate/rs/installing-upgrading/product-lifecycle/",
+    "source_excerpt": "Cluster version end-of-life schedule\nVersion - Release date | End of Life (EOL)\n5.6 – April 2020 | October 31, 2021",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 10,
+    "fingerprint": "sha256:e83839c532904b010e4e6b047b172ac9efa7cfc2e3fa7a1cf1d784b74e6ce0b0",
+    "api": "redis/software-lifecycle",
+    "version": "2020-12-31",
+    "change": "breaking",
+    "subject": {
+      "type": "runtime",
+      "runtime": "redis-software",
+      "version": "5.4"
+    },
+    "description": "Redis Software 5.4 reaches end of life on 2020-12-31: no fixes or support for it from that date.",
+    "migration_hint": "Move to a Redis Software version whose end of life is later; the table lists each one's date.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://redis.io/docs/latest/operate/rs/installing-upgrading/product-lifecycle/",
+    "source_excerpt": "Cluster version end-of-life schedule\nVersion - Release date | End of Life (EOL)\n5.4 – December 2018 | December 31, 2020",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 11,
+    "fingerprint": "sha256:fd48ece9e42d59fdbab709f254053ec2ad56e05343ed6bb53c0fd20a9c9c2495",
+    "api": "redis/software-lifecycle",
+    "version": "2019-12-31",
+    "change": "breaking",
+    "subject": {
+      "type": "runtime",
+      "runtime": "redis-software",
+      "version": "5.2"
+    },
+    "description": "Redis Software 5.2 reaches end of life on 2019-12-31: no fixes or support for it from that date.",
+    "migration_hint": "Move to a Redis Software version whose end of life is later; the table lists each one's date.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://redis.io/docs/latest/operate/rs/installing-upgrading/product-lifecycle/",
+    "source_excerpt": "Cluster version end-of-life schedule\nVersion - Release date | End of Life (EOL)\n5.2 – June 2018 | December 31, 2019",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

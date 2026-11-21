@@ -34,3 +34,11 @@ Read with `Plugin{File: ...}` (`kinds/changelog/sdks.go`); `golden/<provider>-<s
 | File | URL | Tag commit | Saved | License; trimming | Quote |
 |---|---|---|---|---|---|
 | `redis-ioredis-5.0.0-CHANGELOG.md` | https://raw.githubusercontent.com/redis/ioredis/v5.0.0/CHANGELOG.md | `b8e99b4` | 2026-11-20 | MIT (ioredis); trimmed to the sections of 5.0.0 (the golden) and 5.0.0-beta.4 (the drop test), each unchanged | "you very likely have never used it." |
+
+## Saved lifecycle page
+
+Read by `golden/redis-software-lifecycle.json` through the whole `notices` plugin, kept whole as `curl` saved it.
+
+| File | URL | Saved | License | Quote |
+|---|---|---|---|---|
+| `redis-software-lifecycle.html` | https://redis.io/docs/latest/operate/rs/installing-upgrading/product-lifecycle/ | 2026-11-21 | © Redis Ltd.; quoted as a citation of Redis's published schedule | "7.4 – February 2024 \| November 30, 2026" |

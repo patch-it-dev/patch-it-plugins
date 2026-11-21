@@ -1,0 +1,254 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:7203a294791e8243266d1c26aa33fd46526c05c0815e03e5a1d2a5b60652fa34",
+    "api": "mongodb/server",
+    "version": "2031-10-31",
+    "change": "breaking",
+    "subject": {
+      "type": "runtime",
+      "runtime": "mongodb",
+      "version": "9.0"
+    },
+    "description": "MongoDB Server 9.0 reaches end of life on 2031-10-31: no fixes or support for it from that date.",
+    "migration_hint": "Move to a MongoDB Server version whose end of life is later; the table lists each one's date.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://www.mongodb.com/legal/support-policy/lifecycles",
+    "source_excerpt": "MongoDB Server\nRelease | Release Date | End of Life Date\nMongoDB 9.0 | September 2026 | October 31, 2031",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:0b96e50c8e0f5798e4849a122b1dc78543bd81d2a3c50c0d89f185955202fd30",
+    "api": "mongodb/server",
+    "version": "2029-10-31",
+    "change": "breaking",
+    "subject": {
+      "type": "runtime",
+      "runtime": "mongodb",
+      "version": "8.3"
+    },
+    "description": "MongoDB Server 8.3 reaches end of life on 2029-10-31: no fixes or support for it from that date.",
+    "migration_hint": "Move to a MongoDB Server version whose end of life is later; the table lists each one's date.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://www.mongodb.com/legal/support-policy/lifecycles",
+    "source_excerpt": "MongoDB Server\nRelease | Release Date | End of Life Date\nMongoDB 8.3 | May 2026 | October 31, 2029",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:55762b106f302a855e975e5496b4a5a0a4911aa1676557910f82b2d51fbc6557",
+    "api": "mongodb/server",
+    "version": "2026-07-31",
+    "change": "breaking",
+    "subject": {
+      "type": "runtime",
+      "runtime": "mongodb",
+      "version": "8.2"
+    },
+    "description": "MongoDB Server 8.2 reaches end of life on 2026-07-31: no fixes or support for it from that date.",
+    "migration_hint": "Move to a MongoDB Server version whose end of life is later; the table lists each one's date.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://www.mongodb.com/legal/support-policy/lifecycles",
+    "source_excerpt": "MongoDB Server\nRelease | Release Date | End of Life Date\nMongoDB 8.2 | September 2025 | July 31, 2026",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:fd2c1580bdb59e8cd7fd30eca68a56cff936208d4ae5e4f689e4ea03188825b8",
+    "api": "mongodb/server",
+    "version": "2029-10-31",
+    "change": "breaking",
+    "subject": {
+      "type": "runtime",
+      "runtime": "mongodb",
+      "version": "8.0"
+    },
+    "description": "MongoDB Server 8.0 reaches end of life on 2029-10-31: no fixes or support for it from that date.",
+    "migration_hint": "Move to a MongoDB Server version whose end of life is later; the table lists each one's date.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://www.mongodb.com/legal/support-policy/lifecycles",
+    "source_excerpt": "MongoDB Server\nRelease | Release Date | End of Life Date\nMongoDB 8.0 | October 2024 | October 31, 2029",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:3761e3a9a656ffed33772b6203cd55ae96a568c88b28213fece40816bfd0a660",
+    "api": "mongodb/server",
+    "version": "2027-08-31",
+    "change": "breaking",
+    "subject": {
+      "type": "runtime",
+      "runtime": "mongodb",
+      "version": "7.0"
+    },
+    "description": "MongoDB Server 7.0 reaches end of life on 2027-08-31: no fixes or support for it from that date.",
+    "migration_hint": "Move to a MongoDB Server version whose end of life is later; the table lists each one's date.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://www.mongodb.com/legal/support-policy/lifecycles",
+    "source_excerpt": "MongoDB Server\nRelease | Release Date | End of Life Date\nMongoDB 7.0 | August 2023 | August 31, 2027",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:0da27d5617887dca4ee3e8f7d8ef39952eca28e0e5d6fbbed1fe59bbc163e49f",
+    "api": "mongodb/server",
+    "version": "2025-07-31",
+    "change": "breaking",
+    "subject": {
+      "type": "runtime",
+      "runtime": "mongodb",
+      "version": "6.0"
+    },
+    "description": "MongoDB Server 6.0 reaches end of life on 2025-07-31: no fixes or support for it from that date.",
+    "migration_hint": "Move to a MongoDB Server version whose end of life is later; the table lists each one's date.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://www.mongodb.com/legal/support-policy/lifecycles",
+    "source_excerpt": "MongoDB Server\nRelease | Release Date | End of Life Date\nMongoDB 6.0 | July 2022 | July 31, 2025",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:2a82732c686abb3f3ba83947117ea607b2f610479b221990b2c7b02e05442613",
+    "api": "mongodb/server",
+    "version": "2024-10-31",
+    "change": "breaking",
+    "subject": {
+      "type": "runtime",
+      "runtime": "mongodb",
+      "version": "5.0"
+    },
+    "description": "MongoDB Server 5.0 reaches end of life on 2024-10-31: no fixes or support for it from that date.",
+    "migration_hint": "Move to a MongoDB Server version whose end of life is later; the table lists each one's date.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://www.mongodb.com/legal/support-policy/lifecycles",
+    "source_excerpt": "MongoDB Server\nRelease | Release Date | End of Life Date\nMongoDB 5.0 | July 2021 | October 31, 2024",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
+    "fingerprint": "sha256:948ec95b785a847e152a077889186d165ecdbf246bd885de90d0edf8b45f3b02",
+    "api": "mongodb/server",
+    "version": "2024-02-29",
+    "change": "breaking",
+    "subject": {
+      "type": "runtime",
+      "runtime": "mongodb",
+      "version": "4.4"
+    },
+    "description": "MongoDB Server 4.4 reaches end of life on 2024-02-29: no fixes or support for it from that date.",
+    "migration_hint": "Move to a MongoDB Server version whose end of life is later; the table lists each one's date.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://www.mongodb.com/legal/support-policy/lifecycles",
+    "source_excerpt": "MongoDB Server\nRelease | Release Date | End of Life Date\nMongoDB 4.4 | July 2020 | February 29, 2024",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 9,
+    "fingerprint": "sha256:f0186e233bcaa4dd32e81748f95caf18211d5677ab806d1a6a8723e61404ac11",
+    "api": "mongodb/server",
+    "version": "2023-04-30",
+    "change": "breaking",
+    "subject": {
+      "type": "runtime",
+      "runtime": "mongodb",
+      "version": "4.2"
+    },
+    "description": "MongoDB Server 4.2 reaches end of life on 2023-04-30: no fixes or support for it from that date.",
+    "migration_hint": "Move to a MongoDB Server version whose end of life is later; the table lists each one's date.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://www.mongodb.com/legal/support-policy/lifecycles",
+    "source_excerpt": "MongoDB Server\nRelease | Release Date | End of Life Date\nMongoDB 4.2 | August 2019 | April 30, 2023",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 10,
+    "fingerprint": "sha256:ecb82f2eaf34610fdf007301da2b4613df07d6c8f11882324ebc6bc2e6e42845",
+    "api": "mongodb/server",
+    "version": "2022-04-30",
+    "change": "breaking",
+    "subject": {
+      "type": "runtime",
+      "runtime": "mongodb",
+      "version": "4.0"
+    },
+    "description": "MongoDB Server 4.0 reaches end of life on 2022-04-30: no fixes or support for it from that date.",
+    "migration_hint": "Move to a MongoDB Server version whose end of life is later; the table lists each one's date.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://www.mongodb.com/legal/support-policy/lifecycles",
+    "source_excerpt": "MongoDB Server\nRelease | Release Date | End of Life Date\nMongoDB 4.0 | June 2018 | April 30, 2022",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 11,
+    "fingerprint": "sha256:99a04d3080e04f3367210d65f5ba65e13e7a03370ce6fad5923dd6e1233a7319",
+    "api": "mongodb/server",
+    "version": "2021-04-30",
+    "change": "breaking",
+    "subject": {
+      "type": "runtime",
+      "runtime": "mongodb",
+      "version": "3.6"
+    },
+    "description": "MongoDB Server 3.6 reaches end of life on 2021-04-30: no fixes or support for it from that date.",
+    "migration_hint": "Move to a MongoDB Server version whose end of life is later; the table lists each one's date.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://www.mongodb.com/legal/support-policy/lifecycles",
+    "source_excerpt": "MongoDB Server\nRelease | Release Date | End of Life Date\nMongoDB 3.6 | November 2017 | April 30, 2021",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 12,
+    "fingerprint": "sha256:0389213d265b065c06fefb6fc93bd36b9af3512a9893edc80ec2e9436cfe001e",
+    "api": "mongodb/server",
+    "version": "2020-01-31",
+    "change": "breaking",
+    "subject": {
+      "type": "runtime",
+      "runtime": "mongodb",
+      "version": "3.4"
+    },
+    "description": "MongoDB Server 3.4 reaches end of life on 2020-01-31: no fixes or support for it from that date.",
+    "migration_hint": "Move to a MongoDB Server version whose end of life is later; the table lists each one's date.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://www.mongodb.com/legal/support-policy/lifecycles",
+    "source_excerpt": "MongoDB Server\nRelease | Release Date | End of Life Date\nMongoDB 3.4 | November 2016 | January 31, 2020",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 13,
+    "fingerprint": "sha256:bf157b58abd330b403e3713746c73e3df85faf738219f5af924bc8ba01e3b922",
+    "api": "mongodb/server",
+    "version": "2018-09-30",
+    "change": "breaking",
+    "subject": {
+      "type": "runtime",
+      "runtime": "mongodb",
+      "version": "3.2"
+    },
+    "description": "MongoDB Server 3.2 reaches end of life on 2018-09-30: no fixes or support for it from that date.",
+    "migration_hint": "Move to a MongoDB Server version whose end of life is later; the table lists each one's date.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://www.mongodb.com/legal/support-policy/lifecycles",
+    "source_excerpt": "MongoDB Server\nRelease | Release Date | End of Life Date\nMongoDB 3.2 | December 2015 | September 30, 2018",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 14,
+    "fingerprint": "sha256:d02b3b87102068d58c4dc56e2ecd95eb2d7cb72efa1851be57e9cd58f33c61a6",
+    "api": "mongodb/server",
+    "version": "2018-02-28",
+    "change": "breaking",
+    "subject": {
+      "type": "runtime",
+      "runtime": "mongodb",
+      "version": "3.0"
+    },
+    "description": "MongoDB Server 3.0 reaches end of life on 2018-02-28: no fixes or support for it from that date.",
+    "migration_hint": "Move to a MongoDB Server version whose end of life is later; the table lists each one's date.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://www.mongodb.com/legal/support-policy/lifecycles",
+    "source_excerpt": "MongoDB Server\nRelease | Release Date | End of Life Date\nMongoDB 3.0 | March 2015 | February 28, 2018",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

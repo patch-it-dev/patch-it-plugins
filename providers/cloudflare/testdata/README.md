@@ -29,3 +29,19 @@ Read with `Plugin{File: ...}` (`kinds/changelog/sdks.go`); `golden/<provider>-<s
 | `cloudflare-python-5.6.0-CHANGELOG.md` | https://raw.githubusercontent.com/cloudflare/cloudflare-python/v5.6.0/CHANGELOG.md | `02ab9a9` | 2026-11-20 | Apache-2.0 (cloudflare-python); trimmed to the sections of 5.6.0 (the golden) and 5.4.0 (the drop test), each unchanged | "accounts:** The `create()` and `get()` methods have been removed from `client.accounts.subscriptions`. The `Subscript…" |
 | `cloudflare-go-7.15.0-CHANGELOG.md` | https://raw.githubusercontent.com/cloudflare/cloudflare-go/v7.15.0/CHANGELOG.md | `d2f77a0` | 2026-11-20 | Apache-2.0 (cloudflare-go); trimmed to the sections of 7.15.0 (the golden) and 7.13.1 (the drop test), each unchanged | "rules:** the `ListCursor` and `ListCursorParam` types are removed." |
 | `cloudflare-terraform-5.29.0-CHANGELOG.md` | https://raw.githubusercontent.com/cloudflare/terraform-provider-cloudflare/v5.29.0/CHANGELOG.md | `8e7a366` | 2026-11-20 | Apache-2.0 (terraform-provider-cloudflare); trimmed to the sections of 5.29.0 (the golden) and 5.28.1 (the drop test), each unchanged | "zone_dns_settings, account_dns_settings:** the deprecated `foundation_dns` attribute has been removed. On `cloudflare…" |
+
+## Compatibility flags file
+
+`src/workerd/io/compatibility-date.capnp` at six commits of cloudflare/workerd, saved with `curl` from `https://raw.githubusercontent.com/cloudflare/workerd/<sha>/src/workerd/io/compatibility-date.capnp` on 2026-11-21, kept whole; `golden/cloudflare-workers-compat-flags.json` is what two pairs give.
+
+**License:** Apache-2.0 (cloudflare/workerd).
+
+| File | Commit | Quote |
+|---|---|---|
+| `workerd-compatibility-date-bc8e6bc9.capnp` | bc8e6bc991fa1b7b59f96ceb1708c5b1e83abfb0 (2026-10-27) | |
+| `workerd-compatibility-date-e9e1914f.capnp` | e9e1914f23cf37164329b24e8441ac2d46b956e0 (2026-10-29) | `$compatEnableFlag("temporal")` … `$compatEnableDate("2026-12-01");` |
+| `workerd-compatibility-date-3adbfe0d.capnp` | 3adbfe0d419880f6138ab5f20f7be59af0dc6048 (2026-10-31) | |
+| `workerd-compatibility-date-22400fed.capnp` | 22400fed99d386b3ba2e90126dec7ed55ce9b1ea (2026-11-03) | `$compatEnableFlag("nodejs_process_version_24")` … `$compatEnableDate("2026-11-24");` |
+| `workerd-compatibility-date-791430df.capnp` | 791430df76df40ec0c7c5720120f334266a28d84 (2026-11-06) | |
+| `workerd-compatibility-date-d791dc63.capnp` | d791dc63fa7168829214cc19dd09574f497e5dea (2026-11-07) | `$compatEnableFlag("new_module_registry")` … `$compatEnableDate("2026-11-01");` (the drop test) |
+| `workerd-commits-compatibility-date-excerpt.json` | https://api.github.com/repos/cloudflare/workerd/commits?path=src%2Fworkerd%2Fio%2Fcompatibility-date.capnp&per_page=100&page=1, the newest three, trimmed to `sha`, `html_url`, `commit.committer.date` | |

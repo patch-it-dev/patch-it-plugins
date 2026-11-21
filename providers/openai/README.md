@@ -20,7 +20,7 @@ Kind: `openapi` (`kinds/openapi`), with its adapter, `OpenAI` ([`api.go`](api.go
 - **Alternatives considered:**
   - **The repo's tags** (`1.3.0`, `2.0.0`): too sparse to follow the API.
   - **`openapi.json` beside it:** the same spec, but only committed from 2026-07-16 on; the YAML has the whole history.
-  - **The [deprecations page](https://developers.openai.com/api/docs/deprecations):** read for model shutdowns by `openai/models` (kind `notices`). It announces endpoint shutdowns in prose and tables, not per operation.
+  - **The [deprecations page](https://developers.openai.com/api/docs/deprecations):** read for model shutdowns by `openai/models` and for endpoint shutdowns, by path, by `openai/deprecations` (kind `notices`). It names a path, not an operation.
   - **The changelog:** product news, not keyed by operation.
 - **Quote:** "The endpoint and model are deprecated and scheduled to shut down on February 26, 2027." (`POST /audio/translations`, flagged deprecated on 2026-10-28)
 
@@ -71,7 +71,7 @@ Kind: `notices` (`kinds/notices`), reading with the deprecations-page reader, `k
 
 ### What the plugin reads and ignores
 
-- Reads every table with a shutdown or retirement date column, a model column and a replacement column. Each backticked name in the model cell is one model (aliases after an escaped pipe too). The feature and endpoint table has no model column, so it isn't read.
+- Reads every table with a shutdown or retirement date column, a model column and a replacement column. Each backticked name in the model cell is one model (aliases after an escaped pipe too). The feature and endpoint table has no model column, so it isn't read here: `openai/deprecations` reads its endpoints.
 - A model listed twice keeps the row with the latest notice date (the first row on a page without that column); a newer "To be announced", or a status that isn't a retirement (only exactly `Deprecated`, `Shutdown`, `Shut down` or `Retired` are; "Deprecation postponed" isn't), withdraws an older date.
 - A replacement that is itself retired is followed to one that still works (`gpt-3.5-turbo-0613` → `gpt-3.5-turbo` → `gpt-5.6-terra`), and the hint says so.
 - Keeps every `gpt-<number>` model (a new generation needs no change) and the `o1`, `o3`, `o4`, `chatgpt-`, `computer-use` and `codex-` names. Ignores image, audio, realtime, transcription, embedding and moderation models, fine-tuned bases (`ft-gpt-4`; code sends `ft:gpt-4-0613:org::id`) and the legacy `-completions` aliases: the events are for the operations that take text models.
@@ -81,6 +81,39 @@ Kind: `notices` (`kinds/notices`), reading with the deprecations-page reader, `k
 
 - Replacements that need a setting (`gpt-5.6-sol` with `reasoning.mode: pro`) or name no model are passed on as written; a fix can't be generated from the second kind.
 - Image, audio and embedding model retirements aren't events.
+
+## OpenAI endpoint shutdowns (`openai/deprecations`)
+
+### What it watches
+
+REST API endpoints OpenAI shuts down, named on its deprecations page by their path (`/v1/prompts`, `/v1/audio/translations`, `/v1/edits`), each with its shutdown date and, when the page names one, the endpoint to use instead.
+
+Kind: `notices` (`kinds/notices`), with its own page reader, `EndpointsPage` ([`deprecations.go`](deprecations.go)).
+
+### Why this source
+
+- **Source:** [developers.openai.com/api/docs/deprecations](https://developers.openai.com/api/docs/deprecations), read as Markdown at its `.md` URL. Checked on 2026-11-21.
+- **Why this one:** OpenAI's own table of shutdowns, the same page `openai/models` reads for models. Its "Feature and endpoint deprecations" table and its "Past deprecations" table name endpoints with a date; nothing else OpenAI publishes does.
+- **Alternatives considered:**
+  - **The spec (`openai/api`):** flags an operation deprecated, but carries no shutdown date, and an endpoint can go without a flag.
+  - **OpenAI's changelog:** product news in prose, overlapping this table.
+- **Quote:** "| **Feb 26, 2027** | `/v1/audio/translations` | Deprecated | [`/v1/realtime/translations`](…) | Aug 26, 2026 |"
+
+### How the provider announces changes
+
+- A row per shutdown, with the date, the affected feature or endpoint, a status, a recommended replacement and (since 2026-11) a notice date. Past shutdowns move to "Past deprecations" and stay there.
+- An endpoint is written as its path in a code span, with no HTTP method: the contract's path-alone `api_operation` (every method on it).
+
+### What the plugin reads and ignores
+
+- **Reads** every table with a "Shutdown date" and an "Affected …" column: a row whose affected cell starts with a path in a code span is one `api_operation` event (`kind: operation`, `operation` the path), `breaking`, `version` the shutdown date, `previous_version` the read it was compared with. The hint names the replacement when that cell is exactly one path, and otherwise says OpenAI names none.
+- **Ignores** rows that name a feature in words ("Agent Builder", "Evals dashboard, API, and graders", "Self-serve fine-tuning job creation", the EU data residency `service_tier` row), model rows (`openai/models`), and a date that isn't one plain date ("Jun 13, 2024 Earliest estimate").
+- **The golden test** reads the page saved on 2026-11-21: 8 endpoints, 2 upcoming and 6 past. **The drop test** reads only the feature and endpoint table: of its six rows, only the two paths are events.
+
+### Known gaps
+
+- A path names no method, so the client can't name the SDK call from it alone; it lists these events until a handler reads paths.
+- "`/v1/prompts` and reusable prompt objects": the prompt objects themselves aren't an operation, and aren't read.
 
 ## OpenAI Node.js SDK (`openai/node-surface`)
 

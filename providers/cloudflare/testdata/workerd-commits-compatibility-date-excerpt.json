@@ -1,0 +1,29 @@
+[
+  {
+    "sha": "b0031a6dc6c50ecb3611d91781211d9bb60c7f11",
+    "html_url": "https://github.com/cloudflare/workerd/commit/b0031a6dc6c50ecb3611d91781211d9bb60c7f11",
+    "commit": {
+      "committer": {
+        "date": "2026-11-21T03:05:42Z"
+      }
+    }
+  },
+  {
+    "sha": "37d69146f3eee9ea92aff21f2dfd842f18c8a2de",
+    "html_url": "https://github.com/cloudflare/workerd/commit/37d69146f3eee9ea92aff21f2dfd842f18c8a2de",
+    "commit": {
+      "committer": {
+        "date": "2026-11-19T15:01:01Z"
+      }
+    }
+  },
+  {
+    "sha": "430a437e35f3fa7d52f4baca52e23787070574e3",
+    "html_url": "https://github.com/cloudflare/workerd/commit/430a437e35f3fa7d52f4baca52e23787070574e3",
+    "commit": {
+      "committer": {
+        "date": "2026-11-19T04:19:06Z"
+      }
+    }
+  }
+]

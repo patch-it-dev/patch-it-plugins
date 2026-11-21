@@ -90,6 +90,38 @@ Kind: `changelog` (`kinds/changelog`), with its JSON parser (`kinds/changelog/js
 - **The drivers aren't covered,** and they're what most application code uses.
 - **The patch-it client can't place these events yet.** Their `version` is a dated API version (`2023-01-01`), chosen per request in an `Accept` header, a scheme the client's version check doesn't know.
 
+## MongoDB Server end of life (`mongodb/server`)
+
+### What it watches
+
+MongoDB Server releases and the date each reaches end of life, from MongoDB's own lifecycle schedules: one `runtime` event per release (`runtime: mongodb`, `version: 6.0`), dated by its end of life.
+
+Kind: `notices` (`kinds/notices`), read by `kinds/notices/lifecycle` with the provider's table reader ([`server.go`](server.go)).
+
+### Why this source
+
+- **Source:** [mongodb.com/legal/support-policy/lifecycles](https://www.mongodb.com/legal/support-policy/lifecycles), the "MongoDB Server" table under "MongoDB Enterprise Advanced". Checked on 2026-11-21.
+- **Why this one:** MongoDB's own support policy: every server release from 3.0 to 9.0 with its end-of-life date, kept after the date passes.
+- **Alternatives considered:**
+  - **The per-release compatibility notes** (`docs/manual/release-notes/<N>-compatibility/`): what changes in a release, not when one stops being supported.
+  - **The same page's Atlas tables:** Atlas's own upgrade dates for the same release numbers, a different product.
+- **Quote:** "MongoDB 6.0 | July 2022 | July 31, 2025"
+
+### How the provider announces changes
+
+- A new release gets a row with its end-of-life date; rows stay after the date. A date can move (8.0's), which is a new event for the new date.
+
+### What the plugin reads and ignores
+
+- **Reads** the table under the "MongoDB Server" heading whose header is Release, Release Date, End of Life Date. A row "MongoDB X.Y" with a plain date ("October 31, 2029") is a `breaking` `runtime` event, `version` the date, no `previous_version` (a dated notice), past dates included.
+- **Ignores** the page's other tables (Atlas Dedicated, Atlas auto-upgrade, Kubernetes controllers, Ops Manager, Search) and a cell that isn't a plain date ("TBD, no sooner than October 2026").
+- **The golden test** reads the page saved on 2026-11-21: 14 releases, 14 events. **The drop test** reads the page up to the "MongoDB Server" heading: the Atlas tables alone give nothing, and their TBD cells give no date.
+
+### Known gaps
+
+- The client doesn't fix `runtime` events yet: it lists them.
+- MongoDB Atlas's own end-of-life dates for the same releases aren't read.
+
 ## MongoDB Node.js driver (`mongodb/node-surface`)
 
 ### What it watches

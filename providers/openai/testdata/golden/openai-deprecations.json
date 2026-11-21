@@ -1,0 +1,162 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:47cbf10667d82a8b9cd94b13523e749fb89fd2a5bd23d75e4c4dab545f715bbf",
+    "api": "openai/deprecations",
+    "version": "2026-11-30",
+    "previous_version": "2026-11-14T12:00:00Z",
+    "change": "breaking",
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "/v1/prompts"
+    },
+    "description": "OpenAI shuts down /v1/prompts on 2026-11-30: requests to it, whatever the method, fail from that date.",
+    "migration_hint": "OpenAI names no one endpoint to use instead; see the page's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Feature and endpoint deprecations\nShutdown date | Affected feature or endpoint | Status | Recommended replacement | Notice date\n**Nov 30, 2026** | `/v1/prompts` and reusable prompt objects | Deprecated | Move prompt content into your application code. [Migration guide](https://developers.openai.com/api/docs/guides/prompting/migrate-from-prompt-object) | Jun 3, 2026",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:960c9e7adf4b0484bc73d0b0ce9590aa6b9842aa83df726caa82f25355b6e3b0",
+    "api": "openai/deprecations",
+    "version": "2027-02-26",
+    "previous_version": "2026-11-14T12:00:00Z",
+    "change": "breaking",
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "/v1/audio/translations"
+    },
+    "description": "OpenAI shuts down /v1/audio/translations on 2027-02-26: requests to it, whatever the method, fail from that date.",
+    "migration_hint": "Use /v1/realtime/translations instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Feature and endpoint deprecations\nShutdown date | Affected feature or endpoint | Status | Recommended replacement | Notice date\n**Feb 26, 2027** | `/v1/audio/translations` | Deprecated | [`/v1/realtime/translations`](https://developers.openai.com/api/docs/guides/realtime-translation) | Aug 26, 2026",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:10617b59536ed2ad58fac96aa734a69ecc29e25a760250097e6a2d32bbcaa08a",
+    "api": "openai/deprecations",
+    "version": "2024-01-04",
+    "previous_version": "2026-11-14T12:00:00Z",
+    "change": "breaking",
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "/v1/fine-tunes"
+    },
+    "description": "OpenAI shuts down /v1/fine-tunes on 2024-01-04: requests to it, whatever the method, fail from that date.",
+    "migration_hint": "Use /v1/fine_tuning/jobs instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Past deprecations\nShutdown date | Affected model or feature | Listed replacement | Notice date\n**Jan 4, 2024** | `/v1/fine-tunes` | `/v1/fine_tuning/jobs` | Aug 22, 2023",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:88fc4236173d8389801381712eb592d0f43549d94cd841a6f1c2290b637c0a1d",
+    "api": "openai/deprecations",
+    "version": "2024-01-04",
+    "previous_version": "2026-11-14T12:00:00Z",
+    "change": "breaking",
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "/v1/edits"
+    },
+    "description": "OpenAI shuts down /v1/edits on 2024-01-04: requests to it, whatever the method, fail from that date.",
+    "migration_hint": "Use /v1/chat/completions instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Past deprecations\nShutdown date | Affected model or feature | Listed replacement | Notice date\n**Jan 4, 2024** | `/v1/edits` | `/v1/chat/completions` | Jul 6, 2023",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:88ff3d59b4fa01ced866c8deac278361823f1d7e801d870509e50ba2f6fa765c",
+    "api": "openai/deprecations",
+    "version": "2022-12-03",
+    "previous_version": "2026-11-14T12:00:00Z",
+    "change": "breaking",
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "/v1/engines"
+    },
+    "description": "OpenAI shuts down /v1/engines on 2022-12-03: requests to it, whatever the method, fail from that date.",
+    "migration_hint": "Use /v1/models instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Past deprecations\nShutdown date | Affected model or feature | Listed replacement | Notice date\n**Dec 3, 2022** | `/v1/engines` | [/v1/models](https://platform.openai.com/docs/api-reference/models/list) | Jun 3, 2022",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:6d8395069a65598fb501c94f78c9b233f27e196b551e1cf81e93bac794148023",
+    "api": "openai/deprecations",
+    "version": "2022-12-03",
+    "previous_version": "2026-11-14T12:00:00Z",
+    "change": "breaking",
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "/v1/search"
+    },
+    "description": "OpenAI shuts down /v1/search on 2022-12-03: requests to it, whatever the method, fail from that date.",
+    "migration_hint": "OpenAI names no one endpoint to use instead; see the page's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Past deprecations\nShutdown date | Affected model or feature | Listed replacement | Notice date\n**Dec 3, 2022** | `/v1/search` | [View transition guide](https://help.openai.com/en/articles/6272952-search-transition-guide) | Jun 3, 2022",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:3d12021f2066e4a367ce5efe8bd5cd414397e9ce24feddd1cd5944a23e47aab0",
+    "api": "openai/deprecations",
+    "version": "2022-12-03",
+    "previous_version": "2026-11-14T12:00:00Z",
+    "change": "breaking",
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "/v1/classifications"
+    },
+    "description": "OpenAI shuts down /v1/classifications on 2022-12-03: requests to it, whatever the method, fail from that date.",
+    "migration_hint": "OpenAI names no one endpoint to use instead; see the page's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Past deprecations\nShutdown date | Affected model or feature | Listed replacement | Notice date\n**Dec 3, 2022** | `/v1/classifications` | [View transition guide](https://help.openai.com/en/articles/6272941-classifications-transition-guide) | Jun 3, 2022",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
+    "fingerprint": "sha256:1cd8e56822e9b715f7d7a1fa9d45e0f5e9e725fb8f1486423c88210c60e656cf",
+    "api": "openai/deprecations",
+    "version": "2022-12-03",
+    "previous_version": "2026-11-14T12:00:00Z",
+    "change": "breaking",
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "/v1/answers"
+    },
+    "description": "OpenAI shuts down /v1/answers on 2022-12-03: requests to it, whatever the method, fail from that date.",
+    "migration_hint": "OpenAI names no one endpoint to use instead; see the page's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Past deprecations\nShutdown date | Affected model or feature | Listed replacement | Notice date\n**Dec 3, 2022** | `/v1/answers` | [View transition guide](https://help.openai.com/en/articles/6233728-answers-transition-guide) | Jun 3, 2022",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

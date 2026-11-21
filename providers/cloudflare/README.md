@@ -142,6 +142,40 @@ Kind: `apisurface` (`kinds/apisurface`), with the Python reader (`kinds/apisurfa
 - The wheel read is the first one by file name (a `-none-any` wheel when there is one); a release whose platform wheels differ in their Python files is read from that one.
 - Releases are large (about 60,000 public names); a nested response type removed with its API reads as one event per module that defines it.
 
+## Cloudflare Workers compatibility flags (`cloudflare/workers-compat-flags`)
+
+### What it watches
+
+Workers compatibility flags that turn on by default from a compatibility date: a Worker whose `compatibility_date` is on or after it gets the new behavior. One `flag` event per flag (`setting: compatibility_flags`, `name: temporal`), dated by that compatibility date.
+
+Kind: `catalog` (a file read at every commit), with its reader for a flags file in Cap'n Proto, `catalog.CompatFlags` ([`kinds/catalog/compatflags.go`](../../kinds/catalog/compatflags.go)).
+
+### Why this source
+
+- **Source:** [`src/workerd/io/compatibility-date.capnp`](https://github.com/cloudflare/workerd/blob/main/src/workerd/io/compatibility-date.capnp) in cloudflare/workerd, read at every commit that changed it (`https://raw.githubusercontent.com/cloudflare/workerd/<sha>/...`). Checked on 2026-11-21: 207 flags, 95 with a default date.
+- **Why this one:** the runtime's own declaration of every flag, its name, its opt-out name and its default date; the [docs page](https://developers.cloudflare.com/workers/configuration/compatibility-flags/) is written from it. Each commit can be cited and replayed.
+- **Alternatives considered:**
+  - **The docs page:** the same flags in prose, no history to pin.
+  - **Cloudflare's changelog:** announces some flags, not all.
+- **Quote:** `temporal @200 :Bool $compatEnableFlag("temporal") $compatDisableFlag("no_temporal") $compatEnableDate("2026-12-01");`
+
+### How the provider announces changes
+
+- A flag lands with its name and, when it's to become the default, `$compatEnableDate`, usually weeks ahead. A flag is never removed from the file.
+- The date can move before it arrives (`new_module_registry`: 2026-11-01, then 11-08, 11-12 and 11-17, all on 2026-11-07), and branches merge late, so the commit list isn't one straight line.
+
+### What the plugin reads and ignores
+
+- **Reads** every Bool field of the struct with `$compatEnableFlag` and `$compatEnableDate`. A (flag, date) in the newer commit that the older one didn't have is a `breaking` `flag` event: `version` the date, no `previous_version` (a dated notice), the hint naming the opt-out flag. The excerpt is the field and its annotations, whitespace collapsed.
+- **Ignores** flags with no default date (opt-in only), experimental flags (`$experimental`), a date before the commit that sets it, and the first commit read (nothing to compare).
+- **The golden test** replays two pairs: 2026-10-27 → 10-29 (`temporal`, from 2026-12-01) and 10-31 → 11-03 (`nodejs_process_version_24`, from 2026-11-24). **The drop test** replays 2026-11-06 → 11-07: `new_module_registry` dated 2026-11-01, before its commit, no event.
+
+### Known gaps
+
+- A date that moves gives a new event for the new date; the event for the old date isn't withdrawn.
+- Flags implied by another flag after a date (`$impliedByAfterDate`) aren't read.
+- The client doesn't fix `flag` events yet: it lists them.
+
 ## Cloudflare SDKs and Terraform provider (`cloudflare/typescript`, `cloudflare/python`, `cloudflare/go`, `cloudflare/terraform`)
 
 ### What it watches

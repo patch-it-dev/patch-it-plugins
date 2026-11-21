@@ -17,6 +17,12 @@ The deprecations page, as markdown (the page's URL plus `.md`), read by the gold
 | `openai-deprecations.md` | https://developers.openai.com/api/docs/deprecations.md | 2026-11-21 | "\| **Dec 11, 2026** \| `gpt-5`, `gpt-5-2025-08-07` \| Deprecated \| `gpt-6.1-sol` \| Jun 11, 2026 \|" |
 | `openai-deprecations-2026-10-13.md` | https://developers.openai.com/api/docs/deprecations.md | 2026-10-13 | "\| October 23, 2026 \| `gpt-4-0613` \\\| `gpt-4`, … \| `gpt-5.6-sol` \|" |
 
+`openai-deprecations-2026-11-21.md` is the page read by `golden/openai-deprecations.json` (the endpoint rows), saved with `curl` the day the source was built.
+
+| File | URL | Fetched | Quote |
+|---|---|---|---|
+| `openai-deprecations-2026-11-21.md` | https://developers.openai.com/api/docs/deprecations.md | 2026-11-21 | "\| **Nov 30, 2026** \| `/v1/prompts` and reusable prompt objects \| Deprecated \|" |
+
 ## Saved releases
 
 Each golden file, `golden/<provider>-<source>.json`, is what the `apisurface` kind stores from the source's golden pair, read from `pypi/<package>/` or `npm/<package>/` (the Python package's own pair, 1.1.1 → 1.1.2, from the files at the top level of `testdata/`).

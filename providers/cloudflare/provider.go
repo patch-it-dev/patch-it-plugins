@@ -7,6 +7,7 @@ import (
 	"github.com/patch-it-dev/patch-it-plugins/core/kit"
 	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 	"github.com/patch-it-dev/patch-it-plugins/kinds/apisurface"
+	"github.com/patch-it-dev/patch-it-plugins/kinds/catalog"
 	"github.com/patch-it-dev/patch-it-plugins/kinds/changelog"
 	"github.com/patch-it-dev/patch-it-plugins/kinds/notices"
 	"github.com/patch-it-dev/patch-it-plugins/kinds/openapi"
@@ -36,6 +37,13 @@ func init() {
 				Shape:  plugin.Shape{Anchors: []plugin.Anchor{{Entry: "Changelog | API deprecations", Checked: "2026-11-21"}}},
 				Plugin: notices.Plugin{Page: API, Archiver: kit.Wayback{}},
 			},
+			{
+				ID: "workers-compat-flags", Layer: plugin.LayerRuntime,
+				Watches:  "Cloudflare Workers compatibility flags that turn on by default from a compatibility date, from the file workerd declares them in, commit by commit",
+				URLs:     []string{"https://github.com/cloudflare/workerd/blob/main/src/workerd/io/compatibility-date.capnp", "https://developers.cloudflare.com/workers/configuration/compatibility-flags/"},
+				Packages: []string{"npm:wrangler"},
+				Plugin:   WorkersCompatFlags,
+			},
 			changelog.SDK("typescript", Typescript, "npm:cloudflare"),
 			changelog.SDK("python", Python, "pypi:cloudflare"),
 			changelog.SDK("go", Go, "go:github.com/cloudflare/cloudflare-go/v7"),
@@ -63,3 +71,13 @@ var (
 var (
 	PythonSurface = apisurface.Package{ID: "cloudflare/python-surface", Name: "cloudflare", Ecosystem: "pypi", Module: "cloudflare"}
 )
+
+// WorkersCompatFlags is workerd's compatibility flags file (checked
+// 2026-11-21: 207 flags, 95 with a default date, 40 commits to the file
+// since 2026-10-14). The flags a Worker sets go in wrangler's
+// compatibility_flags.
+var WorkersCompatFlags = catalog.CompatFlags{
+	API: "cloudflare/workers-compat-flags", Vendor: "Cloudflare Workers",
+	Provider: "cloudflare", Setting: "compatibility_flags",
+	Repo: "cloudflare/workerd", Path: "src/workerd/io/compatibility-date.capnp",
+}

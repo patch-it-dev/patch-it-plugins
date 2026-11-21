@@ -62,7 +62,7 @@ core/extract/          what readers of prose share: RSS/Atom entries, HTML as te
 core/event/            the change event of patch-it's contract: types, fingerprint, validation
 core/diff/ core/normalize/ core/hint/   the OpenAPI diff engine and its helpers
 kinds/<kind>/          how to read, one package per kind, written once, no provider in it: openapi (+ adapter/,
-                       the interface a provider's spec adapter implements), notices (+ retire/, feed/, eol/),
+                       the interface a provider's spec adapter implements), notices (+ retire/, feed/, eol/, lifecycle/),
                        migrationguide (+ sdkguide/, members/), changelog (Markdown, RST, GitHub release notes
                        or JSON), catalog, apisurface (+ pysurface/, dtsurface/); each with a <kind>test/ package
                        its providers' tests share
