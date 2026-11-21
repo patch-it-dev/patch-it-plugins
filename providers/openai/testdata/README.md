@@ -8,11 +8,14 @@ The deprecations page, as markdown (the page's URL plus `.md`), read by the gold
 
 **License:** excerpts for testing; © OpenAI. Not covered by this repo's license.
 
-**Trimmed.** Each file keeps the page title and, for every retirement table that names at least one model the plugin keeps (text models code sends), the section heading above it and the whole table, copied unchanged. Prose, notice-period policy, endpoint tables and tables of only image, audio or embedding models were left out. `retire.Parse` returns exactly the same retirements from the trimmed and the full pages, so the golden files didn't change.
+**Trimmed.** Each file keeps the page title and, for every retirement table that names at least one model the plugin keeps (text models code sends), the section heading above it and the whole table, copied unchanged. Prose, notice-period policy, endpoint tables and tables of only image, audio or embedding models were left out. `retire.Parse` returns exactly the same retirements from the trimmed and the full pages.
+
+`openai-deprecations.md` is the page today, read by `golden/openai-models.json`. `openai-deprecations-2026-10-13.md` is the page's layout before 2026-11 (one table per announcement, no Status or Notice date column), kept as a case while it still reads: `layouts/openai-models-2026-10-13.json` is its events.
 
 | File | URL | Fetched | Quote |
 |---|---|---|---|
-| `openai-deprecations.md` | https://developers.openai.com/api/docs/deprecations.md | 2026-10-13 | "\| October 23, 2026 \| `gpt-4-0613` \\\| `gpt-4`, … \| `gpt-5.6-sol` \|" |
+| `openai-deprecations.md` | https://developers.openai.com/api/docs/deprecations.md | 2026-11-21 | "\| **Dec 11, 2026** \| `gpt-5`, `gpt-5-2025-08-07` \| Deprecated \| `gpt-6.1-sol` \| Jun 11, 2026 \|" |
+| `openai-deprecations-2026-10-13.md` | https://developers.openai.com/api/docs/deprecations.md | 2026-10-13 | "\| October 23, 2026 \| `gpt-4-0613` \\\| `gpt-4`, … \| `gpt-5.6-sol` \|" |
 
 ## Saved releases
 

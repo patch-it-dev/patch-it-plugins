@@ -17,11 +17,19 @@ import (
 // nothing new.
 func Golden(t *testing.T, page notices.Page, file string) {
 	t.Helper()
+	GoldenFile(t, page, file, "testdata/golden/"+strings.ReplaceAll(page.Slug(), "/", "-")+".json")
+}
+
+// GoldenFile is Golden against another golden file: a page's earlier layout,
+// kept as a case while it still reads (testdata/layouts/), since a source has
+// one golden under testdata/golden/.
+func GoldenFile(t *testing.T, page notices.Page, file, golden string) {
+	t.Helper()
 	saved := kittest.Pages{page.PageURL(): file}
 	archive := &kittest.Archive{T: t, Pages: saved}
 	got := kittest.Page(t, kittest.Env(t, saved), notices.Plugin{Page: page, Archiver: archive})
 	if archive.Calls != 1 {
 		t.Errorf("%d snapshots, want 1: the second read's page is unchanged", archive.Calls)
 	}
-	kittest.Golden(t, "testdata/golden/"+strings.ReplaceAll(page.Slug(), "/", "-")+".json", got)
+	kittest.Golden(t, golden, got)
 }

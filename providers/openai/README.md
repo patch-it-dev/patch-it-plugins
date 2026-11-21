@@ -57,23 +57,23 @@ Kind: `notices` (`kinds/notices`), reading with the deprecations-page reader, `k
 
 ### Why this source
 
-- **Source:** [developers.openai.com/api/docs/deprecations](https://developers.openai.com/api/docs/deprecations), read as markdown at `https://developers.openai.com/api/docs/deprecations.md`. Checked on 2026-10-13.
-- **Why this one:** it's OpenAI's own list of every deprecation, each announcement a table of shutdown date, model and recommended replacement. The markdown version is machine-readable without scraping HTML. `robots.txt` allows it.
+- **Source:** [developers.openai.com/api/docs/deprecations](https://developers.openai.com/api/docs/deprecations), read as markdown at `https://developers.openai.com/api/docs/deprecations.md`. Checked on 2026-11-21.
+- **Why this one:** it's OpenAI's own list of every deprecation: a table of upcoming shutdowns and one of past ones, each row a shutdown date, the models, a status, the recommended replacement and the notice date. The markdown version is machine-readable without scraping HTML. `robots.txt` allows it.
 - **Alternatives considered:** the models list API (`GET /v1/models`: says what exists now, not when it stops); OpenAI's blog and email notices (announce only some changes, no table); the old `platform.openai.com/docs/deprecations` URL (redirects here).
-- **Quote:** "| October 23, 2026 | `gpt-4-0613` \| `gpt-4`, … | `gpt-5.6-sol` |" (2026-04-22 announcement, "Legacy GPT model snapshots").
+- **Quote:** "| **Dec 11, 2026** | `gpt-5`, `gpt-5-2025-08-07` | Deprecated | `gpt-6.1-sol` | Jun 11, 2026 |" ("Upcoming deprecations", 2026-11-21).
 
 ### How the provider announces changes
 
 - An announcement every few weeks, shutdowns a few months later (at least 6 months for generally available models, 3 for specialized variants, possibly 2 weeks for previews, per the page).
 - **Forced, by date**: a request naming a retired model fails on every SDK version. So the event's `version` is the shutdown date.
-- The page keeps past announcements, newest first.
+- The page keeps past shutdowns in a "Past deprecations" table. Until 2026-11 it was one table per announcement, newest first, with plain dates; since then it is two tables (upcoming, past) with bold dates and a Status and a Notice date column. The reader reads both layouts.
 
 ### What the plugin reads and ignores
 
-- Reads every table whose first column is a shutdown or retirement date and which has a model column and a replacement column. Each backticked name in the model cell is one model (aliases after an escaped pipe too).
-- A model listed twice keeps its first (newest) row; a newer "To be announced" withdraws an older date.
+- Reads every table with a shutdown or retirement date column, a model column and a replacement column. Each backticked name in the model cell is one model (aliases after an escaped pipe too). The feature and endpoint table has no model column, so it isn't read.
+- A model listed twice keeps the row with the latest notice date (the first row on a page without that column); a newer "To be announced", or a status that isn't a retirement (only `Deprecated`, `Shutdown` or `Retired` are), withdraws an older date.
 - A replacement that is itself retired is followed to one that still works (`gpt-3.5-turbo-0613` → `gpt-3.5-turbo` → `gpt-5.6-terra`), and the hint says so.
-- Ignores image, audio, realtime, transcription, embedding and moderation models, fine-tuned bases (`ft-gpt-4`; code sends `ft:gpt-4-0613:org::id`) and the legacy `-completions` aliases: the events are for the operations that take text models.
+- Keeps every `gpt-<number>` model (a new generation needs no change) and the `o1`, `o3`, `o4`, `chatgpt-`, `computer-use` and `codex-` names. Ignores image, audio, realtime, transcription, embedding and moderation models, fine-tuned bases (`ft-gpt-4`; code sends `ft:gpt-4-0613:org::id`) and the legacy `-completions` aliases: the events are for the operations that take text models.
 - Every event cites a Wayback Machine snapshot of the page, never the live page, and is read from that snapshot. No snapshot, or one that differs from the live page, stores nothing that run. A page that suddenly lists far fewer retirements fails the run (a renamed column probably hid a table).
 
 ### Known gaps

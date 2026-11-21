@@ -1,66 +1,26 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:e83a8785aa6d1906e4892462f0f62fa5b84084e2329286623563aecdf88249ba",
+    "fingerprint": "sha256:9fb7010e84587e2cebcd6733d07cd340be4121d42352afc5c19f2e9a326cfa54",
     "api": "openai/models",
-    "version": "2027-04-01",
+    "version": "2026-12-11",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
       "type": "model",
       "provider": "openai",
-      "name": "gpt-5.3-codex",
-      "replacement": "gpt-6-sol"
+      "name": "gpt-5",
+      "replacement": "gpt-6.1-sol"
     },
-    "description": "Model \"gpt-5.3-codex\" is shut down on 2027-04-01: OpenAI requests naming it fail from that date.",
-    "migration_hint": "Use `gpt-6-sol` instead: OpenAI's recommended replacement.",
+    "description": "Model \"gpt-5\" is shut down on 2026-12-11: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-6.1-sol` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-10-01: GPT-5.3-Codex, GPT-5.1, GPT-5.4-Nano\n| Shutdown date | Model / system  | Recommended replacement |\n| Apr 1, 2027   | `gpt-5.3-codex` | `gpt-6-sol`             |",
+    "source_excerpt": "## Upcoming deprecations\n| Shutdown date    | Affected model                                                                                                        | Status                                                       | Recommended replacement                                    | Notice date  |\n| **Dec 11, 2026** | `gpt-5`, `gpt-5-2025-08-07`                              | Deprecated | `gpt-6.1-sol`                                              | Jun 11, 2026 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
     "id": 2,
-    "fingerprint": "sha256:9c716074471064f27c0955e58528789627b3e305f8e9f484f802ffce272a02b1",
-    "api": "openai/models",
-    "version": "2027-04-01",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "model",
-      "provider": "openai",
-      "name": "gpt-5.4-nano",
-      "replacement": "gpt-6-luna"
-    },
-    "description": "Model \"gpt-5.4-nano\" is shut down on 2027-04-01: OpenAI requests naming it fail from that date.",
-    "migration_hint": "Use `gpt-6-luna` instead: OpenAI's recommended replacement.",
-    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-10-01: GPT-5.3-Codex, GPT-5.1, GPT-5.4-Nano\n| Shutdown date | Model / system  | Recommended replacement |\n| Apr 1, 2027   | `gpt-5.4-nano`  | `gpt-6-luna`            |",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 3,
-    "fingerprint": "sha256:5468ca8ed9e11617bf886b8295f73ae0dab23e44cd09ff066dfe205f0f532453",
-    "api": "openai/models",
-    "version": "2027-04-01",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "model",
-      "provider": "openai",
-      "name": "gpt-5.1",
-      "replacement": "gpt-6-sol"
-    },
-    "description": "Model \"gpt-5.1\" is shut down on 2027-04-01: OpenAI requests naming it fail from that date.",
-    "migration_hint": "Use `gpt-6-sol` instead: OpenAI's recommended replacement.",
-    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-10-01: GPT-5.3-Codex, GPT-5.1, GPT-5.4-Nano\n| Shutdown date | Model / system  | Recommended replacement |\n| Apr 1, 2027   | `gpt-5.1`       | `gpt-6-sol`             |",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 4,
     "fingerprint": "sha256:fd7343b0764b86973207e103c720c03cc5ad27ad09e0f178b5c02c2706d883e3",
     "api": "openai/models",
     "version": "2026-12-11",
@@ -70,17 +30,37 @@
       "type": "model",
       "provider": "openai",
       "name": "gpt-5-2025-08-07",
-      "replacement": "gpt-5.6-sol"
+      "replacement": "gpt-6.1-sol"
     },
     "description": "Model \"gpt-5-2025-08-07\" is shut down on 2026-12-11: OpenAI requests naming it fail from that date.",
-    "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
+    "migration_hint": "Use `gpt-6.1-sol` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-06-11: GPT-5 and o3 model deprecations\n| Shutdown date | Model / system          | Recommended replacement               |\n| Dec 11, 2026  | `gpt-5-2025-08-07`      | `gpt-5.6-sol`                         |",
+    "source_excerpt": "## Upcoming deprecations\n| Shutdown date    | Affected model                                                                                                        | Status                                                       | Recommended replacement                                    | Notice date  |\n| **Dec 11, 2026** | `gpt-5`, `gpt-5-2025-08-07`                              | Deprecated | `gpt-6.1-sol`                                              | Jun 11, 2026 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 5,
+    "id": 3,
+    "fingerprint": "sha256:bb6c2eb37fb4b683f4624a1c6441e255ab4f8d0982d61636442e6515bc0ede00",
+    "api": "openai/models",
+    "version": "2026-12-11",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "gpt-5-mini",
+      "replacement": "gpt-6.1-terra"
+    },
+    "description": "Model \"gpt-5-mini\" is shut down on 2026-12-11: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-6.1-terra` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Upcoming deprecations\n| Shutdown date    | Affected model                                                                                                        | Status                                                       | Recommended replacement                                    | Notice date  |\n| **Dec 11, 2026** | `gpt-5-mini`, `gpt-5-mini-2025-08-07`                                                                                 | Deprecated | `gpt-6.1-terra`                                            | Jun 11, 2026 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
     "fingerprint": "sha256:9a9550f80f08e21273eda077e7419d2e3bb18846552791072afcb0059e95b2fe",
     "api": "openai/models",
     "version": "2026-12-11",
@@ -90,12 +70,32 @@
       "type": "model",
       "provider": "openai",
       "name": "gpt-5-mini-2025-08-07",
-      "replacement": "gpt-5.6-terra"
+      "replacement": "gpt-6.1-terra"
     },
     "description": "Model \"gpt-5-mini-2025-08-07\" is shut down on 2026-12-11: OpenAI requests naming it fail from that date.",
-    "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement.",
+    "migration_hint": "Use `gpt-6.1-terra` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-06-11: GPT-5 and o3 model deprecations\n| Shutdown date | Model / system          | Recommended replacement               |\n| Dec 11, 2026  | `gpt-5-mini-2025-08-07` | `gpt-5.6-terra`                       |",
+    "source_excerpt": "## Upcoming deprecations\n| Shutdown date    | Affected model                                                                                                        | Status                                                       | Recommended replacement                                    | Notice date  |\n| **Dec 11, 2026** | `gpt-5-mini`, `gpt-5-mini-2025-08-07`                                                                                 | Deprecated | `gpt-6.1-terra`                                            | Jun 11, 2026 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:c453c1761678ac0c869ac34181f39f29ccaf1fb2b0eb52a6e3c836df310c3b12",
+    "api": "openai/models",
+    "version": "2026-12-11",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "gpt-5-nano",
+      "replacement": "gpt-6-luna"
+    },
+    "description": "Model \"gpt-5-nano\" is shut down on 2026-12-11: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-6-luna` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Upcoming deprecations\n| Shutdown date    | Affected model                                                                                                        | Status                                                       | Recommended replacement                                    | Notice date  |\n| **Dec 11, 2026** | `gpt-5-nano`, `gpt-5-nano-2025-08-07`                                                                                 | Deprecated | `gpt-6-luna`                                               | Jun 11, 2026 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
@@ -110,17 +110,36 @@
       "type": "model",
       "provider": "openai",
       "name": "gpt-5-nano-2025-08-07",
-      "replacement": "gpt-5.6-luna"
+      "replacement": "gpt-6-luna"
     },
     "description": "Model \"gpt-5-nano-2025-08-07\" is shut down on 2026-12-11: OpenAI requests naming it fail from that date.",
-    "migration_hint": "Use `gpt-5.6-luna` instead: OpenAI's recommended replacement.",
+    "migration_hint": "Use `gpt-6-luna` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-06-11: GPT-5 and o3 model deprecations\n| Shutdown date | Model / system          | Recommended replacement               |\n| Dec 11, 2026  | `gpt-5-nano-2025-08-07` | `gpt-5.6-luna`                        |",
+    "source_excerpt": "## Upcoming deprecations\n| Shutdown date    | Affected model                                                                                                        | Status                                                       | Recommended replacement                                    | Notice date  |\n| **Dec 11, 2026** | `gpt-5-nano`, `gpt-5-nano-2025-08-07`                                                                                 | Deprecated | `gpt-6-luna`                                               | Jun 11, 2026 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
     "id": 7,
+    "fingerprint": "sha256:861bc08dfcd791a7998d13abfb7894f874af9d4d3e61027867fc2c9f1b4d8361",
+    "api": "openai/models",
+    "version": "2026-12-11",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "gpt-5-pro"
+    },
+    "description": "Model \"gpt-5-pro\" is shut down on 2026-12-11: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-6.1-sol` (`reasoning.mode: pro`) in the Responses API instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Upcoming deprecations\n| Shutdown date    | Affected model                                                                                                        | Status                                                       | Recommended replacement                                    | Notice date  |\n| **Dec 11, 2026** | `gpt-5-pro`, `gpt-5-pro-2025-10-06`                                                                                   | Deprecated | `gpt-6.1-sol` (`reasoning.mode: pro`) in the Responses API | Jun 11, 2026 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
     "fingerprint": "sha256:2513bab92d4daf80ce3a3341677c48567a142a27968890bddaa39b349443ac4a",
     "api": "openai/models",
     "version": "2026-12-11",
@@ -132,14 +151,34 @@
       "name": "gpt-5-pro-2025-10-06"
     },
     "description": "Model \"gpt-5-pro-2025-10-06\" is shut down on 2026-12-11: OpenAI requests naming it fail from that date.",
-    "migration_hint": "Use `gpt-5.6-sol` (`reasoning.mode: pro`) instead: OpenAI's recommended replacement.",
+    "migration_hint": "Use `gpt-6.1-sol` (`reasoning.mode: pro`) in the Responses API instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-06-11: GPT-5 and o3 model deprecations\n| Shutdown date | Model / system          | Recommended replacement               |\n| Dec 11, 2026  | `gpt-5-pro-2025-10-06`  | `gpt-5.6-sol` (`reasoning.mode: pro`) |",
+    "source_excerpt": "## Upcoming deprecations\n| Shutdown date    | Affected model                                                                                                        | Status                                                       | Recommended replacement                                    | Notice date  |\n| **Dec 11, 2026** | `gpt-5-pro`, `gpt-5-pro-2025-10-06`                                                                                   | Deprecated | `gpt-6.1-sol` (`reasoning.mode: pro`) in the Responses API | Jun 11, 2026 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 8,
+    "id": 9,
+    "fingerprint": "sha256:46544902b8aaed380adb65210034641ab02494a712bbfc3b2b8fcf6f34e74986",
+    "api": "openai/models",
+    "version": "2026-12-11",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "o3",
+      "replacement": "gpt-6.1-sol"
+    },
+    "description": "Model \"o3\" is shut down on 2026-12-11: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-6.1-sol` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Upcoming deprecations\n| Shutdown date    | Affected model                                                                                                        | Status                                                       | Recommended replacement                                    | Notice date  |\n| **Dec 11, 2026** | `o3`, `o3-2025-04-16`                                                                                                 | Deprecated | `gpt-6.1-sol`                                              | Jun 11, 2026 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 10,
     "fingerprint": "sha256:3aaa754c27ec3dcf296ba9eca13168cc0c4260f578dd5487fa452ae0406444dd",
     "api": "openai/models",
     "version": "2026-12-11",
@@ -149,17 +188,36 @@
       "type": "model",
       "provider": "openai",
       "name": "o3-2025-04-16",
-      "replacement": "gpt-5.6-sol"
+      "replacement": "gpt-6.1-sol"
     },
     "description": "Model \"o3-2025-04-16\" is shut down on 2026-12-11: OpenAI requests naming it fail from that date.",
-    "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
+    "migration_hint": "Use `gpt-6.1-sol` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-06-11: GPT-5 and o3 model deprecations\n| Shutdown date | Model / system          | Recommended replacement               |\n| Dec 11, 2026  | `o3-2025-04-16`         | `gpt-5.6-sol`                         |",
+    "source_excerpt": "## Upcoming deprecations\n| Shutdown date    | Affected model                                                                                                        | Status                                                       | Recommended replacement                                    | Notice date  |\n| **Dec 11, 2026** | `o3`, `o3-2025-04-16`                                                                                                 | Deprecated | `gpt-6.1-sol`                                              | Jun 11, 2026 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 9,
+    "id": 11,
+    "fingerprint": "sha256:7f81fe542a50f6da67d0981fbb69c814748db6f1ddf4e24ec372b621c6171016",
+    "api": "openai/models",
+    "version": "2026-12-11",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "o3-pro"
+    },
+    "description": "Model \"o3-pro\" is shut down on 2026-12-11: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-6.1-sol` (`reasoning.mode: pro`) in the Responses API instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Upcoming deprecations\n| Shutdown date    | Affected model                                                                                                        | Status                                                       | Recommended replacement                                    | Notice date  |\n| **Dec 11, 2026** | `o3-pro`, `o3-pro-2025-06-10`                                                                                         | Deprecated | `gpt-6.1-sol` (`reasoning.mode: pro`) in the Responses API | Jun 11, 2026 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 12,
     "fingerprint": "sha256:e38b1b847caef42cbed0c277347fe0dcab40032ff344b7252a00fd3c18e49b5c",
     "api": "openai/models",
     "version": "2026-12-11",
@@ -171,73 +229,233 @@
       "name": "o3-pro-2025-06-10"
     },
     "description": "Model \"o3-pro-2025-06-10\" is shut down on 2026-12-11: OpenAI requests naming it fail from that date.",
-    "migration_hint": "Use `gpt-5.6-sol` (`reasoning.mode: pro`) instead: OpenAI's recommended replacement.",
+    "migration_hint": "Use `gpt-6.1-sol` (`reasoning.mode: pro`) in the Responses API instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-06-11: GPT-5 and o3 model deprecations\n| Shutdown date | Model / system          | Recommended replacement               |\n| Dec 11, 2026  | `o3-pro-2025-06-10`     | `gpt-5.6-sol` (`reasoning.mode: pro`) |",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 10,
-    "fingerprint": "sha256:0bc7c996a01e3dd0fae14537400f8bf77fb9ec8dd33c10c5b6458315ba8eb6d5",
-    "api": "openai/models",
-    "version": "2026-10-01",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "model",
-      "provider": "openai",
-      "name": "gpt-5.4-cyber"
-    },
-    "description": "Model \"gpt-5.4-cyber\" is shut down on 2026-10-01: OpenAI requests naming it fail from that date.",
-    "migration_hint": "OpenAI names no replacement model: The most capable cyber model available to you.",
-    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-09-11: GPT-5.4-Cyber\n| Shutdown date | Model / system  | Recommended replacement                        |\n| Oct 1, 2026   | `gpt-5.4-cyber` | The most capable cyber model available to you. |",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 11,
-    "fingerprint": "sha256:9f118e5bd24e073e6ed3cd7dc41a27322b18f714a30a2c3dff9ced089c9c6832",
-    "api": "openai/models",
-    "version": "2026-08-10",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "model",
-      "provider": "openai",
-      "name": "gpt-5.2-chat-latest",
-      "replacement": "gpt-5.6-sol"
-    },
-    "description": "Model \"gpt-5.2-chat-latest\" is shut down on 2026-08-10: OpenAI requests naming it fail from that date.",
-    "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
-    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-05-08: `gpt-5.2-chat-latest` and `gpt-5.3-chat-latest` model snapshots\n| Shutdown date | Model / system        | Recommended replacement |\n| Aug 10, 2026  | `gpt-5.2-chat-latest` | `gpt-5.6-sol`           |",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 12,
-    "fingerprint": "sha256:b843df920a2fb85eedc486fab1ca241676cf4d3e15ed6983e2913d38dc602bc2",
-    "api": "openai/models",
-    "version": "2026-08-10",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "model",
-      "provider": "openai",
-      "name": "gpt-5.3-chat-latest",
-      "replacement": "gpt-5.6-sol"
-    },
-    "description": "Model \"gpt-5.3-chat-latest\" is shut down on 2026-08-10: OpenAI requests naming it fail from that date.",
-    "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
-    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-05-08: `gpt-5.2-chat-latest` and `gpt-5.3-chat-latest` model snapshots\n| Shutdown date | Model / system        | Recommended replacement |\n| Aug 10, 2026  | `gpt-5.3-chat-latest` | `gpt-5.6-sol`           |",
+    "source_excerpt": "## Upcoming deprecations\n| Shutdown date    | Affected model                                                                                                        | Status                                                       | Recommended replacement                                    | Notice date  |\n| **Dec 11, 2026** | `o3-pro`, `o3-pro-2025-06-10`                                                                                         | Deprecated | `gpt-6.1-sol` (`reasoning.mode: pro`) in the Responses API | Jun 11, 2026 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
     "id": 13,
+    "fingerprint": "sha256:f937e85fff305cd727d36adcde2a2a482af8370311722db6d86b364d68d19513",
+    "api": "openai/models",
+    "version": "2027-01-14",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "gpt-4o-2024-08-06",
+      "replacement": "gpt-6-luna"
+    },
+    "description": "Model \"gpt-4o-2024-08-06\" is shut down on 2027-01-14: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-6-luna` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Upcoming deprecations\n| Shutdown date    | Affected model                                                                                                        | Status                                                       | Recommended replacement                                    | Notice date  |\n| **Jan 14, 2027** | GPT-4o (`gpt-4o-2024-08-06`, `gpt-4o-2024-11-20`)        | Deprecated | `gpt-6-luna`                                               | Oct 14, 2026 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 14,
+    "fingerprint": "sha256:ed14fb2127063ac072e42e3093da422a3294182103daf75e2b4361cbfe509f95",
+    "api": "openai/models",
+    "version": "2027-01-14",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "gpt-4o-2024-11-20",
+      "replacement": "gpt-6-luna"
+    },
+    "description": "Model \"gpt-4o-2024-11-20\" is shut down on 2027-01-14: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-6-luna` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Upcoming deprecations\n| Shutdown date    | Affected model                                                                                                        | Status                                                       | Recommended replacement                                    | Notice date  |\n| **Jan 14, 2027** | GPT-4o (`gpt-4o-2024-08-06`, `gpt-4o-2024-11-20`)        | Deprecated | `gpt-6-luna`                                               | Oct 14, 2026 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 15,
+    "fingerprint": "sha256:89b04fb49301279bd49e4dcf84c3f605646d629bbb0c41d5154fc05af0d95520",
+    "api": "openai/models",
+    "version": "2027-01-14",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "gpt-4o-mini-2024-07-18",
+      "replacement": "gpt-6-luna"
+    },
+    "description": "Model \"gpt-4o-mini-2024-07-18\" is shut down on 2027-01-14: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-6-luna` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Upcoming deprecations\n| Shutdown date    | Affected model                                                                                                        | Status                                                       | Recommended replacement                                    | Notice date  |\n| **Jan 14, 2027** | GPT-4o mini (`gpt-4o-mini-2024-07-18`)                                                                                | Deprecated | `gpt-6-luna`                                               | Oct 14, 2026 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 16,
+    "fingerprint": "sha256:406a47e717a50047cb0ff7731e583b52738e7b9e4db3e7753748eeadaa88d4aa",
+    "api": "openai/models",
+    "version": "2027-01-14",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "gpt-4.1-2025-04-14",
+      "replacement": "gpt-6-luna"
+    },
+    "description": "Model \"gpt-4.1-2025-04-14\" is shut down on 2027-01-14: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-6-luna` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Upcoming deprecations\n| Shutdown date    | Affected model                                                                                                        | Status                                                       | Recommended replacement                                    | Notice date  |\n| **Jan 14, 2027** | GPT-4.1 (`gpt-4.1-2025-04-14`)                                                                                        | Deprecated | `gpt-6-luna`                                               | Oct 14, 2026 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 17,
+    "fingerprint": "sha256:01c5589841411083836fc73e114dc1d9c93614b74939600800ed81fdf0e28932",
+    "api": "openai/models",
+    "version": "2027-01-14",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "gpt-4.1-mini-2025-04-14",
+      "replacement": "gpt-6-luna"
+    },
+    "description": "Model \"gpt-4.1-mini-2025-04-14\" is shut down on 2027-01-14: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-6-luna` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Upcoming deprecations\n| Shutdown date    | Affected model                                                                                                        | Status                                                       | Recommended replacement                                    | Notice date  |\n| **Jan 14, 2027** | GPT-4.1 mini (`gpt-4.1-mini-2025-04-14`)                                                                              | Deprecated | `gpt-6-luna`                                               | Oct 14, 2026 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 18,
+    "fingerprint": "sha256:9df3a1f47c5c43c752ff5be427b4094aab61973e8346253906cbed732a3c6797",
+    "api": "openai/models",
+    "version": "2027-02-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "gpt-5.5-cyber-preview"
+    },
+    "description": "Model \"gpt-5.5-cyber-preview\" is shut down on 2027-02-01: OpenAI requests naming it fail from that date.",
+    "migration_hint": "OpenAI names no replacement model: The most capable cyber model available to you.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Upcoming deprecations\n| Shutdown date    | Affected model                                                                                                        | Status                                                       | Recommended replacement                                    | Notice date  |\n| **Feb 1, 2027**  | `gpt-5.5-cyber-preview`                                                     | Deprecated | The most capable cyber model available to you.             | Nov 5, 2026  |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 19,
+    "fingerprint": "sha256:e83a8785aa6d1906e4892462f0f62fa5b84084e2329286623563aecdf88249ba",
+    "api": "openai/models",
+    "version": "2027-04-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "gpt-5.3-codex",
+      "replacement": "gpt-6-sol"
+    },
+    "description": "Model \"gpt-5.3-codex\" is shut down on 2027-04-01: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-6-sol` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Upcoming deprecations\n| Shutdown date    | Affected model                                                                                                        | Status                                                       | Recommended replacement                                    | Notice date  |\n| **Apr 1, 2027**  | `gpt-5.3-codex`                                          | Deprecated | `gpt-6-sol`                                                | Oct 1, 2026  |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 20,
+    "fingerprint": "sha256:9c716074471064f27c0955e58528789627b3e305f8e9f484f802ffce272a02b1",
+    "api": "openai/models",
+    "version": "2027-04-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "gpt-5.4-nano",
+      "replacement": "gpt-6-luna"
+    },
+    "description": "Model \"gpt-5.4-nano\" is shut down on 2027-04-01: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-6-luna` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Upcoming deprecations\n| Shutdown date    | Affected model                                                                                                        | Status                                                       | Recommended replacement                                    | Notice date  |\n| **Apr 1, 2027**  | `gpt-5.4-nano`, `gpt-5.4-nano-2026-03-17`                                                                             | Deprecated | `gpt-6-luna`                                               | Oct 1, 2026  |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 21,
+    "fingerprint": "sha256:8044c568de3866c2a4dea53b6115b5dc50e0869f75157e1111d3800efd9a5a17",
+    "api": "openai/models",
+    "version": "2027-04-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "gpt-5.4-nano-2026-03-17",
+      "replacement": "gpt-6-luna"
+    },
+    "description": "Model \"gpt-5.4-nano-2026-03-17\" is shut down on 2027-04-01: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-6-luna` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Upcoming deprecations\n| Shutdown date    | Affected model                                                                                                        | Status                                                       | Recommended replacement                                    | Notice date  |\n| **Apr 1, 2027**  | `gpt-5.4-nano`, `gpt-5.4-nano-2026-03-17`                                                                             | Deprecated | `gpt-6-luna`                                               | Oct 1, 2026  |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 22,
+    "fingerprint": "sha256:5468ca8ed9e11617bf886b8295f73ae0dab23e44cd09ff066dfe205f0f532453",
+    "api": "openai/models",
+    "version": "2027-04-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "gpt-5.1",
+      "replacement": "gpt-6-sol"
+    },
+    "description": "Model \"gpt-5.1\" is shut down on 2027-04-01: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-6-sol` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Upcoming deprecations\n| Shutdown date    | Affected model                                                                                                        | Status                                                       | Recommended replacement                                    | Notice date  |\n| **Apr 1, 2027**  | `gpt-5.1`, `gpt-5.1-2025-11-13`                                                                                       | Deprecated | `gpt-6-sol`                                                | Oct 1, 2026  |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 23,
+    "fingerprint": "sha256:a6bc0d50b8e8bf68beadcab2aea06eab5f0d958e9cf9fb8cadc372381fa1ba81",
+    "api": "openai/models",
+    "version": "2027-04-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "gpt-5.1-2025-11-13",
+      "replacement": "gpt-6-sol"
+    },
+    "description": "Model \"gpt-5.1-2025-11-13\" is shut down on 2027-04-01: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-6-sol` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Upcoming deprecations\n| Shutdown date    | Affected model                                                                                                        | Status                                                       | Recommended replacement                                    | Notice date  |\n| **Apr 1, 2027**  | `gpt-5.1`, `gpt-5.1-2025-11-13`                                                                                       | Deprecated | `gpt-6-sol`                                                | Oct 1, 2026  |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 24,
     "fingerprint": "sha256:9de4b398a49814fc611c1f914d0caa04e3b49bb8bd820030e6dfa3d008eb525c",
     "api": "openai/models",
     "version": "2026-10-23",
@@ -252,12 +470,12 @@
     "description": "Model \"gpt-3.5-turbo-0125\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `gpt-3.5-turbo-0125` \\| `gpt-3.5-turbo`, `gpt-3.5-turbo-completions`   | `gpt-5.6-terra`                                   |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Oct 23, 2026**                                                                             | `gpt-3.5-turbo-0125`, `gpt-3.5-turbo`, `gpt-3.5-turbo-completions`                                                                            | `gpt-5.6-terra`                                                                                       | Apr 22, 2026 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 14,
+    "id": 25,
     "fingerprint": "sha256:f22d331f61c1e7558b711cc8fdec2c60f563f52a132dbdc3e297c38440460453",
     "api": "openai/models",
     "version": "2026-10-23",
@@ -272,12 +490,12 @@
     "description": "Model \"gpt-3.5-turbo\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `gpt-3.5-turbo-0125` \\| `gpt-3.5-turbo`, `gpt-3.5-turbo-completions`   | `gpt-5.6-terra`                                   |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Oct 23, 2026**                                                                             | `gpt-3.5-turbo-0125`, `gpt-3.5-turbo`, `gpt-3.5-turbo-completions`                                                                            | `gpt-5.6-terra`                                                                                       | Apr 22, 2026 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 15,
+    "id": 26,
     "fingerprint": "sha256:addb33cfa80c881094a669f95b412315e962f57818d9b2c60bf10b457384fd06",
     "api": "openai/models",
     "version": "2026-10-23",
@@ -292,12 +510,12 @@
     "description": "Model \"gpt-4-0613\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `gpt-4-0613` \\| `gpt-4`, `gpt-4-0613-completions`, `gpt-4-completions` | `gpt-5.6-sol`                                     |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Oct 23, 2026**                                                                             | `gpt-4-0613`, `gpt-4`, `gpt-4-0613-completions`, `gpt-4-completions`                                                                                                                                  | `gpt-5.6-sol`                                                                                         | Apr 22, 2026 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 16,
+    "id": 27,
     "fingerprint": "sha256:fa804d562f3745055a2a0102bfc04b2e9bf83c1f009b01b6011da54a42698743",
     "api": "openai/models",
     "version": "2026-10-23",
@@ -312,12 +530,12 @@
     "description": "Model \"gpt-4\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `gpt-4-0613` \\| `gpt-4`, `gpt-4-0613-completions`, `gpt-4-completions` | `gpt-5.6-sol`                                     |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Oct 23, 2026**                                                                             | `gpt-4-0613`, `gpt-4`, `gpt-4-0613-completions`, `gpt-4-completions`                                                                                                                                  | `gpt-5.6-sol`                                                                                         | Apr 22, 2026 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 17,
+    "id": 28,
     "fingerprint": "sha256:e7368b0ebebe0b0d76c287216e5028a43aa67c5bd19d93100b0a5f578f4de3a1",
     "api": "openai/models",
     "version": "2026-10-23",
@@ -332,12 +550,12 @@
     "description": "Model \"gpt-4-1106-preview\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `gpt-4-1106-preview`                                                   | `gpt-5.6-sol`                                     |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Oct 23, 2026**                                                                             | `gpt-4-1106-preview`                                                                                                                                                                                  | `gpt-5.6-sol`                                                                                         | Apr 22, 2026 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 18,
+    "id": 29,
     "fingerprint": "sha256:d028abbd1dbe941ef3ddc502493237ac63618d5bb6dfddb97f865238b953e87b",
     "api": "openai/models",
     "version": "2026-10-23",
@@ -352,12 +570,12 @@
     "description": "Model \"gpt-4-turbo\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `gpt-4-turbo` \\| `gpt-4-turbo-2024-04-09`, `gpt-4-turbo-completions`   | `gpt-5.6-sol`                                     |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Oct 23, 2026**                                                                             | `gpt-4-turbo`, `gpt-4-turbo-2024-04-09`, `gpt-4-turbo-completions`                                                                                                                                    | `gpt-5.6-sol`                                                                                         | Apr 22, 2026 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 19,
+    "id": 30,
     "fingerprint": "sha256:2366f086a80491576145afe7cf510c55ac4e0d2de7bf441bc75ef612d6167e2b",
     "api": "openai/models",
     "version": "2026-10-23",
@@ -372,12 +590,12 @@
     "description": "Model \"gpt-4-turbo-2024-04-09\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `gpt-4-turbo` \\| `gpt-4-turbo-2024-04-09`, `gpt-4-turbo-completions`   | `gpt-5.6-sol`                                     |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Oct 23, 2026**                                                                             | `gpt-4-turbo`, `gpt-4-turbo-2024-04-09`, `gpt-4-turbo-completions`                                                                                                                                    | `gpt-5.6-sol`                                                                                         | Apr 22, 2026 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 20,
+    "id": 31,
     "fingerprint": "sha256:94b73f3151693c11fde24e3848af27c40865037cbd9cf4115e3bc19fd8c60052",
     "api": "openai/models",
     "version": "2026-10-23",
@@ -392,12 +610,12 @@
     "description": "Model \"gpt-4.1-nano\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-5.6-luna` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `gpt-4.1-nano` \\| `gpt-4.1-nano-2025-04-14`                            | `gpt-5.6-luna`                                    |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Oct 23, 2026**                                                                             | `gpt-4.1-nano`, `gpt-4.1-nano-2025-04-14`                                                                                                                                                             | `gpt-5.6-luna`                                                                                        | Apr 22, 2026 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 21,
+    "id": 32,
     "fingerprint": "sha256:d759ff817c84f9d74272fcb91cbdae5221e974eb47b0b55b7dd7147aa1e31602",
     "api": "openai/models",
     "version": "2026-10-23",
@@ -412,12 +630,12 @@
     "description": "Model \"gpt-4.1-nano-2025-04-14\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-5.6-luna` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `gpt-4.1-nano` \\| `gpt-4.1-nano-2025-04-14`                            | `gpt-5.6-luna`                                    |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Oct 23, 2026**                                                                             | `gpt-4.1-nano`, `gpt-4.1-nano-2025-04-14`                                                                                                                                                             | `gpt-5.6-luna`                                                                                        | Apr 22, 2026 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 22,
+    "id": 33,
     "fingerprint": "sha256:0480d1edc177c250b09e7a924a9b40657b44783e7c9bbbb0ffacb80db251fc7f",
     "api": "openai/models",
     "version": "2026-10-23",
@@ -432,12 +650,12 @@
     "description": "Model \"gpt-4o-2024-05-13\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `gpt-4o-2024-05-13`                                                    | `gpt-5.6-sol`                                     |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Oct 23, 2026**                                                                             | `gpt-4o-2024-05-13`                                                                                                                                                                                   | `gpt-5.6-sol`                                                                                         | Apr 22, 2026 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 23,
+    "id": 34,
     "fingerprint": "sha256:ba214836ceb8d67ee994e2dc21f34390630a25c9980f28027d406a6e6cf20aa8",
     "api": "openai/models",
     "version": "2026-10-23",
@@ -452,12 +670,12 @@
     "description": "Model \"o1-2024-12-17\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `o1-2024-12-17` \\| `o1`                                                | `gpt-5.6-sol`                                     |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Oct 23, 2026**                                                                             | `o1-2024-12-17`, `o1`                                                                                                                                                                                 | `gpt-5.6-sol`                                                                                         | Apr 22, 2026 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 24,
+    "id": 35,
     "fingerprint": "sha256:12144bbcd4bc23bd91febd9d2f96b3a9e9579dc4e04bb63422771f69f18721ce",
     "api": "openai/models",
     "version": "2026-10-23",
@@ -472,12 +690,12 @@
     "description": "Model \"o1\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `o1-2024-12-17` \\| `o1`                                                | `gpt-5.6-sol`                                     |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Oct 23, 2026**                                                                             | `o1-2024-12-17`, `o1`                                                                                                                                                                                 | `gpt-5.6-sol`                                                                                         | Apr 22, 2026 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 25,
+    "id": 36,
     "fingerprint": "sha256:3ea97dbeb2ae5fd8b306c204b89426d83f17e1beb06f435b482e50355f0c4205",
     "api": "openai/models",
     "version": "2026-10-23",
@@ -491,12 +709,12 @@
     "description": "Model \"o1-pro-2025-03-19\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-5.6-sol` (`reasoning.mode: pro`) instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `o1-pro-2025-03-19` \\| `o1-pro`                                        | `gpt-5.6-sol` (`reasoning.mode: pro`)             |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Oct 23, 2026**                                                                             | `o1-pro-2025-03-19`, `o1-pro`                                                                                                                                                                         | `gpt-5.6-sol` (`reasoning.mode: pro`)                                                                 | Apr 22, 2026 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 26,
+    "id": 37,
     "fingerprint": "sha256:e363ee6a9fae0c10ff5e99b538929cb5fb8df270659832f5dfca1c193f54a6ec",
     "api": "openai/models",
     "version": "2026-10-23",
@@ -510,12 +728,12 @@
     "description": "Model \"o1-pro\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-5.6-sol` (`reasoning.mode: pro`) instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `o1-pro-2025-03-19` \\| `o1-pro`                                        | `gpt-5.6-sol` (`reasoning.mode: pro`)             |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Oct 23, 2026**                                                                             | `o1-pro-2025-03-19`, `o1-pro`                                                                                                                                                                         | `gpt-5.6-sol` (`reasoning.mode: pro`)                                                                 | Apr 22, 2026 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 27,
+    "id": 38,
     "fingerprint": "sha256:059635ab8cb64b86d7650d4d42358d1df622089f98660b185409f348314f71b7",
     "api": "openai/models",
     "version": "2026-10-23",
@@ -530,12 +748,12 @@
     "description": "Model \"o3-mini-2025-01-31\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `o3-mini-2025-01-31` \\| `o3-mini`                                      | `gpt-5.6-sol`                                     |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Oct 23, 2026**                                                                             | `o3-mini-2025-01-31`, `o3-mini`                                                                                                                                                                       | `gpt-5.6-sol`                                                                                         | Apr 22, 2026 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 28,
+    "id": 39,
     "fingerprint": "sha256:21bc5747c723b0cfeca2e75de8d84ef25dd917f07c6a2ac265e2c357a8acf249",
     "api": "openai/models",
     "version": "2026-10-23",
@@ -550,12 +768,12 @@
     "description": "Model \"o3-mini\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `o3-mini-2025-01-31` \\| `o3-mini`                                      | `gpt-5.6-sol`                                     |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Oct 23, 2026**                                                                             | `o3-mini-2025-01-31`, `o3-mini`                                                                                                                                                                       | `gpt-5.6-sol`                                                                                         | Apr 22, 2026 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 29,
+    "id": 40,
     "fingerprint": "sha256:a6aa8b28c72878f6c9e1ac51de793db65b5c56ce74e868cb0f0a662f1feda5b2",
     "api": "openai/models",
     "version": "2026-10-23",
@@ -570,12 +788,12 @@
     "description": "Model \"o4-mini-2025-04-16\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `o4-mini-2025-04-16` \\| `o4-mini`                                      | `gpt-5.6-terra`                                   |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Oct 23, 2026**                                                                             | `o4-mini-2025-04-16`, `o4-mini`                                                                                                                                                                       | `gpt-5.6-terra`                                                                                       | Apr 22, 2026 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 30,
+    "id": 41,
     "fingerprint": "sha256:cd2490b99479131812970751179d5b2d096f418b46c7dcf29a82fa5af87cbadc",
     "api": "openai/models",
     "version": "2026-10-23",
@@ -590,352 +808,31 @@
     "description": "Model \"o4-mini\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `o4-mini-2025-04-16` \\| `o4-mini`                                      | `gpt-5.6-terra`                                   |",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 31,
-    "fingerprint": "sha256:ae0f2cf43e75ed043a653886b7978c010d5b195b1b4be4609d7a2b080b29c348",
-    "api": "openai/models",
-    "version": "2026-07-23",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "model",
-      "provider": "openai",
-      "name": "computer-use-preview-2025-03-11",
-      "replacement": "gpt-5.6-terra"
-    },
-    "description": "Model \"computer-use-preview-2025-03-11\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
-    "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement.",
-    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `computer-use-preview-2025-03-11` \\| `computer-use-preview`   | `gpt-5.6-terra`         |",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 32,
-    "fingerprint": "sha256:f64b3b40fa81e5b72254b5d7a165b0be6936f6ee31963e69e93a6cd2c4b17905",
-    "api": "openai/models",
-    "version": "2026-07-23",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "model",
-      "provider": "openai",
-      "name": "computer-use-preview",
-      "replacement": "gpt-5.6-terra"
-    },
-    "description": "Model \"computer-use-preview\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
-    "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement.",
-    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `computer-use-preview-2025-03-11` \\| `computer-use-preview`   | `gpt-5.6-terra`         |",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 33,
-    "fingerprint": "sha256:3184eaa1b6321186722ddf12d85c295ca6732c56325354c3c265a430d2d51414",
-    "api": "openai/models",
-    "version": "2026-07-23",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "model",
-      "provider": "openai",
-      "name": "gpt-4o-mini-search-preview-2025-03-11",
-      "replacement": "gpt-5.6-terra"
-    },
-    "description": "Model \"gpt-4o-mini-search-preview-2025-03-11\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
-    "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement.",
-    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `gpt-4o-mini-search-preview-2025-03-11`                       | `gpt-5.6-terra`         |",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 34,
-    "fingerprint": "sha256:fd572c9b7dae1089003abd9a293d105bf70673081d4d878fb74135e17062ac02",
-    "api": "openai/models",
-    "version": "2026-07-23",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "model",
-      "provider": "openai",
-      "name": "gpt-4o-search-preview-2025-03-11",
-      "replacement": "gpt-5.6-terra"
-    },
-    "description": "Model \"gpt-4o-search-preview-2025-03-11\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
-    "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement.",
-    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `gpt-4o-search-preview-2025-03-11`                            | `gpt-5.6-terra`         |",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 35,
-    "fingerprint": "sha256:33518065dd3aa5c749949289dd72055b6fdb79f3835073b34a412b2e451c93d0",
-    "api": "openai/models",
-    "version": "2026-07-23",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "model",
-      "provider": "openai",
-      "name": "gpt-5-chat-latest",
-      "replacement": "gpt-5.6-sol"
-    },
-    "description": "Model \"gpt-5-chat-latest\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
-    "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
-    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `gpt-5-chat-latest`                                           | `gpt-5.6-sol`           |",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 36,
-    "fingerprint": "sha256:40d04868cd14e2aff7523f717367a5a6632542015a489c31b27f9b85aae3052c",
-    "api": "openai/models",
-    "version": "2026-07-23",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "model",
-      "provider": "openai",
-      "name": "gpt-5-codex",
-      "replacement": "gpt-5.6-sol"
-    },
-    "description": "Model \"gpt-5-codex\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
-    "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
-    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `gpt-5-codex`                                                 | `gpt-5.6-sol`           |",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 37,
-    "fingerprint": "sha256:ff2bbf4f9bb9231f9b4a5603899c0fc752f6a37f6e26a5c7e1fe5790f409ca48",
-    "api": "openai/models",
-    "version": "2026-07-23",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "model",
-      "provider": "openai",
-      "name": "gpt-5.1-chat-latest",
-      "replacement": "gpt-5.6-sol"
-    },
-    "description": "Model \"gpt-5.1-chat-latest\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
-    "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
-    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `gpt-5.1-chat-latest`                                         | `gpt-5.6-sol`           |",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 38,
-    "fingerprint": "sha256:362e7e03afadd59d0cdbfff7e736e0f735ae9eea79fe5720bf920bfceb62162a",
-    "api": "openai/models",
-    "version": "2026-07-23",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "model",
-      "provider": "openai",
-      "name": "gpt-5.1-codex",
-      "replacement": "gpt-5.6-sol"
-    },
-    "description": "Model \"gpt-5.1-codex\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
-    "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
-    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `gpt-5.1-codex`                                               | `gpt-5.6-sol`           |",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 39,
-    "fingerprint": "sha256:af71610f01e6ddf5b3afb5d282bf8946761ae2b998b2a2b331e222fc56c7ca74",
-    "api": "openai/models",
-    "version": "2026-07-23",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "model",
-      "provider": "openai",
-      "name": "gpt-5.1-codex-max",
-      "replacement": "gpt-5.6-sol"
-    },
-    "description": "Model \"gpt-5.1-codex-max\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
-    "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
-    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `gpt-5.1-codex-max`                                           | `gpt-5.6-sol`           |",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 40,
-    "fingerprint": "sha256:f24c2a080eba5b89e6ea591af12a14645c80791266b45856420396ffd532f939",
-    "api": "openai/models",
-    "version": "2026-07-23",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "model",
-      "provider": "openai",
-      "name": "gpt-5.1-codex-mini",
-      "replacement": "gpt-5.6-terra"
-    },
-    "description": "Model \"gpt-5.1-codex-mini\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
-    "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement.",
-    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `gpt-5.1-codex-mini`                                          | `gpt-5.6-terra`         |",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 41,
-    "fingerprint": "sha256:0e2a5ba7b05b9c093526bdf9afcabf862d9f31e84e42a4ba14b159838ecd880a",
-    "api": "openai/models",
-    "version": "2026-07-23",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "model",
-      "provider": "openai",
-      "name": "o3-deep-research-2025-06-26",
-      "replacement": "gpt-5.6-sol"
-    },
-    "description": "Model \"o3-deep-research-2025-06-26\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
-    "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
-    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `o3-deep-research-2025-06-26` \\| `o3-deep-research`           | `gpt-5.6-sol`           |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Oct 23, 2026**                                                                             | `o4-mini-2025-04-16`, `o4-mini`                                                                                                                                                                       | `gpt-5.6-terra`                                                                                       | Apr 22, 2026 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
     "id": 42,
-    "fingerprint": "sha256:c6b498786a70cce3450693d63d40983af1593a32ef9dd1dfdd5d8bd36922ca58",
+    "fingerprint": "sha256:0bc7c996a01e3dd0fae14537400f8bf77fb9ec8dd33c10c5b6458315ba8eb6d5",
     "api": "openai/models",
-    "version": "2026-07-23",
+    "version": "2026-10-01",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
       "type": "model",
       "provider": "openai",
-      "name": "o3-deep-research",
-      "replacement": "gpt-5.6-sol"
+      "name": "gpt-5.4-cyber"
     },
-    "description": "Model \"o3-deep-research\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
-    "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
+    "description": "Model \"gpt-5.4-cyber\" is shut down on 2026-10-01: OpenAI requests naming it fail from that date.",
+    "migration_hint": "OpenAI names no replacement model: The most capable cyber model available to you.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `o3-deep-research-2025-06-26` \\| `o3-deep-research`           | `gpt-5.6-sol`           |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Oct 1, 2026**                                                                              | `gpt-5.4-cyber`                                                                                                                                             | The most capable cyber model available to you.                                                        | Sep 11, 2026 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
     "id": 43,
-    "fingerprint": "sha256:1bb911d293d7d2dbd20f2a89a97d9c3fab308d0bbff74bfea2d220a8e3fc1f07",
-    "api": "openai/models",
-    "version": "2026-07-23",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "model",
-      "provider": "openai",
-      "name": "o4-mini-deep-research-2025-06-26",
-      "replacement": "gpt-5.6-sol"
-    },
-    "description": "Model \"o4-mini-deep-research-2025-06-26\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
-    "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
-    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `o4-mini-deep-research-2025-06-26` \\| `o4-mini-deep-research` | `gpt-5.6-sol`           |",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 44,
-    "fingerprint": "sha256:a56b2eb3fce5c64b1981cb90610e8d3eb4f4f5917203b5b2d36d574de381c171",
-    "api": "openai/models",
-    "version": "2026-07-23",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "model",
-      "provider": "openai",
-      "name": "o4-mini-deep-research",
-      "replacement": "gpt-5.6-sol"
-    },
-    "description": "Model \"o4-mini-deep-research\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
-    "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
-    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `o4-mini-deep-research-2025-06-26` \\| `o4-mini-deep-research` | `gpt-5.6-sol`           |",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 45,
-    "fingerprint": "sha256:e92ab5f3acdea6243818e8cc5645187cd71ac3ea985bc7a0900f8b856b50c923",
-    "api": "openai/models",
-    "version": "2026-07-23",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "model",
-      "provider": "openai",
-      "name": "gpt-5.2-codex",
-      "replacement": "gpt-5.6-sol"
-    },
-    "description": "Model \"gpt-5.2-codex\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
-    "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
-    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `gpt-5.2-codex`                                               | `gpt-5.6-sol`           |",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 46,
-    "fingerprint": "sha256:22c3df936ace8a0652431ca2a769dd8b039404c588b4c7f911dabd1d64e770b0",
-    "api": "openai/models",
-    "version": "2026-02-17",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "model",
-      "provider": "openai",
-      "name": "chatgpt-4o-latest",
-      "replacement": "gpt-5.6-sol"
-    },
-    "description": "Model \"chatgpt-4o-latest\" is shut down on 2026-02-17: OpenAI requests naming it fail from that date.",
-    "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement. (OpenAI first named gpt-5.1-chat-latest, which is itself retired.)",
-    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2025-11-18: `chatgpt-4o-latest` snapshot\n| Shutdown date | Model / system      | Recommended replacement |\n| 2026-02-17    | `chatgpt-4o-latest` | `gpt-5.1-chat-latest`   |",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 47,
-    "fingerprint": "sha256:e2b44aa8420f408ceab29fb272f2e0f2baec9893a04c62f93688995ed53481c8",
-    "api": "openai/models",
-    "version": "2026-02-12",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "model",
-      "provider": "openai",
-      "name": "codex-mini-latest",
-      "replacement": "gpt-5-codex-mini"
-    },
-    "description": "Model \"codex-mini-latest\" is shut down on 2026-02-12: OpenAI requests naming it fail from that date.",
-    "migration_hint": "Use `gpt-5-codex-mini` instead: OpenAI's recommended replacement.",
-    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2025-11-17: `codex-mini-latest` model snapshot\n| Shutdown date | Model / system      | Recommended replacement |\n| 2026-02-12    | `codex-mini-latest` | `gpt-5-codex-mini`      |",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 48,
     "fingerprint": "sha256:298d52e2df997a412541c04406569482b54cc7b2736b7a54b64a47636ee5adac",
     "api": "openai/models",
     "version": "2026-09-28",
@@ -950,12 +847,12 @@
     "description": "Model \"gpt-3.5-turbo-instruct\" is shut down on 2026-09-28: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2025-09-26: Legacy GPT model snapshots\n| Shutdown date | Model / system           | Recommended replacement |\n| 2026-09-28    | `gpt-3.5-turbo-instruct` | `gpt-5.6-terra`         |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Sep 28, 2026**                                                                             | `gpt-3.5-turbo-instruct`                                                                                                                      | `gpt-5.6-terra`                                                                                       | Sep 26, 2025 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 49,
+    "id": 44,
     "fingerprint": "sha256:6e31004123e3abadcfd61472f45a91f584a5216750debd24a7893c1e3f1d74be",
     "api": "openai/models",
     "version": "2026-09-28",
@@ -970,32 +867,452 @@
     "description": "Model \"gpt-3.5-turbo-1106\" is shut down on 2026-09-28: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2025-09-26: Legacy GPT model snapshots\n| Shutdown date | Model / system           | Recommended replacement |\n| 2026-09-28    | `gpt-3.5-turbo-1106`     | `gpt-5.6-terra`         |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Sep 28, 2026**                                                                             | `gpt-3.5-turbo-1106`                                                                                                                                                                                  | `gpt-5.6-terra`                                                                                       | Sep 26, 2025 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 50,
-    "fingerprint": "sha256:ce07a31125e454c6347940c57d9f3954c1464e7c4d115b9e613f608fc311fd39",
+    "id": 45,
+    "fingerprint": "sha256:9f118e5bd24e073e6ed3cd7dc41a27322b18f714a30a2c3dff9ced089c9c6832",
     "api": "openai/models",
-    "version": "2025-07-28",
+    "version": "2026-08-10",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
       "type": "model",
       "provider": "openai",
-      "name": "o1-preview",
-      "replacement": "o3"
+      "name": "gpt-5.2-chat-latest",
+      "replacement": "gpt-5.6-sol"
     },
-    "description": "Model \"o1-preview\" is shut down on 2025-07-28: OpenAI requests naming it fail from that date.",
-    "migration_hint": "Use `o3` instead: OpenAI's recommended replacement.",
+    "description": "Model \"gpt-5.2-chat-latest\" is shut down on 2026-08-10: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2025-04-28: `o1-preview` and `o1-mini`\n| Shutdown date | Model / system | Recommended replacement |\n| 2025-07-28    | `o1-preview`   | `o3`                    |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Aug 10, 2026**                                                                             | `gpt-5.2-chat-latest`                                                                                          | `gpt-5.6-sol`                                                                                         | May 8, 2026  |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 46,
+    "fingerprint": "sha256:b843df920a2fb85eedc486fab1ca241676cf4d3e15ed6983e2913d38dc602bc2",
+    "api": "openai/models",
+    "version": "2026-08-10",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "gpt-5.3-chat-latest",
+      "replacement": "gpt-5.6-sol"
+    },
+    "description": "Model \"gpt-5.3-chat-latest\" is shut down on 2026-08-10: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Aug 10, 2026**                                                                             | `gpt-5.3-chat-latest`                                                                                                                                                                                 | `gpt-5.6-sol`                                                                                         | May 8, 2026  |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 47,
+    "fingerprint": "sha256:ae0f2cf43e75ed043a653886b7978c010d5b195b1b4be4609d7a2b080b29c348",
+    "api": "openai/models",
+    "version": "2026-07-23",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "computer-use-preview-2025-03-11",
+      "replacement": "gpt-5.6-terra"
+    },
+    "description": "Model \"computer-use-preview-2025-03-11\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Jul 23, 2026**                                                                             | `computer-use-preview-2025-03-11`, `computer-use-preview`                                                                  | `gpt-5.6-terra`                                                                                       | Apr 22, 2026 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 48,
+    "fingerprint": "sha256:f64b3b40fa81e5b72254b5d7a165b0be6936f6ee31963e69e93a6cd2c4b17905",
+    "api": "openai/models",
+    "version": "2026-07-23",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "computer-use-preview",
+      "replacement": "gpt-5.6-terra"
+    },
+    "description": "Model \"computer-use-preview\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Jul 23, 2026**                                                                             | `computer-use-preview-2025-03-11`, `computer-use-preview`                                                                  | `gpt-5.6-terra`                                                                                       | Apr 22, 2026 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 49,
+    "fingerprint": "sha256:3184eaa1b6321186722ddf12d85c295ca6732c56325354c3c265a430d2d51414",
+    "api": "openai/models",
+    "version": "2026-07-23",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "gpt-4o-mini-search-preview-2025-03-11",
+      "replacement": "gpt-5.6-terra"
+    },
+    "description": "Model \"gpt-4o-mini-search-preview-2025-03-11\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Jul 23, 2026**                                                                             | `gpt-4o-mini-search-preview-2025-03-11`                                                                                                                                                               | `gpt-5.6-terra`                                                                                       | Apr 22, 2026 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 50,
+    "fingerprint": "sha256:fd572c9b7dae1089003abd9a293d105bf70673081d4d878fb74135e17062ac02",
+    "api": "openai/models",
+    "version": "2026-07-23",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "gpt-4o-search-preview-2025-03-11",
+      "replacement": "gpt-5.6-terra"
+    },
+    "description": "Model \"gpt-4o-search-preview-2025-03-11\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Jul 23, 2026**                                                                             | `gpt-4o-search-preview-2025-03-11`                                                                                                                                                                    | `gpt-5.6-terra`                                                                                       | Apr 22, 2026 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
     "id": 51,
+    "fingerprint": "sha256:33518065dd3aa5c749949289dd72055b6fdb79f3835073b34a412b2e451c93d0",
+    "api": "openai/models",
+    "version": "2026-07-23",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "gpt-5-chat-latest",
+      "replacement": "gpt-5.6-sol"
+    },
+    "description": "Model \"gpt-5-chat-latest\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Jul 23, 2026**                                                                             | `gpt-5-chat-latest`                                                                                                                                                                                   | `gpt-5.6-sol`                                                                                         | Apr 22, 2026 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 52,
+    "fingerprint": "sha256:40d04868cd14e2aff7523f717367a5a6632542015a489c31b27f9b85aae3052c",
+    "api": "openai/models",
+    "version": "2026-07-23",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "gpt-5-codex",
+      "replacement": "gpt-5.6-sol"
+    },
+    "description": "Model \"gpt-5-codex\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Jul 23, 2026**                                                                             | `gpt-5-codex`                                                                                                                                                                                         | `gpt-5.6-sol`                                                                                         | Apr 22, 2026 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 53,
+    "fingerprint": "sha256:ff2bbf4f9bb9231f9b4a5603899c0fc752f6a37f6e26a5c7e1fe5790f409ca48",
+    "api": "openai/models",
+    "version": "2026-07-23",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "gpt-5.1-chat-latest",
+      "replacement": "gpt-5.6-sol"
+    },
+    "description": "Model \"gpt-5.1-chat-latest\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Jul 23, 2026**                                                                             | `gpt-5.1-chat-latest`                                                                                                                                                                                 | `gpt-5.6-sol`                                                                                         | Apr 22, 2026 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 54,
+    "fingerprint": "sha256:362e7e03afadd59d0cdbfff7e736e0f735ae9eea79fe5720bf920bfceb62162a",
+    "api": "openai/models",
+    "version": "2026-07-23",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "gpt-5.1-codex",
+      "replacement": "gpt-5.6-sol"
+    },
+    "description": "Model \"gpt-5.1-codex\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Jul 23, 2026**                                                                             | `gpt-5.1-codex`                                                                                                                                                                                       | `gpt-5.6-sol`                                                                                         | Apr 22, 2026 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 55,
+    "fingerprint": "sha256:af71610f01e6ddf5b3afb5d282bf8946761ae2b998b2a2b331e222fc56c7ca74",
+    "api": "openai/models",
+    "version": "2026-07-23",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "gpt-5.1-codex-max",
+      "replacement": "gpt-5.6-sol"
+    },
+    "description": "Model \"gpt-5.1-codex-max\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Jul 23, 2026**                                                                             | `gpt-5.1-codex-max`                                                                                                                                                                                   | `gpt-5.6-sol`                                                                                         | Apr 22, 2026 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 56,
+    "fingerprint": "sha256:f24c2a080eba5b89e6ea591af12a14645c80791266b45856420396ffd532f939",
+    "api": "openai/models",
+    "version": "2026-07-23",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "gpt-5.1-codex-mini",
+      "replacement": "gpt-5.6-terra"
+    },
+    "description": "Model \"gpt-5.1-codex-mini\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Jul 23, 2026**                                                                             | `gpt-5.1-codex-mini`                                                                                                                                                                                  | `gpt-5.6-terra`                                                                                       | Apr 22, 2026 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 57,
+    "fingerprint": "sha256:0e2a5ba7b05b9c093526bdf9afcabf862d9f31e84e42a4ba14b159838ecd880a",
+    "api": "openai/models",
+    "version": "2026-07-23",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "o3-deep-research-2025-06-26",
+      "replacement": "gpt-5.6-sol"
+    },
+    "description": "Model \"o3-deep-research-2025-06-26\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Jul 23, 2026**                                                                             | `o3-deep-research-2025-06-26`, `o3-deep-research`                                                                                                                                                     | `gpt-5.6-sol`                                                                                         | Apr 22, 2026 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 58,
+    "fingerprint": "sha256:c6b498786a70cce3450693d63d40983af1593a32ef9dd1dfdd5d8bd36922ca58",
+    "api": "openai/models",
+    "version": "2026-07-23",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "o3-deep-research",
+      "replacement": "gpt-5.6-sol"
+    },
+    "description": "Model \"o3-deep-research\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Jul 23, 2026**                                                                             | `o3-deep-research-2025-06-26`, `o3-deep-research`                                                                                                                                                     | `gpt-5.6-sol`                                                                                         | Apr 22, 2026 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 59,
+    "fingerprint": "sha256:1bb911d293d7d2dbd20f2a89a97d9c3fab308d0bbff74bfea2d220a8e3fc1f07",
+    "api": "openai/models",
+    "version": "2026-07-23",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "o4-mini-deep-research-2025-06-26",
+      "replacement": "gpt-5.6-sol"
+    },
+    "description": "Model \"o4-mini-deep-research-2025-06-26\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Jul 23, 2026**                                                                             | `o4-mini-deep-research-2025-06-26`, `o4-mini-deep-research`                                                                                                                                           | `gpt-5.6-sol`                                                                                         | Apr 22, 2026 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 60,
+    "fingerprint": "sha256:a56b2eb3fce5c64b1981cb90610e8d3eb4f4f5917203b5b2d36d574de381c171",
+    "api": "openai/models",
+    "version": "2026-07-23",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "o4-mini-deep-research",
+      "replacement": "gpt-5.6-sol"
+    },
+    "description": "Model \"o4-mini-deep-research\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Jul 23, 2026**                                                                             | `o4-mini-deep-research-2025-06-26`, `o4-mini-deep-research`                                                                                                                                           | `gpt-5.6-sol`                                                                                         | Apr 22, 2026 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 61,
+    "fingerprint": "sha256:e92ab5f3acdea6243818e8cc5645187cd71ac3ea985bc7a0900f8b856b50c923",
+    "api": "openai/models",
+    "version": "2026-07-23",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "gpt-5.2-codex",
+      "replacement": "gpt-5.6-sol"
+    },
+    "description": "Model \"gpt-5.2-codex\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Jul 23, 2026**                                                                             | `gpt-5.2-codex`                                                                                                                                                                                       | `gpt-5.6-sol`                                                                                         | Apr 22, 2026 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 62,
+    "fingerprint": "sha256:03fdb08d56f97d7d9a94509b59a1c519b728ec4a8b94192e1ad5c4cd86685849",
+    "api": "openai/models",
+    "version": "2026-03-26",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "gpt-4-0314",
+      "replacement": "gpt-6.1-sol"
+    },
+    "description": "Model \"gpt-4-0314\" is shut down on 2026-03-26: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-6.1-sol` instead: OpenAI's recommended replacement. (OpenAI first named gpt-5, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Mar 26, 2026**                                                                             | `gpt-4-0314`                                                                                                              | `gpt-5`, or `gpt-4.1` for latency-sensitive tasks that don't require reasoning                        | Sep 26, 2025 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 63,
+    "fingerprint": "sha256:85044d16af238463ef67ddc2a45edf0d02ca53ae5c8fb7f9cfc705f0a80cbc4d",
+    "api": "openai/models",
+    "version": "2026-03-26",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "gpt-4-0125-preview",
+      "replacement": "gpt-6.1-sol"
+    },
+    "description": "Model \"gpt-4-0125-preview\" is shut down on 2026-03-26: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-6.1-sol` instead: OpenAI's recommended replacement. (OpenAI first named gpt-5, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Mar 26, 2026**                                                                             | `gpt-4-0125-preview` (including `gpt-4-turbo-preview` and `gpt-4-turbo-preview-completions`, which point to this snapshot)                                                                            | `gpt-5`, or `gpt-4.1` for latency-sensitive tasks that don't require reasoning                        | Sep 26, 2025 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 64,
+    "fingerprint": "sha256:0aa1b225c5ba9fa728f9841bcc58c6df59c6d110e87754f2574f5f2381753b69",
+    "api": "openai/models",
+    "version": "2026-03-26",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "gpt-4-turbo-preview",
+      "replacement": "gpt-6.1-sol"
+    },
+    "description": "Model \"gpt-4-turbo-preview\" is shut down on 2026-03-26: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-6.1-sol` instead: OpenAI's recommended replacement. (OpenAI first named gpt-5, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Mar 26, 2026**                                                                             | `gpt-4-0125-preview` (including `gpt-4-turbo-preview` and `gpt-4-turbo-preview-completions`, which point to this snapshot)                                                                            | `gpt-5`, or `gpt-4.1` for latency-sensitive tasks that don't require reasoning                        | Sep 26, 2025 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 65,
+    "fingerprint": "sha256:22c3df936ace8a0652431ca2a769dd8b039404c588b4c7f911dabd1d64e770b0",
+    "api": "openai/models",
+    "version": "2026-02-17",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "chatgpt-4o-latest",
+      "replacement": "gpt-5.6-sol"
+    },
+    "description": "Model \"chatgpt-4o-latest\" is shut down on 2026-02-17: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement. (OpenAI first named gpt-5.1-chat-latest, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Feb 17, 2026**                                                                             | `chatgpt-4o-latest`                                                                                                                           | `gpt-5.1-chat-latest`                                                                                 | Nov 18, 2025 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 66,
+    "fingerprint": "sha256:e2b44aa8420f408ceab29fb272f2e0f2baec9893a04c62f93688995ed53481c8",
+    "api": "openai/models",
+    "version": "2026-02-12",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "codex-mini-latest",
+      "replacement": "gpt-5-codex-mini"
+    },
+    "description": "Model \"codex-mini-latest\" is shut down on 2026-02-12: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-5-codex-mini` instead: OpenAI's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Feb 12, 2026**                                                                             | `codex-mini-latest`                                                                                                                     | `gpt-5-codex-mini`                                                                                    | Nov 17, 2025 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 67,
     "fingerprint": "sha256:df9d790a772a62b909bf66d840de74633c2a1389f66cca3ba5bda96343b237eb",
     "api": "openai/models",
     "version": "2025-10-27",
@@ -1010,12 +1327,32 @@
     "description": "Model \"o1-mini\" is shut down on 2025-10-27: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement. (OpenAI first named o4-mini, which is itself retired.)",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2025-04-28: `o1-preview` and `o1-mini`\n| Shutdown date | Model / system | Recommended replacement |\n| 2025-10-27    | `o1-mini`      | `o4-mini`               |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Oct 27, 2025**                                                                             | `o1-mini`                                                                                                                                                                                             | `o4-mini`                                                                                             | Apr 28, 2025 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 52,
+    "id": 68,
+    "fingerprint": "sha256:ce07a31125e454c6347940c57d9f3954c1464e7c4d115b9e613f608fc311fd39",
+    "api": "openai/models",
+    "version": "2025-07-28",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "openai",
+      "name": "o1-preview",
+      "replacement": "gpt-6.1-sol"
+    },
+    "description": "Model \"o1-preview\" is shut down on 2025-07-28: OpenAI requests naming it fail from that date.",
+    "migration_hint": "Use `gpt-6.1-sol` instead: OpenAI's recommended replacement. (OpenAI first named o3, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Jul 28, 2025**                                                                             | `o1-preview`                                                                                                                                      | `o3`                                                                                                  | Apr 28, 2025 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 69,
     "fingerprint": "sha256:47cf31bd0a2dc60fd9bbdce8cc286426e2cc28baebd2072c5c1bfce1e8108a40",
     "api": "openai/models",
     "version": "2025-07-14",
@@ -1030,12 +1367,12 @@
     "description": "Model \"gpt-4.5-preview\" is shut down on 2025-07-14: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-4.1` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2025-04-14: GPT-4.5-preview\n| Shutdown date | Model / system    | Recommended replacement |\n| 2025-07-14    | `gpt-4.5-preview` | `gpt-4.1`               |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Jul 14, 2025**                                                                             | `gpt-4.5-preview`                                                                                                                                         | `gpt-4.1`                                                                                             | Apr 14, 2025 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 53,
+    "id": 70,
     "fingerprint": "sha256:9ca7706bae32fba43a64b7089716eb87a6b90c91b15aaf6b32b120e3f6399a79",
     "api": "openai/models",
     "version": "2025-06-06",
@@ -1050,12 +1387,12 @@
     "description": "Model \"gpt-4-32k\" is shut down on 2025-06-06: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-4o` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2024-06-06: GPT-4-32K and Vision Preview models\n| Shutdown date | Deprecated model            | Deprecated model price                             | Recommended replacement |\n| 2025-06-06    | `gpt-4-32k`                 | $60.00 / 1M input tokens + $120 / 1M output tokens | `gpt-4o`                |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Jun 6, 2025**                                                                              | `gpt-4-32k` Historical price $60.00 / 1M input tokens + $120 / 1M output tokens | `gpt-4o`                                                                                              | Jun 6, 2024  |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 54,
+    "id": 71,
     "fingerprint": "sha256:72ccffb5565f02b44b1f0f106fbfe718533126191db0ec66fa622b3510a45247",
     "api": "openai/models",
     "version": "2025-06-06",
@@ -1070,12 +1407,12 @@
     "description": "Model \"gpt-4-32k-0613\" is shut down on 2025-06-06: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-4o` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2024-06-06: GPT-4-32K and Vision Preview models\n| Shutdown date | Deprecated model            | Deprecated model price                             | Recommended replacement |\n| 2025-06-06    | `gpt-4-32k-0613`            | $60.00 / 1M input tokens + $120 / 1M output tokens | `gpt-4o`                |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Jun 6, 2025**                                                                              | `gpt-4-32k-0613` Historical price $60.00 / 1M input tokens + $120 / 1M output tokens                                                             | `gpt-4o`                                                                                              | Jun 6, 2024  |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 55,
+    "id": 72,
     "fingerprint": "sha256:e3b22f3e67667c12321d23412ea6c1b2f98ef44d345f2b0ca173fcb6353037ee",
     "api": "openai/models",
     "version": "2025-06-06",
@@ -1090,12 +1427,12 @@
     "description": "Model \"gpt-4-32k-0314\" is shut down on 2025-06-06: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-4o` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2024-06-06: GPT-4-32K and Vision Preview models\n| Shutdown date | Deprecated model            | Deprecated model price                             | Recommended replacement |\n| 2025-06-06    | `gpt-4-32k-0314`            | $60.00 / 1M input tokens + $120 / 1M output tokens | `gpt-4o`                |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Jun 6, 2025**                                                                              | `gpt-4-32k-0314` Historical price $60.00 / 1M input tokens + $120 / 1M output tokens                                                             | `gpt-4o`                                                                                              | Jun 13, 2023 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 56,
+    "id": 73,
     "fingerprint": "sha256:1bd4a6f96c1537c7f8cde0f2643a337c0497e994226bb3a88739f197ed57ba1e",
     "api": "openai/models",
     "version": "2024-12-06",
@@ -1110,12 +1447,12 @@
     "description": "Model \"gpt-4-vision-preview\" is shut down on 2024-12-06: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-4o` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2024-06-06: GPT-4-32K and Vision Preview models\n| Shutdown date | Deprecated model            | Deprecated model price                             | Recommended replacement |\n| 2024-12-06    | `gpt-4-vision-preview`      | $10.00 / 1M input tokens + $30 / 1M output tokens  | `gpt-4o`                |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Dec 6, 2024**                                                                              | `gpt-4-vision-preview` Historical price $10.00 / 1M input tokens + $30 / 1M output tokens                                                        | `gpt-4o`                                                                                              | Jun 6, 2024  |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 57,
+    "id": 74,
     "fingerprint": "sha256:23b7fa9ef60a7125375298ead1585c704724d03667dbeb24e6e23caa94b6be55",
     "api": "openai/models",
     "version": "2024-12-06",
@@ -1130,12 +1467,12 @@
     "description": "Model \"gpt-4-1106-vision-preview\" is shut down on 2024-12-06: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-4o` instead: OpenAI's recommended replacement.",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2024-06-06: GPT-4-32K and Vision Preview models\n| Shutdown date | Deprecated model            | Deprecated model price                             | Recommended replacement |\n| 2024-12-06    | `gpt-4-1106-vision-preview` | $10.00 / 1M input tokens + $30 / 1M output tokens  | `gpt-4o`                |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Dec 6, 2024**                                                                              | `gpt-4-1106-vision-preview` Historical price $10.00 / 1M input tokens + $30 / 1M output tokens                                                   | `gpt-4o`                                                                                              | Jun 6, 2024  |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 58,
+    "id": 75,
     "fingerprint": "sha256:ea4d8ba55b674c1a828858251ff7506a9fcb5d229db0dddfc7cca370e063c148",
     "api": "openai/models",
     "version": "2024-09-13",
@@ -1150,12 +1487,12 @@
     "description": "Model \"gpt-3.5-turbo-0613\" is shut down on 2024-09-13: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement. (OpenAI first named gpt-3.5-turbo, which is itself retired.)",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2023-11-06: Chat model updates\n| Shutdown date | Deprecated model         | Deprecated model price                             | Recommended replacement |\n| 2024-09-13    | `gpt-3.5-turbo-0613`     | $1.50 / 1M input tokens + $2.00 / 1M output tokens | `gpt-3.5-turbo`         |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Sep 13, 2024**                                                                             | `gpt-3.5-turbo-0613` Historical price $1.50 / 1M input tokens + $2.00 / 1M output tokens         | `gpt-3.5-turbo`                                                                                       | Nov 6, 2023  |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 59,
+    "id": 76,
     "fingerprint": "sha256:e3a9e9a088427c22fae9b2199e34612bd62d03753de88defe42b55c0df16a17f",
     "api": "openai/models",
     "version": "2024-09-13",
@@ -1170,12 +1507,12 @@
     "description": "Model \"gpt-3.5-turbo-16k-0613\" is shut down on 2024-09-13: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement. (OpenAI first named gpt-3.5-turbo, which is itself retired.)",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2023-11-06: Chat model updates\n| Shutdown date | Deprecated model         | Deprecated model price                             | Recommended replacement |\n| 2024-09-13    | `gpt-3.5-turbo-16k-0613` | $3.00 / 1M input tokens + $4.00 / 1M output tokens | `gpt-3.5-turbo`         |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Sep 13, 2024**                                                                             | `gpt-3.5-turbo-16k-0613` Historical price $3.00 / 1M input tokens + $4.00 / 1M output tokens                                                     | `gpt-3.5-turbo`                                                                                       | Nov 6, 2023  |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 60,
+    "id": 77,
     "fingerprint": "sha256:18546ec0a58809196edb87d8141cfecd799cdc4dc50aba6314401318002aa002",
     "api": "openai/models",
     "version": "2024-09-13",
@@ -1190,7 +1527,7 @@
     "description": "Model \"gpt-3.5-turbo-0301\" is shut down on 2024-09-13: OpenAI requests naming it fail from that date.",
     "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement. (OpenAI first named gpt-3.5-turbo, which is itself retired.)",
     "source_url": "https://web.archive.org/web/20261114120000/https://developers.openai.com/api/docs/deprecations.md",
-    "source_excerpt": "### 2023-06-13: Updated chat models\n| Shutdown date | Deprecated model     | Deprecated model price                                | Recommended replacement |\n| 2024-09-13    | `gpt-3.5-turbo-0301` | $15.00 / 1M input tokens + $20.00 / 1M output tokens  | `gpt-3.5-turbo`         |",
+    "source_excerpt": "## Past deprecations\n| Shutdown date                                                                                | Affected model or feature                                                                                                                                                                             | Listed replacement                                                                                    | Notice date  |\n| **Sep 13, 2024**                                                                             | `gpt-3.5-turbo-0301` Historical price $15.00 / 1M input tokens + $20.00 / 1M output tokens                                                       | `gpt-3.5-turbo`                                                                                       | Jun 13, 2023 |",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   }

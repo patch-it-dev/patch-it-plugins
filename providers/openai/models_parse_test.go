@@ -10,9 +10,19 @@ import (
 )
 
 // The batch OpenAI shuts down on 2026-10-23, every alias its own name, each
-// with the replacement the page names (saved copy of the page, 2026-10-13).
+// with the replacement the page names, in both layouts of the page (saved
+// 2026-10-13 and 2026-11-21).
 func TestOpenAIsOctober23Batch(t *testing.T) {
-	got := byModel(t, Models, "openai-deprecations.md")
+	for _, c := range []struct{ file, heading, row string }{
+		{"openai-deprecations-2026-10-13.md", "### 2026-04-22: Legacy GPT model snapshots", "`gpt-4-0613` \\| `gpt-4`"},
+		{"openai-deprecations.md", "## Past deprecations", "| **Oct 23, 2026**"},
+	} {
+		t.Run(c.file, func(t *testing.T) { october23(t, c.file, c.heading, c.row) })
+	}
+}
+
+func october23(t *testing.T, file, heading, row string) {
+	got := byModel(t, Models, file)
 	want := map[string]string{
 		"gpt-3.5-turbo-0125": "gpt-5.6-terra", "gpt-3.5-turbo": "gpt-5.6-terra",
 		"gpt-4-0613": "gpt-5.6-sol", "gpt-4": "gpt-5.6-sol",
@@ -47,7 +57,7 @@ func TestOpenAIsOctober23Batch(t *testing.T) {
 		t.Errorf("the replacement's note is lost: %q", got["o1-pro"].Replacement)
 	}
 	gpt4 := got["gpt-4"].Excerpt
-	if !strings.Contains(gpt4, "### 2026-04-22: Legacy GPT model snapshots") || !strings.Contains(gpt4, "| Shutdown date") || !strings.Contains(gpt4, "`gpt-4-0613` \\| `gpt-4`") {
+	if !strings.Contains(gpt4, heading) || !strings.Contains(gpt4, "| Shutdown date") || !strings.Contains(gpt4, row) {
 		t.Errorf("the excerpt should be the heading, the header and the row:\n%s", gpt4)
 	}
 }
@@ -84,7 +94,7 @@ func TestEveryRealRetirementBecomesValidEvents(t *testing.T) {
 	for _, c := range []struct {
 		p    retire.Page
 		file string
-	}{{Models, "openai-deprecations.md"}} {
+	}{{Models, "openai-deprecations.md"}, {Models, "openai-deprecations-2026-10-13.md"}} {
 		rs, err := retire.Parse(read(t, c.file), c.p.Keep)
 		if err != nil {
 			t.Fatal(err)
@@ -119,4 +129,42 @@ func byModel(t *testing.T, p retire.Page, file string) map[string]retire.Retirem
 		out[r.Model] = r
 	}
 	return out
+}
+
+// Since 2026-11 the page has a Status and a Notice date column. A model
+// listed twice keeps the row with the latest notice, whatever the order, and
+// a status that isn't a retirement (a postponed one) is not read as one.
+func TestTheLatestNoticeWinsAndOnlyARetiringStatusCounts(t *testing.T) {
+	const page = `## Upcoming deprecations
+
+| Shutdown date    | Affected model   | Status     | Recommended replacement | Notice date  |
+| ---------------- | ---------------- | ---------- | ----------------------- | ------------ |
+| **Dec 11, 2026** | ` + "`gpt-5`" + `          | Deprecated | ` + "`gpt-6.1-sol`" + `           | Jun 11, 2026 |
+| **Jan 6, 2027**  | ` + "`o3`" + `             | Postponed  | ` + "`gpt-6.1-sol`" + `           | Nov 1, 2026  |
+
+## Past deprecations
+
+| Shutdown date    | Affected model or feature | Listed replacement | Notice date  |
+| ---------------- | ------------------------- | ------------------ | ------------ |
+| **Mar 1, 2027**  | ` + "`gpt-5`" + `                   | ` + "`gpt-6-sol`" + `        | Aug 1, 2026  |
+| **Dec 11, 2026** | ` + "`o3`" + `                      | ` + "`gpt-6.1-sol`" + `      | Jun 11, 2026 |
+| **Oct 23, 2026** | ` + "`o1`" + `                      | ` + "`gpt-5.6-sol`" + `      | Apr 22, 2026 |
+`
+	rs, err := retire.Parse([]byte(page), Models.Keep)
+	if err != nil {
+		t.Fatal(err)
+	}
+	got := map[string]retire.Retirement{}
+	for _, r := range rs {
+		got[r.Model] = r
+	}
+	if r := got["gpt-5"]; r.Date != "2027-03-01" || retire.First(r.Replacement) != "gpt-6-sol" {
+		t.Errorf("gpt-5: the August notice moved it to 2027-03-01, got %+v", r)
+	}
+	if r, ok := got["o3"]; ok {
+		t.Errorf("o3: the latest notice postponed it, got %+v", r)
+	}
+	if r := got["o1"]; r.Date != "2026-10-23" {
+		t.Errorf("o1: got %+v", r)
+	}
 }
