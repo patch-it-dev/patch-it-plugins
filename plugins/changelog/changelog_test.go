@@ -130,3 +130,25 @@ func TestReleaseNotesAreReadWhole(t *testing.T) {
 		t.Errorf("no notes: %v, want plugin.ErrNothingToRead", err)
 	}
 }
+
+// A rename whose new name the same release renames again or removes points
+// to where the chain ends: never to a name the release took away.
+func TestRenamesAreFollowedToTheirEnd(t *testing.T) {
+	f := File{Package: "acme", Repo: "acme/acme", TagPrefix: "v", Notes: true}.At("2.0.0")
+	body := "## BREAKING CHANGES\\n\\n" +
+		"* `acme.a()` has been renamed to `acme.b()`\\n* `acme.b()` has been renamed to `acme.c()`\\n" +
+		"* `acme.x()` has been renamed to `acme.y()`\\n* `acme.y()` has been removed\\n" +
+		"* `acme.p()` has been renamed to `acme.q()`\\n* `acme.q()` has been renamed to `acme.p()`\\n"
+	_, fs, err := f.Read([]byte(`{"tag_name": "v2.0.0", "body": "` + body + `"}`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	var got []string
+	for _, f := range fs {
+		got = append(got, strings.Join(f.Change.Symbols, ",")+">"+f.Change.Replacement)
+	}
+	want := "acme.a>acme.c acme.b>acme.c acme.x> acme.y> acme.p> acme.q>"
+	if strings.Join(got, " ") != want {
+		t.Errorf("got  %s\nwant %s", strings.Join(got, " "), want)
+	}
+}
