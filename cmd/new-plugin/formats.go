@@ -474,7 +474,8 @@ var {{.Ident}} = catalog.Commands{
 			"{{.File}}-new.json":         "[{\"name\": \"kept.json\", \"type\": \"file\"}]\n",
 			"{{.File}}-placeholder.json": "{\"PLACEHOLDER\": {\"summary\": \"a placeholder\"}}\n",
 		},
-		dropFile: "[{\"name\": \"placeholder.json\", \"type\": \"file\"}, {\"name\": \"kept.json\", \"type\": \"file\"}, {\"name\": \"added.json\", \"type\": \"file\"}]\n",
+		// A release with the same catalog (an added file would be an added event).
+		dropFile: "[{\"name\": \"placeholder.json\", \"type\": \"file\"}, {\"name\": \"kept.json\", \"type\": \"file\"}]\n",
 		source:   "{{.File}}-new.json",
 		ingest: `// The two releases the saved listings are at.
 // ` + todo + `: the real tags, oldest first.

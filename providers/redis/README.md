@@ -28,11 +28,11 @@ Kind: `catalog` (`kinds/catalog`), the `Commands` reader (`kinds/catalog/command
 
 ### What the plugin reads and ignores
 
-- Reads: the list of `*.json` files in `src/commands/` at each release. A file in the older release's list and not in the newer's becomes a `breaking` `package_release` event (`change: removed_symbol`), its symbol the command's name (a subcommand with its container: `CLIENT KILL`), its version the newer release and its `previous_version` the older. The excerpt quotes the file at the older tag.
-- Ignores: what a command's file says (arguments, flags, complexity, ACL categories): only presence is compared. An added command is not an event. A file renamed with the same command in it would read as a removal; none was renamed in the span checked.
+- Reads: the list of `*.json` files in `src/commands/` at each release. A file in the older release's list and not in the newer's becomes a `breaking` `package_release` event (`change: removed_symbol`), its symbol the command's name (a subcommand with its container: `CLIENT KILL`), its version the newer release and its `previous_version` the older. The excerpt quotes the file at the older tag. A file in the newer release's list and not in the older's is an `added` event (`change: added_symbol`), quoting the file at the newer tag. A command whose name leaves one file and arrives in another is a file moved: neither.
+- Ignores: what a command's file says (arguments, flags, complexity, ACL categories): only presence is compared.
 - A release from before 7.0.0 has no `src/commands/`: nothing to read (the pair is skipped).
 - Pre-release tags (`-rc`, `-m`) aren't listed: they aren't releases a team runs.
-- The pinned drop test: 8.8.0 → 8.10.0 adds 17 command files and removes none, so no event.
+- The pinned drop test: 8.8.0 → 8.10.0 adds 17 command files and removes none: 17 `added` events, nothing breaking. The golden pair (8.8-m03 → 8.8-rc1) adds 19 (the array commands and INCREX) besides its two removals.
 
 ### Known gaps
 

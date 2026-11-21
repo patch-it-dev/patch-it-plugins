@@ -28,8 +28,10 @@ import (
 //
 // A version is a release: its tag lists the directory (one GitHub API
 // call), and a command whose file is gone from the next release's listing
-// is removed. Only a removed file is fetched, at the older tag, for the
-// command's name and the entry quoted as evidence.
+// is removed; one whose file is new in it is added. Only a removed or added
+// file is fetched, at the tag that has it, for the command's name and the
+// entry quoted as evidence. A name that leaves in one file and arrives in
+// another is a file moved: neither.
 type Commands struct {
 	API       string // the source id the events carry: "redis/commands"
 	Ecosystem string // the package_release subject's ecosystem: "redis"
@@ -118,9 +120,10 @@ func (c Commands) ReadAt(ctx context.Context, env plugin.Env, v plugin.Version) 
 	return plugin.Snapshot{Version: v, Content: content, SourceURL: fmt.Sprintf("https://github.com/%s/tree/%s/%s", c.Repo, v.Ref, c.Dir)}, nil
 }
 
-// Extract is an event per command whose file is in from's listing and not
-// in to's, citing the file at from's tag, with previous_version from's
-// release. A zero from has nothing to compare.
+// Extract is a breaking event per command whose file is in from's listing
+// and not in to's, citing the file at from's tag, and an added one per
+// command whose file is in to's and not in from's, citing it at to's tag,
+// with previous_version from's release. A zero from has nothing to compare.
 func (c Commands) Extract(ctx context.Context, env plugin.Env, from, to plugin.Snapshot) (plugin.Result, error) {
 	if from.IsZero() {
 		return plugin.Result{}, nil
@@ -135,20 +138,48 @@ func (c Commands) Extract(ctx context.Context, env plugin.Env, from, to plugin.S
 	if err := c.shape.CheckCount("command files", CommandsMinRatio, len(before), len(after)); err != nil {
 		return plugin.Result{}, fmt.Errorf("reading %s: %w", to.SourceURL, err)
 	}
+	type found struct{ name, entry, url string }
+	read := func(ref string, files, other []string) ([]found, error) {
+		var out []found
+		for _, file := range files {
+			if slices.Contains(other, file) {
+				continue
+			}
+			u := c.FileURL(ref, file)
+			body, err := env.Get(ctx, u)
+			if err != nil {
+				return nil, fmt.Errorf("fetching %s: %w", u, err)
+			}
+			name, entry, err := command(body)
+			if err != nil {
+				return nil, fmt.Errorf("reading %s: %w", u, err)
+			}
+			out = append(out, found{name, entry, u})
+		}
+		return out, nil
+	}
+	gone, err := read(from.Version.Ref, before, after)
+	if err != nil {
+		return plugin.Result{}, err
+	}
+	added, err := read(to.Version.Ref, after, before)
+	if err != nil {
+		return plugin.Result{}, err
+	}
+	moved := map[string]bool{}
+	for _, g := range gone {
+		for _, a := range added {
+			if g.name == a.name {
+				moved[g.name] = true
+			}
+		}
+	}
 	var made []event.Event
-	for _, file := range before {
-		if slices.Contains(after, file) {
+	for _, f := range gone {
+		if moved[f.name] {
 			continue
 		}
-		u := c.FileURL(from.Version.Ref, file)
-		body, err := env.Get(ctx, u)
-		if err != nil {
-			return plugin.Result{}, fmt.Errorf("fetching %s: %w", u, err)
-		}
-		name, entry, err := command(body)
-		if err != nil {
-			return plugin.Result{}, fmt.Errorf("reading %s: %w", u, err)
-		}
+		name, entry, u := f.name, f.entry, f.url
 		made = append(made, event.Event{
 			API: c.API, Version: to.Version.ID, PreviousVersion: from.Version.ID,
 			Change: event.ChangeBreaking,
@@ -159,6 +190,24 @@ func (c Commands) Extract(ctx context.Context, env plugin.Env, from, to plugin.S
 			Description:   fmt.Sprintf("%s is gone in Redis %s (it was in %s): calling it fails.", name, to.Version.ID, from.Version.ID),
 			SourceURL:     u,
 			SourceExcerpt: excerpt(entry),
+			Confidence:    1.0,
+			DetectedAt:    env.Now().UTC(),
+		})
+	}
+	for _, f := range added {
+		if moved[f.name] {
+			continue
+		}
+		made = append(made, event.Event{
+			API: c.API, Version: to.Version.ID, PreviousVersion: from.Version.ID,
+			Change: event.ChangeAdded,
+			Subject: event.Subject{
+				Type: event.SubjectPackageRelease, Ecosystem: c.Ecosystem, Package: c.Package,
+				Change: event.PackageAddedSymbol, Symbols: []string{f.name},
+			},
+			Description:   fmt.Sprintf("%s is new in Redis %s (it wasn't in %s).", f.name, to.Version.ID, from.Version.ID),
+			SourceURL:     f.url,
+			SourceExcerpt: excerpt(f.entry),
 			Confidence:    1.0,
 			DetectedAt:    env.Now().UTC(),
 		})
