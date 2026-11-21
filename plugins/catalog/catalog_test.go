@@ -2,118 +2,91 @@ package catalog
 
 import (
 	"context"
+	"errors"
+	"slices"
+	"strings"
 	"testing"
-	"time"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
+	"github.com/patch-it-dev/patch-it-plugins/core/fetch"
 	"github.com/patch-it-dev/patch-it-plugins/core/kit/kittest"
 	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 )
 
-// The two commits redis-doc's own history shows the removal happen between:
-// PR #1697 dropped FUNCTION CREATE and FUNCTION INFO from commands.json on
-// 2022-01-24 (checked 2026-11-18), replacing the single-function CREATE with
-// a whole-library LOAD. Neither command ever reached a tagged Redis release
-// (not even 7.0's first release candidate, which shipped a week later with
-// neither in its own src/commands/): a real removal, but one that happened
-// before any user could depend on it, not a production break.
-const (
-	oldRef = "cc0427b3c3671e90b92f1ad2fe4e835fd32cd3c9"
-	newRef = "06f3598f39c7ca86dbdb0aa1668cfdd1b82b908d"
-)
-
-func env(pages kittest.Pages, t *testing.T) plugin.Env {
-	return plugin.Env{Get: pages.Get(t), Now: time.Now}
-}
-
-func fixturePages() kittest.Pages {
-	return kittest.Pages{
-		Redis.URL(oldRef): "testdata/redis-doc-cc0427b.json",
-		Redis.URL(newRef): "testdata/redis-doc-06f3598.json",
-	}
-}
-
-// The golden test and the pair fixture in one: testdata/redis-doc-cc0427b.json
-// and redis-doc-06f3598.json are real, trimmed excerpts of redis-doc's
-// commands.json at those two commits (checked 2026-11-18). Between them,
-// FUNCTION CREATE and FUNCTION INFO disappear, FUNCTION LOAD appears, and GET
-// (an unrelated, long-lived command) is unchanged: the version pair
-// oldRef → newRef, read with ReadAt and Extract.
-func TestPairRecreatesTheRealFunctionCommandRemoval(t *testing.T) {
-	ctx := context.Background()
-	s := kittest.NewMem()
-	e := env(fixturePages(), t)
-
-	rejected, err := kittest.Pair(ctx, e, s, Plugin{Catalog: Redis}, oldRef, newRef)
-	if err != nil || rejected {
-		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
-	}
-
-	events, err := s.All()
-	if err != nil {
-		t.Fatalf("reading events: %v", err)
-	}
-	// Precision over recall: GET (unchanged) and FUNCTION LOAD (added, not
-	// removed) must produce nothing. Only the two real removals should.
-	got := map[string]bool{}
-	for _, ev := range events {
-		if len(ev.Subject.Symbols) != 1 {
-			t.Fatalf("event with %d symbols, want exactly 1: %+v", len(ev.Subject.Symbols), ev)
-		}
-		got[ev.Subject.Symbols[0]] = true
-	}
-	want := map[string]bool{"FUNCTION CREATE": true, "FUNCTION INFO": true}
-	if len(got) != len(want) {
-		t.Fatalf("stored %v, want exactly %v (GET and FUNCTION LOAD must drop silently)", got, want)
-	}
-	for name := range want {
-		if !got[name] {
-			t.Errorf("missing an event for %s", name)
-		}
-	}
-
-	// Acceptance criteria: every event carries source_url and a non-empty
-	// source_excerpt, is marked breaking, and is placed on the real refs.
-	for _, ev := range events {
-		if ev.API != "redis/commands" || ev.Version != newRef || ev.PreviousVersion != oldRef {
-			t.Errorf("event %v: api=%s version=%s previous_version=%s, want redis/commands %s from %s",
-				ev.Subject.Symbols, ev.API, ev.Version, ev.PreviousVersion, newRef, oldRef)
-		}
-		if ev.ChangeType != event.ChangeTypeBreaking || !ev.Breaking {
-			t.Errorf("event %v: change_type=%s breaking=%v, want breaking", ev.Subject.Symbols, ev.ChangeType, ev.Breaking)
-		}
-		if ev.SourceURL != Redis.URL(oldRef) {
-			t.Errorf("event %v: source_url=%s, want the old snapshot, where the removed command is still evidenced", ev.Subject.Symbols, ev.SourceURL)
-		}
-		if ev.SourceExcerpt == "" {
-			t.Errorf("event %v: missing source_excerpt", ev.Subject.Symbols)
-		}
-	}
-
-	// Reading the same pair again must not duplicate the events.
-	if _, err := kittest.Pair(ctx, e, s, Plugin{Catalog: Redis}, oldRef, newRef); err != nil {
-		t.Fatalf("second read of the pair: %v", err)
-	}
-	if again, _ := s.All(); len(again) != len(events) {
-		t.Errorf("reading the pair again added events: %d -> %d", len(events), len(again))
-	}
-}
-
-// The catalog's versions are its newest commit, looked up on GitHub; that
-// version read with nothing before it has nothing to compare, so no events.
-// kittest extracts it twice, so a second extract that found anything new
-// would fail it too.
-func TestTheNewestCommitAloneHasNoEvents(t *testing.T) {
+// redisPair is the version pair from -> to over the saved listings (and the
+// removed files at from's tag), as the hosted ingestion service extracts it.
+func redisPair(t *testing.T, from, to string, files ...string) []event.Event {
+	t.Helper()
 	pages := kittest.Pages{
-		Redis.RefsURL:     "testdata/commits-master.json",
-		Redis.URL(newRef): "testdata/redis-doc-06f3598.json",
+		Redis.listingURL(from): "testdata/redis-contents-src-commands-" + from + ".json",
+		Redis.listingURL(to):   "testdata/redis-contents-src-commands-" + to + ".json",
 	}
-	e, p := kittest.Env(t, pages), Plugin{Catalog: Redis}
-	vs, err := p.ListVersions(context.Background(), e)
-	if err != nil || len(vs) != 1 || vs[0].Ref != newRef {
-		t.Fatalf("versions %v, %v; want the newest commit, %s", vs, err, newRef)
+	for _, f := range files {
+		pages[Redis.FileURL(from, f)] = "testdata/redis-" + from + "-" + f
 	}
-	if events := kittest.Versions(t, e, p, plugin.Version{}, vs[0]); len(events) != 0 {
-		t.Errorf("found %d events, want 0: there is nothing yet to diff against", len(events))
+	return kittest.Versions(t, kittest.Env(t, pages), Redis, plugin.Version{ID: from, Ref: from}, plugin.Version{ID: to, Ref: to})
+}
+
+// The one removal in redis/redis's src/commands/ between any two tags from
+// 7.0 to 8.12 (checked 2026-11-20): GCRA and GCRASETVALUE, added in the
+// 8.8 milestone builds, are gone at 8.8-rc1. Final releases never removed a
+// command in that span, so the golden pins this pre-release pair: the real
+// files, the real listings.
+func TestGolden(t *testing.T) {
+	got := redisPair(t, "8.8-m03", "8.8-rc1", "gcra.json", "gcrasetvalue.json")
+	var names []string
+	for _, e := range got {
+		names = append(names, e.Subject.Symbols[0])
+		if e.SourceURL != Redis.FileURL("8.8-m03", strings.ToLower(e.Subject.Symbols[0])+".json") || !strings.Contains(e.SourceExcerpt, `"since":"8.8.0"`) {
+			t.Errorf("%s: cites %s, quoting %.80q", e.Subject.Symbols[0], e.SourceURL, e.SourceExcerpt)
+		}
+	}
+	if !slices.Equal(names, []string{"GCRA", "GCRASETVALUE"}) {
+		t.Errorf("removed %v, want GCRA and GCRASETVALUE", names)
+	}
+	kittest.Golden(t, "testdata/golden/redis-commands.json", got)
+}
+
+// The pinned drop test: 8.8.0 -> 8.10.0 adds 17 command files (the array
+// commands, INCREX…) and removes none. Nothing is an event, and nothing
+// past the two listings is fetched.
+func TestReleasesThatOnlyAddCommandsHaveNoEvents(t *testing.T) {
+	if got := redisPair(t, "8.8.0", "8.10.0"); len(got) != 0 {
+		t.Errorf("%d events, want 0", len(got))
+	}
+}
+
+// A subcommand is named with its container, as code sends it.
+func TestASubcommandIsNamedWithItsContainer(t *testing.T) {
+	name, _, err := command([]byte(`{"KILL": {"summary": "x", "container": "CLIENT"}}`))
+	if err != nil || name != "CLIENT KILL" {
+		t.Errorf("%q, %v", name, err)
+	}
+	if _, _, err := command([]byte(`{"A": {}, "B": {}}`)); err == nil {
+		t.Error("two commands in one file must be an error, not a guess")
+	}
+}
+
+// Versions are the final releases on GitHub, by version number (a patch to
+// an older line published later stays in its place), each read at its tag.
+// A release before src/commands/ existed has nothing to read.
+func TestVersionsAreFinalReleasesByVersion(t *testing.T) {
+	env := kittest.Env(t, kittest.Pages{
+		"https://api.github.com/repos/redis/redis/releases?per_page=100&page=1": "testdata/redis-releases-excerpt.json",
+	})
+	vs, err := Redis.ListVersions(context.Background(), env)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var ids []string
+	for _, v := range vs {
+		ids = append(ids, v.ID+"@"+v.Ref)
+	}
+	if got := strings.Join(ids, " "); got != "6.2.20@6.2.20 7.2.10@7.2.10 8.0.0@8.0.0 8.0.1@8.0.1" {
+		t.Errorf("versions %s", got)
+	}
+	notFound := plugin.Env{Get: func(context.Context, string) ([]byte, error) { return nil, &fetch.StatusError{StatusCode: 404} }}
+	if _, err := Redis.ReadAt(context.Background(), notFound, plugin.Version{ID: "6.2.20", Ref: "6.2.20"}); !errors.Is(err, plugin.ErrNothingToRead) {
+		t.Errorf("no src/commands/ at the tag: %v, want plugin.ErrNothingToRead", err)
 	}
 }

@@ -427,40 +427,46 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 		defDir: "plugins/catalog",
 		def: `package catalog
 
-// {{.Ident}} is {{.Provider}}'s catalog: one JSON object, one key per command
-// or endpoint, at a git ref.
+import "regexp"
+
+// {{.Ident}} is {{.Provider}}'s command catalog: one JSON file per command in a
+// directory of its repo, read at each release tag, as Redis's is (redis.go).
 //
 // ` + todo + `: the ecosystem and package for the events' subject, the repo,
-// the catalog's path and the commits API URL for the newest ref. Say what you
-// checked, with the date, as catalog.go does for Redis.
-var {{.Ident}} = Catalog{
+// the directory and the release tags' shape. Say what you checked, with the
+// date, as redis.go does for Redis.
+var {{.Ident}} = Commands{
 	API: "{{.ID}}", Ecosystem: "{{.ProviderID}}", Package: "{{.ProviderID}}",
-	Repo: "TODO-owner/TODO-repo", Path: "TODO/commands.json",
-	RefsURL: "https://api.github.com/repos/TODO-owner/TODO-repo/commits/main",
+	Repo: "TODO-owner/TODO-repo", Dir: "TODO/commands",
+	Release: regexp.MustCompile(` + "`" + `^v?(\d+\.\d+\.\d+)$` + "`" + `),
 }
 `,
-		register: `plugin.Register(Plugin{Catalog: {{.Ident}}})`,
-		pluginOf: `Plugin{Catalog: {{.Ident}}}`,
+		register: `plugin.Register({{.Ident}})`,
+		pluginOf: `{{.Ident}}`,
 		fixtures: map[string]string{
-			"{{.File}}-old.json": "{\"PLACEHOLDER\": {}}\n",
-			"{{.File}}-new.json": "{\"PLACEHOLDER\": {}}\n",
+			"{{.File}}-old.json":         "[{\"name\": \"placeholder.json\", \"type\": \"file\"}, {\"name\": \"kept.json\", \"type\": \"file\"}]\n",
+			"{{.File}}-new.json":         "[{\"name\": \"kept.json\", \"type\": \"file\"}]\n",
+			"{{.File}}-placeholder.json": "{\"PLACEHOLDER\": {\"summary\": \"a placeholder\"}}\n",
 		},
-		source: "{{.File}}-new.json",
-		ingest: `// The two refs the saved snapshots are at.
-// ` + todo + `: the real commits, oldest first.
+		dropFile: "[{\"name\": \"placeholder.json\", \"type\": \"file\"}, {\"name\": \"kept.json\", \"type\": \"file\"}, {\"name\": \"added.json\", \"type\": \"file\"}]\n",
+		source:   "{{.File}}-new.json",
+		ingest: `// The two releases the saved listings are at.
+// ` + todo + `: the real tags, oldest first.
 const (
-	{{.Lower}}OldRef = "0000000000000000000000000000000000000000"
-	{{.Lower}}NewRef = "1111111111111111111111111111111111111111"
+	{{.Lower}}OldRef = "v1.0.0"
+	{{.Lower}}NewRef = "v2.0.0"
 )
 
-// {{.Lower}}Ingest extracts the change from the saved old snapshot to file.
+// {{.Lower}}Ingest is the version pair from the saved old listing to file,
+// the newer release's listing; a file gone from it is read at the old tag.
 func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
 	env := kittest.Env(t, kittest.Pages{
-		{{.Ident}}.URL({{.Lower}}OldRef): "testdata/{{.File}}-old.json",
-		{{.Ident}}.URL({{.Lower}}NewRef): file,
+		{{.Ident}}.listingURL({{.Lower}}OldRef): "testdata/{{.File}}-old.json",
+		{{.Ident}}.listingURL({{.Lower}}NewRef): file,
+		{{.Ident}}.FileURL({{.Lower}}OldRef, "placeholder.json"): "testdata/{{.File}}-placeholder.json",
 	})
-	return kittest.Versions(t, env, Plugin{Catalog: {{.Ident}}},
+	return kittest.Versions(t, env, {{.Ident}},
 		plugin.Version{ID: {{.Lower}}OldRef, Ref: {{.Lower}}OldRef}, plugin.Version{ID: {{.Lower}}NewRef, Ref: {{.Lower}}NewRef})
 }
 `,

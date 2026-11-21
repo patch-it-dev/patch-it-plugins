@@ -1,28 +1,20 @@
-// Package catalog is the source plugin for a provider that publishes its
-// whole command or endpoint surface as one structured JSON file, one entry
-// keyed by name: read it at a commit, compare it with the one read before,
-// and report
-// every name that disappeared entirely between them. Unlike openapi's typed
-// spec, an entry here is opaque: no request or response shape to walk, just
-// whether the name is still there. Redis first: its command surface has no
-// OpenAPI spec, but redis-doc's commands.json is the real, machine-readable
-// file redis.io's own command reference is generated from.
+// Package catalog is the kind for a provider's own structured list of what
+// it offers or is about to take away: a command catalog, a file of upcoming
+// removals. Unlike openapi's typed spec, an entry here is opaque beyond its
+// name (and, for a list of upcoming changes, its date and what to use
+// instead). Each reader is a plugin of its own in this package, read
+// version by version (plugin.Versioned): Redis's commands at each release
+// tag (redis.go).
 //
-// Precision over recall: a name that moves to a different key (a genuine
-// rename) reads as one removal and one addition, same as any other. This
-// never guesses a rename from two disappearances and appearances landing in
-// the same diff; it only ever reports what's gone.
+// Precision over recall: a name that moves (a genuine rename) reads as one
+// removal and one addition, same as any other. A reader never guesses a
+// rename from a disappearance and an appearance landing in the same diff.
 package catalog
 
 import (
-	"context"
-	"encoding/json"
 	"fmt"
-	"sort"
-	"time"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
-	"github.com/patch-it-dev/patch-it-plugins/core/github"
 	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 )
 
@@ -31,162 +23,29 @@ func init() {
 		ID: "redis", Name: "Redis", Category: plugin.CategoryDatabases, Homepage: "https://redis.io",
 		Sources: []plugin.Source{{
 			ID: "commands", Layer: plugin.LayerRuntime, Page: "providers/redis.md",
-			Watches: "Commands removed entirely from Redis's own command catalog between two snapshots",
-			URLs:    []string{"https://github.com/redis/redis-doc/blob/master/commands.json"},
-			Plugin:  Plugin{Catalog: Redis},
+			Watches: "Commands removed entirely between two Redis releases, from the command definitions in the server's own source (src/commands/) at each release tag",
+			URLs:    []string{"https://github.com/redis/redis/tree/unstable/src/commands", "https://github.com/redis/redis/releases"},
+			Plugin:  Redis,
 		}},
 	})
 }
 
-// Catalog is one provider's command or endpoint catalog: a single JSON
-// object, one key per entry, fetched at a git ref.
-type Catalog struct {
-	API       string // the source id the events carry: "redis/commands"
-	Ecosystem string // the package_release subject's ecosystem: "redis"
-	Package   string // the package_release subject's package: "redis"
-	Repo      string // owner/name on GitHub the catalog lives in
-	Path      string // the catalog's path in the repo
-	RefsURL   string // GitHub's commits API, for the newest ref: .../commits/<branch>
-}
-
-// Redis is redis-doc's commands.json, regenerated from each real Redis
-// release and read by redis.io's own command reference (checked 2026-11-18).
-// The repo has no tags, so a ref here is a commit SHA, not a release.
-var Redis = Catalog{
-	API: "redis/commands", Ecosystem: "redis", Package: "redis",
-	Repo: "redis/redis-doc", Path: "commands.json",
-	RefsURL: "https://api.github.com/repos/redis/redis-doc/commits/master",
-}
-
-// URL is the catalog as it was at ref: its own provenance.
-func (c Catalog) URL(ref string) string {
-	return fmt.Sprintf("https://raw.githubusercontent.com/%s/%s/%s", c.Repo, ref, c.Path)
-}
-
-// parse reads the catalog as a flat map of name to its raw entry: every
-// field of an entry (arity, complexity, ACL categories...) is unread, except
-// where an entry's own bytes become an event's excerpt.
-func parse(data []byte) (map[string]json.RawMessage, error) {
-	var out map[string]json.RawMessage
-	if err := json.Unmarshal(data, &out); err != nil {
-		return nil, fmt.Errorf("parsing catalog: %w", err)
-	}
-	return out, nil
-}
-
-// removed is every name of old that new doesn't have, sorted so the result
-// (and the fingerprints built from it) don't depend on map order.
-func removed(old, new map[string]json.RawMessage) []string {
-	var out []string
-	for name := range old {
-		if _, ok := new[name]; !ok {
-			out = append(out, name)
-		}
-	}
-	sort.Strings(out)
-	return out
-}
-
-// Plugin reads one catalog.
-type Plugin struct {
-	Catalog Catalog
-}
-
-func (p Plugin) Name() string { return p.Catalog.API }
-
-// ListVersions is the catalog repo's newest commit: the catalog has no
-// releases, so each commit read is a version, and the change into it is
-// extracted against the one read before.
-func (p Plugin) ListVersions(ctx context.Context, env plugin.Env) ([]plugin.Version, error) {
-	ref, err := p.latestRef(ctx, env)
-	if err != nil {
-		return nil, err
-	}
-	return []plugin.Version{{ID: ref, Ref: ref}}, nil
-}
-
-// ReadAt fetches the catalog at v's commit.
-func (p Plugin) ReadAt(ctx context.Context, env plugin.Env, v plugin.Version) (plugin.Snapshot, error) {
-	url := p.Catalog.URL(v.Ref)
-	body, err := env.Get(ctx, url)
-	if err != nil {
-		return plugin.Snapshot{}, fmt.Errorf("fetching %s: %w", url, err)
-	}
-	return plugin.Snapshot{Version: v, Content: body, SourceURL: url}, nil
-}
-
-// Extract is an event per command in from's catalog that isn't in to's,
-// with previous_version from's commit. A zero from has nothing to compare.
-func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snapshot) (plugin.Result, error) {
-	events, rejected, err := p.events(from.Content, to.Content, from.Version.Ref, to.Version.Ref, env.Now())
-	if err != nil {
-		return plugin.Result{}, err
-	}
-	return plugin.Result{Events: events, Rejected: rejected}, nil
-}
-
-var _ plugin.Versioned = Plugin{}
-
-// latestRef asks GitHub for the catalog repo's newest commit.
-func (p Plugin) latestRef(ctx context.Context, env plugin.Env) (string, error) {
-	sha, err := github.Head(ctx, env.Get, p.Catalog.RefsURL)
-	if err != nil {
-		return "", fmt.Errorf("looking up the newest commit: %w", err)
-	}
-	return sha, nil
-}
-
-// events diffs two parsed snapshots into events. oldContent is empty for
-// the first version read (nothing before it): diffing against no snapshot
-// reports nothing, the same as an unchanged one.
-func (p Plugin) events(oldContent, newContent []byte, from, to string, now time.Time) ([]event.Event, []error, error) {
-	c := p.Catalog
-	newEntries, err := parse(newContent)
-	if err != nil {
-		return nil, nil, fmt.Errorf("parsing %s: %w", c.URL(to), err)
-	}
-	var oldEntries map[string]json.RawMessage
-	if len(oldContent) > 0 {
-		oldEntries, err = parse(oldContent)
-		if err != nil {
-			return nil, nil, fmt.Errorf("parsing %s: %w", c.URL(from), err)
-		}
-	}
-
-	var events []event.Event
-	var rejected []error
-	for _, name := range removed(oldEntries, newEntries) {
-		subject := event.Subject{
-			Type: event.SubjectPackageRelease, Ecosystem: c.Ecosystem, Package: c.Package,
-			Change: event.PackageRemovedSymbol, Symbols: []string{name},
-		}
-		e := event.Event{
-			API: c.API, Version: to, PreviousVersion: from,
-			ChangeType:    event.ChangeTypeBreaking,
-			Breaking:      true,
-			Subject:       subject,
-			Description:   fmt.Sprintf("%s no longer exists: calling it now fails.", name),
-			SourceURL:     c.URL(from),
-			SourceExcerpt: excerpt(name, oldEntries[name]),
-			Confidence:    1.0,
-			DetectedAt:    now,
-		}
-		e.Fingerprint = event.Fingerprint(e.API, e.Version, e.ChangeType, subject, "")
+// finish fingerprints and validates the events a reader made, keeping the
+// valid ones and the reasons the others failed.
+func finish(api string, made []event.Event) (events []event.Event, rejected []error) {
+	for _, e := range made {
+		e.Fingerprint = event.Fingerprint(e.API, e.Version, e.ChangeType, e.Subject, "")
 		if err := e.Validate(); err != nil {
-			rejected = append(rejected, fmt.Errorf("%s: %w", name, err))
+			rejected = append(rejected, fmt.Errorf("%s %s: %w", api, e.Description, err))
 			continue
 		}
 		events = append(events, e)
 	}
-	return events, rejected, nil
+	return events, rejected
 }
 
-// excerpt quotes the entry exactly as the old snapshot had it: the evidence
-// that name existed, in the catalog's own shape. Capped at the contract's
-// 2000-character limit, the entry's closing braces never cut off: nested
-// command-line arguments can run long.
-func excerpt(name string, raw json.RawMessage) string {
-	s := fmt.Sprintf("%q: %s", name, string(raw))
+// excerpt caps a quote at the contract's 2000 characters.
+func excerpt(s string) string {
 	if r := []rune(s); len(r) > 2000 {
 		s = string(r[:1999]) + "…"
 	}

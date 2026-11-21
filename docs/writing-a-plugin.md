@@ -86,7 +86,7 @@ Write the numbers on the provider page, as `providers/vercel.md` does for its sp
 | `plugins/notices` | A live page of dated notices: a model provider's deprecations page (a table of date, model, replacement), a vendor's RSS or Atom feed, a vendor's table of whole API version ranges and their support status | A `retire.Page` in `plugins/notices/retire/providers.go`, a `feed.Feed` with a reader for that vendor's entries in `plugins/notices/feed/`, or an `eol.Page` in `plugins/notices/eol/` (`new-plugin` doesn't scaffold this reader yet) |
 | `plugins/migrationguide` | A guide that lists what a release removed, at the release's tag: an SDK's migration guide per new major (removed request parameters), or a package's table of removed members (an RST simple table or a Markdown pipe table) | A `sdkguide.Guide` in `plugins/migrationguide/sdkguide/`, or a `members.Guide` in `plugins/migrationguide/members/` |
 | `plugins/changelog` | A changelog: a `CHANGELOG.md` / `CHANGES.rst` / `HISTORY.rst`, each release's section at its tag (releases from PyPI or npm), or a vendor's machine-readable API changelog in JSON (per day, endpoint and API version, oasdiff change codes), commit by commit | A `changelog.File` with its `TagPrefix`, or a `changelog.Log` |
-| `plugins/catalog` | A flat JSON catalog, one entry per name, with no release tags to pin — a commit SHA stands in | A `catalog.Catalog`, diffed between two snapshots for names that disappeared entirely |
+| `plugins/catalog` | A provider's own structured list of what it offers: a command catalog kept as one JSON file per command in its repo, read at each release tag and compared for commands that disappeared entirely | A `catalog.Commands` (repo, directory, release tag pattern); a catalog of another shape is a new reader type in the package |
 | `plugins/apisurface` | A published package's public API, compared between two releases: the classes, functions, methods and parameters in each release's files (Python first: the wheel or sdist from PyPI) | A `apisurface.Package` (registry name, ecosystem, top-level module) and its `plugin.RegisterProvider` block |
 
 ## 4. The interface
@@ -204,11 +204,13 @@ The test kit, `core/kit/kittest`, runs the plugin with no network, no database a
 ```go
 func TestGolden(t *testing.T) {
     env := kittest.Env(t, kittest.Pages{
-        Redis.URL(oldRef): "testdata/redis-doc-cc0427b.json",
-        Redis.URL(newRef): "testdata/redis-doc-06f3598.json",
+        Redis.listingURL("8.8-m03"):              "testdata/redis-contents-src-commands-8.8-m03.json",
+        Redis.listingURL("8.8-rc1"):              "testdata/redis-contents-src-commands-8.8-rc1.json",
+        Redis.FileURL("8.8-m03", "gcra.json"):    "testdata/redis-8.8-m03-gcra.json",
+        Redis.FileURL("8.8-m03", "gcrasetvalue.json"): "testdata/redis-8.8-m03-gcrasetvalue.json",
     })
-    got := kittest.Versions(t, env, Plugin{Catalog: Redis},
-        plugin.Version{ID: oldRef, Ref: oldRef}, plugin.Version{ID: newRef, Ref: newRef})
+    got := kittest.Versions(t, env, Redis,
+        plugin.Version{ID: "8.8-m03", Ref: "8.8-m03"}, plugin.Version{ID: "8.8-rc1", Ref: "8.8-rc1"})
     kittest.Golden(t, "testdata/golden/redis-commands.json", got)
 }
 ```
