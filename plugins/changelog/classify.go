@@ -14,7 +14,8 @@ type Kind int
 
 const (
 	KindNone        Kind = iota
-	KindBreaking         // Removed, Breaking changes, Backwards incompatible changes
+	KindBreaking         // Breaking changes, Backwards incompatible changes, Major Changes
+	KindRemoved          // Removed: breaking, and a bullet of names alone is a removal
 	KindDeprecation      // Deprecated, Deprecations
 	KindMixed            // "Deprecations and Removals": the bullet's verb decides
 )
@@ -31,6 +32,8 @@ func SectionKind(title string) Kind {
 	switch {
 	case breaking && deprecation:
 		return KindMixed
+	case breaking && !strings.Contains(t, "breaking") && (strings.Contains(t, "removed") || strings.Contains(t, "removal")):
+		return KindRemoved
 	case breaking:
 		return KindBreaking
 	case deprecation:
@@ -62,6 +65,8 @@ var noisePrefix = regexp.MustCompile("^(?:" + strings.Join([]string{
 	`(?:[A-Z][\w/]*(?: [A-Z][\w/]*)*) - `,
 	`[A-Z][a-zA-Z]+: `,
 }, "|") + ")")
+
+var changeWord = regexp.MustCompile(`(?i)^(added|changed|deprecated|fixed|security|updated|improved)\b`)
 
 // Change is what one bullet says, when it says it plainly enough.
 type Change struct {
@@ -109,7 +114,9 @@ func Classify(k Kind, text, module string) (c Change, ok bool, why string) {
 			text, k = text[len(m):], KindBreaking
 			continue
 		}
-		if m := noisePrefix.FindString(text); m != "" {
+		// "Deprecated: `X`" or "Added: `X`" says what the change is: its
+		// word is not an area to read past.
+		if m := noisePrefix.FindString(text); m != "" && !changeWord.MatchString(m) {
 			text = text[len(m):]
 			continue
 		}
@@ -118,8 +125,13 @@ func Classify(k Kind, text, module string) (c Change, ok bool, why string) {
 	if k == KindNone {
 		return Change{}, false, ""
 	}
+	removedHeading := false
 	sentence, codes := template(text)
 	try := func(re *regexp.Regexp) []string { return re.FindStringSubmatch(sentence) }
+	if k == KindRemoved {
+		k = KindBreaking
+		removedHeading = true
+	}
 	if k != KindDeprecation {
 		if m := try(renamed); m != nil {
 			return names(event.ChangeTypeBreaking, codes, "§", "", "", "", module, codes[1])
@@ -135,7 +147,7 @@ func Classify(k Kind, text, module string) (c Change, ok bool, why string) {
 		}
 		// Only names, no verb ("`Placeholder.reset_color_cycle`"): counts
 		// under a Removed heading, where the heading is the verb.
-		if m := try(bare); m != nil && k == KindBreaking {
+		if m := try(bare); m != nil && removedHeading {
 			return names(event.ChangeTypeBreaking, codes, m[1], "", "", "", module, "")
 		}
 	}

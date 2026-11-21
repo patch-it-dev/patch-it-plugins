@@ -190,7 +190,44 @@ func (f File) Read(page []byte) (heading string, out []Finding, err error) {
 			out = append(out, Finding{Change: c, Section: s.Title, Bullet: b, Dropped: why})
 		}
 	}
-	return heading, out, nil
+	return heading, chained(out), nil
+}
+
+// chained follows each rename through the release's other renames and
+// removals, so a replacement is the name the release ends with: "A renamed
+// to B" and "B renamed to C" make A's replacement C; a chain that ends in a
+// removal (or loops) leaves A removed, with no replacement to move to.
+func chained(fs []Finding) []Finding {
+	renamed, removed := map[string]string{}, map[string]bool{}
+	for _, f := range fs {
+		if f.Dropped != "" || f.Change.ChangeType != event.ChangeTypeBreaking {
+			continue
+		}
+		for _, sym := range f.Change.Symbols {
+			if f.Change.Replacement != "" {
+				renamed[sym] = f.Change.Replacement
+			} else {
+				removed[sym] = true
+			}
+		}
+	}
+	for i, f := range fs {
+		r := f.Change.Replacement
+		if f.Dropped != "" || r == "" {
+			continue
+		}
+		seen := map[string]bool{}
+		for next, ok := renamed[r]; ok && !seen[r]; next, ok = renamed[r] {
+			seen[r] = true
+			r = next
+		}
+		if removed[r] || seen[r] {
+			fs[i].Change.Replacement, fs[i].Change.Change = "", event.PackageRemovedSymbol
+			continue
+		}
+		fs[i].Change.Replacement = r
+	}
+	return fs
 }
 
 // notes are the sections of a GitHub release's body (the API's JSON for one
