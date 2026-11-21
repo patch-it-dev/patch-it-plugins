@@ -19,6 +19,7 @@ Kind: `notices` (`kinds/notices`), with the deprecations-table reader (`kinds/no
   - **Vertex AI's model versions page** (`google/vertex-model-retirements`): the same models on Google Cloud, with Google Cloud's own retirement dates, which differ from the Gemini API's (gemini-2.5-pro: 2026-10-20 on Vertex AI, 2026-12-01 here). A separate source: a repo reaches one or the other.
   - **The Gemini API's models list** (`GET /v1beta/models`): what's served now, with no dates.
 - **Quote:** "| `gemini-2.0-flash` | February 5, 2025 | June 1, 2026 | `gemini-3.6-flash` |" (Gemini 2.0 models, Deprecated models), and above the tables: "The shutdown dates listed in the table indicate the earliest possible dates on which a model might be retired".
+- **Anchors** (checked 2026-11-21, declared in `provider.go`): `gemini-2.0-flash` and `embedding-001`, two shut-down models the page keeps. A read without them fails as a change of layout, never as nothing new.
 
 ### How the provider announces changes
 
@@ -128,6 +129,7 @@ Kind: `notices` (`kinds/notices`), with the deprecations-table reader (`kinds/no
   - **The deprecations page** (`docs.cloud.google.com/vertex-ai/generative-ai/docs/deprecations`): SDK modules and features, not model dates.
   - **The Gemini API deprecations page** (`google/gemini-models`): the Gemini API's own dates, which differ.
 - **Quote:** "| `veo-3.0-generate-001` | July 29, 2025 | June 30, 2026 | `veo-3.1-generate-001` |" (Retired models).
+- **Anchors** (checked 2026-11-21, declared in `provider.go`): `gemini-1.5-pro-002` and `text-bison`, two retired models the page keeps. A read without them fails as a change of layout, never as nothing new.
 
 ### How the provider announces changes
 
@@ -158,6 +160,7 @@ Kind: `notices` (`kinds/notices`), with the feed reader (`kinds/notices/feed`) a
 - **Why this one:** it's Google's own release notes as a feed, one entry per day, each change under a heading naming its kind (`Deprecated`), and deprecations come with a table of discontinued endpoints and replacements.
 - **Alternatives considered:** the model versions and lifecycle docs page (HTML, rewritten in place, no history); the Google Cloud deprecations page (all of Cloud, prose); the models list API (what exists now, not when it stops).
 - **Quote:** "We recommend updating your model endpoints before June 30, 2026, to avoid service disruption." (Deprecated: Imagen generation GA endpoints deprecation).
+- **Anchors** (checked 2026-11-21, declared in `provider.go`): the feed's own title, "Generative AI on Vertex AI - Release notes" (its entries roll off). A read without them fails as a change of layout, never as nothing new.
 
 ### How the provider announces changes
 

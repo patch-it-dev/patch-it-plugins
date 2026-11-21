@@ -120,8 +120,9 @@ func sections(body []string, rst bool, heading *regexp.Regexp) []Section {
 	return out
 }
 
-// Releases is how many releases a changelog file heads: Markdown release
-// headings, or else reStructuredText release titles. What the shape guard
+// Releases is how many releases a changelog file heads: its Markdown
+// release headings or its reStructuredText release titles, whichever it has
+// more of (a stray "# 1 …" line in an RST file doesn't make it count 1). What the shape guard
 // counts: a changelog keeps every past release, so a file that heads far
 // fewer than at the release before was moved, split or reformatted.
 func Releases(file []byte) int {
@@ -138,10 +139,7 @@ func Releases(file []byte) int {
 			}
 		}
 	}
-	if md > 0 {
-		return md
-	}
-	return rst
+	return max(md, rst)
 }
 
 // releaseLines are release's heading and the lines under it, up to the next

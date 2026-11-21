@@ -202,6 +202,8 @@ The source's `Shape` (on its `plugin.Source`) holds its anchors and any ratio or
 },
 ```
 
+**When a drop is real** (a vendor really trims its changelog at a new major, or really splits its spec), the source fails on every run until someone decides, and the hosted ingestion service opens an issue here. Look first for where the rest went: a moved or split source is a new URL or a second source, not a smaller one. Only when the source really is smaller now, set that source's `MinRatio` low enough to pass, with a comment saying what dropped, when, and why it's real.
+
 `RegisterProvider` hands each plugin its source's `Shape` (`plugin.Guarded.WithShape`) and refuses a plugin that doesn't take one: a new kind implements `WithShape` and calls `Shape.CheckCount` (and, for a living page, `Shape.CheckAnchors`) before it reads a single change. A plugin built by hand in a test isn't guarded unless the test gives it a `Shape`: golden tests read trimmed copies, far smaller than the real releases, so a test of the guard calls `WithShape` itself (each kind has one with a redesigned or shrunken input).
 
 ### Fetching: `env.Get` and `core/kit/`

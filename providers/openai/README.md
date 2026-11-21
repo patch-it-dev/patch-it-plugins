@@ -61,6 +61,7 @@ Kind: `notices` (`kinds/notices`), reading with the deprecations-page reader, `k
 - **Why this one:** it's OpenAI's own list of every deprecation: a table of upcoming shutdowns and one of past ones, each row a shutdown date, the models, a status, the recommended replacement and the notice date. The markdown version is machine-readable without scraping HTML. `robots.txt` allows it.
 - **Alternatives considered:** the models list API (`GET /v1/models`: says what exists now, not when it stops); OpenAI's blog and email notices (announce only some changes, no table); the old `platform.openai.com/docs/deprecations` URL (redirects here).
 - **Quote:** "| **Dec 11, 2026** | `gpt-5`, `gpt-5-2025-08-07` | Deprecated | `gpt-6.1-sol` | Jun 11, 2026 |" ("Upcoming deprecations", 2026-11-21).
+- **Anchors** (checked 2026-11-21, declared in `provider.go`): `gpt-4-0613` and `gpt-3.5-turbo-0301`, two models in the "Past deprecations" table. A read without them fails as a change of layout, never as nothing new.
 
 ### How the provider announces changes
 
