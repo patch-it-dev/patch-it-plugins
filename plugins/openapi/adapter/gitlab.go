@@ -101,7 +101,7 @@ func (g GitLab) LatestTag(ctx context.Context) (string, error) {
 // (checked v18.11.0-ee and v19.0.0-ee, 2026-11-15), which can't tell two
 // releases apart. The bare version is also what a self-managed instance
 // reports and what patch-it's package gate can read; it refuses "v19.0.0-ee".
-// A tag that isn't a release (a branch, for a replay) is its own version.
+// A tag that isn't a release (a branch, read as a version) is its own version.
 func (g GitLab) Fetch(ctx context.Context, tag string) (Spec, error) {
 	url := fmt.Sprintf(cmp.Or(g.SpecURLTemplate, gitlabSpecURLTemplate), tag)
 	body, err := fetch.Get(ctx, url, nil)

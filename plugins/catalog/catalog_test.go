@@ -38,7 +38,7 @@ func fixturePages() kittest.Pages {
 // commands.json at those two commits (checked 2026-11-18). Between them,
 // FUNCTION CREATE and FUNCTION INFO disappear, FUNCTION LOAD appears, and GET
 // (an unrelated, long-lived command) is unchanged. This is the pair the
-// plugin's Replay from oldRef to newRef recreates.
+// version pair oldRef → newRef (ReadAt both, Extract) recreates.
 func TestPairRecreatesTheRealFunctionCommandRemoval(t *testing.T) {
 	ctx := context.Background()
 	s := kittest.NewMem()
