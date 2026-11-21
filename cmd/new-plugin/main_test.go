@@ -123,6 +123,9 @@ func TestScaffoldFindsTheRegistrationAmongOtherCalls(t *testing.T) {
 		t.Fatal(err)
 	}
 	src = bytes.Replace(src, []byte("\nfunc init() {"), []byte("\nvar _ = len(\"x\")\n\nfunc helper() []int { return append([]int{}, 1) }\n\nfunc init() {"), 1)
+	if !bytes.Contains(src, []byte(`var _ = len("x")`)) {
+		t.Fatal("setup didn't apply: provider.go has no \"func init() {\" to put the calls above")
+	}
 	if err := os.WriteFile(path, src, 0o644); err != nil {
 		t.Fatal(err)
 	}
