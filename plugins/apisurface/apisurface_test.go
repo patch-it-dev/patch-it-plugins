@@ -216,29 +216,24 @@ func TestASkippedFileRemovesNothing(t *testing.T) {
 
 // A method that left its class for a base class, or became an attribute,
 // or whose class's bases changed, is still there: a note. One its class
-// and bases don't define is gone.
+// and bases don't define is gone. The two releases are read by the real
+// reader, the leaf class included.
 func TestAMethodMovedUpIsNotRemoved(t *testing.T) {
-	self := prm("self", "either", "")
-	a := Release{Surface: pysurface.Surface{
-		"acme.Completions":        cls("class Completions(SyncAPIResource):"),
-		"acme.Completions.create": sym("method", self),
-		"acme.Completions.list":   sym("method", self),
-		"acme.Completions.models": sym("method", self),
-		"acme.Completions.gone":   sym("method", self),
-		"acme.Files":              cls("class Files(SyncAPIResource):"),
-		"acme.Files.upload":       sym("method", self),
-	}}
-	b := Release{
-		Surface: pysurface.Surface{
-			"acme.Completions": cls("class Completions(SyncAPIResource):"),
-			"acme.Files":       cls("class Files(SyncAPIResource, _Uploads):"),
-		},
-		Classes: pysurface.Classes{
-			"Completions":     {Bases: []string{"SyncAPIResource"}, Members: []string{"models"}},
-			"SyncAPIResource": {Bases: []string{"_Base"}, Members: []string{"create"}},
-			"_Base":           {Members: []string{"list"}},
-		},
+	read := func(files map[string]string) Release {
+		var fs []pysurface.File
+		for p, text := range files {
+			fs = append(fs, pysurface.File{Path: p, Text: text})
+		}
+		return Release{Surface: pysurface.Read(fs), Classes: pysurface.ReadClasses(fs)}
 	}
+	a := read(map[string]string{
+		"acme/_base.py":    "class _Base:\n    pass\n\nclass SyncAPIResource(_Base):\n    pass\n",
+		"acme/__init__.py": "from ._base import SyncAPIResource\n\nclass Completions(SyncAPIResource):\n    def create(self, a):\n        pass\n    def list(self):\n        pass\n    def models(self):\n        pass\n    def gone(self):\n        pass\n\nclass Files(SyncAPIResource):\n    def upload(self, f):\n        pass\n",
+	})
+	b := read(map[string]string{
+		"acme/_base.py":    "class _Base:\n    def list(self):\n        pass\n\nclass SyncAPIResource(_Base):\n    def create(self, a):\n        pass\n",
+		"acme/__init__.py": "from ._base import SyncAPIResource\n\nclass Completions(SyncAPIResource):\n    models = _models\n\nclass Files(SyncAPIResource, _Uploads):\n    pass\n",
+	})
 	want := "note acme.Completions.create\nremoved_symbol acme.Completions.gone \nnote acme.Completions.list\nnote acme.Completions.models\nnote acme.Files.upload"
 	if got := strings.Join(changes(a, b), "\n"); got != want {
 		t.Errorf("got\n%s\nwant\n%s", got, want)

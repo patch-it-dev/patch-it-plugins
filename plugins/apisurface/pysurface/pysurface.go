@@ -52,11 +52,11 @@ type Class struct {
 	Members []string `json:"members,omitempty"`
 }
 
-// Classes are the classes a method could have moved to, by name: every
-// module-level class in the package (private modules and names included)
-// that another class names as a base. Classes of the same name in two
-// modules are merged (their members together), which can only make a
-// moved method more likely to be found, never less.
+// Classes are the package's module-level classes by name (private modules
+// and names included): where a method that left a class may still be, in
+// the class itself (now an attribute) or in a base. Classes of the same
+// name in two modules are merged (their members together), which can only
+// make a moved method more likely to be found, never less.
 type Classes map[string]Class
 
 // module is one file read: its own definitions and how it re-exports others.
@@ -107,8 +107,7 @@ func Read(files []File) Surface {
 	return out
 }
 
-// ReadClasses is the package's Classes: every module-level class named as
-// another class's base.
+// ReadClasses is the package's Classes: every module-level class.
 func ReadClasses(files []File) Classes {
 	all := map[string]*Class{}
 	for _, m := range parseAll(files) {
@@ -122,19 +121,11 @@ func ReadClasses(files []File) Classes {
 			have.Members = appendNew(have.Members, c.Members...)
 		}
 	}
-	named := map[string]bool{}
-	for _, c := range all {
-		for _, b := range c.Bases {
-			named[b] = true
-		}
-	}
 	out := Classes{}
 	for n, c := range all {
-		if named[n] {
-			slices.Sort(c.Bases)
-			slices.Sort(c.Members)
-			out[n] = *c
-		}
+		slices.Sort(c.Bases)
+		slices.Sort(c.Members)
+		out[n] = *c
 	}
 	return out
 }
