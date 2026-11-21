@@ -116,7 +116,7 @@ type Env struct {
 }
 
 type Snapshot struct {
-    Version     Version // ID, Released, Ref, URL
+    Version     Version // ID, Released, Ref, URL, MapsTo (the other source's version it pins, if any)
     Content     []byte
     SourceURL   string  // the exact document read: the events' citation
     CompareHash string  // a living page only: how its next Read tells it unchanged
@@ -137,6 +137,7 @@ When a release or a page has no part the reader can use (a changelog with no sec
 A source that has versions (a spec's releases, a package's releases, a guide per major, the commits that changed a file) is read version by version, so a customer several versions behind gets every step: the runner lists the versions, reads each consecutive pair with `ReadAt` and extracts it once (a released version never changes).
 
 - **List** with [`core/versions`](../core/versions/versions.go): `GitHubReleases`, `GitHubTags`, `GitHubCommits` (the commits that changed a file), `PyPIReleases`, `NPMReleases`, `GitHubPages` (any other GitHub list, page by page). An OpenAPI adapter lists its own versions (`adapter.Lister`): every adapter does. Never pin a tag in code: a version you need for a golden test is a pinned *case* in the test (`changelog.Urllib3.At("2.0.0")`), not the registered source.
+- **Pins** (`Version.MapsTo`): when a release pins a version of another source (an SDK release and the API version it calls), set it while listing, from the release itself (its notes, the version constant in its code). It is how a feed query on the SDK's versions also returns the API's changes. Leave it zero when the release doesn't say: never fill it from a table kept by hand.
 - **Read at** a version's `Ref` (a tag, a commit SHA) and return the exact URL read as the snapshot's `SourceURL`: it's the events' citation.
 - **Extract** sets `previous_version` to `from`'s version: every `api_operation` and `package_release` event must name it (the contract's rule 13). `from` is zero only for the first version read, which has nothing to compare: patch-it's hosted ingestion service reads that version as its first snapshot and extracts nothing from it, so a version pair always starts at a real `from` (an `api_operation` or `package_release` event extracted from zero would be rejected).
 

@@ -43,7 +43,23 @@ type Version struct {
 	// URL is where a person sees this version (a release page, a commit, a
 	// Wayback Machine snapshot).
 	URL string
+	// MapsTo is the version of another source this one pins, when it pins
+	// one: an SDK release and the API version it calls ("stripe/api",
+	// "2025-03-31"). Zero when it pins none or the source doesn't say. The
+	// plugin reads it from the release itself (its notes, the version
+	// constant in its code), never from a table kept by hand; it is how a
+	// feed query on the SDK's versions also gets the API's changes.
+	MapsTo Pin
 }
+
+// Pin is one version of another source: what a release pins.
+type Pin struct {
+	API     string // the source's provider/source id: "stripe/api"
+	Version string // as that source names it: "2025-03-31"
+}
+
+// IsZero is true when nothing is pinned.
+func (p Pin) IsZero() bool { return p.API == "" && p.Version == "" }
 
 // Snapshot is a source as it was at one version: what ReadAt or Read read.
 type Snapshot struct {

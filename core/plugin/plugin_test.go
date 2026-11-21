@@ -82,3 +82,12 @@ func TestTwoSourcesCantShareAnID(t *testing.T) {
 	}()
 	register(t, "test-dup")
 }
+
+func TestAVersionPinsNothingUntilSet(t *testing.T) {
+	if !(Version{ID: "12.0.0"}).MapsTo.IsZero() {
+		t.Error("a version with no MapsTo pins something")
+	}
+	if (Pin{API: "example/api", Version: "2026-03-31"}).IsZero() {
+		t.Error("a set pin is zero")
+	}
+}
