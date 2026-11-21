@@ -117,15 +117,15 @@ func TestRead(t *testing.T) {
 	}
 }
 
-// The class index: classes named as a base, with their bases and every name
-// their bodies define; private modules and names included.
+// The class index: every module-level class, with its bases and every name
+// its body defines; private modules and names included.
 func TestReadClasses(t *testing.T) {
 	c := ReadClasses([]File{
 		{"acme/_resource.py", "class _Base:\n    def list(self): pass\n\nclass SyncAPIResource(_Base, Generic[T], metaclass=M):\n    _client: Client\n    create = _create\n    if TYPE_CHECKING:\n        def _hidden(self): pass\n    else:\n        pass\n    def _create(self, x):\n        y = 1\n        return y\n"},
-		{"acme/completions.py", "from ._resource import SyncAPIResource\n\nclass Completions(base.SyncAPIResource):\n    pass\n"},
+		{"acme/completions.py", "from ._resource import SyncAPIResource\n\nclass Completions(base.SyncAPIResource):\n    models = _models\n"},
 	})
 	got, _ := json.Marshal(c)
-	want := `{"SyncAPIResource":{"bases":["Generic","_Base"],"members":["_client","_create","_hidden","create"]},"_Base":{"members":["list"]}}`
+	want := `{"Completions":{"bases":["SyncAPIResource"],"members":["models"]},"SyncAPIResource":{"bases":["Generic","_Base"],"members":["_client","_create","_hidden","create"]},"_Base":{"members":["list"]}}`
 	if string(got) != want {
 		t.Errorf("got  %s\nwant %s", got, want)
 	}
