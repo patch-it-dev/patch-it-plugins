@@ -82,6 +82,20 @@ func Parse(data []byte) (*Spec, error) {
 	return &Spec{Version: version, doc: doc}, nil
 }
 
+// Operations is how many operations the spec has: every method under every
+// path. What the shape guard counts.
+func (s *Spec) Operations() int {
+	n := 0
+	for _, item := range obj(s.doc["paths"]) {
+		for _, m := range methods {
+			if _, ok := obj(item)[m]; ok {
+				n++
+			}
+		}
+	}
+	return n
+}
+
 // methods are the operation keys a path item can hold. Anything else under a
 // path (parameters, servers, summary) is not an operation.
 var methods = []string{"get", "put", "post", "delete", "patch", "head", "options", "trace"}

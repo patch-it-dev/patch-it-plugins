@@ -30,7 +30,9 @@ func TestEOLRegistersItself(t *testing.T) {
 func TestEOLGolden(t *testing.T) {
 	saved := kittest.Pages{RESTAPI.URL: "testdata/salesforce-api-rest-eol-2026-10-31.html"}
 	archive := &kittest.Archive{T: t, Pages: saved}
-	got := kittest.Page(t, kittest.Env(t, saved), notices.Plugin{Page: RESTAPI, Archiver: archive})
+	src, _ := plugin.LookupSource(RESTAPI.API)
+	p := notices.Plugin{Page: RESTAPI, Archiver: archive}.WithShape(src.Source.Shape).(plugin.Living) // its anchors on the saved page too
+	got := kittest.Page(t, kittest.Env(t, saved), p)
 	if archive.Calls != 1 {
 		t.Errorf("%d snapshots, want 1: the second read's page is unchanged", archive.Calls)
 	}

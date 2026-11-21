@@ -23,6 +23,7 @@ package feed
 import (
 	"fmt"
 	"log"
+	"slices"
 	"time"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
@@ -57,24 +58,39 @@ type Finding struct {
 
 // Findings reads every entry of a feed.
 func (f Feed) Findings(b []byte) ([]Finding, error) {
-	entries, err := extract.ParseFeed(b)
+	found, err := f.Find(b)
 	if err != nil {
 		return nil, err
 	}
-	var out []Finding
-	for _, e := range entries {
-		out = append(out, f.Read(e)...)
-	}
-	return out, nil
+	return found.(Findings).Found, nil
 }
 
 // What the notices kind (kinds/notices) asks of a feed.
 
-// Findings are what one read of a feed found, dropped entries included.
-type Findings []Finding
+// Findings are what one read of a feed found: the feed's title, every
+// entry's title, and the findings, dropped ones included.
+type Findings struct {
+	Title   string
+	Entries []string
+	Found   []Finding
+}
 
-// Count is how many findings the feed gave.
-func (fs Findings) Count() int { return len(fs) }
+// Count is how many entries the feed has: a feed keeps its newest entries,
+// so their number stays about the same from one read to the next even when
+// none of them is a finding.
+func (fs Findings) Count() int { return len(fs.Entries) }
+
+// Has says whether entry is the feed's own title or an entry's title. A feed
+// drops its oldest entries as new ones come, so its title is the anchor that
+// stays: it says the URL still serves the feed it did.
+func (fs Findings) Has(entry string) bool {
+	return fs.Title == entry || slices.Contains(fs.Entries, entry)
+}
+
+// MinRatio is the shape guard's ratio for a feed: its window of newest
+// entries can shrink when a vendor trims it, so only a drop below half is a
+// change of shape.
+func (Feed) MinRatio() float64 { return 0.5 }
 
 // Slug is the source id the events carry: "github/actions".
 func (f Feed) Slug() string { return f.API }
@@ -84,8 +100,16 @@ func (f Feed) PageURL() string { return f.URL }
 
 // Find reads every entry of the feed.
 func (f Feed) Find(b []byte) (kit.Notices, error) {
-	fs, err := f.Findings(b)
-	return Findings(fs), err
+	entries, err := extract.ParseFeed(b)
+	if err != nil {
+		return nil, err
+	}
+	out := Findings{Title: extract.FeedTitle(b)}
+	for _, e := range entries {
+		out.Entries = append(out.Entries, e.Title)
+		out.Found = append(out.Found, f.Read(e)...)
+	}
+	return out, nil
 }
 
 // Events are an event per finding, citing citeURL; one of a version-pair type
@@ -94,7 +118,7 @@ func (f Feed) Find(b []byte) (kit.Notices, error) {
 func (f Feed) Events(found kit.Notices, citeURL, previous string, now time.Time) ([]event.Event, []error) {
 	var events []event.Event
 	var rejected []error
-	for _, fd := range found.(Findings) {
+	for _, fd := range found.(Findings).Found {
 		if fd.Dropped != "" {
 			log.Printf("%s: dropped %s: %s", f.API, fd.Entry, fd.Dropped)
 			continue

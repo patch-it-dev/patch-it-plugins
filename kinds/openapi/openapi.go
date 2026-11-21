@@ -45,9 +45,22 @@ type Plugin struct {
 	// spec, not a release removing an API (Elasticsearch removes APIs in a
 	// new minor or major, never in a patch).
 	RemovalsNeedANewVersion bool
+
+	shape *plugin.Shape // the source's, set by RegisterProvider (WithShape); nil: no guard
 }
 
+// DefaultMinRatio is the shape guard's ratio for a spec: a release that
+// keeps fewer than half the operations of the one before is a spec split
+// into files, moved or truncated, not an API removing half of itself.
+const DefaultMinRatio = 0.5
+
 func (p Plugin) Name() string { return p.Adapter.API() }
+
+// WithShape is p guarding its pairs with s.
+func (p Plugin) WithShape(s plugin.Shape) plugin.Plugin {
+	p.shape = &s
+	return p
+}
 
 // ListVersions is every release of the spec, oldest first, when the adapter
 // can list them (adapter.Lister); otherwise only the newest (LatestTag).
@@ -80,17 +93,24 @@ func (p Plugin) ReadAt(ctx context.Context, _ plugin.Env, v plugin.Version) (plu
 
 // Extract diffs two snapshots of the spec into events, with to's version and
 // from's as previous_version. A zero from is an empty spec before the first.
+// A to with far fewer operations than from fails the shape guard
+// (plugin.ErrShapeChanged): no removal is read from it.
 func (p Plugin) Extract(ctx context.Context, env plugin.Env, from, to plugin.Snapshot) (plugin.Result, error) {
 	var oldParsed *diff.Spec
+	before := -1
 	if !from.IsZero() {
 		var err error
 		if oldParsed, err = diff.Parse(from.Content); err != nil {
 			return plugin.Result{}, fmt.Errorf("parsing the %s spec at %s: %w", p.Adapter.API(), from.Version.ID, err)
 		}
+		before = oldParsed.Operations()
 	}
 	newParsed, err := diff.Parse(to.Content)
 	if err != nil {
 		return plugin.Result{}, fmt.Errorf("parsing the %s spec at %s: %w", p.Adapter.API(), to.Version.ID, err)
+	}
+	if err := p.shape.CheckCount("operations", DefaultMinRatio, before, newParsed.Operations()); err != nil {
+		return plugin.Result{}, fmt.Errorf("the %s spec at %s: %w", p.Adapter.API(), to.Version.ID, err)
 	}
 	events, errs := p.events(oldParsed, newParsed, from.Content, to.Content, normalize.Source{
 		API:             p.Adapter.API(),
@@ -104,7 +124,10 @@ func (p Plugin) Extract(ctx context.Context, env plugin.Env, from, to plugin.Sna
 	return plugin.Result{Events: events, Rejected: errs}, nil
 }
 
-var _ plugin.Versioned = Plugin{}
+var (
+	_ plugin.Versioned = Plugin{}
+	_ plugin.Guarded   = Plugin{}
+)
 
 // events diffs two parsed specs into events, applying Keep, and pointing each
 // event's source_pointer into the published file when the adapter reshaped it.

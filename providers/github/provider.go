@@ -29,7 +29,10 @@ func init() {
 				ID: "actions", Layer: plugin.LayerCI,
 				Watches: "GitHub Actions retirements, such as runner images and the `runs-on` labels they remove",
 				URLs:    []string{"https://github.blog/changelog/label/actions/feed/"},
-				Plugin:  notices.Plugin{Page: Actions, Archiver: kit.Wayback{}},
+				// Anchor: the feed's own title. The label's feed keeps its newest 10 posts,
+				// so no post stays; the title says the URL still serves the Actions label.
+				Shape:  plugin.Shape{Anchors: []plugin.Anchor{{Entry: "Use Case: actions - GitHub Changelog", Checked: "2026-11-21"}}},
+				Plugin: notices.Plugin{Page: Actions, Archiver: kit.Wayback{}},
 			},
 			{
 				ID: "graphql", Layer: plugin.LayerAPI,

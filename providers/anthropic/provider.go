@@ -24,7 +24,10 @@ func init() {
 				Watches:  "Model deprecations and retirement dates (Messages API models)",
 				URLs:     []string{"https://platform.claude.com/docs/en/about-claude/model-deprecations"},
 				Packages: []string{"pypi:anthropic", "npm:@anthropic-ai/sdk"},
-				Plugin:   notices.Plugin{Page: Models, Archiver: kit.Wayback{}},
+				// Anchors: two retired models in the page's tables, which keep every
+				// retirement (claude-3-opus-20240229: Jan 5, 2026; claude-2.1: Jul 21, 2025).
+				Shape:  plugin.Shape{Anchors: []plugin.Anchor{{Entry: "claude-3-opus-20240229", Checked: "2026-11-21"}, {Entry: "claude-2.1", Checked: "2026-11-21"}}},
+				Plugin: notices.Plugin{Page: Models, Archiver: kit.Wayback{}},
 			},
 			{
 				ID: "python-sdk", Layer: plugin.LayerSDK,

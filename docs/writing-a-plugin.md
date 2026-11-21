@@ -129,7 +129,7 @@ type Result struct {
 
 A plugin **stores nothing** and reads nothing back: whoever runs it (patch-it's hosted ingestion service, or the test kit) stores the events and keeps the snapshot the next comparison starts from.
 
-When a release or a page has no part the reader can use (a changelog with no section for the release, a migration guide with no table of removals, a page with no table of notices), return `plugin.ErrNothingToRead`, wrapped with what was missing (`fmt.Errorf("no heading for release %s: %w", v, plugin.ErrNothingToRead)`). For a release that's normal, and the runner skips the pair instead of retrying it; it finds the error with `errors.Is`. Any other error is a failure, retried next run.
+When a release or a page has no part the reader can use (a changelog with no section for the release, a migration guide with no table of removals, a page with no table of notices), return `plugin.ErrNothingToRead`, wrapped with what was missing (`fmt.Errorf("no heading for release %s: %w", v, plugin.ErrNothingToRead)`). For a release that's normal, and the runner skips the pair instead of retrying it; it finds the error with `errors.Is`. A living page with nothing to read is never normal: the notices kind turns it into `plugin.ErrShapeChanged` (see [the shape guard](#when-the-source-changes-its-layout-the-shape-guard-and-anchors)). Any other error is a failure, retried next run.
 
 ### A source with versions: `plugin.Versioned`
 
@@ -180,6 +180,29 @@ func init() {
 `RegisterProvider` fills in each source's kind (the `kinds/<kind>` package its plugin's type is defined in) and its page (`providers/<provider>/README.md`), and panics on missing metadata, a duplicate id, or a provider registered a second time. `plugin.Lookup` and `plugin.LookupSource` find a source by its id, `provider/source`. The plugin's `Name` is that id: what every event carries in `api`, and what the fingerprint hashes.
 
 `Packages` are the published packages the source covers, `<ecosystem>:<name>` (`pypi:stripe`, `npm:@vercel/sdk`): the package itself for a package or SDK source, the provider's official SDKs for an API source. `plugin.ForPackage` finds a package's sources, so a customer's lockfile maps to sources with no table kept anywhere else. List only names you checked; none is fine.
+
+### When the source changes its layout: the shape guard and anchors
+
+A source that redesigns its page, moves its changelog or reshapes its spec must never read as "nothing changed", and never as "everything was removed". Every kind runs a **shape guard** ([`core/plugin/shape.go`](../core/plugin/shape.go)), and a read it refuses fails with `plugin.ErrShapeChanged`: nothing is stored, no event is made, and patch-it's hosted ingestion service reports the source as failing (after repeated failures it opens an issue in this repo labelled `source-health`).
+
+- **Count.** Each kind counts what one read found and compares it with the read before: a notices page's notices, a feed's entries, a spec's operations, a changelog file's release headings, a JSON changelog's days, a catalog's command files or upcoming entries, a package's public names. A read with fewer than the kind's ratio of the read before (`DefaultMinRatio` in each kind: 0.9 for a notices page, a changelog or a JSON changelog, 0.5 for a feed, a spec or a package surface, 0.8 for a command catalog, 0.25 for a file of upcoming changes), or with none after one that had some, fails. The ratio is compared only when the read before found at least `plugin.MinItemsCompared` items. A migration guide is one document per major, so it has no count to compare.
+- **Nothing to read, release after release.** For a versioned source, `ErrNothingToRead` on one release is normal. The runner keeps, oldest first, whether each release had something to read and calls `Shape.NothingToRead`: the newest `NothingToReadAfter` releases in a row (3 by default) with nothing, after one that had something, is `ErrShapeChanged` (a moved changelog, a guide no longer shipped), not more skipped pairs.
+- **Anchors** (living pages only). A source names one or two entries its page always lists, so a page that still parses but no longer carries what the source reads fails too. An anchor is an entry as the kind's reader names it: a model id on a deprecations page, a version number on an end-of-life table, the feed's own title (a feed drops its oldest entries, so its title is what stays) or an entry's title. Check each one on the **live page** and write it in `provider.go` by hand, with a comment saying where it is on the page and the date you checked it (`Checked`). Never derive an anchor from the saved copy in `testdata/`. `noticestest.Golden` checks the anchors are on the saved page too.
+
+The source's `Shape` (on its `plugin.Source`) holds its anchors and any ratio or count of its own; leave it zero for the kind's defaults, and set a field only with a comment saying why:
+
+```go
+{
+    ID: "models", Layer: plugin.LayerAIModels,
+    // ...
+    // Anchors: two models in the page's "Past deprecations" table, which keeps
+    // every shutdown (gpt-4-0613: Oct 23, 2026; gpt-3.5-turbo-0301: Sep 13, 2024).
+    Shape:  plugin.Shape{Anchors: []plugin.Anchor{{Entry: "gpt-4-0613", Checked: "2026-11-21"}, {Entry: "gpt-3.5-turbo-0301", Checked: "2026-11-21"}}},
+    Plugin: notices.Plugin{Page: Models, Archiver: kit.Wayback{}},
+},
+```
+
+`RegisterProvider` hands each plugin its source's `Shape` (`plugin.Guarded.WithShape`) and refuses a plugin that doesn't take one: a new kind implements `WithShape` and calls `Shape.CheckCount` (and, for a living page, `Shape.CheckAnchors`) before it reads a single change. A plugin built by hand in a test isn't guarded unless the test gives it a `Shape`: golden tests read trimmed copies, far smaller than the real releases, so a test of the guard calls `WithShape` itself (each kind has one with a redesigned or shrunken input).
 
 ### Fetching: `env.Get` and `core/kit/`
 

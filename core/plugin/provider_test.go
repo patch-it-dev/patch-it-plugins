@@ -11,6 +11,16 @@ type fake struct{ name string }
 func (f fake) Name() string                                                   { return f.name }
 func (fake) Read(context.Context, Env, Snapshot) (Snapshot, error)            { return Snapshot{}, nil }
 func (fake) Extract(context.Context, Env, Snapshot, Snapshot) (Result, error) { return Result{}, nil }
+func (f fake) WithShape(Shape) Plugin                                         { return f }
+
+// unguarded is a living plugin that doesn't run the shape guard: refused.
+type unguarded struct{ name string }
+
+func (u unguarded) Name() string                                        { return u.name }
+func (unguarded) Read(context.Context, Env, Snapshot) (Snapshot, error) { return Snapshot{}, nil }
+func (unguarded) Extract(context.Context, Env, Snapshot, Snapshot) (Result, error) {
+	return Result{}, nil
+}
 
 // both is a plugin that is Versioned and Living: refused.
 type both struct{ fake }
@@ -95,6 +105,26 @@ func TestRegisterProviderRefusesIncompleteMetadata(t *testing.T) {
 		"neither shape": {ID: "x9", Name: "X", Category: CategoryAI, Homepage: "https://x.example", Sources: []Source{func() Source {
 			s := src("api", "x9")
 			s.Plugin = neither{"x9/api"}
+			return s
+		}()}},
+		"no shape guard": {ID: "x11", Name: "X", Category: CategoryAI, Homepage: "https://x.example", Sources: []Source{func() Source {
+			s := src("api", "x11")
+			s.Plugin = unguarded{"x11/api"}
+			return s
+		}()}},
+		"undated anchor": {ID: "x12", Name: "X", Category: CategoryAI, Homepage: "https://x.example", Sources: []Source{func() Source {
+			s := src("api", "x12")
+			s.Shape.Anchors = []Anchor{{Entry: "gpt-4"}}
+			return s
+		}()}},
+		"three anchors": {ID: "x13", Name: "X", Category: CategoryAI, Homepage: "https://x.example", Sources: []Source{func() Source {
+			s := src("api", "x13")
+			s.Shape.Anchors = []Anchor{{"a", "2026-11-21"}, {"b", "2026-11-21"}, {"c", "2026-11-21"}}
+			return s
+		}()}},
+		"ratio above 1": {ID: "x14", Name: "X", Category: CategoryAI, Homepage: "https://x.example", Sources: []Source{func() Source {
+			s := src("api", "x14")
+			s.Shape.MinRatio = 1.5
 			return s
 		}()}},
 		"wrong page": {ID: "x10", Name: "X", Category: CategoryAI, Homepage: "https://x.example", Sources: []Source{func() Source {

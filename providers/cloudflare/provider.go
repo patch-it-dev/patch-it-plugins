@@ -31,7 +31,10 @@ func init() {
 				Watches:  "REST API operations Cloudflare deprecates, breaking on their end-of-life date when it gives one",
 				URLs:     []string{"https://developers.cloudflare.com/fundamentals/api/reference/deprecations/index.xml"},
 				Packages: []string{"pypi:cloudflare", "npm:cloudflare"},
-				Plugin:   notices.Plugin{Page: API, Archiver: kit.Wayback{}},
+				// Anchor: the feed's own title. It keeps the newest 50 announcements, so
+				// the oldest can leave; the title says the URL still serves this feed.
+				Shape:  plugin.Shape{Anchors: []plugin.Anchor{{Entry: "Changelog | API deprecations", Checked: "2026-11-21"}}},
+				Plugin: notices.Plugin{Page: API, Archiver: kit.Wayback{}},
 			},
 			changelog.SDK("typescript", Typescript, "npm:cloudflare"),
 			changelog.SDK("python", Python, "pypi:cloudflare"),

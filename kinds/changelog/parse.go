@@ -120,6 +120,30 @@ func sections(body []string, rst bool, heading *regexp.Regexp) []Section {
 	return out
 }
 
+// Releases is how many releases a changelog file heads: Markdown release
+// headings, or else reStructuredText release titles. What the shape guard
+// counts: a changelog keeps every past release, so a file that heads far
+// fewer than at the release before was moved, split or reformatted.
+func Releases(file []byte) int {
+	lines := strings.Split(strings.ReplaceAll(string(file), "\r\n", "\n"), "\n")
+	md, rst := 0, 0
+	for i, l := range lines {
+		if mdRelease.MatchString(l) {
+			md++
+		}
+		if i+1 < len(lines) {
+			t, u := strings.TrimSpace(l), strings.TrimSpace(lines[i+1])
+			if rstRelease.MatchString(t) && rstUnderline.MatchString(u) && len(u) >= len(t) {
+				rst++
+			}
+		}
+	}
+	if md > 0 {
+		return md
+	}
+	return rst
+}
+
 // releaseLines are release's heading and the lines under it, up to the next
 // release's, and whether the file is reStructuredText.
 func releaseLines(lines []string, release string) (string, []string, bool, error) {

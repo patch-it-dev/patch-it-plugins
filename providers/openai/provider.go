@@ -29,7 +29,10 @@ func init() {
 				Watches:  "Model deprecations and shutdown dates (Chat Completions and Responses text models)",
 				URLs:     []string{"https://developers.openai.com/api/docs/deprecations"},
 				Packages: []string{"pypi:openai", "npm:openai"},
-				Plugin:   notices.Plugin{Page: Models, Archiver: kit.Wayback{}},
+				// Anchors: two models in the page's "Past deprecations" table, which keeps
+				// every shutdown (gpt-4-0613: Oct 23, 2026; gpt-3.5-turbo-0301: Sep 13, 2024).
+				Shape:  plugin.Shape{Anchors: []plugin.Anchor{{Entry: "gpt-4-0613", Checked: "2026-11-21"}, {Entry: "gpt-3.5-turbo-0301", Checked: "2026-11-21"}}},
+				Plugin: notices.Plugin{Page: Models, Archiver: kit.Wayback{}},
 			},
 			apisurface.PyPI(PythonSurface, plugin.LayerSDK, "https://github.com/openai/openai-python"),
 			apisurface.NPM(NodeSurface, "https://github.com/openai/openai-node"),
