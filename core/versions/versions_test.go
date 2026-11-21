@@ -116,6 +116,21 @@ func TestPyPIReleasesAreFinalAndNotYanked(t *testing.T) {
 	if !vs[0].Released.Equal(time.Date(2024, 1, 1, 0, 0, 0, 0, time.UTC)) {
 		t.Errorf("released %v", vs[0].Released)
 	}
+	all, err := PyPIReleasesWithYanked(context.Background(), get, "acme")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got := ids(all); got != "1.0.0@1.0.0 1.9.0@1.9.0 1.9.1@1.9.1 1.10.0@1.10.0" {
+		t.Errorf("with yanked: got %s", got)
+	}
+}
+
+func TestFirstOfMajor(t *testing.T) {
+	for v, want := range map[string]bool{"2.0.0": true, "11.0.0": true, "2.0.1": false, "2.1.0": false, "0.0.0": false, "2.0": false, "2.0.0rc1": false} {
+		if got := FirstOfMajor(v); got != want {
+			t.Errorf("FirstOfMajor(%q) = %v, want %v", v, got, want)
+		}
+	}
 }
 
 func TestNPMReleases(t *testing.T) {

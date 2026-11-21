@@ -1,7 +1,9 @@
 package members
 
-// PostHog8 is the posthog Python SDK's guide to 8.0.0,
-// docs/migration-7.x-to-8.0.md at tag posthog-v8.0.0 (commit
+// PostHog is the posthog Python SDK's guide to a major,
+// docs/migration-{prev}.x-to-{major}.0.md at the major's first tag. The one
+// there is so far (checked 2026-11-20) is 8.0.0's, docs/migration-7.x-to-8.0.md
+// at tag posthog-v8.0.0 (commit
 // 6edff41425188056e48f6119457dc9bc0669ca99), and its "Fix removed APIs"
 // table: "8.x.x removes these options and APIs". The guide isn't in the repo
 // at posthog-v7.91.4, the release before, and is unchanged at posthog-v8.0.2.
@@ -55,14 +57,18 @@ package members
 // 7 events. The guide's other tables (endpoints, AI lane arguments, error
 // fields, retries, dropped events, options, and "Rename deprecated settings",
 // whose old names still work) aren't under the heading, so they're never read.
-var PostHog8 = Guide{
+//
+// Paths, EnvVars and StillWork were checked against 8.0.0's table; a later
+// major's names that aren't in them are read as the table writes them, and
+// NewReplacements keeps every row with one replacement a removed_symbol (no
+// rename the client would apply), so a new guide is read conservatively.
+var PostHog = Guide{
 	API:       "posthog/python-sdk",
 	Package:   "posthog",
 	Module:    "posthog",
-	Release:   "8.0.0",
 	TagPrefix: "posthog-v",
 	Repo:      "PostHog/posthog-python",
-	Path:      "docs/migration-7.x-to-8.0.md",
+	Path:      "docs/migration-{prev}.x-to-{major}.0.md",
 	Section:   "Fix removed APIs",
 	Format:    FormatMarkdown,
 	Header:    "Removed",
@@ -76,6 +82,7 @@ var PostHog8 = Guide{
 	StillWork: map[string]string{
 		"capture_mode": `the guide's "Rename deprecated settings" table: posthog.capture_mode still works or has no effect in 8.x.x`,
 	},
-	// Every replacement in the table is new in 8.0.0.
+	// Every replacement in 8.0.0's table is new in 8.0.0; for a later major,
+	// a rename isn't known to be a drop-in until someone checks.
 	NewReplacements: true,
 }

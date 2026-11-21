@@ -18,7 +18,7 @@ import (
 const posthogSource = "testdata/migration-7.x-to-8.0-posthog-v8.0.0.md"
 
 func TestPostHogRegistersItself(t *testing.T) {
-	kittest.Registered(t, migrationguide.Plugin{Guide: PostHog8})
+	kittest.Registered(t, migrationguide.Plugin{Guide: PostHog})
 }
 
 // The golden test: the saved guide in, every event out.
@@ -85,7 +85,7 @@ func TestPostHogDropsWhatIsNotARemovedMember(t *testing.T) {
 	// The table's own rows: an environment variable, an argument value, and
 	// two rows of prose (a parameter, a dependency). With the rules off, each
 	// is a row of the table, with names in code spans.
-	rs, err := Parse(kittest.Read(t, posthogSource), PostHog8)
+	rs, err := Parse(kittest.Read(t, posthogSource), PostHog)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -131,7 +131,7 @@ func TestPostHogDropsWhatIsNotARemovedMember(t *testing.T) {
 		{"Update error handling", "Field", "drops"},
 		{"Move to event options", "Option", "cookieless_mode"},
 	} {
-		g := PostHog8
+		g := PostHog
 		g.Section, g.Header = other.section, other.header
 		rs, err := Parse(kittest.Read(t, posthogSource), g)
 		if err != nil {
@@ -243,5 +243,5 @@ func TestMarkdownTable(t *testing.T) {
 // the saved guide.
 func posthogIngest(t *testing.T) []event.Event {
 	t.Helper()
-	return release(t, PostHog8, posthogSource, "7.91.4")
+	return release(t, PostHog, posthogSource, "7.91.4", "8.0.0")
 }

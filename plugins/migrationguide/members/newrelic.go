@@ -1,16 +1,19 @@
 package members
 
-// NewRelic11 is New Relic's release note for the Python agent 11.0.0 (the
-// `newrelic` package on PyPI), in newrelic/docs-website at commit
-// f0b4f817bf9a7b76a78e26609369a8a7ce764c8e: that repo has no tags, so the
-// commit stands in for one. Its "Removed features" section's first table,
-// | Legacy API | Replacement API |: "The following APIs have been removed".
-// Checked 2026-11-19.
+// NewRelic is New Relic's release note for each major of the Python agent
+// (the `newrelic` package on PyPI), in newrelic/docs-website as
+// python-agent-<major>0000.mdx (python-agent-110000.mdx for 11.0.0; 9.0.0
+// to 13.0.0 are there, checked 2026-11-20). That repo has no tags, so the
+// newest commit that changed the note stands in for one (Untagged). Its
+// "Removed features" section's first table, | Legacy API | Replacement API |:
+// "The following APIs have been removed". A note without that section has
+// nothing to read. 11.0.0's, at commit f0b4f817 (checked 2026-11-19), is
+// the one described below.
 //
 // 11.0.0 is yanked on PyPI ("Issues with server-side configuration");
 // 11.0.1 has the same public API (newrelic/agent.py and newrelic/api/log.py
 // are byte-identical at v11.0.0 and v11.0.1). The version stays 11.0.0, the
-// release that made the change.
+// release that made the change: Releases keeps yanked releases.
 //
 // Names are kept as code writes them after `import newrelic`: the table
 // writes them bare, and Paths gives each its module. Every row was checked
@@ -61,18 +64,21 @@ package members
 // 7 events. The section's second table, | Legacy Setting | Replacement
 // Setting |, lists configuration settings (newrelic.ini keys), not members
 // of the package: only the section's first table is read, so it never is.
-var NewRelic11 = Guide{
-	API:     "newrelic/python-agent",
-	Package: "newrelic",
-	Module:  "newrelic",
-	Release: "11.0.0",
-	DocsRef: "f0b4f817bf9a7b76a78e26609369a8a7ce764c8e",
-	Repo:    "newrelic/docs-website",
-	Path:    "src/content/docs/release-notes/agent-release-notes/python-release-notes/python-agent-110000.mdx",
-	Section: "Removed features",
-	Format:  FormatMarkdown,
-	Header:  "Legacy API",
-	Doc:     "release notes",
+//
+// Paths and DropIns were checked against 11.0.0's table. A later major's
+// rows with one replacement are removed_symbol unless listed in DropIns, so
+// a new note is read conservatively.
+var NewRelic = Guide{
+	API:      "newrelic/python-agent",
+	Package:  "newrelic",
+	Module:   "newrelic",
+	Untagged: true,
+	Repo:     "newrelic/docs-website",
+	Path:     "src/content/docs/release-notes/agent-release-notes/python-release-notes/python-agent-{major}0000.mdx",
+	Section:  "Removed features",
+	Format:   FormatMarkdown,
+	Header:   "Legacy API",
+	Doc:      "release notes",
 	// The cells link to docs.newrelic.com by path ("/docs/agents/…").
 	LinkBase: "https://docs.newrelic.com",
 	Paths: map[string]string{

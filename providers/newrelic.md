@@ -2,13 +2,13 @@
 
 ## What it watches
 
-Functions and classes removed from New Relic's Python agent (the `newrelic` package) in 11.0.0: `newrelic.agent.record_exception`, `newrelic.agent.add_custom_parameter`, `newrelic.api.log.NewRelicLogHandler`, and others. Code that uses one breaks on the upgrade. The plugin emits one event per member, pinned to that release.
+Functions and classes a new major of New Relic's Python agent (the `newrelic` package) removes, from the major's release notes: in 11.0.0, `newrelic.agent.record_exception`, `newrelic.agent.add_custom_parameter`, `newrelic.api.log.NewRelicLogHandler`, and others. Code that uses one breaks on the upgrade. One event per member, with the major's first release as `version` and the release before it on PyPI as `previous_version`. The releases are listed from PyPI (yanked ones included: 11.0.0 is yanked); nothing in the code names a release or a commit.
 
 Kind: `migrationguide` (`plugins/migrationguide`), with the removed-members reader (`plugins/migrationguide/members`), reading a Markdown table.
 
 ## Why this source
 
-- **Source:** [`python-agent-110000.mdx`](https://github.com/newrelic/docs-website/blob/f0b4f817bf9a7b76a78e26609369a8a7ce764c8e/src/content/docs/release-notes/agent-release-notes/python-release-notes/python-agent-110000.mdx) in newrelic/docs-website at commit `f0b4f817bf9a7b76a78e26609369a8a7ce764c8e` (2026-04-22, the file's latest commit). The plugin reads the raw file at that commit, because the repo has no tags. Checked on 2026-11-19. © New Relic, CC BY-NC-SA 4.0.
+- **Source:** `python-agent-<X>0000.mdx` in newrelic/docs-website (9.0.0 to 13.0.0 are there, checked 2026-11-20), for each major's first release. The repo has no tags, so the plugin asks GitHub for the newest commit that changed the note and reads the raw file at that commit. 11.0.0's, [`python-agent-110000.mdx`](https://github.com/newrelic/docs-website/blob/f0b4f817bf9a7b76a78e26609369a8a7ce764c8e/src/content/docs/release-notes/agent-release-notes/python-release-notes/python-agent-110000.mdx) at commit `f0b4f817` (2026-04-22), is the one checked on 2026-11-19. A note with no "Removed features" section, or no note, has nothing to read (the pair is skipped). © New Relic, CC BY-NC-SA 4.0.
 - **Why this one:** these are New Relic's own release notes for the agent's 11.0.0. Their "Removed features" section has a table of the APIs that 11.0.0 removed, with what to use instead. A commit never changes, so the URL is its own citation. 11.0.0 is a version a repo pins.
 - **Alternatives considered:**
   - **The REST API v2 spec**, <https://api.newrelic.com/docs/swagger.yml> (OpenAPI 3.0.1, 58 operations on 43 paths, fetched 2026-11-19). New Relic serves it only live and doesn't commit it anywhere, so there's no release to pin or replay. Its deprecations aren't machine-readable: it has 0 `deprecated: true` flags. Instead, 12 operation descriptions say "This endpoint will be deprecated after", 11 of them "2024/01" and 1 "2027/01". New Relic's own end-of-life notice for REST API v2 (below) contradicts those dates for 10 of the 12: it retires them on 2027-07-31. It keeps the other 2, on `/alerts_location_failure_conditions/policies/*`, as "Not impacted".
@@ -51,4 +51,6 @@ Kind: `migrationguide` (`plugins/migrationguide`), with the removed-members read
 - **The same functions reached another way** get no event: the `newrelic.api.transaction` and `newrelic.api.time_trace` definitions, and the methods of the same names on `Transaction` (`add_custom_parameter`, `record_exception`…). All were removed in 11.0.0 too.
 - **The removed settings** (`ssl`, `error_collector.ignore_errors`, `strip_exception_messages.whitelist`…). They're configuration, not code, and change events have no subject for them.
 - New Relic's REST API v2 end of life (2027-07-31) and NerdGraph (see above).
-- New Relic's other agents, and later majors of the Python agent: each is a new entry in this plugin.
+- New Relic's other agents.
+- Removals in a minor release: only a major's note is read.
+- A later major's table is read with 11.0.0's `Paths` and `DropIns`: a name not in them is written as the table writes it, and only a listed drop-in is a rename.

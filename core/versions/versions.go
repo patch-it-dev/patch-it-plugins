@@ -149,6 +149,16 @@ func GitHubCommits(ctx context.Context, get Getter, repo, path string) ([]plugin
 // yanked releases, none without files), oldest first by version. The Ref is
 // the version; a plugin that reads a repo at a tag maps it.
 func PyPIReleases(ctx context.Context, get Getter, pkg string) ([]plugin.Version, error) {
+	return pypiReleases(ctx, get, pkg, false)
+}
+
+// PyPIReleasesWithYanked are PyPIReleases and the yanked final releases too:
+// for a source whose change can be documented at a release later yanked.
+func PyPIReleasesWithYanked(ctx context.Context, get Getter, pkg string) ([]plugin.Version, error) {
+	return pypiReleases(ctx, get, pkg, true)
+}
+
+func pypiReleases(ctx context.Context, get Getter, pkg string, withYanked bool) ([]plugin.Version, error) {
 	body, err := get(ctx, PyPI+"/pypi/"+url.PathEscape(pkg)+"/json")
 	if err != nil {
 		return nil, fmt.Errorf("listing %s's releases on PyPI: %w", pkg, err)
@@ -175,7 +185,7 @@ func PyPIReleases(ctx context.Context, get Getter, pkg string) ([]plugin.Version
 				first = f.Uploaded
 			}
 		}
-		if yanked {
+		if yanked && !withYanked {
 			continue
 		}
 		out = append(out, plugin.Version{ID: v, Released: first.UTC(), Ref: v, URL: "https://pypi.org/project/" + pkg + "/" + v + "/"})
@@ -247,6 +257,12 @@ func Major(v string) int {
 	}
 	n, _ := strconv.Atoi(m)
 	return n
+}
+
+// FirstOfMajor is true for X.0.0, the first release of a major (X > 0).
+func FirstOfMajor(v string) bool {
+	m := Major(v)
+	return m > 0 && v == fmt.Sprintf("%d.0.0", m)
 }
 
 // Pairs are the consecutive pairs of vs, oldest first: what a backfill

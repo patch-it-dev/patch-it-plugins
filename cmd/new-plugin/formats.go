@@ -159,16 +159,15 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 		defDir: "plugins/migrationguide/sdkguide",
 		def: `package sdkguide
 
-// {{.Ident}} is {{.Provider}}'s SDK guide to a major release (MIGRATION.md at
-// the release tag).
+// {{.Ident}} is {{.Provider}}'s SDK guide to each major release (MIGRATION.md
+// at the major's first tag), its releases listed from PyPI.
 //
-// ` + todo + `: the PyPI name, the repo, the major release and the calls the
-// guide's table names. Say what you checked, with the date.
+// ` + todo + `: the PyPI name, the repo and the calls the guide's table
+// names. Say what you checked, with the date.
 var {{.Ident}} = Guide{
 	API:     "{{.ID}}",
 	Package: "{{.PyPI}}",
 	Repo:    "TODO-owner/TODO-repo",
-	Major:   1,
 	Methods: "` + "`TODO.create()`" + `",
 	Symbols: []string{"TODO.create"},
 }
@@ -216,9 +215,10 @@ const {{.Lower}}Previous = "0.0.0"
 
 // {{.Lower}}Ingest is the version pair {{.Lower}}Previous -> the guide's
 // major over a saved copy of the guide.
+// ` + todo + `: the major the saved guide is for.
 func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
-	g := sdkguide.{{.Ident}}
+	g := sdkguide.{{.Ident}}.At(1)
 	env := kittest.Env(t, kittest.Pages{g.URL(): file})
 	return kittest.Versions(t, env, Plugin{Guide: g},
 		plugin.Version{ID: {{.Lower}}Previous, Ref: "v" + {{.Lower}}Previous}, plugin.Version{ID: g.Version(), Ref: "v" + g.Version()})
@@ -233,19 +233,19 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 		defDir: "plugins/migrationguide/members",
 		def: `package members
 
-// {{.Ident}} is {{.Provider}}'s migration guide to a release, with its table
-// of removed members.
+// {{.Ident}} is {{.Provider}}'s migration guide to each major, with its table
+// of removed members, read at the major's first tag.
 //
-// ` + todo + `: the package, how the guide writes the module, the release,
-// the repo, the guide's path at the release tag and the heading the table is
-// under. Say what you checked, with the date.
+// ` + todo + `: the package, how the guide writes the module, the repo, the
+// guide's path at a major's tag ({major} for its number, {prev} for the one
+// before) and the heading the table is under. Say what you checked, with the
+// date.
 var {{.Ident}} = Guide{
 	API:     "{{.ID}}",
 	Package: "{{.PyPI}}",
 	Module:  "{{.Module}}",
-	Release: "1.0.0",
 	Repo:    "TODO-owner/TODO-repo",
-	Path:    "TODO/migration_guide.rst",
+	Path:    "TODO/migration_guide_{major}.rst",
 	Section: "Removed members",
 }
 `,
@@ -300,13 +300,17 @@ func Test{{.Ident}}DropsANonChange(t *testing.T) {
 // ` + todo + `: the real release before it.
 const {{.Lower}}Previous = "0.0.0"
 
-// {{.Lower}}Ingest is the version pair {{.Lower}}Previous -> the guide's
-// release over a saved copy of the guide.
+// {{.Lower}}Release is the major's first release the saved guide is for.
+// ` + todo + `: the real release.
+const {{.Lower}}Release = "1.0.0"
+
+// {{.Lower}}Ingest is the version pair {{.Lower}}Previous ->
+// {{.Lower}}Release over a saved copy of the guide.
 func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
 	g := members.{{.Ident}}
-	env := kittest.Env(t, kittest.Pages{g.URL(): file})
-	return kittest.Versions(t, env, Plugin{Guide: g}, plugin.Version{ID: {{.Lower}}Previous}, plugin.Version{ID: g.Release})
+	env := kittest.Env(t, kittest.Pages{g.RawURL("v"+{{.Lower}}Release, 1): file})
+	return kittest.Versions(t, env, Plugin{Guide: g}, plugin.Version{ID: {{.Lower}}Previous}, plugin.Version{ID: {{.Lower}}Release})
 }
 `,
 		imports: []string{"slices", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/core/plugin", "github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide/members"},
@@ -328,9 +332,6 @@ var {{.Ident}} = File{
 	API: "{{.ID}}", Package: "{{.PyPI}}", Ecosystem: "pypi", Module: "{{.Module}}",
 	Repo: "TODO-owner/TODO-repo", TagPrefix: "v", Path: "CHANGELOG.md",
 }
-
-// {{.Ident}}Golden is the release the golden test pins.
-var {{.Ident}}Golden = {{.Ident}}.At("1.0.0")
 `,
 		register: `plugin.Register(Plugin{File: {{.Ident}}})`,
 		pluginOf: `Plugin{File: {{.Ident}}}`,
@@ -345,7 +346,12 @@ var {{.Ident}}Golden = {{.Ident}}.At("1.0.0")
 - A placeholder entry.
 `},
 		source: "{{.File}}-CHANGELOG.md",
-		ingest: `// {{.Lower}}Previous is the release before {{.Ident}}Golden's on the
+		ingest: `// {{.Ident}}Golden is the release the golden test pins: only a test names
+// one.
+// ` + todo + `: the real release.
+var {{.Ident}}Golden = {{.Ident}}.At("1.0.0")
+
+// {{.Lower}}Previous is the release before {{.Ident}}Golden's on the
 // registry: the pair's older side.
 // ` + todo + `: the real release before it.
 const {{.Lower}}Previous = "0.0.0"

@@ -98,12 +98,6 @@ var Urllib3 = File{
 	Repo: "urllib3/urllib3", Path: "CHANGES.rst",
 }
 
-// The releases the golden files pin.
-var (
-	Textual0860 = Textual.At("0.86.0")
-	Urllib3200  = Urllib3.At("2.0.0")
-)
-
 // URL is the changelog as it was at the (pinned) tag: its own provenance.
 func (f File) URL() string {
 	return fmt.Sprintf("https://raw.githubusercontent.com/%s/%s/%s", f.Repo, f.Tag, f.Path)

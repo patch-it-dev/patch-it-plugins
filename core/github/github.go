@@ -16,6 +16,7 @@ import (
 	"time"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/fetch"
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 )
 
 // API is GitHub's REST API.
@@ -63,7 +64,8 @@ func LatestRelease(ctx context.Context, get Getter, url string) (string, error) 
 }
 
 // LatestCommit reads a commit list (url: commits?path=<file>&per_page=1, newest
-// first) and returns the newest commit's SHA, or an error when it lists none.
+// first) and returns the newest commit's SHA, or an error when it lists none
+// (plugin.ErrNothingToRead: no commit ever changed the path).
 func LatestCommit(ctx context.Context, get Getter, url string) (string, error) {
 	body, err := get(ctx, url)
 	if err != nil {
@@ -76,7 +78,7 @@ func LatestCommit(ctx context.Context, get Getter, url string) (string, error) {
 		return "", fmt.Errorf("parsing github commits response: %w", err)
 	}
 	if len(commits) == 0 || commits[0].SHA == "" {
-		return "", fmt.Errorf("github lists no commit")
+		return "", fmt.Errorf("github lists no commit: %w", plugin.ErrNothingToRead)
 	}
 	return commits[0].SHA, nil
 }

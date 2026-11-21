@@ -2,13 +2,13 @@
 
 ## What it watches
 
-Members removed from the `posthog` Python SDK in 8.0.0 (`CaptureMode`, `posthog.capture_v1`, `posthog.capture_v1.CaptureV1Error`, `posthog.request.batch_post`…): code using one breaks on the upgrade. One event per member. Pinned to that release.
+Members a new major of the `posthog` Python SDK removes, from that major's migration guide: in 8.0.0, `CaptureMode`, `posthog.capture_v1`, `posthog.capture_v1.CaptureV1Error`, `posthog.request.batch_post`… (code using one breaks on the upgrade). One event per member, with the major's first release as `version` and the release before it on PyPI as `previous_version`. The releases are listed from PyPI; the guide is read at each major's first tag, so nothing in the code names a release.
 
 Kind: `migrationguide` (`plugins/migrationguide`), with the removed-members reader (`plugins/migrationguide/members`), reading a Markdown table.
 
 ## Why this source
 
-- **Source:** [`docs/migration-7.x-to-8.0.md` at posthog-v8.0.0](https://github.com/PostHog/posthog-python/blob/posthog-v8.0.0/docs/migration-7.x-to-8.0.md) (commit `6edff41425188056e48f6119457dc9bc0669ca99`), read raw at the tag. Checked on 2026-11-19. The guide isn't in the repo at posthog-v7.91.4, the release before, and is the same at posthog-v8.0.2. MIT.
+- **Source:** `docs/migration-<X-1>.x-to-<X>.0.md` at tag `posthog-v<X>.0.0`, read raw at the tag; the one so far is [`docs/migration-7.x-to-8.0.md` at posthog-v8.0.0](https://github.com/PostHog/posthog-python/blob/posthog-v8.0.0/docs/migration-7.x-to-8.0.md) (commit `6edff41425188056e48f6119457dc9bc0669ca99`). A major with no guide at its tag has nothing to read (the pair is skipped). Releases from [PyPI](https://pypi.org/project/posthog/). Checked on 2026-11-19. The guide isn't in the repo at posthog-v7.91.4, the release before, and is the same at posthog-v8.0.2. MIT.
 - **Why this one:** it's PostHog's own migration guide for the SDK's 8.0.0, and its "Fix removed APIs" section is a table of what 8.0.0 removed and what to use instead. A tag never changes, so the URL is its own citation, and 8.0.0 is a version a repo pins.
 - **Alternatives considered:**
   - **`references/public_api_snapshot.txt`** in the same repo: a generated listing of the public API at every tag. Diffing it between two releases gives every removed name with its full path, but no reason, replacement or announcement. The plugin reads the guide, and the listing was used to check the paths of the guide's names.

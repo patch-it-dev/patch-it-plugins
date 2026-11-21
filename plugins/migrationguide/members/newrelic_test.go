@@ -19,7 +19,7 @@ import (
 const newrelicSource = "testdata/python-agent-110000-f0b4f817.mdx"
 
 func TestNewRelicRegistersItself(t *testing.T) {
-	kittest.Registered(t, migrationguide.Plugin{Guide: NewRelic11})
+	kittest.Registered(t, migrationguide.Plugin{Guide: NewRelic})
 }
 
 // The golden test: the saved excerpt in, every event out.
@@ -81,7 +81,7 @@ func TestNewRelicEachRowOfTheTable(t *testing.T) {
 	}
 	// Every DropIns entry is a member the table removes: a typo would quietly
 	// turn its rename into a removal.
-	for _, d := range NewRelic11.DropIns {
+	for _, d := range NewRelic.DropIns {
 		if got[d].change != event.PackageRenamedSymbol {
 			t.Errorf("DropIns %q: not a rename (%+v)", d, got[d])
 		}
@@ -101,7 +101,7 @@ func TestNewRelicDropsWhatIsNotARemovedMember(t *testing.T) {
 	page := string(kittest.Read(t, newrelicSource))
 
 	// The lambda row: read, and dropped.
-	rs, err := Parse([]byte(page), NewRelic11)
+	rs, err := Parse([]byte(page), NewRelic)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -119,7 +119,7 @@ func TestNewRelicDropsWhatIsNotARemovedMember(t *testing.T) {
 	if asList == page {
 		t.Fatal("no lambda row in the saved release note")
 	}
-	if names := readNames(t, asList, NewRelic11); !slices.Contains(names, "lambda_handler") || !slices.Contains(names, "LambdaHandlerWrapper") {
+	if names := readNames(t, asList, NewRelic); !slices.Contains(names, "lambda_handler") || !slices.Contains(names, "LambdaHandlerWrapper") {
 		t.Errorf("with \"and\", the lambda row reads as %v: its drop proves nothing", names)
 	}
 
@@ -132,7 +132,7 @@ func TestNewRelicDropsWhatIsNotARemovedMember(t *testing.T) {
 	if start < 0 || end < start {
 		t.Fatal("the saved release note's shape changed")
 	}
-	g := NewRelic11
+	g := NewRelic
 	g.Header = "Legacy Setting"
 	settings, err := Parse([]byte(page[:start]+page[end:]), g)
 	if err != nil {
@@ -190,12 +190,12 @@ func TestDropInsLimitsRenames(t *testing.T) {
 		"| `old_a` | [`new_a`](/a) |",
 		"| `old_b` | `new_b` |",
 	}, "\n")
-	g := Guide{API: "acme/sdk", Package: "acme", Module: "acme", Release: "2.0.0", Repo: "acme/acme", Path: "MIGRATION.md",
+	g := Guide{API: "acme/sdk", Package: "acme", Module: "acme", Repo: "acme/acme", Path: "MIGRATION.md",
 		Section: "Removed", Format: FormatMarkdown, Header: "Removed",
 		Paths: map[string]string{"old_a": "mod.old_a", "new_a": "mod.new_a"}}
 	run := func(g Guide) map[string]string {
 		out := map[string]string{}
-		for _, e := range release(t, g, writeTemp(t, page), "1.0.0") {
+		for _, e := range release(t, g, writeTemp(t, page), "1.9.0", "2.0.0") {
 			out[e.Subject.Symbols[0]] = string(e.Subject.Change) + " " + e.Subject.Replacement
 		}
 		return out
@@ -237,7 +237,7 @@ func readNames(t *testing.T, page string, g Guide) []string {
 // the saved excerpt.
 func newrelicIngest(t *testing.T) []event.Event {
 	t.Helper()
-	return release(t, NewRelic11, newrelicSource, "10.17.0")
+	return release(t, NewRelic, newrelicSource, "10.17.0", "11.0.0")
 }
 
 // The hint is shown in a pull request or an issue, where a site-relative link
