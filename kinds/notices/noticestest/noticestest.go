@@ -7,11 +7,14 @@ import (
 	"testing"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/kit/kittest"
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 	"github.com/patch-it-dev/patch-it-plugins/kinds/notices"
 )
 
-// Golden reads the page saved as file through the whole plugin and compares
-// every event with testdata/golden/<source id, / as ->.json. The archive
+// Golden reads the page saved as file through the whole plugin, guarded by
+// its registered source's Shape (so the anchors it declares must be on the
+// saved page too), and compares every event with
+// testdata/golden/<source id, / as ->.json. The archive
 // serves the same copy as the snapshot, so the events cite it; kittest's
 // second read of the unchanged page asks for no second snapshot and stores
 // nothing new.
@@ -27,7 +30,12 @@ func GoldenFile(t *testing.T, page notices.Page, file, golden string) {
 	t.Helper()
 	saved := kittest.Pages{page.PageURL(): file}
 	archive := &kittest.Archive{T: t, Pages: saved}
-	got := kittest.Page(t, kittest.Env(t, saved), notices.Plugin{Page: page, Archiver: archive})
+	src, ok := plugin.LookupSource(page.Slug())
+	if !ok {
+		t.Fatalf("%s isn't registered", page.Slug())
+	}
+	p := notices.Plugin{Page: page, Archiver: archive}.WithShape(src.Source.Shape).(plugin.Living)
+	got := kittest.Page(t, kittest.Env(t, saved), p)
 	if archive.Calls != 1 {
 		t.Errorf("%d snapshots, want 1: the second read's page is unchanged", archive.Calls)
 	}

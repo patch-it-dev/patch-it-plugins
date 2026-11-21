@@ -21,6 +21,7 @@ Kind: `notices` (`kinds/notices`), with the end-of-life reader (`kinds/notices/e
   - **The docs site's JSON content API** (`https://developer.salesforce.com/docs/get_document_content/api_rest/api_rest_eol.htm/en-us/<doc version>`, the older "atlas" REST API Developer Guide; `get_document/atlas.en-us.api_rest.meta` names the newest doc version). It answers a plain GET (checked 2026-11-21), but it lags the live page: its newest version, 262.0 (Summer '26), lists versions 31.0 through 66.0 as supported and has no row for the 31.0–40.0 deprecation the live page announces, so it would miss exactly what this source is for.
   - **The retirement-detail sub-pages** the main table links to (e.g. "Salesforce Platform API Versions 31.0 through 40.0 Retirement"), each its own Salesforce Help article. The main page already states the same range, status and season; reading only it keeps one source of truth and one snapshot per run.
 - **Quote:** "As of Summer ’25, these versions are retired and unavailable." (versions 21.0 through 30.0, a real, already-happened retirement)
+- **Anchors** (checked 2026-11-21, declared in `provider.go`): versions `20.0` and `30.0`, two retired version ranges' rows (checked on the Wayback Machine's capture of 2026-11-20: the live page answers 403). A read without them fails as a change of layout, never as nothing new.
 
 ### How the provider announces changes
 

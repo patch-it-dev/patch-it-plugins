@@ -2,6 +2,7 @@ package openai
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"strings"
 	"testing"
@@ -124,19 +125,46 @@ func TestRetirementsStoreNothingWithoutASnapshotThatHoldsThem(t *testing.T) {
 	}
 }
 
-// A renamed column hides a table: the run must fail, not store a shorter list.
-func TestRetirementsRefuseAPageThatLostMostOfItsTables(t *testing.T) {
-	ctx, s, calls := context.Background(), openStore(t), 0
-	withPage(t, deprecations, fakeArchive{content: deprecations, calls: &calls})
-	if _, err := retirements(ctx, s, Models); err != nil {
-		t.Fatal(err)
+// A renamed column hides a table: the run must fail with ErrShapeChanged,
+// not store a shorter list. And a page that still reads but no longer lists
+// an anchor the source declares (provider.go) fails the same way.
+func TestRetirementsRefuseAPageThatChangedShape(t *testing.T) {
+	page := string(read(t, "openai-deprecations.md"))
+	for name, changed := range map[string]string{
+		"a renamed column hides the past table": strings.Replace(page, "Listed replacement", "Successor", 1),
+		"an anchor is gone":                     strings.Replace(page, "`gpt-3.5-turbo-0301`", "`gpt-3.5-turbo-0302`", 1),
+	} {
+		ctx, s, calls := context.Background(), openStore(t), 0
+		withPage(t, page, fakeArchive{content: page, calls: &calls})
+		if _, err := registeredRetirements(ctx, t, s); err != nil {
+			t.Fatal(err)
+		}
+		first, _ := s.All()
+		withPage(t, changed, fakeArchive{content: changed, calls: &calls})
+		if _, err := registeredRetirements(ctx, t, s); !errors.Is(err, plugin.ErrShapeChanged) {
+			t.Errorf("%s: want ErrShapeChanged, got %v", name, err)
+		}
+		if events, _ := s.All(); len(events) != len(first) {
+			t.Errorf("%s: %d events, want only the first read's %d", name, len(events), len(first))
+		}
 	}
-	renamed := strings.Replace(deprecations, "Substitute model", "Successor", 1) + strings.Replace(strings.Replace(deprecations, "gpt-4-0613` \\| `gpt-4", "gpt-4o-old", 1), "Substitute model", "Recommended replacement", 1)
-	withPage(t, renamed, fakeArchive{content: renamed, calls: &calls})
-	if _, err := retirements(ctx, s, Models); err == nil || !strings.Contains(err.Error(), "shape may have changed") {
-		t.Fatalf("want the shape error, got %v", err)
+}
+
+// registeredRetirements is retirements with the plugin as registered: the
+// shape guard on, with the source's anchors.
+func registeredRetirements(ctx context.Context, t *testing.T, s *store) (bool, error) {
+	src, ok := plugin.LookupSource("openai/models")
+	if !ok {
+		t.Fatal("openai/models isn't registered")
 	}
-	if events, _ := s.All(); len(events) != 2 {
-		t.Errorf("%d events, want only the first run's 2", len(events))
+	env := plugin.Env{
+		Get: func(context.Context, string) ([]byte, error) { return []byte(current.live), nil },
+		Now: time.Now,
 	}
+	p := notices.Plugin{Page: Models, Archiver: current.archive}.WithShape(src.Source.Shape).(plugin.Living)
+	kept, rejected, err := kittest.ReadPage(ctx, env, s.Mem, p, s.kept)
+	if err == nil {
+		s.kept = kept
+	}
+	return rejected, err
 }

@@ -53,7 +53,7 @@ Go module `github.com/patch-it-dev/patch-it-plugins`; the only dependency is `go
 
 ```
 core/plugin/           the Plugin interface (Extract) in its two shapes, Versioned (ListVersions, ReadAt) and Living (Read);
-                       ErrNothingToRead; the registry of providers and sources, Env, Result
+                       ErrNothingToRead; the shape guard (Shape, anchors, ErrShapeChanged); the registry, Env, Result
 core/fetch/            the HTTP fetch with retries and the ETag / Last-Modified cache
 core/github/           the newest release / commit on GitHub, and a commit's SHA and date (one place)
 core/versions/         every version of a source: GitHub releases, tags and commits, PyPI, npm

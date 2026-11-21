@@ -1,11 +1,13 @@
 package github
 
 import (
+	"errors"
 	"strings"
 	"testing"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/extract"
 	"github.com/patch-it-dev/patch-it-plugins/core/kit/kittest"
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 	"github.com/patch-it-dev/patch-it-plugins/kinds/notices/feed"
 	"github.com/patch-it-dev/patch-it-plugins/kinds/notices/noticestest"
 )
@@ -15,6 +17,27 @@ import (
 // snapshot.
 func TestActionsGolden(t *testing.T) {
 	noticestest.Golden(t, Actions, "testdata/github-changelog-actions.rss.xml")
+}
+
+// The URL serving another feed (the label renamed or dropped, the changelog's
+// main feed served instead) reads fine as a feed: only the anchor, the
+// feed's own title, says it isn't the Actions label any more.
+func TestActionsAnotherFeedChangedShape(t *testing.T) {
+	saved := string(kittest.Read(t, "testdata/github-changelog-actions.rss.xml"))
+	src, _ := plugin.LookupSource(Actions.API)
+	for name, page := range map[string]string{
+		"saved":        saved,
+		"another feed": strings.Replace(saved, "<title>Use Case: actions - GitHub Changelog</title>", "<title>The GitHub Blog</title>", 1),
+	} {
+		found, err := Actions.Find([]byte(page))
+		if err != nil {
+			t.Fatal(err)
+		}
+		err = src.Source.Shape.CheckAnchors(found.Has)
+		if changed := errors.Is(err, plugin.ErrShapeChanged); changed != (name != "saved") {
+			t.Errorf("%s: %v", name, err)
+		}
+	}
 }
 
 // What the feed's marked entries came to, kept and dropped: the golden files

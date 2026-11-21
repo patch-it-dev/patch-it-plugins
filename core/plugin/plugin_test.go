@@ -18,6 +18,8 @@ type testPlugin struct {
 
 func (p testPlugin) Name() string { return p.name }
 
+func (p testPlugin) WithShape(Shape) Plugin { return p }
+
 func (p testPlugin) Read(_ context.Context, env Env, _ Snapshot) (Snapshot, error) {
 	if p.err != nil {
 		return Snapshot{}, p.err

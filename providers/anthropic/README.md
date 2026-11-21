@@ -48,6 +48,7 @@ Kind: `notices` (`kinds/notices`), reading with the deprecations-page reader, `k
 - **Why this one:** it's Anthropic's own deprecation history, one table per announcement (retirement date, deprecated model, recommended replacement), served as markdown. `robots.txt` disallows only `/api/`.
 - **Alternatives considered:** the models API (`GET /v1/models`: what exists now, no dates); release notes and emails (not a complete list); the old docs.anthropic.com URL (redirects here).
 - **Quote:** "| November 30, 2026 | `claude-sonnet-4-5-20250929` | `claude-sonnet-5-5` |" (Deprecation history, 2026-09-30: Claude Sonnet 4.5 model).
+- **Anchors** (checked 2026-11-21, declared in `provider.go`): `claude-3-opus-20240229` and `claude-2.1`, two retired models the page keeps. A read without them fails as a change of layout, never as nothing new.
 
 ### How the provider announces changes
 

@@ -15,6 +15,16 @@ type Retirements []Retirement
 // Count is how many retirements the page lists.
 func (rs Retirements) Count() int { return len(rs) }
 
+// Has says whether entry is a retired model's name.
+func (rs Retirements) Has(entry string) bool {
+	for _, r := range rs {
+		if r.Model == entry {
+			return true
+		}
+	}
+	return false
+}
+
 // Slug is the source id the events carry: "openai/models".
 func (p Page) Slug() string { return p.API }
 
@@ -32,8 +42,3 @@ func (p Page) Find(page []byte) (kit.Notices, error) {
 func (p Page) Events(found kit.Notices, citeURL, _ string, now time.Time) ([]event.Event, []error) {
 	return Events(p, found.(Retirements), citeURL, now)
 }
-
-// ShapeGuard is on: past retirements stay on the page, so a read with far
-// fewer than the last one means the table changed shape, not that models
-// came back.
-func (Page) ShapeGuard() bool { return true }

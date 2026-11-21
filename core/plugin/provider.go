@@ -117,8 +117,13 @@ type Source struct {
 	// sources without a table kept elsewhere. Only names checked by hand;
 	// none is fine when no package maps to the source.
 	Packages []string
+	// Shape is what the shape guard checks this source's reads against: the
+	// kind's defaults when zero, anchors for a living page (Shape). Set with
+	// a comment saying why, and for an anchor where it is on the page.
+	Shape Shape
 	// Plugin runs it. Its Name is the source's id ("algolia/search-api"),
-	// which every event's `api` carries.
+	// which every event's `api` carries. RegisterProvider replaces it with
+	// the same plugin given Shape (Guarded.WithShape).
 	Plugin Plugin
 }
 
@@ -145,8 +150,10 @@ func RegisterProvider(p Provider) {
 		panic("plugin: " + err.Error())
 	}
 	for i := range p.Sources {
-		p.Sources[i].Kind = KindOf(p.Sources[i].Plugin)
-		p.Sources[i].Page = PageOf(p.ID)
+		s := &p.Sources[i]
+		s.Kind = KindOf(s.Plugin)
+		s.Page = PageOf(p.ID)
+		s.Plugin = s.Plugin.(Guarded).WithShape(s.Shape)
 	}
 	mu.Lock()
 	defer mu.Unlock()
@@ -197,6 +204,8 @@ func (p Provider) check() error {
 			return fmt.Errorf("source %q has no Plugin", id)
 		case shape(s.Plugin) == "":
 			return fmt.Errorf("source %q: its plugin must be exactly one of plugin.Versioned (ListVersions, ReadAt) or plugin.Living (Read)", id)
+		case !isGuarded(s.Plugin):
+			return fmt.Errorf("source %q: its plugin (kinds/%s) doesn't run the shape guard: every kind implements plugin.Guarded", id, KindOf(s.Plugin))
 		case s.Plugin.Name() != id:
 			return fmt.Errorf("source %q: its plugin's Name is %q; a plugin is named by its source's id", id, s.Plugin.Name())
 		case !slices.Contains(Layers(), s.Layer):
@@ -209,6 +218,9 @@ func (p Provider) check() error {
 			return fmt.Errorf("source %q: Page %q, but a provider's page is %s", id, s.Page, PageOf(p.ID))
 		case s.Kind != "" && s.Kind != KindOf(s.Plugin):
 			return fmt.Errorf("source %q: Kind %q, but its plugin is in kinds/%s", id, s.Kind, KindOf(s.Plugin))
+		}
+		if err := s.Shape.check(shape(s.Plugin)); err != nil {
+			return fmt.Errorf("source %q: %w", id, err)
 		}
 		for _, u := range s.URLs {
 			if !absolute(u) {
@@ -238,6 +250,11 @@ func shape(p Plugin) string {
 		return "living"
 	}
 	return ""
+}
+
+func isGuarded(p Plugin) bool {
+	_, ok := p.(Guarded)
+	return ok
 }
 
 func absolute(u string) bool {

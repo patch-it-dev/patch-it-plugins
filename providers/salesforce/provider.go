@@ -18,7 +18,12 @@ func init() {
 				ID: "rest-api", Layer: plugin.LayerAPI,
 				Watches: "REST API version ranges deprecated and retired, from Salesforce's own API end-of-life policy page",
 				URLs:    []string{"https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html"},
-				Plugin:  notices.Plugin{Page: RESTAPI, Archiver: kit.Wayback{}},
+				// Anchors: two retired versions, from the table's "Versions 7.0 through
+				// 20.0" and "Versions 21.0 through 30.0" rows. The live page answers 403,
+				// so checked on the Wayback Machine's capture of 2026-11-20, what the
+				// plugin itself reads when it is blocked (ArchiveWhenBlocked).
+				Shape:  plugin.Shape{Anchors: []plugin.Anchor{{Entry: "20.0", Checked: "2026-11-21"}, {Entry: "30.0", Checked: "2026-11-21"}}},
+				Plugin: notices.Plugin{Page: RESTAPI, Archiver: kit.Wayback{}},
 			},
 		},
 	})

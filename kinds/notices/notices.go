@@ -9,17 +9,20 @@
 // (kit.Cite); Extract makes the events from that snapshot, so each cites what
 // it quotes, keeping only the notices the read before didn't have.
 //
-// Two options a reader turns on with a method: ShapeGuard (a read with fewer
-// than 90% of the last one's notices is an error: the page changed shape),
-// and ArchiveWhenBlocked (a live page that answers one of the statuses its
+// Every read runs the shape guard (plugin.Shape) before anything is kept:
+// a read that finds fewer than DefaultMinRatio of the notices the read
+// before found (a reader can set its own ratio with a MinRatio method: a
+// feed's is lower), or that misses one of the source's anchors, fails with
+// plugin.ErrShapeChanged. One option a reader turns on with a method:
+// ArchiveWhenBlocked (a live page that answers one of the statuses its
 // provider blocks plain fetches with is read from a fresh Wayback Machine
 // snapshot instead).
 //
 // A living page that can't be read is a failed run, never "nothing
 // changed": a page with no notices to read (plugin.ErrNothingToRead from its
 // reader) is the page changing shape or a block page served in its place,
-// so Read returns it as a plain error, which errors.Is doesn't take for
-// nothing to read.
+// so Read returns it as plugin.ErrShapeChanged, which errors.Is doesn't take
+// for nothing to read.
 package notices
 
 import (
@@ -51,9 +54,13 @@ type Page interface {
 	Events(found kit.Notices, citeURL, previous string, now time.Time) ([]event.Event, []error)
 }
 
-// shapeGuarded is a Page whose read with far fewer notices than the last
-// is an error.
-type shapeGuarded interface{ ShapeGuard() bool }
+// DefaultMinRatio is the shape guard's ratio for a notices page: past
+// notices stay on the page, so a real drop is rare, and a read with fewer
+// than 90% of the last read's notices means a table or a column changed.
+const DefaultMinRatio = 0.9
+
+// ratioed is a Page with a shape-guard ratio of its own.
+type ratioed interface{ MinRatio() float64 }
 
 // archivedWhenBlocked is a Page read from a fresh Wayback Machine snapshot
 // when the live page refuses a plain fetch: ArchiveWhenBlocked is the HTTP
@@ -64,9 +71,17 @@ type archivedWhenBlocked interface{ ArchiveWhenBlocked() []int }
 type Plugin struct {
 	Page     Page
 	Archiver kit.Archiver
+
+	shape *plugin.Shape // the source's, set by RegisterProvider (WithShape); nil: no guard
 }
 
 func (p Plugin) Name() string { return p.Page.Slug() }
+
+// WithShape is p guarding its reads with s.
+func (p Plugin) WithShape(s plugin.Shape) plugin.Plugin {
+	p.shape = &s
+	return p
+}
 
 // Read reads the page as it is now. A page that hashes as it did at last
 // (CompareHash) returns last: one GET (a 304 with the HTTP cache), no
@@ -90,18 +105,13 @@ func (p Plugin) Read(ctx context.Context, env plugin.Env, last plugin.Snapshot) 
 	if errors.Is(err, plugin.ErrNothingToRead) {
 		// Not a skip: the page this source reads holds no notices, so it
 		// changed shape or something else was served in its place.
-		return plugin.Snapshot{}, fmt.Errorf("reading %s: the page has no notices to read, it may be blocked or have changed shape: %v", url, err)
+		return plugin.Snapshot{}, fmt.Errorf("reading %s: %w: the page has no notices to read, it may be blocked: %v", url, plugin.ErrShapeChanged, err)
 	}
 	if err != nil {
 		return plugin.Snapshot{}, fmt.Errorf("reading %s: %w", url, err)
 	}
-	// A provider renaming a column makes its table unreadable, and the read
-	// would quietly find fewer notices. Past notices stay on the page, so a
-	// real drop is rare: fail loudly instead of keeping a partial list.
-	if g, ok := pg.(shapeGuarded); ok && g.ShapeGuard() && last.Content != nil {
-		if before, err := pg.Find(last.Content); err == nil && want.Count()*10 < before.Count()*9 {
-			return plugin.Snapshot{}, fmt.Errorf("%s now lists %d notices, %d at %s: the page's shape may have changed", url, want.Count(), before.Count(), last.SourceURL)
-		}
+	if err := p.guard(want, last); err != nil {
+		return plugin.Snapshot{}, fmt.Errorf("reading %s: %w", url, err)
 	}
 	snapURL, snap := archived, live
 	if snapURL == "" {
@@ -113,6 +123,31 @@ func (p Plugin) Read(ctx context.Context, env plugin.Env, last plugin.Snapshot) 
 	v := plugin.Version{ID: now.Format(time.RFC3339), Released: now, Ref: snapURL, URL: snapURL}
 	// The live page's hash, so the next read compares like with like.
 	return plugin.Snapshot{Version: v, Content: snap, SourceURL: snapURL, CompareHash: hash}, nil
+}
+
+// guard is the shape guard on a read that found want, after the read that
+// kept last: every anchor is there, and want isn't far fewer notices than
+// last's. A provider renaming a column makes its table unreadable, and the
+// read would quietly find fewer notices: fail loudly instead of keeping a
+// partial list.
+func (p Plugin) guard(want kit.Notices, last plugin.Snapshot) error {
+	if err := p.shape.CheckAnchors(want.Has); err != nil {
+		return err
+	}
+	before := -1
+	if last.Content != nil {
+		if b, err := p.Page.Find(last.Content); err == nil {
+			before = b.Count()
+		}
+	}
+	ratio := DefaultMinRatio
+	if r, ok := p.Page.(ratioed); ok {
+		ratio = r.MinRatio()
+	}
+	if err := p.shape.CheckCount("notices", ratio, before, want.Count()); err != nil {
+		return fmt.Errorf("%w (the read before: %s)", err, last.SourceURL)
+	}
+	return nil
 }
 
 // fetch reads the live page. When the page's reader asks for it
@@ -195,4 +230,7 @@ func (p Plugin) events(s plugin.Snapshot, previous string, now time.Time) ([]eve
 	return events, rejected, nil
 }
 
-var _ plugin.Living = Plugin{}
+var (
+	_ plugin.Living  = Plugin{}
+	_ plugin.Guarded = Plugin{}
+)

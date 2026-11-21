@@ -50,9 +50,24 @@ type Package struct {
 // Plugin reads one package's releases.
 type Plugin struct {
 	Package Package
+
+	shape *plugin.Shape // the source's, set by RegisterProvider (WithShape); nil: no guard
 }
 
+// DefaultMinRatio is the shape guard's ratio for a package's surface: a
+// release whose public API reads as less than half the one before is a
+// package that moved its code (a new top-level module, declarations
+// shipped elsewhere) or a reader that no longer finds it, not half an API
+// removed. A source that does shrink that much on purpose sets its own.
+const DefaultMinRatio = 0.5
+
 func (p Plugin) Name() string { return p.Package.ID }
+
+// WithShape is p guarding its pairs with s.
+func (p Plugin) WithShape(s plugin.Shape) plugin.Plugin {
+	p.shape = &s
+	return p
+}
 
 // ListVersions is every final release on the registry, oldest first.
 func (p Plugin) ListVersions(ctx context.Context, env plugin.Env) ([]plugin.Version, error) {
@@ -128,6 +143,9 @@ func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 	if err := json.Unmarshal(to.Content, &b); err != nil {
 		return plugin.Result{}, fmt.Errorf("reading the %s %s surface: %w", p.Package.Name, to.Version.ID, err)
 	}
+	if err := p.shape.CheckCount("public names", DefaultMinRatio, len(a.Surface), len(b.Surface)); err != nil {
+		return plugin.Result{}, fmt.Errorf("the %s %s surface: %w", p.Package.Name, to.Version.ID, err)
+	}
 	now := env.Now().UTC()
 	var events []event.Event
 	var rejected []error
@@ -147,7 +165,10 @@ func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 	return plugin.Result{Events: events, Rejected: rejected}, nil
 }
 
-var _ plugin.Versioned = Plugin{}
+var (
+	_ plugin.Versioned = Plugin{}
+	_ plugin.Guarded   = Plugin{}
+)
 
 // event is one change as a change event.
 func (p Plugin) event(c Change, from, to plugin.Snapshot, fromFile, toFile string, now time.Time) event.Event {

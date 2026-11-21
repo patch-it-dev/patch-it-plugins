@@ -39,9 +39,23 @@ type Commands struct {
 	// Release matches a final release's tag; its first submatch is the
 	// version.
 	Release *regexp.Regexp
+
+	shape *plugin.Shape // the source's, set by RegisterProvider (WithShape); nil: no guard
 }
 
+// CommandsMinRatio is the shape guard's ratio for a command catalog: a
+// release that keeps fewer than 80% of the command files of the one before
+// moved or reorganized the directory; read as removals, it would be most of
+// the catalog.
+const CommandsMinRatio = 0.8
+
 func (c Commands) Name() string { return c.API }
+
+// WithShape is c guarding its pairs with s.
+func (c Commands) WithShape(s plugin.Shape) plugin.Plugin {
+	c.shape = &s
+	return c
+}
 
 // ListingURL is GitHub's listing of the directory at a ref.
 func (c Commands) ListingURL(ref string) string {
@@ -118,6 +132,9 @@ func (c Commands) Extract(ctx context.Context, env plugin.Env, from, to plugin.S
 	if err := json.Unmarshal(to.Content, &after); err != nil {
 		return plugin.Result{}, fmt.Errorf("reading %s: %w", to.SourceURL, err)
 	}
+	if err := c.shape.CheckCount("command files", CommandsMinRatio, len(before), len(after)); err != nil {
+		return plugin.Result{}, fmt.Errorf("reading %s: %w", to.SourceURL, err)
+	}
 	var made []event.Event
 	for _, file := range before {
 		if slices.Contains(after, file) {
@@ -181,4 +198,7 @@ func command(body []byte) (name, entry string, err error) {
 	return name, entry, nil
 }
 
-var _ plugin.Versioned = Commands{}
+var (
+	_ plugin.Versioned = Commands{}
+	_ plugin.Guarded   = Commands{}
+)

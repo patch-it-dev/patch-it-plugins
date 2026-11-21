@@ -167,6 +167,17 @@ type Read []Finding
 // Count is how many findings the page gave.
 func (r Read) Count() int { return len(r) }
 
+// Has says whether entry is a version number a row names ("30.0") or a row's
+// own label ("Versions 21.0 through 30.0").
+func (r Read) Has(entry string) bool {
+	for _, f := range r {
+		if f.Version == entry || f.Row == entry {
+			return true
+		}
+	}
+	return false
+}
+
 // Slug is the source id the events carry: "salesforce/rest-api".
 func (pg Page) Slug() string { return pg.API }
 

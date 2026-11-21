@@ -21,7 +21,7 @@ There's no list in this repo: `make plugins` prints every provider and source fr
 
 | Path | What's there |
 |---|---|
-| [`core/plugin/`](../core/plugin/) | The `Plugin` interface (`Extract`) in its two shapes, `Versioned` (`ListVersions`, `ReadAt`) and `Living` (`Read`); `ErrNothingToRead`; the registry of providers and sources (`RegisterProvider`, `Lookup`, `LookupSource`, `Providers`), `Env`, `Result` |
+| [`core/plugin/`](../core/plugin/) | The `Plugin` interface (`Extract`) in its two shapes, `Versioned` (`ListVersions`, `ReadAt`) and `Living` (`Read`); `ErrNothingToRead`; the shape guard every kind runs (`Shape`, anchors, `ErrShapeChanged`); the registry of providers and sources (`RegisterProvider`, `Lookup`, `LookupSource`, `Providers`), `Env`, `Result` |
 | [`core/versions/`](../core/versions/) | Every version of a source: GitHub releases, tags and commits, PyPI, npm |
 | [`kinds/`](../kinds/) | How to read: one package per kind (openapi, changelog, notices, migrationguide, catalog, apisurface), each with its readers and a test helper package; no kind imports a provider |
 | [`providers/`](../providers/) | What to read: one folder per provider, `providers/<provider>/` with `provider.go` (its registration), `README.md` (its page: why each source, what it reads), any code only it needs, `testdata/` and its tests; [`providers/all`](../providers/all/) imports every one, and its tests check the folders and the import graph |

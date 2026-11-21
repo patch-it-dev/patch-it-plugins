@@ -121,6 +121,22 @@ func ParseFeed(b []byte) ([]Entry, error) {
 	return out, nil
 }
 
+// FeedTitle is an RSS channel's or an Atom feed's own title, as text: ""
+// when b isn't one or has none.
+func FeedTitle(b []byte) string {
+	var f struct {
+		RSS  string `xml:"channel>title"`
+		Atom string `xml:"title"`
+	}
+	if err := xml.Unmarshal(b, &f); err != nil {
+		return ""
+	}
+	if f.RSS != "" {
+		return Text(f.RSS)
+	}
+	return Text(f.Atom)
+}
+
 func trimAll(ss []string) []string {
 	var out []string
 	for _, s := range ss {

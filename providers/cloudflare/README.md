@@ -26,6 +26,7 @@ Kind: `notices` (`kinds/notices`), with the feed reader (`kinds/notices/feed`) a
   - **The [changelog](https://developers.cloudflare.com/changelog/) feed.** It covers every product, mostly announcements; the deprecations page is its API part.
   - **The SDKs** (`cloudflare` on PyPI and npm). They're generated from the spec. The Python SDK's `CHANGELOG.md` lists SDK-level breaking changes (removed methods and types), which is a different subject.
 - **Quote:** "End of life date: September 27, 2026" and "After this date, the legacy endpoints will no longer be available." (Legacy Registrar Domain Management API)
+- **Anchors** (checked 2026-11-21, declared in `provider.go`): the feed's own title, "Changelog | API deprecations" (its oldest of 50 entries can roll off). A read without them fails as a change of layout, never as nothing new.
 
 ### How the provider announces changes
 

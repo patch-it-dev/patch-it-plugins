@@ -41,11 +41,20 @@ type Guide interface {
 }
 
 // Plugin reads one source's migration guide.
+//
+// Each major's guide is its own document, so a guide is never compared with
+// the one before: the shape guard here is the runner's
+// Shape.NothingToRead over the releases (a guide that stops being found).
 type Plugin struct {
 	Guide Guide
 }
 
 func (p Plugin) Name() string { return p.Guide.Slug() }
+
+// WithShape is p as it is: a guide has no count to compare, and whoever
+// runs it reads the source's NothingToReadAfter from the registry
+// (plugin.LookupSource) for Shape.NothingToRead.
+func (p Plugin) WithShape(plugin.Shape) plugin.Plugin { return p }
 
 // ListVersions is every release of the source, oldest first.
 func (p Plugin) ListVersions(ctx context.Context, env plugin.Env) ([]plugin.Version, error) {
@@ -88,4 +97,7 @@ func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 	return plugin.Result{Events: events, Rejected: rejected}, nil
 }
 
-var _ plugin.Versioned = Plugin{}
+var (
+	_ plugin.Versioned = Plugin{}
+	_ plugin.Guarded   = Plugin{}
+)

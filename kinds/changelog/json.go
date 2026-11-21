@@ -202,6 +202,11 @@ func (p Plugin) readLog(ctx context.Context, env plugin.Env, v plugin.Version) (
 // compared with.
 func (p Plugin) extractLog(env plugin.Env, from, to plugin.Snapshot) (plugin.Result, error) {
 	l := p.Log
+	if from.Content != nil {
+		if err := p.shape.CheckCount("days", DefaultMinRatio, days(from.Content), days(to.Content)); err != nil {
+			return plugin.Result{}, fmt.Errorf("reading %s: %w", to.SourceURL, err)
+		}
+	}
 	findings, err := l.Read(to.Content)
 	if err != nil {
 		return plugin.Result{}, fmt.Errorf("reading %s: %w", to.SourceURL, err)
@@ -249,6 +254,15 @@ func (p Plugin) extractLog(env plugin.Env, from, to plugin.Snapshot) (plugin.Res
 		events = append(events, e)
 	}
 	return plugin.Result{Events: events, Rejected: rejected}, nil
+}
+
+// days is how many days the file lists, 0 when it isn't a list.
+func days(b []byte) int {
+	var ds []json.RawMessage
+	if json.Unmarshal(b, &ds) != nil {
+		return 0
+	}
+	return len(ds)
 }
 
 // key is what makes two findings the same change: an endpoint's API version

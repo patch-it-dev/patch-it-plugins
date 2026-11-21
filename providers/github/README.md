@@ -48,6 +48,7 @@ Kind: `notices` (`kinds/notices`), with the feed reader (`kinds/notices/feed`) a
 - **Why this one:** it's GitHub's own changelog feed, built to be machine-read, with labels (`Retired`) as RSS categories. Retirement posts list the affected labels in a fixed shape and give the date.
 - **Alternatives considered:** the [actions/runner-images](https://github.com/actions/runner-images) repo's announcement issues (detailed, but issue text varies and they're not a feed); the full GitHub changelog feed (every product, much noisier); the runner images README (says what exists now, not when it goes).
 - **Quote:** "The macOS 14 runner image will be retired on November 2, 2026."
+- **Anchors** (checked 2026-11-21, declared in `provider.go`): the feed's own title, "Use Case: actions - GitHub Changelog" (its 10 posts roll off). A read without them fails as a change of layout, never as nothing new.
 
 ### How the provider announces changes
 

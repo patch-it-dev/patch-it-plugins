@@ -8,4 +8,7 @@ type Notices interface {
 	// Count is how many notices were read: what the shape guard compares
 	// with the last read.
 	Count() int
+	// Has says whether entry is among what was read, as the reader names
+	// an entry: what a source's anchors (plugin.Anchor) are checked with.
+	Has(entry string) bool
 }

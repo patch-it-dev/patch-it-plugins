@@ -229,6 +229,21 @@ func (f File) added(sections []Section) map[string]bool {
 type Plugin struct {
 	File File
 	Log  Log
+
+	shape *plugin.Shape // the source's, set by RegisterProvider (WithShape); nil: no guard
+}
+
+// DefaultMinRatio is the shape guard's ratio for a changelog file or a JSON
+// changelog: both keep every past release or day, so one that has fewer
+// than 90% of what it had at the version before was moved, split or
+// reformatted. A release's notes on GitHub are one release each: nothing to
+// compare, so only Shape.NothingToRead guards them.
+const DefaultMinRatio = 0.9
+
+// WithShape is p guarding its pairs with s.
+func (p Plugin) WithShape(s plugin.Shape) plugin.Plugin {
+	p.shape = &s
+	return p
 }
 
 // isLog is a JSON changelog.
@@ -305,6 +320,11 @@ func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 	}
 	f := p.File
 	f.Release, f.Tag = to.Version.ID, to.Version.Ref
+	if !f.Notes && from.Content != nil {
+		if err := p.shape.CheckCount("release headings", DefaultMinRatio, Releases(from.Content), Releases(to.Content)); err != nil {
+			return plugin.Result{}, fmt.Errorf("reading %s: %w", f.Cite(), err)
+		}
+	}
 	heading, findings, err := f.Read(to.Content)
 	if err != nil {
 		return plugin.Result{}, fmt.Errorf("reading %s: %w", f.Cite(), err)
@@ -351,7 +371,10 @@ func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 	return plugin.Result{Events: events, Rejected: rejected}, nil
 }
 
-var _ plugin.Versioned = Plugin{}
+var (
+	_ plugin.Versioned = Plugin{}
+	_ plugin.Guarded   = Plugin{}
+)
 
 func describe(f File, c Change) string {
 	names := "`" + strings.Join(c.Symbols, "`, `") + "`"

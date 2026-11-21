@@ -42,9 +42,22 @@ type UpcomingChanges struct {
 	// Endpoint is the GraphQL endpoint as an operation: every query and
 	// mutation is a POST to it ("POST /graphql").
 	Endpoint string
+
+	shape *plugin.Shape // the source's, set by RegisterProvider (WithShape); nil: no guard
 }
 
+// UpcomingMinRatio is the shape guard's ratio for a file of upcoming
+// changes: entries leave it in batches when their date passes, so only a
+// file left with under a quarter of its entries (or none) changed shape.
+const UpcomingMinRatio = 0.25
+
 func (u UpcomingChanges) Name() string { return u.API }
+
+// WithShape is u guarding its pairs with s.
+func (u UpcomingChanges) WithShape(s plugin.Shape) plugin.Plugin {
+	u.shape = &s
+	return u
+}
 
 // FileURL is the file at a commit: its own provenance.
 func (u UpcomingChanges) FileURL(sha string) string {
@@ -126,6 +139,9 @@ func (u UpcomingChanges) Extract(_ context.Context, env plugin.Env, from, to plu
 	if err != nil {
 		return plugin.Result{}, fmt.Errorf("reading %s: %w", to.SourceURL, err)
 	}
+	if err := u.shape.CheckCount("entries", UpcomingMinRatio, len(before), len(after)); err != nil {
+		return plugin.Result{}, fmt.Errorf("reading %s: %w", to.SourceURL, err)
+	}
 	had := map[string]bool{}
 	for _, e := range before {
 		had[e.key()] = true
@@ -187,4 +203,7 @@ func (u UpcomingChanges) subject(location string) (event.Subject, bool) {
 		Schema: typ, Property: rest}, true
 }
 
-var _ plugin.Versioned = UpcomingChanges{}
+var (
+	_ plugin.Versioned = UpcomingChanges{}
+	_ plugin.Guarded   = UpcomingChanges{}
+)
