@@ -585,14 +585,29 @@ func addSource(path, source string, imports []string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
+	// The Sources of the provider's one plugin.RegisterProvider call.
 	var sources ast.Expr
 	ast.Inspect(file, func(n ast.Node) bool {
-		if kv, ok := n.(*ast.KeyValueExpr); ok && sources == nil {
-			if k, ok := kv.Key.(*ast.Ident); ok && k.Name == "Sources" {
-				sources = kv.Value
+		call, ok := n.(*ast.CallExpr)
+		if !ok || sources != nil {
+			return sources == nil
+		}
+		sel, ok := call.Fun.(*ast.SelectorExpr)
+		if pkg, isIdent := sel.X.(*ast.Ident); !ok || !isIdent || pkg.Name != "plugin" || sel.Sel.Name != "RegisterProvider" || len(call.Args) != 1 {
+			return true
+		}
+		lit, ok := call.Args[0].(*ast.CompositeLit)
+		if !ok {
+			return true
+		}
+		for _, el := range lit.Elts {
+			if kv, ok := el.(*ast.KeyValueExpr); ok {
+				if k, ok := kv.Key.(*ast.Ident); ok && k.Name == "Sources" {
+					sources = kv.Value
+				}
 			}
 		}
-		return sources == nil
+		return false
 	})
 	var at int
 	switch v := sources.(type) {
@@ -602,7 +617,7 @@ func addSource(path, source string, imports []string) ([]byte, error) {
 	case *ast.CallExpr: // append(specs(), ...)
 		at = fset.Position(v.Rparen).Offset
 	default:
-		return nil, fmt.Errorf("%s: found no Sources: []plugin.Source{...} in its RegisterProvider call", path)
+		return nil, fmt.Errorf("%s: found no Sources in a plugin.RegisterProvider(plugin.Provider{...}) call", path)
 	}
 	var b bytes.Buffer
 	b.Write(bytes.TrimRight(src[:at], " \t\n"))
@@ -625,16 +640,18 @@ func addSource(path, source string, imports []string) ([]byte, error) {
 
 // addImport adds path to src's imports when it isn't there.
 func addImport(src []byte, path string) ([]byte, error) {
-	q := strconv.Quote(path)
-	if bytes.Contains(src, []byte(q)) {
-		return src, nil
-	}
-	if bytes.Contains(src, []byte("import (\n")) {
-		return bytes.Replace(src, []byte("import (\n"), []byte("import (\n\t"+q+"\n"), 1), nil
-	}
-	file, err := parser.ParseFile(token.NewFileSet(), "", src, parser.PackageClauseOnly)
+	file, err := parser.ParseFile(token.NewFileSet(), "", src, parser.ImportsOnly)
 	if err != nil {
 		return nil, err
+	}
+	for _, imp := range file.Imports {
+		if p, _ := strconv.Unquote(imp.Path.Value); p == path {
+			return src, nil
+		}
+	}
+	q := strconv.Quote(path)
+	if bytes.Contains(src, []byte("import (\n")) {
+		return bytes.Replace(src, []byte("import (\n"), []byte("import (\n\t"+q+"\n"), 1), nil
 	}
 	end := int(file.Name.End()) - 1
 	return slices.Concat(src[:end], []byte("\n\nimport "+q+"\n"), src[end:]), nil

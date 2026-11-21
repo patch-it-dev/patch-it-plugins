@@ -56,15 +56,15 @@ Kind: `notices` (`kinds/notices`), reading with the deprecations-page reader, `k
 
 ### What the plugin reads and ignores
 
-- Same reader as [`openai-models`](../openai/README.md#openai-model-retirements-openaimodels): every dated table with a model and a replacement column, newest row wins, retired replacements followed, every event read from and citing a Wayback snapshot.
+- Same reader as [`openai/models`](../openai/README.md#openai-model-retirements-openaimodels): every dated table with a model and a replacement column, newest row wins, retired replacements followed, every event read from and citing a Wayback snapshot.
 - Keeps every `claude-` name. Ignores the "Model status" table (active models with tentative dates) and any model without a date yet.
 
 ### Known gaps
 
 - Retirements on Amazon Bedrock or Google Cloud aren't on this page.
-- The page also documents SDK changes (the Python SDK 1.0 removing sampling parameters); those are the [`anthropic`](#anthropic-python-sdk-anthropicpython-sdk) plugin, not this one.
+- The page also documents SDK changes (the Python SDK 1.0 removing sampling parameters); those are the [`anthropic/python-sdk`](#anthropic-python-sdk-anthropicpython-sdk) source, not this one.
 
-## Anthropic Python SDK (`anthropic/python-surface`)
+## Anthropic Python SDK's public API (`anthropic/python-surface`)
 
 ### What it watches
 

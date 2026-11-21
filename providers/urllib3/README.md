@@ -2,7 +2,7 @@
 
 Every source patch-it reads for urllib3, one section each: what it watches, why this source, what it reads and ignores, its known gaps. Each is registered in [`provider.go`](provider.go) and read by its kind ([`kinds/`](../../kinds/)); the saved copies its tests replay, and the golden files, are in [`testdata/`](testdata/README.md).
 
-## urllib3 (`urllib3/urllib3`)
+## urllib3 changelog (`urllib3/urllib3`)
 
 ### What it watches
 
@@ -25,7 +25,7 @@ Kind: `changelog` (`kinds/changelog`).
 ### What the plugin reads and ignores
 
 - reStructuredText titles: release and section levels are told apart by their underline character.
-- Same bullet templates as [`textual`](../textual/README.md#textual-textualtextual). A name the same release's "Added" section adds back isn't reported as removed: 2.0.0 removed the `urllib3.request` module and added a `urllib3.request()` function.
+- Same bullet templates as [`textual/textual`](../textual/README.md#textual-changelog-textualtextual). A name the same release's "Added" section adds back isn't reported as removed: 2.0.0 removed the `urllib3.request` module and added a `urllib3.request()` function.
 - Drops (and logs) dropped Python and OpenSSL versions and behavior changes. 12 events from 2.0.0.
 
 ### Known gaps
@@ -33,7 +33,7 @@ Kind: `changelog` (`kinds/changelog`).
 - A release is read at its tag; one whose tag or changelog section is missing fails that pair, it isn't guessed.
 - Changed defaults (TLS versions, retries) are behavior changes and aren't events.
 
-## urllib3 (`urllib3/python-surface`)
+## urllib3's public API (`urllib3/python-surface`)
 
 ### What it watches
 

@@ -2,7 +2,7 @@
 
 Every source patch-it reads for NumPy, one section each: what it watches, why this source, what it reads and ignores, its known gaps. Each is registered in [`provider.go`](provider.go) and read by its kind ([`kinds/`](../../kinds/)); the saved copies its tests replay, and the golden files, are in [`testdata/`](testdata/README.md).
 
-## NumPy (`numpy/numpy`)
+## NumPy migration guides (`numpy/numpy`)
 
 ### What it watches
 
@@ -34,7 +34,7 @@ Kind: `migrationguide` (`kinds/migrationguide`), with the removed-members reader
 - Removals in a minor release aren't watched: only a major gets a guide.
 - A later major's guide is read with 2.0's rule: a guideline that is exactly "Use ``np.<member>`` instead." is a rename. NumPy 2.0's guide says each such replacement works on 1.x; a later guide might name one that's new, which would make the rename fail on the release before.
 
-## NumPy (`numpy/python-surface`)
+## NumPy's public API (`numpy/python-surface`)
 
 ### What it watches
 

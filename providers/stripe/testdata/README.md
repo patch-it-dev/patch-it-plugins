@@ -6,7 +6,7 @@ Real copies of what Stripe publishes, read by this folder's tests instead of the
 
 Each pair is a real breaking change between two releases of the provider's own spec, trimmed to the schemas and paths involved: every line is copied unchanged, the rest of the spec was left out. The tests replay one release to the next and check the events.
 
-Stripe's spec isn't saved here: its tests use small specs written inline.
+Stripe's spec isn't saved: the `openapi` kind's own tests use small specs written inline, and `stripe/api`'s listing is tested on the recorded responses below.
 
 ## Recorded API responses
 
@@ -18,13 +18,13 @@ The version-listing tests read these, under `versions/`, instead of the network.
 
 ## Saved releases
 
-Each golden file, `golden/<provider>-<source>.json`, is what the `apisurface` kind stores from the source's golden pair, read from `pypi/<package>/` or `npm/<package>/` (the openai Python package's pair, 1.1.1 → 1.1.2, from the files at the top level).
+Each golden file, `golden/<provider>-<source>.json`, is what the `apisurface` kind stores from the source's golden pair, read from `pypi/<package>/` or `npm/<package>/`.
 
 | File | URL | Saved | License | Quote |
 |---|---|---|---|---|
-| `pypi/stripe/`: `stripe-15.4.0-py3-none-any.trimmed.whl`, `stripe-15.5.0-py3-none-any.trimmed.whl`, `stripe-15.6.2-py3-none-any.trimmed.whl`, `stripe-16.0.0-py3-none-any.trimmed.whl` | https://files.pythonhosted.org/packages/00/e1/3047b4e244cc78bb598b0d5fcab6632b8bf8a4d526f2e840c4f4de02c989/stripe-15.4.0-py3-none-any.whl; https://files.pythonhosted.org/packages/d5/20/4c8377c570697ebe105ad5e073538e498d58e4985ca6e2944bdc917a5034/stripe-15.5.0-py3-none-any.whl; https://files.pythonhosted.org/packages/25/e9/251eb26d9ceae6c44adb3a54cb81ec717dc469452c09756b53a117726277/stripe-15.6.2-py3-none-any.whl; https://files.pythonhosted.org/packages/b5/de/5141ae3990862cc3d61a1cdd4acff72bcb587afb7b4d31c52eaddbb6bc8f/stripe-16.0.0-py3-none-any.whl | 2026-11-21 | MIT (the wheel's own license files are kept in it). Trimmed: only `stripe/__init__.py`, `stripe/_stripe_object.py` and the dist-info `METADATA`, `WHEEL` and license files, each copied byte for byte | see the source's page under `providers/` |
+| `pypi/stripe/`: `stripe-15.4.0-py3-none-any.trimmed.whl`, `stripe-15.5.0-py3-none-any.trimmed.whl`, `stripe-15.6.2-py3-none-any.trimmed.whl`, `stripe-16.0.0-py3-none-any.trimmed.whl` | https://files.pythonhosted.org/packages/00/e1/3047b4e244cc78bb598b0d5fcab6632b8bf8a4d526f2e840c4f4de02c989/stripe-15.4.0-py3-none-any.whl; https://files.pythonhosted.org/packages/d5/20/4c8377c570697ebe105ad5e073538e498d58e4985ca6e2944bdc917a5034/stripe-15.5.0-py3-none-any.whl; https://files.pythonhosted.org/packages/25/e9/251eb26d9ceae6c44adb3a54cb81ec717dc469452c09756b53a117726277/stripe-15.6.2-py3-none-any.whl; https://files.pythonhosted.org/packages/b5/de/5141ae3990862cc3d61a1cdd4acff72bcb587afb7b4d31c52eaddbb6bc8f/stripe-16.0.0-py3-none-any.whl | 2026-11-21 | MIT (the wheel's own license files are kept in it). Trimmed: only `stripe/__init__.py`, `stripe/_stripe_object.py` and the dist-info `METADATA`, `WHEEL` and license files, each copied byte for byte | see the source's section of [`../README.md`](../README.md) |
 | `pypi/stripe/`: `pypi-stripe-excerpt.json` and `pypi-stripe-15.4.0.json`, `pypi-stripe-15.5.0.json`, `pypi-stripe-15.6.2.json`, `pypi-stripe-16.0.0.json` | https://pypi.org/pypi/stripe/json, https://pypi.org/pypi/stripe/&lt;version&gt;/json | 2026-11-21 | PyPI metadata. Trimmed: `releases` to the saved versions, each file to `filename`, `packagetype`, `upload_time_iso_8601`, `yanked`; each version's `urls` to `filename`, `packagetype`, `url`, `yanked` | |
-| `npm/stripe/`: `stripe-22.6.2.trimmed.tgz`, `stripe-23.0.0.trimmed.tgz`, `stripe-23.0.1.trimmed.tgz` | https://registry.npmjs.org/stripe/-/stripe-22.6.2.tgz; https://registry.npmjs.org/stripe/-/stripe-23.0.0.tgz; https://registry.npmjs.org/stripe/-/stripe-23.0.1.tgz | 2026-11-21 | MIT (the package's own license file is kept in each tarball). Trimmed: only `package.json`, the license and `esm/stripe.esm.node.d.ts`, each copied byte for byte | see the source's page under `providers/` |
+| `npm/stripe/`: `stripe-22.6.2.trimmed.tgz`, `stripe-23.0.0.trimmed.tgz`, `stripe-23.0.1.trimmed.tgz` | https://registry.npmjs.org/stripe/-/stripe-22.6.2.tgz; https://registry.npmjs.org/stripe/-/stripe-23.0.0.tgz; https://registry.npmjs.org/stripe/-/stripe-23.0.1.tgz | 2026-11-21 | MIT (the package's own license file is kept in each tarball). Trimmed: only `package.json`, the license and `esm/stripe.esm.node.d.ts`, each copied byte for byte | see the source's section of [`../README.md`](../README.md) |
 | `npm/stripe/`: `npm-stripe-excerpt.json` and `npm-stripe-22.6.2.json`, `npm-stripe-23.0.0.json`, `npm-stripe-23.0.1.json` | https://registry.npmjs.org/stripe, …/&lt;version&gt; | 2026-11-21 | npm registry metadata. Trimmed: `versions` to the saved versions (name and version only) and their `time`; each version's document to `name`, `version`, `dist.tarball` | |
 
 ## SDK changelogs

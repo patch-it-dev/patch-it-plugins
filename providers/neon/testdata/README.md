@@ -16,9 +16,9 @@ The Neon copies are excerpts, not whole files: the spec says its license is "Pro
 
 ## Saved releases
 
-Each golden file, `golden/<provider>-<source>.json`, is what the `apisurface` kind stores from the source's golden pair, read from `pypi/<package>/` or `npm/<package>/` (the openai Python package's pair, 1.1.1 → 1.1.2, from the files at the top level).
+Each golden file, `golden/<provider>-<source>.json`, is what the `apisurface` kind stores from the source's golden pair, read from `pypi/<package>/` or `npm/<package>/`.
 
 | File | URL | Saved | License | Quote |
 |---|---|---|---|---|
-| `npm/neondatabase-serverless/`: `serverless-0.10.4.trimmed.tgz`, `serverless-1.0.0.trimmed.tgz`, `serverless-1.0.1.trimmed.tgz` | https://registry.npmjs.org/@neondatabase/serverless/-/serverless-0.10.4.tgz; https://registry.npmjs.org/@neondatabase/serverless/-/serverless-1.0.0.tgz; https://registry.npmjs.org/@neondatabase/serverless/-/serverless-1.0.1.tgz | 2026-11-21 | MIT (the package's own license file is kept in each tarball). Trimmed: only `package.json`, the license and `index.d.mts`, `index.d.ts`, each copied byte for byte | see the source's page under `providers/` |
+| `npm/neondatabase-serverless/`: `serverless-0.10.4.trimmed.tgz`, `serverless-1.0.0.trimmed.tgz`, `serverless-1.0.1.trimmed.tgz` | https://registry.npmjs.org/@neondatabase/serverless/-/serverless-0.10.4.tgz; https://registry.npmjs.org/@neondatabase/serverless/-/serverless-1.0.0.tgz; https://registry.npmjs.org/@neondatabase/serverless/-/serverless-1.0.1.tgz | 2026-11-21 | MIT (the package's own license file is kept in each tarball). Trimmed: only `package.json`, the license and `index.d.mts`, `index.d.ts`, each copied byte for byte | see the source's section of [`../README.md`](../README.md) |
 | `npm/neondatabase-serverless/`: `npm-neondatabase-serverless-excerpt.json` and `npm-neondatabase-serverless-0.10.4.json`, `npm-neondatabase-serverless-1.0.0.json`, `npm-neondatabase-serverless-1.0.1.json` | https://registry.npmjs.org/@neondatabase%2Fserverless, …/&lt;version&gt; | 2026-11-21 | npm registry metadata. Trimmed: `versions` to the saved versions (name and version only) and their `time`; each version's document to `name`, `version`, `dist.tarball` | |

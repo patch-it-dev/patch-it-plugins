@@ -2,7 +2,7 @@
 
 Every source patch-it reads for Cloudflare, one section each: what it watches, why this source, what it reads and ignores, its known gaps. Each is registered in [`provider.go`](provider.go) and read by its kind ([`kinds/`](../../kinds/)); the saved copies its tests replay, and the golden files, are in [`testdata/`](testdata/README.md).
 
-## Cloudflare (`cloudflare/api`)
+## Cloudflare API deprecations (`cloudflare/api`)
 
 ### What it watches
 
@@ -58,7 +58,7 @@ Kind: `notices` (`kinds/notices`), with the feed reader (`kinds/notices/feed`) a
 - **The patch-it client can't place these events yet.** Its version check reads an `api_operation` event's version as a package version, so a date (`2026-09-27`) doesn't parse and the event is dropped. It needs a rule for date-versioned API events, like the one model retirements have.
 - **`previous_version` is a read, not a release.** The events are `api_operation` subjects, which the change-event contract requires to name the version they were compared with. A page of notices has no releases, so it's the dated read the page was compared with (the read before; on the first read, that read itself, `2026-11-14T12:00:00Z` in the golden file). `version` stays the notice's own.
 
-## Cloudflare (`cloudflare/api-spec`)
+## Cloudflare API spec (`cloudflare/api-spec`)
 
 ### What it watches
 

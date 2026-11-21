@@ -2,7 +2,7 @@
 
 Every source patch-it reads for Textual, one section each: what it watches, why this source, what it reads and ignores, its known gaps. Each is registered in [`provider.go`](provider.go) and read by its kind ([`kinds/`](../../kinds/)); the saved copies its tests replay, and the golden files, are in [`testdata/`](testdata/README.md).
 
-## Textual (`textual/textual`)
+## Textual changelog (`textual/textual`)
 
 ### What it watches
 
@@ -33,7 +33,7 @@ Kind: `changelog` (`kinds/changelog`).
 - A release is read at its tag; one whose tag or changelog section is missing fails that pair, it isn't guessed.
 - Breaking behavior changes written as prose aren't events.
 
-## Textual (`textual/python-surface`)
+## Textual's public API (`textual/python-surface`)
 
 ### What it watches
 

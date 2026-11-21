@@ -13,7 +13,9 @@ import (
 // The import graph, tests included: core/ knows no kind and no provider; a
 // kind (how to read) knows no provider; a provider (what to read) imports
 // only core/ and kinds/, never another provider. Only this package, and the
-// commands through it, imports every provider.
+// commands through it, imports every provider. A test kit (kittest, a
+// kind's <kind>test) is imported by tests and other test kits only, so what
+// it may do (openapitest's net/http) never reaches code that runs.
 func TestTheImportGraph(t *testing.T) {
 	top, err := filepath.Abs("../..")
 	if err != nil {
@@ -72,6 +74,9 @@ func forbidden(file, path string) string {
 	if !ok {
 		return ""
 	}
+	if testKit(pkg) && !strings.HasSuffix(file, "_test.go") && !testKit(filepath.ToSlash(filepath.Dir(file))) {
+		return "a test kit is for tests (and other test kits) only"
+	}
 	switch top, _, _ := strings.Cut(file, "/"); top {
 	case "core":
 		if strings.HasPrefix(pkg, "kinds/") || strings.HasPrefix(pkg, "providers/") {
@@ -88,4 +93,11 @@ func forbidden(file, path string) string {
 		}
 	}
 	return ""
+}
+
+// testKit reports whether a package (a path from the repo's root) is a test
+// kit: core/kit/kittest, or a kind's <kind>test.
+func testKit(pkg string) bool {
+	base := pkg[strings.LastIndex(pkg, "/")+1:]
+	return pkg == "core/kit/kittest" || (strings.HasPrefix(pkg, "kinds/") && strings.HasSuffix(base, "test"))
 }
