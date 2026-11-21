@@ -213,7 +213,9 @@ func chained(fs []Finding) []Finding {
 	}
 	for i, f := range fs {
 		r := f.Change.Replacement
-		if f.Dropped != "" || r == "" {
+		// Only a breaking rename is followed: a deprecation in favor of a
+		// name stays a deprecation, whatever happens to that name.
+		if f.Dropped != "" || r == "" || f.Change.ChangeType != event.ChangeTypeBreaking {
 			continue
 		}
 		seen := map[string]bool{}
