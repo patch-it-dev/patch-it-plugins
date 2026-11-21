@@ -32,9 +32,9 @@ var statedPin = []*regexp.Regexp{
 // one: "2026-11-18.endive", "2022-08-01".
 const apiVersion = `\d{4}-\d{2}-\d{2}(?:\.[a-z]+)?`
 
-// pins are the versions each release of a Markdown changelog states it
+// Pins are the versions each release of a Markdown changelog states it
 // pins, by release as its heading names it.
-func pins(file []byte) map[string]string {
+func Pins(file []byte) map[string]string {
 	out, conflict := map[string]string{}, map[string]bool{}
 	release, fenced := "", false
 	for _, l := range strings.Split(strings.ReplaceAll(string(file), "\r\n", "\n"), "\n") {
@@ -98,7 +98,7 @@ func (f File) pinned(ctx context.Context, env plugin.Env, vs []plugin.Version) [
 		log.Printf("%s: what its releases pin isn't read this time: %v", f.API, err)
 		return vs
 	}
-	stated := pins(page)
+	stated := Pins(page)
 	for i := range vs {
 		if v, ok := stated[vs[i].ID]; ok {
 			vs[i].MapsTo = plugin.Pin{API: f.Pins, Version: v}

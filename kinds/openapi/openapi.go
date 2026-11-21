@@ -18,220 +18,13 @@ import (
 	"github.com/patch-it-dev/patch-it-plugins/kinds/openapi/adapter"
 )
 
-func init() {
-	plugin.RegisterProvider(plugin.Provider{
-		ID: "stripe", Name: "Stripe", Category: plugin.CategoryPayments, Homepage: "https://stripe.com",
-		Sources: []plugin.Source{{
-			ID: "api", Layer: plugin.LayerAPI, Page: "providers/stripe.md",
-			Watches:  "REST API changes between OpenAPI spec releases (removed and renamed endpoints, parameters and fields), with migration hints from Stripe's API changelog",
-			URLs:     []string{"https://github.com/stripe/openapi"},
-			Packages: []string{"pypi:stripe", "npm:stripe"},
-			Plugin:   Plugin{Adapter: adapter.Stripe{}, Hints: hint.Stripe{}},
-		}},
-	})
-	// No Hints yet: Datadog's changelog isn't Stripe's per-parameter table
-	// shape, so there's no hint.Source for it to read.
-	plugin.RegisterProvider(plugin.Provider{
-		ID: "datadog", Name: "Datadog", Category: plugin.CategoryMonitoring, Homepage: "https://www.datadoghq.com",
-		Sources: []plugin.Source{{
-			ID: "api", Layer: plugin.LayerAPI, Page: "providers/datadog.md",
-			Watches:  "API v2 changes between OpenAPI spec releases",
-			URLs:     []string{"https://github.com/DataDog/datadog-api-client-python"},
-			Packages: []string{"pypi:datadog-api-client", "npm:@datadog/datadog-api-client"},
-			Plugin:   Plugin{Adapter: adapter.Datadog{}},
-		}},
-	})
-	// No Hints: GitLab's deprecations are prose per feature, not a changelog
-	// keyed by API version, so there's nothing for hint.Source to look up.
-	plugin.RegisterProvider(plugin.Provider{
-		ID: "gitlab", Name: "GitLab", Category: plugin.CategoryDevTools, Homepage: "https://about.gitlab.com",
-		Sources: []plugin.Source{{
-			ID: "rest-api", Layer: plugin.LayerAPI, Page: "providers/gitlab.md",
-			Watches: "REST API changes between releases, request side only (what callers send)",
-			URLs:    []string{"https://gitlab.com/gitlab-org/gitlab/-/tree/master/doc/api/openapi"},
-			Plugin:  Plugin{Adapter: adapter.GitLab{}, Keep: requestSide},
-		}},
-	})
-	// No Hints yet: GitHub's per-version CHANGELOG.md is prose with no table
-	// at all, so there's nothing for hint.Source to key on. (GitHub's Actions
-	// source is registered by plugins/notices.)
-	plugin.RegisterProvider(plugin.Provider{
-		ID: "github", Name: "GitHub", Category: plugin.CategoryDevTools, Homepage: "https://github.com",
-		Sources: []plugin.Source{{
-			ID: "rest-api", Layer: plugin.LayerAPI, Page: "providers/github.md",
-			Watches: "REST API changes between dated API versions",
-			URLs:    []string{"https://github.com/github/rest-api-description"},
-			Plugin:  Plugin{Adapter: adapter.GitHub{}},
-		}},
-	})
-	// No Hints: Vercel's changelog is product news, not keyed by API change.
-	// Only operation deprecations and removals are kept: see vercelKeep.
-	plugin.RegisterProvider(plugin.Provider{
-		ID: "vercel", Name: "Vercel", Category: plugin.CategoryHosting, Homepage: "https://vercel.com",
-		Sources: []plugin.Source{{
-			ID: "api", Layer: plugin.LayerAPI, Page: "providers/vercel.md",
-			Watches:  "REST API operations deprecated, and deprecated operations removed, between SDK releases of the spec",
-			URLs:     []string{"https://github.com/vercel/sdk"},
-			Packages: []string{"npm:@vercel/sdk"},
-			Plugin:   Plugin{Adapter: adapter.Vercel{}, Diff: vercelDiff, Keep: vercelKeep},
-		}},
-	})
-	// No Hints: Supabase's changelog is platform news, not keyed by
-	// operation. Only operation deprecations and removals: see supabase.go.
-	plugin.RegisterProvider(plugin.Provider{
-		ID: "supabase", Name: "Supabase", Category: plugin.CategoryDatabases, Homepage: "https://supabase.com",
-		Sources: []plugin.Source{{
-			ID: "management-api", Layer: plugin.LayerAPI, Page: "providers/supabase.md",
-			Watches: "Management API operations deprecated, and deprecated operations removed, between commits of the spec",
-			URLs:    []string{"https://github.com/supabase/supabase"},
-			Plugin:  Plugin{Adapter: adapter.Supabase{}, Diff: supabaseDiff, Keep: supabaseKeep},
-		}},
-	})
-	// No Hints: Algolia's changelog is a hosted product feed, not keyed by
-	// operation. One source per API spec: see algolia.go.
-	algolia := plugin.Provider{ID: "algolia", Name: "Algolia", Category: plugin.CategorySearch, Homepage: "https://www.algolia.com"}
-	for _, spec := range []struct{ name, title string }{{"search", "Search"}, {"ingestion", "Ingestion"}, {"recommend", "Recommend"}} {
-		algolia.Sources = append(algolia.Sources, plugin.Source{
-			ID: spec.name + "-api", Layer: plugin.LayerAPI, Page: "providers/algolia.md",
-			Watches:  spec.title + " API operations deprecated, and deprecated operations removed, between releases of the spec",
-			URLs:     []string{"https://github.com/algolia/api-clients-automation", "https://github.com/algolia/api-clients-automation/blob/main/specs/bundled/" + spec.name + ".yml"},
-			Packages: []string{"pypi:algoliasearch", "npm:algoliasearch"},
-			Plugin:   Plugin{Adapter: adapter.Algolia{Spec: spec.name}, Diff: algoliaDiff, Keep: algoliaKeep},
-		})
-	}
-	plugin.RegisterProvider(algolia)
-	// No Hints: Elastic's breaking-changes page is prose per area, not keyed
-	// by operation. See elasticsearch.go.
-	plugin.RegisterProvider(plugin.Provider{
-		ID: "elastic", Name: "Elastic", Category: plugin.CategorySearch, Homepage: "https://www.elastic.co",
-		Sources: []plugin.Source{{
-			ID: "elasticsearch-api", Layer: plugin.LayerAPI, Page: "providers/elasticsearch.md",
-			Watches:  "Elasticsearch REST API operations deprecated, and deprecated operations removed, between released minor versions of the spec",
-			URLs:     []string{"https://github.com/elastic/elasticsearch-specification"},
-			Packages: []string{"pypi:elasticsearch", "npm:@elastic/elasticsearch"},
-			Plugin:   Plugin{Adapter: adapter.Elasticsearch{}, Diff: elasticsearchDiff, Keep: elasticsearchKeep, RemovalsNeedANewVersion: true},
-		}},
-	})
-	// No Hints: Sentry's changelog is product news, not keyed by operation.
-	// Operation deprecations only, most said in the description: see
-	// sentry.go.
-	plugin.RegisterProvider(plugin.Provider{
-		ID: "sentry", Name: "Sentry", Category: plugin.CategoryMonitoring, Homepage: "https://sentry.io",
-		Sources: []plugin.Source{{
-			ID: "api", Layer: plugin.LayerAPI, Page: "providers/sentry.md",
-			Watches: "REST API operations deprecated between releases of the spec, most of them in the operation's description",
-			URLs:    []string{"https://github.com/getsentry/sentry/releases"},
-			Plugin:  Plugin{Adapter: adapter.Sentry{}, Diff: sentryDiff, Keep: sentryKeep},
-		}},
-	})
-	// No Hints: Neon's changelog is a weekly digest, not keyed by operation.
-	// Only operation deprecations and removals: see neon.go.
-	plugin.RegisterProvider(plugin.Provider{
-		ID: "neon", Name: "Neon", Category: plugin.CategoryDatabases, Homepage: "https://neon.com",
-		Sources: []plugin.Source{{
-			ID: "api", Layer: plugin.LayerAPI, Page: "providers/neon.md",
-			Watches:  "Neon API operations deprecated, and deprecated operations removed, between commits of the spec",
-			URLs:     []string{"https://github.com/neondatabase/neon-pkgs"},
-			Packages: []string{"npm:@neondatabase/api-client"},
-			Plugin:   Plugin{Adapter: adapter.Neon{}, Diff: neonDiff, Keep: neonKeep},
-		}},
-	})
-	// No Hints: Convex has no API changelog; its news feed is product news.
-	// Only operation deprecations and removals: see convex.go.
-	plugin.RegisterProvider(plugin.Provider{
-		ID: "convex", Name: "Convex", Category: plugin.CategoryDatabases, Homepage: "https://www.convex.dev",
-		Sources: []plugin.Source{{
-			ID: "deployment-api", Layer: plugin.LayerAPI, Page: "providers/convex.md",
-			Watches: "Deployment API operations deprecated, and deprecated operations removed, between commits of the spec",
-			URLs:    []string{"https://github.com/convex/convex-backend"},
-			Plugin:  Plugin{Adapter: adapter.Convex{}, Diff: convexDiff, Keep: convexKeep},
-		}},
-	})
-	// No Hints: PlanetScale's changelog is product news, not keyed by
-	// operation. Operation deprecations only, said in the description: see
-	// planetscale.go.
-	plugin.RegisterProvider(plugin.Provider{
-		ID: "planetscale", Name: "PlanetScale", Category: plugin.CategoryDatabases, Homepage: "https://planetscale.com",
-		Sources: []plugin.Source{{
-			ID: "api", Layer: plugin.LayerAPI, Page: "providers/planetscale.md",
-			Watches: "API operations deprecated, and deprecated operations removed, between commits of the spec, said in the operation's description",
-			URLs:    []string{"https://github.com/planetscale/terraform-provider-planetscale"},
-			Plugin:  Plugin{Adapter: adapter.PlanetScale{}, Diff: planetscaleDiff, Keep: planetscaleKeep},
-		}},
-	})
-	// No Hints: Appwrite's changelog is product news, not keyed by operation.
-	// Operation deprecations only, SDK method renames left out: see
-	// appwrite.go.
-	plugin.RegisterProvider(plugin.Provider{
-		ID: "appwrite", Name: "Appwrite", Category: plugin.CategoryHosting, Homepage: "https://appwrite.io",
-		Sources: []plugin.Source{{
-			ID: "api", Layer: plugin.LayerAPI, Page: "providers/appwrite.md",
-			Watches:  "REST API operations a server SDK calls that are deprecated between commits of the spec, SDK method renames left out",
-			URLs:     []string{"https://github.com/appwrite/specs"},
-			Packages: []string{"pypi:appwrite", "npm:node-appwrite"},
-			Plugin:   Plugin{Adapter: adapter.Appwrite{}, Diff: appwriteDiff, Keep: appwriteKeep},
-		}},
-	})
-	// No Hints: Flagsmith's release notes are product news, not keyed by
-	// operation. requestSide, same reason as GitLab's: a named request-body
-	// schema shared by several operations (FeatureValue, SegmentOverride)
-	// reads as its own removal, side "response" by the differ's default,
-	// whether or not any operation that used it is actually gone.
-	plugin.RegisterProvider(plugin.Provider{
-		ID: "flagsmith", Name: "Flagsmith", Category: plugin.CategoryDevTools, Homepage: "https://www.flagsmith.com",
-		Sources: []plugin.Source{{
-			ID: "api", Layer: plugin.LayerAPI, Page: "providers/flagsmith.md",
-			Watches: "REST API changes between releases of Flagsmith's own OpenAPI spec (removed endpoints and request parameters)",
-			URLs:    []string{"https://github.com/Flagsmith/flagsmith/blob/main/openapi.yaml"},
-			Plugin:  Plugin{Adapter: adapter.Flagsmith{}, Keep: requestSide},
-		}},
-	})
-	// No Hints: OpenAI's changelog is product news, not keyed by operation.
-	// Only operation deprecations and removals: see openai.go.
-	plugin.RegisterProvider(plugin.Provider{
-		ID: "openai", Name: "OpenAI", Category: plugin.CategoryAI, Homepage: "https://openai.com",
-		Sources: []plugin.Source{{
-			ID: "api", Layer: plugin.LayerAPI, Page: "providers/openai-api.md",
-			Watches:  "REST API operations deprecated, and deprecated operations removed, day by day in the spec OpenAI's SDKs are generated from",
-			URLs:     []string{"https://github.com/openai/openai-openapi/blob/main/openapi.yaml"},
-			Packages: []string{"pypi:openai", "npm:openai"},
-			Plugin:   Plugin{Adapter: adapter.OpenAI{}, Diff: openaiDiff, Keep: openaiKeep},
-		}},
-	})
-	// No Hints: Cloudflare's changelog is product news, not keyed by
-	// operation. Only operation deprecations and removals: see cloudflare.go.
-	// (cloudflare/api is the deprecations feed, registered by plugins/notices.)
-	plugin.RegisterProvider(plugin.Provider{
-		ID: "cloudflare", Name: "Cloudflare", Category: plugin.CategoryInfrastructure, Homepage: "https://www.cloudflare.com",
-		Sources: []plugin.Source{{
-			ID: "api-spec", Layer: plugin.LayerAPI, Page: "providers/cloudflare-api-spec.md",
-			Watches:  "API operations deprecated, and deprecated operations removed, day by day in the spec Cloudflare's SDKs and Terraform provider are generated from",
-			URLs:     []string{"https://github.com/cloudflare/api-schemas/blob/main/openapi.json"},
-			Packages: []string{"pypi:cloudflare", "npm:cloudflare"},
-			Plugin:   Plugin{Adapter: adapter.Cloudflare{}, Diff: cloudflareDiff, Keep: cloudflareKeep},
-		}},
-	})
-	// No Hints: the Atlas changelog is its own source (mongodb/atlas-admin-api,
-	// kind changelog). Only operation deprecations and removals: see
-	// mongodb.go.
-	plugin.RegisterProvider(plugin.Provider{
-		ID: "mongodb", Name: "MongoDB", Category: plugin.CategoryDatabases, Homepage: "https://www.mongodb.com",
-		Sources: []plugin.Source{{
-			ID: "atlas-admin-spec", Layer: plugin.LayerAPI, Page: "providers/mongodb-atlas-admin-spec.md",
-			Watches: "Atlas Administration API v2 operations deprecated, and deprecated operations removed, day by day in MongoDB's published spec",
-			URLs:    []string{"https://github.com/mongodb/openapi/blob/main/openapi/v2.json"},
-			Plugin:  Plugin{Adapter: adapter.MongoDBAtlas{}, Diff: atlasDiff, Keep: atlasKeep},
-		}},
-	})
-}
-
-// requestSide keeps the changes to what callers send. GitLab's response
+// RequestSide keeps the changes to what callers send. GitLab's response
 // schemas are generated from entity docs it is still backfilling: between
 // v18.11.0-ee and v19.0.0-ee, 280 response properties went from the generator's
 // default "string" to their real type and 74 schemas were folded into others,
 // while the API returned the same JSON. That reads as ~360 breaking changes
 // nobody would hit, so response-side changes are dropped, not guessed at.
-func requestSide(c diff.Change) bool { return c.Side == event.SideRequest }
+func RequestSide(c diff.Change) bool { return c.Side == event.SideRequest }
 
 // Plugin runs one API's spec adapter.
 type Plugin struct {
@@ -373,4 +166,22 @@ func (p Plugin) attachHints(ctx context.Context, version string, events []event.
 	}
 	n := ix.Attach(events)
 	log.Printf("%s %s: migration hints on %d of %d events, from %d changelog entries", api, version, n, len(events), len(ix.Entries))
+}
+
+// DeprecationsOnly keeps operation deprecations, and removals of operations
+// the old spec had marked deprecated (by opts' reading of "marked"):
+// everything else is dropped. For a spec whose removals and property changes
+// were mostly not changes to the API (vercel, supabase).
+func DeprecationsOnly(opts diff.Options) func(diff.Change) bool {
+	return func(c diff.Change) bool {
+		switch c.Kind {
+		case diff.OperationDeprecated:
+			return true
+		case diff.OperationRemoved:
+			op, _ := c.Node.(map[string]any)
+			return opts.OperationDeprecated(op)
+		default:
+			return false
+		}
+	}
 }

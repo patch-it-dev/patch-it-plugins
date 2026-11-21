@@ -52,19 +52,6 @@ type Page struct {
 	Operation func(version string) string
 }
 
-// Salesforce is the REST API's end-of-life policy page (checked 2026-11-20):
-// a table of version ranges, each "Supported.", already retired ("As of
-// Summer '25, these versions are retired and unavailable."), or scheduled
-// ("Deprecated and unsupported from Summer '27. Retired from Summer '28.").
-// Salesforce gives no exact date, only the named release ("Summer '27"); the
-// policy text above the table says the notice is at least a year ahead of
-// retirement.
-var Salesforce = Page{
-	API: "salesforce/rest-api", Vendor: "Salesforce",
-	URL:       "https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html",
-	Operation: func(v string) string { return "GET /services/data/v" + v + "/" },
-}
-
 // Row is one version range and what its status cell says, cleaned of HTML.
 type Row struct {
 	From, To int    // inclusive, both ends; From == To for a single version

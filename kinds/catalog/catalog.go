@@ -16,30 +16,7 @@ import (
 	"fmt"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
-	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 )
-
-func init() {
-	plugin.RegisterProvider(plugin.Provider{
-		ID: "redis", Name: "Redis", Category: plugin.CategoryDatabases, Homepage: "https://redis.io",
-		Sources: []plugin.Source{{
-			ID: "commands", Layer: plugin.LayerRuntime, Page: "providers/redis.md",
-			Watches: "Commands removed entirely between two Redis releases, from the command definitions in the server's own source (src/commands/) at each release tag",
-			URLs:    []string{"https://github.com/redis/redis/tree/unstable/src/commands", "https://github.com/redis/redis/releases"},
-			Plugin:  Redis,
-		}},
-	})
-	plugin.RegisterProvider(plugin.Provider{
-		ID: "github", Name: "GitHub", Category: plugin.CategoryDevTools, Homepage: "https://github.com",
-		Sources: []plugin.Source{{
-			ID: "graphql", Layer: plugin.LayerAPI, Page: "providers/github-graphql.md",
-			Watches:  "GraphQL API fields, arguments, input fields and enum values GitHub announces it will remove, with the date, from the file its breaking-changes page is built from",
-			URLs:     []string{"https://docs.github.com/en/graphql/overview/breaking-changes", "https://github.com/github/docs/blob/main/src/graphql/data/fpt/upcoming-changes.json"},
-			Packages: []string{"npm:@octokit/graphql"},
-			Plugin:   GitHubGraphQL,
-		}},
-	})
-}
 
 // finish fingerprints and validates the events a reader made, keeping the
 // valid ones and the reasons the others failed. details, when given, are

@@ -38,18 +38,6 @@ type Log struct {
 	Path   string // the file's path in the repo
 }
 
-// MongoDBAtlas is the Atlas Administration API's changelog,
-// changelog/changelog.json in mongodb/openapi (checked 2026-11-19: 188 days
-// from 2023-02-01 to 2026-11-18, released by MongoDB's CI, "Release API
-// Changelog", a few times a month; the docs page
-// https://www.mongodb.com/docs/atlas/reference/api-resources-spec/changelog/
-// is built from it). Atlas versions each resource by date (`2023-01-01`),
-// chosen per request in the Accept header.
-var MongoDBAtlas = Log{
-	API: "mongodb/atlas-admin-api", Vendor: "MongoDB", Name: "Atlas Administration API",
-	Repo: "mongodb/openapi", Path: "changelog/changelog.json",
-}
-
 // URL is the file at one commit: its own provenance.
 func (l Log) URL(sha string) string {
 	return fmt.Sprintf("https://raw.githubusercontent.com/%s/%s/%s", l.Repo, sha, l.Path)

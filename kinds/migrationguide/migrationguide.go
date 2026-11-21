@@ -20,52 +20,7 @@ import (
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
 	"github.com/patch-it-dev/patch-it-plugins/core/fetch"
 	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
-	"github.com/patch-it-dev/patch-it-plugins/kinds/migrationguide/members"
-	"github.com/patch-it-dev/patch-it-plugins/kinds/migrationguide/sdkguide"
 )
-
-func init() {
-	plugin.RegisterProvider(plugin.Provider{
-		ID: "anthropic", Name: "Anthropic", Category: plugin.CategoryAI, Homepage: "https://www.anthropic.com",
-		Sources: []plugin.Source{{
-			ID: "python-sdk", Layer: plugin.LayerSDK, Page: "providers/anthropic.md",
-			Watches:  "Request parameters each new major of the Python SDK removes from `messages.create()` and friends, from MIGRATION.md at the major's tag",
-			URLs:     []string{"https://github.com/anthropics/anthropic-sdk-python/blob/main/MIGRATION.md", "https://pypi.org/project/anthropic/"},
-			Packages: []string{"pypi:anthropic"},
-			Plugin:   Plugin{Guide: sdkguide.Anthropic},
-		}},
-	})
-	plugin.RegisterProvider(plugin.Provider{
-		ID: "numpy", Name: "NumPy", Category: plugin.CategoryPackages, Homepage: "https://numpy.org",
-		Sources: []plugin.Source{{
-			ID: "numpy", Layer: plugin.LayerPackage, Page: "providers/numpy.md",
-			Watches:  "Members a new major removes or renames in the main namespace, from that major's migration guide at its first tag",
-			URLs:     []string{"https://numpy.org/devdocs/numpy_2_0_migration_guide.html", "https://pypi.org/project/numpy/"},
-			Packages: []string{"pypi:numpy"},
-			Plugin:   Plugin{Guide: members.NumPy},
-		}},
-	})
-	plugin.RegisterProvider(plugin.Provider{
-		ID: "posthog", Name: "PostHog", Category: plugin.CategoryAnalytics, Homepage: "https://posthog.com",
-		Sources: []plugin.Source{{
-			ID: "python-sdk", Layer: plugin.LayerSDK, Page: "providers/posthog.md",
-			Watches:  "Members a new major of the posthog Python SDK removes, from its migration guide in docs/ at the major's first tag",
-			URLs:     []string{"https://github.com/PostHog/posthog-python/tree/main/docs", "https://pypi.org/project/posthog/"},
-			Packages: []string{"pypi:posthog"},
-			Plugin:   Plugin{Guide: members.PostHog},
-		}},
-	})
-	plugin.RegisterProvider(plugin.Provider{
-		ID: "newrelic", Name: "New Relic", Category: plugin.CategoryMonitoring, Homepage: "https://newrelic.com",
-		Sources: []plugin.Source{{
-			ID: "python-agent", Layer: plugin.LayerSDK, Page: "providers/newrelic.md",
-			Watches:  "Members a new major of the New Relic Python agent removes, from the major's release notes (Removed features)",
-			URLs:     []string{"https://docs.newrelic.com/docs/release-notes/agent-release-notes/python-release-notes/", "https://pypi.org/project/newrelic/"},
-			Packages: []string{"pypi:newrelic"},
-			Plugin:   Plugin{Guide: members.NewRelic},
-		}},
-	})
-}
 
 // Guide is one source's migration guide: which releases there are, where the
 // guide is at each, and how its table reads. sdkguide.Guide and

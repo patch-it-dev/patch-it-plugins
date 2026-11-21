@@ -121,8 +121,8 @@ const (
 	FormatMarkdown Format = "markdown"
 )
 
-// tagOf is the git tag of a release of the package.
-func (g Guide) tagOf(release string) string {
+// TagOf is the git tag of a release of the package.
+func (g Guide) TagOf(release string) string {
 	if g.TagPrefix != "" {
 		return g.TagPrefix + release
 	}
@@ -143,26 +143,13 @@ func (g Guide) header() string {
 	return "removed member"
 }
 
-// NumPy is NumPy's migration guide to a major, "Main namespace" table
-// (doc/source/numpy_2_0_migration_guide.rst at v2.0.0, checked 2026-11-04;
-// no other major has one yet, checked 2026-11-20).
-var NumPy = Guide{
-	API:     "numpy/numpy",
-	Package: "numpy",
-	Module:  "np",
-	Repo:    "numpy/numpy",
-	Path:    "doc/source/numpy_{major}_0_migration_guide.rst",
-	Section: "Main namespace",
-	Effect:  "code using it raises AttributeError",
-}
-
 // PathAt is the guide's path for a major.
 func (g Guide) PathAt(major int) string {
 	return strings.NewReplacer("{major}", strconv.Itoa(major), "{prev}", strconv.Itoa(major-1)).Replace(g.Path)
 }
 
-// commitsURL lists the newest commit that changed a major's guide.
-func (g Guide) commitsURL(major int) string {
+// CommitsURL lists the newest commit that changed a major's guide.
+func (g Guide) CommitsURL(major int) string {
 	return fmt.Sprintf("%s/repos/%s/commits?path=%s&per_page=1", github.API, g.Repo, url.QueryEscape(g.PathAt(major)))
 }
 
@@ -273,7 +260,7 @@ func (g Guide) Releases(ctx context.Context, env plugin.Env) ([]plugin.Version, 
 		return nil, err
 	}
 	for i := range vs {
-		vs[i].Ref = g.tagOf(vs[i].ID)
+		vs[i].Ref = g.TagOf(vs[i].ID)
 	}
 	return vs, nil
 }
@@ -288,9 +275,9 @@ func (g Guide) GuideURL(ctx context.Context, env plugin.Env, v plugin.Version) (
 	}
 	major := versions.Major(v.ID)
 	if !g.Untagged {
-		return g.RawURL(g.tagOf(v.ID), major), nil
+		return g.RawURL(g.TagOf(v.ID), major), nil
 	}
-	sha, err := github.LatestCommit(ctx, env.Get, g.commitsURL(major))
+	sha, err := github.LatestCommit(ctx, env.Get, g.CommitsURL(major))
 	if err != nil {
 		return "", fmt.Errorf("the commit %s's guide for %s is read at: %w", g.Package, v.ID, err)
 	}

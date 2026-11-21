@@ -38,38 +38,6 @@ import (
 	"github.com/patch-it-dev/patch-it-plugins/core/versions"
 )
 
-func init() {
-	plugin.RegisterProvider(plugin.Provider{
-		ID: "textual", Name: "Textual", Category: plugin.CategoryPackages, Homepage: "https://textual.textualize.io",
-		Sources: []plugin.Source{{
-			ID: "textual", Layer: plugin.LayerPackage, Page: "providers/textual.md",
-			Watches:  "Names removed, renamed or deprecated in each release, from the release's section of CHANGELOG.md at its tag",
-			URLs:     []string{"https://github.com/Textualize/textual/blob/main/CHANGELOG.md", "https://pypi.org/project/textual/"},
-			Packages: []string{"pypi:textual"},
-			Plugin:   Plugin{File: Textual},
-		}},
-	})
-	plugin.RegisterProvider(plugin.Provider{
-		ID: "urllib3", Name: "urllib3", Category: plugin.CategoryPackages, Homepage: "https://urllib3.readthedocs.io",
-		Sources: []plugin.Source{{
-			ID: "urllib3", Layer: plugin.LayerPackage, Page: "providers/urllib3.md",
-			Watches:  "Names removed or deprecated in each release, from the release's section of CHANGES.rst at its tag",
-			URLs:     []string{"https://github.com/urllib3/urllib3/blob/main/CHANGES.rst", "https://pypi.org/project/urllib3/"},
-			Packages: []string{"pypi:urllib3"},
-			Plugin:   Plugin{File: Urllib3},
-		}},
-	})
-	plugin.RegisterProvider(plugin.Provider{
-		ID: "mongodb", Name: "MongoDB", Category: plugin.CategoryDatabases, Homepage: "https://www.mongodb.com",
-		Sources: []plugin.Source{{
-			ID: "atlas-admin-api", Layer: plugin.LayerAPI, Page: "providers/mongodb-atlas.md",
-			Watches: "Atlas Administration API versions deprecated and removed at their sunset date, per endpoint, from MongoDB's own API changelog",
-			URLs:    []string{"https://github.com/mongodb/openapi/blob/main/changelog/changelog.json"},
-			Plugin:  Plugin{Log: MongoDBAtlas},
-		}},
-	})
-}
-
 // File is one package's changelog. Unpinned (Tag and Release empty), it is
 // read release by release: every version on the package registry (PyPI, npm)
 // or, for an ecosystem patch-it doesn't list (Go, Maven, NuGet, RubyGems,
@@ -95,22 +63,6 @@ type File struct {
 func (f File) At(release string) File {
 	f.Release, f.Tag = release, f.TagPrefix+release
 	return f
-}
-
-// Textual is Textual's Keep a Changelog CHANGELOG.md (checked 2026-11-14 at
-// v0.86.0: "## [0.86.0] - 2024-11-16", "### Removed", and "Breaking change:"
-// bullets under "### Changed"), tagged v<version>.
-var Textual = File{
-	API: "textual/textual", Package: "textual", Ecosystem: "pypi", Module: "textual",
-	Repo: "Textualize/textual", TagPrefix: "v", Path: "CHANGELOG.md",
-}
-
-// Urllib3 is urllib3's CHANGES.rst (checked 2026-11-14 at 2.0.0: "2.0.0
-// (2023-04-26)" over "=====", "Removed" and "Deprecated" over "-----"),
-// tagged <version>.
-var Urllib3 = File{
-	API: "urllib3/urllib3", Package: "urllib3", Ecosystem: "pypi", Module: "urllib3",
-	Repo: "urllib3/urllib3", Path: "CHANGES.rst",
 }
 
 // URL is what ReadAt fetches: the changelog as it was at the (pinned) tag,

@@ -18,12 +18,20 @@ import (
 // commits); only a test pins one, through its saved fixtures.
 var release = regexp.MustCompile(`(^|[^0-9A-Za-z.])v?\d+\.\d+\.\d+([^0-9]|$)|(^|[^0-9a-f])[0-9a-f]{40}([^0-9a-f]|$)`)
 
-// No plugin's code names a specific release or commit: every version comes
-// from where the source publishes them. Comments may name the release a
-// reader was checked at; a string the code uses may not.
+// No kind's or provider's code names a specific release or commit: every
+// version comes from where the source publishes them. Comments may name the
+// release a reader was checked at; a string the code uses may not.
 func TestNoPinnedReleaseInPluginCode(t *testing.T) {
 	fset := token.NewFileSet()
-	err := filepath.WalkDir("..", func(path string, d fs.DirEntry, err error) error {
+	for _, root := range []string{"../../kinds", ".."} {
+		walkGo(t, fset, root)
+	}
+}
+
+// walkGo checks every non-test Go file under root.
+func walkGo(t *testing.T, fset *token.FileSet, root string) {
+	t.Helper()
+	err := filepath.WalkDir(root, func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
 		}

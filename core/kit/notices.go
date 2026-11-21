@@ -1,7 +1,7 @@
 package kit
 
 // Notices is what a reader of a live page of dated notices (a deprecations
-// table, an end-of-life table, a feed: plugins/notices) found on one read
+// table, an end-of-life table, a feed: kinds/notices) found on one read
 // of it. The kind compares what the live page and its snapshot give with
 // reflect.DeepEqual (Cite), so a Notices holds plain values, never a func.
 type Notices interface {

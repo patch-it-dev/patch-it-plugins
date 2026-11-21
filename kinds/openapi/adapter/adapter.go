@@ -1,7 +1,10 @@
-// Package adapter defines the per-API source adapter interface and holds
-// each API's adapter, starting with Stripe. An adapter only knows where its
-// API's spec lives and how to fetch it — fetching mechanics live in
-// fetch/, and diffing/normalizing/storing are shared, not adapter code.
+// Package adapter defines the interface a provider's OpenAPI source
+// implements (its adapter, in providers/<provider>/; Stripe's is the
+// reference) and the helpers adapters share: listing a repo's releases or a
+// spec's commits, converting YAML, and moving a server's base path into the
+// paths. An adapter only knows where its API's spec lives and how to fetch
+// it: fetching mechanics live in core/fetch, and diffing, normalizing and
+// storing are the openapi kind's, not adapter code.
 package adapter
 
 import (

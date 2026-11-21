@@ -3,8 +3,6 @@ package openapi
 import (
 	"context"
 	"fmt"
-	"net/http"
-	"net/http/httptest"
 	"strings"
 	"testing"
 
@@ -79,42 +77,6 @@ func TestListVersionsFallsBackToTheNewest(t *testing.T) {
 	vs, err := newPlugin(fakeAdapter{latest: "v2", specs: specs}, noChangelog).ListVersions(context.Background(), plugin.Env{})
 	if err != nil || len(vs) != 1 || vs[0].Ref != "v2" {
 		t.Errorf("got %v, %v", vs, err)
-	}
-}
-
-// The real adapters list GitHub releases (Stripe: the API versions their
-// notes name) or the commits that changed their spec, through core/versions.
-func TestAdaptersListReleasesAndCommits(t *testing.T) {
-	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		switch {
-		case r.URL.Path == "/repos/stripe/openapi/releases":
-			fmt.Fprint(w, `[{"tag_name":"v2","published_at":"2026-02-01T00:00:00Z","body":"| openapi/spec3.sdk.{json,yaml} | 2026-02-01.b |"},`+
-				`{"tag_name":"v1","published_at":"2026-01-01T00:00:00Z","body":"| openapi/spec3.sdk.{json,yaml} | 2026-01-01.a |"}]`)
-		case r.URL.Path == "/repos/supabase/supabase/commits" && r.URL.Query().Get("path") == "apps/docs/spec/api_v1_openapi.json":
-			fmt.Fprint(w, `[{"sha":"b","commit":{"committer":{"date":"2026-02-01T00:00:00Z"}}},{"sha":"a","commit":{"committer":{"date":"2026-01-01T00:00:00Z"}}}]`)
-		default:
-			http.NotFound(w, r)
-		}
-	}))
-	defer srv.Close()
-	old := versions.GitHubAPI
-	versions.GitHubAPI = srv.URL
-	defer func() { versions.GitHubAPI = old }()
-	for _, c := range []struct {
-		a    adapter.Adapter
-		want string
-	}{{adapter.Stripe{}, "v1 v2"}, {adapter.Supabase{}, "a b"}} {
-		vs, err := Plugin{Adapter: c.a}.ListVersions(context.Background(), plugin.Env{})
-		if err != nil {
-			t.Fatalf("%s: %v", c.a.API(), err)
-		}
-		var refs []string
-		for _, v := range vs {
-			refs = append(refs, v.Ref)
-		}
-		if strings.Join(refs, " ") != c.want {
-			t.Errorf("%s: refs %v, want %s", c.a.API(), refs, c.want)
-		}
 	}
 }
 

@@ -14,14 +14,15 @@ import (
 // A provider is whose API, SDK or package it is (Stripe, OpenAI, Kubernetes),
 // in one category. It has one or more sources: each one place patch-it reads
 // (a spec repo, a deprecations page, a changelog), read by one kind (the
-// plugins/<kind> package whose plugin runs it), at one layer of a customer's
-// stack. A source's id is "<provider>/<source>": "stripe/api",
+// kinds/<kind> package whose plugin runs it: how to read), at one layer of a
+// customer's stack. A source's id is "<provider>/<source>": "stripe/api",
 // "algolia/search-api", "openai/models".
 //
-// Every source is registered with its metadata, in code, by the kind's
-// package (RegisterProvider). That registration is the only list of what
-// patch-it watches: `go run ./cmd/list-plugins` prints it, the Release
-// workflow attaches it to each release as plugins.json, and patch-it's hosted
+// Every provider is registered once, with its metadata and every source, in
+// code, by its own package (providers/<provider>/provider.go, what to read:
+// RegisterProvider). That registration is the only list of what patch-it
+// watches: `go run ./cmd/list-plugins` prints it, the Release workflow
+// attaches it to each release as plugins.json, and patch-it's hosted
 // ingestion service serves it. There is no list to keep by hand.
 
 // Category is what a provider is, for grouping: one per provider.
@@ -77,10 +78,9 @@ func Layers() []Layer {
 	return []Layer{LayerAPI, LayerSDK, LayerPackage, LayerRuntime, LayerCI, LayerAIModels, LayerInfra}
 }
 
-// Provider is one provider and the sources a kind's package registers for it.
-// A provider with sources in several kinds (Anthropic: a deprecations page and
-// an SDK migration guide) is registered by each, with the same ID, Name,
-// Category and Homepage; the registry merges them.
+// Provider is one provider and every source of it, whatever their kinds
+// (Anthropic: a deprecations page, an SDK migration guide, two packages'
+// public API), registered once by providers/<provider>/.
 type Provider struct {
 	ID       string   // lowercase slug: "algolia"
 	Name     string   // as the provider writes it: "Algolia"
@@ -94,7 +94,7 @@ type Source struct {
 	// ID is the source's part of its id, unique within the provider:
 	// "search-api" in "algolia/search-api".
 	ID string
-	// Kind is the kind that reads it: the plugins/<kind> package Plugin is
+	// Kind is the kind that reads it: the kinds/<kind> package Plugin is
 	// defined in. RegisterProvider fills it in; a value set by hand must
 	// match.
 	Kind string
@@ -105,8 +105,10 @@ type Source struct {
 	// URLs are the provider's own pages or files it reads, absolute; the
 	// first is the one a person should look at.
 	URLs []string
-	// Page is the source's page in this repo: "providers/algolia.md" (why
-	// this source, what it reads and ignores, its known gaps).
+	// Page is the provider's page in this repo, where every source of it is
+	// described (why this source, what it reads and ignores, its known
+	// gaps): "providers/algolia/README.md". RegisterProvider fills it in; a
+	// value set by hand must match.
 	Page string
 	// Packages are the published packages whose changes this source
 	// covers, as "<ecosystem>:<name>" ("pypi:stripe", "npm:@vercel/sdk"):
@@ -136,30 +138,28 @@ var (
 )
 
 // RegisterProvider registers p's sources, each under its id, with its Plugin
-// (Lookup). Incomplete metadata is a programming error, as a duplicate is.
+// (Lookup). A provider is registered once, with every source. Incomplete
+// metadata is a programming error, as a second registration is.
 func RegisterProvider(p Provider) {
 	if err := p.check(); err != nil {
 		panic("plugin: " + err.Error())
 	}
 	for i := range p.Sources {
 		p.Sources[i].Kind = KindOf(p.Sources[i].Plugin)
+		p.Sources[i].Page = PageOf(p.ID)
 	}
 	mu.Lock()
 	defer mu.Unlock()
-	if have, ok := providers[p.ID]; ok {
-		if have.Name != p.Name || have.Category != p.Category || have.Homepage != p.Homepage {
-			panic(fmt.Sprintf("plugin: provider %q registered twice with different metadata", p.ID))
-		}
+	if _, ok := providers[p.ID]; ok {
+		panic(fmt.Sprintf("plugin: provider %q is already registered: a provider registers every source at once, in providers/%s/provider.go", p.ID, p.ID))
 	}
 	for _, s := range p.Sources {
 		if _, dup := sources[p.ID+"/"+s.ID]; dup {
 			panic(fmt.Sprintf("plugin: source %q is already registered", p.ID+"/"+s.ID))
 		}
 	}
-	have := providers[p.ID]
-	merged := Provider{ID: p.ID, Name: p.Name, Category: p.Category, Homepage: p.Homepage, Sources: append(have.Sources, p.Sources...)}
-	providers[p.ID] = merged
-	bare := merged
+	providers[p.ID] = p
+	bare := p
 	bare.Sources = nil
 	for _, s := range p.Sources {
 		id := p.ID + "/" + s.ID
@@ -167,6 +167,9 @@ func RegisterProvider(p Provider) {
 		registry[id] = s.Plugin
 	}
 }
+
+// PageOf is a provider's page in this repo: "providers/<id>/README.md".
+func PageOf(provider string) string { return "providers/" + provider + "/README.md" }
 
 // check is the metadata every provider and source must have.
 func (p Provider) check() error {
@@ -202,10 +205,10 @@ func (p Provider) check() error {
 			return fmt.Errorf("source %q: Watches is empty", id)
 		case len(s.URLs) == 0:
 			return fmt.Errorf("source %q has no URLs", id)
-		case !strings.HasPrefix(s.Page, "providers/") || !strings.HasSuffix(s.Page, ".md"):
-			return fmt.Errorf("source %q: Page %q isn't providers/<name>.md", id, s.Page)
+		case s.Page != "" && s.Page != PageOf(p.ID):
+			return fmt.Errorf("source %q: Page %q, but a provider's page is %s", id, s.Page, PageOf(p.ID))
 		case s.Kind != "" && s.Kind != KindOf(s.Plugin):
-			return fmt.Errorf("source %q: Kind %q, but its plugin is in plugins/%s", id, s.Kind, KindOf(s.Plugin))
+			return fmt.Errorf("source %q: Kind %q, but its plugin is in kinds/%s", id, s.Kind, KindOf(s.Plugin))
 		}
 		for _, u := range s.URLs {
 			if !absolute(u) {
@@ -243,7 +246,7 @@ func absolute(u string) bool {
 }
 
 // KindOf is the kind a plugin is: the name of the package its type is
-// defined in (plugins/openapi -> "openapi").
+// defined in (kinds/openapi -> "openapi").
 func KindOf(p Plugin) string {
 	t := reflect.TypeOf(p)
 	for t.Kind() == reflect.Pointer {

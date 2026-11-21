@@ -3,82 +3,12 @@ package apisurface
 import (
 	"archive/zip"
 	"bytes"
-	"context"
 	"strings"
 	"testing"
 
-	"github.com/patch-it-dev/patch-it-plugins/core/event"
-	"github.com/patch-it-dev/patch-it-plugins/core/kit/kittest"
 	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
-	"github.com/patch-it-dev/patch-it-plugins/core/versions"
 	"github.com/patch-it-dev/patch-it-plugins/kinds/apisurface/pysurface"
 )
-
-const (
-	wheel111 = "https://files.pythonhosted.org/packages/f7/86/ea99e3f966a639a3256e2f79d78cd63d45d5eb651a5457ccbdcfd9eed24a/openai-1.1.1-py3-none-any.whl"
-	wheel112 = "https://files.pythonhosted.org/packages/dd/82/b92f73453ea318c0d46f31aeb56e9d94a42606c010fb72a513f4a3cd4bac/openai-1.1.2-py3-none-any.whl"
-)
-
-// The saved releases (testdata/README.md): PyPI's answers and the two
-// wheels, trimmed to the openai.types.beta package.
-var saved = kittest.Pages{
-	"https://pypi.org/pypi/openai/json":       "testdata/pypi-openai-excerpt.json",
-	"https://pypi.org/pypi/openai/1.1.1/json": "testdata/pypi-openai-1.1.1.json",
-	"https://pypi.org/pypi/openai/1.1.2/json": "testdata/pypi-openai-1.1.2.json",
-	wheel111: "testdata/openai-1.1.1-py3-none-any.trimmed.whl",
-	wheel112: "testdata/openai-1.1.2-py3-none-any.trimmed.whl",
-}
-
-// pair lists the releases, reads 1.1.1 and 1.1.2 and extracts the pair, as
-// patch-it's hosted ingestion service does, into the test kit's store.
-func pair(t *testing.T) []event.Event {
-	t.Helper()
-	ctx, env := context.Background(), kittest.Env(t, saved)
-	p := Plugin{Package: OpenAIPython}
-	vs, err := p.ListVersions(ctx, env)
-	if err != nil {
-		t.Fatal(err)
-	}
-	var ids []string
-	for _, v := range vs {
-		ids = append(ids, v.ID)
-	}
-	if got := strings.Join(ids, " "); got != "1.1.0 1.1.1 1.1.2" {
-		t.Fatalf("versions %s", got)
-	}
-	last := versions.Pairs(vs)[1]
-	return kittest.Versions(t, env, p, last[0], last[1])
-}
-
-// openai 1.1.2 renamed the misspelled AsssitantDeleted to AssistantDeleted,
-// module and all: the old name is gone from both places code could import
-// it. (Not read as a rename: the class has no parameters to tell it's the
-// same class.)
-func TestGolden(t *testing.T) {
-	got := pair(t)
-	kittest.Golden(t, "testdata/golden/openai-python-surface.json", got)
-	for _, e := range got {
-		if e.PreviousVersion != "1.1.1" || e.Version != "1.1.2" || e.SourceURL != wheel112 || !strings.Contains(e.SourceExcerpt, "openai/types/beta/asssitant_deleted.py line ") {
-			t.Errorf("%v: %s<-%s, excerpt %q", e.Subject.Symbols, e.Version, e.PreviousVersion, e.SourceExcerpt)
-		}
-	}
-}
-
-// The pinned drop test: 1.1.2 adds AssistantDeleted and its module. A name
-// that appears is no breaking change: no event names it.
-func TestAnAddedNameIsNoEvent(t *testing.T) {
-	for _, e := range pair(t) {
-		for _, s := range e.Subject.Symbols {
-			if strings.Contains(s, "AssistantDeleted") || strings.Contains(s, "assistant_deleted") {
-				t.Errorf("event for %s, which 1.1.2 added", s)
-			}
-		}
-	}
-}
-
-func TestRegistersItself(t *testing.T) {
-	kittest.Registered(t, Plugin{Package: OpenAIPython})
-}
 
 func sym(kind string, params ...pysurface.Param) pysurface.Symbol {
 	if params == nil {

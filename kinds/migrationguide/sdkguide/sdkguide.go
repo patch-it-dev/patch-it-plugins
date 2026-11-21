@@ -37,16 +37,6 @@ type Guide struct {
 	Symbols []string
 }
 
-// Anthropic is anthropic-sdk-python's MIGRATION.md, unpinned: read at the
-// first release of each major (Major 0; At pins it).
-var Anthropic = Guide{
-	API:     "anthropic/python-sdk",
-	Package: "anthropic",
-	Repo:    "anthropics/anthropic-sdk-python",
-	Methods: "`messages.create()`",
-	Symbols: []string{"messages.create", "messages.stream", "messages.parse"},
-}
-
 // At is g pinned to one major.
 func (g Guide) At(major int) Guide {
 	g.Major = major
