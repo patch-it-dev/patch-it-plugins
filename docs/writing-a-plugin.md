@@ -138,7 +138,7 @@ A source that has versions (a spec's releases, a package's releases, a guide per
 
 - **List** with [`core/versions`](../core/versions/versions.go): `GitHubReleases`, `GitHubTags`, `GitHubCommits` (the commits that changed a file), `PyPIReleases`, `NPMReleases`, `GitHubPages` (any other GitHub list, page by page). An OpenAPI adapter lists its own versions (`adapter.Lister`): every adapter does. Never pin a tag in code: a version you need for a golden test is a pinned *case* in the test (`changelog.Urllib3.At("2.0.0")`), not the registered source.
 - **Read at** a version's `Ref` (a tag, a commit SHA) and return the exact URL read as the snapshot's `SourceURL`: it's the events' citation.
-- **Extract** sets `previous_version` to `from`'s version: every `api_operation` and `package_release` event must name it (the contract's rule 13). `from` is zero only for the first version read, which has nothing to compare.
+- **Extract** sets `previous_version` to `from`'s version: every `api_operation` and `package_release` event must name it (the contract's rule 13). `from` is zero only for the first version read, which has nothing to compare: patch-it's hosted ingestion service reads that version as its first snapshot and extracts nothing from it, so a version pair always starts at a real `from` (an `api_operation` or `package_release` event extracted from zero would be rejected).
 
 ### A page with no versions: `plugin.Living`
 

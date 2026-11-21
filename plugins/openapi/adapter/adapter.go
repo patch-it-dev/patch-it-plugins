@@ -11,8 +11,9 @@ import (
 )
 
 // Spec is one fetched spec: its raw bytes, the API version it declares, and
-// the pinned URL it came from. It is not yet parsed or stored — that is
-// diff.Parse's and the baseline's (plugin.Spec) job, respectively.
+// the pinned URL it came from. It is not yet parsed: that is diff.Parse's
+// job, and keeping it is the runner's (the openapi plugin's ReadAt returns it
+// as a plugin.Snapshot).
 type Spec struct {
 	Content   []byte
 	Version   string
