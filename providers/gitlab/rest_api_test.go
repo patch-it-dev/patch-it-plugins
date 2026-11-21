@@ -26,8 +26,9 @@ func gitlabPlugin(t *testing.T) (openapi.Plugin, string) {
 
 // The golden test (testdata/golden/gitlab-rest-api.json) and the pair
 // fixture in one: testdata/gitlab-v18.11.0-ee.yaml and gitlab-v19.0.0-ee.yaml
-// are trimmed, unedited excerpts of GitLab's OpenAPI spec at those two tags (checked 2026-11-15). GitLab 19.0 removed app
-// passwords from the Bitbucket Cloud import API ("Using app passwords with
+// are trimmed, unedited excerpts of GitLab's OpenAPI spec at those two tags
+// (checked 2026-11-15). GitLab 19.0 removed app passwords from the Bitbucket
+// Cloud import API ("Using app passwords with
 // Bitbucket Cloud import GitLab API", announced 18.9, on
 // docs.gitlab.com/update/deprecations): bitbucket_username and
 // bitbucket_app_password are gone from POST /api/v4/import/bitbucket, and
@@ -112,13 +113,13 @@ func TestGitLabPairRecreatesTheBitbucketAppPasswordRemoval(t *testing.T) {
 
 	// The golden file names the spec where GitLab publishes it, not the local
 	// server that stood in for it.
-	real := map[string]string{
+	published := map[string]string{
 		oldURL: fmt.Sprintf(gitlabSpecURLTemplate, "v18.11.0-ee"),
 		newURL: fmt.Sprintf(gitlabSpecURLTemplate, "v19.0.0-ee"),
 	}
 	golden := append([]event.Event(nil), events...)
 	for i := range golden {
-		golden[i].SourceURL = real[golden[i].SourceURL]
+		golden[i].SourceURL = published[golden[i].SourceURL]
 	}
 	kittest.Golden(t, "testdata/golden/gitlab-rest-api.json", golden)
 

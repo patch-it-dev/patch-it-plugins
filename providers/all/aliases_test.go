@@ -69,8 +69,7 @@ type forwarder struct {
 func forwarders(f *ast.File) []forwarder {
 	imported := map[string]bool{}
 	for _, imp := range f.Imports {
-		path := strings.Trim(imp.Path.Value, `"`)
-		name := path[strings.LastIndex(path, "/")+1:]
+		name := importName(strings.Trim(imp.Path.Value, `"`))
 		if imp.Name != nil {
 			name = imp.Name.Name
 		}
@@ -123,6 +122,34 @@ func forwarders(f *ast.File) []forwarder {
 	return out
 }
 
+// importName is the name an unnamed import is used by: the last element,
+// without a major-version suffix (gopkg.in/yaml.v3 is yaml, example.com/x/v2
+// is x).
+func importName(path string) string {
+	elems := strings.Split(path, "/")
+	name := elems[len(elems)-1]
+	if len(elems) > 1 && isMajor(name) {
+		name = elems[len(elems)-2]
+	}
+	if i := strings.Index(name, ".v"); i > 0 && isMajor(name[i+1:]) {
+		name = name[:i]
+	}
+	return name
+}
+
+// isMajor says whether s is a major version element: v2, v3, ...
+func isMajor(s string) bool {
+	if len(s) < 2 || s[0] != 'v' {
+		return false
+	}
+	for _, r := range s[1:] {
+		if r < '0' || r > '9' {
+			return false
+		}
+	}
+	return true
+}
+
 // onlyCall is the call in `return f(...)` or `f(...)`, else nil.
 func onlyCall(s ast.Stmt) *ast.CallExpr {
 	switch s := s.(type) {
@@ -165,6 +192,8 @@ func TestForwardersCatchesEachShape(t *testing.T) {
 import (
 	"strings"
 	x "example.com/extract"
+	"gopkg.in/yaml.v3"
+	"example.com/sdk/v2"
 )
 
 type A = x.Entry
@@ -174,6 +203,9 @@ var C = x.ParseFeed
 const D = strings.Title
 
 func E(s string) string { return strings.ToUpper(s) }
+
+var J = yaml.Marshal
+var K = sdk.Client
 
 // alias-ok: kept on purpose, for the test
 type F = x.Entry
@@ -190,7 +222,7 @@ func I(s string) string { return local(s) }
 	for _, w := range forwarders(f) {
 		got = append(got, w.name)
 	}
-	if want := "A B C D E"; strings.Join(got, " ") != want {
+	if want := "A B C D E J K"; strings.Join(got, " ") != want {
 		t.Errorf("caught %v, want %s", got, want)
 	}
 }
