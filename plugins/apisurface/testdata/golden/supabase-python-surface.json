@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:f4ee227111982d6630ae7be6d6c74f35b5c83dbf1049afa4d0e3b1ca82455c1d",
+    "fingerprint": "sha256:06e68d8c2f3c2d9b76115188b561ca1c1be4956f52cfc05c95c571226caa7373",
     "api": "supabase/python-surface",
     "version": "1.0.0",
     "previous_version": "0.7.1",
@@ -13,7 +13,8 @@
       "package": "supabase",
       "change": "removed_parameter",
       "symbols": [
-        "SupabaseAuthClient"
+        "SupabaseAuthClient",
+        "lib.auth_client.SupabaseAuthClient"
       ],
       "parameter": "api"
     },
@@ -26,7 +27,7 @@
   },
   {
     "id": 2,
-    "fingerprint": "sha256:a826333169c3f39e9ce9e2d7388357bfc54293f736cc37f26f5fcfc995e3417f",
+    "fingerprint": "sha256:b5db5258c88b4532f67454ffc2966598ec1c6afbf738782c6472f4e22d804b83",
     "api": "supabase/python-surface",
     "version": "1.0.0",
     "previous_version": "0.7.1",
@@ -38,7 +39,8 @@
       "package": "supabase",
       "change": "removed_parameter",
       "symbols": [
-        "SupabaseAuthClient"
+        "SupabaseAuthClient",
+        "lib.auth_client.SupabaseAuthClient"
       ],
       "parameter": "cookie_options"
     },
@@ -51,7 +53,7 @@
   },
   {
     "id": 3,
-    "fingerprint": "sha256:9559404087e8d8ff2604e6b04659304e4983fbc3e276156ef528e77770bdb155",
+    "fingerprint": "sha256:90fdf200c73977ab7800fca5b0854ff86f1f49c62e61f814b7609423f5b05459",
     "api": "supabase/python-surface",
     "version": "1.0.0",
     "previous_version": "0.7.1",
@@ -63,7 +65,8 @@
       "package": "supabase",
       "change": "removed_parameter",
       "symbols": [
-        "SupabaseAuthClient"
+        "SupabaseAuthClient",
+        "lib.auth_client.SupabaseAuthClient"
       ],
       "parameter": "local_storage"
     },
@@ -76,7 +79,7 @@
   },
   {
     "id": 4,
-    "fingerprint": "sha256:c212e0f8db0d3848f22ed825157f27c184b6d92fa718fa8012ebbd540c177a87",
+    "fingerprint": "sha256:b4bb8ebb041ac0485fd8e1732fc5ad14ae4fddec09ce71a32fd587b3d2754e7a",
     "api": "supabase/python-surface",
     "version": "1.0.0",
     "previous_version": "0.7.1",
@@ -88,7 +91,8 @@
       "package": "supabase",
       "change": "removed_parameter",
       "symbols": [
-        "SupabaseAuthClient"
+        "SupabaseAuthClient",
+        "lib.auth_client.SupabaseAuthClient"
       ],
       "parameter": "replace_default_headers"
     },
@@ -101,106 +105,6 @@
   },
   {
     "id": 5,
-    "fingerprint": "sha256:f3bea2369c2edfa6e84f0ca919bf2859c0bf4b824cd0cdaacd14b26be16d0970",
-    "api": "supabase/python-surface",
-    "version": "1.0.0",
-    "previous_version": "0.7.1",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "package_release",
-      "ecosystem": "pypi",
-      "package": "supabase",
-      "change": "removed_parameter",
-      "symbols": [
-        "lib.auth_client.SupabaseAuthClient"
-      ],
-      "parameter": "api"
-    },
-    "description": "`lib.auth_client.SupabaseAuthClient` no longer takes the parameter `api` in supabase 1.0.0: passing it raises a TypeError.",
-    "migration_hint": "Stop passing `api` to `lib.auth_client.SupabaseAuthClient`; its signature in 1.0.0 is quoted in the source excerpt.",
-    "source_url": "https://files.pythonhosted.org/packages/8d/7b/42e5e27e4c9f4f5e24c0d3294b7448948b97963c69d634c664b7beaaae4b/supabase-1.0.0-py3-none-any.whl",
-    "source_excerpt": "supabase 0.7.1 (supabase-0.7.1-py3-none-any.whl), supabase/lib/auth_client.py line 13: class SupabaseAuthClient(SyncGoTrueClient) / def __init__( self, *, url: str, headers: Dict[str, str] = {}, auto_refresh_token: bool = True, persist_session: bool = True, local_storage: SyncSupportedStorage = SyncMemoryStorage(), cookie_options: CookieOptions = CookieOptions.parse_obj(COOKIE_OPTIONS), api: Optional[SyncGoTrueAPI] = None, replace_default_headers: bool = False, )\nsupabase 1.0.0 (supabase-1.0.0-py3-none-any.whl), supabase/lib/auth_client.py line 14: class SupabaseAuthClient(SyncGoTrueClient) / def __init__( self, *, url: str, headers: Dict[str, str] = {}, storage_key: Union[str, None] = None, auto_refresh_token: bool = True, persist_session: bool = True, storage: SyncSupportedStorage = SyncMemoryStorage(), http_client: Union[SyncClient, None] = None, )",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 6,
-    "fingerprint": "sha256:228187f1bbb220b2b72a35958163b0686fe1f4901de40f09a3ce691c50b07c4e",
-    "api": "supabase/python-surface",
-    "version": "1.0.0",
-    "previous_version": "0.7.1",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "package_release",
-      "ecosystem": "pypi",
-      "package": "supabase",
-      "change": "removed_parameter",
-      "symbols": [
-        "lib.auth_client.SupabaseAuthClient"
-      ],
-      "parameter": "cookie_options"
-    },
-    "description": "`lib.auth_client.SupabaseAuthClient` no longer takes the parameter `cookie_options` in supabase 1.0.0: passing it raises a TypeError.",
-    "migration_hint": "Stop passing `cookie_options` to `lib.auth_client.SupabaseAuthClient`; its signature in 1.0.0 is quoted in the source excerpt.",
-    "source_url": "https://files.pythonhosted.org/packages/8d/7b/42e5e27e4c9f4f5e24c0d3294b7448948b97963c69d634c664b7beaaae4b/supabase-1.0.0-py3-none-any.whl",
-    "source_excerpt": "supabase 0.7.1 (supabase-0.7.1-py3-none-any.whl), supabase/lib/auth_client.py line 13: class SupabaseAuthClient(SyncGoTrueClient) / def __init__( self, *, url: str, headers: Dict[str, str] = {}, auto_refresh_token: bool = True, persist_session: bool = True, local_storage: SyncSupportedStorage = SyncMemoryStorage(), cookie_options: CookieOptions = CookieOptions.parse_obj(COOKIE_OPTIONS), api: Optional[SyncGoTrueAPI] = None, replace_default_headers: bool = False, )\nsupabase 1.0.0 (supabase-1.0.0-py3-none-any.whl), supabase/lib/auth_client.py line 14: class SupabaseAuthClient(SyncGoTrueClient) / def __init__( self, *, url: str, headers: Dict[str, str] = {}, storage_key: Union[str, None] = None, auto_refresh_token: bool = True, persist_session: bool = True, storage: SyncSupportedStorage = SyncMemoryStorage(), http_client: Union[SyncClient, None] = None, )",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 7,
-    "fingerprint": "sha256:10c88daa7e038d173e0df007fdc97a5e34dced7a99533b8f17c0bc59ecd58cb5",
-    "api": "supabase/python-surface",
-    "version": "1.0.0",
-    "previous_version": "0.7.1",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "package_release",
-      "ecosystem": "pypi",
-      "package": "supabase",
-      "change": "removed_parameter",
-      "symbols": [
-        "lib.auth_client.SupabaseAuthClient"
-      ],
-      "parameter": "local_storage"
-    },
-    "description": "`lib.auth_client.SupabaseAuthClient` no longer takes the parameter `local_storage` in supabase 1.0.0: passing it raises a TypeError.",
-    "migration_hint": "Stop passing `local_storage` to `lib.auth_client.SupabaseAuthClient`; its signature in 1.0.0 is quoted in the source excerpt.",
-    "source_url": "https://files.pythonhosted.org/packages/8d/7b/42e5e27e4c9f4f5e24c0d3294b7448948b97963c69d634c664b7beaaae4b/supabase-1.0.0-py3-none-any.whl",
-    "source_excerpt": "supabase 0.7.1 (supabase-0.7.1-py3-none-any.whl), supabase/lib/auth_client.py line 13: class SupabaseAuthClient(SyncGoTrueClient) / def __init__( self, *, url: str, headers: Dict[str, str] = {}, auto_refresh_token: bool = True, persist_session: bool = True, local_storage: SyncSupportedStorage = SyncMemoryStorage(), cookie_options: CookieOptions = CookieOptions.parse_obj(COOKIE_OPTIONS), api: Optional[SyncGoTrueAPI] = None, replace_default_headers: bool = False, )\nsupabase 1.0.0 (supabase-1.0.0-py3-none-any.whl), supabase/lib/auth_client.py line 14: class SupabaseAuthClient(SyncGoTrueClient) / def __init__( self, *, url: str, headers: Dict[str, str] = {}, storage_key: Union[str, None] = None, auto_refresh_token: bool = True, persist_session: bool = True, storage: SyncSupportedStorage = SyncMemoryStorage(), http_client: Union[SyncClient, None] = None, )",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 8,
-    "fingerprint": "sha256:7a319d5b5a54e628e9bf65802abf4a94e3d1efbd093ba78cd6295b409c84f2e8",
-    "api": "supabase/python-surface",
-    "version": "1.0.0",
-    "previous_version": "0.7.1",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "package_release",
-      "ecosystem": "pypi",
-      "package": "supabase",
-      "change": "removed_parameter",
-      "symbols": [
-        "lib.auth_client.SupabaseAuthClient"
-      ],
-      "parameter": "replace_default_headers"
-    },
-    "description": "`lib.auth_client.SupabaseAuthClient` no longer takes the parameter `replace_default_headers` in supabase 1.0.0: passing it raises a TypeError.",
-    "migration_hint": "Stop passing `replace_default_headers` to `lib.auth_client.SupabaseAuthClient`; its signature in 1.0.0 is quoted in the source excerpt.",
-    "source_url": "https://files.pythonhosted.org/packages/8d/7b/42e5e27e4c9f4f5e24c0d3294b7448948b97963c69d634c664b7beaaae4b/supabase-1.0.0-py3-none-any.whl",
-    "source_excerpt": "supabase 0.7.1 (supabase-0.7.1-py3-none-any.whl), supabase/lib/auth_client.py line 13: class SupabaseAuthClient(SyncGoTrueClient) / def __init__( self, *, url: str, headers: Dict[str, str] = {}, auto_refresh_token: bool = True, persist_session: bool = True, local_storage: SyncSupportedStorage = SyncMemoryStorage(), cookie_options: CookieOptions = CookieOptions.parse_obj(COOKIE_OPTIONS), api: Optional[SyncGoTrueAPI] = None, replace_default_headers: bool = False, )\nsupabase 1.0.0 (supabase-1.0.0-py3-none-any.whl), supabase/lib/auth_client.py line 14: class SupabaseAuthClient(SyncGoTrueClient) / def __init__( self, *, url: str, headers: Dict[str, str] = {}, storage_key: Union[str, None] = None, auto_refresh_token: bool = True, persist_session: bool = True, storage: SyncSupportedStorage = SyncMemoryStorage(), http_client: Union[SyncClient, None] = None, )",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 9,
     "fingerprint": "sha256:2e8f57d805d1e6759157434c063fb8254be8f38523cc17e908d2089e4558c165",
     "api": "supabase/python-surface",
     "version": "1.0.0",

@@ -1,0 +1,290 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:b61444f06bb5f6953cf166251931927a629b6f456f7fb595355b79ff97251137",
+    "api": "mongodb/node-surface",
+    "version": "7.0.0",
+    "previous_version": "6.22.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "mongodb",
+      "change": "removed_symbol",
+      "symbols": [
+        "AsyncDisposable"
+      ]
+    },
+    "description": "The interface `AsyncDisposable` was removed in mongodb 7.0.0: code using it fails.",
+    "migration_hint": "mongodb 7.0.0 has no `AsyncDisposable`: see the package's release notes for what replaces it.",
+    "source_url": "https://registry.npmjs.org/mongodb/-/mongodb-7.0.0.tgz",
+    "source_excerpt": "mongodb 6.22.0 (mongodb-6.22.0.tgz), mongodb.d.ts line 613: interface AsyncDisposable_2\nmongodb 7.0.0 (mongodb-7.0.0.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:c929142262becd8c87f9713e4c7dbb3bcc752519988bb62b0391ebe3e20c4b1e",
+    "api": "mongodb/node-surface",
+    "version": "7.0.0",
+    "previous_version": "6.22.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "mongodb",
+      "change": "removed_symbol",
+      "symbols": [
+        "CancellationToken"
+      ]
+    },
+    "description": "The class `CancellationToken` was removed in mongodb 7.0.0: code using it fails.",
+    "migration_hint": "mongodb 7.0.0 has no `CancellationToken`: see the package's release notes for what replaces it.",
+    "source_url": "https://registry.npmjs.org/mongodb/-/mongodb-7.0.0.tgz",
+    "source_excerpt": "mongodb 6.22.0 (mongodb-6.22.0.tgz), mongodb.d.ts line 1151: class CancellationToken extends TypedEventEmitter<{ cancel(): void; }> / constructor(...args: any[])\nmongodb 7.0.0 (mongodb-7.0.0.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:6d16386d8205c2a4ea10506bcb16c504b681d695c8abfa7ba1fb5c387c8dcfa8",
+    "api": "mongodb/node-surface",
+    "version": "7.0.0",
+    "previous_version": "6.22.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "mongodb",
+      "change": "removed_symbol",
+      "symbols": [
+        "ChangeStream.streamOptions"
+      ]
+    },
+    "description": "The property `ChangeStream.streamOptions` was removed in mongodb 7.0.0: code using it fails.",
+    "migration_hint": "mongodb 7.0.0 has no `ChangeStream.streamOptions`: see the package's release notes for what replaces it.",
+    "source_url": "https://registry.npmjs.org/mongodb/-/mongodb-7.0.0.tgz",
+    "source_excerpt": "mongodb 6.22.0 (mongodb-6.22.0.tgz), mongodb.d.ts line 1179: streamOptions?: CursorStreamOptions\nmongodb 7.0.0 (mongodb-7.0.0.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:07c32100fd99cae3e6cb10b5f91d57ab1f69943b680562c6d960d9f5fc1444df",
+    "api": "mongodb/node-surface",
+    "version": "7.0.0",
+    "previous_version": "6.22.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "mongodb",
+      "change": "removed_symbol",
+      "symbols": [
+        "ClientMetadata"
+      ]
+    },
+    "description": "The interface `ClientMetadata` was removed in mongodb 7.0.0: code using it fails.",
+    "migration_hint": "mongodb 7.0.0 has no `ClientMetadata`: see the package's release notes for what replaces it.",
+    "source_url": "https://registry.npmjs.org/mongodb/-/mongodb-7.0.0.tgz",
+    "source_excerpt": "mongodb 6.22.0 (mongodb-6.22.0.tgz), mongodb.d.ts line 2239: interface ClientMetadata\nmongodb 7.0.0 (mongodb-7.0.0.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:1872a54a678b3a712578b064d0206c38a67288cea71a2c89eca166d7505e8b07",
+    "api": "mongodb/node-surface",
+    "version": "7.0.0",
+    "previous_version": "6.22.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "mongodb",
+      "change": "removed_symbol",
+      "symbols": [
+        "ClientMetadataOptions"
+      ]
+    },
+    "description": "The interface `ClientMetadataOptions` was removed in mongodb 7.0.0: code using it fails.",
+    "migration_hint": "mongodb 7.0.0 has no `ClientMetadataOptions`: see the package's release notes for what replaces it.",
+    "source_url": "https://registry.npmjs.org/mongodb/-/mongodb-7.0.0.tgz",
+    "source_excerpt": "mongodb 6.22.0 (mongodb-6.22.0.tgz), mongodb.d.ts line 2268: interface ClientMetadataOptions\nmongodb 7.0.0 (mongodb-7.0.0.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:742daf6681c54619d23e3134617444b2abf4f8fc2821da6fd93e288147981ef6",
+    "api": "mongodb/node-surface",
+    "version": "7.0.0",
+    "previous_version": "6.22.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "mongodb",
+      "change": "removed_symbol",
+      "symbols": [
+        "ClientSession.transaction"
+      ]
+    },
+    "description": "The property `ClientSession.transaction` was removed in mongodb 7.0.0: code using it fails.",
+    "migration_hint": "mongodb 7.0.0 has no `ClientSession.transaction`: see the package's release notes for what replaces it.",
+    "source_url": "https://registry.npmjs.org/mongodb/-/mongodb-7.0.0.tgz",
+    "source_excerpt": "mongodb 6.22.0 (mongodb-6.22.0.tgz), mongodb.d.ts line 2317: transaction: Transaction\nmongodb 7.0.0 (mongodb-7.0.0.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:1e7a8a626163b2844747f61cf2c9ad140f2b34c65095e8e81d29725cce4db6df",
+    "api": "mongodb/node-surface",
+    "version": "7.0.0",
+    "previous_version": "6.22.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "mongodb",
+      "change": "removed_symbol",
+      "symbols": [
+        "CloseOptions"
+      ]
+    },
+    "description": "The interface `CloseOptions` was removed in mongodb 7.0.0: code using it fails.",
+    "migration_hint": "mongodb 7.0.0 has no `CloseOptions`: see the package's release notes for what replaces it.",
+    "source_url": "https://registry.npmjs.org/mongodb/-/mongodb-7.0.0.tgz",
+    "source_excerpt": "mongodb 6.22.0 (mongodb-6.22.0.tgz), mongodb.d.ts line 2569: interface CloseOptions\nmongodb 7.0.0 (mongodb-7.0.0.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
+    "fingerprint": "sha256:8a72f17b9ce89c546d8f2f3e005da2069151f31fd8e8185047e4a44546c00cc6",
+    "api": "mongodb/node-surface",
+    "version": "7.0.0",
+    "previous_version": "6.22.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "mongodb",
+      "change": "removed_symbol",
+      "symbols": [
+        "CursorStreamOptions"
+      ]
+    },
+    "description": "The interface `CursorStreamOptions` was removed in mongodb 7.0.0: code using it fails.",
+    "migration_hint": "mongodb 7.0.0 has no `CursorStreamOptions`: see the package's release notes for what replaces it.",
+    "source_url": "https://registry.npmjs.org/mongodb/-/mongodb-7.0.0.tgz",
+    "source_excerpt": "mongodb 6.22.0 (mongodb-6.22.0.tgz), mongodb.d.ts line 3746: interface CursorStreamOptions\nmongodb 7.0.0 (mongodb-7.0.0.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 9,
+    "fingerprint": "sha256:1ee48776c8846070e182d0b1cb37a7b4600d98388978a08bfb974c6f9ad702ee",
+    "api": "mongodb/node-surface",
+    "version": "7.0.0",
+    "previous_version": "6.22.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "mongodb",
+      "change": "removed_symbol",
+      "symbols": [
+        "ReadPreference.minWireVersion"
+      ]
+    },
+    "description": "The property `ReadPreference.minWireVersion` was removed in mongodb 7.0.0: code using it fails.",
+    "migration_hint": "mongodb 7.0.0 has no `ReadPreference.minWireVersion`: see the package's release notes for what replaces it.",
+    "source_url": "https://registry.npmjs.org/mongodb/-/mongodb-7.0.0.tgz",
+    "source_excerpt": "mongodb 6.22.0 (mongodb-6.22.0.tgz), mongodb.d.ts line 7490: minWireVersion?: number\nmongodb 7.0.0 (mongodb-7.0.0.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 10,
+    "fingerprint": "sha256:fbb143a9999b0a23716504d99431fd742efa743670e405a198273463672e98ec",
+    "api": "mongodb/node-surface",
+    "version": "7.0.0",
+    "previous_version": "6.22.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "mongodb",
+      "change": "removed_symbol",
+      "symbols": [
+        "ResumeOptions"
+      ]
+    },
+    "description": "The interface `ResumeOptions` was removed in mongodb 7.0.0: code using it fails.",
+    "migration_hint": "mongodb 7.0.0 has no `ResumeOptions`: see the package's release notes for what replaces it.",
+    "source_url": "https://registry.npmjs.org/mongodb/-/mongodb-7.0.0.tgz",
+    "source_excerpt": "mongodb 6.22.0 (mongodb-6.22.0.tgz), mongodb.d.ts line 7636: interface ResumeOptions\nmongodb 7.0.0 (mongodb-7.0.0.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 11,
+    "fingerprint": "sha256:a331df084d2de7e766ee42127c85bc89956e253e74c0dc13237fb5dc6c15b9d7",
+    "api": "mongodb/node-surface",
+    "version": "7.0.0",
+    "previous_version": "6.22.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "mongodb",
+      "change": "removed_symbol",
+      "symbols": [
+        "ServerCapabilities"
+      ]
+    },
+    "description": "The class `ServerCapabilities` was removed in mongodb 7.0.0: code using it fails.",
+    "migration_hint": "mongodb 7.0.0 has no `ServerCapabilities`: see the package's release notes for what replaces it.",
+    "source_url": "https://registry.npmjs.org/mongodb/-/mongodb-7.0.0.tgz",
+    "source_excerpt": "mongodb 6.22.0 (mongodb-6.22.0.tgz), mongodb.d.ts line 7826: class ServerCapabilities / constructor(hello: Document)\nmongodb 7.0.0 (mongodb-7.0.0.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 12,
+    "fingerprint": "sha256:8dd4c1d237aaada9349934a1f7dcc019852702a1c86e2e93382e4fa92feb2937",
+    "api": "mongodb/node-surface",
+    "version": "7.0.0",
+    "previous_version": "6.22.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "mongodb",
+      "change": "removed_symbol",
+      "symbols": [
+        "Transaction"
+      ]
+    },
+    "description": "The class `Transaction` was removed in mongodb 7.0.0: code using it fails.",
+    "migration_hint": "mongodb 7.0.0 has no `Transaction`: see the package's release notes for what replaces it.",
+    "source_url": "https://registry.npmjs.org/mongodb/-/mongodb-7.0.0.tgz",
+    "source_excerpt": "mongodb 6.22.0 (mongodb-6.22.0.tgz), mongodb.d.ts line 8448: class Transaction\nmongodb 7.0.0 (mongodb-7.0.0.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

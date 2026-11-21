@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:ca1757c66d87f7552de1440d2f46b63b76a0d5d33a34ba784470c20556cdba6c",
+    "fingerprint": "sha256:edf38ebeb4762f278249e91a67f9812059fdc18cb30516ce22fd8ca3ac652213",
     "api": "elastic/python-surface",
     "version": "9.1.3",
     "previous_version": "9.1.2",
@@ -13,7 +13,8 @@
       "package": "elasticsearch",
       "change": "changed_default",
       "symbols": [
-        "Elasticsearch.delete_by_query_rethrottle"
+        "Elasticsearch.delete_by_query_rethrottle",
+        "client.Elasticsearch.delete_by_query_rethrottle"
       ],
       "parameter": "requests_per_second"
     },
@@ -26,7 +27,7 @@
   },
   {
     "id": 2,
-    "fingerprint": "sha256:ae3587bdab3994a42671f3dee76739fc81ab294d1cc81c7e056246ce7d78fdaf",
+    "fingerprint": "sha256:5a9c31721c563256b9824ee231f73e2e1c78e2dc2c100b2a19a98542efea7e50",
     "api": "elastic/python-surface",
     "version": "9.1.3",
     "previous_version": "9.1.2",
@@ -38,7 +39,8 @@
       "package": "elasticsearch",
       "change": "changed_default",
       "symbols": [
-        "Elasticsearch.reindex_rethrottle"
+        "Elasticsearch.reindex_rethrottle",
+        "client.Elasticsearch.reindex_rethrottle"
       ],
       "parameter": "requests_per_second"
     },
@@ -51,7 +53,7 @@
   },
   {
     "id": 3,
-    "fingerprint": "sha256:833ae708d266b594f0dbb2e1bca62f6bb21ba55979e5a969f129925666e782da",
+    "fingerprint": "sha256:6618d1ebaf11b7b3c7a419c65810b42af1a75459ac927ad1138c3257a3307bad",
     "api": "elastic/python-surface",
     "version": "9.1.3",
     "previous_version": "9.1.2",
@@ -63,87 +65,13 @@
       "package": "elasticsearch",
       "change": "changed_default",
       "symbols": [
-        "Elasticsearch.update_by_query_rethrottle"
+        "Elasticsearch.update_by_query_rethrottle",
+        "client.Elasticsearch.update_by_query_rethrottle"
       ],
       "parameter": "requests_per_second"
     },
     "description": "`Elasticsearch.update_by_query_rethrottle`'s parameter `requests_per_second` has no default in elasticsearch 9.1.3 (it was `None`): a call that leaves it out raises a TypeError.",
     "migration_hint": "Pass `requests_per_second=None` to `Elasticsearch.update_by_query_rethrottle` to keep the old behavior.",
-    "source_url": "https://files.pythonhosted.org/packages/bf/10/cab92a57625aeb2d787e3f5e3a698948bc5b34c151422afacff1f0f1c691/elasticsearch-9.1.3-py3-none-any.whl",
-    "source_excerpt": "elasticsearch 9.1.2 (elasticsearch-9.1.2-py3-none-any.whl), elasticsearch/_sync/client/__init__.py line 6341: def update_by_query_rethrottle( self, *, task_id: str, error_trace: t.Optional[bool] = None, filter_path: t.Optional[t.Union[str, t.Sequence[str]]] = None, human: t.Optional[bool] = None, pretty: t.Optional[bool] = None, requests_per_second: t.Optional[float] = None, ) -> ObjectApiResponse[t.Any]\nelasticsearch 9.1.3 (elasticsearch-9.1.3-py3-none-any.whl), elasticsearch/_sync/client/__init__.py line 6343: def update_by_query_rethrottle( self, *, task_id: str, requests_per_second: float, error_trace: t.Optional[bool] = None, filter_path: t.Optional[t.Union[str, t.Sequence[str]]] = None, human: t.Optional[bool] = None, pretty: t.Optional[bool] = None, ) -> ObjectApiResponse[t.Any]",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 4,
-    "fingerprint": "sha256:cc66060c7499630e058854a71280736e8e6dd6b26f7d06bb11ec1e44a6529455",
-    "api": "elastic/python-surface",
-    "version": "9.1.3",
-    "previous_version": "9.1.2",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "package_release",
-      "ecosystem": "pypi",
-      "package": "elasticsearch",
-      "change": "changed_default",
-      "symbols": [
-        "client.Elasticsearch.delete_by_query_rethrottle"
-      ],
-      "parameter": "requests_per_second"
-    },
-    "description": "`client.Elasticsearch.delete_by_query_rethrottle`'s parameter `requests_per_second` has no default in elasticsearch 9.1.3 (it was `None`): a call that leaves it out raises a TypeError.",
-    "migration_hint": "Pass `requests_per_second=None` to `client.Elasticsearch.delete_by_query_rethrottle` to keep the old behavior.",
-    "source_url": "https://files.pythonhosted.org/packages/bf/10/cab92a57625aeb2d787e3f5e3a698948bc5b34c151422afacff1f0f1c691/elasticsearch-9.1.3-py3-none-any.whl",
-    "source_excerpt": "elasticsearch 9.1.2 (elasticsearch-9.1.2-py3-none-any.whl), elasticsearch/_sync/client/__init__.py line 1634: def delete_by_query_rethrottle( self, *, task_id: str, error_trace: t.Optional[bool] = None, filter_path: t.Optional[t.Union[str, t.Sequence[str]]] = None, human: t.Optional[bool] = None, pretty: t.Optional[bool] = None, requests_per_second: t.Optional[float] = None, ) -> ObjectApiResponse[t.Any]\nelasticsearch 9.1.3 (elasticsearch-9.1.3-py3-none-any.whl), elasticsearch/_sync/client/__init__.py line 1638: def delete_by_query_rethrottle( self, *, task_id: str, requests_per_second: float, error_trace: t.Optional[bool] = None, filter_path: t.Optional[t.Union[str, t.Sequence[str]]] = None, human: t.Optional[bool] = None, pretty: t.Optional[bool] = None, ) -> ObjectApiResponse[t.Any]",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 5,
-    "fingerprint": "sha256:73d9db814840017f6d510f0c1abf1e3c8dde23216545d1e650b1234cdca568c7",
-    "api": "elastic/python-surface",
-    "version": "9.1.3",
-    "previous_version": "9.1.2",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "package_release",
-      "ecosystem": "pypi",
-      "package": "elasticsearch",
-      "change": "changed_default",
-      "symbols": [
-        "client.Elasticsearch.reindex_rethrottle"
-      ],
-      "parameter": "requests_per_second"
-    },
-    "description": "`client.Elasticsearch.reindex_rethrottle`'s parameter `requests_per_second` has no default in elasticsearch 9.1.3 (it was `None`): a call that leaves it out raises a TypeError.",
-    "migration_hint": "Pass `requests_per_second=None` to `client.Elasticsearch.reindex_rethrottle` to keep the old behavior.",
-    "source_url": "https://files.pythonhosted.org/packages/bf/10/cab92a57625aeb2d787e3f5e3a698948bc5b34c151422afacff1f0f1c691/elasticsearch-9.1.3-py3-none-any.whl",
-    "source_excerpt": "elasticsearch 9.1.2 (elasticsearch-9.1.2-py3-none-any.whl), elasticsearch/_sync/client/__init__.py line 3990: def reindex_rethrottle( self, *, task_id: str, error_trace: t.Optional[bool] = None, filter_path: t.Optional[t.Union[str, t.Sequence[str]]] = None, human: t.Optional[bool] = None, pretty: t.Optional[bool] = None, requests_per_second: t.Optional[float] = None, ) -> ObjectApiResponse[t.Any]\nelasticsearch 9.1.3 (elasticsearch-9.1.3-py3-none-any.whl), elasticsearch/_sync/client/__init__.py line 3994: def reindex_rethrottle( self, *, task_id: str, requests_per_second: float, error_trace: t.Optional[bool] = None, filter_path: t.Optional[t.Union[str, t.Sequence[str]]] = None, human: t.Optional[bool] = None, pretty: t.Optional[bool] = None, ) -> ObjectApiResponse[t.Any]",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 6,
-    "fingerprint": "sha256:cc46f125ec396799a75e4980c286ff1203a49d1e54bae53905f435a7ea31d7ca",
-    "api": "elastic/python-surface",
-    "version": "9.1.3",
-    "previous_version": "9.1.2",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "package_release",
-      "ecosystem": "pypi",
-      "package": "elasticsearch",
-      "change": "changed_default",
-      "symbols": [
-        "client.Elasticsearch.update_by_query_rethrottle"
-      ],
-      "parameter": "requests_per_second"
-    },
-    "description": "`client.Elasticsearch.update_by_query_rethrottle`'s parameter `requests_per_second` has no default in elasticsearch 9.1.3 (it was `None`): a call that leaves it out raises a TypeError.",
-    "migration_hint": "Pass `requests_per_second=None` to `client.Elasticsearch.update_by_query_rethrottle` to keep the old behavior.",
     "source_url": "https://files.pythonhosted.org/packages/bf/10/cab92a57625aeb2d787e3f5e3a698948bc5b34c151422afacff1f0f1c691/elasticsearch-9.1.3-py3-none-any.whl",
     "source_excerpt": "elasticsearch 9.1.2 (elasticsearch-9.1.2-py3-none-any.whl), elasticsearch/_sync/client/__init__.py line 6341: def update_by_query_rethrottle( self, *, task_id: str, error_trace: t.Optional[bool] = None, filter_path: t.Optional[t.Union[str, t.Sequence[str]]] = None, human: t.Optional[bool] = None, pretty: t.Optional[bool] = None, requests_per_second: t.Optional[float] = None, ) -> ObjectApiResponse[t.Any]\nelasticsearch 9.1.3 (elasticsearch-9.1.3-py3-none-any.whl), elasticsearch/_sync/client/__init__.py line 6343: def update_by_query_rethrottle( self, *, task_id: str, requests_per_second: float, error_trace: t.Optional[bool] = None, filter_path: t.Optional[t.Union[str, t.Sequence[str]]] = None, human: t.Optional[bool] = None, pretty: t.Optional[bool] = None, ) -> ObjectApiResponse[t.Any]",
     "confidence": 1,

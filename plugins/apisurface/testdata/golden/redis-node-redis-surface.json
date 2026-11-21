@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:d970a908bf0b4a315ebe3b2e58ea35fa200f14be60a1766ebb3d00b7bdd43c75",
+    "api": "redis/node-redis-surface",
+    "version": "5.0.0",
+    "previous_version": "1.6.1",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@redis/client",
+      "change": "removed_symbol",
+      "symbols": [
+        "RedisFlushModes"
+      ]
+    },
+    "description": "The enum `RedisFlushModes` was removed in @redis/client 5.0.0: code using it fails.",
+    "migration_hint": "@redis/client 5.0.0 has no `RedisFlushModes`: see the package's release notes for what replaces it.",
+    "source_url": "https://registry.npmjs.org/@redis/client/-/client-5.0.0.tgz",
+    "source_excerpt": "@redis/client 1.6.1 (client-1.6.1.tgz), dist/lib/commands/FLUSHALL.d.ts line 1: enum RedisFlushModes\n@redis/client 5.0.0 (client-5.0.0.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:d45c7699a9c5708e947fddde2a03a1556f1a02b3fc5268d6b759c43576f75204",
+    "api": "redis/node-redis-surface",
+    "version": "5.0.0",
+    "previous_version": "1.6.1",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@redis/client",
+      "change": "removed_symbol",
+      "symbols": [
+        "commandOptions"
+      ]
+    },
+    "description": "The variable `commandOptions` was removed in @redis/client 5.0.0: code using it fails.",
+    "migration_hint": "@redis/client 5.0.0 has no `commandOptions`: see the package's release notes for what replaces it.",
+    "source_url": "https://registry.npmjs.org/@redis/client/-/client-5.0.0.tgz",
+    "source_excerpt": "@redis/client 1.6.1 (client-1.6.1.tgz), dist/index.d.ts line 6: const commandOptions: typeof RedisClient.commandOptions\n@redis/client 5.0.0 (client-5.0.0.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

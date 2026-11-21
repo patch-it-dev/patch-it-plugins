@@ -1,0 +1,7 @@
+{
+  "name": "@supabase/supabase-js",
+  "version": "2.118.0",
+  "dist": {
+    "tarball": "https://registry.npmjs.org/@supabase/supabase-js/-/supabase-js-2.118.0.tgz"
+  }
+}

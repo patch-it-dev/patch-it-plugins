@@ -1,0 +1,27 @@
+{
+  "name": "@supabase/supabase-js",
+  "versions": {
+    "1.35.7": {
+      "name": "@supabase/supabase-js",
+      "version": "1.35.7"
+    },
+    "2.0.0": {
+      "name": "@supabase/supabase-js",
+      "version": "2.0.0"
+    },
+    "2.118.0": {
+      "name": "@supabase/supabase-js",
+      "version": "2.118.0"
+    },
+    "2.119.0": {
+      "name": "@supabase/supabase-js",
+      "version": "2.119.0"
+    }
+  },
+  "time": {
+    "1.35.7": "2022-09-21T21:20:23.331Z",
+    "2.0.0": "2022-10-11T11:43:47.776Z",
+    "2.118.0": "2026-10-15T12:57:17.683Z",
+    "2.119.0": "2026-11-04T13:11:11.636Z"
+  }
+}

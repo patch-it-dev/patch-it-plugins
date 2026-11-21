@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:3c4bc51d5938fb29c383e15feec7d6b4e5aff01b9f17058a466d89fd6a2a3cac",
+    "api": "google/genai-js-surface",
+    "version": "1.0.0",
+    "previous_version": "0.15.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@google/genai",
+      "change": "removed_symbol",
+      "symbols": [
+        "LiveMusicSetClientContentParameters"
+      ]
+    },
+    "description": "The interface `LiveMusicSetClientContentParameters` was removed in @google/genai 1.0.0: code using it fails.",
+    "migration_hint": "@google/genai 1.0.0 has no `LiveMusicSetClientContentParameters`: see the package's release notes for what replaces it.",
+    "source_url": "https://registry.npmjs.org/@google/genai/-/genai-1.0.0.tgz",
+    "source_excerpt": "@google/genai 0.15.0 (genai-0.15.0.tgz), dist/genai.d.ts line 3757: interface LiveMusicSetClientContentParameters\n@google/genai 1.0.0 (genai-1.0.0.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:ec64180f7fd0eddfd7bd972c4862b42da57bb3b8b5fb16a761f927d675f5b6d6",
+    "api": "google/genai-js-surface",
+    "version": "1.0.0",
+    "previous_version": "0.15.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@google/genai",
+      "change": "removed_symbol",
+      "symbols": [
+        "@google/genai/node.LiveMusicSetClientContentParameters"
+      ]
+    },
+    "description": "The interface `@google/genai/node.LiveMusicSetClientContentParameters` was removed in @google/genai 1.0.0: code using it fails.",
+    "migration_hint": "@google/genai 1.0.0 has no `@google/genai/node.LiveMusicSetClientContentParameters`: see the package's release notes for what replaces it.",
+    "source_url": "https://registry.npmjs.org/@google/genai/-/genai-1.0.0.tgz",
+    "source_excerpt": "@google/genai 0.15.0 (genai-0.15.0.tgz), dist/node/node.d.ts line 3769: interface LiveMusicSetClientContentParameters\n@google/genai 1.0.0 (genai-1.0.0.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:dc3d0647e0d3b5bac9c81cf053789a818a5a6dcaf99d7bceb0433eb072962574",
+    "api": "google/genai-js-surface",
+    "version": "1.0.0",
+    "previous_version": "0.15.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@google/genai",
+      "change": "removed_symbol",
+      "symbols": [
+        "@google/genai/web.LiveMusicSetClientContentParameters"
+      ]
+    },
+    "description": "The interface `@google/genai/web.LiveMusicSetClientContentParameters` was removed in @google/genai 1.0.0: code using it fails.",
+    "migration_hint": "@google/genai 1.0.0 has no `@google/genai/web.LiveMusicSetClientContentParameters`: see the package's release notes for what replaces it.",
+    "source_url": "https://registry.npmjs.org/@google/genai/-/genai-1.0.0.tgz",
+    "source_excerpt": "@google/genai 0.15.0 (genai-0.15.0.tgz), dist/web/web.d.ts line 3762: interface LiveMusicSetClientContentParameters\n@google/genai 1.0.0 (genai-1.0.0.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

@@ -30,10 +30,8 @@ var pypiCases = []pypiCase{
 	// and all. 2.5.0 made DeadlineExceededError an alias of
 	// GatewayTimeoutError: still importable, no event.
 	{AnthropicPython, [2]string{"2.6.0", "2.7.0"}, []string{
-		"removed_symbol types.beta.BetaBillingFrozenError ",
-		"removed_symbol types.beta.BetaBillingFrozenErrorDetails ",
-		"removed_symbol types.beta.beta_billing_frozen_error.BetaBillingFrozenError ",
-		"removed_symbol types.beta.beta_billing_frozen_error_details.BetaBillingFrozenErrorDetails ",
+		"removed_symbol types.beta.BetaBillingFrozenError,types.beta.beta_billing_frozen_error.BetaBillingFrozenError ",
+		"removed_symbol types.beta.BetaBillingFrozenErrorDetails,types.beta.beta_billing_frozen_error_details.BetaBillingFrozenErrorDetails ",
 	}, [2]string{"2.4.0", "2.5.0"}},
 	// stripe 16.0.0 removed StripeObject.request. 15.5.0 only added.
 	{StripePython, [2]string{"15.6.2", "16.0.0"}, []string{"removed_symbol StripeObject.request "}, [2]string{"15.4.0", "15.5.0"}},
@@ -50,10 +48,8 @@ var pypiCases = []pypiCase{
 	{PyMongo, [2]string{"4.15.5", "4.16.0"}, []string{
 		"removed_parameter asynchronous.command_cursor.AsyncCommandCursor explicit_session",
 		"removed_parameter asynchronous.command_cursor.AsyncRawBatchCommandCursor explicit_session",
-		"removed_parameter command_cursor.CommandCursor explicit_session",
-		"removed_parameter command_cursor.RawBatchCommandCursor explicit_session",
-		"removed_parameter synchronous.command_cursor.CommandCursor explicit_session",
-		"removed_parameter synchronous.command_cursor.RawBatchCommandCursor explicit_session",
+		"removed_parameter command_cursor.CommandCursor,synchronous.command_cursor.CommandCursor explicit_session",
+		"removed_parameter command_cursor.RawBatchCommandCursor,synchronous.command_cursor.RawBatchCommandCursor explicit_session",
 	}, [2]string{"4.15.4", "4.15.5"}},
 	// redis 8.1.0 removed OSSMaintNotificationsHandler.get_handler_for_connection.
 	{RedisPy, [2]string{"8.0.1", "8.1.0"}, []string{"removed_symbol maint_notifications.OSSMaintNotificationsHandler.get_handler_for_connection "}, [2]string{"7.4.1", "8.0.0"}},
@@ -63,31 +59,23 @@ var pypiCases = []pypiCase{
 	// supabase 1.0.0's SupabaseAuthClient lost four parameters. 2.34.0 made
 	// supabase.client a star re-export of the package: still importable.
 	{SupabasePython, [2]string{"0.7.1", "1.0.0"}, []string{
-		"removed_parameter SupabaseAuthClient api",
-		"removed_parameter SupabaseAuthClient cookie_options",
-		"removed_parameter SupabaseAuthClient local_storage",
-		"removed_parameter SupabaseAuthClient replace_default_headers",
-		"removed_parameter lib.auth_client.SupabaseAuthClient api",
-		"removed_parameter lib.auth_client.SupabaseAuthClient cookie_options",
-		"removed_parameter lib.auth_client.SupabaseAuthClient local_storage",
-		"removed_parameter lib.auth_client.SupabaseAuthClient replace_default_headers",
+		"removed_parameter SupabaseAuthClient,lib.auth_client.SupabaseAuthClient api",
+		"removed_parameter SupabaseAuthClient,lib.auth_client.SupabaseAuthClient cookie_options",
+		"removed_parameter SupabaseAuthClient,lib.auth_client.SupabaseAuthClient local_storage",
+		"removed_parameter SupabaseAuthClient,lib.auth_client.SupabaseAuthClient replace_default_headers",
 		"removed_parameter lib.client_options.ClientOptions.replace local_storage",
 	}, [2]string{"2.33.0", "2.34.0"}},
 	// algoliasearch 4.44.3 dropped recommend's FacetFilters (4.44.4 brought
 	// it back: an addition, no event).
 	{AlgoliaPython, [2]string{"4.44.1", "4.44.3"}, []string{
-		"removed_symbol recommend.models.FacetFilters ",
-		"removed_symbol recommend.models.facet_filters.FacetFilters ",
+		"removed_symbol recommend.models.FacetFilters,recommend.models.facet_filters.FacetFilters ",
 	}, [2]string{"4.44.3", "4.44.4"}},
 	// elasticsearch 9.1.3 made the rethrottle methods' requests_per_second
 	// required.
 	{ElasticPython, [2]string{"9.1.2", "9.1.3"}, []string{
-		"changed_default Elasticsearch.delete_by_query_rethrottle requests_per_second",
-		"changed_default Elasticsearch.reindex_rethrottle requests_per_second",
-		"changed_default Elasticsearch.update_by_query_rethrottle requests_per_second",
-		"changed_default client.Elasticsearch.delete_by_query_rethrottle requests_per_second",
-		"changed_default client.Elasticsearch.reindex_rethrottle requests_per_second",
-		"changed_default client.Elasticsearch.update_by_query_rethrottle requests_per_second",
+		"changed_default Elasticsearch.delete_by_query_rethrottle,client.Elasticsearch.delete_by_query_rethrottle requests_per_second",
+		"changed_default Elasticsearch.reindex_rethrottle,client.Elasticsearch.reindex_rethrottle requests_per_second",
+		"changed_default Elasticsearch.update_by_query_rethrottle,client.Elasticsearch.update_by_query_rethrottle requests_per_second",
 	}, [2]string{"9.1.1", "9.1.2"}},
 	// ddtrace 4.13.0 moved AI Guard to ddtrace.aiguard: the old module
 	// forwards its names (__getattr__), so only the two integration helpers
@@ -110,10 +98,8 @@ var pypiCases = []pypiCase{
 	// urllib3 2.6.0 removed BaseHTTPResponse.getheader and getheaders,
 	// deprecated since 2.0.
 	{URLLib3, [2]string{"2.5.0", "2.6.0"}, []string{
-		"removed_symbol BaseHTTPResponse.getheader ",
-		"removed_symbol BaseHTTPResponse.getheaders ",
-		"removed_symbol response.BaseHTTPResponse.getheader ",
-		"removed_symbol response.BaseHTTPResponse.getheaders ",
+		"removed_symbol BaseHTTPResponse.getheader,response.BaseHTTPResponse.getheader ",
+		"removed_symbol BaseHTTPResponse.getheaders,response.BaseHTTPResponse.getheaders ",
 	}, [2]string{"2.2.1", "2.2.2"}},
 }
 

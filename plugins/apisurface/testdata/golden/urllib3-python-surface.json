@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:cc42ae4902d0f79373a7474b8b5abcc56314e6c90fcaccd37c7965e5335f572d",
+    "fingerprint": "sha256:2ac45c906503a69cb6ba22199fe959e6343d4f7dc93d04b144c78111826d795b",
     "api": "urllib3/python-surface",
     "version": "2.6.0",
     "previous_version": "2.5.0",
@@ -13,7 +13,8 @@
       "package": "urllib3",
       "change": "removed_symbol",
       "symbols": [
-        "BaseHTTPResponse.getheader"
+        "BaseHTTPResponse.getheader",
+        "response.BaseHTTPResponse.getheader"
       ]
     },
     "description": "The method `BaseHTTPResponse.getheader` was removed in urllib3 2.6.0: code using it fails.",
@@ -25,7 +26,7 @@
   },
   {
     "id": 2,
-    "fingerprint": "sha256:3375c27db02709e580eba5c9b01b737c31d3c84e130093fca1213a8e967c85ea",
+    "fingerprint": "sha256:2dd33b0c16dc4183ddd2144e64f24ad73d9623ea806e5aa82ff8ef3717652609",
     "api": "urllib3/python-surface",
     "version": "2.6.0",
     "previous_version": "2.5.0",
@@ -37,59 +38,12 @@
       "package": "urllib3",
       "change": "removed_symbol",
       "symbols": [
-        "BaseHTTPResponse.getheaders"
+        "BaseHTTPResponse.getheaders",
+        "response.BaseHTTPResponse.getheaders"
       ]
     },
     "description": "The method `BaseHTTPResponse.getheaders` was removed in urllib3 2.6.0: code using it fails.",
     "migration_hint": "urllib3 2.6.0 has no `BaseHTTPResponse.getheaders`: see the package's release notes for what replaces it.",
-    "source_url": "https://files.pythonhosted.org/packages/56/1a/9ffe814d317c5224166b23e7c47f606d6e473712a2fad0f704ea9b99f246/urllib3-2.6.0-py3-none-any.whl",
-    "source_excerpt": "urllib3 2.5.0 (urllib3-2.5.0-py3-none-any.whl), urllib3/response.py line 543: def getheaders(self) -> HTTPHeaderDict\nurllib3 2.6.0 (urllib3-2.6.0-py3-none-any.whl): not defined",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 3,
-    "fingerprint": "sha256:07a511cc9d663a29116e2b7954a24893790ae274398a78caae714e01fe12e7e9",
-    "api": "urllib3/python-surface",
-    "version": "2.6.0",
-    "previous_version": "2.5.0",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "package_release",
-      "ecosystem": "pypi",
-      "package": "urllib3",
-      "change": "removed_symbol",
-      "symbols": [
-        "response.BaseHTTPResponse.getheader"
-      ]
-    },
-    "description": "The method `response.BaseHTTPResponse.getheader` was removed in urllib3 2.6.0: code using it fails.",
-    "migration_hint": "urllib3 2.6.0 has no `response.BaseHTTPResponse.getheader`: see the package's release notes for what replaces it.",
-    "source_url": "https://files.pythonhosted.org/packages/56/1a/9ffe814d317c5224166b23e7c47f606d6e473712a2fad0f704ea9b99f246/urllib3-2.6.0-py3-none-any.whl",
-    "source_excerpt": "urllib3 2.5.0 (urllib3-2.5.0-py3-none-any.whl), urllib3/response.py line 552: def getheader(self, name: str, default: str | None = None) -> str | None\nurllib3 2.6.0 (urllib3-2.6.0-py3-none-any.whl): not defined",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 4,
-    "fingerprint": "sha256:9a5a800867633a61c978cc30e6702c35ad978c197161eecb29d8735fd67b74d4",
-    "api": "urllib3/python-surface",
-    "version": "2.6.0",
-    "previous_version": "2.5.0",
-    "change_type": "breaking",
-    "breaking": true,
-    "subject": {
-      "type": "package_release",
-      "ecosystem": "pypi",
-      "package": "urllib3",
-      "change": "removed_symbol",
-      "symbols": [
-        "response.BaseHTTPResponse.getheaders"
-      ]
-    },
-    "description": "The method `response.BaseHTTPResponse.getheaders` was removed in urllib3 2.6.0: code using it fails.",
-    "migration_hint": "urllib3 2.6.0 has no `response.BaseHTTPResponse.getheaders`: see the package's release notes for what replaces it.",
     "source_url": "https://files.pythonhosted.org/packages/56/1a/9ffe814d317c5224166b23e7c47f606d6e473712a2fad0f704ea9b99f246/urllib3-2.6.0-py3-none-any.whl",
     "source_excerpt": "urllib3 2.5.0 (urllib3-2.5.0-py3-none-any.whl), urllib3/response.py line 543: def getheaders(self) -> HTTPHeaderDict\nurllib3 2.6.0 (urllib3-2.6.0-py3-none-any.whl): not defined",
     "confidence": 1,

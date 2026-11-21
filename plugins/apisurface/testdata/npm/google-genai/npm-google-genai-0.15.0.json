@@ -1,0 +1,7 @@
+{
+  "name": "@google/genai",
+  "version": "0.15.0",
+  "dist": {
+    "tarball": "https://registry.npmjs.org/@google/genai/-/genai-0.15.0.tgz"
+  }
+}

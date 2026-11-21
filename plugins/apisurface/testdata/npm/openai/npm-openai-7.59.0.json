@@ -1,0 +1,7 @@
+{
+  "name": "openai",
+  "version": "7.59.0",
+  "dist": {
+    "tarball": "https://registry.npmjs.org/openai/-/openai-7.59.0.tgz"
+  }
+}

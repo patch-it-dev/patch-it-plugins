@@ -27,6 +27,7 @@ var defaultReaders = map[string]string{
 	"notices":        "deprecations",
 	"migrationguide": "sdk",
 	"changelog":      "markdown",
+	"apisurface":     "pypi", // npm when a --package is npm:
 }
 
 var formats = map[string]formatSpec{
@@ -541,7 +542,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 		imports: []string{"context", "fmt", "os", "github.com/patch-it-dev/patch-it-plugins/plugins/openapi/adapter", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/core/plugin"},
 		next:    "Write LatestTag, Fetch and Versions in plugins/openapi/adapter/{{.File}}.go (fetch.Get only); add Diff/Keep to the Register line if the spec needs them (see vercel.go).",
 	},
-	"apisurface": {
+	"apisurface/pypi": {
 		kind:   "apisurface",
 		layer:  "sdk",
 		defDir: "plugins/apisurface",
@@ -610,6 +611,82 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 `,
 		imports: []string{"archive/zip", "bytes", "context", "fmt", "github.com/patch-it-dev/patch-it-plugins/core/event"},
 		next:    "Save two real wheels of the package and serve them in {{.Lower}}Ingest; the kind reads their .py files, never runs them.",
+	},
+	"apisurface/npm": {
+		kind:   "apisurface",
+		layer:  "sdk",
+		defDir: "plugins/apisurface",
+		def: `package apisurface
+
+// {{.Ident}} is {{.Provider}}'s package on npm, its public API read from each
+// release's TypeScript declarations.
+//
+// ` + todo + `: check the name on npm, and that its tarball has .d.ts
+// files (package.json's "types" or "exports"). Say what you checked, with
+// the date.
+var {{.Ident}} = npmPackage("{{.ID}}", "{{.NPM}}")
+`,
+		register: `plugin.Register(Plugin{Package: {{.Ident}}})`,
+		pluginOf: `Plugin{Package: {{.Ident}}}`,
+		fixtures: map[string]string{
+			"{{.File}}-old.d.ts": "// ` + todo + `: a placeholder for the older release's declarations. Save the real release's tarball instead (see npm_test.go).\nexport declare function placeholder(a: string, b?: number): void;\n",
+			"{{.File}}-new.d.ts": "// ` + todo + `: a placeholder for the newer release's declarations: b is no longer optional, one event.\nexport declare function placeholder(a: string, b: number): void;\n",
+		},
+		// The drop test's newer release: the older one again, a name added.
+		dropFile: "// ` + todo + `: a placeholder: a release that only adds.\nexport declare function placeholder(a: string, b?: number): void;\nexport declare function added(): void;\n",
+		source:   "{{.File}}-new.d.ts",
+		ingest: `// {{.Lower}}Ingest compares two releases: 1.0.0, a tarball holding
+// testdata/{{.File}}-old.d.ts as index.d.ts, and 1.1.0, one holding file.
+// The tarballs are built here so the placeholders are text.
+// ` + todo + `: save the two real tarballs (trimmed if they're large, as
+// npm_test.go's are) and serve them instead.
+func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
+	t.Helper()
+	tarball := func(src string) []byte {
+		var buf bytes.Buffer
+		gz := gzip.NewWriter(&buf)
+		tw := tar.NewWriter(gz)
+		for name, body := range map[string][]byte{
+			"package/package.json": []byte(` + "`" + `{"name": "{{.NPM}}", "types": "index.d.ts"}` + "`" + `),
+			"package/index.d.ts":   kittest.Read(t, src),
+		} {
+			if err := tw.WriteHeader(&tar.Header{Name: name, Mode: 0o644, Size: int64(len(body)), Typeflag: tar.TypeReg}); err != nil {
+				t.Fatal(err)
+			}
+			tw.Write(body)
+		}
+		if err := tw.Close(); err != nil {
+			t.Fatal(err)
+		}
+		gz.Close()
+		return buf.Bytes()
+	}
+	reg := "https://registry.npmjs.org/" + strings.ReplaceAll("{{.NPM}}", "/", "%2F")
+	files := map[string][]byte{
+		reg:            []byte(` + "`" + `{"versions": {"1.0.0": {}, "1.1.0": {}}, "time": {"1.0.0": "2026-01-01T00:00:00Z", "1.1.0": "2026-02-01T00:00:00Z"}}` + "`" + `),
+		reg + "/1.0.0": []byte(` + "`" + `{"dist": {"tarball": "https://example.com/{{.File}}-1.0.0.tgz"}}` + "`" + `),
+		reg + "/1.1.0": []byte(` + "`" + `{"dist": {"tarball": "https://example.com/{{.File}}-1.1.0.tgz"}}` + "`" + `),
+		"https://example.com/{{.File}}-1.0.0.tgz": tarball("testdata/{{.File}}-old.d.ts"),
+		"https://example.com/{{.File}}-1.1.0.tgz": tarball(file),
+	}
+	env := kittest.Env(t, nil)
+	env.Get = func(_ context.Context, url string) ([]byte, error) {
+		if b, ok := files[url]; ok {
+			return b, nil
+		}
+		t.Errorf("fetched %s, which the test didn't save", url)
+		return nil, fmt.Errorf("no saved copy of %s", url)
+	}
+	ctx, p := context.Background(), Plugin{Package: {{.Ident}}}
+	vs, err := p.ListVersions(ctx, env)
+	if err != nil || len(vs) != 2 {
+		t.Fatalf("versions %v: %v", vs, err)
+	}
+	return kittest.Versions(t, env, p, vs[0], vs[1])
+}
+`,
+		imports: []string{"archive/tar", "bytes", "compress/gzip", "context", "fmt", "strings", "github.com/patch-it-dev/patch-it-plugins/core/event"},
+		next:    "Save two real tarballs of the package and serve them in {{.Lower}}Ingest; the kind reads their .d.ts files, never runs them.",
 	},
 }
 

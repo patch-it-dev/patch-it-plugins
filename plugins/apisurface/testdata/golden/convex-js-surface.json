@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:4c56412c5a8ece213fbc09f06f566879eb2356ca7b8e0ae4dd0308394c08da81",
+    "api": "convex/js-surface",
+    "version": "1.35.1",
+    "previous_version": "1.35.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "convex",
+      "change": "removed_symbol",
+      "symbols": [
+        "convex/browser.QueryOptions"
+      ]
+    },
+    "description": "The type `convex/browser.QueryOptions` was removed in convex 1.35.1: code using it fails.",
+    "migration_hint": "convex 1.35.1 has no `convex/browser.QueryOptions`: see the package's release notes for what replaces it.",
+    "source_url": "https://registry.npmjs.org/convex/-/convex-1.35.1.tgz",
+    "source_excerpt": "convex 1.35.0 (convex-1.35.0.tgz), dist/esm-types/browser/query_options.d.ts line 9: type QueryOptions<Query extends FunctionReference<\"query\">>\nconvex 1.35.1 (convex-1.35.1.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]
