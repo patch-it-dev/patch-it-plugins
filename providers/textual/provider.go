@@ -14,7 +14,8 @@ func init() {
 		ID: "textual", Name: "Textual", Category: plugin.CategoryPackages, Homepage: "https://textual.textualize.io",
 		Sources: []plugin.Source{
 			{
-				ID: "textual", Layer: plugin.LayerPackage, Watches: "Names removed, renamed or deprecated in each release, from the release's section of CHANGELOG.md at its tag",
+				ID: "textual", Layer: plugin.LayerPackage,
+				Watches:  "Names removed, renamed or deprecated in each release, from the release's section of CHANGELOG.md at its tag",
 				URLs:     []string{"https://github.com/Textualize/textual/blob/main/CHANGELOG.md", "https://pypi.org/project/textual/"},
 				Packages: []string{"pypi:textual"},
 				Plugin:   changelog.Plugin{File: Textual},

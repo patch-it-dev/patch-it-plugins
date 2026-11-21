@@ -14,11 +14,12 @@ func init() {
 		Sources: []plugin.Source{
 			// No Hints: PlanetScale's changelog is product news, not keyed by
 			// operation. Operation deprecations only, said in the description: see
-			// planetscale.go.
+			// api.go.
 			{
-				ID: "api", Layer: plugin.LayerAPI, Watches: "API operations deprecated, and deprecated operations removed, between commits of the spec, said in the operation's description",
-				URLs:   []string{"https://github.com/planetscale/terraform-provider-planetscale"},
-				Plugin: openapi.Plugin{Adapter: PlanetScale{}, Diff: planetscaleDiff, Keep: planetscaleKeep},
+				ID: "api", Layer: plugin.LayerAPI,
+				Watches: "API operations deprecated, and deprecated operations removed, between commits of the spec, said in the operation's description",
+				URLs:    []string{"https://github.com/planetscale/terraform-provider-planetscale"},
+				Plugin:  openapi.Plugin{Adapter: PlanetScale{}, Diff: planetscaleDiff, Keep: planetscaleKeep},
 			},
 		},
 	})

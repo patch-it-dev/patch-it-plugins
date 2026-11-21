@@ -18,19 +18,22 @@ func init() {
 		Sources: []plugin.Source{
 			// No Hints yet: GitHub's per-version CHANGELOG.md is prose with no table
 			// at all, so there's nothing for hint.Source to key on. (GitHub's Actions
-			// source is registered by plugins/notices.)
+			// source is read by the notices kind, below.)
 			{
-				ID: "rest-api", Layer: plugin.LayerAPI, Watches: "REST API changes between dated API versions",
-				URLs:   []string{"https://github.com/github/rest-api-description"},
-				Plugin: openapi.Plugin{Adapter: GitHub{}},
+				ID: "rest-api", Layer: plugin.LayerAPI,
+				Watches: "REST API changes between dated API versions",
+				URLs:    []string{"https://github.com/github/rest-api-description"},
+				Plugin:  openapi.Plugin{Adapter: GitHub{}},
 			},
 			{
-				ID: "actions", Layer: plugin.LayerCI, Watches: "GitHub Actions retirements, such as runner images and the `runs-on` labels they remove",
-				URLs:   []string{"https://github.blog/changelog/label/actions/feed/"},
-				Plugin: notices.Plugin{Page: Actions, Archiver: kit.Wayback{}},
+				ID: "actions", Layer: plugin.LayerCI,
+				Watches: "GitHub Actions retirements, such as runner images and the `runs-on` labels they remove",
+				URLs:    []string{"https://github.blog/changelog/label/actions/feed/"},
+				Plugin:  notices.Plugin{Page: Actions, Archiver: kit.Wayback{}},
 			},
 			{
-				ID: "graphql", Layer: plugin.LayerAPI, Watches: "GraphQL API fields, arguments, input fields and enum values GitHub announces it will remove, with the date, from the file its breaking-changes page is built from",
+				ID: "graphql", Layer: plugin.LayerAPI,
+				Watches:  "GraphQL API fields, arguments, input fields and enum values GitHub announces it will remove, with the date, from the file its breaking-changes page is built from",
 				URLs:     []string{"https://docs.github.com/en/graphql/overview/breaking-changes", "https://github.com/github/docs/blob/main/src/graphql/data/fpt/upcoming-changes.json"},
 				Packages: []string{"npm:@octokit/graphql"},
 				Plugin:   GraphQL,

@@ -15,7 +15,8 @@ func init() {
 		ID: "numpy", Name: "NumPy", Category: plugin.CategoryPackages, Homepage: "https://numpy.org",
 		Sources: []plugin.Source{
 			{
-				ID: "numpy", Layer: plugin.LayerPackage, Watches: "Members a new major removes or renames in the main namespace, from that major's migration guide at its first tag",
+				ID: "numpy", Layer: plugin.LayerPackage,
+				Watches:  "Members a new major removes or renames in the main namespace, from that major's migration guide at its first tag",
 				URLs:     []string{"https://numpy.org/devdocs/numpy_2_0_migration_guide.html", "https://pypi.org/project/numpy/"},
 				Packages: []string{"pypi:numpy"},
 				Plugin:   migrationguide.Plugin{Guide: Numpy},

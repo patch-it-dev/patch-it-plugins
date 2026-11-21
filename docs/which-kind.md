@@ -15,11 +15,11 @@ Every kind is one of two shapes ([writing-a-plugin.md, step 4](writing-a-plugin.
 | Is there a **structured catalog** in the provider's repo: one JSON file per command, or one file of upcoming removals? | `catalog` | Each release (or commit) of the catalog, compared with the one before: names that disappeared entirely, or removals newly announced | The command definitions a server is built from, at each release tag |
 | Is it a **published package** with no changelog worth reading? | `apisurface` | Each release's files from the registry (PyPI wheels, npm TypeScript declarations), compared: removed or renamed classes, functions, methods, and parameters removed or newly required | An SDK generated from a spec, released often, whose changelog says "chore: update types" |
 
-Still no "yes"? Open a [discussion](https://github.com/patch-it-dev/patch-it-plugins/discussions) with the source's link: a new kind is a new package under `plugins/`, and the questions above get one more row.
+Still no "yes"? Open a [discussion](https://github.com/patch-it-dev/patch-it-plugins/discussions) with the source's link: a new kind is a new package under `kinds/` (how to read, written once; each provider's sources in `providers/<provider>/` say what to read), and the questions above get one more row.
 
 ## Two sources, not one kind
 
-- **An API and its SDKs are separate sources.** The API's changes come from its spec or its notices; an SDK's from its migration guide, its changelog, or its published files. Register each on its kind, under the same provider.
+- **An API and its SDKs are separate sources.** The API's changes come from its spec or its notices; an SDK's from its migration guide, its changelog, or its published files. Register each, on its kind, in the provider's one `providers/<provider>/provider.go`.
 - **There is no kind per vendor or per tool.** Kubernetes API removals are a `migrationguide` or `notices` source; a Kubernetes client is a package source (`changelog` or `apisurface`); a Terraform provider is a `changelog` source.
 - **Prefer the most machine-readable source** (a spec beats a changelog, a changelog beats a feed, a feed beats a blog post): [writing-a-plugin.md, step 2](writing-a-plugin.md#2-pick-the-source).
 

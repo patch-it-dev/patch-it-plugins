@@ -17,9 +17,10 @@ func init() {
 		ID: "redis", Name: "Redis", Category: plugin.CategoryDatabases, Homepage: "https://redis.io",
 		Sources: []plugin.Source{
 			{
-				ID: "commands", Layer: plugin.LayerRuntime, Watches: "Commands removed entirely between two Redis releases, from the command definitions in the server's own source (src/commands/) at each release tag",
-				URLs:   []string{"https://github.com/redis/redis/tree/unstable/src/commands", "https://github.com/redis/redis/releases"},
-				Plugin: Commands,
+				ID: "commands", Layer: plugin.LayerRuntime,
+				Watches: "Commands removed entirely between two Redis releases, from the command definitions in the server's own source (src/commands/) at each release tag",
+				URLs:    []string{"https://github.com/redis/redis/tree/unstable/src/commands", "https://github.com/redis/redis/releases"},
+				Plugin:  Commands,
 			},
 			changelog.SDK("ioredis", Ioredis, "npm:ioredis"),
 			apisurface.PyPI(RedisPySurface, plugin.LayerSDK, "https://github.com/redis/redis-py"),

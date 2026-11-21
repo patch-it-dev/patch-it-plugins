@@ -18,9 +18,10 @@ func init() {
 			// reads as its own removal, side "response" by the differ's default,
 			// whether or not any operation that used it is actually gone.
 			{
-				ID: "api", Layer: plugin.LayerAPI, Watches: "REST API changes between releases of Flagsmith's own OpenAPI spec (removed endpoints and request parameters)",
-				URLs:   []string{"https://github.com/Flagsmith/flagsmith/blob/main/openapi.yaml"},
-				Plugin: openapi.Plugin{Adapter: Flagsmith{}, Keep: openapi.RequestSide},
+				ID: "api", Layer: plugin.LayerAPI,
+				Watches: "REST API changes between releases of Flagsmith's own OpenAPI spec (removed endpoints and request parameters)",
+				URLs:    []string{"https://github.com/Flagsmith/flagsmith/blob/main/openapi.yaml"},
+				Plugin:  openapi.Plugin{Adapter: Flagsmith{}, Keep: openapi.RequestSide},
 			},
 		},
 	})

@@ -17,16 +17,18 @@ func init() {
 		ID: "cloudflare", Name: "Cloudflare", Category: plugin.CategoryInfrastructure, Homepage: "https://www.cloudflare.com",
 		Sources: []plugin.Source{
 			// No Hints: Cloudflare's changelog is product news, not keyed by
-			// operation. Only operation deprecations and removals: see cloudflare.go.
-			// (cloudflare/api is the deprecations feed, registered by plugins/notices.)
+			// operation. Only operation deprecations and removals: see api_spec.go.
+			// (cloudflare/api is the deprecations feed, read by the notices kind, below.)
 			{
-				ID: "api-spec", Layer: plugin.LayerAPI, Watches: "API operations deprecated, and deprecated operations removed, day by day in the spec Cloudflare's SDKs and Terraform provider are generated from",
+				ID: "api-spec", Layer: plugin.LayerAPI,
+				Watches:  "API operations deprecated, and deprecated operations removed, day by day in the spec Cloudflare's SDKs and Terraform provider are generated from",
 				URLs:     []string{"https://github.com/cloudflare/api-schemas/blob/main/openapi.json"},
 				Packages: []string{"pypi:cloudflare", "npm:cloudflare"},
 				Plugin:   openapi.Plugin{Adapter: Cloudflare{}, Diff: cloudflareDiff, Keep: cloudflareKeep},
 			},
 			{
-				ID: "api", Layer: plugin.LayerAPI, Watches: "REST API operations Cloudflare deprecates, breaking on their end-of-life date when it gives one",
+				ID: "api", Layer: plugin.LayerAPI,
+				Watches:  "REST API operations Cloudflare deprecates, breaking on their end-of-life date when it gives one",
 				URLs:     []string{"https://developers.cloudflare.com/fundamentals/api/reference/deprecations/index.xml"},
 				Packages: []string{"pypi:cloudflare", "npm:cloudflare"},
 				Plugin:   notices.Plugin{Page: API, Archiver: kit.Wayback{}},

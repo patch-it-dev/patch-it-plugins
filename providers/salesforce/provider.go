@@ -15,9 +15,10 @@ func init() {
 		ID: "salesforce", Name: "Salesforce", Category: plugin.CategoryCRM, Homepage: "https://www.salesforce.com",
 		Sources: []plugin.Source{
 			{
-				ID: "rest-api", Layer: plugin.LayerAPI, Watches: "REST API version ranges deprecated and retired, from Salesforce's own API end-of-life policy page",
-				URLs:   []string{"https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html"},
-				Plugin: notices.Plugin{Page: RESTAPI, Archiver: kit.Wayback{}},
+				ID: "rest-api", Layer: plugin.LayerAPI,
+				Watches: "REST API version ranges deprecated and retired, from Salesforce's own API end-of-life policy page",
+				URLs:    []string{"https://developer.salesforce.com/docs/platform/api-rest/guide/api-rest-eol.html"},
+				Plugin:  notices.Plugin{Page: RESTAPI, Archiver: kit.Wayback{}},
 			},
 		},
 	})

@@ -50,11 +50,12 @@ imports:
 		echo "::error::imports outside the allowlist (Makefile, ALLOWED):"; echo "$$others"; exit 1; \
 	fi
 
-# Plugins fetch through env.Get / kit, never on their own.
+# Plugins fetch through env.Get / kit, never on their own. The one exception
+# is a test kit: openapitest serves recorded API responses over httptest.
 nethttp:
 	@bad=$$($(GO) list -f '{{.ImportPath}} {{join .Imports " "}}' ./... \
 		| grep -E '(^| )net/http( |$$)' | cut -d' ' -f1 \
-		| grep -vE '^$(MODULE)/(core/fetch|core/kit|plugins/openapi/adapter)(/|$$)' || true); \
+		| grep -vE '^$(MODULE)/(core/fetch|core/kit|kinds/openapi/openapitest)(/|$$)' || true); \
 	if [ -n "$$bad" ]; then \
 		echo "::error::these packages import net/http; fetch through env.Get or kit instead:"; echo "$$bad"; exit 1; \
 	fi
@@ -65,7 +66,7 @@ test:
 
 # A provider started with new-plugin is done when nothing it wrote still says
 # TODO(new-plugin).
-TODO_DIRS := plugins providers
+TODO_DIRS := kinds providers
 todos:
 	@left=$$(grep -rl 'TODO(new-plugin)' $(TODO_DIRS) || true); \
 	if [ -n "$$left" ]; then \

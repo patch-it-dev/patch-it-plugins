@@ -14,9 +14,10 @@ func init() {
 		ID: "neon", Name: "Neon", Category: plugin.CategoryDatabases, Homepage: "https://neon.com",
 		Sources: []plugin.Source{
 			// No Hints: Neon's changelog is a weekly digest, not keyed by operation.
-			// Only operation deprecations and removals: see neon.go.
+			// Only operation deprecations and removals: see api.go.
 			{
-				ID: "api", Layer: plugin.LayerAPI, Watches: "Neon API operations deprecated, and deprecated operations removed, between commits of the spec",
+				ID: "api", Layer: plugin.LayerAPI,
+				Watches:  "Neon API operations deprecated, and deprecated operations removed, between commits of the spec",
 				URLs:     []string{"https://github.com/neondatabase/neon-pkgs"},
 				Packages: []string{"npm:@neondatabase/api-client"},
 				Plugin:   openapi.Plugin{Adapter: Neon{}, Diff: neonDiff, Keep: neonKeep},

@@ -1,7 +1,7 @@
 // Package members is the migration-guide kind's reader for a package release
 // that removed members of its top-level module, read from the release's own
 // migration guide at its tag: change event v2's `package_release` subject.
-// The kind (plugins/migrationguide) reads the guide and calls Read; this
+// The kind (kinds/migrationguide) reads the guide and calls Read; this
 // package knows where the guide is and how its table reads. A guide is read
 // at the first release of each major (X.0.0), listed from PyPI: nothing in
 // the code names a release. NumPy first: its 2.0 guide lists about 60

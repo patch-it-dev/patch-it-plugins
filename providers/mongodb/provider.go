@@ -16,16 +16,18 @@ func init() {
 		Sources: []plugin.Source{
 			// No Hints: the Atlas changelog is its own source (mongodb/atlas-admin-api,
 			// kind changelog). Only operation deprecations and removals: see
-			// mongodb.go.
+			// atlas_admin_spec.go.
 			{
-				ID: "atlas-admin-spec", Layer: plugin.LayerAPI, Watches: "Atlas Administration API v2 operations deprecated, and deprecated operations removed, day by day in MongoDB's published spec",
-				URLs:   []string{"https://github.com/mongodb/openapi/blob/main/openapi/v2.json"},
-				Plugin: openapi.Plugin{Adapter: MongoDBAtlas{}, Diff: atlasDiff, Keep: atlasKeep},
+				ID: "atlas-admin-spec", Layer: plugin.LayerAPI,
+				Watches: "Atlas Administration API v2 operations deprecated, and deprecated operations removed, day by day in MongoDB's published spec",
+				URLs:    []string{"https://github.com/mongodb/openapi/blob/main/openapi/v2.json"},
+				Plugin:  openapi.Plugin{Adapter: MongoDBAtlas{}, Diff: atlasDiff, Keep: atlasKeep},
 			},
 			{
-				ID: "atlas-admin-api", Layer: plugin.LayerAPI, Watches: "Atlas Administration API versions deprecated and removed at their sunset date, per endpoint, from MongoDB's own API changelog",
-				URLs:   []string{"https://github.com/mongodb/openapi/blob/main/changelog/changelog.json"},
-				Plugin: changelog.Plugin{Log: AtlasAdminAPI},
+				ID: "atlas-admin-api", Layer: plugin.LayerAPI,
+				Watches: "Atlas Administration API versions deprecated and removed at their sunset date, per endpoint, from MongoDB's own API changelog",
+				URLs:    []string{"https://github.com/mongodb/openapi/blob/main/changelog/changelog.json"},
+				Plugin:  changelog.Plugin{Log: AtlasAdminAPI},
 			},
 			apisurface.PyPI(PymongoSurface, plugin.LayerSDK, "https://github.com/mongodb/mongo-python-driver"),
 			apisurface.NPM(NodeSurface, "https://github.com/mongodb/node-mongodb-native"),

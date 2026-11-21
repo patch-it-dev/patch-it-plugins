@@ -1,5 +1,5 @@
 // Package eol is the notices kind's reader for a vendor's own API
-// end-of-life page (plugins/notices reads it, snapshots and cites it): a
+// end-of-life page (kinds/notices reads it, snapshots and cites it): a
 // table of whole version ranges, each with a support status. One event per
 // version number a row says is already retired (breaking) or scheduled to be
 // (deprecation); a row that only says "Supported." names nothing to report.
@@ -159,7 +159,7 @@ func Findings(page []byte) ([]Finding, error) {
 	return out, nil
 }
 
-// What the notices kind (plugins/notices) asks of an end-of-life page.
+// What the notices kind (kinds/notices) asks of an end-of-life page.
 
 // Read is what one read of a page found, dropped rows included.
 type Read []Finding

@@ -15,7 +15,8 @@ func init() {
 		ID: "posthog", Name: "PostHog", Category: plugin.CategoryAnalytics, Homepage: "https://posthog.com",
 		Sources: []plugin.Source{
 			{
-				ID: "python-sdk", Layer: plugin.LayerSDK, Watches: "Members a new major of the posthog Python SDK removes, from its migration guide in docs/ at the major's first tag",
+				ID: "python-sdk", Layer: plugin.LayerSDK,
+				Watches:  "Members a new major of the posthog Python SDK removes, from its migration guide in docs/ at the major's first tag",
 				URLs:     []string{"https://github.com/PostHog/posthog-python/tree/main/docs", "https://pypi.org/project/posthog/"},
 				Packages: []string{"pypi:posthog"},
 				Plugin:   migrationguide.Plugin{Guide: PythonSDK},

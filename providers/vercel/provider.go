@@ -15,7 +15,8 @@ func init() {
 			// No Hints: Vercel's changelog is product news, not keyed by API change.
 			// Only operation deprecations and removals are kept: see vercelKeep.
 			{
-				ID: "api", Layer: plugin.LayerAPI, Watches: "REST API operations deprecated, and deprecated operations removed, between SDK releases of the spec",
+				ID: "api", Layer: plugin.LayerAPI,
+				Watches:  "REST API operations deprecated, and deprecated operations removed, between SDK releases of the spec",
 				URLs:     []string{"https://github.com/vercel/sdk"},
 				Packages: []string{"npm:@vercel/sdk"},
 				Plugin:   openapi.Plugin{Adapter: Vercel{}, Diff: vercelDiff, Keep: vercelKeep},

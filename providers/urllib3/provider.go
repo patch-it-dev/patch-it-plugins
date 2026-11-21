@@ -14,7 +14,8 @@ func init() {
 		ID: "urllib3", Name: "urllib3", Category: plugin.CategoryPackages, Homepage: "https://urllib3.readthedocs.io",
 		Sources: []plugin.Source{
 			{
-				ID: "urllib3", Layer: plugin.LayerPackage, Watches: "Names removed or deprecated in each release, from the release's section of CHANGES.rst at its tag",
+				ID: "urllib3", Layer: plugin.LayerPackage,
+				Watches:  "Names removed or deprecated in each release, from the release's section of CHANGES.rst at its tag",
 				URLs:     []string{"https://github.com/urllib3/urllib3/blob/main/CHANGES.rst", "https://pypi.org/project/urllib3/"},
 				Packages: []string{"pypi:urllib3"},
 				Plugin:   changelog.Plugin{File: Urllib3},

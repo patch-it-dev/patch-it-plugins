@@ -14,11 +14,12 @@ func init() {
 		ID: "supabase", Name: "Supabase", Category: plugin.CategoryDatabases, Homepage: "https://supabase.com",
 		Sources: []plugin.Source{
 			// No Hints: Supabase's changelog is platform news, not keyed by
-			// operation. Only operation deprecations and removals: see supabase.go.
+			// operation. Only operation deprecations and removals: see management_api.go.
 			{
-				ID: "management-api", Layer: plugin.LayerAPI, Watches: "Management API operations deprecated, and deprecated operations removed, between commits of the spec",
-				URLs:   []string{"https://github.com/supabase/supabase"},
-				Plugin: openapi.Plugin{Adapter: Supabase{}, Diff: supabaseDiff, Keep: supabaseKeep},
+				ID: "management-api", Layer: plugin.LayerAPI,
+				Watches: "Management API operations deprecated, and deprecated operations removed, between commits of the spec",
+				URLs:    []string{"https://github.com/supabase/supabase"},
+				Plugin:  openapi.Plugin{Adapter: Supabase{}, Diff: supabaseDiff, Keep: supabaseKeep},
 			},
 			apisurface.PyPI(PythonSurface, plugin.LayerSDK, "https://github.com/supabase/supabase-py"),
 			apisurface.NPM(JSSurface, "https://github.com/supabase/supabase-js"),

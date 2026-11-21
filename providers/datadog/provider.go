@@ -16,7 +16,8 @@ func init() {
 			// No Hints yet: Datadog's changelog isn't Stripe's per-parameter table
 			// shape, so there's no hint.Source for it to read.
 			{
-				ID: "api", Layer: plugin.LayerAPI, Watches: "API v2 changes between OpenAPI spec releases",
+				ID: "api", Layer: plugin.LayerAPI,
+				Watches:  "API v2 changes between OpenAPI spec releases",
 				URLs:     []string{"https://github.com/DataDog/datadog-api-client-python"},
 				Packages: []string{"pypi:datadog-api-client", "npm:@datadog/datadog-api-client"},
 				Plugin:   openapi.Plugin{Adapter: Datadog{}},

@@ -99,7 +99,7 @@ func TestRegisterProviderRefusesIncompleteMetadata(t *testing.T) {
 		}()}},
 		"wrong page": {ID: "x10", Name: "X", Category: CategoryAI, Homepage: "https://x.example", Sources: []Source{func() Source {
 			s := src("api", "x10")
-			s.Page = "providers/x10.md"
+			s.Page = "providers/x10.md" // not providers/x10/README.md
 			return s
 		}()}},
 		"wrong kind": {ID: "x6", Name: "X", Category: CategoryAI, Homepage: "https://x.example", Sources: []Source{func() Source {

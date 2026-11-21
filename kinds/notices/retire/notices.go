@@ -7,7 +7,7 @@ import (
 	"github.com/patch-it-dev/patch-it-plugins/core/kit"
 )
 
-// What the notices kind (plugins/notices) asks of a deprecations page.
+// What the notices kind (kinds/notices) asks of a deprecations page.
 
 // Retirements are what one read of a page found.
 type Retirements []Retirement

@@ -15,9 +15,10 @@ func init() {
 			// No Hints: GitLab's deprecations are prose per feature, not a changelog
 			// keyed by API version, so there's nothing for hint.Source to look up.
 			{
-				ID: "rest-api", Layer: plugin.LayerAPI, Watches: "REST API changes between releases, request side only (what callers send)",
-				URLs:   []string{"https://gitlab.com/gitlab-org/gitlab/-/tree/master/doc/api/openapi"},
-				Plugin: openapi.Plugin{Adapter: GitLab{}, Keep: openapi.RequestSide},
+				ID: "rest-api", Layer: plugin.LayerAPI,
+				Watches: "REST API changes between releases, request side only (what callers send)",
+				URLs:    []string{"https://gitlab.com/gitlab-org/gitlab/-/tree/master/doc/api/openapi"},
+				Plugin:  openapi.Plugin{Adapter: GitLab{}, Keep: openapi.RequestSide},
 			},
 		},
 	})

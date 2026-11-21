@@ -4,12 +4,13 @@
 
 ## Checklist
 
-- [ ] **Metadata complete in the registration** (`plugin.RegisterProvider`: provider id, name, category, homepage; each source's id, kind, layer, what it watches, URLs, packages, page), and I read the words. There is no list to update. Not applicable: <!-- say why -->
+- [ ] **Metadata complete in the registration** (`providers/<provider>/provider.go`, its one `plugin.RegisterProvider`: provider id, name, category, homepage; each source's id, layer, what it watches, URLs, packages), and I read the words. There is no list to update. Not applicable: <!-- say why -->
 - [ ] Every commit is signed off (`git commit -s`, DCO)
-- [ ] Golden test over a real saved copy of the source (`testdata/golden/<provider>-<source>.json`)
-- [ ] `testdata/README.md` lists each file: URL, date fetched, license, quote of the part the plugin reads
+- [ ] Golden test over a real saved copy of the source (`providers/<provider>/testdata/golden/<provider>-<source>.json`)
+- [ ] `providers/<provider>/testdata/README.md` lists each file: URL, date fetched, license, quote of the part the plugin reads
 - [ ] One pinned drop test: a realistic input that produces no event
-- [ ] `providers/<provider>-<source>.md` written or updated from `providers/_template.md`, including **Why this source**
+- [ ] The source's section of `providers/<provider>/README.md` written or updated (a new provider's page from `docs/provider-template.md`), including **Why this source**
+- [ ] Provider-specific code only in `providers/<provider>/`; a kind (`kinds/<kind>/`) imports no provider
 - [ ] Fetches only through `env.Get` / `core/kit/`
 - [ ] `make check` passes locally (`make plugins` prints the source as you expect)
 - [ ] Nothing private: no credentials, internal hosts, private links, customer names

@@ -14,7 +14,8 @@ func init() {
 		ID: "newrelic", Name: "New Relic", Category: plugin.CategoryMonitoring, Homepage: "https://newrelic.com",
 		Sources: []plugin.Source{
 			{
-				ID: "python-agent", Layer: plugin.LayerSDK, Watches: "Members a new major of the New Relic Python agent removes, from the major's release notes (Removed features)",
+				ID: "python-agent", Layer: plugin.LayerSDK,
+				Watches:  "Members a new major of the New Relic Python agent removes, from the major's release notes (Removed features)",
 				URLs:     []string{"https://docs.newrelic.com/docs/release-notes/agent-release-notes/python-release-notes/", "https://pypi.org/project/newrelic/"},
 				Packages: []string{"pypi:newrelic"},
 				Plugin:   migrationguide.Plugin{Guide: PythonAgent},

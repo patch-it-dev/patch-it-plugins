@@ -4,8 +4,8 @@
 // name (and, for a list of upcoming changes, its date and what to use
 // instead). Each reader is a plugin of its own in this package, read
 // version by version (plugin.Versioned): Redis's commands at each release
-// tag (redis.go), GitHub's GraphQL upcoming changes at each commit
-// (graphql.go).
+// tag (Commands, commands.go), GitHub's GraphQL upcoming changes at each commit
+// (UpcomingChanges, upcoming.go).
 //
 // Precision over recall: a name that moves (a genuine rename) reads as one
 // removal and one addition, same as any other. A reader never guesses a

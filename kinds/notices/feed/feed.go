@@ -1,5 +1,5 @@
 // Package feed is the notices kind's reader for a vendor's RSS or Atom
-// changelog feed (plugins/notices reads it, snapshots and cites it): one event per breaking or deprecation entry (or per name such an
+// changelog feed (kinds/notices reads it, snapshots and cites it): one event per breaking or deprecation entry (or per name such an
 // entry lists), quoting the line that says so. Rung 3 of the source ladder.
 //
 // A feed is prose, so each feed comes with a Reader that knows what its
@@ -67,7 +67,7 @@ func (f Feed) Findings(b []byte) ([]Finding, error) {
 	return out, nil
 }
 
-// What the notices kind (plugins/notices) asks of a feed.
+// What the notices kind (kinds/notices) asks of a feed.
 
 // Findings are what one read of a feed found, dropped entries included.
 type Findings []Finding

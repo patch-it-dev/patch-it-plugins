@@ -9,7 +9,7 @@ import (
 	"github.com/patch-it-dev/patch-it-plugins/core/versions"
 )
 
-// What the migration-guide kind (plugins/migrationguide) asks of a guide.
+// What the migration-guide kind (kinds/migrationguide) asks of a guide.
 
 // Slug is the source id the events carry: "anthropic/python-sdk".
 func (g Guide) Slug() string { return g.API }

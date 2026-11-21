@@ -16,7 +16,8 @@ func init() {
 		ID: "stripe", Name: "Stripe", Category: plugin.CategoryPayments, Homepage: "https://stripe.com",
 		Sources: []plugin.Source{
 			{
-				ID: "api", Layer: plugin.LayerAPI, Watches: "REST API changes between OpenAPI spec releases (removed and renamed endpoints, parameters and fields), with migration hints from Stripe's API changelog",
+				ID: "api", Layer: plugin.LayerAPI,
+				Watches:  "REST API changes between OpenAPI spec releases (removed and renamed endpoints, parameters and fields), with migration hints from Stripe's API changelog",
 				URLs:     []string{"https://github.com/stripe/openapi"},
 				Packages: []string{"pypi:stripe", "npm:stripe"},
 				Plugin:   openapi.Plugin{Adapter: Stripe{}, Hints: hint.Stripe{}},
@@ -38,7 +39,8 @@ func init() {
 // (older ones "## X.Y.Z - date"), every breaking bullet marked "⚠️"; each
 // release tagged vX.Y.Z. A release that changes the API version the SDK
 // pins says so in its section, "This release changes the pinned API version
-// to `2026-11-18.endive`." (pins.go): its MapsTo is that stripe/api version.
+// to `2026-11-18.endive`." (kinds/changelog/pins.go): its MapsTo is that
+// stripe/api version.
 var (
 	Python = changelog.File{API: "stripe/python", Package: "stripe", Ecosystem: "pypi", Module: "stripe",
 		Repo: "stripe/stripe-python", TagPrefix: "v", Path: "CHANGELOG.md", Pins: "stripe/api"}

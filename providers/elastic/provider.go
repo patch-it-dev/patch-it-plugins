@@ -14,9 +14,10 @@ func init() {
 		ID: "elastic", Name: "Elastic", Category: plugin.CategorySearch, Homepage: "https://www.elastic.co",
 		Sources: []plugin.Source{
 			// No Hints: Elastic's breaking-changes page is prose per area, not keyed
-			// by operation. See elasticsearch.go.
+			// by operation. See elasticsearch_api.go.
 			{
-				ID: "elasticsearch-api", Layer: plugin.LayerAPI, Watches: "Elasticsearch REST API operations deprecated, and deprecated operations removed, between released minor versions of the spec",
+				ID: "elasticsearch-api", Layer: plugin.LayerAPI,
+				Watches:  "Elasticsearch REST API operations deprecated, and deprecated operations removed, between released minor versions of the spec",
 				URLs:     []string{"https://github.com/elastic/elasticsearch-specification"},
 				Packages: []string{"pypi:elasticsearch", "npm:@elastic/elasticsearch"},
 				Plugin:   openapi.Plugin{Adapter: Elasticsearch{}, Diff: elasticsearchDiff, Keep: elasticsearchKeep, RemovalsNeedANewVersion: true},

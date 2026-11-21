@@ -16,11 +16,12 @@ func init() {
 		Sources: []plugin.Source{
 			// No Hints: Sentry's changelog is product news, not keyed by operation.
 			// Operation deprecations only, most said in the description: see
-			// sentry.go.
+			// api.go.
 			{
-				ID: "api", Layer: plugin.LayerAPI, Watches: "REST API operations deprecated between releases of the spec, most of them in the operation's description",
-				URLs:   []string{"https://github.com/getsentry/sentry/releases"},
-				Plugin: openapi.Plugin{Adapter: Sentry{}, Diff: sentryDiff, Keep: sentryKeep},
+				ID: "api", Layer: plugin.LayerAPI,
+				Watches: "REST API operations deprecated between releases of the spec, most of them in the operation's description",
+				URLs:    []string{"https://github.com/getsentry/sentry/releases"},
+				Plugin:  openapi.Plugin{Adapter: Sentry{}, Diff: sentryDiff, Keep: sentryKeep},
 			},
 			changelog.SDK("python-changelog", PythonChangelog, "pypi:sentry-sdk"),
 			changelog.SDK("javascript-changelog", JavascriptChangelog, "npm:@sentry/node", "npm:@sentry/browser"),

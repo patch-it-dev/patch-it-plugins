@@ -14,9 +14,10 @@ func init() {
 		Sources: []plugin.Source{
 			// No Hints: Appwrite's changelog is product news, not keyed by operation.
 			// Operation deprecations only, SDK method renames left out: see
-			// appwrite.go.
+			// api.go.
 			{
-				ID: "api", Layer: plugin.LayerAPI, Watches: "REST API operations a server SDK calls that are deprecated between commits of the spec, SDK method renames left out",
+				ID: "api", Layer: plugin.LayerAPI,
+				Watches:  "REST API operations a server SDK calls that are deprecated between commits of the spec, SDK method renames left out",
 				URLs:     []string{"https://github.com/appwrite/specs"},
 				Packages: []string{"pypi:appwrite", "npm:node-appwrite"},
 				Plugin:   openapi.Plugin{Adapter: Appwrite{}, Diff: appwriteDiff, Keep: appwriteKeep},

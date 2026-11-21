@@ -2,17 +2,18 @@
 
 Thanks for helping patch-it watch more APIs. This file is the rulebook; [docs/writing-a-plugin.md](docs/writing-a-plugin.md) is the how-to.
 
-**Start a new provider with the starter:** `make new-plugin ARGS='--provider <id> --source <id> --kind <kind>'` ([which kind?](docs/which-kind.md); in a terminal it asks for the rest) writes the definition, its registration, a test over placeholder sources, the testdata rows, the provider page, and the source's metadata in its `RegisterProvider` block; you fill in the `TODO(new-plugin)`s ([how](docs/writing-a-plugin.md#1-scaffold-it-with-new-plugin)).
+**Start a new provider or source with the starter:** `make new-plugin ARGS='--provider <id> --source <id> --kind <kind>'` ([which kind?](docs/which-kind.md); in a terminal it asks for the rest) writes everything into the provider's folder, `providers/<id>/`: the source's definition, its registration with its metadata in `provider.go` (the provider's one `RegisterProvider` block), a test over placeholder sources, the testdata rows, and the source's section of the provider's page; you fill in the `TODO(new-plugin)`s ([how](docs/writing-a-plugin.md#1-scaffold-it-with-new-plugin)).
 
 ## The rules
 
-1. **Give every provider and source complete metadata in its registration.** A source exists when its kind's package registers it with `plugin.RegisterProvider`: the provider's id, name, category and homepage, and the source's id, layer, what it watches, the URLs it reads and its page. That registration is the only list: `make plugins` prints it, each release carries it as `plugins.json`, and docs.patch-it.dev reads it from there. Nothing else to update.
+1. **Give every provider and source complete metadata in its registration.** A source exists when its provider's `providers/<provider>/provider.go` registers it with `plugin.RegisterProvider` (once per provider, every source in it, built from the kinds' exported types): the provider's id, name, category and homepage, and the source's id, layer, what it watches, the URLs it reads and the packages it covers; its page is the provider's `README.md`. That registration is the only list: `make plugins` prints it, each release carries it as `plugins.json`, and docs.patch-it.dev reads it from there. Nothing else to update.
 2. **Fetch only through the environment.** Plugins get their sources from `env.Get` or the helpers in `core/kit/`, never from `net/http` directly, the filesystem or a database. That keeps tests offline and lets the hosted service cache, retry and rate-limit politely.
-3. **Every plugin has a golden test** over a real saved copy of its source: `testdata/<file>` in, `testdata/golden/<provider>-<source>.json` out. `testdata/README.md` lists each file with its URL, the date you fetched it, its license, and a short quote of the part your plugin reads. Keep openly licensed files whole; trim vendor documentation pages to what the test needs.
+3. **Every source has a golden test** over a real saved copy of it: `providers/<provider>/testdata/<file>` in, `providers/<provider>/testdata/golden/<provider>-<source>.json` out. The provider's `testdata/README.md` lists each file with its URL, the date you fetched it, its license, and a short quote of the part your plugin reads. Keep openly licensed files whole; trim vendor documentation pages to what the test needs.
 4. **Precision over recall.** A missed change is a bug we can fix later. A wrong change becomes a wrong pull request in someone's repo. When in doubt, don't emit.
-5. **One pinned drop test per plugin**: a realistic input your plugin must *not* turn into an event (an unrelated section, a renamed heading, a non-breaking addition).
-6. **Document the provider** in `providers/<provider>-<source>.md`, copied from [`providers/_template.md`](providers/_template.md): what it watches, **why you chose that source** (and the alternatives you didn't), how the provider announces changes, what the plugin reads and ignores, and known gaps.
-7. **Nothing private.** This repo is public. No credentials, tokens, internal hostnames or links to private repos or systems, in code, tests, commit messages or PR descriptions. CI scans every PR for secrets and for known internal names.
+5. **One pinned drop test per source**: a realistic input your plugin must *not* turn into an event (an unrelated section, a renamed heading, a non-breaking addition).
+6. **Document the source** in its section of the provider's page, `providers/<provider>/README.md` (a new provider's from [`docs/provider-template.md`](docs/provider-template.md)): what it watches, **why you chose that source** (and the alternatives you didn't), how the provider announces changes, what the plugin reads and ignores, and known gaps.
+7. **Keep how apart from what.** `kinds/<kind>/` says how to read a kind of source, written once, and imports no provider; `providers/<provider>/` says what to read for one provider and imports only `core/` and `kinds/`, never another provider. Code specific to one provider (an OpenAPI adapter, a feed's reader) lives in its folder. `go test ./providers/all` checks the import graph.
+8. **Nothing private.** This repo is public. No credentials, tokens, internal hostnames or links to private repos or systems, in code, tests, commit messages or PR descriptions. CI scans every PR for secrets and for known internal names.
 
 ## Sign your commits (DCO)
 
@@ -36,7 +37,7 @@ That adds `Signed-off-by: Your Name <you@example.com>`, matching the commit's au
 
 | Workflow | What it checks |
 |---|---|
-| `CI_go` | `go mod tidy`, build, vet, gofmt, `go test -race` (including that every registered source has its metadata and page); plugins import only this module, the standard library and approved dependencies; `net/http` only in the fetch layer. Each step is a [Makefile](Makefile) target: `make check` runs them all locally |
+| `CI_go` | `go mod tidy`, build, vet, gofmt, `go test -race` (including that every provider's folder is imported and registers it, every registered source has its metadata and is named on its provider's page, and the import graph: kinds import no provider, a provider only `core/` and `kinds/`); plugins import only this module, the standard library and approved dependencies; `net/http` only in the fetch layer. Each step is a [Makefile](Makefile) target: `make check` runs them all locally |
 | `CI_dco` | Every commit in the PR is signed off by its author |
 | `CI_leak_guard` | gitleaks over the PR's commits, and a check for known internal names (stored as hashes only). Also runs weekly over the whole repo |
 | `Claude Code Review` | Claude reviews the PR against the rules above, once (PRs from this repo's branches; forks: a maintainer comments `@claude review`). Advisory, not a required check |
@@ -46,7 +47,7 @@ That adds `Signed-off-by: Your Name <you@example.com>`, matching the commit's au
 
 Releases are tags on `main` (`v0.x.y`), made only by the **Release** workflow. Nothing is tagged on push, and agents never tag or release.
 
-**Automatic, twice a week:** every Monday and Thursday at 14:00 UTC the workflow makes a **patch** release, but only if something was merged since the last tag; otherwise it does nothing. If the merges add a **new kind** (a new `plugins/<kind>/` directory), the scheduled run skips with a warning instead: run it by hand with **minor**. So a merged plugin reaches patch-it's hosted ingestion service within a few days.
+**Automatic, twice a week:** every Monday and Thursday at 14:00 UTC the workflow makes a **patch** release, but only if something was merged since the last tag; otherwise it does nothing. If the merges add a **new kind** (a new `kinds/<kind>/` directory), the scheduled run skips with a warning instead: run it by hand with **minor**. So a merged plugin reaches patch-it's hosted ingestion service within a few days.
 
 **By hand, any time** (an urgent fix, or a **minor** release):
 
