@@ -32,7 +32,7 @@ func (g *growing) Snapshot(_ context.Context, url string) (string, []byte, error
 // snapshot of the day it first appeared; the unchanged read costs one GET
 // and keeps the snapshot. Nothing reaches the network.
 func TestReadsOfALivingPageStoreEachNoticeOnce(t *testing.T) {
-	full, err := os.ReadFile("testdata/openai-deprecations.md")
+	full, err := os.ReadFile("testdata/openai-deprecations-2026-10-13.md")
 	if err != nil {
 		t.Fatal(err)
 	}

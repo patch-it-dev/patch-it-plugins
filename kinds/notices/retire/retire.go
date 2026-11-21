@@ -83,16 +83,22 @@ func (f Format) Pipes(page []byte) []byte {
 var dateLayouts = []string{"January 2, 2006", "Jan 2, 2006", "2006-01-02"}
 
 // Parse reads every retirement table on the page. A model listed more than
-// once keeps its first row: both pages list the most recent announcement
-// first, and a later one supersedes an earlier date, including a later row
-// that withdraws the date ("To be announced"). A replacement that is
-// itself retired is followed to the model that replaces it, so a hint never
-// points at a model that no longer works.
+// once keeps one row: the one with the latest notice date when the table has
+// a notice date column (OpenAI's, since 2026-11), otherwise the first, since
+// pages without one list the most recent announcement first. A later notice
+// supersedes an earlier date, including one that withdraws the date ("To be
+// announced") or, in a status column, says the model isn't retiring after
+// all. A replacement that is itself retired is followed to the model that
+// replaces it, so a hint never points at a model that no longer works.
 func Parse(page []byte, keep func(string) bool) ([]Retirement, error) {
 	lines := strings.Split(strings.ReplaceAll(string(page), "\r\n", "\n"), "\n")
-	headerAt := 0
-	var out []Retirement
-	seen := map[string]bool{}
+	type row struct {
+		r      Retirement
+		dated  bool   // false: no retirement on this row (no date yet, or not retiring)
+		notice string // the notice date, YYYY-MM-DD, "" when the table has none
+	}
+	best := map[string]row{}
+	var order []string
 	heading := ""
 	for i := 0; i < len(lines); i++ {
 		line := strings.TrimSpace(lines[i])
@@ -115,34 +121,43 @@ func Parse(page []byte, keep func(string) bool) ([]Retirement, error) {
 		if model < 0 || repl < 0 || model == repl {
 			continue // an endpoint ("System"), an agent or a training-price table: no model to replace
 		}
-		headerAt = i
+		status, notice := column(header, "status"), column(header, "notice")
+		headerAt := i
 		i++ // the |---| row
 		for i+1 < len(lines) && strings.HasPrefix(strings.TrimSpace(lines[i+1]), "|") {
 			i++
-			row := strings.TrimSpace(lines[i])
-			c := cells(row)
-			if len(c) <= model || len(c) <= repl || len(c) <= when {
-				return nil, fmt.Errorf("a short row under %q: %s", heading, row)
+			text := strings.TrimSpace(lines[i])
+			c := cells(text)
+			if len(c) <= model || len(c) <= repl || len(c) <= when || len(c) <= status || len(c) <= notice {
+				return nil, fmt.Errorf("a short row under %q: %s", heading, text)
 			}
-			names := ticked.FindAllStringSubmatch(c[model], -1)
 			date, err := parseDate(c[when])
-			if err != nil {
-				// "To be announced": not a retirement yet, and the newer word on
-				// these names, so an older row's date for them doesn't count.
-				for _, m := range names {
-					seen[m[1]] = true
-				}
-				continue
+			r := row{dated: err == nil && (status < 0 || retiring(c[status]))}
+			if notice >= 0 {
+				// A notice date that doesn't read sorts first, so it never wins.
+				r.notice, _ = parseDate(c[notice])
 			}
-			excerpt := strings.Join([]string{heading, strings.TrimSpace(lines[headerAt]), row}, "\n")
-			for _, m := range names {
+			r.r = Retirement{Date: date, Replacement: c[repl], Excerpt: strings.Join([]string{heading, strings.TrimSpace(lines[headerAt]), text}, "\n")}
+			for _, m := range ticked.FindAllStringSubmatch(c[model], -1) {
 				name := m[1]
-				if seen[name] || !keep(name) {
+				if !keep(name) {
 					continue
 				}
-				seen[name] = true
-				out = append(out, Retirement{Model: name, Date: date, Replacement: c[repl], Excerpt: excerpt})
+				prev, ok := best[name]
+				if !ok {
+					order = append(order, name)
+				}
+				if !ok || r.notice > prev.notice {
+					r.r.Model = name
+					best[name] = r
+				}
 			}
+		}
+	}
+	var out []Retirement
+	for _, name := range order {
+		if r := best[name]; r.dated {
+			out = append(out, r.r)
 		}
 	}
 	if len(out) == 0 {
@@ -150,6 +165,25 @@ func Parse(page []byte, keep func(string) bool) ([]Retirement, error) {
 	}
 	follow(out)
 	return out, nil
+}
+
+// retiring says a status cell is a model on its way out or gone: exactly
+// "Deprecated", "Shutdown", "Shut down" or "Retired", whatever the case and
+// emphasis. Any other status ("Postponed", "Deprecation postponed", "Not
+// deprecated") is not a retirement, so the row is not read as one:
+// precision over recall, an unexpected wording fails safe.
+func retiring(status string) bool {
+	switch strings.ToLower(plain(status)) {
+	case "deprecated", "shutdown", "shut down", "retired":
+		return true
+	}
+	return false
+}
+
+// plain is a cell without Markdown emphasis: OpenAI's page bolds its
+// shutdown dates ("**Dec 1, 2026**", since 2026-11).
+func plain(cell string) string {
+	return strings.TrimSpace(strings.NewReplacer("**", "", "__", "").Replace(cell))
 }
 
 // follow replaces a replacement that is itself retired with its own
@@ -219,7 +253,7 @@ func column(header []string, words ...string) int {
 
 func parseDate(s string) (string, error) {
 	for _, layout := range dateLayouts {
-		if t, err := time.Parse(layout, strings.TrimSpace(s)); err == nil {
+		if t, err := time.Parse(layout, plain(s)); err == nil {
 			return t.Format("2006-01-02"), nil
 		}
 	}
