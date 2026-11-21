@@ -55,7 +55,7 @@ func (fakeConvexAdapter) SourcePointer(content []byte) func(string) string {
 func convexFile(tag string) string { return "testdata/convex-" + tag + ".json" }
 
 func convexURL(tag string) string {
-	return "https://raw.githubusercontent.com/get-convex/convex-backend/" + convexCommits[tag][0] + "/npm-packages/@convex-dev/platform/deployment-openapi.json"
+	return "https://raw.githubusercontent.com/convex/convex-backend/" + convexCommits[tag][0] + "/npm-packages/@convex-dev/platform/deployment-openapi.json"
 }
 
 // convexPlugin is the plugin exactly as registered, over the saved copies.
