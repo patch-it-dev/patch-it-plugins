@@ -37,8 +37,8 @@ func fixturePages() kittest.Pages {
 // and redis-doc-06f3598.json are real, trimmed excerpts of redis-doc's
 // commands.json at those two commits (checked 2026-11-18). Between them,
 // FUNCTION CREATE and FUNCTION INFO disappear, FUNCTION LOAD appears, and GET
-// (an unrelated, long-lived command) is unchanged. This is the pair the
-// version pair oldRef → newRef (ReadAt both, Extract) recreates.
+// (an unrelated, long-lived command) is unchanged: the version pair
+// oldRef → newRef, read with ReadAt and Extract.
 func TestPairRecreatesTheRealFunctionCommandRemoval(t *testing.T) {
 	ctx := context.Background()
 	s := kittest.NewMem()
