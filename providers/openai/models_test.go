@@ -23,7 +23,8 @@ func TestModelsGoldenBefore202611(t *testing.T) {
 
 // The drop test: a realistic update of today's page that must produce no
 // event. A feature or endpoint row (no model column), a new image model and
-// a text model whose Status isn't a retirement add nothing a client sends to
+// text models whose Status isn't exactly a retirement ("Postponed",
+// "Deprecation postponed") add nothing a client sends to
 // the Chat Completions or Responses APIs, and a row with no date yet isn't a
 // retirement.
 func TestModelsDropsWhatIsNotATextModelRetirement(t *testing.T) {
@@ -36,6 +37,7 @@ func TestModelsDropsWhatIsNotATextModelRetirement(t *testing.T) {
 | **Mar 1, 2027**  | ` + "`gpt-image-2.1`" + `        | Deprecated | ` + "`gpt-image-2.6-flare`" + `    | Nov 20, 2026 |
 | **Mar 1, 2027**  | ` + "`gpt-5.5-nova`" + `         | Postponed  | ` + "`gpt-6-luna`" + `             | Nov 20, 2026 |
 | To be announced  | ` + "`gpt-5.5-ember`" + `        | Deprecated | ` + "`gpt-6-luna`" + `             | Nov 20, 2026 |
+| **Mar 1, 2027**  | ` + "`gpt-5.5-flint`" + `        | Deprecation postponed | ` + "`gpt-6-luna`" + `  | Nov 20, 2026 |
 
 ## Feature and endpoint deprecations
 
