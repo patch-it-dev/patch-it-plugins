@@ -302,28 +302,32 @@ func TestSelfGoneIsNoRemovedParameter(t *testing.T) {
 
 // TypeScript passes arguments by position: a parameter renamed in place is
 // no change; one gone off the end (with no rest parameter now) is removed;
-// one optional before and required now lost its "default"; a new required
-// one at the end is a note.
+// one optional before and required now, under the same name, lost its
+// "default"; a new required one at the end is a note.
 func TestPositionalParameters(t *testing.T) {
 	pos := func(name string, optional bool) pysurface.Param {
 		return pysurface.Param{Name: name, Kind: "positional", HasDef: optional}
 	}
 	rest := pysurface.Param{Name: "args", Kind: "args", HasDef: true}
 	a := Release{Positional: true, Surface: pysurface.Surface{
-		"acme.renamed": sym("function", pos("a", false), pos("b", true)),
-		"acme.shorter": sym("function", pos("a", false), pos("b", true), pos("c", true)),
-		"acme.rest":    sym("function", pos("a", false), pos("b", true)),
-		"acme.req":     sym("function", pos("a", false), pos("opts", true)),
-		"acme.grew":    sym("function", pos("a", false)),
+		"acme.renamed":  sym("function", pos("a", false), pos("b", true)),
+		"acme.shorter":  sym("function", pos("a", false), pos("b", true), pos("c", true)),
+		"acme.rest":     sym("function", pos("a", false), pos("b", true)),
+		"acme.req":      sym("function", pos("a", false), pos("opts", true)),
+		"acme.grew":     sym("function", pos("a", false)),
+		"acme.inserted": sym("function", pos("a", false), pos("b", true)),
 	}}
 	b := Release{Positional: true, Surface: pysurface.Surface{
-		"acme.renamed": sym("function", pos("x", false), pos("y", true)),
-		"acme.shorter": sym("function", pos("a", false)),
-		"acme.rest":    sym("function", pos("a", false), rest),
-		"acme.req":     sym("function", pos("a", false), pos("opts", false)),
-		"acme.grew":    sym("function", pos("a", false), pos("b", false)),
+		"acme.renamed":  sym("function", pos("x", false), pos("y", true)),
+		"acme.shorter":  sym("function", pos("a", false)),
+		"acme.rest":     sym("function", pos("a", false), rest),
+		"acme.req":      sym("function", pos("a", false), pos("opts", false)),
+		"acme.grew":     sym("function", pos("a", false), pos("b", false)),
+		"acme.inserted": sym("function", pos("a", false), pos("x", false), pos("b", true)),
 	}}
-	want := "note acme.grew\nchanged_default acme.req opts\nremoved_parameter acme.shorter b\nremoved_parameter acme.shorter c"
+	// A required parameter inserted before an optional one (inserted) is a
+	// note: the optional one wasn't made required, it moved.
+	want := "note acme.grew\nnote acme.inserted\nchanged_default acme.req opts\nremoved_parameter acme.shorter b\nremoved_parameter acme.shorter c"
 	if got := strings.Join(changes(a, b), "\n"); got != want {
 		t.Errorf("got\n%s\nwant\n%s", got, want)
 	}

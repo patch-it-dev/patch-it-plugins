@@ -290,5 +290,3 @@ func Daily(vs []plugin.Version) []plugin.Version {
 	}
 	return out
 }
-
-var _ Lister = OpenAI{}

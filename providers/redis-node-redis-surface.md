@@ -32,5 +32,6 @@ Kind: `apisurface` (`plugins/apisurface`), with the TypeScript declaration reade
 - What a property's type holds isn't followed: `client.chat.completions.create` is read as the `Completions` class's `create`, reached through namespaces and entry points, not through the `chat` property's type.
 - Type changes (a parameter's type narrowed, a return type changed, an interface's fields) aren't events.
 - A package that re-exports another wholesale (`export * from "@scope/core"`) hides that package's API: it's a source of its own, or not read.
+- Classes are indexed by name across files to follow a method to its base class: two classes of the same name (in two namespaces) are read as one, which can only turn a removal into a note, never add one.
 - A parameter added without being optional is a note (the change-event contract has no subject for it yet).
 - `@redis/client`'s versions follow its own numbering; a lockfile's `redis` version maps to the client version it depends on.

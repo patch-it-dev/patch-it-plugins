@@ -88,7 +88,10 @@ func (OpenAI) Fetch(ctx context.Context, sha string) (Spec, error) {
 // SourcePointer: see BasePathPointer.
 func (OpenAI) SourcePointer(content []byte) func(string) string { return BasePathPointer(content) }
 
-var _ Reshaper = OpenAI{}
+var (
+	_ Reshaper = OpenAI{}
+	_ Lister   = OpenAI{}
+)
 
 // YAMLToJSON converts a YAML spec to JSON: diff.Parse reads JSON only, and
 // normalize quotes the node it cites re-serialized, never the original bytes,

@@ -376,8 +376,9 @@ func merge(cs []Change) []Change {
 
 // comparePositional compares two signatures whose arguments are passed by
 // position (TypeScript): a parameter gone off the end, when the newer one
-// takes no rest parameter, is removed; one optional before and required now
-// lost its default; names don't matter. A required parameter added at the
+// takes no rest parameter, is removed; one optional before and required now,
+// under the same name, lost its default (under another name, a parameter
+// may have been inserted before it: a note); a rename alone is no change. A required parameter added at the
 // end is a note (no subject for it in the contract yet).
 func comparePositional(k string, old, now pysurface.Symbol, before, after *pysurface.Symbol) []Change {
 	var out []Change
@@ -393,8 +394,12 @@ func comparePositional(k string, old, now pysurface.Symbol, before, after *pysur
 			out = append(out, Change{Change: event.PackageRemovedParameter, Kind: old.Kind, Symbol: k, Parameter: op.Name, Before: before, After: after})
 		case now.Params[i].Kind == "args":
 			return out
+		case op.HasDef && !now.Params[i].HasDef && now.Params[i].Name == op.Name:
+			out = append(out, Change{Change: event.PackageChangedDefault, Kind: old.Kind, Symbol: k, Parameter: op.Name, Before: before, After: after})
 		case op.HasDef && !now.Params[i].HasDef:
-			out = append(out, Change{Change: event.PackageChangedDefault, Kind: old.Kind, Symbol: k, Parameter: now.Params[i].Name, Before: before, After: after})
+			// Another name at the place: a parameter inserted before it,
+			// or a rename. Which one can't be told for sure.
+			out = append(out, Change{Symbol: k, Note: fmt.Sprintf("%s: parameter %d is now %s, required (was %s, optional)", k, i+1, now.Params[i].Name, op.Name)})
 		}
 	}
 	for i := len(old.Params); i < len(now.Params); i++ {
