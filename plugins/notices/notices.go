@@ -11,8 +11,15 @@
 //
 // Two options a reader turns on with a method: ShapeGuard (a read with fewer
 // than 90% of the last one's notices is an error: the page changed shape),
-// and ArchiveWhenBlocked (a live page that answers 401 or 403 is read from a
-// fresh Wayback Machine snapshot instead).
+// and ArchiveWhenBlocked (a live page that answers one of the statuses its
+// provider blocks plain fetches with is read from a fresh Wayback Machine
+// snapshot instead).
+//
+// A living page that can't be read is a failed run, never "nothing
+// changed": a page with no notices to read (plugin.ErrNothingToRead from its
+// reader) is the page changing shape or a block page served in its place,
+// so Read returns it as a plain error, which errors.Is doesn't take for
+// nothing to read.
 package notices
 
 import (
@@ -20,6 +27,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"slices"
 	"time"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
@@ -111,8 +119,9 @@ type Page interface {
 type shapeGuarded interface{ ShapeGuard() bool }
 
 // archivedWhenBlocked is a Page read from a fresh Wayback Machine snapshot
-// when the live page refuses a plain fetch.
-type archivedWhenBlocked interface{ ArchiveWhenBlocked() bool }
+// when the live page refuses a plain fetch: ArchiveWhenBlocked is the HTTP
+// statuses its provider blocks one with.
+type archivedWhenBlocked interface{ ArchiveWhenBlocked() []int }
 
 // Plugin reads one page.
 type Plugin struct {
@@ -141,6 +150,11 @@ func (p Plugin) Read(ctx context.Context, env plugin.Env, last plugin.Snapshot) 
 		return last, nil
 	}
 	want, err := pg.Find(live)
+	if errors.Is(err, plugin.ErrNothingToRead) {
+		// Not a skip: the page this source reads holds no notices, so it
+		// changed shape or something else was served in its place.
+		return plugin.Snapshot{}, fmt.Errorf("reading %s: the page has no notices to read, it may be blocked or have changed shape: %v", url, err)
+	}
 	if err != nil {
 		return plugin.Snapshot{}, fmt.Errorf("reading %s: %w", url, err)
 	}
@@ -166,19 +180,21 @@ func (p Plugin) Read(ctx context.Context, env plugin.Env, last plugin.Snapshot) 
 
 // fetch reads the live page. When the page's reader asks for it
 // (ArchiveWhenBlocked) and the provider's own site blocks a plain fetch with
-// 401 or 403 (Salesforce's docs site, every time, checked 2026-11-20;
-// confirmed the same day that a real Wayback Machine save-page-now capture
-// of that page parses to the same findings as the live page would), it
-// falls back to a fresh Wayback Machine snapshot, taken right now by the
-// archive's own crawler rather than patch-it's, and returns that content
-// with its own permanent URL in archivedURL: it needs no further citation
-// step, having come from the archive already.
+// one of the statuses the reader names (Salesforce's docs site: 403 on
+// 2026-11-20, 503 from its CDN on 2026-11-21, after fetch's own retries;
+// confirmed on 2026-11-20 that a real Wayback Machine capture of that page
+// parses to the same findings as the live page would), it falls back to a
+// fresh Wayback Machine snapshot, taken right now by the archive's own
+// crawler rather than patch-it's, and returns that content with its own
+// permanent URL in archivedURL: it needs no further citation step, having
+// come from the archive already.
 //
-// Only 401 and 403 fall back. A 404 or 410 means the page moved, not that
-// it's blocked: asking the archive to snapshot a page that's gone would
-// waste the call and hide the real cause behind the archive's own error.
-// A 429 or a 5xx is returned as is: retrying it against the archive would
-// hide a transient failure as a real page, not fix one.
+// Any other status is returned as is. A 404 or 410 means the page moved,
+// not that it's blocked: asking the archive to snapshot a page that's gone
+// would waste the call and hide the real cause behind the archive's own
+// error. A 429, or a 5xx the reader doesn't name, is a transient failure:
+// retrying it against the archive would hide it as a real page. Either way
+// the run fails, and so does a fallback whose snapshot can't be taken.
 func (p Plugin) fetch(ctx context.Context, env plugin.Env, pageURL string) (body []byte, archivedURL string, err error) {
 	body, err = env.Get(ctx, pageURL)
 	if err == nil {
@@ -186,7 +202,7 @@ func (p Plugin) fetch(ctx context.Context, env plugin.Env, pageURL string) (body
 	}
 	b, ok := p.Page.(archivedWhenBlocked)
 	var se *fetch.StatusError
-	if !ok || !b.ArchiveWhenBlocked() || !errors.As(err, &se) || (se.StatusCode != 401 && se.StatusCode != 403) {
+	if !ok || !errors.As(err, &se) || !slices.Contains(b.ArchiveWhenBlocked(), se.StatusCode) {
 		return nil, "", err
 	}
 	archivedURL, body, archErr := p.Archiver.Snapshot(ctx, pageURL)
