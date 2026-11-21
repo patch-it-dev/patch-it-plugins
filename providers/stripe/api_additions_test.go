@@ -107,3 +107,10 @@ func TestStripeReleasesOfOneVersionAreAdditionsOnly(t *testing.T) {
 		t.Fatalf("got %d events %v, want retrieval_reference_number added only", len(events), events)
 	}
 }
+
+// stripe/api re-releases its versions; a spec without the adapter doesn't.
+func TestStripeRereleasesItsVersions(t *testing.T) {
+	if !(openapi.Plugin{Adapter: Stripe{}}).Rereleases() {
+		t.Error("stripe/api: Rereleases false")
+	}
+}

@@ -187,9 +187,18 @@ func (p Plugin) extract(ctx context.Context, env plugin.Env, from, to plugin.Sna
 	return plugin.Result{Events: events, Rejected: errs}, nil
 }
 
+// Rereleases is true for an adapter that re-releases its versions
+// (adapter.Rereleased): the newest version is compared again, as a pair of
+// one version, when its release moves.
+func (p Plugin) Rereleases() bool {
+	_, ok := p.Adapter.(adapter.Rereleased)
+	return ok
+}
+
 var (
-	_ plugin.Versioned = Plugin{}
-	_ plugin.Guarded   = Plugin{}
+	_ plugin.Versioned   = Plugin{}
+	_ plugin.Guarded     = Plugin{}
+	_ plugin.Rereleasing = Plugin{}
 )
 
 // events diffs two parsed specs into events, applying Keep, and pointing each
