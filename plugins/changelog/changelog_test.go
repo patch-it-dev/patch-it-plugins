@@ -138,7 +138,8 @@ func TestRenamesAreFollowedToTheirEnd(t *testing.T) {
 	body := "## BREAKING CHANGES\\n\\n" +
 		"* `acme.a()` has been renamed to `acme.b()`\\n* `acme.b()` has been renamed to `acme.c()`\\n" +
 		"* `acme.x()` has been renamed to `acme.y()`\\n* `acme.y()` has been removed\\n" +
-		"* `acme.p()` has been renamed to `acme.q()`\\n* `acme.q()` has been renamed to `acme.p()`\\n"
+		"* `acme.p()` has been renamed to `acme.q()`\\n* `acme.q()` has been renamed to `acme.p()`\\n" +
+		"## Deprecations\\n\\n* Deprecated `acme.d` in favor of `acme.y`\\n"
 	_, fs, err := f.Read([]byte(`{"tag_name": "v2.0.0", "body": "` + body + `"}`))
 	if err != nil {
 		t.Fatal(err)
@@ -147,7 +148,7 @@ func TestRenamesAreFollowedToTheirEnd(t *testing.T) {
 	for _, f := range fs {
 		got = append(got, strings.Join(f.Change.Symbols, ",")+">"+f.Change.Replacement)
 	}
-	want := "acme.a>acme.c acme.b>acme.c acme.x> acme.y> acme.p> acme.q>"
+	want := "acme.a>acme.c acme.b>acme.c acme.x> acme.y> acme.p> acme.q> acme.d>acme.y"
 	if strings.Join(got, " ") != want {
 		t.Errorf("got  %s\nwant %s", strings.Join(got, " "), want)
 	}
