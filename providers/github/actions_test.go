@@ -4,6 +4,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/patch-it-dev/patch-it-plugins/core/extract"
 	"github.com/patch-it-dev/patch-it-plugins/core/kit/kittest"
 	"github.com/patch-it-dev/patch-it-plugins/kinds/notices/feed"
 	"github.com/patch-it-dev/patch-it-plugins/kinds/notices/noticestest"
@@ -54,8 +55,8 @@ func TestActionsUnsureEntriesAreDropped(t *testing.T) {
 // Breaking only when the vendor says the thing stops on the date; softer
 // words downgrade to a deprecation, and no date drops the entry.
 func TestBreakingNeedsTheVendorToSayItStops(t *testing.T) {
-	entry := func(sentence string) feed.Entry {
-		return feed.Entry{Title: "Ubuntu 22.04 runner image retirement", Link: "https://x.test/e", Categories: []string{"Retired"},
+	entry := func(sentence string) extract.Entry {
+		return extract.Entry{Title: "Ubuntu 22.04 runner image retirement", Link: "https://x.test/e", Categories: []string{"Retired"},
 			HTML: "<p>" + sentence + "</p><p>This deprecation includes the following labels:</p><ul><li><code>ubuntu-22.04</code></li></ul>"}
 	}
 	for sentence, want := range map[string]string{

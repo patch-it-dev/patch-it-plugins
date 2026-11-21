@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:2410950b4abb96df49dcfc203160590970afd61d54b0cffd7c0f69aabd152eaa",
+    "api": "gitlab/rest-api",
+    "version": "19.0.0",
+    "previous_version": "18.11.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "request_parameter",
+      "side": "request",
+      "operation": "POST /api/v4/import/bitbucket",
+      "property": "bitbucket_api_token"
+    },
+    "description": "Property bitbucket_api_token is now required in POST /api/v4/import/bitbucket.",
+    "migration_hint": "Always send bitbucket_api_token.",
+    "source_url": "https://gitlab.com/api/v4/projects/gitlab-org%2Fgitlab/repository/files/doc%2Fapi%2Fopenapi%2Fopenapi_v3.yaml/raw?ref=v19.0.0-ee",
+    "source_pointer": "/components/schemas/RequestBody_f0e6af1da635/properties/bitbucket_api_token",
+    "source_excerpt": "{\"description\":\"BitBucket API token\",\"nullable\":true,\"type\":\"string\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:d16335c186904d97976bf0262d52068c03c6a288e845f1b2eedb596931d4b28f",
+    "api": "gitlab/rest-api",
+    "version": "19.0.0",
+    "previous_version": "18.11.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "request_parameter",
+      "side": "request",
+      "operation": "POST /api/v4/import/bitbucket",
+      "property": "bitbucket_app_password"
+    },
+    "description": "Property bitbucket_app_password removed from POST /api/v4/import/bitbucket.",
+    "source_url": "https://gitlab.com/api/v4/projects/gitlab-org%2Fgitlab/repository/files/doc%2Fapi%2Fopenapi%2Fopenapi_v3.yaml/raw?ref=v18.11.0-ee",
+    "source_pointer": "/components/schemas/RequestBody_a98aaa3a441e/properties/bitbucket_app_password",
+    "source_excerpt": "{\"description\":\"BitBucket app password\",\"nullable\":true,\"type\":\"string\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:1fdbf03d0d78186ce1a1a7ab19449afc6fb7e8158160d2777ce52a619f0d93e6",
+    "api": "gitlab/rest-api",
+    "version": "19.0.0",
+    "previous_version": "18.11.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "request_parameter",
+      "side": "request",
+      "operation": "POST /api/v4/import/bitbucket",
+      "property": "bitbucket_email"
+    },
+    "description": "Property bitbucket_email is now required in POST /api/v4/import/bitbucket.",
+    "migration_hint": "Always send bitbucket_email.",
+    "source_url": "https://gitlab.com/api/v4/projects/gitlab-org%2Fgitlab/repository/files/doc%2Fapi%2Fopenapi%2Fopenapi_v3.yaml/raw?ref=v19.0.0-ee",
+    "source_pointer": "/components/schemas/RequestBody_f0e6af1da635/properties/bitbucket_email",
+    "source_excerpt": "{\"description\":\"BitBucket email\",\"nullable\":true,\"type\":\"string\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:e7b0d1779f8ca483da00e7ca1dfb5d4cb5a6d80fea16e1ad99da5bd39b5296e0",
+    "api": "gitlab/rest-api",
+    "version": "19.0.0",
+    "previous_version": "18.11.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "request_parameter",
+      "side": "request",
+      "operation": "POST /api/v4/import/bitbucket",
+      "property": "bitbucket_username"
+    },
+    "description": "Property bitbucket_username removed from POST /api/v4/import/bitbucket.",
+    "source_url": "https://gitlab.com/api/v4/projects/gitlab-org%2Fgitlab/repository/files/doc%2Fapi%2Fopenapi%2Fopenapi_v3.yaml/raw?ref=v18.11.0-ee",
+    "source_pointer": "/components/schemas/RequestBody_a98aaa3a441e/properties/bitbucket_username",
+    "source_excerpt": "{\"description\":\"BitBucket username (for app passwords)\",\"nullable\":true,\"type\":\"string\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

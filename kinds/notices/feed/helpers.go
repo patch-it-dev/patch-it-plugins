@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
+	"github.com/patch-it-dev/patch-it-plugins/core/extract"
 )
 
 var (
@@ -36,12 +37,12 @@ func Dated(lines []string) (line, date string, ct event.ChangeType) {
 		// The date after the words, not the first on the line: "deprecated
 		// as of February 23, 2026 and will be shut down on August 23, 2026".
 		if m := willStop.FindStringIndex(l); m != nil {
-			if d := Date(l[m[1]:]); d != "" {
+			if d := extract.Date(l[m[1]:]); d != "" {
 				return l, d, event.ChangeTypeBreaking
 			}
 		}
 		if m := willSoften.FindStringIndex(l); m != nil {
-			if d := Date(l[m[1]:]); d != "" {
+			if d := extract.Date(l[m[1]:]); d != "" {
 				return l, d, event.ChangeTypeDeprecation
 			}
 		}

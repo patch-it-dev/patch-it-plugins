@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
+	"github.com/patch-it-dev/patch-it-plugins/core/extract"
 	"github.com/patch-it-dev/patch-it-plugins/kinds/notices/feed"
 )
 
@@ -23,7 +24,7 @@ var API = feed.Feed{
 	Read:   readCloudflareAPI,
 }
 
-func readCloudflareAPI(e feed.Entry) []feed.Finding {
+func readCloudflareAPI(e extract.Entry) []feed.Finding {
 	title := strings.TrimPrefix(e.Title, "API deprecations - ")
 	drop := func(why string) []feed.Finding {
 		return []feed.Finding{{Entry: e.Link, Dropped: fmt.Sprintf("%q: %s", title, why)}}
@@ -35,7 +36,7 @@ func readCloudflareAPI(e feed.Entry) []feed.Finding {
 		return drop(`no "Deprecated APIs:" list of operations`)
 	}
 
-	lines := feed.Lines(e.HTML)
+	lines := extract.Lines(e.HTML)
 	for _, l := range lines {
 		if cfNoAction.MatchString(l) {
 			// The URL keeps working; only an SDK method moves (the Radar
@@ -60,13 +61,13 @@ func readCloudflareAPI(e feed.Entry) []feed.Finding {
 		}
 	}
 	for _, p := range cfParagraph.FindAllStringSubmatch(e.HTML, -1) {
-		if l := feed.Text(p[1]); cfStops.MatchString(l) {
+		if l := extract.Text(p[1]); cfStops.MatchString(l) {
 			stopLine = l
 			break
 		}
 	}
-	ct, date, dateLine := event.ChangeTypeDeprecation, feed.Date(depLine), depLine
-	if d := feed.Date(eolLine); d != "" && stopLine != "" {
+	ct, date, dateLine := event.ChangeTypeDeprecation, extract.Date(depLine), depLine
+	if d := extract.Date(eolLine); d != "" && stopLine != "" {
 		ct, date, dateLine = event.ChangeTypeBreaking, d, eolLine
 	}
 	if date == "" {
@@ -80,8 +81,8 @@ func readCloudflareAPI(e feed.Entry) []feed.Finding {
 
 	var out []feed.Finding
 	for _, li := range feed.ListItem.FindAllStringSubmatch(m[1], -1) {
-		codes := feed.Codes(li[1])
-		text := feed.Text(li[1])
+		codes := extract.Codes(li[1])
+		text := extract.Text(li[1])
 		// One operation, in code, first, and at most a name after it: "GET
 		// /path — List domains". Not "GET and POST /path", a hostname, nor
 		// "POST /path — creating rules with action: audit_ssh is no longer

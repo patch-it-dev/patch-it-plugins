@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
+	"github.com/patch-it-dev/patch-it-plugins/core/extract"
 	"github.com/patch-it-dev/patch-it-plugins/core/kit/kittest"
 	"github.com/patch-it-dev/patch-it-plugins/kinds/notices/feed"
 	"github.com/patch-it-dev/patch-it-plugins/kinds/notices/noticestest"
@@ -115,8 +116,8 @@ func TestCloudflareCounts(t *testing.T) {
 	}
 }
 
-func cfEntry(dates, items string) feed.Entry {
-	return feed.Entry{Title: "API deprecations - X", Link: "https://x.test/#x", Published: "Mon, 29 Jun 2026 00:00:00 GMT",
+func cfEntry(dates, items string) extract.Entry {
+	return extract.Entry{Title: "API deprecations - X", Link: "https://x.test/#x", Published: "Mon, 29 Jun 2026 00:00:00 GMT",
 		HTML: dates + "<p>Deprecated APIs:</p>\n<ul>\n" + items + "</ul>\n<p>Replacement:</p><ul><li><code>GET /new</code></li></ul>"}
 }
 
@@ -204,7 +205,7 @@ func TestCloudflareDates(t *testing.T) {
 	if fs := readCloudflareAPI(noDates); len(fs) != 1 || fs[0].Dropped == "" {
 		t.Errorf("no date at all: %+v, want dropped", fs)
 	}
-	if fs := readCloudflareAPI(feed.Entry{Title: "API deprecations - Y", HTML: "<p>Affected APIs:</p><ul><li><code>GET /a</code></li></ul>"}); len(fs) != 1 || fs[0].Dropped == "" {
+	if fs := readCloudflareAPI(extract.Entry{Title: "API deprecations - Y", HTML: "<p>Affected APIs:</p><ul><li><code>GET /a</code></li></ul>"}); len(fs) != 1 || fs[0].Dropped == "" {
 		t.Errorf("only affected APIs: %+v, want dropped", fs)
 	}
 }
