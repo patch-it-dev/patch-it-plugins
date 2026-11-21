@@ -12,9 +12,8 @@
 //
 // Its versions are the commits that changed the file, whose URLs never
 // change, so a commit's URL is the events' provenance (no snapshot). A pair
-// of commits gives the findings the newer one has and the older one didn't;
-// a plain run reads the whole file at the newest commit, and the
-// fingerprints dedupe.
+// of commits gives the findings the newer one has and the older one didn't,
+// with the older commit's date as previous_version.
 
 package changelog
 
@@ -23,12 +22,9 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"log"
 	"sort"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
-	"github.com/patch-it-dev/patch-it-plugins/core/github"
-	"github.com/patch-it-dev/patch-it-plugins/core/kit"
 	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 	"github.com/patch-it-dev/patch-it-plugins/core/versions"
 )
@@ -52,11 +48,6 @@ type Log struct {
 var MongoDBAtlas = Log{
 	API: "mongodb/atlas-admin-api", Vendor: "MongoDB", Name: "Atlas Administration API",
 	Repo: "mongodb/openapi", Path: "changelog/changelog.json",
-}
-
-// CommitsURL lists the newest commit that changed the file.
-func (l Log) CommitsURL() string {
-	return fmt.Sprintf("https://api.github.com/repos/%s/commits?path=%s&per_page=1", l.Repo, l.Path)
 }
 
 // URL is the file at one commit: its own provenance.
@@ -200,33 +191,6 @@ func (l Log) Read(b []byte) ([]LogFinding, error) {
 	return out, nil
 }
 
-// runLog reads the file at the newest commit that changed it.
-func (p Plugin) runLog(ctx context.Context, env plugin.Env) (plugin.Result, error) {
-	l := p.Log
-	sha, err := github.LatestCommit(ctx, env.Get, l.CommitsURL())
-	if err != nil {
-		return plugin.Result{}, fmt.Errorf("looking up %s's newest changelog commit (%s in %s): %w", l.API, l.Path, l.Repo, err)
-	}
-	to, err := p.readLog(ctx, env, plugin.Version{ID: sha, Ref: sha})
-	if err != nil {
-		return plugin.Result{}, err
-	}
-	last, same, err := kit.Unchanged(env, l.API, to.Content)
-	if err != nil {
-		return plugin.Result{}, err
-	}
-	if same {
-		log.Printf("%s: no change since %s", l.API, last.SourceURL)
-		return plugin.Result{}, nil
-	}
-	res, err := p.extractLog(env, plugin.Snapshot{}, to)
-	if err != nil {
-		return plugin.Result{}, err
-	}
-	res.Baselines = []plugin.Spec{plugin.Baseline(l.API, sha, sha, to.SourceURL, to.Content, env.Now().UTC())}
-	return res, nil
-}
-
 // listLog is every commit that changed the file, oldest first: the ID is
 // the commit's date, the Ref its SHA.
 func (p Plugin) listLog(ctx context.Context, env plugin.Env) ([]plugin.Version, error) {
@@ -244,15 +208,17 @@ func (p Plugin) readLog(ctx context.Context, env plugin.Env, v plugin.Version) (
 }
 
 // extractLog is an event per life-cycle change that stands at to and didn't
-// at from (every one, when from is zero). The events are about the
-// endpoint's API version, so they carry that version, not the commit's.
+// at from (every one, when nothing was read at from). The events are about
+// the endpoint's API version, so they carry that version, not the commit's;
+// previous_version is from's commit, the version of the file they were
+// compared with.
 func (p Plugin) extractLog(env plugin.Env, from, to plugin.Snapshot) (plugin.Result, error) {
 	l := p.Log
 	findings, err := l.Read(to.Content)
 	if err != nil {
 		return plugin.Result{}, fmt.Errorf("reading %s: %w", to.SourceURL, err)
 	}
-	if !from.IsZero() {
+	if from.Content != nil {
 		before, err := l.Read(from.Content)
 		if err != nil {
 			return plugin.Result{}, fmt.Errorf("reading %s: %w", from.SourceURL, err)
@@ -274,17 +240,18 @@ func (p Plugin) extractLog(env plugin.Env, from, to plugin.Snapshot) (plugin.Res
 	var rejected []error
 	for _, f := range findings {
 		e := event.Event{
-			API:           l.API,
-			Version:       f.Version,
-			ChangeType:    f.ChangeType,
-			Breaking:      f.ChangeType == event.ChangeTypeBreaking,
-			Subject:       event.Subject{Type: event.SubjectAPIOperation, Kind: event.KindOperation, Side: event.SideRequest, Operation: f.Operation},
-			Description:   describeLog(l, f),
-			SourceURL:     to.SourceURL,
-			SourcePointer: f.Pointer,
-			SourceExcerpt: f.Excerpt,
-			Confidence:    1.0,
-			DetectedAt:    now,
+			API:             l.API,
+			Version:         f.Version,
+			PreviousVersion: from.Version.ID,
+			ChangeType:      f.ChangeType,
+			Breaking:        f.ChangeType == event.ChangeTypeBreaking,
+			Subject:         event.Subject{Type: event.SubjectAPIOperation, Kind: event.KindOperation, Side: event.SideRequest, Operation: f.Operation},
+			Description:     describeLog(l, f),
+			SourceURL:       to.SourceURL,
+			SourcePointer:   f.Pointer,
+			SourceExcerpt:   f.Excerpt,
+			Confidence:      1.0,
+			DetectedAt:      now,
 		}
 		e.Fingerprint = event.Fingerprint(e.API, e.Version, e.ChangeType, e.Subject, "")
 		if err := e.Validate(); err != nil {
@@ -293,7 +260,7 @@ func (p Plugin) extractLog(env plugin.Env, from, to plugin.Snapshot) (plugin.Res
 		}
 		events = append(events, e)
 	}
-	return plugin.Result{Label: to.SourceURL, Events: events, Rejected: rejected}, nil
+	return plugin.Result{Events: events, Rejected: rejected}, nil
 }
 
 // key is what makes two findings the same change: an endpoint's API version

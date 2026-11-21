@@ -1,11 +1,15 @@
-// Package kittest is the plugin test kit: a saved copy of a source in, the
+// Package kittest is the plugin test kit: saved copies of a source in, the
 // events a plugin stores out, compared with a golden file. Nothing reaches the
-// network or a database: a URL the test didn't save fails the test, events and
-// baselines are kept in memory (Mem), and the clock is fixed, so the same
-// pages always give byte-identical events.
+// network or a database: a URL the test didn't save fails the test, events
+// are kept in memory (Mem), and the clock is fixed, so the same pages always
+// give byte-identical events. A source is read as patch-it's hosted ingestion
+// service reads it, in its shape: a version pair of a versioned source
+// (Versions, or Extracted when the test builds the snapshots), or a living
+// page's first read (Page).
 //
-//	got := kittest.Ingest(t, plugin, kittest.Pages{url: "testdata/page.md"})
-//	kittest.Golden(t, "testdata/golden/numpy.json", got)
+//	env := kittest.Env(t, kittest.Pages{url: "testdata/page.md"})
+//	got := kittest.Versions(t, env, p, plugin.Version{ID: "1.26.15", Ref: "1.26.15"}, plugin.Version{ID: "2.0.0", Ref: "2.0.0"})
+//	kittest.Golden(t, "testdata/golden/urllib3-2.0.0.json", got)
 //
 // `go test ./plugins/<name> -update` rewrites a plugin's golden files;
 // review the diff like code.
@@ -59,41 +63,77 @@ func Read(t testing.TB, file string) []byte {
 	return b
 }
 
-// Env is an empty Mem for the baselines and the events, Pages for the network
-// and Clock for the time. Nothing outside the test is touched: no database, no
-// network.
+// Env is Pages for the network and Clock for the time. Nothing outside the
+// test is touched: no database, no network.
 func Env(t testing.TB, pages Pages) plugin.Env {
 	t.Helper()
-	return plugin.Env{Baselines: NewMem(), Get: pages.Get(t), Now: func() time.Time { return Clock }}
+	return plugin.Env{Get: pages.Get(t), Now: func() time.Time { return Clock }}
 }
 
-// Ingest runs p twice and returns what the first run stored. Any rejected
-// event or error fails the test, and so does a second run over the same pages
-// that stores anything new: the fingerprints must dedupe.
-func Ingest(t testing.TB, p plugin.Plugin, pages Pages) []event.Event {
+// Versions is the version pair from -> to of p, as the hosted ingestion
+// service extracts it: ReadAt both sides, Extract. A zero from is read as
+// nothing (no version before). It returns the events stored; any error or
+// rejected event fails the test, and so does extracting the same pair again
+// storing anything new: the fingerprints must dedupe.
+func Versions(t testing.TB, env plugin.Env, p plugin.Versioned, from, to plugin.Version) []event.Event {
 	t.Helper()
-	env := Env(t, pages)
-	return IngestWith(t, env, p)
-}
-
-// IngestWith is Ingest over an Env the test built (its own archive, a baseline
-// already saved). env.Baselines is where the events are stored too, so it must
-// be a Sink, as Env's Mem is.
-func IngestWith(t testing.TB, env plugin.Env, p plugin.Plugin) []event.Event {
-	t.Helper()
-	sink, ok := env.Baselines.(Sink)
-	if !ok {
-		t.Fatalf("env.Baselines is a %T, not a kittest.Sink to store the events in", env.Baselines)
+	ctx := context.Background()
+	var a plugin.Snapshot
+	if from != (plugin.Version{}) {
+		var err error
+		if a, err = p.ReadAt(ctx, env, from); err != nil {
+			t.Fatalf("%s: reading %s: %v", p.Name(), from.ID, err)
+		}
 	}
-	if rejected, err := Run(context.Background(), env, sink, p); err != nil || rejected {
+	b, err := p.ReadAt(ctx, env, to)
+	if err != nil {
+		t.Fatalf("%s: reading %s: %v", p.Name(), to.ID, err)
+	}
+	return Extracted(t, env, p, a, b)
+}
+
+// Extracted is Versions over snapshots the test made: for a pair whose older
+// side the test names without reading it (a changelog's or a guide's Extract
+// reads only the newer side's own section).
+func Extracted(t testing.TB, env plugin.Env, p plugin.Plugin, from, to plugin.Snapshot) []event.Event {
+	t.Helper()
+	sink := NewMem()
+	if rejected, err := Extract(context.Background(), env, sink, p, from, to); err != nil || rejected {
 		t.Fatalf("%s: rejected=%v err=%v", p.Name(), rejected, err)
 	}
 	first := Stored(t, sink)
-	if rejected, err := Run(context.Background(), env, sink, p); err != nil || rejected {
-		t.Fatalf("%s, second run: rejected=%v err=%v", p.Name(), rejected, err)
+	if rejected, err := Extract(context.Background(), env, sink, p, from, to); err != nil || rejected {
+		t.Fatalf("%s, the same pair again: rejected=%v err=%v", p.Name(), rejected, err)
 	}
 	if again := Stored(t, sink); len(again) != len(first) {
-		t.Errorf("%s: a second run over the same pages stored %d more events", p.Name(), len(again)-len(first))
+		t.Errorf("%s: the same pair again stored %d more events", p.Name(), len(again)-len(first))
+	}
+	return first
+}
+
+// Page is a living page's first read, as the hosted ingestion service reads
+// it: Read with nothing kept, Extract from nothing, the events stored. A
+// second Read over the same pages must find the page unchanged (the snapshot
+// kept, by CompareHash) and store nothing; any error or rejected event fails
+// the test.
+func Page(t testing.TB, env plugin.Env, p plugin.Living) []event.Event {
+	t.Helper()
+	ctx := context.Background()
+	sink := NewMem()
+	cur, rejected, err := ReadPage(ctx, env, sink, p, plugin.Snapshot{})
+	if err != nil || rejected {
+		t.Fatalf("%s: rejected=%v err=%v", p.Name(), rejected, err)
+	}
+	first := Stored(t, sink)
+	again, rejected, err := ReadPage(ctx, env, sink, p, cur)
+	if err != nil || rejected {
+		t.Fatalf("%s, second read: rejected=%v err=%v", p.Name(), rejected, err)
+	}
+	if again.CompareHash != cur.CompareHash || again.Version != cur.Version {
+		t.Errorf("%s: a second read of the same page is a new snapshot (%s), want the kept one (%s)", p.Name(), again.Version.ID, cur.Version.ID)
+	}
+	if n := len(Stored(t, sink)); n != len(first) {
+		t.Errorf("%s: a second read of the same page stored %d more events", p.Name(), n-len(first))
 	}
 	return first
 }

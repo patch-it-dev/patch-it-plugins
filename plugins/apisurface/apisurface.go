@@ -64,42 +64,6 @@ type Plugin struct {
 
 func (p Plugin) Name() string { return p.Package.ID }
 
-// Run reads the newest release and extracts it against the last one read
-// (the baseline), or against nothing on a first run: the surface it stores
-// as the baseline.
-func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) {
-	vs, err := p.ListVersions(ctx, env)
-	if err != nil {
-		return plugin.Result{}, err
-	}
-	if len(vs) == 0 {
-		return plugin.Result{}, fmt.Errorf("%s: no release listed", p.Package.Name)
-	}
-	v := vs[len(vs)-1]
-	last, err := env.Baselines.LastSpec(p.Package.ID)
-	if err != nil {
-		return plugin.Result{}, fmt.Errorf("loading the last baseline of %s: %w", p.Package.Name, err)
-	}
-	if last != nil && last.Version == v.ID {
-		log.Printf("%s: no new release since %s", p.Package.Name, v.ID)
-		return plugin.Result{}, nil
-	}
-	to, err := p.ReadAt(ctx, env, v)
-	if err != nil {
-		return plugin.Result{}, err
-	}
-	var from plugin.Snapshot
-	if last != nil {
-		from = plugin.Snapshot{Version: plugin.Version{ID: last.Version, Ref: last.Tag}, Content: last.Content, SourceURL: last.SourceURL}
-	}
-	res, err := p.Extract(ctx, env, from, to)
-	if err != nil {
-		return plugin.Result{}, err
-	}
-	res.Baselines = []plugin.Spec{plugin.Baseline(p.Package.ID, v.ID, v.Ref, to.SourceURL, to.Content, env.Now().UTC())}
-	return res, nil
-}
-
 // ListVersions is every final release on the registry, oldest first.
 func (p Plugin) ListVersions(ctx context.Context, env plugin.Env) ([]plugin.Version, error) {
 	switch p.Package.Ecosystem {
@@ -155,7 +119,7 @@ func (p Plugin) ReadAt(ctx context.Context, env plugin.Env, v plugin.Version) (p
 // no events.
 func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snapshot) (plugin.Result, error) {
 	if from.IsZero() {
-		return plugin.Result{Label: to.Version.ID}, nil
+		return plugin.Result{}, nil
 	}
 	var a, b Release
 	if err := json.Unmarshal(from.Content, &a); err != nil {
@@ -180,7 +144,7 @@ func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 		}
 		events = append(events, e)
 	}
-	return plugin.Result{Label: to.SourceURL, Events: events, Rejected: rejected}, nil
+	return plugin.Result{Events: events, Rejected: rejected}, nil
 }
 
 var _ plugin.Versioned = Plugin{}

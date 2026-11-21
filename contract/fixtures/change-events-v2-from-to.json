@@ -1,0 +1,65 @@
+{
+  "_comment": "A from/to query with a coverage gap: GET /v1/changes?apis=example/examplepkg&from=1.8.0&to=2.0.0. The pair 1.9.0 -> 2.0.0 is covered and returned; 1.8.0 -> 1.9.0 isn't yet, so it's in `missing`, and the server has recorded it to fill. Synthetic names.",
+  "changes": [
+    {
+      "id": 3,
+      "fingerprint": "sha256:77635ae79b6a991863456882d24e309ed620b5306fa4693154e6c176654dd8ea",
+      "api": "example/examplepkg",
+      "version": "2.0.0",
+      "previous_version": "1.9.0",
+      "change_type": "breaking",
+      "breaking": true,
+      "subject": {
+        "type": "package_release",
+        "ecosystem": "pypi",
+        "package": "examplepkg",
+        "change": "renamed_symbol",
+        "symbols": [
+          "Model.parse_obj"
+        ],
+        "replacement": "Model.model_validate"
+      },
+      "description": "Model.parse_obj renamed to Model.model_validate in examplepkg 2.0.0.",
+      "source_url": "https://example.test/examplepkg/2.0.0",
+      "source_excerpt": "Synthetic fixture for package_release: not a real source.",
+      "confidence": 1,
+      "detected_at": "2026-11-03T12:00:00Z"
+    },
+    {
+      "id": 4,
+      "fingerprint": "sha256:d93d4c94ea2e145f4b979e69ea7a13bf312d91eb028b9ab90ed60e1f09791978",
+      "api": "example/examplepkg",
+      "version": "2.0.0",
+      "previous_version": "1.9.0",
+      "change_type": "breaking",
+      "breaking": true,
+      "subject": {
+        "type": "package_release",
+        "ecosystem": "pypi",
+        "package": "examplepkg",
+        "change": "removed_symbol",
+        "symbols": [
+          "Client.legacy_call"
+        ]
+      },
+      "description": "Client.legacy_call removed in examplepkg 2.0.0.",
+      "source_url": "https://example.test/examplepkg/2.0.0",
+      "source_excerpt": "Synthetic fixture for package_release: not a real source.",
+      "confidence": 1,
+      "detected_at": "2026-11-03T12:00:00Z"
+    }
+  ],
+  "next_cursor": "4",
+  "kill_switch": {
+    "on": false,
+    "reason": null,
+    "since": null
+  },
+  "missing": [
+    {
+      "api": "example/examplepkg",
+      "from": "1.8.0",
+      "to": "1.9.0"
+    }
+  ]
+}

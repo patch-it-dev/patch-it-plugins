@@ -24,7 +24,7 @@ type Archiver interface {
 // Wayback is the Internet Archive's Save Page Now: GET /save/<page> answers
 // with a redirect to the new snapshot, /web/<14-digit timestamp>/<page>, and
 // /web/<timestamp>id_/<page> serves the archived bytes as they were captured
-// (checked 2026-10-13). One slow call per run that sees the page change.
+// (checked 2026-10-13). One slow call per read that sees the page change.
 //
 // Both calls send userAgent: the archive answers 498 to Go's default
 // ("Go-http-client/2.0") and serves the same capture to anything else (seen

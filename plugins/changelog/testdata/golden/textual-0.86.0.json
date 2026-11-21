@@ -4,6 +4,7 @@
     "fingerprint": "sha256:fac4cb01fbe4eb33b37f1ec953ac0abfe97c3444aaa22cdbe9118fb6f4b56e48",
     "api": "textual/textual",
     "version": "0.86.0",
+    "previous_version": "0.85.2",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -27,6 +28,7 @@
     "fingerprint": "sha256:6a0ba08e00b5d4d4f349a526a43ddef1bb84fe2bad9ef83111074fc2a690723c",
     "api": "textual/textual",
     "version": "0.86.0",
+    "previous_version": "0.85.2",
     "change_type": "breaking",
     "breaking": true,
     "subject": {

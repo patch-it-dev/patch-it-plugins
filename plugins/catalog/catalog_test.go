@@ -22,8 +22,8 @@ const (
 	newRef = "06f3598f39c7ca86dbdb0aa1668cfdd1b82b908d"
 )
 
-func env(s *kittest.Mem, pages kittest.Pages, t *testing.T) plugin.Env {
-	return plugin.Env{Baselines: s, Get: pages.Get(t), Now: time.Now}
+func env(pages kittest.Pages, t *testing.T) plugin.Env {
+	return plugin.Env{Get: pages.Get(t), Now: time.Now}
 }
 
 func fixturePages() kittest.Pages {
@@ -42,7 +42,7 @@ func fixturePages() kittest.Pages {
 func TestPairRecreatesTheRealFunctionCommandRemoval(t *testing.T) {
 	ctx := context.Background()
 	s := kittest.NewMem()
-	e := env(s, fixturePages(), t)
+	e := env(fixturePages(), t)
 
 	rejected, err := kittest.Pair(ctx, e, s, Plugin{Catalog: Redis}, oldRef, newRef)
 	if err != nil || rejected {
@@ -99,18 +99,21 @@ func TestPairRecreatesTheRealFunctionCommandRemoval(t *testing.T) {
 	}
 }
 
-// Run's own path: looking up the newest commit, then diffing it against
-// whatever was last stored. A first run has no baseline to diff against, so
-// it reports nothing (same as an unchanged one) and just saves one.
-// kittest.Ingest reruns this, so a second run that found anything new would
-// fail it too.
-func TestRunFindsNothingOnAFirstRunAndStaysQuietOnARerun(t *testing.T) {
+// The catalog's versions are its newest commit, looked up on GitHub; that
+// version read with nothing before it has nothing to compare, so no events.
+// kittest extracts it twice, so a second extract that found anything new
+// would fail it too.
+func TestTheNewestCommitAloneHasNoEvents(t *testing.T) {
 	pages := kittest.Pages{
 		Redis.RefsURL:     "testdata/commits-master.json",
 		Redis.URL(newRef): "testdata/redis-doc-06f3598.json",
 	}
-	events := kittest.Ingest(t, Plugin{Catalog: Redis}, pages)
-	if len(events) != 0 {
-		t.Errorf("first run found %d events, want 0: there is nothing yet to diff against", len(events))
+	e, p := kittest.Env(t, pages), Plugin{Catalog: Redis}
+	vs, err := p.ListVersions(context.Background(), e)
+	if err != nil || len(vs) != 1 || vs[0].Ref != newRef {
+		t.Fatalf("versions %v, %v; want the newest commit, %s", vs, err, newRef)
+	}
+	if events := kittest.Versions(t, e, p, plugin.Version{}, vs[0]); len(events) != 0 {
+		t.Errorf("found %d events, want 0: there is nothing yet to diff against", len(events))
 	}
 }

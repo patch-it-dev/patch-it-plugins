@@ -2,6 +2,7 @@ package changelog
 
 import (
 	"context"
+	"errors"
 	"strings"
 	"testing"
 
@@ -46,9 +47,9 @@ func TestReleasesAreListedAndExtractedPairByPair(t *testing.T) {
 	if err != nil || len(res.Rejected) > 0 {
 		t.Fatalf("%v %v", err, res.Rejected)
 	}
-	pinned := kittest.Ingest(t, Plugin{File: Urllib3200}, kittest.Pages{Urllib3200.URL(): "testdata/urllib3-2.0.0-CHANGES.rst"})
+	pinned := release(t, Urllib3200, "testdata/urllib3-2.0.0-CHANGES.rst", "1.26.15")
 	if len(res.Events) == 0 || len(res.Events) != len(pinned) {
-		t.Fatalf("pair gave %d events, pinned run %d", len(res.Events), len(pinned))
+		t.Fatalf("pair gave %d events, the pinned release %d", len(res.Events), len(pinned))
 	}
 	for i, e := range res.Events {
 		if e.PreviousVersion != "1.26.15" || e.Version != "2.0.0" || e.Fingerprint != pinned[i].Fingerprint {
@@ -57,17 +58,24 @@ func TestReleasesAreListedAndExtractedPairByPair(t *testing.T) {
 	}
 }
 
-// Run on an unpinned file reads the newest release on PyPI.
-func TestRunReadsTheNewestRelease(t *testing.T) {
+// A release whose changelog has no section for it is nothing to read, not a
+// failure: patch-it's hosted ingestion service skips the pair.
+func TestAReleaseWithNoSectionIsNothingToRead(t *testing.T) {
 	pages := kittest.Pages{
 		"https://pypi.org/pypi/urllib3/json": "testdata/pypi-urllib3-excerpt.json",
 		Urllib3.At("2.0.1").URL():            "testdata/urllib3-2.0.0-CHANGES.rst",
 	}
-	_, err := Plugin{File: Urllib3}.Run(context.Background(), kittest.Env(t, pages))
-	// The saved file is 2.0.0's, which has no 2.0.1 section: the run says so
-	// rather than inventing events.
-	if err == nil || !strings.Contains(err.Error(), "2.0.1") {
-		t.Errorf("err = %v, want one naming 2.0.1", err)
+	env := kittest.Env(t, pages)
+	p := Plugin{File: Urllib3}
+	ctx := context.Background()
+	to, err := p.ReadAt(ctx, env, plugin.Version{ID: "2.0.1", Ref: "2.0.1"})
+	if err != nil {
+		t.Fatal(err)
 	}
-	var _ plugin.Versioned = Plugin{}
+	// The saved file is 2.0.0's, which has no 2.0.1 section: Extract says so
+	// rather than inventing events.
+	_, err = p.Extract(ctx, env, plugin.Snapshot{Version: plugin.Version{ID: "2.0.0", Ref: "2.0.0"}}, to)
+	if !errors.Is(err, plugin.ErrNothingToRead) || !strings.Contains(err.Error(), "2.0.1") {
+		t.Errorf("err = %v, want plugin.ErrNothingToRead naming 2.0.1", err)
+	}
 }

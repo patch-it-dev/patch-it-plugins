@@ -1,27 +1,46 @@
 package changelog
 
 import (
+	"context"
 	"strings"
 	"testing"
 
+	"github.com/patch-it-dev/patch-it-plugins/core/event"
 	"github.com/patch-it-dev/patch-it-plugins/core/kit/kittest"
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 )
 
 // Two real changelogs at their release tags (testdata/README.md) in, every
-// event out.
+// event out: each the pair from the release before (on PyPI) to the pinned one.
 func TestGolden(t *testing.T) {
 	for _, c := range []struct {
-		file  File
-		saved string
+		file     File
+		saved    string
+		previous string
 	}{
-		{Textual0860, "testdata/textual-v0.86.0-CHANGELOG.md"},
-		{Urllib3200, "testdata/urllib3-2.0.0-CHANGES.rst"},
+		{Textual0860, "testdata/textual-v0.86.0-CHANGELOG.md", "0.85.2"},
+		{Urllib3200, "testdata/urllib3-2.0.0-CHANGES.rst", "1.26.15"},
 	} {
 		t.Run(c.file.Package, func(t *testing.T) {
-			got := kittest.Ingest(t, Plugin{File: c.file}, kittest.Pages{c.file.URL(): c.saved})
+			got := release(t, c.file, c.saved, c.previous)
 			kittest.Golden(t, "testdata/golden/"+c.file.Package+"-"+c.file.Release+".json", got)
 		})
 	}
+}
+
+// release is the pair previous -> f's pinned release, as patch-it's hosted
+// ingestion service extracts it. A changelog's Extract reads only the newer
+// release's own section, so previous is named, not read.
+func release(t *testing.T, f File, saved, previous string) []event.Event {
+	t.Helper()
+	env := kittest.Env(t, kittest.Pages{f.URL(): saved})
+	p := Plugin{File: f}
+	to, err := p.ReadAt(context.Background(), env, plugin.Version{ID: f.Release, Ref: f.Tag})
+	if err != nil {
+		t.Fatal(err)
+	}
+	from := plugin.Snapshot{Version: plugin.Version{ID: previous, Ref: f.TagPrefix + previous}}
+	return kittest.Extracted(t, env, p, from, to)
 }
 
 // Every bullet of each release that is breaking or a deprecation but isn't

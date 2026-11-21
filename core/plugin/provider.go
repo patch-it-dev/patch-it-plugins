@@ -192,6 +192,8 @@ func (p Provider) check() error {
 			return fmt.Errorf("source %q is listed twice", id)
 		case s.Plugin == nil:
 			return fmt.Errorf("source %q has no Plugin", id)
+		case shape(s.Plugin) == "":
+			return fmt.Errorf("source %q: its plugin must be exactly one of plugin.Versioned (ListVersions, ReadAt) or plugin.Living (Read)", id)
 		case s.Plugin.Name() != id:
 			return fmt.Errorf("source %q: its plugin's Name is %q; a plugin is named by its source's id", id, s.Plugin.Name())
 		case !slices.Contains(Layers(), s.Layer):
@@ -219,6 +221,20 @@ func (p Provider) check() error {
 		seen[s.ID] = true
 	}
 	return nil
+}
+
+// shape is "versioned" or "living", or "" for a plugin that is both or
+// neither.
+func shape(p Plugin) string {
+	_, v := p.(Versioned)
+	_, l := p.(Living)
+	switch {
+	case v && !l:
+		return "versioned"
+	case l && !v:
+		return "living"
+	}
+	return ""
 }
 
 func absolute(u string) bool {

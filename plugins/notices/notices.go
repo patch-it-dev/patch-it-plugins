@@ -1,11 +1,13 @@
 // Package notices is the kind for a live page of dated notices: something
 // stops, or is deprecated, on a date. A model provider's deprecations table
 // (retire/), a vendor's RSS or Atom changelog feed (feed/), a vendor's API
-// end-of-life table (eol/). Each Page reader knows how its page reads; the
-// steps around it are written once, here: fetch the live page, stop when it
-// hasn't changed since the last run, read it, snapshot it in the Wayback
-// Machine and check the snapshot says the same (kit.Cite), make the events
-// from the snapshot so each cites what it quotes, and save the baseline.
+// end-of-life table (eol/). Such a page has no versions of its own: the kind
+// is plugin.Living. Each Page reader knows how its page reads; the steps
+// around it are written once, here. Read fetches the live page, stops when it
+// hasn't changed since the snapshot kept from the read before, reads it,
+// snapshots it in the Wayback Machine and checks the snapshot says the same
+// (kit.Cite); Extract makes the events from that snapshot, so each cites what
+// it quotes, keeping only the notices the read before didn't have.
 //
 // Two options a reader turns on with a method: ShapeGuard (a read with fewer
 // than 90% of the last one's notices is an error: the page changed shape),
@@ -14,7 +16,6 @@
 package notices
 
 import (
-	"cmp"
 	"context"
 	"errors"
 	"fmt"
@@ -25,7 +26,6 @@ import (
 	"github.com/patch-it-dev/patch-it-plugins/core/fetch"
 	"github.com/patch-it-dev/patch-it-plugins/core/kit"
 	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
-	"github.com/patch-it-dev/patch-it-plugins/core/versions"
 	"github.com/patch-it-dev/patch-it-plugins/plugins/notices/eol"
 	"github.com/patch-it-dev/patch-it-plugins/plugins/notices/feed"
 	"github.com/patch-it-dev/patch-it-plugins/plugins/notices/retire"
@@ -101,8 +101,9 @@ type Page interface {
 	// Find reads the page's notices.
 	Find(page []byte) (kit.Notices, error)
 	// Events turn what Find read into events citing citeURL, and the
-	// notices that failed to become events.
-	Events(found kit.Notices, citeURL string, now time.Time) ([]event.Event, []error)
+	// notices that failed to become events. An event of a version-pair
+	// type (an api_operation) carries previous as previous_version.
+	Events(found kit.Notices, citeURL, previous string, now time.Time) ([]event.Event, []error)
 }
 
 // shapeGuarded is a Page whose read with far fewer notices than the last
@@ -121,53 +122,46 @@ type Plugin struct {
 
 func (p Plugin) Name() string { return p.Page.Slug() }
 
-// Run stores an event per notice on the page. The events are read from the
-// snapshot itself, so every excerpt is on the page it cites; a snapshot that
-// doesn't hold what the live page says (the page changed in between) stores
-// nothing this run. An unchanged page since the last run costs one GET (a
-// 304 with the HTTP cache) and no snapshot.
-func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) {
+// Read reads the page as it is now. A page that hashes as it did at last
+// (CompareHash) returns last: one GET (a 304 with the HTTP cache), no
+// snapshot. Otherwise the page is snapshotted in the Wayback Machine and the
+// snapshot must hold what the live page says (kit.Cite): the new snapshot,
+// dated now, is that capture, and a capture that says something else (the
+// page changed in between) is an error, so nothing is kept this time.
+func (p Plugin) Read(ctx context.Context, env plugin.Env, last plugin.Snapshot) (plugin.Snapshot, error) {
 	pg := p.Page
-	api, url := pg.Slug(), pg.PageURL()
+	url := pg.PageURL()
 	live, archived, err := p.fetch(ctx, env, url)
 	if err != nil {
-		return plugin.Result{}, fmt.Errorf("fetching %s: %w", url, err)
+		return plugin.Snapshot{}, fmt.Errorf("fetching %s: %w", url, err)
 	}
 	hash := plugin.SHA256(live)
-	last, same, err := kit.Unchanged(env, api, live)
-	if err != nil {
-		return plugin.Result{}, err
-	}
-	if same {
-		log.Printf("%s: no change since %s", api, last.SourceURL)
-		return plugin.Result{}, nil
+	if !last.IsZero() && hash == last.CompareHash {
+		log.Printf("%s: no change since %s", pg.Slug(), last.SourceURL)
+		return last, nil
 	}
 	want, err := pg.Find(live)
 	if err != nil {
-		return plugin.Result{}, fmt.Errorf("reading %s: %w", url, err)
+		return plugin.Snapshot{}, fmt.Errorf("reading %s: %w", url, err)
 	}
-	// A provider renaming a column makes its table unreadable, and the run
-	// would quietly read fewer notices. Past notices stay on the page, so a
-	// real drop is rare: fail loudly instead of storing a partial list.
-	if g, ok := pg.(shapeGuarded); ok && g.ShapeGuard() && last != nil {
+	// A provider renaming a column makes its table unreadable, and the read
+	// would quietly find fewer notices. Past notices stay on the page, so a
+	// real drop is rare: fail loudly instead of keeping a partial list.
+	if g, ok := pg.(shapeGuarded); ok && g.ShapeGuard() && last.Content != nil {
 		if before, err := pg.Find(last.Content); err == nil && want.Count()*10 < before.Count()*9 {
-			return plugin.Result{}, fmt.Errorf("%s now lists %d notices, %d at %s: the page's shape may have changed", url, want.Count(), before.Count(), last.SourceURL)
+			return plugin.Snapshot{}, fmt.Errorf("%s now lists %d notices, %d at %s: the page's shape may have changed", url, want.Count(), before.Count(), last.SourceURL)
 		}
 	}
-
-	snapURL, snap, got := archived, live, want
+	snapURL, snap := archived, live
 	if snapURL == "" {
-		if snapURL, snap, got, err = kit.Cite(ctx, p.Archiver, url, pg.Find, want); err != nil {
-			return plugin.Result{}, err
+		if snapURL, snap, _, err = kit.Cite(ctx, p.Archiver, url, pg.Find, want); err != nil {
+			return plugin.Snapshot{}, err
 		}
 	}
-
 	now := env.Now().UTC()
-	events, rejected := pg.Events(got, snapURL, now)
-	// The hash of the live page, so the next run compares like with like.
-	baseline := plugin.Baseline(api, now.Format("2006-01-02"), snapURL, snapURL, snap, now)
-	baseline.SHA256 = hash
-	return plugin.Result{Label: snapURL, Events: events, Rejected: rejected, Baselines: []plugin.Spec{baseline}}, nil
+	v := plugin.Version{ID: now.Format(time.RFC3339), Released: now, Ref: snapURL, URL: snapURL}
+	// The live page's hash, so the next read compares like with like.
+	return plugin.Snapshot{Version: v, Content: snap, SourceURL: snapURL, CompareHash: hash}, nil
 }
 
 // fetch reads the live page. When the page's reader asks for it
@@ -202,39 +196,24 @@ func (p Plugin) fetch(ctx context.Context, env plugin.Env, pageURL string) (body
 	return body, archivedURL, nil
 }
 
-// A living page has no versions of its own, so its history is the Web
-// Archive's: every distinct capture is a version, dated (I19.11). A backfill
-// reads the page at each capture and extracts each consecutive pair, the
-// same events a run on that day would have stored, each citing its capture.
-
-// ListVersions is every distinct Web Archive capture of the page, oldest
-// first (versions.WaybackCaptures); the caller keeps the ones in its window.
-func (p Plugin) ListVersions(ctx context.Context, env plugin.Env) ([]plugin.Version, error) {
-	return versions.WaybackCaptures(ctx, env.Get, p.Page.PageURL(), time.Time{}, time.Time{})
-}
-
-// ReadAt reads the page as the capture v holds it: the capture's original
-// bytes (v.Ref), cited by its address (v.URL).
-func (p Plugin) ReadAt(ctx context.Context, env plugin.Env, v plugin.Version) (plugin.Snapshot, error) {
-	body, err := env.Get(ctx, v.Ref)
-	if err != nil {
-		return plugin.Snapshot{}, fmt.Errorf("fetching %s as captured on %s: %w", p.Page.PageURL(), v.ID, err)
-	}
-	return plugin.Snapshot{Version: v, Content: body, SourceURL: cmp.Or(v.URL, v.Ref)}, nil
-}
-
 // Extract is an event per notice on the page at to that wasn't at from
 // (every one when from is zero), citing to's capture. The events keep the
-// notice's own version (its date or API version), so previous_version stays
-// empty: from is an earlier day of the page, not an earlier release.
+// notice's own version (its date or API version). One of a version-pair type
+// (an api_operation: an operation's end of life) names the read it was
+// compared with as previous_version: from's dated version, or on a first
+// read, with nothing before it, to's own.
 func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snapshot) (plugin.Result, error) {
 	now := env.Now().UTC()
-	events, rejected, err := p.events(to, now)
+	previous := from.Version.ID
+	if from.IsZero() {
+		previous = to.Version.ID
+	}
+	events, rejected, err := p.events(to, previous, now)
 	if err != nil {
 		return plugin.Result{}, err
 	}
 	if !from.IsZero() {
-		before, _, err := p.events(from, now)
+		before, _, err := p.events(from, previous, now)
 		if err != nil {
 			return plugin.Result{}, err
 		}
@@ -250,17 +229,17 @@ func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 		}
 		events = kept
 	}
-	return plugin.Result{Label: to.SourceURL, Events: events, Rejected: rejected}, nil
+	return plugin.Result{Events: events, Rejected: rejected}, nil
 }
 
 // events reads one snapshot's notices into events citing it.
-func (p Plugin) events(s plugin.Snapshot, now time.Time) ([]event.Event, []error, error) {
+func (p Plugin) events(s plugin.Snapshot, previous string, now time.Time) ([]event.Event, []error, error) {
 	found, err := p.Page.Find(s.Content)
 	if err != nil {
 		return nil, nil, fmt.Errorf("reading %s: %w", s.SourceURL, err)
 	}
-	events, rejected := p.Page.Events(found, s.SourceURL, now)
+	events, rejected := p.Page.Events(found, s.SourceURL, previous, now)
 	return events, rejected, nil
 }
 
-var _ plugin.Versioned = Plugin{}
+var _ plugin.Living = Plugin{}

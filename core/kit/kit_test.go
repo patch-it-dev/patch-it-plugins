@@ -5,10 +5,6 @@ import (
 	"errors"
 	"strings"
 	"testing"
-	"time"
-
-	"github.com/patch-it-dev/patch-it-plugins/core/kit/kittest"
-	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 )
 
 type archive struct {
@@ -46,21 +42,5 @@ func TestCiteRefusesWhatItCantCite(t *testing.T) {
 		if _, _, _, err := Cite(context.Background(), a, "https://x.test/p", lines, []string{"a", "b"}); err == nil {
 			t.Errorf("%s: want an error", name)
 		}
-	}
-}
-
-func TestUnchangedComparesWithTheLastBaseline(t *testing.T) {
-	env := kittest.Env(t, nil)
-	if last, same, err := Unchanged(env, "x", []byte("page")); err != nil || same || last != nil {
-		t.Fatalf("first run: %v %v %v", last, same, err)
-	}
-	if err := env.Baselines.(kittest.Sink).SaveSpec(plugin.Baseline("x", "1", "t", "https://x.test", []byte("page"), time.Now())); err != nil {
-		t.Fatal(err)
-	}
-	if _, same, _ := Unchanged(env, "x", []byte("page")); !same {
-		t.Error("same bytes: want unchanged")
-	}
-	if _, same, _ := Unchanged(env, "x", []byte("page2")); same {
-		t.Error("other bytes: want changed")
 	}
 }

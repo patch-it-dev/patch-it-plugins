@@ -221,39 +221,6 @@ type Plugin struct {
 
 func (p Plugin) Name() string { return p.Adapter.API() }
 
-// Run diffs the newest release against whatever was last stored: the newest
-// version (LatestTag), ReadAt it, and Extract against the last baseline.
-func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) {
-	a := p.Adapter
-	tag, err := a.LatestTag(ctx)
-	if err != nil {
-		return plugin.Result{}, fmt.Errorf("finding latest tag: %w", err)
-	}
-	to, err := p.ReadAt(ctx, env, plugin.Version{ID: tag, Ref: tag})
-	if err != nil {
-		return plugin.Result{}, err
-	}
-	last, err := env.Baselines.LastSpec(a.API())
-	if err != nil {
-		return plugin.Result{}, fmt.Errorf("loading last spec: %w", err)
-	}
-	if last != nil && last.SHA256 == plugin.SHA256(to.Content) {
-		log.Printf("%s: no change (%s)", a.API(), tag)
-		return plugin.Result{}, nil
-	}
-	var from plugin.Snapshot
-	if last != nil {
-		from = plugin.Snapshot{Version: plugin.Version{ID: last.Version, Ref: last.Tag}, Content: last.Content, SourceURL: last.SourceURL}
-	}
-	res, err := p.Extract(ctx, env, from, to)
-	if err != nil {
-		return plugin.Result{}, err
-	}
-	res.Label = tag
-	res.Baselines = []plugin.Spec{plugin.Baseline(a.API(), to.Version.ID, tag, to.SourceURL, to.Content, env.Now())}
-	return res, nil
-}
-
 // ListVersions is every release of the spec, oldest first, when the adapter
 // can list them (adapter.Lister); otherwise only the newest (LatestTag).
 func (p Plugin) ListVersions(ctx context.Context, _ plugin.Env) ([]plugin.Version, error) {
@@ -301,7 +268,7 @@ func (p Plugin) Extract(ctx context.Context, env plugin.Env, from, to plugin.Sna
 		DetectedAt:      env.Now().UTC(),
 	})
 	p.attachHints(ctx, to.Version.ID, events)
-	return plugin.Result{Label: to.Version.Ref, Events: events, Rejected: errs}, nil
+	return plugin.Result{Events: events, Rejected: errs}, nil
 }
 
 var _ plugin.Versioned = Plugin{}

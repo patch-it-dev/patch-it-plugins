@@ -4,6 +4,7 @@
     "fingerprint": "sha256:07170c43fdc6d298df0a7752b72ad8977df95bccaaadb95fdfafbcf5d30286a0",
     "api": "anthropic/python-sdk",
     "version": "1.0.0",
+    "previous_version": "0.75.0",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -30,6 +31,7 @@
     "fingerprint": "sha256:61c02ba43dda9bf576bc55cd9564fbad623951df898b2653a79e572806bd70e2",
     "api": "anthropic/python-sdk",
     "version": "1.0.0",
+    "previous_version": "0.75.0",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -56,6 +58,7 @@
     "fingerprint": "sha256:0845af07684a241eb1300ad5b161b21fa6a026584ee8f088a416c7c918cfffd0",
     "api": "anthropic/python-sdk",
     "version": "1.0.0",
+    "previous_version": "0.75.0",
     "change_type": "breaking",
     "breaking": true,
     "subject": {

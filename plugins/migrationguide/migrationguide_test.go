@@ -4,18 +4,14 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/patch-it-dev/patch-it-plugins/core/kit/kittest"
 	"github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide/sdkguide"
 )
 
 func TestAMigrationGuideStoresOneEventPerRemovedParameter(t *testing.T) {
 	// Only the v1.0.0 tag is saved: fetching anything else fails the test, and
-	// kittest's second run (the tag never changes) must store nothing new.
-	events := kittest.Ingest(t, Plugin{Guide: sdkguide.AnthropicV1}, kittest.Pages{
-		sdkguide.AnthropicV1.URL(): "sdkguide/testdata/anthropic-MIGRATION-v1.0.0.md",
-	})
+	// kittest's second extract of the pair must store nothing new.
 	var params []string
-	for _, e := range events {
+	for _, e := range anthropicV1(t, sdkguide.AnthropicV1) {
 		params = append(params, e.Subject.Parameter)
 	}
 	if strings.Join(params, ",") != "temperature,top_p,top_k" {

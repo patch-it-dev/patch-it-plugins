@@ -5,9 +5,12 @@ import (
 	"time"
 )
 
+// A source is read in one of two shapes. Both end in Extract, so whoever runs
+// them treats every source as pairs of snapshots.
+//
 // A source that has versions (a spec repo's tags, a package's releases on
-// PyPI or npm, a guide per major) is read in three parts, so whoever runs it
-// can cover every version, not only the newest:
+// PyPI or npm, a guide per major, a file's commits) is Versioned, so whoever
+// runs it can cover every version, not only the newest:
 //
 //	versions, _ := s.ListVersions(ctx, env)            // oldest first
 //	a, _ := s.ReadAt(ctx, env, versions[i])
@@ -17,55 +20,63 @@ import (
 // Every consecutive pair is one Extract; a released version never changes, so
 // a pair is done once.
 //
-// A living page (a deprecations page, a feed: the notices kind) is also read
-// as it is now by Run, which compares it with the last baseline and cites a
-// fresh Web Archive snapshot of it; its history is its Web Archive captures,
-// listed as versions.
+// A page with no versions of its own (a deprecations page, a feed: the
+// notices kind) is Living: it is read as it is now, against the snapshot kept
+// from the read before, and each read that differs is a new version, dated:
+//
+//	cur, _ := s.Read(ctx, env, last)                  // last: the kept snapshot, or zero
+//	if cur.CompareHash != last.CompareHash {
+//		result, _ := s.Extract(ctx, env, last, cur)   // what the page says now that it didn't
+//		// store the events, keep cur as the snapshot
+//	}
 
 // Version is one version of a source.
 type Version struct {
-	// ID is the version as events name it: "2.0.0", "2026-11-19", "2025-03-31.basil".
+	// ID is the version as events name it: "2.0.0", "2026-11-19",
+	// "2025-03-31.basil"; a living page's read is dated (RFC 3339, UTC).
 	ID string
-	// Released is when it came out; zero when the source doesn't say.
+	// Released is when it came out (a living page: when it was read); zero
+	// when the source doesn't say.
 	Released time.Time
 	// Ref is what to read it at: a tag, a commit SHA, a branch, a date.
 	Ref string
-	// URL is where a person sees this version (a release page, a commit).
+	// URL is where a person sees this version (a release page, a commit, a
+	// Wayback Machine snapshot).
 	URL string
 }
 
-// Snapshot is a source as it was at one version: what ReadAt read.
+// Snapshot is a source as it was at one version: what ReadAt or Read read.
 type Snapshot struct {
 	Version   Version
 	Content   []byte
 	SourceURL string // the exact document read, pinned to the version
+	// CompareHash is how a living page's next Read tells it unchanged: the
+	// hash of the page as fetched, which may differ from Content (a page
+	// cited through a Wayback Machine snapshot keeps the snapshot's bytes).
+	// Empty for a versioned source: a released version never changes.
+	CompareHash string
 }
 
 // IsZero is true for the snapshot before the first version: nothing.
 func (s Snapshot) IsZero() bool { return s.Version.ID == "" && s.Content == nil }
 
-// VersionLister lists every version a source has, oldest first.
-type VersionLister interface {
-	ListVersions(ctx context.Context, env Env) ([]Version, error)
-}
-
-// Reader reads a source at one version.
-type Reader interface {
-	ReadAt(ctx context.Context, env Env, v Version) (Snapshot, error)
-}
-
-// Extractor turns two snapshots into the changes between them. from may be
-// zero (no earlier version read). The events carry to's version and, when from
-// isn't zero, previous_version set to from's. It stores nothing: Result has no
-// Baselines (Run adds its own).
-type Extractor interface {
-	Extract(ctx context.Context, env Env, from, to Snapshot) (Result, error)
-}
-
 // Versioned is a plugin read version by version.
 type Versioned interface {
 	Plugin
-	VersionLister
-	Reader
-	Extractor
+	// ListVersions is every version the source has, oldest first.
+	ListVersions(ctx context.Context, env Env) ([]Version, error)
+	// ReadAt reads the source at one version.
+	ReadAt(ctx context.Context, env Env, v Version) (Snapshot, error)
+}
+
+// Living is a plugin read as it is now: a page that only shows its latest
+// state.
+type Living interface {
+	Plugin
+	// Read reads the page now. last is the snapshot kept from the read
+	// before (zero on a first read); when the page is the same as then (by
+	// CompareHash), Read returns last as is, having cost one GET. Otherwise
+	// it returns a new snapshot, dated now, citing a copy of the page that
+	// stays as read (a Wayback Machine snapshot), with its CompareHash set.
+	Read(ctx context.Context, env Env, last Snapshot) (Snapshot, error)
 }

@@ -4,7 +4,6 @@ import (
 	"testing"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
-	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 )
 
 func TestMemStoresAsIngestDoes(t *testing.T) {
@@ -27,21 +26,4 @@ func TestMemIdsHaveNoGaps(t *testing.T) {
 			t.Errorf("event %d has id %d, want %d", i, e.ID, i+1)
 		}
 	}
-}
-
-// What LastSpec returns is a copy: a plugin changing it can't change the store.
-func TestMemLastSpecIsACopy(t *testing.T) {
-	m := NewMem()
-	if err := m.SaveSpec(sinkSpec("body")); err != nil {
-		t.Fatal(err)
-	}
-	got, _ := m.LastSpec("x")
-	got.Content[0] = 'X'
-	if again, _ := m.LastSpec("x"); string(again.Content) != "body" {
-		t.Errorf("stored content changed to %q", again.Content)
-	}
-}
-
-func sinkSpec(content string) plugin.Spec {
-	return plugin.Baseline("x", "1", "v1", "https://example.test/1", []byte(content), Clock)
 }

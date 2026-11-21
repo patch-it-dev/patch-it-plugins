@@ -27,8 +27,9 @@ func (p Page) Find(page []byte) (kit.Notices, error) {
 	return Retirements(rs), err
 }
 
-// Events are an event per retired model, citing citeURL.
-func (p Page) Events(found kit.Notices, citeURL string, now time.Time) ([]event.Event, []error) {
+// Events are an event per retired model, citing citeURL. A retirement is a
+// dated notice: no previous_version.
+func (p Page) Events(found kit.Notices, citeURL, _ string, now time.Time) ([]event.Event, []error) {
 	return Events(p, found.(Retirements), citeURL, now)
 }
 

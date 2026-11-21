@@ -1,6 +1,6 @@
 // Package kit is what source plugins share beyond the core: the Wayback
-// Machine client a plugin cites a live page through (Wayback, Cite) and the
-// "same page as last run" check (Unchanged). Fetching with ETag and
+// Machine client a living page is cited through (Wayback, Cite), and what a
+// reader of dated notices returns (Notices). Fetching with ETag and
 // Last-Modified caching is fetch's Cache, handed to every plugin as
 // plugin.Env.Get; the test kit is kittest.
 //
@@ -11,20 +11,7 @@ import (
 	"context"
 	"fmt"
 	"reflect"
-
-	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 )
-
-// Unchanged reports whether body is what api's last stored baseline hashed
-// to, and returns that baseline (nil on a first run). A plugin reading a live
-// page returns early on true: an unchanged page costs one GET and no snapshot.
-func Unchanged(env plugin.Env, api string, body []byte) (last *plugin.Spec, same bool, err error) {
-	last, err = env.Baselines.LastSpec(api)
-	if err != nil {
-		return nil, false, fmt.Errorf("loading the last baseline of %s: %w", api, err)
-	}
-	return last, last != nil && last.SHA256 == plugin.SHA256(body), nil
-}
 
 // Cite snapshots a live page and checks the snapshot holds what the plugin
 // read from the live page: read turns bytes into whatever the plugin makes

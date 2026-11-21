@@ -51,12 +51,9 @@ func TestOnlyANewMajorHasAGuide(t *testing.T) {
 	}
 }
 
-// Run on the unpinned guide reads the newest major's: the same events as the
-// pinned golden.
-func TestRunReadsTheNewestMajor(t *testing.T) {
-	got := kittest.Ingest(t, Plugin{Guide: sdkguide.Anthropic}, kittest.Pages{
-		"https://pypi.org/pypi/anthropic/json": "testdata/pypi-anthropic-excerpt.json",
-		sdkguide.AnthropicV1.URL():             "sdkguide/testdata/anthropic-MIGRATION-v1.0.0.md",
-	})
+// The unpinned guide's pair into the newest major gives the same events as
+// the pinned golden.
+func TestTheUnpinnedGuidesPairIsTheGoldens(t *testing.T) {
+	got := anthropicV1(t, sdkguide.Anthropic)
 	kittest.CompareGolden(t, "testdata/golden/anthropic-1.0.0.json", got)
 }

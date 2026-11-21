@@ -195,7 +195,7 @@ func TestDropInsLimitsRenames(t *testing.T) {
 		Paths: map[string]string{"old_a": "mod.old_a", "new_a": "mod.new_a"}}
 	run := func(g Guide) map[string]string {
 		out := map[string]string{}
-		for _, e := range kittest.Ingest(t, migrationguide.Plugin{Guide: g}, kittest.Pages{g.URL(): writeTemp(t, page)}) {
+		for _, e := range release(t, g, writeTemp(t, page), "1.0.0") {
 			out[e.Subject.Symbols[0]] = string(e.Subject.Change) + " " + e.Subject.Replacement
 		}
 		return out
@@ -233,10 +233,11 @@ func readNames(t *testing.T, page string, g Guide) []string {
 	return names
 }
 
-// newrelicIngest runs the plugin over the saved excerpt.
+// newrelicIngest is the pair from 10.17.0, the release before on PyPI, over
+// the saved excerpt.
 func newrelicIngest(t *testing.T) []event.Event {
 	t.Helper()
-	return kittest.Ingest(t, migrationguide.Plugin{Guide: NewRelic11}, kittest.Pages{NewRelic11.URL(): newrelicSource})
+	return release(t, NewRelic11, newrelicSource, "10.17.0")
 }
 
 // The hint is shown in a pull request or an issue, where a site-relative link

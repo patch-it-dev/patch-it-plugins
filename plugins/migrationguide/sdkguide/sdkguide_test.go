@@ -1,12 +1,14 @@
 package sdkguide
 
 import (
+	"errors"
 	"os"
 	"strings"
 	"testing"
 	"time"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 )
 
 func guide(t *testing.T) []byte {
@@ -43,17 +45,17 @@ func TestAnthropicV1RemovesTheSamplingParameters(t *testing.T) {
 func TestAnotherMajorsGuideOrNoRowIsAnError(t *testing.T) {
 	v2 := AnthropicV1
 	v2.Major = 2
-	if _, err := Parse(guide(t), v2); err == nil {
-		t.Error("the v1 guide read as v2's")
+	if _, err := Parse(guide(t), v2); !errors.Is(err, plugin.ErrNothingToRead) {
+		t.Errorf("the v1 guide read as v2's: %v, want plugin.ErrNothingToRead", err)
 	}
-	if _, err := Parse([]byte("# Migrating to v1\n\nNothing removed.\n"), AnthropicV1); err == nil {
-		t.Error("no table must be an error, not zero events")
+	if _, err := Parse([]byte("# Migrating to v1\n\nNothing removed.\n"), AnthropicV1); !errors.Is(err, plugin.ErrNothingToRead) {
+		t.Errorf("no table must be plugin.ErrNothingToRead, not zero events: %v", err)
 	}
 }
 
 func TestEventsAreValidAndCiteTheTag(t *testing.T) {
 	rs, _ := Parse(guide(t), AnthropicV1)
-	events, errs := Events(AnthropicV1, rs, time.Date(2026, 10, 17, 0, 0, 0, 0, time.UTC))
+	events, errs := Events(AnthropicV1, rs, "0.75.0", time.Date(2026, 10, 17, 0, 0, 0, 0, time.UTC))
 	if len(errs) != 0 || len(events) != 3 {
 		t.Fatalf("%d events, %v", len(events), errs)
 	}

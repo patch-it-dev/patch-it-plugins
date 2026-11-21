@@ -77,7 +77,7 @@ func (fakeFlagsmithAdapter) Fetch(_ context.Context, tag string) (adapter.Spec, 
 func TestFlagsmithGolden(t *testing.T) {
 	ctx := context.Background()
 	env := kittest.Env(t, nil)
-	sink := env.Baselines.(kittest.Sink)
+	sink := kittest.NewMem()
 	p := Plugin{Adapter: fakeFlagsmithAdapter{}, Keep: requestSide}
 	if rejected, err := kittest.Pair(ctx, env, sink, p, "v2.286.0", "v2.287.0"); err != nil || rejected {
 		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
@@ -90,7 +90,7 @@ func TestFlagsmithGolden(t *testing.T) {
 func TestFlagsmithDropsADescriptionOnlyChange(t *testing.T) {
 	ctx := context.Background()
 	env := kittest.Env(t, nil)
-	sink := env.Baselines.(kittest.Sink)
+	sink := kittest.NewMem()
 	p := Plugin{Adapter: fakeFlagsmithAdapter{}, Keep: requestSide}
 	if rejected, err := kittest.Pair(ctx, env, sink, p, "c3ef832", "f504f16"); err != nil || rejected {
 		t.Fatalf("pair: rejected=%v err=%v", rejected, err)

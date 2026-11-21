@@ -114,18 +114,6 @@ func TestConvexGolden(t *testing.T) {
 		}
 	}
 	kittest.Golden(t, "testdata/golden/convex.json", events)
-
-	// As a daily ingest, the same six events.
-	s = openStore(t)
-	env := vercelEnv(s)
-	for _, tag := range []string{"f35879bb", "5e5159cb"} {
-		if rejected, err := kittest.Run(ctx, env, s, convexPlugin(tag)); err != nil || rejected {
-			t.Fatalf("run %s: rejected=%v err=%v", tag, rejected, err)
-		}
-	}
-	if got := kittest.Stored(t, s); len(got) != len(convexReplacements) {
-		t.Errorf("ingest stored %d events, want %d", len(got), len(convexReplacements))
-	}
 }
 
 // The pinned drop test. On 2026-07-14 (3ead9091, "Remove name from usage

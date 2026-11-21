@@ -1,15 +1,16 @@
 // Package plugin is what a change source is: every source is a plugin behind
-// one interface, registered by name. A plugin reads its source and returns a
-// Result; it stores nothing itself. Whoever runs it (patch-it's hosted
-// ingestion service, or the test kit) stores the events, then the baselines.
-// Adding a source is a RegisterProvider call in its kind's package; nothing
-// here changes.
+// one of two shapes, registered by its id. A plugin reads its source and
+// returns what changed between two reads of it; it stores nothing itself.
+// Whoever runs it (patch-it's hosted ingestion service, or the test kit)
+// stores the events and keeps the latest snapshot. Adding a source is a
+// RegisterProvider call in its kind's package; nothing here changes.
 package plugin
 
 import (
 	"context"
 	"crypto/sha256"
 	"encoding/hex"
+	"errors"
 	"slices"
 	"sync"
 	"time"
@@ -17,22 +18,35 @@ import (
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
 )
 
-// Plugin is one place changes come from.
+// Plugin is one place changes come from. Every plugin is exactly one of
+// Versioned (a source with versions: tags, releases, commits) or Living (a
+// page with no versions of its own, read as it is now); RegisterProvider
+// refuses one that is both or neither. Either way, the changes are what
+// Extract finds between two snapshots.
 type Plugin interface {
 	// Name is the source's id, "<provider>/<source>", which its events
 	// carry in `api`: "stripe/api", "openai/models".
 	Name() string
-	// Run reads the source as it is now and returns what changed since the
-	// baseline it saved last (env.Baselines.LastSpec). An error stores nothing.
-	Run(ctx context.Context, env Env) (Result, error)
+	// Extract turns two snapshots into the changes between them: the
+	// events carry to's version. from is zero when nothing was read before
+	// it (a living page's first read). It stores nothing.
+	Extract(ctx context.Context, env Env, from, to Snapshot) (Result, error)
 }
 
+// ErrNothingToRead is what a reader returns, wrapped, when a release or a
+// page has no part it can read: a changelog with no section for the
+// release, a migration guide with no table of removals, a page with no
+// table of notices. For a release that's normal (not every release has
+// one), so the runner keeps the pair as skipped rather than retrying it;
+// errors.Is finds it through any wrapping. Any other error (a fetch, a
+// parse) is a failure.
+var ErrNothingToRead = errors.New("nothing to read")
+
 // Env is everything a plugin may reach outside itself, so a test can hand it
-// baselines, the network and a clock of its own. A plugin that fetches through
-// its own client (the OpenAPI plugin's adapter) ignores Get; its tests fake
-// that client instead.
+// the network and a clock of its own. A plugin that fetches through its own
+// client (the OpenAPI plugin's adapter) ignores Get; its tests fake that
+// client instead.
 type Env struct {
-	Baselines BaselineReader
 	// Get fetches one URL. In both the hosted ingestion service and the test
 	// kit, this is fetch.Cache.Get (kit/kittest's Pages.Get wraps saved files
 	// the same way): a non-2xx, non-304 response fails with a *fetch.StatusError
@@ -43,32 +57,10 @@ type Env struct {
 	Now func() time.Time
 }
 
-// BaselineReader is the one thing a plugin reads back: the baseline its last
-// run saved. Ingest's store implements it; so does the test kit.
-type BaselineReader interface {
-	// LastSpec is api's latest baseline, or nil (and no error) on a first run.
-	LastSpec(api string) (*Spec, error)
-}
-
-// Spec is one baseline: a fetched copy of what a source said, kept only so a
-// later run can diff against it, or tell in one hash comparison that nothing
-// changed.
-type Spec struct {
-	API       string
-	Version   string
-	Tag       string
-	SHA256    string
-	SourceURL string
-	FetchedAt time.Time
-	Content   []byte
-}
-
-// Result is what one run found.
+// Result is what one Extract found.
 type Result struct {
-	Label     string        // what was read, for the summary: a tag, a snapshot, a URL
-	Events    []event.Event // valid events, to store
-	Rejected  []error       // changes that failed to become valid events
-	Baselines []Spec        // what the run read, saved after the events
+	Events   []event.Event // valid events, to store
+	Rejected []error       // changes that failed to become valid events
 }
 
 var (
@@ -97,21 +89,7 @@ func Names() []string {
 	return names
 }
 
-// Baseline is what a plugin saves as the last thing it read, hashed so the
-// next run can tell an unchanged source in one comparison.
-func Baseline(api, version, tag, sourceURL string, content []byte, at time.Time) Spec {
-	return Spec{
-		API:       api,
-		Version:   version,
-		Tag:       tag,
-		SHA256:    SHA256(content),
-		SourceURL: sourceURL,
-		FetchedAt: at,
-		Content:   content,
-	}
-}
-
-// SHA256 is the hex hash a baseline is compared by.
+// SHA256 is the hex hash a living page is compared by (Snapshot.CompareHash).
 func SHA256(data []byte) string {
 	sum := sha256.Sum256(data)
 	return hex.EncodeToString(sum[:])

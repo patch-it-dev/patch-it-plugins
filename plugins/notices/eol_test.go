@@ -27,9 +27,9 @@ func TestEOLRegistersItself(t *testing.T) {
 func TestEOLGolden(t *testing.T) {
 	saved := kittest.Pages{eol.Salesforce.URL: "eol/testdata/salesforce-api-rest-eol-2026-10-31.html"}
 	archive := &kittest.Archive{T: t, Pages: saved}
-	got := kittest.IngestWith(t, kittest.Env(t, saved), Plugin{Page: eol.Salesforce, Archiver: archive})
+	got := kittest.Page(t, kittest.Env(t, saved), Plugin{Page: eol.Salesforce, Archiver: archive})
 	if archive.Calls != 1 {
-		t.Errorf("%d snapshots, want 1: the second run's page is unchanged", archive.Calls)
+		t.Errorf("%d snapshots, want 1: the second read's page is unchanged", archive.Calls)
 	}
 	kittest.Golden(t, "testdata/golden/salesforce.json", got)
 }
@@ -61,7 +61,7 @@ func TestDropsAStillSupportedBand(t *testing.T) {
 }
 
 // eol.Salesforce's docs site answers 403 to a plain GET; the live page is never
-// reachable through env.Get. Run must fall back to the Wayback Machine's own
+// reachable through env.Get. Read must fall back to the Wayback Machine's own
 // fetch and use its snapshot directly, not fail outright. 401 falls back the
 // same way.
 func TestFallsBackToTheArchiveWhenTheLiveFetchIsBlocked(t *testing.T) {
@@ -70,23 +70,22 @@ func TestFallsBackToTheArchiveWhenTheLiveFetchIsBlocked(t *testing.T) {
 			saved := kittest.Pages{eol.Salesforce.URL: "eol/testdata/salesforce-api-rest-eol-2026-10-31.html"}
 			archive := &kittest.Archive{T: t, Pages: saved}
 			env := plugin.Env{
-				Baselines: kittest.NewMem(),
 				Get: func(context.Context, string) ([]byte, error) {
 					return nil, &fetch.StatusError{URL: eol.Salesforce.URL, StatusCode: code}
 				},
 				Now: func() time.Time { return kittest.Clock },
 			}
-			got := kittest.IngestWith(t, env, Plugin{Page: eol.Salesforce, Archiver: archive})
+			got := kittest.Page(t, env, Plugin{Page: eol.Salesforce, Archiver: archive})
 			if len(got) == 0 {
 				t.Fatal("no events: the archive fallback didn't run")
 			}
 			// Unlike the normal path, a permanently blocked live page has no
-			// cheap way to check "did it change": liveOrArchived needs the
-			// archive's own fetch just to get bytes to hash, on every run,
-			// not only a changed one. The second run still stores nothing
-			// new: the hash matches.
+			// cheap way to check "did it change": fetch needs the archive's
+			// own capture just to get bytes to hash, on every read, not only
+			// a changed one. The second read still stores nothing new: the
+			// hash matches.
 			if archive.Calls != 2 {
-				t.Errorf("%d snapshots, want 2: the live page is blocked every run", archive.Calls)
+				t.Errorf("%d snapshots, want 2: the live page is blocked every read", archive.Calls)
 			}
 			for _, e := range got {
 				if e.SourceURL == eol.Salesforce.URL {
@@ -104,7 +103,6 @@ func TestDoesNotFallBackOnATransientError(t *testing.T) {
 	for _, code := range []int{404, 429, 503} {
 		t.Run(fmt.Sprint(code), func(t *testing.T) {
 			env := plugin.Env{
-				Baselines: kittest.NewMem(),
 				Get: func(context.Context, string) ([]byte, error) {
 					return nil, &fetch.StatusError{URL: eol.Salesforce.URL, StatusCode: code}
 				},
@@ -112,7 +110,7 @@ func TestDoesNotFallBackOnATransientError(t *testing.T) {
 			}
 			// No Pages: a fallback here would fail the test by asking the
 			// archive for a snapshot it was never given.
-			_, err := Plugin{Page: eol.Salesforce, Archiver: &kittest.Archive{T: t}}.Run(context.Background(), env)
+			_, err := Plugin{Page: eol.Salesforce, Archiver: &kittest.Archive{T: t}}.Read(context.Background(), env, plugin.Snapshot{})
 			if err == nil {
 				t.Fatalf("want an error for a %d, got none", code)
 			}

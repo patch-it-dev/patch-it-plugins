@@ -186,7 +186,7 @@ func parseRST(page []byte, g Guide) ([]Removal, error) {
 		}
 	}
 	if start < 0 {
-		return nil, fmt.Errorf("no %q section: the guide's shape may have changed", g.Section)
+		return nil, fmt.Errorf("no %q section (the guide's shape may have changed): %w", g.Section, plugin.ErrNothingToRead)
 	}
 	border := -1
 	for i := start; i < len(lines); i++ {
@@ -196,7 +196,7 @@ func parseRST(page []byte, g Guide) ([]Removal, error) {
 		}
 	}
 	if border < 0 || border+2 >= len(lines) {
-		return nil, fmt.Errorf("no table under %q", g.Section)
+		return nil, fmt.Errorf("no table under %q: %w", g.Section, plugin.ErrNothingToRead)
 	}
 	col := strings.Index(lines[border], " ") + 1
 	for col < len(lines[border]) && lines[border][col] == ' ' {
@@ -230,7 +230,7 @@ func parseRST(page []byte, g Guide) ([]Removal, error) {
 		raw = append(raw, l)
 	}
 	if len(out) == 0 {
-		return nil, fmt.Errorf("the removed members table under %q is empty", g.Section)
+		return nil, fmt.Errorf("the removed members table under %q is empty: %w", g.Section, plugin.ErrNothingToRead)
 	}
 	plain := regexp.MustCompile("^Use ``" + regexp.QuoteMeta(g.Module) + `\.([A-Za-z_][A-Za-z0-9_]*)` + "`` instead\\.$")
 	for i := range out {
@@ -244,11 +244,6 @@ func parseRST(page []byte, g Guide) ([]Removal, error) {
 
 // Slug is the source id the events carry: "numpy/numpy".
 func (g Guide) Slug() string { return g.API }
-
-// Current is the release the guide documents: what a plain run reads.
-func (g Guide) Current(context.Context, plugin.Env) (plugin.Version, error) {
-	return plugin.Version{ID: g.Release, Ref: g.tag()}, nil
-}
 
 // Releases is every final release of the package on PyPI, oldest first,
 // each with the ref its guide would be read at.

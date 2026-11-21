@@ -5,6 +5,8 @@ import (
 	"regexp"
 	"slices"
 	"strings"
+
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 )
 
 var (
@@ -55,7 +57,7 @@ func parseMarkdown(page []byte, g Guide) ([]Removal, error) {
 		}
 	}
 	if start < 0 {
-		return nil, fmt.Errorf("no %q section: the guide's shape may have changed", g.Section)
+		return nil, fmt.Errorf("no %q section (the guide's shape may have changed): %w", g.Section, plugin.ErrNothingToRead)
 	}
 	table := -1
 	for i := start + 1; i+1 < len(lines); i++ {
@@ -68,7 +70,7 @@ func parseMarkdown(page []byte, g Guide) ([]Removal, error) {
 		}
 	}
 	if table < 0 {
-		return nil, fmt.Errorf("no table under %q", g.Section)
+		return nil, fmt.Errorf("no table under %q: %w", g.Section, plugin.ErrNothingToRead)
 	}
 	header := pipeCells(lines[table])
 	if len(header) < 2 || !strings.EqualFold(header[0], g.header()) {
@@ -112,7 +114,7 @@ func parseMarkdown(page []byte, g Guide) ([]Removal, error) {
 		}
 	}
 	if len(out) == 0 {
-		return nil, fmt.Errorf("the removed members table under %q is empty", g.Section)
+		return nil, fmt.Errorf("the removed members table under %q is empty: %w", g.Section, plugin.ErrNothingToRead)
 	}
 	return out, nil
 }

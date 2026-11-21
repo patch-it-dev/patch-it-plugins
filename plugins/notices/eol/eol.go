@@ -34,6 +34,7 @@ import (
 
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
 	"github.com/patch-it-dev/patch-it-plugins/core/kit"
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 )
 
 // Page is one vendor's end-of-life table.
@@ -107,7 +108,7 @@ func text(fragment string) string {
 func Parse(page []byte) ([]Row, error) {
 	m := table.FindStringSubmatch(string(page))
 	if m == nil {
-		return nil, fmt.Errorf("no table found: the page's shape may have changed")
+		return nil, fmt.Errorf("no table found (the page's shape may have changed): %w", plugin.ErrNothingToRead)
 	}
 	var out []Row
 	for _, r := range row.FindAllStringSubmatch(m[1], -1) {
@@ -128,7 +129,7 @@ func Parse(page []byte) ([]Row, error) {
 		out = append(out, Row{From: from, To: to, Label: label, Status: text(cells[1][1])})
 	}
 	if len(out) == 0 {
-		return nil, fmt.Errorf("no version rows found: the page's shape may have changed")
+		return nil, fmt.Errorf("no version rows found (the page's shape may have changed): %w", plugin.ErrNothingToRead)
 	}
 	return out, nil
 }
@@ -196,8 +197,9 @@ func (pg Page) Find(page []byte) (kit.Notices, error) {
 func (Page) ArchiveWhenBlocked() bool { return true }
 
 // Events are an event per version number a row retires or deprecates,
-// citing citeURL; a dropped row is logged with why.
-func (pg Page) Events(found kit.Notices, citeURL string, now time.Time) ([]event.Event, []error) {
+// citing citeURL, with previous as previous_version (each is an
+// api_operation: a version pair); a dropped row is logged with why.
+func (pg Page) Events(found kit.Notices, citeURL, previous string, now time.Time) ([]event.Event, []error) {
 	var events []event.Event
 	var rejected []error
 	for _, f := range found.(Read) {
@@ -206,10 +208,11 @@ func (pg Page) Events(found kit.Notices, citeURL string, now time.Time) ([]event
 			continue
 		}
 		e := event.Event{
-			API:        pg.API,
-			Version:    f.Version,
-			ChangeType: f.ChangeType,
-			Breaking:   f.ChangeType == event.ChangeTypeBreaking,
+			API:             pg.API,
+			Version:         f.Version,
+			PreviousVersion: previous,
+			ChangeType:      f.ChangeType,
+			Breaking:        f.ChangeType == event.ChangeTypeBreaking,
 			Subject: event.Subject{
 				Type:      event.SubjectAPIOperation,
 				Kind:      event.KindOperation,

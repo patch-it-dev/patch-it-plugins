@@ -87,9 +87,10 @@ func (f Feed) Find(b []byte) (kit.Notices, error) {
 	return Findings(fs), err
 }
 
-// Events are an event per finding, citing citeURL; a dropped finding is
-// logged with why.
-func (f Feed) Events(found kit.Notices, citeURL string, now time.Time) ([]event.Event, []error) {
+// Events are an event per finding, citing citeURL; one of a version-pair type
+// (an api_operation) carries previous as previous_version, a dated notice
+// none. A dropped finding is logged with why.
+func (f Feed) Events(found kit.Notices, citeURL, previous string, now time.Time) ([]event.Event, []error) {
 	var events []event.Event
 	var rejected []error
 	for _, fd := range found.(Findings) {
@@ -109,6 +110,9 @@ func (f Feed) Events(found kit.Notices, citeURL string, now time.Time) ([]event.
 			SourceExcerpt: fd.Excerpt,
 			Confidence:    1.0,
 			DetectedAt:    now,
+		}
+		if event.PairType(e.Subject.Type) {
+			e.PreviousVersion = previous
 		}
 		e.Fingerprint = event.Fingerprint(e.API, e.Version, e.ChangeType, e.Subject, "")
 		if err := e.Validate(); err != nil {
