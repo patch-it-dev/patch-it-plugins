@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"regexp"
 	"slices"
 	"strings"
 	"time"
@@ -36,10 +37,58 @@ func commits(ctx context.Context, repo, path string) ([]plugin.Version, error) {
 	return Daily(vs), nil
 }
 
-// Versions are stripe/openapi's releases.
+// stripeSDKSpecVersion is the API version a stripe/openapi release's notes
+// say its SDK spec carries, the version Stripe's SDKs pin (every release
+// since v2191, 2026-03-11, checked 2026-11-20):
+//
+//	| openapi/spec3.sdk.{json,yaml} | 2026-11-18.endive |
+var stripeSDKSpecVersion = regexp.MustCompile(`(?m)^\|\s*openapi/spec3\.sdk\.\{json,yaml\}\s*\|\s*(\d{4}-\d{2}-\d{2}(?:\.[a-z]+)?)\s*\|`)
+
+// Versions are Stripe's API versions ("2026-11-18.endive"), oldest first, as
+// stripe/openapi's releases name them in their notes: each is read at the
+// newest release that carries it (Ref, URL) and dated by the first
+// (Released). A release whose notes name no version (every one before v2191)
+// is left out: its version would have to be guessed.
 func (Stripe) Versions(ctx context.Context) ([]plugin.Version, error) {
-	return releases(ctx, "stripe/openapi", nil)
+	rs, err := versions.GitHubPages[stripeRelease](ctx, github.Get, versions.GitHubAPI+"/repos/stripe/openapi/releases")
+	if err != nil {
+		return nil, fmt.Errorf("listing stripe/openapi's releases: %w", err)
+	}
+	slices.SortStableFunc(rs, func(a, b stripeRelease) int { return a.Published.Compare(b.Published) })
+	byID := map[string]*plugin.Version{}
+	var out []*plugin.Version
+	for _, r := range rs {
+		m := stripeSDKSpecVersion.FindStringSubmatch(r.Body)
+		if r.Draft || r.Prerelease || r.Tag == "" || m == nil {
+			continue
+		}
+		v, ok := byID[m[1]]
+		if !ok {
+			v = &plugin.Version{ID: m[1], Released: r.Published}
+			byID[m[1]], out = v, append(out, v)
+		}
+		v.Ref, v.URL = r.Tag, r.URL
+	}
+	vs := make([]plugin.Version, len(out))
+	for i, v := range out {
+		vs[i] = *v
+	}
+	slices.SortStableFunc(vs, func(a, b plugin.Version) int { return versions.Compare(a.ID, b.ID) })
+	return vs, nil
 }
+
+// stripeRelease is a stripe/openapi release as GitHub's API lists it.
+type stripeRelease struct {
+	Tag        string    `json:"tag_name"`
+	Draft      bool      `json:"draft"`
+	Prerelease bool      `json:"prerelease"`
+	Published  time.Time `json:"published_at"`
+	URL        string    `json:"html_url"`
+	Body       string    `json:"body"`
+}
+
+// ListsSpecVersions: Stripe's version ids are the specs' info.version.
+func (Stripe) ListsSpecVersions() {}
 
 // Versions are datadog-api-client-python's releases.
 func (Datadog) Versions(ctx context.Context) ([]plugin.Version, error) {
@@ -77,14 +126,14 @@ func (PlanetScale) Versions(ctx context.Context) ([]plugin.Version, error) {
 }
 
 var (
-	_ Lister = Stripe{}
-	_ Lister = Datadog{}
-	_ Lister = Vercel{}
-	_ Lister = Flagsmith{}
-	_ Lister = Supabase{}
-	_ Lister = Neon{}
-	_ Lister = Convex{}
-	_ Lister = PlanetScale{}
+	_ SpecVersioned = Stripe{}
+	_ Lister        = Datadog{}
+	_ Lister        = Vercel{}
+	_ Lister        = Flagsmith{}
+	_ Lister        = Supabase{}
+	_ Lister        = Neon{}
+	_ Lister        = Convex{}
+	_ Lister        = PlanetScale{}
 )
 
 // Versions are every API version GitHub supports, oldest first: each is a

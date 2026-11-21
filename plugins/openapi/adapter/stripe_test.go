@@ -26,13 +26,10 @@ func fakeGitHub(t *testing.T, releaseJSON string, specs map[string]string) *http
 	}))
 	t.Cleanup(srv.Close)
 
-	oldRel, oldSpec, oldLegacy := stripeReleasesURL, stripeSpecURLTemplate, stripeLegacySpecURLTemplate
+	oldRel, oldSpec := stripeReleasesURL, stripeSpecURLTemplate
 	stripeReleasesURL = srv.URL + "/releases/latest"
 	stripeSpecURLTemplate = srv.URL + "/%s/latest/openapi.spec3.json"
-	stripeLegacySpecURLTemplate = srv.URL + "/%s/openapi/spec3.json"
-	t.Cleanup(func() {
-		stripeReleasesURL, stripeSpecURLTemplate, stripeLegacySpecURLTemplate = oldRel, oldSpec, oldLegacy
-	})
+	t.Cleanup(func() { stripeReleasesURL, stripeSpecURLTemplate = oldRel, oldSpec })
 	return srv
 }
 
@@ -54,7 +51,6 @@ func TestLatestTagRejectsAReleaseWithoutATag(t *testing.T) {
 func TestFetchUsesTheRecommendedSpec(t *testing.T) {
 	srv := fakeGitHub(t, "", map[string]string{
 		"/v2468/latest/openapi.spec3.json": `{"info":{"version":"2026-08-26.dahlia"}}`,
-		"/v2468/openapi/spec3.json":        `{"info":{"version":"legacy-should-not-be-used"}}`,
 	})
 	spec, err := Stripe{}.Fetch(context.Background(), "v2468")
 	if err != nil {
@@ -62,25 +58,6 @@ func TestFetchUsesTheRecommendedSpec(t *testing.T) {
 	}
 	if spec.Version != "2026-08-26.dahlia" || spec.SourceURL != srv.URL+"/v2468/latest/openapi.spec3.json" {
 		t.Errorf("got version %q from %s; want the latest/ file", spec.Version, spec.SourceURL)
-	}
-}
-
-// The demo change lives on tag v207, which predates Stripe's latest/ directory.
-// Without this fallback the demo couldn't be fetched at all, and the event's
-// provenance must name the file that was actually used.
-func TestFetchFallsBackToTheLegacySpecForOldTags(t *testing.T) {
-	srv := fakeGitHub(t, "", map[string]string{
-		"/v207/openapi/spec3.json": `{"info":{"version":"2022-08-01"}}`,
-	})
-	spec, err := Stripe{}.Fetch(context.Background(), "v207")
-	if err != nil {
-		t.Fatalf("old tag: %v", err)
-	}
-	if spec.Version != "2022-08-01" {
-		t.Errorf("version %q, want 2022-08-01", spec.Version)
-	}
-	if spec.SourceURL != srv.URL+"/v207/openapi/spec3.json" {
-		t.Errorf("source_url %s, want the legacy file that was actually fetched", spec.SourceURL)
 	}
 }
 

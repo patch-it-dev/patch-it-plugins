@@ -44,3 +44,11 @@ type Reshaper interface {
 type Lister interface {
 	Versions(ctx context.Context) ([]plugin.Version, error)
 }
+
+// SpecVersioned is a Lister whose version ids are the specs' own
+// info.version (Stripe's API versions): a spec read at a listed version must
+// declare that version, or it's an error, never another version's content.
+type SpecVersioned interface {
+	Lister
+	ListsSpecVersions()
+}

@@ -27,12 +27,16 @@ Kind: `changelog` (`plugins/changelog`, `sdks.go`).
 
 Stripe ships a new major of every SDK when it pins a new API version (twice a year or so), and marks each breaking bullet `⚠️`. Older changelogs head releases `## X.Y.Z - date`, newer ones `## <a id="X-Y-Z"></a>X.Y.Z - date`; both are read.
 
+A release that changes the API version the SDK pins says so in its section, in the same words in all seven SDKs (checked 2026-11-20): "This release changes the pinned API version to `2026-11-18.endive`." A few say they keep it: "This release **doesn't** change the pinned API version; it still uses `2026-05-27.dahlia`." (Go, Java, .NET), "…**does not** change the pinned API version. It's still `2026-06-24.dahlia`." (PHP), "This release uses the same pinned API version to `2026-03-25.dahlia` as the last major release." (Node).
+
 ## What the plugin reads and ignores
 
 - Reads the release's section only. A bullet counts when it's marked `⚠️` or sits under a breaking or deprecation heading, and its first sentence is a plain template over code spans: `Remove X`, `Remove X from Y`, `Rename X to Y`, `X has been removed`, `Deprecated X in favor of Y`. The pull-request link it starts with is read past.
 - Drops (and logs) everything else: type changes ("Change type of …"), nullable fields, pinned API versions, dropped language versions, bullets that list names inside prose or parentheses, and "Generated changes from …" roll-ups.
+- **What a release pins** (`MapsTo`, `pins.go`): while listing the releases, it reads the changelog at the newest release's tag (or the one before, when that tag isn't pushed yet) and sets each release's `MapsTo` to `stripe/api` at the API version its own section states (the same id `stripe/api` lists its versions by, `providers/stripe.md`), in one of the sentences above, exactly as written (`2026-11-18.endive`). A release whose section doesn't say pins nothing here, even though it keeps the release before's; two different versions in one section are none. Older wordings without "pinned" ("Major version release for API version 2022-08-01", "Move to API version …") aren't read.
 
 ## Known gaps
 
 - Stripe's big generated roll-ups ("⚠️ Generated changes from #…") list their removals in nested bullets the reader doesn't open: those releases give no event.
 - A release whose tag or section is missing is skipped as nothing to read, never guessed.
+- Only releases that state their pin have one: most minors and patches don't say, so a release between two pin changes has none.

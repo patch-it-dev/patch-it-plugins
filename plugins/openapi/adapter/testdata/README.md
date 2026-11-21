@@ -13,6 +13,7 @@ The version-listing tests (`versions_test.go`) read these instead of the network
 | `versions/sentry-schema-releases.json` | `https://api.github.com/repos/getsentry/sentry-api-schema/releases` (pages 1-4) | 2.3.2 and 2.4.0; same fields |
 | `versions/algolia-refs.json` | `https://api.github.com/repos/algolia/api-clients-automation/git/matching-refs/tags/released-` | 9 of 186 tags, five of them on two days with several releases |
 | `versions/algolia-commit-*.json` | `https://api.github.com/repos/algolia/api-clients-automation/commits/<tag>` | `sha` and the committer date |
+| `versions/stripe-openapi-releases.json` | `https://api.github.com/repos/stripe/openapi/releases/tags/<tag>`, one per release, in the order `releases?per_page=100` lists them | 21 of 2,591: the first and the last release of each of the 10 API versions their notes name (v2191 to v2602), and v2190, the newest whose notes name none; `tag_name`, `name`, `draft`, `prerelease`, `published_at`, `html_url`, `body` |
 | `versions/appwrite-commits.json` | `https://api.github.com/repos/appwrite/specs/commits?path=specs&per_page=100&page=1` | the 40 newest commits; `sha`, `html_url`, the committer date |
 
 Licenses: these are API metadata (tag names, dates, SHAs), not the projects' content.
