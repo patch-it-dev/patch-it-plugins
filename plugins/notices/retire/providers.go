@@ -71,3 +71,18 @@ var Gemini = Page{
 	Keep:     googleModel.MatchString,
 	Earliest: true,
 }
+
+// Vertex is Google Cloud's Vertex AI model versions page (checked
+// 2026-11-21): HTML tables of | Model ID | Release date | Retirement date |
+// Replacement model ID | (or Recommended upgrade). A GA model's date is a
+// minimum lifetime ("October 13, 2027 or later", "No sooner than May 20,
+// 2028"), not a notice, and isn't read as a date; a retired or retiring
+// model's is a plain date ("June 30, 2026").
+var Vertex = Page{
+	API:      "google/vertex-model-retirements",
+	Provider: "google",
+	Vendor:   "Google",
+	URL:      "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+	Format:   FormatHTML,
+	Keep:     googleModel.MatchString,
+}

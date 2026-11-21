@@ -6,8 +6,9 @@
 // A page is a Markdown pipe table (OpenAI's and Anthropic's pages, served as
 // markdown at their URL plus ".md", checked 2026-10-13), a Markdoc table
 // (Google's Gemini API page, {% table %} with one "* cell" per line, checked
-// 2026-11-21), read into pipe rows first, with its headings, so one parser
-// reads every page. A table is a retirement
+// 2026-11-21), or an HTML table (Google Cloud's Vertex AI model versions,
+// checked 2026-11-21). The last two are read into pipe rows first, with
+// their headings, so one parser reads every page. A table is a retirement
 // table when it has a shutdown or retirement date column, a model column and
 // a replacement column, in any order. The event cites a Wayback Machine
 // snapshot of the page (kit/), never the live page: the contract requires a
@@ -29,7 +30,7 @@ type Page struct {
 	API      string // the source id the events carry: "openai/models"
 	Provider string // the model subject's provider: "openai"
 	Vendor   string // for sentences: "OpenAI"
-	URL      string // the page, as markdown
+	URL      string // the page, as markdown or HTML
 	// Format is how the page writes its tables: Markdown pipe tables (the
 	// default), Markdoc or HTML.
 	Format Format
@@ -48,6 +49,7 @@ type Format string
 const (
 	FormatMarkdown Format = ""
 	FormatMarkdoc  Format = "markdoc"
+	FormatHTML     Format = "html"
 )
 
 // Retirement is one model name the provider stops serving on Date, with the
@@ -72,6 +74,8 @@ func (f Format) Pipes(page []byte) []byte {
 	switch f {
 	case FormatMarkdoc:
 		return markdocPipes(page)
+	case FormatHTML:
+		return htmlPipes(page)
 	}
 	return page
 }

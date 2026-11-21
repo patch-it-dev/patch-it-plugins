@@ -1,7 +1,9 @@
 package retire
 
 import (
+	"html"
 	"regexp"
+	"strconv"
 	"strings"
 )
 
@@ -48,6 +50,44 @@ func markdocPipes(page []byte) []byte {
 		}
 	}
 	return []byte(strings.Join(out, "\n") + "\n")
+}
+
+var (
+	htmlTable   = regexp.MustCompile(`(?is)<h([1-6])[^>]*>(.*?)</h[1-6]>|<table[^>]*>(.*?)</table>`)
+	htmlRow     = regexp.MustCompile(`(?is)<tr[^>]*>(.*?)</tr>`)
+	htmlCell    = regexp.MustCompile(`(?is)<t[hd][^>]*>(.*?)</t[hd]>`)
+	htmlCode    = regexp.MustCompile(`(?is)<code[^>]*>(.*?)</code>`)
+	htmlTag     = regexp.MustCompile(`<[^>]+>`)
+	htmlNewline = regexp.MustCompile(`\s+`)
+)
+
+// htmlPipes reads an HTML page's tables into pipe tables, each under the
+// heading above it; <code> becomes a code span, every other tag goes.
+func htmlPipes(page []byte) []byte {
+	var out []string
+	for _, m := range htmlTable.FindAllStringSubmatch(string(page), -1) {
+		if m[1] != "" {
+			level, _ := strconv.Atoi(m[1])
+			out = append(out, strings.Repeat("#", level)+" "+htmlText(m[2]))
+			continue
+		}
+		var rows [][]string
+		for _, r := range htmlRow.FindAllStringSubmatch(m[3], -1) {
+			var row []string
+			for _, c := range htmlCell.FindAllStringSubmatch(r[1], -1) {
+				row = append(row, htmlText(htmlCode.ReplaceAllString(c[1], "`$1`")))
+			}
+			if len(row) > 0 {
+				rows = append(rows, row)
+			}
+		}
+		out = append(out, pipeTable(rows)...)
+	}
+	return []byte(strings.Join(out, "\n") + "\n")
+}
+
+func htmlText(s string) string {
+	return strings.TrimSpace(htmlNewline.ReplaceAllString(html.UnescapeString(htmlTag.ReplaceAllString(s, " ")), " "))
 }
 
 // pipeTable writes rows (the first the header) as a Markdown pipe table,

@@ -14,9 +14,10 @@ import (
 // of the unchanged page asks for no snapshot.
 func TestRetirementsGolden(t *testing.T) {
 	for file, page := range map[string]retire.Page{
-		"openai-deprecations.md":    retire.OpenAI,
-		"anthropic-deprecations.md": retire.Anthropic,
-		"gemini-deprecations.md":    retire.Gemini,
+		"openai-deprecations.md":     retire.OpenAI,
+		"anthropic-deprecations.md":  retire.Anthropic,
+		"gemini-deprecations.md":     retire.Gemini,
+		"vertex-model-versions.html": retire.Vertex,
 	} {
 		t.Run(page.API, func(t *testing.T) {
 			saved := kittest.Pages{page.URL: "retire/testdata/" + file}

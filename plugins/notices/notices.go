@@ -82,6 +82,12 @@ func init() {
 			URLs:     []string{"https://ai.google.dev/gemini-api/docs/deprecations", "https://aistudio.google.com/docs/deprecations"},
 			Packages: []string{"pypi:google-genai", "npm:@google/genai"},
 			Plugin:   Plugin{Page: retire.Gemini, Archiver: kit.Wayback{}},
+		}, {
+			ID: "vertex-model-retirements", Layer: plugin.LayerAIModels, Page: "providers/google-vertex-model-retirements.md",
+			Watches:  "Vertex AI (Gemini Enterprise Agent Platform) model retirement dates and replacements, from Google Cloud's model versions tables",
+			URLs:     []string{"https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions"},
+			Packages: []string{"pypi:google-genai", "pypi:google-cloud-aiplatform", "npm:@google/genai"},
+			Plugin:   Plugin{Page: retire.Vertex, Archiver: kit.Wayback{}},
 		}},
 	})
 	plugin.RegisterProvider(plugin.Provider{

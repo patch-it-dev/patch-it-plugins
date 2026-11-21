@@ -12,7 +12,7 @@ Kind: `notices` (`plugins/notices`), with the deprecations-table reader (`plugin
 - **Why this one:** it's Google's own table of every Gemini API model with its release date, its shutdown date and the recommended replacement, one table per model family, the shut-down ones kept under "Deprecated models". It's where Google says deprecation dates are tracked: "Deprecation announcements are made on the Release notes page, and the announced earliest shutdown dates are tracked on this page."
 - **Alternatives considered:**
   - **The Gemini API release notes** (`https://aistudio.google.com/docs/changelog`): the same deprecations, announced in prose, one entry per day. The table is the same facts, already structured.
-  - **Vertex AI's model versions page**: the same models on Google Cloud, with Google Cloud's own retirement dates, which differ from the Gemini API's (gemini-2.5-pro: 2026-10-20 on Vertex AI, 2026-12-01 here). A separate source: a repo reaches one or the other.
+  - **Vertex AI's model versions page** (`google/vertex-model-retirements`): the same models on Google Cloud, with Google Cloud's own retirement dates, which differ from the Gemini API's (gemini-2.5-pro: 2026-10-20 on Vertex AI, 2026-12-01 here). A separate source: a repo reaches one or the other.
   - **The Gemini API's models list** (`GET /v1beta/models`): what's served now, with no dates.
 - **Quote:** "| `gemini-2.0-flash` | February 5, 2025 | June 1, 2026 | `gemini-3.6-flash` |" (Gemini 2.0 models, Deprecated models), and above the tables: "The shutdown dates listed in the table indicate the earliest possible dates on which a model might be retired".
 

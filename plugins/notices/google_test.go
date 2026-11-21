@@ -66,8 +66,24 @@ func TestGeminiDropsModelsWithNoDateAndAgents(t *testing.T) {
 	}
 }
 
+// The pinned drop test for Vertex AI: a GA model's "June 28, 2027 or
+// later" is how long it's kept at least, not a retirement. The Gemini image
+// models' table has four such rows and one dated retirement
+// (gemini-2.5-flash-image, March 15, 2027): one event. The same table with
+// the dates plain would give five.
+func TestVertexDropsAMinimumLifetime(t *testing.T) {
+	ga := section(t, "retire/testdata/vertex-model-versions.html", `<h3 id="gemini-image-models"`, `<h3 id="gemini-omni-models"`)
+	if n := readGoogle(t, retire.Vertex, ga); n != 1 {
+		t.Errorf("%d events, want the one dated retirement only", n)
+	}
+	plain := strings.ReplaceAll(ga, " or later", "")
+	if rs, err := retire.Parse(retire.Vertex.Format.Pipes([]byte(plain)), retire.Vertex.Keep); err != nil || len(rs) < 2 {
+		t.Errorf("the same table with plain dates: %d, %v; the drop proves nothing", len(rs), err)
+	}
+}
+
 // Google's Gemini dates are the earliest a model may go: the description
-// says so.
+// says so, and an exact table (Vertex AI's) doesn't.
 func TestGeminiDatesAreTheEarliest(t *testing.T) {
 	saved := kittest.Pages{retire.Gemini.URL: "retire/testdata/gemini-deprecations.md"}
 	for _, e := range kittest.Page(t, kittest.Env(t, saved), Plugin{Page: retire.Gemini, Archiver: &kittest.Archive{T: t, Pages: saved}}) {
