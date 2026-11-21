@@ -30,6 +30,19 @@ Read with `Plugin{File: ...}` (`sdks.go`); `golden/<provider>-<source>.json` is 
 | `cloudflare-python-5.6.0-CHANGELOG.md` | https://raw.githubusercontent.com/cloudflare/cloudflare-python/v5.6.0/CHANGELOG.md | `02ab9a9` | 2026-11-20 | Apache-2.0 (cloudflare-python); trimmed to the sections of 5.6.0 (the golden) and 5.4.0 (the drop test), each unchanged | "accounts:** The `create()` and `get()` methods have been removed from `client.accounts.subscriptions`. The `Subscript…" |
 | `cloudflare-go-7.15.0-CHANGELOG.md` | https://raw.githubusercontent.com/cloudflare/cloudflare-go/v7.15.0/CHANGELOG.md | `d2f77a0` | 2026-11-20 | Apache-2.0 (cloudflare-go); trimmed to the sections of 7.15.0 (the golden) and 7.13.1 (the drop test), each unchanged | "rules:** the `ListCursor` and `ListCursorParam` types are removed." |
 | `cloudflare-terraform-5.29.0-CHANGELOG.md` | https://raw.githubusercontent.com/cloudflare/terraform-provider-cloudflare/v5.29.0/CHANGELOG.md | `8e7a366` | 2026-11-20 | Apache-2.0 (terraform-provider-cloudflare); trimmed to the sections of 5.29.0 (the golden) and 5.28.1 (the drop test), each unchanged | "zone_dns_settings, account_dns_settings:** the deprecated `foundation_dns` attribute has been removed. On `cloudflare…" |
+| `redis-ioredis-5.0.0-CHANGELOG.md` | https://raw.githubusercontent.com/redis/ioredis/v5.0.0/CHANGELOG.md | `b8e99b4` | 2026-11-20 | MIT (ioredis); trimmed to the sections of 5.0.0 (the golden) and 5.0.0-beta.4 (the drop test), each unchanged | "you very likely have never used it." |
+| `posthog-go-2.0.0-CHANGELOG.md` | https://raw.githubusercontent.com/PostHog/posthog-go/v2.0.0/CHANGELOG.md | `ee5c496` | 2026-11-20 | MIT (posthog-go); trimmed to the sections of 2.0.0 (the golden) and 1.44.1 (the drop test), each unchanged | "fc05013: Remove `Capture.Library` and `Exception.Library`. Set `$lib` in the event's `Properties` instead, and set `$…" |
+
+## SDK release notes
+
+Read with `Plugin{File: ...}` and `Notes: true` (`sdks.go`): an SDK whose changelog is its GitHub releases' notes. Each file is one release as GitHub's API returns it, trimmed to the fields the reader uses.
+
+| File | URL | Tag commit | Saved | License; trimming | Use |
+|---|---|---|---|---|---|
+| `github-octokit-rest-18.0.0-release.json` | https://api.github.com/repos/octokit/rest.js/releases/tags/v18.0.0 | `b4ab0db` | 2026-11-20 | MIT (rest.js); trimmed to `html_url`, `tag_name`, `name`, `published_at` and `body`, re-indented, values unchanged | golden |
+| `github-octokit-rest-17.11.2-release.json` | https://api.github.com/repos/octokit/rest.js/releases/tags/v17.11.2 | `5306f37` | 2026-11-20 | MIT (rest.js); trimmed to `html_url`, `tag_name`, `name`, `published_at` and `body`, re-indented, values unchanged | drop test |
+| `github-octokit-net-0.19.0-release.json` | https://api.github.com/repos/octokit/octokit.net/releases/tags/v0.19.0 | `60603b7` | 2026-11-20 | MIT (octokit.net); trimmed to `html_url`, `tag_name`, `name`, `published_at` and `body`, re-indented, values unchanged | golden |
+| `github-octokit-net-0.18.0-release.json` | https://api.github.com/repos/octokit/octokit.net/releases/tags/v0.18.0 | `de17cbc` | 2026-11-20 | MIT (octokit.net); trimmed to `html_url`, `tag_name`, `name`, `published_at` and `body`, re-indented, values unchanged | drop test |
 
 ## Version lists
 
