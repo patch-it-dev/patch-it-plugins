@@ -190,7 +190,7 @@ func TestSymbolOrderDoesntChangeTheFingerprint(t *testing.T) {
 // Two kinds of change that share every other field still get two fingerprints.
 func TestTheTypeIsPartOfTheFingerprint(t *testing.T) {
 	m := Fingerprint("x/y", "1", ChangeBreaking, Subject{Type: SubjectModel, Provider: "p", Name: "n"}, "")
-	c := Fingerprint("x/y", "1", ChangeBreaking, Subject{Type: SubjectCIRuntime, Platform: "p", Runtime: "n"}, "")
+	c := Fingerprint("x/y", "1", ChangeBreaking, Subject{Type: SubjectRuntime, Platform: "p", Runtime: "n"}, "")
 	if m == c {
 		t.Error("a model and a CI runtime with the same values share a fingerprint")
 	}

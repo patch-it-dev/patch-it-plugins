@@ -63,5 +63,4 @@ var (
 var GraphQL = catalog.UpcomingChanges{
 	API: "github/graphql", Vendor: "GitHub",
 	Repo: "github/docs", Path: "src/graphql/data/fpt/upcoming-changes.json",
-	Endpoint: "POST /graphql",
 }

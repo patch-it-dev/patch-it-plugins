@@ -52,7 +52,9 @@ const (
 	SubjectAPIOperation   SubjectType = "api_operation"
 	SubjectModel          SubjectType = "model"
 	SubjectPackageRelease SubjectType = "package_release"
-	SubjectCIRuntime      SubjectType = "ci_runtime"
+	SubjectRuntime        SubjectType = "runtime"
+	SubjectFlag           SubjectType = "flag"
+	SubjectGraphQLField   SubjectType = "graphql_field"
 )
 
 // PackageChange is what a package release did to the code that calls it.
@@ -83,7 +85,7 @@ type Subject struct {
 	Schema    string `json:"schema,omitempty"`
 	Property  string `json:"property,omitempty"`
 
-	// model
+	// model, flag
 	Provider string `json:"provider,omitempty"`
 	Name     string `json:"name,omitempty"`
 
@@ -94,11 +96,24 @@ type Subject struct {
 	Symbols   []string      `json:"symbols,omitempty"`
 	Parameter string        `json:"parameter,omitempty"`
 
-	// ci_runtime
+	// runtime: a runtime or server version that stops being provided or
+	// supported. Platform is where it runs (absent for a product's own
+	// lifecycle), Runtime its name as config writes it, Version the version
+	// going when the source names it apart from the name.
 	Platform string `json:"platform,omitempty"`
 	Runtime  string `json:"runtime,omitempty"`
+	Version  string `json:"version,omitempty"`
 
-	// model, package_release (renamed_symbol), ci_runtime
+	// flag: a named switch code or config sets (a compatibility flag, a beta
+	// header). Setting is where it's set, as written there.
+	Setting string `json:"setting,omitempty"`
+
+	// graphql_field: a field, argument, input field or enum value.
+	TypeName string `json:"type_name,omitempty"`
+	Field    string `json:"field,omitempty"`
+	Argument string `json:"argument,omitempty"`
+
+	// model, package_release (renamed_symbol), runtime, flag
 	Replacement string `json:"replacement,omitempty"`
 }
 
@@ -169,7 +184,9 @@ var subjectKeys = map[SubjectType][]string{
 	SubjectAPIOperation:   {"kind", "side", "operation", "schema", "property"},
 	SubjectModel:          {"provider", "name", "replacement"},
 	SubjectPackageRelease: {"ecosystem", "package", "change", "symbols", "parameter", "replacement"},
-	SubjectCIRuntime:      {"platform", "runtime", "replacement"},
+	SubjectRuntime:        {"platform", "runtime", "version", "replacement"},
+	SubjectFlag:           {"provider", "setting", "name", "replacement"},
+	SubjectGraphQLField:   {"type_name", "field", "argument"},
 }
 
 // Fingerprint identifies one change, so re-reading the same source stores
@@ -193,8 +210,12 @@ func Fingerprint(api, version string, change Change, s Subject, detail string) s
 		symbols := slices.Clone(s.Symbols)
 		slices.Sort(symbols)
 		parts = append(parts, s.Ecosystem, s.Package, string(s.Change), strings.Join(symbols, ","), s.Parameter)
-	case SubjectCIRuntime:
-		parts = append(parts, s.Platform, s.Runtime)
+	case SubjectRuntime:
+		parts = append(parts, s.Platform, s.Runtime, s.Version)
+	case SubjectFlag:
+		parts = append(parts, s.Provider, s.Setting, s.Name)
+	case SubjectGraphQLField:
+		parts = append(parts, s.TypeName, s.Field, s.Argument)
 	}
 	return hash(append(parts, "")...)
 }
@@ -218,6 +239,11 @@ func (e Event) Validate() error {
 	// one twice for a change made inside one version).
 	if PairType(e.Subject.Type) && e.PreviousVersion == "" {
 		return fmt.Errorf("previous_version is required for a %s change: it compares two versions", e.Subject.Type)
+	}
+	// A dated notice names no previous_version: the client tells a pair from
+	// a notice by it.
+	if !PairType(e.Subject.Type) && e.PreviousVersion != "" {
+		return fmt.Errorf("a %s change is a dated notice: it has no previous_version", e.Subject.Type)
 	}
 	// Rule 14: api is the source's provider/source id.
 	if !sourceID.MatchString(e.API) {
@@ -283,13 +309,25 @@ func (s Subject) required() ([]string, error) {
 			return nil, fmt.Errorf("subject.symbols must name at least one symbol, none empty")
 		}
 		return subjectKeys[SubjectPackageRelease], nil
-	case SubjectCIRuntime:
-		for _, f := range [][2]string{{"platform", s.Platform}, {"runtime", s.Runtime}} {
+	case SubjectRuntime:
+		if err := need("runtime", s.Runtime); err != nil {
+			return nil, err
+		}
+		return subjectKeys[SubjectRuntime], nil
+	case SubjectFlag:
+		for _, f := range [][2]string{{"provider", s.Provider}, {"setting", s.Setting}, {"name", s.Name}} {
 			if err := need(f[0], f[1]); err != nil {
 				return nil, err
 			}
 		}
-		return subjectKeys[SubjectCIRuntime], nil
+		return subjectKeys[SubjectFlag], nil
+	case SubjectGraphQLField:
+		for _, f := range [][2]string{{"type_name", s.TypeName}, {"field", s.Field}} {
+			if err := need(f[0], f[1]); err != nil {
+				return nil, err
+			}
+		}
+		return subjectKeys[SubjectGraphQLField], nil
 	}
 	return nil, fmt.Errorf("subject.type must be a valid enum value, got %q", s.Type)
 }
@@ -302,7 +340,9 @@ func (s Subject) present() map[string]bool {
 		"provider": s.Provider != "", "name": s.Name != "",
 		"ecosystem": s.Ecosystem != "", "package": s.Package != "", "change": s.Change != "",
 		"symbols": len(s.Symbols) > 0, "parameter": s.Parameter != "",
-		"platform": s.Platform != "", "runtime": s.Runtime != "",
+		"platform": s.Platform != "", "runtime": s.Runtime != "", "version": s.Version != "",
+		"setting":   s.Setting != "",
+		"type_name": s.TypeName != "", "field": s.Field != "", "argument": s.Argument != "",
 		"replacement": s.Replacement != "",
 	}
 }
@@ -318,6 +358,10 @@ var sourceID = regexp.MustCompile(`^[a-z0-9][a-z0-9._-]*/[a-z0-9][a-z0-9._-]*$`)
 func PairType(t SubjectType) bool {
 	return t == SubjectAPIOperation || t == SubjectPackageRelease
 }
+
+// operationPattern is the contract's shape for an api_operation's operation:
+// an upper-case method and a path, or a path alone. patch-it checks the same.
+var operationPattern = regexp.MustCompile(`^([A-Z]+ )?/[^ ]*$`)
 
 // fingerprintPattern is the contract's shape for a fingerprint (the schema's
 // pattern in the change event contract). patch-it checks the same pattern.
@@ -385,6 +429,11 @@ func (a Subject) validateOperation() error {
 	}
 	if a.Side != SideRequest && a.Side != SideResponse {
 		return fmt.Errorf("subject.side must be a valid enum value, got %q", a.Side)
+	}
+	// Rule 11: an operation is METHOD /path, or the path alone when the
+	// source names an endpoint without a method.
+	if a.Operation != "" && !operationPattern.MatchString(a.Operation) {
+		return fmt.Errorf("subject.operation must be \"METHOD /path\" or \"/path\", got %q", a.Operation)
 	}
 
 	// Rule 5: subject's required fields, and its side, depend on its kind.

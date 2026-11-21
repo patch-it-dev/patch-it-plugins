@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"html"
 	"regexp"
+	"slices"
 	"sort"
 	"strings"
 
@@ -24,10 +25,11 @@ import (
 // "Type.field.argument"), date the day it goes.
 //
 // A version is a commit (its date, its SHA). An entry in to's file that
-// from's didn't have is a newly announced removal: a deprecation event on
-// that location whose version is the removal date (GitHub's GraphQL API has
-// no versions of its own, so the day it breaks is the one to gate on, as a
-// model's shutdown date is), with previous_version the commit before. An
+// from's didn't have is a newly announced removal: a deprecated
+// graphql_field event on that location whose version is the removal date
+// (GitHub's GraphQL API has no versions of its own, so the day it breaks is
+// the one to gate on, as a model's shutdown date is): a dated notice, with no
+// previous_version. An
 // entry a commit drops and a later one restores, with the same date, is then
 // the same event again, which the store dedupes by fingerprint. An entry dated before the commit that
 // adds it isn't an announcement (a revert putting back a removal already
@@ -39,9 +41,6 @@ type UpcomingChanges struct {
 	Vendor string // for sentences: "GitHub"
 	Repo   string // owner/name on GitHub
 	Path   string // the file's path in the repo
-	// Endpoint is the GraphQL endpoint as an operation: every query and
-	// mutation is a POST to it ("POST /graphql").
-	Endpoint string
 
 	shape *plugin.Shape // the source's, set by RegisterProvider (WithShape); nil: no guard
 }
@@ -125,7 +124,7 @@ func gqlText(s string) string {
 
 // Extract is a deprecation event per entry in to's file that from's didn't
 // have, dated before to's commit or not at all excluded (see
-// UpcomingChanges), with previous_version from's commit. A zero from has
+// UpcomingChanges), each a dated notice. A zero from has
 // nothing to compare.
 func (u UpcomingChanges) Extract(_ context.Context, env plugin.Env, from, to plugin.Snapshot) (plugin.Result, error) {
 	if from.IsZero() {
@@ -167,7 +166,7 @@ func (u UpcomingChanges) Extract(_ context.Context, env plugin.Env, from, to plu
 			hint += " " + r
 		}
 		made = append(made, event.Event{
-			API: u.API, Version: e.Date, PreviousVersion: from.Version.ID,
+			API: u.API, Version: e.Date,
 			Change:  event.ChangeDeprecated,
 			Subject: subject,
 			Description: fmt.Sprintf("%s's GraphQL API removes %s on %s: code that queries or sends it fails from that date.",
@@ -184,23 +183,20 @@ func (u UpcomingChanges) Extract(_ context.Context, env plugin.Env, from, to plu
 	return plugin.Result{Events: events, Rejected: rejected}, nil
 }
 
-// subject places a location in the contract's api_operation: an input
-// object's field, or an argument of a root field (Query.field.argument), is
-// a request parameter of the endpoint; any other location (a field, a root
-// field itself, a field's argument, an enum's value) is a property of its
-// type, as a schema.
+// subject places a location in the contract's graphql_field: "Type.field"
+// (a field, an input object's field, an enum's value) or
+// "Type.field.argument". A location with more parts, or an empty one, isn't
+// read: guessing which part is which isn't reading the file.
 func (u UpcomingChanges) subject(location string) (event.Subject, bool) {
-	typ, rest, ok := strings.Cut(location, ".")
-	if !ok || typ == "" || rest == "" {
+	parts := strings.Split(location, ".")
+	if len(parts) < 2 || len(parts) > 3 || slices.Contains(parts, "") {
 		return event.Subject{}, false
 	}
-	root := typ == "Query" || typ == "Mutation" || typ == "Subscription"
-	if strings.HasSuffix(typ, "Input") || (root && strings.Contains(rest, ".")) {
-		return event.Subject{Type: event.SubjectAPIOperation, Kind: event.KindRequestParameter, Side: event.SideRequest,
-			Operation: u.Endpoint, Property: location}, true
+	s := event.Subject{Type: event.SubjectGraphQLField, TypeName: parts[0], Field: parts[1]}
+	if len(parts) == 3 {
+		s.Argument = parts[2]
 	}
-	return event.Subject{Type: event.SubjectAPIOperation, Kind: event.KindSchemaProperty, Side: event.SideResponse,
-		Schema: typ, Property: rest}, true
+	return s, true
 }
 
 var (

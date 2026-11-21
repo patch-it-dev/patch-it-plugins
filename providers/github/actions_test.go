@@ -49,7 +49,7 @@ func TestActionsUnsureEntriesAreDropped(t *testing.T) {
 		dropped []string // a substring of each drop reason, in order
 	}{
 		{Actions, "testdata/github-changelog-actions.rss.xml", []string{
-			"arm32-linux-windows-retirement",                    // no runner label: no ci_runtime to name
+			"arm32-linux-windows-retirement",                    // no runner label: no runtime to name
 			"pull_request_target-blocked-by-default-december-2", // a behavior change, no subject type fits
 		}},
 	} {

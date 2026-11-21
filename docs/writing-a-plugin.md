@@ -146,7 +146,7 @@ A source that has versions (a spec's releases, a package's releases, a guide per
 A living page (a deprecations page, a feed: a `notices` source) only shows its latest state. The runner keeps the snapshot of the last read and hands it to `Read`:
 
 - **Read** fetches the page. When it hashes as it did at `last` (`CompareHash`), return `last` as is: an unchanged page costs one GET (a 304 with the HTTP cache) and nothing else. Otherwise cite it (`kit.Cite`: a Wayback Machine snapshot that must say what the live page said) and return a new snapshot, dated now (`Version.ID` is the read's time, RFC 3339), whose content is the snapshot's bytes and whose `CompareHash` is the live page's.
-- **Extract** from the kept snapshot to the new one is an event per notice the new one has that the kept one didn't (every one on a first read), citing the new snapshot. A dated notice (`model`, `ci_runtime`) has no `previous_version`; an `api_operation` notice names the read it was compared with (on a first read, its own).
+- **Extract** from the kept snapshot to the new one is an event per notice the new one has that the kept one didn't (every one on a first read), citing the new snapshot. A dated notice (`model`, `runtime`, `flag`, `graphql_field`) has no `previous_version` (the contract refuses one); an `api_operation` notice names the read it was compared with (on a first read, its own).
 
 ### The `apisurface` kind: reading a package's API without running it
 
@@ -216,7 +216,7 @@ The source's `Shape` (on its `plugin.Source`) holds its anchors and any ratio or
 
 ### Events
 
-The event format is [patch-it's change-event contract](https://github.com/patch-it-dev/patch-it/tree/main/docs/contract); `core/event/` is its Go binding. Every event has a typed `subject` (`api_operation`, `model`, `package_release`, `ci_runtime`), a `change` (`breaking`, `deprecated` or `added`: additions are data too, emit what the kind can see), a `version`, a `fingerprint` (`event.Fingerprint`), and **a `source_url` and `source_excerpt`: no source, no event**. Call `Validate()`; an invalid event goes in `Result.Rejected`, not `Events`.
+The event format is [patch-it's change-event contract](https://github.com/patch-it-dev/patch-it/tree/main/docs/contract); `core/event/` is its Go binding. Every event has a typed `subject` (`api_operation`, `model`, `package_release`, `runtime`, `flag`, `graphql_field`), a `change` (`breaking`, `deprecated` or `added`: additions are data too, emit what the kind can see), a `version`, a `fingerprint` (`event.Fingerprint`), and **a `source_url` and `source_excerpt`: no source, no event**. Call `Validate()`; an invalid event goes in `Result.Rejected`, not `Events`.
 
 ## 5. Save the source
 

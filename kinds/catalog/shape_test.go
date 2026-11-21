@@ -52,7 +52,7 @@ func TestUpcomingChangesThatVanishedChangedShape(t *testing.T) {
 		}
 		return out
 	}
-	u := UpcomingChanges{API: "acme/graphql", Vendor: "Acme", Repo: "acme/acme", Path: "upcoming.json", Endpoint: "POST /graphql"}.WithShape(plugin.Shape{})
+	u := UpcomingChanges{API: "acme/graphql", Vendor: "Acme", Repo: "acme/acme", Path: "upcoming.json"}.WithShape(plugin.Shape{})
 	if _, err := u.Extract(context.Background(), env, snap("2026-11-01", entries(40)), snap("2026-11-02", map[string]any{})); !errors.Is(err, plugin.ErrShapeChanged) {
 		t.Errorf("40 -> 0 entries: %v", err)
 	}

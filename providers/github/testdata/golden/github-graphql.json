@@ -1,17 +1,14 @@
 [
   {
     "id": 0,
-    "fingerprint": "sha256:1d12c73ed6bb1158f4c8472da0634b0a592ef6ae269efff912b9a5b578b76983",
+    "fingerprint": "sha256:50323585521d3bfb32a2143ba24b4efdd3697dcf65edbdb4cb8bf0e42f441ce8",
     "api": "github/graphql",
     "version": "2027-01-01",
-    "previous_version": "2026-02-13",
     "change": "deprecated",
     "subject": {
-      "type": "api_operation",
-      "kind": "schema_property",
-      "side": "response",
-      "schema": "CheckAnnotation",
-      "property": "databaseId"
+      "type": "graphql_field",
+      "type_name": "CheckAnnotation",
+      "field": "databaseId"
     },
     "description": "GitHub's GraphQL API removes CheckAnnotation.databaseId on 2027-01-01: code that queries or sends it fails from that date.",
     "migration_hint": "databaseId will be removed. Use fullDatabaseId instead. databaseId will be removed because it does not support 64-bit signed integer identifiers.",
@@ -22,17 +19,14 @@
   },
   {
     "id": 0,
-    "fingerprint": "sha256:1d65855ed9cd7bbc1e7b132af416cb3e5f786e14c22929fd008785d81a225561",
+    "fingerprint": "sha256:5e62f44cdc3cdf1ff14a6406c74ae920dc0eb3a7a92603e5eccb0a3b532d03de",
     "api": "github/graphql",
     "version": "2027-01-01",
-    "previous_version": "2026-02-13",
     "change": "deprecated",
     "subject": {
-      "type": "api_operation",
-      "kind": "schema_property",
-      "side": "response",
-      "schema": "Artifact",
-      "property": "databaseId"
+      "type": "graphql_field",
+      "type_name": "Artifact",
+      "field": "databaseId"
     },
     "description": "GitHub's GraphQL API removes Artifact.databaseId on 2027-01-01: code that queries or sends it fails from that date.",
     "migration_hint": "databaseId will be removed. Use fullDatabaseId instead. databaseId will be removed because it does not support 64-bit signed integer identifiers.",
@@ -43,17 +37,14 @@
   },
   {
     "id": 0,
-    "fingerprint": "sha256:af67e381d65adb4520943a44a3f5f6c56166149106dd05cd8e538ca1864cdfda",
+    "fingerprint": "sha256:a714ff0573ba048cf152d4d1895615cdf4190607dd0f314079cea58294d7eda5",
     "api": "github/graphql",
     "version": "2026-10-01",
-    "previous_version": "2026-03-03",
     "change": "deprecated",
     "subject": {
-      "type": "api_operation",
-      "kind": "schema_property",
-      "side": "response",
-      "schema": "User",
-      "property": "viewerRelevantRepositories"
+      "type": "graphql_field",
+      "type_name": "User",
+      "field": "viewerRelevantRepositories"
     },
     "description": "GitHub's GraphQL API removes User.viewerRelevantRepositories on 2026-10-01: code that queries or sends it fails from that date.",
     "migration_hint": "viewerRelevantRepositories will be removed. Use viewerCopilotChatRepositorySuggestions instead. viewerRelevantRepositories has been renamed to viewerCopilotChatRepositorySuggestions.",
@@ -64,17 +55,14 @@
   },
   {
     "id": 0,
-    "fingerprint": "sha256:322f81e53a4f2aabf1671494c6cb64faa4576fe96584c60c901740b658b5cafd",
+    "fingerprint": "sha256:82f0659b5410ff655b5fbe3a92f6808204c786c28d5cfe2552c4d0f83f7ed729",
     "api": "github/graphql",
     "version": "2026-10-01",
-    "previous_version": "2026-05-22",
     "change": "deprecated",
     "subject": {
-      "type": "api_operation",
-      "kind": "schema_property",
-      "side": "response",
-      "schema": "CopilotAgentTask",
-      "property": "type"
+      "type": "graphql_field",
+      "type_name": "CopilotAgentTask",
+      "field": "type"
     },
     "description": "GitHub's GraphQL API removes CopilotAgentTask.type on 2026-10-01: code that queries or sends it fails from that date.",
     "migration_hint": "type will be removed. Use codingAgentFilter and codingAgentTypeFilter instead. type will be removed.",

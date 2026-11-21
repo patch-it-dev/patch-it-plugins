@@ -1,12 +1,12 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:bdfcfa49f99297e3e205a803e01a25285fa7b5b07b1cb98b4c9d716aec4c12f4",
+    "fingerprint": "sha256:426c0fb8cbb93cb647a67f5190652a61f9930fadbdeca9d1cb370fac9d7f85db",
     "api": "github/actions",
     "version": "2026-11-02",
     "change": "breaking",
     "subject": {
-      "type": "ci_runtime",
+      "type": "runtime",
       "platform": "github-actions",
       "runtime": "macos-14"
     },
@@ -19,12 +19,12 @@
   },
   {
     "id": 2,
-    "fingerprint": "sha256:a4de3d5a12c726e5ed2733253429730a0a456113302b879f0d0219419d3ca474",
+    "fingerprint": "sha256:5890a97aea412cc2466152a01d9d65888cc1da4547e02c4d6c83389c917121f6",
     "api": "github/actions",
     "version": "2026-11-02",
     "change": "breaking",
     "subject": {
-      "type": "ci_runtime",
+      "type": "runtime",
       "platform": "github-actions",
       "runtime": "macos-14-large"
     },
@@ -37,12 +37,12 @@
   },
   {
     "id": 3,
-    "fingerprint": "sha256:2f2185ea0c64bbed2075d64d5a8f697a0b9ef179ae65a221d19816305ad11030",
+    "fingerprint": "sha256:2d38db42f708b2e0dcfefb8c6c8ac624804ffa29b941e1e7fd6b1d043d933ee8",
     "api": "github/actions",
     "version": "2026-11-02",
     "change": "breaking",
     "subject": {
-      "type": "ci_runtime",
+      "type": "runtime",
       "platform": "github-actions",
       "runtime": "macos-14-xlarge"
     },

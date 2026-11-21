@@ -31,7 +31,7 @@ func readGitHubActions(e extract.Entry) []feed.Finding {
 	}
 	drop := func(why string) []feed.Finding { return []feed.Finding{{Entry: e.Link, Dropped: why}} }
 	if !runnerImage.MatchString(e.Title) {
-		return drop("not a runner image retirement: no ci_runtime this reader can name")
+		return drop("not a runner image retirement: no runtime this reader can name")
 	}
 	line, date, ct := feed.Dated(extract.Lines(e.HTML))
 	if date == "" {
@@ -57,7 +57,7 @@ func readGitHubActions(e extract.Entry) []feed.Finding {
 		out = append(out, feed.Finding{
 			ChangeType:  ct,
 			Version:     date,
-			Subject:     event.Subject{Type: event.SubjectCIRuntime, Platform: "github-actions", Runtime: label},
+			Subject:     event.Subject{Type: event.SubjectRuntime, Platform: "github-actions", Runtime: label},
 			Description: desc,
 			Hint:        "Move `runs-on` to a supported label; GitHub's announcement lists them: " + e.Link,
 			Excerpt:     feed.Excerpt(e.Title, line, intro, label),

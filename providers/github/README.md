@@ -38,7 +38,7 @@ Kind: `openapi` (`kinds/openapi`), with its adapter, `GitHub` ([`rest_api.go`](r
 
 ### What it watches
 
-GitHub-hosted runner images that GitHub retires: one `ci_runtime` event per `runs-on` label the retirement removes (`macos-14`, `macos-14-large`, …), dated by the removal date.
+GitHub-hosted runner images that GitHub retires: one `runtime` event (`platform: github-actions`) per `runs-on` label the retirement removes (`macos-14`, `macos-14-large`, …), dated by the removal date.
 
 Kind: `notices` (`kinds/notices`), with the feed reader (`kinds/notices/feed`) and its `Actions` feed ([`actions.go`](actions.go)).
 
@@ -65,7 +65,7 @@ Kind: `notices` (`kinds/notices`), with the feed reader (`kinds/notices/feed`) a
 
 ### Known gaps
 
-- The patch-it client doesn't fix `ci_runtime` events yet.
+- The patch-it client doesn't fix `runtime` events yet: it lists them.
 - Deprecations of actions themselves (`actions/upload-artifact@v3`, …) aren't read.
 
 ## GitHub GraphQL API (`github/graphql`)
@@ -93,16 +93,14 @@ Kind: `catalog` (`kinds/catalog`), the `UpcomingChanges` reader (`kinds/catalog/
 
 ### What the plugin reads and ignores
 
-- Reads every entry of the file at each commit. An entry (location and date) in the newer commit's file that the older one didn't have is a `deprecation` event: `version` the removal date (the API has no versions; the day it breaks is what a gate compares, as a model's shutdown date is), `previous_version` the older commit's date, the hint the entry's description and reason as text. The excerpt is the entry's fields as the file writes them, its `owner` left out.
-- Subject (`api_operation`): an input object's field (`AddPullRequestReviewInput.comments`) or a root field's argument (`Query.sponsorables.dependencyEcosystem`) is a `request_parameter` of `POST /graphql`, its `property` the location; any other location (a root field itself, a type's field or its argument, an enum value) is a `schema_property`, its `schema` the type and its `property` the rest (`RepositoryPermission` / `TRIAGE_PLUS`).
+- Reads every entry of the file at each commit. An entry (location and date) in the newer commit's file that the older one didn't have is a `deprecation` event: `version` the removal date (the API has no versions; the day it breaks is what a gate compares, as a model's shutdown date is), no `previous_version` (a dated notice), the hint the entry's description and reason as text. The excerpt is the entry's fields as the file writes them, its `owner` left out.
+- Subject (`graphql_field`): the location's type, field and, when it names one, argument: `Query.sponsorables.dependencyEcosystem` is `type_name: Query`, `field: sponsorables`, `argument: dependencyEcosystem`; an input object's field or an enum value is its type and the field (`RepositoryPermission` / `TRIAGE_PLUS`). A location with more than three parts isn't read. A dated notice: `version` is the removal date, no `previous_version`.
 - An entry a commit drops while still upcoming and a later commit restores is the same event (same removal date, same fingerprint), so it isn't announced twice.
 - Ignores an entry dated before the commit that adds it: a revert putting back a removal already made, not an announcement. On 2026-01-05 the file lost 17 such entries, got them back the next day and lost them again on 2026-01-08: no event (the pinned drop test).
 - Ignores an entry leaving the file: the removal shipped, or GitHub withdrew it, and the file doesn't say which.
 - A first read, with no commit before it, has nothing to compare: no events.
 
 ### Known gaps
-
-- `previous_version` (a commit date) to `version` (the removal date) isn't a range of this source's listed versions: the removal date is when the change breaks, as a model's shutdown date is. Whether the feed's coverage logic should treat such a pair differently is for the contract (patch-it) to say.
 
 - The removal itself (the day it ships) isn't a separate `breaking` event; the deprecation names the date.
 - GitHub Enterprise Server's own files (`ghes-*`) aren't read.

@@ -109,19 +109,19 @@
     },
     {
       "id": 6,
-      "fingerprint": "sha256:a6a538cb0f3058030c288bbce398fe0534dbee242e3f375f9cedd3fc9c467c7a",
+      "fingerprint": "sha256:b5b9cc38b450990866750d518d4b51f4c45b65d77c63cc07f2199d8b4303e017",
       "api": "github/actions",
       "version": "2026-09-23",
       "change": "breaking",
       "subject": {
-        "type": "ci_runtime",
+        "type": "runtime",
         "platform": "github-actions",
         "runtime": "node20",
         "replacement": "node24"
       },
       "description": "Node 20 is no longer available on GitHub Actions runners from 2026-09-23.",
       "source_url": "https://example.test/github-actions/2026-09-23",
-      "source_excerpt": "Synthetic fixture for ci_runtime: not a real source.",
+      "source_excerpt": "Synthetic fixture for runtime: not a real source.",
       "confidence": 1,
       "detected_at": "2026-11-03T12:00:00Z"
     },
@@ -230,6 +230,41 @@
       "source_excerpt": "Synthetic fixture for a deprecated package_release symbol: not a real source.",
       "confidence": 1,
       "detected_at": "2026-11-03T12:00:00Z"
+    },
+    {
+      "id": 12,
+      "fingerprint": "sha256:af46dafd55a53f7787476e1c4b8e570f82662e0bdb433d663444e927f397fc5c",
+      "api": "cloudflare/workers-compat-flags",
+      "version": "2024-09-23",
+      "change": "breaking",
+      "subject": {
+        "type": "flag",
+        "provider": "cloudflare",
+        "setting": "compatibility_flags",
+        "name": "nodejs_compat_v2"
+      },
+      "description": "Cloudflare Workers turn on nodejs_compat_v2 by default from compatibility date 2024-09-23.",
+      "source_url": "https://example.test/cloudflare-workers-compat-flags/2024-09-23",
+      "source_excerpt": "Synthetic fixture for flag: not a real source.",
+      "confidence": 1,
+      "detected_at": "2026-11-21T12:00:00Z"
+    },
+    {
+      "id": 13,
+      "fingerprint": "sha256:c0a0bb90693ee0dcf24f264fc12cea7023fc4fe2e60a696e7496f14e3714f77b",
+      "api": "github/graphql",
+      "version": "2027-01-01",
+      "change": "deprecated",
+      "subject": {
+        "type": "graphql_field",
+        "type_name": "Repository",
+        "field": "suggestedTopics"
+      },
+      "description": "GitHub's GraphQL API removes Repository.suggestedTopics on 2027-01-01.",
+      "source_url": "https://example.test/github-graphql/2027-01-01",
+      "source_excerpt": "Synthetic fixture for graphql_field: not a real source.",
+      "confidence": 1,
+      "detected_at": "2026-11-21T12:00:00Z"
     }
   ]
 }

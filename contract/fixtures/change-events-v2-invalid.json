@@ -271,26 +271,6 @@
       }
     },
     {
-      "why_invalid": "ci_runtime without the runtime",
-      "event": {
-        "id": 2,
-        "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "api": "openai/models",
-        "version": "2026-12-11",
-        "change": "breaking",
-        "subject": {
-          "type": "ci_runtime",
-          "platform": "github-actions"
-        },
-        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
-        "source_url": "https://example.test/openai-models/2026-12-11",
-        "source_excerpt": "Synthetic fixture for model: not a real source.",
-        "confidence": 1.0,
-        "detected_at": "2026-11-03T12:00:00Z",
-        "migration_hint": "Use `examplemodel-2` instead."
-      }
-    },
-    {
       "why_invalid": "api_operation with value, a field its type doesn't define (a model has its own type)",
       "event": {
         "id": 2,
@@ -462,26 +442,6 @@
           "provider": "openai",
           "name": "examplemodel-1",
           "replacement": "examplemodel-2"
-        },
-        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
-        "source_url": "https://example.test/openai-models/2026-12-11",
-        "source_excerpt": "Synthetic fixture for model: not a real source.",
-        "confidence": 1.0,
-        "detected_at": "2026-11-03T12:00:00Z",
-        "migration_hint": "Use `examplemodel-2` instead."
-      }
-    },
-    {
-      "why_invalid": "ci_runtime without the platform",
-      "event": {
-        "id": 2,
-        "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "api": "openai/models",
-        "version": "2026-12-11",
-        "change": "breaking",
-        "subject": {
-          "type": "ci_runtime",
-          "runtime": "node20"
         },
         "description": "Model examplemodel-1 is shut down on 2026-12-11.",
         "source_url": "https://example.test/openai-models/2026-12-11",
@@ -817,6 +777,293 @@
         "source_excerpt": "Synthetic fixture for package_release: not a real source.",
         "confidence": 1,
         "detected_at": "2026-11-03T12:00:00Z"
+      }
+    },
+    {
+      "why_invalid": "runtime without the runtime",
+      "event": {
+        "id": 4,
+        "fingerprint": "sha256:0da27d5617887dca4ee3e8f7d8ef39952eca28e0e5d6fbbed1fe59bbc163e49f",
+        "api": "mongodb/server",
+        "version": "2025-07-31",
+        "change": "breaking",
+        "subject": {
+          "type": "runtime",
+          "version": "6.0"
+        },
+        "description": "MongoDB 6.0 reaches end of life on 2025-07-31.",
+        "source_url": "https://example.test/mongodb-server/2025-07-31",
+        "source_excerpt": "Synthetic fixture for runtime: not a real source.",
+        "confidence": 1,
+        "detected_at": "2026-11-21T12:00:00Z"
+      }
+    },
+    {
+      "why_invalid": "runtime with a model's field",
+      "event": {
+        "id": 4,
+        "fingerprint": "sha256:0da27d5617887dca4ee3e8f7d8ef39952eca28e0e5d6fbbed1fe59bbc163e49f",
+        "api": "mongodb/server",
+        "version": "2025-07-31",
+        "change": "breaking",
+        "subject": {
+          "type": "runtime",
+          "runtime": "mongodb",
+          "version": "6.0",
+          "name": "mongodb"
+        },
+        "description": "MongoDB 6.0 reaches end of life on 2025-07-31.",
+        "source_url": "https://example.test/mongodb-server/2025-07-31",
+        "source_excerpt": "Synthetic fixture for runtime: not a real source.",
+        "confidence": 1,
+        "detected_at": "2026-11-21T12:00:00Z"
+      }
+    },
+    {
+      "why_invalid": "old ci_runtime type",
+      "event": {
+        "id": 5,
+        "fingerprint": "sha256:5890a97aea412cc2466152a01d9d65888cc1da4547e02c4d6c83389c917121f6",
+        "api": "github/actions",
+        "version": "2026-11-02",
+        "change": "breaking",
+        "subject": {
+          "type": "ci_runtime",
+          "platform": "github-actions",
+          "runtime": "macos-14-large"
+        },
+        "description": "GitHub Actions removes the macos-14-large runner image on 2026-11-02.",
+        "source_url": "https://example.test/github-actions/2026-11-02",
+        "source_excerpt": "Synthetic fixture for runtime: not a real source.",
+        "confidence": 1,
+        "detected_at": "2026-11-21T12:00:00Z"
+      }
+    },
+    {
+      "why_invalid": "flag without the setting",
+      "event": {
+        "id": 6,
+        "fingerprint": "sha256:af46dafd55a53f7787476e1c4b8e570f82662e0bdb433d663444e927f397fc5c",
+        "api": "cloudflare/workers-compat-flags",
+        "version": "2024-09-23",
+        "change": "breaking",
+        "subject": {
+          "type": "flag",
+          "provider": "cloudflare",
+          "name": "nodejs_compat_v2"
+        },
+        "description": "Cloudflare Workers turn on nodejs_compat_v2 by default from compatibility date 2024-09-23.",
+        "source_url": "https://example.test/cloudflare-workers-compat-flags/2024-09-23",
+        "source_excerpt": "Synthetic fixture for flag: not a real source.",
+        "confidence": 1,
+        "detected_at": "2026-11-21T12:00:00Z"
+      }
+    },
+    {
+      "why_invalid": "flag without the name",
+      "event": {
+        "id": 7,
+        "fingerprint": "sha256:f1475ccaeac3407302583b5c440d6764c89bf9338c541794ae49b374ae0ae45d",
+        "api": "anthropic/api-notices",
+        "version": "2026-04-30",
+        "change": "breaking",
+        "subject": {
+          "type": "flag",
+          "provider": "anthropic",
+          "setting": "anthropic-beta"
+        },
+        "description": "Anthropic retires the context-1m-2025-08-07 beta on 2026-04-30.",
+        "source_url": "https://example.test/anthropic-api-notices/2026-04-30",
+        "source_excerpt": "Synthetic fixture for flag: not a real source.",
+        "confidence": 1,
+        "detected_at": "2026-11-21T12:00:00Z"
+      }
+    },
+    {
+      "why_invalid": "flag without the provider",
+      "event": {
+        "id": 6,
+        "fingerprint": "sha256:af46dafd55a53f7787476e1c4b8e570f82662e0bdb433d663444e927f397fc5c",
+        "api": "cloudflare/workers-compat-flags",
+        "version": "2024-09-23",
+        "change": "breaking",
+        "subject": {
+          "type": "flag",
+          "setting": "compatibility_flags",
+          "name": "nodejs_compat_v2"
+        },
+        "description": "Cloudflare Workers turn on nodejs_compat_v2 by default from compatibility date 2024-09-23.",
+        "source_url": "https://example.test/cloudflare-workers-compat-flags/2024-09-23",
+        "source_excerpt": "Synthetic fixture for flag: not a real source.",
+        "confidence": 1,
+        "detected_at": "2026-11-21T12:00:00Z"
+      }
+    },
+    {
+      "why_invalid": "graphql_field without the field",
+      "event": {
+        "id": 8,
+        "fingerprint": "sha256:c0a0bb90693ee0dcf24f264fc12cea7023fc4fe2e60a696e7496f14e3714f77b",
+        "api": "github/graphql",
+        "version": "2027-01-01",
+        "change": "deprecated",
+        "subject": {
+          "type": "graphql_field",
+          "type_name": "Repository"
+        },
+        "description": "GitHub's GraphQL API removes Repository.suggestedTopics on 2027-01-01.",
+        "source_url": "https://example.test/github-graphql/2027-01-01",
+        "source_excerpt": "Synthetic fixture for graphql_field: not a real source.",
+        "confidence": 1,
+        "detected_at": "2026-11-21T12:00:00Z"
+      }
+    },
+    {
+      "why_invalid": "graphql_field without the type_name",
+      "event": {
+        "id": 8,
+        "fingerprint": "sha256:c0a0bb90693ee0dcf24f264fc12cea7023fc4fe2e60a696e7496f14e3714f77b",
+        "api": "github/graphql",
+        "version": "2027-01-01",
+        "change": "deprecated",
+        "subject": {
+          "type": "graphql_field",
+          "field": "suggestedTopics"
+        },
+        "description": "GitHub's GraphQL API removes Repository.suggestedTopics on 2027-01-01.",
+        "source_url": "https://example.test/github-graphql/2027-01-01",
+        "source_excerpt": "Synthetic fixture for graphql_field: not a real source.",
+        "confidence": 1,
+        "detected_at": "2026-11-21T12:00:00Z"
+      }
+    },
+    {
+      "why_invalid": "graphql_field with an api_operation's field",
+      "event": {
+        "id": 8,
+        "fingerprint": "sha256:c0a0bb90693ee0dcf24f264fc12cea7023fc4fe2e60a696e7496f14e3714f77b",
+        "api": "github/graphql",
+        "version": "2027-01-01",
+        "change": "deprecated",
+        "subject": {
+          "type": "graphql_field",
+          "type_name": "Repository",
+          "field": "suggestedTopics",
+          "operation": "POST /graphql"
+        },
+        "description": "GitHub's GraphQL API removes Repository.suggestedTopics on 2027-01-01.",
+        "source_url": "https://example.test/github-graphql/2027-01-01",
+        "source_excerpt": "Synthetic fixture for graphql_field: not a real source.",
+        "confidence": 1,
+        "detected_at": "2026-11-21T12:00:00Z"
+      }
+    },
+    {
+      "why_invalid": "a dated notice (runtime) with a previous_version",
+      "event": {
+        "id": 4,
+        "fingerprint": "sha256:0da27d5617887dca4ee3e8f7d8ef39952eca28e0e5d6fbbed1fe59bbc163e49f",
+        "api": "mongodb/server",
+        "version": "2025-07-31",
+        "change": "breaking",
+        "subject": {
+          "type": "runtime",
+          "runtime": "mongodb",
+          "version": "6.0"
+        },
+        "description": "MongoDB 6.0 reaches end of life on 2025-07-31.",
+        "source_url": "https://example.test/mongodb-server/2025-07-31",
+        "source_excerpt": "Synthetic fixture for runtime: not a real source.",
+        "confidence": 1,
+        "detected_at": "2026-11-21T12:00:00Z",
+        "previous_version": "2025-01-01"
+      }
+    },
+    {
+      "why_invalid": "a dated notice (graphql_field) with a previous_version",
+      "event": {
+        "id": 8,
+        "fingerprint": "sha256:c0a0bb90693ee0dcf24f264fc12cea7023fc4fe2e60a696e7496f14e3714f77b",
+        "api": "github/graphql",
+        "version": "2027-01-01",
+        "change": "deprecated",
+        "subject": {
+          "type": "graphql_field",
+          "type_name": "Repository",
+          "field": "suggestedTopics"
+        },
+        "description": "GitHub's GraphQL API removes Repository.suggestedTopics on 2027-01-01.",
+        "source_url": "https://example.test/github-graphql/2027-01-01",
+        "source_excerpt": "Synthetic fixture for graphql_field: not a real source.",
+        "confidence": 1,
+        "detected_at": "2026-11-21T12:00:00Z",
+        "previous_version": "4f1c2a9"
+      }
+    },
+    {
+      "why_invalid": "operation with a lower-case method",
+      "event": {
+        "id": 1,
+        "fingerprint": "sha256:b7ed147bb1bf3ee5f687d37000395a1c957e4cab894aa526e02d0365b9aecd80",
+        "api": "openai/deprecations",
+        "version": "2026-11-30",
+        "change": "deprecated",
+        "subject": {
+          "type": "api_operation",
+          "kind": "operation",
+          "side": "request",
+          "operation": "post /v1/prompts"
+        },
+        "description": "OpenAI shuts down /v1/prompts on 2026-11-30: every method on that path.",
+        "source_url": "https://example.test/openai-deprecations/2026-11-30",
+        "source_excerpt": "Synthetic fixture for api_operation: not a real source.",
+        "confidence": 1,
+        "detected_at": "2026-11-21T12:00:00Z",
+        "previous_version": "2026-11-20"
+      }
+    },
+    {
+      "why_invalid": "operation that isn't a path",
+      "event": {
+        "id": 1,
+        "fingerprint": "sha256:b7ed147bb1bf3ee5f687d37000395a1c957e4cab894aa526e02d0365b9aecd80",
+        "api": "openai/deprecations",
+        "version": "2026-11-30",
+        "change": "deprecated",
+        "subject": {
+          "type": "api_operation",
+          "kind": "operation",
+          "side": "request",
+          "operation": "prompts"
+        },
+        "description": "OpenAI shuts down /v1/prompts on 2026-11-30: every method on that path.",
+        "source_url": "https://example.test/openai-deprecations/2026-11-30",
+        "source_excerpt": "Synthetic fixture for api_operation: not a real source.",
+        "confidence": 1,
+        "detected_at": "2026-11-21T12:00:00Z",
+        "previous_version": "2026-11-20"
+      }
+    },
+    {
+      "why_invalid": "operation with a method and no path",
+      "event": {
+        "id": 1,
+        "fingerprint": "sha256:b7ed147bb1bf3ee5f687d37000395a1c957e4cab894aa526e02d0365b9aecd80",
+        "api": "openai/deprecations",
+        "version": "2026-11-30",
+        "change": "deprecated",
+        "subject": {
+          "type": "api_operation",
+          "kind": "operation",
+          "side": "request",
+          "operation": "POST"
+        },
+        "description": "OpenAI shuts down /v1/prompts on 2026-11-30: every method on that path.",
+        "source_url": "https://example.test/openai-deprecations/2026-11-30",
+        "source_excerpt": "Synthetic fixture for api_operation: not a real source.",
+        "confidence": 1,
+        "detected_at": "2026-11-21T12:00:00Z",
+        "previous_version": "2026-11-20"
       }
     }
   ]

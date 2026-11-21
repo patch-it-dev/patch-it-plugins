@@ -1,0 +1,167 @@
+{
+  "_comment": "C5.12: one event per shape the sources of C5.12 announce. Hand-written, not real sources.",
+  "changes": [
+    {
+      "id": 1,
+      "fingerprint": "sha256:b7ed147bb1bf3ee5f687d37000395a1c957e4cab894aa526e02d0365b9aecd80",
+      "api": "openai/deprecations",
+      "version": "2026-11-30",
+      "previous_version": "2026-11-20",
+      "change": "deprecated",
+      "subject": {
+        "type": "api_operation",
+        "kind": "operation",
+        "side": "request",
+        "operation": "/v1/prompts"
+      },
+      "description": "OpenAI shuts down /v1/prompts on 2026-11-30: every method on that path.",
+      "source_url": "https://example.test/openai-deprecations/2026-11-30",
+      "source_excerpt": "Synthetic fixture for api_operation: not a real source.",
+      "confidence": 1,
+      "detected_at": "2026-11-21T12:00:00Z"
+    },
+    {
+      "id": 2,
+      "fingerprint": "sha256:d971ed5b18372328173be5d08fb1e7e06e576254a7e8dd2561e1b497c659fbfb",
+      "api": "anthropic/api-notices",
+      "version": "2026-08-17",
+      "previous_version": "2026-11-20",
+      "change": "breaking",
+      "subject": {
+        "type": "api_operation",
+        "kind": "operation",
+        "side": "request",
+        "operation": "/v1/experimental/generate_prompt"
+      },
+      "description": "Anthropic retires /v1/experimental/generate_prompt on 2026-08-17.",
+      "source_url": "https://example.test/anthropic-api-notices/2026-08-17",
+      "source_excerpt": "Synthetic fixture for api_operation: not a real source.",
+      "confidence": 1,
+      "detected_at": "2026-11-21T12:00:00Z"
+    },
+    {
+      "id": 3,
+      "fingerprint": "sha256:2ad6e76cb1b3f59718dedf7665ffb02a57654fc9b9804ee92a81c3fbceb6a49f",
+      "api": "vercel/runtimes",
+      "version": "2026-10-01",
+      "change": "deprecated",
+      "subject": {
+        "type": "runtime",
+        "platform": "vercel",
+        "runtime": "node",
+        "version": "20",
+        "replacement": "24"
+      },
+      "description": "Vercel deprecates Node.js 20 on 2026-10-01.",
+      "source_url": "https://example.test/vercel-runtimes/2026-10-01",
+      "source_excerpt": "Synthetic fixture for runtime: not a real source.",
+      "confidence": 1,
+      "detected_at": "2026-11-21T12:00:00Z"
+    },
+    {
+      "id": 4,
+      "fingerprint": "sha256:0da27d5617887dca4ee3e8f7d8ef39952eca28e0e5d6fbbed1fe59bbc163e49f",
+      "api": "mongodb/server",
+      "version": "2025-07-31",
+      "change": "breaking",
+      "subject": {
+        "type": "runtime",
+        "runtime": "mongodb",
+        "version": "6.0"
+      },
+      "description": "MongoDB 6.0 reaches end of life on 2025-07-31.",
+      "source_url": "https://example.test/mongodb-server/2025-07-31",
+      "source_excerpt": "Synthetic fixture for runtime: not a real source.",
+      "confidence": 1,
+      "detected_at": "2026-11-21T12:00:00Z"
+    },
+    {
+      "id": 5,
+      "fingerprint": "sha256:5890a97aea412cc2466152a01d9d65888cc1da4547e02c4d6c83389c917121f6",
+      "api": "github/actions",
+      "version": "2026-11-02",
+      "change": "breaking",
+      "subject": {
+        "type": "runtime",
+        "platform": "github-actions",
+        "runtime": "macos-14-large"
+      },
+      "description": "GitHub Actions removes the macos-14-large runner image on 2026-11-02.",
+      "source_url": "https://example.test/github-actions/2026-11-02",
+      "source_excerpt": "Synthetic fixture for runtime: not a real source.",
+      "confidence": 1,
+      "detected_at": "2026-11-21T12:00:00Z"
+    },
+    {
+      "id": 6,
+      "fingerprint": "sha256:af46dafd55a53f7787476e1c4b8e570f82662e0bdb433d663444e927f397fc5c",
+      "api": "cloudflare/workers-compat-flags",
+      "version": "2024-09-23",
+      "change": "breaking",
+      "subject": {
+        "type": "flag",
+        "provider": "cloudflare",
+        "setting": "compatibility_flags",
+        "name": "nodejs_compat_v2"
+      },
+      "description": "Cloudflare Workers turn on nodejs_compat_v2 by default from compatibility date 2024-09-23.",
+      "source_url": "https://example.test/cloudflare-workers-compat-flags/2024-09-23",
+      "source_excerpt": "Synthetic fixture for flag: not a real source.",
+      "confidence": 1,
+      "detected_at": "2026-11-21T12:00:00Z"
+    },
+    {
+      "id": 7,
+      "fingerprint": "sha256:f1475ccaeac3407302583b5c440d6764c89bf9338c541794ae49b374ae0ae45d",
+      "api": "anthropic/api-notices",
+      "version": "2026-04-30",
+      "change": "breaking",
+      "subject": {
+        "type": "flag",
+        "provider": "anthropic",
+        "setting": "anthropic-beta",
+        "name": "context-1m-2025-08-07"
+      },
+      "description": "Anthropic retires the context-1m-2025-08-07 beta on 2026-04-30.",
+      "source_url": "https://example.test/anthropic-api-notices/2026-04-30",
+      "source_excerpt": "Synthetic fixture for flag: not a real source.",
+      "confidence": 1,
+      "detected_at": "2026-11-21T12:00:00Z"
+    },
+    {
+      "id": 8,
+      "fingerprint": "sha256:c0a0bb90693ee0dcf24f264fc12cea7023fc4fe2e60a696e7496f14e3714f77b",
+      "api": "github/graphql",
+      "version": "2027-01-01",
+      "change": "deprecated",
+      "subject": {
+        "type": "graphql_field",
+        "type_name": "Repository",
+        "field": "suggestedTopics"
+      },
+      "description": "GitHub's GraphQL API removes Repository.suggestedTopics on 2027-01-01.",
+      "source_url": "https://example.test/github-graphql/2027-01-01",
+      "source_excerpt": "Synthetic fixture for graphql_field: not a real source.",
+      "confidence": 1,
+      "detected_at": "2026-11-21T12:00:00Z"
+    },
+    {
+      "id": 9,
+      "fingerprint": "sha256:e046ca1e05d4e56e829b3a9b9408a1860d5215efce12374bcfa0c722db5fde9e",
+      "api": "github/graphql",
+      "version": "2027-01-01",
+      "change": "deprecated",
+      "subject": {
+        "type": "graphql_field",
+        "type_name": "Query",
+        "field": "repository",
+        "argument": "followRenames"
+      },
+      "description": "GitHub's GraphQL API removes the followRenames argument of Query.repository on 2027-01-01.",
+      "source_url": "https://example.test/github-graphql/2027-01-01",
+      "source_excerpt": "Synthetic fixture for graphql_field: not a real source.",
+      "confidence": 1,
+      "detected_at": "2026-11-21T12:00:00Z"
+    }
+  ]
+}

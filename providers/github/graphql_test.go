@@ -49,7 +49,7 @@ func TestGraphQLGolden(t *testing.T) {
 	for _, pair := range versions.Pairs(graphqlCommits[3:]) {
 		for _, e := range graphqlPair(t, pair[0], pair[1]) {
 			got = append(got, e)
-			names = append(names, fmt.Sprintf("%s->%s %s.%s", e.PreviousVersion, pair[1].ID, e.Subject.Schema, e.Subject.Property))
+			names = append(names, fmt.Sprintf("%s->%s %s.%s", pair[0].ID, pair[1].ID, e.Subject.TypeName, e.Subject.Field))
 		}
 	}
 	want := "2026-02-13->2026-03-03 CheckAnnotation.databaseId | 2026-02-13->2026-03-03 Artifact.databaseId | 2026-03-03->2026-05-22 User.viewerRelevantRepositories | 2026-05-22->2026-06-23 CopilotAgentTask.type"
@@ -57,7 +57,7 @@ func TestGraphQLGolden(t *testing.T) {
 		t.Errorf("got  %s\nwant %s", strings.Join(names, " | "), want)
 	}
 	for _, e := range got {
-		if e.Change != event.ChangeDeprecated || e.Subject.Kind != event.KindSchemaProperty || !strings.Contains(e.SourceExcerpt, `"criticality":"breaking"`) || strings.Contains(e.SourceExcerpt, "owner") {
+		if e.Change != event.ChangeDeprecated || e.Subject.Type != event.SubjectGraphQLField || e.PreviousVersion != "" || !strings.Contains(e.SourceExcerpt, `"criticality":"breaking"`) || strings.Contains(e.SourceExcerpt, "owner") {
 			t.Errorf("%+v", e)
 		}
 	}
