@@ -6,7 +6,7 @@ Every source patch-it reads for Stripe, one section each: what it watches, why t
 
 ### What it watches
 
-Stripe's REST API, API version by API version (`2026-10-28.endive` → `2026-11-18.endive`): endpoints, parameters, fields, schemas and enum values that are removed, renamed, retyped or added between two versions of Stripe's own OpenAPI spec. Breaking events carry Stripe's own explanation from its API changelog as the migration hint when the changelog has one.
+Stripe's REST API, API version by API version (`2026-10-28.endive` → `2026-11-18.endive`): endpoints, parameters, fields, schemas and enum values that are removed, renamed, retyped or added between two versions of Stripe's own OpenAPI spec, and what Stripe adds inside a version after naming it (`added` events with `previous_version` equal to `version`). Breaking events carry Stripe's own explanation from its API changelog as the migration hint when the changelog has one.
 
 Kind: `openapi` (`kinds/openapi`), with its adapter, `Stripe` ([`api.go`](api.go)) and the changelog hint source in `core/hint`.
 
@@ -26,14 +26,14 @@ Kind: `openapi` (`kinds/openapi`), with its adapter, `Stripe` ([`api.go`](api.go
 
 ### What the plugin reads and ignores
 
-- Reads: the whole spec at each API version's newest release, diffed against the version before's (`core/diff/`, `core/normalize/`). `$ref`s are never followed: a change inside a shared schema is reported once, on that schema, not once per endpoint that uses it.
+- Reads: the whole spec at each API version's newest release and at the first release whose `latest/openapi.spec3.json` declares it (`Releases`, `adapter.Rereleased`). The change into a version is the version before's newest release against this version's first: what Stripe added later inside the version isn't filed with it. The version's first release against its newest is the additions inside the version, filed under the version itself (`previous_version` = `version`), additions only: a named version only gains things, so a removal there is a correction, not a release. Measured on 2026-09-30.endive (v2525 → v2592, checked 2026-11-21): two enum values added to `subscriptions_resource_paused_status_details_subscription.type`, nothing removed (`TestStripeAdditionsInsideAVersionGolden`). (`core/diff/`, `core/normalize/`) `$ref`s are never followed: a change inside a shared schema is reported once, on that schema, not once per endpoint that uses it.
 - Hints: for each breaking event, the changelog entry for that version whose "REST API" table names the same parameter and operation; the entry's "What's new" text and link become `migration_hint`. An entry describing an addition never explains a removal, and the reverse.
 - `latest/openapi.spec3.json` can lag a version bump by several releases (at v2602 the notes name `2026-11-18.endive` while the file still declares `2026-10-28.endive`). A spec that doesn't declare the listed version is an error, never read as that version. When a later release's file catches up, it also names the version in its notes, so the version is read there on a later run.
 
 ### Known gaps
 
 - Releases before v2191 (2026-03-11) don't name their API version, so versions older than `2026-02-25.clover` aren't listed: naming them would mean reading every old spec or guessing.
-- While a version is the newest, the release it's read at moves as Stripe publishes more of it. The pair into it is compared once, at the release current then.
+- While a version is the newest, the release it's read at moves as Stripe publishes more of it. The pair into it is compared once, at the release current then; what the version gains after that is compared by the hosted ingestion service as a pair of two releases of the version (additions only) when it sees the newest release move.
 - If Stripe ever moved its SDK spec on to the next version before `latest/openapi.spec3.json` had declared the current one, that version's release would stop moving and it would fail to read on every run, loudly. It hasn't happened: at each listed version's release (v2203 … v2600) the file declares that version (checked 2026-11-21); v2602 is the lag described above.
 - Changes the spec doesn't express (behavior changes, webhook payload semantics) are only in the changelog, which isn't read for events.
 - Enum value removals and some tax-related changes have no parameter row in the changelog, so those events keep the normalizer's one-line hint.

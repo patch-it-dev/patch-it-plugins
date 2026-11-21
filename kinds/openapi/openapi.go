@@ -7,6 +7,7 @@ package openapi
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"log"
 
@@ -75,6 +76,11 @@ func (p Plugin) ListVersions(ctx context.Context, _ plugin.Env) ([]plugin.Versio
 	return []plugin.Version{{ID: tag, Ref: tag}}, nil
 }
 
+// errNotThereYet is a release that names a version its spec doesn't declare
+// yet (Stripe's notes name the SDK spec's version a release or two before the
+// full spec carries it).
+var errNotThereYet = errors.New("not published there yet")
+
 // ReadAt fetches the spec at v.Ref. The snapshot's version ID is the version
 // the spec itself declares (what events carry), which may differ from the tag;
 // for an adapter that lists the specs' own versions (SpecVersioned) it must
@@ -85,7 +91,7 @@ func (p Plugin) ReadAt(ctx context.Context, _ plugin.Env, v plugin.Version) (plu
 		return plugin.Snapshot{}, fmt.Errorf("fetching %s %s: %w", p.Adapter.API(), v.Ref, err)
 	}
 	if _, ok := p.Adapter.(adapter.SpecVersioned); ok && s.Version != v.ID {
-		return plugin.Snapshot{}, fmt.Errorf("%s %s: the spec at %s declares %s: not published there yet", p.Adapter.API(), v.ID, v.Ref, s.Version)
+		return plugin.Snapshot{}, fmt.Errorf("%s %s: the spec at %s declares %s: %w", p.Adapter.API(), v.ID, v.Ref, s.Version, errNotThereYet)
 	}
 	v.ID = s.Version
 	return plugin.Snapshot{Version: v, Content: s.Content, SourceURL: s.SourceURL}, nil
@@ -95,7 +101,64 @@ func (p Plugin) ReadAt(ctx context.Context, _ plugin.Env, v plugin.Version) (plu
 // from's as previous_version. A zero from is an empty spec before the first.
 // A to with far fewer operations than from fails the shape guard
 // (plugin.ErrShapeChanged): no removal is read from it.
+//
+// For an adapter that re-releases its versions (adapter.Rereleased), the
+// changes into to are read from to's first release, and what to's later
+// releases add is filed under to's version alone: additions inside one
+// version, never mixed with the changes between two. A pair of two releases
+// of one version (from and to name the same version) is additions only.
 func (p Plugin) Extract(ctx context.Context, env plugin.Env, from, to plugin.Snapshot) (plugin.Result, error) {
+	rr, rereleased := p.Adapter.(adapter.Rereleased)
+	if !rereleased || from.IsZero() {
+		return p.extract(ctx, env, from, to, false)
+	}
+	if from.Version.ID == to.Version.ID {
+		return p.extract(ctx, env, from, to, true)
+	}
+	first, err := p.firstRelease(ctx, env, rr, to)
+	if err != nil {
+		return plugin.Result{}, err
+	}
+	if first.Version.Ref == to.Version.Ref {
+		return p.extract(ctx, env, from, to, false)
+	}
+	between, err := p.extract(ctx, env, from, first, false)
+	if err != nil {
+		return plugin.Result{}, err
+	}
+	inside, err := p.extract(ctx, env, first, to, true)
+	if err != nil {
+		return plugin.Result{}, err
+	}
+	return plugin.Result{
+		Events:   append(between.Events, inside.Events...),
+		Rejected: append(between.Rejected, inside.Rejected...),
+	}, nil
+}
+
+// firstRelease is to's version read at the first release whose spec declares
+// it; to itself when none before to's does.
+func (p Plugin) firstRelease(ctx context.Context, env plugin.Env, rr adapter.Rereleased, to plugin.Snapshot) (plugin.Snapshot, error) {
+	refs, err := rr.Releases(ctx, to.Version)
+	if err != nil {
+		return plugin.Snapshot{}, fmt.Errorf("%s %s: listing its releases: %w", p.Adapter.API(), to.Version.ID, err)
+	}
+	for _, ref := range refs {
+		if ref == to.Version.Ref {
+			break
+		}
+		s, err := p.ReadAt(ctx, env, plugin.Version{ID: to.Version.ID, Ref: ref})
+		if errors.Is(err, errNotThereYet) {
+			continue
+		}
+		return s, err
+	}
+	return to, nil
+}
+
+// extract is one diff, from's version as previous_version; additionsOnly
+// keeps only what to adds.
+func (p Plugin) extract(ctx context.Context, env plugin.Env, from, to plugin.Snapshot, additionsOnly bool) (plugin.Result, error) {
 	var oldParsed *diff.Spec
 	before := -1
 	if !from.IsZero() {
@@ -112,7 +175,7 @@ func (p Plugin) Extract(ctx context.Context, env plugin.Env, from, to plugin.Sna
 	if err := p.shape.CheckCount("operations", DefaultMinRatio, before, newParsed.Operations()); err != nil {
 		return plugin.Result{}, fmt.Errorf("the %s spec at %s: %w", p.Adapter.API(), to.Version.ID, err)
 	}
-	events, errs := p.events(oldParsed, newParsed, from.Content, to.Content, normalize.Source{
+	events, errs := p.events(oldParsed, newParsed, from.Content, to.Content, additionsOnly, normalize.Source{
 		API:             p.Adapter.API(),
 		Version:         to.Version.ID,
 		PreviousVersion: from.Version.ID,
@@ -131,8 +194,20 @@ var (
 
 // events diffs two parsed specs into events, applying Keep, and pointing each
 // event's source_pointer into the published file when the adapter reshaped it.
-func (p Plugin) events(oldParsed, newParsed *diff.Spec, oldContent, newContent []byte, src normalize.Source) ([]event.Event, []error) {
+func (p Plugin) events(oldParsed, newParsed *diff.Spec, oldContent, newContent []byte, additionsOnly bool, src normalize.Source) ([]event.Event, []error) {
 	changes := diff.ChangesWith(oldParsed, newParsed, p.Diff)
+	if additionsOnly {
+		kept := changes[:0:0]
+		for _, c := range changes {
+			if c.ChangeType == event.ChangeAdded {
+				kept = append(kept, c)
+			}
+		}
+		if dropped := len(changes) - len(kept); dropped > 0 {
+			log.Printf("%s %s: %d changes inside one version that aren't additions dropped", src.API, src.Version, dropped)
+		}
+		changes = kept
+	}
 	if p.Keep != nil {
 		kept := changes[:0:0]
 		for _, c := range changes {
@@ -193,8 +268,10 @@ func (p Plugin) attachHints(ctx context.Context, version string, events []event.
 
 // DeprecationsOnly keeps operation deprecations, and removals of operations
 // the old spec had marked deprecated (by opts' reading of "marked"):
-// everything else is dropped. For a spec whose removals and property changes
-// were mostly not changes to the API (vercel, supabase).
+// everything else is dropped, additions too. For a spec whose removals,
+// additions and property changes were mostly not changes to the API (moved,
+// re-added, regenerated: vercel, supabase). A spec without such a filter
+// files every addition the diff sees.
 func DeprecationsOnly(opts diff.Options) func(diff.Change) bool {
 	return func(c diff.Change) bool {
 		switch c.Kind {

@@ -17,7 +17,7 @@ func init() {
 		Sources: []plugin.Source{
 			{
 				ID: "api", Layer: plugin.LayerAPI,
-				Watches:  "REST API changes between OpenAPI spec releases (removed and renamed endpoints, parameters and fields), with migration hints from Stripe's API changelog",
+				Watches:  "REST API changes between OpenAPI spec releases (removed, renamed and added endpoints, parameters and fields, and what Stripe adds inside an API version), with migration hints from Stripe's API changelog",
 				URLs:     []string{"https://github.com/stripe/openapi"},
 				Packages: []string{"pypi:stripe", "npm:stripe"},
 				Plugin:   openapi.Plugin{Adapter: Stripe{}, Hints: hint.Stripe{}},

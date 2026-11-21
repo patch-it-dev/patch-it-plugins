@@ -108,6 +108,8 @@ func vercelDeprecatedSummary(summary string) bool {
 //     union members compared by position as their order moved; outside unions
 //     there were still 142, and 27 of those reverted later.
 //
-// Additions are dropped too: nobody has to fix code for a new endpoint, and a
-// re-added one isn't new.
+// Additions are dropped too: in this history a new operation was as often a
+// moved or re-added one (16 of the 103 came back), and a new property the
+// generated schemas reshuffling, so an "added" here isn't one (precision over
+// recall).
 func vercelKeep(c diff.Change) bool { return openapi.DeprecationsOnly(vercelDiff)(c) }

@@ -6,7 +6,13 @@ Real copies of what Stripe publishes, read by this folder's tests instead of the
 
 Each pair is a real breaking change between two releases of the provider's own spec, trimmed to the schemas and paths involved: every line is copied unchanged, the rest of the spec was left out. The tests replay one release to the next and check the events.
 
-Stripe's spec isn't saved: the `openapi` kind's own tests use small specs written inline, and `stripe/api`'s listing is tested on the recorded responses below.
+`stripe/api`'s additions inside one version (`api_additions_test.go`, `golden/stripe-api-additions.json`) are read from `openapi/`:
+
+| File | URL | Saved | License | Quote |
+|---|---|---|---|---|
+| `openapi/stripe-v2516-openapi.spec3.trimmed.json`, `…-v2524-…`, `…-v2525-…`, `…-v2592-…` | https://raw.githubusercontent.com/stripe/openapi/v2516/latest/openapi.spec3.json (and v2524, v2525, v2592) | 2026-11-21 | MIT (stripe/openapi). Trimmed: `openapi`, `info` and, under `components.schemas`, only `payment_method_details_card_present` and `subscriptions_resource_paused_status_details_subscription`, each value copied unchanged and indented; no paths | v2592's `subscriptions_resource_paused_status_details_subscription.type` enum lists `final_payment_failure` and `first_payment_failure`, which v2525's (the first release declaring 2026-09-30.endive) doesn't |
+
+The rest of Stripe's spec isn't saved: the `openapi` kind's own tests use small specs written inline, and `stripe/api`'s listing is tested on the recorded responses below.
 
 ## Recorded API responses
 
@@ -14,6 +20,7 @@ The version-listing tests read these, under `versions/`, instead of the network.
 
 | File | Recorded from | Trimmed to |
 |---|---|---|
+| `versions/stripe-openapi-releases-2026-09-30.json` | `https://api.github.com/repos/stripe/openapi/releases/tags/<tag>`, newest first, recorded 2026-11-21 | 5: v2516 (the last release naming 2026-08-26.dahlia), v2524 (names 2026-09-30.endive; its full spec doesn't declare it yet), v2525, v2526, v2592; same fields |
 | `versions/stripe-openapi-releases.json` | `https://api.github.com/repos/stripe/openapi/releases/tags/<tag>`, one per release, in the order `releases?per_page=100` lists them | 21 of 2,591: the first and the last release of each of the 10 API versions their notes name (v2191 to v2602), and v2190, the newest whose notes name none; `tag_name`, `name`, `draft`, `prerelease`, `published_at`, `html_url`, `body` |
 
 ## Saved releases
