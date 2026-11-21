@@ -1,0 +1,271 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:77fa0f3903472c1341793c5a0ff14a410b4cfee8abea043f3c080f278f7c5e77",
+    "api": "cloudflare/typescript",
+    "version": "7.2.0",
+    "previous_version": "7.1.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "cloudflare",
+      "change": "removed_symbol",
+      "symbols": [
+        "accounts.tokens.value.update"
+      ]
+    },
+    "description": "`accounts.tokens.value.update` was removed in cloudflare 7.2.0: code using it fails.",
+    "migration_hint": "`accounts.tokens.value.update()` (cloudflare's changelog for 7.2.0)",
+    "source_url": "https://raw.githubusercontent.com/cloudflare/cloudflare-typescript/v7.2.0/CHANGELOG.md",
+    "source_excerpt": "## 7.2.0 (2026-09-25)\nBreaking Changes\n- `accounts.tokens.value.update()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:7cece1f65feea5183e709f71b646a38e55d3f61d632effc7d2efe9587a74689a",
+    "api": "cloudflare/typescript",
+    "version": "7.2.0",
+    "previous_version": "7.1.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "cloudflare",
+      "change": "removed_symbol",
+      "symbols": [
+        "addressing.addressMaps.ips.update",
+        "addressing.addressMaps.zones.update"
+      ]
+    },
+    "description": "`addressing.addressMaps.ips.update`, `addressing.addressMaps.zones.update` were removed in cloudflare 7.2.0: code using it fails.",
+    "migration_hint": "`addressing.addressMaps.ips.update()`, `addressing.addressMaps.zones.update()` (cloudflare's changelog for 7.2.0)",
+    "source_url": "https://raw.githubusercontent.com/cloudflare/cloudflare-typescript/v7.2.0/CHANGELOG.md",
+    "source_excerpt": "## 7.2.0 (2026-09-25)\nBreaking Changes\n- `addressing.addressMaps.ips.update()`, `addressing.addressMaps.zones.update()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:e5b5e77b29b9b0e45a2d3def8c2f3b9625f02bf0a48ed7eec7ae16bf51e4d601",
+    "api": "cloudflare/typescript",
+    "version": "7.2.0",
+    "previous_version": "7.1.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "cloudflare",
+      "change": "removed_symbol",
+      "symbols": [
+        "cache.cacheReserve.clear"
+      ]
+    },
+    "description": "`cache.cacheReserve.clear` was removed in cloudflare 7.2.0: code using it fails.",
+    "migration_hint": "`cache.cacheReserve.clear()` (cloudflare's changelog for 7.2.0)",
+    "source_url": "https://raw.githubusercontent.com/cloudflare/cloudflare-typescript/v7.2.0/CHANGELOG.md",
+    "source_excerpt": "## 7.2.0 (2026-09-25)\nBreaking Changes\n- `cache.cacheReserve.clear()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:4fc37fbc375bcf397e339f1cfa87a5f22c994e80bd9acc85358e2f84c816eb82",
+    "api": "cloudflare/typescript",
+    "version": "7.2.0",
+    "previous_version": "7.1.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "cloudflare",
+      "change": "removed_symbol",
+      "symbols": [
+        "dns.records.scan"
+      ]
+    },
+    "description": "`dns.records.scan` was removed in cloudflare 7.2.0: code using it fails.",
+    "migration_hint": "`dns.records.scan()` (cloudflare's changelog for 7.2.0)",
+    "source_url": "https://raw.githubusercontent.com/cloudflare/cloudflare-typescript/v7.2.0/CHANGELOG.md",
+    "source_excerpt": "## 7.2.0 (2026-09-25)\nBreaking Changes\n- `dns.records.scan()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:134dd1216e0dc7e93216c47f4ad7b738c64c226e4833fd934019ffab692e0f28",
+    "api": "cloudflare/typescript",
+    "version": "7.2.0",
+    "previous_version": "7.1.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "cloudflare",
+      "change": "removed_symbol",
+      "symbols": [
+        "dns.zoneTransfers.forceAXFR.create"
+      ]
+    },
+    "description": "`dns.zoneTransfers.forceAXFR.create` was removed in cloudflare 7.2.0: code using it fails.",
+    "migration_hint": "`dns.zoneTransfers.forceAXFR.create()` (cloudflare's changelog for 7.2.0)",
+    "source_url": "https://raw.githubusercontent.com/cloudflare/cloudflare-typescript/v7.2.0/CHANGELOG.md",
+    "source_excerpt": "## 7.2.0 (2026-09-25)\nBreaking Changes\n- `dns.zoneTransfers.forceAXFR.create()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:50dc4a5e89a74a666093f4c6017aaf3ecf62b4a6a587b39de35061fef29212a2",
+    "api": "cloudflare/typescript",
+    "version": "7.2.0",
+    "previous_version": "7.1.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "cloudflare",
+      "change": "removed_symbol",
+      "symbols": [
+        "dns.zoneTransfers.outgoing.disable",
+        "enable",
+        "forceNotify"
+      ]
+    },
+    "description": "`dns.zoneTransfers.outgoing.disable`, `enable`, `forceNotify` were removed in cloudflare 7.2.0: code using it fails.",
+    "migration_hint": "`dns.zoneTransfers.outgoing.disable()`, `enable()`, `forceNotify()` (cloudflare's changelog for 7.2.0)",
+    "source_url": "https://raw.githubusercontent.com/cloudflare/cloudflare-typescript/v7.2.0/CHANGELOG.md",
+    "source_excerpt": "## 7.2.0 (2026-09-25)\nBreaking Changes\n- `dns.zoneTransfers.outgoing.disable()`, `enable()`, `forceNotify()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:133eadd068ce6ef418e06c85cb21d413f3b31c8f3e41c40c19497a860d356612",
+    "api": "cloudflare/typescript",
+    "version": "7.2.0",
+    "previous_version": "7.1.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "cloudflare",
+      "change": "removed_symbol",
+      "symbols": [
+        "emailRouting.disable",
+        "emailRouting.enable"
+      ]
+    },
+    "description": "`emailRouting.disable`, `emailRouting.enable` were removed in cloudflare 7.2.0: code using it fails.",
+    "migration_hint": "`emailRouting.disable()`, `emailRouting.enable()` (cloudflare's changelog for 7.2.0)",
+    "source_url": "https://raw.githubusercontent.com/cloudflare/cloudflare-typescript/v7.2.0/CHANGELOG.md",
+    "source_excerpt": "## 7.2.0 (2026-09-25)\nBreaking Changes\n- `emailRouting.disable()`, `emailRouting.enable()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
+    "fingerprint": "sha256:7ed480dff9a03a58c4683b3907d7c62b48528420f43aa233145c4cace2e6f8be",
+    "api": "cloudflare/typescript",
+    "version": "7.2.0",
+    "previous_version": "7.1.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "cloudflare",
+      "change": "removed_symbol",
+      "symbols": [
+        "magicTransit.ipsecTunnels.pskGenerate"
+      ]
+    },
+    "description": "`magicTransit.ipsecTunnels.pskGenerate` was removed in cloudflare 7.2.0: code using it fails.",
+    "migration_hint": "`magicTransit.ipsecTunnels.pskGenerate()` (cloudflare's changelog for 7.2.0)",
+    "source_url": "https://raw.githubusercontent.com/cloudflare/cloudflare-typescript/v7.2.0/CHANGELOG.md",
+    "source_excerpt": "## 7.2.0 (2026-09-25)\nBreaking Changes\n- `magicTransit.ipsecTunnels.pskGenerate()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 9,
+    "fingerprint": "sha256:6760b085d17ee4bebac8f753461f75403f3bea4585026f6a766cc35043a1a078",
+    "api": "cloudflare/typescript",
+    "version": "7.2.0",
+    "previous_version": "7.1.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "cloudflare",
+      "change": "removed_symbol",
+      "symbols": [
+        "stream.keys.create"
+      ]
+    },
+    "description": "`stream.keys.create` was removed in cloudflare 7.2.0: code using it fails.",
+    "migration_hint": "`stream.keys.create()` (cloudflare's changelog for 7.2.0)",
+    "source_url": "https://raw.githubusercontent.com/cloudflare/cloudflare-typescript/v7.2.0/CHANGELOG.md",
+    "source_excerpt": "## 7.2.0 (2026-09-25)\nBreaking Changes\n- `stream.keys.create()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 10,
+    "fingerprint": "sha256:79bf35ee3acf7a485565de2453011a61691e2e12145fb13fa712916b4c7fa0a2",
+    "api": "cloudflare/typescript",
+    "version": "7.2.0",
+    "previous_version": "7.1.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "cloudflare",
+      "change": "removed_symbol",
+      "symbols": [
+        "workers.scripts.tail.create"
+      ]
+    },
+    "description": "`workers.scripts.tail.create` was removed in cloudflare 7.2.0: code using it fails.",
+    "migration_hint": "`workers.scripts.tail.create()` (cloudflare's changelog for 7.2.0)",
+    "source_url": "https://raw.githubusercontent.com/cloudflare/cloudflare-typescript/v7.2.0/CHANGELOG.md",
+    "source_excerpt": "## 7.2.0 (2026-09-25)\nBreaking Changes\n- `workers.scripts.tail.create()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 11,
+    "fingerprint": "sha256:8660f9646a9867f8143274f4e0972f2da1a983de3c3915440a055c8f513c017a",
+    "api": "cloudflare/typescript",
+    "version": "7.2.0",
+    "previous_version": "7.1.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "cloudflare",
+      "change": "removed_symbol",
+      "symbols": [
+        "zeroTrust.gateway.certificates.activate",
+        "deactivate"
+      ]
+    },
+    "description": "`zeroTrust.gateway.certificates.activate`, `deactivate` were removed in cloudflare 7.2.0: code using it fails.",
+    "migration_hint": "`zeroTrust.gateway.certificates.activate()`, `deactivate()` (cloudflare's changelog for 7.2.0)",
+    "source_url": "https://raw.githubusercontent.com/cloudflare/cloudflare-typescript/v7.2.0/CHANGELOG.md",
+    "source_excerpt": "## 7.2.0 (2026-09-25)\nBreaking Changes\n- `zeroTrust.gateway.certificates.activate()`, `deactivate()`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

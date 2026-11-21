@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:72145a1ab485e851443f2c85c2eb01e59be63296d6afefee171f192b74c780e1",
+    "api": "cloudflare/terraform",
+    "version": "5.29.0",
+    "previous_version": "5.28.1",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "terraform",
+      "package": "cloudflare/cloudflare",
+      "change": "removed_symbol",
+      "symbols": [
+        "foundation_dns"
+      ]
+    },
+    "description": "`foundation_dns` was removed in cloudflare/cloudflare 5.29.0: code using it fails.",
+    "migration_hint": "**zone_dns_settings, account_dns_settings:** the deprecated `foundation_dns` attribute has been removed. On `cloudflare_zone_dns_settings` a configuration that still sets it now fails with an \"Unsupported argument\" error; remove it and use `nameservers.type` (`cloudflare.advanced` to enable Advanced Nameservers, `cloudflare.standard` to disable). On `cloudflare_account_dns_settings` the field lived inside the nested `zone_defaults` object and is dropped silently on upgrade. No state upgrader is required. (cloudflare/cloudflare's changelog for 5.29.0)",
+    "source_url": "https://raw.githubusercontent.com/cloudflare/terraform-provider-cloudflare/v5.29.0/CHANGELOG.md",
+    "source_excerpt": "## 5.29.0 (2026-11-10)\n⚠ BREAKING CHANGES\n- **zone_dns_settings, account_dns_settings:** the deprecated `foundation_dns` attribute has been removed. On `cloudflare_zone_dns_settings` a configuration that still sets it now fails with an \"Unsupported argument\" error; remove it and use `nameservers.type` (`cloudflare.advanced` to enable Advanced Nameservers, `cloudflare.standard` to disable). On `cloudflare_account_dns_settings` the field lived inside the nested `zone_defaults` object and is dropped silently on upgrade. No state upgrader is required.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]
