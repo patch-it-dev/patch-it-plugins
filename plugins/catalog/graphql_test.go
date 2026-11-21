@@ -48,7 +48,7 @@ func TestGraphQLGolden(t *testing.T) {
 	for _, pair := range versions.Pairs(graphqlCommits[3:]) {
 		for _, e := range graphqlPair(t, pair[0], pair[1]) {
 			got = append(got, e)
-			names = append(names, fmt.Sprintf("%s->%s %s.%s", e.PreviousVersion, e.Version, e.Subject.Schema, e.Subject.Property))
+			names = append(names, fmt.Sprintf("%s->%s %s.%s", e.PreviousVersion, pair[1].ID, e.Subject.Schema, e.Subject.Property))
 		}
 	}
 	want := "2026-02-13->2026-03-03 CheckAnnotation.databaseId | 2026-02-13->2026-03-03 Artifact.databaseId | 2026-03-03->2026-05-22 User.viewerRelevantRepositories | 2026-05-22->2026-06-23 CopilotAgentTask.type"
@@ -114,5 +114,26 @@ func TestGraphQLVersionsAreTheFilesCommits(t *testing.T) {
 	vs, err := GitHubGraphQL.ListVersions(context.Background(), env)
 	if err != nil || len(vs) != 3 || vs[0].Ref != graphqlCommits[3].Ref || vs[2].ID != "2026-05-22" {
 		t.Errorf("%v %v", vs, err)
+	}
+}
+
+// An entry a commit drops while still upcoming and a later commit restores
+// is the same event: its version is the removal date, not the commit's, so
+// the fingerprint matches and the store keeps one.
+func TestGraphQLARestoredEntryIsTheSameEvent(t *testing.T) {
+	first := graphqlPair(t, graphqlCommits[3], graphqlCommits[4])
+	// 2026-03-03's file without its two additions, then the file again.
+	from, _ := GitHubGraphQL.ReadAt(context.Background(), kittest.Env(t, graphqlPages()), graphqlCommits[3])
+	to, _ := GitHubGraphQL.ReadAt(context.Background(), kittest.Env(t, graphqlPages()), graphqlCommits[4])
+	from.Version = plugin.Version{ID: "2026-04-01", Ref: "dropped"}
+	to.Version = plugin.Version{ID: "2026-04-02", Ref: "restored"}
+	again, err := GitHubGraphQL.Extract(context.Background(), kittest.Env(t, nil), from, to)
+	if err != nil || len(again.Events) != len(first) {
+		t.Fatalf("%v, %d events", err, len(again.Events))
+	}
+	for i, e := range again.Events {
+		if e.Version != "2027-01-01" || e.Fingerprint != first[i].Fingerprint {
+			t.Errorf("%s: version %s, same fingerprint %v", e.Subject.Property, e.Version, e.Fingerprint == first[i].Fingerprint)
+		}
 	}
 }

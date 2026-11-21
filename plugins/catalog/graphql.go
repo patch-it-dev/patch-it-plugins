@@ -25,7 +25,11 @@ import (
 //
 // A version is a commit (its date, its SHA). An entry in to's file that
 // from's didn't have is a newly announced removal: a deprecation event on
-// that location, dated by the commit. An entry dated before the commit that
+// that location whose version is the removal date (GitHub's GraphQL API has
+// no versions of its own, so the day it breaks is the one to gate on, as a
+// model's shutdown date is), with previous_version the commit before. An
+// entry a commit drops and a later one restores, with the same date, is then
+// the same event again, which the store dedupes by fingerprint. An entry dated before the commit that
 // adds it isn't an announcement (a revert putting back a removal already
 // made: the file lost and regained 17 such entries on 2026-01-05 and 06), and
 // an entry that leaves the file isn't read: it shipped, or was withdrawn,
@@ -156,7 +160,7 @@ func (u UpcomingChanges) Extract(_ context.Context, env plugin.Env, from, to plu
 			hint += " " + r
 		}
 		made = append(made, event.Event{
-			API: u.API, Version: to.Version.ID, PreviousVersion: from.Version.ID,
+			API: u.API, Version: e.Date, PreviousVersion: from.Version.ID,
 			ChangeType: event.ChangeTypeDeprecation,
 			Subject:    subject,
 			Description: fmt.Sprintf("%s's GraphQL API removes %s on %s: code that queries or sends it fails from that date.",
@@ -167,23 +171,24 @@ func (u UpcomingChanges) Extract(_ context.Context, env plugin.Env, from, to plu
 			Confidence:    1.0,
 			DetectedAt:    env.Now().UTC(),
 		})
-		// The same location announced for two dates is two changes.
-		details = append(details, "removed on "+e.Date)
+		details = append(details, "")
 	}
 	events, rejected := finish(u.API, made, details)
 	return plugin.Result{Events: events, Rejected: rejected}, nil
 }
 
 // subject places a location in the contract's api_operation: an input
-// object's field, or an argument of a root field (Query, Mutation), is a
-// request parameter of the endpoint; any other type's field (or its
-// argument, or an enum's value) is a property of that type, as a schema.
+// object's field, or an argument of a root field (Query.field.argument), is
+// a request parameter of the endpoint; any other location (a field, a root
+// field itself, a field's argument, an enum's value) is a property of its
+// type, as a schema.
 func (u UpcomingChanges) subject(location string) (event.Subject, bool) {
 	typ, rest, ok := strings.Cut(location, ".")
 	if !ok || typ == "" || rest == "" {
 		return event.Subject{}, false
 	}
-	if strings.HasSuffix(typ, "Input") || typ == "Query" || typ == "Mutation" || typ == "Subscription" {
+	root := typ == "Query" || typ == "Mutation" || typ == "Subscription"
+	if strings.HasSuffix(typ, "Input") || (root && strings.Contains(rest, ".")) {
 		return event.Subject{Type: event.SubjectAPIOperation, Kind: event.KindRequestParameter, Side: event.SideRequest,
 			Operation: u.Endpoint, Property: location}, true
 	}

@@ -2,7 +2,7 @@
 
 ## What it watches
 
-Removals GitHub announces for its GraphQL API: a field, an argument, an input field or an enum value, with the date it goes. One `deprecation` event per newly announced removal, dated by the commit that announced it.
+Removals GitHub announces for its GraphQL API: a field, an argument, an input field or an enum value, with the date it goes. One `deprecation` event per newly announced removal, its `version` the removal date.
 
 Kind: `catalog` (`plugins/catalog`), the `UpcomingChanges` reader (`plugins/catalog/graphql.go`).
 
@@ -23,8 +23,9 @@ Kind: `catalog` (`plugins/catalog`), the `UpcomingChanges` reader (`plugins/cata
 
 ## What the plugin reads and ignores
 
-- Reads every entry of the file at each commit. An entry (location and date) in the newer commit's file that the older one didn't have is a `deprecation` event: `version` the newer commit's date, `previous_version` the older's, the hint the entry's description and reason as text. The excerpt is the entry's fields as the file writes them, its `owner` left out.
-- Subject (`api_operation`): an input object's field (`AddPullRequestReviewInput.comments`) or a root field's argument (`Query.sponsorables.dependencyEcosystem`) is a `request_parameter` of `POST /graphql`, its `property` the location; any other location is a `schema_property`, its `schema` the type and its `property` the rest (`RepositoryPermission` / `TRIAGE_PLUS`).
+- Reads every entry of the file at each commit. An entry (location and date) in the newer commit's file that the older one didn't have is a `deprecation` event: `version` the removal date (the API has no versions; the day it breaks is what a gate compares, as a model's shutdown date is), `previous_version` the older commit's date, the hint the entry's description and reason as text. The excerpt is the entry's fields as the file writes them, its `owner` left out.
+- Subject (`api_operation`): an input object's field (`AddPullRequestReviewInput.comments`) or a root field's argument (`Query.sponsorables.dependencyEcosystem`) is a `request_parameter` of `POST /graphql`, its `property` the location; any other location (a root field itself, a type's field or its argument, an enum value) is a `schema_property`, its `schema` the type and its `property` the rest (`RepositoryPermission` / `TRIAGE_PLUS`).
+- An entry a commit drops while still upcoming and a later commit restores is the same event (same removal date, same fingerprint), so it isn't announced twice.
 - Ignores an entry dated before the commit that adds it: a revert putting back a removal already made, not an announcement. On 2026-01-05 the file lost 17 such entries, got them back the next day and lost them again on 2026-01-08: no event (the pinned drop test).
 - Ignores an entry leaving the file: the removal shipped, or GitHub withdrew it, and the file doesn't say which.
 - A first read, with no commit before it, has nothing to compare: no events.
@@ -33,4 +34,4 @@ Kind: `catalog` (`plugins/catalog`), the `UpcomingChanges` reader (`plugins/cata
 
 - The removal itself (the day it ships) isn't a separate `breaking` event; the deprecation names the date.
 - GitHub Enterprise Server's own files (`ghes-*`) aren't read.
-- A location GitHub moves to a new date is a new event, alongside the first.
+- A location GitHub moves to a new date is a new event (a new `version`), alongside the first.
