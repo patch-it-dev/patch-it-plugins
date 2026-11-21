@@ -44,11 +44,25 @@ Read with `Plugin{File: ...}` and `Notes: true` (`sdks.go`): an SDK whose change
 | `github-octokit-net-0.5.2-release.json` | https://api.github.com/repos/octokit/octokit.net/releases/tags/v0.5.2 | `4b61105` | 2026-11-20 | MIT (octokit.net); trimmed to `html_url`, `tag_name`, `name`, `published_at` and `body`, re-indented, values unchanged | golden |
 | `github-octokit-net-0.5.1-release.json` | https://api.github.com/repos/octokit/octokit.net/releases/tags/v0.5.1 | `8a9e828` | 2026-11-20 | MIT (octokit.net); trimmed to `html_url`, `tag_name`, `name`, `published_at` and `body`, re-indented, values unchanged | drop test |
 
+## What a release pins
+
+Read by `pins.go`; `pins_test.go` checks each release's stated pin. Every file is the SDK's `CHANGELOG.md` at its newest release tag, saved with `curl` on 2026-11-20, **trimmed** to the sections listed, each kept whole and unchanged.
+
+| File | URL | Tag commit | Sections kept | License | Quote |
+|---|---|---|---|---|---|
+| `pins/stripe-python-17.1.0-CHANGELOG.md` | https://raw.githubusercontent.com/stripe/stripe-python/v17.1.0/CHANGELOG.md | `2bbff43` | 17.1.0 (changes the pin), 17.0.0 (says nothing) | MIT (stripe-python) | "This release changes the pinned API version to `2026-11-18.endive`." |
+| `pins/stripe-node-23.2.0-CHANGELOG.md` | https://raw.githubusercontent.com/stripe/stripe-node/v23.2.0/CHANGELOG.md | `dd92429` | 23.2.0, 23.0.1 (says nothing), 22.0.0 ("uses the same pinned API version to") | MIT (stripe-node) | "This release uses the same pinned API version to `2026-03-25.dahlia` as the last major release." |
+| `pins/stripe-go-87.2.0-CHANGELOG.md` | https://raw.githubusercontent.com/stripe/stripe-go/v87.2.0/CHANGELOG.md | `c97713a` | 87.2.0, 86.4.2 (says nothing), 86.0.0 ("doesn't change") | MIT (stripe-go) | "This release **doesn't** change the pinned API version; it still uses `2026-05-27.dahlia`." |
+| `pins/stripe-java-34.1.0-CHANGELOG.md` | https://raw.githubusercontent.com/stripe/stripe-java/v34.1.0/CHANGELOG.md | `d1dcf1a` | 34.1.0, 33.4.2 (says nothing), 33.0.0 ("doesn't change") | MIT (stripe-java) | "This release changes the pinned API version to `2026-10-28.endive`." |
+| `pins/stripe-ruby-21.1.0-CHANGELOG.md` | https://raw.githubusercontent.com/stripe/stripe-ruby/v21.1.0/CHANGELOG.md | `6605e66` | 21.1.0, 21.0.0 (says nothing) | MIT (stripe-ruby) | "This release changes the pinned API version to `2026-11-18.endive`." |
+| `pins/stripe-dotnet-53.2.0-CHANGELOG.md` | https://raw.githubusercontent.com/stripe/stripe-dotnet/v53.2.0/CHANGELOG.md | `a32d3eb` | 53.2.0, 52.4.2 (says nothing), 52.0.0 ("doesn't change") | Apache-2.0 (stripe-dotnet) | "This release changes the pinned API version to `2026-11-18.endive`." |
+| `pins/stripe-php-23.1.0-CHANGELOG.md` | https://raw.githubusercontent.com/stripe/stripe-php/v23.1.0/CHANGELOG.md | `6694b4d` | 23.1.0, 23.0.0 (says nothing), 21.0.0 ("does not change") | MIT (stripe-php) | "This release **does not** change the pinned API version. It's still `2026-06-24.dahlia`." |
+
 ## Version lists
 
 | File | URL | Saved | License | Use |
 |---|---|---|---|---|
-| `versions/stripe-go-tags.json`, `versions/octokit-rest-releases.json` | https://api.github.com/repos/stripe/stripe-go/tags, https://api.github.com/repos/octokit/rest.js/releases (shape only) | written for the test, 2026-11-20 | not saved copies: a few real tag names and releases in the shape of GitHub's API (a pre-release, a draft and a tag of another series among them) | for the version-listing test only (tags for an ecosystem with no registry lister, releases for release notes); no golden reads them |
+| `versions/stripe-go-tags.json`, `versions/stripe-go-tags-pins.json`, `versions/octokit-rest-releases.json` | https://api.github.com/repos/stripe/stripe-go/tags, https://api.github.com/repos/octokit/rest.js/releases (shape only) | written for the test, 2026-11-20 | not saved copies: a few real tag names and releases in the shape of GitHub's API (a pre-release, a draft and a tag of another series among them) | for the version-listing test only (tags for an ecosystem with no registry lister, releases for release notes); no golden reads them |
 | `pypi-urllib3-excerpt.json` | https://pypi.org/pypi/urllib3/json (shape only) | written for the test, 2026-11-20 | not a saved copy: four releases in the shape of PyPI's JSON API (`releases` → files with `upload_time_iso_8601`, `yanked`), dates approximate, a pre-release among them | for the version-listing test only (ListVersions, consecutive pairs); no golden reads it |
 
 ## JSON changelogs

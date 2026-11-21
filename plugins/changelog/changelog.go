@@ -86,6 +86,7 @@ type File struct {
 	TagPrefix string // a release's git tag is TagPrefix + its version: "v" for v0.86.0
 	Path      string // the changelog's path in the repo
 	Notes     bool   // the changelog is each GitHub release's notes, not a file
+	Pins      string // the source a release's section says it pins a version of ("stripe/api"; pins.go), or ""
 	Tag       string // pinned: the release's tag: "2.0.0", "v0.86.0"
 	Release   string // pinned: the release as the changelog heads it: "2.0.0"
 }
@@ -317,7 +318,7 @@ func (p Plugin) ListVersions(ctx context.Context, env plugin.Env) ([]plugin.Vers
 		vs, err = versions.NPMReleases(ctx, env.Get, f.Package)
 	default:
 		// No registry patch-it lists from: the repo's release tags.
-		return versions.GitHubTags(ctx, env.Get, f.Repo, regexp.MustCompile(`^`+regexp.QuoteMeta(f.TagPrefix)+`(\d+(?:\.\d+)+)$`))
+		vs, err = versions.GitHubTags(ctx, env.Get, f.Repo, regexp.MustCompile(`^`+regexp.QuoteMeta(f.TagPrefix)+`(\d+(?:\.\d+)+)$`))
 	}
 	if err != nil {
 		return nil, err
@@ -325,7 +326,7 @@ func (p Plugin) ListVersions(ctx context.Context, env plugin.Env) ([]plugin.Vers
 	for i := range vs {
 		vs[i].Ref = f.TagPrefix + vs[i].ID
 	}
-	return vs, nil
+	return f.pinned(ctx, env, vs), nil
 }
 
 // ReadAt fetches the changelog at the release's tag.
