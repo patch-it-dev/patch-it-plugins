@@ -1,0 +1,27 @@
+// Package noticestest is what the tests of providers' notices sources
+// share: a saved page through the whole plugin, against its golden file.
+package noticestest
+
+import (
+	"strings"
+	"testing"
+
+	"github.com/patch-it-dev/patch-it-plugins/core/kit/kittest"
+	"github.com/patch-it-dev/patch-it-plugins/kinds/notices"
+)
+
+// Golden reads the page saved as file through the whole plugin and compares
+// every event with testdata/golden/<source id, / as ->.json. The archive
+// serves the same copy as the snapshot, so the events cite it; kittest's
+// second read of the unchanged page asks for no second snapshot and stores
+// nothing new.
+func Golden(t *testing.T, page notices.Page, file string) {
+	t.Helper()
+	saved := kittest.Pages{page.PageURL(): file}
+	archive := &kittest.Archive{T: t, Pages: saved}
+	got := kittest.Page(t, kittest.Env(t, saved), notices.Plugin{Page: page, Archiver: archive})
+	if archive.Calls != 1 {
+		t.Errorf("%d snapshots, want 1: the second read's page is unchanged", archive.Calls)
+	}
+	kittest.Golden(t, "testdata/golden/"+strings.ReplaceAll(page.Slug(), "/", "-")+".json", got)
+}

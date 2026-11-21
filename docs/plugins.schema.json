@@ -41,7 +41,7 @@
                 "layer": { "type": "string", "enum": ["api", "sdk", "package", "runtime", "ci", "ai-models", "infra"] },
                 "watches": { "type": "string", "minLength": 1 },
                 "urls": { "type": "array", "items": { "type": "string", "pattern": "^https://" } },
-                "page": { "type": "string", "pattern": "^https://github\\.com/patch-it-dev/patch-it-plugins/blob/[^/]+/providers/[a-z0-9][a-z0-9.-]*\\.md$" }
+                "page": { "type": "string", "pattern": "^https://github\\.com/patch-it-dev/patch-it-plugins/blob/[^/]+/providers/[a-z0-9][a-z0-9-]*/README\\.md$" }
               }
             }
           }

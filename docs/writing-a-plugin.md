@@ -1,8 +1,8 @@
 # Writing a plugin
 
-A **provider** (Stripe, OpenAI, Kubernetes…) has a **category** and one or more **sources**. A source is one place the provider announces changes; it is read by one **kind** of plugin (the `plugins/<kind>` package: `openapi`, `changelog`, `notices`, `migrationguide`, `catalog`, `apisurface`), covers one **layer** (`api`, `sdk`, `package`, `runtime`, `ci`, `ai-models`, `infra`), and has **versions**. Its id is `provider/source` (`stripe/api`, `algolia/search-api`). This guide walks through adding a source, from picking it to the PR. The rules are in [CONTRIBUTING.md](../CONTRIBUTING.md); this is the how-to. How the pieces fit: [how-it-works.md](how-it-works.md).
+A **provider** (Stripe, OpenAI, Kubernetes…) has a **category** and one or more **sources**. A source is one place the provider announces changes; it is read by one **kind** of plugin (the `kinds/<kind>` package: `openapi`, `changelog`, `notices`, `migrationguide`, `catalog`, `apisurface`), covers one **layer** (`api`, `sdk`, `package`, `runtime`, `ci`, `ai-models`, `infra`), and has **versions**. Its id is `provider/source` (`stripe/api`, `algolia/search-api`). A kind says **how to read** and is written once; a provider's folder, `providers/<provider>/`, says **what to read**: its `provider.go` registers the provider and every source of it, and holds nothing about any other provider. This guide walks through adding a source, from picking it to the PR. The rules are in [CONTRIBUTING.md](../CONTRIBUTING.md); this is the how-to. How the pieces fit: [how-it-works.md](how-it-works.md).
 
-**Most new sources don't need new code.** They are a new entry for an existing kind: a new `changelog.File`, a new `retire.Page`, a new `feed.Feed` reader, a new OpenAPI adapter, a new `apisurface.Package`. Write a new kind only when none of them reads your source. There is no "Kubernetes kind" or "Terraform kind": Kubernetes API removals are a migration-guide or notices source, a client SDK is a package source, a Terraform provider is a changelog source.
+**Most new sources don't need new code in a kind.** They are a new value of an existing kind's type in the provider's folder: a `changelog.File`, a `retire.Page`, a `feed.Feed` with its reader, an OpenAPI adapter, an `apisurface.Package`. Write a new kind only when none of them reads your source. There is no "Kubernetes kind" or "Terraform kind": Kubernetes API removals are a migration-guide or notices source, a client SDK is a package source, a Terraform provider is a changelog source.
 
 ## 1. Scaffold it with `new-plugin`
 
@@ -14,19 +14,18 @@ make new-plugin ARGS='--provider acme --name Acme --category devtools --homepage
 # the same: go run ./cmd/new-plugin --provider acme ...
 # --kind: openapi, changelog, notices, migrationguide, catalog, apisurface
 # --reader, for a kind with several: changelog markdown|json, notices deprecations|feed, migrationguide sdk|members
-# optional: --layer api|sdk|package|runtime|ci|ai-models|infra (default: the kind's), --watches "...",
-#           --page acme (share an existing providers/ page; default <provider>-<source>)
+# optional: --layer api|sdk|package|runtime|ci|ai-models|infra (default: the kind's), --watches "..."
 ```
 
 Run in a terminal without the flags, it asks for them: the provider's id, then (for a new provider) its name, category and homepage, then the source's id, kind, reader, layer, URLs, packages and what it watches. A second source of a registered provider needs only `--provider`, `--source` and `--kind`: the name, category and homepage come from the registry. One run adds one source; run it again for the next.
 
-It writes, and lists:
+It writes, and lists, everything in the provider's folder, `providers/<provider>/`:
 
-- the source's definition in the package its kind reads it from (`plugins/openapi/adapter/`, `plugins/notices/retire/`, `plugins/notices/feed/`, `plugins/migrationguide/sdkguide/`, `plugins/migrationguide/members/` or `plugins/<kind>/`), with the version wiring the kind needs from it: an OpenAPI adapter's `LatestTag`, `Fetch` and `Versions` to write; every other kind lists, reads and extracts versions itself;
-- its `plugin.RegisterProvider` block (the provider and the source with every metadata field, packages included) in the kind's `init`, and the kind's import in `plugins/all` if it's a new kind;
-- `plugins/<kind>/<provider>_<source>_test.go`: the registration test, a golden test and a pinned drop test, over placeholder sources in `testdata/`, with the golden file written from them;
-- a row per saved file in that `testdata/README.md` (URL, date, license, quote to fill in);
-- `providers/<provider>-<source>.md` from the template (or nothing, with `--page`, when the provider already has one);
+- `<source>.go`: the source's definition, built from the kind's exported types, with the version wiring the kind needs from it: an OpenAPI adapter's `LatestTag`, `Fetch` and `Versions` to write; a feed's reader; every other kind lists, reads and extracts versions itself;
+- its registration in `provider.go`: for a new provider, a new `provider.go` with the provider's `plugin.RegisterProvider` call (every metadata field, packages included) and its import in `providers/all`; for a provider with a folder, one more source in its `Sources`;
+- `<source>_test.go`: the registration test, a golden test and a pinned drop test, over placeholder sources in `testdata/`, with the golden file written from them;
+- a row per saved file in `testdata/README.md` (URL, date, license, quote to fill in);
+- the source's section in `README.md`, the provider's page (a new provider's from [`provider-template.md`](provider-template.md));
 
 `go test ./...` passes right after; every place to fill in says `TODO(new-plugin)` (`grep -rn 'TODO(new-plugin)' .`), and `make check` (its `todos` step, also in CI_go) fails until none is left. It refuses a `provider/source` id that's taken, or a file it would write that exists, and then changes nothing.
 
@@ -39,7 +38,7 @@ Use the provider's own, most machine-readable source. In order of preference:
 3. **An official RSS / Atom feed** of changes. Built to be machine-read.
 4. **An official documentation page** (a deprecations page), ideally served as markdown. A live page changes, so events cite a Wayback Machine snapshot of it.
 
-Never scrape what the provider's `robots.txt` or terms disallow, and never read a forum or a third-party blog. Write down what you chose and why in the provider page (step 8).
+Never scrape what the provider's `robots.txt` or terms disallow, and never read a forum or a third-party blog. Write down what you chose and why on the provider's page (step 8).
 
 ### Measure the source over its history before trusting it
 
@@ -53,7 +52,7 @@ A source that looks right on today's copy can be wrong as a history of changes. 
   - a release branch cut before an older branch's last minor didn't have it yet;
   - it described only an API client: a helper or a "custom request" method, marked `x-helper` or similar.
 
-  So the default rule for a spec is the `deprecationsOnly` filter (`plugins/openapi/vercel.go`): operation deprecations, plus removals of operations marked deprecated first. Keep an unmarked removal only if the history shows they're real.
+  So the default rule for a spec is the `openapi.DeprecationsOnly` filter (`kinds/openapi/openapi.go`, as `providers/vercel/api.go` uses it): operation deprecations, plus removals of operations marked deprecated first. Keep an unmarked removal only if the history shows they're real.
 - **Withdrawals:** a deprecation the provider takes back (`endpoint-reactivated`), a removed version that reappears. Replay the history in order, and let a withdrawal cancel what it withdraws.
 - **Property-level changes,** request and response. Response properties of a generated spec often churn by the hundred per release. Count before deciding; leaving them out is a fine first version.
 
@@ -63,7 +62,7 @@ Then check what's left against the provider's own words:
 - **Cross-check a removal with the release notes** ("Remove unfreeze REST endpoint" for the endpoint that left the spec).
 - **Probing the live API from outside rarely settles it.** Many APIs answer 401 or 403 to every path without credentials, real or made up.
 
-Write the numbers on the provider page, as `providers/vercel.md` does for its spec's history, so a reviewer can check the rule against them.
+Write the numbers on the provider's page, as `providers/vercel/README.md` does for its spec's history, so a reviewer can check the rule against them.
 
 ### Cite a version, and pick one a repo pins
 
@@ -80,14 +79,14 @@ Write the numbers on the provider page, as `providers/vercel.md` does for its sp
 
 [Which kind fits my provider?](which-kind.md) asks the questions; the table says what each kind reads.
 
-| Kind | Reads | Add a source by |
+| Kind | Reads | Add a source, in `providers/<provider>/`, by |
 |---|---|---|
-| `plugins/openapi` | An OpenAPI spec per release, diffed with `core/diff/` and turned into events by `core/normalize/` | An `adapter.Adapter` in `plugins/openapi/adapter/` (latest tag, fetch a tag's spec; `Versions` to list every release) and a `plugin.RegisterProvider` block |
-| `plugins/notices` | A live page of dated notices: a model provider's deprecations page (a table of date, model, replacement: Markdown, Markdoc or HTML), a vendor's RSS or Atom feed, a vendor's table of whole API version ranges and their support status | A `retire.Page` in `plugins/notices/retire/providers.go`, a `feed.Feed` with a reader for that vendor's entries in `plugins/notices/feed/`, or an `eol.Page` in `plugins/notices/eol/` (`new-plugin` doesn't scaffold this reader yet) |
-| `plugins/migrationguide` | A guide that lists what a release removed, at the release's tag: an SDK's migration guide per new major (removed request parameters), or a package's table of removed members (an RST simple table or a Markdown pipe table) | A `sdkguide.Guide` in `plugins/migrationguide/sdkguide/`, or a `members.Guide` in `plugins/migrationguide/members/` |
-| `plugins/changelog` | A changelog: a `CHANGELOG.md` / `CHANGES.rst` / `HISTORY.rst`, each release's section at its tag (releases from PyPI or npm, or for any other ecosystem the repo's `TagPrefix` + X.Y.Z tags), or each GitHub release's notes (`Notes`), or a vendor's machine-readable API changelog in JSON (per day, endpoint and API version, oasdiff change codes), commit by commit | A `changelog.File` with its `Ecosystem` and `TagPrefix`, or a `changelog.Log` |
-| `plugins/catalog` | A provider's own structured list of what it offers: a command catalog kept as one JSON file per command in its repo, read at each release tag and compared for commands that disappeared entirely | A `catalog.Commands` (repo, directory, release tag pattern); a catalog of another shape is a new reader type in the package |
-| `plugins/apisurface` | A published package's public API, compared between two releases: the classes, functions, methods and parameters in each release's files (the wheel or sdist from PyPI, the TypeScript declarations in an npm tarball) | An `apisurface.Package` (registry name, ecosystem, top-level module; `npmPackage` for npm) and its `plugin.RegisterProvider` block |
+| `kinds/openapi` | An OpenAPI spec per release, diffed with `core/diff/` and turned into events by `core/normalize/` | An `adapter.Adapter` (latest tag, fetch a tag's spec; `Versions` to list every release, with `adapter.Releases`, `adapter.Commits` or `core/versions`) in `<source>.go`, and an `openapi.Plugin` source in `provider.go` (`Diff` and `Keep` when the spec needs them) |
+| `kinds/notices` | A live page of dated notices: a model provider's deprecations page (a table of date, model, replacement: Markdown, Markdoc or HTML), a vendor's RSS or Atom feed, a vendor's table of whole API version ranges and their support status | A `retire.Page` (what models to keep), a `feed.Feed` with a reader for that vendor's entries, or an `eol.Page` (`new-plugin` doesn't scaffold this reader yet), run by a `notices.Plugin` |
+| `kinds/migrationguide` | A guide that lists what a release removed, at the release's tag: an SDK's migration guide per new major (removed request parameters), or a package's table of removed members (an RST simple table or a Markdown pipe table) | A `sdkguide.Guide` or a `members.Guide`, run by a `migrationguide.Plugin` |
+| `kinds/changelog` | A changelog: a `CHANGELOG.md` / `CHANGES.rst` / `HISTORY.rst`, each release's section at its tag (releases from PyPI or npm, or for any other ecosystem the repo's `TagPrefix` + X.Y.Z tags), or each GitHub release's notes (`Notes`), or a vendor's machine-readable API changelog in JSON (per day, endpoint and API version, oasdiff change codes), commit by commit | A `changelog.File` with its `Ecosystem` and `TagPrefix` (`changelog.SDK` builds an SDK's source from it), or a `changelog.Log` |
+| `kinds/catalog` | A provider's own structured list of what it offers: a command catalog kept as one JSON file per command in its repo, read at each release tag and compared for commands that disappeared entirely; a file of upcoming removals, commit by commit | A `catalog.Commands` (repo, directory, release tag pattern) or a `catalog.UpcomingChanges`; a catalog of another shape is a new reader type in the kind |
+| `kinds/apisurface` | A published package's public API, compared between two releases: the classes, functions, methods and parameters in each release's files (the wheel or sdist from PyPI, the TypeScript declarations in an npm tarball) | An `apisurface.Package` (registry name, ecosystem, top-level module; `apisurface.NPMPackage` for npm), its source built with `apisurface.PyPI` or `apisurface.NPM` |
 
 ## 4. The interface
 
@@ -136,7 +135,7 @@ When a release or a page has no part the reader can use (a changelog with no sec
 
 A source that has versions (a spec's releases, a package's releases, a guide per major, the commits that changed a file) is read version by version, so a customer several versions behind gets every step: the runner lists the versions, reads each consecutive pair with `ReadAt` and extracts it once (a released version never changes).
 
-- **List** with [`core/versions`](../core/versions/versions.go): `GitHubReleases`, `GitHubTags`, `GitHubCommits` (the commits that changed a file), `PyPIReleases` (`PyPIReleasesWithYanked` when a change can be documented at a release later yanked), `NPMReleases`, `GitHubPages` (any other GitHub list, page by page). An OpenAPI adapter lists its own versions (`adapter.Lister`): every adapter does. Never pin a tag in code: a version you need for a golden test is a pinned *case* in the test (`changelog.Urllib3.At("2.0.0")`, in a `_test.go` file), not the registered source; `plugins/all`'s `TestNoPinnedReleaseInPluginCode` fails on a release number or commit SHA in any plugin's non-test code.
+- **List** with [`core/versions`](../core/versions/versions.go): `GitHubReleases`, `GitHubTags`, `GitHubCommits` (the commits that changed a file), `PyPIReleases` (`PyPIReleasesWithYanked` when a change can be documented at a release later yanked), `NPMReleases`, `GitHubPages` (any other GitHub list, page by page). An OpenAPI adapter lists its own versions (`adapter.Lister`): every adapter does. Never pin a tag in code: a version you need for a golden test is a pinned *case* in the test (`Urllib3.At("2.0.0")` in `providers/urllib3/`, in a `_test.go` file), not the registered source; `providers/all`'s `TestNoPinnedReleaseInPluginCode` fails on a release number or commit SHA in any kind's or provider's non-test code.
 - **Pins** (`Version.MapsTo`): when a release pins a version of another source (an SDK release and the API version it calls), set it while listing, from the release itself (its notes, the version constant in its code). It is how a feed query on the SDK's versions also returns the API's changes. Leave it zero when the release doesn't say: never fill it from a table kept by hand.
 - **Read at** a version's `Ref` (a tag, a commit SHA) and return the exact URL read as the snapshot's `SourceURL`: it's the events' citation.
 - **Extract** sets `previous_version` to `from`'s version: every `api_operation` and `package_release` event must name it (the contract's rule 13). `from` is zero only for the first version read, which has nothing to compare: patch-it's hosted ingestion service reads that version as its first snapshot and extracts nothing from it, so a version pair always starts at a real `from` (an `api_operation` or `package_release` event extracted from zero would be rejected).
@@ -150,38 +149,41 @@ A living page (a deprecations page, a feed: a `notices` source) only shows its l
 
 ### The `apisurface` kind: reading a package's API without running it
 
-`plugins/apisurface` downloads a release's wheel (or sdist) through `env.Get`, opens it in memory (`archive/zip`, `archive/tar`: nothing is written to disk) and hands the `.py` and `.pyi` files to `plugins/apisurface/pysurface`, which reads them as text: logical lines, indentation, and the headers of `def`, `class`, `__all__` and `from … import`. Nothing in the package is imported, compiled or run. That's the safest way to read code someone else publishes, and it needs no dependency: a Python interpreter (the `ast` module) would mean running a second runtime next to the plugins, and the pure-Go Python parsers available follow old grammars and pull in a large module for what is a few hundred lines here. The cost is that only signatures are read, never what a body does, and anything the reader can't be sure of is left out (see `providers/openai-python-surface.md`). Archive and file sizes are capped (`MaxFileBytes`, `MaxSourceBytes`), so a crafted release can't exhaust the runner.
+`kinds/apisurface` downloads a release's wheel (or sdist) through `env.Get`, opens it in memory (`archive/zip`, `archive/tar`: nothing is written to disk) and hands the `.py` and `.pyi` files to `kinds/apisurface/pysurface`, which reads them as text: logical lines, indentation, and the headers of `def`, `class`, `__all__` and `from … import`. Nothing in the package is imported, compiled or run. That's the safest way to read code someone else publishes, and it needs no dependency: a Python interpreter (the `ast` module) would mean running a second runtime next to the plugins, and the pure-Go Python parsers available follow old grammars and pull in a large module for what is a few hundred lines here. The cost is that only signatures are read, never what a body does, and anything the reader can't be sure of is left out (see `providers/openai/README.md`, the Python SDK's section). Archive and file sizes are capped (`MaxFileBytes`, `MaxSourceBytes`), so a crafted release can't exhaust the runner.
 
-An npm release is read the same way: its tarball (the version document's `dist.tarball`) is opened in memory and only `package.json` and the `.d.ts`, `.d.mts` and `.d.cts` files are kept, for `plugins/apisurface/dtsurface`. Declaration files hold declarations only, never statements, so a tokenizer and a parser of declarations, which skips each type expression by its brackets, read every name, member and parameter a caller can see, in about a thousand lines of standard-library Go. The alternatives would each be worse here: the TypeScript compiler is JavaScript, so it would mean running Node and code from npm next to the plugins; the Go ports of TypeScript's parser are internal to their projects or need cgo (tree-sitter); and a full type checker is far more than a public-API diff needs. No package code runs, no install script runs, no dependency is added (the `make imports` allowlist is unchanged). What it doesn't do, on purpose: resolve types (a property's type isn't followed), or read interface members (see `providers/openai-node-surface.md`).
+An npm release is read the same way: its tarball (the version document's `dist.tarball`) is opened in memory and only `package.json` and the `.d.ts`, `.d.mts` and `.d.cts` files are kept, for `kinds/apisurface/dtsurface`. Declaration files hold declarations only, never statements, so a tokenizer and a parser of declarations, which skips each type expression by its brackets, read every name, member and parameter a caller can see, in about a thousand lines of standard-library Go. The alternatives would each be worse here: the TypeScript compiler is JavaScript, so it would mean running Node and code from npm next to the plugins; the Go ports of TypeScript's parser are internal to their projects or need cgo (tree-sitter); and a full type checker is far more than a public-API diff needs. No package code runs, no install script runs, no dependency is added (the `make imports` allowlist is unchanged). What it doesn't do, on purpose: resolve types (a property's type isn't followed), or read interface members (see `providers/openai/README.md`, the Node SDK's section).
 
 An event cites the newer release's file, and its excerpt quotes the definition's path and line in both releases. npm packages (`.d.ts` files) are next.
 
 ### Register the provider and its source
 
-In the kind's package `init`, with the metadata ([AGENTS.md](../AGENTS.md) rule 1):
+In the provider's `providers/<provider>/provider.go`, one `init` registers the provider and every source of it, whatever their kinds, with the metadata ([AGENTS.md](../AGENTS.md) rule 1):
 
 ```go
 func init() {
     plugin.RegisterProvider(plugin.Provider{
         ID: "urllib3", Name: "urllib3", Category: plugin.CategoryPackages, Homepage: "https://urllib3.readthedocs.io",
-        Sources: []plugin.Source{{
-            ID: "urllib3", Layer: plugin.LayerPackage, Page: "providers/urllib3.md",
-            Watches: "Names removed or deprecated in each release, …",
-            URLs:    []string{"https://github.com/urllib3/urllib3/blob/main/CHANGES.rst"},
-            Packages: []string{"pypi:urllib3"},
-            Plugin:  Plugin{File: Urllib3},
-        }},
+        Sources: []plugin.Source{
+            {
+                ID: "urllib3", Layer: plugin.LayerPackage,
+                Watches:  "Names removed or deprecated in each release, …",
+                URLs:     []string{"https://github.com/urllib3/urllib3/blob/main/CHANGES.rst"},
+                Packages: []string{"pypi:urllib3"},
+                Plugin:   changelog.Plugin{File: Urllib3},
+            },
+            apisurface.PyPI(PythonSurface, plugin.LayerPackage, "https://github.com/urllib3/urllib3"),
+        },
     })
 }
 ```
 
-`RegisterProvider` panics on missing metadata, a duplicate id, or a provider registered twice with a different name, category or homepage (a provider with sources in two kinds repeats the same ones). `plugin.Lookup` and `plugin.LookupSource` find a source by its id, `provider/source`. The plugin's `Name` is that id: what every event carries in `api`, and what the fingerprint hashes.
+`RegisterProvider` fills in each source's kind (the `kinds/<kind>` package its plugin's type is defined in) and its page (`providers/<provider>/README.md`), and panics on missing metadata, a duplicate id, or a provider registered a second time. `plugin.Lookup` and `plugin.LookupSource` find a source by its id, `provider/source`. The plugin's `Name` is that id: what every event carries in `api`, and what the fingerprint hashes.
 
 `Packages` are the published packages the source covers, `<ecosystem>:<name>` (`pypi:stripe`, `npm:@vercel/sdk`): the package itself for a package or SDK source, the provider's official SDKs for an API source. `plugin.ForPackage` finds a package's sources, so a customer's lockfile maps to sources with no table kept anywhere else. List only names you checked; none is fine.
 
 ### Fetching: `env.Get` and `core/kit/`
 
-- Fetch **only** with `env.Get`. It caches by `ETag` / `Last-Modified`, retries, and in tests serves saved files. `CI_go` fails a package outside `core/fetch/`, `core/kit/` and `plugins/openapi/adapter/` that imports `net/http`.
+- Fetch **only** with `env.Get`. It caches by `ETag` / `Last-Modified`, retries, and in tests serves saved files. `CI_go` fails a package outside `core/fetch/` and `core/kit/` that imports `net/http`.
 - `kit.Cite(ctx, archiver, url, read, want)`: for a **living page**'s `Read`. Takes a Wayback Machine snapshot, reads it with your own reader and checks it says exactly what the live page said. Make the events from the snapshot and cite its URL. No snapshot, no events.
 - `plugin.SHA256(body)`: the hash a living page's `CompareHash` holds.
 - `github.LatestRelease`, `github.LatestCommit`, `github.Commit`, `github.Head` ([`core/github`](../core/github/github.go)): the newest release or commit on GitHub, one place; don't decode GitHub's responses yourself.
@@ -192,7 +194,7 @@ The event format is [patch-it's change-event contract](https://github.com/patch-
 
 ## 5. Save the source
 
-Save a real copy of what the plugin reads under your package's `testdata/` (or the reader package's, like `plugins/notices/retire/testdata/`). Add a row to that directory's `README.md`: file, URL, date fetched, license, and a short quote of the part the plugin reads.
+Save a real copy of what the source reads under the provider's `testdata/`, `providers/<provider>/testdata/`. Add a row to its `README.md`: file, URL, date fetched, license, and a short quote of the part the plugin reads.
 
 - **Openly licensed files** (MIT, BSD, Apache, CC BY): keep them whole.
 - **Vendor documentation pages**: trim to what the plugin reads (the tables, the sections), copy every kept line unchanged, mark it "excerpt for testing; © the vendor", and say what you left out.
@@ -207,12 +209,12 @@ The test kit, `core/kit/kittest`, runs the plugin with no network, no database a
 ```go
 func TestGolden(t *testing.T) {
     env := kittest.Env(t, kittest.Pages{
-        Redis.listingURL("8.8-m03"):              "testdata/redis-contents-src-commands-8.8-m03.json",
-        Redis.listingURL("8.8-rc1"):              "testdata/redis-contents-src-commands-8.8-rc1.json",
-        Redis.FileURL("8.8-m03", "gcra.json"):    "testdata/redis-8.8-m03-gcra.json",
-        Redis.FileURL("8.8-m03", "gcrasetvalue.json"): "testdata/redis-8.8-m03-gcrasetvalue.json",
+        Commands.ListingURL("8.8-m03"):                   "testdata/redis-contents-src-commands-8.8-m03.json",
+        Commands.ListingURL("8.8-rc1"):                   "testdata/redis-contents-src-commands-8.8-rc1.json",
+        Commands.FileURL("8.8-m03", "gcra.json"):         "testdata/redis-8.8-m03-gcra.json",
+        Commands.FileURL("8.8-m03", "gcrasetvalue.json"): "testdata/redis-8.8-m03-gcrasetvalue.json",
     })
-    got := kittest.Versions(t, env, Redis,
+    got := kittest.Versions(t, env, Commands,
         plugin.Version{ID: "8.8-m03", Ref: "8.8-m03"}, plugin.Version{ID: "8.8-rc1", Ref: "8.8-rc1"})
     kittest.Golden(t, "testdata/golden/redis-commands.json", got)
 }
@@ -222,21 +224,22 @@ func TestGolden(t *testing.T) {
 - A versioned source: `kittest.Versions(t, env, plugin, from, to)` reads both versions with `ReadAt` and extracts the pair, as the hosted service does. When the older side needn't be read (a changelog's or a migration guide's `Extract` reads only the newer release's own section), build the snapshots yourself and call `kittest.Extracted(t, env, plugin, from, to)`, naming the real release before as `from`.
 - A living page: `kittest.Page(t, env, plugin)` is its first read, cited through `&kittest.Archive{T: t, Pages: saved}`; a second read of the same page must return the kept snapshot and store nothing.
 - Each stores into an in-memory store (`kittest.Mem`) and extracts **twice**: a rejected event, an error, or a second extract that stores anything new fails the test. `kittest.Pair` and `kittest.ReadPage` are the same steps returning errors, for tests that expect one.
-- `kittest.Golden` compares the stored events with the JSON file. Create or rewrite it with `go test ./plugins/<name> -update`, then read the diff like code: every event in it is a pull request someone may get.
+- `kittest.Golden` compares the stored events with the JSON file. Create or rewrite it with `go test ./providers/<provider> -update`, then read the diff like code: every event in it is a pull request someone may get.
 
 ## 7. Pin a drop test and the registration
 
 - **One drop test**: a realistic input the plugin must *not* turn into an event (an unrelated section, a behavior change written as prose, a product name in a sentence). Precision over recall: a missed change is a bug we fix later; a wrong change is a wrong pull request in someone's repo. Make it prove something: also run the same input with the filter off, and assert the noise it drops is there.
-- **`registered_test.go`**: `kittest.Registered(t, Plugin{…})` checks the package registered that plugin under that name.
-- **A new kind (a new package under plugins/)**: add its blank import to [`plugins/all/all.go`](../plugins/all/all.go). `TestEveryPluginIsImported` fails until you do; the hosted service runs exactly what `plugins/all` imports.
+- **The registration**: `kittest.Registered(t, openapi.Plugin{…})` checks the source is registered under that name with that plugin.
+- **A new provider (a new folder under providers/)**: its blank import goes in [`providers/all/all.go`](../providers/all/all.go) (`new-plugin` adds it). `TestEveryProviderIsImported` fails until it's there; the hosted service runs exactly what `providers/all` imports. `TestTheImportGraph` fails when a kind imports a provider, or a provider imports anything of this module but `core/` and `kinds/`.
+- **A new kind (a new package under kinds/)**: it says how to read and knows no provider; the providers that use it import it.
 
 ## 8. Write the provider page
 
-Copy [`providers/_template.md`](../providers/_template.md) to `providers/<api>.md` and fill in every section: what it watches; **why this source** (the link, the date you checked it, why it's the best place this provider announces breaking changes, the alternatives you didn't use and why, one short quote); how the provider announces changes; what the plugin reads and ignores; known gaps.
+Each source has a section on its provider's page, `providers/<provider>/README.md` (a new provider's from [`provider-template.md`](provider-template.md); `new-plugin` writes the section). Fill in every part: what it watches; **why this source** (the link, the date you checked it, why it's the best place this provider announces breaking changes, the alternatives you didn't use and why, one short quote); how the provider announces changes; what the plugin reads and ignores; known gaps.
 
 ## 9. Fill in the metadata in the registration
 
-**Not optional** ([AGENTS.md](../AGENTS.md) rule 1). The `plugin.RegisterProvider` block the starter wrote is the only place the source is listed: the provider's id, name, category (`plugin.Categories()`) and homepage, and the source's id (`<provider>/<source>`), layer (`plugin.Layers()`), what it watches, the URLs it reads and its page. A second source of a provider repeats the provider's id, name, category and homepage exactly. `make plugins` prints the list with it; each release attaches that list as `plugins.json`, which docs.patch-it.dev and patch-it's hosted ingestion service read. There's nothing else to update.
+**Not optional** ([AGENTS.md](../AGENTS.md) rule 1). The `plugin.RegisterProvider` block the starter wrote is the only place the source is listed: the provider's id, name, category (`plugin.Categories()`) and homepage, and the source's id (`<provider>/<source>`), layer (`plugin.Layers()`), what it watches, the URLs it reads and the packages it covers. A provider is registered once, in its `provider.go`: a second source is one more entry in its `Sources`. `make plugins` prints the list with it; each release attaches that list as `plugins.json`, which docs.patch-it.dev and patch-it's hosted ingestion service read. There's nothing else to update.
 
 ## 10. Check and open the PR
 

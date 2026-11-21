@@ -19,9 +19,9 @@ You need Go (the version in `go.mod`), `make` and Python 3.
    ```sh
    make new-plugin ARGS='--provider acme --name Acme --source api --kind notices --reader feed --url https://acme.example/changelog.xml'
    ```
-2. **Fill in every `TODO(new-plugin)`**: the reader, the provider and source metadata in its `plugin.RegisterProvider` block, a saved copy of the source in `testdata/`, and "Why this source" in `providers/acme-api.md`. Then write the golden file and read it like code:
+2. **Fill in every `TODO(new-plugin)`** in `providers/acme/`: the reader, the provider and source metadata in `provider.go`, a saved copy of the source in `testdata/`, and "Why this source" in `README.md`. Then write the golden file and read it like code:
    ```sh
-   go test ./plugins/notices -run TestAcmeApi -update
+   go test ./providers/acme -run TestApi -update
    ```
 3. **Check it the way CI will, and open the PR** (`git commit -s`, one provider per PR):
    ```sh
@@ -31,7 +31,7 @@ You need Go (the version in `go.mod`), `make` and Python 3.
 ## More
 
 - [Which kind fits my provider?](docs/which-kind.md) and [how to write a plugin](docs/writing-a-plugin.md): providers, sources, kinds, versions, the test kit, step by step.
-- [How it works](docs/how-it-works.md): what a plugin does, the layout, the checks, releases.
+- [How it works](docs/how-it-works.md): what a plugin does, the layout (`kinds/` how to read, `providers/` what to read), the checks, releases.
 - What's covered: `make plugins` prints every provider and source from the code; each [release](https://github.com/patch-it-dev/patch-it-plugins/releases) carries it as `plugins.json`, and [docs.patch-it.dev](https://docs.patch-it.dev/supported-apis/plugins/) shows it.
 - [CONTRIBUTING.md](CONTRIBUTING.md) (the rules), [AGENTS.md](AGENTS.md) (for AI coding agents), [Discussions](https://github.com/patch-it-dev/patch-it-plugins/discussions), [good first issues](https://github.com/patch-it-dev/patch-it-plugins/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
 - What patch-it does with the events: [patch-it.dev](https://patch-it.dev) and [docs.patch-it.dev](https://docs.patch-it.dev). [Apache-2.0](LICENSE), copyright patch-it contributors.

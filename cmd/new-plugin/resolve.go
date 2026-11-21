@@ -132,20 +132,13 @@ func cmp(a, b string) string {
 	return b
 }
 
-// importInAll adds plugins/<kind> to plugins/all's imports when it isn't
-// there (a new kind), so a program importing all runs it. ok is false when
-// it's already there.
-func importInAll(root, kind string) ([]byte, bool, error) {
-	path := filepath.Join(root, "plugins", "all", "all.go")
-	src, err := os.ReadFile(path)
+// importInAll adds providers/<provider> to providers/all's imports, so a
+// program importing all runs its sources.
+func importInAll(root, provider string) ([]byte, error) {
+	src, err := os.ReadFile(filepath.Join(root, "providers", "all", "all.go"))
 	if err != nil {
-		return nil, false, err
+		return nil, err
 	}
-	imp := `"github.com/patch-it-dev/patch-it-plugins/plugins/` + kind + `"`
-	if bytes.Contains(src, []byte(imp)) {
-		return nil, false, nil
-	}
-	out := bytes.Replace(src, []byte("import (\n"), []byte("import (\n\t_ "+imp+"\n"), 1)
-	b, err := format.Source(out)
-	return b, err == nil, err
+	out := bytes.Replace(src, []byte("import (\n"), []byte("import (\n\t_ \""+module+"providers/"+provider+"\"\n"), 1)
+	return format.Source(out)
 }

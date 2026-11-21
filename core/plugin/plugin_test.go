@@ -63,7 +63,7 @@ func TestNamesAreSorted(t *testing.T) {
 func register(t *testing.T, provider string) {
 	t.Helper()
 	RegisterProvider(Provider{ID: provider, Name: provider, Category: CategoryDevTools, Homepage: "https://example.test",
-		Sources: []Source{{ID: "api", Layer: LayerAPI, Watches: "w", URLs: []string{"https://example.test/spec"}, Page: "providers/test.md", Plugin: testPlugin{name: provider + "/api"}}}})
+		Sources: []Source{{ID: "api", Layer: LayerAPI, Watches: "w", URLs: []string{"https://example.test/spec"}, Plugin: testPlugin{name: provider + "/api"}}}})
 	t.Cleanup(func() {
 		mu.Lock()
 		defer mu.Unlock()

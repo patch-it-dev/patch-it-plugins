@@ -14,7 +14,7 @@ import (
 	"os"
 
 	"github.com/patch-it-dev/patch-it-plugins/internal/pluginlist"
-	_ "github.com/patch-it-dev/patch-it-plugins/plugins/all"
+	_ "github.com/patch-it-dev/patch-it-plugins/providers/all"
 )
 
 func main() {

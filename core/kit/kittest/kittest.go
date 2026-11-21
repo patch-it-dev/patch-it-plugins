@@ -11,7 +11,7 @@
 //	got := kittest.Versions(t, env, p, plugin.Version{ID: "1.26.15", Ref: "1.26.15"}, plugin.Version{ID: "2.0.0", Ref: "2.0.0"})
 //	kittest.Golden(t, "testdata/golden/urllib3-2.0.0.json", got)
 //
-// `go test ./plugins/<name> -update` rewrites a plugin's golden files;
+// `go test ./providers/<name> -update` rewrites a provider's golden files;
 // review the diff like code.
 package kittest
 
