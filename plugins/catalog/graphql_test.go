@@ -123,8 +123,14 @@ func TestGraphQLVersionsAreTheFilesCommits(t *testing.T) {
 func TestGraphQLARestoredEntryIsTheSameEvent(t *testing.T) {
 	first := graphqlPair(t, graphqlCommits[3], graphqlCommits[4])
 	// 2026-03-03's file without its two additions, then the file again.
-	from, _ := GitHubGraphQL.ReadAt(context.Background(), kittest.Env(t, graphqlPages()), graphqlCommits[3])
-	to, _ := GitHubGraphQL.ReadAt(context.Background(), kittest.Env(t, graphqlPages()), graphqlCommits[4])
+	from, err := GitHubGraphQL.ReadAt(context.Background(), kittest.Env(t, graphqlPages()), graphqlCommits[3])
+	if err != nil {
+		t.Fatal(err)
+	}
+	to, err := GitHubGraphQL.ReadAt(context.Background(), kittest.Env(t, graphqlPages()), graphqlCommits[4])
+	if err != nil {
+		t.Fatal(err)
+	}
 	from.Version = plugin.Version{ID: "2026-04-01", Ref: "dropped"}
 	to.Version = plugin.Version{ID: "2026-04-02", Ref: "restored"}
 	again, err := GitHubGraphQL.Extract(context.Background(), kittest.Env(t, nil), from, to)

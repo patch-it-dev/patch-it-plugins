@@ -32,6 +32,8 @@ Kind: `catalog` (`plugins/catalog`), the `UpcomingChanges` reader (`plugins/cata
 
 ## Known gaps
 
+- `previous_version` (a commit date) to `version` (the removal date) isn't a range of this source's listed versions: the removal date is when the change breaks, as a model's shutdown date is. Whether the feed's coverage logic should treat such a pair differently is for the contract (patch-it) to say.
+
 - The removal itself (the day it ships) isn't a separate `breaking` event; the deprecation names the date.
 - GitHub Enterprise Server's own files (`ghes-*`) aren't read.
 - A location GitHub moves to a new date is a new event (a new `version`), alongside the first.
