@@ -109,7 +109,8 @@ var (
 	deprecPassive  = regexp.MustCompile(`(?i)^(?:the )?(?:` + noun + ` )?` + list + `(?: ` + noun + `)? (?:is|are) (?:now )?deprecated(?: in favou?r of (?:the )?(§)(?: ` + noun + `)?)?$`)
 
 	// constant is a bullet about a constant.
-	constant = regexp.MustCompile(`(?i)\bconstants?\b`)
+	constant   = regexp.MustCompile(`(?i)\bconstants?\b`)
+	supportFor = regexp.MustCompile(`(?i)\bsupport for\b`)
 
 	// What an "Added" or "Features" bullet says plainly: names it adds
 	// ("Added `Client.stream` method", "Add `a` and `b` to `Widget`", "New
@@ -201,8 +202,10 @@ func classifyAdded(text, module string) (Change, bool, string) {
 		}
 		// A constant "to" a type is a member in one language and a
 		// package-level name of that type in another (Go): which, the bullet
-		// doesn't say.
-		if m[2] != "" && constant.MatchString(sentence) {
+		// doesn't say. "Support for `X`" with nothing it's on names what the
+		// package now works with (a file format, a library), not a name it
+		// exports.
+		if m[2] != "" && constant.MatchString(sentence) || m[2] == "" && supportFor.MatchString(sentence) {
 			return Change{}, false, ""
 		}
 		c, ok, why := names(event.ChangeAdded, codes, m[1], m[2], "", "", module, "")

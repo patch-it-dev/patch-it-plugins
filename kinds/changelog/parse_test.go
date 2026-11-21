@@ -72,6 +72,8 @@ func TestOnlyAPlainSentenceNamesItsSymbols(t *testing.T) {
 		{KindAdded, "`Placeholder.cycle`", ""},                   // names alone: added to what?
 		{KindAdded, "Add `A.b()`, `c()` and `d()` methods", ""},  // c and d's owner is the reader's guess
 		{KindAdded, "Add `SOURCE_X` constant to `Transfer`", ""}, // a member, or a package-level name?
+		{KindAdded, "Added support for `pyproject.toml`", ""},    // something it works with, not a name
+		{KindAdded, "Add support for `a` and `b` on `C`", "added added_symbol C.a,C.b"},
 		{KindAdded, "Added `timeout` parameter to `Client.send`", "added added_parameter Client.send(timeout)"},
 		{KindAdded, "Support streaming responses", ""},
 		{KindAdded, "Added `x` when `y` is set", ""},

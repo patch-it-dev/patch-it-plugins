@@ -317,9 +317,9 @@ func Compare(ra, rb Release) []Change {
 			continue // its class is reported
 		}
 		before := a[k]
-		if why := notGone(k, before, ra, rb); why != "" {
-			if base, ok := strings.CutPrefix(why, "its base class "); ok {
-				movedUp[strings.TrimSuffix(base, " defines it")+"."+k[strings.LastIndexByte(k, '.')+1:]] = true
+		if why, base := notGone(k, before, ra, rb); why != "" {
+			if base != "" {
+				movedUp[base+"."+k[strings.LastIndexByte(k, '.')+1:]] = true
 			}
 			out = append(out, Change{Symbol: k, Note: fmt.Sprintf("%s: not in the newer release, but %s", k, why)})
 			continue
@@ -344,7 +344,7 @@ func Compare(ra, rb Release) []Change {
 			continue // moved up from its subclasses: not new to them
 		}
 		after := s
-		if why := notGone(k, after, rb, ra); why != "" {
+		if why, _ := notGone(k, after, rb, ra); why != "" {
 			out = append(out, Change{Symbol: k, Note: fmt.Sprintf("%s: not in the older release, but %s", k, why)})
 			continue
 		}
@@ -494,49 +494,50 @@ func callerParams(ps []pysurface.Param) []pysurface.Param {
 }
 
 // notGone says why symbol k, defined as before in a and missing from b's
-// surface, may still be there in b; "" when it's gone.
-func notGone(k string, before pysurface.Symbol, a, b Release) string {
+// surface, may still be there in b; "" when it's gone. base is the base
+// class that defines it in b, when that's why.
+func notGone(k string, before pysurface.Symbol, a, b Release) (why, base string) {
 	if slices.Contains(b.Skipped, before.File) {
-		return fmt.Sprintf("%s, where it was defined, was too big to read", before.File)
+		return fmt.Sprintf("%s, where it was defined, was too big to read", before.File), ""
 	}
 	if mod, ok := b.Bindings[parentOf(k)]; ok {
 		name := k[strings.LastIndexByte(k, '.')+1:]
 		switch {
 		case slices.Contains(mod.Names, name):
-			return fmt.Sprintf("%s still binds the name (an alias, an import or a value now)", parentOf(k))
+			return fmt.Sprintf("%s still binds the name (an alias, an import or a value now)", parentOf(k)), ""
 		case mod.Star:
-			return fmt.Sprintf("%s star-imports names that can't be listed", parentOf(k))
+			return fmt.Sprintf("%s star-imports names that can't be listed", parentOf(k)), ""
 		}
 	}
 	if parent, ok := b.Surface[parentOf(k)]; ok {
 		switch parent.Kind {
 		case "export":
-			return fmt.Sprintf("%s is now re-exported from another package, whose members aren't read", parentOf(k))
+			return fmt.Sprintf("%s is now re-exported from another package, whose members aren't read", parentOf(k)), ""
 		case "variable", "interface", "type":
-			return fmt.Sprintf("%s is now a %s, whose members aren't read", parentOf(k), parent.Kind)
+			return fmt.Sprintf("%s is now a %s, whose members aren't read", parentOf(k), parent.Kind), ""
 		}
 	}
 	if before.Kind != "method" && before.Kind != "property" {
-		return ""
+		return "", ""
 	}
 	cls, ok := b.Surface[parentOf(k)]
 	if !ok || cls.Kind != "class" {
-		return ""
+		return "", ""
 	}
 	name := k[strings.LastIndexByte(k, '.')+1:]
 	oldBases, bases := pysurface.Bases(a.Surface[parentOf(k)].Signature), pysurface.Bases(cls.Signature)
 	if !slices.Equal(oldBases, bases) {
-		return fmt.Sprintf("its class's bases changed (%s to %s)", strings.Join(oldBases, ", "), strings.Join(bases, ", "))
+		return fmt.Sprintf("its class's bases changed (%s to %s)", strings.Join(oldBases, ", "), strings.Join(bases, ", ")), ""
 	}
 	if own, ok := b.Classes[className(cls.Signature)]; ok && slices.Contains(own.Members, name) {
-		return "its class still defines the name (now an attribute)"
+		return "its class still defines the name (now an attribute)", ""
 	}
 	if b.Positional {
 		// TypeScript: a base class from another package isn't read, and
 		// may define it.
 		for _, base := range b.Classes[className(cls.Signature)].Bases {
 			if _, ours := b.Classes[base]; !ours {
-				return fmt.Sprintf("its class extends %s, from another package, which may define it", base)
+				return fmt.Sprintf("its class extends %s, from another package, which may define it", base), ""
 			}
 		}
 	}
@@ -553,11 +554,11 @@ func notGone(k string, before pysurface.Symbol, a, b Release) string {
 			continue // not the package's: unchanged, as the bases are
 		}
 		if slices.Contains(c.Members, name) {
-			return fmt.Sprintf("its base class %s defines it", base)
+			return fmt.Sprintf("its base class %s defines it", base), base
 		}
 		bases = append(bases, c.Bases...)
 	}
-	return ""
+	return "", ""
 }
 
 // className is "Completions" for "class Completions(SyncAPIResource): ...".
