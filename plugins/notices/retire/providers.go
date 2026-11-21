@@ -1,6 +1,9 @@
 package retire
 
-import "strings"
+import (
+	"regexp"
+	"strings"
+)
 
 // OpenAI's deprecations page (checked 2026-10-13). Its tables cover every
 // kind of model; these events are for the text models the Chat Completions
@@ -45,4 +48,26 @@ func openAIText(name string) bool {
 		}
 	}
 	return false
+}
+
+// googleModel is a model id as code sends it, nothing around it: a cell
+// with a footnote mark ("textembedding-gecko@003 *") isn't read.
+var googleModel = regexp.MustCompile(`^[a-z0-9][a-z0-9.@_-]*$`)
+
+// Gemini is the Gemini API's deprecations page (ai.google.dev, served by
+// aistudio.google.com as markdown, checked 2026-11-21): one Markdoc table per
+// model family, | Model | Release date | Shutdown date | Recommended
+// replacement |, current models with "No shutdown date announced", shut-down
+// ones under "Deprecated models". Every model there is one code names in a
+// request (text, image, video, audio, embedding: all through the same SDK);
+// the managed agents' tables name an agent, not a model, and are skipped.
+// Google says its dates are the earliest a model may be shut down.
+var Gemini = Page{
+	API:      "google/gemini-models",
+	Provider: "google",
+	Vendor:   "Google",
+	URL:      "https://aistudio.google.com/docs/deprecations",
+	Format:   FormatMarkdoc,
+	Keep:     googleModel.MatchString,
+	Earliest: true,
 }

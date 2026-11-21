@@ -76,6 +76,12 @@ func init() {
 			Watches: "Generative AI model deprecations on Vertex AI",
 			URLs:    []string{"https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml"},
 			Plugin:  Plugin{Page: feed.VertexAIModels, Archiver: kit.Wayback{}},
+		}, {
+			ID: "gemini-models", Layer: plugin.LayerAIModels, Page: "providers/google-gemini-models.md",
+			Watches:  "Gemini API model shutdown dates (the earliest Google gives) and their replacements, from Google's own deprecations table",
+			URLs:     []string{"https://ai.google.dev/gemini-api/docs/deprecations", "https://aistudio.google.com/docs/deprecations"},
+			Packages: []string{"pypi:google-genai", "npm:@google/genai"},
+			Plugin:   Plugin{Page: retire.Gemini, Archiver: kit.Wayback{}},
 		}},
 	})
 	plugin.RegisterProvider(plugin.Provider{

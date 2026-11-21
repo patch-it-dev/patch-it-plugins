@@ -3,11 +3,15 @@
 // OpenAPI differ. There is no spec to diff, only the provider's own table of
 // shutdown date, model and named replacement, so this reads the table.
 //
-// Both providers serve the page as markdown at its URL plus ".md" (checked
-// 2026-10-13), and both write each announcement as a table whose first column
-// is the date the model stops working. The event cites a Wayback Machine
-// snapshot of that markdown (kit/), never the live page: the contract
-// requires a source that can't change under the event.
+// A page is a Markdown pipe table (OpenAI's and Anthropic's pages, served as
+// markdown at their URL plus ".md", checked 2026-10-13), a Markdoc table
+// (Google's Gemini API page, {% table %} with one "* cell" per line, checked
+// 2026-11-21), read into pipe rows first, with its headings, so one parser
+// reads every page. A table is a retirement
+// table when it has a shutdown or retirement date column, a model column and
+// a replacement column, in any order. The event cites a Wayback Machine
+// snapshot of the page (kit/), never the live page: the contract requires a
+// source that can't change under the event.
 package retire
 
 import (
@@ -25,11 +29,26 @@ type Page struct {
 	API      string // the source id the events carry: "openai/models"
 	Provider string // the model subject's provider: "openai"
 	Vendor   string // for sentences: "OpenAI"
-	URL      string // the page as markdown
+	URL      string // the page, as markdown
+	// Format is how the page writes its tables: Markdown pipe tables (the
+	// default), Markdoc or HTML.
+	Format Format
 	// Keep says whether a model name belongs to this source: the operations
 	// above take text models, not image, audio or embedding ones.
 	Keep func(name string) bool
+	// Earliest says the page's dates are the earliest a model may be shut
+	// down, not the day it is (Google's Gemini API page): the description
+	// says so.
+	Earliest bool
 }
+
+// Format is how a page writes its tables.
+type Format string
+
+const (
+	FormatMarkdown Format = ""
+	FormatMarkdoc  Format = "markdoc"
+)
 
 // Retirement is one model name the provider stops serving on Date, with the
 // replacement it names. An alias gets its own Retirement, with the row it
@@ -47,6 +66,16 @@ var (
 	ticked     = regexp.MustCompile("`([^`]+)`")
 )
 
+// Pipes is the page's tables as Markdown pipe tables, each under the
+// heading above it: the page itself when it's Markdown.
+func (f Format) Pipes(page []byte) []byte {
+	switch f {
+	case FormatMarkdoc:
+		return markdocPipes(page)
+	}
+	return page
+}
+
 var dateLayouts = []string{"January 2, 2006", "Jan 2, 2006", "2006-01-02"}
 
 // Parse reads every retirement table on the page. A model listed more than
@@ -57,6 +86,7 @@ var dateLayouts = []string{"January 2, 2006", "Jan 2, 2006", "2006-01-02"}
 // points at a model that no longer works.
 func Parse(page []byte, keep func(string) bool) ([]Retirement, error) {
 	lines := strings.Split(strings.ReplaceAll(string(page), "\r\n", "\n"), "\n")
+	headerAt := 0
 	var out []Retirement
 	seen := map[string]bool{}
 	heading := ""
@@ -67,23 +97,31 @@ func Parse(page []byte, keep func(string) bool) ([]Retirement, error) {
 			continue
 		}
 		header := cells(line)
-		if len(header) < 3 || !dateHeader.MatchString(header[0]) {
+		when := -1
+		for c, h := range header {
+			if dateHeader.MatchString(h) {
+				when = c
+				break
+			}
+		}
+		if len(header) < 3 || when < 0 {
 			continue
 		}
-		model, repl := column(header, "model"), column(header, "replacement", "substitute")
-		if model < 0 || repl < 0 {
-			continue // an endpoint ("System") or a training-price table: no model to replace
+		model, repl := column(header, "model"), column(header, "replacement", "substitute", "upgrade")
+		if model < 0 || repl < 0 || model == repl {
+			continue // an endpoint ("System"), an agent or a training-price table: no model to replace
 		}
+		headerAt = i
 		i++ // the |---| row
 		for i+1 < len(lines) && strings.HasPrefix(strings.TrimSpace(lines[i+1]), "|") {
 			i++
 			row := strings.TrimSpace(lines[i])
 			c := cells(row)
-			if len(c) <= model || len(c) <= repl {
+			if len(c) <= model || len(c) <= repl || len(c) <= when {
 				return nil, fmt.Errorf("a short row under %q: %s", heading, row)
 			}
 			names := ticked.FindAllStringSubmatch(c[model], -1)
-			date, err := parseDate(c[0])
+			date, err := parseDate(c[when])
 			if err != nil {
 				// "To be announced": not a retirement yet, and the newer word on
 				// these names, so an older row's date for them doesn't count.
@@ -92,7 +130,7 @@ func Parse(page []byte, keep func(string) bool) ([]Retirement, error) {
 				}
 				continue
 			}
-			excerpt := strings.Join([]string{heading, strings.TrimSpace(lines[headerLine(lines, i)]), row}, "\n")
+			excerpt := strings.Join([]string{heading, strings.TrimSpace(lines[headerAt]), row}, "\n")
 			for _, m := range names {
 				name := m[1]
 				if seen[name] || !keep(name) {
@@ -108,14 +146,6 @@ func Parse(page []byte, keep func(string) bool) ([]Retirement, error) {
 	}
 	follow(out)
 	return out, nil
-}
-
-// headerLine walks back from a row to its table's header.
-func headerLine(lines []string, i int) int {
-	for i > 0 && strings.HasPrefix(strings.TrimSpace(lines[i-1]), "|") {
-		i--
-	}
-	return i
 }
 
 // follow replaces a replacement that is itself retired with its own
@@ -173,8 +203,8 @@ func cells(row string) []string {
 }
 
 func column(header []string, words ...string) int {
-	for i, h := range header {
-		for _, w := range words {
+	for _, w := range words {
+		for i, h := range header {
 			if strings.Contains(strings.ToLower(h), w) {
 				return i
 			}
@@ -211,7 +241,7 @@ func Events(p Page, rs []Retirement, sourceURL string, now time.Time) ([]event.E
 			ChangeType:    event.ChangeTypeBreaking,
 			Breaking:      true,
 			Subject:       subject,
-			Description:   fmt.Sprintf("Model %q is shut down on %s: %s requests naming it fail from that date.", r.Model, r.Date, p.Vendor),
+			Description:   describe(p, r),
 			MigrationHint: h,
 			SourceURL:     sourceURL,
 			SourceExcerpt: r.Excerpt,
@@ -225,6 +255,13 @@ func Events(p Page, rs []Retirement, sourceURL string, now time.Time) ([]event.E
 		events = append(events, e)
 	}
 	return events, errs
+}
+
+func describe(p Page, r Retirement) string {
+	if p.Earliest {
+		return fmt.Sprintf("Model %q can be shut down from %s, the earliest date %s gives: %s requests naming it fail once it is.", r.Model, r.Date, p.Vendor, p.Vendor)
+	}
+	return fmt.Sprintf("Model %q is shut down on %s: %s requests naming it fail from that date.", r.Model, r.Date, p.Vendor)
 }
 
 // replacement is the one model the provider names, when its replacement cell
@@ -242,6 +279,9 @@ func replacement(cell string) string {
 
 func hint(vendor string, r Retirement) string {
 	repl := strings.TrimSpace(r.Replacement)
+	if repl == "" {
+		return fmt.Sprintf("%s names no replacement model.", vendor)
+	}
 	if First(repl) == "" {
 		return fmt.Sprintf("%s names no replacement model: %s", vendor, repl)
 	}

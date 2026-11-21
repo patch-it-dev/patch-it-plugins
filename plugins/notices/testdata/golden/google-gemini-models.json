@@ -1,0 +1,1072 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:caea2393099a2cf5bdbb0fbc226f25dfe2dfce8afb3267eec5faf86162821f2c",
+    "api": "google/gemini-models",
+    "version": "2027-05-07",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-3.1-flash-lite",
+      "replacement": "gemini-3.5-flash-lite"
+    },
+    "description": "Model \"gemini-3.1-flash-lite\" can be shut down from 2027-05-07, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-3.5-flash-lite` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "## Gemini 3 models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-3.1-flash-lite` | May 7, 2026 | May 7, 2027 | `gemini-3.5-flash-lite` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:8858145e5f4653df2466841a60dc2868c6f426c5af9150f55afc1fda77513773",
+    "api": "google/gemini-models",
+    "version": "2026-12-18",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-3.1-flash-tts-preview"
+    },
+    "description": "Model \"gemini-3.1-flash-tts-preview\" can be shut down from 2026-12-18, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-3.8-flash-tts` or `gemini-3.8-flash-lite-tts` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Preview models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-3.1-flash-tts-preview` | February 26, 2026 | December 18, 2026 | `gemini-3.8-flash-tts` or `gemini-3.8-flash-lite-tts` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:0cac57f7a4434d25aae59532745358c6f44758d0c4ddf897a2927a170b6dbf28",
+    "api": "google/gemini-models",
+    "version": "2026-03-09",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-3-pro-preview",
+      "replacement": "gemini-3.1-pro-preview"
+    },
+    "description": "Model \"gemini-3-pro-preview\" can be shut down from 2026-03-09, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-3.1-pro-preview` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-3-pro-preview` | November 18, 2025 | March 9, 2026 | `gemini-3.1-pro-preview` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:3f4158206697b71cbe0dbbe74a52310d52e6f44033349189349d8d8128e59336",
+    "api": "google/gemini-models",
+    "version": "2026-05-25",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-3.1-flash-lite-preview",
+      "replacement": "gemini-3.5-flash-lite"
+    },
+    "description": "Model \"gemini-3.1-flash-lite-preview\" can be shut down from 2026-05-25, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-3.5-flash-lite` instead: Google's recommended replacement. (Google first named gemini-3.1-flash-lite, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-3.1-flash-lite-preview` | March 3, 2026 | May 25, 2026 | `gemini-3.1-flash-lite` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:871f6f3d545e0f3bf03421077213fe06548c79e9e8ddf9954d79b95e15adc17d",
+    "api": "google/gemini-models",
+    "version": "2026-12-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.5-pro"
+    },
+    "description": "Model \"gemini-2.5-pro\" can be shut down from 2026-12-01, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-3.8-flash` (`gemini-2.5-pro` is no longer available in Google AI Studio; effective December 1, 2026, API requests to `gemini-2.5-pro` will automatically route to `gemini-3.8-flash`) instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "## Gemini 2.5 Pro models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-2.5-pro` | June 17, 2025 | December 1, 2026 | `gemini-3.8-flash` (`gemini-2.5-pro` is no longer available in Google AI Studio; effective December 1, 2026, API requests to `gemini-2.5-pro` will automatically route to `gemini-3.8-flash`) |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:c02264b3e06bca3097caafa91d4a6dada49368e16d087f58ff1debbffc121a43",
+    "api": "google/gemini-models",
+    "version": "2026-07-28",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.5-computer-use-preview-10-2025",
+      "replacement": "gemini-3.8-flash"
+    },
+    "description": "Model \"gemini-2.5-computer-use-preview-10-2025\" can be shut down from 2026-07-28, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-3.8-flash` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-2.5-computer-use-preview-10-2025` | October 7, 2025 | July 28, 2026 | `gemini-3.8-flash` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:2adc7a8dfc6a692ee12da231f25be750326a077e9b3cd26aa82764f23aa6acd2",
+    "api": "google/gemini-models",
+    "version": "2025-12-02",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.5-pro-preview-03-25",
+      "replacement": "gemini-3.8-flash"
+    },
+    "description": "Model \"gemini-2.5-pro-preview-03-25\" can be shut down from 2025-12-02, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-3.8-flash` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-2.5-pro-preview-03-25` | March 3, 2025 | December 2, 2025 | `gemini-3.8-flash` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
+    "fingerprint": "sha256:b225c413ec1d91b929eb2d7124814f928b9b04e18a9f08611c5fbfcf08e0a0e0",
+    "api": "google/gemini-models",
+    "version": "2025-12-02",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.5-pro-preview-05-06",
+      "replacement": "gemini-3.8-flash"
+    },
+    "description": "Model \"gemini-2.5-pro-preview-05-06\" can be shut down from 2025-12-02, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-3.8-flash` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-2.5-pro-preview-05-06` | May 6, 2025 | December 2, 2025 | `gemini-3.8-flash` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 9,
+    "fingerprint": "sha256:4c2be4641bb22e1ae2d4c3b95da03ca363cd5e488a394cca4bc001f8915a835b",
+    "api": "google/gemini-models",
+    "version": "2025-12-02",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.5-pro-preview-06-05",
+      "replacement": "gemini-3.8-flash"
+    },
+    "description": "Model \"gemini-2.5-pro-preview-06-05\" can be shut down from 2025-12-02, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-3.8-flash` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-2.5-pro-preview-06-05` | June 5, 2025 | December 2, 2025 | `gemini-3.8-flash` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 10,
+    "fingerprint": "sha256:60b751f9d3e759c519bbcabec3139c1de457129e71ed1ed966711f60af5374e1",
+    "api": "google/gemini-models",
+    "version": "2026-12-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.5-flash"
+    },
+    "description": "Model \"gemini-2.5-flash\" can be shut down from 2026-12-01, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-3.5-flash-lite` (`gemini-2.5-flash` is no longer available in Google AI Studio; effective December 1, 2026, API requests to `gemini-2.5-flash` will automatically route to `gemini-3.5-flash-lite`) instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "## Gemini 2.5 Flash models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-2.5-flash` | June 17, 2025 | December 1, 2026 | `gemini-3.5-flash-lite` (`gemini-2.5-flash` is no longer available in Google AI Studio; effective December 1, 2026, API requests to `gemini-2.5-flash` will automatically route to `gemini-3.5-flash-lite`) |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 11,
+    "fingerprint": "sha256:b6d458a69ba2b51781274669929bebda33e4bebcf1927c1f63e23022386b265a",
+    "api": "google/gemini-models",
+    "version": "2026-03-31",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.5-flash-lite-preview-09-2025",
+      "replacement": "gemini-3.5-flash-lite"
+    },
+    "description": "Model \"gemini-2.5-flash-lite-preview-09-2025\" can be shut down from 2026-03-31, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-3.5-flash-lite` instead: Google's recommended replacement. (Google first named gemini-3.1-flash-lite, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-2.5-flash-lite-preview-09-2025` | September 25, 2025 | March 31, 2026 | `gemini-3.1-flash-lite` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 12,
+    "fingerprint": "sha256:b81dc7696b0da57fbd358d29f47d03a65f8ae9260049cf302d1bd6b4a7098bf3",
+    "api": "google/gemini-models",
+    "version": "2025-11-18",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.5-flash-preview-05-20",
+      "replacement": "gemini-3.6-flash"
+    },
+    "description": "Model \"gemini-2.5-flash-preview-05-20\" can be shut down from 2025-11-18, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-3.6-flash` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-2.5-flash-preview-05-20` | May 20, 2025 | November 18, 2025 | `gemini-3.6-flash` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 13,
+    "fingerprint": "sha256:8571eb750e46025a2b5ae4d0d645c01e1db00df8ffaa3ffae4a10a1f163d96b6",
+    "api": "google/gemini-models",
+    "version": "2026-02-17",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.5-flash-preview-09-2025",
+      "replacement": "gemini-3.6-flash"
+    },
+    "description": "Model \"gemini-2.5-flash-preview-09-2025\" can be shut down from 2026-02-17, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-3.6-flash` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-2.5-flash-preview-09-2025` | September 25, 2025 | February 17, 2026 | `gemini-3.6-flash` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 14,
+    "fingerprint": "sha256:856205baa026aae1af080949fbba2a7272d91ad3467927e12bc533e6d318fe3e",
+    "api": "google/gemini-models",
+    "version": "2026-06-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.0-flash",
+      "replacement": "gemini-3.6-flash"
+    },
+    "description": "Model \"gemini-2.0-flash\" can be shut down from 2026-06-01, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-3.6-flash` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-2.0-flash` | February 5, 2025 | June 1, 2026 | `gemini-3.6-flash` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 15,
+    "fingerprint": "sha256:83b2140ac7dce78acb6a4338e680fefed3069e978f060b707b965b078746b345",
+    "api": "google/gemini-models",
+    "version": "2026-06-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.0-flash-001",
+      "replacement": "gemini-3.6-flash"
+    },
+    "description": "Model \"gemini-2.0-flash-001\" can be shut down from 2026-06-01, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-3.6-flash` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-2.0-flash-001` | February 5, 2025 | June 1, 2026 | `gemini-3.6-flash` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 16,
+    "fingerprint": "sha256:606afbea818c0aa70a918ce8a161373fc742c491a4c591180ce32e582e7271a6",
+    "api": "google/gemini-models",
+    "version": "2026-06-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.0-flash-lite",
+      "replacement": "gemini-3.5-flash-lite"
+    },
+    "description": "Model \"gemini-2.0-flash-lite\" can be shut down from 2026-06-01, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-3.5-flash-lite` instead: Google's recommended replacement. (Google first named gemini-3.1-flash-lite, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-2.0-flash-lite` | February 25, 2025 | June 1, 2026 | `gemini-3.1-flash-lite` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 17,
+    "fingerprint": "sha256:c46f075bda7582cef7ad8fb25fda10b4412029124b68f67aa3aae129cb26fb54",
+    "api": "google/gemini-models",
+    "version": "2026-06-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.0-flash-lite-001",
+      "replacement": "gemini-3.5-flash-lite"
+    },
+    "description": "Model \"gemini-2.0-flash-lite-001\" can be shut down from 2026-06-01, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-3.5-flash-lite` instead: Google's recommended replacement. (Google first named gemini-3.1-flash-lite, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-2.0-flash-lite-001` | February 25, 2025 | June 1, 2026 | `gemini-3.1-flash-lite` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 18,
+    "fingerprint": "sha256:f33c6d97b86cb936d566061674c549260c611d3084532190e53ede81a667cb64",
+    "api": "google/gemini-models",
+    "version": "2025-12-09",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.0-flash-lite-preview",
+      "replacement": "gemini-3.5-flash-lite"
+    },
+    "description": "Model \"gemini-2.0-flash-lite-preview\" can be shut down from 2025-12-09, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-3.5-flash-lite` instead: Google's recommended replacement. (Google first named gemini-3.1-flash-lite, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-2.0-flash-lite-preview` | February 5, 2025 | December 9, 2025 | `gemini-3.1-flash-lite` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 19,
+    "fingerprint": "sha256:1905e464a0c97bc4e0adc0812fe8f9e578f239fe86d263dbd8ea112ecd669cf8",
+    "api": "google/gemini-models",
+    "version": "2025-12-09",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.0-flash-lite-preview-02-05",
+      "replacement": "gemini-3.5-flash-lite"
+    },
+    "description": "Model \"gemini-2.0-flash-lite-preview-02-05\" can be shut down from 2025-12-09, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-3.5-flash-lite` instead: Google's recommended replacement. (Google first named gemini-3.1-flash-lite, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-2.0-flash-lite-preview-02-05` | February 5, 2025 | December 9, 2025 | `gemini-3.1-flash-lite` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 20,
+    "fingerprint": "sha256:7b91dbf1e5b957702a1f2e048ff346070c9765f96ec23c6cf018562a7391c15f",
+    "api": "google/gemini-models",
+    "version": "2027-03-31",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.5-flash-native-audio-preview-12-2025",
+      "replacement": "gemini-3.8-live"
+    },
+    "description": "Model \"gemini-2.5-flash-native-audio-preview-12-2025\" can be shut down from 2027-03-31, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-3.8-live` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Preview models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-2.5-flash-native-audio-preview-12-2025` | December 12, 2025 | March 31, 2027 | `gemini-3.8-live` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 21,
+    "fingerprint": "sha256:b3d90322199ab4367fc8eba144f8cd88b5a5c3b786a7374d159a2332d9f5244c",
+    "api": "google/gemini-models",
+    "version": "2025-12-09",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-live-2.5-flash-preview",
+      "replacement": "gemini-3.8-live"
+    },
+    "description": "Model \"gemini-live-2.5-flash-preview\" can be shut down from 2025-12-09, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-3.8-live` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-live-2.5-flash-preview` | June 17, 2025 | December 9, 2025 | `gemini-3.8-live` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 22,
+    "fingerprint": "sha256:840b70b0db6e2eb215e8266fe0105f25a0855d32aba42a776523c0fd0d8a4e52",
+    "api": "google/gemini-models",
+    "version": "2025-12-09",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.0-flash-live-001",
+      "replacement": "gemini-3.8-live"
+    },
+    "description": "Model \"gemini-2.0-flash-live-001\" can be shut down from 2025-12-09, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-3.8-live` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-2.0-flash-live-001` | April 9, 2025 | December 9, 2025 | `gemini-3.8-live` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 23,
+    "fingerprint": "sha256:a6a20dbe9b625f444a1644e3c8ccbce9a63ebfa4e039393c75633c8ca4b13974",
+    "api": "google/gemini-models",
+    "version": "2026-12-18",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.5-flash-preview-tts"
+    },
+    "description": "Model \"gemini-2.5-flash-preview-tts\" can be shut down from 2026-12-18, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-3.8-flash-tts` or `gemini-3.8-flash-lite-tts` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Preview models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-2.5-flash-preview-tts` | May 20, 2025 | December 18, 2026 | `gemini-3.8-flash-tts` or `gemini-3.8-flash-lite-tts` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 24,
+    "fingerprint": "sha256:8bc72c3cc1260e614977f305a2c61bee114dd67ec702fff60f09a036232e2a97",
+    "api": "google/gemini-models",
+    "version": "2026-12-18",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.5-pro-preview-tts"
+    },
+    "description": "Model \"gemini-2.5-pro-preview-tts\" can be shut down from 2026-12-18, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-3.8-flash-tts` or `gemini-3.8-flash-lite-tts` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Preview models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-2.5-pro-preview-tts` | May 20, 2025 | December 18, 2026 | `gemini-3.8-flash-tts` or `gemini-3.8-flash-lite-tts` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 25,
+    "fingerprint": "sha256:6c676c8e23b7b1d9db5de5e998a741c6fbac7dc2c2bf1929b647e7f6cf680542",
+    "api": "google/gemini-models",
+    "version": "2028-05-14",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-embedding-001",
+      "replacement": "gemini-embedding-2"
+    },
+    "description": "Model \"gemini-embedding-001\" can be shut down from 2028-05-14, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-embedding-2` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "## Embedding models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-embedding-001` | July 14, 2025 | May 14, 2028 | `gemini-embedding-2` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 26,
+    "fingerprint": "sha256:f78e21e24ec4d3f9122c2631190b6b92736ec1bd89010b63b209bf2507daf953",
+    "api": "google/gemini-models",
+    "version": "2026-11-06",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-embedding-2-preview"
+    },
+    "description": "Model \"gemini-embedding-2-preview\" can be shut down from 2026-11-06, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-embedding-2` (effective November 6, 2026, API requests to `gemini-embedding-2-preview` route to `gemini-embedding-2`) instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-embedding-2-preview` | March 10, 2026 | November 6, 2026 | `gemini-embedding-2` (effective November 6, 2026, API requests to `gemini-embedding-2-preview` route to `gemini-embedding-2`) |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 27,
+    "fingerprint": "sha256:0a968f052281aeb0c8cd71d3a92db497be8040686f23c3d592f6406aea39d68f",
+    "api": "google/gemini-models",
+    "version": "2026-01-14",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "text-embedding-004",
+      "replacement": "gemini-embedding-2"
+    },
+    "description": "Model \"text-embedding-004\" can be shut down from 2026-01-14, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-embedding-2` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `text-embedding-004` | April 9, 2024 | January 14, 2026 | `gemini-embedding-2` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 28,
+    "fingerprint": "sha256:d1332b877be37336a413687d6be1480cf66dcfb3369101147a88c216a58e0736",
+    "api": "google/gemini-models",
+    "version": "2025-10-30",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "embedding-001",
+      "replacement": "gemini-embedding-2"
+    },
+    "description": "Model \"embedding-001\" can be shut down from 2025-10-30, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-embedding-2` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `embedding-001` | April 9, 2024 | October 30, 2025 | `gemini-embedding-2` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 29,
+    "fingerprint": "sha256:9961f36c881a0bdf2d339315acd7895323e3b4672b0957436987f3b1c8296b2f",
+    "api": "google/gemini-models",
+    "version": "2025-10-30",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "embedding-gecko-001",
+      "replacement": "gemini-embedding-2"
+    },
+    "description": "Model \"embedding-gecko-001\" can be shut down from 2025-10-30, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-embedding-2` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `embedding-gecko-001` |  | October 30, 2025 | `gemini-embedding-2` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 30,
+    "fingerprint": "sha256:49b126de93982f83c2ee88f884ad720f1d0921206dae42f5826227db76af68ee",
+    "api": "google/gemini-models",
+    "version": "2025-10-30",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-embedding-exp",
+      "replacement": "gemini-embedding-2"
+    },
+    "description": "Model \"gemini-embedding-exp\" can be shut down from 2025-10-30, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-embedding-2` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-embedding-exp` |  | October 30, 2025 | `gemini-embedding-2` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 31,
+    "fingerprint": "sha256:ef27905e81e0ee48ec07d4669a42ea6ce0dd785a7f85033d7e1d34d7bf411b94",
+    "api": "google/gemini-models",
+    "version": "2025-10-30",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-embedding-exp-03-07",
+      "replacement": "gemini-embedding-2"
+    },
+    "description": "Model \"gemini-embedding-exp-03-07\" can be shut down from 2025-10-30, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-embedding-2` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-embedding-exp-03-07` |  | October 30, 2025 | `gemini-embedding-2` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 32,
+    "fingerprint": "sha256:acc61a0a44b398c42fb63c271aa2163a03749d76b12932f561f303c4981ae96e",
+    "api": "google/gemini-models",
+    "version": "2027-03-15",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.5-flash-image",
+      "replacement": "gemini-3.1-flash-lite-image"
+    },
+    "description": "Model \"gemini-2.5-flash-image\" can be shut down from 2027-03-15, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-3.1-flash-lite-image` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "## Nano Banana models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-2.5-flash-image` | October 2, 2025 | March 15, 2027 | `gemini-3.1-flash-lite-image` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 33,
+    "fingerprint": "sha256:352f204e72c7ab36bb05cb742c9edee87f1589930ece2bc90ffbb851c443aba7",
+    "api": "google/gemini-models",
+    "version": "2026-06-25",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-3.1-flash-image-preview",
+      "replacement": "gemini-nano-banana-2.1"
+    },
+    "description": "Model \"gemini-3.1-flash-image-preview\" can be shut down from 2026-06-25, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-nano-banana-2.1` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-3.1-flash-image-preview` | February 26, 2026 | June 25, 2026 | `gemini-nano-banana-2.1` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 34,
+    "fingerprint": "sha256:1d09afffb5768ce989c65f94befc597bdba8a13131ad7c2cc139741a1b39bf56",
+    "api": "google/gemini-models",
+    "version": "2026-06-25",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-3-pro-image-preview",
+      "replacement": "gemini-3-pro-image"
+    },
+    "description": "Model \"gemini-3-pro-image-preview\" can be shut down from 2026-06-25, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-3-pro-image` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-3-pro-image-preview` | November 20, 2025 | June 25, 2026 | `gemini-3-pro-image` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 35,
+    "fingerprint": "sha256:9132c7b110d46a16200f6541ece38bcbe0748e75d36c1bd3586eab10398fbe37",
+    "api": "google/gemini-models",
+    "version": "2026-01-15",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.5-flash-image-preview",
+      "replacement": "gemini-nano-banana-2.1"
+    },
+    "description": "Model \"gemini-2.5-flash-image-preview\" can be shut down from 2026-01-15, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-nano-banana-2.1` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-2.5-flash-image-preview` | May 7, 2025 | January 15, 2026 | `gemini-nano-banana-2.1` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 36,
+    "fingerprint": "sha256:c42e560875145b4013adeac0199e6ee63421d16e345ee97c023565710c4f3215",
+    "api": "google/gemini-models",
+    "version": "2025-11-14",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.0-flash-preview-image-generation",
+      "replacement": "gemini-nano-banana-2.1"
+    },
+    "description": "Model \"gemini-2.0-flash-preview-image-generation\" can be shut down from 2025-11-14, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-nano-banana-2.1` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-2.0-flash-preview-image-generation` | May 7, 2025 | November 14, 2025 | `gemini-nano-banana-2.1` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 37,
+    "fingerprint": "sha256:c889c0a9533b444eda90a0d8d057d30a837941242dfaa095a5378027d6579654",
+    "api": "google/gemini-models",
+    "version": "2026-08-17",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagen-4.0-generate-001",
+      "replacement": "gemini-nano-banana-2.1"
+    },
+    "description": "Model \"imagen-4.0-generate-001\" can be shut down from 2026-08-17, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-nano-banana-2.1` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `imagen-4.0-generate-001` | June 24, 2025 | August 17, 2026 | `gemini-nano-banana-2.1` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 38,
+    "fingerprint": "sha256:b65d181909243d2cfdbcf4a81fea4fa279eacdb61e776b235685042b1d273da4",
+    "api": "google/gemini-models",
+    "version": "2026-08-17",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagen-4.0-ultra-generate-001",
+      "replacement": "gemini-nano-banana-2.1"
+    },
+    "description": "Model \"imagen-4.0-ultra-generate-001\" can be shut down from 2026-08-17, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-nano-banana-2.1` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `imagen-4.0-ultra-generate-001` | June 24, 2025 | August 17, 2026 | `gemini-nano-banana-2.1` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 39,
+    "fingerprint": "sha256:8a703192637bc96b8f7a341b9ef30531bd5bb58dd26c89e4fd938dd9834daaa4",
+    "api": "google/gemini-models",
+    "version": "2026-08-17",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagen-4.0-fast-generate-001",
+      "replacement": "gemini-nano-banana-2.1"
+    },
+    "description": "Model \"imagen-4.0-fast-generate-001\" can be shut down from 2026-08-17, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-nano-banana-2.1` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `imagen-4.0-fast-generate-001` | June 24, 2025 | August 17, 2026 | `gemini-nano-banana-2.1` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 40,
+    "fingerprint": "sha256:03f79598c1d1c60b2390af7583c7346dc18c2cacc9116a52d1d1e4f575c6d070",
+    "api": "google/gemini-models",
+    "version": "2026-02-17",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagen-4.0-generate-preview-06-06",
+      "replacement": "gemini-nano-banana-2.1"
+    },
+    "description": "Model \"imagen-4.0-generate-preview-06-06\" can be shut down from 2026-02-17, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-nano-banana-2.1` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `imagen-4.0-generate-preview-06-06` | June 24, 2025 | February 17, 2026 | `gemini-nano-banana-2.1` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 41,
+    "fingerprint": "sha256:4e1ece623c8fc9d8f782fc8b9c1bc5c27904204d0cffa5e5369098ba245124e1",
+    "api": "google/gemini-models",
+    "version": "2026-02-17",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagen-4.0-ultra-generate-preview-06-06",
+      "replacement": "gemini-nano-banana-2.1"
+    },
+    "description": "Model \"imagen-4.0-ultra-generate-preview-06-06\" can be shut down from 2026-02-17, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-nano-banana-2.1` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `imagen-4.0-ultra-generate-preview-06-06` | June 24, 2025 | February 17, 2026 | `gemini-nano-banana-2.1` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 42,
+    "fingerprint": "sha256:7855e31da95e666c348f96b9ccfbc5e353c3c0c0713553ddbae260d29ebded13",
+    "api": "google/gemini-models",
+    "version": "2025-11-10",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagen-3.0-generate-002",
+      "replacement": "gemini-nano-banana-2.1"
+    },
+    "description": "Model \"imagen-3.0-generate-002\" can be shut down from 2025-11-10, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-nano-banana-2.1` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `imagen-3.0-generate-002` | February 6, 2025 | November 10, 2025 | `gemini-nano-banana-2.1` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 43,
+    "fingerprint": "sha256:f4406ae5b26f233d65b6f39e0a4c99868f125bbea55dc703938ca776d8ec633b",
+    "api": "google/gemini-models",
+    "version": "2026-10-22",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "veo-3.1-lite-generate-preview",
+      "replacement": "gemini-omni-1.2-flash"
+    },
+    "description": "Model \"veo-3.1-lite-generate-preview\" can be shut down from 2026-10-22, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-omni-1.2-flash` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `veo-3.1-lite-generate-preview` | March 31, 2026 | October 22, 2026 | `gemini-omni-1.2-flash` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 44,
+    "fingerprint": "sha256:8554aabbaf268ea7946f6a3e686c1157fbff2a57997d35773f1fbf46bec5afc0",
+    "api": "google/gemini-models",
+    "version": "2026-10-22",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "veo-3.1-generate-preview",
+      "replacement": "gemini-omni-1.2-flash"
+    },
+    "description": "Model \"veo-3.1-generate-preview\" can be shut down from 2026-10-22, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-omni-1.2-flash` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `veo-3.1-generate-preview` | October 15, 2025 | October 22, 2026 | `gemini-omni-1.2-flash` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 45,
+    "fingerprint": "sha256:0a83cb678a880fb7254c61aec5e1b0e0ba19aa5435d956156d5459eddbe9be4c",
+    "api": "google/gemini-models",
+    "version": "2026-10-22",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "veo-3.1-fast-generate-preview",
+      "replacement": "gemini-omni-1.2-flash"
+    },
+    "description": "Model \"veo-3.1-fast-generate-preview\" can be shut down from 2026-10-22, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-omni-1.2-flash` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `veo-3.1-fast-generate-preview` | October 15, 2025 | October 22, 2026 | `gemini-omni-1.2-flash` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 46,
+    "fingerprint": "sha256:9ae0db34527de17bb0383edde0172525ec9032cf2a5cdac0df7af07f7c303668",
+    "api": "google/gemini-models",
+    "version": "2026-06-30",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "veo-3.0-generate-001"
+    },
+    "description": "Model \"veo-3.0-generate-001\" can be shut down from 2026-06-30, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-omni-1.2-flash` or the GA models on the [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/veo/3-1-generate) instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `veo-3.0-generate-001` | September 9, 2025 | June 30, 2026 | `gemini-omni-1.2-flash` or the GA models on the [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/veo/3-1-generate) |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 47,
+    "fingerprint": "sha256:3a692dac54bbd0875feefbf6a8135be447fa904017da920eb1dc6d30e0f1d86a",
+    "api": "google/gemini-models",
+    "version": "2026-06-30",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "veo-3.0-fast-generate-001"
+    },
+    "description": "Model \"veo-3.0-fast-generate-001\" can be shut down from 2026-06-30, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-omni-1.2-flash` or the GA models on the [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/veo/3-1-generate) instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `veo-3.0-fast-generate-001` | September 9, 2025 | June 30, 2026 | `gemini-omni-1.2-flash` or the GA models on the [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/veo/3-1-generate) |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 48,
+    "fingerprint": "sha256:a394fe9fdeeb5a404f2c0b561439c7236477e7fc837927962ab3aa5db1f896d5",
+    "api": "google/gemini-models",
+    "version": "2026-06-30",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "veo-2.0-generate-001"
+    },
+    "description": "Model \"veo-2.0-generate-001\" can be shut down from 2026-06-30, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-omni-1.2-flash` or the GA models on the [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/veo/3-1-generate) instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `veo-2.0-generate-001` | April 9, 2025 | June 30, 2026 | `gemini-omni-1.2-flash` or the GA models on the [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/veo/3-1-generate) |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 49,
+    "fingerprint": "sha256:ab74adbe95ffded3bd489bbd60695d9d94948d636f8e60daac190561b6474a19",
+    "api": "google/gemini-models",
+    "version": "2025-11-12",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "veo-3.0-generate-preview",
+      "replacement": "gemini-omni-1.2-flash"
+    },
+    "description": "Model \"veo-3.0-generate-preview\" can be shut down from 2025-11-12, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-omni-1.2-flash` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `veo-3.0-generate-preview` | July 31, 2025 | November 12, 2025 | `gemini-omni-1.2-flash` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 50,
+    "fingerprint": "sha256:0f5636525a0226794daa38aa43146d185121082d0eac106e9d875b8b991d1b91",
+    "api": "google/gemini-models",
+    "version": "2025-11-12",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "veo-3.0-fast-generate-preview",
+      "replacement": "gemini-omni-1.2-flash"
+    },
+    "description": "Model \"veo-3.0-fast-generate-preview\" can be shut down from 2025-11-12, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-omni-1.2-flash` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `veo-3.0-fast-generate-preview` | July 31, 2025 | November 12, 2025 | `gemini-omni-1.2-flash` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 51,
+    "fingerprint": "sha256:32849db67ffe3564cf53e5d5b56a8536949a7fd3aa6cb28223c0bd8656ee4e7e",
+    "api": "google/gemini-models",
+    "version": "2026-12-03",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-omni-1.1-flash"
+    },
+    "description": "Model \"gemini-omni-1.1-flash\" can be shut down from 2026-12-03, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-omni-1.2-flash` (Effective December 3, 2026, the endpoint is automatically routing API requests to `gemini-omni-1.2-flash`) instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "## Gemini Omni Flash models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-omni-1.1-flash` | August 27, 2026 | December 3, 2026 | `gemini-omni-1.2-flash` (Effective December 3, 2026, the endpoint is automatically routing API requests to `gemini-omni-1.2-flash`) |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 52,
+    "fingerprint": "sha256:6b6d10f0220a8da62121f3ed15db742d6f8bbdd987db4671ee04709957275efc",
+    "api": "google/gemini-models",
+    "version": "2026-10-22",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-omni-flash-preview",
+      "replacement": "gemini-omni-1.2-flash"
+    },
+    "description": "Model \"gemini-omni-flash-preview\" can be shut down from 2026-10-22, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-omni-1.2-flash` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-omni-flash-preview` | June 30, 2026 | October 22, 2026 | `gemini-omni-1.2-flash` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 53,
+    "fingerprint": "sha256:54a233efe659c23ad8898c69d4d211f7e48aa36acbd16fadb14a3547a6f3daf4",
+    "api": "google/gemini-models",
+    "version": "2026-08-31",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-robotics-er-1.6-preview",
+      "replacement": "gemini-robotics-er-2-preview"
+    },
+    "description": "Model \"gemini-robotics-er-1.6-preview\" can be shut down from 2026-08-31, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-robotics-er-2-preview` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-robotics-er-1.6-preview` | April 14, 2026 | August 31, 2026 | `gemini-robotics-er-2-preview` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 54,
+    "fingerprint": "sha256:0a9481a7ed1278252e1175f2555423a03b83d4680e42f075558914f3ef3e2e5b",
+    "api": "google/gemini-models",
+    "version": "2026-04-30",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-robotics-er-1.5-preview",
+      "replacement": "gemini-robotics-er-2-preview"
+    },
+    "description": "Model \"gemini-robotics-er-1.5-preview\" can be shut down from 2026-04-30, the earliest date Google gives: Google requests naming it fail once it is.",
+    "migration_hint": "Use `gemini-robotics-er-2-preview` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://aistudio.google.com/docs/deprecations",
+    "source_excerpt": "### Deprecated models\n| Model | Release date | Shutdown date | Recommended replacement |\n| `gemini-robotics-er-1.5-preview` | September 25, 2025 | April 30, 2026 | `gemini-robotics-er-2-preview` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]
