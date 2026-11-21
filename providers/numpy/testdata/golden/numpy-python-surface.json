@@ -1,12 +1,57 @@
 [
   {
     "id": 1,
+    "fingerprint": "sha256:bc72212e81d0bc6f8fe35af624914699a1516e614c603b12d94a6fd97384e14d",
+    "api": "numpy/python-surface",
+    "version": "2.5.0",
+    "previous_version": "2.4.6",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "added_parameter",
+      "symbols": [
+        "generic.sort"
+      ],
+      "parameter": "descending"
+    },
+    "description": "`generic.sort` takes a new optional parameter `descending` in numpy 2.5.0.",
+    "source_url": "https://files.pythonhosted.org/packages/fa/0a/11486d02add7b1384dff7374d124b1cfbb0ee864dcc9f6a2c0380638cf84/numpy-2.5.0-cp312-cp312-macosx_10_13_x86_64.whl",
+    "source_excerpt": "numpy 2.4.6 (numpy-2.4.6-cp311-cp311-macosx_10_9_x86_64.whl), numpy/__init__.pyi line 3752: def sort(self: Never, /, axis: L[-1] = -1, kind: None = None, order: None = None, *, stable: None = None) -> Never\nnumpy 2.5.0 (numpy-2.5.0-cp312-cp312-macosx_10_13_x86_64.whl), numpy/__init__.pyi line 5073: def sort(self: Never, /, axis: L[-1] = -1, kind: None = None, order: None = None, *, stable: None = None, descending: None = None) -> Never",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:a9d44794ab4e4345eaea67108b3091d937ef1145fc2e8282ae139b7d9ec634a1",
+    "api": "numpy/python-surface",
+    "version": "2.5.0",
+    "previous_version": "2.4.6",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "added_parameter",
+      "symbols": [
+        "ndarray.sort"
+      ],
+      "parameter": "descending"
+    },
+    "description": "`ndarray.sort` takes a new optional parameter `descending` in numpy 2.5.0.",
+    "source_url": "https://files.pythonhosted.org/packages/fa/0a/11486d02add7b1384dff7374d124b1cfbb0ee864dcc9f6a2c0380638cf84/numpy-2.5.0-cp312-cp312-macosx_10_13_x86_64.whl",
+    "source_excerpt": "numpy 2.4.6 (numpy-2.4.6-cp311-cp311-macosx_10_9_x86_64.whl), numpy/__init__.pyi line 2469: def sort( self, /, axis: SupportsIndex = -1, kind: _SortKind | None = None, order: str | Sequence[str] | None = None, *, stable: builtins.bool | None = None, ) -> None\nnumpy 2.5.0 (numpy-2.5.0-cp312-cp312-macosx_10_13_x86_64.whl), numpy/__init__.pyi line 3737: def sort( self, /, axis: SupportsIndex = -1, kind: _SortKind | None = None, order: str | Sequence[str] | None = None, *, stable: py_bool | None = None, descending: py_bool | None = None, ) -> None",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
     "fingerprint": "sha256:c417046b5181068bc41250e19c47325f8d16824803101ca7f62ae01768842d63",
     "api": "numpy/python-surface",
     "version": "2.5.0",
     "previous_version": "2.4.6",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",

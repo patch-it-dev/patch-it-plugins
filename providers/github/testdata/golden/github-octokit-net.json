@@ -5,8 +5,7 @@
     "api": "github/octokit-net",
     "version": "0.5.2",
     "previous_version": "0.5.1",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "nuget",

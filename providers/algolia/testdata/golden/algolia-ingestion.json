@@ -1,12 +1,11 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:eb14278aa4735854c8fd3f33ffe3e5eb43d6e81f720547c68cf55f91f2eb51b8",
+    "fingerprint": "sha256:88a90f81f764d64b75cf56e34603acdbb7539f4975506773f795d00b31689c19",
     "api": "algolia/ingestion-api",
     "version": "2025-01-22",
     "previous_version": "2025-01-07",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -22,12 +21,11 @@
   },
   {
     "id": 2,
-    "fingerprint": "sha256:d6fbe2c5b1ed2baf0b7131551b5656fd7aed8b91490c6f4126fd4a42c9731478",
+    "fingerprint": "sha256:f36cbcb27d2600cbdcf6dac66e91467d2028c4415c752730f7e7bfc1d9859248",
     "api": "algolia/ingestion-api",
     "version": "2025-01-22",
     "previous_version": "2025-01-07",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -43,12 +41,11 @@
   },
   {
     "id": 3,
-    "fingerprint": "sha256:8e673e76d54e5b20644e0787cbf23af273057f0bf044f7cd29081d546ec2c96c",
+    "fingerprint": "sha256:1c387647bff35cc03f9592a16d3c09265ec429a6dc2bbffd32feb7f0882d458b",
     "api": "algolia/ingestion-api",
     "version": "2025-01-22",
     "previous_version": "2025-01-07",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -64,12 +61,11 @@
   },
   {
     "id": 4,
-    "fingerprint": "sha256:00482b2527330636337a1fa3e5f5319458f1ff185282d9d2d89b88fb71eea14d",
+    "fingerprint": "sha256:15a4df58d52fc5bb29b57384a9edea6a1737dffb4664ed56a5419f3793f667ca",
     "api": "algolia/ingestion-api",
     "version": "2025-01-22",
     "previous_version": "2025-01-07",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -85,12 +81,11 @@
   },
   {
     "id": 5,
-    "fingerprint": "sha256:9137e456a4e6480c5115bc5cabd4c07d3e8b90a4dc3bff54511c1cd20e93ead5",
+    "fingerprint": "sha256:b2bdf451ef084caf4d4bec21ea3b1a3afd62d1fb79e19fd43db341f943ac6cf2",
     "api": "algolia/ingestion-api",
     "version": "2025-01-22",
     "previous_version": "2025-01-07",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -106,12 +101,11 @@
   },
   {
     "id": 6,
-    "fingerprint": "sha256:2d0c4fd84ef9e0c4956b0572939c915ab7be8075ab296fe585b307fa65a7dee0",
+    "fingerprint": "sha256:24bdd5bad81200b6a903165144ae2c23395b4c7958989c2c6af648c60c91c169",
     "api": "algolia/ingestion-api",
     "version": "2025-01-22",
     "previous_version": "2025-01-07",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -127,12 +121,11 @@
   },
   {
     "id": 7,
-    "fingerprint": "sha256:b991f89f474625d83ef1733ba29bab9c9d63c6520a5e969610a1f7a06f3ae014",
+    "fingerprint": "sha256:4548b813797bb86280252696248f9949edfdc672f55ac0b796fb1c934f8f2fb7",
     "api": "algolia/ingestion-api",
     "version": "2025-01-22",
     "previous_version": "2025-01-07",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -148,12 +141,11 @@
   },
   {
     "id": 8,
-    "fingerprint": "sha256:dd4793d02c7b15e0a8469cd996a78d26e79a73684f2f620936a324c7da5761ca",
+    "fingerprint": "sha256:937f44c959bb50948c36f6b6881b36f487f4ef85c811aeb25b1229f05dee0b41",
     "api": "algolia/ingestion-api",
     "version": "2025-01-22",
     "previous_version": "2025-01-07",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",

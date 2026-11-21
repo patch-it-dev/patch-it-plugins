@@ -7,8 +7,7 @@
       "api": "anthropic/python-sdk",
       "version": "1.0.0",
       "previous_version": "0.125.0",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -34,8 +33,7 @@
       "api": "anthropic/python-sdk",
       "version": "1.0.0",
       "previous_version": "0.125.0",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -61,8 +59,7 @@
       "api": "anthropic/python-sdk",
       "version": "1.0.0",
       "previous_version": "0.125.0",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",

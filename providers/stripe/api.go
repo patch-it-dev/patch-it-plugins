@@ -27,8 +27,12 @@ var (
 // It has no state, so its zero value is ready to use.
 type Stripe struct{}
 
-// Compile-time check that Stripe actually satisfies Adapter.
-var _ adapter.Adapter = Stripe{}
+// Compile-time checks: Stripe is an adapter whose API versions are
+// re-released.
+var (
+	_ adapter.Adapter    = Stripe{}
+	_ adapter.Rereleased = Stripe{}
+)
 
 func (Stripe) API() string { return "stripe/api" }
 
@@ -82,31 +86,53 @@ var stripeSDKSpecVersion = regexp.MustCompile(`(?m)^\|\s*openapi/spec3\.sdk\.\{j
 // (Released). A release whose notes name no version (every one before v2191)
 // is left out: its version would have to be guessed.
 func (Stripe) Versions(ctx context.Context) ([]plugin.Version, error) {
+	byID, err := apiVersions(ctx)
+	if err != nil {
+		return nil, err
+	}
+	vs := make([]plugin.Version, 0, len(byID))
+	for id, rs := range byID {
+		first, last := rs[0], rs[len(rs)-1]
+		vs = append(vs, plugin.Version{ID: id, Released: first.Published, Ref: last.Tag, URL: last.URL})
+	}
+	slices.SortStableFunc(vs, func(a, b plugin.Version) int { return versions.Compare(a.ID, b.ID) })
+	return vs, nil
+}
+
+// Releases are the releases whose notes name v, oldest first: Stripe keeps
+// adding to an API version in later releases, and what they add is filed
+// under v alone (adapter.Rereleased). The first one or two may not carry v
+// in the full spec yet (their notes name the SDK spec's version).
+func (Stripe) Releases(ctx context.Context, v plugin.Version) ([]string, error) {
+	byID, err := apiVersions(ctx)
+	if err != nil {
+		return nil, err
+	}
+	var tags []string
+	for _, r := range byID[v.ID] {
+		tags = append(tags, r.Tag)
+	}
+	return tags, nil
+}
+
+// apiVersions are stripe/openapi's releases by the API version their notes
+// name, oldest release first; drafts, prereleases and releases that name
+// none are left out.
+func apiVersions(ctx context.Context) (map[string][]stripeRelease, error) {
 	rs, err := versions.GitHubPages[stripeRelease](ctx, github.Get, versions.GitHubAPI+"/repos/stripe/openapi/releases")
 	if err != nil {
 		return nil, fmt.Errorf("listing stripe/openapi's releases: %w", err)
 	}
 	slices.SortStableFunc(rs, func(a, b stripeRelease) int { return a.Published.Compare(b.Published) })
-	byID := map[string]*plugin.Version{}
-	var out []*plugin.Version
+	byID := map[string][]stripeRelease{}
 	for _, r := range rs {
 		m := stripeSDKSpecVersion.FindStringSubmatch(r.Body)
 		if r.Draft || r.Prerelease || r.Tag == "" || m == nil {
 			continue
 		}
-		v, ok := byID[m[1]]
-		if !ok {
-			v = &plugin.Version{ID: m[1], Released: r.Published}
-			byID[m[1]], out = v, append(out, v)
-		}
-		v.Ref, v.URL = r.Tag, r.URL
+		byID[m[1]] = append(byID[m[1]], r)
 	}
-	vs := make([]plugin.Version, len(out))
-	for i, v := range out {
-		vs[i] = *v
-	}
-	slices.SortStableFunc(vs, func(a, b plugin.Version) int { return versions.Compare(a.ID, b.ID) })
-	return vs, nil
+	return byID, nil
 }
 
 // stripeRelease is a stripe/openapi release as GitHub's API lists it.

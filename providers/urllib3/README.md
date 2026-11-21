@@ -6,7 +6,7 @@ Every source patch-it reads for urllib3, one section each: what it watches, why 
 
 ### What it watches
 
-Removals and deprecations in each urllib3 release, read from that release's section of its changelog: classes, methods and modules removed or renamed. One `package_release` event per bullet the plugin can read with certainty. The releases are listed from PyPI (final releases only) and each is read at its git tag (`<version>`); 2.0.0 is the release the golden test pins.
+Removals and deprecations in each urllib3 release, read from that release's section of its changelog: classes, methods and modules removed or renamed. One `package_release` event per bullet the plugin can read with certainty. The releases are listed from PyPI (final releases only) and each is read at its git tag (`<version>`); 2.0.0 is the release the golden test pins. A bullet under an "Added" or "Features" heading that plainly names what the release adds is an `added` event.
 
 Kind: `changelog` (`kinds/changelog`).
 
@@ -37,7 +37,7 @@ Kind: `changelog` (`kinds/changelog`).
 
 ### What it watches
 
-The public API of the `urllib3` package on PyPI, release by release: classes, functions and methods removed or renamed, parameters removed, and parameters that lost their default (callers must now pass them). One `package_release` event per change. Every final release is listed from PyPI, and each consecutive pair is compared.
+The public API of the `urllib3` package on PyPI, release by release: classes, functions and methods removed or renamed, parameters removed, and parameters that lost their default (callers must now pass them). One `package_release` event per change. Every final release is listed from PyPI, and each consecutive pair is compared. What a release adds (a new module, class, function or method, or a new parameter with a default) is an `added` event.
 
 Kind: `apisurface` (`kinds/apisurface`), with the Python reader (`kinds/apisurface/pysurface`).
 

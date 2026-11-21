@@ -5,8 +5,7 @@
     "api": "urllib3/python-surface",
     "version": "2.6.0",
     "previous_version": "2.5.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -30,8 +29,7 @@
     "api": "urllib3/python-surface",
     "version": "2.6.0",
     "previous_version": "2.5.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -46,6 +44,253 @@
     "migration_hint": "urllib3 2.6.0 has no `BaseHTTPResponse.getheaders`: see the package's release notes for what replaces it.",
     "source_url": "https://files.pythonhosted.org/packages/56/1a/9ffe814d317c5224166b23e7c47f606d6e473712a2fad0f704ea9b99f246/urllib3-2.6.0-py3-none-any.whl",
     "source_excerpt": "urllib3 2.5.0 (urllib3-2.5.0-py3-none-any.whl), urllib3/response.py line 543: def getheaders(self) -> HTTPHeaderDict\nurllib3 2.6.0 (urllib3-2.6.0-py3-none-any.whl): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:6b0d2033a59e77276be9025922b96458e0fcdbb42e7b5881f382203d1d0d4931",
+    "api": "urllib3/python-surface",
+    "version": "2.6.0",
+    "previous_version": "2.5.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "urllib3",
+      "change": "added_symbol",
+      "symbols": [
+        "response.BrotliDecoder.has_unconsumed_tail"
+      ]
+    },
+    "description": "New method `response.BrotliDecoder.has_unconsumed_tail` in urllib3 2.6.0.",
+    "source_url": "https://files.pythonhosted.org/packages/56/1a/9ffe814d317c5224166b23e7c47f606d6e473712a2fad0f704ea9b99f246/urllib3-2.6.0-py3-none-any.whl",
+    "source_excerpt": "urllib3 2.5.0 (urllib3-2.5.0-py3-none-any.whl): not defined\nurllib3 2.6.0 (urllib3-2.6.0-py3-none-any.whl), urllib3/response.py line 228: def has_unconsumed_tail(self) -> bool",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:55307ec213c1622438642883d6ce311c884a50f83131860d2d83bc5da9d4d646",
+    "api": "urllib3/python-surface",
+    "version": "2.6.0",
+    "previous_version": "2.5.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "urllib3",
+      "change": "added_parameter",
+      "symbols": [
+        "response.ContentDecoder.decompress"
+      ],
+      "parameter": "max_length"
+    },
+    "description": "`response.ContentDecoder.decompress` takes a new optional parameter `max_length` in urllib3 2.6.0.",
+    "source_url": "https://files.pythonhosted.org/packages/56/1a/9ffe814d317c5224166b23e7c47f606d6e473712a2fad0f704ea9b99f246/urllib3-2.6.0-py3-none-any.whl",
+    "source_excerpt": "urllib3 2.5.0 (urllib3-2.5.0-py3-none-any.whl), urllib3/response.py line 55: def decompress(self, data: bytes) -> bytes\nurllib3 2.6.0 (urllib3-2.6.0-py3-none-any.whl), urllib3/response.py line 55: def decompress(self, data: bytes, max_length: int = -1) -> bytes",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:259dd33c1b882960134f20cee0896a321871a59bbbe571db0d4ba7d653d07b82",
+    "api": "urllib3/python-surface",
+    "version": "2.6.0",
+    "previous_version": "2.5.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "urllib3",
+      "change": "added_symbol",
+      "symbols": [
+        "response.ContentDecoder.has_unconsumed_tail"
+      ]
+    },
+    "description": "New method `response.ContentDecoder.has_unconsumed_tail` in urllib3 2.6.0.",
+    "source_url": "https://files.pythonhosted.org/packages/56/1a/9ffe814d317c5224166b23e7c47f606d6e473712a2fad0f704ea9b99f246/urllib3-2.6.0-py3-none-any.whl",
+    "source_excerpt": "urllib3 2.5.0 (urllib3-2.5.0-py3-none-any.whl): not defined\nurllib3 2.6.0 (urllib3-2.6.0-py3-none-any.whl), urllib3/response.py line 59: def has_unconsumed_tail(self) -> bool",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:7cadae2a50df9d8969070282d8385efa162da8e86bfe91d8d8c3ede0aa7c2520",
+    "api": "urllib3/python-surface",
+    "version": "2.6.0",
+    "previous_version": "2.5.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "urllib3",
+      "change": "added_parameter",
+      "symbols": [
+        "response.DeflateDecoder.decompress"
+      ],
+      "parameter": "max_length"
+    },
+    "description": "`response.DeflateDecoder.decompress` takes a new optional parameter `max_length` in urllib3 2.6.0.",
+    "source_url": "https://files.pythonhosted.org/packages/56/1a/9ffe814d317c5224166b23e7c47f606d6e473712a2fad0f704ea9b99f246/urllib3-2.6.0-py3-none-any.whl",
+    "source_excerpt": "urllib3 2.5.0 (urllib3-2.5.0-py3-none-any.whl), urllib3/response.py line 68: def decompress(self, data: bytes) -> bytes\nurllib3 2.6.0 (urllib3-2.6.0-py3-none-any.whl), urllib3/response.py line 73: def decompress(self, data: bytes, max_length: int = -1) -> bytes",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:6a78bf0b670adb1126ed05bcbcb571d48dfcdec896b119833be2045bfd6f5ada",
+    "api": "urllib3/python-surface",
+    "version": "2.6.0",
+    "previous_version": "2.5.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "urllib3",
+      "change": "added_symbol",
+      "symbols": [
+        "response.DeflateDecoder.has_unconsumed_tail"
+      ]
+    },
+    "description": "New method `response.DeflateDecoder.has_unconsumed_tail` in urllib3 2.6.0.",
+    "source_url": "https://files.pythonhosted.org/packages/56/1a/9ffe814d317c5224166b23e7c47f606d6e473712a2fad0f704ea9b99f246/urllib3-2.6.0-py3-none-any.whl",
+    "source_excerpt": "urllib3 2.5.0 (urllib3-2.5.0-py3-none-any.whl): not defined\nurllib3 2.6.0 (urllib3-2.6.0-py3-none-any.whl), urllib3/response.py line 116: def has_unconsumed_tail(self) -> bool",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
+    "fingerprint": "sha256:283359b66ffc1d9f1623312fc819f5dd516c55e45c73250637c885568314f96e",
+    "api": "urllib3/python-surface",
+    "version": "2.6.0",
+    "previous_version": "2.5.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "urllib3",
+      "change": "added_parameter",
+      "symbols": [
+        "response.GzipDecoder.decompress"
+      ],
+      "parameter": "max_length"
+    },
+    "description": "`response.GzipDecoder.decompress` takes a new optional parameter `max_length` in urllib3 2.6.0.",
+    "source_url": "https://files.pythonhosted.org/packages/56/1a/9ffe814d317c5224166b23e7c47f606d6e473712a2fad0f704ea9b99f246/urllib3-2.6.0-py3-none-any.whl",
+    "source_excerpt": "urllib3 2.5.0 (urllib3-2.5.0-py3-none-any.whl), urllib3/response.py line 105: def decompress(self, data: bytes) -> bytes\nurllib3 2.6.0 (urllib3-2.6.0-py3-none-any.whl), urllib3/response.py line 137: def decompress(self, data: bytes, max_length: int = -1) -> bytes",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 9,
+    "fingerprint": "sha256:696b821ca600150bea1a0f92fad94a80aa37f6fc4e39b01d844adf26ec5938e4",
+    "api": "urllib3/python-surface",
+    "version": "2.6.0",
+    "previous_version": "2.5.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "urllib3",
+      "change": "added_symbol",
+      "symbols": [
+        "response.GzipDecoder.has_unconsumed_tail"
+      ]
+    },
+    "description": "New method `response.GzipDecoder.has_unconsumed_tail` in urllib3 2.6.0.",
+    "source_url": "https://files.pythonhosted.org/packages/56/1a/9ffe814d317c5224166b23e7c47f606d6e473712a2fad0f704ea9b99f246/urllib3-2.6.0-py3-none-any.whl",
+    "source_excerpt": "urllib3 2.5.0 (urllib3-2.5.0-py3-none-any.whl): not defined\nurllib3 2.6.0 (urllib3-2.6.0-py3-none-any.whl), urllib3/response.py line 188: def has_unconsumed_tail(self) -> bool",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 10,
+    "fingerprint": "sha256:d25cb931796a31be9c7d8b12ca494090aea18aa9d2e1e12a4d5de6c2dc2c3001",
+    "api": "urllib3/python-surface",
+    "version": "2.6.0",
+    "previous_version": "2.5.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "urllib3",
+      "change": "added_parameter",
+      "symbols": [
+        "response.MultiDecoder.decompress"
+      ],
+      "parameter": "max_length"
+    },
+    "description": "`response.MultiDecoder.decompress` takes a new optional parameter `max_length` in urllib3 2.6.0.",
+    "source_url": "https://files.pythonhosted.org/packages/56/1a/9ffe814d317c5224166b23e7c47f606d6e473712a2fad0f704ea9b99f246/urllib3-2.6.0-py3-none-any.whl",
+    "source_excerpt": "urllib3 2.5.0 (urllib3-2.5.0-py3-none-any.whl), urllib3/response.py line 229: def decompress(self, data: bytes) -> bytes\nurllib3 2.6.0 (urllib3-2.6.0-py3-none-any.whl), urllib3/response.py line 325: def decompress(self, data: bytes, max_length: int = -1) -> bytes",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 11,
+    "fingerprint": "sha256:48f7c3552af9df675444aa4c69fc5cb78835b2c26299c470dab065a16722b068",
+    "api": "urllib3/python-surface",
+    "version": "2.6.0",
+    "previous_version": "2.5.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "urllib3",
+      "change": "added_symbol",
+      "symbols": [
+        "response.MultiDecoder.has_unconsumed_tail"
+      ]
+    },
+    "description": "New method `response.MultiDecoder.has_unconsumed_tail` in urllib3 2.6.0.",
+    "source_url": "https://files.pythonhosted.org/packages/56/1a/9ffe814d317c5224166b23e7c47f606d6e473712a2fad0f704ea9b99f246/urllib3-2.6.0-py3-none-any.whl",
+    "source_excerpt": "urllib3 2.5.0 (urllib3-2.5.0-py3-none-any.whl): not defined\nurllib3 2.6.0 (urllib3-2.6.0-py3-none-any.whl), urllib3/response.py line 352: def has_unconsumed_tail(self) -> bool",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 12,
+    "fingerprint": "sha256:390862608d1c9c50dbcab8fa649a842d7d11b5702ac08bfbbb287310b36e304d",
+    "api": "urllib3/python-surface",
+    "version": "2.6.0",
+    "previous_version": "2.5.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "urllib3",
+      "change": "added_parameter",
+      "symbols": [
+        "response.ZstdDecoder.decompress"
+      ],
+      "parameter": "max_length"
+    },
+    "description": "`response.ZstdDecoder.decompress` takes a new optional parameter `max_length` in urllib3 2.6.0.",
+    "source_url": "https://files.pythonhosted.org/packages/56/1a/9ffe814d317c5224166b23e7c47f606d6e473712a2fad0f704ea9b99f246/urllib3-2.6.0-py3-none-any.whl",
+    "source_excerpt": "urllib3 2.5.0 (urllib3-2.5.0-py3-none-any.whl), urllib3/response.py line 197: def decompress(self, data: bytes) -> bytes\nurllib3 2.6.0 (urllib3-2.6.0-py3-none-any.whl), urllib3/response.py line 254: def decompress(self, data: bytes, max_length: int = -1) -> bytes",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 13,
+    "fingerprint": "sha256:7d11d9b2ecd6d823c045170ce32f21c7678f358d55327deeb9df1936605bb769",
+    "api": "urllib3/python-surface",
+    "version": "2.6.0",
+    "previous_version": "2.5.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "urllib3",
+      "change": "added_symbol",
+      "symbols": [
+        "response.ZstdDecoder.has_unconsumed_tail"
+      ]
+    },
+    "description": "New method `response.ZstdDecoder.has_unconsumed_tail` in urllib3 2.6.0.",
+    "source_url": "https://files.pythonhosted.org/packages/56/1a/9ffe814d317c5224166b23e7c47f606d6e473712a2fad0f704ea9b99f246/urllib3-2.6.0-py3-none-any.whl",
+    "source_excerpt": "urllib3 2.5.0 (urllib3-2.5.0-py3-none-any.whl): not defined\nurllib3 2.6.0 (urllib3-2.6.0-py3-none-any.whl), urllib3/response.py line 289: def has_unconsumed_tail(self) -> bool",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   }

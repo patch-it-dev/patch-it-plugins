@@ -311,8 +311,7 @@ func (g Guide) Read(page []byte, sourceURL string, from, to plugin.Version, now 
 			API:             g.API,
 			PreviousVersion: from.ID,
 			Version:         to.ID,
-			ChangeType:      event.ChangeTypeBreaking,
-			Breaking:        true,
+			Change:          event.ChangeBreaking,
 			Subject:         subject,
 			Description:     desc,
 			MigrationHint:   fmt.Sprintf("%s (%s's %s for %s)", g.absoluteLinks(r.Guideline), g.Package, g.doc(), to.ID),
@@ -321,7 +320,7 @@ func (g Guide) Read(page []byte, sourceURL string, from, to plugin.Version, now 
 			Confidence:      1.0,
 			DetectedAt:      now,
 		}
-		e.Fingerprint = event.Fingerprint(e.API, e.Version, e.ChangeType, subject, "")
+		e.Fingerprint = event.Fingerprint(e.API, e.Version, e.Change, subject, "")
 		if err := e.Validate(); err != nil {
 			rejected = append(rejected, fmt.Errorf("%s %s: %w", g.Package, r.Member, err))
 			continue

@@ -1,12 +1,33 @@
 [
   {
     "id": 1,
+    "fingerprint": "sha256:ec1f1bc646d8593369d3db4ac978ef90c9135defa495c98cdb1cfacd0033fc65",
+    "api": "sentry/node-surface",
+    "version": "10.0.0",
+    "previous_version": "9.47.2",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@sentry/node",
+      "change": "added_symbol",
+      "symbols": [
+        "firebaseIntegration"
+      ]
+    },
+    "description": "New export `firebaseIntegration` in @sentry/node 10.0.0.",
+    "source_url": "https://registry.npmjs.org/@sentry/node/-/node-10.0.0.tgz",
+    "source_excerpt": "@sentry/node 9.47.2 (node-9.47.2.tgz): not defined\n@sentry/node 10.0.0 (node-10.0.0.tgz), build/types/index.d.ts line 28: export { firebaseIntegration } from \"./integrations/tracing/firebase\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
     "fingerprint": "sha256:90cf03be39ede17ce97c960570711221ff22297deb0125a2ac0f2c002ec9ba1e",
     "api": "sentry/node-surface",
     "version": "10.0.0",
     "previous_version": "9.47.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",

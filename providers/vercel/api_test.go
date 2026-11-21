@@ -72,13 +72,13 @@ func TestVercelGolden(t *testing.T) {
 	events := kittest.Stored(t, s)
 	got := map[string]string{}
 	for _, e := range events {
-		got[e.Subject.Operation+" "+e.Version] = string(e.ChangeType)
+		got[e.Subject.Operation+" "+e.Version] = string(e.Change)
 	}
 	want := map[string]string{
-		"POST /v5/domains/buy 1.13.5":              "deprecation",
-		"GET /v1/domains/{domain}/registry 1.13.5": "deprecation",
-		"GET /v4/domains/status 1.13.5":            "deprecation",
-		"GET /v4/domains/price 1.13.5":             "deprecation",
+		"POST /v5/domains/buy 1.13.5":              "deprecated",
+		"GET /v1/domains/{domain}/registry 1.13.5": "deprecated",
+		"GET /v4/domains/status 1.13.5":            "deprecated",
+		"GET /v4/domains/price 1.13.5":             "deprecated",
 		"GET /v4/domains/status 1.18.7":            "breaking",
 		"GET /v4/domains/price 1.18.7":             "breaking",
 	}
@@ -95,7 +95,7 @@ func TestVercelGolden(t *testing.T) {
 	// excerpt of it, the node its pointer names in the saved copy.
 	for _, e := range events {
 		tag := "v" + e.Version
-		if e.ChangeType == event.ChangeTypeBreaking {
+		if e.Change == event.ChangeBreaking {
 			tag = "v" + e.PreviousVersion // a removal is evidenced by the old spec
 		}
 		if e.SourceURL != vercelURL(tag) {
@@ -165,7 +165,7 @@ func TestVercelDropsRemovalsThatWerentDeprecated(t *testing.T) {
 	}
 	var removals int
 	for _, e := range kittest.Stored(t, s) {
-		if strings.HasPrefix(e.Subject.Operation, "GET /v1/log-drains") && e.ChangeType == event.ChangeTypeBreaking {
+		if strings.HasPrefix(e.Subject.Operation, "GET /v1/log-drains") && e.Change == event.ChangeBreaking {
 			removals++
 		}
 	}

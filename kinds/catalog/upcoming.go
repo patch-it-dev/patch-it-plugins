@@ -168,8 +168,8 @@ func (u UpcomingChanges) Extract(_ context.Context, env plugin.Env, from, to plu
 		}
 		made = append(made, event.Event{
 			API: u.API, Version: e.Date, PreviousVersion: from.Version.ID,
-			ChangeType: event.ChangeTypeDeprecation,
-			Subject:    subject,
+			Change:  event.ChangeDeprecated,
+			Subject: subject,
 			Description: fmt.Sprintf("%s's GraphQL API removes %s on %s: code that queries or sends it fails from that date.",
 				u.Vendor, e.Location, e.Date),
 			MigrationHint: hint,

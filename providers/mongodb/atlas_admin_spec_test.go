@@ -69,8 +69,8 @@ func TestMongoDBAtlasGolden(t *testing.T) {
 	var ops []string
 	for _, e := range events {
 		ops = append(ops, e.Subject.Operation)
-		if e.ChangeType != event.ChangeTypeDeprecation || e.Version != "2025-02-20" || e.PreviousVersion != "2025-02-18" || e.SourceURL != atlasURL("2025-02-20") || !strings.Contains(e.SourceExcerpt, `"deprecated":true`) {
-			t.Errorf("%s: %s %s<-%s cites %s", e.Subject.Operation, e.ChangeType, e.Version, e.PreviousVersion, e.SourceURL)
+		if e.Change != event.ChangeDeprecated || e.Version != "2025-02-20" || e.PreviousVersion != "2025-02-18" || e.SourceURL != atlasURL("2025-02-20") || !strings.Contains(e.SourceExcerpt, `"deprecated":true`) {
+			t.Errorf("%s: %s %s<-%s cites %s", e.Subject.Operation, e.Change, e.Version, e.PreviousVersion, e.SourceURL)
 		}
 	}
 	slices.Sort(ops)

@@ -96,8 +96,8 @@ func TestSupabaseGolden(t *testing.T) {
 			t.Errorf("unexpected event %s %s", e.Subject.Operation, e.Version)
 			continue
 		}
-		if e.ChangeType != event.ChangeTypeDeprecation || e.Breaking {
-			t.Errorf("%s: %s, want deprecation", e.Subject.Operation, e.ChangeType)
+		if e.Change != event.ChangeDeprecated || (e.Change == event.ChangeBreaking) {
+			t.Errorf("%s: %s, want deprecation", e.Subject.Operation, e.Change)
 		}
 		if e.SourceURL != supabaseURL(tag) {
 			t.Errorf("%s: source_url %s, want %s", e.Subject.Operation, e.SourceURL, supabaseURL(tag))
@@ -138,7 +138,7 @@ func TestSupabaseDropsRemovalsThatWerentDeprecated(t *testing.T) {
 	}
 	var removals int
 	for _, e := range kittest.Stored(t, s) {
-		if strings.Contains(e.Subject.Operation, "/analytics/warehouse/") && e.ChangeType == event.ChangeTypeBreaking {
+		if strings.Contains(e.Subject.Operation, "/analytics/warehouse/") && e.Change == event.ChangeBreaking {
 			removals++
 		}
 	}
@@ -159,7 +159,7 @@ func TestSupabaseBranchParameterRenameIsNoChange(t *testing.T) {
 		t.Fatal(err)
 	}
 	for _, e := range kittest.Stored(t, s) {
-		if e.ChangeType == event.ChangeTypeBreaking && strings.Contains(e.Description, "removed") && strings.Contains(e.Subject.Operation, "{branch_id}") {
+		if e.Change == event.ChangeBreaking && strings.Contains(e.Description, "removed") && strings.Contains(e.Subject.Operation, "{branch_id}") {
 			t.Errorf("by template: %s", e.Description)
 		}
 	}

@@ -5,8 +5,7 @@
     "api": "sentry/dotnet",
     "version": "4.0.0",
     "previous_version": "3.41.4",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "nuget",
@@ -30,8 +29,7 @@
     "api": "sentry/dotnet",
     "version": "4.0.0",
     "previous_version": "3.41.4",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "nuget",

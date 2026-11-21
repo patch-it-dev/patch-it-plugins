@@ -1,12 +1,122 @@
 [
   {
     "id": 1,
+    "fingerprint": "sha256:136e6cfe4631b81313a2c7586b053658113a8f923ecbb6cf151ccef11db0a246",
+    "api": "textual/textual",
+    "version": "0.86.0",
+    "previous_version": "0.85.2",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "textual",
+      "change": "added_symbol",
+      "symbols": [
+        "App.theme"
+      ]
+    },
+    "description": "`App.theme` was added in textual 0.86.0.",
+    "source_url": "https://raw.githubusercontent.com/Textualize/textual/v0.86.0/CHANGELOG.md",
+    "source_excerpt": "## [0.86.0] - 2024-11-16\nAdded\n- Added `App.theme` reactive attribute https://github.com/Textualize/textual/pull/5087",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:694427d740efca41ba1d07e611a38e359c8f5b5c90edd7e1d1fd7d150bc28855",
+    "api": "textual/textual",
+    "version": "0.86.0",
+    "previous_version": "0.85.2",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "textual",
+      "change": "added_symbol",
+      "symbols": [
+        "App.register_theme",
+        "App.unregister_theme"
+      ]
+    },
+    "description": "`App.register_theme`, `App.unregister_theme` were added in textual 0.86.0.",
+    "source_url": "https://raw.githubusercontent.com/Textualize/textual/v0.86.0/CHANGELOG.md",
+    "source_excerpt": "## [0.86.0] - 2024-11-16\nAdded\n- Added `App.register_theme` and `App.unregister_theme` https://github.com/Textualize/textual/pull/5087",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:4a6120f4c9d6e05a9853ce6b0454a6df5ec6b71c7f4c8a8fbb876aa2816ac899",
+    "api": "textual/textual",
+    "version": "0.86.0",
+    "previous_version": "0.85.2",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "textual",
+      "change": "added_symbol",
+      "symbols": [
+        "App.theme_changed_signal"
+      ]
+    },
+    "description": "`App.theme_changed_signal` was added in textual 0.86.0.",
+    "source_url": "https://raw.githubusercontent.com/Textualize/textual/v0.86.0/CHANGELOG.md",
+    "source_excerpt": "## [0.86.0] - 2024-11-16\nAdded\n- Added `App.theme_changed_signal` https://github.com/Textualize/textual/pull/5087",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:c2d9ecf1afac5c6f986faf161c1b3e162cfea7becac56e80ac7fd8d81e56e4fb",
+    "api": "textual/textual",
+    "version": "0.86.0",
+    "previous_version": "0.85.2",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "textual",
+      "change": "added_symbol",
+      "symbols": [
+        "Widget.is_scrolling"
+      ]
+    },
+    "description": "`Widget.is_scrolling` was added in textual 0.86.0.",
+    "source_url": "https://raw.githubusercontent.com/Textualize/textual/v0.86.0/CHANGELOG.md",
+    "source_excerpt": "## [0.86.0] - 2024-11-16\nAdded\n- Added `Widget.is_scrolling` https://github.com/Textualize/textual/pull/5238",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:5759588331e8435cba3af2486d3e837aea33076799c161e0c3394ca444d32fd8",
+    "api": "textual/textual",
+    "version": "0.86.0",
+    "previous_version": "0.85.2",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "textual",
+      "change": "added_symbol",
+      "symbols": [
+        "Tree.add_json"
+      ]
+    },
+    "description": "`Tree.add_json` was added in textual 0.86.0.",
+    "source_url": "https://raw.githubusercontent.com/Textualize/textual/v0.86.0/CHANGELOG.md",
+    "source_excerpt": "## [0.86.0] - 2024-11-16\nAdded\n- Added `Tree.add_json` https://github.com/Textualize/textual/pull/5238",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
     "fingerprint": "sha256:fac4cb01fbe4eb33b37f1ec953ac0abfe97c3444aaa22cdbe9118fb6f4b56e48",
     "api": "textual/textual",
     "version": "0.86.0",
     "previous_version": "0.85.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -24,13 +134,12 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 2,
+    "id": 7,
     "fingerprint": "sha256:6a0ba08e00b5d4d4f349a526a43ddef1bb84fe2bad9ef83111074fc2a690723c",
     "api": "textual/textual",
     "version": "0.86.0",
     "previous_version": "0.85.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",

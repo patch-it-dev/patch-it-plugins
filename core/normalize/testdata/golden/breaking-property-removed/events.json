@@ -5,8 +5,7 @@
     "api": "stripe/api",
     "version": "2026-08-26.dahlia",
     "previous_version": "2026-07-29.dahlia",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "schema_property",

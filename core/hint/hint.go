@@ -112,7 +112,7 @@ func (ix *Index) Lookup(e event.Event) (Entry, bool) {
 		k = key("", a.Schema, path(a.Property))
 	}
 	for _, m := range ix.byKey[k] {
-		if compatible(m.change, e.ChangeType) {
+		if compatible(m.change, e.Change) {
 			return ix.Entries[m.entry], true
 		}
 	}
@@ -122,12 +122,12 @@ func (ix *Index) Lookup(e event.Event) (Entry, bool) {
 // compatible keeps a row's text off an event going the other way: an "Added" row
 // only explains an addition, a "Removed" row never does. Anything else
 // ("Changed", ...) can explain either.
-func compatible(rowChange string, ct event.ChangeType) bool {
+func compatible(rowChange string, ct event.Change) bool {
 	switch {
 	case strings.EqualFold(rowChange, "Added"):
-		return ct == event.ChangeTypeNewFeature
+		return ct == event.ChangeAdded
 	case strings.EqualFold(rowChange, "Removed"):
-		return ct != event.ChangeTypeNewFeature
+		return ct != event.ChangeAdded
 	}
 	return true
 }

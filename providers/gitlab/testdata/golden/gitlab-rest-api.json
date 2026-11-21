@@ -5,8 +5,7 @@
     "api": "gitlab/rest-api",
     "version": "19.0.0",
     "previous_version": "18.11.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "request_parameter",
@@ -28,8 +27,7 @@
     "api": "gitlab/rest-api",
     "version": "19.0.0",
     "previous_version": "18.11.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "request_parameter",
@@ -50,8 +48,7 @@
     "api": "gitlab/rest-api",
     "version": "19.0.0",
     "previous_version": "18.11.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "request_parameter",
@@ -73,8 +70,7 @@
     "api": "gitlab/rest-api",
     "version": "19.0.0",
     "previous_version": "18.11.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "request_parameter",

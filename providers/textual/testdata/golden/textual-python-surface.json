@@ -5,8 +5,7 @@
     "api": "textual/python-surface",
     "version": "8.2.6",
     "previous_version": "8.2.5",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",

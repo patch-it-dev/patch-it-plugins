@@ -5,8 +5,7 @@
     "api": "cloudflare/api-spec",
     "version": "2026-10-30",
     "previous_version": "2026-10-29",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -26,8 +25,7 @@
     "api": "cloudflare/api-spec",
     "version": "2026-10-30",
     "previous_version": "2026-10-29",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -47,8 +45,7 @@
     "api": "cloudflare/api-spec",
     "version": "2026-10-30",
     "previous_version": "2026-10-29",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",

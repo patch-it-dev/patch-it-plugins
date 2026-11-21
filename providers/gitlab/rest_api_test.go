@@ -88,8 +88,8 @@ func TestGitLabPairRecreatesTheBitbucketAppPasswordRemoval(t *testing.T) {
 		if e.API != "gitlab/rest-api" || e.Version != "19.0.0" || e.PreviousVersion != "18.11.0" {
 			t.Errorf("%s: api=%s version=%s previous=%s", e.Subject.Property, e.API, e.Version, e.PreviousVersion)
 		}
-		if string(e.ChangeType) != "breaking" || !e.Breaking {
-			t.Errorf("%s: change_type=%s breaking=%v, want breaking", e.Subject.Property, e.ChangeType, e.Breaking)
+		if string(e.Change) != "breaking" || e.Change != event.ChangeBreaking {
+			t.Errorf("%s: change=%s, want breaking", e.Subject.Property, e.Change)
 		}
 		if e.Subject.Operation != "POST /api/v4/import/bitbucket" || e.Subject.Side != "request" {
 			t.Errorf("%s: subject %+v", e.Subject.Property, e.Subject)

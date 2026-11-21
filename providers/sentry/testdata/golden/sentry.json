@@ -1,12 +1,11 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:2c581bcf2a003ab8ce3564a8fa559f444388a64ed2a5dc0da2e7440400417047",
+    "fingerprint": "sha256:6484e8d71fbfb4ab3f30d4871dc5496c1188ed16e8f785d193cd003b8ea788fa",
     "api": "sentry/api",
     "version": "2024-07-31",
     "previous_version": "2024-07-31",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -22,12 +21,11 @@
   },
   {
     "id": 2,
-    "fingerprint": "sha256:3cd6e034c9602e808d72897f85568aa4c6f3427840a9f55e3a819ec84f2c24e3",
+    "fingerprint": "sha256:03e5c449a5c43015ceba701392ebfb655769190d292cf1f47bd6abc25658640f",
     "api": "sentry/api",
     "version": "2025-07-25",
     "previous_version": "2025-07-25",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -43,12 +41,11 @@
   },
   {
     "id": 3,
-    "fingerprint": "sha256:b10b4122b9cf5bb7cf73b726128cfb8325227dd9e252b529595eb8419fcd3a17",
+    "fingerprint": "sha256:b06d95c5094a52d08285b4220f091b8826fcab95757b3fa302217492ff693050",
     "api": "sentry/api",
     "version": "2026-01-22",
     "previous_version": "2026-01-21",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -64,12 +61,11 @@
   },
   {
     "id": 4,
-    "fingerprint": "sha256:9a1a370124284bb32f1ade8af8dc022ef9719a7adc5ade39a71f607848aea43b",
+    "fingerprint": "sha256:3b25930086db6e0e0f660b17575d2cbfae8063941d24bbc88f00b9d993d63bfc",
     "api": "sentry/api",
     "version": "2026-01-22",
     "previous_version": "2026-01-21",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -85,12 +81,11 @@
   },
   {
     "id": 5,
-    "fingerprint": "sha256:360f32fc9198150194657ac504e030a86f246677364104b5cdf65175934a1d5d",
+    "fingerprint": "sha256:3038537216fccdc96cb408c9d1d4d725c43fc93a0be8cf4c7196fcff40de6478",
     "api": "sentry/api",
     "version": "2026-01-22",
     "previous_version": "2026-01-21",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -106,12 +101,11 @@
   },
   {
     "id": 6,
-    "fingerprint": "sha256:d585c8aff07f53c61f686e437d99447ce5d68254eef0f3527d38090d2103d1d8",
+    "fingerprint": "sha256:115646fd626e8391a2b94c9a5b5b032accf0aa2c22190a5a23aafd5106532e4f",
     "api": "sentry/api",
     "version": "2026-01-22",
     "previous_version": "2026-01-21",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -127,12 +121,11 @@
   },
   {
     "id": 7,
-    "fingerprint": "sha256:49151a031811fac3d401cc2ae9df3b29c92f25a1c768941f64b9db48fe933c38",
+    "fingerprint": "sha256:0d6673efd448a8007759b43bac199577b8d929e340418066a67b9821dd5ed7cd",
     "api": "sentry/api",
     "version": "2026-01-22",
     "previous_version": "2026-01-21",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -148,12 +141,11 @@
   },
   {
     "id": 8,
-    "fingerprint": "sha256:1e0a6193b9d4ee311207fff20af8ee2a22ad6d55a066af49fa82876a7cb91d97",
+    "fingerprint": "sha256:14ce13e241606a91eb7985db13bc5437cdd33ef2a4a469f80ed40267721ff701",
     "api": "sentry/api",
     "version": "2026-01-22",
     "previous_version": "2026-01-21",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -169,12 +161,11 @@
   },
   {
     "id": 9,
-    "fingerprint": "sha256:10b62873f4ac22a29ac7384ccc9bdb308c3bb070adc6cc3e4e21afe759ebade0",
+    "fingerprint": "sha256:e6fcec629852f53e70f0997d46d3368492c50b4e2ecd334778c29427085419b6",
     "api": "sentry/api",
     "version": "2026-01-22",
     "previous_version": "2026-01-21",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -190,12 +181,11 @@
   },
   {
     "id": 10,
-    "fingerprint": "sha256:229b405e49905a7c71fc58eaff80f860bdce47abbeb9bd766301879094c31e17",
+    "fingerprint": "sha256:ee8adb816c1633b3026db51d1fef4851723cb28cf914e2f85b80f941160e92da",
     "api": "sentry/api",
     "version": "2026-01-22",
     "previous_version": "2026-01-21",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -211,12 +201,11 @@
   },
   {
     "id": 11,
-    "fingerprint": "sha256:1e5db27221e10250eb64354e1c204c1120cd14dbef5bf7661f063d0aab0bbe71",
+    "fingerprint": "sha256:27ad2b1b12fc73a85154a4d5fe0b7f868fd6f00fc5006eb2084601022d9eb4c7",
     "api": "sentry/api",
     "version": "2026-01-22",
     "previous_version": "2026-01-21",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -232,12 +221,11 @@
   },
   {
     "id": 12,
-    "fingerprint": "sha256:c2c1b2a44827fbc07afe0ddf1c6cbd7fae8c39d513508c68853ec8a7a8f6988d",
+    "fingerprint": "sha256:285f93e79f6cd5c0110b6b098d348c4d0ddfb935c72164bce3266cdd47475cf3",
     "api": "sentry/api",
     "version": "2026-01-22",
     "previous_version": "2026-01-21",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",

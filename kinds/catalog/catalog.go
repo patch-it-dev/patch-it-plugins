@@ -28,7 +28,7 @@ func finish(api string, made []event.Event, details []string) (events []event.Ev
 		if details != nil {
 			detail = details[i]
 		}
-		e.Fingerprint = event.Fingerprint(e.API, e.Version, e.ChangeType, e.Subject, detail)
+		e.Fingerprint = event.Fingerprint(e.API, e.Version, e.Change, e.Subject, detail)
 		if err := e.Validate(); err != nil {
 			rejected = append(rejected, fmt.Errorf("%s %s: %w", api, e.Description, err))
 			continue

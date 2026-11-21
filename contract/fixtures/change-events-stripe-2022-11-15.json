@@ -7,8 +7,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "schema",
@@ -28,8 +27,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "schema_property",
@@ -50,8 +48,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "schema",
@@ -71,8 +68,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "schema",
@@ -92,8 +88,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "schema",
@@ -113,8 +108,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "schema",
@@ -134,8 +128,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "schema",
@@ -155,8 +148,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "schema",
@@ -176,8 +168,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "schema",
@@ -197,8 +188,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "schema",
@@ -218,8 +208,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "schema",
@@ -239,8 +228,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "schema",
@@ -260,8 +248,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "schema",
@@ -281,8 +268,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "schema",
@@ -302,8 +288,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "schema",
@@ -323,8 +308,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "schema",
@@ -344,8 +328,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "schema",
@@ -365,8 +348,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "schema",
@@ -386,8 +368,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "schema",
@@ -407,8 +388,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "schema_property",
@@ -425,12 +405,11 @@
     },
     {
       "id": 21,
-      "fingerprint": "sha256:4a3568912f55fb9a0d323e4187eea8d5f3950be3061527d53473e77a8e604f22",
+      "fingerprint": "sha256:7040c7f28446e73278f786e61494a21bc299966d0c243dc125bc42f571400f44",
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "new_feature",
-      "breaking": false,
+      "change": "added",
       "subject": {
         "type": "api_operation",
         "kind": "schema_property",
@@ -451,8 +430,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "schema",
@@ -472,8 +450,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "schema",
@@ -493,8 +470,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "schema",
@@ -514,8 +490,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "operation",
@@ -535,8 +510,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "operation",
@@ -556,8 +530,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "operation",
@@ -577,8 +550,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "operation",
@@ -598,8 +570,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "operation",
@@ -619,8 +590,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "operation",
@@ -640,8 +610,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "operation",
@@ -661,8 +630,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "operation",
@@ -682,8 +650,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "operation",
@@ -703,8 +670,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "operation",
@@ -724,8 +690,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "operation",
@@ -745,8 +710,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "operation",
@@ -766,8 +730,7 @@
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "operation",
@@ -783,12 +746,11 @@
     },
     {
       "id": 38,
-      "fingerprint": "sha256:5e0bf470298434a89ce8711c823cf4f40ad76371ab7e4dc2c4713391d324d4bf",
+      "fingerprint": "sha256:f4ac971842d5207c7a040f92a1c5ec9e1933062c0985e067127847c6dab86624",
       "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
-      "change_type": "new_feature",
-      "breaking": false,
+      "change": "added",
       "subject": {
         "type": "api_operation",
         "kind": "request_parameter",

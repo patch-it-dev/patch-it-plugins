@@ -16,14 +16,15 @@ import (
 	"unicode/utf8"
 )
 
-// ChangeType is what kind of change it is to the code that calls the source.
-type ChangeType string
+// Change is what a change does to code written against the version before
+// it: breaks it, deprecates something it uses, or adds something it could
+// use. Additions are data too: a source never drops one it can see.
+type Change string
 
 const (
-	ChangeTypeBreaking    ChangeType = "breaking"
-	ChangeTypeDeprecation ChangeType = "deprecation"
-	ChangeTypeNewFeature  ChangeType = "new_feature"
-	ChangeTypeFix         ChangeType = "fix"
+	ChangeBreaking   Change = "breaking"
+	ChangeDeprecated Change = "deprecated"
+	ChangeAdded      Change = "added"
 )
 
 // Kind is what an api_operation subject is about.
@@ -62,7 +63,13 @@ const (
 	PackageRemovedSymbol    PackageChange = "removed_symbol"
 	PackageRenamedSymbol    PackageChange = "renamed_symbol"
 	PackageChangedDefault   PackageChange = "changed_default"
+	PackageAddedSymbol      PackageChange = "added_symbol"
+	PackageAddedParameter   PackageChange = "added_parameter"
 )
+
+// Adds is true for the package changes that add something: their events are
+// added, and only theirs.
+func (c PackageChange) Adds() bool { return c == PackageAddedSymbol || c == PackageAddedParameter }
 
 // Subject is what changed. Type picks which fields it may have; every other
 // field must be empty (the contract's "a field its type doesn't define").
@@ -97,21 +104,20 @@ type Subject struct {
 
 // Event is one change event.
 type Event struct {
-	ID              int64      `json:"id"`
-	Fingerprint     string     `json:"fingerprint"`
-	API             string     `json:"api"`
-	Version         string     `json:"version"`
-	PreviousVersion string     `json:"previous_version,omitempty"`
-	ChangeType      ChangeType `json:"change_type"`
-	Breaking        bool       `json:"breaking"`
-	Subject         Subject    `json:"subject"`
-	Description     string     `json:"description"`
-	MigrationHint   string     `json:"migration_hint,omitempty"`
-	SourceURL       string     `json:"source_url"`
-	SourcePointer   string     `json:"source_pointer,omitempty"`
-	SourceExcerpt   string     `json:"source_excerpt"`
-	Confidence      float64    `json:"confidence"`
-	DetectedAt      time.Time  `json:"detected_at"`
+	ID              int64     `json:"id"`
+	Fingerprint     string    `json:"fingerprint"`
+	API             string    `json:"api"`
+	Version         string    `json:"version"`
+	PreviousVersion string    `json:"previous_version,omitempty"`
+	Change          Change    `json:"change"`
+	Subject         Subject   `json:"subject"`
+	Description     string    `json:"description"`
+	MigrationHint   string    `json:"migration_hint,omitempty"`
+	SourceURL       string    `json:"source_url"`
+	SourcePointer   string    `json:"source_pointer,omitempty"`
+	SourceExcerpt   string    `json:"source_excerpt"`
+	Confidence      float64   `json:"confidence"`
+	DetectedAt      time.Time `json:"detected_at"`
 }
 
 // Decode reads one event and refuses a field the contract doesn't define,
@@ -154,8 +160,8 @@ func Decode(raw []byte) (Event, error) {
 }
 
 // eventKeys are the JSON names of Event's fields.
-var eventKeys = []string{"id", "fingerprint", "api", "version", "previous_version", "change_type",
-	"breaking", "subject", "description", "migration_hint", "source_url",
+var eventKeys = []string{"id", "fingerprint", "api", "version", "previous_version", "change",
+	"subject", "description", "migration_hint", "source_url",
 	"source_pointer", "source_excerpt", "confidence", "detected_at"}
 
 // subjectKeys are the fields each type may have, besides `type`.
@@ -172,12 +178,14 @@ var subjectKeys = map[SubjectType][]string{
 // changes at one place: the enum value added, "added as required"); for the
 // other types, the type and its key fields, detail empty: the key already
 // says what changed. Symbols are sorted first, so the same release always
-// gets the same fingerprint.
-func Fingerprint(api, version string, changeType ChangeType, s Subject, detail string) string {
+// gets the same fingerprint. change is hashed, so an addition and a breaking
+// change at one location (a property added, a property removed: the same
+// key) never share a fingerprint.
+func Fingerprint(api, version string, change Change, s Subject, detail string) string {
 	if s.Type == SubjectAPIOperation {
-		return hash(api, version, string(changeType), string(s.Kind), string(s.Side), s.Operation, s.Schema, s.Property, detail)
+		return hash(api, version, string(change), string(s.Kind), string(s.Side), s.Operation, s.Schema, s.Property, detail)
 	}
-	parts := []string{api, version, string(changeType), string(s.Type)}
+	parts := []string{api, version, string(change), string(s.Type)}
 	switch s.Type {
 	case SubjectModel:
 		parts = append(parts, s.Provider, s.Name)
@@ -199,10 +207,15 @@ func hash(parts ...string) string {
 // Validate applies the contract: the rules for every field, then subject's own.
 func (e Event) Validate() error {
 	if err := checkCommon(e.SourceURL, e.SourceExcerpt, e.Fingerprint, e.API, e.Version,
-		e.Description, e.DetectedAt, e.ChangeType, e.Breaking, e.Confidence); err != nil {
+		e.Description, e.DetectedAt, e.Change, e.Confidence); err != nil {
 		return err
 	}
-	// Rule 13: a change found by comparing two versions names both.
+	// Rule 4: a package's addition is an added event, and only an addition is.
+	if e.Subject.Type == SubjectPackageRelease && e.Subject.Change.Adds() != (e.Change == ChangeAdded) {
+		return fmt.Errorf("subject.change %s and change %s disagree: only added_symbol and added_parameter are added", e.Subject.Change, e.Change)
+	}
+	// Rule 13: a change found by comparing two versions names both (the same
+	// one twice for a change made inside one version).
 	if PairType(e.Subject.Type) && e.PreviousVersion == "" {
 		return fmt.Errorf("previous_version is required for a %s change: it compares two versions", e.Subject.Type)
 	}
@@ -254,7 +267,7 @@ func (s Subject) required() ([]string, error) {
 			}
 		}
 		switch s.Change {
-		case PackageRemovedParameter, PackageChangedDefault:
+		case PackageRemovedParameter, PackageChangedDefault, PackageAddedParameter:
 			if err := need("parameter", s.Parameter); err != nil {
 				return nil, err
 			}
@@ -262,7 +275,7 @@ func (s Subject) required() ([]string, error) {
 			if err := need("replacement", s.Replacement); err != nil {
 				return nil, err
 			}
-		case PackageRemovedSymbol:
+		case PackageRemovedSymbol, PackageAddedSymbol:
 		default:
 			return nil, fmt.Errorf("subject.change must be a valid enum value, got %q", s.Change)
 		}
@@ -312,7 +325,7 @@ var fingerprintPattern = regexp.MustCompile(`^sha256:[0-9a-f]{64}$`)
 
 // checkCommon is the contract's rules for every field outside subject.
 func checkCommon(sourceURL, excerpt, fingerprint, api, version, description string,
-	detectedAt time.Time, changeType ChangeType, breaking bool, confidence float64) error {
+	detectedAt time.Time, change Change, confidence float64) error {
 	// Rule 1: provenance is mandatory — the anti-hallucination mechanism.
 	if sourceURL == "" {
 		return fmt.Errorf("source_url is required")
@@ -341,17 +354,9 @@ func checkCommon(sourceURL, excerpt, fingerprint, api, version, description stri
 		return fmt.Errorf("detected_at is required")
 	}
 
-	// Rule 3: change_type must be one of the known enum values.
-	if changeType != ChangeTypeBreaking &&
-		changeType != ChangeTypeDeprecation &&
-		changeType != ChangeTypeNewFeature &&
-		changeType != ChangeTypeFix {
-		return fmt.Errorf("change_type must be a valid enum value, got %q", changeType)
-	}
-
-	// Rule 4: breaking must agree with change_type.
-	if breaking != (changeType == ChangeTypeBreaking) {
-		return fmt.Errorf("breaking (%v) must equal change_type == breaking", breaking)
+	// Rule 3: change must be breaking, deprecated or added.
+	if change != ChangeBreaking && change != ChangeDeprecated && change != ChangeAdded {
+		return fmt.Errorf("change must be breaking, deprecated or added, got %q", change)
 	}
 
 	// Rule 6: confidence must be in [0, 1].

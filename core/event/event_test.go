@@ -18,7 +18,7 @@ var operationAdded = Event{
 	API:             "stripe/api",
 	Version:         "2026-08-26.dahlia",
 	PreviousVersion: "2026-07-29.dahlia",
-	ChangeType:      ChangeTypeNewFeature,
+	Change:          ChangeAdded,
 	Subject:         Subject{Type: SubjectAPIOperation, Kind: KindOperation, Side: SideRequest, Operation: "POST /v1/billing/feedback_options"},
 	Description:     "New operation POST /v1/billing/feedback_options (PostBillingFeedbackOptions).",
 	SourceURL:       "https://raw.githubusercontent.com/stripe/openapi/v2468/latest/openapi.spec3.json",
@@ -29,7 +29,7 @@ var operationAdded = Event{
 }
 
 func init() {
-	operationAdded.Fingerprint = Fingerprint(operationAdded.API, operationAdded.Version, operationAdded.ChangeType, operationAdded.Subject, "")
+	operationAdded.Fingerprint = Fingerprint(operationAdded.API, operationAdded.Version, operationAdded.Change, operationAdded.Subject, "")
 }
 
 func rawEvents(t *testing.T, name string) []json.RawMessage {
@@ -76,7 +76,7 @@ func TestFixturesAreValid(t *testing.T) {
 			if e.Subject.Type == SubjectAPIOperation {
 				continue
 			}
-			if want := Fingerprint(e.API, e.Version, e.ChangeType, e.Subject, ""); e.Fingerprint != want {
+			if want := Fingerprint(e.API, e.Version, e.Change, e.Subject, ""); e.Fingerprint != want {
 				t.Errorf("%s event %d: fingerprint %s, the formula gives %s", name, e.ID, e.Fingerprint, want)
 			}
 		}
@@ -121,11 +121,21 @@ func TestValidateRejectsContractViolations(t *testing.T) {
 		t.Fatalf("the valid event: %v", err)
 	}
 	cases := map[string]func(e *Event){
-		"missing source_url":                  func(e *Event) { e.SourceURL = "" },
-		"missing source_excerpt":              func(e *Event) { e.SourceExcerpt = "" },
-		"missing detected_at":                 func(e *Event) { e.DetectedAt = time.Time{} },
-		"breaking disagrees with change_type": func(e *Event) { e.Breaking = true },
-		"unknown change_type":                 func(e *Event) { e.ChangeType = "maybe" },
+		"missing source_url":       func(e *Event) { e.SourceURL = "" },
+		"missing source_excerpt":   func(e *Event) { e.SourceExcerpt = "" },
+		"missing detected_at":      func(e *Event) { e.DetectedAt = time.Time{} },
+		"the old name new_feature": func(e *Event) { e.Change = "new_feature" },
+		"no change":                func(e *Event) { e.Change = "" },
+		"a package addition that isn't added": func(e *Event) {
+			e.Subject = Subject{Type: SubjectPackageRelease, Ecosystem: "pypi", Package: "x", Change: PackageAddedSymbol, Symbols: []string{"a"}}
+			e.Change = ChangeBreaking
+		},
+		"a package removal filed as added": func(e *Event) {
+			e.Subject = Subject{Type: SubjectPackageRelease, Ecosystem: "pypi", Package: "x", Change: PackageRemovedSymbol, Symbols: []string{"a"}}
+		},
+		"added_parameter without the parameter": func(e *Event) {
+			e.Subject = Subject{Type: SubjectPackageRelease, Ecosystem: "pypi", Package: "x", Change: PackageAddedParameter, Symbols: []string{"a"}}
+		},
 		"confidence above 1":                  func(e *Event) { e.Confidence = 1.5 },
 		"a bad fingerprint":                   func(e *Event) { e.Fingerprint = "sha256:abc" },
 		"operation kind on the response side": func(e *Event) { e.Subject.Side = SideResponse },
@@ -169,7 +179,7 @@ func TestSymbolOrderDoesntChangeTheFingerprint(t *testing.T) {
 		Change: PackageRemovedParameter, Parameter: "top_k", Symbols: []string{"messages.stream", "messages.create"}}
 	r := s
 	r.Symbols = []string{"messages.create", "messages.stream"}
-	if Fingerprint("anthropic/python-sdk", "1.0.0", ChangeTypeBreaking, s, "") != Fingerprint("anthropic/python-sdk", "1.0.0", ChangeTypeBreaking, r, "") {
+	if Fingerprint("anthropic/python-sdk", "1.0.0", ChangeBreaking, s, "") != Fingerprint("anthropic/python-sdk", "1.0.0", ChangeBreaking, r, "") {
 		t.Error("symbol order changed the fingerprint")
 	}
 	if s.Symbols[0] != "messages.stream" {
@@ -179,8 +189,8 @@ func TestSymbolOrderDoesntChangeTheFingerprint(t *testing.T) {
 
 // Two kinds of change that share every other field still get two fingerprints.
 func TestTheTypeIsPartOfTheFingerprint(t *testing.T) {
-	m := Fingerprint("x/y", "1", ChangeTypeBreaking, Subject{Type: SubjectModel, Provider: "p", Name: "n"}, "")
-	c := Fingerprint("x/y", "1", ChangeTypeBreaking, Subject{Type: SubjectCIRuntime, Platform: "p", Runtime: "n"}, "")
+	m := Fingerprint("x/y", "1", ChangeBreaking, Subject{Type: SubjectModel, Provider: "p", Name: "n"}, "")
+	c := Fingerprint("x/y", "1", ChangeBreaking, Subject{Type: SubjectCIRuntime, Platform: "p", Runtime: "n"}, "")
 	if m == c {
 		t.Error("a model and a CI runtime with the same values share a fingerprint")
 	}

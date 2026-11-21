@@ -66,9 +66,9 @@ func readCloudflareAPI(e extract.Entry) []feed.Finding {
 			break
 		}
 	}
-	ct, date, dateLine := event.ChangeTypeDeprecation, extract.Date(depLine), depLine
+	ct, date, dateLine := event.ChangeDeprecated, extract.Date(depLine), depLine
 	if d := extract.Date(eolLine); d != "" && stopLine != "" {
-		ct, date, dateLine = event.ChangeTypeBreaking, d, eolLine
+		ct, date, dateLine = event.ChangeBreaking, d, eolLine
 	}
 	if date == "" {
 		if t, err := time.Parse(time.RFC1123, strings.TrimSpace(e.Published)); err == nil {
@@ -100,14 +100,14 @@ func readCloudflareAPI(e extract.Entry) []feed.Finding {
 		operation := op[1] + " " + path
 
 		desc := fmt.Sprintf("Cloudflare API operation %s is deprecated (%s).", operation, date)
-		if ct == event.ChangeTypeBreaking {
+		if ct == event.ChangeBreaking {
 			desc = fmt.Sprintf("Cloudflare API operation %s reaches end of life on %s, the date Cloudflare stops serving it.", operation, date)
 		}
 		quote := []string{e.Title}
 		if dateLine != "" {
 			quote = append(quote, dateLine)
 		}
-		if ct == event.ChangeTypeBreaking {
+		if ct == event.ChangeBreaking {
 			quote = append(quote, stopLine)
 		}
 		out = append(out, feed.Finding{

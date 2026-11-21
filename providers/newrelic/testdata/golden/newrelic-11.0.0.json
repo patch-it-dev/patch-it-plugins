@@ -5,8 +5,7 @@
     "api": "newrelic/python-agent",
     "version": "11.0.0",
     "previous_version": "10.17.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -29,8 +28,7 @@
     "api": "newrelic/python-agent",
     "version": "11.0.0",
     "previous_version": "10.17.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -54,8 +52,7 @@
     "api": "newrelic/python-agent",
     "version": "11.0.0",
     "previous_version": "10.17.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -79,8 +76,7 @@
     "api": "newrelic/python-agent",
     "version": "11.0.0",
     "previous_version": "10.17.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -103,8 +99,7 @@
     "api": "newrelic/python-agent",
     "version": "11.0.0",
     "previous_version": "10.17.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -127,8 +122,7 @@
     "api": "newrelic/python-agent",
     "version": "11.0.0",
     "previous_version": "10.17.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -151,8 +145,7 @@
     "api": "newrelic/python-agent",
     "version": "11.0.0",
     "previous_version": "10.17.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",

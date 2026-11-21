@@ -5,8 +5,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -29,8 +28,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -53,8 +51,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -77,8 +74,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -101,8 +97,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -126,8 +121,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -151,8 +145,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -176,8 +169,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -201,8 +193,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -226,8 +217,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -251,8 +241,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -276,8 +265,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -301,8 +289,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -326,8 +313,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -351,8 +337,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -376,8 +361,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -401,8 +385,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -426,8 +409,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -451,8 +433,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -476,8 +457,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -501,8 +481,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -526,8 +505,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -551,8 +529,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -576,8 +553,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -601,8 +577,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -626,8 +601,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -651,8 +625,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -676,8 +649,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -701,8 +673,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -726,8 +697,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -751,8 +721,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -776,8 +745,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -801,8 +769,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -826,8 +793,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -851,8 +817,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -876,8 +841,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -901,8 +865,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -926,8 +889,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -951,8 +913,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -976,8 +937,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1001,8 +961,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1026,8 +985,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1051,8 +1009,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1076,8 +1033,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1101,8 +1057,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1126,8 +1081,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1151,8 +1105,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1176,8 +1129,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1201,8 +1153,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1226,8 +1177,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1251,8 +1201,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1276,8 +1225,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1301,8 +1249,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1326,8 +1273,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1351,8 +1297,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1376,8 +1321,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1401,8 +1345,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1426,8 +1369,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1451,8 +1393,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1476,8 +1417,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1501,8 +1441,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1526,8 +1465,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1551,8 +1489,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1576,8 +1513,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1601,8 +1537,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1626,8 +1561,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1651,8 +1585,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1676,8 +1609,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1701,8 +1633,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1726,8 +1657,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1751,8 +1681,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1776,8 +1705,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1801,8 +1729,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1826,8 +1753,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1851,8 +1777,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1876,8 +1801,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1901,8 +1825,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1926,8 +1849,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1951,8 +1873,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -1976,8 +1897,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2001,8 +1921,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2025,8 +1944,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2050,8 +1968,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2075,8 +1992,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2100,8 +2016,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2125,8 +2040,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2150,8 +2064,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2175,8 +2088,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2200,8 +2112,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2225,8 +2136,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2250,8 +2160,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2275,8 +2184,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2300,8 +2208,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2325,8 +2232,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2350,8 +2256,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2375,8 +2280,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2400,8 +2304,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2425,8 +2328,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2450,8 +2352,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2475,8 +2376,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2500,8 +2400,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2525,8 +2424,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2550,8 +2448,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2575,8 +2472,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2600,8 +2496,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2625,8 +2520,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2650,8 +2544,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2675,8 +2568,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2700,8 +2592,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2725,8 +2616,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2750,8 +2640,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2775,8 +2664,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2800,8 +2688,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2825,8 +2712,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2850,8 +2736,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2875,8 +2760,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2900,8 +2784,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2925,8 +2808,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2950,8 +2832,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -2975,8 +2856,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3000,8 +2880,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3025,8 +2904,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3050,8 +2928,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3075,8 +2952,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3100,8 +2976,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3125,8 +3000,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3150,8 +3024,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3175,8 +3048,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3200,8 +3072,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3225,8 +3096,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3250,8 +3120,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3275,8 +3144,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3300,8 +3168,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3325,8 +3192,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3350,8 +3216,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3375,8 +3240,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3400,8 +3264,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3425,8 +3288,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3450,8 +3312,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3475,8 +3336,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3500,8 +3360,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3525,8 +3384,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3550,8 +3408,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3575,8 +3432,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3600,8 +3456,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3625,8 +3480,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3650,8 +3504,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3675,8 +3528,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3700,8 +3552,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3725,8 +3576,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3750,8 +3600,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3775,8 +3624,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3800,8 +3648,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3825,8 +3672,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -3850,8 +3696,7 @@
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",

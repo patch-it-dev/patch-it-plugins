@@ -109,7 +109,7 @@ Kind: `openapi` (`kinds/openapi`), with its adapter, `Cloudflare` ([`api_spec.go
 
 ### What it watches
 
-The public API of the `cloudflare` package on PyPI, release by release: classes, functions and methods removed or renamed, parameters removed, and parameters that lost their default (callers must now pass them). One `package_release` event per change. Every final release is listed from PyPI, and each consecutive pair is compared.
+The public API of the `cloudflare` package on PyPI, release by release: classes, functions and methods removed or renamed, parameters removed, and parameters that lost their default (callers must now pass them). One `package_release` event per change. Every final release is listed from PyPI, and each consecutive pair is compared. What a release adds (a new module, class, function or method, or a new parameter with a default) is an `added` event.
 
 Kind: `apisurface` (`kinds/apisurface`), with the Python reader (`kinds/apisurface/pysurface`).
 
@@ -146,7 +146,7 @@ Kind: `apisurface` (`kinds/apisurface`), with the Python reader (`kinds/apisurfa
 
 ### What it watches
 
-Methods, sub-resources, types and attributes removed or renamed in each release of Cloudflare's TypeScript, Python and Go SDKs and its Terraform provider, from that release's section of the repo's `CHANGELOG.md` at its tag. One `package_release` event per bullet that names what it removes plainly. Cloudflare's API notices are a separate source (`cloudflare/api`).
+Methods, sub-resources, types and attributes removed or renamed in each release of Cloudflare's TypeScript, Python and Go SDKs and its Terraform provider, from that release's section of the repo's `CHANGELOG.md` at its tag. One `package_release` event per bullet that names what it removes plainly. Cloudflare's API notices are a separate source (`cloudflare/api`). A bullet under an "Added" or "Features" heading that plainly names what the release adds is an `added` event.
 
 Kind: `changelog` (`kinds/changelog`, `sdks.go`).
 

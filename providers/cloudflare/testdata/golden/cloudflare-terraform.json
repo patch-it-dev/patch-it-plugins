@@ -5,8 +5,7 @@
     "api": "cloudflare/terraform",
     "version": "5.29.0",
     "previous_version": "5.28.1",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "terraform",

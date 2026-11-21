@@ -1,12 +1,34 @@
 [
   {
     "id": 1,
+    "fingerprint": "sha256:52485305096cb3d69949fdaefe8ce2d66a47c5d8838b67d75bc1bca32674f1e0",
+    "api": "stripe/node",
+    "version": "10.0.0",
+    "previous_version": "9.16.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "stripe",
+      "change": "added_symbol",
+      "symbols": [
+        "Checkout.Session.shipping_cost",
+        "Checkout.Session.shipping_details"
+      ]
+    },
+    "description": "`Checkout.Session.shipping_cost`, `Checkout.Session.shipping_details` were added in stripe 10.0.0.",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-node/v10.0.0/CHANGELOG.md",
+    "source_excerpt": "## 10.0.0 - 2022-08-02\nAdded\n* Add support for `shipping_cost` and `shipping_details` on `Checkout.Session`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
     "fingerprint": "sha256:2856cf1b062ef3e8a7b029619210d99c4eeff1d987fd1b07cda009f21595fa7e",
     "api": "stripe/node",
     "version": "10.0.0",
     "previous_version": "9.16.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -25,13 +47,12 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 2,
+    "id": 3,
     "fingerprint": "sha256:c3a46e1eed63fe07ee8fd17743bd9b26ddd7dfdf8acc3dfb878f305f4a5c3058",
     "api": "stripe/node",
     "version": "10.0.0",
     "previous_version": "9.16.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -51,13 +72,12 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 3,
+    "id": 4,
     "fingerprint": "sha256:c8d1cabbaa3ec871d84e66b56fc7000c11d07d4bdc8ab353fd9eb7052bfa2f33",
     "api": "stripe/node",
     "version": "10.0.0",
     "previous_version": "9.16.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -75,13 +95,12 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 4,
+    "id": 5,
     "fingerprint": "sha256:630ab133a793dae35fa3a5cbde150da23a1aa3c254aa74599c0baa9a20a480ab",
     "api": "stripe/node",
     "version": "10.0.0",
     "previous_version": "9.16.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -100,13 +119,12 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 5,
+    "id": 6,
     "fingerprint": "sha256:5c369c047eb7249b0ea0ae8ee4a26678fe4f7fdec7ee607b2824c30a4af28af6",
     "api": "stripe/node",
     "version": "10.0.0",
     "previous_version": "9.16.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -124,13 +142,12 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 6,
+    "id": 7,
     "fingerprint": "sha256:cbfe6524ca5fce0839f344f84ffaa87777379e8cc5383028d755846a04d1788c",
     "api": "stripe/node",
     "version": "10.0.0",
     "previous_version": "9.16.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -148,13 +165,12 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 7,
+    "id": 8,
     "fingerprint": "sha256:05a31b5b2a1e855150ca4f888a658af38cd71e7f06fa59918059a3ffa8e1a899",
     "api": "stripe/node",
     "version": "10.0.0",
     "previous_version": "9.16.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -172,13 +188,12 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 8,
+    "id": 9,
     "fingerprint": "sha256:d6bc5839f091fe5c6f08d1f1028ded7ac98387016f830a72523be8dc59e6072f",
     "api": "stripe/node",
     "version": "10.0.0",
     "previous_version": "9.16.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",

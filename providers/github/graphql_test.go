@@ -57,7 +57,7 @@ func TestGraphQLGolden(t *testing.T) {
 		t.Errorf("got  %s\nwant %s", strings.Join(names, " | "), want)
 	}
 	for _, e := range got {
-		if e.ChangeType != event.ChangeTypeDeprecation || e.Subject.Kind != event.KindSchemaProperty || !strings.Contains(e.SourceExcerpt, `"criticality":"breaking"`) || strings.Contains(e.SourceExcerpt, "owner") {
+		if e.Change != event.ChangeDeprecated || e.Subject.Kind != event.KindSchemaProperty || !strings.Contains(e.SourceExcerpt, `"criticality":"breaking"`) || strings.Contains(e.SourceExcerpt, "owner") {
 			t.Errorf("%+v", e)
 		}
 	}

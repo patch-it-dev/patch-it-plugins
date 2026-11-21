@@ -50,26 +50,37 @@ func pair(t *testing.T) []event.Event {
 // openai 1.1.2 renamed the misspelled AsssitantDeleted to AssistantDeleted,
 // module and all: the old name is gone from both places code could import
 // it. (Not read as a rename: the class has no parameters to tell it's the
-// same class.)
+// same class.) AssistantDeleted, new, is the pair's addition.
 func TestPythonSurfaceGolden(t *testing.T) {
 	got := pair(t)
 	kittest.Golden(t, "testdata/golden/openai-python-surface.json", got)
 	for _, e := range got {
-		if e.PreviousVersion != "1.1.1" || e.Version != "1.1.2" || e.SourceURL != wheel112 || !strings.Contains(e.SourceExcerpt, "openai/types/beta/asssitant_deleted.py line ") {
+		file := "openai/types/beta/asssitant_deleted.py line "
+		if e.Change == event.ChangeAdded {
+			file = "openai/types/beta/assistant_deleted.py line "
+		}
+		if e.PreviousVersion != "1.1.1" || e.Version != "1.1.2" || e.SourceURL != wheel112 || !strings.Contains(e.SourceExcerpt, file) {
 			t.Errorf("%v: %s<-%s, excerpt %q", e.Subject.Symbols, e.Version, e.PreviousVersion, e.SourceExcerpt)
 		}
 	}
 }
 
 // The pinned drop test: 1.1.2 adds AssistantDeleted and its module. A name
-// that appears is no breaking change: no event names it.
+// that appears is an addition, never a breaking change.
 func TestPythonSurfaceAnAddedNameIsNoEvent(t *testing.T) {
+	added := 0
 	for _, e := range pair(t) {
 		for _, s := range e.Subject.Symbols {
 			if strings.Contains(s, "AssistantDeleted") || strings.Contains(s, "assistant_deleted") {
-				t.Errorf("event for %s, which 1.1.2 added", s)
+				if e.Change != event.ChangeAdded || e.Subject.Change != event.PackageAddedSymbol {
+					t.Errorf("%s %s for %s, which 1.1.2 added", e.Change, e.Subject.Change, s)
+				}
+				added++
 			}
 		}
+	}
+	if added == 0 {
+		t.Error("no added event for AssistantDeleted")
 	}
 }
 

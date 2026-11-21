@@ -1,12 +1,143 @@
 [
   {
     "id": 1,
+    "fingerprint": "sha256:a1b2dcc141128a20635ed372a8e080dc7301e4f67a9fabbc6d15f0e9e671ceee",
+    "api": "redis/node-redis-surface",
+    "version": "5.0.0",
+    "previous_version": "1.6.1",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@redis/client",
+      "change": "added_symbol",
+      "symbols": [
+        "BlobError"
+      ]
+    },
+    "description": "New class `BlobError` in @redis/client 5.0.0.",
+    "source_url": "https://registry.npmjs.org/@redis/client/-/client-5.0.0.tgz",
+    "source_excerpt": "@redis/client 1.6.1 (client-1.6.1.tgz): not defined\n@redis/client 5.0.0 (client-5.0.0.tgz), dist/lib/errors.d.ts line 35: class BlobError extends ErrorReply",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:d60c2b59b8e245238757bda2fd64e01ddeb9899422dceba2071d504d92d16ae9",
+    "api": "redis/node-redis-surface",
+    "version": "5.0.0",
+    "previous_version": "1.6.1",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@redis/client",
+      "change": "added_symbol",
+      "symbols": [
+        "GEO_REPLY_WITH"
+      ]
+    },
+    "description": "New export `GEO_REPLY_WITH` in @redis/client 5.0.0.",
+    "source_url": "https://registry.npmjs.org/@redis/client/-/client-5.0.0.tgz",
+    "source_excerpt": "@redis/client 1.6.1 (client-1.6.1.tgz): not defined\n@redis/client 5.0.0 (client-5.0.0.tgz), dist/index.d.ts line 18: export { GEO_REPLY_WITH } from \"./lib/commands/GEOSEARCH_WITH\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:6f40ab5a16ca18cc91d4790704cb6cdfb6b99b1d6e8f07fe7802b9f3f2a4084a",
+    "api": "redis/node-redis-surface",
+    "version": "5.0.0",
+    "previous_version": "1.6.1",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@redis/client",
+      "change": "added_symbol",
+      "symbols": [
+        "REDIS_FLUSH_MODES"
+      ]
+    },
+    "description": "New variable `REDIS_FLUSH_MODES` in @redis/client 5.0.0.",
+    "source_url": "https://registry.npmjs.org/@redis/client/-/client-5.0.0.tgz",
+    "source_excerpt": "@redis/client 1.6.1 (client-1.6.1.tgz): not defined\n@redis/client 5.0.0 (client-5.0.0.tgz), dist/lib/commands/FLUSHALL.d.ts line 3: const REDIS_FLUSH_MODES: { readonly ASYNC: \"ASYNC\"; readonly SYNC: \"SYNC\"; }",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:1c3cb748ebfa89d21198dfb3f01c84207d2cba2b396b1d7b71800010dad64988",
+    "api": "redis/node-redis-surface",
+    "version": "5.0.0",
+    "previous_version": "1.6.1",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@redis/client",
+      "change": "added_symbol",
+      "symbols": [
+        "RESP_TYPES"
+      ]
+    },
+    "description": "New export `RESP_TYPES` in @redis/client 5.0.0.",
+    "source_url": "https://registry.npmjs.org/@redis/client/-/client-5.0.0.tgz",
+    "source_excerpt": "@redis/client 1.6.1 (client-1.6.1.tgz): not defined\n@redis/client 5.0.0 (client-5.0.0.tgz), dist/index.d.ts line 2: export { RESP_TYPES } from \"./lib/RESP/decoder\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:ed140a8a85502c50125c55eb2128a7858351c34768f1d3e9b202a5cc85b21592",
+    "api": "redis/node-redis-surface",
+    "version": "5.0.0",
+    "previous_version": "1.6.1",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@redis/client",
+      "change": "added_symbol",
+      "symbols": [
+        "RedisArgument"
+      ]
+    },
+    "description": "New export `RedisArgument` in @redis/client 5.0.0.",
+    "source_url": "https://registry.npmjs.org/@redis/client/-/client-5.0.0.tgz",
+    "source_excerpt": "@redis/client 1.6.1 (client-1.6.1.tgz): not defined\n@redis/client 5.0.0 (client-5.0.0.tgz), dist/index.d.ts line 1: export { RedisArgument } from \"./lib/RESP/types\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:17eaba7ca925e13a154c064097a6278e2649436293c7e58c9d6a0db7e21019aa",
+    "api": "redis/node-redis-surface",
+    "version": "5.0.0",
+    "previous_version": "1.6.1",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@redis/client",
+      "change": "added_symbol",
+      "symbols": [
+        "RedisClientPoolType"
+      ]
+    },
+    "description": "New export `RedisClientPoolType` in @redis/client 5.0.0.",
+    "source_url": "https://registry.npmjs.org/@redis/client/-/client-5.0.0.tgz",
+    "source_excerpt": "@redis/client 1.6.1 (client-1.6.1.tgz): not defined\n@redis/client 5.0.0 (client-5.0.0.tgz), dist/index.d.ts line 0: import RedisClientPoolType from \"./lib/client/pool\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
     "fingerprint": "sha256:d970a908bf0b4a315ebe3b2e58ea35fa200f14be60a1766ebb3d00b7bdd43c75",
     "api": "redis/node-redis-surface",
     "version": "5.0.0",
     "previous_version": "1.6.1",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -24,13 +155,188 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 2,
+    "id": 8,
+    "fingerprint": "sha256:5c9a9202a669530bf60a2751c1a5ba5c2518f790674fbeb5660d192d60b6eb42",
+    "api": "redis/node-redis-surface",
+    "version": "5.0.0",
+    "previous_version": "1.6.1",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@redis/client",
+      "change": "added_symbol",
+      "symbols": [
+        "RedisPoolOptions"
+      ]
+    },
+    "description": "New export `RedisPoolOptions` in @redis/client 5.0.0.",
+    "source_url": "https://registry.npmjs.org/@redis/client/-/client-5.0.0.tgz",
+    "source_excerpt": "@redis/client 1.6.1 (client-1.6.1.tgz): not defined\n@redis/client 5.0.0 (client-5.0.0.tgz), dist/index.d.ts line 0: import RedisPoolOptions from \"./lib/client/pool\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 9,
+    "fingerprint": "sha256:63f68a5a16f977db444805edf8e7bba25976a69d60dc3f2eac52944cecf65cb4",
+    "api": "redis/node-redis-surface",
+    "version": "5.0.0",
+    "previous_version": "1.6.1",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@redis/client",
+      "change": "added_symbol",
+      "symbols": [
+        "RedisSentinelOptions"
+      ]
+    },
+    "description": "New export `RedisSentinelOptions` in @redis/client 5.0.0.",
+    "source_url": "https://registry.npmjs.org/@redis/client/-/client-5.0.0.tgz",
+    "source_excerpt": "@redis/client 1.6.1 (client-1.6.1.tgz): not defined\n@redis/client 5.0.0 (client-5.0.0.tgz), dist/index.d.ts line 16: export { RedisSentinelOptions } from \"./lib/sentinel/types\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 10,
+    "fingerprint": "sha256:62cd55514763cfa28dce715b5dbb99ebb51bcf23999a82f6b688e802fd5440a1",
+    "api": "redis/node-redis-surface",
+    "version": "5.0.0",
+    "previous_version": "1.6.1",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@redis/client",
+      "change": "added_symbol",
+      "symbols": [
+        "RedisSentinelType"
+      ]
+    },
+    "description": "New export `RedisSentinelType` in @redis/client 5.0.0.",
+    "source_url": "https://registry.npmjs.org/@redis/client/-/client-5.0.0.tgz",
+    "source_excerpt": "@redis/client 1.6.1 (client-1.6.1.tgz): not defined\n@redis/client 5.0.0 (client-5.0.0.tgz), dist/index.d.ts line 16: export { RedisSentinelType } from \"./lib/sentinel/types\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 11,
+    "fingerprint": "sha256:72f727eb954b177c69b0948abc4abc152ab9a970ede709a42b0c8aad2b0404e2",
+    "api": "redis/node-redis-surface",
+    "version": "5.0.0",
+    "previous_version": "1.6.1",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@redis/client",
+      "change": "added_symbol",
+      "symbols": [
+        "RespVersions"
+      ]
+    },
+    "description": "New export `RespVersions` in @redis/client 5.0.0.",
+    "source_url": "https://registry.npmjs.org/@redis/client/-/client-5.0.0.tgz",
+    "source_excerpt": "@redis/client 1.6.1 (client-1.6.1.tgz): not defined\n@redis/client 5.0.0 (client-5.0.0.tgz), dist/index.d.ts line 1: export { RespVersions } from \"./lib/RESP/types\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 12,
+    "fingerprint": "sha256:e78f0c923ea502c52e202412585e2f6879a1314a1ed432a0eea7eb56e7318fca",
+    "api": "redis/node-redis-surface",
+    "version": "5.0.0",
+    "previous_version": "1.6.1",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@redis/client",
+      "change": "added_symbol",
+      "symbols": [
+        "SimpleError"
+      ]
+    },
+    "description": "New class `SimpleError` in @redis/client 5.0.0.",
+    "source_url": "https://registry.npmjs.org/@redis/client/-/client-5.0.0.tgz",
+    "source_excerpt": "@redis/client 1.6.1 (client-1.6.1.tgz): not defined\n@redis/client 5.0.0 (client-5.0.0.tgz), dist/lib/errors.d.ts line 33: class SimpleError extends ErrorReply",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 13,
+    "fingerprint": "sha256:64f0b66767b06fd245725b8a1c51bad255bfdfedccfc45a0c504e61612593e45",
+    "api": "redis/node-redis-surface",
+    "version": "5.0.0",
+    "previous_version": "1.6.1",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@redis/client",
+      "change": "added_symbol",
+      "symbols": [
+        "TimeoutError"
+      ]
+    },
+    "description": "New class `TimeoutError` in @redis/client 5.0.0.",
+    "source_url": "https://registry.npmjs.org/@redis/client/-/client-5.0.0.tgz",
+    "source_excerpt": "@redis/client 1.6.1 (client-1.6.1.tgz): not defined\n@redis/client 5.0.0 (client-5.0.0.tgz), dist/lib/errors.d.ts line 37: class TimeoutError extends Error",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 14,
+    "fingerprint": "sha256:0241ab6a8fd939b677fc2f178a1a49e7e582beefadb267fcf6b766ec3b04ec54",
+    "api": "redis/node-redis-surface",
+    "version": "5.0.0",
+    "previous_version": "1.6.1",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@redis/client",
+      "change": "added_symbol",
+      "symbols": [
+        "TypeMapping"
+      ]
+    },
+    "description": "New export `TypeMapping` in @redis/client 5.0.0.",
+    "source_url": "https://registry.npmjs.org/@redis/client/-/client-5.0.0.tgz",
+    "source_excerpt": "@redis/client 1.6.1 (client-1.6.1.tgz): not defined\n@redis/client 5.0.0 (client-5.0.0.tgz), dist/index.d.ts line 1: export { TypeMapping } from \"./lib/RESP/types\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 15,
+    "fingerprint": "sha256:69de504b02167cfe16982da3fe08346e3c7a189acac71610a943de1a342b36d0",
+    "api": "redis/node-redis-surface",
+    "version": "5.0.0",
+    "previous_version": "1.6.1",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@redis/client",
+      "change": "added_symbol",
+      "symbols": [
+        "VerbatimString"
+      ]
+    },
+    "description": "New export `VerbatimString` in @redis/client 5.0.0.",
+    "source_url": "https://registry.npmjs.org/@redis/client/-/client-5.0.0.tgz",
+    "source_excerpt": "@redis/client 1.6.1 (client-1.6.1.tgz): not defined\n@redis/client 5.0.0 (client-5.0.0.tgz), dist/index.d.ts line 3: export { VerbatimString } from \"./lib/RESP/verbatim-string\"",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 16,
     "fingerprint": "sha256:d45c7699a9c5708e947fddde2a03a1556f1a02b3fc5268d6b759c43576f75204",
     "api": "redis/node-redis-surface",
     "version": "5.0.0",
     "previous_version": "1.6.1",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -44,6 +350,50 @@
     "migration_hint": "@redis/client 5.0.0 has no `commandOptions`: see the package's release notes for what replaces it.",
     "source_url": "https://registry.npmjs.org/@redis/client/-/client-5.0.0.tgz",
     "source_excerpt": "@redis/client 1.6.1 (client-1.6.1.tgz), dist/index.d.ts line 6: const commandOptions: typeof RedisClient.commandOptions\n@redis/client 5.0.0 (client-5.0.0.tgz): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 17,
+    "fingerprint": "sha256:6f80de21a50875065d5c9f55ceee24aed1ed8226e0d5237d817c6a0ebf78c2bb",
+    "api": "redis/node-redis-surface",
+    "version": "5.0.0",
+    "previous_version": "1.6.1",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@redis/client",
+      "change": "added_symbol",
+      "symbols": [
+        "createClientPool"
+      ]
+    },
+    "description": "New variable `createClientPool` in @redis/client 5.0.0.",
+    "source_url": "https://registry.npmjs.org/@redis/client/-/client-5.0.0.tgz",
+    "source_excerpt": "@redis/client 1.6.1 (client-1.6.1.tgz): not defined\n@redis/client 5.0.0 (client-5.0.0.tgz), dist/index.d.ts line 11: const createClientPool: typeof RedisClientPool.create",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 18,
+    "fingerprint": "sha256:026797db569cd7f1f97a40edcb1c51f7d6735d808862d90a37c35a1178fd2df3",
+    "api": "redis/node-redis-surface",
+    "version": "5.0.0",
+    "previous_version": "1.6.1",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@redis/client",
+      "change": "added_symbol",
+      "symbols": [
+        "createSentinel"
+      ]
+    },
+    "description": "New variable `createSentinel` in @redis/client 5.0.0.",
+    "source_url": "https://registry.npmjs.org/@redis/client/-/client-5.0.0.tgz",
+    "source_excerpt": "@redis/client 1.6.1 (client-1.6.1.tgz): not defined\n@redis/client 5.0.0 (client-5.0.0.tgz), dist/index.d.ts line 17: const createSentinel: typeof RedisSentinel.create",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   }

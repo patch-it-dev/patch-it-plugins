@@ -20,19 +20,21 @@ import (
 	"github.com/patch-it-dev/patch-it-plugins/kinds/apisurface"
 )
 
-// Case is one source's saved releases: a golden pair, the events it must
-// store, and a drop pair, a real release that must store none. Both pairs
-// are consecutive releases on the registry.
+// Case is one source's saved releases: a golden pair, the breaking events it
+// must store, and a drop pair, a real release that must store none. Both
+// pairs are consecutive releases on the registry. What a pair adds (added
+// events) is in the golden file, not in Want, and a drop pair may add.
 type Case struct {
 	Package apisurface.Package
 	Golden  [2]string
-	Want    []string // each event as "<change> <symbol> <parameter>"
+	Want    []string // each breaking event as "<change> <symbol> <parameter>"
 	Drop    [2]string
 }
 
-// PyPI checks a PyPI source: its golden pair stores exactly the events
-// listed, each citing the newer wheel and quoting both releases, against
-// testdata/golden/<provider>-<source>.json; its drop pair stores none; and
+// PyPI checks a PyPI source: its golden pair stores exactly the breaking
+// events listed (and what it adds, in the golden file), each citing the newer wheel and quoting both releases, against
+// testdata/golden/<provider>-<source>.json; its drop pair stores nothing
+// that breaks or deprecates; and
 // it is registered.
 func PyPI(t *testing.T, c Case) {
 	t.Helper()
@@ -41,7 +43,9 @@ func PyPI(t *testing.T, c Case) {
 		got := pypiPair(t, c, c.Golden)
 		var lines []string
 		for _, e := range got {
-			lines = append(lines, string(e.Subject.Change)+" "+strings.Join(e.Subject.Symbols, ",")+" "+e.Subject.Parameter)
+			if e.Change != event.ChangeAdded {
+				lines = append(lines, string(e.Subject.Change)+" "+strings.Join(e.Subject.Symbols, ",")+" "+e.Subject.Parameter)
+			}
 			if e.Version != c.Golden[1] || e.PreviousVersion != c.Golden[0] || !strings.Contains(e.SourceURL, "files.pythonhosted.org") || !strings.Contains(e.SourceExcerpt, c.Package.Name+" "+c.Golden[0]+" (") {
 				t.Errorf("%s: %s<-%s cites %s, excerpt %q", e.Subject.Symbols, e.Version, e.PreviousVersion, e.SourceURL, e.SourceExcerpt)
 			}
@@ -54,7 +58,9 @@ func PyPI(t *testing.T, c Case) {
 	})
 	t.Run("drop", func(t *testing.T) {
 		for _, e := range pypiPair(t, c, c.Drop) {
-			t.Errorf("%s %v %s", e.Subject.Change, e.Subject.Symbols, e.Subject.Parameter)
+			if e.Change != event.ChangeAdded {
+				t.Errorf("%s %v %s", e.Subject.Change, e.Subject.Symbols, e.Subject.Parameter)
+			}
 		}
 	})
 }
@@ -71,7 +77,9 @@ func NPM(t *testing.T, c Case) {
 		}
 		var lines []string
 		for _, e := range got {
-			lines = append(lines, string(e.Subject.Change)+" "+strings.Join(e.Subject.Symbols, ",")+" "+e.Subject.Parameter)
+			if e.Change != event.ChangeAdded {
+				lines = append(lines, string(e.Subject.Change)+" "+strings.Join(e.Subject.Symbols, ",")+" "+e.Subject.Parameter)
+			}
 			if e.Version != c.Golden[1] || e.PreviousVersion != c.Golden[0] || !strings.HasPrefix(e.SourceURL, "https://registry.npmjs.org/") || !strings.Contains(e.SourceExcerpt, c.Package.Name+" "+c.Golden[0]+" (") || e.Subject.Ecosystem != "npm" {
 				t.Errorf("%s: %s<-%s cites %s, excerpt %q", e.Subject.Symbols, e.Version, e.PreviousVersion, e.SourceURL, e.SourceExcerpt)
 			}
@@ -84,7 +92,9 @@ func NPM(t *testing.T, c Case) {
 	})
 	t.Run("drop", func(t *testing.T) {
 		for _, e := range npmPair(t, c, c.Drop) {
-			t.Errorf("%s %v %s", e.Subject.Change, e.Subject.Symbols, e.Subject.Parameter)
+			if e.Change != event.ChangeAdded {
+				t.Errorf("%s %v %s", e.Subject.Change, e.Subject.Symbols, e.Subject.Parameter)
+			}
 		}
 	})
 }

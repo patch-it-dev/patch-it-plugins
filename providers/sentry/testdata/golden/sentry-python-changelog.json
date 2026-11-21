@@ -5,8 +5,7 @@
     "api": "sentry/python-changelog",
     "version": "2.0.0",
     "previous_version": "1.45.1",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -29,8 +28,7 @@
     "api": "sentry/python-changelog",
     "version": "2.0.0",
     "previous_version": "1.45.1",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -53,8 +51,7 @@
     "api": "sentry/python-changelog",
     "version": "2.0.0",
     "previous_version": "1.45.1",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -77,8 +74,7 @@
     "api": "sentry/python-changelog",
     "version": "2.0.0",
     "previous_version": "1.45.1",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -101,8 +97,7 @@
     "api": "sentry/python-changelog",
     "version": "2.0.0",
     "previous_version": "1.45.1",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -121,12 +116,11 @@
   },
   {
     "id": 6,
-    "fingerprint": "sha256:267c491f2b9d0d8aecfc5322d8bc8361cd4325bcdfe89e083d22d36f95b783ac",
+    "fingerprint": "sha256:a0a42771836bd32b736b107de41c6c7f7bdc0e07259b142e903c6bdf5988afaa",
     "api": "sentry/python-changelog",
     "version": "2.0.0",
     "previous_version": "1.45.1",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -145,12 +139,11 @@
   },
   {
     "id": 7,
-    "fingerprint": "sha256:50850b1709f2eb184c4c9c06ca7e03526b392d864286ad444696bea22dd27302",
+    "fingerprint": "sha256:255b1ef043aff5a144ffff9bc8caeae196d4c9cda175d2a1d15fd2e88528cc81",
     "api": "sentry/python-changelog",
     "version": "2.0.0",
     "previous_version": "1.45.1",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -169,12 +162,11 @@
   },
   {
     "id": 8,
-    "fingerprint": "sha256:2c94e0b51f757d22c715faac37426deb5f991e822636564ff18f87449121719c",
+    "fingerprint": "sha256:ecb762d5cc0ac39583853acb5e902fb0001ad6d786bc9aacb019eea115dc65fd",
     "api": "sentry/python-changelog",
     "version": "2.0.0",
     "previous_version": "1.45.1",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",

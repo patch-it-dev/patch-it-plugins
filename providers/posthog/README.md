@@ -64,7 +64,7 @@ Kind: `migrationguide` (`kinds/migrationguide`), with the removed-members reader
 
 ### What it watches
 
-Names removed or renamed in each release of posthog-go, from that release's section of its `CHANGELOG.md` at its tag. Package `go:github.com/posthog/posthog-go` (events name the module at each release's major, `…/v2` from 2.0.0); releases listed from the repo's `vX.Y.Z` tags. The Python SDK's 8.0 migration guide is a separate source (`posthog/python-sdk`).
+Names removed or renamed in each release of posthog-go, from that release's section of its `CHANGELOG.md` at its tag. Package `go:github.com/posthog/posthog-go` (events name the module at each release's major, `…/v2` from 2.0.0); releases listed from the repo's `vX.Y.Z` tags. The Python SDK's 8.0 migration guide is a separate source (`posthog/python-sdk`). A bullet under an "Added" or "Features" heading that plainly names what the release adds is an `added` event.
 
 Kind: `changelog` (`kinds/changelog`, `sdks.go`).
 

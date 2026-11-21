@@ -28,8 +28,7 @@ var source = Source{
 func chargesRemoved() diff.Change {
 	return diff.Change{
 		Kind:       diff.PropertyRemoved,
-		ChangeType: event.ChangeTypeBreaking,
-		Breaking:   true,
+		ChangeType: event.ChangeBreaking,
 		Side:       event.SideResponse,
 		Schema:     "payment_intent",
 		Property:   "charges",
@@ -42,7 +41,7 @@ func chargesRemoved() diff.Change {
 func latestChargeAdded() diff.Change {
 	return diff.Change{
 		Kind:       diff.PropertyAdded,
-		ChangeType: event.ChangeTypeNewFeature,
+		ChangeType: event.ChangeAdded,
 		Side:       event.SideResponse,
 		Schema:     "payment_intent",
 		Property:   "latest_charge",
@@ -62,7 +61,7 @@ func TestEventsAreValidWithFullProvenance(t *testing.T) {
 
 	removed, added := events[0], events[1]
 	if removed.Subject.Kind != event.KindSchemaProperty || removed.Subject.Schema != "payment_intent" ||
-		removed.Subject.Property != "charges" || !removed.Breaking {
+		removed.Subject.Property != "charges" || removed.Change != event.ChangeBreaking {
 		t.Errorf("charges removal mapped wrong: %+v", removed)
 	}
 	// Removals cite the old spec: the evidence is gone from the new one.

@@ -30,11 +30,10 @@ func (p testPlugin) Read(_ context.Context, env Env, _ Snapshot) (Snapshot, erro
 func (p testPlugin) Extract(_ context.Context, env Env, _, _ Snapshot) (Result, error) {
 	subject := event.Subject{Type: event.SubjectModel, Provider: "test", Name: "model-1"}
 	e := event.Event{
-		Fingerprint:   event.Fingerprint(p.name, "2026-12-01", event.ChangeTypeBreaking, subject, ""),
+		Fingerprint:   event.Fingerprint(p.name, "2026-12-01", event.ChangeBreaking, subject, ""),
 		API:           p.name,
 		Version:       "2026-12-01",
-		ChangeType:    event.ChangeTypeBreaking,
-		Breaking:      true,
+		Change:        event.ChangeBreaking,
 		Subject:       subject,
 		Description:   "model-1 shuts down on 2026-12-01.",
 		SourceURL:     "https://example.test/spec/2.json",

@@ -115,8 +115,8 @@ func TestSentryGolden(t *testing.T) {
 	byVersion := map[string]int{}
 	for _, e := range events {
 		byVersion[e.Version]++
-		if e.ChangeType != event.ChangeTypeDeprecation || !strings.HasSuffix(e.SourcePointer, "/description") {
-			t.Errorf("%s: %s citing %s", e.Subject.Operation, e.ChangeType, e.SourcePointer)
+		if e.Change != event.ChangeDeprecated || !strings.HasSuffix(e.SourcePointer, "/description") {
+			t.Errorf("%s: %s citing %s", e.Subject.Operation, e.Change, e.SourcePointer)
 		}
 		if !strings.Contains(e.Subject.Operation, " /api/0/") {
 			t.Errorf("%s: want the path a caller sends, with /api/0", e.Subject.Operation)
@@ -197,8 +197,8 @@ func TestSentryBasePathMoveIsNoChange(t *testing.T) {
 	// pointer names a node in the file as published, without /api/0.
 	p.Keep = nil
 	for _, e := range pairSentry(t, p, [2]string{"2.0.1", "2.1.0"}) {
-		if e.ChangeType == event.ChangeTypeBreaking && e.Subject.Kind == event.KindOperation {
-			t.Errorf("unfiltered: %s %s", e.ChangeType, e.Subject.Operation)
+		if e.Change == event.ChangeBreaking && e.Subject.Kind == event.KindOperation {
+			t.Errorf("unfiltered: %s %s", e.Change, e.Subject.Operation)
 		}
 		ref := strings.TrimSuffix(strings.TrimPrefix(e.SourceURL, base+"/"), "/openapi-derefed.json")
 		if node := openapitest.JSONNode(t, sentryFile(ref), e.SourcePointer); node != e.SourceExcerpt && !openapitest.Truncated(e.SourceExcerpt, node) {
@@ -210,7 +210,7 @@ func TestSentryBasePathMoveIsNoChange(t *testing.T) {
 	raw := openapi.Plugin{Adapter: rawSentry{}, Diff: sentryDiff}
 	var removed []string
 	for _, e := range pairSentry(t, raw, [2]string{"2.0.1", "2.1.0"}) {
-		if e.ChangeType == event.ChangeTypeBreaking && e.Subject.Kind == event.KindOperation {
+		if e.Change == event.ChangeBreaking && e.Subject.Kind == event.KindOperation {
 			removed = append(removed, e.Subject.Operation)
 		}
 	}
@@ -219,7 +219,7 @@ func TestSentryBasePathMoveIsNoChange(t *testing.T) {
 	}
 	raw.Keep = openapi.DeprecationsOnly(sentryDiff)
 	events := pairSentry(t, raw, [2]string{"2.0.1", "2.1.0"})
-	if len(events) != 1 || events[0].Subject.Operation != "GET /api/0/projects/{organization_id_or_slug}/{project_id_or_slug}/issues/" || !events[0].Breaking {
+	if len(events) != 1 || events[0].Subject.Operation != "GET /api/0/projects/{organization_id_or_slug}/{project_id_or_slug}/issues/" || events[0].Change != event.ChangeBreaking {
 		t.Errorf("as published, removals of deprecated operations: %d events, want GET .../issues/ removed", len(events))
 	}
 }

@@ -77,8 +77,8 @@ func TestCloudflareGolden(t *testing.T) {
 	var ops []string
 	for _, e := range events {
 		ops = append(ops, e.Subject.Operation)
-		if e.ChangeType != event.ChangeTypeBreaking || e.Version != "2026-10-30" || e.PreviousVersion != "2026-10-29" || e.SourceURL != cloudflareURL("2026-10-29") {
-			t.Errorf("%s: %s %s<-%s cites %s", e.Subject.Operation, e.ChangeType, e.Version, e.PreviousVersion, e.SourceURL)
+		if e.Change != event.ChangeBreaking || e.Version != "2026-10-30" || e.PreviousVersion != "2026-10-29" || e.SourceURL != cloudflareURL("2026-10-29") {
+			t.Errorf("%s: %s %s<-%s cites %s", e.Subject.Operation, e.Change, e.Version, e.PreviousVersion, e.SourceURL)
 		}
 	}
 	slices.Sort(ops)

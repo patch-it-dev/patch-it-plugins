@@ -5,8 +5,7 @@
     "api": "posthog/go",
     "version": "2.0.0",
     "previous_version": "1.44.1",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",

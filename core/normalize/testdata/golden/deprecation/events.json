@@ -1,12 +1,11 @@
 [
   {
     "id": 0,
-    "fingerprint": "sha256:0563cf609d49fe03301efb63f3b071d05ffa98392a443dbccec31b867a4446b9",
+    "fingerprint": "sha256:e5292c5beaa31dec4730d0a2be959aafda956b5d26f41fd3274117a7cf1ad35a",
     "api": "stripe/api",
     "version": "2026-08-26.dahlia",
     "previous_version": "2026-07-29.dahlia",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",

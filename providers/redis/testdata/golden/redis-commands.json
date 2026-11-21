@@ -5,8 +5,7 @@
     "api": "redis/commands",
     "version": "8.8-rc1",
     "previous_version": "8.8-m03",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "redis",
@@ -28,8 +27,7 @@
     "api": "redis/commands",
     "version": "8.8-rc1",
     "previous_version": "8.8-m03",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "redis",
@@ -42,6 +40,424 @@
     "description": "GCRASETVALUE is gone in Redis 8.8-rc1 (it was in 8.8-m03): calling it fails.",
     "source_url": "https://raw.githubusercontent.com/redis/redis/8.8-m03/src/commands/gcrasetvalue.json",
     "source_excerpt": "{\"GCRASETVALUE\":{\"summary\":\"An internal command for recording a GCRA TAT value during AOF rewrite and replication.\",\"complexity\":\"O(1)\",\"group\":\"rate_limit\",\"since\":\"8.8.0\",\"arity\":3,\"function\":\"gcraSetValueCommand\",\"command_flags\":[\"WRITE\",\"DENYOOM\",\"FAST\"],\"acl_categories\":[\"RATE_LIMIT\"],\"key_specs\":[{\"flags\":[\"OW\",\"UPDATE\"],\"begin_search\":{\"index\":{\"pos\":1}},\"find_keys\":{\"range\":{\"lastkey\":0,\"step\":1,\"limit\":0}}}],\"reply_schema\":{\"const\":\"OK\"},\"arguments\":[{\"name\":\"key\",\"type\":\"key\",\"key_spec_index\":0},{\"name\":\"tat\",\"type\":\"integer\"}]}}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:88ea9c8d0af373d569c35c0543510defac510544d94dd496759266038490d5eb",
+    "api": "redis/commands",
+    "version": "8.8-rc1",
+    "previous_version": "8.8-m03",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "redis",
+      "package": "redis",
+      "change": "added_symbol",
+      "symbols": [
+        "ARCOUNT"
+      ]
+    },
+    "description": "ARCOUNT is new in Redis 8.8-rc1 (it wasn't in 8.8-m03).",
+    "source_url": "https://raw.githubusercontent.com/redis/redis/8.8-rc1/src/commands/arcount.json",
+    "source_excerpt": "{\"ARCOUNT\":{\"summary\":\"Returns the number of non-empty elements in an array.\",\"complexity\":\"O(1)\",\"group\":\"array\",\"since\":\"8.8.0\",\"arity\":2,\"function\":\"arcountCommand\",\"command_flags\":[\"READONLY\",\"FAST\"],\"acl_categories\":[\"ARRAY\"],\"key_specs\":[{\"flags\":[\"RO\",\"ACCESS\"],\"begin_search\":{\"index\":{\"pos\":1}},\"find_keys\":{\"range\":{\"lastkey\":0,\"step\":1,\"limit\":0}}}],\"reply_schema\":{\"description\":\"The number of non-empty elements, or 0 if key does not exist.\",\"type\":\"integer\"},\"arguments\":[{\"name\":\"key\",\"type\":\"key\",\"key_spec_index\":0}]}}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:07f3ca3ccd6a4a6491164a03c5743f68d0120024fa331539b157eb911e1589bd",
+    "api": "redis/commands",
+    "version": "8.8-rc1",
+    "previous_version": "8.8-m03",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "redis",
+      "package": "redis",
+      "change": "added_symbol",
+      "symbols": [
+        "ARDEL"
+      ]
+    },
+    "description": "ARDEL is new in Redis 8.8-rc1 (it wasn't in 8.8-m03).",
+    "source_url": "https://raw.githubusercontent.com/redis/redis/8.8-rc1/src/commands/ardel.json",
+    "source_excerpt": "{\"ARDEL\":{\"summary\":\"Deletes elements at the specified indices in an array.\",\"complexity\":\"O(N) where N is the number of indices to delete\",\"group\":\"array\",\"since\":\"8.8.0\",\"arity\":-3,\"function\":\"ardelCommand\",\"command_flags\":[\"WRITE\",\"FAST\"],\"acl_categories\":[\"ARRAY\"],\"key_specs\":[{\"flags\":[\"RW\",\"DELETE\"],\"begin_search\":{\"index\":{\"pos\":1}},\"find_keys\":{\"range\":{\"lastkey\":0,\"step\":1,\"limit\":0}}}],\"reply_schema\":{\"description\":\"Number of elements deleted.\",\"type\":\"integer\"},\"arguments\":[{\"name\":\"key\",\"type\":\"key\",\"key_spec_index\":0},{\"name\":\"index\",\"type\":\"integer\",\"multiple\":true}]}}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:58e0609f104abf89432cf40301ebe50a91f99155696468fa6d72f5e269acf82d",
+    "api": "redis/commands",
+    "version": "8.8-rc1",
+    "previous_version": "8.8-m03",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "redis",
+      "package": "redis",
+      "change": "added_symbol",
+      "symbols": [
+        "ARDELRANGE"
+      ]
+    },
+    "description": "ARDELRANGE is new in Redis 8.8-rc1 (it wasn't in 8.8-m03).",
+    "source_url": "https://raw.githubusercontent.com/redis/redis/8.8-rc1/src/commands/ardelrange.json",
+    "source_excerpt": "{\"ARDELRANGE\":{\"summary\":\"Deletes elements in one or more ranges.\",\"complexity\":\"Proportional to the number of existing elements / slices touched, not to the numeric span of the requested ranges\",\"group\":\"array\",\"since\":\"8.8.0\",\"arity\":-4,\"function\":\"ardelrangeCommand\",\"command_flags\":[\"WRITE\"],\"acl_categories\":[\"ARRAY\"],\"key_specs\":[{\"flags\":[\"RW\",\"DELETE\"],\"begin_search\":{\"index\":{\"pos\":1}},\"find_keys\":{\"range\":{\"lastkey\":0,\"step\":1,\"limit\":0}}}],\"reply_schema\":{\"description\":\"Number of elements deleted.\",\"type\":\"integer\"},\"arguments\":[{\"name\":\"key\",\"type\":\"key\",\"key_spec_index\":0},{\"name\":\"range\",\"type\":\"block\",\"multiple\":true,\"arguments\":[{\"name\":\"start\",\"type\":\"integer\"},{\"name\":\"end\",\"type\":\"integer\"}]}]}}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:9268d0e849f40b7e2923c8c90896b94b556efc173d6c87f695c8776f9f2f4abf",
+    "api": "redis/commands",
+    "version": "8.8-rc1",
+    "previous_version": "8.8-m03",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "redis",
+      "package": "redis",
+      "change": "added_symbol",
+      "symbols": [
+        "ARGET"
+      ]
+    },
+    "description": "ARGET is new in Redis 8.8-rc1 (it wasn't in 8.8-m03).",
+    "source_url": "https://raw.githubusercontent.com/redis/redis/8.8-rc1/src/commands/arget.json",
+    "source_excerpt": "{\"ARGET\":{\"summary\":\"Gets the value at an index in an array.\",\"complexity\":\"O(1)\",\"group\":\"array\",\"since\":\"8.8.0\",\"arity\":3,\"function\":\"argetCommand\",\"command_flags\":[\"READONLY\",\"FAST\"],\"acl_categories\":[\"ARRAY\"],\"key_specs\":[{\"flags\":[\"RO\",\"ACCESS\"],\"begin_search\":{\"index\":{\"pos\":1}},\"find_keys\":{\"range\":{\"lastkey\":0,\"step\":1,\"limit\":0}}}],\"reply_schema\":{\"oneOf\":[{\"description\":\"The value at the given index.\",\"type\":\"string\"},{\"description\":\"Null reply if key or index does not exist.\",\"type\":\"null\"}]},\"arguments\":[{\"name\":\"key\",\"type\":\"key\",\"key_spec_index\":0},{\"name\":\"index\",\"type\":\"integer\"}]}}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:1bc48498fbcbb72715038b9dbf3e6220c8b7fec7a23890c3f1254bfaae885768",
+    "api": "redis/commands",
+    "version": "8.8-rc1",
+    "previous_version": "8.8-m03",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "redis",
+      "package": "redis",
+      "change": "added_symbol",
+      "symbols": [
+        "ARGETRANGE"
+      ]
+    },
+    "description": "ARGETRANGE is new in Redis 8.8-rc1 (it wasn't in 8.8-m03).",
+    "source_url": "https://raw.githubusercontent.com/redis/redis/8.8-rc1/src/commands/argetrange.json",
+    "source_excerpt": "{\"ARGETRANGE\":{\"summary\":\"Gets values in a range of indices.\",\"complexity\":\"O(N) where N is the range length\",\"group\":\"array\",\"since\":\"8.8.0\",\"arity\":4,\"function\":\"argetrangeCommand\",\"command_flags\":[\"READONLY\"],\"acl_categories\":[\"ARRAY\"],\"key_specs\":[{\"flags\":[\"RO\",\"ACCESS\"],\"begin_search\":{\"index\":{\"pos\":1}},\"find_keys\":{\"range\":{\"lastkey\":0,\"step\":1,\"limit\":0}}}],\"reply_schema\":{\"type\":\"array\",\"items\":{\"oneOf\":[{\"type\":\"string\"},{\"type\":\"null\"}]}},\"arguments\":[{\"name\":\"key\",\"type\":\"key\",\"key_spec_index\":0},{\"name\":\"start\",\"type\":\"integer\"},{\"name\":\"end\",\"type\":\"integer\"}]}}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
+    "fingerprint": "sha256:09ce1b11a26ba99931aeb8c9c68ff0b1d8675f599454dd1e0ba3eea4bf548a4d",
+    "api": "redis/commands",
+    "version": "8.8-rc1",
+    "previous_version": "8.8-m03",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "redis",
+      "package": "redis",
+      "change": "added_symbol",
+      "symbols": [
+        "ARGREP"
+      ]
+    },
+    "description": "ARGREP is new in Redis 8.8-rc1 (it wasn't in 8.8-m03).",
+    "source_url": "https://raw.githubusercontent.com/redis/redis/8.8-rc1/src/commands/argrep.json",
+    "source_excerpt": "{\"ARGREP\":{\"summary\":\"Searches array elements in a range using textual predicates.\",\"complexity\":\"O(P * C) where P is the number of visited positions in touched slices and C is the cost of evaluating the predicates on one existing element.\",\"group\":\"array\",\"since\":\"8.8.0\",\"arity\":-6,\"function\":\"argrepCommand\",\"command_flags\":[\"READONLY\"],\"acl_categories\":[\"ARRAY\"],\"key_specs\":[{\"flags\":[\"RO\",\"ACCESS\"],\"begin_search\":{\"index\":{\"pos\":1}},\"find_keys\":{\"range\":{\"lastkey\":0,\"step\":1,\"limit\":0}}}],\"reply_schema\":{\"anyOf\":[{\"description\":\"Array of matching indexes.\",\"type\":\"array\",\"items\":{\"type\":\"integer\",\"description\":\"Index of a matching element\"}},{\"description\":\"Array of [index, value] pairs. Returned in case `WITHVALUES` was used.\",\"type\":\"array\",\"items\":{\"type\":\"array\",\"minItems\":2,\"maxItems\":2,\"items\":[{\"type\":\"integer\",\"description\":\"Index of a matching element\"},{\"type\":\"string\",\"description\":\"Value at that index\"}]}}]},\"arguments\":[{\"name\":\"key\",\"type\":\"key\",\"key_spec_index\":0},{\"name\":\"start\",\"type\":\"string\"},{\"name\":\"end\",\"type\":\"string\"},{\"name\":\"predicate\",\"type\":\"oneof\",\"multiple\":true,\"arguments\":[{\"name\":\"exact\",\"type\":\"block\",\"arguments\":[{\"name\":\"exact\",\"type\":\"pure-token\",\"token\":\"EXACT\"},{\"name\":\"string\",\"type\":\"string\"}]},{\"name\":\"match\",\"type\":\"block\",\"arguments\":[{\"name\":\"match\",\"type\":\"pure-token\",\"token\":\"MATCH\"},{\"name\":\"string\",\"type\":\"string\"}]},{\"name\":\"glob\",\"type\":\"block\",\"arguments\":[{\"name\":\"glob\",\"type\":\"pure-token\",\"token\":\"GLOB\"},{\"name\":\"pattern\",\"type\":\"string\"}]},{\"name\":\"re\",\"type\":\"block\",\"arguments\":[{\"name\":\"re\",\"type\":\"pure-token\",\"token\":\"RE\"},{\"name\":\"pattern\",\"type\":\"string\"}]}]},{\"name\":\"options\",\"type\":\"oneof\",\"optional\":true,\"multiple\":true,\"arguments\":[{\"name\":\"and\",\"type\":\"pure-token\",\"token\":\"AND\"},{\"name\":\"or\",\"type\":\"pure-token\",\"token\":\"OR\"},{\"name\":\"limit\",\"type\":\"integer\",\"token\":\"LIMIT\"},{\"name\":\"withvalues\",\"type\":\"pure-token\",\"token\":\"WITHVALUES\"},{\"name\":\"nocase\",\"type\":\"pure-token\",\"token\":\"NOCASE\"}]}]}}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 9,
+    "fingerprint": "sha256:1073d010cb16c453701c172745e86fac9ef4a85ef842e3bc51a68abd87e80582",
+    "api": "redis/commands",
+    "version": "8.8-rc1",
+    "previous_version": "8.8-m03",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "redis",
+      "package": "redis",
+      "change": "added_symbol",
+      "symbols": [
+        "ARINFO"
+      ]
+    },
+    "description": "ARINFO is new in Redis 8.8-rc1 (it wasn't in 8.8-m03).",
+    "source_url": "https://raw.githubusercontent.com/redis/redis/8.8-rc1/src/commands/arinfo.json",
+    "source_excerpt": "{\"ARINFO\":{\"summary\":\"Returns metadata about an array.\",\"complexity\":\"O(1), or O(N) with FULL option where N is the number of slices.\",\"group\":\"array\",\"since\":\"8.8.0\",\"arity\":-2,\"function\":\"arinfoCommand\",\"command_flags\":[\"READONLY\"],\"acl_categories\":[\"ARRAY\"],\"key_specs\":[{\"flags\":[\"RO\",\"ACCESS\"],\"begin_search\":{\"index\":{\"pos\":1}},\"find_keys\":{\"range\":{\"lastkey\":0,\"step\":1,\"limit\":0}}}],\"reply_schema\":{\"type\":\"object\",\"additionalProperties\":false,\"properties\":{\"count\":{\"type\":\"integer\",\"description\":\"Total number of non-empty elements.\"},\"len\":{\"type\":\"integer\",\"description\":\"Logical length (highest index + 1).\"},\"next-insert-index\":{\"type\":\"integer\",\"description\":\"Index the next ARINSERT would use, or 0 if unset/exhausted.\"},\"slices\":{\"type\":\"integer\",\"description\":\"Number of allocated slices.\"},\"directory-size\":{\"type\":\"integer\",\"description\":\"Directory allocation capacity (flat dir_alloc or superdir sdir_cap).\"},\"super-dir-entries\":{\"type\":\"integer\",\"description\":\"Number of super-directory entries (0 if not in superdir mode).\"},\"slice-size\":{\"type\":\"integer\",\"description\":\"Configured slice size.\"},\"dense-slices\":{\"type\":\"integer\",\"description\":\"Number of dense slices (FULL only).\"},\"sparse-slices\":{\"type\":\"integer\",\"description\":\"Number of sparse slices (FULL only).\"},\"avg-dense-size\":{\"type\":\"number\",\"description\":\"Average allocation size of dense slices (FULL only).\"},\"avg-dense-fill\":{\"type\":\"number\",\"description\":\"Average fill rate of dense slices (FULL only).\"},\"avg-sparse-size\":{\"type\":\"number\",\"description\":\"Average capacity of sparse slices (FULL only).\"}}},\"arguments\":[{\"name\":\"key\",\"type\":\"key\",\"key_spec_index\":0},{\"name\":\"full\",\"type\":\"pure-token\",\"token\":\"FULL\",\"optional\":true}]}}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 10,
+    "fingerprint": "sha256:63956e3ab21e036d7d76941805ffede66204fe812a82e3983d4fde4932ac975e",
+    "api": "redis/commands",
+    "version": "8.8-rc1",
+    "previous_version": "8.8-m03",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "redis",
+      "package": "redis",
+      "change": "added_symbol",
+      "symbols": [
+        "ARINSERT"
+      ]
+    },
+    "description": "ARINSERT is new in Redis 8.8-rc1 (it wasn't in 8.8-m03).",
+    "source_url": "https://raw.githubusercontent.com/redis/redis/8.8-rc1/src/commands/arinsert.json",
+    "source_excerpt": "{\"ARINSERT\":{\"summary\":\"Inserts one or more values at consecutive indices.\",\"complexity\":\"O(N) where N is the number of values\",\"group\":\"array\",\"since\":\"8.8.0\",\"arity\":-3,\"function\":\"arinsertCommand\",\"command_flags\":[\"WRITE\",\"DENYOOM\",\"FAST\"],\"acl_categories\":[\"ARRAY\"],\"key_specs\":[{\"flags\":[\"RW\",\"UPDATE\"],\"begin_search\":{\"index\":{\"pos\":1}},\"find_keys\":{\"range\":{\"lastkey\":0,\"step\":1,\"limit\":0}}}],\"reply_schema\":{\"description\":\"The last index where a value was inserted.\",\"type\":\"integer\"},\"arguments\":[{\"name\":\"key\",\"type\":\"key\",\"key_spec_index\":0},{\"name\":\"value\",\"type\":\"string\",\"multiple\":true}]}}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 11,
+    "fingerprint": "sha256:4ea19e21b808b8b75ec85d01198a4cb7c8caf4a6421476abf6f9ddd34ddb5476",
+    "api": "redis/commands",
+    "version": "8.8-rc1",
+    "previous_version": "8.8-m03",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "redis",
+      "package": "redis",
+      "change": "added_symbol",
+      "symbols": [
+        "ARLASTITEMS"
+      ]
+    },
+    "description": "ARLASTITEMS is new in Redis 8.8-rc1 (it wasn't in 8.8-m03).",
+    "source_url": "https://raw.githubusercontent.com/redis/redis/8.8-rc1/src/commands/arlastitems.json",
+    "source_excerpt": "{\"ARLASTITEMS\":{\"summary\":\"Returns the most recently inserted elements.\",\"complexity\":\"O(N) where N is the count\",\"group\":\"array\",\"since\":\"8.8.0\",\"arity\":-3,\"function\":\"arlastitemsCommand\",\"command_flags\":[\"READONLY\"],\"acl_categories\":[\"ARRAY\"],\"key_specs\":[{\"flags\":[\"RO\",\"ACCESS\"],\"begin_search\":{\"index\":{\"pos\":1}},\"find_keys\":{\"range\":{\"lastkey\":0,\"step\":1,\"limit\":0}}}],\"reply_schema\":{\"type\":\"array\",\"items\":{\"oneOf\":[{\"type\":\"string\"},{\"type\":\"null\"}]}},\"arguments\":[{\"name\":\"key\",\"type\":\"key\",\"key_spec_index\":0},{\"name\":\"count\",\"type\":\"integer\"},{\"name\":\"rev\",\"type\":\"pure-token\",\"token\":\"REV\",\"optional\":true}]}}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 12,
+    "fingerprint": "sha256:7d3e7408e6db86c840d0c12e96af19c710364d83f3a6a8d71804add1d2f6e5c2",
+    "api": "redis/commands",
+    "version": "8.8-rc1",
+    "previous_version": "8.8-m03",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "redis",
+      "package": "redis",
+      "change": "added_symbol",
+      "symbols": [
+        "ARLEN"
+      ]
+    },
+    "description": "ARLEN is new in Redis 8.8-rc1 (it wasn't in 8.8-m03).",
+    "source_url": "https://raw.githubusercontent.com/redis/redis/8.8-rc1/src/commands/arlen.json",
+    "source_excerpt": "{\"ARLEN\":{\"summary\":\"Returns the length of an array (max index + 1).\",\"complexity\":\"O(1)\",\"group\":\"array\",\"since\":\"8.8.0\",\"arity\":2,\"function\":\"arlenCommand\",\"command_flags\":[\"READONLY\",\"FAST\"],\"acl_categories\":[\"ARRAY\"],\"key_specs\":[{\"flags\":[\"RO\",\"ACCESS\"],\"begin_search\":{\"index\":{\"pos\":1}},\"find_keys\":{\"range\":{\"lastkey\":0,\"step\":1,\"limit\":0}}}],\"reply_schema\":{\"description\":\"The length of the array (max index + 1), or 0 if key does not exist.\",\"type\":\"integer\"},\"arguments\":[{\"name\":\"key\",\"type\":\"key\",\"key_spec_index\":0}]}}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 13,
+    "fingerprint": "sha256:d2c15837bc34cbdd73ad9f98de58dc3541e1d948343a67f36ae19857ef3f8608",
+    "api": "redis/commands",
+    "version": "8.8-rc1",
+    "previous_version": "8.8-m03",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "redis",
+      "package": "redis",
+      "change": "added_symbol",
+      "symbols": [
+        "ARMGET"
+      ]
+    },
+    "description": "ARMGET is new in Redis 8.8-rc1 (it wasn't in 8.8-m03).",
+    "source_url": "https://raw.githubusercontent.com/redis/redis/8.8-rc1/src/commands/armget.json",
+    "source_excerpt": "{\"ARMGET\":{\"summary\":\"Gets values at multiple indices in an array.\",\"complexity\":\"O(N) where N is the number of indices\",\"group\":\"array\",\"since\":\"8.8.0\",\"arity\":-3,\"function\":\"armgetCommand\",\"command_flags\":[\"READONLY\",\"FAST\"],\"acl_categories\":[\"ARRAY\"],\"key_specs\":[{\"flags\":[\"RO\",\"ACCESS\"],\"begin_search\":{\"index\":{\"pos\":1}},\"find_keys\":{\"range\":{\"lastkey\":0,\"step\":1,\"limit\":0}}}],\"reply_schema\":{\"type\":\"array\",\"items\":{\"oneOf\":[{\"type\":\"string\"},{\"type\":\"null\"}]}},\"arguments\":[{\"name\":\"key\",\"type\":\"key\",\"key_spec_index\":0},{\"name\":\"index\",\"type\":\"integer\",\"multiple\":true}]}}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 14,
+    "fingerprint": "sha256:a285018d95c302e7b7c469bf8033be56885037bf0014ce134fa13464e5e92ce2",
+    "api": "redis/commands",
+    "version": "8.8-rc1",
+    "previous_version": "8.8-m03",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "redis",
+      "package": "redis",
+      "change": "added_symbol",
+      "symbols": [
+        "ARMSET"
+      ]
+    },
+    "description": "ARMSET is new in Redis 8.8-rc1 (it wasn't in 8.8-m03).",
+    "source_url": "https://raw.githubusercontent.com/redis/redis/8.8-rc1/src/commands/armset.json",
+    "source_excerpt": "{\"ARMSET\":{\"summary\":\"Sets multiple index-value pairs in an array.\",\"complexity\":\"O(N) where N is the number of pairs\",\"group\":\"array\",\"since\":\"8.8.0\",\"arity\":-4,\"function\":\"armsetCommand\",\"command_flags\":[\"WRITE\",\"DENYOOM\",\"FAST\"],\"acl_categories\":[\"ARRAY\"],\"key_specs\":[{\"flags\":[\"RW\",\"UPDATE\"],\"begin_search\":{\"index\":{\"pos\":1}},\"find_keys\":{\"range\":{\"lastkey\":0,\"step\":1,\"limit\":0}}}],\"reply_schema\":{\"description\":\"Number of new slots that were set (previously empty).\",\"type\":\"integer\"},\"arguments\":[{\"name\":\"key\",\"type\":\"key\",\"key_spec_index\":0},{\"name\":\"data\",\"type\":\"block\",\"multiple\":true,\"arguments\":[{\"name\":\"index\",\"type\":\"integer\"},{\"name\":\"value\",\"type\":\"string\"}]}]}}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 15,
+    "fingerprint": "sha256:7833f256be0d3e0d3097baa2c5c2582365dcfaa1662cb175765dcd4ce13ad1d1",
+    "api": "redis/commands",
+    "version": "8.8-rc1",
+    "previous_version": "8.8-m03",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "redis",
+      "package": "redis",
+      "change": "added_symbol",
+      "symbols": [
+        "ARNEXT"
+      ]
+    },
+    "description": "ARNEXT is new in Redis 8.8-rc1 (it wasn't in 8.8-m03).",
+    "source_url": "https://raw.githubusercontent.com/redis/redis/8.8-rc1/src/commands/arnext.json",
+    "source_excerpt": "{\"ARNEXT\":{\"summary\":\"Returns the next index ARINSERT would use.\",\"complexity\":\"O(1)\",\"group\":\"array\",\"since\":\"8.8.0\",\"arity\":2,\"function\":\"arnextCommand\",\"command_flags\":[\"READONLY\",\"FAST\"],\"acl_categories\":[\"ARRAY\"],\"key_specs\":[{\"flags\":[\"RO\",\"ACCESS\"],\"begin_search\":{\"index\":{\"pos\":1}},\"find_keys\":{\"range\":{\"lastkey\":0,\"step\":1,\"limit\":0}}}],\"reply_schema\":{\"oneOf\":[{\"description\":\"The next index ARINSERT would use. Returns 0 for missing keys or when no insert happened yet.\",\"type\":\"integer\"},{\"description\":\"Null when the insertion cursor is exhausted (next insert would overflow).\",\"type\":\"null\"}]},\"arguments\":[{\"name\":\"key\",\"type\":\"key\",\"key_spec_index\":0}]}}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 16,
+    "fingerprint": "sha256:9574a66f21f23304130ce43f2c57ef7f95f0fd373a0c7b9d0d3b45c9499d2300",
+    "api": "redis/commands",
+    "version": "8.8-rc1",
+    "previous_version": "8.8-m03",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "redis",
+      "package": "redis",
+      "change": "added_symbol",
+      "symbols": [
+        "AROP"
+      ]
+    },
+    "description": "AROP is new in Redis 8.8-rc1 (it wasn't in 8.8-m03).",
+    "source_url": "https://raw.githubusercontent.com/redis/redis/8.8-rc1/src/commands/arop.json",
+    "source_excerpt": "{\"AROP\":{\"summary\":\"Performs aggregate operations on array elements in a range.\",\"complexity\":\"O(P) where P is visited positions in touched slices (dense scanned slots + sparse entries), with worst-case O(|end-start|+1) and typical case close to O(N), where N is the number of existing elements in range.\",\"group\":\"array\",\"since\":\"8.8.0\",\"arity\":-5,\"function\":\"aropCommand\",\"command_flags\":[\"READONLY\"],\"acl_categories\":[\"ARRAY\"],\"key_specs\":[{\"flags\":[\"RO\",\"ACCESS\"],\"begin_search\":{\"index\":{\"pos\":1}},\"find_keys\":{\"range\":{\"lastkey\":0,\"step\":1,\"limit\":0}}}],\"reply_schema\":{\"oneOf\":[{\"description\":\"Result of the operation.\",\"type\":\"string\"},{\"description\":\"Integer result for MATCH, USED, AND, OR, XOR.\",\"type\":\"integer\"},{\"description\":\"Null if no elements match the operation.\",\"type\":\"null\"}]},\"arguments\":[{\"name\":\"key\",\"type\":\"key\",\"key_spec_index\":0},{\"name\":\"start\",\"type\":\"integer\"},{\"name\":\"end\",\"type\":\"integer\"},{\"name\":\"operation\",\"type\":\"oneof\",\"arguments\":[{\"name\":\"sum\",\"type\":\"pure-token\",\"token\":\"SUM\"},{\"name\":\"min\",\"type\":\"pure-token\",\"token\":\"MIN\"},{\"name\":\"max\",\"type\":\"pure-token\",\"token\":\"MAX\"},{\"name\":\"and\",\"type\":\"pure-token\",\"token\":\"AND\"},{\"name\":\"or\",\"type\":\"pure-token\",\"token\":\"OR\"},{\"name\":\"xor\",\"type\":\"pure-token\",\"token\":\"XOR\"},{\"name\":\"match\",\"type\":\"block\",\"arguments\":[{\"name\":\"match\",\"type\":\"pure-token\",\"token\":\"MATCH\"},{\"name\":\"value\",\"type\":\"string\"}]},{\"name\":\"used\",\"type\":\"pure-token\",\"token\":\"USED\"}]}]}}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 17,
+    "fingerprint": "sha256:d58c2e417063017c574c0b95360faf00054f4661b2cc029c01c2a6c1b2c99fc8",
+    "api": "redis/commands",
+    "version": "8.8-rc1",
+    "previous_version": "8.8-m03",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "redis",
+      "package": "redis",
+      "change": "added_symbol",
+      "symbols": [
+        "ARRING"
+      ]
+    },
+    "description": "ARRING is new in Redis 8.8-rc1 (it wasn't in 8.8-m03).",
+    "source_url": "https://raw.githubusercontent.com/redis/redis/8.8-rc1/src/commands/arring.json",
+    "source_excerpt": "{\"ARRING\":{\"summary\":\"Inserts values into a ring buffer of specified size, wrapping and truncating as needed.\",\"complexity\":\"O(M) normally, O(N+M) on ring resize, where N is the maximum of the old and new ring size and M is the number of inserted values\",\"group\":\"array\",\"since\":\"8.8.0\",\"arity\":-4,\"function\":\"arringCommand\",\"command_flags\":[\"WRITE\",\"DENYOOM\"],\"acl_categories\":[\"ARRAY\"],\"key_specs\":[{\"flags\":[\"RW\",\"UPDATE\"],\"begin_search\":{\"index\":{\"pos\":1}},\"find_keys\":{\"range\":{\"lastkey\":0,\"step\":1,\"limit\":0}}}],\"reply_schema\":{\"description\":\"The last index where a value was inserted.\",\"type\":\"integer\"},\"arguments\":[{\"name\":\"key\",\"type\":\"key\",\"key_spec_index\":0},{\"name\":\"size\",\"type\":\"integer\"},{\"name\":\"value\",\"type\":\"string\",\"multiple\":true}]}}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 18,
+    "fingerprint": "sha256:ab0a42651df1c9e0b6c7532ead703fcf80fffc983b74087b2ccec383695f279b",
+    "api": "redis/commands",
+    "version": "8.8-rc1",
+    "previous_version": "8.8-m03",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "redis",
+      "package": "redis",
+      "change": "added_symbol",
+      "symbols": [
+        "ARSCAN"
+      ]
+    },
+    "description": "ARSCAN is new in Redis 8.8-rc1 (it wasn't in 8.8-m03).",
+    "source_url": "https://raw.githubusercontent.com/redis/redis/8.8-rc1/src/commands/arscan.json",
+    "source_excerpt": "{\"ARSCAN\":{\"summary\":\"Iterates existing elements in a range, returning index-value pairs.\",\"complexity\":\"O(P) where P is visited positions in touched slices (dense scanned slots + sparse entries), with worst-case O(|end-start|+1) and typical case close to O(N), where N is the number of existing elements in range.\",\"group\":\"array\",\"since\":\"8.8.0\",\"arity\":-4,\"function\":\"arscanCommand\",\"command_flags\":[\"READONLY\"],\"acl_categories\":[\"ARRAY\"],\"key_specs\":[{\"flags\":[\"RO\",\"ACCESS\"],\"begin_search\":{\"index\":{\"pos\":1}},\"find_keys\":{\"range\":{\"lastkey\":0,\"step\":1,\"limit\":0}}}],\"reply_schema\":{\"description\":\"Array of [index, value] pairs.\",\"type\":\"array\",\"items\":{\"type\":\"array\",\"minItems\":2,\"maxItems\":2,\"items\":[{\"type\":\"integer\",\"description\":\"Index of existing element\"},{\"type\":\"string\",\"description\":\"Value at that index\"}]}},\"arguments\":[{\"name\":\"key\",\"type\":\"key\",\"key_spec_index\":0},{\"name\":\"start\",\"type\":\"integer\"},{\"name\":\"end\",\"type\":\"integer\"},{\"name\":\"limit\",\"token\":\"LIMIT\",\"type\":\"integer\",\"optional\":true}]}}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 19,
+    "fingerprint": "sha256:f1900230440808ff8f6a0e6d559a94d92d70e56defef8d8719ce6c44721159dd",
+    "api": "redis/commands",
+    "version": "8.8-rc1",
+    "previous_version": "8.8-m03",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "redis",
+      "package": "redis",
+      "change": "added_symbol",
+      "symbols": [
+        "ARSEEK"
+      ]
+    },
+    "description": "ARSEEK is new in Redis 8.8-rc1 (it wasn't in 8.8-m03).",
+    "source_url": "https://raw.githubusercontent.com/redis/redis/8.8-rc1/src/commands/arseek.json",
+    "source_excerpt": "{\"ARSEEK\":{\"summary\":\"Sets the ARINSERT / ARRING cursor to a specific index.\",\"complexity\":\"O(1)\",\"group\":\"array\",\"since\":\"8.8.0\",\"arity\":3,\"function\":\"arseekCommand\",\"command_flags\":[\"WRITE\",\"FAST\"],\"acl_categories\":[\"ARRAY\"],\"key_specs\":[{\"flags\":[\"RW\",\"UPDATE\"],\"begin_search\":{\"index\":{\"pos\":1}},\"find_keys\":{\"range\":{\"lastkey\":0,\"step\":1,\"limit\":0}}}],\"reply_schema\":{\"description\":\"1 if the cursor was set, 0 if the key does not exist.\",\"type\":\"integer\"},\"arguments\":[{\"name\":\"key\",\"type\":\"key\",\"key_spec_index\":0},{\"name\":\"index\",\"type\":\"integer\"}]}}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 20,
+    "fingerprint": "sha256:218c1bef6d66a6477d4ee1c613e8a0ee27e5b2f56955e3536868e3e333ab53ef",
+    "api": "redis/commands",
+    "version": "8.8-rc1",
+    "previous_version": "8.8-m03",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "redis",
+      "package": "redis",
+      "change": "added_symbol",
+      "symbols": [
+        "ARSET"
+      ]
+    },
+    "description": "ARSET is new in Redis 8.8-rc1 (it wasn't in 8.8-m03).",
+    "source_url": "https://raw.githubusercontent.com/redis/redis/8.8-rc1/src/commands/arset.json",
+    "source_excerpt": "{\"ARSET\":{\"summary\":\"Sets one or more contiguous values starting at an index in an array.\",\"complexity\":\"O(N) where N is the number of values\",\"group\":\"array\",\"since\":\"8.8.0\",\"arity\":-4,\"function\":\"arsetCommand\",\"command_flags\":[\"WRITE\",\"DENYOOM\",\"FAST\"],\"acl_categories\":[\"ARRAY\"],\"key_specs\":[{\"flags\":[\"RW\",\"UPDATE\"],\"begin_search\":{\"index\":{\"pos\":1}},\"find_keys\":{\"range\":{\"lastkey\":0,\"step\":1,\"limit\":0}}}],\"reply_schema\":{\"description\":\"Number of new slots that were set (previously empty).\",\"type\":\"integer\"},\"arguments\":[{\"name\":\"key\",\"type\":\"key\",\"key_spec_index\":0},{\"name\":\"index\",\"type\":\"integer\"},{\"name\":\"value\",\"type\":\"string\",\"multiple\":true}]}}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 21,
+    "fingerprint": "sha256:df5b42953a79dfc430ca59f736ec80e4513d86610ef5a54df0579c4b474af662",
+    "api": "redis/commands",
+    "version": "8.8-rc1",
+    "previous_version": "8.8-m03",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "redis",
+      "package": "redis",
+      "change": "added_symbol",
+      "symbols": [
+        "INCREX"
+      ]
+    },
+    "description": "INCREX is new in Redis 8.8-rc1 (it wasn't in 8.8-m03).",
+    "source_url": "https://raw.githubusercontent.com/redis/redis/8.8-rc1/src/commands/increx.json",
+    "source_excerpt": "{\"INCREX\":{\"summary\":\"Increments the numeric value of a key by a number and sets its expiration time. Uses 0 as initial value if the key doesn't exist.\",\"complexity\":\"O(1)\",\"group\":\"string\",\"since\":\"8.8.0\",\"arity\":-2,\"function\":\"increxCommand\",\"command_flags\":[\"WRITE\",\"DENYOOM\",\"FAST\"],\"acl_categories\":[\"STRING\"],\"key_specs\":[{\"flags\":[\"RW\",\"ACCESS\",\"UPDATE\"],\"begin_search\":{\"index\":{\"pos\":1}},\"find_keys\":{\"range\":{\"lastkey\":0,\"step\":1,\"limit\":0}}}],\"reply_schema\":{\"type\":\"array\",\"minItems\":2,\"maxItems\":2,\"items\":[{\"description\":\"the value of the key after the increment\",\"type\":\"number\"},{\"description\":\"the actual increment\",\"type\":\"number\"}]},\"arguments\":[{\"name\":\"key\",\"type\":\"key\",\"key_spec_index\":0},{\"name\":\"increment\",\"type\":\"oneof\",\"optional\":true,\"arguments\":[{\"name\":\"float\",\"type\":\"double\",\"token\":\"BYFLOAT\"},{\"name\":\"integer\",\"type\":\"integer\",\"token\":\"BYINT\"}]},{\"name\":\"overflow-block\",\"token\":\"OVERFLOW\",\"type\":\"oneof\",\"optional\":true,\"summary\":\"Out-of-bounds policy; defaults to FAIL. Missing LBOUND/UBOUND default to the type limits (LLONG_MIN/LLONG_MAX for BYINT, -LDBL_MAX/LDBL_MAX for BYFLOAT).\",\"arguments\":[{\"name\":\"fail\",\"type\":\"pure-token\",\"token\":\"FAIL\"},{\"name\":\"sat\",\"type\":\"pure-token\",\"token\":\"SAT\"},{\"name\":\"reject\",\"type\":\"pure-token\",\"token\":\"REJECT\"}]},{\"name\":\"lowerbound\",\"token\":\"LBOUND\",\"type\":\"string\",\"summary\":\"Integer when used with BYINT, floating-point when used with BYFLOAT.\",\"optional\":true},{\"name\":\"upperbound\",\"token\":\"UBOUND\",\"type\":\"string\",\"summary\":\"Integer when used with BYINT, floating-point when used with BYFLOAT.\",\"optional\":true},{\"name\":\"expiration\",\"type\":\"oneof\",\"optional\":true,\"arguments\":[{\"name\":\"seconds\",\"type\":\"integer\",\"token\":\"EX\"},{\"name\":\"milliseconds\",\"type\":\"integer\",\"token\":\"PX\"},{\"name\":\"unix-time-seconds\",\"type\":\"unix-time\",\"token\":\"EXAT\"},{\"name\":\"unix-time-milliseconds\",\"type\":\"unix-time\",\"token\":\"PXAT\"},{\"name\":\"persist\",\"type\":\"pure-token\",\"token\":\"PERSIST\"}]},{\"name\":\"enx\",\"type\":\"pure-token\",\"token\":\"EN…",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   }

@@ -56,12 +56,11 @@ func sinkEvent(n int) event.Event {
 		Schema: "thing", Property: fmt.Sprintf("field_%d", n),
 	}
 	return event.Event{
-		Fingerprint:     event.Fingerprint("example/x", "2", event.ChangeTypeBreaking, subject, ""),
+		Fingerprint:     event.Fingerprint("example/x", "2", event.ChangeBreaking, subject, ""),
 		API:             "example/x",
 		PreviousVersion: "1",
 		Version:         "2",
-		ChangeType:      event.ChangeTypeBreaking,
-		Breaking:        true,
+		Change:          event.ChangeBreaking,
 		Subject:         subject,
 		Description:     fmt.Sprintf("Property field_%d removed.", n),
 		SourceURL:       "https://example.test/2",

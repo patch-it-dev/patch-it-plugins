@@ -2,7 +2,8 @@
 // worth reading: its public API is compared between two releases, read from
 // the released files themselves. A class, function or method that is gone,
 // or renamed, a parameter that is gone, or one that lost its default (callers
-// must now pass it), is an event.
+// must now pass it), is a breaking event; a module, class, function or method
+// that is new, or a new parameter with a default, is an added one.
 //
 // Every release on PyPI or npm (ListVersions), the release's files read
 // without running any of them (ReadAt: pysurface/ reads a wheel's or sdist's
@@ -21,7 +22,9 @@
 // a name its module still binds (an alias, an import, a star import or a
 // module __getattr__ that can't be listed), and a parameter newly added
 // without a default (patch-it's change-event contract has no subject for it
-// yet: logged).
+// yet: logged). The same rules, the other way round, keep a name that only
+// looks new (the older release bound it, or couldn't be read) from being an
+// addition; the members of a new class or module are part of its addition.
 package apisurface
 
 import (
@@ -129,8 +132,8 @@ func (p Plugin) ReadAt(ctx context.Context, env plugin.Env, v plugin.Version) (p
 }
 
 // Extract compares from's surface with to's: an event per class, function or
-// method gone or renamed, and per parameter gone or now required, with to's
-// version and from's as previous_version. A zero from has nothing to compare:
+// method gone, renamed or new, and per parameter gone, now required or new
+// (with a default), with to's version and from's as previous_version. A zero from has nothing to compare:
 // no events.
 func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snapshot) (plugin.Result, error) {
 	if from.IsZero() {
@@ -155,7 +158,7 @@ func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 			continue
 		}
 		e := p.event(c, from, to, a.Artifact, b.Artifact, now)
-		e.Fingerprint = event.Fingerprint(e.API, e.Version, e.ChangeType, e.Subject, "")
+		e.Fingerprint = event.Fingerprint(e.API, e.Version, e.Change, e.Subject, "")
 		if err := e.Validate(); err != nil {
 			rejected = append(rejected, fmt.Errorf("%s %s %s: %w", p.Package.Name, to.Version.ID, c.Symbol, err))
 			continue
@@ -179,7 +182,15 @@ func (p Plugin) event(c Change, from, to plugin.Snapshot, fromFile, toFile strin
 		subject.Symbols = append(subject.Symbols, p.local(a))
 	}
 	var desc, hint string
+	change := event.ChangeBreaking
 	switch c.Change {
+	case event.PackageAddedSymbol:
+		change = event.ChangeAdded
+		desc = fmt.Sprintf("New %s `%s` in %s %s.", c.Kind, sym, pkg.Name, to.Version.ID)
+	case event.PackageAddedParameter:
+		change = event.ChangeAdded
+		subject.Parameter = c.Parameter
+		desc = fmt.Sprintf("`%s` takes a new optional parameter `%s` in %s %s.", sym, c.Parameter, pkg.Name, to.Version.ID)
 	case event.PackageRenamedSymbol:
 		subject.Replacement = p.local(c.Replacement)
 		desc = fmt.Sprintf("`%s` was renamed to `%s` in %s %s: code using the old name fails.", sym, subject.Replacement, pkg.Name, to.Version.ID)
@@ -207,8 +218,7 @@ func (p Plugin) event(c Change, from, to plugin.Snapshot, fromFile, toFile strin
 		API:             pkg.ID,
 		Version:         to.Version.ID,
 		PreviousVersion: from.Version.ID,
-		ChangeType:      event.ChangeTypeBreaking,
-		Breaking:        true,
+		Change:          change,
 		Subject:         subject,
 		Description:     desc,
 		MigrationHint:   hint,
@@ -292,21 +302,25 @@ func Compare(ra, rb Release) []Change {
 			byParent[key] = g
 		}
 	}
-	renamed := map[string]string{}
+	renamed, renamedTo := map[string]string{}, map[string]bool{}
 	for _, g := range byParent {
 		if len(g[0]) == 1 && len(g[1]) == 1 {
 			old, now := a[g[0][0]], b[g[1][0]]
 			if old.Params != nil && !old.Overloaded && !now.Overloaded && slices.Equal(old.Params, now.Params) && len(callerParams(old.Params)) > 0 {
-				renamed[g[0][0]] = g[1][0]
+				renamed[g[0][0]], renamedTo[g[1][0]] = g[1][0], true
 			}
 		}
 	}
+	movedUp := map[string]bool{} // "Base.name": a method its subclasses had, now on their base
 	for k := range removed {
 		if removed[parentOf(k)] {
 			continue // its class is reported
 		}
 		before := a[k]
-		if why := notGone(k, before, ra, rb); why != "" {
+		if why, base := notGone(k, before, ra, rb); why != "" {
+			if base != "" {
+				movedUp[base+"."+k[strings.LastIndexByte(k, '.')+1:]] = true
+			}
 			out = append(out, Change{Symbol: k, Note: fmt.Sprintf("%s: not in the newer release, but %s", k, why)})
 			continue
 		}
@@ -316,6 +330,25 @@ func Compare(ra, rb Release) []Change {
 			c.Change, c.Replacement, c.After = event.PackageRenamedSymbol, r, &after
 		}
 		out = append(out, c)
+	}
+	for k, s := range b {
+		if _, ok := a[k]; ok || renamedTo[k] {
+			continue
+		}
+		if _, ok := b[parentOf(k)]; ok {
+			if _, had := a[parentOf(k)]; !had {
+				continue // its class or module is the addition
+			}
+		}
+		if parent, ok := b[parentOf(k)]; ok && movedUp[className(parent.Signature)+"."+k[strings.LastIndexByte(k, '.')+1:]] {
+			continue // moved up from its subclasses: not new to them
+		}
+		after := s
+		if why, _ := notGone(k, after, rb, ra); why != "" {
+			out = append(out, Change{Symbol: k, Note: fmt.Sprintf("%s: not in the older release, but %s", k, why)})
+			continue
+		}
+		out = append(out, Change{Change: event.PackageAddedSymbol, Kind: s.Kind, Symbol: k, After: &after})
 	}
 	for k, old := range a {
 		now, ok := b[k]
@@ -343,12 +376,14 @@ func Compare(ra, rb Release) []Change {
 			}
 		}
 		for _, np := range now.Params {
-			if np.HasDef || np.Kind == "args" || np.Kind == "kwargs" {
+			if np.Kind == "args" || np.Kind == "kwargs" || slices.ContainsFunc(old.Params, func(p pysurface.Param) bool { return p.Name == np.Name }) {
 				continue
 			}
-			if !slices.ContainsFunc(old.Params, func(p pysurface.Param) bool { return p.Name == np.Name }) {
-				out = append(out, Change{Symbol: k, Note: fmt.Sprintf("%s: new required parameter %s (no subject for it in the contract yet)", k, np.Name)})
+			if np.HasDef {
+				out = append(out, Change{Change: event.PackageAddedParameter, Kind: now.Kind, Symbol: k, Parameter: np.Name, Before: &before, After: &after})
+				continue
 			}
+			out = append(out, Change{Symbol: k, Note: fmt.Sprintf("%s: new required parameter %s (no subject for it in the contract yet)", k, np.Name)})
 		}
 	}
 	out = merge(out)
@@ -370,11 +405,17 @@ func merge(cs []Change) []Change {
 	groups := map[key][]int{}
 	var out []Change
 	for i, c := range cs {
-		if c.Before == nil || (c.Change != event.PackageRemovedSymbol && c.Change != event.PackageRemovedParameter && c.Change != event.PackageChangedDefault) {
+		// A declaration is where the change is read: the older release's for
+		// what's gone or changed, the newer's for what's new.
+		at := c.Before
+		if c.Change == event.PackageAddedSymbol || c.Change == event.PackageAddedParameter {
+			at = c.After
+		}
+		if at == nil || c.Change == "" || c.Change == event.PackageRenamedSymbol {
 			out = append(out, c)
 			continue
 		}
-		k := key{c.Change, c.Before.File, c.Symbol[strings.LastIndexByte(c.Symbol, '.')+1:], c.Before.Signature, c.Parameter, c.Before.Line}
+		k := key{c.Change, at.File, c.Symbol[strings.LastIndexByte(c.Symbol, '.')+1:], at.Signature, c.Parameter, at.Line}
 		groups[k] = append(groups[k], i)
 	}
 	for _, idx := range groups {
@@ -423,8 +464,20 @@ func comparePositional(k string, old, now pysurface.Symbol, before, after *pysur
 			out = append(out, Change{Symbol: k, Note: fmt.Sprintf("%s: parameter %d is now %s, required (was %s, optional)", k, i+1, now.Params[i].Name, op.Name)})
 		}
 	}
-	for i := len(old.Params); i < len(now.Params); i++ {
-		if np := now.Params[i]; !np.HasDef && np.Kind != "args" && !slices.ContainsFunc(old.Params, func(p pysurface.Param) bool { return p.Kind == "args" }) {
+	// A new parameter at the end is read only when every older one is still
+	// in its place under its name: otherwise one may have moved.
+	oldRest := slices.ContainsFunc(old.Params, func(p pysurface.Param) bool { return p.Kind == "args" })
+	inPlace := len(now.Params) >= len(old.Params)
+	for i := 0; inPlace && i < len(old.Params); i++ {
+		inPlace = old.Params[i].Name == now.Params[i].Name
+	}
+	for i := len(old.Params); i < len(now.Params) && !oldRest; i++ {
+		switch np := now.Params[i]; {
+		case np.Kind == "args":
+		case np.HasDef && inPlace:
+			out = append(out, Change{Change: event.PackageAddedParameter, Kind: now.Kind, Symbol: k, Parameter: np.Name, Before: before, After: after})
+		case np.HasDef:
+		default:
 			out = append(out, Change{Symbol: k, Note: fmt.Sprintf("%s: new required parameter %s (no subject for it in the contract yet)", k, np.Name)})
 		}
 	}
@@ -441,49 +494,50 @@ func callerParams(ps []pysurface.Param) []pysurface.Param {
 }
 
 // notGone says why symbol k, defined as before in a and missing from b's
-// surface, may still be there in b; "" when it's gone.
-func notGone(k string, before pysurface.Symbol, a, b Release) string {
+// surface, may still be there in b; "" when it's gone. base is the base
+// class that defines it in b, when that's why.
+func notGone(k string, before pysurface.Symbol, a, b Release) (why, base string) {
 	if slices.Contains(b.Skipped, before.File) {
-		return fmt.Sprintf("%s, where it was defined, was too big to read", before.File)
+		return fmt.Sprintf("%s, where it was defined, was too big to read", before.File), ""
 	}
 	if mod, ok := b.Bindings[parentOf(k)]; ok {
 		name := k[strings.LastIndexByte(k, '.')+1:]
 		switch {
 		case slices.Contains(mod.Names, name):
-			return fmt.Sprintf("%s still binds the name (an alias, an import or a value now)", parentOf(k))
+			return fmt.Sprintf("%s still binds the name (an alias, an import or a value now)", parentOf(k)), ""
 		case mod.Star:
-			return fmt.Sprintf("%s star-imports names that can't be listed", parentOf(k))
+			return fmt.Sprintf("%s star-imports names that can't be listed", parentOf(k)), ""
 		}
 	}
 	if parent, ok := b.Surface[parentOf(k)]; ok {
 		switch parent.Kind {
 		case "export":
-			return fmt.Sprintf("%s is now re-exported from another package, whose members aren't read", parentOf(k))
+			return fmt.Sprintf("%s is now re-exported from another package, whose members aren't read", parentOf(k)), ""
 		case "variable", "interface", "type":
-			return fmt.Sprintf("%s is now a %s, whose members aren't read", parentOf(k), parent.Kind)
+			return fmt.Sprintf("%s is now a %s, whose members aren't read", parentOf(k), parent.Kind), ""
 		}
 	}
 	if before.Kind != "method" && before.Kind != "property" {
-		return ""
+		return "", ""
 	}
 	cls, ok := b.Surface[parentOf(k)]
 	if !ok || cls.Kind != "class" {
-		return ""
+		return "", ""
 	}
 	name := k[strings.LastIndexByte(k, '.')+1:]
 	oldBases, bases := pysurface.Bases(a.Surface[parentOf(k)].Signature), pysurface.Bases(cls.Signature)
 	if !slices.Equal(oldBases, bases) {
-		return fmt.Sprintf("its class's bases changed (%s to %s)", strings.Join(oldBases, ", "), strings.Join(bases, ", "))
+		return fmt.Sprintf("its class's bases changed (%s to %s)", strings.Join(oldBases, ", "), strings.Join(bases, ", ")), ""
 	}
 	if own, ok := b.Classes[className(cls.Signature)]; ok && slices.Contains(own.Members, name) {
-		return "its class still defines the name (now an attribute)"
+		return "its class still defines the name (now an attribute)", ""
 	}
 	if b.Positional {
 		// TypeScript: a base class from another package isn't read, and
 		// may define it.
 		for _, base := range b.Classes[className(cls.Signature)].Bases {
 			if _, ours := b.Classes[base]; !ours {
-				return fmt.Sprintf("its class extends %s, from another package, which may define it", base)
+				return fmt.Sprintf("its class extends %s, from another package, which may define it", base), ""
 			}
 		}
 	}
@@ -500,11 +554,11 @@ func notGone(k string, before pysurface.Symbol, a, b Release) string {
 			continue // not the package's: unchanged, as the bases are
 		}
 		if slices.Contains(c.Members, name) {
-			return fmt.Sprintf("its base class %s defines it", base)
+			return fmt.Sprintf("its base class %s defines it", base), base
 		}
 		bases = append(bases, c.Bases...)
 	}
-	return ""
+	return "", ""
 }
 
 // className is "Completions" for "class Completions(SyncAPIResource): ...".

@@ -474,7 +474,8 @@ var {{.Ident}} = catalog.Commands{
 			"{{.File}}-new.json":         "[{\"name\": \"kept.json\", \"type\": \"file\"}]\n",
 			"{{.File}}-placeholder.json": "{\"PLACEHOLDER\": {\"summary\": \"a placeholder\"}}\n",
 		},
-		dropFile: "[{\"name\": \"placeholder.json\", \"type\": \"file\"}, {\"name\": \"kept.json\", \"type\": \"file\"}, {\"name\": \"added.json\", \"type\": \"file\"}]\n",
+		// A release with the same catalog (an added file would be an added event).
+		dropFile: "[{\"name\": \"placeholder.json\", \"type\": \"file\"}, {\"name\": \"kept.json\", \"type\": \"file\"}]\n",
 		source:   "{{.File}}-new.json",
 		ingest: `// The two releases the saved listings are at.
 // ` + todo + `: the real tags, oldest first.
@@ -676,8 +677,9 @@ var {{.Ident}} = apisurface.NPMPackage("{{.ID}}", "{{.NPM}}")
 			"{{.File}}-old.d.ts": "// ` + todo + `: a placeholder for the older release's declarations. Save the real release's tarball instead (see kinds/apisurface/apisurfacetest).\nexport declare function placeholder(a: string, b?: number): void;\n",
 			"{{.File}}-new.d.ts": "// ` + todo + `: a placeholder for the newer release's declarations: b is no longer optional, one event.\nexport declare function placeholder(a: string, b: number): void;\n",
 		},
-		// The drop test's newer release: the older one again, a name added.
-		dropFile: "// ` + todo + `: a placeholder: a release that only adds.\nexport declare function placeholder(a: string, b?: number): void;\nexport declare function added(): void;\n",
+		// The drop test's newer release: the older one again, only its
+		// comments changed (an added name would be an added event).
+		dropFile: "// ` + todo + `: a placeholder: a release that only changes its comments.\n/** Does the placeholder thing. */\nexport declare function placeholder(a: string, b?: number): void;\n",
 		source:   "{{.File}}-new.d.ts",
 		ingest: `// {{.Lower}}Ingest compares two releases: 1.0.0, a tarball holding
 // testdata/{{.File}}-old.d.ts as index.d.ts, and 1.1.0, one holding file.

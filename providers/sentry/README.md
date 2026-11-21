@@ -65,7 +65,7 @@ Kind: `openapi` (`kinds/openapi`), with its adapter, `Sentry` ([`api.go`](api.go
 
 ### What it watches
 
-The public API of the `@sentry/node` package on npm, release by release, read from its TypeScript declarations: exported names removed, class members removed, parameters removed, and parameters that are no longer optional. One `package_release` event per change. Every final release is listed from the npm registry (pre-releases and deprecated versions left out), and each consecutive pair is compared.
+The public API of the `@sentry/node` package on npm, release by release, read from its TypeScript declarations: exported names removed, class members removed, parameters removed, and parameters that are no longer optional. One `package_release` event per change. Every final release is listed from the npm registry (pre-releases and deprecated versions left out), and each consecutive pair is compared. What a release adds (a new module, class, function or method, or a new parameter with a default) is an `added` event.
 
 Kind: `apisurface` (`kinds/apisurface`), with the TypeScript declaration reader (`kinds/apisurface/dtsurface`).
 
@@ -103,7 +103,7 @@ Kind: `apisurface` (`kinds/apisurface`), with the TypeScript declaration reader 
 
 ### What it watches
 
-The public API of the `sentry-sdk` package on PyPI, release by release: classes, functions and methods removed or renamed, parameters removed, and parameters that lost their default (callers must now pass them). One `package_release` event per change. Every final release is listed from PyPI, and each consecutive pair is compared.
+The public API of the `sentry-sdk` package on PyPI, release by release: classes, functions and methods removed or renamed, parameters removed, and parameters that lost their default (callers must now pass them). One `package_release` event per change. Every final release is listed from PyPI, and each consecutive pair is compared. What a release adds (a new module, class, function or method, or a new parameter with a default) is an `added` event.
 
 Kind: `apisurface` (`kinds/apisurface`), with the Python reader (`kinds/apisurface/pysurface`).
 
@@ -140,7 +140,7 @@ Kind: `apisurface` (`kinds/apisurface`), with the Python reader (`kinds/apisurfa
 
 ### What it watches
 
-Names removed, renamed or deprecated in each release of Sentry's Python, JavaScript, Go and .NET SDKs, from that release's section of the SDK's `CHANGELOG.md` at its tag. One `package_release` event per bullet that names what it changes plainly. Sentry's API is a separate source (`sentry/api`).
+Names removed, renamed or deprecated in each release of Sentry's Python, JavaScript, Go and .NET SDKs, from that release's section of the SDK's `CHANGELOG.md` at its tag. One `package_release` event per bullet that names what it changes plainly. Sentry's API is a separate source (`sentry/api`). A bullet under an "Added" or "Features" heading that plainly names what the release adds is an `added` event.
 
 Kind: `changelog` (`kinds/changelog`, `sdks.go`).
 

@@ -4,8 +4,7 @@
     "fingerprint": "sha256:bdfcfa49f99297e3e205a803e01a25285fa7b5b07b1cb98b4c9d716aec4c12f4",
     "api": "github/actions",
     "version": "2026-11-02",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "ci_runtime",
       "platform": "github-actions",
@@ -23,8 +22,7 @@
     "fingerprint": "sha256:a4de3d5a12c726e5ed2733253429730a0a456113302b879f0d0219419d3ca474",
     "api": "github/actions",
     "version": "2026-11-02",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "ci_runtime",
       "platform": "github-actions",
@@ -42,8 +40,7 @@
     "fingerprint": "sha256:2f2185ea0c64bbed2075d64d5a8f697a0b9ef179ae65a221d19816305ad11030",
     "api": "github/actions",
     "version": "2026-11-02",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "ci_runtime",
       "platform": "github-actions",

@@ -93,8 +93,8 @@ func TestNeonGolden(t *testing.T) {
 	if e.Subject.Operation != "POST /api/v2/projects/{project_id}/branches/{branch_id}/auth/send_test_email" || e.Version != "2026-08-23" || e.PreviousVersion != "2026-08-17" {
 		t.Errorf("got %s %s (after %s)", e.Subject.Operation, e.Version, e.PreviousVersion)
 	}
-	if e.ChangeType != event.ChangeTypeDeprecation || e.Breaking {
-		t.Errorf("%s, want a deprecation", e.ChangeType)
+	if e.Change != event.ChangeDeprecated || (e.Change == event.ChangeBreaking) {
+		t.Errorf("%s, want a deprecation", e.Change)
 	}
 	if e.SourceURL != neonURL("93b93dc9") {
 		t.Errorf("source_url %s", e.SourceURL)
@@ -134,7 +134,7 @@ func TestNeonDropsRemovalsThatWerentDeprecated(t *testing.T) {
 	}
 	var removals []string
 	for _, e := range kittest.Stored(t, s) {
-		if e.ChangeType == event.ChangeTypeBreaking && strings.HasPrefix(e.Description, "Operation ") && strings.HasSuffix(e.Description, " removed.") {
+		if e.Change == event.ChangeBreaking && strings.HasPrefix(e.Description, "Operation ") && strings.HasSuffix(e.Description, " removed.") {
 			removals = append(removals, e.Subject.Operation)
 		}
 	}
@@ -191,8 +191,8 @@ func TestNeonKeepsTheRemovalOfADeprecatedOperation(t *testing.T) {
 		t.Fatalf("stored %d events, want 1", len(events))
 	}
 	e := events[0]
-	if e.Subject.Operation != "GET /api/v2/consumption_history/account" || e.ChangeType != event.ChangeTypeBreaking || !e.Breaking {
-		t.Errorf("got %s %s breaking=%v, want GET /consumption_history/account removed", e.Subject.Operation, e.ChangeType, e.Breaking)
+	if e.Subject.Operation != "GET /api/v2/consumption_history/account" || e.Change != event.ChangeBreaking {
+		t.Errorf("got %s %s, want GET /consumption_history/account removed", e.Subject.Operation, e.Change)
 	}
 	if !strings.Contains(e.SourceExcerpt, `"deprecated":true`) {
 		t.Errorf("excerpt lacks the flag the removal was kept for: %.300s", e.SourceExcerpt)

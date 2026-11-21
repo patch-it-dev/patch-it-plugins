@@ -5,8 +5,7 @@
     "api": "sentry/javascript-changelog",
     "version": "10.0.0",
     "previous_version": "9.47.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -29,8 +28,7 @@
     "api": "sentry/javascript-changelog",
     "version": "10.0.0",
     "previous_version": "9.47.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",

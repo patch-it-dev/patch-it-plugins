@@ -18,7 +18,7 @@ func init() {
 		Sources: []plugin.Source{
 			{
 				ID: "commands", Layer: plugin.LayerRuntime,
-				Watches: "Commands removed entirely between two Redis releases, from the command definitions in the server's own source (src/commands/) at each release tag",
+				Watches: "Commands removed entirely, or new, between two Redis releases, from the command definitions in the server's own source (src/commands/) at each release tag",
 				URLs:    []string{"https://github.com/redis/redis/tree/unstable/src/commands", "https://github.com/redis/redis/releases"},
 				Plugin:  Commands,
 			},

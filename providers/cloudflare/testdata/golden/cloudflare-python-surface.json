@@ -1,12 +1,143 @@
 [
   {
     "id": 1,
+    "fingerprint": "sha256:f5da89cca9344e9873db71a86b68287e96e31c01bfa16689c8530a5a96dac66e",
+    "api": "cloudflare/python-surface",
+    "version": "5.4.0",
+    "previous_version": "5.3.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "cloudflare",
+      "change": "added_symbol",
+      "symbols": [
+        "resources.iam.AsyncOAuthScopesResource"
+      ]
+    },
+    "description": "New class `resources.iam.AsyncOAuthScopesResource` in cloudflare 5.4.0.",
+    "source_url": "https://files.pythonhosted.org/packages/c2/bf/20002f7398cb5dc2f289cccd19777aa8869d40d5b01961ccbe8e25e094a6/cloudflare-5.4.0-py3-none-any.whl",
+    "source_excerpt": "cloudflare 5.3.0 (cloudflare-5.3.0-py3-none-any.whl): not defined\ncloudflare 5.4.0 (cloudflare-5.4.0-py3-none-any.whl), cloudflare/resources/iam/oauth_scopes.py line 68: class AsyncOAuthScopesResource(AsyncAPIResource)",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:9abd755403d52e24874f625db557d12f5b7c589c6008c7f10d345157fa8fd33a",
+    "api": "cloudflare/python-surface",
+    "version": "5.4.0",
+    "previous_version": "5.3.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "cloudflare",
+      "change": "added_symbol",
+      "symbols": [
+        "resources.iam.AsyncOAuthScopesResourceWithRawResponse"
+      ]
+    },
+    "description": "New class `resources.iam.AsyncOAuthScopesResourceWithRawResponse` in cloudflare 5.4.0.",
+    "source_url": "https://files.pythonhosted.org/packages/c2/bf/20002f7398cb5dc2f289cccd19777aa8869d40d5b01961ccbe8e25e094a6/cloudflare-5.4.0-py3-none-any.whl",
+    "source_excerpt": "cloudflare 5.3.0 (cloudflare-5.3.0-py3-none-any.whl): not defined\ncloudflare 5.4.0 (cloudflare-5.4.0-py3-none-any.whl), cloudflare/resources/iam/oauth_scopes.py line 122: class AsyncOAuthScopesResourceWithRawResponse / def __init__(self, oauth_scopes: AsyncOAuthScopesResource) -> None",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:fa835555392ce2258cd2448a6a545ebaf72bd3e9063d05f66280fc9c5803576d",
+    "api": "cloudflare/python-surface",
+    "version": "5.4.0",
+    "previous_version": "5.3.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "cloudflare",
+      "change": "added_symbol",
+      "symbols": [
+        "resources.iam.AsyncOAuthScopesResourceWithStreamingResponse"
+      ]
+    },
+    "description": "New class `resources.iam.AsyncOAuthScopesResourceWithStreamingResponse` in cloudflare 5.4.0.",
+    "source_url": "https://files.pythonhosted.org/packages/c2/bf/20002f7398cb5dc2f289cccd19777aa8869d40d5b01961ccbe8e25e094a6/cloudflare-5.4.0-py3-none-any.whl",
+    "source_excerpt": "cloudflare 5.3.0 (cloudflare-5.3.0-py3-none-any.whl): not defined\ncloudflare 5.4.0 (cloudflare-5.4.0-py3-none-any.whl), cloudflare/resources/iam/oauth_scopes.py line 140: class AsyncOAuthScopesResourceWithStreamingResponse / def __init__(self, oauth_scopes: AsyncOAuthScopesResource) -> None",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:35d76909a212a27adf4e9fc217af481ef9682b21589f9778d049755493ae63b8",
+    "api": "cloudflare/python-surface",
+    "version": "5.4.0",
+    "previous_version": "5.3.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "cloudflare",
+      "change": "added_symbol",
+      "symbols": [
+        "resources.iam.OAuthScopesResource"
+      ]
+    },
+    "description": "New class `resources.iam.OAuthScopesResource` in cloudflare 5.4.0.",
+    "source_url": "https://files.pythonhosted.org/packages/c2/bf/20002f7398cb5dc2f289cccd19777aa8869d40d5b01961ccbe8e25e094a6/cloudflare-5.4.0-py3-none-any.whl",
+    "source_excerpt": "cloudflare 5.3.0 (cloudflare-5.3.0-py3-none-any.whl): not defined\ncloudflare 5.4.0 (cloudflare-5.4.0-py3-none-any.whl), cloudflare/resources/iam/oauth_scopes.py line 23: class OAuthScopesResource(SyncAPIResource)",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:3fb173fb8120c0654bf784e83d37464650a7b9ce6ec73fabfb81b900a46b5b40",
+    "api": "cloudflare/python-surface",
+    "version": "5.4.0",
+    "previous_version": "5.3.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "cloudflare",
+      "change": "added_symbol",
+      "symbols": [
+        "resources.iam.OAuthScopesResourceWithRawResponse"
+      ]
+    },
+    "description": "New class `resources.iam.OAuthScopesResourceWithRawResponse` in cloudflare 5.4.0.",
+    "source_url": "https://files.pythonhosted.org/packages/c2/bf/20002f7398cb5dc2f289cccd19777aa8869d40d5b01961ccbe8e25e094a6/cloudflare-5.4.0-py3-none-any.whl",
+    "source_excerpt": "cloudflare 5.3.0 (cloudflare-5.3.0-py3-none-any.whl): not defined\ncloudflare 5.4.0 (cloudflare-5.4.0-py3-none-any.whl), cloudflare/resources/iam/oauth_scopes.py line 113: class OAuthScopesResourceWithRawResponse / def __init__(self, oauth_scopes: OAuthScopesResource) -> None",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:57ce1b61f1637e1b18381708f399877c822b3f0d2f326a03754639debff33f5f",
+    "api": "cloudflare/python-surface",
+    "version": "5.4.0",
+    "previous_version": "5.3.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "cloudflare",
+      "change": "added_symbol",
+      "symbols": [
+        "resources.iam.OAuthScopesResourceWithStreamingResponse"
+      ]
+    },
+    "description": "New class `resources.iam.OAuthScopesResourceWithStreamingResponse` in cloudflare 5.4.0.",
+    "source_url": "https://files.pythonhosted.org/packages/c2/bf/20002f7398cb5dc2f289cccd19777aa8869d40d5b01961ccbe8e25e094a6/cloudflare-5.4.0-py3-none-any.whl",
+    "source_excerpt": "cloudflare 5.3.0 (cloudflare-5.3.0-py3-none-any.whl): not defined\ncloudflare 5.4.0 (cloudflare-5.4.0-py3-none-any.whl), cloudflare/resources/iam/oauth_scopes.py line 131: class OAuthScopesResourceWithStreamingResponse / def __init__(self, oauth_scopes: OAuthScopesResource) -> None",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
     "fingerprint": "sha256:d1c7eddabd9cb9b74e7bd17ae72c88a0abace63313633534cca074d4d0886d40",
     "api": "cloudflare/python-surface",
     "version": "5.4.0",
     "previous_version": "5.3.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -24,13 +155,12 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 2,
+    "id": 8,
     "fingerprint": "sha256:ffcad893350bec2b3de31300151ade456487a0c615bf3790c1a7f798ff514ab6",
     "api": "cloudflare/python-surface",
     "version": "5.4.0",
     "previous_version": "5.3.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -48,13 +178,12 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 3,
+    "id": 9,
     "fingerprint": "sha256:9eb8385dbf1dc3e9251143e3c841884e9110146737388022fdc8138fae556b17",
     "api": "cloudflare/python-surface",
     "version": "5.4.0",
     "previous_version": "5.3.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",

@@ -5,8 +5,7 @@
     "api": "stripe/python-surface",
     "version": "16.0.0",
     "previous_version": "15.6.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",

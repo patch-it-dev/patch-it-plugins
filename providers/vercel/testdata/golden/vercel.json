@@ -1,12 +1,11 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:ff56553007ba92c7da01fd7b944f1989a2a08ddd78f67e4d61757f507b93ca91",
+    "fingerprint": "sha256:342ccca7a88b3415c569aac0dcaf5ebe0fb12975d356fcbcad45dfaa6402b91e",
     "api": "vercel/api",
     "version": "1.13.5",
     "previous_version": "1.13.4",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -22,12 +21,11 @@
   },
   {
     "id": 2,
-    "fingerprint": "sha256:bbc8995e4907e383935c8eb7eda04a71b49975160a4c2cfa67ca296011a5e48c",
+    "fingerprint": "sha256:6d2e3f5e01f9b1d3b84d68af40702ff2b88b390f97340038d4106a7d607e8476",
     "api": "vercel/api",
     "version": "1.13.5",
     "previous_version": "1.13.4",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -43,12 +41,11 @@
   },
   {
     "id": 3,
-    "fingerprint": "sha256:350f494abf46acc4721581386836895b85a3fab5cb1b285405ba8094d7e9ddf8",
+    "fingerprint": "sha256:131590d78f1cc105ffb755bff3d2fa579b931890f63bcc564febbb1b9a36ea3b",
     "api": "vercel/api",
     "version": "1.13.5",
     "previous_version": "1.13.4",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -64,12 +61,11 @@
   },
   {
     "id": 4,
-    "fingerprint": "sha256:e36c66e4c03dd109d47cfe6cc67a8f8809b46f23afa1ab9133b6270c0f7bf34d",
+    "fingerprint": "sha256:7323cbf08dba1ed5e6b9b22b9a2645a0de0e94207dfd0931e5a9e33ac524fbdc",
     "api": "vercel/api",
     "version": "1.13.5",
     "previous_version": "1.13.4",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -89,8 +85,7 @@
     "api": "vercel/api",
     "version": "1.18.7",
     "previous_version": "1.18.6",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -110,8 +105,7 @@
     "api": "vercel/api",
     "version": "1.18.7",
     "previous_version": "1.18.6",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",

@@ -55,3 +55,14 @@ type SpecVersioned interface {
 	Lister
 	ListsSpecVersions()
 }
+
+// Rereleased is an adapter that publishes a version again after naming it:
+// Stripe adds to an API version in later stripe/openapi releases, under the
+// same version. Releases are the releases that name v, oldest first (what
+// Fetch takes); the first whose spec declares v is where v starts. The
+// changes into v are read from there, so nothing added inside v is filed
+// with the changes between two versions; what v's later releases add is
+// filed under v itself (previous_version = version), additions only.
+type Rereleased interface {
+	Releases(ctx context.Context, v plugin.Version) ([]string, error)
+}

@@ -76,11 +76,11 @@ func TestElasticsearchNoRemovalWithinAMinor(t *testing.T) {
 	if rejected, err := kittest.Pair(ctx, openapitest.Env(s), s, p, "8.19", "9.0"); err != nil || rejected {
 		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}
-	n := map[event.ChangeType]int{}
+	n := map[event.Change]int{}
 	for _, e := range kittest.Stored(t, s) {
-		n[e.ChangeType]++
+		n[e.Change]++
 	}
-	if n[event.ChangeTypeBreaking] != 0 || n[event.ChangeTypeDeprecation] != 5 {
+	if n[event.ChangeBreaking] != 0 || n[event.ChangeDeprecated] != 5 {
 		t.Errorf("got %v, want 5 deprecations and no removal", n)
 	}
 }
@@ -98,37 +98,37 @@ func TestElasticsearchGolden(t *testing.T) {
 		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}
 	events := kittest.Stored(t, s)
-	byType := map[event.ChangeType][]string{}
+	byType := map[event.Change][]string{}
 	for _, e := range events {
-		byType[e.ChangeType] = append(byType[e.ChangeType], e.Subject.Operation)
+		byType[e.Change] = append(byType[e.Change], e.Subject.Operation)
 		if e.Version != "9.0.0" || e.PreviousVersion != "8.19.0" {
 			t.Errorf("%s: version %s from %s", e.Subject.Operation, e.Version, e.PreviousVersion)
 		}
 		want := esURL("9.0")
-		if e.Breaking {
+		if e.Change == event.ChangeBreaking {
 			want = esURL("8.19") // a removal is evidenced by the old spec
 		}
 		if e.SourceURL != want || !strings.Contains(e.SourceExcerpt, `"deprecated":true`) {
 			t.Errorf("%s: cited %s, excerpt %.120s", e.Subject.Operation, e.SourceURL, e.SourceExcerpt)
 		}
 		file := esFile("9.0")
-		if e.Breaking {
+		if e.Change == event.ChangeBreaking {
 			file = esFile("8.19")
 		}
 		if node := openapitest.JSONNode(t, file, e.SourcePointer); node != e.SourceExcerpt && !openapitest.Truncated(e.SourceExcerpt, node) {
 			t.Errorf("%s: excerpt doesn't match %s#%s", e.Subject.Operation, file, e.SourcePointer)
 		}
 	}
-	breaking := strings.Join(byType[event.ChangeTypeBreaking], ", ")
+	breaking := strings.Join(byType[event.ChangeBreaking], ", ")
 	for _, op := range []string{"GET /{index}/_knn_search", "POST /{index}/_knn_search", "POST /{index}/_unfreeze"} {
 		if !strings.Contains(breaking, op) {
 			t.Errorf("no removal of %s in %s", op, breaking)
 		}
 	}
-	if len(byType[event.ChangeTypeBreaking]) != 3 || len(byType[event.ChangeTypeDeprecation]) != 5 {
+	if len(byType[event.ChangeBreaking]) != 3 || len(byType[event.ChangeDeprecated]) != 5 {
 		t.Errorf("got %v, want 3 removals and 5 /_application/analytics deprecations", byType)
 	}
-	for _, op := range byType[event.ChangeTypeDeprecation] {
+	for _, op := range byType[event.ChangeDeprecated] {
 		if !strings.Contains(op, " /_application/analytics") {
 			t.Errorf("unexpected deprecation %s", op)
 		}
@@ -158,7 +158,7 @@ func TestElasticsearchDropsUndeprecatedRemovals(t *testing.T) {
 	}
 	var removed int
 	for _, e := range kittest.Stored(t, s) {
-		if e.Breaking && (strings.Contains(e.Subject.Operation, "/_autoscaling") || strings.Contains(e.Subject.Operation, "/shutdown")) {
+		if (e.Change == event.ChangeBreaking) && (strings.Contains(e.Subject.Operation, "/_autoscaling") || strings.Contains(e.Subject.Operation, "/shutdown")) {
 			removed++
 		}
 	}

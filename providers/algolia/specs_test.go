@@ -89,8 +89,8 @@ func TestAlgoliaGolden(t *testing.T) {
 				t.Fatalf("%d events, want %d", len(events), c.ops)
 			}
 			for _, e := range events {
-				if e.ChangeType != event.ChangeTypeDeprecation || e.Version != c.to[9:19] || e.SourceURL != algoliaURL(c.spec, c.to) {
-					t.Errorf("%s: %s %s %s", e.Subject.Operation, e.ChangeType, e.Version, e.SourceURL)
+				if e.Change != event.ChangeDeprecated || e.Version != c.to[9:19] || e.SourceURL != algoliaURL(c.spec, c.to) {
+					t.Errorf("%s: %s %s %s", e.Subject.Operation, e.Change, e.Version, e.SourceURL)
 				}
 				if !strings.Contains(e.SourceExcerpt, `"deprecated":true`) {
 					t.Errorf("%s: excerpt lacks the flag: %.150s", e.Subject.Operation, e.SourceExcerpt)
@@ -129,7 +129,7 @@ func TestAlgoliaDropsRemovalsThatWerentDeprecated(t *testing.T) {
 	}
 	var removed int
 	for _, e := range kittest.Stored(t, s) {
-		if strings.HasSuffix(e.Subject.Operation, " /1/transformations/models") && e.Breaking {
+		if strings.HasSuffix(e.Subject.Operation, " /1/transformations/models") && (e.Change == event.ChangeBreaking) {
 			removed++
 		}
 	}
@@ -181,7 +181,7 @@ func TestAlgoliaRecommendCustomRequestMoveIsNoEvent(t *testing.T) {
 	}
 	var removed int
 	for _, e := range kittest.Stored(t, s) {
-		if strings.HasSuffix(e.Subject.Operation, " /1{path}") && e.Breaking {
+		if strings.HasSuffix(e.Subject.Operation, " /1{path}") && (e.Change == event.ChangeBreaking) {
 			removed++
 		}
 	}

@@ -56,8 +56,8 @@ func TestGitHubPairRecreatesTheRealPropertyRemoval(t *testing.T) {
 		t.Fatalf("stored %d events, want exactly 1 (the rate property removal)", len(events))
 	}
 	e := events[0]
-	if e.Subject.Property != "rate" || string(e.ChangeType) != "breaking" {
-		t.Errorf("got property=%q change_type=%q, want rate/breaking", e.Subject.Property, e.ChangeType)
+	if e.Subject.Property != "rate" || string(e.Change) != "breaking" {
+		t.Errorf("got property=%q change=%q, want rate/breaking", e.Subject.Property, e.Change)
 	}
 
 	// Acceptance criteria: the event carries source_url and a non-empty

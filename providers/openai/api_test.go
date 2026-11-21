@@ -81,8 +81,8 @@ func TestOpenAIGolden(t *testing.T) {
 		t.Fatalf("stored %d events, want 1", len(events))
 	}
 	e := events[0]
-	if e.Subject.Operation != "POST /v1/audio/translations" || e.ChangeType != event.ChangeTypeDeprecation || e.Version != "2026-10-28" || e.PreviousVersion != "2026-10-27" {
-		t.Errorf("got %s %s %s (after %s)", e.ChangeType, e.Subject.Operation, e.Version, e.PreviousVersion)
+	if e.Subject.Operation != "POST /v1/audio/translations" || e.Change != event.ChangeDeprecated || e.Version != "2026-10-28" || e.PreviousVersion != "2026-10-27" {
+		t.Errorf("got %s %s %s (after %s)", e.Change, e.Subject.Operation, e.Version, e.PreviousVersion)
 	}
 	if e.SourceURL != openaiURL("2026-10-28") || e.SourcePointer != "/paths/~1audio~1translations/post" {
 		t.Errorf("cites %s#%s", e.SourceURL, e.SourcePointer)

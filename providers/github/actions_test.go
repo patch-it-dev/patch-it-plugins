@@ -85,8 +85,8 @@ func TestBreakingNeedsTheVendorToSayItStops(t *testing.T) {
 	for sentence, want := range map[string]string{
 		"The Ubuntu 22.04 runner image will be retired on March 1, 2027.":     "breaking 2027-03-01",
 		"The Ubuntu 22.04 runner image will be removed on March 1, 2027.":     "breaking 2027-03-01",
-		"The Ubuntu 22.04 runner image will be deprecated on March 1, 2027.":  "deprecation 2027-03-01",
-		"Please move off the Ubuntu 22.04 runner image before March 1, 2027.": "deprecation 2027-03-01",
+		"The Ubuntu 22.04 runner image will be deprecated on March 1, 2027.":  "deprecated 2027-03-01",
+		"Please move off the Ubuntu 22.04 runner image before March 1, 2027.": "deprecated 2027-03-01",
 		"The Ubuntu 22.04 runner image will be retired in the coming months.": "dropped",
 		"Announced March 1, 2027: the Ubuntu 22.04 image is being looked at.": "dropped",
 	} {

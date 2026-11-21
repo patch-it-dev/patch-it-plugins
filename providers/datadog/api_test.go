@@ -63,7 +63,7 @@ func TestDatadogPairRecreatesTheRealPropertyRemoval(t *testing.T) {
 	}
 	got := map[string]string{}
 	for _, e := range events {
-		got[e.Subject.Property] = string(e.ChangeType)
+		got[e.Subject.Property] = string(e.Change)
 	}
 	want := map[string]string{
 		"queried_tags_window_seconds": "breaking",

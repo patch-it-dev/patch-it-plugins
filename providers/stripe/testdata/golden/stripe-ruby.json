@@ -5,8 +5,7 @@
     "api": "stripe/ruby",
     "version": "7.0.0",
     "previous_version": "6.5.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "rubygems",
@@ -29,8 +28,7 @@
     "api": "stripe/ruby",
     "version": "7.0.0",
     "previous_version": "6.5.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "rubygems",
@@ -53,8 +51,7 @@
     "api": "stripe/ruby",
     "version": "7.0.0",
     "previous_version": "6.5.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "rubygems",
@@ -77,8 +74,7 @@
     "api": "stripe/ruby",
     "version": "7.0.0",
     "previous_version": "6.5.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "rubygems",
@@ -101,8 +97,7 @@
     "api": "stripe/ruby",
     "version": "7.0.0",
     "previous_version": "6.5.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "rubygems",

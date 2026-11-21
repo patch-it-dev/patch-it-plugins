@@ -1,12 +1,122 @@
 [
   {
     "id": 1,
+    "fingerprint": "sha256:5b74325b8eb3ff7c0c15e7f4fa738647133d651ab7c57e2ee0e086631834a990",
+    "api": "stripe/java",
+    "version": "21.0.0",
+    "previous_version": "20.136.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "maven",
+      "package": "com.stripe:stripe-java",
+      "change": "added_symbol",
+      "symbols": [
+        "ApiKeyMissingException"
+      ]
+    },
+    "description": "`ApiKeyMissingException` was added in com.stripe:stripe-java 21.0.0.",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-java/v21.0.0/CHANGELOG.md",
+    "source_excerpt": "## 21.0.0 - 2022-08-02\nAdded\n* Add `ApiKeyMissingException`.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:4c4902fb25647b8868862ebf624de2afc631da973cc6fc013ce3efc9d2999f51",
+    "api": "stripe/java",
+    "version": "21.0.0",
+    "previous_version": "20.136.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "maven",
+      "package": "com.stripe:stripe-java",
+      "change": "added_symbol",
+      "symbols": [
+        "CustomerCreateParams.validate"
+      ]
+    },
+    "description": "`CustomerCreateParams.validate` was added in com.stripe:stripe-java 21.0.0.",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-java/v21.0.0/CHANGELOG.md",
+    "source_excerpt": "## 21.0.0 - 2022-08-02\nAdded\n* Add `validate` field to `CustomerCreateParams`.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:19b6b26d92e1ecc44c501ca92a03b235b65b4d9d9db46f2212996db6de327927",
+    "api": "stripe/java",
+    "version": "21.0.0",
+    "previous_version": "20.136.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "maven",
+      "package": "com.stripe:stripe-java",
+      "change": "added_symbol",
+      "symbols": [
+        "CustomerUpdateParams.validate"
+      ]
+    },
+    "description": "`CustomerUpdateParams.validate` was added in com.stripe:stripe-java 21.0.0.",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-java/v21.0.0/CHANGELOG.md",
+    "source_excerpt": "## 21.0.0 - 2022-08-02\nAdded\n* Add `validate` field to `CustomerUpdateParams`.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:eac103e8eb898a0aae3c4744eea12396adf520d5ae5ca500cd9bc27c73e82c1b",
+    "api": "stripe/java",
+    "version": "21.0.0",
+    "previous_version": "20.136.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "maven",
+      "package": "com.stripe:stripe-java",
+      "change": "added_symbol",
+      "symbols": [
+        "PaymentSourceCollectionCreateParams.validate"
+      ]
+    },
+    "description": "`PaymentSourceCollectionCreateParams.validate` was added in com.stripe:stripe-java 21.0.0.",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-java/v21.0.0/CHANGELOG.md",
+    "source_excerpt": "## 21.0.0 - 2022-08-02\nAdded\n* Add `validate` field to `PaymentSourceCollectionCreateParams`.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:5a2e1d705bd4f77ca8495b49a7d7bc195ec4ceda6ba97bd466f13447936660f4",
+    "api": "stripe/java",
+    "version": "21.0.0",
+    "previous_version": "20.136.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "maven",
+      "package": "com.stripe:stripe-java",
+      "change": "added_symbol",
+      "symbols": [
+        "Checkout.Session.shipping_cost",
+        "Checkout.Session.shipping_details"
+      ]
+    },
+    "description": "`Checkout.Session.shipping_cost`, `Checkout.Session.shipping_details` were added in com.stripe:stripe-java 21.0.0.",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-java/v21.0.0/CHANGELOG.md",
+    "source_excerpt": "## 21.0.0 - 2022-08-02\nAdded\n* Add support for `shipping_cost` and `shipping_details` on `Checkout.Session`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
     "fingerprint": "sha256:52d5d7009a373dfc3666fa786bf3861a5c8e6ab8c76fc96f1bc323f9cedde7cb",
     "api": "stripe/java",
     "version": "21.0.0",
     "previous_version": "20.136.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "maven",
@@ -24,13 +134,12 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 2,
+    "id": 7,
     "fingerprint": "sha256:243aa32aa0d94502d221264fc88b76024d1392329d5936eeb1594223bbde16e9",
     "api": "stripe/java",
     "version": "21.0.0",
     "previous_version": "20.136.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "maven",
@@ -48,13 +157,12 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 3,
+    "id": 8,
     "fingerprint": "sha256:c85c6374f1dbb41fd978e13ee8fdaf009533c19529b82367d9e0b0186cab25e6",
     "api": "stripe/java",
     "version": "21.0.0",
     "previous_version": "20.136.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "maven",
@@ -72,13 +180,12 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 4,
+    "id": 9,
     "fingerprint": "sha256:ab3c4e3268d23e6cf7563c14c3a1c67d5ce241784a8efc4f99418b92f44c1cee",
     "api": "stripe/java",
     "version": "21.0.0",
     "previous_version": "20.136.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "maven",
@@ -96,13 +203,12 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 5,
+    "id": 10,
     "fingerprint": "sha256:01aa491de6852639511b23c7635842bdb4821ad0d8015ef21013133cf97e1f7b",
     "api": "stripe/java",
     "version": "21.0.0",
     "previous_version": "20.136.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "maven",
@@ -120,13 +226,12 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 6,
+    "id": 11,
     "fingerprint": "sha256:43418603b888248622b34c7dde74366f65799e8756b196daf20e8d6d7bf95845",
     "api": "stripe/java",
     "version": "21.0.0",
     "previous_version": "20.136.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "maven",
@@ -144,13 +249,12 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 7,
+    "id": 12,
     "fingerprint": "sha256:f445955ccefd8a04403f005db91a02b8b5ecbf9f649de82c4073ffc1c97a3650",
     "api": "stripe/java",
     "version": "21.0.0",
     "previous_version": "20.136.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "maven",
@@ -168,13 +272,12 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 8,
+    "id": 13,
     "fingerprint": "sha256:7275ee8da7eefc657932c00b8ecc072a60e8d2bf5fc421eec76c459d9fa3f1a6",
     "api": "stripe/java",
     "version": "21.0.0",
     "previous_version": "20.136.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "maven",

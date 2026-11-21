@@ -1,12 +1,11 @@
 [
   {
     "id": 0,
-    "fingerprint": "sha256:480b352be42e611c5b6806177349bb7230190f2ee9ccfe8d16c27ade354b6dfb",
+    "fingerprint": "sha256:4c9f5f426d3615498ca05668f0a05225ba562d3c2771b4946bf9afecbe2d9b31",
     "api": "stripe/api",
     "version": "2026-08-26.dahlia",
     "previous_version": "2026-07-29.dahlia",
-    "change_type": "new_feature",
-    "breaking": false,
+    "change": "added",
     "subject": {
       "type": "api_operation",
       "kind": "operation",

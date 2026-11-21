@@ -54,6 +54,7 @@ A source that looks right on today's copy can be wrong as a history of changes. 
 
   So the default rule for a spec is the `openapi.DeprecationsOnly` filter (`kinds/openapi/openapi.go`, as `providers/vercel/api.go` uses it): operation deprecations, plus removals of operations marked deprecated first. Keep an unmarked removal only if the history shows they're real.
 - **Withdrawals:** a deprecation the provider takes back (`endpoint-reactivated`), a removed version that reappears. Replay the history in order, and let a withdrawal cancel what it withdraws.
+- **Additions** (new operations, parameters, properties): emitted as `added` by default, since additions are data too. Count them the same way: a spec that moves or re-adds paths makes "new" operations that aren't; a filter that drops them says why on the provider's page.
 - **Property-level changes,** request and response. Response properties of a generated spec often churn by the hundred per release. Count before deciding; leaving them out is a fine first version.
 
 Then check what's left against the provider's own words:
@@ -215,7 +216,7 @@ The source's `Shape` (on its `plugin.Source`) holds its anchors and any ratio or
 
 ### Events
 
-The event format is [patch-it's change-event contract](https://github.com/patch-it-dev/patch-it/tree/main/docs/contract); `core/event/` is its Go binding. Every event has a typed `subject` (`api_operation`, `model`, `package_release`, `ci_runtime`), a `change_type` (`breaking`, `deprecation`, …), a `version`, a `fingerprint` (`event.Fingerprint`), and **a `source_url` and `source_excerpt`: no source, no event**. Call `Validate()`; an invalid event goes in `Result.Rejected`, not `Events`.
+The event format is [patch-it's change-event contract](https://github.com/patch-it-dev/patch-it/tree/main/docs/contract); `core/event/` is its Go binding. Every event has a typed `subject` (`api_operation`, `model`, `package_release`, `ci_runtime`), a `change` (`breaking`, `deprecated` or `added`: additions are data too, emit what the kind can see), a `version`, a `fingerprint` (`event.Fingerprint`), and **a `source_url` and `source_excerpt`: no source, no event**. Call `Validate()`; an invalid event goes in `Result.Rejected`, not `Events`.
 
 ## 5. Save the source
 

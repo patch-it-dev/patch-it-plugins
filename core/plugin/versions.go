@@ -85,6 +85,18 @@ type Versioned interface {
 	ReadAt(ctx context.Context, env Env, v Version) (Snapshot, error)
 }
 
+// Rereleasing is a versioned source that publishes a version again under
+// the same id after naming it (Stripe adds to an API version in later spec
+// releases): its listing reads each version at the newest release carrying
+// it. When the newest version's Ref moves, whoever runs the source compares
+// that version as read before (its snapshot's Ref) with it now: a pair of
+// one version, from and to with the same ID, whose Extract files only what
+// the newer release adds. Rereleases says whether this source does.
+type Rereleasing interface {
+	Versioned
+	Rereleases() bool
+}
+
 // Living is a plugin read as it is now: a page that only shows its latest
 // state.
 type Living interface {

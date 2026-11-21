@@ -1,11 +1,10 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:4627337a65ee7ecc6e02ac97ae51834d56722fa732ef67a19eca027b566a4f44",
+    "fingerprint": "sha256:bb0b832d4db43d0ba18a579645776c1d716c85356f0f2969f25b1c4dc24518c0",
     "api": "google/vertex-ai-models",
     "version": "2026-06-30",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -21,11 +20,10 @@
   },
   {
     "id": 2,
-    "fingerprint": "sha256:7da0d2dd46fa4f16ed41f9857ac90de07be28a2e165544c3212e2b975296a0e5",
+    "fingerprint": "sha256:5315576414711f47eaaa04b66c2492c6baf266100072b872666aeb00803bd1ff",
     "api": "google/vertex-ai-models",
     "version": "2026-06-30",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -41,11 +39,10 @@
   },
   {
     "id": 3,
-    "fingerprint": "sha256:366d6614ee42be4bd650704aa459e9d7a338cb682119f0b66123d030184ebc8d",
+    "fingerprint": "sha256:15709c6be02fd15f2a994aa611c78047c6529d72f9fb131cea3ff4e872848be7",
     "api": "google/vertex-ai-models",
     "version": "2026-06-30",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -61,11 +58,10 @@
   },
   {
     "id": 4,
-    "fingerprint": "sha256:54113780d0f2717208cd90ff8f76e4ac24f19302aa2e89ca10dfb4ca767f6236",
+    "fingerprint": "sha256:a09de1fe3a51f8a64e9c6f7b2047ba2142c0c67dcb045badbdc5183f2f848237",
     "api": "google/vertex-ai-models",
     "version": "2026-06-30",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -81,11 +77,10 @@
   },
   {
     "id": 5,
-    "fingerprint": "sha256:e4cf8857ddd3731ed2853071312f49588e79c47e81de698aa3458e0ed551b6fa",
+    "fingerprint": "sha256:a8ac7b0e09d8cfe042129e6c95535b11370d7311f7f16ea81abefad512713073",
     "api": "google/vertex-ai-models",
     "version": "2026-06-30",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -101,11 +96,10 @@
   },
   {
     "id": 6,
-    "fingerprint": "sha256:70e23f95c88d498b93825af99e0790a21b80cdd1903b522f36ccf7a76fa09182",
+    "fingerprint": "sha256:580dabde4e64c7c5430338ba5d6c2fcd58db2b56ce173a482169614b8f5bfeb7",
     "api": "google/vertex-ai-models",
     "version": "2026-06-30",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -121,11 +115,10 @@
   },
   {
     "id": 7,
-    "fingerprint": "sha256:7ccb799cf84268de5106b8509e4c0706f7165eab3b189bcf171df9c4b08f9bf9",
+    "fingerprint": "sha256:8732f4a6a8e4bddab16e62663c81e286c5a10b443e6da862875d38e380458b72",
     "api": "google/vertex-ai-models",
     "version": "2026-06-30",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -141,11 +134,10 @@
   },
   {
     "id": 8,
-    "fingerprint": "sha256:2edea0439cd41993804f3165d122d92f88f95fa5d22da1ae8a72c54562df56b9",
+    "fingerprint": "sha256:b0b55d3642bc8cc5d54e54223ab38707c98f0c6bcc8505c54694bf683d7389b1",
     "api": "google/vertex-ai-models",
     "version": "2026-06-30",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -161,11 +153,10 @@
   },
   {
     "id": 9,
-    "fingerprint": "sha256:ab4cd57e14aa05f619251f4e234f9b6faa5719f2599efd9c0f0ddf17242bf400",
+    "fingerprint": "sha256:d461f80ac448866ae383476ad66873c2c11b764fedf7fb080d7710663c8ea2e2",
     "api": "google/vertex-ai-models",
     "version": "2026-06-30",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -181,11 +172,10 @@
   },
   {
     "id": 10,
-    "fingerprint": "sha256:8d25d3020603811f27cfd86a17ddd27626682a65a09bd6286fad5488dfa04800",
+    "fingerprint": "sha256:8c8a7da7b4741a1ac968d5b0a061336daeea22029d3ccbaefcd8493e0dac7a40",
     "api": "google/vertex-ai-models",
     "version": "2026-06-30",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -201,11 +191,10 @@
   },
   {
     "id": 11,
-    "fingerprint": "sha256:39ca8174998ababa3c0c7c5438e1792de7b4133980c2038cce2f0e5eefde9ac9",
+    "fingerprint": "sha256:db98a95d336dc0554236752835428ec3ac57c3f1e902e5af71b6894ed466cea5",
     "api": "google/vertex-ai-models",
     "version": "2026-06-30",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -221,11 +210,10 @@
   },
   {
     "id": 12,
-    "fingerprint": "sha256:dfba27e6493a553e4976424fe316649f6111d3925c8443ac562ace71c5327183",
+    "fingerprint": "sha256:6c27209365faffe7f4b2f556f315187a92f932d84241f3022e9b85e2b38fadf7",
     "api": "google/vertex-ai-models",
     "version": "2026-06-30",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -241,11 +229,10 @@
   },
   {
     "id": 13,
-    "fingerprint": "sha256:e498e7d1768eb1327445f5589b9b5cf1eeede6a8fccecd98896ac39fdb6cf93b",
+    "fingerprint": "sha256:6c9e57549cae853c1c8dc050b8e77c07dde2af186486757129338ff411415386",
     "api": "google/vertex-ai-models",
     "version": "2026-06-30",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -261,11 +248,10 @@
   },
   {
     "id": 14,
-    "fingerprint": "sha256:91583fe5103284396c784ccc01d805ff0b3df116b2f39a1ff594292c6c19f3c9",
+    "fingerprint": "sha256:5f7ef5e186cbbf7a046ba07a20526a3032df22b6a7282cd7e59666d5e0c5f521",
     "api": "google/vertex-ai-models",
     "version": "2026-06-30",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -281,11 +267,10 @@
   },
   {
     "id": 15,
-    "fingerprint": "sha256:5d95e1087917d0ca68631f30d564790fbf485bf9f8c946d38b602191bcc5eff2",
+    "fingerprint": "sha256:5295c00e91a278255a1ee306f5e506c1007da612369974ca5d8bb5d9fecbc9f4",
     "api": "google/vertex-ai-models",
     "version": "2026-06-30",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -301,11 +286,10 @@
   },
   {
     "id": 16,
-    "fingerprint": "sha256:8e8d56f1d8bd361be7f4eb6516da283bec666b26d4cc5d8eea5efe3c979aadd6",
+    "fingerprint": "sha256:116a11477f1fd8b9df26ab90e790d7782591382939cef27b174942e781652832",
     "api": "google/vertex-ai-models",
     "version": "2026-06-30",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -321,11 +305,10 @@
   },
   {
     "id": 17,
-    "fingerprint": "sha256:97f4aacf7dd601956041e3d0bca0708cf5236e4e26e71019919fc9cf9c7b9c36",
+    "fingerprint": "sha256:772b7a1037c4290e8f1693f02dd82217df96679ea3302c60b7bcfe6263017de0",
     "api": "google/vertex-ai-models",
     "version": "2026-06-30",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -341,11 +324,10 @@
   },
   {
     "id": 18,
-    "fingerprint": "sha256:717de8a8c0f4ffbcb5e35f0440648d2ff8533165261a04e8f3d7112ce265ba20",
+    "fingerprint": "sha256:3bf215b2835eaab4fa596c43135c0ec06b2f70a28b018138964a823d53221ea5",
     "api": "google/vertex-ai-models",
     "version": "2026-04-02",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -361,11 +343,10 @@
   },
   {
     "id": 19,
-    "fingerprint": "sha256:43c9247f0fe52ba4f8b04d0efd09eb724b997fb9fd6d2ccf2f4cf8e39eaab770",
+    "fingerprint": "sha256:25ce94cc5f513aeb1bb35e2eaca8d7db4a9bd87073c1e8909d689103d7b6a1ce",
     "api": "google/vertex-ai-models",
     "version": "2026-04-02",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -380,11 +361,10 @@
   },
   {
     "id": 20,
-    "fingerprint": "sha256:81c5020f2b5e4bf5ac41f41d74ab25411de5709661e6bf2c58880b2dc334eb5e",
+    "fingerprint": "sha256:fe9dee57992969ecfc2ec076a14b0a53c47e7e68c66c835e13f18265fb424196",
     "api": "google/vertex-ai-models",
     "version": "2026-04-02",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -400,11 +380,10 @@
   },
   {
     "id": 21,
-    "fingerprint": "sha256:f603b43ee261cb8092b8dea3fb0ef7f11d7052595a5aaa23b2a350fae0744aff",
+    "fingerprint": "sha256:8a4dd70058ee2d65065b16c5256eedcf3a7d0080f13a06f6d59c028364d3b113",
     "api": "google/vertex-ai-models",
     "version": "2026-04-02",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -420,11 +399,10 @@
   },
   {
     "id": 22,
-    "fingerprint": "sha256:f522717bee23205fa997dd1a055708e7ca210c5dc035f88920463fa14e57af5a",
+    "fingerprint": "sha256:1458feb65aa057ce707398e9b2a78047af2036fb576739eb79ef3fafffa27b3c",
     "api": "google/vertex-ai-models",
     "version": "2026-04-02",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -440,11 +418,10 @@
   },
   {
     "id": 23,
-    "fingerprint": "sha256:8f8284129c2702e11752022571ae87f6b1c383bedf0e97b57cb4448ec0f5ca98",
+    "fingerprint": "sha256:dd55681347468fdee38370fc810f1c72dce8bd0365e49d8b8dbb0bec91be7fb8",
     "api": "google/vertex-ai-models",
     "version": "2026-04-02",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -460,11 +437,10 @@
   },
   {
     "id": 24,
-    "fingerprint": "sha256:94012bcb9d12655a7703235f5fcd7686f4ab638449b1dcf4274021c2d57e15b3",
+    "fingerprint": "sha256:80b037adcb209125082a3704de11273b9ee5314636dab3b0acdd226206cc565e",
     "api": "google/vertex-ai-models",
     "version": "2026-04-02",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -480,11 +456,10 @@
   },
   {
     "id": 25,
-    "fingerprint": "sha256:f940d36a57c55555c4a77ad0e81374a5384b2dc465a2545d8d80856ed5ceb0e9",
+    "fingerprint": "sha256:cbbee648d340c8d4b4a64b69a0c0c6ea3f59ffd1d24d93f0d2eeab510d03d37f",
     "api": "google/vertex-ai-models",
     "version": "2026-04-02",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -500,11 +475,10 @@
   },
   {
     "id": 26,
-    "fingerprint": "sha256:ead9022ac7480a58f5e5592aa1052a795436440bf8f1c44f06bd0dfa924b3fd3",
+    "fingerprint": "sha256:c2498ea99a0d0d75dde0d08e352de9253cf6eb6f203c8732034ed6b78f97ca22",
     "api": "google/vertex-ai-models",
     "version": "2026-03-19",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -520,11 +494,10 @@
   },
   {
     "id": 27,
-    "fingerprint": "sha256:6d498a1d266365bad2125ea26ed5f34d10c55d1dcc59d72d7feb2db19d63a17b",
+    "fingerprint": "sha256:311bc5077b68f36d7830cfa21a94557e7fdc3d8c18328d2ff94562b2eeb9600c",
     "api": "google/vertex-ai-models",
     "version": "2026-03-19",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -539,11 +512,10 @@
   },
   {
     "id": 28,
-    "fingerprint": "sha256:1f62ea6bf271e2b64a26cd0f64b679d0058b1d63e3551dd64fbe58fe849fc1b4",
+    "fingerprint": "sha256:430e1acfcd12911f3d5ba99f7fc11096ce8e11475073a293be5a179599e357b8",
     "api": "google/vertex-ai-models",
     "version": "2026-03-19",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -558,11 +530,10 @@
   },
   {
     "id": 29,
-    "fingerprint": "sha256:7f6da3ceb3be5b19a4a84b34bfc738a3c907f79614f6924b79bb9d8fe5e15f04",
+    "fingerprint": "sha256:0bc20f5ee129c7a172176cdca277b5a526ee12bfd0b379bdd816091c884ceec4",
     "api": "google/vertex-ai-models",
     "version": "2026-03-19",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -577,11 +548,10 @@
   },
   {
     "id": 30,
-    "fingerprint": "sha256:aaf7a42341e623059379622c1f42b13ac3db869956d0c7783c2c6b208e8fc9cb",
+    "fingerprint": "sha256:69954014909caff849320fd7c4c8337281f081c5c08d15301f07505bb5a1ed73",
     "api": "google/vertex-ai-models",
     "version": "2026-03-19",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -596,11 +566,10 @@
   },
   {
     "id": 31,
-    "fingerprint": "sha256:a1634ca7146b93f7d208e08f064923ac3bc2c39fd5e838706a36c0891f70f4d2",
+    "fingerprint": "sha256:06b4bfd0caf73dc3707076c46211c9f0b7f608f31b1397d8cd76246dd836380c",
     "api": "google/vertex-ai-models",
     "version": "2026-03-19",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -615,11 +584,10 @@
   },
   {
     "id": 32,
-    "fingerprint": "sha256:94fff9b9d36a3cc8ce8b764ecbc4cf78c7544fab37518ed1ddc09ba7b77de150",
+    "fingerprint": "sha256:27b71c5f6caa6dd294689bdb117006a97a90dabbc28802674acd49549e14e361",
     "api": "google/vertex-ai-models",
     "version": "2026-03-19",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -635,11 +603,10 @@
   },
   {
     "id": 33,
-    "fingerprint": "sha256:76dc2c9d131c5f4440bb4d3359bb613fbd78762b5fb63e969d93205bc8914a03",
+    "fingerprint": "sha256:baa1b9a7fa804910f807bbf5492e8e4829f13f23557c19a234bb169f0787e229",
     "api": "google/vertex-ai-models",
     "version": "2026-03-19",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -655,11 +622,10 @@
   },
   {
     "id": 34,
-    "fingerprint": "sha256:5ce0ba566a3c908960246f8a12eb65a096c47730c7947c81371c8c01e2071717",
+    "fingerprint": "sha256:37767de1756a5d665d625f4d64c3637e02a7a6e6c51e48dfe8fbe365e001bd9a",
     "api": "google/vertex-ai-models",
     "version": "2026-03-19",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -675,11 +641,10 @@
   },
   {
     "id": 35,
-    "fingerprint": "sha256:ae6ad7fcb917173ee50e45c04736c2f9cabec071da307402916398d6203a9ab2",
+    "fingerprint": "sha256:c8732a03eceee2aa5a13ced050071aa136b45bf835b150fa6ef892be2e1e7235",
     "api": "google/vertex-ai-models",
     "version": "2026-03-19",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "model",
       "provider": "google",

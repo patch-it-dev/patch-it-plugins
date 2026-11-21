@@ -46,8 +46,8 @@ type Reader func(e extract.Entry) []Finding
 
 // Finding is one change a reader found in an entry, or one it dropped.
 type Finding struct {
-	ChangeType  event.ChangeType // breaking or deprecation
-	Version     string           // per the subject's type: the removal or shutdown date
+	ChangeType  event.Change // breaking or deprecation
+	Version     string       // per the subject's type: the removal or shutdown date
 	Subject     event.Subject
 	Description string
 	Hint        string
@@ -126,8 +126,7 @@ func (f Feed) Events(found kit.Notices, citeURL, previous string, now time.Time)
 		e := event.Event{
 			API:           f.API,
 			Version:       fd.Version,
-			ChangeType:    fd.ChangeType,
-			Breaking:      fd.ChangeType == event.ChangeTypeBreaking,
+			Change:        fd.ChangeType,
 			Subject:       fd.Subject,
 			Description:   fd.Description,
 			MigrationHint: fd.Hint,
@@ -139,7 +138,7 @@ func (f Feed) Events(found kit.Notices, citeURL, previous string, now time.Time)
 		if event.PairType(e.Subject.Type) {
 			e.PreviousVersion = previous
 		}
-		e.Fingerprint = event.Fingerprint(e.API, e.Version, e.ChangeType, e.Subject, "")
+		e.Fingerprint = event.Fingerprint(e.API, e.Version, e.Change, e.Subject, "")
 		if err := e.Validate(); err != nil {
 			rejected = append(rejected, fmt.Errorf("%s %s: %w", f.API, fd.Entry, err))
 			continue

@@ -2,6 +2,7 @@ package changelog
 
 import (
 	"errors"
+	"github.com/patch-it-dev/patch-it-plugins/core/event"
 	"strings"
 	"testing"
 
@@ -28,7 +29,9 @@ func TestReleaseNotesAreReadWhole(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(fs) != 1 || fs[0].Dropped != "" || strings.Join(fs[0].Change.Symbols, ",") != "acme.old" {
+	// The removal, and the feature that names what it adds.
+	if len(fs) != 2 || fs[0].Dropped != "" || strings.Join(fs[0].Change.Symbols, ",") != "acme.old" ||
+		fs[1].Change.Change != event.PackageAddedSymbol || strings.Join(fs[1].Change.Symbols, ",") != "acme.new" {
 		t.Errorf("findings %+v", fs)
 	}
 	if f.Cite() != "https://github.com/acme/acme/releases/tag/v2.0.0" || f.URL() != "https://api.github.com/repos/acme/acme/releases/tags/v2.0.0" {

@@ -5,8 +5,7 @@
     "api": "google/genai-python-surface",
     "version": "1.0.0",
     "previous_version": "0.8.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -29,8 +28,7 @@
     "api": "google/genai-python-surface",
     "version": "1.0.0",
     "previous_version": "0.8.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",

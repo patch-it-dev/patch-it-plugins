@@ -32,18 +32,18 @@ func Marked(labels []string, words ...string) bool {
 // Dated is the first line holding a date and saying what happens on it:
 // breaking when the thing stops on the date, deprecation when the vendor only
 // asks to move by it. "" when no line says either.
-func Dated(lines []string) (line, date string, ct event.ChangeType) {
+func Dated(lines []string) (line, date string, ct event.Change) {
 	for _, l := range lines {
 		// The date after the words, not the first on the line: "deprecated
 		// as of February 23, 2026 and will be shut down on August 23, 2026".
 		if m := willStop.FindStringIndex(l); m != nil {
 			if d := extract.Date(l[m[1]:]); d != "" {
-				return l, d, event.ChangeTypeBreaking
+				return l, d, event.ChangeBreaking
 			}
 		}
 		if m := willSoften.FindStringIndex(l); m != nil {
 			if d := extract.Date(l[m[1]:]); d != "" {
-				return l, d, event.ChangeTypeDeprecation
+				return l, d, event.ChangeDeprecated
 			}
 		}
 	}

@@ -3,6 +3,7 @@ package redis
 import (
 	"context"
 	"errors"
+	"path/filepath"
 	"slices"
 	"strings"
 	"testing"
@@ -14,15 +15,22 @@ import (
 )
 
 // redisPair is the version pair from -> to over the saved listings (and the
-// removed files at from's tag), as the hosted ingestion service extracts it.
-func redisPair(t *testing.T, from, to string, files ...string) []event.Event {
+// command files saved at either tag: testdata/redis-<tag>-<file>), as the
+// hosted ingestion service extracts it.
+func redisPair(t *testing.T, from, to string) []event.Event {
 	t.Helper()
 	pages := kittest.Pages{
 		Commands.ListingURL(from): "testdata/redis-contents-src-commands-" + from + ".json",
 		Commands.ListingURL(to):   "testdata/redis-contents-src-commands-" + to + ".json",
 	}
-	for _, f := range files {
-		pages[Commands.FileURL(from, f)] = "testdata/redis-" + from + "-" + f
+	for _, ref := range []string{from, to} {
+		saved, err := filepath.Glob("testdata/redis-" + ref + "-*.json")
+		if err != nil {
+			t.Fatal(err)
+		}
+		for _, path := range saved {
+			pages[Commands.FileURL(ref, strings.TrimPrefix(filepath.Base(path), "redis-"+ref+"-"))] = path
+		}
 	}
 	return kittest.Versions(t, kittest.Env(t, pages), Commands, plugin.Version{ID: from, Ref: from}, plugin.Version{ID: to, Ref: to})
 }
@@ -31,11 +39,20 @@ func redisPair(t *testing.T, from, to string, files ...string) []event.Event {
 // 7.0 to 8.12 (checked 2026-11-20): GCRA and GCRASETVALUE, added in the
 // 8.8 milestone builds, are gone at 8.8-rc1. Final releases never removed a
 // command in that span, so the golden pins this pre-release pair: the real
-// files, the real listings.
+// files, the real listings. The same pair adds the 18 array commands (AR*)
+// and INCREX, each an added event citing its file at 8.8-rc1.
 func TestGolden(t *testing.T) {
-	got := redisPair(t, "8.8-m03", "8.8-rc1", "gcra.json", "gcrasetvalue.json")
+	got := redisPair(t, "8.8-m03", "8.8-rc1")
 	var names []string
+	added := 0
 	for _, e := range got {
+		if e.Change == event.ChangeAdded {
+			if e.SourceURL != Commands.FileURL("8.8-rc1", strings.ToLower(e.Subject.Symbols[0])+".json") || e.Subject.Change != event.PackageAddedSymbol {
+				t.Errorf("%s: cites %s", e.Subject.Symbols[0], e.SourceURL)
+			}
+			added++
+			continue
+		}
 		names = append(names, e.Subject.Symbols[0])
 		if e.SourceURL != Commands.FileURL("8.8-m03", strings.ToLower(e.Subject.Symbols[0])+".json") || !strings.Contains(e.SourceExcerpt, `"since":"8.8.0"`) {
 			t.Errorf("%s: cites %s, quoting %.80q", e.Subject.Symbols[0], e.SourceURL, e.SourceExcerpt)
@@ -44,15 +61,23 @@ func TestGolden(t *testing.T) {
 	if !slices.Equal(names, []string{"GCRA", "GCRASETVALUE"}) {
 		t.Errorf("removed %v, want GCRA and GCRASETVALUE", names)
 	}
+	if added != 19 {
+		t.Errorf("%d commands added, want 19", added)
+	}
 	kittest.Golden(t, "testdata/golden/redis-commands.json", got)
 }
 
-// The pinned drop test: 8.8.0 -> 8.10.0 adds 17 command files (the array
-// commands, INCREX…) and removes none. Nothing is an event, and nothing
-// past the two listings is fetched.
+// The pinned drop test: 8.8.0 -> 8.10.0 adds 17 command files and removes
+// none. Nothing breaks: every event is an addition.
 func TestReleasesThatOnlyAddCommandsHaveNoEvents(t *testing.T) {
-	if got := redisPair(t, "8.8.0", "8.10.0"); len(got) != 0 {
-		t.Errorf("%d events, want 0", len(got))
+	got := redisPair(t, "8.8.0", "8.10.0")
+	for _, e := range got {
+		if e.Change != event.ChangeAdded {
+			t.Errorf("%s %v, want additions only", e.Change, e.Subject.Symbols)
+		}
+	}
+	if len(got) != 17 {
+		t.Errorf("%d additions, want 17", len(got))
 	}
 }
 

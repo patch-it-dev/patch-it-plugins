@@ -6,8 +6,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -30,8 +29,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -54,8 +52,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -78,8 +75,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -102,8 +98,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -126,8 +121,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -150,8 +144,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -174,8 +167,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -199,8 +191,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -224,8 +215,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -248,8 +238,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -273,8 +262,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -298,8 +286,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -322,8 +309,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -346,8 +332,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -370,8 +355,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -394,8 +378,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -418,8 +401,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -442,8 +424,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -466,8 +447,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -491,8 +471,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -515,8 +494,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -540,8 +518,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -565,8 +542,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -590,8 +566,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -614,8 +589,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -638,8 +612,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -663,8 +636,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -688,8 +660,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -712,8 +683,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -737,8 +707,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -761,8 +730,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -785,8 +753,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -809,8 +776,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -834,8 +800,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -859,8 +824,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -883,8 +847,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -907,8 +870,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -932,8 +894,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -957,8 +918,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -981,8 +941,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -1005,8 +964,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -1030,8 +988,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -1055,8 +1012,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -1079,8 +1035,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -1103,8 +1058,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -1127,8 +1081,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -1151,8 +1104,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -1175,8 +1127,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -1199,8 +1150,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -1224,8 +1174,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -1249,8 +1198,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -1273,8 +1221,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -1297,8 +1244,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -1321,8 +1267,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -1346,8 +1291,7 @@
       "api": "numpy/numpy",
       "version": "2.0.0",
       "previous_version": "1.26.4",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
