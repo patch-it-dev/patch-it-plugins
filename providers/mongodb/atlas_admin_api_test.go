@@ -85,8 +85,9 @@ func TestTenantBackupSunset(t *testing.T) {
 
 // The pinned drop test: the changelog's newest day (2026-11-18), whole and
 // unchanged: 104 changes, 23 of them marked not backward compatible
-// (`request-property-one-of-removed`, …), none an endpoint's life cycle.
-// No event.
+// (`request-property-one-of-removed`, …), none a removal or a deprecation of
+// an endpoint. No breaking or deprecated event; the one endpoint it adds
+// (POST …/clusterConfigurations:validate) is an added one.
 func TestPropertyChangesMakeNoEvent(t *testing.T) {
 	const sha = "0000000000000000000000000000000000000001"
 	file := "testdata/mongodb-atlas-changelog-2026-11-18-day.json"
@@ -111,11 +112,12 @@ func TestPropertyChangesMakeNoEvent(t *testing.T) {
 	if notBC != 23 {
 		t.Fatalf("the atlasFixture has %d changes not backward compatible, want 23", notBC)
 	}
-	if got := logPair(t, sha, file); len(got) != 0 {
+	got := logPair(t, sha, file)
+	if len(got) != 1 || got[0].Change != event.ChangeAdded || got[0].Subject.Operation != "POST /api/atlas/v2/groups/{groupId}/clusterConfigurations:validate" {
 		for _, e := range got {
-			t.Logf("got: %s", e.Description)
+			t.Logf("got: %s %s", e.Change, e.Description)
 		}
-		t.Fatalf("%d events, want none", len(got))
+		t.Fatalf("%d events, want the one endpoint added", len(got))
 	}
 }
 

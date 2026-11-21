@@ -118,7 +118,7 @@ Kind: `apisurface` (`kinds/apisurface`), with the Python reader (`kinds/apisurfa
 
 ### What it watches
 
-Classes, methods, properties, constants and resources removed or renamed in each release of Stripe's seven official server SDKs, read from that release's section of the SDK's own `CHANGELOG.md`. One `package_release` event per bullet that names what it removes plainly. Stripe's API itself is a separate source (`stripe/api`, kind `openapi`).
+Classes, methods, properties, constants and resources removed or renamed in each release of Stripe's seven official server SDKs, read from that release's section of the SDK's own `CHANGELOG.md`. One `package_release` event per bullet that names what it removes plainly. Stripe's API itself is a separate source (`stripe/api`, kind `openapi`). A bullet under an "Added" or "Features" heading that plainly names what the release adds is an `added` event.
 
 Kind: `changelog` (`kinds/changelog`, `sdks.go`).
 

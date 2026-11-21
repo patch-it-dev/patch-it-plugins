@@ -277,5 +277,50 @@
     "source_excerpt": "2.0.0 (2023-04-26)\nDeprecated\n* Deprecated ``HTTPConnection.request_chunked()`` method which will be removed in urllib3 v2.1.0. Instead pass ``chunked=True`` to ``HTTPConnection.request()`` (`#1985 <https://github.com/urllib3/urllib3/issues/1985>`__).",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 13,
+    "fingerprint": "sha256:4a4296abc3835c8dd36752f7f170d554d150d25e55f368892490623db731e92e",
+    "api": "urllib3/urllib3",
+    "version": "2.0.0",
+    "previous_version": "1.26.15",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "urllib3",
+      "change": "added_symbol",
+      "symbols": [
+        "response.BaseHTTPResponse"
+      ]
+    },
+    "description": "`response.BaseHTTPResponse` was added in urllib3 2.0.0.",
+    "source_url": "https://raw.githubusercontent.com/urllib3/urllib3/2.0.0/CHANGES.rst",
+    "source_excerpt": "2.0.0 (2023-04-26)\nAdded\n* Added ``urllib3.response.BaseHTTPResponse`` class. All future response classes will be subclasses of ``BaseHTTPResponse`` (`#2083 <https://github.com/urllib3/urllib3/issues/2083>`__).",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 14,
+    "fingerprint": "sha256:4a4e849a79ed67b25251f6b7e4e9f11af9a2f96074e83367fc50251c13637af5",
+    "api": "urllib3/urllib3",
+    "version": "2.0.0",
+    "previous_version": "1.26.15",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "urllib3",
+      "change": "added_parameter",
+      "symbols": [
+        "Retry"
+      ],
+      "parameter": "backoff_jitter"
+    },
+    "description": "`Retry` takes a new parameter `backoff_jitter` in urllib3 2.0.0.",
+    "source_url": "https://raw.githubusercontent.com/urllib3/urllib3/2.0.0/CHANGES.rst",
+    "source_excerpt": "2.0.0 (2023-04-26)\nAdded\n* Added optional ``backoff_jitter`` parameter to ``Retry``. (`#2952 <https://github.com/urllib3/urllib3/issues/2952>`__)",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
   }
 ]

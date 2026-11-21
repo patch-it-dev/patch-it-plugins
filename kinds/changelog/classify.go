@@ -18,6 +18,7 @@ const (
 	KindRemoved          // Removed: breaking, and a bullet of names alone is a removal
 	KindDeprecation      // Deprecated, Deprecations
 	KindMixed            // "Deprecations and Removals": the bullet's verb decides
+	KindAdded            // Added, Features, New features
 )
 
 // SectionKind classifies a section title.
@@ -38,6 +39,8 @@ func SectionKind(title string) Kind {
 		return KindBreaking
 	case deprecation:
 		return KindDeprecation
+	case strings.Contains(t, "added") || strings.Contains(t, "feature"):
+		return KindAdded
 	}
 	return KindNone
 }
@@ -71,9 +74,10 @@ var changeWord = regexp.MustCompile(`(?i)^(added|changed|deprecated|fixed|securi
 // Change is what one bullet says, when it says it plainly enough.
 type Change struct {
 	ChangeType  event.Change
-	Change      event.PackageChange // removed_symbol or renamed_symbol
+	Change      event.PackageChange // removed_symbol, renamed_symbol, added_symbol or added_parameter
 	Symbols     []string            // as code writes them after the import
 	Replacement string              // renamed_symbol only
+	Parameter   string              // added_parameter only
 }
 
 var (
@@ -103,6 +107,17 @@ var (
 	renamedPassive = regexp.MustCompile(`(?i)^(?:the )?(?:` + noun + ` )?(§)(?: ` + noun + `)? (?:has been|have been|was|were|is|is now) renamed to (?:the )?(§)$`)
 	deprecActive   = regexp.MustCompile(`(?i)^(?:deprecated|deprecates|deprecate) (?:the )?(?:` + noun + ` )?` + list + `(?: ` + noun + `)?(?: (?:which|that) will be removed in .+| in favou?r of (?:the )?(§)(?: ` + noun + `)?)?$`)
 	deprecPassive  = regexp.MustCompile(`(?i)^(?:the )?(?:` + noun + ` )?` + list + `(?: ` + noun + `)? (?:is|are) (?:now )?deprecated(?: in favou?r of (?:the )?(§)(?: ` + noun + `)?)?$`)
+
+	// constant is a bullet about a constant.
+	constant = regexp.MustCompile(`(?i)\bconstants?\b`)
+
+	// What an "Added" or "Features" bullet says plainly: names it adds
+	// ("Added `Client.stream` method", "Add `a` and `b` to `Widget`", "New
+	// `foo` function", "`bar` was added"), or a parameter it gives a call
+	// ("Added `timeout` parameter to `Client.send`").
+	addedActive  = regexp.MustCompile(`(?i)^(?:added|adds|add|introduced|introduces|introduce|new)(?: support for)? (?:the |a |an )?(?:new )?(?:` + noun + ` )?` + list + `(?: ` + noun + `)?(?: (?:to|on|in) (?:the )?(?:` + noun + ` )?(§)(?: ` + noun + `)?)?$`)
+	addedPassive = regexp.MustCompile(`(?i)^(?:the )?(?:new )?(?:` + noun + ` )?` + list + `(?: ` + noun + `)? (?:has been |have been |was |were |is |are |is now |are now )?added(?: to (?:the )?(?:` + noun + ` )?(§)(?: ` + noun + `)?)?$`)
+	addedParam   = regexp.MustCompile(`(?i)^(?:added|adds|add|introduced|introduces|introduce) (?:the |a |an )?(?:new )?(?:optional )?(§) (?:parameter|argument|param|option|kwarg|keyword argument) (?:to|on|for|in) (?:the )?(?:` + noun + ` )?(§)(?: ` + noun + `)?$`)
 )
 
 // Classify reads one bullet of a section of kind k. ok is false for a bullet
@@ -124,6 +139,9 @@ func Classify(k Kind, text, module string) (c Change, ok bool, why string) {
 	}
 	if k == KindNone {
 		return Change{}, false, ""
+	}
+	if k == KindAdded {
+		return classifyAdded(text, module)
 	}
 	removedHeading := false
 	sentence, codes := template(text)
@@ -162,6 +180,51 @@ func Classify(k Kind, text, module string) (c Change, ok bool, why string) {
 	return Change{}, true, "doesn't say plainly which names it removes or deprecates"
 }
 
+// classifyAdded reads a bullet of an "Added" or "Features" section: names it
+// plainly adds, or a parameter it plainly gives a call. ok is false for any
+// other bullet (a feature described in words): precision over recall, an
+// addition that doesn't name what it adds isn't one.
+func classifyAdded(text, module string) (Change, bool, string) {
+	sentence, codes := template(text)
+	if m := addedParam.FindStringSubmatch(sentence); m != nil {
+		param, ok := cleanName(codes[0], module)
+		sym, ok2 := cleanName(codes[1], module)
+		if !ok || !ok2 || strings.Contains(param, ".") {
+			return Change{}, false, ""
+		}
+		return Change{ChangeType: event.ChangeAdded, Change: event.PackageAddedParameter, Symbols: []string{sym}, Parameter: param}, true, ""
+	}
+	for _, re := range []*regexp.Regexp{addedActive, addedPassive} {
+		m := re.FindStringSubmatch(sentence)
+		if m == nil {
+			continue
+		}
+		// A constant "to" a type is a member in one language and a
+		// package-level name of that type in another (Go): which, the bullet
+		// doesn't say.
+		if m[2] != "" && constant.MatchString(sentence) {
+			return Change{}, false, ""
+		}
+		c, ok, why := names(event.ChangeAdded, codes, m[1], m[2], "", "", module, "")
+		if !ok || why != "" {
+			return Change{}, false, ""
+		}
+		// "`A.b()`, `c()` and `d()`" leaves c and d's owner to the reader.
+		dotted := 0
+		for _, s := range c.Symbols {
+			if strings.Contains(s, ".") {
+				dotted++
+			}
+		}
+		if m[2] == "" && dotted > 0 && dotted < len(c.Symbols) {
+			return Change{}, false, ""
+		}
+		c.Change = event.PackageAddedSymbol
+		return c, true, ""
+	}
+	return Change{}, false, ""
+}
+
 // template is the bullet's first sentence, links and issue references
 // dropped, with every code span replaced by §, and the spans in order.
 func template(text string) (string, []string) {
@@ -181,6 +244,17 @@ func template(text string) (string, []string) {
 	s = issueRef.ReplaceAllString(s, "")
 	s = strings.Join(strings.Fields(s), " ")
 	return strings.TrimRight(s, ". "), codes
+}
+
+// cleanName is a code span as code writes the name after importing module:
+// Ruby's and ioredis' "Class#method" is Class.method, a trailing "()" goes.
+// ok is false for anything that isn't a name.
+func cleanName(s, module string) (string, bool) {
+	s = strings.ReplaceAll(strings.TrimSuffix(strings.TrimSpace(s), "()"), "#", ".")
+	if module != "" {
+		s = strings.TrimPrefix(s, module+".")
+	}
+	return s, ident.MatchString(s) && s != module
 }
 
 // names turns the § groups of a matched template into a Change. list is the
@@ -209,14 +283,7 @@ func names(ct event.Change, codes []string, list, owner, newName, favour, module
 	if renamedTo != "" {
 		repl = []string{renamedTo}
 	}
-	clean := func(s string) (string, bool) {
-		// Ruby's and ioredis' "Class#method" is Class.method in code.
-		s = strings.ReplaceAll(strings.TrimSuffix(strings.TrimSpace(s), "()"), "#", ".")
-		if module != "" {
-			s = strings.TrimPrefix(s, module+".")
-		}
-		return s, ident.MatchString(s) && s != module
-	}
+	clean := func(s string) (string, bool) { return cleanName(s, module) }
 	c := Change{ChangeType: ct, Change: event.PackageRemovedSymbol}
 	prefix := ""
 	if len(own) == 1 {

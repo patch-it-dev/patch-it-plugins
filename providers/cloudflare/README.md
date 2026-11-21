@@ -146,7 +146,7 @@ Kind: `apisurface` (`kinds/apisurface`), with the Python reader (`kinds/apisurfa
 
 ### What it watches
 
-Methods, sub-resources, types and attributes removed or renamed in each release of Cloudflare's TypeScript, Python and Go SDKs and its Terraform provider, from that release's section of the repo's `CHANGELOG.md` at its tag. One `package_release` event per bullet that names what it removes plainly. Cloudflare's API notices are a separate source (`cloudflare/api`).
+Methods, sub-resources, types and attributes removed or renamed in each release of Cloudflare's TypeScript, Python and Go SDKs and its Terraform provider, from that release's section of the repo's `CHANGELOG.md` at its tag. One `package_release` event per bullet that names what it removes plainly. Cloudflare's API notices are a separate source (`cloudflare/api`). A bullet under an "Added" or "Features" heading that plainly names what the release adds is an `added` event.
 
 Kind: `changelog` (`kinds/changelog`, `sdks.go`).
 

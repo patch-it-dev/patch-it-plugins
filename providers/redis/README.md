@@ -44,7 +44,7 @@ Kind: `catalog` (`kinds/catalog`), the `Commands` reader (`kinds/catalog/command
 
 ### What it watches
 
-Names removed or renamed in each release of ioredis, the Node.js Redis client, from that release's section of its `CHANGELOG.md` at its tag. Package `npm:ioredis`; releases listed from npm, each read at `vX.Y.Z`.
+Names removed or renamed in each release of ioredis, the Node.js Redis client, from that release's section of its `CHANGELOG.md` at its tag. Package `npm:ioredis`; releases listed from npm, each read at `vX.Y.Z`. A bullet under an "Added" or "Features" heading that plainly names what the release adds is an `added` event.
 
 Kind: `changelog` (`kinds/changelog`, `sdks.go`).
 

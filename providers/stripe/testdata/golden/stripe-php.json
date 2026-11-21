@@ -1,6 +1,73 @@
 [
   {
     "id": 1,
+    "fingerprint": "sha256:4eb42a76b991cc971bcbd48bdff3161dcaee67a8dcdefa0c11af7497f9de42cc",
+    "api": "stripe/php",
+    "version": "9.0.0",
+    "previous_version": "8.12.1",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "packagist",
+      "package": "stripe/stripe-php",
+      "change": "added_symbol",
+      "symbols": [
+        "CreditNote.previewLines"
+      ]
+    },
+    "description": "`CreditNote.previewLines` was added in stripe/stripe-php 9.0.0.",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-php/v9.0.0/CHANGELOG.md",
+    "source_excerpt": "## 9.0.0 - 2022-08-02\nAdded\n* Add `previewLines` method to `CreditNote` resource.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:b1831c39f6f0ad661650aab8c03a503252516fbcdd1f3f5099b5a3a000e2e47b",
+    "api": "stripe/php",
+    "version": "9.0.0",
+    "previous_version": "8.12.1",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "packagist",
+      "package": "stripe/stripe-php",
+      "change": "added_symbol",
+      "symbols": [
+        "Subscription.transfer_data"
+      ]
+    },
+    "description": "`Subscription.transfer_data` was added in stripe/stripe-php 9.0.0.",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-php/v9.0.0/CHANGELOG.md",
+    "source_excerpt": "## 9.0.0 - 2022-08-02\nAdded\n* Add `transfer_data` property to `Subscription` resource.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:f85377a4299b380ad819ebb8e19710ea093dbfa0e67d932e7cee0f799e47dedb",
+    "api": "stripe/php",
+    "version": "9.0.0",
+    "previous_version": "8.12.1",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "packagist",
+      "package": "stripe/stripe-php",
+      "change": "added_symbol",
+      "symbols": [
+        "Checkout.Session.shipping_cost",
+        "Checkout.Session.shipping_details"
+      ]
+    },
+    "description": "`Checkout.Session.shipping_cost`, `Checkout.Session.shipping_details` were added in stripe/stripe-php 9.0.0.",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-php/v9.0.0/CHANGELOG.md",
+    "source_excerpt": "## 9.0.0 - 2022-08-02\nAdded\n* Add support for `shipping_cost` and `shipping_details` on `Checkout.Session`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
     "fingerprint": "sha256:95f08416a80abe613f0c0d925233869ab43a475c14833646b920c22ea42cedfc",
     "api": "stripe/php",
     "version": "9.0.0",
@@ -28,7 +95,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 2,
+    "id": 5,
     "fingerprint": "sha256:bc7f7490d19133a9d24b8e38ad4f552b3160fb06efa5047fc107dcad79153136",
     "api": "stripe/php",
     "version": "9.0.0",
@@ -57,7 +124,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 3,
+    "id": 6,
     "fingerprint": "sha256:970dba3c9bd9103e02ed256e84a01d746b02d5a16c9b2f5a1204050536b134b9",
     "api": "stripe/php",
     "version": "9.0.0",
@@ -80,7 +147,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 4,
+    "id": 7,
     "fingerprint": "sha256:f4dbe10e62145cce352a66464591f45618e1c8c0d2db286f532af5ae71c9e1b1",
     "api": "stripe/php",
     "version": "9.0.0",
@@ -103,7 +170,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 5,
+    "id": 8,
     "fingerprint": "sha256:b2616c13d70525432c1b5386b9f85b70d3c8f060ecfcb97f5283c24cce678dc3",
     "api": "stripe/php",
     "version": "9.0.0",
@@ -126,7 +193,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 6,
+    "id": 9,
     "fingerprint": "sha256:7d685fdf0f1f95f4fbb4fa80385d31814e45e71b121322b4c2bb071f80e1fc3b",
     "api": "stripe/php",
     "version": "9.0.0",
@@ -149,7 +216,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 7,
+    "id": 10,
     "fingerprint": "sha256:3d5515e7f14aefd9f500fafafd38b5af54a220769696aded6b6263155ffd9788",
     "api": "stripe/php",
     "version": "9.0.0",
@@ -172,7 +239,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 8,
+    "id": 11,
     "fingerprint": "sha256:d98bdf8072fe5d37f343e9c527d0105cabf8bc6b43888000e736c49aa559ac44",
     "api": "stripe/php",
     "version": "9.0.0",
@@ -195,7 +262,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 9,
+    "id": 12,
     "fingerprint": "sha256:9ee75099718bbebdeb4be9c0306c6b0f6b6bbd7f2b4b48ce1f83d5e9e8e4f2f5",
     "api": "stripe/php",
     "version": "9.0.0",
@@ -218,7 +285,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 10,
+    "id": 13,
     "fingerprint": "sha256:edfdf15a041809d95c8f8b2566c9f894bc38093e4d9193d58f351d106e1d19e6",
     "api": "stripe/php",
     "version": "9.0.0",
@@ -241,7 +308,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 11,
+    "id": 14,
     "fingerprint": "sha256:3129db17b7c504632b11f9cc7c285b28b9149744e7368a66c31690abe053d1bf",
     "api": "stripe/php",
     "version": "9.0.0",
@@ -264,7 +331,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 12,
+    "id": 15,
     "fingerprint": "sha256:87f358cf49af35ffde3e3c8f0c97e06a9d08e00e2c122d800fbc2308fb7c6838",
     "api": "stripe/php",
     "version": "9.0.0",
@@ -287,7 +354,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 13,
+    "id": 16,
     "fingerprint": "sha256:8111fd622d99b4ee315adf3e50f80f9f6dbcbe044ae1bc9ccc85ad18ab0f20ed",
     "api": "stripe/php",
     "version": "9.0.0",

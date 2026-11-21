@@ -6,7 +6,7 @@ Every source patch-it reads for Textual, one section each: what it watches, why 
 
 ### What it watches
 
-Removals and breaking changes in each Textual release, read from that release's section of its changelog: symbols removed (`App.dark`, …) or renamed. One `package_release` event per changelog bullet the plugin can read with certainty. The releases are listed from PyPI (final releases only) and each is read at its tag (`v<version>`); 0.86.0 is the release the golden test pins.
+Removals and breaking changes in each Textual release, read from that release's section of its changelog: symbols removed (`App.dark`, …) or renamed. One `package_release` event per changelog bullet the plugin can read with certainty. The releases are listed from PyPI (final releases only) and each is read at its tag (`v<version>`); 0.86.0 is the release the golden test pins. A bullet under an "Added" or "Features" heading that plainly names what the release adds is an `added` event.
 
 Kind: `changelog` (`kinds/changelog`).
 

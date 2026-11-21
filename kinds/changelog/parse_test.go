@@ -63,6 +63,19 @@ func TestOnlyAPlainSentenceNamesItsSymbols(t *testing.T) {
 		{KindDeprecation, "Deprecated ``pkg.contrib.x`` module which will be removed in pkg v2.1.0 (#1)", "deprecated removed_symbol contrib.x"},
 		{KindMixed, "Removed `X`", "breaking removed_symbol X"},
 		{KindMixed, "Deprecated `Y`", "deprecated removed_symbol Y"},
+		// Additions: names plainly added, a parameter plainly given, and
+		// nothing for a feature described in words.
+		{KindAdded, "Added `Client.stream` method", "added added_symbol Client.stream"},
+		{KindAdded, "Add `a` and `b()` to `Widget`", "added added_symbol Widget.a,Widget.b"},
+		{KindAdded, "New `foo` function (#12)", "added added_symbol foo"},
+		{KindAdded, "`Bar` class was added", "added added_symbol Bar"},
+		{KindAdded, "`Placeholder.cycle`", ""},                   // names alone: added to what?
+		{KindAdded, "Add `A.b()`, `c()` and `d()` methods", ""},  // c and d's owner is the reader's guess
+		{KindAdded, "Add `SOURCE_X` constant to `Transfer`", ""}, // a member, or a package-level name?
+		{KindAdded, "Added `timeout` parameter to `Client.send`", "added added_parameter Client.send(timeout)"},
+		{KindAdded, "Support streaming responses", ""},
+		{KindAdded, "Added `x` when `y` is set", ""},
+		{KindAdded, "Removed `Z`", ""}, // an Added section's removal isn't read as one
 		// The SDK changelogs' shapes: a mark that makes a bullet breaking, and
 		// an area, issue or commit read past.
 		{KindNone, "⚠️ [#1914](https://x.test/1914) Remove deprecated `StripeObject.request()` method", "breaking removed_symbol StripeObject.request"},
@@ -97,6 +110,9 @@ func TestOnlyAPlainSentenceNamesItsSymbols(t *testing.T) {
 			if ch.Replacement != "" {
 				got += ">" + ch.Replacement
 			}
+			if ch.Parameter != "" {
+				got += "(" + ch.Parameter + ")"
+			}
 		}
 		if c.want == "deprecated renamed_symbol types>typing" {
 			ch, _, _ = Classify(c.kind, c.text, "structlog")
@@ -107,7 +123,8 @@ func TestOnlyAPlainSentenceNamesItsSymbols(t *testing.T) {
 		}
 	}
 	if SectionKind("Deprecations and Removals") != KindMixed || SectionKind("Backwards incompatible changes") != KindBreaking ||
-		SectionKind("Removed") != KindRemoved || SectionKind("Changed") != KindNone {
+		SectionKind("Removed") != KindRemoved || SectionKind("Changed") != KindNone ||
+		SectionKind("Added") != KindAdded || SectionKind("New Features") != KindAdded {
 		t.Error("section kinds")
 	}
 }

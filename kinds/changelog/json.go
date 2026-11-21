@@ -63,7 +63,7 @@ type change struct {
 }
 
 // lifecycle is what each change code this plugin reads means, each about a
-// whole endpoint at one API version: "endpoint deprecated"; "new resource
+// whole endpoint at one API version: "endpoint added"; "endpoint deprecated"; "new resource
 // added 2023-02-01. Resource version 2023-01-01 deprecated and marked for
 // removal on 2025-06-01"; "endpoint with API Version '2023-01-01' was removed
 // as it has reached its sunset date '2026-01-22'".
@@ -73,6 +73,7 @@ type change struct {
 // `endpoint-added` the same day, and the endpoint changes again later: it
 // wasn't removed.
 var lifecycle = map[string]event.Change{
+	"endpoint-added":              event.ChangeAdded,
 	"endpoint-deprecated":         event.ChangeDeprecated,
 	"resource-version-deprecated": event.ChangeDeprecated,
 	"endpoint-removed":            event.ChangeBreaking,
@@ -117,6 +118,7 @@ func (l Log) Read(b []byte) ([]LogFinding, error) {
 	}
 	deprecated := map[string]item{} // by operation and version, until reactivated
 	removed := map[string]item{}
+	added := map[string]item{}
 	seq := 0
 	for di := len(days) - 1; di >= 0; di-- {
 		d := days[di]
@@ -129,18 +131,21 @@ func (l Log) Read(b []byte) ([]LogFinding, error) {
 					}
 					op := p.Method + " " + p.Path
 					key := op + " " + v.Version
+					back := false
 					if r, ok := removed[key]; ok && r.f.Date < d.Date && lifecycle[c.ChangeCode] != event.ChangeBreaking {
 						// It came back. Whether its old deprecation still
-						// applies is unclear, so that goes too.
+						// applies is unclear, so that goes too; and it isn't
+						// new.
 						delete(removed, key)
 						delete(deprecated, key)
+						back = true
 					}
 					if c.ChangeCode == reactivated {
 						delete(deprecated, key)
 						continue
 					}
 					ct, ok := lifecycle[c.ChangeCode]
-					if !ok {
+					if !ok || (back && ct == event.ChangeAdded) {
 						continue
 					}
 					var ex bytes.Buffer
@@ -154,8 +159,11 @@ func (l Log) Read(b []byte) ([]LogFinding, error) {
 					}
 					seq++
 					target := deprecated
-					if ct == event.ChangeBreaking {
+					switch ct {
+					case event.ChangeBreaking:
 						target = removed
+					case event.ChangeAdded:
+						target = added
 					}
 					if _, dup := target[key]; !dup {
 						target[key] = item{seq, f}
@@ -164,8 +172,11 @@ func (l Log) Read(b []byte) ([]LogFinding, error) {
 			}
 		}
 	}
-	all := make([]item, 0, len(deprecated)+len(removed))
+	all := make([]item, 0, len(deprecated)+len(removed)+len(added))
 	for _, it := range deprecated {
+		all = append(all, it)
+	}
+	for _, it := range added {
 		all = append(all, it)
 	}
 	for _, it := range removed {
@@ -265,13 +276,15 @@ func days(b []byte) int {
 }
 
 // key is what makes two findings the same change: an endpoint's API version
-// deprecated, or removed.
+// added, deprecated, or removed.
 func (f LogFinding) key() string { return string(f.ChangeType) + " " + f.Operation + " " + f.Version }
 
 func describeLog(l Log, f LogFinding) string {
 	switch f.ChangeType {
 	case event.ChangeBreaking:
 		return fmt.Sprintf("%s %s, API version %s, removed on %s (%s's changelog, %s).", l.Name, f.Operation, f.Version, f.Date, l.Vendor, f.Code)
+	case event.ChangeAdded:
+		return fmt.Sprintf("%s %s, API version %s, added on %s (%s's changelog, %s).", l.Name, f.Operation, f.Version, f.Date, l.Vendor, f.Code)
 	default:
 		return fmt.Sprintf("%s %s, API version %s, deprecated on %s (%s's changelog, %s).", l.Name, f.Operation, f.Version, f.Date, l.Vendor, f.Code)
 	}

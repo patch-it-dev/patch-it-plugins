@@ -1,6 +1,29 @@
 [
   {
     "id": 1,
+    "fingerprint": "sha256:8929d5de5ef0cc6767012a4aa2f8398b16f49a2719ea52df84d2eab12a6bf2b1",
+    "api": "stripe/dotnet",
+    "version": "40.0.0",
+    "previous_version": "39.126.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "nuget",
+      "package": "Stripe.net",
+      "change": "added_symbol",
+      "symbols": [
+        "CheckoutSession.ShippingCost",
+        "CheckoutSession.ShippingDetails"
+      ]
+    },
+    "description": "`CheckoutSession.ShippingCost`, `CheckoutSession.ShippingDetails` were added in Stripe.net 40.0.0.",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-dotnet/v40.0.0/CHANGELOG.md",
+    "source_excerpt": "## 40.0.0 - 2022-08-02\nAdded\n* Add support for `ShippingCost` and `ShippingDetails` on `CheckoutSession`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
     "fingerprint": "sha256:eebe0e0b38610cb9a0567dd0faa50aaef5b3ad8adb64e47c4ec2b8b775a0d28c",
     "api": "stripe/dotnet",
     "version": "40.0.0",
@@ -26,7 +49,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 2,
+    "id": 3,
     "fingerprint": "sha256:da684da773ddf61efd72704ca30144801a397b1f97d9ebe8b38747a7c5895aa3",
     "api": "stripe/dotnet",
     "version": "40.0.0",
@@ -52,7 +75,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 3,
+    "id": 4,
     "fingerprint": "sha256:8e8af5e5a10f757b9a821b6933a11b5eed7e272b7c5f7c06ce366fe85ac1a13c",
     "api": "stripe/dotnet",
     "version": "40.0.0",
@@ -75,7 +98,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 4,
+    "id": 5,
     "fingerprint": "sha256:f19f602855f3af0487e459aefecbf349d33357be48e1090eec34ba49d50152fb",
     "api": "stripe/dotnet",
     "version": "40.0.0",
@@ -98,7 +121,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 5,
+    "id": 6,
     "fingerprint": "sha256:6318782d02a60ee53ce339826d81530094a32aa04dd81945452d24a7dfdd13de",
     "api": "stripe/dotnet",
     "version": "40.0.0",

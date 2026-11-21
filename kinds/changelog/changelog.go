@@ -7,7 +7,11 @@
 // A changelog file (CHANGELOG.md, CHANGES.rst, HISTORY.rst) is read at a
 // release's tag, and a release's notes at its tag's GitHub release: one change
 // event per bullet that plainly removes, renames or deprecates names code
-// uses. The tag never changes, so its URL is the event's provenance (no
+// uses, or, under an "Added" or "Features" heading, plainly names what it
+// adds ("Added `Client.stream` method", "Add `a` to `Widget`", "Added
+// `timeout` parameter to `Client.send`"): an added event. A feature told in
+// words, names with no owner, a list mixing owned and bare names, or a
+// constant "to" a type (a member or a package-level name?) is no event. The tag never changes, so its URL is the event's provenance (no
 // snapshot) and a rerun stores nothing new: the fingerprints dedupe.
 //
 // Which bullets count: those under a Keep a Changelog "Removed" or
@@ -108,7 +112,7 @@ type Finding struct {
 	Dropped string
 }
 
-// Read finds the release's breaking and deprecation bullets.
+// Read finds the release's breaking, deprecation and addition bullets.
 func (f File) Read(page []byte) (heading string, out []Finding, err error) {
 	var sections []Section
 	if f.Notes {
@@ -341,7 +345,7 @@ func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 		c := fd.Change
 		subject := event.Subject{
 			Type: event.SubjectPackageRelease, Ecosystem: f.Ecosystem, Package: f.installed(),
-			Change: c.Change, Symbols: c.Symbols, Replacement: c.Replacement,
+			Change: c.Change, Symbols: c.Symbols, Replacement: c.Replacement, Parameter: c.Parameter,
 		}
 		e := event.Event{
 			API:             f.API,
@@ -350,7 +354,7 @@ func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 			Change:          c.ChangeType,
 			Subject:         subject,
 			Description:     describe(f, c),
-			MigrationHint:   cap2000(fmt.Sprintf("%s (%s's %s for %s)", fd.Bullet.Text, f.Package, f.what(), f.Release)),
+			MigrationHint:   hint(f, c, fd.Bullet.Text),
 			SourceURL:       f.Cite(),
 			SourceExcerpt:   cap2000(heading + "\n" + fd.Section + "\n" + fd.Bullet.Raw),
 			Confidence:      1.0,
@@ -375,6 +379,15 @@ var (
 	_ plugin.Guarded   = Plugin{}
 )
 
+// hint is the bullet itself, as the vendor wrote it, for a change to fix;
+// an addition needs no fix.
+func hint(f File, c Change, bullet string) string {
+	if c.ChangeType == event.ChangeAdded {
+		return ""
+	}
+	return cap2000(fmt.Sprintf("%s (%s's %s for %s)", bullet, f.Package, f.what(), f.Release))
+}
+
 func describe(f File, c Change) string {
 	names := "`" + strings.Join(c.Symbols, "`, `") + "`"
 	verb := "was"
@@ -382,6 +395,10 @@ func describe(f File, c Change) string {
 		verb = "were"
 	}
 	switch {
+	case c.Change == event.PackageAddedParameter:
+		return fmt.Sprintf("%s takes a new parameter `%s` in %s %s.", names, c.Parameter, f.Package, f.Release)
+	case c.ChangeType == event.ChangeAdded:
+		return fmt.Sprintf("%s %s added in %s %s.", names, verb, f.Package, f.Release)
 	case c.ChangeType == event.ChangeDeprecated && c.Replacement != "":
 		return fmt.Sprintf("%s %s deprecated in %s %s in favor of `%s`.", names, map[string]string{"was": "is", "were": "are"}[verb], f.Package, f.Release, c.Replacement)
 	case c.ChangeType == event.ChangeDeprecated:

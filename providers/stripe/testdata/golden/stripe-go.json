@@ -1,6 +1,232 @@
 [
   {
     "id": 1,
+    "fingerprint": "sha256:c42f4e89935308eddf226dfc1917694bfb130d6382912955bb765fc32c20e3de",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "added_symbol",
+      "symbols": [
+        "CheckoutSessionSetupIntentDataParams.Metadata"
+      ]
+    },
+    "description": "`CheckoutSessionSetupIntentDataParams.Metadata` was added in github.com/stripe/stripe-go 73.0.0.",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\nAdded\n- Add `CheckoutSessionSetupIntentDataParams.Metadata`.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:57b33c5b0f9e8c1f58b245b83008cbe460005923172d8c73a0b89eebb6e74234",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "added_symbol",
+      "symbols": [
+        "CheckoutSessionShippingCostTax",
+        "CheckoutSessionShippingCost"
+      ]
+    },
+    "description": "`CheckoutSessionShippingCostTax`, `CheckoutSessionShippingCost` were added in github.com/stripe/stripe-go 73.0.0.",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\nAdded\n- Add `CheckoutSessionShippingCostTax` and `CheckoutSessionShippingCost` classes",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:1b39b60e4ceef944e4dcba9b56faa84f6a10fc638f5faaace4934134403f47aa",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "added_symbol",
+      "symbols": [
+        "Customer.Validate"
+      ]
+    },
+    "description": "`Customer.Validate` was added in github.com/stripe/stripe-go 73.0.0.",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\nAdded\n- Add `Validate` field to `Customer` resource.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:54013a87793d55dd6548248603ad8bdb9a94465b0777db390f547795d4458b01",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "added_symbol",
+      "symbols": [
+        "PaymentSourceParams.Validate"
+      ]
+    },
+    "description": "`PaymentSourceParams.Validate` was added in github.com/stripe/stripe-go 73.0.0.",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\nAdded\n- Add `Validate` field to `PaymentSourceParams`.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:6d98ce758c1a9c8ef85513ce97319700b25aed3a222a2bc0e63f2c5ce1259c74",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "added_symbol",
+      "symbols": [
+        "SKUPackageDimensionsParams",
+        "SKUPackageDimensions"
+      ]
+    },
+    "description": "`SKUPackageDimensionsParams`, `SKUPackageDimensions` were added in github.com/stripe/stripe-go 73.0.0.",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\nAdded\n- Add `SKUPackageDimensionsParams` and `SKUPackageDimensions`.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:e42131a9b410e316f58101b9c9cbc594341a43c077ab3b89c6b3775f53c4855f",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "added_symbol",
+      "symbols": [
+        "Subscription.DeleteDiscount"
+      ]
+    },
+    "description": "`Subscription.DeleteDiscount` was added in github.com/stripe/stripe-go 73.0.0.",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\nAdded\n- Add `Subscription.DeleteDiscount` methods.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:ea2c5bcb22a0f6a5801e7f8de13ca3bf751feab8278b5ed596a195891275dada",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "added_symbol",
+      "symbols": [
+        "SubscriptionItemUsageRecordSummariesParams"
+      ]
+    },
+    "description": "`SubscriptionItemUsageRecordSummariesParams` was added in github.com/stripe/stripe-go 73.0.0.",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\nAdded\n- Add `SubscriptionItemUsageRecordSummariesParams`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
+    "fingerprint": "sha256:bec1c10ae54befa3791392865875535c577a6aa81d2f65641c5bc012763784f1",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "added_symbol",
+      "symbols": [
+        "SubscriptionSchedulePhaseBillingCycleAnchor",
+        "SubscriptionSchedulePhaseBillingCycleAnchorAutomatic",
+        "SubscriptionSchedulePhaseBillingCycleAnchorPhaseStart"
+      ]
+    },
+    "description": "`SubscriptionSchedulePhaseBillingCycleAnchor`, `SubscriptionSchedulePhaseBillingCycleAnchorAutomatic`, `SubscriptionSchedulePhaseBillingCycleAnchorPhaseStart` were added in github.com/stripe/stripe-go 73.0.0.",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\nAdded\n- Add `SubscriptionSchedulePhaseBillingCycleAnchor`, `SubscriptionSchedulePhaseBillingCycleAnchorAutomatic`, and `SubscriptionSchedulePhaseBillingCycleAnchorPhaseStart`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 9,
+    "fingerprint": "sha256:457fb9b3d67e23940aa4574e21eb2930ff956f1ed66a9a0a40cc68f1e5ae1447",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "added_symbol",
+      "symbols": [
+        "SubscriptionSchedulePhaseInvoiceSettings",
+        "SubscriptionSchedulePhaseInvoiceSettingsParams"
+      ]
+    },
+    "description": "`SubscriptionSchedulePhaseInvoiceSettings`, `SubscriptionSchedulePhaseInvoiceSettingsParams` were added in github.com/stripe/stripe-go 73.0.0.",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\nAdded\n- Add `SubscriptionSchedulePhaseInvoiceSettings` and `SubscriptionSchedulePhaseInvoiceSettingsParams `",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 10,
+    "fingerprint": "sha256:8ecc094c6b6945f92fdf801f7cba6af29ff285dfac180494a645cdbcd9c670a3",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "added_symbol",
+      "symbols": [
+        "CheckoutSession.ShippingCost",
+        "CheckoutSession.ShippingDetails"
+      ]
+    },
+    "description": "`CheckoutSession.ShippingCost`, `CheckoutSession.ShippingDetails` were added in github.com/stripe/stripe-go 73.0.0.",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\nAdded\n* Add support for `ShippingCost` and `ShippingDetails` on `CheckoutSession`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 11,
     "fingerprint": "sha256:f837052506f58bb33e02572b81383dcc3d53a80aca893897f446412e2c8ff047",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -23,7 +249,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 2,
+    "id": 12,
     "fingerprint": "sha256:c171141689be54d629b416af0762dd4dc355c414a5c94a5543e18816b14894b5",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -46,7 +272,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 3,
+    "id": 13,
     "fingerprint": "sha256:c745dcedd14d1c4ed6102654dbcdccc5a468d9908ec8a14a957695177462975f",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -71,7 +297,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 4,
+    "id": 14,
     "fingerprint": "sha256:f8cd2b4de4e6dc58dd264973fb0b147e137c4ac5ae029633992c5d14165de851",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -96,7 +322,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 5,
+    "id": 15,
     "fingerprint": "sha256:974192abbe3984b3c30da88a48ed5b1001704ea39b9357442bdb4f455085dd88",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -119,7 +345,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 6,
+    "id": 16,
     "fingerprint": "sha256:5a41a62f665c7edc22a9a59a12e4f9164db34715301330c7b66b5a8d0d387918",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -142,7 +368,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 7,
+    "id": 17,
     "fingerprint": "sha256:bdefbd6fbc222b70cb1f4944d4d7501e54ddb31c61905e4414409953a2d83e81",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -165,7 +391,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 8,
+    "id": 18,
     "fingerprint": "sha256:c9917160ac326bff21fbf76b359edf91262a6eee4d8654e5a550e2b33ce9e2ee",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -188,7 +414,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 9,
+    "id": 19,
     "fingerprint": "sha256:e9f1a3738a3a3c30f6ba508734a449a85a1d23e74e736f4f755e2462c4b8022c",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -211,7 +437,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 10,
+    "id": 20,
     "fingerprint": "sha256:e5ae8d10dc875f7c0a3b7807346d8849a28dcb29ce2a2fe328749a16958b75ff",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -234,7 +460,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 11,
+    "id": 21,
     "fingerprint": "sha256:deb6a1e9e0b3a0fe8b22c8afbaa8b94b7fa846ba27568ce47dd4d660a07a3978",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -261,7 +487,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 12,
+    "id": 22,
     "fingerprint": "sha256:bde76308505cb9fb9b888886ea74785cd6224b1a04d0ce7b19d869060907e4e4",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -284,7 +510,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 13,
+    "id": 23,
     "fingerprint": "sha256:0c3b8bbaebbc4ff5c9ffc7ec05c70c58735565904a630f89e029bb167a11ffd9",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -307,7 +533,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 14,
+    "id": 24,
     "fingerprint": "sha256:a920d707b527271b4ece80bab0bfd8b90076716ea85fcd84b804aa1127b17650",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -330,7 +556,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 15,
+    "id": 25,
     "fingerprint": "sha256:9eab45c446e618d250ac6fd36e3576a95531f9509a2c30236c6609a30c443218",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -353,7 +579,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 16,
+    "id": 26,
     "fingerprint": "sha256:43835f02097187dd38190a8d5b70fdaab12951ffdc9a9e3449309b76745b1246",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -376,7 +602,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 17,
+    "id": 27,
     "fingerprint": "sha256:c3694e59cc09e7bfafc46cc303c67c391dbaeac2bf163804ef62dabe44bb7b5a",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -399,7 +625,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 18,
+    "id": 28,
     "fingerprint": "sha256:26a05cd5678882db42e2d0574f1af89f5a313d15f3d57f66544f8dc37c33499d",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -422,7 +648,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 19,
+    "id": 29,
     "fingerprint": "sha256:747e593c78a458b6db0071fb21da8a80b575514df6e324f05be95cec43b5c379",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -446,7 +672,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 20,
+    "id": 30,
     "fingerprint": "sha256:acc442d857bf6e23a80c0fd2a37bb5a8978758eea634a74080445cd7aa57fc72",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -469,7 +695,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 21,
+    "id": 31,
     "fingerprint": "sha256:64aeb32d66430b1987b83de0c9713062a0a67aacb224c19451b1348fa8bcc64f",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -492,7 +718,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 22,
+    "id": 32,
     "fingerprint": "sha256:9111d2a1f9f44593beee2dd832ea5d6b102a6441cfeac4d0bf0f9ec24ffd8be8",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -515,7 +741,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 23,
+    "id": 33,
     "fingerprint": "sha256:c22a29f6a0dabafeba9db6416820a23e72e21d76bc985c3d7abe6ff9c17ff2b3",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -539,7 +765,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 24,
+    "id": 34,
     "fingerprint": "sha256:fc84cbc6883d95b92e104d1c79916f8c88cddf670734e5507aef1e2ad8297a81",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -568,7 +794,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 25,
+    "id": 35,
     "fingerprint": "sha256:cb52fb0ef5638deb73f8758f3be765c392fe736207c7a99a7e3516cd6c5f1854",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -591,7 +817,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 26,
+    "id": 36,
     "fingerprint": "sha256:0d5234543295b3d75573d23c7638c5f8fd357b9a7aa00fbabe5c2356b156adba",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -615,7 +841,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 27,
+    "id": 37,
     "fingerprint": "sha256:24e1c61189fa5f74829b23606f65e935bad7b8266d30aa1668654b900da1580e",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -641,7 +867,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 28,
+    "id": 38,
     "fingerprint": "sha256:c5d87f9bb94d5c4d8237dd5e87f28179f99015ddab3c8adad80d611113c9c47d",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -667,7 +893,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 29,
+    "id": 39,
     "fingerprint": "sha256:ac9411bb856ec03b20cab5d9556731efd2763d4fe62e4bc9a94701ada166ce64",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -690,7 +916,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 30,
+    "id": 40,
     "fingerprint": "sha256:2902e81051374ad2c155d1dbe603eb3a9a51756040ff6f3193b6a7216a71ce4e",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -715,7 +941,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 31,
+    "id": 41,
     "fingerprint": "sha256:5a4bb8d2681a60429744d3014d65852ebe01edc4fb5c431442baad67d67e6990",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -739,7 +965,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 32,
+    "id": 42,
     "fingerprint": "sha256:88b47b02d230fbe97a5b3c89924e96e385d2b28e3bd24fe41f1c224fdc3b1bda",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -762,7 +988,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 33,
+    "id": 43,
     "fingerprint": "sha256:a61ca1c620016258f3d3d246c1549c23bd912fea8bd3c55b78b5b6f284662711",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -786,7 +1012,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 34,
+    "id": 44,
     "fingerprint": "sha256:8fe895146f05e1639f09a32355d15e3b85358c03ee201998778c22867d1f4a74",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -809,7 +1035,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 35,
+    "id": 45,
     "fingerprint": "sha256:645435c630f60163aa4eafbce3ce6d81c8ce1170f4dab2829498a6391e6ed01b",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -832,7 +1058,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 36,
+    "id": 46,
     "fingerprint": "sha256:f8783b3b8921606936676c83ed8f3d271216cdd4a5996601198dc9fe0666573a",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -856,7 +1082,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 37,
+    "id": 47,
     "fingerprint": "sha256:9b3886e5d282e8e2679b65116f2186e3bf675c4452220a4c13db5c8c6df2e704",
     "api": "stripe/go",
     "version": "73.0.0",
@@ -879,7 +1105,7 @@
     "detected_at": "2026-11-14T12:00:00Z"
   },
   {
-    "id": 38,
+    "id": 48,
     "fingerprint": "sha256:d4d073680f457f30d134a42c601f23a0721a951a0dec5bc8cb511927c9d269aa",
     "api": "stripe/go",
     "version": "73.0.0",

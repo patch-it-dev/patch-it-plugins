@@ -112,7 +112,7 @@ Kind: `catalog` (`kinds/catalog`), the `UpcomingChanges` reader (`kinds/catalog/
 
 ### What it watches
 
-Methods removed or renamed in each release of `@octokit/rest` (JavaScript) and Octokit (.NET), from each GitHub release's notes: neither keeps a changelog file. Packages `npm:@octokit/rest` and `nuget:Octokit`; releases listed from each repo's GitHub releases (`vX.Y.Z`, drafts and pre-releases left out). GitHub's REST API itself is a separate source (`github/rest-api`).
+Methods removed or renamed in each release of `@octokit/rest` (JavaScript) and Octokit (.NET), from each GitHub release's notes: neither keeps a changelog file. Packages `npm:@octokit/rest` and `nuget:Octokit`; releases listed from each repo's GitHub releases (`vX.Y.Z`, drafts and pre-releases left out). GitHub's REST API itself is a separate source (`github/rest-api`). A bullet under an "Added" or "Features" heading that plainly names what the release adds is an `added` event.
 
 Kind: `changelog` (`kinds/changelog`, `sdks.go`, with `Notes: true`).
 

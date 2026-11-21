@@ -49,7 +49,7 @@ Kind: `openapi` (`kinds/openapi`), with its adapter, `MongoDBAtlas` ([`atlas_adm
 
 ### What it watches
 
-The MongoDB Atlas Administration API (`/api/atlas/v2`): an endpoint's API version deprecated (unless MongoDB reactivates it), and an endpoint's API version removed at its sunset date, as MongoDB lists them in its own machine-readable API changelog.
+The MongoDB Atlas Administration API (`/api/atlas/v2`): an endpoint's API version added (an `added` event, unless it's one coming back after a removal), deprecated (unless MongoDB reactivates it), and removed at its sunset date, as MongoDB lists them in its own machine-readable API changelog.
 
 Kind: `changelog` (`kinds/changelog`), with its JSON parser (`kinds/changelog/json.go`) and the `AtlasAdminAPI` log.
 

@@ -140,7 +140,7 @@ Kind: `apisurface` (`kinds/apisurface`), with the Python reader (`kinds/apisurfa
 
 ### What it watches
 
-Names removed, renamed or deprecated in each release of Sentry's Python, JavaScript, Go and .NET SDKs, from that release's section of the SDK's `CHANGELOG.md` at its tag. One `package_release` event per bullet that names what it changes plainly. Sentry's API is a separate source (`sentry/api`).
+Names removed, renamed or deprecated in each release of Sentry's Python, JavaScript, Go and .NET SDKs, from that release's section of the SDK's `CHANGELOG.md` at its tag. One `package_release` event per bullet that names what it changes plainly. Sentry's API is a separate source (`sentry/api`). A bullet under an "Added" or "Features" heading that plainly names what the release adds is an `added` event.
 
 Kind: `changelog` (`kinds/changelog`, `sdks.go`).
 
