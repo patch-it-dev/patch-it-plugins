@@ -151,19 +151,32 @@ func TestAlgoliaListsEveryReleaseTag(t *testing.T) {
 	}
 }
 
-// Every commit that changed specs/, oldest first, dated.
+// Every day specs/ changed, oldest first, at the day's last commit: the 40
+// commits saved fall on 16 days, and a version ID (the date) is named once.
 func TestAppwriteListsEverySpecCommit(t *testing.T) {
 	srv := recorded(t, map[string]string{"/repos/appwrite/specs/commits?path=specs&per_page=100&page=1": "appwrite-commits.json"})
 	vs, err := Appwrite{APIBase: srv.URL}.Versions(context.Background())
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(vs) != 40 {
-		t.Fatalf("%d versions, want 40", len(vs))
+	if len(vs) != 16 {
+		t.Fatalf("%d versions, want 16", len(vs))
 	}
 	for i := 1; i < len(vs); i++ {
-		if vs[i].Released.Before(vs[i-1].Released) || len(vs[i].Ref) != 40 {
+		if !vs[i].Released.After(vs[i-1].Released) || vs[i].ID == vs[i-1].ID || len(vs[i].Ref) != 40 {
 			t.Errorf("%v after %v", vs[i], vs[i-1])
 		}
+	}
+}
+
+// Daily keeps each day's last commit, in order.
+func TestDailyKeepsEachDaysLastCommit(t *testing.T) {
+	in := []plugin.Version{{ID: "2026-10-27", Ref: "a"}, {ID: "2026-10-28", Ref: "b"}, {ID: "2026-10-28", Ref: "c"}, {ID: "2026-10-30", Ref: "d"}}
+	var got []string
+	for _, v := range Daily(in) {
+		got = append(got, v.ID+" "+v.Ref)
+	}
+	if want := "2026-10-27 a,2026-10-28 c,2026-10-30 d"; strings.Join(got, ",") != want {
+		t.Errorf("got %v, want %s", got, want)
 	}
 }

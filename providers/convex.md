@@ -44,5 +44,5 @@ Kind: `openapi` (`plugins/openapi`), with `adapter.Convex`.
 
 - **Only the Deployment API is covered.** Not the Management API (see above), the client SDKs (`convex` on npm, `convex-py`), or the functions runtime. SDK removals are written as plain bullets in their changelogs, so nothing reads them yet.
 - **Removals Convex doesn't mark first aren't events,** even if the endpoint really went away. None has happened yet.
-- **Two spec commits on one day share a `version`.** It happened on 13 days in the history. The events stay distinct, because the operation is part of the fingerprint, but the second run's `previous_version` equals its `version`.
+- **Two spec commits on one day are one version** (13 days in the history), read at the day's last commit: a change made and undone the same day isn't seen.
 - **The patch-it client can't place these events until `convex` is in its list of date-versioned APIs.**

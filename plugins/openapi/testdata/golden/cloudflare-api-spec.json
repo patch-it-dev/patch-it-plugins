@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:9ae82e58fc8968d19a7177ff87875316b2988bf188b7d4a1e2aa036ba1864720",
+    "api": "cloudflare/api-spec",
+    "version": "2026-10-30",
+    "previous_version": "2026-10-29",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /client/v4/accounts/{account_id}/registrar/domains"
+    },
+    "description": "Operation GET /client/v4/accounts/{account_id}/registrar/domains removed.",
+    "source_url": "https://raw.githubusercontent.com/cloudflare/api-schemas/46a48d5eba1d8a839cd8cc5712d2b9368e21e654/openapi.json",
+    "source_pointer": "/paths/~1accounts~1{account_id}~1registrar~1domains/get",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Lists domains handled by Registrar.\",\"operationId\":\"registrar-domains-list-domains\",\"parameters\":[{\"in\":\"path\",\"name\":\"account_id\",\"required\":true,\"schema\":{\"$ref\":\"#/components/schemas/registrar-api_identifier\"}}],\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/registrar-api_domain_response_collection\"}}},\"description\":\"List domains response.\"},\"4XX\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/registrar-api_api-response-common-failure\"}}},\"description\":\"List domains response failure.\"}},\"security\":[{\"api_email\":[],\"api_key\":[],\"api_token\":[]}],\"summary\":\"List domains\",\"tags\":[\"Registrar Domains\"],\"x-api-token-group\":null,\"x-fern-ignore\":true,\"x-fern-sdk-group-name\":\"registrar.legacy\",\"x-fern-sdk-method-name\":\"list-domains\",\"x-stainless-deprecation-message\":\"This operation is deprecated and will reach end of life on September 27, 2026. Use the new Registrar API endpoints (domain-search, domain-check, registrations) instead. Refer to https://developers.cloudflare.com/fundamentals/api/reference/deprecations/ for details.\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:9cde00a0f01a8aa044725ce3ff49ab6d6ac313cc87d406ccff97588046adeeb0",
+    "api": "cloudflare/api-spec",
+    "version": "2026-10-30",
+    "previous_version": "2026-10-29",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /client/v4/accounts/{account_id}/registrar/domains/{domain_name}"
+    },
+    "description": "Operation GET /client/v4/accounts/{account_id}/registrar/domains/{domain_name} removed.",
+    "source_url": "https://raw.githubusercontent.com/cloudflare/api-schemas/46a48d5eba1d8a839cd8cc5712d2b9368e21e654/openapi.json",
+    "source_pointer": "/paths/~1accounts~1{account_id}~1registrar~1domains~1{domain_name}/get",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Show individual domain.\",\"operationId\":\"registrar-domains-get-domain\",\"parameters\":[{\"in\":\"path\",\"name\":\"domain_name\",\"required\":true,\"schema\":{\"$ref\":\"#/components/schemas/registrar-api_domain_name\"}},{\"in\":\"path\",\"name\":\"account_id\",\"required\":true,\"schema\":{\"$ref\":\"#/components/schemas/registrar-api_identifier\"}}],\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/registrar-api_domain_response_single\"}}},\"description\":\"Get domain response.\"},\"4XX\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/registrar-api_api-response-common-failure\"}}},\"description\":\"Get domain response failure.\"}},\"security\":[{\"api_email\":[],\"api_key\":[],\"api_token\":[]}],\"summary\":\"Get domain\",\"tags\":[\"Registrar Domains\"],\"x-api-token-group\":null,\"x-fern-ignore\":true,\"x-fern-sdk-group-name\":\"registrar.legacy\",\"x-fern-sdk-method-name\":\"get-domain\",\"x-stainless-deprecation-message\":\"This operation is deprecated and will reach end of life on September 27, 2026. Use the new Registrar API endpoints (domain-search, domain-check, registrations) instead. Refer to https://developers.cloudflare.com/fundamentals/api/reference/deprecations/ for details.\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:dfc96b1305887adc93c67c27aaff84d606242b16b68852b7d32f612848fe4eb6",
+    "api": "cloudflare/api-spec",
+    "version": "2026-10-30",
+    "previous_version": "2026-10-29",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "PUT /client/v4/accounts/{account_id}/registrar/domains/{domain_name}"
+    },
+    "description": "Operation PUT /client/v4/accounts/{account_id}/registrar/domains/{domain_name} removed.",
+    "source_url": "https://raw.githubusercontent.com/cloudflare/api-schemas/46a48d5eba1d8a839cd8cc5712d2b9368e21e654/openapi.json",
+    "source_pointer": "/paths/~1accounts~1{account_id}~1registrar~1domains~1{domain_name}/put",
+    "source_excerpt": "{\"deprecated\":true,\"description\":\"Updates an individual domain.\",\"operationId\":\"registrar-domains-update-domain\",\"parameters\":[{\"in\":\"path\",\"name\":\"domain_name\",\"required\":true,\"schema\":{\"$ref\":\"#/components/schemas/registrar-api_domain_name\"}},{\"in\":\"path\",\"name\":\"account_id\",\"required\":true,\"schema\":{\"$ref\":\"#/components/schemas/registrar-api_identifier\"}}],\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/registrar-api_domain_update_properties\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/registrar-api_domain_response_single\"}}},\"description\":\"Update domain response.\"},\"4XX\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/registrar-api_api-response-common-failure\"}}},\"description\":\"Update domain response failure.\"}},\"security\":[{\"api_email\":[],\"api_key\":[],\"api_token\":[]}],\"summary\":\"Update domain\",\"tags\":[\"Registrar Domains\"],\"x-api-token-group\":null,\"x-fern-ignore\":true,\"x-fern-sdk-group-name\":\"registrar.legacy\",\"x-fern-sdk-method-name\":\"update-domain\",\"x-stainless-deprecation-message\":\"This operation is deprecated and will reach end of life on September 27, 2026. Use the new Registrar API endpoints (domain-search, domain-check, registrations) instead. Refer to https://developers.cloudflare.com/fundamentals/api/reference/deprecations/ for details.\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]
