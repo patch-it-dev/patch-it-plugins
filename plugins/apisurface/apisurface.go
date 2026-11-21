@@ -11,11 +11,14 @@
 // both releases. npm (.d.ts) is a follow-up.
 //
 // What isn't read, on purpose (precision over recall): private names (a
-// leading underscore, a private module, a name left out of __all__),
-// classes nested in classes, overloaded functions' parameters, a removed
+// leading underscore, a module under a private one or one named internal
+// or vendor, a name left out of __all__), classes nested in classes,
+// overloaded functions' and properties' parameters, self and cls, a removed
 // parameter when the function now takes **kwargs (passing it still works),
-// and a parameter newly added without a default (patch-it's change-event
-// contract has no subject for it yet: logged).
+// a name its module still binds (an alias, an import, a star import or a
+// module __getattr__ that can't be listed), and a parameter newly added
+// without a default (patch-it's change-event contract has no subject for it
+// yet: logged).
 package apisurface
 
 import (
@@ -33,29 +36,13 @@ import (
 	"github.com/patch-it-dev/patch-it-plugins/plugins/apisurface/pysurface"
 )
 
-func init() {
-	plugin.RegisterProvider(plugin.Provider{
-		ID: "openai", Name: "OpenAI", Category: plugin.CategoryAI, Homepage: "https://openai.com",
-		Sources: []plugin.Source{{
-			ID: "python-sdk", Layer: plugin.LayerSDK, Page: "providers/openai-python-sdk.md",
-			Watches:  "Classes, functions, methods and parameters removed or renamed in the public API of the openai Python package, release by release, read from each release's wheel",
-			URLs:     []string{"https://pypi.org/project/openai/", "https://github.com/openai/openai-python"},
-			Packages: []string{"pypi:openai"},
-			Plugin:   Plugin{Package: OpenAIPython},
-		}},
-	})
-}
-
 // Package is one published package.
 type Package struct {
-	ID        string // the source id the events carry: "openai/python-sdk"
+	ID        string // the source id the events carry: "openai/python-surface"
 	Name      string // on the registry: "openai"
 	Ecosystem string // "pypi"
 	Module    string // the top-level import name: "openai"
 }
-
-// OpenAIPython is the openai package on PyPI.
-var OpenAIPython = Package{ID: "openai/python-sdk", Name: "openai", Ecosystem: "pypi", Module: "openai"}
 
 // Plugin reads one package's releases.
 type Plugin struct {
@@ -77,10 +64,11 @@ func (p Plugin) ListVersions(ctx context.Context, env plugin.Env) ([]plugin.Vers
 // Release is what ReadAt keeps of a release: its public surface, the
 // classes a method could move to, and what couldn't be read.
 type Release struct {
-	Artifact string            `json:"artifact"`
-	Surface  pysurface.Surface `json:"surface"`
-	Classes  pysurface.Classes `json:"classes,omitempty"`
-	Skipped  []string          `json:"skipped,omitempty"` // files over the size limit
+	Artifact string             `json:"artifact"`
+	Surface  pysurface.Surface  `json:"surface"`
+	Classes  pysurface.Classes  `json:"classes,omitempty"`
+	Bindings pysurface.Bindings `json:"bindings,omitempty"` // what each public module binds
+	Skipped  []string           `json:"skipped,omitempty"`  // files over the size limit
 }
 
 // ReadAt downloads the release's wheel (or sdist) and reads its public
@@ -106,7 +94,7 @@ func (p Plugin) ReadAt(ctx context.Context, env plugin.Env, v plugin.Version) (p
 	for _, s := range skipped {
 		log.Printf("%s %s: %s skipped: over %d bytes", pkg.Name, v.ID, s, MaxFileBytes)
 	}
-	content, err := json.Marshal(Release{Artifact: a.Filename, Surface: pysurface.Read(files), Classes: pysurface.ReadClasses(files), Skipped: skipped})
+	content, err := json.Marshal(Release{Artifact: a.Filename, Surface: pysurface.Read(files), Classes: pysurface.ReadClasses(files), Bindings: pysurface.ReadBindings(files), Skipped: skipped})
 	if err != nil {
 		return plugin.Snapshot{}, err
 	}
@@ -230,7 +218,9 @@ type Change struct {
 // them besides self or cls; anything less sure is a removal.
 //
 // What looks removed but may not be is a note, not an event: a symbol
-// defined in a file b couldn't read (over the size limit), and a method
+// defined in a file b couldn't read (over the size limit), a name its
+// module still binds in b (an alias, an import, a star import from where
+// names can't be listed), and a method
 // whose class is still there but whose bases changed, which one of its
 // bases (or theirs) now defines, or which the class now defines as an
 // attribute (create = _create, a property made a plain attribute).
@@ -288,9 +278,9 @@ func Compare(ra, rb Release) []Change {
 		}
 		before, after := old, now
 		kwargs := slices.ContainsFunc(now.Params, func(p pysurface.Param) bool { return p.Kind == "kwargs" })
-		for _, op := range old.Params {
-			if op.Kind == "args" || op.Kind == "kwargs" {
-				continue
+		for i, op := range old.Params {
+			if op.Kind == "args" || op.Kind == "kwargs" || (i == 0 && (op.Name == "self" || op.Name == "cls")) {
+				continue // a caller never passes self or cls
 			}
 			i := slices.IndexFunc(now.Params, func(p pysurface.Param) bool { return p.Name == op.Name })
 			switch {
@@ -331,6 +321,15 @@ func callerParams(ps []pysurface.Param) []pysurface.Param {
 func notGone(k string, before pysurface.Symbol, a, b Release) string {
 	if slices.Contains(b.Skipped, before.File) {
 		return fmt.Sprintf("%s, where it was defined, was too big to read", before.File)
+	}
+	if mod, ok := b.Bindings[parentOf(k)]; ok {
+		name := k[strings.LastIndexByte(k, '.')+1:]
+		switch {
+		case slices.Contains(mod.Names, name):
+			return fmt.Sprintf("%s still binds the name (an alias, an import or a value now)", parentOf(k))
+		case mod.Star:
+			return fmt.Sprintf("%s star-imports names that can't be listed", parentOf(k))
+		}
 	}
 	if before.Kind != "method" {
 		return ""

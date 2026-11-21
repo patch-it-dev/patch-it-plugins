@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:a036b4b8c94ba10a83a8aa91d5b5659adce96e03f1a1b6701378fe552fbc70a3",
+    "api": "stripe/python-surface",
+    "version": "16.0.0",
+    "previous_version": "15.6.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "stripe",
+      "change": "removed_symbol",
+      "symbols": [
+        "StripeObject.request"
+      ]
+    },
+    "description": "The method `StripeObject.request` was removed in stripe 16.0.0: code using it fails.",
+    "migration_hint": "stripe 16.0.0 has no `StripeObject.request`: see the package's release notes for what replaces it.",
+    "source_url": "https://files.pythonhosted.org/packages/b5/de/5141ae3990862cc3d61a1cdd4acff72bcb587afb7b4d31c52eaddbb6bc8f/stripe-16.0.0-py3-none-any.whl",
+    "source_excerpt": "stripe 15.6.2 (stripe-15.6.2-py3-none-any.whl), stripe/_stripe_object.py line 452: def request( self, method: Literal[\"get\", \"post\", \"delete\"], url: str, params: Optional[Dict[str, Any]] = None, *, base_address: BaseAddress = \"api\", ) -> \"StripeObject\"\nstripe 16.0.0 (stripe-16.0.0-py3-none-any.whl): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

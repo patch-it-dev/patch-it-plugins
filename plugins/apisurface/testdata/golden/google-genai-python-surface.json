@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:41314f4825ff731df86c3c2f70397e098f761aa7321cfcdd0c828559032e36a4",
+    "api": "google/genai-python-surface",
+    "version": "1.0.0",
+    "previous_version": "0.8.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "google-genai",
+      "change": "removed_symbol",
+      "symbols": [
+        "genai.types.TuningJobOrOperation"
+      ]
+    },
+    "description": "The class `genai.types.TuningJobOrOperation` was removed in google-genai 1.0.0: code using it fails.",
+    "migration_hint": "google-genai 1.0.0 has no `genai.types.TuningJobOrOperation`: see the package's release notes for what replaces it.",
+    "source_url": "https://files.pythonhosted.org/packages/24/9d/63dbd2b6c630f44cbbf09c4e04b4c9012da01f6e585d34ae53d07931bb67/google_genai-1.0.0-py3-none-any.whl",
+    "source_excerpt": "google-genai 0.8.0 (google_genai-0.8.0-py3-none-any.whl), google/genai/types.py line 5924: class TuningJobOrOperation(_common.BaseModel)\ngoogle-genai 1.0.0 (google_genai-1.0.0-py3-none-any.whl): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:c53654517cd182f33c723d855ceeafacae6a8495ed9f50a2c302c9c01d6b1223",
+    "api": "google/genai-python-surface",
+    "version": "1.0.0",
+    "previous_version": "0.8.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "google-genai",
+      "change": "removed_symbol",
+      "symbols": [
+        "genai.types.TuningJobOrOperationDict"
+      ]
+    },
+    "description": "The class `genai.types.TuningJobOrOperationDict` was removed in google-genai 1.0.0: code using it fails.",
+    "migration_hint": "google-genai 1.0.0 has no `genai.types.TuningJobOrOperationDict`: see the package's release notes for what replaces it.",
+    "source_url": "https://files.pythonhosted.org/packages/24/9d/63dbd2b6c630f44cbbf09c4e04b4c9012da01f6e585d34ae53d07931bb67/google_genai-1.0.0-py3-none-any.whl",
+    "source_excerpt": "google-genai 0.8.0 (google_genai-0.8.0-py3-none-any.whl), google/genai/types.py line 5930: class TuningJobOrOperationDict(TypedDict, total=False)\ngoogle-genai 1.0.0 (google_genai-1.0.0-py3-none-any.whl): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

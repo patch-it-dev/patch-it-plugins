@@ -1,0 +1,20 @@
+{
+  "info": {
+    "name": "google-genai",
+    "version": "0.8.0"
+  },
+  "urls": [
+    {
+      "filename": "google_genai-0.8.0-py3-none-any.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/74/6d/c5b1757ffe28fdfb38df3fda79c614ec840ebac0b72a3fcbe2ed969e254d/google_genai-0.8.0-py3-none-any.whl",
+      "yanked": false
+    },
+    {
+      "filename": "google_genai-0.8.0.tar.gz",
+      "packagetype": "sdist",
+      "url": "https://files.pythonhosted.org/packages/d2/ef/d5a57aa9360f31b3a3b726fa4d0cc8b2ea14e3a6a0c482cca74a28ab5392/google_genai-0.8.0.tar.gz",
+      "yanked": false
+    }
+  ]
+}

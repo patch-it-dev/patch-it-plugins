@@ -1,0 +1,63 @@
+{
+  "info": {
+    "name": "anthropic"
+  },
+  "releases": {
+    "2.4.0": [
+      {
+        "filename": "anthropic-2.4.0-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-11-02T19:08:03.822137Z",
+        "yanked": false
+      },
+      {
+        "filename": "anthropic-2.4.0.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-11-02T19:08:06.047272Z",
+        "yanked": false
+      }
+    ],
+    "2.5.0": [
+      {
+        "filename": "anthropic-2.5.0-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-11-04T20:27:48.007575Z",
+        "yanked": false
+      },
+      {
+        "filename": "anthropic-2.5.0.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-11-04T20:27:46.038994Z",
+        "yanked": false
+      }
+    ],
+    "2.6.0": [
+      {
+        "filename": "anthropic-2.6.0-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-11-05T18:59:11.474835Z",
+        "yanked": false
+      },
+      {
+        "filename": "anthropic-2.6.0.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-11-05T18:59:09.557787Z",
+        "yanked": false
+      }
+    ],
+    "2.7.0": [
+      {
+        "filename": "anthropic-2.7.0-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-11-09T18:52:39.769381Z",
+        "yanked": false
+      },
+      {
+        "filename": "anthropic-2.7.0.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-11-09T18:52:41.504138Z",
+        "yanked": false
+      }
+    ]
+  }
+}

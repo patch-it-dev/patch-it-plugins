@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:95e246734443816f7e3e35b448487ccc151507de19571e349566567dc818f73e",
+    "api": "algolia/python-surface",
+    "version": "4.44.3",
+    "previous_version": "4.44.1",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "algoliasearch",
+      "change": "removed_symbol",
+      "symbols": [
+        "recommend.models.FacetFilters"
+      ]
+    },
+    "description": "The class `recommend.models.FacetFilters` was removed in algoliasearch 4.44.3: code using it fails.",
+    "migration_hint": "algoliasearch 4.44.3 has no `recommend.models.FacetFilters`: see the package's release notes for what replaces it.",
+    "source_url": "https://files.pythonhosted.org/packages/32/05/84c46d0844055735c1192ba1a0364d871251dbf03e26a465eedf148e63f1/algoliasearch-4.44.3-py3-none-any.whl",
+    "source_excerpt": "algoliasearch 4.44.1 (algoliasearch-4.44.1-py3-none-any.whl), algoliasearch/recommend/models/facet_filters.py line 21: class FacetFilters(BaseModel) / def __init__(self, *args, **kwargs) -> None\nalgoliasearch 4.44.3 (algoliasearch-4.44.3-py3-none-any.whl): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:9af26e72ee45fb7595267991a7eba23f19593859865e726ebc55bddbbbba7020",
+    "api": "algolia/python-surface",
+    "version": "4.44.3",
+    "previous_version": "4.44.1",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "algoliasearch",
+      "change": "removed_symbol",
+      "symbols": [
+        "recommend.models.facet_filters.FacetFilters"
+      ]
+    },
+    "description": "The class `recommend.models.facet_filters.FacetFilters` was removed in algoliasearch 4.44.3: code using it fails.",
+    "migration_hint": "algoliasearch 4.44.3 has no `recommend.models.facet_filters.FacetFilters`: see the package's release notes for what replaces it.",
+    "source_url": "https://files.pythonhosted.org/packages/32/05/84c46d0844055735c1192ba1a0364d871251dbf03e26a465eedf148e63f1/algoliasearch-4.44.3-py3-none-any.whl",
+    "source_excerpt": "algoliasearch 4.44.1 (algoliasearch-4.44.1-py3-none-any.whl), algoliasearch/recommend/models/facet_filters.py line 21: class FacetFilters(BaseModel) / def __init__(self, *args, **kwargs) -> None\nalgoliasearch 4.44.3 (algoliasearch-4.44.3-py3-none-any.whl): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

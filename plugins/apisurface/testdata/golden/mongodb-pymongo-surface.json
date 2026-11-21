@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:7740664e48992c85a1317271702aa5c8b9da76c18896e731bb061dfe11974e94",
+    "api": "mongodb/pymongo-surface",
+    "version": "4.16.0",
+    "previous_version": "4.15.5",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "pymongo",
+      "change": "removed_parameter",
+      "symbols": [
+        "asynchronous.command_cursor.AsyncCommandCursor"
+      ],
+      "parameter": "explicit_session"
+    },
+    "description": "`asynchronous.command_cursor.AsyncCommandCursor` no longer takes the parameter `explicit_session` in pymongo 4.16.0: passing it raises a TypeError.",
+    "migration_hint": "Stop passing `explicit_session` to `asynchronous.command_cursor.AsyncCommandCursor`; its signature in 4.16.0 is quoted in the source excerpt.",
+    "source_url": "https://files.pythonhosted.org/packages/4d/93/c36c0998dd91ad8b5031d2e77a903d5cd705b5ba05ca92bcc8731a2c3a8d/pymongo-4.16.0-cp310-cp310-macosx_10_9_x86_64.whl",
+    "source_excerpt": "pymongo 4.15.5 (pymongo-4.15.5-cp310-cp310-macosx_10_9_x86_64.whl), pymongo/asynchronous/command_cursor.py line 54: class AsyncCommandCursor(Generic[_DocumentType]) / def __init__( self, collection: AsyncCollection[_DocumentType], cursor_info: Mapping[str, Any], address: Optional[_Address], batch_size: int = 0, max_await_time_ms: Optional[int] = None, session: Optional[AsyncClientSession] = None, explicit_session: bool = False, comment: Any = None, ) -> None\npymongo 4.16.0 (pymongo-4.16.0-cp310-cp310-macosx_10_9_x86_64.whl), pymongo/asynchronous/command_cursor.py line 54: class AsyncCommandCursor(Generic[_DocumentType]) / def __init__( self, collection: AsyncCollection[_DocumentType], cursor_info: Mapping[str, Any], address: Optional[_Address], batch_size: int = 0, max_await_time_ms: Optional[int] = None, session: Optional[AsyncClientSession] = None, comment: Any = None, ) -> None",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:ab9ae9fd0fed997ec948131fc7a7d49e09183c535244305fef8e5cfd7a27344d",
+    "api": "mongodb/pymongo-surface",
+    "version": "4.16.0",
+    "previous_version": "4.15.5",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "pymongo",
+      "change": "removed_parameter",
+      "symbols": [
+        "asynchronous.command_cursor.AsyncRawBatchCommandCursor"
+      ],
+      "parameter": "explicit_session"
+    },
+    "description": "`asynchronous.command_cursor.AsyncRawBatchCommandCursor` no longer takes the parameter `explicit_session` in pymongo 4.16.0: passing it raises a TypeError.",
+    "migration_hint": "Stop passing `explicit_session` to `asynchronous.command_cursor.AsyncRawBatchCommandCursor`; its signature in 4.16.0 is quoted in the source excerpt.",
+    "source_url": "https://files.pythonhosted.org/packages/4d/93/c36c0998dd91ad8b5031d2e77a903d5cd705b5ba05ca92bcc8731a2c3a8d/pymongo-4.16.0-cp310-cp310-macosx_10_9_x86_64.whl",
+    "source_excerpt": "pymongo 4.15.5 (pymongo-4.15.5-cp310-cp310-macosx_10_9_x86_64.whl), pymongo/asynchronous/command_cursor.py line 422: class AsyncRawBatchCommandCursor(AsyncCommandCursor[_DocumentType]) / def __init__( self, collection: AsyncCollection[_DocumentType], cursor_info: Mapping[str, Any], address: Optional[_Address], batch_size: int = 0, max_await_time_ms: Optional[int] = None, session: Optional[AsyncClientSession] = None, explicit_session: bool = False, comment: Any = None, ) -> None\npymongo 4.16.0 (pymongo-4.16.0-cp310-cp310-macosx_10_9_x86_64.whl), pymongo/asynchronous/command_cursor.py line 424: class AsyncRawBatchCommandCursor(AsyncCommandCursor[_DocumentType]) / def __init__( self, collection: AsyncCollection[_DocumentType], cursor_info: Mapping[str, Any], address: Optional[_Address], batch_size: int = 0, max_await_time_ms: Optional[int] = None, session: Optional[AsyncClientSession] = None, comment: Any = None, ) -> None",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:2aa202533ee1eadd2d5520a4bdac4feb358488eb097f42de3ed92c03a368b79f",
+    "api": "mongodb/pymongo-surface",
+    "version": "4.16.0",
+    "previous_version": "4.15.5",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "pymongo",
+      "change": "removed_parameter",
+      "symbols": [
+        "command_cursor.CommandCursor"
+      ],
+      "parameter": "explicit_session"
+    },
+    "description": "`command_cursor.CommandCursor` no longer takes the parameter `explicit_session` in pymongo 4.16.0: passing it raises a TypeError.",
+    "migration_hint": "Stop passing `explicit_session` to `command_cursor.CommandCursor`; its signature in 4.16.0 is quoted in the source excerpt.",
+    "source_url": "https://files.pythonhosted.org/packages/4d/93/c36c0998dd91ad8b5031d2e77a903d5cd705b5ba05ca92bcc8731a2c3a8d/pymongo-4.16.0-cp310-cp310-macosx_10_9_x86_64.whl",
+    "source_excerpt": "pymongo 4.15.5 (pymongo-4.15.5-cp310-cp310-macosx_10_9_x86_64.whl), pymongo/synchronous/command_cursor.py line 54: class CommandCursor(Generic[_DocumentType]) / def __init__( self, collection: Collection[_DocumentType], cursor_info: Mapping[str, Any], address: Optional[_Address], batch_size: int = 0, max_await_time_ms: Optional[int] = None, session: Optional[ClientSession] = None, explicit_session: bool = False, comment: Any = None, ) -> None\npymongo 4.16.0 (pymongo-4.16.0-cp310-cp310-macosx_10_9_x86_64.whl), pymongo/synchronous/command_cursor.py line 54: class CommandCursor(Generic[_DocumentType]) / def __init__( self, collection: Collection[_DocumentType], cursor_info: Mapping[str, Any], address: Optional[_Address], batch_size: int = 0, max_await_time_ms: Optional[int] = None, session: Optional[ClientSession] = None, comment: Any = None, ) -> None",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:776c26a7c3102de14dbf1780065e5e13f1457caf39ba7764dfa1a94f6ebd92a9",
+    "api": "mongodb/pymongo-surface",
+    "version": "4.16.0",
+    "previous_version": "4.15.5",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "pymongo",
+      "change": "removed_parameter",
+      "symbols": [
+        "command_cursor.RawBatchCommandCursor"
+      ],
+      "parameter": "explicit_session"
+    },
+    "description": "`command_cursor.RawBatchCommandCursor` no longer takes the parameter `explicit_session` in pymongo 4.16.0: passing it raises a TypeError.",
+    "migration_hint": "Stop passing `explicit_session` to `command_cursor.RawBatchCommandCursor`; its signature in 4.16.0 is quoted in the source excerpt.",
+    "source_url": "https://files.pythonhosted.org/packages/4d/93/c36c0998dd91ad8b5031d2e77a903d5cd705b5ba05ca92bcc8731a2c3a8d/pymongo-4.16.0-cp310-cp310-macosx_10_9_x86_64.whl",
+    "source_excerpt": "pymongo 4.15.5 (pymongo-4.15.5-cp310-cp310-macosx_10_9_x86_64.whl), pymongo/synchronous/command_cursor.py line 422: class RawBatchCommandCursor(CommandCursor[_DocumentType]) / def __init__( self, collection: Collection[_DocumentType], cursor_info: Mapping[str, Any], address: Optional[_Address], batch_size: int = 0, max_await_time_ms: Optional[int] = None, session: Optional[ClientSession] = None, explicit_session: bool = False, comment: Any = None, ) -> None\npymongo 4.16.0 (pymongo-4.16.0-cp310-cp310-macosx_10_9_x86_64.whl), pymongo/synchronous/command_cursor.py line 424: class RawBatchCommandCursor(CommandCursor[_DocumentType]) / def __init__( self, collection: Collection[_DocumentType], cursor_info: Mapping[str, Any], address: Optional[_Address], batch_size: int = 0, max_await_time_ms: Optional[int] = None, session: Optional[ClientSession] = None, comment: Any = None, ) -> None",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:92385a2407cd6ed110661d5d5185cbced9cd5ce3ea22cf5363138adb28daa180",
+    "api": "mongodb/pymongo-surface",
+    "version": "4.16.0",
+    "previous_version": "4.15.5",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "pymongo",
+      "change": "removed_parameter",
+      "symbols": [
+        "synchronous.command_cursor.CommandCursor"
+      ],
+      "parameter": "explicit_session"
+    },
+    "description": "`synchronous.command_cursor.CommandCursor` no longer takes the parameter `explicit_session` in pymongo 4.16.0: passing it raises a TypeError.",
+    "migration_hint": "Stop passing `explicit_session` to `synchronous.command_cursor.CommandCursor`; its signature in 4.16.0 is quoted in the source excerpt.",
+    "source_url": "https://files.pythonhosted.org/packages/4d/93/c36c0998dd91ad8b5031d2e77a903d5cd705b5ba05ca92bcc8731a2c3a8d/pymongo-4.16.0-cp310-cp310-macosx_10_9_x86_64.whl",
+    "source_excerpt": "pymongo 4.15.5 (pymongo-4.15.5-cp310-cp310-macosx_10_9_x86_64.whl), pymongo/synchronous/command_cursor.py line 54: class CommandCursor(Generic[_DocumentType]) / def __init__( self, collection: Collection[_DocumentType], cursor_info: Mapping[str, Any], address: Optional[_Address], batch_size: int = 0, max_await_time_ms: Optional[int] = None, session: Optional[ClientSession] = None, explicit_session: bool = False, comment: Any = None, ) -> None\npymongo 4.16.0 (pymongo-4.16.0-cp310-cp310-macosx_10_9_x86_64.whl), pymongo/synchronous/command_cursor.py line 54: class CommandCursor(Generic[_DocumentType]) / def __init__( self, collection: Collection[_DocumentType], cursor_info: Mapping[str, Any], address: Optional[_Address], batch_size: int = 0, max_await_time_ms: Optional[int] = None, session: Optional[ClientSession] = None, comment: Any = None, ) -> None",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:5c5b44bd9ce8967fc28b81a14e4ebbcaab56bb876959aa3189272db0c72aed0e",
+    "api": "mongodb/pymongo-surface",
+    "version": "4.16.0",
+    "previous_version": "4.15.5",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "pymongo",
+      "change": "removed_parameter",
+      "symbols": [
+        "synchronous.command_cursor.RawBatchCommandCursor"
+      ],
+      "parameter": "explicit_session"
+    },
+    "description": "`synchronous.command_cursor.RawBatchCommandCursor` no longer takes the parameter `explicit_session` in pymongo 4.16.0: passing it raises a TypeError.",
+    "migration_hint": "Stop passing `explicit_session` to `synchronous.command_cursor.RawBatchCommandCursor`; its signature in 4.16.0 is quoted in the source excerpt.",
+    "source_url": "https://files.pythonhosted.org/packages/4d/93/c36c0998dd91ad8b5031d2e77a903d5cd705b5ba05ca92bcc8731a2c3a8d/pymongo-4.16.0-cp310-cp310-macosx_10_9_x86_64.whl",
+    "source_excerpt": "pymongo 4.15.5 (pymongo-4.15.5-cp310-cp310-macosx_10_9_x86_64.whl), pymongo/synchronous/command_cursor.py line 422: class RawBatchCommandCursor(CommandCursor[_DocumentType]) / def __init__( self, collection: Collection[_DocumentType], cursor_info: Mapping[str, Any], address: Optional[_Address], batch_size: int = 0, max_await_time_ms: Optional[int] = None, session: Optional[ClientSession] = None, explicit_session: bool = False, comment: Any = None, ) -> None\npymongo 4.16.0 (pymongo-4.16.0-cp310-cp310-macosx_10_9_x86_64.whl), pymongo/synchronous/command_cursor.py line 424: class RawBatchCommandCursor(CommandCursor[_DocumentType]) / def __init__( self, collection: Collection[_DocumentType], cursor_info: Mapping[str, Any], address: Optional[_Address], batch_size: int = 0, max_await_time_ms: Optional[int] = None, session: Optional[ClientSession] = None, comment: Any = None, ) -> None",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

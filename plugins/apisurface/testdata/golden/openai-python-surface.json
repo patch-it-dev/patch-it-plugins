@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:7c2703dd5112b040c64fd384b102f560a1205f2f540f4ec31cd8310e6a604902",
-    "api": "openai/python-sdk",
+    "fingerprint": "sha256:8e136bc6c99457904b7001c21e8783822fc3821daf882c6db30d86ef3af75f08",
+    "api": "openai/python-surface",
     "version": "1.1.2",
     "previous_version": "1.1.1",
     "change_type": "breaking",
@@ -25,8 +25,8 @@
   },
   {
     "id": 2,
-    "fingerprint": "sha256:54fc59ce604c0f5bfa1b1f3886d8d79ea37963f05f2fa694ea4d7b68ad720dbd",
-    "api": "openai/python-sdk",
+    "fingerprint": "sha256:d4c8db1c17ff6739ceb947019823ef8de79d77fd0da8be47e9701aa43fa28a8a",
+    "api": "openai/python-surface",
     "version": "1.1.2",
     "previous_version": "1.1.1",
     "change_type": "breaking",

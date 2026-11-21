@@ -1,0 +1,63 @@
+{
+  "info": {
+    "name": "redis"
+  },
+  "releases": {
+    "7.4.1": [
+      {
+        "filename": "redis-7.4.1-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-05T09:10:05.128093Z",
+        "yanked": false
+      },
+      {
+        "filename": "redis-7.4.1.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-06-05T09:10:06.703392Z",
+        "yanked": false
+      }
+    ],
+    "8.0.0": [
+      {
+        "filename": "redis-8.0.0-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-05-28T12:45:11.697858Z",
+        "yanked": false
+      },
+      {
+        "filename": "redis-8.0.0.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-05-28T12:45:13.500411Z",
+        "yanked": false
+      }
+    ],
+    "8.0.1": [
+      {
+        "filename": "redis-8.0.1-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-06-23T14:52:36.137484Z",
+        "yanked": false
+      },
+      {
+        "filename": "redis-8.0.1.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-06-23T14:52:37.728998Z",
+        "yanked": false
+      }
+    ],
+    "8.1.0": [
+      {
+        "filename": "redis-8.1.0-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-07-30T08:50:58.497552Z",
+        "yanked": false
+      },
+      {
+        "filename": "redis-8.1.0.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-07-30T08:51:00.269040Z",
+        "yanked": false
+      }
+    ]
+  }
+}

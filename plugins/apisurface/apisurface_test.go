@@ -56,7 +56,7 @@ func pair(t *testing.T) []event.Event {
 // same class.)
 func TestGolden(t *testing.T) {
 	got := pair(t)
-	kittest.Golden(t, "testdata/golden/openai-1.1.2.json", got)
+	kittest.Golden(t, "testdata/golden/openai-python-surface.json", got)
 	for _, e := range got {
 		if e.PreviousVersion != "1.1.1" || e.Version != "1.1.2" || e.SourceURL != wheel112 || !strings.Contains(e.SourceExcerpt, "openai/types/beta/asssitant_deleted.py line ") {
 			t.Errorf("%v: %s<-%s, excerpt %q", e.Subject.Symbols, e.Version, e.PreviousVersion, e.SourceExcerpt)
@@ -255,3 +255,47 @@ func TestSourceFilesStayInThePackage(t *testing.T) {
 }
 
 var _ plugin.Versioned = Plugin{}
+
+// A class or function gone from a module's surface while the module still
+// binds the name is still importable: the class made an alias of another
+// (anthropic 2.5.0: DeadlineExceededError = GatewayTimeoutError), names
+// re-exported from a private module (google-genai 3.4.0's interactions),
+// or a module that star-imports from where names can't be listed. A note,
+// not an event. A name the module no longer binds at all is gone.
+func TestANameTheModuleStillBindsIsNotRemoved(t *testing.T) {
+	read := func(files map[string]string) Release {
+		var fs []pysurface.File
+		for p, text := range files {
+			fs = append(fs, pysurface.File{Path: p, Text: text})
+		}
+		return Release{Surface: pysurface.Read(fs), Classes: pysurface.ReadClasses(fs), Bindings: pysurface.ReadBindings(fs)}
+	}
+	a := read(map[string]string{
+		"acme/__init__.py":     "from ._exceptions import DeadlineExceededError, Gone\n",
+		"acme/_exceptions.py":  "class DeadlineExceededError(Exception): pass\nclass Gone(Exception): pass\n",
+		"acme/interactions.py": "class Webhook:\n    def __init__(self, url): pass\n",
+		"acme/starred.py":      "class Agent:\n    def __init__(self, name): pass\n",
+	})
+	b := read(map[string]string{
+		"acme/__init__.py":     "from ._exceptions import DeadlineExceededError\n",
+		"acme/_exceptions.py":  "class GatewayTimeoutError(Exception): pass\nDeadlineExceededError = GatewayTimeoutError\n",
+		"acme/interactions.py": "from ._gen.webhooks import Webhook\n",
+		"acme/starred.py":      "from ._gen.agents import *\n",
+	})
+	want := "note acme.DeadlineExceededError\nremoved_symbol acme.Gone \nnote acme.interactions.Webhook\nnote acme.starred.Agent"
+	if got := strings.Join(changes(a, b), "\n"); got != want {
+		t.Errorf("got\n%s\nwant\n%s", got, want)
+	}
+}
+
+// A method made a staticmethod loses self, which no caller passes:
+// supabase 1.0.0's SupabaseRealtimeClient.get_payload_records. Not a removed
+// parameter. (cls likewise, for a classmethod made static.)
+func TestSelfGoneIsNoRemovedParameter(t *testing.T) {
+	self := prm("self", "either", "")
+	a := Release{Surface: pysurface.Surface{"acme.C": cls("class C:"), "acme.C.records": sym("method", self, prm("payload", "either", ""))}}
+	b := Release{Surface: pysurface.Surface{"acme.C": cls("class C:"), "acme.C.records": sym("method", prm("payload", "either", ""))}}
+	if got := changes(a, b); len(got) != 0 {
+		t.Errorf("got %v, want nothing", got)
+	}
+}

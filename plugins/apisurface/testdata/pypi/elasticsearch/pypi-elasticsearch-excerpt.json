@@ -1,0 +1,49 @@
+{
+  "info": {
+    "name": "elasticsearch"
+  },
+  "releases": {
+    "9.1.1": [
+      {
+        "filename": "elasticsearch-9.1.1-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-09-12T13:27:34.948311Z",
+        "yanked": false
+      },
+      {
+        "filename": "elasticsearch-9.1.1.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2025-09-12T13:27:38.620286Z",
+        "yanked": false
+      }
+    ],
+    "9.1.2": [
+      {
+        "filename": "elasticsearch-9.1.2-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2025-10-28T16:49:41.468783Z",
+        "yanked": false
+      },
+      {
+        "filename": "elasticsearch-9.1.2.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2025-10-28T16:49:45.739685Z",
+        "yanked": false
+      }
+    ],
+    "9.1.3": [
+      {
+        "filename": "elasticsearch-9.1.3-py3-none-any.whl",
+        "packagetype": "bdist_wheel",
+        "upload_time_iso_8601": "2026-01-05T12:50:05.326983Z",
+        "yanked": false
+      },
+      {
+        "filename": "elasticsearch-9.1.3.tar.gz",
+        "packagetype": "sdist",
+        "upload_time_iso_8601": "2026-01-05T12:50:08.241432Z",
+        "yanked": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:c417046b5181068bc41250e19c47325f8d16824803101ca7f62ae01768842d63",
+    "api": "numpy/python-surface",
+    "version": "2.5.0",
+    "previous_version": "2.4.6",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "row_stack"
+      ]
+    },
+    "description": "The function `row_stack` was removed in numpy 2.5.0: code using it fails.",
+    "migration_hint": "numpy 2.5.0 has no `row_stack`: see the package's release notes for what replaces it.",
+    "source_url": "https://files.pythonhosted.org/packages/fa/0a/11486d02add7b1384dff7374d124b1cfbb0ee864dcc9f6a2c0380638cf84/numpy-2.5.0-cp312-cp312-macosx_10_13_x86_64.whl",
+    "source_excerpt": "numpy 2.4.6 (numpy-2.4.6-cp311-cp311-macosx_10_9_x86_64.whl), numpy/lib/_shape_base_impl.pyi line 129: def row_stack( tup: Sequence[ArrayLike], *, dtype: DTypeLike | None = None, casting: _CastingKind = \"same_kind\", ) -> NDArray[Any]\nnumpy 2.5.0 (numpy-2.5.0-cp312-cp312-macosx_10_13_x86_64.whl): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

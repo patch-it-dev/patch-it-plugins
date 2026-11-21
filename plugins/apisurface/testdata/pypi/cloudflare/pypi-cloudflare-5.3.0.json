@@ -1,0 +1,20 @@
+{
+  "info": {
+    "name": "cloudflare",
+    "version": "5.3.0"
+  },
+  "urls": [
+    {
+      "filename": "cloudflare-5.3.0-py3-none-any.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/c5/6f/b7624d3a8f0637b04e883f289f530c88e1c4f683c70d8ebe291e4b430ec1/cloudflare-5.3.0-py3-none-any.whl",
+      "yanked": false
+    },
+    {
+      "filename": "cloudflare-5.3.0.tar.gz",
+      "packagetype": "sdist",
+      "url": "https://files.pythonhosted.org/packages/61/64/ba01193be8e31bda89974f0f33d1084b44b34a2d2d96031e3fb704340182/cloudflare-5.3.0.tar.gz",
+      "yanked": false
+    }
+  ]
+}
