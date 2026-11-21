@@ -1,0 +1,194 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:52d5d7009a373dfc3666fa786bf3861a5c8e6ab8c76fc96f1bc323f9cedde7cb",
+    "api": "stripe/java",
+    "version": "21.0.0",
+    "previous_version": "20.136.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "maven",
+      "package": "com.stripe:stripe-java",
+      "change": "removed_symbol",
+      "symbols": [
+        "CashBalance.retrieveCashBalance"
+      ]
+    },
+    "description": "`CashBalance.retrieveCashBalance` was removed in com.stripe:stripe-java 21.0.0: code using it fails.",
+    "migration_hint": "Removed `CashBalance.retrieveCashBalance` method. Prefer `CashBalance.retrieve`. (com.stripe:stripe-java's changelog for 21.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-java/v21.0.0/CHANGELOG.md",
+    "source_excerpt": "## 21.0.0 - 2022-08-02\n⚠️ Removed\n- Removed `CashBalance.retrieveCashBalance` method. Prefer `CashBalance.retrieve`.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:243aa32aa0d94502d221264fc88b76024d1392329d5936eeb1594223bbde16e9",
+    "api": "stripe/java",
+    "version": "21.0.0",
+    "previous_version": "20.136.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "maven",
+      "package": "com.stripe:stripe-java",
+      "change": "removed_symbol",
+      "symbols": [
+        "Rule.getDeleted"
+      ]
+    },
+    "description": "`Rule.getDeleted` was removed in com.stripe:stripe-java 21.0.0: code using it fails.",
+    "migration_hint": "Removed `Rule.getDeleted` method. The property was never populated and always had the default value of `false`. (com.stripe:stripe-java's changelog for 21.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-java/v21.0.0/CHANGELOG.md",
+    "source_excerpt": "## 21.0.0 - 2022-08-02\n⚠️ Removed\n- Removed `Rule.getDeleted` method. The property was never populated and always had the default value of `false`.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:c85c6374f1dbb41fd978e13ee8fdaf009533c19529b82367d9e0b0186cab25e6",
+    "api": "stripe/java",
+    "version": "21.0.0",
+    "previous_version": "20.136.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "maven",
+      "package": "com.stripe:stripe-java",
+      "change": "removed_symbol",
+      "symbols": [
+        "LineItem.getDeleted"
+      ]
+    },
+    "description": "`LineItem.getDeleted` was removed in com.stripe:stripe-java 21.0.0: code using it fails.",
+    "migration_hint": "Removed `LineItem.getDeleted` method. The property was never populated and always had the default value of `false`. (com.stripe:stripe-java's changelog for 21.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-java/v21.0.0/CHANGELOG.md",
+    "source_excerpt": "## 21.0.0 - 2022-08-02\n⚠️ Removed\n- Removed `LineItem.getDeleted` method. The property was never populated and always had the default value of `false`.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:ab3c4e3268d23e6cf7563c14c3a1c67d5ce241784a8efc4f99418b92f44c1cee",
+    "api": "stripe/java",
+    "version": "21.0.0",
+    "previous_version": "20.136.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "maven",
+      "package": "com.stripe:stripe-java",
+      "change": "removed_symbol",
+      "symbols": [
+        "LoginLink.redirectUrl"
+      ]
+    },
+    "description": "`LoginLink.redirectUrl` was removed in com.stripe:stripe-java 21.0.0: code using it fails.",
+    "migration_hint": "Removed deprecated `LoginLink.redirectUrl` property. (com.stripe:stripe-java's changelog for 21.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-java/v21.0.0/CHANGELOG.md",
+    "source_excerpt": "## 21.0.0 - 2022-08-02\n⚠️ Removed\n- Removed deprecated `LoginLink.redirectUrl` property.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:01aa491de6852639511b23c7635842bdb4821ad0d8015ef21013133cf97e1f7b",
+    "api": "stripe/java",
+    "version": "21.0.0",
+    "previous_version": "20.136.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "maven",
+      "package": "com.stripe:stripe-java",
+      "change": "removed_symbol",
+      "symbols": [
+        "Charge.order"
+      ]
+    },
+    "description": "`Charge.order` was removed in com.stripe:stripe-java 21.0.0: code using it fails.",
+    "migration_hint": "Removed deprecated `Charge.order` property. (com.stripe:stripe-java's changelog for 21.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-java/v21.0.0/CHANGELOG.md",
+    "source_excerpt": "## 21.0.0 - 2022-08-02\n⚠️ Removed\n- Removed deprecated `Charge.order` property.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:43418603b888248622b34c7dde74366f65799e8756b196daf20e8d6d7bf95845",
+    "api": "stripe/java",
+    "version": "21.0.0",
+    "previous_version": "20.136.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "maven",
+      "package": "com.stripe:stripe-java",
+      "change": "removed_symbol",
+      "symbols": [
+        "Card.recipient"
+      ]
+    },
+    "description": "`Card.recipient` was removed in com.stripe:stripe-java 21.0.0: code using it fails.",
+    "migration_hint": "Removed deprecated `Card.recipient` property. (com.stripe:stripe-java's changelog for 21.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-java/v21.0.0/CHANGELOG.md",
+    "source_excerpt": "## 21.0.0 - 2022-08-02\n⚠️ Removed\n- Removed deprecated `Card.recipient` property.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:f445955ccefd8a04403f005db91a02b8b5ecbf9f649de82c4073ffc1c97a3650",
+    "api": "stripe/java",
+    "version": "21.0.0",
+    "previous_version": "20.136.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "maven",
+      "package": "com.stripe:stripe-java",
+      "change": "removed_symbol",
+      "symbols": [
+        "Customer.defaultCurrency"
+      ]
+    },
+    "description": "`Customer.defaultCurrency` was removed in com.stripe:stripe-java 21.0.0: code using it fails.",
+    "migration_hint": "Removed `defaultCurrency` property from `Customer` resource. Please use `Currency` property instead. (com.stripe:stripe-java's changelog for 21.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-java/v21.0.0/CHANGELOG.md",
+    "source_excerpt": "## 21.0.0 - 2022-08-02\n⚠️ Removed\n- Removed `defaultCurrency` property from `Customer` resource. Please use `Currency` property instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
+    "fingerprint": "sha256:7275ee8da7eefc657932c00b8ecc072a60e8d2bf5fc421eec76c459d9fa3f1a6",
+    "api": "stripe/java",
+    "version": "21.0.0",
+    "previous_version": "20.136.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "maven",
+      "package": "com.stripe:stripe-java",
+      "change": "removed_symbol",
+      "symbols": [
+        "InitiatingPaymentMethodDetails"
+      ]
+    },
+    "description": "`InitiatingPaymentMethodDetails` was removed in com.stripe:stripe-java 21.0.0: code using it fails.",
+    "migration_hint": "Removed `InitiatingPaymentMethodDetails` class (com.stripe:stripe-java's changelog for 21.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-java/v21.0.0/CHANGELOG.md",
+    "source_excerpt": "## 21.0.0 - 2022-08-02\n⚠️ Removed\n- Removed `InitiatingPaymentMethodDetails` class",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

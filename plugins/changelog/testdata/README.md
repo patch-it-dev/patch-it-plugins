@@ -9,6 +9,20 @@ golden files under `golden/` are what the plugin stores from them
 | `textual-v0.86.0-CHANGELOG.md` | https://raw.githubusercontent.com/Textualize/textual/v0.86.0/CHANGELOG.md | `5a738fa` | 2026-11-14 08:36 UTC | MIT (Textual), kept whole | "Breaking change: Removed `App.dark` reactive attribute" |
 | `urllib3-2.0.0-CHANGES.rst` | https://raw.githubusercontent.com/urllib3/urllib3/2.0.0/CHANGES.rst | `303ba81` | 2026-11-14 08:35 UTC | MIT (urllib3), kept whole | "Removed support for Python 2.7, 3.5, and 3.6" |
 
+## SDK changelogs
+
+Read with `Plugin{File: ...}` (`sdks.go`); `golden/<provider>-<source>.json` is what each stores from its release (`sdks_test.go`), the pair from the release before it on the registry (or among the repo's tags). Every file is the changelog at the release's tag, saved with `curl`, **trimmed** to two releases' sections, each kept whole and unchanged: the release the golden pins and one more release from the same file whose notes remove nothing the reader can name (the drop test). Only the pinned release's own section is read for the golden, so the trimmed copy gives the same events as the whole file (checked when each copy was made).
+
+| File | URL | Tag commit | Saved | License; trimming | Quote |
+|---|---|---|---|---|---|
+| `stripe-python-4.0.0-CHANGELOG.md` | https://raw.githubusercontent.com/stripe/stripe-python/v4.0.0/CHANGELOG.md | `e65630a` | 2026-11-20 | MIT (stripe-python); trimmed to the sections of 4.0.0 (the golden) and 3.5.0 (the drop test), each unchanged | "Removed deprecated `AlipayAccount`, `BitcoinReceiver`, `BitcoinTransaction`, `IssuerFraudRecord`, `Recipient`, `Recip…" |
+| `stripe-node-10.0.0-CHANGELOG.md` | https://raw.githubusercontent.com/stripe/stripe-node/v10.0.0/CHANGELOG.md | `321d2fd` | 2026-11-20 | MIT (stripe-node); trimmed to the sections of 10.0.0 (the golden) and 9.16.0 (the drop test), each unchanged | "Remove `AlipayAccount` and `BitcoinReceiver` from `CustomerSource`." |
+| `stripe-go-73.0.0-CHANGELOG.md` | https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md | `234502c` | 2026-11-20 | MIT (stripe-go); trimmed to the sections of 73.0.0 (the golden) and 72.122.0 (the drop test), each unchanged | "Remove `BalanceTransactionStatus`. It was meant to be an enum, but none of the enum values were defined, so it was ju…" |
+| `stripe-java-21.0.0-CHANGELOG.md` | https://raw.githubusercontent.com/stripe/stripe-java/v21.0.0/CHANGELOG.md | `cd2b023` | 2026-11-20 | MIT (stripe-java); trimmed to the sections of 21.0.0 (the golden) and 20.136.0 (the drop test), each unchanged | "Removed `CashBalance.retrieveCashBalance` method. Prefer `CashBalance.retrieve`." |
+| `stripe-ruby-7.0.0-CHANGELOG.md` | https://raw.githubusercontent.com/stripe/stripe-ruby/v7.0.0/CHANGELOG.md | `6081371` | 2026-11-20 | MIT (stripe-ruby); trimmed to the sections of 7.0.0 (the golden) and 6.5.0 (the drop test), each unchanged | "Remove `details` method from `Issuing.Card` resource. The method was not supported." |
+| `stripe-dotnet-40.0.0-CHANGELOG.md` | https://raw.githubusercontent.com/stripe/stripe-dotnet/v40.0.0/CHANGELOG.md | `e07ebe7` | 2026-11-20 | Apache-2.0 (stripe-dotnet); trimmed to the sections of 40.0.0 (the golden) and 39.126.0 (the drop test), each unchanged | "Remove `CustomerPaymentSettingsOptions`, `CustomerPaymentSettingsPaymentMethodOptionsBancontactOptions`, `CustomerPay…" |
+| `stripe-php-9.0.0-CHANGELOG.md` | https://raw.githubusercontent.com/stripe/stripe-php/v9.0.0/CHANGELOG.md | `e405c17` | 2026-11-20 | MIT (stripe-php); trimmed to the sections of 9.0.0 (the golden) and 8.12.0 (the drop test), each unchanged | "Remove deprecated `AlipayAccount`, `BitcoinReceiver`, `BitcoinTransaction`, `Recipient`, `RecipientTransfer`, and `Th…" |
+
 ## Version lists
 
 | File | URL | Saved | License | Use |

@@ -1,0 +1,104 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:4ef8a02b8745af184c28063aa738bba6dffde1c7207f479415f39d568b3525d9",
+    "api": "stripe/python",
+    "version": "4.0.0",
+    "previous_version": "3.5.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "stripe",
+      "change": "removed_symbol",
+      "symbols": [
+        "AlipayAccount",
+        "BitcoinReceiver",
+        "BitcoinTransaction",
+        "IssuerFraudRecord",
+        "Recipient",
+        "RecipientTransfer",
+        "ThreeDSecure"
+      ]
+    },
+    "description": "`AlipayAccount`, `BitcoinReceiver`, `BitcoinTransaction`, `IssuerFraudRecord`, `Recipient`, `RecipientTransfer`, `ThreeDSecure` were removed in stripe 4.0.0: code using it fails.",
+    "migration_hint": "Removed deprecated `AlipayAccount`, `BitcoinReceiver`, `BitcoinTransaction`, `IssuerFraudRecord`, `Recipient`, `RecipientTransfer`, and  `ThreeDSecure` classes. (stripe's changelog for 4.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-python/v4.0.0/CHANGELOG.md",
+    "source_excerpt": "## 4.0.0 - 2022-08-02\n⚠️ Removed\n- Removed deprecated `AlipayAccount`, `BitcoinReceiver`, `BitcoinTransaction`, `IssuerFraudRecord`, `Recipient`, `RecipientTransfer`, and  `ThreeDSecure` classes.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:ca689207e3e9817ee38fb9be79582dafd72a09c4c289a57e13c2b3e0111e260a",
+    "api": "stripe/python",
+    "version": "4.0.0",
+    "previous_version": "3.5.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "stripe",
+      "change": "removed_symbol",
+      "symbols": [
+        "Source.source_transactions"
+      ]
+    },
+    "description": "`Source.source_transactions` was removed in stripe 4.0.0: code using it fails.",
+    "migration_hint": "Removed the deprecated `Source.source_transactions` method. Prefer `SubscriptionItem.list_source_transactions` (stripe's changelog for 4.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-python/v4.0.0/CHANGELOG.md",
+    "source_excerpt": "## 4.0.0 - 2022-08-02\n⚠️ Removed\n- Removed the deprecated `Source.source_transactions` method. Prefer `SubscriptionItem.list_source_transactions`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:64c4a22647bac26cb2fed938ea6ebe90e9930543c8ea7498791c12adfe81b82b",
+    "api": "stripe/python",
+    "version": "4.0.0",
+    "previous_version": "3.5.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "stripe",
+      "change": "removed_symbol",
+      "symbols": [
+        "SubscriptionItem.usage_record_summaries"
+      ]
+    },
+    "description": "`SubscriptionItem.usage_record_summaries` was removed in stripe 4.0.0: code using it fails.",
+    "migration_hint": "Removed the deprecated `SubscriptionItem.usage_record_summaries` method. Prefer `SubscriptionItem.list_usage_record_summaries` (stripe's changelog for 4.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-python/v4.0.0/CHANGELOG.md",
+    "source_excerpt": "## 4.0.0 - 2022-08-02\n⚠️ Removed\n- Removed the deprecated `SubscriptionItem.usage_record_summaries` method. Prefer `SubscriptionItem.list_usage_record_summaries`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:91688bb22334f3aea1d46e62ef002d7e1a5f7c5df3f9c78576712469e34d4092",
+    "api": "stripe/python",
+    "version": "4.0.0",
+    "previous_version": "3.5.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "stripe",
+      "change": "removed_symbol",
+      "symbols": [
+        "Charge.refund"
+      ]
+    },
+    "description": "`Charge.refund` was removed in stripe 4.0.0: code using it fails.",
+    "migration_hint": "Removed the deprecated `Charge.refund` method. Prefer [Refund.create](https://stripe.com/docs/api/refunds/create) (stripe's changelog for 4.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-python/v4.0.0/CHANGELOG.md",
+    "source_excerpt": "## 4.0.0 - 2022-08-02\n⚠️ Removed\n- Removed the deprecated `Charge.refund` method. Prefer [Refund.create](https://stripe.com/docs/api/refunds/create)",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

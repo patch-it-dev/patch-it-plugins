@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:4073c8c038b5e0a11881cc1ba4490333aea88628c8607408e23b43fa9a26a9eb",
+    "api": "stripe/ruby",
+    "version": "7.0.0",
+    "previous_version": "6.5.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "rubygems",
+      "package": "stripe",
+      "change": "removed_symbol",
+      "symbols": [
+        "Issuing.Card.details"
+      ]
+    },
+    "description": "`Issuing.Card.details` was removed in stripe 7.0.0: code using it fails.",
+    "migration_hint": "Remove `details` method from `Issuing.Card` resource. The method was not supported. (stripe's changelog for 7.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-ruby/v7.0.0/CHANGELOG.md",
+    "source_excerpt": "## 7.0.0 - 2022-08-02\n⚠️ Removed\n* Remove `details` method from `Issuing.Card` resource. The method was not supported.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:bc47f3c78bbe44ff6aa507547c6693214f5c374ebbac8fa2248685914f3aae69",
+    "api": "stripe/ruby",
+    "version": "7.0.0",
+    "previous_version": "6.5.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "rubygems",
+      "package": "stripe",
+      "change": "removed_symbol",
+      "symbols": [
+        "Issuing.CardDetails"
+      ]
+    },
+    "description": "`Issuing.CardDetails` was removed in stripe 7.0.0: code using it fails.",
+    "migration_hint": "Remove `Issuing.CardDetails` resource. Read more at https://stripe.com/docs/issuing/cards/virtual. (stripe's changelog for 7.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-ruby/v7.0.0/CHANGELOG.md",
+    "source_excerpt": "## 7.0.0 - 2022-08-02\n⚠️ Removed\n* Remove `Issuing.CardDetails` resource. Read more at https://stripe.com/docs/issuing/cards/virtual.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:41990f1f204892089efee2818cd4e8191e1bd49f0d6fd8797c90d3864852bab7",
+    "api": "stripe/ruby",
+    "version": "7.0.0",
+    "previous_version": "6.5.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "rubygems",
+      "package": "stripe",
+      "change": "removed_symbol",
+      "symbols": [
+        "ReportType.create"
+      ]
+    },
+    "description": "`ReportType.create` was removed in stripe 7.0.0: code using it fails.",
+    "migration_hint": "Remove `create` method from `ReportType` resource. The method was not supported. (stripe's changelog for 7.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-ruby/v7.0.0/CHANGELOG.md",
+    "source_excerpt": "## 7.0.0 - 2022-08-02\n⚠️ Removed\n* Remove `create` method from `ReportType` resource. The method was not supported.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:2d9549e7d050ba760dfea4571c876ae0743893310d2259f0c2c4fefa127c5ea1",
+    "api": "stripe/ruby",
+    "version": "7.0.0",
+    "previous_version": "6.5.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "rubygems",
+      "package": "stripe",
+      "change": "removed_symbol",
+      "symbols": [
+        "SubscriptionItem.usage_record_summaries"
+      ]
+    },
+    "description": "`SubscriptionItem.usage_record_summaries` was removed in stripe 7.0.0: code using it fails.",
+    "migration_hint": "Remove `usage_record_summaries` method from `SubscriptionItem` resource. Please use `list_usage_record_summaries` method instead. (stripe's changelog for 7.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-ruby/v7.0.0/CHANGELOG.md",
+    "source_excerpt": "## 7.0.0 - 2022-08-02\n⚠️ Removed\n* Remove `usage_record_summaries` method from `SubscriptionItem` resource. Please use `list_usage_record_summaries` method instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:b1d35424e6907ade50fc99c73ea1c72b43a5c849fac26de6133dde8490efca3b",
+    "api": "stripe/ruby",
+    "version": "7.0.0",
+    "previous_version": "6.5.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "rubygems",
+      "package": "stripe",
+      "change": "removed_symbol",
+      "symbols": [
+        "Transfer.cancel"
+      ]
+    },
+    "description": "`Transfer.cancel` was removed in stripe 7.0.0: code using it fails.",
+    "migration_hint": "Remove `cancel` method from `Transfer` resource. The method was deprecated. (stripe's changelog for 7.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-ruby/v7.0.0/CHANGELOG.md",
+    "source_excerpt": "## 7.0.0 - 2022-08-02\n⚠️ Removed\n* Remove `cancel` method from `Transfer` resource. The method was deprecated.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]
