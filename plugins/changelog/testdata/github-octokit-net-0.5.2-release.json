@@ -1,0 +1,7 @@
+{
+  "html_url": "https://github.com/octokit/octokit.net/releases/tag/v0.5.2",
+  "tag_name": "v0.5.2",
+  "name": "v0.5.2",
+  "published_at": "2014-10-14T12:28:46Z",
+  "body": "- New: Method to add repository to team - #546 via @kevfromireland\n- Fixed: PATCH parameters for releases, issues and pull requests are now nullable - #561 via @thedillonb\n\n**Breaking Changes:**\n- `PullRequestUpdate` removed unused fields: `Number`, `State`, `Base`, and `Head`\n- `ReleaseClient.Create` now accepts a `NewRelease` parameter (was `ReleaseUpdate`)\n- `ReleaseUpdate` no longer requires a `TagName` in the constructor (see `NewRelease`)\n- `ReleaseUpdate` now has nullable `Draft` and `Prerelease` properties - only\n   set these if you want to apply changes to the API\n- `IssueUpdate.State` is now a nullable `ItemState`\n- `MilestoneUpdate.Number` is now removed\n- `MilestoneUpdate.State` is now a nullable `ItemState`\n"
+}

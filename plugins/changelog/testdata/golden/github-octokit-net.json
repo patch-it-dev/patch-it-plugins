@@ -1,10 +1,10 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:4ee478cf71b9b18424154f67e8cb68ef73a2526abc3543b19fded169a8add122",
+    "fingerprint": "sha256:0480089f0ce05c60634ebc123e89916b2835c44388dec0fec747d0c0c204fcfc",
     "api": "github/octokit-net",
-    "version": "0.19.0",
-    "previous_version": "0.18.0",
+    "version": "0.5.2",
+    "previous_version": "0.5.1",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -13,13 +13,13 @@
       "package": "Octokit",
       "change": "removed_symbol",
       "symbols": [
-        "ISshKeysClient.GetAllForCurrent"
+        "MilestoneUpdate.Number"
       ]
     },
-    "description": "`ISshKeysClient.GetAllForCurrent` was removed in Octokit 0.19.0: code using it fails.",
-    "migration_hint": "`ISshKeysClient.GetAllForCurrent()` (Octokit's release notes for 0.19.0)",
-    "source_url": "https://github.com/octokit/octokit.net/releases/tag/v0.19.0",
-    "source_excerpt": "v0.19 - Identifying Types\nBreaking Changes\n- `ISshKeysClient.GetAllForCurrent()`",
+    "description": "`MilestoneUpdate.Number` was removed in Octokit 0.5.2: code using it fails.",
+    "migration_hint": "`MilestoneUpdate.Number` is now removed (Octokit's release notes for 0.5.2)",
+    "source_url": "https://github.com/octokit/octokit.net/releases/tag/v0.5.2",
+    "source_excerpt": "v0.5.2\nBreaking Changes:\n- `MilestoneUpdate.Number` is now removed",
     "confidence": 1,
     "detected_at": "2026-11-14T12:00:00Z"
   }

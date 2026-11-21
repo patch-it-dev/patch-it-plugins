@@ -41,8 +41,8 @@ Read with `Plugin{File: ...}` and `Notes: true` (`sdks.go`): an SDK whose change
 |---|---|---|---|---|---|
 | `github-octokit-rest-18.0.0-release.json` | https://api.github.com/repos/octokit/rest.js/releases/tags/v18.0.0 | `b4ab0db` | 2026-11-20 | MIT (rest.js); trimmed to `html_url`, `tag_name`, `name`, `published_at` and `body`, re-indented, values unchanged | golden |
 | `github-octokit-rest-17.11.2-release.json` | https://api.github.com/repos/octokit/rest.js/releases/tags/v17.11.2 | `5306f37` | 2026-11-20 | MIT (rest.js); trimmed to `html_url`, `tag_name`, `name`, `published_at` and `body`, re-indented, values unchanged | drop test |
-| `github-octokit-net-0.19.0-release.json` | https://api.github.com/repos/octokit/octokit.net/releases/tags/v0.19.0 | `60603b7` | 2026-11-20 | MIT (octokit.net); trimmed to `html_url`, `tag_name`, `name`, `published_at` and `body`, re-indented, values unchanged | golden |
-| `github-octokit-net-0.18.0-release.json` | https://api.github.com/repos/octokit/octokit.net/releases/tags/v0.18.0 | `de17cbc` | 2026-11-20 | MIT (octokit.net); trimmed to `html_url`, `tag_name`, `name`, `published_at` and `body`, re-indented, values unchanged | drop test |
+| `github-octokit-net-0.5.2-release.json` | https://api.github.com/repos/octokit/octokit.net/releases/tags/v0.5.2 | `4b61105` | 2026-11-20 | MIT (octokit.net); trimmed to `html_url`, `tag_name`, `name`, `published_at` and `body`, re-indented, values unchanged | golden |
+| `github-octokit-net-0.5.1-release.json` | https://api.github.com/repos/octokit/octokit.net/releases/tags/v0.5.1 | `8a9e828` | 2026-11-20 | MIT (octokit.net); trimmed to `html_url`, `tag_name`, `name`, `published_at` and `body`, re-indented, values unchanged | drop test |
 
 ## Version lists
 

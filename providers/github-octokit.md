@@ -19,10 +19,11 @@ rest.js ships a major when GitHub removes or renames REST endpoints; octokit.net
 
 ## What the plugin reads and ignores
 
+- A rename whose new name the same release renames again or removes points to where the chain ends (rest.js 18.0.0: `issues.replaceLabels` → `issues.setLabels`, not the intermediate `replaceAllLabels`), or to nothing when the chain ends in a removal.
 - Every heading in a release's notes starts a section; bullets under a breaking or deprecation heading count when they name what they remove or rename plainly.
 - Drops (and logs): signature changes (`ISshKeysClient.Get(int id)`), dropped Node.js versions, "remove deprecated endpoints" without names.
 
 ## Known gaps
 
 - Release notes can be edited after the release: what's read is the notes when the pair is extracted.
-- octokit.net's recent releases describe breaking changes in prose: few of them are events.
+- octokit.net's releases describe breaking changes in prose or as signatures: the last plainly named removal is 0.5.2's (`MilestoneUpdate.Number`), the release its golden pins.

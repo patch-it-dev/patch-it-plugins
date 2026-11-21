@@ -411,9 +411,9 @@
       "symbols": [
         "octokit.actions.listWorkflowJobLogs"
       ],
-      "replacement": "octokit.actions.downloadWorkflowJobLogs"
+      "replacement": "octokit.actions.downloadJobLogsForWorkflowRun"
     },
-    "description": "`octokit.actions.listWorkflowJobLogs` was renamed to `octokit.actions.downloadWorkflowJobLogs` in @octokit/rest 18.0.0: code using the old name fails.",
+    "description": "`octokit.actions.listWorkflowJobLogs` was renamed to `octokit.actions.downloadJobLogsForWorkflowRun` in @octokit/rest 18.0.0: code using the old name fails.",
     "migration_hint": "`octokit.actions.listWorkflowJobLogs()` has been renamed to `octokit.actions.downloadWorkflowJobLogs()` (@octokit/rest's release notes for 18.0.0)",
     "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
     "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.actions.listWorkflowJobLogs()` has been renamed to `octokit.actions.downloadWorkflowJobLogs()`",
@@ -1236,9 +1236,9 @@
       "symbols": [
         "octokit.issues.replaceLabels"
       ],
-      "replacement": "octokit.issues.replaceAllLabels"
+      "replacement": "octokit.issues.setLabels"
     },
-    "description": "`octokit.issues.replaceLabels` was renamed to `octokit.issues.replaceAllLabels` in @octokit/rest 18.0.0: code using the old name fails.",
+    "description": "`octokit.issues.replaceLabels` was renamed to `octokit.issues.setLabels` in @octokit/rest 18.0.0: code using the old name fails.",
     "migration_hint": "`octokit.issues.replaceLabels()` has been renamed to `octokit.issues.replaceAllLabels()` (@octokit/rest's release notes for 18.0.0)",
     "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
     "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.issues.replaceLabels()` has been renamed to `octokit.issues.replaceAllLabels()`",
@@ -1997,7 +1997,7 @@
   },
   {
     "id": 81,
-    "fingerprint": "sha256:d62fe0641f356d2b93f014c7bc66248d4e4315a33d726b77cc65668df1f91cad",
+    "fingerprint": "sha256:5f8fa38b7fcc1d11b8a81e95ed2d4a634ab0165c5ed914fdc85ca64914820f34",
     "api": "github/octokit-rest",
     "version": "18.0.0",
     "previous_version": "17.11.2",
@@ -2007,13 +2007,12 @@
       "type": "package_release",
       "ecosystem": "npm",
       "package": "@octokit/rest",
-      "change": "renamed_symbol",
+      "change": "removed_symbol",
       "symbols": [
         "octokit.reactions.delete"
-      ],
-      "replacement": "octokit.reactions.deleteLegacy"
+      ]
     },
-    "description": "`octokit.reactions.delete` was renamed to `octokit.reactions.deleteLegacy` in @octokit/rest 18.0.0: code using the old name fails.",
+    "description": "`octokit.reactions.delete` was removed in @octokit/rest 18.0.0: code using it fails.",
     "migration_hint": "`octokit.reactions.delete()` has been renamed to `octokit.reactions.deleteLegacy()` (@octokit/rest's release notes for 18.0.0)",
     "source_url": "https://github.com/octokit/rest.js/releases/tag/v18.0.0",
     "source_excerpt": "v18.0.0\nBREAKING CHANGES\n* `octokit.reactions.delete()` has been renamed to `octokit.reactions.deleteLegacy()`",
