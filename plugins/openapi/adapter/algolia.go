@@ -35,7 +35,7 @@ type Algolia struct {
 
 var _ Adapter = Algolia{}
 
-func (a Algolia) API() string { return "algolia-" + a.Spec }
+func (a Algolia) API() string { return "algolia/" + a.Spec + "-api" }
 
 var algoliaTag = regexp.MustCompile(`^released-(\d{4}-\d{2}-\d{2})(-[0-9a-f]+)?$`)
 
@@ -43,24 +43,15 @@ var algoliaTag = regexp.MustCompile(`^released-(\d{4}-\d{2}-\d{2})(-[0-9a-f]+)?$
 // have several releases (three on 2024-09-19) whose commit suffix says
 // nothing about their order, so those are told apart by their commit's date.
 func (a Algolia) LatestTag(ctx context.Context) (string, error) {
-	body, err := fetch.Get(ctx, algoliaRefsURL, github.Headers())
+	tags, err := algoliaTags(ctx)
 	if err != nil {
-		return "", fmt.Errorf("listing algolia's release tags: %w", err)
-	}
-	var refs []struct {
-		Ref string `json:"ref"`
-	}
-	if err := json.Unmarshal(body, &refs); err != nil {
-		return "", fmt.Errorf("parsing github's tag refs: %w", err)
+		return "", err
 	}
 	var day string
 	var sameDay []string
-	for _, r := range refs {
-		tag := strings.TrimPrefix(r.Ref, "refs/tags/")
+	for _, tag := range tags {
 		m := algoliaTag.FindStringSubmatch(tag)
 		switch {
-		case m == nil:
-			continue
 		case m[1] > day:
 			day, sameDay = m[1], []string{tag}
 		case m[1] == day:
@@ -85,6 +76,27 @@ func (a Algolia) LatestTag(ctx context.Context) (string, error) {
 		}
 	}
 	return latest, nil
+}
+
+// algoliaTags are every release tag, in the listing's order.
+func algoliaTags(ctx context.Context) ([]string, error) {
+	body, err := fetch.Get(ctx, algoliaRefsURL, github.Headers())
+	if err != nil {
+		return nil, fmt.Errorf("listing algolia's release tags: %w", err)
+	}
+	var refs []struct {
+		Ref string `json:"ref"`
+	}
+	if err := json.Unmarshal(body, &refs); err != nil {
+		return nil, fmt.Errorf("parsing github's tag refs: %w", err)
+	}
+	var tags []string
+	for _, r := range refs {
+		if tag := strings.TrimPrefix(r.Ref, "refs/tags/"); algoliaTag.MatchString(tag) {
+			tags = append(tags, tag)
+		}
+	}
+	return tags, nil
 }
 
 func algoliaCommitDate(ctx context.Context, tag string) (time.Time, error) {

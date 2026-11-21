@@ -1,10 +1,10 @@
-# Supabase (`supabase`)
+# Supabase (`supabase/management-api`)
 
 ## What it watches
 
 The Supabase Management API (`api.supabase.com/v1`): operations Supabase marks deprecated, and removals of operations it had marked deprecated, between two versions of the API's OpenAPI spec.
 
-Format plugin: `openapi` (`plugins/openapi`), with `adapter.Supabase`.
+Kind: `openapi` (`plugins/openapi`), with `adapter.Supabase`.
 
 ## Why this source
 
@@ -35,7 +35,7 @@ Format plugin: `openapi` (`plugins/openapi`), with `adapter.Supabase`.
   - **Removals of operations that were never deprecated.** 22 operations left the spec in its history, none deprecated first: 14 analytics warehouse operations on 2024-07-15, 7 path-parameter renames, and one that came back 12 days later. Without credentials every route answers `401`, made-up ones included, so whether a removed one still works can't be checked from outside.
   - **Request and response property changes, and new operations.**
 - Over the 90 commits this keeps 2 events, both deprecations: `POST /v1/projects/{ref}/functions` (2025-02-19) and `GET /v1/projects/{ref}/analytics/endpoints/logs.all` (2026-06-29).
-- **Replays** a historical pair (`Replay`, from `693bdc38` to `eb21ae25`) and recreates the `logs.all` deprecation. The golden test also runs the `functions` deprecation as a daily ingest. The drop tests replay the warehouse removal and the branch path-parameter rename.
+- **Reads** a historical pair (a version pair, `693bdc38` → `eb21ae25`) and recreates the `logs.all` deprecation. The golden test also runs the `functions` deprecation as a daily ingest. The drop tests replay the warehouse removal and the branch path-parameter rename.
 
 ## Known gaps
 

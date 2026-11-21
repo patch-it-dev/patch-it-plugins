@@ -4,13 +4,10 @@
 package all
 
 import (
-	_ "github.com/patch-it-dev/patch-it-plugins/plugins/apichangelog"
+	_ "github.com/patch-it-dev/patch-it-plugins/plugins/apisurface"
 	_ "github.com/patch-it-dev/patch-it-plugins/plugins/catalog"
 	_ "github.com/patch-it-dev/patch-it-plugins/plugins/changelog"
-	_ "github.com/patch-it-dev/patch-it-plugins/plugins/eol"
-	_ "github.com/patch-it-dev/patch-it-plugins/plugins/feed"
 	_ "github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide"
+	_ "github.com/patch-it-dev/patch-it-plugins/plugins/notices"
 	_ "github.com/patch-it-dev/patch-it-plugins/plugins/openapi"
-	_ "github.com/patch-it-dev/patch-it-plugins/plugins/removedmembers"
-	_ "github.com/patch-it-dev/patch-it-plugins/plugins/retirements"
 )

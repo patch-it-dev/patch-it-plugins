@@ -1,0 +1,59 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:bdfcfa49f99297e3e205a803e01a25285fa7b5b07b1cb98b4c9d716aec4c12f4",
+    "api": "github/actions",
+    "version": "2026-11-02",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "ci_runtime",
+      "platform": "github-actions",
+      "runtime": "macos-14"
+    },
+    "description": "GitHub-hosted runner label \"macos-14\" is retired on 2026-11-02: jobs that run on it fail from that date.",
+    "migration_hint": "Move `runs-on` to a supported label; GitHub's announcement lists them: https://github.blog/changelog/2026-10-01-github-actions-macos-14-runner-image-retirement",
+    "source_url": "https://web.archive.org/web/20261114120000/https://github.blog/changelog/label/actions/feed/",
+    "source_excerpt": "GitHub Actions: macOS 14 runner image retirement\nThe macOS 14 runner image will be retired on November 2, 2026. To raise awareness of the upcoming removal, jobs using macOS 14 will temporarily fail during the following scheduled brownout periods:\nThis deprecation includes the following labels:\nmacos-14",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:a4de3d5a12c726e5ed2733253429730a0a456113302b879f0d0219419d3ca474",
+    "api": "github/actions",
+    "version": "2026-11-02",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "ci_runtime",
+      "platform": "github-actions",
+      "runtime": "macos-14-large"
+    },
+    "description": "GitHub-hosted runner label \"macos-14-large\" is retired on 2026-11-02: jobs that run on it fail from that date.",
+    "migration_hint": "Move `runs-on` to a supported label; GitHub's announcement lists them: https://github.blog/changelog/2026-10-01-github-actions-macos-14-runner-image-retirement",
+    "source_url": "https://web.archive.org/web/20261114120000/https://github.blog/changelog/label/actions/feed/",
+    "source_excerpt": "GitHub Actions: macOS 14 runner image retirement\nThe macOS 14 runner image will be retired on November 2, 2026. To raise awareness of the upcoming removal, jobs using macOS 14 will temporarily fail during the following scheduled brownout periods:\nThis deprecation includes the following labels:\nmacos-14-large",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:2f2185ea0c64bbed2075d64d5a8f697a0b9ef179ae65a221d19816305ad11030",
+    "api": "github/actions",
+    "version": "2026-11-02",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "ci_runtime",
+      "platform": "github-actions",
+      "runtime": "macos-14-xlarge"
+    },
+    "description": "GitHub-hosted runner label \"macos-14-xlarge\" is retired on 2026-11-02: jobs that run on it fail from that date.",
+    "migration_hint": "Move `runs-on` to a supported label; GitHub's announcement lists them: https://github.blog/changelog/2026-10-01-github-actions-macos-14-runner-image-retirement",
+    "source_url": "https://web.archive.org/web/20261114120000/https://github.blog/changelog/label/actions/feed/",
+    "source_excerpt": "GitHub Actions: macOS 14 runner image retirement\nThe macOS 14 runner image will be retired on November 2, 2026. To raise awareness of the upcoming removal, jobs using macOS 14 will temporarily fail during the following scheduled brownout periods:\nThis deprecation includes the following labels:\nmacos-14-xlarge",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

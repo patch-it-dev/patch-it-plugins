@@ -1,10 +1,10 @@
-# Redis (`redis`)
+# Redis (`redis/commands`)
 
 ## What it watches
 
 Redis's command surface: commands that disappear entirely from `redis-doc`'s own catalog of every command, between two snapshots of it.
 
-Format plugin: `catalog` (`plugins/catalog`), new in this change — no existing format plugin reads a flat JSON catalog keyed by name; see "Alternatives considered" for the formats checked and ruled out first.
+Kind: `catalog` (`plugins/catalog`), new in this change — no existing format plugin reads a flat JSON catalog keyed by name; see "Alternatives considered" for the formats checked and ruled out first.
 
 ## Why this source
 
@@ -25,10 +25,10 @@ Format plugin: `catalog` (`plugins/catalog`), new in this change — no existing
 
 ## What the plugin reads and ignores
 
-- Reads: `commands.json` at the newest commit, diffed against the last one stored (or two given commits, to replay). A name present before and missing after becomes a `breaking` `package_release` event (`change: removed_symbol`); the excerpt quotes the entry's own JSON from the snapshot where it still existed.
+- Reads: `commands.json` at the newest commit, compared with the commit read before it. A name present before and missing after becomes a `breaking` `package_release` event (`change: removed_symbol`); the excerpt quotes the entry's own JSON from the snapshot where it still existed.
 - Ignores: everything else about a command (arguments, flags, complexity, ACL categories) — only presence is diffed. A name that's only *added* is not an event. A rename is read as one removal, since nothing in the catalog says a disappearance and an appearance are the same command; guessing that would trade precision for recall.
 - The live `deprecated_since` / `replaced_by` fields on still-present commands aren't read yet (see "Known gaps"): they're deprecations, not removals, and every one of them already works forever regardless.
-- Replays a historical pair (`Replay`, from commit `cc0427b` to `06f3598`) and recreates the real removal of `FUNCTION CREATE` and `FUNCTION INFO` (the golden test uses trimmed excerpts of both commits' `commands.json`, alongside `GET`, unchanged, as the drop-test fixture).
+- Reads a historical pair (a version pair, commit `cc0427b` → `06f3598`) and recreates the real removal of `FUNCTION CREATE` and `FUNCTION INFO` (the golden test uses trimmed excerpts of both commits' `commands.json`, alongside `GET`, unchanged, as the drop-test fixture).
 
 ## Known gaps
 

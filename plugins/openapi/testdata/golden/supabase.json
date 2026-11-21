@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:880606fe624faa3f49480e13588a19e93562091d5a8f40c2a097f36fb329a604",
-    "api": "supabase",
+    "fingerprint": "sha256:fd6a1208f9f1047d9eaeff41188fbfda52dd7a2d5a67c05a7989a0a17ac1eb6f",
+    "api": "supabase/management-api",
     "version": "2025-02-19",
     "previous_version": "2025-02-10",
     "change_type": "deprecation",
@@ -22,8 +22,8 @@
   },
   {
     "id": 2,
-    "fingerprint": "sha256:9cdc7164ed43b50e19c232e8af7f43c3fbfe87aa18b96bf5e62d7e59ee47c7b0",
-    "api": "supabase",
+    "fingerprint": "sha256:06a8a5322e8f622bc5e0841866ddb7d9d2c195f8b5137c9a5c7e2f49d3f7f7b2",
+    "api": "supabase/management-api",
     "version": "2026-06-29",
     "previous_version": "2026-06-22",
     "change_type": "deprecation",

@@ -1,10 +1,10 @@
-# GitHub REST API (`github`)
+# GitHub REST API (`github/rest-api`)
 
 ## What it watches
 
 GitHub's REST API between dated API versions (`2022-11-28` → `2026-03-10`): properties, schemas, parameters and operations removed or changed in a new version.
 
-Format plugin: `openapi` (`plugins/openapi`), with `adapter.GitHub`.
+Kind: `openapi` (`plugins/openapi`), with `adapter.GitHub`.
 
 ## Why this source
 

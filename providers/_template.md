@@ -1,6 +1,6 @@
-# <Provider> (`<api>`)
+# <Provider> (`<provider>/<source>`)
 
-Copy this file to `providers/<api>.md` and fill every section. Delete these instructions.
+Copy this file to `providers/<provider>-<source>.md` and fill every section. Delete these instructions.
 
 ## What it watches
 

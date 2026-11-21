@@ -1,10 +1,10 @@
-# Datadog (`datadog`)
+# Datadog (`datadog/api`)
 
 ## What it watches
 
 Datadog's API v2, release by release: endpoints, request and response properties and schemas removed or changed between two versions of the OpenAPI spec Datadog generates its official clients from.
 
-Format plugin: `openapi` (`plugins/openapi`), with `adapter.Datadog`.
+Kind: `openapi` (`plugins/openapi`), with `adapter.Datadog`.
 
 ## Why this source
 
@@ -24,7 +24,7 @@ Format plugin: `openapi` (`plugins/openapi`), with `adapter.Datadog`.
 
 - Reads: the v2 spec at the newest tag, diffed against the last one.
 - Ignores: changes to OpenAPI `tags` (they only rename generated SDK methods; the REST API is unchanged). The v1 spec isn't read yet.
-- Replays a historical pair (`Replay`, from `2.60.0` to `2.61.0`) and recreates the removal of two properties from `TagIndexingRuleDynamicTags` (the golden test uses trimmed excerpts of both specs).
+- Reads a historical pair (a version pair, `2.60.0` → `2.61.0`) and recreates the removal of two properties from `TagIndexingRuleDynamicTags` (the golden test uses trimmed excerpts of both specs).
 
 ## Known gaps
 

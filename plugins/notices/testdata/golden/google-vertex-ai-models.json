@@ -1,0 +1,696 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:4627337a65ee7ecc6e02ac97ae51834d56722fa732ef67a19eca027b566a4f44",
+    "api": "google/vertex-ai-models",
+    "version": "2026-06-30",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagegeneration@002",
+      "replacement": "gemini-2.5-flash-image"
+    },
+    "description": "Model \"imagegeneration@002\" is deprecated on Vertex AI: Google asks to move off it before 2026-06-30 to avoid service disruption.",
+    "migration_hint": "Use `gemini-2.5-flash-image` instead: Google's recommended migration.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nImagen generation GA endpoints deprecation\nThe following table describes image generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before June 30, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nimagegeneration@002 | gemini-2.5-flash-image",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:7da0d2dd46fa4f16ed41f9857ac90de07be28a2e165544c3212e2b975296a0e5",
+    "api": "google/vertex-ai-models",
+    "version": "2026-06-30",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagegeneration@003",
+      "replacement": "gemini-2.5-flash-image"
+    },
+    "description": "Model \"imagegeneration@003\" is deprecated on Vertex AI: Google asks to move off it before 2026-06-30 to avoid service disruption.",
+    "migration_hint": "Use `gemini-2.5-flash-image` instead: Google's recommended migration.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nImagen generation GA endpoints deprecation\nThe following table describes image generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before June 30, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nimagegeneration@003 | gemini-2.5-flash-image",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:366d6614ee42be4bd650704aa459e9d7a338cb682119f0b66123d030184ebc8d",
+    "api": "google/vertex-ai-models",
+    "version": "2026-06-30",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagegeneration@004",
+      "replacement": "gemini-2.5-flash-image"
+    },
+    "description": "Model \"imagegeneration@004\" is deprecated on Vertex AI: Google asks to move off it before 2026-06-30 to avoid service disruption.",
+    "migration_hint": "Use `gemini-2.5-flash-image` instead: Google's recommended migration.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nImagen generation GA endpoints deprecation\nThe following table describes image generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before June 30, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nimagegeneration@004 | gemini-2.5-flash-image",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:54113780d0f2717208cd90ff8f76e4ac24f19302aa2e89ca10dfb4ca767f6236",
+    "api": "google/vertex-ai-models",
+    "version": "2026-06-30",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagegeneration@005",
+      "replacement": "gemini-2.5-flash-image"
+    },
+    "description": "Model \"imagegeneration@005\" is deprecated on Vertex AI: Google asks to move off it before 2026-06-30 to avoid service disruption.",
+    "migration_hint": "Use `gemini-2.5-flash-image` instead: Google's recommended migration.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nImagen generation GA endpoints deprecation\nThe following table describes image generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before June 30, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nimagegeneration@005 | gemini-2.5-flash-image",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:e4cf8857ddd3731ed2853071312f49588e79c47e81de698aa3458e0ed551b6fa",
+    "api": "google/vertex-ai-models",
+    "version": "2026-06-30",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagegeneration@006",
+      "replacement": "gemini-2.5-flash-image"
+    },
+    "description": "Model \"imagegeneration@006\" is deprecated on Vertex AI: Google asks to move off it before 2026-06-30 to avoid service disruption.",
+    "migration_hint": "Use `gemini-2.5-flash-image` instead: Google's recommended migration.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nImagen generation GA endpoints deprecation\nThe following table describes image generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before June 30, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nimagegeneration@006 | gemini-2.5-flash-image",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:70e23f95c88d498b93825af99e0790a21b80cdd1903b522f36ccf7a76fa09182",
+    "api": "google/vertex-ai-models",
+    "version": "2026-06-30",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagetext@001",
+      "replacement": "gemini-2.5-flash-image"
+    },
+    "description": "Model \"imagetext@001\" is deprecated on Vertex AI: Google asks to move off it before 2026-06-30 to avoid service disruption.",
+    "migration_hint": "Use `gemini-2.5-flash-image` instead: Google's recommended migration.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nImagen generation GA endpoints deprecation\nThe following table describes image generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before June 30, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nimagetext@001 | gemini-2.5-flash-image",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:7ccb799cf84268de5106b8509e4c0706f7165eab3b189bcf171df9c4b08f9bf9",
+    "api": "google/vertex-ai-models",
+    "version": "2026-06-30",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagen-3.0-capability-001",
+      "replacement": "gemini-2.5-flash-image"
+    },
+    "description": "Model \"imagen-3.0-capability-001\" is deprecated on Vertex AI: Google asks to move off it before 2026-06-30 to avoid service disruption.",
+    "migration_hint": "Use `gemini-2.5-flash-image` instead: Google's recommended migration.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nImagen generation GA endpoints deprecation\nThe following table describes image generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before June 30, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nimagen-3.0-capability-001 | gemini-2.5-flash-image",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
+    "fingerprint": "sha256:2edea0439cd41993804f3165d122d92f88f95fa5d22da1ae8a72c54562df56b9",
+    "api": "google/vertex-ai-models",
+    "version": "2026-06-30",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagen-3.0-capability-002",
+      "replacement": "gemini-2.5-flash-image"
+    },
+    "description": "Model \"imagen-3.0-capability-002\" is deprecated on Vertex AI: Google asks to move off it before 2026-06-30 to avoid service disruption.",
+    "migration_hint": "Use `gemini-2.5-flash-image` instead: Google's recommended migration.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nImagen generation GA endpoints deprecation\nThe following table describes image generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before June 30, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nimagen-3.0-capability-002 | gemini-2.5-flash-image",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 9,
+    "fingerprint": "sha256:ab4cd57e14aa05f619251f4e234f9b6faa5719f2599efd9c0f0ddf17242bf400",
+    "api": "google/vertex-ai-models",
+    "version": "2026-06-30",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagen-3.0-fast-generate-001",
+      "replacement": "gemini-2.5-flash-image"
+    },
+    "description": "Model \"imagen-3.0-fast-generate-001\" is deprecated on Vertex AI: Google asks to move off it before 2026-06-30 to avoid service disruption.",
+    "migration_hint": "Use `gemini-2.5-flash-image` instead: Google's recommended migration.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nImagen generation GA endpoints deprecation\nThe following table describes image generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before June 30, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nimagen-3.0-fast-generate-001 | gemini-2.5-flash-image",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 10,
+    "fingerprint": "sha256:8d25d3020603811f27cfd86a17ddd27626682a65a09bd6286fad5488dfa04800",
+    "api": "google/vertex-ai-models",
+    "version": "2026-06-30",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagen-3.0-generate-001",
+      "replacement": "gemini-2.5-flash-image"
+    },
+    "description": "Model \"imagen-3.0-generate-001\" is deprecated on Vertex AI: Google asks to move off it before 2026-06-30 to avoid service disruption.",
+    "migration_hint": "Use `gemini-2.5-flash-image` instead: Google's recommended migration.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nImagen generation GA endpoints deprecation\nThe following table describes image generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before June 30, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nimagen-3.0-generate-001 | gemini-2.5-flash-image",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 11,
+    "fingerprint": "sha256:39ca8174998ababa3c0c7c5438e1792de7b4133980c2038cce2f0e5eefde9ac9",
+    "api": "google/vertex-ai-models",
+    "version": "2026-06-30",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagen-3.0-generate-002",
+      "replacement": "gemini-2.5-flash-image"
+    },
+    "description": "Model \"imagen-3.0-generate-002\" is deprecated on Vertex AI: Google asks to move off it before 2026-06-30 to avoid service disruption.",
+    "migration_hint": "Use `gemini-2.5-flash-image` instead: Google's recommended migration.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nImagen generation GA endpoints deprecation\nThe following table describes image generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before June 30, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nimagen-3.0-generate-002 | gemini-2.5-flash-image",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 12,
+    "fingerprint": "sha256:dfba27e6493a553e4976424fe316649f6111d3925c8443ac562ace71c5327183",
+    "api": "google/vertex-ai-models",
+    "version": "2026-06-30",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagen-4.0-fast-generate-001",
+      "replacement": "gemini-2.5-flash-image"
+    },
+    "description": "Model \"imagen-4.0-fast-generate-001\" is deprecated on Vertex AI: Google asks to move off it before 2026-06-30 to avoid service disruption.",
+    "migration_hint": "Use `gemini-2.5-flash-image` instead: Google's recommended migration.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nImagen generation GA endpoints deprecation\nThe following table describes image generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before June 30, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nimagen-4.0-fast-generate-001 | gemini-2.5-flash-image",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 13,
+    "fingerprint": "sha256:e498e7d1768eb1327445f5589b9b5cf1eeede6a8fccecd98896ac39fdb6cf93b",
+    "api": "google/vertex-ai-models",
+    "version": "2026-06-30",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagen-4.0-generate-001",
+      "replacement": "gemini-2.5-flash-image"
+    },
+    "description": "Model \"imagen-4.0-generate-001\" is deprecated on Vertex AI: Google asks to move off it before 2026-06-30 to avoid service disruption.",
+    "migration_hint": "Use `gemini-2.5-flash-image` instead: Google's recommended migration.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nImagen generation GA endpoints deprecation\nThe following table describes image generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before June 30, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nimagen-4.0-generate-001 | gemini-2.5-flash-image",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 14,
+    "fingerprint": "sha256:91583fe5103284396c784ccc01d805ff0b3df116b2f39a1ff594292c6c19f3c9",
+    "api": "google/vertex-ai-models",
+    "version": "2026-06-30",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagen-4.0-ultra-generate-001",
+      "replacement": "gemini-2.5-flash-image"
+    },
+    "description": "Model \"imagen-4.0-ultra-generate-001\" is deprecated on Vertex AI: Google asks to move off it before 2026-06-30 to avoid service disruption.",
+    "migration_hint": "Use `gemini-2.5-flash-image` instead: Google's recommended migration.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nImagen generation GA endpoints deprecation\nThe following table describes image generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before June 30, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nimagen-4.0-ultra-generate-001 | gemini-2.5-flash-image",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 15,
+    "fingerprint": "sha256:5d95e1087917d0ca68631f30d564790fbf485bf9f8c946d38b602191bcc5eff2",
+    "api": "google/vertex-ai-models",
+    "version": "2026-06-30",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "veo-3.0-generate-001",
+      "replacement": "veo-3.1-generate-001"
+    },
+    "description": "Model \"veo-3.0-generate-001\" is deprecated on Vertex AI: Google asks to move off it before 2026-06-30 to avoid service disruption.",
+    "migration_hint": "Use `veo-3.1-generate-001` instead: Google's recommended migration.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nVideo generation GA endpoints deprecation\nThe following table describes video generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before June 30, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nveo-3.0-generate-001 | veo-3.1-generate-001",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 16,
+    "fingerprint": "sha256:8e8d56f1d8bd361be7f4eb6516da283bec666b26d4cc5d8eea5efe3c979aadd6",
+    "api": "google/vertex-ai-models",
+    "version": "2026-06-30",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "veo-3.0-fast-generate-001",
+      "replacement": "veo-3.1-fast-generate-001"
+    },
+    "description": "Model \"veo-3.0-fast-generate-001\" is deprecated on Vertex AI: Google asks to move off it before 2026-06-30 to avoid service disruption.",
+    "migration_hint": "Use `veo-3.1-fast-generate-001` instead: Google's recommended migration.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nVideo generation GA endpoints deprecation\nThe following table describes video generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before June 30, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nveo-3.0-fast-generate-001 | veo-3.1-fast-generate-001",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 17,
+    "fingerprint": "sha256:97f4aacf7dd601956041e3d0bca0708cf5236e4e26e71019919fc9cf9c7b9c36",
+    "api": "google/vertex-ai-models",
+    "version": "2026-06-30",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "veo-2.0-generate-001",
+      "replacement": "veo-3.1-generate-001"
+    },
+    "description": "Model \"veo-2.0-generate-001\" is deprecated on Vertex AI: Google asks to move off it before 2026-06-30 to avoid service disruption.",
+    "migration_hint": "Use `veo-3.1-generate-001` instead: Google's recommended migration.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nVideo generation GA endpoints deprecation\nThe following table describes video generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before June 30, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nveo-2.0-generate-001 | veo-3.1-generate-001",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 18,
+    "fingerprint": "sha256:717de8a8c0f4ffbcb5e35f0440648d2ff8533165261a04e8f3d7112ce265ba20",
+    "api": "google/vertex-ai-models",
+    "version": "2026-04-02",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "veo-3.0-generate-preview",
+      "replacement": "veo-3.0-generate-001"
+    },
+    "description": "Model \"veo-3.0-generate-preview\" is deprecated on Vertex AI: Google asks to move off it before 2026-04-02 to avoid service disruption.",
+    "migration_hint": "Use `veo-3.0-generate-001` instead: Google's recommended migration.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nVideo generation preview endpoints deprecation\nThe following table describes video generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before April 2, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nveo-3.0-generate-preview | veo-3.0-generate-001",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 19,
+    "fingerprint": "sha256:43c9247f0fe52ba4f8b04d0efd09eb724b997fb9fd6d2ccf2f4cf8e39eaab770",
+    "api": "google/vertex-ai-models",
+    "version": "2026-04-02",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "veo-3.0-fast-generate-preview"
+    },
+    "description": "Model \"veo-3.0-fast-generate-preview\" is deprecated on Vertex AI: Google asks to move off it before 2026-04-02 to avoid service disruption.",
+    "migration_hint": "Google recommends: veo-3.0-fast-generate-preview.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nVideo generation preview endpoints deprecation\nThe following table describes video generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before April 2, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nveo-3.0-fast-generate-preview | veo-3.0-fast-generate-preview",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 20,
+    "fingerprint": "sha256:81c5020f2b5e4bf5ac41f41d74ab25411de5709661e6bf2c58880b2dc334eb5e",
+    "api": "google/vertex-ai-models",
+    "version": "2026-04-02",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "veo-2.0-generate-preview",
+      "replacement": "veo-2.0-generate-001"
+    },
+    "description": "Model \"veo-2.0-generate-preview\" is deprecated on Vertex AI: Google asks to move off it before 2026-04-02 to avoid service disruption.",
+    "migration_hint": "Use `veo-2.0-generate-001` instead: Google's recommended migration.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nVideo generation preview endpoints deprecation\nThe following table describes video generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before April 2, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nveo-2.0-generate-preview | veo-2.0-generate-001",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 21,
+    "fingerprint": "sha256:f603b43ee261cb8092b8dea3fb0ef7f11d7052595a5aaa23b2a350fae0744aff",
+    "api": "google/vertex-ai-models",
+    "version": "2026-04-02",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "veo-2.0-generate-exp",
+      "replacement": "veo-2.0-generate-001"
+    },
+    "description": "Model \"veo-2.0-generate-exp\" is deprecated on Vertex AI: Google asks to move off it before 2026-04-02 to avoid service disruption.",
+    "migration_hint": "Use `veo-2.0-generate-001` instead: Google's recommended migration.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nVideo generation preview endpoints deprecation\nThe following table describes video generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before April 2, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nveo-2.0-generate-exp | veo-2.0-generate-001",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 22,
+    "fingerprint": "sha256:f522717bee23205fa997dd1a055708e7ca210c5dc035f88920463fa14e57af5a",
+    "api": "google/vertex-ai-models",
+    "version": "2026-04-02",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "veo-001-preview-0815",
+      "replacement": "veo-2.0-generate-001"
+    },
+    "description": "Model \"veo-001-preview-0815\" is deprecated on Vertex AI: Google asks to move off it before 2026-04-02 to avoid service disruption.",
+    "migration_hint": "Use `veo-2.0-generate-001` instead: Google's recommended migration.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nVideo generation preview endpoints deprecation\nThe following table describes video generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before April 2, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nveo-001-preview-0815 | veo-2.0-generate-001",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 23,
+    "fingerprint": "sha256:8f8284129c2702e11752022571ae87f6b1c383bedf0e97b57cb4448ec0f5ca98",
+    "api": "google/vertex-ai-models",
+    "version": "2026-04-02",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "veo-001-preview",
+      "replacement": "veo-2.0-generate-001"
+    },
+    "description": "Model \"veo-001-preview\" is deprecated on Vertex AI: Google asks to move off it before 2026-04-02 to avoid service disruption.",
+    "migration_hint": "Use `veo-2.0-generate-001` instead: Google's recommended migration.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nVideo generation preview endpoints deprecation\nThe following table describes video generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before April 2, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nveo-001-preview | veo-2.0-generate-001",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 24,
+    "fingerprint": "sha256:94012bcb9d12655a7703235f5fcd7686f4ab638449b1dcf4274021c2d57e15b3",
+    "api": "google/vertex-ai-models",
+    "version": "2026-04-02",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "veo-3.1-generate-preview",
+      "replacement": "veo-3.1-generate-001"
+    },
+    "description": "Model \"veo-3.1-generate-preview\" is deprecated on Vertex AI: Google asks to move off it before 2026-04-02 to avoid service disruption.",
+    "migration_hint": "Use `veo-3.1-generate-001` instead: Google's recommended migration.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nVideo generation preview endpoints deprecation\nThe following table describes video generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before April 2, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nveo-3.1-generate-preview | veo-3.1-generate-001",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 25,
+    "fingerprint": "sha256:f940d36a57c55555c4a77ad0e81374a5384b2dc465a2545d8d80856ed5ceb0e9",
+    "api": "google/vertex-ai-models",
+    "version": "2026-04-02",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "veo-3.1-fast-generate-preview",
+      "replacement": "veo-3.1-fast-generate-001"
+    },
+    "description": "Model \"veo-3.1-fast-generate-preview\" is deprecated on Vertex AI: Google asks to move off it before 2026-04-02 to avoid service disruption.",
+    "migration_hint": "Use `veo-3.1-fast-generate-001` instead: Google's recommended migration.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nVideo generation preview endpoints deprecation\nThe following table describes video generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before April 2, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nveo-3.1-fast-generate-preview | veo-3.1-fast-generate-001",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 26,
+    "fingerprint": "sha256:ead9022ac7480a58f5e5592aa1052a795436440bf8f1c44f06bd0dfa924b3fd3",
+    "api": "google/vertex-ai-models",
+    "version": "2026-03-19",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.0-flash-image-generation-preview",
+      "replacement": "gemini-2.5-flash-image"
+    },
+    "description": "Model \"gemini-2.0-flash-image-generation-preview\" is deprecated on Vertex AI: Google asks to move off it before 2026-03-19 to avoid service disruption.",
+    "migration_hint": "Use `gemini-2.5-flash-image` instead: Google's recommended migration.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nImage generation preview endpoints deprecation\nThe following table describes image generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before March 19, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\ngemini-2.0-flash-image-generation-preview | gemini-2.5-flash-image",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 27,
+    "fingerprint": "sha256:6d498a1d266365bad2125ea26ed5f34d10c55d1dcc59d72d7feb2db19d63a17b",
+    "api": "google/vertex-ai-models",
+    "version": "2026-03-19",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.5-flash-image-generation-preview"
+    },
+    "description": "Model \"gemini-2.5-flash-image-generation-preview\" is deprecated on Vertex AI: Google asks to move off it before 2026-03-19 to avoid service disruption.",
+    "migration_hint": "Google recommends: imagen-4.0-generate-001 or gemini-2.5-flash-image.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nImage generation preview endpoints deprecation\nThe following table describes image generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before March 19, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\ngemini-2.5-flash-image-generation-preview | imagen-4.0-generate-001 or gemini-2.5-flash-image",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 28,
+    "fingerprint": "sha256:1f62ea6bf271e2b64a26cd0f64b679d0058b1d63e3551dd64fbe58fe849fc1b4",
+    "api": "google/vertex-ai-models",
+    "version": "2026-03-19",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagen-4.0-generate-preview-05-20"
+    },
+    "description": "Model \"imagen-4.0-generate-preview-05-20\" is deprecated on Vertex AI: Google asks to move off it before 2026-03-19 to avoid service disruption.",
+    "migration_hint": "Google recommends: imagen-4.0-generate-001 or gemini-2.5-flash-image.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nImage generation preview endpoints deprecation\nThe following table describes image generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before March 19, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nimagen-4.0-generate-preview-05-20 | imagen-4.0-generate-001 or gemini-2.5-flash-image",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 29,
+    "fingerprint": "sha256:7f6da3ceb3be5b19a4a84b34bfc738a3c907f79614f6924b79bb9d8fe5e15f04",
+    "api": "google/vertex-ai-models",
+    "version": "2026-03-19",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagen-4.0-generate-preview-06-06"
+    },
+    "description": "Model \"imagen-4.0-generate-preview-06-06\" is deprecated on Vertex AI: Google asks to move off it before 2026-03-19 to avoid service disruption.",
+    "migration_hint": "Google recommends: imagen-4.0-generate-001 or gemini-2.5-flash-image.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nImage generation preview endpoints deprecation\nThe following table describes image generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before March 19, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nimagen-4.0-generate-preview-06-06 | imagen-4.0-generate-001 or gemini-2.5-flash-image",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 30,
+    "fingerprint": "sha256:aaf7a42341e623059379622c1f42b13ac3db869956d0c7783c2c6b208e8fc9cb",
+    "api": "google/vertex-ai-models",
+    "version": "2026-03-19",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagen-4.0-ultra-generate-preview-06-06"
+    },
+    "description": "Model \"imagen-4.0-ultra-generate-preview-06-06\" is deprecated on Vertex AI: Google asks to move off it before 2026-03-19 to avoid service disruption.",
+    "migration_hint": "Google recommends: imagen-4.0-generate-001 or gemini-2.5-flash-image.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nImage generation preview endpoints deprecation\nThe following table describes image generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before March 19, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nimagen-4.0-ultra-generate-preview-06-06 | imagen-4.0-generate-001 or gemini-2.5-flash-image",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 31,
+    "fingerprint": "sha256:a1634ca7146b93f7d208e08f064923ac3bc2c39fd5e838706a36c0891f70f4d2",
+    "api": "google/vertex-ai-models",
+    "version": "2026-03-19",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagen-4.0-fast-generate-preview-05-20"
+    },
+    "description": "Model \"imagen-4.0-fast-generate-preview-05-20\" is deprecated on Vertex AI: Google asks to move off it before 2026-03-19 to avoid service disruption.",
+    "migration_hint": "Google recommends: imagen-4.0-generate-001 or gemini-2.5-flash-image.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nImage generation preview endpoints deprecation\nThe following table describes image generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before March 19, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nimagen-4.0-fast-generate-preview-05-20 | imagen-4.0-generate-001 or gemini-2.5-flash-image",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 32,
+    "fingerprint": "sha256:94fff9b9d36a3cc8ce8b764ecbc4cf78c7544fab37518ed1ddc09ba7b77de150",
+    "api": "google/vertex-ai-models",
+    "version": "2026-03-19",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagen-product-recontext-preview-06-30",
+      "replacement": "gemini-2.5-flash-image"
+    },
+    "description": "Model \"imagen-product-recontext-preview-06-30\" is deprecated on Vertex AI: Google asks to move off it before 2026-03-19 to avoid service disruption.",
+    "migration_hint": "Use `gemini-2.5-flash-image` instead: Google's recommended migration.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nImage generation preview endpoints deprecation\nThe following table describes image generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before March 19, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nimagen-product-recontext-preview-06-30 | gemini-2.5-flash-image",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 33,
+    "fingerprint": "sha256:76dc2c9d131c5f4440bb4d3359bb613fbd78762b5fb63e969d93205bc8914a03",
+    "api": "google/vertex-ai-models",
+    "version": "2026-03-19",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagen-2.0-edit-preview-0627",
+      "replacement": "gemini-2.5-flash-image"
+    },
+    "description": "Model \"imagen-2.0-edit-preview-0627\" is deprecated on Vertex AI: Google asks to move off it before 2026-03-19 to avoid service disruption.",
+    "migration_hint": "Use `gemini-2.5-flash-image` instead: Google's recommended migration.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nImage generation preview endpoints deprecation\nThe following table describes image generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before March 19, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nimagen-2.0-edit-preview-0627 | gemini-2.5-flash-image",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 34,
+    "fingerprint": "sha256:5ce0ba566a3c908960246f8a12eb65a096c47730c7947c81371c8c01e2071717",
+    "api": "google/vertex-ai-models",
+    "version": "2026-03-19",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "virtual-try-on-preview-08-04",
+      "replacement": "virtual-try-on-001"
+    },
+    "description": "Model \"virtual-try-on-preview-08-04\" is deprecated on Vertex AI: Google asks to move off it before 2026-03-19 to avoid service disruption.",
+    "migration_hint": "Use `virtual-try-on-001` instead: Google's recommended migration.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nImage generation preview endpoints deprecation\nThe following table describes image generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before March 19, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nvirtual-try-on-preview-08-04 | virtual-try-on-001",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 35,
+    "fingerprint": "sha256:ae6ad7fcb917173ee50e45c04736c2f9cabec071da307402916398d6203a9ab2",
+    "api": "google/vertex-ai-models",
+    "version": "2026-03-19",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagen-4.0-ingredients-preview",
+      "replacement": "gemini-2.5-flash-image"
+    },
+    "description": "Model \"imagen-4.0-ingredients-preview\" is deprecated on Vertex AI: Google asks to move off it before 2026-03-19 to avoid service disruption.",
+    "migration_hint": "Use `gemini-2.5-flash-image` instead: Google's recommended migration.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/feeds/generative-ai-on-vertex-ai-release-notes.xml",
+    "source_excerpt": "Deprecated\nImage generation preview endpoints deprecation\nThe following table describes image generation endpoints that are deprecated and their replacements. We recommend updating your model endpoints before March 19, 2026, to avoid service disruption.\nDiscontinued endpoints | Recommended endpoint migration\nimagen-4.0-ingredients-preview | gemini-2.5-flash-image",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

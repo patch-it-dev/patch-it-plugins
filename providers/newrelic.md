@@ -1,10 +1,10 @@
-# New Relic (`newrelic`)
+# New Relic (`newrelic/python-agent`)
 
 ## What it watches
 
 Functions and classes removed from New Relic's Python agent (the `newrelic` package) in 11.0.0: `newrelic.agent.record_exception`, `newrelic.agent.add_custom_parameter`, `newrelic.api.log.NewRelicLogHandler`, and others. Code that uses one breaks on the upgrade. The plugin emits one event per member, pinned to that release.
 
-Format plugin: `removedmembers` (`plugins/removedmembers`), reading a Markdown table.
+Kind: `migrationguide` (`plugins/migrationguide`), with the removed-members reader (`plugins/migrationguide/members`), reading a Markdown table.
 
 ## Why this source
 

@@ -1,10 +1,10 @@
-# Cloudflare (`cloudflare`)
+# Cloudflare (`cloudflare/api`)
 
 ## What it watches
 
 Cloudflare's REST API (`api.cloudflare.com/client/v4`): every operation Cloudflare names as deprecated on its API deprecations page. It's a `breaking` event, dated by the end of life, when the item says the endpoints stop on a full end-of-life date. Otherwise it's a `deprecation`.
 
-Format plugin: `feed` (`plugins/feed`), with the `CloudflareAPI` reader.
+Kind: `notices` (`plugins/notices`), with the feed reader (`plugins/notices/feed`) and its `CloudflareAPI` feed.
 
 ## Why this source
 

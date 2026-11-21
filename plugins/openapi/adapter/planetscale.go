@@ -34,7 +34,7 @@ type PlanetScale struct {
 
 var _ Adapter = PlanetScale{}
 
-func (PlanetScale) API() string { return "planetscale" }
+func (PlanetScale) API() string { return "planetscale/api" }
 
 func (p PlanetScale) api(path string) string {
 	return cmp.Or(p.APIBase, "https://api.github.com") + "/repos/" + planetscaleRepo + path

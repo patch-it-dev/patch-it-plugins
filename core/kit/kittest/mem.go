@@ -20,22 +20,22 @@ type Sink interface {
 	plugin.BaselineReader
 	// SaveEvents stores events, skipping any whose fingerprint is already
 	// stored, and returns how many were new. An invalid event stores nothing.
-	SaveEvents(events []event.EventV2) (int, error)
+	SaveEvents(events []event.Event) (int, error)
 	// SaveSpec stores a baseline, once per (api, sha256).
 	SaveSpec(spec plugin.Spec) error
 	// All is every stored event in feed order, each with its id.
-	All() ([]event.EventV2, error)
+	All() ([]event.Event, error)
 }
 
 // Mem is a Sink in memory that stores like the hosted service's database does, so a
 // golden file is the same whichever stored the events: events are deduped by
 // fingerprint and get ids 1, 2, 3... in the order they were saved, each is
 // stored as its JSON (what the feed serves), and a baseline is the latest
-// non-replay one, by fetch time, then by save order. Ingest's conformance test
-// replays every plugin's golden through the real store to keep the two equal.
+// one, by fetch time, then by save order. Ingest's conformance test stores
+// every plugin's golden through the real store to keep the two equal.
 type Mem struct {
 	mu     sync.Mutex
-	events []event.EventV2
+	events []event.Event
 	seen   map[string]bool
 	specs  []plugin.Spec // in save order
 }
@@ -45,9 +45,9 @@ var _ Sink = (*Mem)(nil)
 // NewMem is an empty store.
 func NewMem() *Mem { return &Mem{seen: map[string]bool{}} }
 
-func (m *Mem) SaveEvents(events []event.EventV2) (int, error) {
+func (m *Mem) SaveEvents(events []event.Event) (int, error) {
 	// Like the store's transaction: one invalid event and none are stored.
-	stored := make([]event.EventV2, 0, len(events))
+	stored := make([]event.Event, 0, len(events))
 	for _, e := range events {
 		if err := e.Validate(); err != nil {
 			return 0, fmt.Errorf("invalid event %s: %w", e.Fingerprint, err)
@@ -56,7 +56,7 @@ func (m *Mem) SaveEvents(events []event.EventV2) (int, error) {
 		if err != nil {
 			return 0, fmt.Errorf("marshaling event %s: %w", e.Fingerprint, err)
 		}
-		var back event.EventV2
+		var back event.Event
 		if err := json.Unmarshal(data, &back); err != nil {
 			return 0, fmt.Errorf("unmarshaling event %s: %w", e.Fingerprint, err)
 		}
@@ -80,43 +80,36 @@ func (m *Mem) SaveEvents(events []event.EventV2) (int, error) {
 	return saved, nil
 }
 
-func (m *Mem) All() ([]event.EventV2, error) {
+func (m *Mem) All() ([]event.Event, error) {
 	m.mu.Lock()
 	defer m.mu.Unlock()
 	return slices.Clone(m.events), nil
 }
 
-// SaveSpec stores spec once per (api, sha256). The same content saved again
-// is not a new baseline, with one exception kept from the store: a replay saved
-// it first and a normal run now has, so the row stops being a replay and takes
-// the normal run's time and tag (else LastSpec, which skips replays, would
-// never find it).
+// SaveSpec stores spec once per (api, sha256): the same content saved again
+// is not a new baseline.
 func (m *Mem) SaveSpec(spec plugin.Spec) error {
 	spec.FetchedAt = spec.FetchedAt.UTC().Truncate(time.Microsecond) // what Postgres keeps: UTC, to the microsecond
 	spec.Content = bytes.Clone(spec.Content)
 	m.mu.Lock()
 	defer m.mu.Unlock()
-	for i, s := range m.specs {
-		if s.API != spec.API || s.SHA256 != spec.SHA256 {
-			continue
+	for _, s := range m.specs {
+		if s.API == spec.API && s.SHA256 == spec.SHA256 {
+			return nil
 		}
-		if s.Replay && !spec.Replay {
-			m.specs[i].Replay, m.specs[i].FetchedAt, m.specs[i].Tag = false, spec.FetchedAt, spec.Tag
-		}
-		return nil
 	}
 	m.specs = append(m.specs, spec)
 	return nil
 }
 
-// LastSpec is api's latest non-replay baseline, or nil on a first run.
+// LastSpec is api's latest baseline, or nil on a first run.
 func (m *Mem) LastSpec(api string) (*plugin.Spec, error) {
 	m.mu.Lock()
 	defer m.mu.Unlock()
 	var last *plugin.Spec
 	for i := range m.specs {
 		s := &m.specs[i]
-		if s.API != api || s.Replay {
+		if s.API != api {
 			continue
 		}
 		if last == nil || !s.FetchedAt.Before(last.FetchedAt) { // a later save wins a tie
@@ -144,13 +137,23 @@ func Run(ctx context.Context, env plugin.Env, sink Sink, p plugin.Plugin) (rejec
 	return save(sink, p.Name(), r)
 }
 
-// Replay is Run over two releases of a plugin that can replay them.
-func Replay(ctx context.Context, env plugin.Env, sink Sink, p plugin.Plugin, from, to string) (rejected bool, err error) {
-	rp, ok := p.(plugin.Replayer)
+// Pair reads two versions of a versioned plugin (by id, read at the same
+// ref), extracts the change between them and stores its events in sink: a
+// version pair as patch-it's ingestion service does it.
+func Pair(ctx context.Context, env plugin.Env, sink Sink, p plugin.Plugin, from, to string) (rejected bool, err error) {
+	vp, ok := p.(plugin.Versioned)
 	if !ok {
-		return false, fmt.Errorf("%s has no releases to replay", p.Name())
+		return false, fmt.Errorf("%s isn't read version by version", p.Name())
 	}
-	r, err := rp.Replay(ctx, env, from, to)
+	a, err := vp.ReadAt(ctx, env, plugin.Version{ID: from, Ref: from})
+	if err != nil {
+		return false, fmt.Errorf("%s: %w", p.Name(), err)
+	}
+	b, err := vp.ReadAt(ctx, env, plugin.Version{ID: to, Ref: to})
+	if err != nil {
+		return false, fmt.Errorf("%s: %w", p.Name(), err)
+	}
+	r, err := vp.Extract(ctx, env, a, b)
 	if err != nil {
 		return false, fmt.Errorf("%s: %w", p.Name(), err)
 	}

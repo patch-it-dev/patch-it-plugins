@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:ddffac6cdf8e522e71a5059177f72c13d0f91fdcfcbaab724df5a0aa14666f9c",
-    "api": "neon",
+    "fingerprint": "sha256:50fac21d2215fb2ff00b13fe54d7d0bcbb21769dedc49d0db8ab8e2f25844828",
+    "api": "neon/api",
     "version": "2026-08-23",
     "previous_version": "2026-08-17",
     "change_type": "deprecation",

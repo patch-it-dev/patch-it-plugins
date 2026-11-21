@@ -32,12 +32,12 @@
             "type": "array",
             "items": {
               "type": "object",
-              "required": ["id", "alias", "kind", "layer", "watches", "urls", "page"],
+              "required": ["id", "kind", "layer", "watches", "urls", "packages", "page"],
               "additionalProperties": false,
               "properties": {
-                "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*/[a-z0-9][a-z0-9-]*$", "description": "provider/source" },
-                "alias": { "type": "string", "pattern": "^[a-z0-9][a-z0-9.-]*$", "description": "The old slug: --api and every event's api field until patch-it's change-event contract switches to source ids." },
-                "kind": { "type": "string", "enum": ["openapi", "retirements", "migrationguide", "removedmembers", "changelog", "feed", "apichangelog", "catalog", "eol"] },
+                "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*/[a-z0-9][a-z0-9-]*$", "description": "provider/source: every event's api field." },
+                "packages": { "type": "array", "items": { "type": "string", "pattern": "^(pypi|npm|go|maven|nuget|rubygems|cargo|packagist):[^\\s]+$" }, "description": "The published packages this source covers, as ecosystem:name, so a lockfile entry finds its sources." },
+                "kind": { "type": "string", "enum": ["openapi", "changelog", "notices", "migrationguide", "catalog", "apisurface"] },
                 "layer": { "type": "string", "enum": ["api", "sdk", "package", "runtime", "ci", "ai-models", "infra"] },
                 "watches": { "type": "string", "minLength": 1 },
                 "urls": { "type": "array", "items": { "type": "string", "pattern": "^https://" } },

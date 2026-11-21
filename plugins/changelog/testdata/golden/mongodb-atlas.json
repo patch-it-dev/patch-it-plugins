@@ -1,0 +1,1622 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:cc24f6195c643b2ebaa07b4ede7d4dfe00bdcb0874c1347e01e017af1fc8fb6f",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/groups/{groupId}/clusters"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/groups/{groupId}/clusters, API version 2023-01-01, deprecated on 2023-02-01 (MongoDB's changelog, resource-version-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/187/paths/0/versions/1/changes/0",
+    "source_excerpt": "{\"change\":\"new resource added 2023-02-01. Resource version 2023-01-01 deprecated and marked for removal on 2025-06-01\",\"changeCode\":\"resource-version-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:58fc100be70cb15a7e2c83d5977433fc552dcbd271eed4bca7ad55026d72e3d8",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/atlas/v2/groups/{groupId}/clusters"
+    },
+    "description": "Atlas Administration API POST /api/atlas/v2/groups/{groupId}/clusters, API version 2023-01-01, deprecated on 2023-02-01 (MongoDB's changelog, resource-version-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/187/paths/1/versions/1/changes/0",
+    "source_excerpt": "{\"change\":\"new resource added 2023-02-01. Resource version 2023-01-01 deprecated and marked for removal on 2025-06-01\",\"changeCode\":\"resource-version-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:f1a7c1dde961ea7c2da23e52e9a789b096755da256c4f07bde16ab26448e7db5",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "DELETE /api/atlas/v2/groups/{groupId}/clusters/{clusterName}"
+    },
+    "description": "Atlas Administration API DELETE /api/atlas/v2/groups/{groupId}/clusters/{clusterName}, API version 2023-01-01, deprecated on 2023-02-01 (MongoDB's changelog, resource-version-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/187/paths/2/versions/1/changes/0",
+    "source_excerpt": "{\"change\":\"new resource added 2023-02-01. Resource version 2023-01-01 deprecated and marked for removal on 2025-06-01\",\"changeCode\":\"resource-version-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:f912840ec1cdfbde49c8958870be43bf49c4c740308434e1176bd3b9a8a8cd0a",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/groups/{groupId}/clusters/{clusterName}"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/groups/{groupId}/clusters/{clusterName}, API version 2023-01-01, deprecated on 2023-02-01 (MongoDB's changelog, resource-version-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/187/paths/3/versions/1/changes/0",
+    "source_excerpt": "{\"change\":\"new resource added 2023-02-01. Resource version 2023-01-01 deprecated and marked for removal on 2025-06-01\",\"changeCode\":\"resource-version-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:d86286f29ec943830ed073221731f182bbc6402413fc976d09384abf2adf3553",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "PATCH /api/atlas/v2/groups/{groupId}/clusters/{clusterName}"
+    },
+    "description": "Atlas Administration API PATCH /api/atlas/v2/groups/{groupId}/clusters/{clusterName}, API version 2023-01-01, deprecated on 2023-02-01 (MongoDB's changelog, resource-version-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/187/paths/4/versions/1/changes/0",
+    "source_excerpt": "{\"change\":\"new resource added 2023-02-01. Resource version 2023-01-01 deprecated and marked for removal on 2025-06-01\",\"changeCode\":\"resource-version-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:2bc605298b2197c441f892d8b363b1d4d906a0fe5852c68a62f751f3f95d2ddc",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/globalWrites"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/globalWrites, API version 2023-01-01, deprecated on 2023-02-01 (MongoDB's changelog, resource-version-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/187/paths/5/versions/1/changes/0",
+    "source_excerpt": "{\"change\":\"new resource added 2023-02-01. Resource version 2023-01-01 deprecated and marked for removal on 2025-06-01\",\"changeCode\":\"resource-version-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:af5b6044d2d4daafeee3bb3cfc171208ef70fb74d226a9c816bccedf5269b6c7",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "DELETE /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/globalWrites/customZoneMapping"
+    },
+    "description": "Atlas Administration API DELETE /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/globalWrites/customZoneMapping, API version 2023-01-01, deprecated on 2023-02-01 (MongoDB's changelog, resource-version-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/187/paths/6/versions/1/changes/0",
+    "source_excerpt": "{\"change\":\"new resource added 2023-02-01. Resource version 2023-01-01 deprecated and marked for removal on 2025-06-01\",\"changeCode\":\"resource-version-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
+    "fingerprint": "sha256:7f07e58557631d8d00e31a56f0c5ea611fb3a31675049aa344c08f87f93a3906",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/globalWrites/customZoneMapping"
+    },
+    "description": "Atlas Administration API POST /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/globalWrites/customZoneMapping, API version 2023-01-01, deprecated on 2023-02-01 (MongoDB's changelog, resource-version-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/187/paths/7/versions/1/changes/0",
+    "source_excerpt": "{\"change\":\"new resource added 2023-02-01. Resource version 2023-01-01 deprecated and marked for removal on 2025-06-01\",\"changeCode\":\"resource-version-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 9,
+    "fingerprint": "sha256:ef82850143544d5fa34eb2c35dec55de7eea3f859b77bb4ec5a49a63ef251d4d",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "DELETE /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/globalWrites/managedNamespaces"
+    },
+    "description": "Atlas Administration API DELETE /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/globalWrites/managedNamespaces, API version 2023-01-01, deprecated on 2023-02-01 (MongoDB's changelog, resource-version-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/187/paths/8/versions/1/changes/0",
+    "source_excerpt": "{\"change\":\"new resource added 2023-02-01. Resource version 2023-01-01 deprecated and marked for removal on 2025-06-01\",\"changeCode\":\"resource-version-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 10,
+    "fingerprint": "sha256:c8e80b8e19b699e5a4419b8ad98140959520fbe6f66a1c24672d1793e9457a09",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/globalWrites/managedNamespaces"
+    },
+    "description": "Atlas Administration API POST /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/globalWrites/managedNamespaces, API version 2023-01-01, deprecated on 2023-02-01 (MongoDB's changelog, resource-version-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/187/paths/9/versions/1/changes/0",
+    "source_excerpt": "{\"change\":\"new resource added 2023-02-01. Resource version 2023-01-01 deprecated and marked for removal on 2025-06-01\",\"changeCode\":\"resource-version-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 11,
+    "fingerprint": "sha256:bfb77e886c515a27e002946c9dfe495a44612c21c33d545acb72f5477af7f53c",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/restartPrimaries"
+    },
+    "description": "Atlas Administration API POST /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/restartPrimaries, API version 2023-01-01, deprecated on 2023-02-01 (MongoDB's changelog, resource-version-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/187/paths/10/versions/1/changes/0",
+    "source_excerpt": "{\"change\":\"new resource added 2023-02-01. Resource version 2023-01-01 deprecated and marked for removal on 2025-06-01\",\"changeCode\":\"resource-version-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 12,
+    "fingerprint": "sha256:8bb4a901d1c83e82e67c4accbdf2ee67e3fe170d29ba289835a9e68e2f5558b3",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/groups/{groupId}/clusters/{hostName}/logs/{logName}.gz"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/groups/{groupId}/clusters/{hostName}/logs/{logName}.gz, API version 2023-01-01, deprecated on 2023-02-01 (MongoDB's changelog, resource-version-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/187/paths/11/versions/1/changes/0",
+    "source_excerpt": "{\"change\":\"new resource added 2023-02-01. Resource version 2023-01-01 deprecated and marked for removal on 2025-06-01\",\"changeCode\":\"resource-version-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 13,
+    "fingerprint": "sha256:92d94ba56f6811cc4dad18ede386020e893f66ff9ff9b28f6993e4677ea7be8d",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-02-01",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/federationSettings/{federationSettingsId}/identityProviders/{identityProviderId}"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/federationSettings/{federationSettingsId}/identityProviders/{identityProviderId}, API version 2023-02-01, deprecated on 2024-01-10 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/186/paths/9/versions/1/changes/3",
+    "source_excerpt": "{\"change\":\"New resource added 2023-11-15. Resource version 2023-02-01 deprecated and marked for removal on 2025-01-01\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 14,
+    "fingerprint": "sha256:665bf236dcb1319e2cd5c5da8a271bb0d235917d99e7d9384b7730f35cf9b80f",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-02-01",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "PATCH /api/atlas/v2/federationSettings/{federationSettingsId}/identityProviders/{identityProviderId}"
+    },
+    "description": "Atlas Administration API PATCH /api/atlas/v2/federationSettings/{federationSettingsId}/identityProviders/{identityProviderId}, API version 2023-02-01, deprecated on 2024-01-10 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/186/paths/10/versions/1/changes/2",
+    "source_excerpt": "{\"change\":\"New resource added 2023-11-15. Resource version 2023-02-01 deprecated and marked for removal on 2025-01-01\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 15,
+    "fingerprint": "sha256:f3fc7367c663e20fd644b6b96befb1cf5d2185dd3cefab1092897f488580cb50",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-02-01",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/groups/{groupId}/backupCompliancePolicy"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/groups/{groupId}/backupCompliancePolicy, API version 2023-02-01, deprecated on 2024-01-10 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/186/paths/28/versions/1/changes/1",
+    "source_excerpt": "{\"change\":\"New resource added 2023-11-15. Resource version 2023-02-01 deprecated and marked for removal on 2024-10-01\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 16,
+    "fingerprint": "sha256:ca95618f62b1986840a47ea36d5ff501008d104abb52318a1af6ab1f847d86d8",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-02-01",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "PUT /api/atlas/v2/groups/{groupId}/backupCompliancePolicy"
+    },
+    "description": "Atlas Administration API PUT /api/atlas/v2/groups/{groupId}/backupCompliancePolicy, API version 2023-02-01, deprecated on 2024-01-10 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/186/paths/29/versions/1/changes/2",
+    "source_excerpt": "{\"change\":\"New resource added 2023-11-15. Resource version 2023-02-01 deprecated and marked for removal on 2024-10-01\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 17,
+    "fingerprint": "sha256:9c307d0bb3ce60d32a75da2afa0555d1233500095be5f51e9c440b49b6f0098d",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-11-15",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/processArgs"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/processArgs, API version 2023-11-15, deprecated on 2024-05-09 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/161/paths/15/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint deprecated\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 18,
+    "fingerprint": "sha256:dcecedf2e09ebd4a3156b58b05d495c5c4074af97cbd044a06cb9deffaa5eaa9",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-11-15",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "PATCH /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/processArgs"
+    },
+    "description": "Atlas Administration API PATCH /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/processArgs, API version 2023-11-15, deprecated on 2024-05-09 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/161/paths/16/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint deprecated\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 19,
+    "fingerprint": "sha256:160f906532581397e3ebddda5b1b7f056509ae3def7884dd6a9ede41a5f493cc",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2024-05-30",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/fts/indexes"
+    },
+    "description": "Atlas Administration API POST /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/fts/indexes, API version 2024-05-30, deprecated on 2024-05-31 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/158/paths/12/versions/0/changes/1",
+    "source_excerpt": "{\"change\":\"endpoint deprecated\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 20,
+    "fingerprint": "sha256:627be9a47ff6458c73002e89125b40400721e03603963ac478905deee028d8d3",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2024-05-30",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/fts/indexes/{databaseName}/{collectionName}"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/fts/indexes/{databaseName}/{collectionName}, API version 2024-05-30, deprecated on 2024-05-31 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/158/paths/13/versions/0/changes/1",
+    "source_excerpt": "{\"change\":\"endpoint deprecated\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 21,
+    "fingerprint": "sha256:af242c9e3aae3b5ba5489753c4ecc410ce889cf05fe4f1b1c1fe1a840bb25f2d",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2024-05-30",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "DELETE /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/fts/indexes/{indexId}"
+    },
+    "description": "Atlas Administration API DELETE /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/fts/indexes/{indexId}, API version 2024-05-30, deprecated on 2024-05-31 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/158/paths/14/versions/0/changes/1",
+    "source_excerpt": "{\"change\":\"endpoint deprecated\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 22,
+    "fingerprint": "sha256:30d873ec4a52dbb90d6d6fa49fc26e4bcb5e1e8e63601e9743737f002344084b",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2024-05-30",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/fts/indexes/{indexId}"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/fts/indexes/{indexId}, API version 2024-05-30, deprecated on 2024-05-31 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/158/paths/15/versions/0/changes/1",
+    "source_excerpt": "{\"change\":\"endpoint deprecated\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 23,
+    "fingerprint": "sha256:ddb7365f8bf1b14590d796042c46bfc9a2e3fc12991561e835bf5bf9ebbd16f5",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2024-05-30",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "PATCH /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/fts/indexes/{indexId}"
+    },
+    "description": "Atlas Administration API PATCH /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/fts/indexes/{indexId}, API version 2024-05-30, deprecated on 2024-05-31 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/158/paths/16/versions/0/changes/1",
+    "source_excerpt": "{\"change\":\"endpoint deprecated\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 24,
+    "fingerprint": "sha256:51fabed35665b97a15ad2af6ec7f4de6e7f6c8913b075fae8f3d2badd866f80c",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2024-08-05",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/atlas/v2/groups/{groupId}/clusters"
+    },
+    "description": "Atlas Administration API POST /api/atlas/v2/groups/{groupId}/clusters, API version 2024-08-05, deprecated on 2024-10-24 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/122/paths/65/versions/0/changes/1",
+    "source_excerpt": "{\"change\":\"endpoint deprecated\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 25,
+    "fingerprint": "sha256:cb70fc3369d62e371c873c7590d8e64a4aae64e2591e645811fe119eb2cc520c",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2024-08-05",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "PATCH /api/atlas/v2/groups/{groupId}/clusters/{clusterName}"
+    },
+    "description": "Atlas Administration API PATCH /api/atlas/v2/groups/{groupId}/clusters/{clusterName}, API version 2024-08-05, deprecated on 2024-10-24 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/122/paths/71/versions/0/changes/1",
+    "source_excerpt": "{\"change\":\"endpoint deprecated\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 26,
+    "fingerprint": "sha256:e2ce2e1195ccb2dec2f38d3e2aabd126ef5757e9807cdff3aa27a598fbfdd0e5",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/federationSettings/{federationSettingsId}/identityProviders/{identityProviderId}"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/federationSettings/{federationSettingsId}/identityProviders/{identityProviderId}, API version 2023-01-01, removed on 2025-01-01 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/112/paths/0/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2025-01-01'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 27,
+    "fingerprint": "sha256:bef9488df24c4837d134696508790c87450785aeb715017483aa4efce11a5920",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "PATCH /api/atlas/v2/federationSettings/{federationSettingsId}/identityProviders/{identityProviderId}"
+    },
+    "description": "Atlas Administration API PATCH /api/atlas/v2/federationSettings/{federationSettingsId}/identityProviders/{identityProviderId}, API version 2023-01-01, removed on 2025-01-01 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/112/paths/1/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2025-01-01'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 28,
+    "fingerprint": "sha256:6f26729ebc2b23eb9cfbf54274a08b8a052333c332fd22ba1600353dd4cd5500",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2025-02-19",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/atlas/v2/groups/{groupId}/access"
+    },
+    "description": "Atlas Administration API POST /api/atlas/v2/groups/{groupId}/access, API version 2025-02-19, deprecated on 2025-02-20 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/101/paths/3/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint deprecated\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 29,
+    "fingerprint": "sha256:5cc945d7dfc328833dab035345f094a55b0056a6c4c9ebb8dee8d1e16212e7e4",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2025-02-19",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "PUT /api/atlas/v2/groups/{groupId}/users/{userId}/roles"
+    },
+    "description": "Atlas Administration API PUT /api/atlas/v2/groups/{groupId}/users/{userId}/roles, API version 2025-02-19, deprecated on 2025-02-20 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/101/paths/49/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint deprecated\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 30,
+    "fingerprint": "sha256:33e575770ae4ee93abc83c3297a204b9fac76804f78b5afdb9445087cc5a7ebc",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2025-02-19",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/orgs/{orgId}/invites"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/orgs/{orgId}/invites, API version 2025-02-19, deprecated on 2025-02-20 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/101/paths/55/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint deprecated\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 31,
+    "fingerprint": "sha256:8de6ab83507db7269db3a639255a2068c387e9785875b2c21d1e7d995be7c482",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2025-02-19",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "PATCH /api/atlas/v2/orgs/{orgId}/invites"
+    },
+    "description": "Atlas Administration API PATCH /api/atlas/v2/orgs/{orgId}/invites, API version 2025-02-19, deprecated on 2025-02-20 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/101/paths/56/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint deprecated\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 32,
+    "fingerprint": "sha256:542ae91c8f1ad44bf462d703f155afbaa85908ac86c09a6d4a4c93b756144e98",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2025-02-19",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/atlas/v2/orgs/{orgId}/invites"
+    },
+    "description": "Atlas Administration API POST /api/atlas/v2/orgs/{orgId}/invites, API version 2025-02-19, deprecated on 2025-02-20 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/101/paths/57/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint deprecated\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 33,
+    "fingerprint": "sha256:d2b323f2d8dd032dd30e1646e666563a89226e1a0078c532e5139a348eaeed13",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2025-02-19",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "DELETE /api/atlas/v2/orgs/{orgId}/invites/{invitationId}"
+    },
+    "description": "Atlas Administration API DELETE /api/atlas/v2/orgs/{orgId}/invites/{invitationId}, API version 2025-02-19, deprecated on 2025-02-20 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/101/paths/58/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint deprecated\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 34,
+    "fingerprint": "sha256:5f6e8e3f099b05d54e52927c9c468842df69607f7a28c3fa86e3f1d0fdf8b86a",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2025-02-19",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/orgs/{orgId}/invites/{invitationId}"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/orgs/{orgId}/invites/{invitationId}, API version 2025-02-19, deprecated on 2025-02-20 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/101/paths/59/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint deprecated\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 35,
+    "fingerprint": "sha256:690d31fcafd5209816ad6c16c0ed9199c7599bdba84872bdfa5b6b126238d985",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2025-02-19",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "PATCH /api/atlas/v2/orgs/{orgId}/invites/{invitationId}"
+    },
+    "description": "Atlas Administration API PATCH /api/atlas/v2/orgs/{orgId}/invites/{invitationId}, API version 2025-02-19, deprecated on 2025-02-20 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/101/paths/60/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint deprecated\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 36,
+    "fingerprint": "sha256:d146c472539b4b5494c7f9749a708129bad45aa22ebe8a966e2061f2d68a4c06",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2025-02-19",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/atlas/v2/orgs/{orgId}/teams/{teamId}/users"
+    },
+    "description": "Atlas Administration API POST /api/atlas/v2/orgs/{orgId}/teams/{teamId}/users, API version 2025-02-19, deprecated on 2025-02-20 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/101/paths/62/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint deprecated\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 37,
+    "fingerprint": "sha256:9c3c5c4e3f219e8954c0f98003c889eb5b0ee10ddfa858a3350736b48e2a263e",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2025-02-19",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "DELETE /api/atlas/v2/orgs/{orgId}/teams/{teamId}/users/{userId}"
+    },
+    "description": "Atlas Administration API DELETE /api/atlas/v2/orgs/{orgId}/teams/{teamId}/users/{userId}, API version 2025-02-19, deprecated on 2025-02-20 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/101/paths/63/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint deprecated\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 38,
+    "fingerprint": "sha256:58a98f24cdcd722bad12234a6e5d3d013f63f31b1f121670e93801e2a27713c0",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2025-02-19",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "PUT /api/atlas/v2/orgs/{orgId}/users/{userId}/roles"
+    },
+    "description": "Atlas Administration API PUT /api/atlas/v2/orgs/{orgId}/users/{userId}/roles, API version 2025-02-19, deprecated on 2025-02-20 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/101/paths/71/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint deprecated\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 39,
+    "fingerprint": "sha256:329a4a061813ba41a8e5e2ce063df7ce6542b48922730c70778e181a287ad576",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2025-02-19",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/atlas/v2/users"
+    },
+    "description": "Atlas Administration API POST /api/atlas/v2/users, API version 2025-02-19, deprecated on 2025-02-20 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/101/paths/74/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint deprecated\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 40,
+    "fingerprint": "sha256:e5c8117858980a087db6a750044cc9be9ac1d70e6fa2921191d9affd006bb891",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2025-02-19",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/users/byName/{userName}"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/users/byName/{userName}, API version 2025-02-19, deprecated on 2025-02-20 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/101/paths/75/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint deprecated\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 41,
+    "fingerprint": "sha256:366c39d16e92feed3c2ad2eb125b18d547062da23306e4aeaa96c12446f723f3",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2025-02-19",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/users/{userId}"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/users/{userId}, API version 2025-02-19, deprecated on 2025-02-20 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/101/paths/76/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint deprecated\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 42,
+    "fingerprint": "sha256:4890187b0f4c5115a06d1b522f78d9c007ac952e2885a00a8096e3ea6b8ea8c6",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/groups/{groupId}/pipelines"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/groups/{groupId}/pipelines, API version 2023-01-01, removed on 2025-09-30 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/76/paths/0/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2025-09-30'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 43,
+    "fingerprint": "sha256:f8dd816c9f01dc6dbe5812a32baf1ee83206fe4d4d1aed161d89ebde4ac146d8",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/atlas/v2/groups/{groupId}/pipelines"
+    },
+    "description": "Atlas Administration API POST /api/atlas/v2/groups/{groupId}/pipelines, API version 2023-01-01, removed on 2025-09-30 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/76/paths/1/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2025-09-30'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 44,
+    "fingerprint": "sha256:63208e5db910ade6c6639860a329dcab961adf38accb6e17b11d4a0a2dca688c",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "DELETE /api/atlas/v2/groups/{groupId}/pipelines/{pipelineName}"
+    },
+    "description": "Atlas Administration API DELETE /api/atlas/v2/groups/{groupId}/pipelines/{pipelineName}, API version 2023-01-01, removed on 2025-09-30 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/76/paths/2/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2025-09-30'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 45,
+    "fingerprint": "sha256:9ab1025568f8c14c44bc5b398eb311331d92eda892182eaf7317ef692a3a1415",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/groups/{groupId}/pipelines/{pipelineName}"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/groups/{groupId}/pipelines/{pipelineName}, API version 2023-01-01, removed on 2025-09-30 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/76/paths/3/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2025-09-30'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 46,
+    "fingerprint": "sha256:de768eabbd9ddc3f8f7137fbd7e0927f777a18862b48f438c2e94706bcb37b9f",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "PATCH /api/atlas/v2/groups/{groupId}/pipelines/{pipelineName}"
+    },
+    "description": "Atlas Administration API PATCH /api/atlas/v2/groups/{groupId}/pipelines/{pipelineName}, API version 2023-01-01, removed on 2025-09-30 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/76/paths/4/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2025-09-30'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 47,
+    "fingerprint": "sha256:e7e53fdccbfd094a9c4a8bb9cddfcfe2fc09b668ad0ec23db1e48419018c1f64",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/groups/{groupId}/pipelines/{pipelineName}/availableSchedules"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/groups/{groupId}/pipelines/{pipelineName}/availableSchedules, API version 2023-01-01, removed on 2025-09-30 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/76/paths/5/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2025-09-30'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 48,
+    "fingerprint": "sha256:f35f36f036476ee5ac4ddd620455bf07485f1543d37ade3401927505ef3d4a81",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/groups/{groupId}/pipelines/{pipelineName}/availableSnapshots"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/groups/{groupId}/pipelines/{pipelineName}/availableSnapshots, API version 2023-01-01, removed on 2025-09-30 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/76/paths/6/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2025-09-30'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 49,
+    "fingerprint": "sha256:78e8e41965696a2ee9a654ec04b8e0aba0da1001908d02f4436497f9a31cbd77",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/atlas/v2/groups/{groupId}/pipelines/{pipelineName}/pause"
+    },
+    "description": "Atlas Administration API POST /api/atlas/v2/groups/{groupId}/pipelines/{pipelineName}/pause, API version 2023-01-01, removed on 2025-09-30 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/76/paths/7/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2025-09-30'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 50,
+    "fingerprint": "sha256:fdb48987835b96b82d519cf71db83020ea0e356631dcf3fca44e574d700872d2",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/atlas/v2/groups/{groupId}/pipelines/{pipelineName}/resume"
+    },
+    "description": "Atlas Administration API POST /api/atlas/v2/groups/{groupId}/pipelines/{pipelineName}/resume, API version 2023-01-01, removed on 2025-09-30 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/76/paths/8/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2025-09-30'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 51,
+    "fingerprint": "sha256:6cf42e038f9a85ce22f032648a2ef29433d2dad4a9ac64c76810374e87729d47",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/groups/{groupId}/pipelines/{pipelineName}/runs"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/groups/{groupId}/pipelines/{pipelineName}/runs, API version 2023-01-01, removed on 2025-09-30 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/76/paths/9/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2025-09-30'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 52,
+    "fingerprint": "sha256:7adb19759eded477fd14b56d08342d1fc625237d32d241f2aa53b34b04eaaa59",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "DELETE /api/atlas/v2/groups/{groupId}/pipelines/{pipelineName}/runs/{pipelineRunId}"
+    },
+    "description": "Atlas Administration API DELETE /api/atlas/v2/groups/{groupId}/pipelines/{pipelineName}/runs/{pipelineRunId}, API version 2023-01-01, removed on 2025-09-30 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/76/paths/10/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2025-09-30'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 53,
+    "fingerprint": "sha256:5477185bf15848e9d350630af08a953686c5c0ce5bc723f70aca7b51c3322820",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/groups/{groupId}/pipelines/{pipelineName}/runs/{pipelineRunId}"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/groups/{groupId}/pipelines/{pipelineName}/runs/{pipelineRunId}, API version 2023-01-01, removed on 2025-09-30 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/76/paths/11/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2025-09-30'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 54,
+    "fingerprint": "sha256:4e17ab6c53866e464715eab44c347d868a8edc504310292a57887c5f522774a0",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/atlas/v2/groups/{groupId}/pipelines/{pipelineName}/trigger"
+    },
+    "description": "Atlas Administration API POST /api/atlas/v2/groups/{groupId}/pipelines/{pipelineName}/trigger, API version 2023-01-01, removed on 2025-09-30 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/76/paths/12/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2025-09-30'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 55,
+    "fingerprint": "sha256:3ecfbb5e27cafcf1d7d2d420151284423f0ab29286866952e555fe2f440b3afb",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/groups/{groupId}/serverless"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/groups/{groupId}/serverless, API version 2023-01-01, removed on 2026-01-15 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/62/paths/0/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2026-01-15'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 56,
+    "fingerprint": "sha256:c18980b3f5677145215991caf64657f8c60728bceb9bb521f0456e7411a5288e",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/groups/{groupId}/serverless/{name}"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/groups/{groupId}/serverless/{name}, API version 2023-01-01, removed on 2026-01-15 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/62/paths/1/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2026-01-15'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 57,
+    "fingerprint": "sha256:bb1c6412e90a6fd06acfa4ea522059f8cc35c05d0657b1ec9c9ba18d6a855394",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/backup/tenant/download"
+    },
+    "description": "Atlas Administration API POST /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/backup/tenant/download, API version 2023-01-01, removed on 2026-01-22 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/59/paths/6/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2026-01-22'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 58,
+    "fingerprint": "sha256:75b2abc3ffbf51bbd3054fc0eff45f6e634c79714829d3143284ce879f910a29",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/backup/tenant/restore"
+    },
+    "description": "Atlas Administration API POST /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/backup/tenant/restore, API version 2023-01-01, removed on 2026-01-22 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/59/paths/7/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2026-01-22'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 59,
+    "fingerprint": "sha256:d4b564c377109df103774c094235e12c57a91aa3c175f937df4cebf0b85e8c7d",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/backup/tenant/restores"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/backup/tenant/restores, API version 2023-01-01, removed on 2026-01-22 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/59/paths/8/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2026-01-22'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 60,
+    "fingerprint": "sha256:85da70f97ee83f2b7e20f558827e85c0ae5495c9ed2d0d5f29f660149f3a0c6d",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/backup/tenant/restores/{restoreId}"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/backup/tenant/restores/{restoreId}, API version 2023-01-01, removed on 2026-01-22 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/59/paths/9/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2026-01-22'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 61,
+    "fingerprint": "sha256:f5a4afc82f69d52e2d338ab66ab99d992d6dca427c8e01a4233816c36395e559",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/backup/tenant/snapshots"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/backup/tenant/snapshots, API version 2023-01-01, removed on 2026-01-22 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/59/paths/10/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2026-01-22'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 62,
+    "fingerprint": "sha256:8c76d61398f0274d7d124ba7317cefa454002ad52f876e50ce7125142f779411",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/backup/tenant/snapshots/{snapshotId}"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/groups/{groupId}/clusters/{clusterName}/backup/tenant/snapshots/{snapshotId}, API version 2023-01-01, removed on 2026-01-22 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/59/paths/11/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2026-01-22'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 63,
+    "fingerprint": "sha256:3c9ef94fb769309eb53458f755b3bc93dff3d65e24c295ab41dfbc45721e66fd",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/groups/{groupId}/privateEndpoint/serverless/instance/{instanceName}/endpoint"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/groups/{groupId}/privateEndpoint/serverless/instance/{instanceName}/endpoint, API version 2023-01-01, removed on 2026-01-22 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/59/paths/13/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2026-01-22'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 64,
+    "fingerprint": "sha256:4905693ad5f2aff385bffea0f61718029280874bcd59fe50a3b592a018ca205f",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/atlas/v2/groups/{groupId}/privateEndpoint/serverless/instance/{instanceName}/endpoint"
+    },
+    "description": "Atlas Administration API POST /api/atlas/v2/groups/{groupId}/privateEndpoint/serverless/instance/{instanceName}/endpoint, API version 2023-01-01, removed on 2026-01-22 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/59/paths/14/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2026-01-22'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 65,
+    "fingerprint": "sha256:6f9dc9d86fa2003c7a2f1c196f6dc09f082ace53d395808a3d850d4a71359377",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "DELETE /api/atlas/v2/groups/{groupId}/privateEndpoint/serverless/instance/{instanceName}/endpoint/{endpointId}"
+    },
+    "description": "Atlas Administration API DELETE /api/atlas/v2/groups/{groupId}/privateEndpoint/serverless/instance/{instanceName}/endpoint/{endpointId}, API version 2023-01-01, removed on 2026-01-22 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/59/paths/15/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2026-01-22'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 66,
+    "fingerprint": "sha256:3c3975b9a70621c359747fa9c8597c3f1456108a8382de5f95e3852fd6c8063a",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/groups/{groupId}/privateEndpoint/serverless/instance/{instanceName}/endpoint/{endpointId}"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/groups/{groupId}/privateEndpoint/serverless/instance/{instanceName}/endpoint/{endpointId}, API version 2023-01-01, removed on 2026-01-22 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/59/paths/16/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2026-01-22'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 67,
+    "fingerprint": "sha256:7ef39f4601e0bce6744f057c9b9e4c34bc8d07b10f6f8fe6a1ecce0a2cbccb30",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "PATCH /api/atlas/v2/groups/{groupId}/privateEndpoint/serverless/instance/{instanceName}/endpoint/{endpointId}"
+    },
+    "description": "Atlas Administration API PATCH /api/atlas/v2/groups/{groupId}/privateEndpoint/serverless/instance/{instanceName}/endpoint/{endpointId}, API version 2023-01-01, removed on 2026-01-22 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/59/paths/17/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2026-01-22'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 68,
+    "fingerprint": "sha256:82a31b85f9ab9bc72917add466d2777b231db5be1e432c24faaae68f4446885e",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/atlas/v2/groups/{groupId}/serverless"
+    },
+    "description": "Atlas Administration API POST /api/atlas/v2/groups/{groupId}/serverless, API version 2023-01-01, removed on 2026-01-22 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/59/paths/18/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2026-01-22'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 69,
+    "fingerprint": "sha256:ea55329b1a7e5b44dbd7497720a0ca34bbc3d54a72ebd3dbeb0620db50fc18b2",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/groups/{groupId}/serverless/{clusterName}/backup/restoreJobs"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/groups/{groupId}/serverless/{clusterName}/backup/restoreJobs, API version 2023-01-01, removed on 2026-01-22 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/59/paths/19/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2026-01-22'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 70,
+    "fingerprint": "sha256:faaad8344369d497fbc754cdbbcfedc0261b525476d232cefab22d14e8b93229",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/atlas/v2/groups/{groupId}/serverless/{clusterName}/backup/restoreJobs"
+    },
+    "description": "Atlas Administration API POST /api/atlas/v2/groups/{groupId}/serverless/{clusterName}/backup/restoreJobs, API version 2023-01-01, removed on 2026-01-22 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/59/paths/20/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2026-01-22'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 71,
+    "fingerprint": "sha256:9b50bf722ec1eae087c5f8c15eead886c6d744b0a0b1285ca8270528678c0fb1",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/groups/{groupId}/serverless/{clusterName}/backup/restoreJobs/{restoreJobId}"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/groups/{groupId}/serverless/{clusterName}/backup/restoreJobs/{restoreJobId}, API version 2023-01-01, removed on 2026-01-22 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/59/paths/21/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2026-01-22'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 72,
+    "fingerprint": "sha256:afd8e5317d1698efecca262b0bba602ef658e6178cec2045f47f2bd906c0aa79",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/groups/{groupId}/serverless/{clusterName}/backup/snapshots"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/groups/{groupId}/serverless/{clusterName}/backup/snapshots, API version 2023-01-01, removed on 2026-01-22 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/59/paths/22/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2026-01-22'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 73,
+    "fingerprint": "sha256:297eff6dc3b5ec919ddd92f130c1059a75af839a5275f465f5f03d65d64bc3e0",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/groups/{groupId}/serverless/{clusterName}/backup/snapshots/{snapshotId}"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/groups/{groupId}/serverless/{clusterName}/backup/snapshots/{snapshotId}, API version 2023-01-01, removed on 2026-01-22 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/59/paths/23/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2026-01-22'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 74,
+    "fingerprint": "sha256:771dabda44befcc4292720b7492b668e55a0851ca50a9ca65e64422caec4f975",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/groups/{groupId}/serverless/{clusterName}/performanceAdvisor/autoIndexing"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/groups/{groupId}/serverless/{clusterName}/performanceAdvisor/autoIndexing, API version 2023-01-01, removed on 2026-01-22 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/59/paths/24/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2026-01-22'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 75,
+    "fingerprint": "sha256:3f3a9dd94fb934fcd26949ca865abfc990630cd24db5cb40623a78ba7d516ef6",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/atlas/v2/groups/{groupId}/serverless/{clusterName}/performanceAdvisor/autoIndexing"
+    },
+    "description": "Atlas Administration API POST /api/atlas/v2/groups/{groupId}/serverless/{clusterName}/performanceAdvisor/autoIndexing, API version 2023-01-01, removed on 2026-01-22 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/59/paths/25/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2026-01-22'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 76,
+    "fingerprint": "sha256:d131e731e86b2fbe4b3e546d785602d6f65422ebfaed33195c9bae954a094e09",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "DELETE /api/atlas/v2/groups/{groupId}/serverless/{name}"
+    },
+    "description": "Atlas Administration API DELETE /api/atlas/v2/groups/{groupId}/serverless/{name}, API version 2023-01-01, removed on 2026-01-22 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/59/paths/26/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2026-01-22'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 77,
+    "fingerprint": "sha256:a78eea7be07575a3bb36c5526348ab752fee07176bae200dce40fa316fdd08dc",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2023-01-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "PATCH /api/atlas/v2/groups/{groupId}/serverless/{name}"
+    },
+    "description": "Atlas Administration API PATCH /api/atlas/v2/groups/{groupId}/serverless/{name}, API version 2023-01-01, removed on 2026-01-22 (MongoDB's changelog, endpoint-removed).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/59/paths/27/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint with API Version '2023-01-01' was removed as it has reached its sunset date '2026-01-22'\",\"changeCode\":\"endpoint-removed\",\"backwardCompatible\":false}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 78,
+    "fingerprint": "sha256:16c25ef30e3ca196af5f94eb2a15c327b7408a059e08647eb3952c0c260a5750",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2025-03-12",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "DELETE /api/atlas/v2/groups/{groupId}/pushBasedLogExport"
+    },
+    "description": "Atlas Administration API DELETE /api/atlas/v2/groups/{groupId}/pushBasedLogExport, API version 2025-03-12, deprecated on 2026-01-30 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/57/paths/12/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint deprecated\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 79,
+    "fingerprint": "sha256:2bb72b9a509e7e1c82c80f7c19d34d5840d0dff7b9d2db6283729f52c111c2eb",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2025-03-12",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "GET /api/atlas/v2/groups/{groupId}/pushBasedLogExport"
+    },
+    "description": "Atlas Administration API GET /api/atlas/v2/groups/{groupId}/pushBasedLogExport, API version 2025-03-12, deprecated on 2026-01-30 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/57/paths/13/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint deprecated\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 80,
+    "fingerprint": "sha256:3d8712c8fd430ebc1c2ca68ce8f2db339d7b5521eeecf35ebfccfe5abdb009c4",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2025-03-12",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "PATCH /api/atlas/v2/groups/{groupId}/pushBasedLogExport"
+    },
+    "description": "Atlas Administration API PATCH /api/atlas/v2/groups/{groupId}/pushBasedLogExport, API version 2025-03-12, deprecated on 2026-01-30 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/57/paths/14/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint deprecated\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 81,
+    "fingerprint": "sha256:b1da7820ea9b85583c0270feae07d446556fb0468da2b61b1dd666f9d0b63f9d",
+    "api": "mongodb/atlas-admin-api",
+    "version": "2025-03-12",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /api/atlas/v2/groups/{groupId}/pushBasedLogExport"
+    },
+    "description": "Atlas Administration API POST /api/atlas/v2/groups/{groupId}/pushBasedLogExport, API version 2025-03-12, deprecated on 2026-01-30 (MongoDB's changelog, endpoint-deprecated).",
+    "source_url": "https://raw.githubusercontent.com/mongodb/openapi/c0f99ca9145e5aa74d08ae4451020857e93b5f28/changelog/changelog.json",
+    "source_pointer": "/57/paths/15/versions/0/changes/0",
+    "source_excerpt": "{\"change\":\"endpoint deprecated\",\"changeCode\":\"endpoint-deprecated\",\"backwardCompatible\":true}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

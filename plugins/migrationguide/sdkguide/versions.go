@@ -1,0 +1,84 @@
+package sdkguide
+
+import (
+	"context"
+	"fmt"
+	"time"
+
+	"github.com/patch-it-dev/patch-it-plugins/core/event"
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
+	"github.com/patch-it-dev/patch-it-plugins/core/versions"
+)
+
+// What the migration-guide kind (plugins/migrationguide) asks of a guide.
+
+// Slug is the source id the events carry: "anthropic/python-sdk".
+func (g Guide) Slug() string { return g.API }
+
+// Releases is every final release of the SDK on PyPI, oldest first, each
+// read at its v<version> tag; a pinned Guide has its one major.
+func (g Guide) Releases(ctx context.Context, env plugin.Env) ([]plugin.Version, error) {
+	if g.Major != 0 {
+		return []plugin.Version{{ID: g.Version(), Ref: "v" + g.Version()}}, nil
+	}
+	vs, err := versions.PyPIReleases(ctx, env.Get, g.Package)
+	if err != nil {
+		return nil, err
+	}
+	for i := range vs {
+		vs[i].Ref = "v" + vs[i].ID
+	}
+	return vs, nil
+}
+
+// Current is the pinned major's first release, or the newest major's.
+func (g Guide) Current(ctx context.Context, env plugin.Env) (plugin.Version, error) {
+	if g.Major != 0 {
+		return plugin.Version{ID: g.Version(), Ref: "v" + g.Version()}, nil
+	}
+	vs, err := g.Releases(ctx, env)
+	if err != nil {
+		return plugin.Version{}, err
+	}
+	var v plugin.Version
+	for _, c := range vs {
+		if FirstOfMajor(c.ID) {
+			v = c
+		}
+	}
+	if v.ID == "" {
+		return plugin.Version{}, fmt.Errorf("%s: no major release listed", g.API)
+	}
+	return v, nil
+}
+
+// GuideURL is the guide at v's tag when v is the first release of its major
+// (X.0.0): only a new major has a guide to read. Any other release has none
+// ("").
+func (g Guide) GuideURL(v plugin.Version) string {
+	if !FirstOfMajor(v.ID) {
+		return ""
+	}
+	return g.At(versions.Major(v.ID)).URL()
+}
+
+// Read is an event per parameter the to major removed, read from its
+// guide, with previous_version from's release.
+func (g Guide) Read(page []byte, from, to plugin.Version, now time.Time) (_ []event.Event, rejected []error, err error) {
+	g = g.At(versions.Major(to.ID))
+	removals, err := Parse(page, g)
+	if err != nil {
+		return nil, nil, err
+	}
+	events, errs := Events(g, removals, now)
+	for i := range events {
+		events[i].PreviousVersion = from.ID
+	}
+	return events, errs, nil
+}
+
+// FirstOfMajor is true for X.0.0, the release a major's guide is tagged at.
+func FirstOfMajor(v string) bool {
+	m := versions.Major(v)
+	return m > 0 && v == fmt.Sprintf("%d.0.0", m)
+}

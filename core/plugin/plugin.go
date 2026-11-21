@@ -2,7 +2,7 @@
 // one interface, registered by name. A plugin reads its source and returns a
 // Result; it stores nothing itself. Whoever runs it (patch-it's hosted
 // ingestion service, or the test kit) stores the events, then the baselines.
-// Adding a source is a new package under plugins/ that calls Register; nothing
+// Adding a source is a RegisterProvider call in its kind's package; nothing
 // here changes.
 package plugin
 
@@ -10,7 +10,6 @@ import (
 	"context"
 	"crypto/sha256"
 	"encoding/hex"
-	"fmt"
 	"slices"
 	"sync"
 	"time"
@@ -20,18 +19,12 @@ import (
 
 // Plugin is one place changes come from.
 type Plugin interface {
-	// Name is the slug the command line selects it by and its events carry in
-	// `api`: "stripe", "openai-models".
+	// Name is the source's id, "<provider>/<source>", which its events
+	// carry in `api`: "stripe/api", "openai/models".
 	Name() string
 	// Run reads the source as it is now and returns what changed since the
 	// baseline it saved last (env.Baselines.LastSpec). An error stores nothing.
 	Run(ctx context.Context, env Env) (Result, error)
-}
-
-// Replayer is a plugin that can also diff two given releases (--from, --to):
-// how a historical change is recreated without moving the normal baseline.
-type Replayer interface {
-	Replay(ctx context.Context, env Env, from, to string) (Result, error)
 }
 
 // Env is everything a plugin may reach outside itself, so a test can hand it
@@ -67,16 +60,15 @@ type Spec struct {
 	SHA256    string
 	SourceURL string
 	FetchedAt time.Time
-	Replay    bool
 	Content   []byte
 }
 
 // Result is what one run found.
 type Result struct {
-	Label     string          // what was read, for the summary: a tag, a snapshot, a URL
-	Events    []event.EventV2 // valid v2 events, to store
-	Rejected  []error         // changes that failed to become valid events
-	Baselines []Spec          // what the run read, saved after the events
+	Label     string        // what was read, for the summary: a tag, a snapshot, a URL
+	Events    []event.Event // valid events, to store
+	Rejected  []error       // changes that failed to become valid events
+	Baselines []Spec        // what the run read, saved after the events
 }
 
 var (
@@ -84,37 +76,16 @@ var (
 	registry = map[string]Plugin{}
 )
 
-// Register adds a plugin. A second plugin with the same name is a programming
-// error: two sources would write the same `api`. So is the name "all", which
-// `--api all` means.
-func Register(p Plugin) {
+// Lookup finds a registered plugin by its source's id ("algolia/search-api").
+func Lookup(id string) (Plugin, bool) {
 	mu.Lock()
 	defer mu.Unlock()
-	if p.Name() == "all" {
-		panic(`plugin: "all" means every plugin; a plugin can't be named it`)
-	}
-	if _, dup := registry[p.Name()]; dup {
-		panic(fmt.Sprintf("plugin: a plugin named %q is already registered", p.Name()))
-	}
-	registry[p.Name()] = p
+	p, ok := registry[id]
+	return p, ok
 }
 
-// Lookup finds a registered plugin by name: its old slug ("algolia-search")
-// or its source's full id ("algolia/search-api").
-func Lookup(name string) (Plugin, bool) {
-	mu.Lock()
-	defer mu.Unlock()
-	if p, ok := registry[name]; ok {
-		return p, true
-	}
-	if s, ok := sources[name]; ok {
-		return s.Source.Plugin, true
-	}
-	return nil, false
-}
-
-// Names are the registered plugins' old slugs, sorted: what `--api all` runs.
-// Sources lists them with their full ids and metadata.
+// Names are the registered sources' ids, sorted. Sources lists them with
+// their metadata.
 func Names() []string {
 	mu.Lock()
 	defer mu.Unlock()
@@ -128,7 +99,7 @@ func Names() []string {
 
 // Baseline is what a plugin saves as the last thing it read, hashed so the
 // next run can tell an unchanged source in one comparison.
-func Baseline(api, version, tag, sourceURL string, content []byte, replay bool, at time.Time) Spec {
+func Baseline(api, version, tag, sourceURL string, content []byte, at time.Time) Spec {
 	return Spec{
 		API:       api,
 		Version:   version,
@@ -136,7 +107,6 @@ func Baseline(api, version, tag, sourceURL string, content []byte, replay bool, 
 		SHA256:    SHA256(content),
 		SourceURL: sourceURL,
 		FetchedAt: at,
-		Replay:    replay,
 		Content:   content,
 	}
 }

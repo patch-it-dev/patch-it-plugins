@@ -50,7 +50,7 @@ type GitLab struct {
 
 var _ Adapter = GitLab{}
 
-func (GitLab) API() string { return "gitlab" }
+func (GitLab) API() string { return "gitlab/rest-api" }
 
 // LatestTag is the highest stable release tag, e.g. "v19.5.5-ee". The tags API
 // sorts by version, but its handling of the "-ee" suffix and of release
@@ -101,7 +101,7 @@ func (g GitLab) LatestTag(ctx context.Context) (string, error) {
 // (checked v18.11.0-ee and v19.0.0-ee, 2026-11-15), which can't tell two
 // releases apart. The bare version is also what a self-managed instance
 // reports and what patch-it's package gate can read; it refuses "v19.0.0-ee".
-// A tag that isn't a release (a branch, for a replay) is its own version.
+// A tag that isn't a release (a branch, read as a version) is its own version.
 func (g GitLab) Fetch(ctx context.Context, tag string) (Spec, error) {
 	url := fmt.Sprintf(cmp.Or(g.SpecURLTemplate, gitlabSpecURLTemplate), tag)
 	body, err := fetch.Get(ctx, url, nil)

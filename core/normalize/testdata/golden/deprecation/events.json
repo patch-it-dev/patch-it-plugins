@@ -1,13 +1,14 @@
 [
   {
     "id": 0,
-    "fingerprint": "sha256:5e6a726296bc4c319b8605eb7e3f67d641ae3d63c9d5038b75bb691d5ac5b6be",
-    "api": "stripe",
+    "fingerprint": "sha256:0563cf609d49fe03301efb63f3b071d05ffa98392a443dbccec31b867a4446b9",
+    "api": "stripe/api",
     "version": "2026-08-26.dahlia",
     "previous_version": "2026-07-29.dahlia",
     "change_type": "deprecation",
     "breaking": false,
-    "affected": {
+    "subject": {
+      "type": "api_operation",
       "kind": "operation",
       "side": "request",
       "operation": "POST /v1/charges"

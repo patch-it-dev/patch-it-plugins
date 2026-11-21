@@ -29,7 +29,7 @@ var update = flag.Bool("update", false, "rewrite the golden events.json files fr
 // Everything that isn't part of the spec pair is fixed, so the output is exactly
 // reproducible.
 var goldenSource = Source{
-	API:        "stripe",
+	API:        "stripe/api",
 	NewSpecURL: "https://raw.githubusercontent.com/stripe/openapi/v2468/latest/openapi.spec3.json",
 	OldSpecURL: "https://raw.githubusercontent.com/stripe/openapi/v2460/latest/openapi.spec3.json",
 	DetectedAt: time.Date(2026, 9, 27, 12, 0, 0, 0, time.UTC),

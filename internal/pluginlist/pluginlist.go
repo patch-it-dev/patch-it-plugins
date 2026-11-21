@@ -38,13 +38,13 @@ type Provider struct {
 
 // Source is one source.
 type Source struct {
-	ID      string   `json:"id"`    // provider/source
-	Alias   string   `json:"alias"` // the old slug: --api and every event's api until the contract switches to source ids
-	Kind    string   `json:"kind"`
-	Layer   string   `json:"layer"`
-	Watches string   `json:"watches"`
-	URLs    []string `json:"urls"`
-	Page    string   `json:"page"` // absolute, at Version
+	ID       string   `json:"id"` // provider/source: every event's api
+	Kind     string   `json:"kind"`
+	Layer    string   `json:"layer"`
+	Watches  string   `json:"watches"`
+	URLs     []string `json:"urls"`
+	Packages []string `json:"packages"` // "<ecosystem>:<name>"; [] when none
+	Page     string   `json:"page"`     // absolute, at Version
 }
 
 // Build is the list of everything registered, with pages linked at ref (a
@@ -64,9 +64,11 @@ func Build(ref string) File {
 	for _, p := range plugin.Providers() {
 		out := Provider{ID: p.ID, Name: p.Name, Category: string(p.Category), Homepage: p.Homepage}
 		for _, s := range p.Sources {
+			info := plugin.SourceInfo{Provider: p, Source: s}
 			out.Sources = append(out.Sources, Source{
-				ID: p.ID + "/" + s.ID, Alias: s.Plugin.Name(), Kind: s.Kind, Layer: string(s.Layer),
-				Watches: s.Watches, URLs: s.URLs, Page: Repo + "/blob/" + ref + "/" + s.Page,
+				ID:   info.FullID(),
+				Kind: s.Kind, Layer: string(s.Layer), Watches: s.Watches, URLs: s.URLs,
+				Packages: append([]string{}, s.Packages...), Page: Repo + "/blob/" + ref + "/" + s.Page,
 			})
 		}
 		f.Sources += len(out.Sources)

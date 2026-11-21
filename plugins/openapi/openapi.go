@@ -3,7 +3,8 @@
 // Algolia, Elasticsearch, Sentry, Neon, Convex, PlanetScale, Appwrite): fetch
 // the newest spec, diff it against the last one seen, normalize the changes
 // into events, and attach migration hints from the API's changelog when it
-// has one. It can also replay two given releases.
+// has one. Every release is listed and each consecutive pair diffed
+// (ListVersions, ReadAt, Extract).
 package openapi
 
 import (
@@ -14,7 +15,6 @@ import (
 	"github.com/patch-it-dev/patch-it-plugins/core/diff"
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
 	"github.com/patch-it-dev/patch-it-plugins/core/hint"
-	"github.com/patch-it-dev/patch-it-plugins/core/migrate"
 	"github.com/patch-it-dev/patch-it-plugins/core/normalize"
 	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 	"github.com/patch-it-dev/patch-it-plugins/plugins/openapi/adapter"
@@ -25,9 +25,10 @@ func init() {
 		ID: "stripe", Name: "Stripe", Category: plugin.CategoryPayments, Homepage: "https://stripe.com",
 		Sources: []plugin.Source{{
 			ID: "api", Layer: plugin.LayerAPI, Page: "providers/stripe.md",
-			Watches: "REST API changes between OpenAPI spec releases (removed and renamed endpoints, parameters and fields), with migration hints from Stripe's API changelog",
-			URLs:    []string{"https://github.com/stripe/openapi"},
-			Plugin:  Plugin{Adapter: adapter.Stripe{}, Hints: hint.Stripe{}},
+			Watches:  "REST API changes between OpenAPI spec releases (removed and renamed endpoints, parameters and fields), with migration hints from Stripe's API changelog",
+			URLs:     []string{"https://github.com/stripe/openapi"},
+			Packages: []string{"pypi:stripe", "npm:stripe"},
+			Plugin:   Plugin{Adapter: adapter.Stripe{}, Hints: hint.Stripe{}},
 		}},
 	})
 	// No Hints yet: Datadog's changelog isn't Stripe's per-parameter table
@@ -36,9 +37,10 @@ func init() {
 		ID: "datadog", Name: "Datadog", Category: plugin.CategoryMonitoring, Homepage: "https://www.datadoghq.com",
 		Sources: []plugin.Source{{
 			ID: "api", Layer: plugin.LayerAPI, Page: "providers/datadog.md",
-			Watches: "API v2 changes between OpenAPI spec releases",
-			URLs:    []string{"https://github.com/DataDog/datadog-api-client-python"},
-			Plugin:  Plugin{Adapter: adapter.Datadog{}},
+			Watches:  "API v2 changes between OpenAPI spec releases",
+			URLs:     []string{"https://github.com/DataDog/datadog-api-client-python"},
+			Packages: []string{"pypi:datadog-api-client", "npm:@datadog/datadog-api-client"},
+			Plugin:   Plugin{Adapter: adapter.Datadog{}},
 		}},
 	})
 	// No Hints: GitLab's deprecations are prose per feature, not a changelog
@@ -54,7 +56,7 @@ func init() {
 	})
 	// No Hints yet: GitHub's per-version CHANGELOG.md is prose with no table
 	// at all, so there's nothing for hint.Source to key on. (GitHub's Actions
-	// source is registered by plugins/feed.)
+	// source is registered by plugins/notices.)
 	plugin.RegisterProvider(plugin.Provider{
 		ID: "github", Name: "GitHub", Category: plugin.CategoryDevTools, Homepage: "https://github.com",
 		Sources: []plugin.Source{{
@@ -70,9 +72,10 @@ func init() {
 		ID: "vercel", Name: "Vercel", Category: plugin.CategoryHosting, Homepage: "https://vercel.com",
 		Sources: []plugin.Source{{
 			ID: "api", Layer: plugin.LayerAPI, Page: "providers/vercel.md",
-			Watches: "REST API operations deprecated, and deprecated operations removed, between SDK releases of the spec",
-			URLs:    []string{"https://github.com/vercel/sdk"},
-			Plugin:  Plugin{Adapter: adapter.Vercel{}, Diff: vercelDiff, Keep: vercelKeep},
+			Watches:  "REST API operations deprecated, and deprecated operations removed, between SDK releases of the spec",
+			URLs:     []string{"https://github.com/vercel/sdk"},
+			Packages: []string{"npm:@vercel/sdk"},
+			Plugin:   Plugin{Adapter: adapter.Vercel{}, Diff: vercelDiff, Keep: vercelKeep},
 		}},
 	})
 	// No Hints: Supabase's changelog is platform news, not keyed by
@@ -92,9 +95,10 @@ func init() {
 	for _, spec := range []struct{ name, title string }{{"search", "Search"}, {"ingestion", "Ingestion"}, {"recommend", "Recommend"}} {
 		algolia.Sources = append(algolia.Sources, plugin.Source{
 			ID: spec.name + "-api", Layer: plugin.LayerAPI, Page: "providers/algolia.md",
-			Watches: spec.title + " API operations deprecated, and deprecated operations removed, between releases of the spec",
-			URLs:    []string{"https://github.com/algolia/api-clients-automation", "https://github.com/algolia/api-clients-automation/blob/main/specs/bundled/" + spec.name + ".yml"},
-			Plugin:  Plugin{Adapter: adapter.Algolia{Spec: spec.name}, Diff: algoliaDiff, Keep: algoliaKeep},
+			Watches:  spec.title + " API operations deprecated, and deprecated operations removed, between releases of the spec",
+			URLs:     []string{"https://github.com/algolia/api-clients-automation", "https://github.com/algolia/api-clients-automation/blob/main/specs/bundled/" + spec.name + ".yml"},
+			Packages: []string{"pypi:algoliasearch", "npm:algoliasearch"},
+			Plugin:   Plugin{Adapter: adapter.Algolia{Spec: spec.name}, Diff: algoliaDiff, Keep: algoliaKeep},
 		})
 	}
 	plugin.RegisterProvider(algolia)
@@ -104,9 +108,10 @@ func init() {
 		ID: "elastic", Name: "Elastic", Category: plugin.CategorySearch, Homepage: "https://www.elastic.co",
 		Sources: []plugin.Source{{
 			ID: "elasticsearch-api", Layer: plugin.LayerAPI, Page: "providers/elasticsearch.md",
-			Watches: "Elasticsearch REST API operations deprecated, and deprecated operations removed, between released minor versions of the spec",
-			URLs:    []string{"https://github.com/elastic/elasticsearch-specification"},
-			Plugin:  Plugin{Adapter: adapter.Elasticsearch{}, Diff: elasticsearchDiff, Keep: elasticsearchKeep, RemovalsNeedANewVersion: true},
+			Watches:  "Elasticsearch REST API operations deprecated, and deprecated operations removed, between released minor versions of the spec",
+			URLs:     []string{"https://github.com/elastic/elasticsearch-specification"},
+			Packages: []string{"pypi:elasticsearch", "npm:@elastic/elasticsearch"},
+			Plugin:   Plugin{Adapter: adapter.Elasticsearch{}, Diff: elasticsearchDiff, Keep: elasticsearchKeep, RemovalsNeedANewVersion: true},
 		}},
 	})
 	// No Hints: Sentry's changelog is product news, not keyed by operation.
@@ -127,9 +132,10 @@ func init() {
 		ID: "neon", Name: "Neon", Category: plugin.CategoryDatabases, Homepage: "https://neon.com",
 		Sources: []plugin.Source{{
 			ID: "api", Layer: plugin.LayerAPI, Page: "providers/neon.md",
-			Watches: "Neon API operations deprecated, and deprecated operations removed, between commits of the spec",
-			URLs:    []string{"https://github.com/neondatabase/neon-pkgs"},
-			Plugin:  Plugin{Adapter: adapter.Neon{}, Diff: neonDiff, Keep: neonKeep},
+			Watches:  "Neon API operations deprecated, and deprecated operations removed, between commits of the spec",
+			URLs:     []string{"https://github.com/neondatabase/neon-pkgs"},
+			Packages: []string{"npm:@neondatabase/api-client"},
+			Plugin:   Plugin{Adapter: adapter.Neon{}, Diff: neonDiff, Keep: neonKeep},
 		}},
 	})
 	// No Hints: Convex has no API changelog; its news feed is product news.
@@ -162,9 +168,10 @@ func init() {
 		ID: "appwrite", Name: "Appwrite", Category: plugin.CategoryHosting, Homepage: "https://appwrite.io",
 		Sources: []plugin.Source{{
 			ID: "api", Layer: plugin.LayerAPI, Page: "providers/appwrite.md",
-			Watches: "REST API operations a server SDK calls that are deprecated between commits of the spec, SDK method renames left out",
-			URLs:    []string{"https://github.com/appwrite/specs"},
-			Plugin:  Plugin{Adapter: adapter.Appwrite{}, Diff: appwriteDiff, Keep: appwriteKeep},
+			Watches:  "REST API operations a server SDK calls that are deprecated between commits of the spec, SDK method renames left out",
+			URLs:     []string{"https://github.com/appwrite/specs"},
+			Packages: []string{"pypi:appwrite", "npm:node-appwrite"},
+			Plugin:   Plugin{Adapter: adapter.Appwrite{}, Diff: appwriteDiff, Keep: appwriteKeep},
 		}},
 	})
 	// No Hints: Flagsmith's release notes are product news, not keyed by
@@ -243,32 +250,7 @@ func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) 
 		return plugin.Result{}, err
 	}
 	res.Label = tag
-	res.Baselines = []plugin.Spec{plugin.Baseline(a.API(), to.Version.ID, tag, to.SourceURL, to.Content, false, env.Now())}
-	return res, nil
-}
-
-// Replay diffs two given releases. Both specs are saved marked as replays, so
-// the normal-run baseline never moves; the events are stored like any others:
-// that's how a historical change becomes something the feed can serve.
-func (p Plugin) Replay(ctx context.Context, env plugin.Env, from, to string) (plugin.Result, error) {
-	old, err := p.ReadAt(ctx, env, plugin.Version{ID: from, Ref: from})
-	if err != nil {
-		return plugin.Result{}, err
-	}
-	next, err := p.ReadAt(ctx, env, plugin.Version{ID: to, Ref: to})
-	if err != nil {
-		return plugin.Result{}, err
-	}
-	res, err := p.Extract(ctx, env, old, next)
-	if err != nil {
-		return plugin.Result{}, err
-	}
-	now := env.Now()
-	res.Label = to
-	res.Baselines = []plugin.Spec{
-		plugin.Baseline(p.Adapter.API(), old.Version.ID, from, old.SourceURL, old.Content, true, now),
-		plugin.Baseline(p.Adapter.API(), next.Version.ID, to, next.SourceURL, next.Content, true, now),
-	}
+	res.Baselines = []plugin.Spec{plugin.Baseline(a.API(), to.Version.ID, tag, to.SourceURL, to.Content, env.Now())}
 	return res, nil
 }
 
@@ -319,15 +301,14 @@ func (p Plugin) Extract(ctx context.Context, env plugin.Env, from, to plugin.Sna
 		DetectedAt:      env.Now().UTC(),
 	})
 	p.attachHints(ctx, to.Version.ID, events)
-	converted, invalid := migrate.Fresh(events)
-	return plugin.Result{Label: to.Version.Ref, Events: converted, Rejected: append(errs, invalid...)}, nil
+	return plugin.Result{Label: to.Version.Ref, Events: events, Rejected: errs}, nil
 }
 
 var _ plugin.Versioned = Plugin{}
 
 // events diffs two parsed specs into events, applying Keep, and pointing each
 // event's source_pointer into the published file when the adapter reshaped it.
-func (p Plugin) events(oldParsed, newParsed *diff.Spec, oldContent, newContent []byte, src normalize.Source) ([]event.ChangeEvent, []error) {
+func (p Plugin) events(oldParsed, newParsed *diff.Spec, oldContent, newContent []byte, src normalize.Source) ([]event.Event, []error) {
 	changes := diff.ChangesWith(oldParsed, newParsed, p.Diff)
 	if p.Keep != nil {
 		kept := changes[:0:0]
@@ -373,7 +354,7 @@ func (p Plugin) events(oldParsed, newParsed *diff.Spec, oldContent, newContent [
 
 // attachHints looks the events up in the API's changelog for their version.
 // Never fails the run: a hint is help for the fix, not provenance for the event.
-func (p Plugin) attachHints(ctx context.Context, version string, events []event.ChangeEvent) {
+func (p Plugin) attachHints(ctx context.Context, version string, events []event.Event) {
 	if p.Hints == nil || len(events) == 0 {
 		return
 	}

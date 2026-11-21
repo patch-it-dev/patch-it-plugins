@@ -1,0 +1,20 @@
+{
+  "info": {
+    "name": "openai",
+    "version": "1.1.1"
+  },
+  "urls": [
+    {
+      "filename": "openai-1.1.1-py3-none-any.whl",
+      "packagetype": "bdist_wheel",
+      "url": "https://files.pythonhosted.org/packages/f7/86/ea99e3f966a639a3256e2f79d78cd63d45d5eb651a5457ccbdcfd9eed24a/openai-1.1.1-py3-none-any.whl",
+      "yanked": false
+    },
+    {
+      "filename": "openai-1.1.1.tar.gz",
+      "packagetype": "sdist",
+      "url": "https://files.pythonhosted.org/packages/81/f3/77cea3da9cbee3cfd48ef86158a813ab0da4b1827d66537723f2abfc869c/openai-1.1.1.tar.gz",
+      "yanked": false
+    }
+  ]
+}

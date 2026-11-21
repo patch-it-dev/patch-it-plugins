@@ -32,7 +32,7 @@ type Neon struct{}
 
 var _ Adapter = Neon{}
 
-func (Neon) API() string { return "neon" }
+func (Neon) API() string { return "neon/api" }
 
 // LatestTag is the SHA of the newest commit that changed the spec.
 func (Neon) LatestTag(ctx context.Context) (string, error) {

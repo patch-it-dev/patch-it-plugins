@@ -1,0 +1,163 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:75d945cf03e52543a2fdabae1c94e6e81322a2fee42c6623830c6b9b5ffc4e40",
+    "api": "posthog/python-sdk",
+    "version": "8.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "posthog",
+      "change": "removed_symbol",
+      "symbols": [
+        "CaptureMode"
+      ]
+    },
+    "description": "`CaptureMode` was removed in posthog 8.0.0.",
+    "migration_hint": "Use instead: Nothing (posthog's migration guide for 8.0.0)",
+    "source_url": "https://raw.githubusercontent.com/PostHog/posthog-python/posthog-v8.0.0/docs/migration-7.x-to-8.0.md",
+    "source_excerpt": "Fix removed APIs\n| Removed | Use instead |\n| --- | --- |\n| `capture_mode`, `CaptureMode`, `POSTHOG_CAPTURE_MODE` | Nothing |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:d91ba129157bb359c50102c4c532f811a949d0612abb8d45d0992e4dc7aefcbf",
+    "api": "posthog/python-sdk",
+    "version": "8.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "posthog",
+      "change": "removed_symbol",
+      "symbols": [
+        "capture_v1.CaptureV1Error"
+      ]
+    },
+    "description": "`capture_v1.CaptureV1Error` was removed in posthog 8.0.0.",
+    "migration_hint": "Use instead: `CaptureError` (posthog's migration guide for 8.0.0)",
+    "source_url": "https://raw.githubusercontent.com/PostHog/posthog-python/posthog-v8.0.0/docs/migration-7.x-to-8.0.md",
+    "source_excerpt": "Fix removed APIs\n| Removed | Use instead |\n| --- | --- |\n| `CaptureV1Error` | `CaptureError` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:7b1dbda0f8429ab629a5a041205a2e2e036e348e6810f9ee62f372e7446b2dd8",
+    "api": "posthog/python-sdk",
+    "version": "8.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "posthog",
+      "change": "removed_symbol",
+      "symbols": [
+        "capture_v1"
+      ]
+    },
+    "description": "`capture_v1` was removed in posthog 8.0.0.",
+    "migration_hint": "Use instead: `posthog.capture_event` and `posthog.capture_send` (posthog's migration guide for 8.0.0)",
+    "source_url": "https://raw.githubusercontent.com/PostHog/posthog-python/posthog-v8.0.0/docs/migration-7.x-to-8.0.md",
+    "source_excerpt": "Fix removed APIs\n| Removed | Use instead |\n| --- | --- |\n| `posthog.capture_v1` | `posthog.capture_event` and `posthog.capture_send` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:94d72e7984b7e207ea3eee48a2047efdcfb651bb3774a0af926c5368b351a3e4",
+    "api": "posthog/python-sdk",
+    "version": "8.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "posthog",
+      "change": "removed_symbol",
+      "symbols": [
+        "request.batch_post"
+      ]
+    },
+    "description": "`request.batch_post` was removed in posthog 8.0.0.",
+    "migration_hint": "Use instead: Send events through a client (posthog's migration guide for 8.0.0)",
+    "source_url": "https://raw.githubusercontent.com/PostHog/posthog-python/posthog-v8.0.0/docs/migration-7.x-to-8.0.md",
+    "source_excerpt": "Fix removed APIs\n| Removed | Use instead |\n| --- | --- |\n| `request.batch_post`, `async_batch_post`, `EVENTS_ENDPOINT`, `AI_EVENTS_ENDPOINT` | Send events through a client |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:fcee60f271c6aec47734b6a4577de6b3f06e32f1e025e98a625f675fa794c41c",
+    "api": "posthog/python-sdk",
+    "version": "8.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "posthog",
+      "change": "removed_symbol",
+      "symbols": [
+        "_async_request.async_batch_post"
+      ]
+    },
+    "description": "`_async_request.async_batch_post` was removed in posthog 8.0.0.",
+    "migration_hint": "Use instead: Send events through a client (posthog's migration guide for 8.0.0)",
+    "source_url": "https://raw.githubusercontent.com/PostHog/posthog-python/posthog-v8.0.0/docs/migration-7.x-to-8.0.md",
+    "source_excerpt": "Fix removed APIs\n| Removed | Use instead |\n| --- | --- |\n| `request.batch_post`, `async_batch_post`, `EVENTS_ENDPOINT`, `AI_EVENTS_ENDPOINT` | Send events through a client |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:9fb8ed99a7840f76c8148d3da79ee9d391a5db28579219d944d3d2ecc96418ae",
+    "api": "posthog/python-sdk",
+    "version": "8.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "posthog",
+      "change": "removed_symbol",
+      "symbols": [
+        "request.EVENTS_ENDPOINT"
+      ]
+    },
+    "description": "`request.EVENTS_ENDPOINT` was removed in posthog 8.0.0.",
+    "migration_hint": "Use instead: Send events through a client (posthog's migration guide for 8.0.0)",
+    "source_url": "https://raw.githubusercontent.com/PostHog/posthog-python/posthog-v8.0.0/docs/migration-7.x-to-8.0.md",
+    "source_excerpt": "Fix removed APIs\n| Removed | Use instead |\n| --- | --- |\n| `request.batch_post`, `async_batch_post`, `EVENTS_ENDPOINT`, `AI_EVENTS_ENDPOINT` | Send events through a client |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:c39d1f380b736e1e5bb84d008ef468e59469aec919aabeef97ea412549c9e139",
+    "api": "posthog/python-sdk",
+    "version": "8.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "posthog",
+      "change": "removed_symbol",
+      "symbols": [
+        "request.AI_EVENTS_ENDPOINT"
+      ]
+    },
+    "description": "`request.AI_EVENTS_ENDPOINT` was removed in posthog 8.0.0.",
+    "migration_hint": "Use instead: Send events through a client (posthog's migration guide for 8.0.0)",
+    "source_url": "https://raw.githubusercontent.com/PostHog/posthog-python/posthog-v8.0.0/docs/migration-7.x-to-8.0.md",
+    "source_excerpt": "Fix removed APIs\n| Removed | Use instead |\n| --- | --- |\n| `request.batch_post`, `async_batch_post`, `EVENTS_ENDPOINT`, `AI_EVENTS_ENDPOINT` | Send events through a client |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

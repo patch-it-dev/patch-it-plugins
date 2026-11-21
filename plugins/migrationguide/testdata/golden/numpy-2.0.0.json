@@ -1,0 +1,1310 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:b0783c632fa593bf60b79b17a531b3b57a421e999cf53927142ba7edb8ce3169",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "add_docstring"
+      ]
+    },
+    "description": "np.add_docstring was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "It's still available as ``np.lib.add_docstring``. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nadd_docstring           It's still available as ``np.lib.add_docstring``.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:b41e888a7433412bc61a81d6ceba463fcafc9276fc09976ed6b32319388d2f81",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "add_newdoc"
+      ]
+    },
+    "description": "np.add_newdoc was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "It's still available as ``np.lib.add_newdoc``. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nadd_newdoc              It's still available as ``np.lib.add_newdoc``.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:126c06d99b4ddc08be5f6c574d69f5593f73bdaa9dfe4551741a54962aa902a1",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "add_newdoc_ufunc"
+      ]
+    },
+    "description": "np.add_newdoc_ufunc was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "It's an internal function and doesn't have a replacement. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nadd_newdoc_ufunc        It's an internal function and doesn't have a replacement.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:143771722bc49885b35d3b9c7001fd19e56b9c26f4b21946e73c2e40e6fa4504",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "alltrue"
+      ]
+    },
+    "description": "np.alltrue was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``all`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nalltrue                 Use ``all`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:4327f8787005edc444aece39bda8bdde02c8bbb2c725882200ae14674ca1116c",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "asfarray"
+      ]
+    },
+    "description": "np.asfarray was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``np.asarray`` with a float dtype instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nasfarray                Use ``np.asarray`` with a float dtype instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:34eb3c1db0e9914ab4b3e0f7f4dc80cc1d1d5d2d1d743663aede4bcaaa5d66c1",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "byte_bounds"
+      ]
+    },
+    "description": "np.byte_bounds was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Now it's available under ``np.lib.array_utils.byte_bounds`` (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nbyte_bounds             Now it's available under ``np.lib.array_utils.byte_bounds``",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:7b413031e868403cfadd2229a68286bc67c12fcfd9f99ae6936cc89333b7ad60",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "cast"
+      ]
+    },
+    "description": "np.cast was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``np.asarray(arr, dtype=dtype)`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\ncast                    Use ``np.asarray(arr, dtype=dtype)`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
+    "fingerprint": "sha256:96efba0d4e96431f67360a67c792c4d2e6a7d3b300593d3f5499d402a8a141fe",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "renamed_symbol",
+      "symbols": [
+        "cfloat"
+      ],
+      "replacement": "complex128"
+    },
+    "description": "np.cfloat was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``np.complex128`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\ncfloat                  Use ``np.complex128`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 9,
+    "fingerprint": "sha256:2c9778be1dd3f63b98e74f9c07c0a6bdf18e26784c8f002ed2cc39b9f52aec8d",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "renamed_symbol",
+      "symbols": [
+        "clongfloat"
+      ],
+      "replacement": "clongdouble"
+    },
+    "description": "np.clongfloat was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``np.clongdouble`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nclongfloat              Use ``np.clongdouble`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 10,
+    "fingerprint": "sha256:17cf21d49a707d39eb5bac336e6e915ba800f76cfe50d3aa7a33d5de7fbc3543",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "compat"
+      ]
+    },
+    "description": "np.compat was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "There's no replacement, as Python 2 is no longer supported. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\ncompat                  There's no replacement, as Python 2 is no longer supported.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 11,
+    "fingerprint": "sha256:ff51f64a013851f451e5776574e3a65e81cf2656c1573635f21323da7861c455",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "renamed_symbol",
+      "symbols": [
+        "complex_"
+      ],
+      "replacement": "complex128"
+    },
+    "description": "np.complex_ was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``np.complex128`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\ncomplex\\_               Use ``np.complex128`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 12,
+    "fingerprint": "sha256:69a3ba2862b32c578da907e78f05206cee14710ef791fdb55c8996f2268984d3",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "renamed_symbol",
+      "symbols": [
+        "cumproduct"
+      ],
+      "replacement": "cumprod"
+    },
+    "description": "np.cumproduct was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``np.cumprod`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\ncumproduct              Use ``np.cumprod`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 13,
+    "fingerprint": "sha256:e9143511f87c438ed0ab56301560b4daba766c10b336bea7be5bcc97efb9b4bf",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "DataSource"
+      ]
+    },
+    "description": "np.DataSource was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "It's still available as ``np.lib.npyio.DataSource``. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nDataSource              It's still available as ``np.lib.npyio.DataSource``.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 14,
+    "fingerprint": "sha256:764794a1bf403c2c6095e79a508ef212f954b1ec6f6619d3ae54355adef33d4b",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "deprecate"
+      ]
+    },
+    "description": "np.deprecate was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Emit ``DeprecationWarning`` with ``warnings.warn`` directly, or use ``typing.deprecated``. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\ndeprecate               Emit ``DeprecationWarning`` with ``warnings.warn`` directly,\n                        or use ``typing.deprecated``.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 15,
+    "fingerprint": "sha256:8715ec0959044c083b44c8c9535f74c742ae3a544671f43d5abfa5087be7790e",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "deprecate_with_doc"
+      ]
+    },
+    "description": "np.deprecate_with_doc was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Emit ``DeprecationWarning`` with ``warnings.warn`` directly, or use ``typing.deprecated``. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\ndeprecate_with_doc      Emit ``DeprecationWarning`` with ``warnings.warn`` directly,\n                        or use ``typing.deprecated``.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 16,
+    "fingerprint": "sha256:2be00bcbf01b6dd7451390a12425e16d9cc3d994b01f17fc6278f479c746b062",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "disp"
+      ]
+    },
+    "description": "np.disp was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use your own printing function instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\ndisp                    Use your own printing function instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 17,
+    "fingerprint": "sha256:f56cd36c2524684fbcbe8bd45bf74610d19797ab9cfc045f209c065d5c6a2b15",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "fastCopyAndTranspose"
+      ]
+    },
+    "description": "np.fastCopyAndTranspose was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``arr.T.copy()`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nfastCopyAndTranspose    Use ``arr.T.copy()`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 18,
+    "fingerprint": "sha256:dd911afbc6bdb4121681393823532d3eed009a278ce1e0eec6452b3e43deedaa",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "find_common_type"
+      ]
+    },
+    "description": "np.find_common_type was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``numpy.promote_types`` or ``numpy.result_type`` instead. To achieve semantics for the ``scalar_types`` argument, use ``numpy.result_type`` and pass the Python values ``0``, ``0.0``, or ``0j``. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nfind_common_type        Use ``numpy.promote_types`` or ``numpy.result_type`` instead. \n                        To achieve semantics for the ``scalar_types`` argument, \n                        use ``numpy.result_type`` and pass the Python values ``0``, \n                        ``0.0``, or ``0j``.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 19,
+    "fingerprint": "sha256:7b44dc9e7fe08590408c8f94edacfcb036286de2c7e2e80d9a92c81afdcd6a46",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "get_array_wrap"
+      ]
+    },
+    "description": "np.get_array_wrap was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": " (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nget_array_wrap",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 20,
+    "fingerprint": "sha256:8711daa446d6d4a8683f49f9db118ae5bdf53c31b4c9f77a0398d816fc25980a",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "renamed_symbol",
+      "symbols": [
+        "float_"
+      ],
+      "replacement": "float64"
+    },
+    "description": "np.float_ was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``np.float64`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nfloat\\_                 Use ``np.float64`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 21,
+    "fingerprint": "sha256:dfbe1b3d248418215f52b5f2c8e8c0b69d2b71989fa5f94f98c855f02ac5eb97",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "geterrobj"
+      ]
+    },
+    "description": "np.geterrobj was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use the np.errstate context manager instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\ngeterrobj               Use the np.errstate context manager instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 22,
+    "fingerprint": "sha256:f129fb52117ed68b20a0aa025644c24e048a6bf66deabbe05ec506094c2550ef",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "renamed_symbol",
+      "symbols": [
+        "Inf"
+      ],
+      "replacement": "inf"
+    },
+    "description": "np.Inf was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``np.inf`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nInf                     Use ``np.inf`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 23,
+    "fingerprint": "sha256:c527e0e526ce8934592299baf54a586aca4a7668a12f9e74b71cc7cc39738dc4",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "renamed_symbol",
+      "symbols": [
+        "Infinity"
+      ],
+      "replacement": "inf"
+    },
+    "description": "np.Infinity was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``np.inf`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nInfinity                Use ``np.inf`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 24,
+    "fingerprint": "sha256:0daa283517da38834730ed51076b83f24d0ad28e9fa5baf7efc56247623fdcf8",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "renamed_symbol",
+      "symbols": [
+        "infty"
+      ],
+      "replacement": "inf"
+    },
+    "description": "np.infty was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``np.inf`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\ninfty                   Use ``np.inf`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 25,
+    "fingerprint": "sha256:4e160f1fe78740c45b7668fb06a5176734867992b9f37ac4eb1680b18bf87260",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "issctype"
+      ]
+    },
+    "description": "np.issctype was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``issubclass(rep, np.generic)`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nissctype                Use ``issubclass(rep, np.generic)`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 26,
+    "fingerprint": "sha256:154c87acc07c26f96f8516063d516eee04a1d6b60840e7acf505b651d6677add",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "issubclass_"
+      ]
+    },
+    "description": "np.issubclass_ was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``issubclass`` builtin instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nissubclass\\_            Use ``issubclass`` builtin instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 27,
+    "fingerprint": "sha256:4bbfbf7969500581b7d16e9651d80d1b9358921bf589307704e2385bbedc59ac",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "renamed_symbol",
+      "symbols": [
+        "issubsctype"
+      ],
+      "replacement": "issubdtype"
+    },
+    "description": "np.issubsctype was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``np.issubdtype`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nissubsctype             Use ``np.issubdtype`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 28,
+    "fingerprint": "sha256:d4a1985a0357792efe4789c2233bad139cf8928458e0ec785ce1b1cd7fb11e73",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "renamed_symbol",
+      "symbols": [
+        "mat"
+      ],
+      "replacement": "asmatrix"
+    },
+    "description": "np.mat was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``np.asmatrix`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nmat                     Use ``np.asmatrix`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 29,
+    "fingerprint": "sha256:c88871cfc1ecb72bc4aad8cd5b6f23bcf15e380846669f8af005e30de83ef47c",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "maximum_sctype"
+      ]
+    },
+    "description": "np.maximum_sctype was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use a specific dtype instead. You should avoid relying on any implicit mechanism and select the largest dtype of a kind explicitly in the code. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nmaximum_sctype          Use a specific dtype instead. You should avoid relying\n                        on any implicit mechanism and select the largest dtype of\n                        a kind explicitly in the code.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 30,
+    "fingerprint": "sha256:4863038fb9b91d931b5fdc30826b3ad1ea5ba69328c37260ae0959fadbed7aee",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "renamed_symbol",
+      "symbols": [
+        "NaN"
+      ],
+      "replacement": "nan"
+    },
+    "description": "np.NaN was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``np.nan`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nNaN                     Use ``np.nan`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 31,
+    "fingerprint": "sha256:ec88ce6ee9843e242b2389245d90ddc4f9ec7dc22e1116f6bfe430949da19005",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "nbytes"
+      ]
+    },
+    "description": "np.nbytes was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``np.dtype(<dtype>).itemsize`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nnbytes                  Use ``np.dtype(<dtype>).itemsize`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 32,
+    "fingerprint": "sha256:eed7dac5bb066436ce0df5666bc15e405ec3955c9e167439b588243e878bff11",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "NINF"
+      ]
+    },
+    "description": "np.NINF was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``-np.inf`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nNINF                    Use ``-np.inf`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 33,
+    "fingerprint": "sha256:caca0ecc8275dd7119f4f04f80c3e8b9783d6016ba28221a4238eb2dff79e3bb",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "NZERO"
+      ]
+    },
+    "description": "np.NZERO was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``-0.0`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nNZERO                   Use ``-0.0`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 34,
+    "fingerprint": "sha256:dc18158f7f52098c8fa5647ad0f3ac016020f23d684bf3e8a204c33cf855a394",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "renamed_symbol",
+      "symbols": [
+        "longcomplex"
+      ],
+      "replacement": "clongdouble"
+    },
+    "description": "np.longcomplex was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``np.clongdouble`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nlongcomplex             Use ``np.clongdouble`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 35,
+    "fingerprint": "sha256:abdf8696910cd0012a63c8c7826a3a4ed1c43872627247b449a69d2bad8434de",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "renamed_symbol",
+      "symbols": [
+        "longfloat"
+      ],
+      "replacement": "longdouble"
+    },
+    "description": "np.longfloat was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``np.longdouble`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nlongfloat               Use ``np.longdouble`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 36,
+    "fingerprint": "sha256:863640a58894e351474344af0dbdfafd91fd40aef2323e21ded6b6d43ba5da23",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "lookfor"
+      ]
+    },
+    "description": "np.lookfor was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Search NumPy's documentation directly. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nlookfor                 Search NumPy's documentation directly.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 37,
+    "fingerprint": "sha256:5a8b83d2b15698a7e304bc6b5d7b2ccd073f4502705fb64e5db5d60218d594c1",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "obj2sctype"
+      ]
+    },
+    "description": "np.obj2sctype was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``np.dtype(obj).type`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nobj2sctype              Use ``np.dtype(obj).type`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 38,
+    "fingerprint": "sha256:35c02de167c3581dbfbbd1cb2ef0a42398a7fe0759792b5c71ba2f45ffa6af7a",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "renamed_symbol",
+      "symbols": [
+        "PINF"
+      ],
+      "replacement": "inf"
+    },
+    "description": "np.PINF was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``np.inf`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nPINF                    Use ``np.inf`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 39,
+    "fingerprint": "sha256:868ad45a4f8c29663f19bdeb84ee97653721419c4457ec2431271509ed57387f",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "renamed_symbol",
+      "symbols": [
+        "product"
+      ],
+      "replacement": "prod"
+    },
+    "description": "np.product was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``np.prod`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nproduct                 Use ``np.prod`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 40,
+    "fingerprint": "sha256:13f12000b0678c2a9990c8aba54e12e4574edd78f624e0d88fcdb981ac2d32e2",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "PZERO"
+      ]
+    },
+    "description": "np.PZERO was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``0.0`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nPZERO                   Use ``0.0`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 41,
+    "fingerprint": "sha256:136c816d0e1236b96b4f5b19fa9fd6675cf09e64048d459cd14cc014f4aafd49",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "recfromcsv"
+      ]
+    },
+    "description": "np.recfromcsv was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``np.genfromtxt`` with comma delimiter instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nrecfromcsv              Use ``np.genfromtxt`` with comma delimiter instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 42,
+    "fingerprint": "sha256:5ed93388730232ca923f22a1647cba930bedc3114dde3a5433ab2f8698dee684",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "renamed_symbol",
+      "symbols": [
+        "recfromtxt"
+      ],
+      "replacement": "genfromtxt"
+    },
+    "description": "np.recfromtxt was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``np.genfromtxt`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nrecfromtxt              Use ``np.genfromtxt`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 43,
+    "fingerprint": "sha256:b6db560c04fea4149c33667d36aeba13d6706d1f78887f9e7e7f38dcdd61f92d",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "renamed_symbol",
+      "symbols": [
+        "round_"
+      ],
+      "replacement": "round"
+    },
+    "description": "np.round_ was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``np.round`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nround\\_                 Use ``np.round`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 44,
+    "fingerprint": "sha256:bee468fe3c58f14587d4a58871a1662d9f0d832361b740634683a7a285ac43f0",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "safe_eval"
+      ]
+    },
+    "description": "np.safe_eval was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``ast.literal_eval`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nsafe_eval               Use ``ast.literal_eval`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 45,
+    "fingerprint": "sha256:914dfac763acc9361bbfdec6541a697ae7763bf09a2240c9cbd1fafe78d1f531",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "sctype2char"
+      ]
+    },
+    "description": "np.sctype2char was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``np.dtype(obj).char`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nsctype2char             Use ``np.dtype(obj).char`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 46,
+    "fingerprint": "sha256:ba6b201483db19e04bacc9e46ee1c2c9e58ec4cd51bb9216e2be39fe3a76d594",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "sctypes"
+      ]
+    },
+    "description": "np.sctypes was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Access dtypes explicitly instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nsctypes                 Access dtypes explicitly instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 47,
+    "fingerprint": "sha256:7d680b6a440b3a14ac495e905a379f0eec3527c49e1cc98403bff35ff6bd66f0",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "seterrobj"
+      ]
+    },
+    "description": "np.seterrobj was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use the np.errstate context manager instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nseterrobj               Use the np.errstate context manager instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 48,
+    "fingerprint": "sha256:9ed3f595c62d8e9780887a58970e82c9af7d416b0457ceac0bf1cc55a518b0c6",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "set_numeric_ops"
+      ]
+    },
+    "description": "np.set_numeric_ops was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "For the general case, use ``PyUFunc_ReplaceLoopBySignature``. For ndarray subclasses, define the ``__array_ufunc__`` method and override the relevant ufunc. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nset_numeric_ops         For the general case, use ``PyUFunc_ReplaceLoopBySignature``. \n                        For ndarray subclasses, define the ``__array_ufunc__`` method \n                        and override the relevant ufunc.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 49,
+    "fingerprint": "sha256:ced822e6a5b1ef208d6a8df0f78f9f542bd19bf3219fffeda83039d3bdd3c492",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "set_string_function"
+      ]
+    },
+    "description": "np.set_string_function was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``np.set_printoptions`` instead with a formatter for custom printing of NumPy objects. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nset_string_function     Use ``np.set_printoptions`` instead with a formatter \n                        for custom printing of NumPy objects.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 50,
+    "fingerprint": "sha256:d94b2c6839f05465a1c6437c3e1a5316596258e5d999abca0e3f942cf8b1bdd7",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "renamed_symbol",
+      "symbols": [
+        "singlecomplex"
+      ],
+      "replacement": "complex64"
+    },
+    "description": "np.singlecomplex was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``np.complex64`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nsinglecomplex           Use ``np.complex64`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 51,
+    "fingerprint": "sha256:da92a61aba8cbc8ae017a52ed418811d6c464e05c7df1945bf513e2f1617c667",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "renamed_symbol",
+      "symbols": [
+        "string_"
+      ],
+      "replacement": "bytes_"
+    },
+    "description": "np.string_ was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``np.bytes_`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nstring\\_                Use ``np.bytes_`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 52,
+    "fingerprint": "sha256:0d4bd197cb31ba8d395640fe104102c0e549b4e0f63c3a6557159f62f28255d1",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "sometrue"
+      ]
+    },
+    "description": "np.sometrue was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``any`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nsometrue                Use ``any`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 53,
+    "fingerprint": "sha256:0244a14e2f675fc4f2d854012e79e2242c3441b855dfc0acad32a69fcd837121",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "source"
+      ]
+    },
+    "description": "np.source was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``inspect.getsource`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nsource                  Use ``inspect.getsource`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 54,
+    "fingerprint": "sha256:120004adecac61928b41859f183e0ea707c9218d6d1270b743699b1980984c7b",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "tracemalloc_domain"
+      ]
+    },
+    "description": "np.tracemalloc_domain was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "It's now available from ``np.lib``. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\ntracemalloc_domain      It's now available from ``np.lib``.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 55,
+    "fingerprint": "sha256:a142b4adeea44bce0f23cdd28e54f874fd13f180494362e26aa85ae825ec80a8",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "renamed_symbol",
+      "symbols": [
+        "unicode_"
+      ],
+      "replacement": "str_"
+    },
+    "description": "np.unicode_ was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use ``np.str_`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nunicode\\_               Use ``np.str_`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 56,
+    "fingerprint": "sha256:d2ba751b9e8289c6e868330d2ea952ba118290c301dea8c809e8b617bbdc1f1c",
+    "api": "numpy/numpy",
+    "version": "2.0.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "change": "removed_symbol",
+      "symbols": [
+        "who"
+      ]
+    },
+    "description": "np.who was removed in numpy 2.0.0: code using it raises AttributeError.",
+    "migration_hint": "Use an IDE variable explorer or ``locals()`` instead. (numpy's migration guide for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst",
+    "source_excerpt": "Main namespace\n======================  =================================================================\nremoved member          migration guideline\n======================  =================================================================\nwho                     Use an IDE variable explorer or ``locals()`` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

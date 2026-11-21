@@ -1,10 +1,10 @@
-# Algolia (`algolia-search`, `algolia-ingestion`, `algolia-recommend`)
+# Algolia (`algolia/search-api`, `algolia/ingestion-api`, `algolia/recommend-api`)
 
 ## What it watches
 
 Three of Algolia's REST APIs, one plugin each: the Search API (`algolia-search`), the Ingestion API (`algolia-ingestion`) and the Recommend API (`algolia-recommend`). Each reports operations Algolia marks deprecated, and removals of operations it had marked deprecated, between two releases of that API's OpenAPI spec.
 
-Format plugin: `openapi` (`plugins/openapi`), with `adapter.Algolia`.
+Kind: `openapi` (`plugins/openapi`), with `adapter.Algolia`.
 
 ## Why this source
 

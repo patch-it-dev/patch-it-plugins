@@ -1,10 +1,10 @@
-# Neon (`neon`)
+# Neon (`neon/api`)
 
 ## What it watches
 
 The Neon API (`console.neon.tech/api/v2`), the management API for Neon projects, branches, computes, databases and roles: operations Neon marks deprecated, and removals of operations it had marked deprecated, between two versions of the API's OpenAPI spec.
 
-Format plugin: `openapi` (`plugins/openapi`), with `adapter.Neon`.
+Kind: `openapi` (`plugins/openapi`), with `adapter.Neon`.
 
 ## Why this source
 
@@ -40,7 +40,7 @@ Format plugin: `openapi` (`plugins/openapi`), with `adapter.Neon`.
   - **`x-sunset` dates and "Removal scheduled" words:** quoted in the deprecation's excerpt, but not events of their own, since the operations outlive them.
   - **Request and response property changes, and new operations.**
 - **History:** over the 23 commits this keeps 1 event: the deprecation of `POST /projects/{project_id}/branches/{branch_id}/auth/send_test_email` (beta) on 2026-08-23. The other 15 deprecated operations were already flagged in the first commit.
-- **Replays** a historical pair (`Replay`, from `5c57d009` to `93b93dc9`) and recreates that deprecation (the golden test). The drop test replays `4c6b3be4` to `4497de89`, the `recover` removal.
+- **Reads** a historical pair (a version pair, `5c57d009` → `93b93dc9`) and recreates that deprecation (the golden test). The drop test replays `4c6b3be4` to `4497de89`, the `recover` removal.
 - **A kept removal:** none happened in neon-pkgs's history, so a test replays the same spec from `@neondatabase/api-client` 2.7.2 to 2.7.3 (a different source, used only for this test): `GET /consumption_history/account`, deprecated and then removed, the removal Neon's changelog announced. That's one breaking event.
 
 ## Known gaps

@@ -56,11 +56,11 @@ func planetscalePlugin(t *testing.T) (Plugin, string) {
 	return Plugin{Adapter: a, Diff: planetscaleDiff, Keep: planetscaleKeep}, srv.URL + "/raw" + repo
 }
 
-func replayPlanetScale(t *testing.T, p Plugin, from, to string) []event.EventV2 {
+func pairPlanetScale(t *testing.T, p Plugin, from, to string) []event.Event {
 	t.Helper()
 	s := openStore(t)
-	if rejected, err := kittest.Replay(context.Background(), vercelEnv(s), s, p, from, to); err != nil || rejected {
-		t.Fatalf("replay %s -> %s: rejected=%v err=%v", from, to, rejected, err)
+	if rejected, err := kittest.Pair(context.Background(), vercelEnv(s), s, p, from, to); err != nil || rejected {
+		t.Fatalf("pair %s -> %s: rejected=%v err=%v", from, to, rejected, err)
 	}
 	return kittest.Stored(t, s)
 }
@@ -74,7 +74,7 @@ func replayPlanetScale(t *testing.T, p Plugin, from, to string) []event.EventV2 
 func TestPlanetScaleGolden(t *testing.T) {
 	p, base := planetscalePlugin(t)
 	const from, to = "e631095aa649a6797578a1d51d861b91e0568aa1", "fc13e09d0c18b893aabd3e02d175d13957bba677"
-	events := replayPlanetScale(t, p, from, to)
+	events := pairPlanetScale(t, p, from, to)
 	const branch = "/v1/organizations/{organization}/databases/{database}/branches/{branch}"
 	want := map[string]bool{
 		"GET " + branch + "/bouncers/{bouncer}/resizes":    true,
@@ -127,13 +127,13 @@ func TestPlanetScaleGolden(t *testing.T) {
 func TestPlanetScaleDropsRemovalsThatWerentDeprecated(t *testing.T) {
 	p, _ := planetscalePlugin(t)
 	const from, to = "b49c354080667638b79781801f0517ae07bc55b8", "f6d6ad4d3929f6c1ef021eb13c1541ba31f72107"
-	if events := replayPlanetScale(t, p, from, to); len(events) != 0 {
+	if events := pairPlanetScale(t, p, from, to); len(events) != 0 {
 		t.Fatalf("%d events, want none: %s", len(events), events[0].Description)
 	}
 	p.Keep = nil
 	var removed []string
-	for _, e := range replayPlanetScale(t, p, from, to) {
-		if e.Breaking && e.Subject.Kind == event.AffectedKindOperation && strings.HasSuffix(e.Description, " removed.") {
+	for _, e := range pairPlanetScale(t, p, from, to) {
+		if e.Breaking && e.Subject.Kind == event.KindOperation && strings.HasSuffix(e.Description, " removed.") {
 			removed = append(removed, e.Subject.Operation)
 		}
 	}

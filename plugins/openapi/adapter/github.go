@@ -32,7 +32,7 @@ type GitHub struct{}
 
 var _ Adapter = GitHub{}
 
-func (GitHub) API() string { return "github" }
+func (GitHub) API() string { return "github/rest-api" }
 
 // LatestTag asks GitHub for every API version it currently supports and
 // returns the newest, by string order (the dates sort correctly as text).

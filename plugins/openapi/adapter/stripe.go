@@ -29,7 +29,7 @@ type Stripe struct{}
 // Compile-time check that Stripe actually satisfies Adapter.
 var _ Adapter = Stripe{}
 
-func (Stripe) API() string { return "stripe" }
+func (Stripe) API() string { return "stripe/api" }
 
 // LatestTag asks GitHub for Stripe's newest openapi release tag, e.g. "v2468".
 func (Stripe) LatestTag(ctx context.Context) (string, error) {

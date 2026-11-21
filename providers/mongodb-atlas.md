@@ -1,10 +1,10 @@
-# MongoDB Atlas (`mongodb-atlas`)
+# MongoDB Atlas (`mongodb/atlas-admin-api`)
 
 ## What it watches
 
 The MongoDB Atlas Administration API (`/api/atlas/v2`): an endpoint's API version deprecated (unless MongoDB reactivates it), and an endpoint's API version removed at its sunset date, as MongoDB lists them in its own machine-readable API changelog.
 
-Format plugin: `apichangelog` (`plugins/apichangelog`), with the `MongoDBAtlas` log.
+Kind: `changelog` (`plugins/changelog`), with its JSON parser (`json.go`) and the `MongoDBAtlas` log.
 
 ## Why this source
 

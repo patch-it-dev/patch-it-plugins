@@ -80,12 +80,12 @@ func sentryPlugin(t *testing.T) (Plugin, string) {
 	return Plugin{Adapter: a, Diff: sentryDiff, Keep: sentryKeep}, srv.URL + "/raw/getsentry/sentry-api-schema"
 }
 
-func replaySentry(t *testing.T, p Plugin, pairs ...[2]string) []event.EventV2 {
+func pairSentry(t *testing.T, p Plugin, pairs ...[2]string) []event.Event {
 	t.Helper()
 	s := openStore(t)
 	for _, pair := range pairs {
-		if rejected, err := kittest.Replay(context.Background(), vercelEnv(s), s, p, pair[0], pair[1]); err != nil || rejected {
-			t.Fatalf("replay %s -> %s: rejected=%v err=%v", pair[0], pair[1], rejected, err)
+		if rejected, err := kittest.Pair(context.Background(), vercelEnv(s), s, p, pair[0], pair[1]); err != nil || rejected {
+			t.Fatalf("pair %s -> %s: rejected=%v err=%v", pair[0], pair[1], rejected, err)
 		}
 	}
 	return kittest.Stored(t, s)
@@ -105,7 +105,7 @@ func replaySentry(t *testing.T, p Plugin, pairs ...[2]string) []event.EventV2 {
 // Each event cites the description, in the commit's file.
 func TestSentryGolden(t *testing.T) {
 	p, base := sentryPlugin(t)
-	events := replaySentry(t, p,
+	events := pairSentry(t, p,
 		[2]string{"ead7f0cf9ccb8ac817105ac11bb94fe316fcb337", "4650a66a859e015cccef2c171b115633321768e9"},
 		[2]string{"d64149d65723484ca4d34c956ad017a66e1a4e07", "c2f638f601baadcb055aec4ca3c2ba9f2654c087"},
 		[2]string{"47231e6180b34f222ed462b1d0cb3cdb951cc4e7", "1da1f31fac696201b1a7d20046fc199c8b1324b6"},
@@ -152,11 +152,11 @@ func TestSentryGolden(t *testing.T) {
 // date both deprecations 2026-06-16.
 func TestSentryFlagAfterWordsIsNotNew(t *testing.T) {
 	p, _ := sentryPlugin(t)
-	if events := replaySentry(t, p, [2]string{"0.223.0", "0.224.0"}); len(events) != 0 {
+	if events := pairSentry(t, p, [2]string{"0.223.0", "0.224.0"}); len(events) != 0 {
 		t.Fatalf("%d events, want none", len(events))
 	}
 	p.Diff.DeprecatedDescription = nil
-	events := replaySentry(t, p, [2]string{"0.223.0", "0.224.0"})
+	events := pairSentry(t, p, [2]string{"0.223.0", "0.224.0"})
 	var ops []string
 	for _, e := range events {
 		if strings.HasSuffix(e.SourcePointer, "/description") || !strings.Contains(e.SourceExcerpt, `"deprecated":true`) {
@@ -173,8 +173,8 @@ func TestSentryFlagAfterWordsIsNotNew(t *testing.T) {
 // moving /api/0 into the paths.
 type rawSentry struct{}
 
-func (rawSentry) API() string                               { return "sentry" }
-func (rawSentry) LatestTag(context.Context) (string, error) { return "", fmt.Errorf("replay only") }
+func (rawSentry) API() string                               { return "sentry/api" }
+func (rawSentry) LatestTag(context.Context) (string, error) { return "", fmt.Errorf("pairs only") }
 func (rawSentry) Fetch(_ context.Context, tag string) (adapter.Spec, error) {
 	body, err := os.ReadFile(sentryFile(tag))
 	return adapter.Spec{Content: body, Version: sentryTags[tag][:10], SourceURL: "https://example.invalid/" + tag}, err
@@ -187,15 +187,15 @@ func (rawSentry) Fetch(_ context.Context, tag string) (adapter.Spec, error) {
 // rule that kept removals of deprecated operations would report it shut down.
 func TestSentryBasePathMoveIsNoChange(t *testing.T) {
 	p, base := sentryPlugin(t)
-	if events := replaySentry(t, p, [2]string{"2.0.1", "2.1.0"}); len(events) != 0 {
+	if events := pairSentry(t, p, [2]string{"2.0.1", "2.1.0"}); len(events) != 0 {
 		t.Fatalf("%d events, want none", len(events))
 	}
 
 	// Unfiltered, what the move leaves is a few property changes, and every
 	// pointer names a node in the file as published, without /api/0.
 	p.Keep = nil
-	for _, e := range replaySentry(t, p, [2]string{"2.0.1", "2.1.0"}) {
-		if e.ChangeType == event.ChangeTypeBreaking && e.Subject.Kind == event.AffectedKindOperation {
+	for _, e := range pairSentry(t, p, [2]string{"2.0.1", "2.1.0"}) {
+		if e.ChangeType == event.ChangeTypeBreaking && e.Subject.Kind == event.KindOperation {
 			t.Errorf("unfiltered: %s %s", e.ChangeType, e.Subject.Operation)
 		}
 		ref := strings.TrimSuffix(strings.TrimPrefix(e.SourceURL, base+"/"), "/openapi-derefed.json")
@@ -207,8 +207,8 @@ func TestSentryBasePathMoveIsNoChange(t *testing.T) {
 	// As published: every operation of 2.0.1 removed.
 	raw := Plugin{Adapter: rawSentry{}, Diff: sentryDiff}
 	var removed []string
-	for _, e := range replaySentry(t, raw, [2]string{"2.0.1", "2.1.0"}) {
-		if e.ChangeType == event.ChangeTypeBreaking && e.Subject.Kind == event.AffectedKindOperation {
+	for _, e := range pairSentry(t, raw, [2]string{"2.0.1", "2.1.0"}) {
+		if e.ChangeType == event.ChangeTypeBreaking && e.Subject.Kind == event.KindOperation {
 			removed = append(removed, e.Subject.Operation)
 		}
 	}
@@ -216,7 +216,7 @@ func TestSentryBasePathMoveIsNoChange(t *testing.T) {
 		t.Errorf("as published: removed %v, want the 5 operations of the saved 2.0.1", removed)
 	}
 	raw.Keep = deprecationsOnly(sentryDiff)
-	events := replaySentry(t, raw, [2]string{"2.0.1", "2.1.0"})
+	events := pairSentry(t, raw, [2]string{"2.0.1", "2.1.0"})
 	if len(events) != 1 || events[0].Subject.Operation != "GET /api/0/projects/{organization_id_or_slug}/{project_id_or_slug}/issues/" || !events[0].Breaking {
 		t.Errorf("as published, removals of deprecated operations: %d events, want GET .../issues/ removed", len(events))
 	}
@@ -234,12 +234,12 @@ func TestSentryDeprecationWordsThatArentDeprecations(t *testing.T) {
 		{"e8ec23b4c9601dea2d51205983ec1d7b89550b85", "1ef7f21a0501fae9490d69e3ae29f0d5acbfb61c"},
 	}
 	p, _ := sentryPlugin(t)
-	if events := replaySentry(t, p, pairs...); len(events) != 0 {
+	if events := pairSentry(t, p, pairs...); len(events) != 0 {
 		t.Fatalf("%d events, want none: %v", len(events), events[0].Subject.Operation)
 	}
 	loose := regexp.MustCompile(`(?i)deprecat`)
 	p.Diff.DeprecatedDescription = loose.MatchString
-	if events := replaySentry(t, p, pairs...); len(events) != 2 {
+	if events := pairSentry(t, p, pairs...); len(events) != 2 {
 		t.Errorf("matching %q: %d events, want the 2 wrong ones", loose, len(events))
 	}
 }

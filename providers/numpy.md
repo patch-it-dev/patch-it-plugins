@@ -1,10 +1,10 @@
-# NumPy (`numpy`)
+# NumPy (`numpy/numpy`)
 
 ## What it watches
 
 Members removed from or renamed in NumPy's main namespace in 2.0.0 (`np.float_`, `np.NaN`, `np.product` and about fifty more): code using one raises `AttributeError`. One event per member. Pinned to that release.
 
-Format plugin: `removedmembers` (`plugins/removedmembers`).
+Kind: `migrationguide` (`plugins/migrationguide`), with the removed-members reader (`plugins/migrationguide/members`).
 
 ## Why this source
 

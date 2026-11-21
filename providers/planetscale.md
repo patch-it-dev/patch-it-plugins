@@ -1,10 +1,10 @@
-# PlanetScale (`planetscale`)
+# PlanetScale (`planetscale/api`)
 
 ## What it watches
 
 The PlanetScale API (`api.planetscale.com/v1`): operations PlanetScale marks deprecated, and removals of operations it had marked deprecated, between two versions of the API's OpenAPI spec. PlanetScale says it in the operation's description, never with the `deprecated` flag.
 
-Format plugin: `openapi` (`plugins/openapi`), with `adapter.PlanetScale`.
+Kind: `openapi` (`plugins/openapi`), with `adapter.PlanetScale`.
 
 ## Why this source
 
@@ -40,7 +40,7 @@ Format plugin: `openapi` (`plugins/openapi`), with `adapter.PlanetScale`.
   - **Removals of operations that were never deprecated.** 41 in the history: 1 on 2026-06-01, 7 on 2026-10-03, 17 on 2026-10-14, 7 on 2026-10-23, 9 on 2026-11-09. On 2026-10-03, 6 of them were the read-only replica operations, renamed to dedicated read replicas, and on 2026-11-19 planetscale-go's `main` still sends `.../read-only-replicas` ("the deprecated read-only-replicas path", in its own words). Leaving the spec isn't the same as stopping working.
   - **Request and response property changes, and new operations.** The history has 216 new operations, and the property side is noisy: 226 type changes on 2025-12-06 alone, when whole numbers became `integer`.
 - Over the 31 consecutive pairs this keeps 5 events, all deprecations on 2026-11-09 (`fc13e09d`): `GET` and `DELETE .../bouncers/{bouncer}/resizes`, `GET .../neki-changes`, `GET` and `DELETE .../neki-changes/{id}`. A pattern matching "deprecat" anywhere in the description finds the same 5.
-- **Replays** a historical pair (`Replay`, from `e631095a` to `fc13e09d`) and recreates those 5. The drop test replays `b49c3540` to `f6d6ad4d` (the replica rename): no event, where the same pair unfiltered reports the 7 removals.
+- **Reads** a historical pair (a version pair, `e631095a` → `fc13e09d`) and recreates those 5. The drop test replays `b49c3540` to `f6d6ad4d` (the replica rename): no event, where the same pair unfiltered reports the 7 removals.
 
 ## Known gaps
 

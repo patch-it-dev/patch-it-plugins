@@ -24,9 +24,9 @@ var esHeads = map[string]string{
 
 type fakeESAdapter struct{}
 
-func (fakeESAdapter) API() string { return "elasticsearch" }
+func (fakeESAdapter) API() string { return "elastic/elasticsearch-api" }
 
-func (fakeESAdapter) LatestTag(context.Context) (string, error) { return "", fmt.Errorf("replay only") }
+func (fakeESAdapter) LatestTag(context.Context) (string, error) { return "", fmt.Errorf("pairs only") }
 
 func (fakeESAdapter) Fetch(_ context.Context, branch string) (adapter.Spec, error) {
 	if _, ok := esHeads[branch]; !ok {
@@ -71,8 +71,8 @@ func TestElasticsearchNoRemovalWithinAMinor(t *testing.T) {
 	s := openStore(t)
 	p := esPlugin()
 	p.Adapter = sameMinor{}
-	if rejected, err := kittest.Replay(ctx, vercelEnv(s), s, p, "8.19", "9.0"); err != nil || rejected {
-		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
+	if rejected, err := kittest.Pair(ctx, vercelEnv(s), s, p, "8.19", "9.0"); err != nil || rejected {
+		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}
 	n := map[event.ChangeType]int{}
 	for _, e := range kittest.Stored(t, s) {
@@ -92,8 +92,8 @@ func TestElasticsearchNoRemovalWithinAMinor(t *testing.T) {
 func TestElasticsearchGolden(t *testing.T) {
 	ctx := context.Background()
 	s := openStore(t)
-	if rejected, err := kittest.Replay(ctx, vercelEnv(s), s, esPlugin(), "8.19", "9.0"); err != nil || rejected {
-		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
+	if rejected, err := kittest.Pair(ctx, vercelEnv(s), s, esPlugin(), "8.19", "9.0"); err != nil || rejected {
+		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}
 	events := kittest.Stored(t, s)
 	byType := map[event.ChangeType][]string{}
@@ -142,8 +142,8 @@ func TestElasticsearchGolden(t *testing.T) {
 func TestElasticsearchDropsUndeprecatedRemovals(t *testing.T) {
 	ctx := context.Background()
 	s := openStore(t)
-	if rejected, err := kittest.Replay(ctx, vercelEnv(s), s, esPlugin(), "9.1", "9.2"); err != nil || rejected {
-		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
+	if rejected, err := kittest.Pair(ctx, vercelEnv(s), s, esPlugin(), "9.1", "9.2"); err != nil || rejected {
+		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}
 	if events := kittest.Stored(t, s); len(events) != 0 {
 		t.Fatalf("%d events, want none", len(events))
@@ -151,7 +151,7 @@ func TestElasticsearchDropsUndeprecatedRemovals(t *testing.T) {
 	s = openStore(t)
 	p := esPlugin()
 	p.Keep = nil
-	if _, err := kittest.Replay(ctx, vercelEnv(s), s, p, "9.1", "9.2"); err != nil {
+	if _, err := kittest.Pair(ctx, vercelEnv(s), s, p, "9.1", "9.2"); err != nil {
 		t.Fatal(err)
 	}
 	var removed int

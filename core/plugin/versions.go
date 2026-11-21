@@ -15,11 +15,12 @@ import (
 //	result, _ := s.Extract(ctx, env, a, b)            // what changed from a to b
 //
 // Every consecutive pair is one Extract; a released version never changes, so
-// a pair is done once. Run keeps working: it reads the newest version and
-// extracts against the last baseline, as before.
+// a pair is done once.
 //
-// A source with no versions of its own (a deprecations page, a feed) has only
-// Run: patch-it's hosted ingestion service reads it as a living page.
+// A living page (a deprecations page, a feed: the notices kind) is also read
+// as it is now by Run, which compares it with the last baseline and cites a
+// fresh Web Archive snapshot of it; its history is its Web Archive captures,
+// listed as versions.
 
 // Version is one version of a source.
 type Version struct {

@@ -10,4 +10,5 @@ func TestRegistersItself(t *testing.T) {
 	for _, f := range []File{Textual0860, Urllib3200} {
 		kittest.Registered(t, Plugin{File: f})
 	}
+	kittest.Registered(t, Plugin{Log: MongoDBAtlas})
 }

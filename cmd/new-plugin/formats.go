@@ -4,6 +4,7 @@ package main
 // definition goes, the line that registers it, the placeholder sources its
 // test reads, and how the test runs it.
 type formatSpec struct {
+	kind     string            // the kind: the plugins/<kind> package that registers and tests it
 	layer    string            // the source's default layer (plugin.Layers())
 	defDir   string            // the package directory the definition goes in
 	def      string            // the definition file (template)
@@ -17,21 +18,22 @@ type formatSpec struct {
 	next     string            // a format-specific line for the next steps
 	drop     string            // the drop test, when "no event at all" can't be it (template)
 	dropFile string            // the drop test's placeholder, when not a copy of the source's
-	mapEntry *mapEntry         // an entry the format needs in a map elsewhere
-}
-
-// mapEntry is a line added to a map literal in another package: the v1 -> v2
-// conversion in migrate/ knows each model retirement page and SDK guide.
-type mapEntry struct {
-	file, varName, entry string // entry is a template
 }
 
 const todo = "TODO(new-plugin)"
 
+// defaultReaders are the reader --kind picks when --reader is left out.
+var defaultReaders = map[string]string{
+	"notices":        "deprecations",
+	"migrationguide": "sdk",
+	"changelog":      "markdown",
+}
+
 var formats = map[string]formatSpec{
-	"feed": {
+	"notices/feed": {
+		kind:   "notices",
 		layer:  "api",
-		defDir: "plugins/feed",
+		defDir: "plugins/notices/feed",
 		def: `package feed
 
 // {{.Ident}} is {{.Provider}}'s feed of changes.
@@ -58,8 +60,8 @@ func read{{.Ident}}(e Entry) []Finding {
 	return nil
 }
 `,
-		register: `plugin.Register(Plugin{Feed: {{.Ident}}, Archiver: kit.Wayback{}})`,
-		pluginOf: `Plugin{Feed: {{.Ident}}}`,
+		register: `plugin.Register(Plugin{Page: feed.{{.Ident}}, Archiver: kit.Wayback{}})`,
+		pluginOf: `Plugin{Page: feed.{{.Ident}}}`,
 		fixtures: map[string]string{"{{.File}}.rss.xml": `<?xml version="1.0" encoding="UTF-8"?>
 <!-- ` + todo + `: a placeholder. Replace it with a real copy of {{.Source}} (curl -o) and list it in README.md. -->
 <rss version="2.0"><channel><title>placeholder</title><link>https://example.com/</link><description>placeholder</description>
@@ -69,19 +71,20 @@ func read{{.Ident}}(e Entry) []Finding {
 		source: "{{.File}}.rss.xml",
 		ingest: `// {{.Lower}}Ingest runs the plugin over a saved copy of the feed, cited
 // through a test archive that serves the same copy.
-func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
+func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
-	saved := kittest.Pages{ {{.Ident}}.URL: file}
+	saved := kittest.Pages{feed.{{.Ident}}.URL: file}
 	archive := &kittest.Archive{T: t, Pages: saved}
-	return kittest.IngestWith(t, kittest.Env(t, saved), Plugin{Feed: {{.Ident}}, Archiver: archive})
+	return kittest.IngestWith(t, kittest.Env(t, saved), Plugin{Page: feed.{{.Ident}}, Archiver: archive})
 }
 `,
-		imports: []string{"github.com/patch-it-dev/patch-it-plugins/core/event"},
+		imports: []string{"github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/plugins/notices/feed"},
 	},
 
-	"retirements": {
+	"notices/deprecations": {
+		kind:   "notices",
 		layer:  "ai-models",
-		defDir: "plugins/retirements/retire",
+		defDir: "plugins/notices/retire",
 		def: `package retire
 
 import "strings"
@@ -93,18 +96,16 @@ import "strings"
 // date" or "Retirement date" column first, then the model and its
 // replacement), how far back it goes.
 var {{.Ident}} = Page{
-	API:    "{{.ID}}",
-	Vendor: "{{.Provider}}",
-	URL:    "{{.Source}}",
-	// ` + todo + `: the provider's main call that takes a model name.
-	Operation: "POST /v1/TODO",
-	// ` + todo + `: keep the model names the operation above takes (text
-	// models, not image or embedding ones), as openAIText in providers.go does.
+	API:      "{{.ID}}",
+	Provider: "{{.ProviderID}}",
+	Vendor:   "{{.Provider}}",
+	URL:      "{{.Source}}",
+	// ` + todo + `: keep the model names the provider's calls take as text
+	// models (not image or embedding ones), as openAIText in providers.go does.
 	Keep: func(name string) bool { return strings.HasPrefix(name, "placeholder-text-") },
 }
 `,
 		register: `plugin.Register(Plugin{Page: retire.{{.Ident}}, Archiver: kit.Wayback{}})`,
-		mapEntry: &mapEntry{"core/migrate/migrate.go", "providers", `retire.{{.Ident}}.API: "{{.Slug}}"`},
 		pluginOf: `Plugin{Page: retire.{{.Ident}}}`,
 		fixtures: map[string]string{"{{.File}}-deprecations.md": `# Placeholder deprecations page
 
@@ -142,17 +143,18 @@ func Test{{.Ident}}DropsANonChange(t *testing.T) {
 		source: "{{.File}}-deprecations.md",
 		ingest: `// {{.Lower}}Ingest runs the plugin over a saved copy of the page, cited
 // through a test archive that serves the same copy.
-func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
+func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
 	saved := kittest.Pages{retire.{{.Ident}}.URL: file}
 	archive := &kittest.Archive{T: t, Pages: saved}
 	return kittest.IngestWith(t, kittest.Env(t, saved), Plugin{Page: retire.{{.Ident}}, Archiver: archive})
 }
 `,
-		imports: []string{"encoding/json", "strings", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/plugins/retirements/retire"},
+		imports: []string{"encoding/json", "strings", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/plugins/notices/retire"},
 	},
 
-	"migrationguide": {
+	"migrationguide/sdk": {
+		kind:   "migrationguide",
 		layer:  "sdk",
 		defDir: "plugins/migrationguide/sdkguide",
 		def: `package sdkguide
@@ -160,20 +162,18 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 // {{.Ident}} is {{.Provider}}'s SDK guide to a major release (MIGRATION.md at
 // the release tag).
 //
-// ` + todo + `: the repo, the major release, the API operation the removed
-// parameters were sent to, and the calls the guide's table names. Say what
-// you checked, with the date.
+// ` + todo + `: the PyPI name, the repo, the major release and the calls the
+// guide's table names. Say what you checked, with the date.
 var {{.Ident}} = Guide{
-	API:       "{{.ID}}",
-	Repo:      "TODO-owner/TODO-repo",
-	Major:     1,
-	Operation: "POST /v1/TODO",
-	Methods:   "` + "`TODO.create()`" + `",
-	Symbols:   []string{"TODO.create"},
+	API:     "{{.ID}}",
+	Package: "{{.PyPI}}",
+	Repo:    "TODO-owner/TODO-repo",
+	Major:   1,
+	Methods: "` + "`TODO.create()`" + `",
+	Symbols: []string{"TODO.create"},
 }
 `,
 		register: `plugin.Register(Plugin{Guide: sdkguide.{{.Ident}}})`,
-		mapEntry: &mapEntry{"core/migrate/migrate.go", "guides", `sdkguide.{{.Ident}}.API: sdkguide.{{.Ident}}`},
 		pluginOf: `Plugin{Guide: sdkguide.{{.Ident}}}`,
 		fixtures: map[string]string{"{{.File}}-MIGRATION.md": `# Migrating to v1
 
@@ -210,7 +210,7 @@ func Test{{.Ident}}DropsANonChange(t *testing.T) {
 `,
 		source: "{{.File}}-MIGRATION.md",
 		ingest: `// {{.Lower}}Ingest runs the plugin over a saved copy of the guide.
-func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
+func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
 	return kittest.Ingest(t, Plugin{Guide: sdkguide.{{.Ident}}}, kittest.Pages{sdkguide.{{.Ident}}.URL(): file})
 }
@@ -218,10 +218,11 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 		imports: []string{"encoding/json", "strings", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide/sdkguide"},
 	},
 
-	"removedmembers": {
+	"migrationguide/members": {
+		kind:   "migrationguide",
 		layer:  "package",
-		defDir: "plugins/removedmembers",
-		def: `package removedmembers
+		defDir: "plugins/migrationguide/members",
+		def: `package members
 
 // {{.Ident}} is {{.Provider}}'s migration guide to a release, with its table
 // of removed members.
@@ -230,16 +231,17 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 // the repo, the guide's path at the release tag and the heading the table is
 // under. Say what you checked, with the date.
 var {{.Ident}} = Guide{
-	Package: "{{.ID}}",
-	Module:  "{{.ID}}",
+	API:     "{{.ID}}",
+	Package: "{{.PyPI}}",
+	Module:  "{{.Module}}",
 	Release: "1.0.0",
 	Repo:    "TODO-owner/TODO-repo",
 	Path:    "TODO/migration_guide.rst",
 	Section: "Removed members",
 }
 `,
-		register: `plugin.Register(Plugin{Guide: {{.Ident}}})`,
-		pluginOf: `Plugin{Guide: {{.Ident}}}`,
+		register: `plugin.Register(Plugin{Guide: members.{{.Ident}}})`,
+		pluginOf: `Plugin{Guide: members.{{.Ident}}}`,
 		fixtures: map[string]string{"{{.File}}-migration-guide.rst": `.. ` + todo + `: a placeholder. Replace it with a real copy of the guide at the release tag and list it in README.md.
 
 Removed members
@@ -248,7 +250,7 @@ Removed members
 ======================  ==========================
 Removed member          Migration guideline
 ======================  ==========================
-placeholder_member      Use ` + "``{{.ID}}.placeholder_new``" + ` instead.
+placeholder_member      Use ` + "``{{.Module}}.placeholder_new``" + ` instead.
 ======================  ==========================
 `},
 		dropFile: `.. ` + todo + `: a placeholder. Replace it with a real copy of the guide and say in the test why its other table is no removal.
@@ -259,7 +261,7 @@ Removed members
 ======================  ==========================
 Removed member          Migration guideline
 ======================  ==========================
-placeholder_member      Use ` + "``{{.ID}}.placeholder_new``" + ` instead.
+placeholder_member      Use ` + "``{{.Module}}.placeholder_new``" + ` instead.
 ======================  ==========================
 
 Other members
@@ -278,22 +280,23 @@ placeholder_elsewhere   Not in the main table.
 func Test{{.Ident}}DropsANonChange(t *testing.T) {
 	for _, e := range {{.Lower}}Ingest(t, {{.Lower}}Drop) {
 		if slices.Contains(e.Subject.Symbols, "placeholder_elsewhere") {
-			t.Errorf("event for placeholder_elsewhere, which isn't under %q", {{.Ident}}.Section)
+			t.Errorf("event for placeholder_elsewhere, which isn't under %q", members.{{.Ident}}.Section)
 		}
 	}
 }
 `,
 		source: "{{.File}}-migration-guide.rst",
 		ingest: `// {{.Lower}}Ingest runs the plugin over a saved copy of the guide.
-func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
+func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
-	return kittest.Ingest(t, Plugin{Guide: {{.Ident}}}, kittest.Pages{ {{.Ident}}.URL(): file})
+	return kittest.Ingest(t, Plugin{Guide: members.{{.Ident}}}, kittest.Pages{members.{{.Ident}}.URL(): file})
 }
 `,
-		imports: []string{"slices", "github.com/patch-it-dev/patch-it-plugins/core/event"},
+		imports: []string{"slices", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide/members"},
 	},
 
-	"changelog": {
+	"changelog/markdown": {
+		kind:   "changelog",
 		layer:  "package",
 		defDir: "plugins/changelog",
 		def: `package changelog
@@ -305,7 +308,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 // the changelog's path. Say what you checked, with the date, as changelog.go
 // does for Textual and urllib3.
 var {{.Ident}} = File{
-	Package: "{{.ID}}", Ecosystem: "pypi", Module: "{{.ID}}",
+	API: "{{.ID}}", Package: "{{.PyPI}}", Ecosystem: "pypi", Module: "{{.Module}}",
 	Repo: "TODO-owner/TODO-repo", TagPrefix: "v", Path: "CHANGELOG.md",
 }
 
@@ -326,7 +329,7 @@ var {{.Ident}}Golden = {{.Ident}}.At("1.0.0")
 `},
 		source: "{{.File}}-CHANGELOG.md",
 		ingest: `// {{.Lower}}Ingest runs the plugin over a saved copy of the changelog.
-func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
+func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
 	return kittest.Ingest(t, Plugin{File: {{.Ident}}Golden}, kittest.Pages{ {{.Ident}}Golden.URL(): file})
 }
@@ -334,15 +337,16 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 		imports: []string{"github.com/patch-it-dev/patch-it-plugins/core/event"},
 	},
 
-	"apichangelog": {
+	"changelog/json": {
+		kind:   "changelog",
 		layer:  "api",
-		defDir: "plugins/apichangelog",
-		def: `package apichangelog
+		defDir: "plugins/changelog",
+		def: `package changelog
 
 // {{.Ident}} is {{.Provider}}'s machine-readable API changelog.
 //
 // ` + todo + `: the repo and the file's path, and what you checked, with the
-// date, as apichangelog.go does for MongoDB Atlas.
+// date, as json.go does for MongoDB Atlas.
 var {{.Ident}} = Log{
 	API: "{{.ID}}", Vendor: "{{.Provider}}", Name: "TODO: the API's name, for sentences",
 	Repo: "TODO-owner/TODO-repo", Path: "changelog/changelog.json",
@@ -360,7 +364,7 @@ var {{.Ident}} = Log{
 const {{.Lower}}Commit = "0000000000000000000000000000000000000000"
 
 // {{.Lower}}Ingest runs the plugin over a saved copy of the changelog.
-func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
+func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
 	return kittest.Ingest(t, Plugin{Log: {{.Ident}}}, kittest.Pages{
 		{{.Ident}}.CommitsURL():         "testdata/{{.File}}-commits.json",
@@ -372,6 +376,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 	},
 
 	"catalog": {
+		kind:   "catalog",
 		layer:  "runtime",
 		defDir: "plugins/catalog",
 		def: `package catalog
@@ -383,7 +388,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 // the catalog's path and the commits API URL for the newest ref. Say what you
 // checked, with the date, as catalog.go does for Redis.
 var {{.Ident}} = Catalog{
-	API: "{{.ID}}", Ecosystem: "{{.ID}}", Package: "{{.ID}}",
+	API: "{{.ID}}", Ecosystem: "{{.ProviderID}}", Package: "{{.ProviderID}}",
 	Repo: "TODO-owner/TODO-repo", Path: "TODO/commands.json",
 	RefsURL: "https://api.github.com/repos/TODO-owner/TODO-repo/commits/main",
 }
@@ -402,8 +407,8 @@ const (
 	{{.Lower}}NewRef = "1111111111111111111111111111111111111111"
 )
 
-// {{.Lower}}Ingest replays the saved old snapshot against file.
-func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
+// {{.Lower}}Ingest extracts the change from the saved old snapshot to file.
+func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
 	env := kittest.Env(t, kittest.Pages{
 		{{.Ident}}.URL({{.Lower}}OldRef): "testdata/{{.File}}-old.json",
@@ -411,8 +416,8 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 	})
 	sink := env.Baselines.(kittest.Sink)
 	p := Plugin{Catalog: {{.Ident}}}
-	if rejected, err := kittest.Replay(context.Background(), env, sink, p, {{.Lower}}OldRef, {{.Lower}}NewRef); err != nil || rejected {
-		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
+	if rejected, err := kittest.Pair(context.Background(), env, sink, p, {{.Lower}}OldRef, {{.Lower}}NewRef); err != nil || rejected {
+		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}
 	return kittest.Stored(t, sink)
 }
@@ -421,6 +426,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 	},
 
 	"openapi": {
+		kind:   "openapi",
 		layer:  "api",
 		defDir: "plugins/openapi/adapter",
 		def: `package adapter
@@ -428,6 +434,8 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
 import (
 	"context"
 	"fmt"
+
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 )
 
 // {{.Ident}} adapts {{.Provider}}'s OpenAPI spec for the openapi plugin.
@@ -450,6 +458,14 @@ func ({{.Ident}}) LatestTag(ctx context.Context) (string, error) {
 // Fetch downloads the spec at tag.
 func ({{.Ident}}) Fetch(ctx context.Context, tag string) (Spec, error) {
 	return Spec{}, fmt.Errorf("{{.ID}}: Fetch isn't written yet (plugins/openapi/adapter/{{.File}}.go)")
+}
+
+// Versions are every release of the spec, oldest first, each with the Ref
+// Fetch takes: what lets every pair of releases be diffed, not only the
+// newest. ` + todo + `: list them with core/versions (GitHubReleases,
+// GitHubCommits, GitHubTags), as versions.go does for the other adapters.
+func ({{.Ident}}) Versions(ctx context.Context) ([]plugin.Version, error) {
+	return nil, fmt.Errorf("{{.ID}}: Versions isn't written yet (plugins/openapi/adapter/{{.File}}.go)")
 }
 `,
 		register: `plugin.Register(Plugin{Adapter: adapter.{{.Ident}}{}})`,
@@ -479,25 +495,107 @@ func (a {{.Lower}}Adapter) Fetch(_ context.Context, tag string) (adapter.Spec, e
 	return adapter.Spec{Content: body, Version: tag, SourceURL: "{{.Source}}"}, nil
 }
 
-// {{.Lower}}Ingest replays the saved old spec against file.
-func {{.Lower}}Ingest(t *testing.T, file string) []event.EventV2 {
+// {{.Lower}}Ingest extracts the change from the saved old spec to file.
+func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
 	env := kittest.Env(t, nil)
 	sink := env.Baselines.(kittest.Sink)
 	p := Plugin{Adapter: {{.Lower}}Adapter{"old": "testdata/{{.File}}-old.json", "new": file}}
-	if rejected, err := kittest.Replay(context.Background(), env, sink, p, "old", "new"); err != nil || rejected {
-		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
+	if rejected, err := kittest.Pair(context.Background(), env, sink, p, "old", "new"); err != nil || rejected {
+		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}
 	return kittest.Stored(t, sink)
 }
 `,
 		imports: []string{"context", "fmt", "os", "github.com/patch-it-dev/patch-it-plugins/plugins/openapi/adapter", "github.com/patch-it-dev/patch-it-plugins/core/event"},
-		next:    "Write LatestTag and Fetch in plugins/openapi/adapter/{{.File}}.go (fetch.Get only); add Diff/Keep to the Register line if the spec needs them (see vercel.go).",
+		next:    "Write LatestTag, Fetch and Versions in plugins/openapi/adapter/{{.File}}.go (fetch.Get only); add Diff/Keep to the Register line if the spec needs them (see vercel.go).",
+	},
+	"apisurface": {
+		kind:   "apisurface",
+		layer:  "sdk",
+		defDir: "plugins/apisurface",
+		def: `package apisurface
+
+// {{.Ident}} is {{.Provider}}'s package on PyPI, its public API read from each
+// release's wheel.
+//
+// ` + todo + `: check the name on PyPI and the top-level module code
+// imports (from --package, or guessed). Say
+// what you checked, with the date: that the wheel holds the package's .py
+// (or .pyi) files.
+var {{.Ident}} = Package{ID: "{{.ID}}", Name: "{{.PyPI}}", Ecosystem: "pypi", Module: "{{.Module}}"}
+`,
+		register: `plugin.Register(Plugin{Package: {{.Ident}}})`,
+		pluginOf: `Plugin{Package: {{.Ident}}}`,
+		fixtures: map[string]string{
+			"{{.File}}-old.py": "# ` + todo + `: a placeholder for the older release's module. Save the real release's wheel instead (see apisurface_test.go).\ndef placeholder(a, b=1):\n    pass\n",
+			"{{.File}}-new.py": "# ` + todo + `: a placeholder for the newer release's module: it drops b, one event.\ndef placeholder(a):\n    pass\n",
+		},
+		// The drop test's newer release: the older one again, nothing gone.
+		dropFile: "# ` + todo + `: a placeholder: a release that only adds or changes private names.\ndef placeholder(a, b=1):\n    pass\n\ndef _private(x):\n    pass\n",
+		source:   "{{.File}}-new.py",
+		ingest: `// {{.Lower}}Ingest compares two releases: 1.0.0, a wheel holding
+// testdata/{{.File}}-old.py as {{.Module}}/__init__.py, and 1.1.0, one
+// holding file. The wheels are built here so the placeholders are text.
+// ` + todo + `: save the two real wheels (trimmed if they're large, as
+// apisurface_test.go's are) and serve them instead.
+func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
+	t.Helper()
+	wheel := func(src string) []byte {
+		var buf bytes.Buffer
+		zw := zip.NewWriter(&buf)
+		w, err := zw.Create("{{.Module}}/__init__.py")
+		if err != nil {
+			t.Fatal(err)
+		}
+		w.Write(kittest.Read(t, src))
+		if err := zw.Close(); err != nil {
+			t.Fatal(err)
+		}
+		return buf.Bytes()
+	}
+	files := map[string][]byte{
+		"https://pypi.org/pypi/{{.PyPI}}/json":       []byte(` + "`" + `{"releases": {"1.0.0": [{"upload_time_iso_8601": "2026-01-01T00:00:00Z"}], "1.1.0": [{"upload_time_iso_8601": "2026-02-01T00:00:00Z"}]}}` + "`" + `),
+		"https://pypi.org/pypi/{{.PyPI}}/1.0.0/json": []byte(` + "`" + `{"urls": [{"packagetype": "bdist_wheel", "filename": "{{.Module}}-1.0.0-py3-none-any.whl", "url": "https://example.com/{{.Module}}-1.0.0-py3-none-any.whl"}]}` + "`" + `),
+		"https://pypi.org/pypi/{{.PyPI}}/1.1.0/json": []byte(` + "`" + `{"urls": [{"packagetype": "bdist_wheel", "filename": "{{.Module}}-1.1.0-py3-none-any.whl", "url": "https://example.com/{{.Module}}-1.1.0-py3-none-any.whl"}]}` + "`" + `),
+		"https://example.com/{{.Module}}-1.0.0-py3-none-any.whl": wheel("testdata/{{.File}}-old.py"),
+		"https://example.com/{{.Module}}-1.1.0-py3-none-any.whl": wheel(file),
+	}
+	env := kittest.Env(t, nil)
+	env.Get = func(_ context.Context, url string) ([]byte, error) {
+		if b, ok := files[url]; ok {
+			return b, nil
+		}
+		t.Errorf("fetched %s, which the test didn't save", url)
+		return nil, fmt.Errorf("no saved copy of %s", url)
+	}
+	ctx, p := context.Background(), Plugin{Package: {{.Ident}}}
+	vs, err := p.ListVersions(ctx, env)
+	if err != nil || len(vs) != 2 {
+		t.Fatalf("versions %v: %v", vs, err)
+	}
+	from, err := p.ReadAt(ctx, env, vs[0])
+	if err != nil {
+		t.Fatal(err)
+	}
+	to, err := p.ReadAt(ctx, env, vs[1])
+	if err != nil {
+		t.Fatal(err)
+	}
+	res, err := p.Extract(ctx, env, from, to)
+	if err != nil || len(res.Rejected) > 0 {
+		t.Fatalf("%v %v", err, res.Rejected)
+	}
+	return res.Events
+}
+`,
+		imports: []string{"archive/zip", "bytes", "context", "fmt", "github.com/patch-it-dev/patch-it-plugins/core/event"},
+		next:    "Save two real wheels of the package and serve them in {{.Lower}}Ingest; the kind reads their .py files, never runs them.",
 	},
 }
 
 // testFile is the generated test, the same for every format.
-const testFile = `package {{.Format}}
+const testFile = `package {{.Kind}}
 
 import (
 {{range .Imports}}	"{{.}}"
@@ -518,12 +616,12 @@ func Test{{.Ident}}RegistersItself(t *testing.T) {
 // The golden test: the saved source in, every event out.
 // ` + todo + `: once the source is real, run
 //
-//	go test ./plugins/{{.Format}} -run Test{{.Ident}}Golden -update
+//	go test ./plugins/{{.Kind}} -run Test{{.Ident}}Golden -update
 //
-// and read testdata/golden/{{.ID}}.json like code: every event in it is a
+// and read testdata/golden/{{.Name}}.json like code: every event in it is a
 // pull request someone may get.
 func Test{{.Ident}}Golden(t *testing.T) {
-	kittest.Golden(t, "testdata/golden/{{.ID}}.json", {{.Lower}}Ingest(t, {{.Lower}}Source))
+	kittest.Golden(t, "testdata/golden/{{.Name}}.json", {{.Lower}}Ingest(t, {{.Lower}}Source))
 }
 
 {{if .Drop}}{{.Drop}}{{else}}// The pinned drop test: a realistic input that must not become an event.

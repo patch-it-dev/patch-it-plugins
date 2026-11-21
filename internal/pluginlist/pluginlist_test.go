@@ -12,7 +12,7 @@ import (
 const root = "../.."
 
 // The list is the registry: every registered source once, under its provider,
-// with its old slug, and the counts agree.
+// once, and the counts agree.
 func TestBuildListsEveryRegisteredSource(t *testing.T) {
 	f := Build("")
 	if f.Version != "main" {
@@ -29,7 +29,7 @@ func TestBuildListsEveryRegisteredSource(t *testing.T) {
 			if !strings.HasPrefix(s.Page, Repo+"/blob/main/providers/") {
 				t.Errorf("%s: page %s", s.ID, s.Page)
 			}
-			seen[s.Alias] = true
+			seen[s.ID] = true
 		}
 	}
 	if n != f.Sources || len(f.List) != f.Providers || n != len(plugin.Sources()) {
@@ -58,12 +58,12 @@ func TestAlgoliaIsOneProviderWithThreeSources(t *testing.T) {
 		}
 		var ids []string
 		for _, s := range p.Sources {
-			ids = append(ids, s.ID+"="+s.Alias)
+			ids = append(ids, s.ID)
 			if !strings.Contains(s.Page, "/blob/v1.2.3/") {
 				t.Errorf("%s: page %s isn't at the release", s.ID, s.Page)
 			}
 		}
-		if got := strings.Join(ids, " "); got != "algolia/ingestion-api=algolia-ingestion algolia/recommend-api=algolia-recommend algolia/search-api=algolia-search" {
+		if got := strings.Join(ids, " "); got != "algolia/ingestion-api algolia/recommend-api algolia/search-api" {
 			t.Errorf("algolia's sources: %s", got)
 		}
 		return

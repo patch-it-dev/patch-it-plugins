@@ -1,13 +1,14 @@
 [
   {
     "id": 0,
-    "fingerprint": "sha256:c945f5c4c228e6a9a7fa10537b4f931c4dfdae7ee8688520dc3229b9860862bc",
-    "api": "stripe",
+    "fingerprint": "sha256:480b352be42e611c5b6806177349bb7230190f2ee9ccfe8d16c27ade354b6dfb",
+    "api": "stripe/api",
     "version": "2026-08-26.dahlia",
     "previous_version": "2026-07-29.dahlia",
     "change_type": "new_feature",
     "breaking": false,
-    "affected": {
+    "subject": {
+      "type": "api_operation",
       "kind": "operation",
       "side": "request",
       "operation": "POST /v1/billing/feedback_options"

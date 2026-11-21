@@ -1,8 +1,10 @@
 package all
 
 import (
+	"go/ast"
 	"go/parser"
 	"go/token"
+	"io/fs"
 	"os"
 	"path/filepath"
 	"slices"
@@ -78,29 +80,107 @@ func TestImportingAllRegistersThePlugins(t *testing.T) {
 	}
 }
 
-// Every registered plugin is a source with complete metadata (RegisterProvider
-// checks the fields), reachable by its full id and its old slug, and its page
-// exists.
-func TestEveryPluginIsASourceWithMetadata(t *testing.T) {
-	covered := map[string]bool{}
+// Every registered source has complete metadata (RegisterProvider checks the
+// fields), is found by its id, and its page exists.
+func TestEverySourceHasMetadata(t *testing.T) {
 	for _, s := range plugin.Sources() {
-		covered[s.Alias()] = true
 		if _, err := os.Stat(filepath.Join("..", "..", s.Source.Page)); err != nil {
 			t.Errorf("%s: its page %s doesn't exist (copy providers/_template.md)", s.FullID(), s.Source.Page)
 		}
-		for _, id := range []string{s.FullID(), s.Alias()} {
-			got, ok := plugin.LookupSource(id)
-			if !ok || got.FullID() != s.FullID() {
-				t.Errorf("LookupSource(%q) = %q, %v; want %s", id, got.FullID(), ok, s.FullID())
+		if p, ok := plugin.Lookup(s.FullID()); !ok || p.Name() != s.FullID() {
+			t.Errorf("Lookup(%q) didn't find it", s.FullID())
+		}
+	}
+	if len(plugin.Names()) != len(plugin.Sources()) {
+		t.Errorf("%d plugins, %d sources", len(plugin.Names()), len(plugin.Sources()))
+	}
+}
+
+// Every registered source's kind is an answer of docs/which-kind.md, so the
+// guide sends every source somewhere.
+func TestWhichKindNamesEveryKind(t *testing.T) {
+	guide, err := os.ReadFile("../../docs/which-kind.md")
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, s := range plugin.Sources() {
+		if !strings.Contains(string(guide), "| `"+s.Source.Kind+"` |") {
+			t.Errorf("%s's kind, %s, isn't an answer in docs/which-kind.md", s.FullID(), s.Source.Kind)
+		}
+	}
+}
+
+// Every package under plugins/ is a kind that registers its sources, or a
+// reader package inside one (plugins/<kind>/<reader>/); and none only
+// forwards to another package (type aliases and re-exported values, no code
+// of its own).
+func TestEveryPackageIsAKindOrPartOfOne(t *testing.T) {
+	dirs, err := os.ReadDir("..")
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, d := range dirs {
+		if d.IsDir() && d.Name() != "all" && !registers(t, filepath.Join("..", d.Name())) {
+			t.Errorf("plugins/%s registers no source: a kind registers its sources, a reader lives inside its kind", d.Name())
+		}
+	}
+	err = filepath.WalkDir("..", func(p string, d fs.DirEntry, err error) error {
+		if err != nil || !d.IsDir() || d.Name() == "testdata" {
+			if d != nil && d.IsDir() && d.Name() == "testdata" {
+				return filepath.SkipDir
 			}
-			if p, ok := plugin.Lookup(id); !ok || p.Name() != s.Alias() {
-				t.Errorf("Lookup(%q) didn't find %s", id, s.Alias())
+			return err
+		}
+		if forwardsOnly(t, p) {
+			t.Errorf("%s only forwards to another package: import that package instead", p)
+		}
+		return nil
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+// forwardsOnly reports whether a package's non-test code is nothing but type
+// aliases and values copied from other packages.
+func forwardsOnly(t *testing.T, dir string) bool {
+	t.Helper()
+	files, err := filepath.Glob(filepath.Join(dir, "*.go"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	decls := 0
+	for _, f := range files {
+		if strings.HasSuffix(f, "_test.go") {
+			continue
+		}
+		file, err := parser.ParseFile(token.NewFileSet(), f, nil, 0)
+		if err != nil {
+			t.Fatal(err)
+		}
+		for _, decl := range file.Decls {
+			g, ok := decl.(*ast.GenDecl)
+			if !ok {
+				return false // a func: code of its own
+			}
+			for _, spec := range g.Specs {
+				switch s := spec.(type) {
+				case *ast.ImportSpec:
+					continue
+				case *ast.TypeSpec:
+					if !s.Assign.IsValid() {
+						return false
+					}
+				case *ast.ValueSpec:
+					for _, v := range s.Values {
+						if _, sel := v.(*ast.SelectorExpr); !sel {
+							return false
+						}
+					}
+				}
+				decls++
 			}
 		}
 	}
-	for _, name := range plugin.Names() {
-		if !covered[name] {
-			t.Errorf("%s is registered with plugin.Register only: register it as a source of its provider (plugin.RegisterProvider) with its metadata", name)
-		}
-	}
+	return decls > 0
 }

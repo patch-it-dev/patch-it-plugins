@@ -2,8 +2,8 @@
 """Check contract/fixtures/ against patch-it's fixtures/.
 
 patch-it (https://github.com/patch-it-dev/patch-it) owns the change-event
-contract; this repo carries a copy of its change-event fixtures so core/event/ and
-core/migrate/ test against the same events the patch-it client does. The copies
+contract; this repo carries a copy of its change-event fixtures so core/event/
+tests against the same events the patch-it client does. The copies
 must hold the same JSON as patch-it's. Only the top-level "_comment" fields may
 differ: they describe where a fixture came from, and this repo words them for
 a public audience.

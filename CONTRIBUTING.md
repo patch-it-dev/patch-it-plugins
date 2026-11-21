@@ -2,16 +2,16 @@
 
 Thanks for helping patch-it watch more APIs. This file is the rulebook; [docs/writing-a-plugin.md](docs/writing-a-plugin.md) is the how-to.
 
-**Start a new provider with the starter:** `go run ./cmd/new-plugin --api <id> --provider <Name> --format <format>` writes the definition, its registration, a test over placeholder sources, the testdata rows, the provider page, and the source's metadata in its `RegisterProvider` block; you fill in the `TODO(new-plugin)`s ([how](docs/writing-a-plugin.md#1-scaffold-it-with-new-plugin)).
+**Start a new provider with the starter:** `make new-plugin ARGS='--provider <id> --source <id> --kind <kind>'` ([which kind?](docs/which-kind.md); in a terminal it asks for the rest) writes the definition, its registration, a test over placeholder sources, the testdata rows, the provider page, and the source's metadata in its `RegisterProvider` block; you fill in the `TODO(new-plugin)`s ([how](docs/writing-a-plugin.md#1-scaffold-it-with-new-plugin)).
 
 ## The rules
 
 1. **Give every provider and source complete metadata in its registration.** A source exists when its kind's package registers it with `plugin.RegisterProvider`: the provider's id, name, category and homepage, and the source's id, layer, what it watches, the URLs it reads and its page. That registration is the only list: `make plugins` prints it, each release carries it as `plugins.json`, and docs.patch-it.dev reads it from there. Nothing else to update.
 2. **Fetch only through the environment.** Plugins get their sources from `env.Get` or the helpers in `core/kit/`, never from `net/http` directly, the filesystem or a database. That keeps tests offline and lets the hosted service cache, retry and rate-limit politely.
-3. **Every plugin has a golden test** over a real saved copy of its source: `testdata/<file>` in, `testdata/golden/<api>.json` out. `testdata/README.md` lists each file with its URL, the date you fetched it, its license, and a short quote of the part your plugin reads. Keep openly licensed files whole; trim vendor documentation pages to what the test needs.
+3. **Every plugin has a golden test** over a real saved copy of its source: `testdata/<file>` in, `testdata/golden/<provider>-<source>.json` out. `testdata/README.md` lists each file with its URL, the date you fetched it, its license, and a short quote of the part your plugin reads. Keep openly licensed files whole; trim vendor documentation pages to what the test needs.
 4. **Precision over recall.** A missed change is a bug we can fix later. A wrong change becomes a wrong pull request in someone's repo. When in doubt, don't emit.
 5. **One pinned drop test per plugin**: a realistic input your plugin must *not* turn into an event (an unrelated section, a renamed heading, a non-breaking addition).
-6. **Document the provider** in `providers/<api>.md`, copied from [`providers/_template.md`](providers/_template.md): what it watches, **why you chose that source** (and the alternatives you didn't), how the provider announces changes, what the plugin reads and ignores, and known gaps.
+6. **Document the provider** in `providers/<provider>-<source>.md`, copied from [`providers/_template.md`](providers/_template.md): what it watches, **why you chose that source** (and the alternatives you didn't), how the provider announces changes, what the plugin reads and ignores, and known gaps.
 7. **Nothing private.** This repo is public. No credentials, tokens, internal hostnames or links to private repos or systems, in code, tests, commit messages or PR descriptions. CI scans every PR for secrets and for known internal names.
 
 ## Sign your commits (DCO)
@@ -46,14 +46,14 @@ That adds `Signed-off-by: Your Name <you@example.com>`, matching the commit's au
 
 Releases are tags on `main` (`v0.x.y`), made only by the **Release** workflow. Nothing is tagged on push, and agents never tag or release.
 
-**Automatic, twice a week:** every Monday and Thursday at 14:00 UTC the workflow makes a **patch** release, but only if something was merged since the last tag; otherwise it does nothing. If the merges add a **new format plugin** (a new `plugins/<format>/` directory), the scheduled run skips with a warning instead: run it by hand with **minor**. So a merged plugin reaches patch-it's hosted ingestion service within a few days.
+**Automatic, twice a week:** every Monday and Thursday at 14:00 UTC the workflow makes a **patch** release, but only if something was merged since the last tag; otherwise it does nothing. If the merges add a **new kind** (a new `plugins/<kind>/` directory), the scheduled run skips with a warning instead: run it by hand with **minor**. So a merged plugin reaches patch-it's hosted ingestion service within a few days.
 
 **By hand, any time** (an urgent fix, or a **minor** release):
 
 1. Merge the PRs that should go out.
 2. **Actions → Release → Run workflow** (branch `main`), pick the bump:
-   - **patch** (`v0.4.1` → `v0.4.2`): fixes, a new provider on an existing format plugin, docs;
-   - **minor** (`v0.4.1` → `v0.5.0`): a new format plugin, new exported API, anything users should read about.
+   - **patch** (`v0.4.1` → `v0.4.2`): fixes, a new source on an existing kind, docs;
+   - **minor** (`v0.4.1` → `v0.5.0`): a new kind, new exported API, anything users should read about.
 3. The workflow refuses if `main`'s HEAD is already tagged, then runs, on that exact commit, the internal-names check over every file, gitleaks over the whole history, `go build`, `go vet`, `gofmt` and `go test -race`. Any failure stops it before a tag exists.
 4. When everything passes it pushes an annotated tag and publishes a GitHub release with generated notes (grouped by the PR's label: `plugin`/`enhancement`, `bug`, `documentation`; see [`.github/release.yml`](.github/release.yml)). The release carries one asset, `plugins.json`: the list of providers and sources printed from the registry at that tag (`go run ./cmd/list-plugins`). It is the only published list; nothing in the repo keeps one, and docs.patch-it.dev reads `https://github.com/patch-it-dev/patch-it-plugins/releases/latest/download/plugins.json`.
 

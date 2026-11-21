@@ -14,7 +14,7 @@ import (
 // Datadog's, github's spec is already JSON, so there's no conversion step.
 type fakeGitHubAdapter struct{}
 
-func (fakeGitHubAdapter) API() string { return "github" }
+func (fakeGitHubAdapter) API() string { return "github/rest-api" }
 
 func (fakeGitHubAdapter) LatestTag(context.Context) (string, error) { return "2026-03-10", nil }
 
@@ -28,21 +28,21 @@ func (fakeGitHubAdapter) Fetch(_ context.Context, tag string) (adapter.Spec, err
 	return adapter.Spec{Content: body, Version: tag, SourceURL: sourceURL}, nil
 }
 
-// The golden test and the replay fixture in one: testdata/github-2022-11-28.json
+// The golden test and the pair fixture in one: testdata/github-2022-11-28.json
 // and github-2026-03-10.json are real, trimmed excerpts of github's own bundled
 // REST API description at those two dated API versions (checked 2026-11-14).
 // Between them, GitHub's documented breaking change for 2026-03-10 ("Remove
 // deprecated rate property from rate limit endpoint") dropped the required
 // `rate` property from the `rate-limit-overview` schema — a real historical
 // breaking change, not an invented one. This is the pair
-// the plugin's Replay from 2022-11-28 to 2026-03-10 recreates.
-func TestGitHubReplayRecreatesTheRealPropertyRemoval(t *testing.T) {
+// the pair 2022-11-28 → 2026-03-10 recreates.
+func TestGitHubPairRecreatesTheRealPropertyRemoval(t *testing.T) {
 	ctx := context.Background()
 	s := openStore(t)
 
-	rejected, err := replayWith(ctx, s, Plugin{Adapter: fakeGitHubAdapter{}}, "2022-11-28", "2026-03-10")
+	rejected, err := pairWith(ctx, s, Plugin{Adapter: fakeGitHubAdapter{}}, "2022-11-28", "2026-03-10")
 	if err != nil || rejected {
-		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
+		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}
 
 	events, err := s.All()
@@ -59,19 +59,19 @@ func TestGitHubReplayRecreatesTheRealPropertyRemoval(t *testing.T) {
 
 	// Acceptance criteria: the event carries source_url and a non-empty
 	// source_excerpt, and is placed on the real dated versions, not stand-ins.
-	if e.API != "github" || e.Version != "2026-03-10" || e.PreviousVersion != "2022-11-28" {
-		t.Errorf("event %s: api=%s version=%s previous_version=%s, want github 2026-03-10 from 2022-11-28",
+	if e.API != "github/rest-api" || e.Version != "2026-03-10" || e.PreviousVersion != "2022-11-28" {
+		t.Errorf("event %s: api=%s version=%s previous_version=%s, want github/rest-api 2026-03-10 from 2022-11-28",
 			e.Subject.Property, e.API, e.Version, e.PreviousVersion)
 	}
 	if e.SourceURL == "" || e.SourceExcerpt == "" {
 		t.Errorf("event %s: missing provenance", e.Subject.Property)
 	}
 
-	// Replaying the same pair again must not duplicate the event.
-	if _, err := replayWith(ctx, s, Plugin{Adapter: fakeGitHubAdapter{}}, "2022-11-28", "2026-03-10"); err != nil {
-		t.Fatalf("second replay: %v", err)
+	// Reading the same pair again must not duplicate the event.
+	if _, err := pairWith(ctx, s, Plugin{Adapter: fakeGitHubAdapter{}}, "2022-11-28", "2026-03-10"); err != nil {
+		t.Fatalf("second read of the pair: %v", err)
 	}
 	if again, _ := s.All(); len(again) != len(events) {
-		t.Errorf("repeating the replay added events: %d -> %d", len(events), len(again))
+		t.Errorf("reading the pair again added events: %d -> %d", len(events), len(again))
 	}
 }

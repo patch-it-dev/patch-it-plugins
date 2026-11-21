@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:1e7a1a853da5f0cb442587af95ab66fcc9a20308d4295dfb287805399c7c41e7",
-    "api": "algolia-ingestion",
+    "fingerprint": "sha256:eb14278aa4735854c8fd3f33ffe3e5eb43d6e81f720547c68cf55f91f2eb51b8",
+    "api": "algolia/ingestion-api",
     "version": "2025-01-22",
     "previous_version": "2025-01-07",
     "change_type": "deprecation",
@@ -22,8 +22,8 @@
   },
   {
     "id": 2,
-    "fingerprint": "sha256:17ec64b06df87ecb1eecafcb16e9e382db116527edca15062f451c572745f3ae",
-    "api": "algolia-ingestion",
+    "fingerprint": "sha256:d6fbe2c5b1ed2baf0b7131551b5656fd7aed8b91490c6f4126fd4a42c9731478",
+    "api": "algolia/ingestion-api",
     "version": "2025-01-22",
     "previous_version": "2025-01-07",
     "change_type": "deprecation",
@@ -43,8 +43,8 @@
   },
   {
     "id": 3,
-    "fingerprint": "sha256:4e9f82a0c9e7cabbc050af7fd66c4d4e71a90c18a695f1f8464d93cf7be864db",
-    "api": "algolia-ingestion",
+    "fingerprint": "sha256:8e673e76d54e5b20644e0787cbf23af273057f0bf044f7cd29081d546ec2c96c",
+    "api": "algolia/ingestion-api",
     "version": "2025-01-22",
     "previous_version": "2025-01-07",
     "change_type": "deprecation",
@@ -64,8 +64,8 @@
   },
   {
     "id": 4,
-    "fingerprint": "sha256:df4563501aec2e6b427964f1ee51f9881e432fc2eed2c343953d78f43d79f317",
-    "api": "algolia-ingestion",
+    "fingerprint": "sha256:00482b2527330636337a1fa3e5f5319458f1ff185282d9d2d89b88fb71eea14d",
+    "api": "algolia/ingestion-api",
     "version": "2025-01-22",
     "previous_version": "2025-01-07",
     "change_type": "deprecation",
@@ -85,8 +85,8 @@
   },
   {
     "id": 5,
-    "fingerprint": "sha256:f53f0abf4924f3abed31f2d0d50b71e30c77295dc2b2a4fcfc426aeb64b3cf4e",
-    "api": "algolia-ingestion",
+    "fingerprint": "sha256:9137e456a4e6480c5115bc5cabd4c07d3e8b90a4dc3bff54511c1cd20e93ead5",
+    "api": "algolia/ingestion-api",
     "version": "2025-01-22",
     "previous_version": "2025-01-07",
     "change_type": "deprecation",
@@ -106,8 +106,8 @@
   },
   {
     "id": 6,
-    "fingerprint": "sha256:7dc53327e9239847c43e0d1fc140670139b4b755711875cc00b2d0126973cf69",
-    "api": "algolia-ingestion",
+    "fingerprint": "sha256:2d0c4fd84ef9e0c4956b0572939c915ab7be8075ab296fe585b307fa65a7dee0",
+    "api": "algolia/ingestion-api",
     "version": "2025-01-22",
     "previous_version": "2025-01-07",
     "change_type": "deprecation",
@@ -127,8 +127,8 @@
   },
   {
     "id": 7,
-    "fingerprint": "sha256:fbb43f00dfdd75418da24e766a926b0e48b824e8b6a000340a3a82ed87ec654f",
-    "api": "algolia-ingestion",
+    "fingerprint": "sha256:b991f89f474625d83ef1733ba29bab9c9d63c6520a5e969610a1f7a06f3ae014",
+    "api": "algolia/ingestion-api",
     "version": "2025-01-22",
     "previous_version": "2025-01-07",
     "change_type": "deprecation",
@@ -148,8 +148,8 @@
   },
   {
     "id": 8,
-    "fingerprint": "sha256:cefabf61328b95d67f3187e183dae0b8d54407d98b09b0d018e15f6b3d5f0d69",
-    "api": "algolia-ingestion",
+    "fingerprint": "sha256:dd4793d02c7b15e0a8469cd996a78d26e79a73684f2f620936a324c7da5761ca",
+    "api": "algolia/ingestion-api",
     "version": "2025-01-22",
     "previous_version": "2025-01-07",
     "change_type": "deprecation",

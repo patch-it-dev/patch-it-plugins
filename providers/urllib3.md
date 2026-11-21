@@ -1,10 +1,10 @@
-# urllib3 (`urllib3`)
+# urllib3 (`urllib3/urllib3`)
 
 ## What it watches
 
 Removals and deprecations in each urllib3 release, read from that release's section of its changelog: classes, methods and modules removed or renamed. One `package_release` event per bullet the plugin can read with certainty. The releases are listed from PyPI (final releases only) and each is read at its git tag (`<version>`); 2.0.0 is the release the golden test pins.
 
-Format plugin: `changelog` (`plugins/changelog`).
+Kind: `changelog` (`plugins/changelog`).
 
 ## Why this source
 

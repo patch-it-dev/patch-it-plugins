@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:e6f9a24b6c0707867db8194dcf23dd20fe851e359236a9567c741e60daa220af",
-    "api": "elasticsearch",
+    "fingerprint": "sha256:9a7edf6e9f3b40c20d4e303d0ce42472b9c1c66e5125936f35e60b6f5255759f",
+    "api": "elastic/elasticsearch-api",
     "version": "9.0.0",
     "previous_version": "8.19.0",
     "change_type": "deprecation",
@@ -22,8 +22,8 @@
   },
   {
     "id": 2,
-    "fingerprint": "sha256:914a686914eb233286a5ea281f284296892936c059d663d7786bf7972c3e6ae8",
-    "api": "elasticsearch",
+    "fingerprint": "sha256:89077715c1d3fdf2e229be46735a4d52bd3a9553d0531aa4ae56a073844c3770",
+    "api": "elastic/elasticsearch-api",
     "version": "9.0.0",
     "previous_version": "8.19.0",
     "change_type": "deprecation",
@@ -43,8 +43,8 @@
   },
   {
     "id": 3,
-    "fingerprint": "sha256:ac4eb6548c39460a5ecce3f0c8c80aa59b458713afc81c081d126915c5ca116d",
-    "api": "elasticsearch",
+    "fingerprint": "sha256:72e6f44c763a9142fc69cf2328a5bff614ea2bb795a01b16f553b857230daecc",
+    "api": "elastic/elasticsearch-api",
     "version": "9.0.0",
     "previous_version": "8.19.0",
     "change_type": "deprecation",
@@ -64,8 +64,8 @@
   },
   {
     "id": 4,
-    "fingerprint": "sha256:58610ad6c67e990ade54c586ad0cb021c4dcbb876454bb06a916f483b819e4bc",
-    "api": "elasticsearch",
+    "fingerprint": "sha256:6850c9d36ef120c4172c027d16743ced30b082c38a50f409adc5d41527aeba36",
+    "api": "elastic/elasticsearch-api",
     "version": "9.0.0",
     "previous_version": "8.19.0",
     "change_type": "deprecation",
@@ -85,8 +85,8 @@
   },
   {
     "id": 5,
-    "fingerprint": "sha256:cf1e119d61e7a9acd402b6547a3854f956ca26b905ac6f6fe288d198f2894a6f",
-    "api": "elasticsearch",
+    "fingerprint": "sha256:6a472cf6cc4004690bee910738bc1717984e9689e71f6acd2a99a39e3fc6f502",
+    "api": "elastic/elasticsearch-api",
     "version": "9.0.0",
     "previous_version": "8.19.0",
     "change_type": "deprecation",
@@ -106,8 +106,8 @@
   },
   {
     "id": 6,
-    "fingerprint": "sha256:245db5b4444fca5f4b864b5088d433ece32370538217d21dacc48d5cbb245eac",
-    "api": "elasticsearch",
+    "fingerprint": "sha256:dd5715bb59c4c9deb13f36a7bc80822410401c95aebddf6a9878755bd1b5d846",
+    "api": "elastic/elasticsearch-api",
     "version": "9.0.0",
     "previous_version": "8.19.0",
     "change_type": "breaking",
@@ -127,8 +127,8 @@
   },
   {
     "id": 7,
-    "fingerprint": "sha256:e1850b21011cbdf095b88fbdbe1eaa522be2fab47912258bc06742f96bbbe44c",
-    "api": "elasticsearch",
+    "fingerprint": "sha256:351fc1a569c8a06f7b95de00e5f2b6cf521fa477ca0f16ac686d5bed1a0f0dac",
+    "api": "elastic/elasticsearch-api",
     "version": "9.0.0",
     "previous_version": "8.19.0",
     "change_type": "breaking",
@@ -148,8 +148,8 @@
   },
   {
     "id": 8,
-    "fingerprint": "sha256:eaae479ba14d5d2779649052f53e9c9f2987b4cd01b284e94e7a5cf177f8514c",
-    "api": "elasticsearch",
+    "fingerprint": "sha256:bb11ba82db2c21bec5693520ed31045a19adfa7e36be55c2ab2f7f155df33d9c",
+    "api": "elastic/elasticsearch-api",
     "version": "9.0.0",
     "previous_version": "8.19.0",
     "change_type": "breaking",

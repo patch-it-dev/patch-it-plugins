@@ -51,7 +51,7 @@ type Sentry struct {
 
 var _ Adapter = Sentry{}
 
-func (Sentry) API() string { return "sentry" }
+func (Sentry) API() string { return "sentry/api" }
 
 func (s Sentry) api(path string) string {
 	return cmp.Or(s.APIBase, "https://api.github.com") + path

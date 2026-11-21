@@ -1,10 +1,10 @@
-# Flagsmith (`flagsmith`)
+# Flagsmith (`flagsmith/api`)
 
 ## What it watches
 
 Flagsmith's REST API (the Admin/Management API and the SDK-facing endpoints together) between releases of Flagsmith's own OpenAPI 3.1 spec: whole operations removed, and request parameters callers send that are removed, renamed or newly required.
 
-Format plugin: `openapi` (`plugins/openapi`), with `adapter.Flagsmith` and a request-side filter (`openapi.Plugin.Keep`, same `requestSide` GitLab uses).
+Kind: `openapi` (`plugins/openapi`), with `adapter.Flagsmith` and a request-side filter (`openapi.Plugin.Keep`, same `requestSide` GitLab uses).
 
 ## Why this source
 

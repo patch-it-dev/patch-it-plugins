@@ -67,6 +67,11 @@ const (
 	LayerInfra    Layer = "infra"
 )
 
+// Ecosystems are the package registries a Source's Packages name.
+func Ecosystems() []string {
+	return []string{"pypi", "npm", "go", "maven", "nuget", "rubygems", "cargo", "packagist"}
+}
+
 // Layers are every layer.
 func Layers() []Layer {
 	return []Layer{LayerAPI, LayerSDK, LayerPackage, LayerRuntime, LayerCI, LayerAIModels, LayerInfra}
@@ -103,9 +108,15 @@ type Source struct {
 	// Page is the source's page in this repo: "providers/algolia.md" (why
 	// this source, what it reads and ignores, its known gaps).
 	Page string
-	// Plugin runs it. Its Name is the source's old slug ("algolia-search"):
-	// what `--api` selects and every event's `api` carries until patch-it's
-	// change-event contract switches to source ids.
+	// Packages are the published packages whose changes this source
+	// covers, as "<ecosystem>:<name>" ("pypi:stripe", "npm:@vercel/sdk"):
+	// the package itself for a package or SDK source, the provider's
+	// official SDKs for an API source. What lets a lockfile entry find its
+	// sources without a table kept elsewhere. Only names checked by hand;
+	// none is fine when no package maps to the source.
+	Packages []string
+	// Plugin runs it. Its Name is the source's id ("algolia/search-api"),
+	// which every event's `api` carries.
 	Plugin Plugin
 }
 
@@ -118,19 +129,14 @@ type SourceInfo struct {
 // FullID is "<provider>/<source>".
 func (s SourceInfo) FullID() string { return s.Provider.ID + "/" + s.Source.ID }
 
-// Alias is the source's old slug, its Plugin's Name: "algolia-search".
-func (s SourceInfo) Alias() string { return s.Source.Plugin.Name() }
-
 var (
 	providers = map[string]Provider{}   // by provider ID, Sources merged
 	sources   = map[string]SourceInfo{} // by full ID
-	aliases   = map[string]string{}     // old slug to full ID
 	slug      = regexp.MustCompile(`^[a-z0-9][a-z0-9-]*$`)
 )
 
-// RegisterProvider registers p's sources, each under its full id, and each
-// source's Plugin under its old slug (Register), so Lookup finds it by
-// either. Incomplete metadata is a programming error, as a duplicate is.
+// RegisterProvider registers p's sources, each under its id, with its Plugin
+// (Lookup). Incomplete metadata is a programming error, as a duplicate is.
 func RegisterProvider(p Provider) {
 	if err := p.check(); err != nil {
 		panic("plugin: " + err.Error())
@@ -139,27 +145,17 @@ func RegisterProvider(p Provider) {
 		p.Sources[i].Kind = KindOf(p.Sources[i].Plugin)
 	}
 	mu.Lock()
+	defer mu.Unlock()
 	if have, ok := providers[p.ID]; ok {
 		if have.Name != p.Name || have.Category != p.Category || have.Homepage != p.Homepage {
-			mu.Unlock()
 			panic(fmt.Sprintf("plugin: provider %q registered twice with different metadata", p.ID))
 		}
 	}
 	for _, s := range p.Sources {
-		id := p.ID + "/" + s.ID
-		if _, dup := sources[id]; dup {
-			mu.Unlock()
-			panic(fmt.Sprintf("plugin: source %q is already registered", id))
+		if _, dup := sources[p.ID+"/"+s.ID]; dup {
+			panic(fmt.Sprintf("plugin: source %q is already registered", p.ID+"/"+s.ID))
 		}
 	}
-	mu.Unlock()
-
-	for _, s := range p.Sources {
-		Register(s.Plugin) // panics on a duplicate old slug
-	}
-
-	mu.Lock()
-	defer mu.Unlock()
 	have := providers[p.ID]
 	merged := Provider{ID: p.ID, Name: p.Name, Category: p.Category, Homepage: p.Homepage, Sources: append(have.Sources, p.Sources...)}
 	providers[p.ID] = merged
@@ -168,7 +164,7 @@ func RegisterProvider(p Provider) {
 	for _, s := range p.Sources {
 		id := p.ID + "/" + s.ID
 		sources[id] = SourceInfo{Provider: bare, Source: s}
-		aliases[s.Plugin.Name()] = id
+		registry[id] = s.Plugin
 	}
 }
 
@@ -196,6 +192,8 @@ func (p Provider) check() error {
 			return fmt.Errorf("source %q is listed twice", id)
 		case s.Plugin == nil:
 			return fmt.Errorf("source %q has no Plugin", id)
+		case s.Plugin.Name() != id:
+			return fmt.Errorf("source %q: its plugin's Name is %q; a plugin is named by its source's id", id, s.Plugin.Name())
 		case !slices.Contains(Layers(), s.Layer):
 			return fmt.Errorf("source %q: layer %q isn't one of plugin.Layers()", id, s.Layer)
 		case strings.TrimSpace(s.Watches) == "":
@@ -210,6 +208,12 @@ func (p Provider) check() error {
 		for _, u := range s.URLs {
 			if !absolute(u) {
 				return fmt.Errorf("source %q: URL %q isn't absolute", id, u)
+			}
+		}
+		for _, pkg := range s.Packages {
+			eco, name, ok := strings.Cut(pkg, ":")
+			if !ok || !slices.Contains(Ecosystems(), eco) || name == "" || strings.ContainsAny(name, " \t\n") {
+				return fmt.Errorf("source %q: package %q isn't <ecosystem>:<name>, the ecosystem one of plugin.Ecosystems()", id, pkg)
 			}
 		}
 		seen[s.ID] = true
@@ -259,14 +263,23 @@ func Sources() []SourceInfo {
 	return out
 }
 
-// LookupSource finds a source by its full id ("algolia/search-api") or its
-// old slug ("algolia-search").
+// ForPackage are the sources that cover a published package
+// ("pypi:stripe"), sorted by full id: how a lockfile entry finds what to
+// ask the feed for.
+func ForPackage(pkg string) []SourceInfo {
+	var out []SourceInfo
+	for _, s := range Sources() {
+		if slices.Contains(s.Source.Packages, pkg) {
+			out = append(out, s)
+		}
+	}
+	return out
+}
+
+// LookupSource finds a source by its id ("algolia/search-api").
 func LookupSource(id string) (SourceInfo, bool) {
 	mu.Lock()
 	defer mu.Unlock()
-	if full, ok := aliases[id]; ok {
-		id = full
-	}
 	s, ok := sources[id]
 	return s, ok
 }

@@ -93,7 +93,7 @@ func TestAlgoliaFetch(t *testing.T) {
 	if spec.Version != "2025-04-01" || string(spec.Content) != want || !strings.HasSuffix(spec.SourceURL, "/released-2025-04-01-c19ee6afb/search.yml") {
 		t.Errorf("got %q %s %s", spec.Version, spec.Content, spec.SourceURL)
 	}
-	if (Algolia{Spec: "search"}).API() != "algolia-search" {
+	if (Algolia{Spec: "search"}).API() != "algolia/search-api" {
 		t.Error("api slug")
 	}
 	for _, tag := range []string{"v4.0.0", "released-2025-04-01-c19ee6afb-x", "released-xx"} {

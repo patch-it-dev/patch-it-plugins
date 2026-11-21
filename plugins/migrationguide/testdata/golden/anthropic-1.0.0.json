@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:16f13db8470e2299ccdfc6564519417bacb8101ff6884ebfcaf989f59c7ed021",
-    "api": "anthropic",
+    "fingerprint": "sha256:07170c43fdc6d298df0a7752b72ad8977df95bccaaadb95fdfafbcf5d30286a0",
+    "api": "anthropic/python-sdk",
     "version": "1.0.0",
     "change_type": "breaking",
     "breaking": true,
@@ -27,8 +27,8 @@
   },
   {
     "id": 2,
-    "fingerprint": "sha256:61b3739d72b6dff1f2192fb4f553ff86ef77c2d33bbb6def80c99ac58ebb4382",
-    "api": "anthropic",
+    "fingerprint": "sha256:61c02ba43dda9bf576bc55cd9564fbad623951df898b2653a79e572806bd70e2",
+    "api": "anthropic/python-sdk",
     "version": "1.0.0",
     "change_type": "breaking",
     "breaking": true,
@@ -53,8 +53,8 @@
   },
   {
     "id": 3,
-    "fingerprint": "sha256:b39ce1b3d18e8f138ae5a09d03edab9f1793ddbe030d090c90f8c2cd958ac474",
-    "api": "anthropic",
+    "fingerprint": "sha256:0845af07684a241eb1300ad5b161b21fa6a026584ee8f088a416c7c918cfffd0",
+    "api": "anthropic/python-sdk",
     "version": "1.0.0",
     "change_type": "breaking",
     "breaking": true,

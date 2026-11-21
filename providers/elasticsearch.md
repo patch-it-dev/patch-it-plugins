@@ -1,10 +1,10 @@
-# Elasticsearch (`elasticsearch`)
+# Elasticsearch (`elastic/elasticsearch-api`)
 
 ## What it watches
 
 The Elasticsearch REST API, minor version by minor version: operations Elastic marks deprecated, and removals of operations it had marked deprecated, between two versions of the OpenAPI spec generated from Elastic's API specification.
 
-Format plugin: `openapi` (`plugins/openapi`), with `adapter.Elasticsearch`.
+Kind: `openapi` (`plugins/openapi`), with `adapter.Elasticsearch`.
 
 ## Why this source
 
@@ -42,7 +42,7 @@ Format plugin: `openapi` (`plugins/openapi`), with `adapter.Elasticsearch`.
 - **History:** over 8.14 to 9.6, this keeps 26 events.
   - **23 deprecations.** For example, the rollup and legacy `_template` endpoints (8.17), `/_application/analytics` (9.0), and `POST /_ml/anomaly_detectors/{job_id}/_flush` (9.1).
   - **3 removals, in 9.0:** GET and POST `/{index}/_knn_search`, and POST `/{index}/_unfreeze`.
-- **Replays** 8.19 → 9.0 in the golden test. The drop test replays 9.1 → 9.2.
+- **Reads** 8.19 → 9.0 in the golden test. The drop test replays 9.1 → 9.2.
 
 ## Known gaps
 

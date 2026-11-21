@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"regexp"
+	"slices"
 	"strconv"
 	"strings"
 
@@ -37,7 +38,7 @@ type Elasticsearch struct{}
 
 var _ Adapter = Elasticsearch{}
 
-func (Elasticsearch) API() string { return "elasticsearch" }
+func (Elasticsearch) API() string { return "elastic/elasticsearch-api" }
 
 var (
 	esRelease = regexp.MustCompile(`^v(\d+)\.(\d+)\.(\d+)$`)
@@ -49,9 +50,23 @@ var (
 // 2026-11-19, when the newest release was 9.5.6), whose spec can still
 // change before it ships.
 func (Elasticsearch) LatestTag(ctx context.Context) (string, error) {
+	newest, branches, err := esMinors(ctx)
+	if err != nil {
+		return "", err
+	}
+	want := fmt.Sprintf("%d.%d", newest[0], newest[1])
+	if slices.Contains(branches, want) {
+		return want, nil
+	}
+	return "", fmt.Errorf("elasticsearch %s is released, but elasticsearch-specification has no %s branch", want, want)
+}
+
+// esMinors is the newest minor Elastic has released and every minor branch
+// ("9.5") of elasticsearch-specification.
+func esMinors(ctx context.Context) (newest [2]int, branches []string, err error) {
 	body, err := fetch.Get(ctx, esReleasesURL, github.Headers())
 	if err != nil {
-		return "", fmt.Errorf("listing elasticsearch releases: %w", err)
+		return newest, nil, fmt.Errorf("listing elasticsearch releases: %w", err)
 	}
 	var releases []struct {
 		Tag        string `json:"tag_name"`
@@ -59,9 +74,9 @@ func (Elasticsearch) LatestTag(ctx context.Context) (string, error) {
 		Draft      bool   `json:"draft"`
 	}
 	if err := json.Unmarshal(body, &releases); err != nil {
-		return "", fmt.Errorf("parsing github releases: %w", err)
+		return newest, nil, fmt.Errorf("parsing github releases: %w", err)
 	}
-	newest := [2]int{-1, -1}
+	newest = [2]int{-1, -1}
 	for _, r := range releases {
 		m := esRelease.FindStringSubmatch(r.Tag)
 		if m == nil || r.Prerelease || r.Draft {
@@ -73,26 +88,25 @@ func (Elasticsearch) LatestTag(ctx context.Context) (string, error) {
 		}
 	}
 	if newest[0] < 0 {
-		return "", fmt.Errorf("github lists no elasticsearch release")
+		return newest, nil, fmt.Errorf("github lists no elasticsearch release")
 	}
 
 	body, err = fetch.Get(ctx, esBranchesURL, github.Headers())
 	if err != nil {
-		return "", fmt.Errorf("listing elasticsearch-specification branches: %w", err)
+		return newest, nil, fmt.Errorf("listing elasticsearch-specification branches: %w", err)
 	}
 	var refs []struct {
 		Ref string `json:"ref"`
 	}
 	if err := json.Unmarshal(body, &refs); err != nil {
-		return "", fmt.Errorf("parsing github branch refs: %w", err)
+		return newest, nil, fmt.Errorf("parsing github branch refs: %w", err)
 	}
-	want := fmt.Sprintf("%d.%d", newest[0], newest[1])
 	for _, r := range refs {
-		if strings.TrimPrefix(r.Ref, "refs/heads/") == want {
-			return want, nil
+		if b := strings.TrimPrefix(r.Ref, "refs/heads/"); esBranch.MatchString(b) {
+			branches = append(branches, b)
 		}
 	}
-	return "", fmt.Errorf("elasticsearch %s is released, but elasticsearch-specification has no %s branch", want, want)
+	return newest, branches, nil
 }
 
 func atoi(s string) int {

@@ -1,10 +1,10 @@
-# GitHub Actions runner images (`github-actions`)
+# GitHub Actions runner images (`github/actions`)
 
 ## What it watches
 
 GitHub-hosted runner images that GitHub retires: one `ci_runtime` event per `runs-on` label the retirement removes (`macos-14`, `macos-14-large`, …), dated by the removal date.
 
-Format plugin: `feed` (`plugins/feed`), with the `GitHubActions` reader.
+Kind: `notices` (`plugins/notices`), with the feed reader (`plugins/notices/feed`) and its `GitHubActions` feed.
 
 ## Why this source
 

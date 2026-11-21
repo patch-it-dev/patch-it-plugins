@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:24d9bb42e9abe2644dbb30433702c9d94f1598d7143ad708c2fe09568f9437c0",
-    "api": "textual",
+    "fingerprint": "sha256:fac4cb01fbe4eb33b37f1ec953ac0abfe97c3444aaa22cdbe9118fb6f4b56e48",
+    "api": "textual/textual",
     "version": "0.86.0",
     "change_type": "breaking",
     "breaking": true,
@@ -24,8 +24,8 @@
   },
   {
     "id": 2,
-    "fingerprint": "sha256:852863d8d05a5753b2d64b4b0dc3717fce11f753727c586cd18eae7f7059dfc9",
-    "api": "textual",
+    "fingerprint": "sha256:6a0ba08e00b5d4d4f349a526a43ddef1bb84fe2bad9ef83111074fc2a690723c",
+    "api": "textual/textual",
     "version": "0.86.0",
     "change_type": "breaking",
     "breaking": true,

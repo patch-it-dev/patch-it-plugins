@@ -1,10 +1,10 @@
-# OpenAI model retirements (`openai-models`)
+# OpenAI model retirements (`openai/models`)
 
 ## What it watches
 
 OpenAI models that are being shut down: every text model name code sends to the Chat Completions or Responses API, with its shutdown date and the replacement OpenAI recommends. One breaking event per model name.
 
-Format plugin: `retirements` (`plugins/retirements`), reading with `plugins/retirements/retire/`.
+Kind: `notices` (`plugins/notices`), reading with the deprecations-page reader, `plugins/notices/retire/`.
 
 ## Why this source
 

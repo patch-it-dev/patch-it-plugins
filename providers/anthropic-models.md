@@ -1,10 +1,10 @@
-# Anthropic model retirements (`anthropic-models`)
+# Anthropic model retirements (`anthropic/models`)
 
 ## What it watches
 
 Claude models that are retired or have a retirement date on the Claude API, with the replacement Anthropic recommends. One breaking event per model name.
 
-Format plugin: `retirements` (`plugins/retirements`), reading with `plugins/retirements/retire/`.
+Kind: `notices` (`plugins/notices`), reading with the deprecations-page reader, `plugins/notices/retire/`.
 
 ## Why this source
 

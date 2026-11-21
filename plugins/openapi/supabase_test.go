@@ -31,7 +31,7 @@ var supabaseCommits = map[string][2]string{
 // copied from, as adapter.Supabase.Fetch cites it.
 type fakeSupabaseAdapter struct{ latest string }
 
-func (fakeSupabaseAdapter) API() string { return "supabase" }
+func (fakeSupabaseAdapter) API() string { return "supabase/management-api" }
 
 func (f fakeSupabaseAdapter) LatestTag(context.Context) (string, error) { return f.latest, nil }
 
@@ -62,7 +62,7 @@ func supabasePlugin(latest string) Plugin {
 // Management API spec's history. On 2025-02-19, POST
 // /v1/projects/{ref}/functions ("This endpoint is deprecated - use the deploy
 // endpoint."), here as a daily ingest. On 2026-06-29, GET
-// /v1/projects/{ref}/analytics/endpoints/logs.all, the replay fixture: the
+// /v1/projects/{ref}/analytics/endpoints/logs.all, the pair fixture: the
 // flag alone, no reason yet. (On 2026-09-30 its description became "This
 // endpoint has been removed and always responds with `410 Gone`", with the
 // operation still in the spec: a change of words, which no diff sees.)
@@ -75,8 +75,8 @@ func TestSupabaseGolden(t *testing.T) {
 			t.Fatalf("run %s: rejected=%v err=%v", tag, rejected, err)
 		}
 	}
-	if rejected, err := kittest.Replay(ctx, env, s, supabasePlugin(""), "693bdc38", "eb21ae25"); err != nil || rejected {
-		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
+	if rejected, err := kittest.Pair(ctx, env, s, supabasePlugin(""), "693bdc38", "eb21ae25"); err != nil || rejected {
+		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}
 
 	events := kittest.Stored(t, s)
@@ -123,8 +123,8 @@ func TestSupabaseGolden(t *testing.T) {
 func TestSupabaseDropsRemovalsThatWerentDeprecated(t *testing.T) {
 	ctx := context.Background()
 	s := openStore(t)
-	if rejected, err := kittest.Replay(ctx, vercelEnv(s), s, supabasePlugin(""), "8aef4a08", "90b71e3e"); err != nil || rejected {
-		t.Fatalf("replay: rejected=%v err=%v", rejected, err)
+	if rejected, err := kittest.Pair(ctx, vercelEnv(s), s, supabasePlugin(""), "8aef4a08", "90b71e3e"); err != nil || rejected {
+		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}
 	if events := kittest.Stored(t, s); len(events) != 0 {
 		t.Fatalf("stored %d events, want none", len(events))
@@ -133,7 +133,7 @@ func TestSupabaseDropsRemovalsThatWerentDeprecated(t *testing.T) {
 	s = openStore(t)
 	p := supabasePlugin("")
 	p.Keep = nil
-	if _, err := kittest.Replay(ctx, vercelEnv(s), s, p, "8aef4a08", "90b71e3e"); err != nil {
+	if _, err := kittest.Pair(ctx, vercelEnv(s), s, p, "8aef4a08", "90b71e3e"); err != nil {
 		t.Fatal(err)
 	}
 	var removals int
@@ -155,7 +155,7 @@ func TestSupabaseBranchParameterRenameIsNoChange(t *testing.T) {
 	s := openStore(t)
 	p := supabasePlugin("")
 	p.Keep = nil // even unfiltered: the operations are paired, not removed
-	if _, err := kittest.Replay(ctx, vercelEnv(s), s, p, "de806266", "a5fc0527"); err != nil {
+	if _, err := kittest.Pair(ctx, vercelEnv(s), s, p, "de806266", "a5fc0527"); err != nil {
 		t.Fatal(err)
 	}
 	for _, e := range kittest.Stored(t, s) {
@@ -165,7 +165,7 @@ func TestSupabaseBranchParameterRenameIsNoChange(t *testing.T) {
 	}
 	s = openStore(t)
 	p.Diff.PathTemplates = false
-	if _, err := kittest.Replay(ctx, vercelEnv(s), s, p, "de806266", "a5fc0527"); err != nil {
+	if _, err := kittest.Pair(ctx, vercelEnv(s), s, p, "de806266", "a5fc0527"); err != nil {
 		t.Fatal(err)
 	}
 	var removed int

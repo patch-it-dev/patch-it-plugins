@@ -100,8 +100,8 @@ func NewIndex(entries []Entry) *Index {
 // ("[]" dropped on both sides), and a change kind that fits the event (a row
 // that *adds* a parameter never explains a breaking change to it). When
 // several entries name the same key, the first on the release page wins.
-func (ix *Index) Lookup(e event.ChangeEvent) (Entry, bool) {
-	a := e.Affected
+func (ix *Index) Lookup(e event.Event) (Entry, bool) {
+	a := e.Subject
 	if ix == nil || a.Property == "" {
 		return Entry{}, false
 	}
@@ -137,7 +137,7 @@ func compatible(rowChange string, ct event.ChangeType) bool {
 // sending V"), is the precise sentence and stays first; the vendor's prose
 // follows it. A match only ever adds information. An event nothing matches is
 // left as it was.
-func (ix *Index) Attach(events []event.ChangeEvent) int {
+func (ix *Index) Attach(events []event.Event) int {
 	n := 0
 	for i := range events {
 		e, ok := ix.Lookup(events[i])
