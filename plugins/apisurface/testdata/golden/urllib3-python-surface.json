@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:2ac45c906503a69cb6ba22199fe959e6343d4f7dc93d04b144c78111826d795b",
+    "fingerprint": "sha256:ea8eb6ac566d9a46a8d1aa80c02f818c997ee000bbde7acdc08d8ad214d50197",
     "api": "urllib3/python-surface",
     "version": "2.6.0",
     "previous_version": "2.5.0",
@@ -26,7 +26,7 @@
   },
   {
     "id": 2,
-    "fingerprint": "sha256:2dd33b0c16dc4183ddd2144e64f24ad73d9623ea806e5aa82ff8ef3717652609",
+    "fingerprint": "sha256:fd6ae1aab499021131a0d09490c503f4b464e2913646bba28f78a1fef8073dc4",
     "api": "urllib3/python-surface",
     "version": "2.6.0",
     "previous_version": "2.5.0",
