@@ -37,7 +37,10 @@ var formats = map[string]formatSpec{
 		layer: "api",
 		def: `package {{.Package}}
 
-import "github.com/patch-it-dev/patch-it-plugins/kinds/notices/feed"
+import (
+	"github.com/patch-it-dev/patch-it-plugins/core/extract"
+	"github.com/patch-it-dev/patch-it-plugins/kinds/notices/feed"
+)
 
 // {{.Ident}} is {{.Provider}}'s feed of changes.
 //
@@ -60,7 +63,7 @@ var {{.Ident}} = feed.Feed{
 // an entry that isn't a breaking change or a deprecation. Precision over
 // recall: readCloudflareAPI in providers/cloudflare/api.go is a worked
 // example.
-func read{{.Ident}}(e feed.Entry) []feed.Finding {
+func read{{.Ident}}(e extract.Entry) []feed.Finding {
 	return nil
 }
 `,

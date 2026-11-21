@@ -80,8 +80,6 @@ var specs = map[string]string{
 	    "id":{"type":"string"},"latest_charge":{"type":"string"}}}}}}`,
 }
 
-func openStore(*testing.T) *kittest.Mem { return kittest.NewMem() }
-
 func storedEvents(t *testing.T, s *kittest.Mem) []string {
 	t.Helper()
 	events, err := s.All()
@@ -99,7 +97,7 @@ func storedEvents(t *testing.T, s *kittest.Mem) []string {
 // stored as change events, once.
 func TestAPairStoresItsEventsOnce(t *testing.T) {
 	ctx := context.Background()
-	s := openStore(t)
+	s := kittest.NewMem()
 
 	if _, err := pair(ctx, s, fakeAdapter{specs: specs}, "v1", "v2"); err != nil {
 		t.Fatalf("pair: %v", err)
@@ -132,7 +130,7 @@ func TestAPairStoresItsEventsOnce(t *testing.T) {
 // hint source in these tests always errors: noChangelog).
 func TestIngestStoresEventsWhenTheChangelogIsUnreachable(t *testing.T) {
 	ctx := context.Background()
-	s := openStore(t)
+	s := kittest.NewMem()
 	if _, err := pair(ctx, s, fakeAdapter{specs: specs}, "v1", "v2"); err != nil {
 		t.Fatalf("pair: %v", err)
 	}
@@ -152,7 +150,7 @@ func TestAPairAttachesMigrationHintsFromTheChangelog(t *testing.T) {
 	}}}
 
 	ctx := context.Background()
-	s := openStore(t)
+	s := kittest.NewMem()
 	if _, err := pairWith(ctx, s, newPlugin(fakeAdapter{specs: specs}, withHints), "v1", "v2"); err != nil {
 		t.Fatalf("pair: %v", err)
 	}

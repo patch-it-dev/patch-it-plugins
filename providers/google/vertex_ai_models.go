@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
+	"github.com/patch-it-dev/patch-it-plugins/core/extract"
 	"github.com/patch-it-dev/patch-it-plugins/kinds/notices/feed"
 )
 
@@ -27,13 +28,13 @@ var tableCell = regexp.MustCompile(`(?is)<t[dh][^>]*>(.*?)</t[dh]>`)
 
 var plainModelID = regexp.MustCompile(`^[a-z0-9][a-z0-9.@_-]*$`)
 
-func readVertexAI(e feed.Entry) []feed.Finding {
+func readVertexAI(e extract.Entry) []feed.Finding {
 	var out []feed.Finding
-	for _, s := range feed.SplitBy(e.HTML, 3) {
+	for _, s := range extract.SplitBy(e.HTML, 3) {
 		if !feed.Marked([]string{s.Heading}, "Deprecated", "Breaking") {
 			continue
 		}
-		lines := feed.Lines(s.HTML)
+		lines := extract.Lines(s.HTML)
 		drop := func(why string) {
 			title := ""
 			if len(lines) > 0 {
@@ -61,17 +62,17 @@ func readVertexAI(e feed.Entry) []feed.Finding {
 			if len(raw) < 2 {
 				continue
 			}
-			names := feed.Codes(raw[0][1])
-			if len(names) != 1 || !plainModelID.MatchString(names[0]) || feed.Text(raw[0][1]) != names[0] {
-				drop(fmt.Sprintf("row %q doesn't name one model id", feed.Text(raw[0][1])))
+			names := extract.Codes(raw[0][1])
+			if len(names) != 1 || !plainModelID.MatchString(names[0]) || extract.Text(raw[0][1]) != names[0] {
+				drop(fmt.Sprintf("row %q doesn't name one model id", extract.Text(raw[0][1])))
 				continue
 			}
-			name, migrate := names[0], feed.Text(raw[1][1])
+			name, migrate := names[0], extract.Text(raw[1][1])
 			subject := event.Subject{Type: event.SubjectModel, Provider: "google", Name: name}
 			hint := fmt.Sprintf("Google recommends: %s.", migrate)
 			// Exactly one plain model, and not the model itself (the feed has a
 			// row whose migration is its own name): anything else stays a hint.
-			if repl := feed.Codes(raw[1][1]); len(repl) == 1 && feed.Text(raw[1][1]) == repl[0] && repl[0] != name {
+			if repl := extract.Codes(raw[1][1]); len(repl) == 1 && extract.Text(raw[1][1]) == repl[0] && repl[0] != name {
 				subject.Replacement = repl[0]
 				hint = fmt.Sprintf("Use `%s` instead: Google's recommended migration.", repl[0])
 			}
@@ -96,7 +97,7 @@ func readVertexAI(e feed.Entry) []feed.Finding {
 func cells(row string) []string {
 	var out []string
 	for _, c := range tableCell.FindAllStringSubmatch(row, -1) {
-		out = append(out, feed.Text(c[1]))
+		out = append(out, extract.Text(c[1]))
 	}
 	return out
 }

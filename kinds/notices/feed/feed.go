@@ -26,6 +26,7 @@ import (
 	"time"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
+	"github.com/patch-it-dev/patch-it-plugins/core/extract"
 	"github.com/patch-it-dev/patch-it-plugins/core/kit"
 )
 
@@ -40,7 +41,7 @@ type Feed struct {
 // Reader turns one entry into findings: what it can name for sure, and what
 // it drops. It returns nothing for an entry that isn't breaking or a
 // deprecation.
-type Reader func(e Entry) []Finding
+type Reader func(e extract.Entry) []Finding
 
 // Finding is one change a reader found in an entry, or one it dropped.
 type Finding struct {
@@ -56,7 +57,7 @@ type Finding struct {
 
 // Findings reads every entry of a feed.
 func (f Feed) Findings(b []byte) ([]Finding, error) {
-	entries, err := Parse(b)
+	entries, err := extract.ParseFeed(b)
 	if err != nil {
 		return nil, err
 	}
