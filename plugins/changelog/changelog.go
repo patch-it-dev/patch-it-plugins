@@ -1,17 +1,22 @@
 // Package changelog is the kind for a changelog, with a parser for each
-// shape: a package's changelog file in Markdown or reStructuredText (File;
-// this file, parse.go, classify.go), or a vendor's machine-readable API
-// changelog in JSON (Log; json.go). One Plugin reads either.
+// shape: a package's changelog file in Markdown or reStructuredText, or its
+// release notes on GitHub (File; this file, parse.go, classify.go), or a
+// vendor's machine-readable API changelog in JSON (Log; json.go). One Plugin
+// reads either.
 //
-// A changelog file (CHANGELOG.md, CHANGES.rst, HISTORY.rst) is read at a release's tag: one
-// change event per bullet that plainly removes, renames or deprecates names
-// code uses. The tag never changes, so its URL is the event's provenance (no
+// A changelog file (CHANGELOG.md, CHANGES.rst, HISTORY.rst) is read at a
+// release's tag, and a release's notes at its tag's GitHub release: one change
+// event per bullet that plainly removes, renames or deprecates names code
+// uses. The tag never changes, so its URL is the event's provenance (no
 // snapshot) and a rerun stores nothing new: the fingerprints dedupe.
 //
 // Which bullets count: those under a Keep a Changelog "Removed" or
 // "Deprecated" heading, and the common variants ("Breaking changes",
-// "Backwards incompatible changes", "Deprecations", reStructuredText titles,
-// "**Deprecations**:"), plus a "Breaking change:" bullet under any heading.
+// "⚠ BREAKING CHANGES", "Backwards incompatible changes", "Deprecations",
+// changesets' "Major Changes", reStructuredText titles, "**Deprecations**:"),
+// plus a bullet marked breaking under any heading ("Breaking change:", "⚠️",
+// "**[BREAKING]**", "feat!:"). An area, issue or commit the bullet starts
+// with ("**client:**", "[#12](...)", "abc1234:") is read past.
 // A bullet must say which names in one plain sentence ("Removed `X`",
 // "`X` class removed", "Deprecated `X` in favor of `Y`"); anything else
 // (dropped Python versions, behavior changes, parameters of an unnamed call,
@@ -20,8 +25,12 @@ package changelog
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log"
+	"net/url"
+	"regexp"
+	"slices"
 	"strings"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
@@ -62,16 +71,21 @@ func init() {
 }
 
 // File is one package's changelog. Unpinned (Tag and Release empty), it is
-// read release by release: every version on the package registry, the file at
-// that release's tag (TagPrefix + version). Pinned (At), it is one release.
+// read release by release: every version on the package registry (PyPI, npm)
+// or, for an ecosystem patch-it doesn't list (Go, Maven, NuGet, RubyGems,
+// Packagist, Terraform), every TagPrefix + X.Y.Z tag in the repo; the file at
+// that release's tag. With Notes, the changelog is each release's notes on
+// GitHub instead of a file, and the versions are the repo's releases. Pinned
+// (At), it is one release.
 type File struct {
 	API       string // the source id the events carry: "urllib3/urllib3"
-	Package   string // the installed name: "urllib3"
-	Ecosystem string // where its releases are listed: "pypi"
+	Package   string // the installed name: "urllib3"; a Go module's path without its /vN
+	Ecosystem string // where it's installed from: "pypi", "npm", "go", "maven", "nuget", "rubygems", "packagist", "terraform"
 	Module    string // the import name, stripped from a symbol's front: "urllib3"
 	Repo      string // owner/name on GitHub
 	TagPrefix string // a release's git tag is TagPrefix + its version: "v" for v0.86.0
 	Path      string // the changelog's path in the repo
+	Notes     bool   // the changelog is each GitHub release's notes, not a file
 	Tag       string // pinned: the release's tag: "2.0.0", "v0.86.0"
 	Release   string // pinned: the release as the changelog heads it: "2.0.0"
 }
@@ -104,9 +118,39 @@ var (
 	Urllib3200  = Urllib3.At("2.0.0")
 )
 
-// URL is the changelog as it was at the (pinned) tag: its own provenance.
+// URL is what ReadAt fetches: the changelog as it was at the (pinned) tag,
+// or the tag's release on GitHub's API.
 func (f File) URL() string {
+	if f.Notes {
+		return fmt.Sprintf("%s/repos/%s/releases/tags/%s", versions.GitHubAPI, f.Repo, url.PathEscape(f.Tag))
+	}
 	return fmt.Sprintf("https://raw.githubusercontent.com/%s/%s/%s", f.Repo, f.Tag, f.Path)
+}
+
+// Cite is the events' provenance: the file at the tag, or the release's
+// page, where a person reads the same notes.
+func (f File) Cite() string {
+	if f.Notes {
+		return fmt.Sprintf("https://github.com/%s/releases/tag/%s", f.Repo, url.PathEscape(f.Tag))
+	}
+	return f.URL()
+}
+
+// what the changelog is, in a sentence.
+func (f File) what() string {
+	if f.Notes {
+		return "release notes"
+	}
+	return "changelog"
+}
+
+// installed is the package as code installs it at the release: a Go
+// module's path gains /vN from major 2 on (Go's semantic import versioning).
+func (f File) installed() string {
+	if m := versions.Major(f.Release); f.Ecosystem == "go" && m >= 2 {
+		return fmt.Sprintf("%s/v%d", f.Package, m)
+	}
+	return f.Package
 }
 
 // Finding is one bullet that became a change, or one that was dropped.
@@ -119,7 +163,12 @@ type Finding struct {
 
 // Read finds the release's breaking and deprecation bullets.
 func (f File) Read(page []byte) (heading string, out []Finding, err error) {
-	heading, sections, err := ReleaseNotes(page, f.Release)
+	var sections []Section
+	if f.Notes {
+		heading, sections, err = f.notes(page)
+	} else {
+		heading, sections, err = ReleaseNotes(page, f.Release)
+	}
 	if err != nil {
 		return "", nil, err
 	}
@@ -141,7 +190,70 @@ func (f File) Read(page []byte) (heading string, out []Finding, err error) {
 			out = append(out, Finding{Change: c, Section: s.Title, Bullet: b, Dropped: why})
 		}
 	}
-	return heading, out, nil
+	return heading, chained(out), nil
+}
+
+// chained follows each rename through the release's other renames and
+// removals, so a replacement is the name the release ends with: "A renamed
+// to B" and "B renamed to C" make A's replacement C; a chain that ends in a
+// removal (or loops) leaves A removed, with no replacement to move to.
+func chained(fs []Finding) []Finding {
+	renamed, removed := map[string]string{}, map[string]bool{}
+	for _, f := range fs {
+		if f.Dropped != "" || f.Change.ChangeType != event.ChangeTypeBreaking {
+			continue
+		}
+		for _, sym := range f.Change.Symbols {
+			if f.Change.Replacement != "" {
+				renamed[sym] = f.Change.Replacement
+			} else {
+				removed[sym] = true
+			}
+		}
+	}
+	for i, f := range fs {
+		r := f.Change.Replacement
+		// Only a breaking rename is followed: a deprecation in favor of a
+		// name stays a deprecation, whatever happens to that name.
+		if f.Dropped != "" || r == "" || f.Change.ChangeType != event.ChangeTypeBreaking {
+			continue
+		}
+		seen := map[string]bool{}
+		for next, ok := renamed[r]; ok && !seen[r]; next, ok = renamed[r] {
+			seen[r] = true
+			r = next
+		}
+		if removed[r] || seen[r] {
+			fs[i].Change.Replacement, fs[i].Change.Change = "", event.PackageRemovedSymbol
+			continue
+		}
+		fs[i].Change.Replacement = r
+	}
+	return fs
+}
+
+// notes are the sections of a GitHub release's body (the API's JSON for one
+// release), headed by its name. A release with no notes has nothing to read.
+func (f File) notes(page []byte) (string, []Section, error) {
+	var r struct {
+		Tag  string `json:"tag_name"`
+		Name string `json:"name"`
+		Body string `json:"body"`
+	}
+	if err := json.Unmarshal(page, &r); err != nil {
+		return "", nil, fmt.Errorf("parsing the release %s: %w", f.Tag, err)
+	}
+	if r.Tag != f.Tag {
+		return "", nil, fmt.Errorf("the release read is %q, not %q", r.Tag, f.Tag)
+	}
+	if strings.TrimSpace(r.Body) == "" {
+		return "", nil, fmt.Errorf("release %s has no notes: %w", f.Tag, plugin.ErrNothingToRead)
+	}
+	heading := r.Name
+	if heading == "" {
+		heading = r.Tag
+	}
+	return heading, NotesSections(r.Body), nil
 }
 
 // added are the names the release's "Added" bullets name, as symbols.
@@ -194,13 +306,24 @@ func (p Plugin) ListVersions(ctx context.Context, env plugin.Env) ([]plugin.Vers
 	}
 	var vs []plugin.Version
 	var err error
-	switch f.Ecosystem {
-	case "pypi":
+	switch {
+	case f.Notes:
+		vs, err = versions.GitHubReleases(ctx, env.Get, f.Repo, func(tag string) bool {
+			v, ok := strings.CutPrefix(tag, f.TagPrefix)
+			return ok && versions.Final(v) && !strings.HasPrefix(v, "v")
+		})
+		for i := range vs {
+			vs[i].ID = strings.TrimPrefix(vs[i].Ref, f.TagPrefix)
+		}
+		slices.SortStableFunc(vs, func(a, b plugin.Version) int { return versions.Compare(a.ID, b.ID) })
+		return vs, err
+	case f.Ecosystem == "pypi":
 		vs, err = versions.PyPIReleases(ctx, env.Get, f.Package)
-	case "npm":
+	case f.Ecosystem == "npm":
 		vs, err = versions.NPMReleases(ctx, env.Get, f.Package)
 	default:
-		return nil, fmt.Errorf("%s: no registry to list %q releases from", f.Package, f.Ecosystem)
+		// No registry patch-it lists from: the repo's release tags.
+		return versions.GitHubTags(ctx, env.Get, f.Repo, regexp.MustCompile(`^`+regexp.QuoteMeta(f.TagPrefix)+`(\d+(?:\.\d+)+)$`))
 	}
 	if err != nil {
 		return nil, err
@@ -222,7 +345,7 @@ func (p Plugin) ReadAt(ctx context.Context, env plugin.Env, v plugin.Version) (p
 	if err != nil {
 		return plugin.Snapshot{}, fmt.Errorf("fetching %s: %w", f.URL(), err)
 	}
-	return plugin.Snapshot{Version: v, Content: page, SourceURL: f.URL()}, nil
+	return plugin.Snapshot{Version: v, Content: page, SourceURL: f.Cite()}, nil
 }
 
 // Extract is the to release's section of the changelog: an event per bullet
@@ -237,11 +360,12 @@ func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 	f.Release, f.Tag = to.Version.ID, to.Version.Ref
 	heading, findings, err := f.Read(to.Content)
 	if err != nil {
-		return plugin.Result{}, fmt.Errorf("reading %s: %w", f.URL(), err)
+		return plugin.Result{}, fmt.Errorf("reading %s: %w", f.Cite(), err)
 	}
 	now := env.Now().UTC()
 	var events []event.Event
 	var rejected []error
+	seen := map[string]bool{} // a changelog that lists a bullet twice is one change
 	for _, fd := range findings {
 		if fd.Dropped != "" {
 			log.Printf("%s %s: dropped %q: %s", f.Package, f.Release, fd.Bullet.Text, fd.Dropped)
@@ -249,7 +373,7 @@ func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 		}
 		c := fd.Change
 		subject := event.Subject{
-			Type: event.SubjectPackageRelease, Ecosystem: f.Ecosystem, Package: f.Package,
+			Type: event.SubjectPackageRelease, Ecosystem: f.Ecosystem, Package: f.installed(),
 			Change: c.Change, Symbols: c.Symbols, Replacement: c.Replacement,
 		}
 		e := event.Event{
@@ -260,13 +384,17 @@ func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 			Breaking:        c.ChangeType == event.ChangeTypeBreaking,
 			Subject:         subject,
 			Description:     describe(f, c),
-			MigrationHint:   cap2000(fmt.Sprintf("%s (%s's changelog for %s)", fd.Bullet.Text, f.Package, f.Release)),
-			SourceURL:       f.URL(),
+			MigrationHint:   cap2000(fmt.Sprintf("%s (%s's %s for %s)", fd.Bullet.Text, f.Package, f.what(), f.Release)),
+			SourceURL:       f.Cite(),
 			SourceExcerpt:   cap2000(heading + "\n" + fd.Section + "\n" + fd.Bullet.Raw),
 			Confidence:      1.0,
 			DetectedAt:      now,
 		}
 		e.Fingerprint = event.Fingerprint(e.API, e.Version, e.ChangeType, subject, "")
+		if seen[e.Fingerprint] {
+			continue
+		}
+		seen[e.Fingerprint] = true
 		if err := e.Validate(); err != nil {
 			rejected = append(rejected, fmt.Errorf("%s %s %v: %w", f.Package, f.Release, c.Symbols, err))
 			continue

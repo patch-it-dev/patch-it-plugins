@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:0f44b1e48ef9b130605c09c38f207a5b580f7ed6b0c2a05c906b83dc7ad76388",
+    "api": "sentry/dotnet",
+    "version": "4.0.0",
+    "previous_version": "3.41.4",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "nuget",
+      "package": "Sentry",
+      "change": "renamed_symbol",
+      "symbols": [
+        "ITransaction"
+      ],
+      "replacement": "ITransactionTracer"
+    },
+    "description": "`ITransaction` was renamed to `ITransactionTracer` in Sentry 4.0.0: code using the old name fails.",
+    "migration_hint": "`ITransaction` has been renamed to `ITransactionTracer`. You will need to update any references to these interfaces in your code to use the new interface names ([#2731](https://github.com/getsentry/sentry-dotnet/pull/2731), [#2870](https://github.com/getsentry/sentry-dotnet/pull/2870)) (Sentry's changelog for 4.0.0)",
+    "source_url": "https://raw.githubusercontent.com/getsentry/sentry-dotnet/4.0.0/CHANGELOG.md",
+    "source_excerpt": "## 4.0.0\nAPI breaking Changes\n- `ITransaction` has been renamed to `ITransactionTracer`. You will need to update any references to these interfaces in your code to use the new interface names ([#2731](https://github.com/getsentry/sentry-dotnet/pull/2731), [#2870](https://github.com/getsentry/sentry-dotnet/pull/2870))",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:c2e3c53d050a43c913df5961fc5e32dd38251a8591ad9592599e1ac2f274e61c",
+    "api": "sentry/dotnet",
+    "version": "4.0.0",
+    "previous_version": "3.41.4",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "nuget",
+      "package": "Sentry",
+      "change": "removed_symbol",
+      "symbols": [
+        "WithScope",
+        "WithScopeAsync"
+      ]
+    },
+    "description": "`WithScope`, `WithScopeAsync` were removed in Sentry 4.0.0: code using it fails.",
+    "migration_hint": "The `WithScope` and `WithScopeAsync` methods have been removed. We have discovered that these methods didn't work correctly in certain desktop contexts, especially when using a global scope. ([#2717](https://github.com/getsentry/sentry-dotnet/pull/2717)) (Sentry's changelog for 4.0.0)",
+    "source_url": "https://raw.githubusercontent.com/getsentry/sentry-dotnet/4.0.0/CHANGELOG.md",
+    "source_excerpt": "## 4.0.0\nAPI breaking Changes\n- The `WithScope` and `WithScopeAsync` methods have been removed. We have discovered that these methods didn't work correctly in certain desktop contexts, especially when using a global scope. ([#2717](https://github.com/getsentry/sentry-dotnet/pull/2717))",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

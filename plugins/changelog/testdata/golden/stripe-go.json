@@ -1,0 +1,942 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:f837052506f58bb33e02572b81383dcc3d53a80aca893897f446412e2c8ff047",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "BalanceTransactionStatus"
+      ]
+    },
+    "description": "`BalanceTransactionStatus` was removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `BalanceTransactionStatus`. It was meant to be an enum, but none of the enum values were defined, so it was just an alias for string. (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `BalanceTransactionStatus`. It was meant to be an enum, but none of the enum values were defined, so it was just an alias for string.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:c171141689be54d629b416af0762dd4dc355c414a5c94a5543e18816b14894b5",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "CardParams.AccountType"
+      ]
+    },
+    "description": "`CardParams.AccountType` was removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `CardParams.AccountType`. `AccountType` does not exist on any client method for Card. It does on BankAccount, which is similar. (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `CardParams.AccountType`. `AccountType` does not exist on any client method for Card. It does on BankAccount, which is similar.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:c745dcedd14d1c4ed6102654dbcdccc5a468d9908ec8a14a957695177462975f",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "CheckoutSessionLineItemPriceDataRecurringParams.AggregateUsage",
+        "CheckoutSessionLineItemPriceDataRecurringParams.TrialPeriodDays",
+        "CheckoutSessionLineItemPriceDataRecurringParams.UsageType"
+      ]
+    },
+    "description": "`CheckoutSessionLineItemPriceDataRecurringParams.AggregateUsage`, `CheckoutSessionLineItemPriceDataRecurringParams.TrialPeriodDays`, `CheckoutSessionLineItemPriceDataRecurringParams.UsageType` were removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `CheckoutSessionLineItemPriceDataRecurringParams.AggregateUsage`, `CheckoutSessionLineItemPriceDataRecurringParams.TrialPeriodDays`, and `CheckoutSessionLineItemPriceDataRecurringParams.UsageType` (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `CheckoutSessionLineItemPriceDataRecurringParams.AggregateUsage`, `CheckoutSessionLineItemPriceDataRecurringParams.TrialPeriodDays`, and `CheckoutSessionLineItemPriceDataRecurringParams.UsageType`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:f8cd2b4de4e6dc58dd264973fb0b147e137c4ac5ae029633992c5d14165de851",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "CheckoutSessionPaymentIntentDataParams.Params",
+        "CheckoutSessionSetupIntentDataParams.Params",
+        "CheckoutSessionSubscriptionDataParams.Params"
+      ]
+    },
+    "description": "`CheckoutSessionPaymentIntentDataParams.Params`, `CheckoutSessionSetupIntentDataParams.Params`, `CheckoutSessionSubscriptionDataParams.Params` were removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `CheckoutSessionPaymentIntentDataParams.Params`, `CheckoutSessionSetupIntentDataParams.Params`, `CheckoutSessionSubscriptionDataParams.Params`. `Params` should only be embedded in root method struct, and has extraneous fields not applicable to child/sub structs. (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `CheckoutSessionPaymentIntentDataParams.Params`, `CheckoutSessionSetupIntentDataParams.Params`, `CheckoutSessionSubscriptionDataParams.Params`. `Params` should only be embedded in root method struct, and has extraneous fields not applicable to child/sub structs.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:974192abbe3984b3c30da88a48ed5b1001704ea39b9357442bdb4f455085dd88",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "CheckoutSessionTotalDetailsBreakdownTax.TaxRate"
+      ]
+    },
+    "description": "`CheckoutSessionTotalDetailsBreakdownTax.TaxRate` was removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `CheckoutSessionTotalDetailsBreakdownTax.TaxRate`. Use `CheckoutSessionTotalDetailsBreakdownTax.Rate` (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `CheckoutSessionTotalDetailsBreakdownTax.TaxRate`. Use `CheckoutSessionTotalDetailsBreakdownTax.Rate`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:5a41a62f665c7edc22a9a59a12e4f9164db34715301330c7b66b5a8d0d387918",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "CheckoutSessionTotalDetailsBreakdownTax.Deleted"
+      ]
+    },
+    "description": "`CheckoutSessionTotalDetailsBreakdownTax.Deleted` was removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `CheckoutSessionTotalDetailsBreakdownTax.Deleted` (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `CheckoutSessionTotalDetailsBreakdownTax.Deleted`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:bdefbd6fbc222b70cb1f4944d4d7501e54ddb31c61905e4414409953a2d83e81",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "CustomerParams.Token"
+      ]
+    },
+    "description": "`CustomerParams.Token` was removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `CustomerParams.Token` (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `CustomerParams.Token`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
+    "fingerprint": "sha256:c9917160ac326bff21fbf76b359edf91262a6eee4d8654e5a550e2b33ce9e2ee",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "DiscountParams"
+      ]
+    },
+    "description": "`DiscountParams` was removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `DiscountParams` (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `DiscountParams`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 9,
+    "fingerprint": "sha256:e9f1a3738a3a3c30f6ba508734a449a85a1d23e74e736f4f755e2462c4b8022c",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "InvoiceParams.Paid"
+      ]
+    },
+    "description": "`InvoiceParams.Paid` was removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `InvoiceParams.Paid`. Use `invoice.status` to check for status. `invoice.status` is a read-only field. (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `InvoiceParams.Paid`. Use `invoice.status` to check for status. `invoice.status` is a read-only field.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 10,
+    "fingerprint": "sha256:e5ae8d10dc875f7c0a3b7807346d8849a28dcb29ce2a2fe328749a16958b75ff",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "IssuingCardSpendingControlsParams.SpendingLimitsCurrency"
+      ]
+    },
+    "description": "`IssuingCardSpendingControlsParams.SpendingLimitsCurrency` was removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `IssuingCardSpendingControlsParams.SpendingLimitsCurrency`. `issuing_card` has `currency`, and `issuing_card.spending_controls.spending_limits.amount` will use that currency (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `IssuingCardSpendingControlsParams.SpendingLimitsCurrency`. `issuing_card` has `currency`, and `issuing_card.spending_controls.spending_limits.amount` will use that currency",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 11,
+    "fingerprint": "sha256:deb6a1e9e0b3a0fe8b22c8afbaa8b94b7fa846ba27568ce47dd4d660a07a3978",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "IssuingDisputeEvidenceServiceNotAsDescribed.ProductDescription",
+        "IssuingDisputeEvidenceServiceNotAsDescribed.ProductType",
+        "IssuingDisputeEvidenceServiceNotAsDescribedParams.ProductDescription",
+        "IssuingDisputeEvidenceServiceNotAsDescribedParams.ProductType",
+        "IssuingDisputeEvidenceServiceNotAsDescribedProductType"
+      ]
+    },
+    "description": "`IssuingDisputeEvidenceServiceNotAsDescribed.ProductDescription`, `IssuingDisputeEvidenceServiceNotAsDescribed.ProductType`, `IssuingDisputeEvidenceServiceNotAsDescribedParams.ProductDescription`, `IssuingDisputeEvidenceServiceNotAsDescribedParams.ProductType`, `IssuingDisputeEvidenceServiceNotAsDescribedProductType` were removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `IssuingDisputeEvidenceServiceNotAsDescribed.ProductDescription`, `IssuingDisputeEvidenceServiceNotAsDescribed.ProductType`, `IssuingDisputeEvidenceServiceNotAsDescribedParams.ProductDescription`, `IssuingDisputeEvidenceServiceNotAsDescribedParams.ProductType`, and `IssuingDisputeEvidenceServiceNotAsDescribedProductType`. `issuing_dispute.evidence.service_not_as_described` does not have `product_description` or `product_type`. `issuing_dispute.evidence.canceled` does. (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `IssuingDisputeEvidenceServiceNotAsDescribed.ProductDescription`, `IssuingDisputeEvidenceServiceNotAsDescribed.ProductType`, `IssuingDisputeEvidenceServiceNotAsDescribedParams.ProductDescription`, `IssuingDisputeEvidenceServiceNotAsDescribedParams.ProductType`, and `IssuingDisputeEvidenceServiceNotAsDescribedProductType`. `issuing_dispute.evidence.service_not_as_described` does not have `product_description` or `product_type`. `issuing_dispute.evidence.canceled` does.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 12,
+    "fingerprint": "sha256:bde76308505cb9fb9b888886ea74785cd6224b1a04d0ce7b19d869060907e4e4",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "LineItemTax.TaxRate"
+      ]
+    },
+    "description": "`LineItemTax.TaxRate` was removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `LineItemTax.TaxRate`. Use `LineItemTax.Rate` instead. (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `LineItemTax.TaxRate`. Use `LineItemTax.Rate` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 13,
+    "fingerprint": "sha256:0c3b8bbaebbc4ff5c9ffc7ec05c70c58735565904a630f89e029bb167a11ffd9",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "LineItem.Deleted"
+      ]
+    },
+    "description": "`LineItem.Deleted` was removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `LineItem.Deleted` (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `LineItem.Deleted`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 14,
+    "fingerprint": "sha256:a920d707b527271b4ece80bab0bfd8b90076716ea85fcd84b804aa1127b17650",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "LoginLink.RedirectURL"
+      ]
+    },
+    "description": "`LoginLink.RedirectURL` was removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `LoginLink.RedirectURL` (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `LoginLink.RedirectURL`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 15,
+    "fingerprint": "sha256:9eab45c446e618d250ac6fd36e3576a95531f9509a2c30236c6609a30c443218",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "PaymentIntentConfirmParams.PaymentMethodTypes"
+      ]
+    },
+    "description": "`PaymentIntentConfirmParams.PaymentMethodTypes` was removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `PaymentIntentConfirmParams.PaymentMethodTypes` (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `PaymentIntentConfirmParams.PaymentMethodTypes`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 16,
+    "fingerprint": "sha256:43835f02097187dd38190a8d5b70fdaab12951ffdc9a9e3449309b76745b1246",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "PaymentMethodFPX.TransactionID"
+      ]
+    },
+    "description": "`PaymentMethodFPX.TransactionID` was removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `PaymentMethodFPX.TransactionID` (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `PaymentMethodFPX.TransactionID`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 17,
+    "fingerprint": "sha256:c3694e59cc09e7bfafc46cc303c67c391dbaeac2bf163804ef62dabe44bb7b5a",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "PlanParams.ProductID"
+      ]
+    },
+    "description": "`PlanParams.ProductID` was removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `PlanParams.ProductID`. Use `PlanParams.Product.ID` instead. (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `PlanParams.ProductID`. Use `PlanParams.Product.ID` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 18,
+    "fingerprint": "sha256:26a05cd5678882db42e2d0574f1af89f5a313d15f3d57f66544f8dc37c33499d",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "Customer.DefaultCurrency"
+      ]
+    },
+    "description": "`Customer.DefaultCurrency` was removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `DefaultCurrency` property from `Customer` resource. Please use `Currency` property instead. (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `DefaultCurrency` property from `Customer` resource. Please use `Currency` property instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 19,
+    "fingerprint": "sha256:747e593c78a458b6db0071fb21da8a80b575514df6e324f05be95cec43b5c379",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "RadarValueList.Updated",
+        "RadarValueList.UpdatedBy"
+      ]
+    },
+    "description": "`RadarValueList.Updated`, `RadarValueList.UpdatedBy` were removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `Updated` and `UpdatedBy` from `RadarValueList` (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `Updated` and `UpdatedBy` from `RadarValueList`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 20,
+    "fingerprint": "sha256:acc442d857bf6e23a80c0fd2a37bb5a8978758eea634a74080445cd7aa57fc72",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "RadarValueListItem.Name"
+      ]
+    },
+    "description": "`RadarValueListItem.Name` was removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `Name` from `RadarValueListItem` (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `Name` from `RadarValueListItem`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 21,
+    "fingerprint": "sha256:64aeb32d66430b1987b83de0c9713062a0a67aacb224c19451b1348fa8bcc64f",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "Review.ReviewReasonType"
+      ]
+    },
+    "description": "`Review.ReviewReasonType` was removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `ReviewReasonType` type from `Review` resource. Use `ReviewReason` instead (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `ReviewReasonType` type from `Review` resource. Use `ReviewReason` instead",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 22,
+    "fingerprint": "sha256:9111d2a1f9f44593beee2dd832ea5d6b102a6441cfeac4d0bf0f9ec24ffd8be8",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "SigmaScheduledQueryRun.Query"
+      ]
+    },
+    "description": "`SigmaScheduledQueryRun.Query` was removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `SigmaScheduledQueryRun.Query`. The field was invalid (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `SigmaScheduledQueryRun.Query`. The field was invalid",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 23,
+    "fingerprint": "sha256:c22a29f6a0dabafeba9db6416820a23e72e21d76bc985c3d7abe6ff9c17ff2b3",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "SKUParams.Description",
+        "SKU.Description"
+      ]
+    },
+    "description": "`SKUParams.Description`, `SKU.Description` were removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `SKUParams.Description` and `SKU.Description` (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `SKUParams.Description` and `SKU.Description`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 24,
+    "fingerprint": "sha256:fc84cbc6883d95b92e104d1c79916f8c88cddf670734e5507aef1e2ad8297a81",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "SourceMandateAcceptanceStatus",
+        "SourceMandateAcceptanceStatusAccepted",
+        "SourceMandateAcceptanceStatusRefused",
+        "SourceMandateNotificationMethod",
+        "SourceMandateNotificationMethodEmail",
+        "SourceMandateNotificationMethodManual",
+        "SourceMandateNotificationMethodNone"
+      ]
+    },
+    "description": "`SourceMandateAcceptanceStatus`, `SourceMandateAcceptanceStatusAccepted`, `SourceMandateAcceptanceStatusRefused`, `SourceMandateNotificationMethod`, `SourceMandateNotificationMethodEmail`, `SourceMandateNotificationMethodManual`, `SourceMandateNotificationMethodNone` were removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `SourceMandateAcceptanceStatus`, `SourceMandateAcceptanceStatusAccepted`, `SourceMandateAcceptanceStatusRefused`, `SourceMandateNotificationMethod`, `SourceMandateNotificationMethodEmail`, `SourceMandateNotificationMethodManual`, and `SourceMandateNotificationMethodNone` (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `SourceMandateAcceptanceStatus`, `SourceMandateAcceptanceStatusAccepted`, `SourceMandateAcceptanceStatusRefused`, `SourceMandateNotificationMethod`, `SourceMandateNotificationMethodEmail`, `SourceMandateNotificationMethodManual`, and `SourceMandateNotificationMethodNone`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 25,
+    "fingerprint": "sha256:cb52fb0ef5638deb73f8758f3be765c392fe736207c7a99a7e3516cd6c5f1854",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "SourceTransaction.CustomerData"
+      ]
+    },
+    "description": "`SourceTransaction.CustomerData` was removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `SourceTransaction.CustomerData`. The field was deprecated (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `SourceTransaction.CustomerData`. The field was deprecated",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 26,
+    "fingerprint": "sha256:0d5234543295b3d75573d23c7638c5f8fd357b9a7aa00fbabe5c2356b156adba",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "SourceTransaction.TypeData",
+        "SourceTransaction.UnmarshalJSON"
+      ]
+    },
+    "description": "`SourceTransaction.TypeData`, `SourceTransaction.UnmarshalJSON` were removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `SourceTransaction.TypeData` and `SourceTransaction.UnmarshalJSON`. Use payment specific fields - Remove `ACHCreditTransfer`, `CHFCreditTransfer`, `GBPCreditTransfer`, `PaperCheck`, and `SEPACreditTransfer` (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `SourceTransaction.TypeData` and `SourceTransaction.UnmarshalJSON`. Use payment specific fields - Remove `ACHCreditTransfer`, `CHFCreditTransfer`, `GBPCreditTransfer`, `PaperCheck`, and `SEPACreditTransfer`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 27,
+    "fingerprint": "sha256:24e1c61189fa5f74829b23606f65e935bad7b8266d30aa1668654b900da1580e",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "SubscriptionPaymentBehavior",
+        "SubscriptionPaymentBehaviorAllowIncomplete",
+        "SubscriptionPaymentBehaviorErrorIfIncomplete",
+        "SubscriptionPaymentBehaviorPendingIfIncomplete"
+      ]
+    },
+    "description": "`SubscriptionPaymentBehavior`, `SubscriptionPaymentBehaviorAllowIncomplete`, `SubscriptionPaymentBehaviorErrorIfIncomplete`, `SubscriptionPaymentBehaviorPendingIfIncomplete` were removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `SubscriptionPaymentBehavior`, `SubscriptionPaymentBehaviorAllowIncomplete`, `SubscriptionPaymentBehaviorErrorIfIncomplete`, and `SubscriptionPaymentBehaviorPendingIfIncomplete` (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `SubscriptionPaymentBehavior`, `SubscriptionPaymentBehaviorAllowIncomplete`, `SubscriptionPaymentBehaviorErrorIfIncomplete`, and `SubscriptionPaymentBehaviorPendingIfIncomplete`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 28,
+    "fingerprint": "sha256:c5d87f9bb94d5c4d8237dd5e87f28179f99015ddab3c8adad80d611113c9c47d",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "SubscriptionProrationBehavior",
+        "SubscriptionProrationBehaviorAlwaysInvoice",
+        "SubscriptionProrationBehaviorCreateProrations",
+        "SubscriptionProrationBehaviorNone"
+      ]
+    },
+    "description": "`SubscriptionProrationBehavior`, `SubscriptionProrationBehaviorAlwaysInvoice`, `SubscriptionProrationBehaviorCreateProrations`, `SubscriptionProrationBehaviorNone` were removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `SubscriptionProrationBehavior`, `SubscriptionProrationBehaviorAlwaysInvoice`, `SubscriptionProrationBehaviorCreateProrations`, and `SubscriptionProrationBehaviorNone` (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `SubscriptionProrationBehavior`, `SubscriptionProrationBehaviorAlwaysInvoice`, `SubscriptionProrationBehaviorCreateProrations`, and `SubscriptionProrationBehaviorNone`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 29,
+    "fingerprint": "sha256:ac9411bb856ec03b20cab5d9556731efd2763d4fe62e4bc9a94701ada166ce64",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "SubscriptionStatusAll"
+      ]
+    },
+    "description": "`SubscriptionStatusAll` was removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `SubscriptionStatusAll` (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `SubscriptionStatusAll`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 30,
+    "fingerprint": "sha256:2902e81051374ad2c155d1dbe603eb3a9a51756040ff6f3193b6a7216a71ce4e",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "SubscriptionParams.Card",
+        "SubscriptionParams.Plan",
+        "SubscriptionParams.Quantity"
+      ]
+    },
+    "description": "`SubscriptionParams.Card`, `SubscriptionParams.Plan`, `SubscriptionParams.Quantity` were removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `SubscriptionParams.Card`, `SubscriptionParams.Plan`, and `SubscriptionParams.Quantity` (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `SubscriptionParams.Card`, `SubscriptionParams.Plan`, and `SubscriptionParams.Quantity`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 31,
+    "fingerprint": "sha256:5a4bb8d2681a60429744d3014d65852ebe01edc4fb5c431442baad67d67e6990",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "Subscription.Plan",
+        "Subscription.Quantity"
+      ]
+    },
+    "description": "`Subscription.Plan`, `Subscription.Quantity` were removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `Subscription.Plan` and `Subscription.Quantity` (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `Subscription.Plan` and `Subscription.Quantity`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 32,
+    "fingerprint": "sha256:88b47b02d230fbe97a5b3c89924e96e385d2b28e3bd24fe41f1c224fdc3b1bda",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "SubscriptionItemParams.ID"
+      ]
+    },
+    "description": "`SubscriptionItemParams.ID` was removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `SubscriptionItemParams.ID`. The field was deprecated (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `SubscriptionItemParams.ID`. The field was deprecated",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 33,
+    "fingerprint": "sha256:a61ca1c620016258f3d3d246c1549c23bd912fea8bd3c55b78b5b6f284662711",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "SubscriptionSchedulePhaseAddInvoiceItemPriceDataRecurringParams",
+        "SubscriptionSchedulePhaseAddInvoiceItemPriceDataParams"
+      ]
+    },
+    "description": "`SubscriptionSchedulePhaseAddInvoiceItemPriceDataRecurringParams`, `SubscriptionSchedulePhaseAddInvoiceItemPriceDataParams` were removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `SubscriptionSchedulePhaseAddInvoiceItemPriceDataRecurringParams` and `SubscriptionSchedulePhaseAddInvoiceItemPriceDataParams` (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `SubscriptionSchedulePhaseAddInvoiceItemPriceDataRecurringParams` and `SubscriptionSchedulePhaseAddInvoiceItemPriceDataParams`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 34,
+    "fingerprint": "sha256:8fe895146f05e1639f09a32355d15e3b85358c03ee201998778c22867d1f4a74",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "TaxRate.Del"
+      ]
+    },
+    "description": "`TaxRate.Del` was removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `Del` method on `TaxRate` (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `Del` method on `TaxRate`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 35,
+    "fingerprint": "sha256:645435c630f60163aa4eafbce3ce6d81c8ce1170f4dab2829498a6391e6ed01b",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "TerminalReaderGetParams"
+      ]
+    },
+    "description": "`TerminalReaderGetParams` was removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `TerminalReaderGetParams`. Use `TerminalReaderParams` instead. (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `TerminalReaderGetParams`. Use `TerminalReaderParams` instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 36,
+    "fingerprint": "sha256:f8783b3b8921606936676c83ed8f3d271216cdd4a5996601198dc9fe0666573a",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "Token.Email",
+        "TokenParams.Email"
+      ]
+    },
+    "description": "`Token.Email`, `TokenParams.Email` were removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `Token.Email` and `TokenParams.Email` (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `Token.Email` and `TokenParams.Email`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 37,
+    "fingerprint": "sha256:9b3886e5d282e8e2679b65116f2186e3bf675c4452220a4c13db5c8c6df2e704",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "TopupParams.SetSource"
+      ]
+    },
+    "description": "`TopupParams.SetSource` was removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `TopupParams.SetSource` (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `TopupParams.SetSource`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 38,
+    "fingerprint": "sha256:d4d073680f457f30d134a42c601f23a0721a951a0dec5bc8cb511927c9d269aa",
+    "api": "stripe/go",
+    "version": "73.0.0",
+    "previous_version": "72.122.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/stripe/stripe-go/v73",
+      "change": "removed_symbol",
+      "symbols": [
+        "WebhookEndpoint.Connected"
+      ]
+    },
+    "description": "`WebhookEndpoint.Connected` was removed in github.com/stripe/stripe-go 73.0.0: code using it fails.",
+    "migration_hint": "Remove `WebhookEndpoint.Connected` (github.com/stripe/stripe-go's changelog for 73.0.0)",
+    "source_url": "https://raw.githubusercontent.com/stripe/stripe-go/v73.0.0/CHANGELOG.md",
+    "source_excerpt": "## 73.0.0 - 2022-08-02\n⚠️ Removed\n- Remove `WebhookEndpoint.Connected`",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

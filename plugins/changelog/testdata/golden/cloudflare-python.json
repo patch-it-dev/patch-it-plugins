@@ -1,0 +1,173 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:3cb251ed147619574779c6350e7cc7d5de187b594ae5684f99344aa295c5310c",
+    "api": "cloudflare/python",
+    "version": "5.6.0",
+    "previous_version": "5.5.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "cloudflare",
+      "change": "removed_symbol",
+      "symbols": [
+        "client.accounts.subscriptions.create",
+        "client.accounts.subscriptions.get"
+      ]
+    },
+    "description": "`client.accounts.subscriptions.create`, `client.accounts.subscriptions.get` were removed in cloudflare 5.6.0: code using it fails.",
+    "migration_hint": "**accounts:** The `create()` and `get()` methods have been removed from `client.accounts.subscriptions`. The `SubscriptionCreateParams` type is no longer available. (cloudflare's changelog for 5.6.0)",
+    "source_url": "https://raw.githubusercontent.com/cloudflare/cloudflare-python/v5.6.0/CHANGELOG.md",
+    "source_excerpt": "## 5.6.0 (2026-07-22)\nBreaking Changes\n* **accounts:** The `create()` and `get()` methods have been removed from `client.accounts.subscriptions`. The `SubscriptionCreateParams` type is no longer available.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:5feead857c2e71809894332f68baf622f9170c8ab9bd6215874f91de64ed53da",
+    "api": "cloudflare/python",
+    "version": "5.6.0",
+    "previous_version": "5.5.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "cloudflare",
+      "change": "removed_symbol",
+      "symbols": [
+        "types.acm.CertificateAuthority"
+      ]
+    },
+    "description": "`types.acm.CertificateAuthority` was removed in cloudflare 5.6.0: code using it fails.",
+    "migration_hint": "**acm:** The `CertificateAuthority` type has been removed from `cloudflare.types.acm`. (cloudflare's changelog for 5.6.0)",
+    "source_url": "https://raw.githubusercontent.com/cloudflare/cloudflare-python/v5.6.0/CHANGELOG.md",
+    "source_excerpt": "## 5.6.0 (2026-07-22)\nBreaking Changes\n* **acm:** The `CertificateAuthority` type has been removed from `cloudflare.types.acm`.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:c88da90d9128dd42b957d7d3120662e5595f616edc5e0b8ca9dcb037e1f8bf0a",
+    "api": "cloudflare/python",
+    "version": "5.6.0",
+    "previous_version": "5.5.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "cloudflare",
+      "change": "removed_symbol",
+      "symbols": [
+        "types.certificate_authorities.HostnameAssociation"
+      ]
+    },
+    "description": "`types.certificate_authorities.HostnameAssociation` was removed in cloudflare 5.6.0: code using it fails.",
+    "migration_hint": "**certificate_authorities:** The `HostnameAssociation` type has been removed from `cloudflare.types.certificate_authorities`. (cloudflare's changelog for 5.6.0)",
+    "source_url": "https://raw.githubusercontent.com/cloudflare/cloudflare-python/v5.6.0/CHANGELOG.md",
+    "source_excerpt": "## 5.6.0 (2026-07-22)\nBreaking Changes\n* **certificate_authorities:** The `HostnameAssociation` type has been removed from `cloudflare.types.certificate_authorities`.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:cf3bf0f5e5d0ecbcc6c4188dbba6069120f744f06b20c9a954a8eb5a4f176c26",
+    "api": "cloudflare/python",
+    "version": "5.6.0",
+    "previous_version": "5.5.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "cloudflare",
+      "change": "removed_symbol",
+      "symbols": [
+        "client.cloudforce_one.threat_events.indicator_types"
+      ]
+    },
+    "description": "`client.cloudforce_one.threat_events.indicator_types` was removed in cloudflare 5.6.0: code using it fails.",
+    "migration_hint": "**cloudforce_one:** The `indicator_types` sub-resource has been removed from `client.cloudforce_one.threat_events`. Use the new `client.cloudforce_one.threat_events.indicators.types` resource instead. (cloudflare's changelog for 5.6.0)",
+    "source_url": "https://raw.githubusercontent.com/cloudflare/cloudflare-python/v5.6.0/CHANGELOG.md",
+    "source_excerpt": "## 5.6.0 (2026-07-22)\nBreaking Changes\n* **cloudforce_one:** The `indicator_types` sub-resource has been removed from `client.cloudforce_one.threat_events`. Use the new `client.cloudforce_one.threat_events.indicators.types` resource instead.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:eb5fa65379196b9ff19d6716c609f92ee1c1f6d5a55c81fd83e329e461a8f4dc",
+    "api": "cloudflare/python",
+    "version": "5.6.0",
+    "previous_version": "5.5.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "cloudflare",
+      "change": "removed_symbol",
+      "symbols": [
+        "types.custom_certificates.Status"
+      ]
+    },
+    "description": "`types.custom_certificates.Status` was removed in cloudflare 5.6.0: code using it fails.",
+    "migration_hint": "**custom_certificates:** The `Status` type has been removed from `cloudflare.types.custom_certificates`. (cloudflare's changelog for 5.6.0)",
+    "source_url": "https://raw.githubusercontent.com/cloudflare/cloudflare-python/v5.6.0/CHANGELOG.md",
+    "source_excerpt": "## 5.6.0 (2026-07-22)\nBreaking Changes\n* **custom_certificates:** The `Status` type has been removed from `cloudflare.types.custom_certificates`.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:7d702e9358dd147062382f1dc950fbc0aa210418290b69f30dc715328c825364",
+    "api": "cloudflare/python",
+    "version": "5.6.0",
+    "previous_version": "5.5.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "cloudflare",
+      "change": "removed_symbol",
+      "symbols": [
+        "types.ssl.Host",
+        "types.ssl.Status",
+        "types.ssl.ValidationMethod"
+      ]
+    },
+    "description": "`types.ssl.Host`, `types.ssl.Status`, `types.ssl.ValidationMethod` were removed in cloudflare 5.6.0: code using it fails.",
+    "migration_hint": "**ssl:** The `Host`, `Status`, and `ValidationMethod` types have been removed from `cloudflare.types.ssl`. The `hosts` parameter on `client.ssl.certificate_packs.create()` changed from `SequenceNotStr[Host]` to `SequenceNotStr[str]`. (cloudflare's changelog for 5.6.0)",
+    "source_url": "https://raw.githubusercontent.com/cloudflare/cloudflare-python/v5.6.0/CHANGELOG.md",
+    "source_excerpt": "## 5.6.0 (2026-07-22)\nBreaking Changes\n* **ssl:** The `Host`, `Status`, and `ValidationMethod` types have been removed from `cloudflare.types.ssl`. The `hosts` parameter on `client.ssl.certificate_packs.create()` changed from `SequenceNotStr[Host]` to `SequenceNotStr[str]`.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:351465f6be74ad1191370b6990d92f2808a94d34454f696cdedc018673c54e34",
+    "api": "cloudflare/python",
+    "version": "5.6.0",
+    "previous_version": "5.5.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "cloudflare",
+      "change": "removed_symbol",
+      "symbols": [
+        "client.zero_trust.casb.applications.setup_flows"
+      ]
+    },
+    "description": "`client.zero_trust.casb.applications.setup_flows` was removed in cloudflare 5.6.0: code using it fails.",
+    "migration_hint": "**zero_trust:** The `setup_flows` sub-resource has been removed from `client.zero_trust.casb.applications`. The `get()` method endpoint changed from `/accounts/{account_id}/one/applications/{slug}` to `/accounts/{account_id}/one/applications/{application_id}`. (cloudflare's changelog for 5.6.0)",
+    "source_url": "https://raw.githubusercontent.com/cloudflare/cloudflare-python/v5.6.0/CHANGELOG.md",
+    "source_excerpt": "## 5.6.0 (2026-07-22)\nBreaking Changes\n* **zero_trust:** The `setup_flows` sub-resource has been removed from `client.zero_trust.casb.applications`. The `get()` method endpoint changed from `/accounts/{account_id}/one/applications/{slug}` to `/accounts/{account_id}/one/applications/{application_id}`.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

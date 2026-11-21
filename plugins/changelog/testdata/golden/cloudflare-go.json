@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:074a5e03880423fd5123a0a3b2f9bb5065608688493e7cb1964fe8639831e9cc",
+    "api": "cloudflare/go",
+    "version": "7.15.0",
+    "previous_version": "7.14.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/cloudflare/cloudflare-go/v7",
+      "change": "removed_symbol",
+      "symbols": [
+        "ListCursor",
+        "ListCursorParam"
+      ]
+    },
+    "description": "`ListCursor`, `ListCursorParam` were removed in github.com/cloudflare/cloudflare-go 7.15.0: code using it fails.",
+    "migration_hint": "**rules:** the `ListCursor` and `ListCursorParam` types are removed. (github.com/cloudflare/cloudflare-go's changelog for 7.15.0)",
+    "source_url": "https://raw.githubusercontent.com/cloudflare/cloudflare-go/v7.15.0/CHANGELOG.md",
+    "source_excerpt": "## 7.15.0 (2026-11-06)\nBreaking Changes\n* **rules:** the `ListCursor` and `ListCursorParam` types are removed.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

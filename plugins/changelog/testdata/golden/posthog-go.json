@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:72de49d11432e04c482b83a52e73b9d437daf91a20d460f906318f304973911d",
+    "api": "posthog/go",
+    "version": "2.0.0",
+    "previous_version": "1.44.1",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/posthog/posthog-go/v2",
+      "change": "removed_symbol",
+      "symbols": [
+        "Capture.Library",
+        "Exception.Library"
+      ]
+    },
+    "description": "`Capture.Library`, `Exception.Library` were removed in github.com/posthog/posthog-go 2.0.0: code using it fails.",
+    "migration_hint": "fc05013: Remove `Capture.Library` and `Exception.Library`. Set `$lib` in the event's `Properties` instead, and set `$lib_version` with it: the SDK adds its own version only to its own `$lib`. `posthogmcp` events report `posthog-go-mcp` with the SDK version. See `docs/migration-v2.md`. (github.com/posthog/posthog-go's changelog for 2.0.0)",
+    "source_url": "https://raw.githubusercontent.com/PostHog/posthog-go/v2.0.0/CHANGELOG.md",
+    "source_excerpt": "## 2.0.0\nMajor Changes\n- fc05013: Remove `Capture.Library` and `Exception.Library`. Set `$lib` in the event's `Properties` instead, and set `$lib_version` with it: the SDK adds its own version only to its own `$lib`. `posthogmcp` events report `posthog-go-mcp` with the SDK version. See `docs/migration-v2.md`.",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

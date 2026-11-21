@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:56f85aa1cf74a8a8d04b37f117e24c3545011d733459d9f04195be526598fe1d",
+    "api": "sentry/javascript-changelog",
+    "version": "10.0.0",
+    "previous_version": "9.47.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@sentry/node",
+      "change": "removed_symbol",
+      "symbols": [
+        "BaseClient"
+      ]
+    },
+    "description": "`BaseClient` was removed in @sentry/node 10.0.0: code using it fails.",
+    "migration_hint": "feat(core)!: Remove `BaseClient` ([#17071](https://github.com/getsentry/sentry-javascript/pull/17071)) (@sentry/node's changelog for 10.0.0)",
+    "source_url": "https://raw.githubusercontent.com/getsentry/sentry-javascript/10.0.0/CHANGELOG.md",
+    "source_excerpt": "## 10.0.0\nBreaking Changes\n- feat(core)!: Remove `BaseClient` ([#17071](https://github.com/getsentry/sentry-javascript/pull/17071))",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:b30cd0ae134c24563f30f8467e081143808401e8218d929b741564ab8a0efa0f",
+    "api": "sentry/javascript-changelog",
+    "version": "10.0.0",
+    "previous_version": "9.47.2",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "npm",
+      "package": "@sentry/node",
+      "change": "removed_symbol",
+      "symbols": [
+        "hasTracingEnabled"
+      ]
+    },
+    "description": "`hasTracingEnabled` was removed in @sentry/node 10.0.0: code using it fails.",
+    "migration_hint": "feat(core)!: Remove `hasTracingEnabled` ([#17072](https://github.com/getsentry/sentry-javascript/pull/17072)) (@sentry/node's changelog for 10.0.0)",
+    "source_url": "https://raw.githubusercontent.com/getsentry/sentry-javascript/10.0.0/CHANGELOG.md",
+    "source_excerpt": "## 10.0.0\nBreaking Changes\n- feat(core)!: Remove `hasTracingEnabled` ([#17072](https://github.com/getsentry/sentry-javascript/pull/17072))",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

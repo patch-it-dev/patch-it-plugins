@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:b9934e7cf2ed5fce3e47a8dcccab92ee4b04c4b4fe555a45643237bb667985ff",
+    "api": "sentry/go",
+    "version": "0.31.0",
+    "previous_version": "0.30.0",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "go",
+      "package": "github.com/getsentry/sentry-go",
+      "change": "removed_symbol",
+      "symbols": [
+        "User.Segment"
+      ]
+    },
+    "description": "`User.Segment` was removed in github.com/getsentry/sentry-go 0.31.0: code using it fails.",
+    "migration_hint": "Remove `Segment` field from the `User` struct. This field is no longer used in the Sentry product. ([#928](https://github.com/getsentry/sentry-go/pull/928)) (github.com/getsentry/sentry-go's changelog for 0.31.0)",
+    "source_url": "https://raw.githubusercontent.com/getsentry/sentry-go/v0.31.0/CHANGELOG.md",
+    "source_excerpt": "## 0.31.0\nBreaking Changes\n- Remove `Segment` field from the `User` struct. This field is no longer used in the Sentry product. ([#928](https://github.com/getsentry/sentry-go/pull/928))",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

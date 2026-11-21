@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:0480089f0ce05c60634ebc123e89916b2835c44388dec0fec747d0c0c204fcfc",
+    "api": "github/octokit-net",
+    "version": "0.5.2",
+    "previous_version": "0.5.1",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "nuget",
+      "package": "Octokit",
+      "change": "removed_symbol",
+      "symbols": [
+        "MilestoneUpdate.Number"
+      ]
+    },
+    "description": "`MilestoneUpdate.Number` was removed in Octokit 0.5.2: code using it fails.",
+    "migration_hint": "`MilestoneUpdate.Number` is now removed (Octokit's release notes for 0.5.2)",
+    "source_url": "https://github.com/octokit/octokit.net/releases/tag/v0.5.2",
+    "source_excerpt": "v0.5.2\nBreaking Changes:\n- `MilestoneUpdate.Number` is now removed",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]
