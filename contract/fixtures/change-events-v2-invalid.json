@@ -5,7 +5,7 @@
       "event": {
         "id": 2,
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "api": "openai-models",
+        "api": "openai/models",
         "version": "2026-12-11",
         "change_type": "breaking",
         "breaking": true,
@@ -20,8 +20,7 @@
         "source_excerpt": "Synthetic fixture for model: not a real source.",
         "confidence": 1.0,
         "detected_at": "2026-11-03T12:00:00Z",
-        "migration_hint": "Use `examplemodel-2` instead.",
-        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        "migration_hint": "Use `examplemodel-2` instead."
       }
     },
     {
@@ -29,7 +28,7 @@
       "event": {
         "id": 2,
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "api": "openai-models",
+        "api": "openai/models",
         "version": "2026-12-11",
         "change_type": "breaking",
         "breaking": true,
@@ -43,8 +42,7 @@
         "source_excerpt": "Synthetic fixture for model: not a real source.",
         "confidence": 1.0,
         "detected_at": "2026-11-03T12:00:00Z",
-        "migration_hint": "Use `examplemodel-2` instead.",
-        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        "migration_hint": "Use `examplemodel-2` instead."
       }
     },
     {
@@ -52,7 +50,7 @@
       "event": {
         "id": 2,
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "api": "openai-models",
+        "api": "openai/models",
         "version": "2026-12-11",
         "change_type": "breaking",
         "breaking": true,
@@ -66,8 +64,7 @@
         "source_excerpt": "Synthetic fixture for model: not a real source.",
         "confidence": 1.0,
         "detected_at": "2026-11-03T12:00:00Z",
-        "migration_hint": "Use `examplemodel-2` instead.",
-        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        "migration_hint": "Use `examplemodel-2` instead."
       }
     },
     {
@@ -75,7 +72,7 @@
       "event": {
         "id": 2,
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "api": "openai-models",
+        "api": "openai/models",
         "version": "2026-12-11",
         "change_type": "breaking",
         "breaking": true,
@@ -91,8 +88,7 @@
         "source_excerpt": "Synthetic fixture for model: not a real source.",
         "confidence": 1.0,
         "detected_at": "2026-11-03T12:00:00Z",
-        "migration_hint": "Use `examplemodel-2` instead.",
-        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        "migration_hint": "Use `examplemodel-2` instead."
       }
     },
     {
@@ -100,8 +96,9 @@
       "event": {
         "id": 2,
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "api": "openai-models",
+        "api": "openai/models",
         "version": "2026-12-11",
+        "previous_version": "1.9.0",
         "change_type": "breaking",
         "breaking": true,
         "subject": {
@@ -118,8 +115,7 @@
         "source_excerpt": "Synthetic fixture for model: not a real source.",
         "confidence": 1.0,
         "detected_at": "2026-11-03T12:00:00Z",
-        "migration_hint": "Use `examplemodel-2` instead.",
-        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        "migration_hint": "Use `examplemodel-2` instead."
       }
     },
     {
@@ -127,8 +123,9 @@
       "event": {
         "id": 2,
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "api": "openai-models",
+        "api": "openai/models",
         "version": "2026-12-11",
+        "previous_version": "1.9.0",
         "change_type": "breaking",
         "breaking": true,
         "subject": {
@@ -145,8 +142,7 @@
         "source_excerpt": "Synthetic fixture for model: not a real source.",
         "confidence": 1.0,
         "detected_at": "2026-11-03T12:00:00Z",
-        "migration_hint": "Use `examplemodel-2` instead.",
-        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        "migration_hint": "Use `examplemodel-2` instead."
       }
     },
     {
@@ -154,8 +150,9 @@
       "event": {
         "id": 2,
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "api": "openai-models",
+        "api": "openai/models",
         "version": "2026-12-11",
+        "previous_version": "1.9.0",
         "change_type": "breaking",
         "breaking": true,
         "subject": {
@@ -172,8 +169,7 @@
         "source_excerpt": "Synthetic fixture for model: not a real source.",
         "confidence": 1.0,
         "detected_at": "2026-11-03T12:00:00Z",
-        "migration_hint": "Use `examplemodel-2` instead.",
-        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        "migration_hint": "Use `examplemodel-2` instead."
       }
     },
     {
@@ -181,8 +177,9 @@
       "event": {
         "id": 2,
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "api": "openai-models",
+        "api": "openai/models",
         "version": "2026-12-11",
+        "previous_version": "1.9.0",
         "change_type": "breaking",
         "breaking": true,
         "subject": {
@@ -198,8 +195,7 @@
         "source_excerpt": "Synthetic fixture for model: not a real source.",
         "confidence": 1.0,
         "detected_at": "2026-11-03T12:00:00Z",
-        "migration_hint": "Use `examplemodel-2` instead.",
-        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        "migration_hint": "Use `examplemodel-2` instead."
       }
     },
     {
@@ -207,8 +203,9 @@
       "event": {
         "id": 2,
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "api": "openai-models",
+        "api": "openai/models",
         "version": "2026-12-11",
+        "previous_version": "1.9.0",
         "change_type": "breaking",
         "breaking": true,
         "subject": {
@@ -226,8 +223,7 @@
         "source_excerpt": "Synthetic fixture for model: not a real source.",
         "confidence": 1.0,
         "detected_at": "2026-11-03T12:00:00Z",
-        "migration_hint": "Use `examplemodel-2` instead.",
-        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        "migration_hint": "Use `examplemodel-2` instead."
       }
     },
     {
@@ -235,8 +231,9 @@
       "event": {
         "id": 2,
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "api": "openai-models",
+        "api": "openai/models",
         "version": "2026-12-11",
+        "previous_version": "1.9.0",
         "change_type": "breaking",
         "breaking": true,
         "subject": {
@@ -254,8 +251,7 @@
         "source_excerpt": "Synthetic fixture for model: not a real source.",
         "confidence": 1.0,
         "detected_at": "2026-11-03T12:00:00Z",
-        "migration_hint": "Use `examplemodel-2` instead.",
-        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        "migration_hint": "Use `examplemodel-2` instead."
       }
     },
     {
@@ -263,8 +259,9 @@
       "event": {
         "id": 2,
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "api": "openai-models",
+        "api": "openai/models",
         "version": "2026-12-11",
+        "previous_version": "1.9.0",
         "change_type": "breaking",
         "breaking": true,
         "subject": {
@@ -281,8 +278,7 @@
         "source_excerpt": "Synthetic fixture for model: not a real source.",
         "confidence": 1.0,
         "detected_at": "2026-11-03T12:00:00Z",
-        "migration_hint": "Use `examplemodel-2` instead.",
-        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        "migration_hint": "Use `examplemodel-2` instead."
       }
     },
     {
@@ -290,7 +286,7 @@
       "event": {
         "id": 2,
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "api": "openai-models",
+        "api": "openai/models",
         "version": "2026-12-11",
         "change_type": "breaking",
         "breaking": true,
@@ -303,17 +299,17 @@
         "source_excerpt": "Synthetic fixture for model: not a real source.",
         "confidence": 1.0,
         "detected_at": "2026-11-03T12:00:00Z",
-        "migration_hint": "Use `examplemodel-2` instead.",
-        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        "migration_hint": "Use `examplemodel-2` instead."
       }
     },
     {
-      "why_invalid": "api_operation with value, which v2 dropped (a model has its own type)",
+      "why_invalid": "api_operation with value, a field its type doesn't define (a model has its own type)",
       "event": {
         "id": 2,
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "api": "openai-models",
+        "api": "openai/models",
         "version": "2026-12-11",
+        "previous_version": "2026-08-26.dahlia",
         "change_type": "breaking",
         "breaking": true,
         "subject": {
@@ -329,8 +325,7 @@
         "source_excerpt": "Synthetic fixture for model: not a real source.",
         "confidence": 1.0,
         "detected_at": "2026-11-03T12:00:00Z",
-        "migration_hint": "Use `examplemodel-2` instead.",
-        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        "migration_hint": "Use `examplemodel-2` instead."
       }
     },
     {
@@ -338,8 +333,9 @@
       "event": {
         "id": 2,
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "api": "openai-models",
+        "api": "openai/models",
         "version": "2026-12-11",
+        "previous_version": "2026-08-26.dahlia",
         "change_type": "breaking",
         "breaking": true,
         "subject": {
@@ -354,8 +350,7 @@
         "source_excerpt": "Synthetic fixture for model: not a real source.",
         "confidence": 1.0,
         "detected_at": "2026-11-03T12:00:00Z",
-        "migration_hint": "Use `examplemodel-2` instead.",
-        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        "migration_hint": "Use `examplemodel-2` instead."
       }
     },
     {
@@ -363,8 +358,9 @@
       "event": {
         "id": 2,
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "api": "openai-models",
+        "api": "openai/models",
         "version": "2026-12-11",
+        "previous_version": "2026-08-26.dahlia",
         "change_type": "breaking",
         "breaking": true,
         "subject": {
@@ -378,16 +374,15 @@
         "source_excerpt": "Synthetic fixture for model: not a real source.",
         "confidence": 1.0,
         "detected_at": "2026-11-03T12:00:00Z",
-        "migration_hint": "Use `examplemodel-2` instead.",
-        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        "migration_hint": "Use `examplemodel-2` instead."
       }
     },
     {
-      "why_invalid": "supersedes isn't a fingerprint",
+      "why_invalid": "supersedes, a field the contract doesn't define",
       "event": {
         "id": 2,
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "api": "openai-models",
+        "api": "openai/models",
         "version": "2026-12-11",
         "change_type": "breaking",
         "breaking": true,
@@ -403,15 +398,15 @@
         "confidence": 1.0,
         "detected_at": "2026-11-03T12:00:00Z",
         "migration_hint": "Use `examplemodel-2` instead.",
-        "supersedes": "sha256:xyz"
+        "supersedes": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
       }
     },
     {
-      "why_invalid": "v1's affected next to subject: a field v2 doesn't define",
+      "why_invalid": "affected next to subject: a field the contract doesn't define",
       "event": {
         "id": 2,
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "api": "openai-models",
+        "api": "openai/models",
         "version": "2026-12-11",
         "change_type": "breaking",
         "breaking": true,
@@ -427,7 +422,6 @@
         "confidence": 1.0,
         "detected_at": "2026-11-03T12:00:00Z",
         "migration_hint": "Use `examplemodel-2` instead.",
-        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
         "affected": {
           "kind": "operation",
           "side": "request",
@@ -440,7 +434,7 @@
       "event": {
         "id": 2,
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "api": "openai-models",
+        "api": "openai/models",
         "version": "2026-12-11",
         "change_type": "breaking",
         "breaking": true,
@@ -449,8 +443,7 @@
         "source_excerpt": "Synthetic fixture for model: not a real source.",
         "confidence": 1.0,
         "detected_at": "2026-11-03T12:00:00Z",
-        "migration_hint": "Use `examplemodel-2` instead.",
-        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        "migration_hint": "Use `examplemodel-2` instead."
       }
     },
     {
@@ -458,7 +451,7 @@
       "event": {
         "id": 2,
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "api": "openai-models",
+        "api": "openai/models",
         "version": "2026-12-11",
         "change_type": "breaking",
         "breaking": true,
@@ -472,8 +465,7 @@
         "source_excerpt": "Synthetic fixture for model: not a real source.",
         "confidence": 1.0,
         "detected_at": "2026-11-03T12:00:00Z",
-        "migration_hint": "Use `examplemodel-2` instead.",
-        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        "migration_hint": "Use `examplemodel-2` instead."
       }
     },
     {
@@ -481,7 +473,7 @@
       "event": {
         "id": 2,
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "api": "openai-models",
+        "api": "openai/models",
         "version": "2026-12-11",
         "change_type": "breaking",
         "breaking": false,
@@ -496,8 +488,7 @@
         "source_excerpt": "Synthetic fixture for model: not a real source.",
         "confidence": 1.0,
         "detected_at": "2026-11-03T12:00:00Z",
-        "migration_hint": "Use `examplemodel-2` instead.",
-        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        "migration_hint": "Use `examplemodel-2` instead."
       }
     },
     {
@@ -505,7 +496,7 @@
       "event": {
         "id": 2,
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "api": "openai-models",
+        "api": "openai/models",
         "version": "2026-12-11",
         "change_type": "breaking",
         "breaking": true,
@@ -518,8 +509,7 @@
         "source_excerpt": "Synthetic fixture for model: not a real source.",
         "confidence": 1.0,
         "detected_at": "2026-11-03T12:00:00Z",
-        "migration_hint": "Use `examplemodel-2` instead.",
-        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        "migration_hint": "Use `examplemodel-2` instead."
       }
     },
     {
@@ -527,8 +517,9 @@
       "event": {
         "id": 2,
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "api": "openai-models",
+        "api": "openai/models",
         "version": "2026-12-11",
+        "previous_version": "1.9.0",
         "change_type": "breaking",
         "breaking": true,
         "subject": {
@@ -544,8 +535,7 @@
         "source_excerpt": "Synthetic fixture for model: not a real source.",
         "confidence": 1.0,
         "detected_at": "2026-11-03T12:00:00Z",
-        "migration_hint": "Use `examplemodel-2` instead.",
-        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        "migration_hint": "Use `examplemodel-2` instead."
       }
     },
     {
@@ -553,8 +543,9 @@
       "event": {
         "id": 2,
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "api": "openai-models",
+        "api": "openai/models",
         "version": "2026-12-11",
+        "previous_version": "2026-08-26.dahlia",
         "change_type": "breaking",
         "breaking": true,
         "subject": {
@@ -569,8 +560,7 @@
         "source_excerpt": "Synthetic fixture for model: not a real source.",
         "confidence": 1.0,
         "detected_at": "2026-11-03T12:00:00Z",
-        "migration_hint": "Use `examplemodel-2` instead.",
-        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        "migration_hint": "Use `examplemodel-2` instead."
       }
     },
     {
@@ -578,7 +568,7 @@
       "event": {
         "id": 2,
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "api": "openai-models",
+        "api": "openai/models",
         "version": "2026-12-11",
         "change_type": "breaking",
         "breaking": true,
@@ -592,8 +582,7 @@
         "source_excerpt": "Synthetic fixture for model: not a real source.",
         "confidence": 1.0,
         "detected_at": "2026-11-03T12:00:00Z",
-        "migration_hint": "Use `examplemodel-2` instead.",
-        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        "migration_hint": "Use `examplemodel-2` instead."
       }
     },
     {
@@ -616,8 +605,104 @@
         "confidence": 1.0,
         "detected_at": "2026-11-03T12:00:00Z",
         "migration_hint": "Use `examplemodel-2` instead.",
-        "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
-        "API": "openai-models"
+        "API": "openai/models"
+      }
+    },
+    {
+      "why_invalid": "previous_version missing on a pair event (package_release)",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:7caa5ac7c7922798e11123fce490b3309dba0ca23ed2460938b8e284d2001a0d",
+        "api": "example/examplepkg",
+        "version": "2.0.0",
+        "change_type": "breaking",
+        "breaking": true,
+        "subject": {
+          "type": "package_release",
+          "ecosystem": "pypi",
+          "package": "examplepkg",
+          "change": "renamed_symbol",
+          "symbols": [
+            "Model.parse_obj"
+          ],
+          "replacement": "Model.model_validate"
+        },
+        "description": "Model.parse_obj renamed to Model.model_validate in examplepkg 2.0.0.",
+        "source_url": "https://example.test/examplepkg/2.0.0",
+        "source_excerpt": "Synthetic fixture for package_release: not a real source.",
+        "confidence": 1,
+        "detected_at": "2026-11-03T12:00:00Z"
+      }
+    },
+    {
+      "why_invalid": "previous_version missing on a pair event (api_operation)",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:f8416cbd34c4ff65d68365ae656c636732d41bb1027ed839440137f87c26d4cf",
+        "api": "stripe/api",
+        "version": "2026-09-30.endive",
+        "change_type": "breaking",
+        "breaking": true,
+        "subject": {
+          "type": "api_operation",
+          "kind": "schema_property",
+          "side": "response",
+          "schema": "invoice",
+          "property": "subscription"
+        },
+        "description": "Property invoice.subscription removed.",
+        "source_url": "https://example.test/stripe/2026-09-30.endive",
+        "source_excerpt": "Synthetic fixture for api_operation: not a real source.",
+        "confidence": 1,
+        "detected_at": "2026-11-03T12:00:00Z"
+      }
+    },
+    {
+      "why_invalid": "api isn't a provider/source id: an old slug (stripe)",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:f8416cbd34c4ff65d68365ae656c636732d41bb1027ed839440137f87c26d4cf",
+        "api": "stripe",
+        "version": "2026-09-30.endive",
+        "change_type": "breaking",
+        "breaking": true,
+        "subject": {
+          "type": "api_operation",
+          "kind": "schema_property",
+          "side": "response",
+          "schema": "invoice",
+          "property": "subscription"
+        },
+        "description": "Property invoice.subscription removed.",
+        "source_url": "https://example.test/stripe/2026-09-30.endive",
+        "source_excerpt": "Synthetic fixture for api_operation: not a real source.",
+        "confidence": 1,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "previous_version": "2026-08-26.dahlia"
+      }
+    },
+    {
+      "why_invalid": "api isn't a provider/source id: uppercase (Stripe/API)",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:f8416cbd34c4ff65d68365ae656c636732d41bb1027ed839440137f87c26d4cf",
+        "api": "Stripe/API",
+        "version": "2026-09-30.endive",
+        "change_type": "breaking",
+        "breaking": true,
+        "subject": {
+          "type": "api_operation",
+          "kind": "schema_property",
+          "side": "response",
+          "schema": "invoice",
+          "property": "subscription"
+        },
+        "description": "Property invoice.subscription removed.",
+        "source_url": "https://example.test/stripe/2026-09-30.endive",
+        "source_excerpt": "Synthetic fixture for api_operation: not a real source.",
+        "confidence": 1,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "previous_version": "2026-08-26.dahlia"
       }
     }
   ]

@@ -1,12 +1,14 @@
 package retire
 
 import (
+	"errors"
 	"os"
 	"strings"
 	"testing"
 	"time"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 )
 
 func read(t *testing.T, name string) []byte {
@@ -155,8 +157,8 @@ func TestTableEdgeCases(t *testing.T) {
 	if _, ok := got["gpt-4-later"]; ok {
 		t.Error("a newer \"To be announced\" withdraws an older row's date: no stale event")
 	}
-	if _, err := Parse([]byte("# Deprecations\n\nnothing here\n"), openAIText); err == nil {
-		t.Error("a page with no retirement tables must be an error, not zero events")
+	if _, err := Parse([]byte("# Deprecations\n\nnothing here\n"), openAIText); !errors.Is(err, plugin.ErrNothingToRead) {
+		t.Errorf("a page with no retirement tables must be plugin.ErrNothingToRead, not zero events: %v", err)
 	}
 }
 

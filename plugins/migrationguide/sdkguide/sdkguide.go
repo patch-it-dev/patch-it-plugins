@@ -18,6 +18,7 @@ import (
 	"unicode/utf8"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 )
 
 // Guide is one SDK's migration guide for one major release.
@@ -83,7 +84,7 @@ var ticked = regexp.MustCompile("`([^`]+)`")
 func Parse(page []byte, g Guide) ([]Removal, error) {
 	text := strings.ReplaceAll(string(page), "\r\n", "\n")
 	if !strings.Contains(text, fmt.Sprintf("# Migrating to v%d", g.Major)) {
-		return nil, fmt.Errorf("not the guide to v%d", g.Major)
+		return nil, fmt.Errorf("not the guide to v%d: %w", g.Major, plugin.ErrNothingToRead)
 	}
 	lines := strings.Split(text, "\n")
 	var out []Removal
@@ -114,7 +115,7 @@ func Parse(page []byte, g Guide) ([]Removal, error) {
 		}
 	}
 	if len(out) == 0 {
-		return nil, fmt.Errorf("no removed-parameter row naming %s: the guide's shape may have changed", g.Methods)
+		return nil, fmt.Errorf("no removed-parameter row naming %s (the guide's shape may have changed): %w", g.Methods, plugin.ErrNothingToRead)
 	}
 	return out, nil
 }
@@ -147,8 +148,9 @@ func cut(s string, n int) string {
 }
 
 // Events turns removals into change events: one breaking removed_parameter
-// event per parameter, on the SDK calls it can no longer be passed to.
-func Events(g Guide, rs []Removal, now time.Time) ([]event.Event, []error) {
+// event per parameter, on the SDK calls it can no longer be passed to, with
+// previous (the release before) as previous_version.
+func Events(g Guide, rs []Removal, previous string, now time.Time) ([]event.Event, []error) {
 	var events []event.Event
 	var errs []error
 	for _, r := range rs {
@@ -157,18 +159,19 @@ func Events(g Guide, rs []Removal, now time.Time) ([]event.Event, []error) {
 			Change: event.PackageRemovedParameter, Parameter: r.Param, Symbols: g.Symbols,
 		}
 		e := event.Event{
-			Fingerprint:   event.Fingerprint(g.API, g.Version(), event.ChangeTypeBreaking, subject, ""),
-			API:           g.API,
-			Version:       g.Version(),
-			ChangeType:    event.ChangeTypeBreaking,
-			Breaking:      true,
-			Subject:       subject,
-			Description:   fmt.Sprintf("Parameter %s removed from %s and its sibling methods in the %s SDK %s: passing it raises a TypeError.", r.Param, g.Methods, g.Package, g.Version()),
-			MigrationHint: fmt.Sprintf("%s Source: %s", r.Instead, g.Page()),
-			SourceURL:     g.URL(),
-			SourceExcerpt: r.Excerpt,
-			Confidence:    1.0,
-			DetectedAt:    now,
+			Fingerprint:     event.Fingerprint(g.API, g.Version(), event.ChangeTypeBreaking, subject, ""),
+			API:             g.API,
+			Version:         g.Version(),
+			PreviousVersion: previous,
+			ChangeType:      event.ChangeTypeBreaking,
+			Breaking:        true,
+			Subject:         subject,
+			Description:     fmt.Sprintf("Parameter %s removed from %s and its sibling methods in the %s SDK %s: passing it raises a TypeError.", r.Param, g.Methods, g.Package, g.Version()),
+			MigrationHint:   fmt.Sprintf("%s Source: %s", r.Instead, g.Page()),
+			SourceURL:       g.URL(),
+			SourceExcerpt:   r.Excerpt,
+			Confidence:      1.0,
+			DetectedAt:      now,
 		}
 		if err := e.Validate(); err != nil {
 			errs = append(errs, fmt.Errorf("%s %s: %w", g.API, r.Param, err))

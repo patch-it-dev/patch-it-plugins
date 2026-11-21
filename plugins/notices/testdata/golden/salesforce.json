@@ -4,6 +4,7 @@
     "fingerprint": "sha256:96a4bf95d203b442628962583c15c58ce031da50dfe37335ddde6269fb426feb",
     "api": "salesforce/rest-api",
     "version": "31.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -24,6 +25,7 @@
     "fingerprint": "sha256:012c28a49c2340048dc090672525f2982c8f3f2dca395972738e7964b2d192b0",
     "api": "salesforce/rest-api",
     "version": "32.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -44,6 +46,7 @@
     "fingerprint": "sha256:1f2b8339e9ef0ff5c5febe23dc2a21908b8d5523c3116adcec7fb364d328ac94",
     "api": "salesforce/rest-api",
     "version": "33.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -64,6 +67,7 @@
     "fingerprint": "sha256:3a0d271a4843c6933542538bcb8d6e8073e264f4fef985ae8ea45545a64c5079",
     "api": "salesforce/rest-api",
     "version": "34.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -84,6 +88,7 @@
     "fingerprint": "sha256:b0f532972d7edeac88234c226f9d13aa739e22ccdb76d0c715cc9a983909ced4",
     "api": "salesforce/rest-api",
     "version": "35.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -104,6 +109,7 @@
     "fingerprint": "sha256:df9e4eab6337c0b0ac95964aa2d55048c5010280fb695f5472639939d9cfaa2d",
     "api": "salesforce/rest-api",
     "version": "36.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -124,6 +130,7 @@
     "fingerprint": "sha256:beb4c877840a1e54436cdec1b331ba770a018e50a459286d71198becdef92b80",
     "api": "salesforce/rest-api",
     "version": "37.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -144,6 +151,7 @@
     "fingerprint": "sha256:0ac93a885e8f93f3d5a0c254f80a2f9d3cc342f0a42049cae8c0db64a66a1580",
     "api": "salesforce/rest-api",
     "version": "38.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -164,6 +172,7 @@
     "fingerprint": "sha256:d4e47848b8cce83fcd7a5bab59a04cd0c799fd677066634e5d2c158c01bf11d3",
     "api": "salesforce/rest-api",
     "version": "39.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -184,6 +193,7 @@
     "fingerprint": "sha256:0ad4bdfbe6fb425cf970046b57277acc27139d72d3fc671d9c8088622087b00d",
     "api": "salesforce/rest-api",
     "version": "40.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -204,6 +214,7 @@
     "fingerprint": "sha256:c4dca9562fd787bfba9d73d3d942cf9f86c4fa297950dae813ef45755fd9f422",
     "api": "salesforce/rest-api",
     "version": "21.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -224,6 +235,7 @@
     "fingerprint": "sha256:ce3136f63f99d74730d055a9ae0b9786b3cb09afda65e679ee7ca4f02f0bbb4f",
     "api": "salesforce/rest-api",
     "version": "22.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -244,6 +256,7 @@
     "fingerprint": "sha256:bcfef560d3295295df22bb0e1e23dbe2073f7ccdeca0af60939d7f473bc2d2a7",
     "api": "salesforce/rest-api",
     "version": "23.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -264,6 +277,7 @@
     "fingerprint": "sha256:9533ab4a1f46c424c9bb551eb7caaee1d30adabae3ef275fcfa9bfb321bcd273",
     "api": "salesforce/rest-api",
     "version": "24.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -284,6 +298,7 @@
     "fingerprint": "sha256:479da007024f7c36ae3c0406e8fe5c438362b8f1c30d725833bd3e37d7b965ae",
     "api": "salesforce/rest-api",
     "version": "25.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -304,6 +319,7 @@
     "fingerprint": "sha256:9d42c0cb78dd8add1cf01e74eadb1bb1b765c95e5bd201b6c003e83f8290386d",
     "api": "salesforce/rest-api",
     "version": "26.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -324,6 +340,7 @@
     "fingerprint": "sha256:832dfa7fcacaf76ceac4b91e281458a87f0c8d3f973d1d53aac55026e4b1fb7b",
     "api": "salesforce/rest-api",
     "version": "27.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -344,6 +361,7 @@
     "fingerprint": "sha256:409dbd170c4aa71923824e95d9b458d1b88c37b255104a6c86dec67b8a100ac8",
     "api": "salesforce/rest-api",
     "version": "28.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -364,6 +382,7 @@
     "fingerprint": "sha256:561d8e2e8c4ffee2fd071b62d03f8d7d37fa21ec0c9faf9f3efde1943a4fd83c",
     "api": "salesforce/rest-api",
     "version": "29.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -384,6 +403,7 @@
     "fingerprint": "sha256:a8f3b6a7ef22d26b047ffa1beeb398afcd5c3d73af7263d1ddfd60796b18f45f",
     "api": "salesforce/rest-api",
     "version": "30.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -404,6 +424,7 @@
     "fingerprint": "sha256:0fcc2e13469764fdb95343e3c97aa15232f5a46ba6e09e091ed1618d22858c6b",
     "api": "salesforce/rest-api",
     "version": "7.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -424,6 +445,7 @@
     "fingerprint": "sha256:1836f945f91e9c4bfd6393341729d5c795894db8988d5c53af017f902e529b2e",
     "api": "salesforce/rest-api",
     "version": "8.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -444,6 +466,7 @@
     "fingerprint": "sha256:4aca007478f276b46117b3c9f4aa5a289cebd818e69e3e83dfacb3e1583d1072",
     "api": "salesforce/rest-api",
     "version": "9.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -464,6 +487,7 @@
     "fingerprint": "sha256:cce9cf0404b112076ffd3814efaa70238c942420a9893a1fc6a93250904a75c6",
     "api": "salesforce/rest-api",
     "version": "10.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -484,6 +508,7 @@
     "fingerprint": "sha256:2314981ead2820e1523bf7ca29b8cefde9b445c3a5ddaaf501ffbeabf56a8a99",
     "api": "salesforce/rest-api",
     "version": "11.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -504,6 +529,7 @@
     "fingerprint": "sha256:8acca78bbf8ce6adb5d16d7b767a36c79b1ad32f2e3a00c09e29b41e3b061cc6",
     "api": "salesforce/rest-api",
     "version": "12.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -524,6 +550,7 @@
     "fingerprint": "sha256:759fd344f34b106ccd906a70c2d0830f0e85ecaf1e5058a9c4d2be70b317874d",
     "api": "salesforce/rest-api",
     "version": "13.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -544,6 +571,7 @@
     "fingerprint": "sha256:3900ae246cbcde03edddb7b23644c2219e0db3b476ed1369ef8b9457f87e05e8",
     "api": "salesforce/rest-api",
     "version": "14.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -564,6 +592,7 @@
     "fingerprint": "sha256:a54e091c042d0b6207daae68c86fff56a610db97f3c5efed453eb39120e10cc5",
     "api": "salesforce/rest-api",
     "version": "15.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -584,6 +613,7 @@
     "fingerprint": "sha256:a8f6e65b0994234b81fd370d6647ba1a478206398c27967aa3d2e59ce2fbee8c",
     "api": "salesforce/rest-api",
     "version": "16.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -604,6 +634,7 @@
     "fingerprint": "sha256:7ca796235cd5f96170640fdc6c381cf5c08822d860d2baf8e13c59f03070c76b",
     "api": "salesforce/rest-api",
     "version": "17.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -624,6 +655,7 @@
     "fingerprint": "sha256:841b996096bd90d89db132bd96fd8386913fc2f05f26c8c268b550c883d4f506",
     "api": "salesforce/rest-api",
     "version": "18.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -644,6 +676,7 @@
     "fingerprint": "sha256:a3f3f6021a40ab52092b92f59b1ced42891e298a6b75486c93971cc1a63feaf9",
     "api": "salesforce/rest-api",
     "version": "19.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -664,6 +697,7 @@
     "fingerprint": "sha256:718d1a6a17fe65fd7a7cd327ed6167f20f99f9ac87c05bda663b878684cd3e3c",
     "api": "salesforce/rest-api",
     "version": "20.0",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "breaking",
     "breaking": true,
     "subject": {

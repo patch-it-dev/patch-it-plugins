@@ -9,8 +9,8 @@ import (
 )
 
 // Both providers' saved pages (2026-10-13) in, every event out. The archive
-// serves the same copy as the snapshot, so the events cite it; a second run
-// over the unchanged page asks for no snapshot.
+// serves the same copy as the snapshot, so the events cite it; a second read
+// of the unchanged page asks for no snapshot.
 func TestRetirementsGolden(t *testing.T) {
 	for file, page := range map[string]retire.Page{
 		"openai-deprecations.md":    retire.OpenAI,
@@ -19,9 +19,9 @@ func TestRetirementsGolden(t *testing.T) {
 		t.Run(page.API, func(t *testing.T) {
 			saved := kittest.Pages{page.URL: "retire/testdata/" + file}
 			archive := &kittest.Archive{T: t, Pages: saved}
-			got := kittest.IngestWith(t, kittest.Env(t, saved), Plugin{Page: page, Archiver: archive})
+			got := kittest.Page(t, kittest.Env(t, saved), Plugin{Page: page, Archiver: archive})
 			if archive.Calls != 1 {
-				t.Errorf("%d snapshots, want 1: the second run's page is unchanged", archive.Calls)
+				t.Errorf("%d snapshots, want 1: the second read's page is unchanged", archive.Calls)
 			}
 			kittest.Golden(t, "testdata/golden/"+strings.ReplaceAll(page.API, "/", "-")+".json", got)
 		})

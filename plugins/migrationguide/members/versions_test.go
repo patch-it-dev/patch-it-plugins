@@ -26,7 +26,7 @@ func TestOnlyTheGuidesReleaseHasEvents(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	pinned := kittest.Ingest(t, p, kittest.Pages{NumPy2.URL(): "testdata/numpy_2_0_migration_guide-v2.0.0.rst"})
+	pinned := release(t, NumPy2, "testdata/numpy_2_0_migration_guide-v2.0.0.rst", "1.26.4")
 	var got []string
 	for _, pair := range versions.Pairs(vs) {
 		from, err := p.ReadAt(ctx, env, pair[0])

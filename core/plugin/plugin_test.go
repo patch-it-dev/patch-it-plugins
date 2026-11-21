@@ -4,6 +4,7 @@ import (
 	"context"
 	"slices"
 	"testing"
+	"time"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
 )
@@ -17,29 +18,29 @@ type testPlugin struct {
 
 func (p testPlugin) Name() string { return p.name }
 
-func (p testPlugin) Run(_ context.Context, env Env) (Result, error) {
+func (p testPlugin) Read(_ context.Context, env Env, _ Snapshot) (Snapshot, error) {
 	if p.err != nil {
-		return Result{}, p.err
+		return Snapshot{}, p.err
 	}
-	subject := event.Subject{Type: event.SubjectAPIOperation, Kind: event.KindOperation, Side: event.SideRequest, Operation: "POST /v1/things"}
+	return Snapshot{Version: Version{ID: env.Now().UTC().Format(time.RFC3339)}, Content: []byte(`{"version":"2"}`), SourceURL: "https://example.test/spec/2.json"}, nil
+}
+
+func (p testPlugin) Extract(_ context.Context, env Env, _, _ Snapshot) (Result, error) {
+	subject := event.Subject{Type: event.SubjectModel, Provider: "test", Name: "model-1"}
 	e := event.Event{
-		Fingerprint:   event.Fingerprint(p.name, "2", event.ChangeTypeNewFeature, subject, ""),
+		Fingerprint:   event.Fingerprint(p.name, "2026-12-01", event.ChangeTypeBreaking, subject, ""),
 		API:           p.name,
-		Version:       "2",
-		ChangeType:    event.ChangeTypeNewFeature,
+		Version:       "2026-12-01",
+		ChangeType:    event.ChangeTypeBreaking,
+		Breaking:      true,
 		Subject:       subject,
-		Description:   "New operation POST /v1/things.",
+		Description:   "model-1 shuts down on 2026-12-01.",
 		SourceURL:     "https://example.test/spec/2.json",
-		SourceExcerpt: `{"post":{}}`,
+		SourceExcerpt: "model-1 | 2026-12-01",
 		Confidence:    1,
 		DetectedAt:    env.Now().UTC(),
 	}
-	content := []byte(`{"version":"2"}`)
-	return Result{
-		Label:     "v2",
-		Events:    []event.Event{e},
-		Baselines: []Spec{Baseline(p.name, "2", "v2", "https://example.test/spec/2.json", content, env.Now())},
-	}, nil
+	return Result{Events: []event.Event{e}}, nil
 }
 
 func TestASourceRegisteredInATestIsFound(t *testing.T) {

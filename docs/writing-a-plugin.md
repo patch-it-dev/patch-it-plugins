@@ -91,47 +91,61 @@ Write the numbers on the provider page, as `providers/vercel.md` does for its sp
 
 ## 4. The interface
 
-A plugin implements `plugin.Plugin` (package [`core/plugin/`](../core/plugin/plugin.go)):
+A plugin implements `plugin.Plugin` (package [`core/plugin/`](../core/plugin/plugin.go)) and **exactly one** of two shapes: `plugin.Versioned` (a source with versions) or `plugin.Living` (a page with no versions of its own). `RegisterProvider` refuses a plugin that is both or neither. Either way the changes are what `Extract` finds between two snapshots, so whoever runs it treats every source as pairs.
 
 ```go
 type Plugin interface {
-    Name() string                                    // the source's id, provider/source: every event's `api`
-    Run(ctx context.Context, env Env) (Result, error) // the newest version against the baseline it saved last
+    Name() string                                                  // the source's id, provider/source: every event's `api`
+    Extract(ctx context.Context, env Env, from, to Snapshot) (Result, error) // the changes from one snapshot to the next
+}
+
+type Versioned interface { // tags, releases, commits, a guide per major
+    Plugin
+    ListVersions(ctx context.Context, env Env) ([]Version, error)   // every version, oldest first
+    ReadAt(ctx context.Context, env Env, v Version) (Snapshot, error) // the source at one version
+}
+
+type Living interface { // a deprecations page, a feed
+    Plugin
+    Read(ctx context.Context, env Env, last Snapshot) (Snapshot, error) // the page now, against the snapshot kept from the read before
 }
 
 type Env struct {
-    Baselines BaselineReader                               // LastSpec(api): what the last run saved
-    Get       func(ctx context.Context, url string) ([]byte, error) // the only way to fetch
-    Now       func() time.Time
+    Get func(ctx context.Context, url string) ([]byte, error) // the only way to fetch
+    Now func() time.Time
+}
+
+type Snapshot struct {
+    Version     Version // ID, Released, Ref, URL
+    Content     []byte
+    SourceURL   string  // the exact document read: the events' citation
+    CompareHash string  // a living page only: how its next Read tells it unchanged
 }
 
 type Result struct {
-    Label     string          // what was read, for the run summary
-    Events    []event.Event   // valid events
-    Rejected  []error         // changes that failed to become valid events
-    Baselines []Spec          // what was read, saved after the events
+    Events   []event.Event // valid events
+    Rejected []error       // changes that failed to become valid events
 }
 ```
 
-A plugin **stores nothing**. Whoever runs it (patch-it's hosted ingestion service, or the test kit) stores the events first and the baseline after, so a crash in between re-reads the same change next time and the fingerprints dedupe it.
+A plugin **stores nothing** and reads nothing back: whoever runs it (patch-it's hosted ingestion service, or the test kit) stores the events and keeps the snapshot the next comparison starts from.
 
-### Every version, not only the newest
+When a release or a page has no part the reader can use (a changelog with no section for the release, a migration guide with no table of removals, a page with no table of notices), return `plugin.ErrNothingToRead`, wrapped with what was missing (`fmt.Errorf("no heading for release %s: %w", v, plugin.ErrNothingToRead)`). For a release that's normal, and the runner skips the pair instead of retrying it; it finds the error with `errors.Is`. Any other error is a failure, retried next run.
 
-A source that has versions (a spec's releases, a package's releases, a guide per major) also implements the three parts of `plugin.Versioned` ([`core/plugin/versions.go`](../core/plugin/versions.go)), so a customer several versions behind gets every step:
+### A source with versions: `plugin.Versioned`
 
-```go
-ListVersions(ctx, env) ([]Version, error)                    // every version, oldest first
-ReadAt(ctx, env, v Version) (Snapshot, error)                 // the source at one version
-Extract(ctx, env, from, to Snapshot) (Result, error)          // the changes from one to the next
-```
+A source that has versions (a spec's releases, a package's releases, a guide per major, the commits that changed a file) is read version by version, so a customer several versions behind gets every step: the runner lists the versions, reads each consecutive pair with `ReadAt` and extracts it once (a released version never changes).
 
-- **List** with [`core/versions`](../core/versions/versions.go): `GitHubReleases`, `GitHubTags`, `GitHubCommits` (the commits that changed a file), `PyPIReleases`, `NPMReleases`, `WaybackCaptures` (every distinct Web Archive capture of a living page, dated), `WaybackAt` (a page as it was on a date), `GitHubPages` (any other GitHub list, page by page). An OpenAPI adapter lists its own versions (`adapter.Lister`): every adapter does. Never pin a tag in code: a version you need for a golden test is a pinned *case* in the test (`changelog.Urllib3.At("2.0.0")`), not the registered source.
-- **Read at** a version's `Ref` (a tag, a commit SHA, an archive URL) and return the exact URL read as the snapshot's `SourceURL`: it's the events' citation.
-- **Extract** sets `previous_version` to `from`'s version; `from` may be zero (nothing before). It returns no baselines.
-- `Run` is built from the same parts: the newest version, extracted against the last baseline.
-- Test a version pair with `kittest.Pair(ctx, env, sink, plugin, from, to)`: both versions read, the change extracted, its events stored.
+- **List** with [`core/versions`](../core/versions/versions.go): `GitHubReleases`, `GitHubTags`, `GitHubCommits` (the commits that changed a file), `PyPIReleases`, `NPMReleases`, `GitHubPages` (any other GitHub list, page by page). An OpenAPI adapter lists its own versions (`adapter.Lister`): every adapter does. Never pin a tag in code: a version you need for a golden test is a pinned *case* in the test (`changelog.Urllib3.At("2.0.0")`), not the registered source.
+- **Read at** a version's `Ref` (a tag, a commit SHA) and return the exact URL read as the snapshot's `SourceURL`: it's the events' citation.
+- **Extract** sets `previous_version` to `from`'s version: every `api_operation` and `package_release` event must name it (the contract's rule 13). `from` is zero only for the first version read, which has nothing to compare: patch-it's hosted ingestion service reads that version as its first snapshot and extracts nothing from it, so a version pair always starts at a real `from` (an `api_operation` or `package_release` event extracted from zero would be rejected).
 
-A living page with no versions of its own (a deprecations page, a feed: a `notices` source) is read as it is now by `Run`, and each change to it is a dated version. Its history comes from the Web Archive: the `notices` kind lists every distinct capture (`WaybackCaptures`), reads each, and extracts what each one added, citing that capture, so a year of it can be backfilled by date with no stored copies.
+### A page with no versions: `plugin.Living`
+
+A living page (a deprecations page, a feed: a `notices` source) only shows its latest state. The runner keeps the snapshot of the last read and hands it to `Read`:
+
+- **Read** fetches the page. When it hashes as it did at `last` (`CompareHash`), return `last` as is: an unchanged page costs one GET (a 304 with the HTTP cache) and nothing else. Otherwise cite it (`kit.Cite`: a Wayback Machine snapshot that must say what the live page said) and return a new snapshot, dated now (`Version.ID` is the read's time, RFC 3339), whose content is the snapshot's bytes and whose `CompareHash` is the live page's.
+- **Extract** from the kept snapshot to the new one is an event per notice the new one has that the kept one didn't (every one on a first read), citing the new snapshot. A dated notice (`model`, `ci_runtime`) has no `previous_version`; an `api_operation` notice names the read it was compared with (on a first read, its own).
 
 ### The `apisurface` kind: reading a package's API without running it
 
@@ -165,9 +179,8 @@ func init() {
 ### Fetching: `env.Get` and `core/kit/`
 
 - Fetch **only** with `env.Get`. It caches by `ETag` / `Last-Modified`, retries, and in tests serves saved files. `CI_go` fails a package outside `core/fetch/`, `core/kit/` and `plugins/openapi/adapter/` that imports `net/http`.
-- `kit.Unchanged(env, api, body)`: true when the page hashes to the last baseline. Return early: an unchanged source costs one GET and nothing else.
-- `kit.Cite(ctx, archiver, url, read, want)`: for a **live page**. Takes a Wayback Machine snapshot, reads it with your own reader and checks it says exactly what the live page said. Make the events from the snapshot and cite its URL. No snapshot, no events.
-- `plugin.Baseline(api, version, tag, sourceURL, content, now)`: the baseline `Run` returns.
+- `kit.Cite(ctx, archiver, url, read, want)`: for a **living page**'s `Read`. Takes a Wayback Machine snapshot, reads it with your own reader and checks it says exactly what the live page said. Make the events from the snapshot and cite its URL. No snapshot, no events.
+- `plugin.SHA256(body)`: the hash a living page's `CompareHash` holds.
 - `github.LatestRelease`, `github.LatestCommit`, `github.Commit`, `github.Head` ([`core/github`](../core/github/github.go)): the newest release or commit on GitHub, one place; don't decode GitHub's responses yourself.
 
 ### Events
@@ -190,16 +203,21 @@ The test kit, `core/kit/kittest`, runs the plugin with no network, no database a
 
 ```go
 func TestGolden(t *testing.T) {
-    got := kittest.Ingest(t, Plugin{File: Textual0860},
-        kittest.Pages{Textual0860.URL(): "testdata/textual-v0.86.0-CHANGELOG.md"})
-    kittest.Golden(t, "testdata/golden/textual-0.86.0.json", got)
+    env := kittest.Env(t, kittest.Pages{
+        Redis.URL(oldRef): "testdata/redis-doc-cc0427b.json",
+        Redis.URL(newRef): "testdata/redis-doc-06f3598.json",
+    })
+    got := kittest.Versions(t, env, Plugin{Catalog: Redis},
+        plugin.Version{ID: oldRef, Ref: oldRef}, plugin.Version{ID: newRef, Ref: newRef})
+    kittest.Golden(t, "testdata/golden/redis-commands.json", got)
 }
 ```
 
-- `kittest.Pages` maps each URL to a saved file. Fetching any other URL fails the test.
-- `kittest.Ingest` runs the plugin **twice** over an in-memory store (`kittest.Mem`): a rejected event, an error, or a second run that stores anything new fails the test.
+- `kittest.Pages` maps each URL to a saved file; `kittest.Env` serves them with a fixed clock. Fetching any other URL fails the test.
+- A versioned source: `kittest.Versions(t, env, plugin, from, to)` reads both versions with `ReadAt` and extracts the pair, as the hosted service does. When the older side needn't be read (a changelog's or a migration guide's `Extract` reads only the newer release's own section), build the snapshots yourself and call `kittest.Extracted(t, env, plugin, from, to)`, naming the real release before as `from`.
+- A living page: `kittest.Page(t, env, plugin)` is its first read, cited through `&kittest.Archive{T: t, Pages: saved}`; a second read of the same page must return the kept snapshot and store nothing.
+- Each stores into an in-memory store (`kittest.Mem`) and extracts **twice**: a rejected event, an error, or a second extract that stores anything new fails the test. `kittest.Pair` and `kittest.ReadPage` are the same steps returning errors, for tests that expect one.
 - `kittest.Golden` compares the stored events with the JSON file. Create or rewrite it with `go test ./plugins/<name> -update`, then read the diff like code: every event in it is a pull request someone may get.
-- A live page: build the env with `kittest.Env`, cite through `&kittest.Archive{T: t, Pages: saved}` and run with `kittest.IngestWith`.
 
 ## 7. Pin a drop test and the registration
 

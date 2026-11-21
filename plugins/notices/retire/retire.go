@@ -17,6 +17,7 @@ import (
 	"time"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 )
 
 // Page is one provider's deprecations page and what its models are sent to.
@@ -103,7 +104,7 @@ func Parse(page []byte, keep func(string) bool) ([]Retirement, error) {
 		}
 	}
 	if len(out) == 0 {
-		return nil, fmt.Errorf("no retirement tables found: the page's shape may have changed")
+		return nil, fmt.Errorf("no retirement tables found (the page's shape may have changed): %w", plugin.ErrNothingToRead)
 	}
 	follow(out)
 	return out, nil

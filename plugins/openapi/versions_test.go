@@ -61,8 +61,8 @@ func TestEveryConsecutivePairIsExtracted(t *testing.T) {
 			t.Fatal(err)
 		}
 		res, err := p.Extract(ctx, e, from, to)
-		if err != nil || len(res.Rejected) > 0 || len(res.Baselines) > 0 {
-			t.Fatalf("Extract: %v %v baselines=%d", err, res.Rejected, len(res.Baselines))
+		if err != nil || len(res.Rejected) > 0 {
+			t.Fatalf("Extract: %v %v", err, res.Rejected)
 		}
 		for _, ev := range res.Events {
 			got = append(got, fmt.Sprintf("%s<-%s %s %s", ev.Version, ev.PreviousVersion, ev.ChangeType, ev.Subject.Property))

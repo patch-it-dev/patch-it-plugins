@@ -1,12 +1,14 @@
 package members_test
 
 import (
+	"errors"
 	"slices"
 	"strings"
 	"testing"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
 	"github.com/patch-it-dev/patch-it-plugins/core/kit/kittest"
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 
 	"github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide"
 	. "github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide/members" // the reader under test
@@ -222,19 +224,24 @@ func TestMarkdownTable(t *testing.T) {
 		t.Errorf("%+v", rs[0])
 	}
 
-	for name, page := range map[string]string{
-		"no section":    "## Other\n| Removed | Use instead |\n| --- | --- |\n| `a` | b |",
-		"no table":      "## Removed\ntext\n## Next\n| Removed | Use instead |\n| --- | --- |\n| `a` | b |",
-		"another table": "## Removed\n| Method | Endpoint |\n| --- | --- |\n| `a` | b |",
+	for name, c := range map[string]struct {
+		page    string
+		nothing bool // plugin.ErrNothingToRead: no part to read, not a guide that changed shape
+	}{
+		"no section":    {"## Other\n| Removed | Use instead |\n| --- | --- |\n| `a` | b |", true},
+		"no table":      {"## Removed\ntext\n## Next\n| Removed | Use instead |\n| --- | --- |\n| `a` | b |", true},
+		"another table": {"## Removed\n| Method | Endpoint |\n| --- | --- |\n| `a` | b |", false},
 	} {
-		if _, err := Parse([]byte(page), g); err == nil {
-			t.Errorf("%s: no error", name)
+		_, err := Parse([]byte(c.page), g)
+		if err == nil || errors.Is(err, plugin.ErrNothingToRead) != c.nothing {
+			t.Errorf("%s: err %v, want an error that is plugin.ErrNothingToRead: %v", name, err, c.nothing)
 		}
 	}
 }
 
-// posthogIngest runs the plugin over the saved guide.
+// posthogIngest is the pair from 7.91.4, the release before on PyPI, over
+// the saved guide.
 func posthogIngest(t *testing.T) []event.Event {
 	t.Helper()
-	return kittest.Ingest(t, migrationguide.Plugin{Guide: PostHog8}, kittest.Pages{PostHog8.URL(): posthogSource})
+	return release(t, PostHog8, posthogSource, "7.91.4")
 }

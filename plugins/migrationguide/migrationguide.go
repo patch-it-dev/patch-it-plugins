@@ -74,8 +74,6 @@ type Guide interface {
 	// Releases are the versions, oldest first, each with the ref its guide
 	// would be read at.
 	Releases(ctx context.Context, env plugin.Env) ([]plugin.Version, error)
-	// Current is the release a plain run (Run) reads.
-	Current(ctx context.Context, env plugin.Env) (plugin.Version, error)
 	// GuideURL is where the guide is at v, pinned to v's tag, or "" when v
 	// has no guide (a release that isn't a new major).
 	GuideURL(v plugin.Version) string
@@ -91,24 +89,6 @@ type Plugin struct {
 }
 
 func (p Plugin) Name() string { return p.Guide.Slug() }
-
-// Run reads the guide at its current release and stores its events.
-func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) {
-	v, err := p.Guide.Current(ctx, env)
-	if err != nil {
-		return plugin.Result{}, err
-	}
-	to, err := p.ReadAt(ctx, env, v)
-	if err != nil {
-		return plugin.Result{}, err
-	}
-	res, err := p.Extract(ctx, env, plugin.Snapshot{}, to)
-	if err != nil {
-		return plugin.Result{}, err
-	}
-	res.Baselines = []plugin.Spec{plugin.Baseline(p.Name(), v.ID, v.Ref, to.SourceURL, to.Content, env.Now().UTC())}
-	return res, nil
-}
 
 // ListVersions is every release of the source, oldest first.
 func (p Plugin) ListVersions(ctx context.Context, env plugin.Env) ([]plugin.Version, error) {
@@ -133,13 +113,13 @@ func (p Plugin) ReadAt(ctx context.Context, env plugin.Env, v plugin.Version) (p
 // from's release. A release with no guide has no events.
 func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snapshot) (plugin.Result, error) {
 	if to.Content == nil {
-		return plugin.Result{Label: to.Version.ID}, nil
+		return plugin.Result{}, nil
 	}
 	events, rejected, err := p.Guide.Read(to.Content, from.Version, to.Version, env.Now().UTC())
 	if err != nil {
 		return plugin.Result{}, fmt.Errorf("reading %s: %w", to.SourceURL, err)
 	}
-	return plugin.Result{Label: to.SourceURL, Events: events, Rejected: rejected}, nil
+	return plugin.Result{Events: events, Rejected: rejected}, nil
 }
 
 var _ plugin.Versioned = Plugin{}

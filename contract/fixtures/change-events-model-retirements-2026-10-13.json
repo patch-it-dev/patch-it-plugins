@@ -1,1684 +1,1599 @@
 {
-  "_comment": "Real output of the `openai-models` and `anthropic-models` plugins for the providers' deprecations pages, read 2026-10-13 by patch-it's hosted ingestion service and served with the stored row id as `id`, the way GET /v1/changes serves it. One event per retired model name, the name in `affected.value`; `affected.operation` is the provider's main model-taking call (`POST /v1/chat/completions`, `POST /v1/messages`); `version` is the shutdown date, `migration_hint` the replacement the provider names, and every `source_url` is a Wayback Machine snapshot of the page the event was read from. No hand edits.",
+  "_comment": "The ingestion service's real output for the model providers' deprecations pages: OpenAI's and Anthropic's, read 2026-10-13 and dumped from its store with the row id as `id`, the same way the feed serves it. One model event per retired model name; `version` is the shutdown date, `migration_hint` the replacement the provider names (and `subject.replacement` when it names exactly one model), and every `source_url` is a Wayback Machine snapshot of the page the event was read from. Rewritten 2026-11-21 when the contract named sources by their provider/source id: `api` is the id, every fingerprint recomputed over it with the same detail, and the event's subject as the server writes it.",
   "changes": [
     {
       "id": 1,
-      "fingerprint": "sha256:539023dabeabd20a08739b12575a5df2e27ccdd38664463ae5819d9895a4699c",
-      "api": "openai-models",
+      "fingerprint": "sha256:e83a8785aa6d1906e4892462f0f62fa5b84084e2329286623563aecdf88249ba",
+      "api": "openai/models",
       "version": "2027-04-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-5.3-codex"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-5.3-codex",
+        "replacement": "gpt-6-sol"
       },
       "description": "Model \"gpt-5.3-codex\" is shut down on 2027-04-01: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-6-sol` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-10-01: GPT-5.3-Codex, GPT-5.1, GPT-5.4-Nano\n| Shutdown date | Model / system  | Recommended replacement |\n| Apr 1, 2027   | `gpt-5.3-codex` | `gpt-6-sol`             |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 2,
-      "fingerprint": "sha256:e66da9bbf6c16d343f823e113fe986fa1a564f21a18cc41669472238cf9bdc28",
-      "api": "openai-models",
+      "fingerprint": "sha256:9c716074471064f27c0955e58528789627b3e305f8e9f484f802ffce272a02b1",
+      "api": "openai/models",
       "version": "2027-04-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-5.4-nano"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-5.4-nano",
+        "replacement": "gpt-6-luna"
       },
       "description": "Model \"gpt-5.4-nano\" is shut down on 2027-04-01: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-6-luna` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-10-01: GPT-5.3-Codex, GPT-5.1, GPT-5.4-Nano\n| Shutdown date | Model / system  | Recommended replacement |\n| Apr 1, 2027   | `gpt-5.4-nano`  | `gpt-6-luna`            |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 3,
-      "fingerprint": "sha256:c55e1e0059a63a923b55905fe8e375cbcf6a6cb897a1061cd087151c26aed22d",
-      "api": "openai-models",
+      "fingerprint": "sha256:5468ca8ed9e11617bf886b8295f73ae0dab23e44cd09ff066dfe205f0f532453",
+      "api": "openai/models",
       "version": "2027-04-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-5.1"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-5.1",
+        "replacement": "gpt-6-sol"
       },
       "description": "Model \"gpt-5.1\" is shut down on 2027-04-01: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-6-sol` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-10-01: GPT-5.3-Codex, GPT-5.1, GPT-5.4-Nano\n| Shutdown date | Model / system  | Recommended replacement |\n| Apr 1, 2027   | `gpt-5.1`       | `gpt-6-sol`             |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 4,
-      "fingerprint": "sha256:d290a5ba24668ecc867112c7ca1b2ed3cc2aa136495592061bcf44abc96e7cbe",
-      "api": "openai-models",
+      "fingerprint": "sha256:fd7343b0764b86973207e103c720c03cc5ad27ad09e0f178b5c02c2706d883e3",
+      "api": "openai/models",
       "version": "2026-12-11",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-5-2025-08-07"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-5-2025-08-07",
+        "replacement": "gpt-5.6-sol"
       },
       "description": "Model \"gpt-5-2025-08-07\" is shut down on 2026-12-11: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-06-11: GPT-5 and o3 model deprecations\n| Shutdown date | Model / system          | Recommended replacement               |\n| Dec 11, 2026  | `gpt-5-2025-08-07`      | `gpt-5.6-sol`                         |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 5,
-      "fingerprint": "sha256:1ac8a5ee7d5cfbfaeba8f813bbcf3b480987a7f7dd68e642e12624c46c383574",
-      "api": "openai-models",
+      "fingerprint": "sha256:9a9550f80f08e21273eda077e7419d2e3bb18846552791072afcb0059e95b2fe",
+      "api": "openai/models",
       "version": "2026-12-11",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-5-mini-2025-08-07"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-5-mini-2025-08-07",
+        "replacement": "gpt-5.6-terra"
       },
       "description": "Model \"gpt-5-mini-2025-08-07\" is shut down on 2026-12-11: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-06-11: GPT-5 and o3 model deprecations\n| Shutdown date | Model / system          | Recommended replacement               |\n| Dec 11, 2026  | `gpt-5-mini-2025-08-07` | `gpt-5.6-terra`                       |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 6,
-      "fingerprint": "sha256:cdfd8fb3fa20a972b922eeabbfe1a7b529457a951a53287165bd4068102f4497",
-      "api": "openai-models",
+      "fingerprint": "sha256:158fd36994686a79bf82bfbd377ed17c6567546fbbbb36791f11ca390faa4081",
+      "api": "openai/models",
       "version": "2026-12-11",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-5-nano-2025-08-07"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-5-nano-2025-08-07",
+        "replacement": "gpt-5.6-luna"
       },
       "description": "Model \"gpt-5-nano-2025-08-07\" is shut down on 2026-12-11: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-luna` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-06-11: GPT-5 and o3 model deprecations\n| Shutdown date | Model / system          | Recommended replacement               |\n| Dec 11, 2026  | `gpt-5-nano-2025-08-07` | `gpt-5.6-luna`                        |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 7,
-      "fingerprint": "sha256:88bd70188575f330d43a636252f69964ae624a3a62a75ae8a031646d16b9a587",
-      "api": "openai-models",
+      "fingerprint": "sha256:2513bab92d4daf80ce3a3341677c48567a142a27968890bddaa39b349443ac4a",
+      "api": "openai/models",
       "version": "2026-12-11",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-5-pro-2025-10-06"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-5-pro-2025-10-06"
       },
       "description": "Model \"gpt-5-pro-2025-10-06\" is shut down on 2026-12-11: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-sol` (`reasoning.mode: pro`) instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-06-11: GPT-5 and o3 model deprecations\n| Shutdown date | Model / system          | Recommended replacement               |\n| Dec 11, 2026  | `gpt-5-pro-2025-10-06`  | `gpt-5.6-sol` (`reasoning.mode: pro`) |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 8,
-      "fingerprint": "sha256:55cf2d3222b85762320aa846393a1d01663ada0276d17d5e15812fad73fe28b9",
-      "api": "openai-models",
+      "fingerprint": "sha256:3aaa754c27ec3dcf296ba9eca13168cc0c4260f578dd5487fa452ae0406444dd",
+      "api": "openai/models",
       "version": "2026-12-11",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "o3-2025-04-16"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "o3-2025-04-16",
+        "replacement": "gpt-5.6-sol"
       },
       "description": "Model \"o3-2025-04-16\" is shut down on 2026-12-11: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-06-11: GPT-5 and o3 model deprecations\n| Shutdown date | Model / system          | Recommended replacement               |\n| Dec 11, 2026  | `o3-2025-04-16`         | `gpt-5.6-sol`                         |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 9,
-      "fingerprint": "sha256:ac63c8daa9349db362ba371702462df1ece8de3616dc5dadd85f76d1067497d6",
-      "api": "openai-models",
+      "fingerprint": "sha256:e38b1b847caef42cbed0c277347fe0dcab40032ff344b7252a00fd3c18e49b5c",
+      "api": "openai/models",
       "version": "2026-12-11",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "o3-pro-2025-06-10"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "o3-pro-2025-06-10"
       },
       "description": "Model \"o3-pro-2025-06-10\" is shut down on 2026-12-11: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-sol` (`reasoning.mode: pro`) instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-06-11: GPT-5 and o3 model deprecations\n| Shutdown date | Model / system          | Recommended replacement               |\n| Dec 11, 2026  | `o3-pro-2025-06-10`     | `gpt-5.6-sol` (`reasoning.mode: pro`) |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 10,
-      "fingerprint": "sha256:dad8184c94944da73bbd1e82a4457941735e6fedfe27974c86bc559777c4e82b",
-      "api": "openai-models",
+      "fingerprint": "sha256:0bc7c996a01e3dd0fae14537400f8bf77fb9ec8dd33c10c5b6458315ba8eb6d5",
+      "api": "openai/models",
       "version": "2026-10-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-5.4-cyber"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-5.4-cyber"
       },
       "description": "Model \"gpt-5.4-cyber\" is shut down on 2026-10-01: OpenAI requests naming it fail from that date.",
       "migration_hint": "OpenAI names no replacement model: The most capable cyber model available to you.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-09-11: GPT-5.4-Cyber\n| Shutdown date | Model / system  | Recommended replacement                        |\n| Oct 1, 2026   | `gpt-5.4-cyber` | The most capable cyber model available to you. |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 11,
-      "fingerprint": "sha256:0bf74b195e46b8de45d20f6fc35ee0d4fc1952b5962fff41f5893fc67dfcdda3",
-      "api": "openai-models",
+      "fingerprint": "sha256:9f118e5bd24e073e6ed3cd7dc41a27322b18f714a30a2c3dff9ced089c9c6832",
+      "api": "openai/models",
       "version": "2026-08-10",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-5.2-chat-latest"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-5.2-chat-latest",
+        "replacement": "gpt-5.6-sol"
       },
       "description": "Model \"gpt-5.2-chat-latest\" is shut down on 2026-08-10: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-05-08: `gpt-5.2-chat-latest` and `gpt-5.3-chat-latest` model snapshots\n| Shutdown date | Model / system        | Recommended replacement |\n| Aug 10, 2026  | `gpt-5.2-chat-latest` | `gpt-5.6-sol`           |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 12,
-      "fingerprint": "sha256:0787db481426f46fe04b0ec92de635944681bb94cea62b36b28d7fa336272171",
-      "api": "openai-models",
+      "fingerprint": "sha256:b843df920a2fb85eedc486fab1ca241676cf4d3e15ed6983e2913d38dc602bc2",
+      "api": "openai/models",
       "version": "2026-08-10",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-5.3-chat-latest"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-5.3-chat-latest",
+        "replacement": "gpt-5.6-sol"
       },
       "description": "Model \"gpt-5.3-chat-latest\" is shut down on 2026-08-10: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-05-08: `gpt-5.2-chat-latest` and `gpt-5.3-chat-latest` model snapshots\n| Shutdown date | Model / system        | Recommended replacement |\n| Aug 10, 2026  | `gpt-5.3-chat-latest` | `gpt-5.6-sol`           |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 13,
-      "fingerprint": "sha256:df48017bf8565dc665e014a30ebfa32640054acf15d2805d0ecc530bb823a4ff",
-      "api": "openai-models",
+      "fingerprint": "sha256:9de4b398a49814fc611c1f914d0caa04e3b49bb8bd820030e6dfa3d008eb525c",
+      "api": "openai/models",
       "version": "2026-10-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-3.5-turbo-0125"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-3.5-turbo-0125",
+        "replacement": "gpt-5.6-terra"
       },
       "description": "Model \"gpt-3.5-turbo-0125\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `gpt-3.5-turbo-0125` \\| `gpt-3.5-turbo`, `gpt-3.5-turbo-completions`   | `gpt-5.6-terra`                                   |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 14,
-      "fingerprint": "sha256:5696875784b54eac4f4f8586eaaeb264299089eed88aa2b0cf4c0babed804fa7",
-      "api": "openai-models",
+      "fingerprint": "sha256:f22d331f61c1e7558b711cc8fdec2c60f563f52a132dbdc3e297c38440460453",
+      "api": "openai/models",
       "version": "2026-10-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-3.5-turbo"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-3.5-turbo",
+        "replacement": "gpt-5.6-terra"
       },
       "description": "Model \"gpt-3.5-turbo\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `gpt-3.5-turbo-0125` \\| `gpt-3.5-turbo`, `gpt-3.5-turbo-completions`   | `gpt-5.6-terra`                                   |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 15,
-      "fingerprint": "sha256:1c78092e600eb2d84b3359d3402e701b6366d24fa8e04b103b6b221468150429",
-      "api": "openai-models",
+      "fingerprint": "sha256:addb33cfa80c881094a669f95b412315e962f57818d9b2c60bf10b457384fd06",
+      "api": "openai/models",
       "version": "2026-10-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-4-0613"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-4-0613",
+        "replacement": "gpt-5.6-sol"
       },
       "description": "Model \"gpt-4-0613\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `gpt-4-0613` \\| `gpt-4`, `gpt-4-0613-completions`, `gpt-4-completions` | `gpt-5.6-sol`                                     |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 16,
-      "fingerprint": "sha256:972492c8af23237236f8a23f90fe1fc151f62dfe18fb0ecd15d2387b8bcbdeaf",
-      "api": "openai-models",
+      "fingerprint": "sha256:fa804d562f3745055a2a0102bfc04b2e9bf83c1f009b01b6011da54a42698743",
+      "api": "openai/models",
       "version": "2026-10-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-4"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-4",
+        "replacement": "gpt-5.6-sol"
       },
       "description": "Model \"gpt-4\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `gpt-4-0613` \\| `gpt-4`, `gpt-4-0613-completions`, `gpt-4-completions` | `gpt-5.6-sol`                                     |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 17,
-      "fingerprint": "sha256:7da688569bcdab559df8030666936a483981b1fa8e03b9b31ad19d6f97c202e2",
-      "api": "openai-models",
+      "fingerprint": "sha256:e7368b0ebebe0b0d76c287216e5028a43aa67c5bd19d93100b0a5f578f4de3a1",
+      "api": "openai/models",
       "version": "2026-10-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-4-1106-preview"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-4-1106-preview",
+        "replacement": "gpt-5.6-sol"
       },
       "description": "Model \"gpt-4-1106-preview\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `gpt-4-1106-preview`                                                   | `gpt-5.6-sol`                                     |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 18,
-      "fingerprint": "sha256:9d42915c07fc078e627e9751fb4283480e6ffd6f32c4ceecb889b27d0d2b7c73",
-      "api": "openai-models",
+      "fingerprint": "sha256:d028abbd1dbe941ef3ddc502493237ac63618d5bb6dfddb97f865238b953e87b",
+      "api": "openai/models",
       "version": "2026-10-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-4-turbo"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-4-turbo",
+        "replacement": "gpt-5.6-sol"
       },
       "description": "Model \"gpt-4-turbo\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `gpt-4-turbo` \\| `gpt-4-turbo-2024-04-09`, `gpt-4-turbo-completions`   | `gpt-5.6-sol`                                     |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 19,
-      "fingerprint": "sha256:fb1e5e885a2c06b24ff05ce42b964411d4021f82b2aa352f88574588e10cb516",
-      "api": "openai-models",
+      "fingerprint": "sha256:2366f086a80491576145afe7cf510c55ac4e0d2de7bf441bc75ef612d6167e2b",
+      "api": "openai/models",
       "version": "2026-10-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-4-turbo-2024-04-09"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-4-turbo-2024-04-09",
+        "replacement": "gpt-5.6-sol"
       },
       "description": "Model \"gpt-4-turbo-2024-04-09\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `gpt-4-turbo` \\| `gpt-4-turbo-2024-04-09`, `gpt-4-turbo-completions`   | `gpt-5.6-sol`                                     |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 20,
-      "fingerprint": "sha256:5ef3aae45415f1721cf8b60cc74cc80907368ac2d782b45fa6110d56149d8964",
-      "api": "openai-models",
+      "fingerprint": "sha256:94b73f3151693c11fde24e3848af27c40865037cbd9cf4115e3bc19fd8c60052",
+      "api": "openai/models",
       "version": "2026-10-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-4.1-nano"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-4.1-nano",
+        "replacement": "gpt-5.6-luna"
       },
       "description": "Model \"gpt-4.1-nano\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-luna` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `gpt-4.1-nano` \\| `gpt-4.1-nano-2025-04-14`                            | `gpt-5.6-luna`                                    |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 21,
-      "fingerprint": "sha256:1f078b2cfd6300f012c8d364118c8c9f67fde9c8a16b71efbfbfb75e9967073c",
-      "api": "openai-models",
+      "fingerprint": "sha256:d759ff817c84f9d74272fcb91cbdae5221e974eb47b0b55b7dd7147aa1e31602",
+      "api": "openai/models",
       "version": "2026-10-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-4.1-nano-2025-04-14"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-4.1-nano-2025-04-14",
+        "replacement": "gpt-5.6-luna"
       },
       "description": "Model \"gpt-4.1-nano-2025-04-14\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-luna` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `gpt-4.1-nano` \\| `gpt-4.1-nano-2025-04-14`                            | `gpt-5.6-luna`                                    |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 22,
-      "fingerprint": "sha256:b0776a8d123448682026c0a532bccd71b76113bdb5a6beec6a8a72edf149b7d3",
-      "api": "openai-models",
+      "fingerprint": "sha256:0480d1edc177c250b09e7a924a9b40657b44783e7c9bbbb0ffacb80db251fc7f",
+      "api": "openai/models",
       "version": "2026-10-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-4o-2024-05-13"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-4o-2024-05-13",
+        "replacement": "gpt-5.6-sol"
       },
       "description": "Model \"gpt-4o-2024-05-13\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `gpt-4o-2024-05-13`                                                    | `gpt-5.6-sol`                                     |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 23,
-      "fingerprint": "sha256:839897de5a0b1e9fb7337a4d7180ad1a58b4422d58a3aee9b82935c55e9da088",
-      "api": "openai-models",
+      "fingerprint": "sha256:ba214836ceb8d67ee994e2dc21f34390630a25c9980f28027d406a6e6cf20aa8",
+      "api": "openai/models",
       "version": "2026-10-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "o1-2024-12-17"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "o1-2024-12-17",
+        "replacement": "gpt-5.6-sol"
       },
       "description": "Model \"o1-2024-12-17\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `o1-2024-12-17` \\| `o1`                                                | `gpt-5.6-sol`                                     |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 24,
-      "fingerprint": "sha256:4634ed7472792c97be25f36c5aeb03478a9c59d400b5adad71ee356090add5c3",
-      "api": "openai-models",
+      "fingerprint": "sha256:12144bbcd4bc23bd91febd9d2f96b3a9e9579dc4e04bb63422771f69f18721ce",
+      "api": "openai/models",
       "version": "2026-10-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "o1"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "o1",
+        "replacement": "gpt-5.6-sol"
       },
       "description": "Model \"o1\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `o1-2024-12-17` \\| `o1`                                                | `gpt-5.6-sol`                                     |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 25,
-      "fingerprint": "sha256:201050a84ac9736668e468dc3d19d5f325845f8cfe138d280bfcdc8633a02950",
-      "api": "openai-models",
+      "fingerprint": "sha256:3ea97dbeb2ae5fd8b306c204b89426d83f17e1beb06f435b482e50355f0c4205",
+      "api": "openai/models",
       "version": "2026-10-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "o1-pro-2025-03-19"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "o1-pro-2025-03-19"
       },
       "description": "Model \"o1-pro-2025-03-19\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-sol` (`reasoning.mode: pro`) instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `o1-pro-2025-03-19` \\| `o1-pro`                                        | `gpt-5.6-sol` (`reasoning.mode: pro`)             |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 26,
-      "fingerprint": "sha256:47e686edd1b8da09cadb374969288f1e058d52877224133831e89b8a8e41f7d1",
-      "api": "openai-models",
+      "fingerprint": "sha256:e363ee6a9fae0c10ff5e99b538929cb5fb8df270659832f5dfca1c193f54a6ec",
+      "api": "openai/models",
       "version": "2026-10-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "o1-pro"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "o1-pro"
       },
       "description": "Model \"o1-pro\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-sol` (`reasoning.mode: pro`) instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `o1-pro-2025-03-19` \\| `o1-pro`                                        | `gpt-5.6-sol` (`reasoning.mode: pro`)             |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 27,
-      "fingerprint": "sha256:f7e71b2539a76232e584774fe0f1612558b62a7ba4afaf1981c3d557da5431fe",
-      "api": "openai-models",
+      "fingerprint": "sha256:059635ab8cb64b86d7650d4d42358d1df622089f98660b185409f348314f71b7",
+      "api": "openai/models",
       "version": "2026-10-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "o3-mini-2025-01-31"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "o3-mini-2025-01-31",
+        "replacement": "gpt-5.6-sol"
       },
       "description": "Model \"o3-mini-2025-01-31\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `o3-mini-2025-01-31` \\| `o3-mini`                                      | `gpt-5.6-sol`                                     |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 28,
-      "fingerprint": "sha256:b72a1c0a7c855de0283fae7fba68498391fe2b1efda99a16241715ac2e999b54",
-      "api": "openai-models",
+      "fingerprint": "sha256:21bc5747c723b0cfeca2e75de8d84ef25dd917f07c6a2ac265e2c357a8acf249",
+      "api": "openai/models",
       "version": "2026-10-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "o3-mini"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "o3-mini",
+        "replacement": "gpt-5.6-sol"
       },
       "description": "Model \"o3-mini\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `o3-mini-2025-01-31` \\| `o3-mini`                                      | `gpt-5.6-sol`                                     |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 29,
-      "fingerprint": "sha256:58954806119df1eb845ec182516de3aef6254f4f4ff7b321965b921277c49ded",
-      "api": "openai-models",
+      "fingerprint": "sha256:a6aa8b28c72878f6c9e1ac51de793db65b5c56ce74e868cb0f0a662f1feda5b2",
+      "api": "openai/models",
       "version": "2026-10-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "o4-mini-2025-04-16"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "o4-mini-2025-04-16",
+        "replacement": "gpt-5.6-terra"
       },
       "description": "Model \"o4-mini-2025-04-16\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `o4-mini-2025-04-16` \\| `o4-mini`                                      | `gpt-5.6-terra`                                   |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 30,
-      "fingerprint": "sha256:e117912e24c641b1b59896bf24ac5b26f7d5df69adff0ddb025ac6c690f03785",
-      "api": "openai-models",
+      "fingerprint": "sha256:cd2490b99479131812970751179d5b2d096f418b46c7dcf29a82fa5af87cbadc",
+      "api": "openai/models",
       "version": "2026-10-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "o4-mini"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "o4-mini",
+        "replacement": "gpt-5.6-terra"
       },
       "description": "Model \"o4-mini\" is shut down on 2026-10-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots\n| Shutdown date    | Model snapshot                                                         | Substitute model                                  |\n| October 23, 2026 | `o4-mini-2025-04-16` \\| `o4-mini`                                      | `gpt-5.6-terra`                                   |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 31,
-      "fingerprint": "sha256:f875e69fe949e42334c68baae0d777d44a792fccc59e211e296cba9e5cb78f46",
-      "api": "openai-models",
+      "fingerprint": "sha256:ae0f2cf43e75ed043a653886b7978c010d5b195b1b4be4609d7a2b080b29c348",
+      "api": "openai/models",
       "version": "2026-07-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "computer-use-preview-2025-03-11"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "computer-use-preview-2025-03-11",
+        "replacement": "gpt-5.6-terra"
       },
       "description": "Model \"computer-use-preview-2025-03-11\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `computer-use-preview-2025-03-11` \\| `computer-use-preview`   | `gpt-5.6-terra`         |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 32,
-      "fingerprint": "sha256:b727c12c8a9359d6c33c11cd550c1e6058f6bc7125df1487fc9a47f8ad78613c",
-      "api": "openai-models",
+      "fingerprint": "sha256:f64b3b40fa81e5b72254b5d7a165b0be6936f6ee31963e69e93a6cd2c4b17905",
+      "api": "openai/models",
       "version": "2026-07-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "computer-use-preview"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "computer-use-preview",
+        "replacement": "gpt-5.6-terra"
       },
       "description": "Model \"computer-use-preview\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `computer-use-preview-2025-03-11` \\| `computer-use-preview`   | `gpt-5.6-terra`         |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 33,
-      "fingerprint": "sha256:ab0c4d8417f9176091b09f30bd765934d2f2209e82bdd9db597aed3bf63155c9",
-      "api": "openai-models",
+      "fingerprint": "sha256:3184eaa1b6321186722ddf12d85c295ca6732c56325354c3c265a430d2d51414",
+      "api": "openai/models",
       "version": "2026-07-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-4o-mini-search-preview-2025-03-11"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-4o-mini-search-preview-2025-03-11",
+        "replacement": "gpt-5.6-terra"
       },
       "description": "Model \"gpt-4o-mini-search-preview-2025-03-11\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `gpt-4o-mini-search-preview-2025-03-11`                       | `gpt-5.6-terra`         |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 34,
-      "fingerprint": "sha256:2cfabd0f9ec732b716d98858dbe292983ce85edcfb07f4fe6b8efd2d703ae36b",
-      "api": "openai-models",
+      "fingerprint": "sha256:fd572c9b7dae1089003abd9a293d105bf70673081d4d878fb74135e17062ac02",
+      "api": "openai/models",
       "version": "2026-07-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-4o-search-preview-2025-03-11"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-4o-search-preview-2025-03-11",
+        "replacement": "gpt-5.6-terra"
       },
       "description": "Model \"gpt-4o-search-preview-2025-03-11\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `gpt-4o-search-preview-2025-03-11`                            | `gpt-5.6-terra`         |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 35,
-      "fingerprint": "sha256:e29dd3af4775910a7b32781a6dd8529a8781a56576ea3e1ae0ce779b1b0f458c",
-      "api": "openai-models",
+      "fingerprint": "sha256:33518065dd3aa5c749949289dd72055b6fdb79f3835073b34a412b2e451c93d0",
+      "api": "openai/models",
       "version": "2026-07-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-5-chat-latest"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-5-chat-latest",
+        "replacement": "gpt-5.6-sol"
       },
       "description": "Model \"gpt-5-chat-latest\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `gpt-5-chat-latest`                                           | `gpt-5.6-sol`           |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 36,
-      "fingerprint": "sha256:ea357f656f258f9fd6c29fd96a4cff737632411a5f84f27d4076b474656e3478",
-      "api": "openai-models",
+      "fingerprint": "sha256:40d04868cd14e2aff7523f717367a5a6632542015a489c31b27f9b85aae3052c",
+      "api": "openai/models",
       "version": "2026-07-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-5-codex"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-5-codex",
+        "replacement": "gpt-5.6-sol"
       },
       "description": "Model \"gpt-5-codex\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `gpt-5-codex`                                                 | `gpt-5.6-sol`           |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 37,
-      "fingerprint": "sha256:a1dbce59b031eafb541f7845739afe8664b715cd65e4691b28930192496a85b9",
-      "api": "openai-models",
+      "fingerprint": "sha256:ff2bbf4f9bb9231f9b4a5603899c0fc752f6a37f6e26a5c7e1fe5790f409ca48",
+      "api": "openai/models",
       "version": "2026-07-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-5.1-chat-latest"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-5.1-chat-latest",
+        "replacement": "gpt-5.6-sol"
       },
       "description": "Model \"gpt-5.1-chat-latest\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `gpt-5.1-chat-latest`                                         | `gpt-5.6-sol`           |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 38,
-      "fingerprint": "sha256:56a551f2a01dd859583aa241da988701c07fdb35391462f42a4f36ad1bacbdfe",
-      "api": "openai-models",
+      "fingerprint": "sha256:362e7e03afadd59d0cdbfff7e736e0f735ae9eea79fe5720bf920bfceb62162a",
+      "api": "openai/models",
       "version": "2026-07-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-5.1-codex"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-5.1-codex",
+        "replacement": "gpt-5.6-sol"
       },
       "description": "Model \"gpt-5.1-codex\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `gpt-5.1-codex`                                               | `gpt-5.6-sol`           |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 39,
-      "fingerprint": "sha256:e63441f169eb65de5bc5482bf40a7c462fdf6a265b9478c328ecbd87b10d36f8",
-      "api": "openai-models",
+      "fingerprint": "sha256:af71610f01e6ddf5b3afb5d282bf8946761ae2b998b2a2b331e222fc56c7ca74",
+      "api": "openai/models",
       "version": "2026-07-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-5.1-codex-max"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-5.1-codex-max",
+        "replacement": "gpt-5.6-sol"
       },
       "description": "Model \"gpt-5.1-codex-max\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `gpt-5.1-codex-max`                                           | `gpt-5.6-sol`           |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 40,
-      "fingerprint": "sha256:e055f233640720a3d6ac94470672af0b4204d698fae0d8bf2332e1a7c4d4b2bc",
-      "api": "openai-models",
+      "fingerprint": "sha256:f24c2a080eba5b89e6ea591af12a14645c80791266b45856420396ffd532f939",
+      "api": "openai/models",
       "version": "2026-07-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-5.1-codex-mini"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-5.1-codex-mini",
+        "replacement": "gpt-5.6-terra"
       },
       "description": "Model \"gpt-5.1-codex-mini\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `gpt-5.1-codex-mini`                                          | `gpt-5.6-terra`         |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 41,
-      "fingerprint": "sha256:6a65387751abb8f26398b244fc13db66fe2ffcc45fc99e047da08c3a5444bf3e",
-      "api": "openai-models",
+      "fingerprint": "sha256:0e2a5ba7b05b9c093526bdf9afcabf862d9f31e84e42a4ba14b159838ecd880a",
+      "api": "openai/models",
       "version": "2026-07-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "o3-deep-research-2025-06-26"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "o3-deep-research-2025-06-26",
+        "replacement": "gpt-5.6-sol"
       },
       "description": "Model \"o3-deep-research-2025-06-26\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `o3-deep-research-2025-06-26` \\| `o3-deep-research`           | `gpt-5.6-sol`           |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 42,
-      "fingerprint": "sha256:dc9bc7c9e9960dd73eb12629f9727f143cc9fea515049848af2e392770087ac1",
-      "api": "openai-models",
+      "fingerprint": "sha256:c6b498786a70cce3450693d63d40983af1593a32ef9dd1dfdd5d8bd36922ca58",
+      "api": "openai/models",
       "version": "2026-07-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "o3-deep-research"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "o3-deep-research",
+        "replacement": "gpt-5.6-sol"
       },
       "description": "Model \"o3-deep-research\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `o3-deep-research-2025-06-26` \\| `o3-deep-research`           | `gpt-5.6-sol`           |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 43,
-      "fingerprint": "sha256:1f8aeca94489c92e694413b988afe9df1ddf3214915308c8eb40186624be9705",
-      "api": "openai-models",
+      "fingerprint": "sha256:1bb911d293d7d2dbd20f2a89a97d9c3fab308d0bbff74bfea2d220a8e3fc1f07",
+      "api": "openai/models",
       "version": "2026-07-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "o4-mini-deep-research-2025-06-26"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "o4-mini-deep-research-2025-06-26",
+        "replacement": "gpt-5.6-sol"
       },
       "description": "Model \"o4-mini-deep-research-2025-06-26\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `o4-mini-deep-research-2025-06-26` \\| `o4-mini-deep-research` | `gpt-5.6-sol`           |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 44,
-      "fingerprint": "sha256:972135e29681b87b643d2d9743c15ec10fbf2cafe746c86043877515a2fc7fc4",
-      "api": "openai-models",
+      "fingerprint": "sha256:a56b2eb3fce5c64b1981cb90610e8d3eb4f4f5917203b5b2d36d574de381c171",
+      "api": "openai/models",
       "version": "2026-07-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "o4-mini-deep-research"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "o4-mini-deep-research",
+        "replacement": "gpt-5.6-sol"
       },
       "description": "Model \"o4-mini-deep-research\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `o4-mini-deep-research-2025-06-26` \\| `o4-mini-deep-research` | `gpt-5.6-sol`           |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 45,
-      "fingerprint": "sha256:aa6fad24d1c4e4844b793e39b14c3ccab3d177437e104339864d8b92aa2342d7",
-      "api": "openai-models",
+      "fingerprint": "sha256:e92ab5f3acdea6243818e8cc5645187cd71ac3ea985bc7a0900f8b856b50c923",
+      "api": "openai/models",
       "version": "2026-07-23",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-5.2-codex"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-5.2-codex",
+        "replacement": "gpt-5.6-sol"
       },
       "description": "Model \"gpt-5.2-codex\" is shut down on 2026-07-23: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2026-04-22: Legacy GPT model snapshots (July 2026 shutdown)\n| Shutdown date | Model snapshot                                                | Substitute model        |\n| July 23, 2026 | `gpt-5.2-codex`                                               | `gpt-5.6-sol`           |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 46,
-      "fingerprint": "sha256:c1cb4abca7be5711746377114c3052ea3b29eae3148e2acabddad5cf299d5096",
-      "api": "openai-models",
+      "fingerprint": "sha256:22c3df936ace8a0652431ca2a769dd8b039404c588b4c7f911dabd1d64e770b0",
+      "api": "openai/models",
       "version": "2026-02-17",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "chatgpt-4o-latest"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "chatgpt-4o-latest",
+        "replacement": "gpt-5.6-sol"
       },
       "description": "Model \"chatgpt-4o-latest\" is shut down on 2026-02-17: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-sol` instead: OpenAI's recommended replacement. (OpenAI first named gpt-5.1-chat-latest, which is itself retired.)",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2025-11-18: `chatgpt-4o-latest` snapshot\n| Shutdown date | Model / system      | Recommended replacement |\n| 2026-02-17    | `chatgpt-4o-latest` | `gpt-5.1-chat-latest`   |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 47,
-      "fingerprint": "sha256:45d0de9f98d2b7447db15e389a903566800d502692ef9772f87a4118c5cc6fe0",
-      "api": "openai-models",
+      "fingerprint": "sha256:e2b44aa8420f408ceab29fb272f2e0f2baec9893a04c62f93688995ed53481c8",
+      "api": "openai/models",
       "version": "2026-02-12",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "codex-mini-latest"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "codex-mini-latest",
+        "replacement": "gpt-5-codex-mini"
       },
       "description": "Model \"codex-mini-latest\" is shut down on 2026-02-12: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5-codex-mini` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2025-11-17: `codex-mini-latest` model snapshot\n| Shutdown date | Model / system      | Recommended replacement |\n| 2026-02-12    | `codex-mini-latest` | `gpt-5-codex-mini`      |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 48,
-      "fingerprint": "sha256:6e06ec8939ff99b9d7bf76dbc719ad765ab105bab071ef589d8c1b7d643142c3",
-      "api": "openai-models",
+      "fingerprint": "sha256:298d52e2df997a412541c04406569482b54cc7b2736b7a54b64a47636ee5adac",
+      "api": "openai/models",
       "version": "2026-09-28",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-3.5-turbo-instruct"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-3.5-turbo-instruct",
+        "replacement": "gpt-5.6-terra"
       },
       "description": "Model \"gpt-3.5-turbo-instruct\" is shut down on 2026-09-28: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2025-09-26: Legacy GPT model snapshots\n| Shutdown date | Model / system           | Recommended replacement |\n| 2026-09-28    | `gpt-3.5-turbo-instruct` | `gpt-5.6-terra`         |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 49,
-      "fingerprint": "sha256:8cd0dd76cbee1fdf129359d7663e459a4cacf0aa1171802ba6a1fd97b571a1df",
-      "api": "openai-models",
+      "fingerprint": "sha256:6e31004123e3abadcfd61472f45a91f584a5216750debd24a7893c1e3f1d74be",
+      "api": "openai/models",
       "version": "2026-09-28",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-3.5-turbo-1106"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-3.5-turbo-1106",
+        "replacement": "gpt-5.6-terra"
       },
       "description": "Model \"gpt-3.5-turbo-1106\" is shut down on 2026-09-28: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2025-09-26: Legacy GPT model snapshots\n| Shutdown date | Model / system           | Recommended replacement |\n| 2026-09-28    | `gpt-3.5-turbo-1106`     | `gpt-5.6-terra`         |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 50,
-      "fingerprint": "sha256:d2e81f2168a164181b888b3df7ee02ddc1bb4aa68efa0048418b42f74fa69dc8",
-      "api": "openai-models",
+      "fingerprint": "sha256:ce07a31125e454c6347940c57d9f3954c1464e7c4d115b9e613f608fc311fd39",
+      "api": "openai/models",
       "version": "2025-07-28",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "o1-preview"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "o1-preview",
+        "replacement": "o3"
       },
       "description": "Model \"o1-preview\" is shut down on 2025-07-28: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `o3` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2025-04-28: `o1-preview` and `o1-mini`\n| Shutdown date | Model / system | Recommended replacement |\n| 2025-07-28    | `o1-preview`   | `o3`                    |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 51,
-      "fingerprint": "sha256:a217548a90106bde98d3252bdc35ad12e9b3d6021f5053e9040bac9b12c0b2d7",
-      "api": "openai-models",
+      "fingerprint": "sha256:df9d790a772a62b909bf66d840de74633c2a1389f66cca3ba5bda96343b237eb",
+      "api": "openai/models",
       "version": "2025-10-27",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "o1-mini"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "o1-mini",
+        "replacement": "gpt-5.6-terra"
       },
       "description": "Model \"o1-mini\" is shut down on 2025-10-27: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement. (OpenAI first named o4-mini, which is itself retired.)",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2025-04-28: `o1-preview` and `o1-mini`\n| Shutdown date | Model / system | Recommended replacement |\n| 2025-10-27    | `o1-mini`      | `o4-mini`               |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 52,
-      "fingerprint": "sha256:75838177cf29b8fb9dcc533c89e28b837085167d974a69f941d94536127d3318",
-      "api": "openai-models",
+      "fingerprint": "sha256:47cf31bd0a2dc60fd9bbdce8cc286426e2cc28baebd2072c5c1bfce1e8108a40",
+      "api": "openai/models",
       "version": "2025-07-14",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-4.5-preview"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-4.5-preview",
+        "replacement": "gpt-4.1"
       },
       "description": "Model \"gpt-4.5-preview\" is shut down on 2025-07-14: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-4.1` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2025-04-14: GPT-4.5-preview\n| Shutdown date | Model / system    | Recommended replacement |\n| 2025-07-14    | `gpt-4.5-preview` | `gpt-4.1`               |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 53,
-      "fingerprint": "sha256:a25bc7d98ff6669d5bdef78c4814d084a610ad5661c9fccb8a82ae2f9ec59866",
-      "api": "openai-models",
+      "fingerprint": "sha256:9ca7706bae32fba43a64b7089716eb87a6b90c91b15aaf6b32b120e3f6399a79",
+      "api": "openai/models",
       "version": "2025-06-06",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-4-32k"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-4-32k",
+        "replacement": "gpt-4o"
       },
       "description": "Model \"gpt-4-32k\" is shut down on 2025-06-06: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-4o` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2024-06-06: GPT-4-32K and Vision Preview models\n| Shutdown date | Deprecated model            | Deprecated model price                             | Recommended replacement |\n| 2025-06-06    | `gpt-4-32k`                 | $60.00 / 1M input tokens + $120 / 1M output tokens | `gpt-4o`                |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 54,
-      "fingerprint": "sha256:ee7c7da8a4f145671b92384d0e661b86bfe3315dfa443c62987bf069ed73fd10",
-      "api": "openai-models",
+      "fingerprint": "sha256:72ccffb5565f02b44b1f0f106fbfe718533126191db0ec66fa622b3510a45247",
+      "api": "openai/models",
       "version": "2025-06-06",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-4-32k-0613"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-4-32k-0613",
+        "replacement": "gpt-4o"
       },
       "description": "Model \"gpt-4-32k-0613\" is shut down on 2025-06-06: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-4o` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2024-06-06: GPT-4-32K and Vision Preview models\n| Shutdown date | Deprecated model            | Deprecated model price                             | Recommended replacement |\n| 2025-06-06    | `gpt-4-32k-0613`            | $60.00 / 1M input tokens + $120 / 1M output tokens | `gpt-4o`                |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 55,
-      "fingerprint": "sha256:a870700fb07e76d4a6858909223c47bf77643c017ea4097fee2aa45c55d36bf1",
-      "api": "openai-models",
+      "fingerprint": "sha256:e3b22f3e67667c12321d23412ea6c1b2f98ef44d345f2b0ca173fcb6353037ee",
+      "api": "openai/models",
       "version": "2025-06-06",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-4-32k-0314"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-4-32k-0314",
+        "replacement": "gpt-4o"
       },
       "description": "Model \"gpt-4-32k-0314\" is shut down on 2025-06-06: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-4o` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2024-06-06: GPT-4-32K and Vision Preview models\n| Shutdown date | Deprecated model            | Deprecated model price                             | Recommended replacement |\n| 2025-06-06    | `gpt-4-32k-0314`            | $60.00 / 1M input tokens + $120 / 1M output tokens | `gpt-4o`                |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 56,
-      "fingerprint": "sha256:77efc8e795e0280400fb662644a98ea68f7606013a49da27d38717a165080163",
-      "api": "openai-models",
+      "fingerprint": "sha256:1bd4a6f96c1537c7f8cde0f2643a337c0497e994226bb3a88739f197ed57ba1e",
+      "api": "openai/models",
       "version": "2024-12-06",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-4-vision-preview"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-4-vision-preview",
+        "replacement": "gpt-4o"
       },
       "description": "Model \"gpt-4-vision-preview\" is shut down on 2024-12-06: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-4o` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2024-06-06: GPT-4-32K and Vision Preview models\n| Shutdown date | Deprecated model            | Deprecated model price                             | Recommended replacement |\n| 2024-12-06    | `gpt-4-vision-preview`      | $10.00 / 1M input tokens + $30 / 1M output tokens  | `gpt-4o`                |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 57,
-      "fingerprint": "sha256:dd53d4cad47e319eb05fdbde9defc3fe4f5040583b331a174a149fdc745bccf7",
-      "api": "openai-models",
+      "fingerprint": "sha256:23b7fa9ef60a7125375298ead1585c704724d03667dbeb24e6e23caa94b6be55",
+      "api": "openai/models",
       "version": "2024-12-06",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-4-1106-vision-preview"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-4-1106-vision-preview",
+        "replacement": "gpt-4o"
       },
       "description": "Model \"gpt-4-1106-vision-preview\" is shut down on 2024-12-06: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-4o` instead: OpenAI's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2024-06-06: GPT-4-32K and Vision Preview models\n| Shutdown date | Deprecated model            | Deprecated model price                             | Recommended replacement |\n| 2024-12-06    | `gpt-4-1106-vision-preview` | $10.00 / 1M input tokens + $30 / 1M output tokens  | `gpt-4o`                |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 58,
-      "fingerprint": "sha256:70be28cc3267effea36fba84142f72fcc06e4ec273a6ab615e09a9725b749448",
-      "api": "openai-models",
+      "fingerprint": "sha256:ea4d8ba55b674c1a828858251ff7506a9fcb5d229db0dddfc7cca370e063c148",
+      "api": "openai/models",
       "version": "2024-09-13",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-3.5-turbo-0613"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-3.5-turbo-0613",
+        "replacement": "gpt-5.6-terra"
       },
       "description": "Model \"gpt-3.5-turbo-0613\" is shut down on 2024-09-13: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement. (OpenAI first named gpt-3.5-turbo, which is itself retired.)",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2023-11-06: Chat model updates\n| Shutdown date | Deprecated model         | Deprecated model price                             | Recommended replacement |\n| 2024-09-13    | `gpt-3.5-turbo-0613`     | $1.50 / 1M input tokens + $2.00 / 1M output tokens | `gpt-3.5-turbo`         |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 59,
-      "fingerprint": "sha256:c535be3edc7ace0a693eb21cd6ac95603b05382e74c235ee2f48f6e8bb8df40a",
-      "api": "openai-models",
+      "fingerprint": "sha256:e3a9e9a088427c22fae9b2199e34612bd62d03753de88defe42b55c0df16a17f",
+      "api": "openai/models",
       "version": "2024-09-13",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-3.5-turbo-16k-0613"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-3.5-turbo-16k-0613",
+        "replacement": "gpt-5.6-terra"
       },
       "description": "Model \"gpt-3.5-turbo-16k-0613\" is shut down on 2024-09-13: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement. (OpenAI first named gpt-3.5-turbo, which is itself retired.)",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2023-11-06: Chat model updates\n| Shutdown date | Deprecated model         | Deprecated model price                             | Recommended replacement |\n| 2024-09-13    | `gpt-3.5-turbo-16k-0613` | $3.00 / 1M input tokens + $4.00 / 1M output tokens | `gpt-3.5-turbo`         |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 60,
-      "fingerprint": "sha256:8a3e7874dc09e9bbedd0269b90c607b62343a789bb9cfdf241b2a32021bd6378",
-      "api": "openai-models",
+      "fingerprint": "sha256:18546ec0a58809196edb87d8141cfecd799cdc4dc50aba6314401318002aa002",
+      "api": "openai/models",
       "version": "2024-09-13",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/chat/completions",
-        "property": "model",
-        "value": "gpt-3.5-turbo-0301"
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "gpt-3.5-turbo-0301",
+        "replacement": "gpt-5.6-terra"
       },
       "description": "Model \"gpt-3.5-turbo-0301\" is shut down on 2024-09-13: OpenAI requests naming it fail from that date.",
       "migration_hint": "Use `gpt-5.6-terra` instead: OpenAI's recommended replacement. (OpenAI first named gpt-3.5-turbo, which is itself retired.)",
       "source_url": "https://web.archive.org/web/20261013115538/https://developers.openai.com/api/docs/deprecations.md",
       "source_excerpt": "### 2023-06-13: Updated chat models\n| Shutdown date | Deprecated model     | Deprecated model price                                | Recommended replacement |\n| 2024-09-13    | `gpt-3.5-turbo-0301` | $15.00 / 1M input tokens + $20.00 / 1M output tokens  | `gpt-3.5-turbo`         |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:45.4479453Z"
     },
     {
       "id": 61,
-      "fingerprint": "sha256:7c3bd78d82dafed817dcbfd81e5fdab2cf708f1a162cc2e3656fa8a776adee31",
-      "api": "anthropic-models",
+      "fingerprint": "sha256:bf9dc66e694d48792f443cfa0a83407438ba84d9908fe8d159440896068ac486",
+      "api": "anthropic/models",
       "version": "2026-11-30",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/messages",
-        "property": "model",
-        "value": "claude-sonnet-4-5-20250929"
+      "subject": {
+        "type": "model",
+        "provider": "anthropic",
+        "name": "claude-sonnet-4-5-20250929",
+        "replacement": "claude-sonnet-5-5"
       },
       "description": "Model \"claude-sonnet-4-5-20250929\" is shut down on 2026-11-30: Anthropic requests naming it fail from that date.",
       "migration_hint": "Use `claude-sonnet-5-5` instead: Anthropic's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013120015/https://platform.claude.com/docs/en/about-claude/model-deprecations.md",
       "source_excerpt": "### 2026-09-30: Claude Sonnet 4.5 model\n| Retirement date   | Deprecated model             | Recommended replacement |\n| November 30, 2026 | `claude-sonnet-4-5-20250929` | `claude-sonnet-5-5`     |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:53.309920002Z"
     },
     {
       "id": 62,
-      "fingerprint": "sha256:79d27da5fa9a7037c753e2f648e5d584ea6b5e1d0e85ebd405e6d14d9cc18614",
-      "api": "anthropic-models",
+      "fingerprint": "sha256:bb9908fbd60b90f608a4d2527ab5e1b0e308387e7f95fbd5434712668555db03",
+      "api": "anthropic/models",
       "version": "2026-08-05",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/messages",
-        "property": "model",
-        "value": "claude-opus-4-1-20250805"
+      "subject": {
+        "type": "model",
+        "provider": "anthropic",
+        "name": "claude-opus-4-1-20250805",
+        "replacement": "claude-opus-4-8"
       },
       "description": "Model \"claude-opus-4-1-20250805\" is shut down on 2026-08-05: Anthropic requests naming it fail from that date.",
       "migration_hint": "Use `claude-opus-4-8` instead: Anthropic's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013120015/https://platform.claude.com/docs/en/about-claude/model-deprecations.md",
       "source_excerpt": "### 2026-06-05: Claude Opus 4.1 model\n| Retirement date | Deprecated model           | Recommended replacement |\n| August 5, 2026  | `claude-opus-4-1-20250805` | `claude-opus-4-8`       |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:53.309920002Z"
     },
     {
       "id": 63,
-      "fingerprint": "sha256:f558a4951b7f9b4192e3159285d6ac21bc6fd236be87337dc0ae89a570abafb7",
-      "api": "anthropic-models",
+      "fingerprint": "sha256:acbe6e761b6bc504fcc0a76745325c1debee73580cde96660d9831f57269fad9",
+      "api": "anthropic/models",
       "version": "2026-06-15",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/messages",
-        "property": "model",
-        "value": "claude-sonnet-4-20250514"
+      "subject": {
+        "type": "model",
+        "provider": "anthropic",
+        "name": "claude-sonnet-4-20250514",
+        "replacement": "claude-sonnet-5-5"
       },
       "description": "Model \"claude-sonnet-4-20250514\" is shut down on 2026-06-15: Anthropic requests naming it fail from that date.",
       "migration_hint": "Use `claude-sonnet-5-5` instead: Anthropic's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013120015/https://platform.claude.com/docs/en/about-claude/model-deprecations.md",
       "source_excerpt": "### 2026-04-14: Claude Sonnet 4 and Claude Opus 4 models\n| Retirement date | Deprecated model           | Recommended replacement |\n| June 15, 2026   | `claude-sonnet-4-20250514` | `claude-sonnet-5-5`     |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:53.309920002Z"
     },
     {
       "id": 64,
-      "fingerprint": "sha256:1f11c2915bc54e5e51c582765a7b7fdc197eaa4a657ae932d82b68db4fbb348c",
-      "api": "anthropic-models",
+      "fingerprint": "sha256:e8595a6279ec27c8401bb8e22040ea635d62229de1895e07272ba147b8f23cc0",
+      "api": "anthropic/models",
       "version": "2026-06-15",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/messages",
-        "property": "model",
-        "value": "claude-opus-4-20250514"
+      "subject": {
+        "type": "model",
+        "provider": "anthropic",
+        "name": "claude-opus-4-20250514",
+        "replacement": "claude-opus-4-8"
       },
       "description": "Model \"claude-opus-4-20250514\" is shut down on 2026-06-15: Anthropic requests naming it fail from that date.",
       "migration_hint": "Use `claude-opus-4-8` instead: Anthropic's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013120015/https://platform.claude.com/docs/en/about-claude/model-deprecations.md",
       "source_excerpt": "### 2026-04-14: Claude Sonnet 4 and Claude Opus 4 models\n| Retirement date | Deprecated model           | Recommended replacement |\n| June 15, 2026   | `claude-opus-4-20250514`   | `claude-opus-4-8`       |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:53.309920002Z"
     },
     {
       "id": 65,
-      "fingerprint": "sha256:e48ee9c04629ae22986b2f98ae82680e4f22357f176cbdeeae71387ff4114bbe",
-      "api": "anthropic-models",
+      "fingerprint": "sha256:dd9954ebdca4a5b7bebc9a3eb90b12692d5aef06cbeb83f98d35c1b613fc4144",
+      "api": "anthropic/models",
       "version": "2026-04-20",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/messages",
-        "property": "model",
-        "value": "claude-3-haiku-20240307"
+      "subject": {
+        "type": "model",
+        "provider": "anthropic",
+        "name": "claude-3-haiku-20240307",
+        "replacement": "claude-haiku-4-5-20251001"
       },
       "description": "Model \"claude-3-haiku-20240307\" is shut down on 2026-04-20: Anthropic requests naming it fail from that date.",
       "migration_hint": "Use `claude-haiku-4-5-20251001` instead: Anthropic's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013120015/https://platform.claude.com/docs/en/about-claude/model-deprecations.md",
       "source_excerpt": "### 2026-02-19: Claude Haiku 3 model\n| Retirement date | Deprecated model          | Recommended replacement     |\n| April 20, 2026  | `claude-3-haiku-20240307` | `claude-haiku-4-5-20251001` |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:53.309920002Z"
     },
     {
       "id": 66,
-      "fingerprint": "sha256:a27d84beb9ce8011cc8f86f1dbafa725550c46c93e95d2da982ec407188647c1",
-      "api": "anthropic-models",
+      "fingerprint": "sha256:806bb2b5795722c4fa651bc70f43f812fc28a7f02c97c75c6080b1a5ae234878",
+      "api": "anthropic/models",
       "version": "2026-02-19",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/messages",
-        "property": "model",
-        "value": "claude-3-5-haiku-20241022"
+      "subject": {
+        "type": "model",
+        "provider": "anthropic",
+        "name": "claude-3-5-haiku-20241022",
+        "replacement": "claude-haiku-4-5-20251001"
       },
       "description": "Model \"claude-3-5-haiku-20241022\" is shut down on 2026-02-19: Anthropic requests naming it fail from that date.",
       "migration_hint": "Use `claude-haiku-4-5-20251001` instead: Anthropic's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013120015/https://platform.claude.com/docs/en/about-claude/model-deprecations.md",
       "source_excerpt": "### 2025-12-19: Claude Haiku 3.5 model\n| Retirement date   | Deprecated model            | Recommended replacement     |\n| February 19, 2026 | `claude-3-5-haiku-20241022` | `claude-haiku-4-5-20251001` |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:53.309920002Z"
     },
     {
       "id": 67,
-      "fingerprint": "sha256:7ba8a2e0981659b9feca77b25a7a0e4fe38ec5e4defca2f28d16aa453a8ddfc3",
-      "api": "anthropic-models",
+      "fingerprint": "sha256:17b575b6086b4189e150014dca87c0e6bf856e64f772b24b538f180beea81f56",
+      "api": "anthropic/models",
       "version": "2026-02-19",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/messages",
-        "property": "model",
-        "value": "claude-3-7-sonnet-20250219"
+      "subject": {
+        "type": "model",
+        "provider": "anthropic",
+        "name": "claude-3-7-sonnet-20250219",
+        "replacement": "claude-sonnet-5-5"
       },
       "description": "Model \"claude-3-7-sonnet-20250219\" is shut down on 2026-02-19: Anthropic requests naming it fail from that date.",
       "migration_hint": "Use `claude-sonnet-5-5` instead: Anthropic's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013120015/https://platform.claude.com/docs/en/about-claude/model-deprecations.md",
       "source_excerpt": "### 2025-10-28: Claude Sonnet 3.7 model\n| Retirement date   | Deprecated model             | Recommended replacement |\n| February 19, 2026 | `claude-3-7-sonnet-20250219` | `claude-sonnet-5-5`     |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:53.309920002Z"
     },
     {
       "id": 68,
-      "fingerprint": "sha256:6c2bb68a40ec314fe1280bfc1e1a7df059ac299285b3fbe91d30d0ea2b231c2a",
-      "api": "anthropic-models",
+      "fingerprint": "sha256:bd42e7d7a185f3edd5d21f300d5f350f960079ce1de4676949a0d83e6140ce74",
+      "api": "anthropic/models",
       "version": "2025-10-28",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/messages",
-        "property": "model",
-        "value": "claude-3-5-sonnet-20240620"
+      "subject": {
+        "type": "model",
+        "provider": "anthropic",
+        "name": "claude-3-5-sonnet-20240620",
+        "replacement": "claude-sonnet-5-5"
       },
       "description": "Model \"claude-3-5-sonnet-20240620\" is shut down on 2025-10-28: Anthropic requests naming it fail from that date.",
       "migration_hint": "Use `claude-sonnet-5-5` instead: Anthropic's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013120015/https://platform.claude.com/docs/en/about-claude/model-deprecations.md",
       "source_excerpt": "### 2025-08-13: Claude Sonnet 3.5 models\n| Retirement date  | Deprecated model             | Recommended replacement |\n| October 28, 2025 | `claude-3-5-sonnet-20240620` | `claude-sonnet-5-5`     |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:53.309920002Z"
     },
     {
       "id": 69,
-      "fingerprint": "sha256:2e0577e83090a19eca4b46024d7b31b5a278bc66d51a26469af35054696ec0f0",
-      "api": "anthropic-models",
+      "fingerprint": "sha256:1f6698c66029b5d94cb452eeb8ecc6a03f623759833b6f21a69f53a0c5b2984d",
+      "api": "anthropic/models",
       "version": "2025-10-28",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/messages",
-        "property": "model",
-        "value": "claude-3-5-sonnet-20241022"
+      "subject": {
+        "type": "model",
+        "provider": "anthropic",
+        "name": "claude-3-5-sonnet-20241022",
+        "replacement": "claude-sonnet-5-5"
       },
       "description": "Model \"claude-3-5-sonnet-20241022\" is shut down on 2025-10-28: Anthropic requests naming it fail from that date.",
       "migration_hint": "Use `claude-sonnet-5-5` instead: Anthropic's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013120015/https://platform.claude.com/docs/en/about-claude/model-deprecations.md",
       "source_excerpt": "### 2025-08-13: Claude Sonnet 3.5 models\n| Retirement date  | Deprecated model             | Recommended replacement |\n| October 28, 2025 | `claude-3-5-sonnet-20241022` | `claude-sonnet-5-5`     |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:53.309920002Z"
     },
     {
       "id": 70,
-      "fingerprint": "sha256:a19c9e1191f5ce51c640ae7259f139e110b6e800666f1fa766ff8c4c81b0ba9a",
-      "api": "anthropic-models",
+      "fingerprint": "sha256:0428d4c806abbf7ccf25718a3fe238279b280d2e8f6b8fe689d1a786481f9f40",
+      "api": "anthropic/models",
       "version": "2026-01-05",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/messages",
-        "property": "model",
-        "value": "claude-3-opus-20240229"
+      "subject": {
+        "type": "model",
+        "provider": "anthropic",
+        "name": "claude-3-opus-20240229",
+        "replacement": "claude-opus-4-8"
       },
       "description": "Model \"claude-3-opus-20240229\" is shut down on 2026-01-05: Anthropic requests naming it fail from that date.",
       "migration_hint": "Use `claude-opus-4-8` instead: Anthropic's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013120015/https://platform.claude.com/docs/en/about-claude/model-deprecations.md",
       "source_excerpt": "### 2025-06-30: Claude Opus 3 model\n| Retirement date | Deprecated model         | Recommended replacement |\n| January 5, 2026 | `claude-3-opus-20240229` | `claude-opus-4-8`       |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:53.309920002Z"
     },
     {
       "id": 71,
-      "fingerprint": "sha256:599a7aec89c1a2c5229e278ae1cae0bf2734b04ced77840b0937431ca0173e9f",
-      "api": "anthropic-models",
+      "fingerprint": "sha256:bbe44fbfc6527ac3b4fd0b481eff836c6f0995700ecc4b94d930bc8941e0d597",
+      "api": "anthropic/models",
       "version": "2025-07-21",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/messages",
-        "property": "model",
-        "value": "claude-2.0"
+      "subject": {
+        "type": "model",
+        "provider": "anthropic",
+        "name": "claude-2.0",
+        "replacement": "claude-opus-4-8"
       },
       "description": "Model \"claude-2.0\" is shut down on 2025-07-21: Anthropic requests naming it fail from that date.",
       "migration_hint": "Use `claude-opus-4-8` instead: Anthropic's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013120015/https://platform.claude.com/docs/en/about-claude/model-deprecations.md",
       "source_excerpt": "### 2025-01-21: Claude 2, Claude 2.1, and Claude Sonnet 3 models\n| Retirement date | Deprecated model           | Recommended replacement |\n| July 21, 2025   | `claude-2.0`               | `claude-opus-4-8`       |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:53.309920002Z"
     },
     {
       "id": 72,
-      "fingerprint": "sha256:1e464c9894b7e987011ffb905e5206f092ddc2a06dc955a3713aa13190eb31d5",
-      "api": "anthropic-models",
+      "fingerprint": "sha256:146d061d088109e98ae03d63a075e5e06ebb513d5d2143fafc0596b91daa4256",
+      "api": "anthropic/models",
       "version": "2025-07-21",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/messages",
-        "property": "model",
-        "value": "claude-2.1"
+      "subject": {
+        "type": "model",
+        "provider": "anthropic",
+        "name": "claude-2.1",
+        "replacement": "claude-opus-4-8"
       },
       "description": "Model \"claude-2.1\" is shut down on 2025-07-21: Anthropic requests naming it fail from that date.",
       "migration_hint": "Use `claude-opus-4-8` instead: Anthropic's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013120015/https://platform.claude.com/docs/en/about-claude/model-deprecations.md",
       "source_excerpt": "### 2025-01-21: Claude 2, Claude 2.1, and Claude Sonnet 3 models\n| Retirement date | Deprecated model           | Recommended replacement |\n| July 21, 2025   | `claude-2.1`               | `claude-opus-4-8`       |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:53.309920002Z"
     },
     {
       "id": 73,
-      "fingerprint": "sha256:ad912f874fc3ca67756fbd39610f1998f26e1137c0b9f6572a1f2f9754f9d53d",
-      "api": "anthropic-models",
+      "fingerprint": "sha256:eadc4ebf13f46a084d4331c734ac8e6550dc6d53c0f93b9083ceb849b8fe1be6",
+      "api": "anthropic/models",
       "version": "2025-07-21",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/messages",
-        "property": "model",
-        "value": "claude-3-sonnet-20240229"
+      "subject": {
+        "type": "model",
+        "provider": "anthropic",
+        "name": "claude-3-sonnet-20240229",
+        "replacement": "claude-sonnet-5-5"
       },
       "description": "Model \"claude-3-sonnet-20240229\" is shut down on 2025-07-21: Anthropic requests naming it fail from that date.",
       "migration_hint": "Use `claude-sonnet-5-5` instead: Anthropic's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013120015/https://platform.claude.com/docs/en/about-claude/model-deprecations.md",
       "source_excerpt": "### 2025-01-21: Claude 2, Claude 2.1, and Claude Sonnet 3 models\n| Retirement date | Deprecated model           | Recommended replacement |\n| July 21, 2025   | `claude-3-sonnet-20240229` | `claude-sonnet-5-5`     |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:53.309920002Z"
     },
     {
       "id": 74,
-      "fingerprint": "sha256:ff99b4078114327947c107292239c6a77699cd2db48d68869badf54ecdd987cf",
-      "api": "anthropic-models",
+      "fingerprint": "sha256:8b03c1ec82e23fe22c0d178d92ea22b1154adbffede5509af1d77439009c70c2",
+      "api": "anthropic/models",
       "version": "2024-11-06",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/messages",
-        "property": "model",
-        "value": "claude-1.0"
+      "subject": {
+        "type": "model",
+        "provider": "anthropic",
+        "name": "claude-1.0",
+        "replacement": "claude-haiku-4-5-20251001"
       },
       "description": "Model \"claude-1.0\" is shut down on 2024-11-06: Anthropic requests naming it fail from that date.",
       "migration_hint": "Use `claude-haiku-4-5-20251001` instead: Anthropic's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013120015/https://platform.claude.com/docs/en/about-claude/model-deprecations.md",
       "source_excerpt": "### 2024-09-04: Claude 1 and Instant models\n| Retirement date  | Deprecated model     | Recommended replacement     |\n| November 6, 2024 | `claude-1.0`         | `claude-haiku-4-5-20251001` |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:53.309920002Z"
     },
     {
       "id": 75,
-      "fingerprint": "sha256:768ef82f8e9e8771a28feda2c48be088dbee670b467eb87e39c8008266c52c0e",
-      "api": "anthropic-models",
+      "fingerprint": "sha256:7527709cc6692b6c31ae8149fcfda97149b28d41a9fa7437c2848c17e639893d",
+      "api": "anthropic/models",
       "version": "2024-11-06",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/messages",
-        "property": "model",
-        "value": "claude-1.1"
+      "subject": {
+        "type": "model",
+        "provider": "anthropic",
+        "name": "claude-1.1",
+        "replacement": "claude-haiku-4-5-20251001"
       },
       "description": "Model \"claude-1.1\" is shut down on 2024-11-06: Anthropic requests naming it fail from that date.",
       "migration_hint": "Use `claude-haiku-4-5-20251001` instead: Anthropic's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013120015/https://platform.claude.com/docs/en/about-claude/model-deprecations.md",
       "source_excerpt": "### 2024-09-04: Claude 1 and Instant models\n| Retirement date  | Deprecated model     | Recommended replacement     |\n| November 6, 2024 | `claude-1.1`         | `claude-haiku-4-5-20251001` |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:53.309920002Z"
     },
     {
       "id": 76,
-      "fingerprint": "sha256:0cc4a925c9e0be75a73c53198487d393b658e46bf1880c2a3470de41ae5491d1",
-      "api": "anthropic-models",
+      "fingerprint": "sha256:5e4dd9e6a098fc16bf1db022e3d9aab838a657ef4b7284996a0f39c1475bdaac",
+      "api": "anthropic/models",
       "version": "2024-11-06",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/messages",
-        "property": "model",
-        "value": "claude-1.2"
+      "subject": {
+        "type": "model",
+        "provider": "anthropic",
+        "name": "claude-1.2",
+        "replacement": "claude-haiku-4-5-20251001"
       },
       "description": "Model \"claude-1.2\" is shut down on 2024-11-06: Anthropic requests naming it fail from that date.",
       "migration_hint": "Use `claude-haiku-4-5-20251001` instead: Anthropic's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013120015/https://platform.claude.com/docs/en/about-claude/model-deprecations.md",
       "source_excerpt": "### 2024-09-04: Claude 1 and Instant models\n| Retirement date  | Deprecated model     | Recommended replacement     |\n| November 6, 2024 | `claude-1.2`         | `claude-haiku-4-5-20251001` |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:53.309920002Z"
     },
     {
       "id": 77,
-      "fingerprint": "sha256:721bc23d777bf8817591a22e79f52f6bc33a21406d9d58d7f6577bf74c76e3ed",
-      "api": "anthropic-models",
+      "fingerprint": "sha256:33f19a2640035c553ab915ec77169bc3f74e7664733c391eb509587977c6b180",
+      "api": "anthropic/models",
       "version": "2024-11-06",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/messages",
-        "property": "model",
-        "value": "claude-1.3"
+      "subject": {
+        "type": "model",
+        "provider": "anthropic",
+        "name": "claude-1.3",
+        "replacement": "claude-haiku-4-5-20251001"
       },
       "description": "Model \"claude-1.3\" is shut down on 2024-11-06: Anthropic requests naming it fail from that date.",
       "migration_hint": "Use `claude-haiku-4-5-20251001` instead: Anthropic's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013120015/https://platform.claude.com/docs/en/about-claude/model-deprecations.md",
       "source_excerpt": "### 2024-09-04: Claude 1 and Instant models\n| Retirement date  | Deprecated model     | Recommended replacement     |\n| November 6, 2024 | `claude-1.3`         | `claude-haiku-4-5-20251001` |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:53.309920002Z"
     },
     {
       "id": 78,
-      "fingerprint": "sha256:95eb2d252fa6f37bcad2db2baa74d19686e1c9941d3f3fd4602c95a4d85f5fc8",
-      "api": "anthropic-models",
+      "fingerprint": "sha256:deda532ae210b3cef3858d6e93d60c6bf1d399da9cf4a3e5cc99878ba28dbe3e",
+      "api": "anthropic/models",
       "version": "2024-11-06",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/messages",
-        "property": "model",
-        "value": "claude-instant-1.0"
+      "subject": {
+        "type": "model",
+        "provider": "anthropic",
+        "name": "claude-instant-1.0",
+        "replacement": "claude-haiku-4-5-20251001"
       },
       "description": "Model \"claude-instant-1.0\" is shut down on 2024-11-06: Anthropic requests naming it fail from that date.",
       "migration_hint": "Use `claude-haiku-4-5-20251001` instead: Anthropic's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013120015/https://platform.claude.com/docs/en/about-claude/model-deprecations.md",
       "source_excerpt": "### 2024-09-04: Claude 1 and Instant models\n| Retirement date  | Deprecated model     | Recommended replacement     |\n| November 6, 2024 | `claude-instant-1.0` | `claude-haiku-4-5-20251001` |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:53.309920002Z"
     },
     {
       "id": 79,
-      "fingerprint": "sha256:fadfe113401280e3be8fbb4bc13e300a21d2318f83e9377f7e27f85ad1f4fe8a",
-      "api": "anthropic-models",
+      "fingerprint": "sha256:a6b4d99422328b062908402e3099c31ae310217f7fec120a3edc7fed68e6d761",
+      "api": "anthropic/models",
       "version": "2024-11-06",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/messages",
-        "property": "model",
-        "value": "claude-instant-1.1"
+      "subject": {
+        "type": "model",
+        "provider": "anthropic",
+        "name": "claude-instant-1.1",
+        "replacement": "claude-haiku-4-5-20251001"
       },
       "description": "Model \"claude-instant-1.1\" is shut down on 2024-11-06: Anthropic requests naming it fail from that date.",
       "migration_hint": "Use `claude-haiku-4-5-20251001` instead: Anthropic's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013120015/https://platform.claude.com/docs/en/about-claude/model-deprecations.md",
       "source_excerpt": "### 2024-09-04: Claude 1 and Instant models\n| Retirement date  | Deprecated model     | Recommended replacement     |\n| November 6, 2024 | `claude-instant-1.1` | `claude-haiku-4-5-20251001` |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:53.309920002Z"
     },
     {
       "id": 80,
-      "fingerprint": "sha256:6a1e4bb409b7fe7a8a37108fc3b5f488a16329e336d439f32c0f52f237457930",
-      "api": "anthropic-models",
+      "fingerprint": "sha256:bb55c886fefe4e73c8aeed5252eec689481baa9778c2bc3c75f89eb3882b16d9",
+      "api": "anthropic/models",
       "version": "2024-11-06",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
-        "kind": "request_parameter",
-        "side": "request",
-        "operation": "POST /v1/messages",
-        "property": "model",
-        "value": "claude-instant-1.2"
+      "subject": {
+        "type": "model",
+        "provider": "anthropic",
+        "name": "claude-instant-1.2",
+        "replacement": "claude-haiku-4-5-20251001"
       },
       "description": "Model \"claude-instant-1.2\" is shut down on 2024-11-06: Anthropic requests naming it fail from that date.",
       "migration_hint": "Use `claude-haiku-4-5-20251001` instead: Anthropic's recommended replacement.",
       "source_url": "https://web.archive.org/web/20261013120015/https://platform.claude.com/docs/en/about-claude/model-deprecations.md",
       "source_excerpt": "### 2024-09-04: Claude 1 and Instant models\n| Retirement date  | Deprecated model     | Recommended replacement     |\n| November 6, 2024 | `claude-instant-1.2` | `claude-haiku-4-5-20251001` |",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-13T12:10:53.309920002Z"
     }
   ]

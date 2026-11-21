@@ -10,7 +10,7 @@ import (
 
 // The two feeds as saved on 2026-11-14 (feed/testdata/README.md), each through the
 // whole plugin: live feed and snapshot are the same copy, so the events cite
-// the snapshot, and kittest's second run over the unchanged feed asks for no
+// the snapshot, and kittest's second read of the unchanged feed asks for no
 // second snapshot and stores nothing new.
 func TestFeedsGolden(t *testing.T) {
 	for _, c := range []struct {
@@ -24,7 +24,7 @@ func TestFeedsGolden(t *testing.T) {
 		t.Run(c.feed.API, func(t *testing.T) {
 			saved := kittest.Pages{c.feed.URL: c.file}
 			archive := &kittest.Archive{T: t, Pages: saved}
-			got := kittest.IngestWith(t, kittest.Env(t, saved), Plugin{Page: c.feed, Archiver: archive})
+			got := kittest.Page(t, kittest.Env(t, saved), Plugin{Page: c.feed, Archiver: archive})
 			if archive.Calls != 1 {
 				t.Errorf("%d snapshots, want 1", archive.Calls)
 			}

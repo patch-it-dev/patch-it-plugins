@@ -8,8 +8,23 @@ import (
 
 type fake struct{ name string }
 
-func (f fake) Name() string                           { return f.name }
-func (fake) Run(context.Context, Env) (Result, error) { return Result{}, nil }
+func (f fake) Name() string                                                   { return f.name }
+func (fake) Read(context.Context, Env, Snapshot) (Snapshot, error)            { return Snapshot{}, nil }
+func (fake) Extract(context.Context, Env, Snapshot, Snapshot) (Result, error) { return Result{}, nil }
+
+// both is a plugin that is Versioned and Living: refused.
+type both struct{ fake }
+
+func (both) ListVersions(context.Context, Env) ([]Version, error)   { return nil, nil }
+func (both) ReadAt(context.Context, Env, Version) (Snapshot, error) { return Snapshot{}, nil }
+
+// neither only extracts: refused.
+type neither struct{ name string }
+
+func (n neither) Name() string { return n.name }
+func (neither) Extract(context.Context, Env, Snapshot, Snapshot) (Result, error) {
+	return Result{}, nil
+}
 
 // src is a source of the provider whose id is provider, named by its id.
 func src(id, provider string) Source {
@@ -69,6 +84,16 @@ func TestRegisterProviderRefusesIncompleteMetadata(t *testing.T) {
 		"bad package": {ID: "x7", Name: "X", Category: CategoryAI, Homepage: "https://x.example", Sources: []Source{func() Source {
 			s := src("api", "x7")
 			s.Packages = []string{"pip:x"}
+			return s
+		}()}},
+		"both shapes": {ID: "x8", Name: "X", Category: CategoryAI, Homepage: "https://x.example", Sources: []Source{func() Source {
+			s := src("api", "x8")
+			s.Plugin = both{fake{"x8/api"}}
+			return s
+		}()}},
+		"neither shape": {ID: "x9", Name: "X", Category: CategoryAI, Homepage: "https://x.example", Sources: []Source{func() Source {
+			s := src("api", "x9")
+			s.Plugin = neither{"x9/api"}
 			return s
 		}()}},
 		"wrong kind": {ID: "x6", Name: "X", Category: CategoryAI, Homepage: "https://x.example", Sources: []Source{func() Source {

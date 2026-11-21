@@ -50,11 +50,12 @@ One target at a time: `make tidy`, `make build`, `make fmt`, `make vet`, `make i
 Go module `github.com/patch-it-dev/patch-it-plugins`; the only dependency is `gopkg.in/yaml.v3`.
 
 ```
-core/plugin/           the Plugin interface (Run; ListVersions, ReadAt, Extract), the registry of providers and sources, Env, Result
+core/plugin/           the Plugin interface (Extract) in its two shapes, Versioned (ListVersions, ReadAt) and Living (Read);
+                       ErrNothingToRead; the registry of providers and sources, Env, Result
 core/fetch/            the HTTP fetch with retries and the ETag / Last-Modified cache
 core/github/           the newest release / commit on GitHub, and a commit's SHA and date (one place)
-core/versions/         every version of a source: GitHub releases, tags and commits, PyPI, npm, Web Archive captures
-core/kit/  core/kit/kittest/   Unchanged, Cite, Wayback, Notices; the test kit (Mem, Pages, Ingest, Golden)
+core/versions/         every version of a source: GitHub releases, tags and commits, PyPI, npm
+core/kit/  core/kit/kittest/   Cite, Wayback, Notices; the test kit (Mem, Pages, Versions, Extracted, Page, Golden)
 core/extract/          what readers of prose share: RSS/Atom entries, HTML as text, dates, code spans
 core/event/            the change event of patch-it's contract: types, fingerprint, validation
 core/diff/ core/normalize/ core/hint/   the OpenAPI diff engine and its helpers

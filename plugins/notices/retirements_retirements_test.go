@@ -48,17 +48,25 @@ func withPage(t *testing.T, live string, archive fakeArchive) {
 	current = page{live, archive}
 }
 
-func openStore(*testing.T) *kittest.Mem { return kittest.NewMem() }
+// store is the events stored and the snapshot kept, as the hosted ingestion
+// service keeps them between reads.
+type store struct {
+	*kittest.Mem
+	kept plugin.Snapshot
+}
 
-// retirements runs OpenAI's plugin over the current page through the same core
-// the command uses.
-func retirements(ctx context.Context, s *kittest.Mem, p retire.Page) (bool, error) {
+func openStore(*testing.T) *store { return &store{Mem: kittest.NewMem()} }
+
+// retirements reads the current page with OpenAI's plugin against the
+// snapshot kept from the read before, as the hosted ingestion service does.
+func retirements(ctx context.Context, s *store, p retire.Page) (bool, error) {
 	env := plugin.Env{
-		Baselines: s,
-		Get:       func(context.Context, string) ([]byte, error) { return []byte(current.live), nil },
-		Now:       time.Now,
+		Get: func(context.Context, string) ([]byte, error) { return []byte(current.live), nil },
+		Now: time.Now,
 	}
-	return kittest.Run(ctx, env, s, Plugin{Page: p, Archiver: current.archive})
+	kept, rejected, err := kittest.ReadPage(ctx, env, s.Mem, Plugin{Page: p, Archiver: current.archive}, s.kept)
+	s.kept = kept
+	return rejected, err
 }
 
 func TestRetirementsStoreOneEventPerModel(t *testing.T) {
@@ -109,8 +117,8 @@ func TestRetirementsStoreNothingWithoutASnapshotThatHoldsThem(t *testing.T) {
 		if events, _ := s.All(); len(events) != 0 {
 			t.Errorf("%s: stored %d events with nothing to cite", name, len(events))
 		}
-		if last, _ := s.LastSpec(retire.OpenAI.API); last != nil {
-			t.Errorf("%s: the page was saved, so the next run would skip it", name)
+		if !s.kept.IsZero() {
+			t.Errorf("%s: the page was kept, so the next read would skip it", name)
 		}
 	}
 }

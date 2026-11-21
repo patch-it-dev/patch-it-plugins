@@ -1,0 +1,118 @@
+{
+  "_comment": "A response page for several sources: GET /v1/changes?apis=stripe/api,openai/models,example/examplepkg,github/actions,example/newpkg. The first four events are change-events-v2-types.json's; every fingerprint hashes the event's id (change-event.md#fingerprint). Synthetic names.",
+  "changes": [
+    {
+      "id": 1,
+      "fingerprint": "sha256:119a952a622187a16bb1fa37cfc01561e29fd037eb9378990be25090c59d1fbc",
+      "api": "stripe/api",
+      "version": "2026-09-30.endive",
+      "previous_version": "2026-08-26.dahlia",
+      "change_type": "breaking",
+      "breaking": true,
+      "subject": {
+        "type": "api_operation",
+        "kind": "schema_property",
+        "side": "response",
+        "schema": "invoice",
+        "property": "subscription"
+      },
+      "description": "Property invoice.subscription removed.",
+      "source_url": "https://example.test/stripe/2026-09-30.endive",
+      "source_excerpt": "Synthetic fixture for api_operation: not a real source.",
+      "confidence": 1,
+      "detected_at": "2026-11-03T12:00:00Z"
+    },
+    {
+      "id": 2,
+      "fingerprint": "sha256:e81c4586518962482b93b1b972578acf16396be3ce7e4205de6a16dfc8618e95",
+      "api": "openai/models",
+      "version": "2026-12-11",
+      "change_type": "breaking",
+      "breaking": true,
+      "subject": {
+        "type": "model",
+        "provider": "openai",
+        "name": "examplemodel-1",
+        "replacement": "examplemodel-2"
+      },
+      "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+      "migration_hint": "Use `examplemodel-2` instead.",
+      "source_url": "https://example.test/openai-models/2026-12-11",
+      "source_excerpt": "Synthetic fixture for model: not a real source.",
+      "confidence": 1,
+      "detected_at": "2026-11-03T12:00:00Z"
+    },
+    {
+      "id": 3,
+      "fingerprint": "sha256:77635ae79b6a991863456882d24e309ed620b5306fa4693154e6c176654dd8ea",
+      "api": "example/examplepkg",
+      "version": "2.0.0",
+      "previous_version": "1.9.0",
+      "change_type": "breaking",
+      "breaking": true,
+      "subject": {
+        "type": "package_release",
+        "ecosystem": "pypi",
+        "package": "examplepkg",
+        "change": "renamed_symbol",
+        "symbols": [
+          "Model.parse_obj"
+        ],
+        "replacement": "Model.model_validate"
+      },
+      "description": "Model.parse_obj renamed to Model.model_validate in examplepkg 2.0.0.",
+      "source_url": "https://example.test/examplepkg/2.0.0",
+      "source_excerpt": "Synthetic fixture for package_release: not a real source.",
+      "confidence": 1,
+      "detected_at": "2026-11-03T12:00:00Z"
+    },
+    {
+      "id": 6,
+      "fingerprint": "sha256:a6a538cb0f3058030c288bbce398fe0534dbee242e3f375f9cedd3fc9c467c7a",
+      "api": "github/actions",
+      "version": "2026-09-23",
+      "change_type": "breaking",
+      "breaking": true,
+      "subject": {
+        "type": "ci_runtime",
+        "platform": "github-actions",
+        "runtime": "node20",
+        "replacement": "node24"
+      },
+      "description": "Node 20 is no longer available on GitHub Actions runners from 2026-09-23.",
+      "source_url": "https://example.test/github-actions/2026-09-23",
+      "source_excerpt": "Synthetic fixture for ci_runtime: not a real source.",
+      "confidence": 1,
+      "detected_at": "2026-11-03T12:00:00Z"
+    },
+    {
+      "id": 7,
+      "fingerprint": "sha256:b1758a916bf00cc53b10849ed6c99752d94efc8a006a15f8b3274f97212af6b1",
+      "api": "example/newpkg",
+      "version": "3.0.0",
+      "previous_version": "2.4.1",
+      "change_type": "breaking",
+      "breaking": true,
+      "subject": {
+        "type": "package_release",
+        "ecosystem": "npm",
+        "package": "newpkg",
+        "change": "removed_symbol",
+        "symbols": [
+          "legacyConnect"
+        ]
+      },
+      "description": "legacyConnect removed in newpkg 3.0.0.",
+      "source_url": "https://example.test/example/newpkg/3.0.0",
+      "source_excerpt": "Synthetic fixture for a second source of a provider: not a real source.",
+      "confidence": 1,
+      "detected_at": "2026-11-20T12:00:00Z"
+    }
+  ],
+  "next_cursor": "7",
+  "kill_switch": {
+    "on": false,
+    "reason": null,
+    "since": null
+  }
+}

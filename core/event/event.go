@@ -105,7 +105,6 @@ type Event struct {
 	ChangeType      ChangeType `json:"change_type"`
 	Breaking        bool       `json:"breaking"`
 	Subject         Subject    `json:"subject"`
-	Supersedes      string     `json:"supersedes,omitempty"`
 	Description     string     `json:"description"`
 	MigrationHint   string     `json:"migration_hint,omitempty"`
 	SourceURL       string     `json:"source_url"`
@@ -156,7 +155,7 @@ func Decode(raw []byte) (Event, error) {
 
 // eventKeys are the JSON names of Event's fields.
 var eventKeys = []string{"id", "fingerprint", "api", "version", "previous_version", "change_type",
-	"breaking", "subject", "supersedes", "description", "migration_hint", "source_url",
+	"breaking", "subject", "description", "migration_hint", "source_url",
 	"source_pointer", "source_excerpt", "confidence", "detected_at"}
 
 // subjectKeys are the fields each type may have, besides `type`.
@@ -203,8 +202,13 @@ func (e Event) Validate() error {
 		e.Description, e.DetectedAt, e.ChangeType, e.Breaking, e.Confidence); err != nil {
 		return err
 	}
-	if e.Supersedes != "" && !fingerprintPattern.MatchString(e.Supersedes) {
-		return fmt.Errorf("supersedes must look like sha256:<64 lowercase hex>, got %q", e.Supersedes)
+	// Rule 13: a change found by comparing two versions names both.
+	if PairType(e.Subject.Type) && e.PreviousVersion == "" {
+		return fmt.Errorf("previous_version is required for a %s change: it compares two versions", e.Subject.Type)
+	}
+	// Rule 14: api is the source's provider/source id.
+	if !sourceID.MatchString(e.API) {
+		return fmt.Errorf("api must be a provider/source id (stripe/api), got %q", e.API)
 	}
 	return e.Subject.validate()
 }
@@ -288,6 +292,18 @@ func (s Subject) present() map[string]bool {
 		"platform": s.Platform != "", "runtime": s.Runtime != "",
 		"replacement": s.Replacement != "",
 	}
+}
+
+// sourceID is the contract's shape for a source's id (the schema's pattern
+// for api): "<provider>/<source>", lowercase. patch-it checks the same.
+var sourceID = regexp.MustCompile(`^[a-z0-9][a-z0-9._-]*/[a-z0-9][a-z0-9._-]*$`)
+
+// PairType is true for the subject types whose change is found by comparing
+// two versions of a source (api_operation, package_release): their events
+// must name both, previous_version as well as version. The others are a dated
+// notice, with nothing compared.
+func PairType(t SubjectType) bool {
+	return t == SubjectAPIOperation || t == SubjectPackageRelease
 }
 
 // fingerprintPattern is the contract's shape for a fingerprint (the schema's

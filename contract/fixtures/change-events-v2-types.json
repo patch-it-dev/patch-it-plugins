@@ -2,8 +2,8 @@
   "changes": [
     {
       "id": 1,
-      "fingerprint": "sha256:f8416cbd34c4ff65d68365ae656c636732d41bb1027ed839440137f87c26d4cf",
-      "api": "stripe",
+      "fingerprint": "sha256:119a952a622187a16bb1fa37cfc01561e29fd037eb9378990be25090c59d1fbc",
+      "api": "stripe/api",
       "version": "2026-09-30.endive",
       "previous_version": "2026-08-26.dahlia",
       "change_type": "breaking",
@@ -23,8 +23,8 @@
     },
     {
       "id": 2,
-      "fingerprint": "sha256:a49391691dd2187ece6ba84dcf6ec244bbe0c71c9e972b54104db769319d9f45",
-      "api": "openai-models",
+      "fingerprint": "sha256:e81c4586518962482b93b1b972578acf16396be3ce7e4205de6a16dfc8618e95",
+      "api": "openai/models",
       "version": "2026-12-11",
       "change_type": "breaking",
       "breaking": true,
@@ -34,7 +34,6 @@
         "name": "examplemodel-1",
         "replacement": "examplemodel-2"
       },
-      "supersedes": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
       "description": "Model examplemodel-1 is shut down on 2026-12-11.",
       "migration_hint": "Use `examplemodel-2` instead.",
       "source_url": "https://example.test/openai-models/2026-12-11",
@@ -44,9 +43,10 @@
     },
     {
       "id": 3,
-      "fingerprint": "sha256:7caa5ac7c7922798e11123fce490b3309dba0ca23ed2460938b8e284d2001a0d",
-      "api": "examplepkg",
+      "fingerprint": "sha256:77635ae79b6a991863456882d24e309ed620b5306fa4693154e6c176654dd8ea",
+      "api": "example/examplepkg",
       "version": "2.0.0",
+      "previous_version": "1.9.0",
       "change_type": "breaking",
       "breaking": true,
       "subject": {
@@ -67,9 +67,10 @@
     },
     {
       "id": 4,
-      "fingerprint": "sha256:27deca77d38e704021cfdfc77741903aff791ae118121d9e1157492416042bc1",
-      "api": "examplepkg",
+      "fingerprint": "sha256:d93d4c94ea2e145f4b979e69ea7a13bf312d91eb028b9ab90ed60e1f09791978",
+      "api": "example/examplepkg",
       "version": "2.0.0",
+      "previous_version": "1.9.0",
       "change_type": "breaking",
       "breaking": true,
       "subject": {
@@ -89,9 +90,10 @@
     },
     {
       "id": 5,
-      "fingerprint": "sha256:a670cf0f7ec97526cdef4eb710a70cce61d9d1ef190fdf18d41a53937eb55ecc",
-      "api": "examplepkg",
+      "fingerprint": "sha256:e10a07a898889d128c1d278b8ffc9d5554d7c3a911a2275972312337cdaf82ba",
+      "api": "example/examplepkg",
       "version": "2.0.0",
+      "previous_version": "1.9.0",
       "change_type": "deprecation",
       "breaking": false,
       "subject": {
@@ -112,8 +114,8 @@
     },
     {
       "id": 6,
-      "fingerprint": "sha256:2131ccf4b4cea4214775419c1df37eef0b139d20570e51e548d93f19c33a02f8",
-      "api": "github-actions",
+      "fingerprint": "sha256:a6a538cb0f3058030c288bbce398fe0534dbee242e3f375f9cedd3fc9c467c7a",
+      "api": "github/actions",
       "version": "2026-09-23",
       "change_type": "breaking",
       "breaking": true,

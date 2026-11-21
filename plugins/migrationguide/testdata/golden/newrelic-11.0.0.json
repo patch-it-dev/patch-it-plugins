@@ -4,6 +4,7 @@
     "fingerprint": "sha256:7f09f0bebf3e229d1a8f43574c224b8a6e186b4e0228f62c793afd10156569fe",
     "api": "newrelic/python-agent",
     "version": "11.0.0",
+    "previous_version": "10.17.0",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -27,6 +28,7 @@
     "fingerprint": "sha256:033c7dc942625f1d07ef976edf7dcc22b458dd2786eeab3d5a7a0889dfe100e3",
     "api": "newrelic/python-agent",
     "version": "11.0.0",
+    "previous_version": "10.17.0",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -51,6 +53,7 @@
     "fingerprint": "sha256:2260cefe21b2807a9abc2144b46fd967e728f7e73dc2a489babb8ca0d77fa2b8",
     "api": "newrelic/python-agent",
     "version": "11.0.0",
+    "previous_version": "10.17.0",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -75,6 +78,7 @@
     "fingerprint": "sha256:a26a9a7d453398aa11ba51c77edf340e83d0eee8657c87a8a25ee517729648ba",
     "api": "newrelic/python-agent",
     "version": "11.0.0",
+    "previous_version": "10.17.0",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -98,6 +102,7 @@
     "fingerprint": "sha256:0d2b52b1e7f8601a5ccb6efa65ad4c028f2c8faceec43672af3f8e9f3de7183a",
     "api": "newrelic/python-agent",
     "version": "11.0.0",
+    "previous_version": "10.17.0",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -121,6 +126,7 @@
     "fingerprint": "sha256:6dac3561485ac1b50b934c773fbdf9d34244b6a238d4ffba84649653093ae020",
     "api": "newrelic/python-agent",
     "version": "11.0.0",
+    "previous_version": "10.17.0",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -144,6 +150,7 @@
     "fingerprint": "sha256:726ecaafb7ec01c6471fa78cb1d90ba403489b8900b1d403c24f087e18cccbb7",
     "api": "newrelic/python-agent",
     "version": "11.0.0",
+    "previous_version": "10.17.0",
     "change_type": "breaking",
     "breaking": true,
     "subject": {

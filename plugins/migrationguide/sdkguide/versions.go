@@ -31,27 +31,6 @@ func (g Guide) Releases(ctx context.Context, env plugin.Env) ([]plugin.Version, 
 	return vs, nil
 }
 
-// Current is the pinned major's first release, or the newest major's.
-func (g Guide) Current(ctx context.Context, env plugin.Env) (plugin.Version, error) {
-	if g.Major != 0 {
-		return plugin.Version{ID: g.Version(), Ref: "v" + g.Version()}, nil
-	}
-	vs, err := g.Releases(ctx, env)
-	if err != nil {
-		return plugin.Version{}, err
-	}
-	var v plugin.Version
-	for _, c := range vs {
-		if FirstOfMajor(c.ID) {
-			v = c
-		}
-	}
-	if v.ID == "" {
-		return plugin.Version{}, fmt.Errorf("%s: no major release listed", g.API)
-	}
-	return v, nil
-}
-
 // GuideURL is the guide at v's tag when v is the first release of its major
 // (X.0.0): only a new major has a guide to read. Any other release has none
 // ("").
@@ -70,10 +49,7 @@ func (g Guide) Read(page []byte, from, to plugin.Version, now time.Time) (_ []ev
 	if err != nil {
 		return nil, nil, err
 	}
-	events, errs := Events(g, removals, now)
-	for i := range events {
-		events[i].PreviousVersion = from.ID
-	}
+	events, errs := Events(g, removals, from.ID, now)
 	return events, errs, nil
 }
 

@@ -132,20 +132,6 @@ func TestNPMReleases(t *testing.T) {
 	}
 }
 
-func TestWaybackAt(t *testing.T) {
-	get := serve(t, map[string]string{
-		"https://archive.org/wayback/available?timestamp=20250301000000&url=https%3A%2F%2Facme.example%2Fdeprecations": `{"archived_snapshots":{"closest":{"available":true,"status":"200","timestamp":"20250228120000","url":"http://web.archive.org/web/20250228120000/https://acme.example/deprecations"}}}`,
-		"https://archive.org/wayback/available?timestamp=20000101000000&url=https%3A%2F%2Facme.example%2Fdeprecations": `{"archived_snapshots":{}}`,
-	})
-	v, err := WaybackAt(context.Background(), get, "https://acme.example/deprecations", time.Date(2025, 3, 1, 0, 0, 0, 0, time.UTC))
-	if err != nil || v.ID != "2025-02-28" || !strings.Contains(v.Ref, "/web/20250228120000/") {
-		t.Errorf("got %+v, %v", v, err)
-	}
-	if _, err := WaybackAt(context.Background(), get, "https://acme.example/deprecations", time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)); err == nil {
-		t.Error("no capture gave no error")
-	}
-}
-
 func TestCompareFinalMajorPairs(t *testing.T) {
 	for _, c := range []struct {
 		a, b string
@@ -166,54 +152,5 @@ func TestCompareFinalMajorPairs(t *testing.T) {
 	ps := Pairs([]plugin.Version{{ID: "1"}, {ID: "2"}, {ID: "3"}})
 	if len(ps) != 2 || ps[0][0].ID != "1" || ps[1][1].ID != "3" {
 		t.Errorf("Pairs = %v", ps)
-	}
-}
-
-// The CDX API's answer: a header row, then captures oldest first. The same
-// content captured again (same digest) is one version; a change back is a
-// new one; two distinct captures on one day keep the later.
-func TestWaybackCapturesCollapseDuplicates(t *testing.T) {
-	const page = "https://example.com/deprecations"
-	cdx := `[["timestamp","original","digest"],
-["20250103120000","https://example.com/deprecations","AAA"],
-["20250210080000","https://example.com/deprecations","AAA"],
-["20250301090000","https://example.com/deprecations","BBB"],
-["20250301170000","https://example.com/deprecations","CCC"],
-["20250601000000","https://example.com/deprecations","CCC"],
-["20251120000000","https://example.com/deprecations","AAA"]]`
-	var asked string
-	get := func(_ context.Context, u string) ([]byte, error) { asked = u; return []byte(cdx), nil }
-	from, to := time.Date(2025, 1, 1, 0, 0, 0, 0, time.UTC), time.Date(2025, 12, 31, 0, 0, 0, 0, time.UTC)
-	vs, err := WaybackCaptures(context.Background(), get, page, from, to)
-	if err != nil {
-		t.Fatal(err)
-	}
-	var got []string
-	for _, v := range vs {
-		got = append(got, v.ID+" "+v.Ref)
-	}
-	want := []string{
-		"2025-01-03 https://web.archive.org/web/20250103120000id_/https://example.com/deprecations",
-		"2025-03-01 https://web.archive.org/web/20250301170000id_/https://example.com/deprecations",
-		"2025-11-20 https://web.archive.org/web/20251120000000id_/https://example.com/deprecations",
-	}
-	if strings.Join(got, "\n") != strings.Join(want, "\n") {
-		t.Errorf("got\n%s\nwant\n%s", strings.Join(got, "\n"), strings.Join(want, "\n"))
-	}
-	for _, p := range []string{"from=20250101000000", "to=20251231000000", "collapse=digest", "filter=statuscode%3A200", "url=https%3A%2F%2Fexample.com%2Fdeprecations"} {
-		if !strings.Contains(asked, p) {
-			t.Errorf("asked %s, without %s", asked, p)
-		}
-	}
-	if vs[0].URL != "https://web.archive.org/web/20250103120000/https://example.com/deprecations" {
-		t.Errorf("URL %s", vs[0].URL)
-	}
-}
-
-// A page the archive never captured has no versions, and no error.
-func TestWaybackCapturesOfAnUncapturedPage(t *testing.T) {
-	get := func(context.Context, string) ([]byte, error) { return []byte("[]"), nil }
-	if vs, err := WaybackCaptures(context.Background(), get, "https://example.com/x", time.Time{}, time.Time{}); err != nil || len(vs) != 0 {
-		t.Errorf("%v %v", vs, err)
 	}
 }

@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"regexp"
 	"strings"
+
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 )
 
 // Section is one titled part of a release's notes ("Removed", "Changed") and
@@ -126,5 +128,5 @@ func releaseLines(lines []string, release string) (string, []string, bool, error
 		}
 		return strings.TrimSpace(lines[i]), lines[i+2 : end], true, nil
 	}
-	return "", nil, false, fmt.Errorf("no heading for release %s: the changelog may have moved or changed shape", release)
+	return "", nil, false, fmt.Errorf("no heading for release %s (the changelog may have moved or changed shape): %w", release, plugin.ErrNothingToRead)
 }

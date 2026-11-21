@@ -18,7 +18,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"log"
 	"sort"
 	"time"
 
@@ -95,44 +94,6 @@ type Plugin struct {
 
 func (p Plugin) Name() string { return p.Catalog.API }
 
-// Run diffs the newest snapshot against whatever was last stored.
-func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) {
-	c := p.Catalog
-	ref, err := p.latestRef(ctx, env)
-	if err != nil {
-		return plugin.Result{}, err
-	}
-	newContent, err := env.Get(ctx, c.URL(ref))
-	if err != nil {
-		return plugin.Result{}, fmt.Errorf("fetching %s: %w", c.URL(ref), err)
-	}
-	last, err := env.Baselines.LastSpec(c.API)
-	if err != nil {
-		return plugin.Result{}, fmt.Errorf("loading last catalog: %w", err)
-	}
-	if last != nil && last.SHA256 == plugin.SHA256(newContent) {
-		log.Printf("%s: no change (%s)", c.API, ref)
-		return plugin.Result{}, nil
-	}
-
-	var oldContent []byte
-	var from string
-	if last != nil {
-		oldContent, from = last.Content, last.Tag
-	}
-	now := env.Now()
-	events, rejected, err := p.events(oldContent, newContent, from, ref, now)
-	if err != nil {
-		return plugin.Result{}, err
-	}
-	return plugin.Result{
-		Label:     ref,
-		Events:    events,
-		Rejected:  rejected,
-		Baselines: []plugin.Spec{plugin.Baseline(c.API, ref, ref, c.URL(ref), newContent, now)},
-	}, nil
-}
-
 // ListVersions is the catalog repo's newest commit: the catalog has no
 // releases, so each commit read is a version, and the change into it is
 // extracted against the one read before.
@@ -161,7 +122,7 @@ func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 	if err != nil {
 		return plugin.Result{}, err
 	}
-	return plugin.Result{Label: to.Version.Ref, Events: events, Rejected: rejected}, nil
+	return plugin.Result{Events: events, Rejected: rejected}, nil
 }
 
 var _ plugin.Versioned = Plugin{}
@@ -175,9 +136,9 @@ func (p Plugin) latestRef(ctx context.Context, env plugin.Env) (string, error) {
 	return sha, nil
 }
 
-// events diffs two parsed snapshots into events. oldContent is empty on a
-// plugin's first run (no baseline yet): diffing against no snapshot reports
-// nothing, the same as an unchanged one.
+// events diffs two parsed snapshots into events. oldContent is empty for
+// the first version read (nothing before it): diffing against no snapshot
+// reports nothing, the same as an unchanged one.
 func (p Plugin) events(oldContent, newContent []byte, from, to string, now time.Time) ([]event.Event, []error, error) {
 	c := p.Catalog
 	newEntries, err := parse(newContent)

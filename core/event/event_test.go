@@ -3,6 +3,7 @@ package event
 import (
 	"encoding/json"
 	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 	"time"
@@ -49,10 +50,21 @@ func rawEvents(t *testing.T, name string) []json.RawMessage {
 	return feed.Changes
 }
 
-// The contract's fixtures, the same ones the patch-it client checks, are
-// accepted, with the fingerprints the formula gives.
+// Every event in the contract's fixtures, the same ones the patch-it client
+// checks, is accepted, with the fingerprint the formula gives (an API event's
+// detail isn't stored, so only the other types are recomputed).
 func TestFixturesAreValid(t *testing.T) {
-	for _, name := range []string{"change-events-v2.json", "change-events-v2-types.json"} {
+	names, err := filepath.Glob(fixtures + "change-events*.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	n := 0
+	for _, path := range names {
+		name := filepath.Base(path)
+		if strings.HasSuffix(name, "-invalid.json") {
+			continue
+		}
+		n++
 		for _, raw := range rawEvents(t, name) {
 			e, err := Decode(raw)
 			if err != nil {
@@ -61,15 +73,16 @@ func TestFixturesAreValid(t *testing.T) {
 			if err := e.Validate(); err != nil {
 				t.Errorf("%s event %d: %v", name, e.ID, err)
 			}
-			// An API event's detail isn't stored, so only the other types are
-			// recomputed here.
-			if e.Subject.Type == SubjectAPIOperation && name == "change-events-v2.json" {
+			if e.Subject.Type == SubjectAPIOperation {
 				continue
 			}
 			if want := Fingerprint(e.API, e.Version, e.ChangeType, e.Subject, ""); e.Fingerprint != want {
 				t.Errorf("%s event %d: fingerprint %s, the formula gives %s", name, e.ID, e.Fingerprint, want)
 			}
 		}
+	}
+	if n < 10 {
+		t.Errorf("read %d fixture files; the contract has more", n)
 	}
 }
 
@@ -121,6 +134,9 @@ func TestValidateRejectsContractViolations(t *testing.T) {
 			e.Subject = Subject{Type: SubjectAPIOperation, Kind: KindSchema, Side: SideRequest, Schema: "invoice"}
 		},
 		"a model field on an api_operation": func(e *Event) { e.Subject.Name = "gpt-4" },
+		"a pair without previous_version":   func(e *Event) { e.PreviousVersion = "" },
+		"an old slug as api":                func(e *Event) { e.API = "stripe" },
+		"an uppercase id as api":            func(e *Event) { e.API = "Stripe/API" },
 	}
 	for name, breakIt := range cases {
 		e := operationAdded

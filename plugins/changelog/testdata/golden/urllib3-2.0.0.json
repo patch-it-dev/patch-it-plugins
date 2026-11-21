@@ -4,6 +4,7 @@
     "fingerprint": "sha256:565fb74f16769a316da5d73cfb0c28c3aaa71b380cc6ac892e3c6a1b3532c4f9",
     "api": "urllib3/urllib3",
     "version": "2.0.0",
+    "previous_version": "1.26.15",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -27,6 +28,7 @@
     "fingerprint": "sha256:e1c8e0509a8217a6f9a8e5ed8966f1ea13f1c713068e3065879b3e4ad2841e4c",
     "api": "urllib3/urllib3",
     "version": "2.0.0",
+    "previous_version": "1.26.15",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -50,6 +52,7 @@
     "fingerprint": "sha256:2bd2e3969f9bf6485261b2fce984053fb86f92f8da9c7286574067e4aff75779",
     "api": "urllib3/urllib3",
     "version": "2.0.0",
+    "previous_version": "1.26.15",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -73,6 +76,7 @@
     "fingerprint": "sha256:a70d74d5ec403834ee6b3983da713930c891e9c9e5a2c6b2ac9ffcd10bd1af68",
     "api": "urllib3/urllib3",
     "version": "2.0.0",
+    "previous_version": "1.26.15",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -96,6 +100,7 @@
     "fingerprint": "sha256:7606c6922d7e3efda6589fc8266028b28ac7a74710c58fdc37358398855ac98c",
     "api": "urllib3/urllib3",
     "version": "2.0.0",
+    "previous_version": "1.26.15",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -119,6 +124,7 @@
     "fingerprint": "sha256:8af004c9a0ba8e72258d2f43ab47b92a007468f6aee662b332afdef3370e5b1f",
     "api": "urllib3/urllib3",
     "version": "2.0.0",
+    "previous_version": "1.26.15",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -143,6 +149,7 @@
     "fingerprint": "sha256:bbef62c5f4f8c4a73497468084c88085703613cf84ca801fc166f660970dd802",
     "api": "urllib3/urllib3",
     "version": "2.0.0",
+    "previous_version": "1.26.15",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -166,6 +173,7 @@
     "fingerprint": "sha256:286dce48e3ed461fe14bb2350c560709459821ffa331e7eea09922ae59db1491",
     "api": "urllib3/urllib3",
     "version": "2.0.0",
+    "previous_version": "1.26.15",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -189,6 +197,7 @@
     "fingerprint": "sha256:d85bf269a9bc3ef4e5282d3fb165481b04d7206e75bbd5f655c11ab5f1ad69fa",
     "api": "urllib3/urllib3",
     "version": "2.0.0",
+    "previous_version": "1.26.15",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -212,6 +221,7 @@
     "fingerprint": "sha256:deaa904363334a867a2a212042a73358699122b789858feb014268773d8a7979",
     "api": "urllib3/urllib3",
     "version": "2.0.0",
+    "previous_version": "1.26.15",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -237,6 +247,7 @@
     "fingerprint": "sha256:90ab9071df0b3a7b40197842b4a9966eb64e099dfb474d3c231dc11da00a7a7a",
     "api": "urllib3/urllib3",
     "version": "2.0.0",
+    "previous_version": "1.26.15",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -260,6 +271,7 @@
     "fingerprint": "sha256:84d7a90515e16d4ef2b7af2b15ec076e8b165c1201cef525d7fbdf5a55f1777d",
     "api": "urllib3/urllib3",
     "version": "2.0.0",
+    "previous_version": "1.26.15",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {

@@ -48,8 +48,8 @@ func vercelPlugin(latest string) Plugin {
 	return Plugin{Adapter: fakeVercelAdapter{latest: latest}, Diff: vercelDiff, Keep: vercelKeep}
 }
 
-func vercelEnv(s *kittest.Mem) plugin.Env {
-	return plugin.Env{Baselines: s, Now: func() time.Time { return kittest.Clock }}
+func vercelEnv(*kittest.Mem) plugin.Env {
+	return plugin.Env{Now: func() time.Time { return kittest.Clock }}
 }
 
 // The golden test: the whole life of Vercel's Legacy Domains API in its own
@@ -66,13 +66,11 @@ func TestVercelGolden(t *testing.T) {
 	s := openStore(t)
 	env := vercelEnv(s)
 
-	// Daily ingest: v1.13.4 is the baseline, v1.13.5 the next day's release.
-	for _, tag := range []string{"v1.13.4", "v1.13.5"} {
-		if rejected, err := kittest.Run(ctx, env, s, vercelPlugin(tag)); err != nil || rejected {
-			t.Fatalf("run %s: rejected=%v err=%v", tag, rejected, err)
-		}
+	// The deprecations: v1.13.4 to the next day's release, v1.13.5.
+	if rejected, err := kittest.Pair(ctx, env, s, vercelPlugin(""), "v1.13.4", "v1.13.5"); err != nil || rejected {
+		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}
-	// The removal, as a pair.
+	// The removal, another pair.
 	if rejected, err := kittest.Pair(ctx, env, s, vercelPlugin(""), "v1.18.6", "v1.18.7"); err != nil || rejected {
 		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}

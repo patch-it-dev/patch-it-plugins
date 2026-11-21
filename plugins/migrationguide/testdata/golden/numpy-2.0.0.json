@@ -4,6 +4,7 @@
     "fingerprint": "sha256:b0783c632fa593bf60b79b17a531b3b57a421e999cf53927142ba7edb8ce3169",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -27,6 +28,7 @@
     "fingerprint": "sha256:b41e888a7433412bc61a81d6ceba463fcafc9276fc09976ed6b32319388d2f81",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -50,6 +52,7 @@
     "fingerprint": "sha256:126c06d99b4ddc08be5f6c574d69f5593f73bdaa9dfe4551741a54962aa902a1",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -73,6 +76,7 @@
     "fingerprint": "sha256:143771722bc49885b35d3b9c7001fd19e56b9c26f4b21946e73c2e40e6fa4504",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -96,6 +100,7 @@
     "fingerprint": "sha256:4327f8787005edc444aece39bda8bdde02c8bbb2c725882200ae14674ca1116c",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -119,6 +124,7 @@
     "fingerprint": "sha256:34eb3c1db0e9914ab4b3e0f7f4dc80cc1d1d5d2d1d743663aede4bcaaa5d66c1",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -142,6 +148,7 @@
     "fingerprint": "sha256:7b413031e868403cfadd2229a68286bc67c12fcfd9f99ae6936cc89333b7ad60",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -165,6 +172,7 @@
     "fingerprint": "sha256:96efba0d4e96431f67360a67c792c4d2e6a7d3b300593d3f5499d402a8a141fe",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -189,6 +197,7 @@
     "fingerprint": "sha256:2c9778be1dd3f63b98e74f9c07c0a6bdf18e26784c8f002ed2cc39b9f52aec8d",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -213,6 +222,7 @@
     "fingerprint": "sha256:17cf21d49a707d39eb5bac336e6e915ba800f76cfe50d3aa7a33d5de7fbc3543",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -236,6 +246,7 @@
     "fingerprint": "sha256:ff51f64a013851f451e5776574e3a65e81cf2656c1573635f21323da7861c455",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -260,6 +271,7 @@
     "fingerprint": "sha256:69a3ba2862b32c578da907e78f05206cee14710ef791fdb55c8996f2268984d3",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -284,6 +296,7 @@
     "fingerprint": "sha256:e9143511f87c438ed0ab56301560b4daba766c10b336bea7be5bcc97efb9b4bf",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -307,6 +320,7 @@
     "fingerprint": "sha256:764794a1bf403c2c6095e79a508ef212f954b1ec6f6619d3ae54355adef33d4b",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -330,6 +344,7 @@
     "fingerprint": "sha256:8715ec0959044c083b44c8c9535f74c742ae3a544671f43d5abfa5087be7790e",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -353,6 +368,7 @@
     "fingerprint": "sha256:2be00bcbf01b6dd7451390a12425e16d9cc3d994b01f17fc6278f479c746b062",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -376,6 +392,7 @@
     "fingerprint": "sha256:f56cd36c2524684fbcbe8bd45bf74610d19797ab9cfc045f209c065d5c6a2b15",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -399,6 +416,7 @@
     "fingerprint": "sha256:dd911afbc6bdb4121681393823532d3eed009a278ce1e0eec6452b3e43deedaa",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -422,6 +440,7 @@
     "fingerprint": "sha256:7b44dc9e7fe08590408c8f94edacfcb036286de2c7e2e80d9a92c81afdcd6a46",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -445,6 +464,7 @@
     "fingerprint": "sha256:8711daa446d6d4a8683f49f9db118ae5bdf53c31b4c9f77a0398d816fc25980a",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -469,6 +489,7 @@
     "fingerprint": "sha256:dfbe1b3d248418215f52b5f2c8e8c0b69d2b71989fa5f94f98c855f02ac5eb97",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -492,6 +513,7 @@
     "fingerprint": "sha256:f129fb52117ed68b20a0aa025644c24e048a6bf66deabbe05ec506094c2550ef",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -516,6 +538,7 @@
     "fingerprint": "sha256:c527e0e526ce8934592299baf54a586aca4a7668a12f9e74b71cc7cc39738dc4",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -540,6 +563,7 @@
     "fingerprint": "sha256:0daa283517da38834730ed51076b83f24d0ad28e9fa5baf7efc56247623fdcf8",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -564,6 +588,7 @@
     "fingerprint": "sha256:4e160f1fe78740c45b7668fb06a5176734867992b9f37ac4eb1680b18bf87260",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -587,6 +612,7 @@
     "fingerprint": "sha256:154c87acc07c26f96f8516063d516eee04a1d6b60840e7acf505b651d6677add",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -610,6 +636,7 @@
     "fingerprint": "sha256:4bbfbf7969500581b7d16e9651d80d1b9358921bf589307704e2385bbedc59ac",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -634,6 +661,7 @@
     "fingerprint": "sha256:d4a1985a0357792efe4789c2233bad139cf8928458e0ec785ce1b1cd7fb11e73",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -658,6 +686,7 @@
     "fingerprint": "sha256:c88871cfc1ecb72bc4aad8cd5b6f23bcf15e380846669f8af005e30de83ef47c",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -681,6 +710,7 @@
     "fingerprint": "sha256:4863038fb9b91d931b5fdc30826b3ad1ea5ba69328c37260ae0959fadbed7aee",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -705,6 +735,7 @@
     "fingerprint": "sha256:ec88ce6ee9843e242b2389245d90ddc4f9ec7dc22e1116f6bfe430949da19005",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -728,6 +759,7 @@
     "fingerprint": "sha256:eed7dac5bb066436ce0df5666bc15e405ec3955c9e167439b588243e878bff11",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -751,6 +783,7 @@
     "fingerprint": "sha256:caca0ecc8275dd7119f4f04f80c3e8b9783d6016ba28221a4238eb2dff79e3bb",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -774,6 +807,7 @@
     "fingerprint": "sha256:dc18158f7f52098c8fa5647ad0f3ac016020f23d684bf3e8a204c33cf855a394",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -798,6 +832,7 @@
     "fingerprint": "sha256:abdf8696910cd0012a63c8c7826a3a4ed1c43872627247b449a69d2bad8434de",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -822,6 +857,7 @@
     "fingerprint": "sha256:863640a58894e351474344af0dbdfafd91fd40aef2323e21ded6b6d43ba5da23",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -845,6 +881,7 @@
     "fingerprint": "sha256:5a8b83d2b15698a7e304bc6b5d7b2ccd073f4502705fb64e5db5d60218d594c1",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -868,6 +905,7 @@
     "fingerprint": "sha256:35c02de167c3581dbfbbd1cb2ef0a42398a7fe0759792b5c71ba2f45ffa6af7a",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -892,6 +930,7 @@
     "fingerprint": "sha256:868ad45a4f8c29663f19bdeb84ee97653721419c4457ec2431271509ed57387f",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -916,6 +955,7 @@
     "fingerprint": "sha256:13f12000b0678c2a9990c8aba54e12e4574edd78f624e0d88fcdb981ac2d32e2",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -939,6 +979,7 @@
     "fingerprint": "sha256:136c816d0e1236b96b4f5b19fa9fd6675cf09e64048d459cd14cc014f4aafd49",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -962,6 +1003,7 @@
     "fingerprint": "sha256:5ed93388730232ca923f22a1647cba930bedc3114dde3a5433ab2f8698dee684",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -986,6 +1028,7 @@
     "fingerprint": "sha256:b6db560c04fea4149c33667d36aeba13d6706d1f78887f9e7e7f38dcdd61f92d",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -1010,6 +1053,7 @@
     "fingerprint": "sha256:bee468fe3c58f14587d4a58871a1662d9f0d832361b740634683a7a285ac43f0",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -1033,6 +1077,7 @@
     "fingerprint": "sha256:914dfac763acc9361bbfdec6541a697ae7763bf09a2240c9cbd1fafe78d1f531",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -1056,6 +1101,7 @@
     "fingerprint": "sha256:ba6b201483db19e04bacc9e46ee1c2c9e58ec4cd51bb9216e2be39fe3a76d594",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -1079,6 +1125,7 @@
     "fingerprint": "sha256:7d680b6a440b3a14ac495e905a379f0eec3527c49e1cc98403bff35ff6bd66f0",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -1102,6 +1149,7 @@
     "fingerprint": "sha256:9ed3f595c62d8e9780887a58970e82c9af7d416b0457ceac0bf1cc55a518b0c6",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -1125,6 +1173,7 @@
     "fingerprint": "sha256:ced822e6a5b1ef208d6a8df0f78f9f542bd19bf3219fffeda83039d3bdd3c492",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -1148,6 +1197,7 @@
     "fingerprint": "sha256:d94b2c6839f05465a1c6437c3e1a5316596258e5d999abca0e3f942cf8b1bdd7",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -1172,6 +1222,7 @@
     "fingerprint": "sha256:da92a61aba8cbc8ae017a52ed418811d6c464e05c7df1945bf513e2f1617c667",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -1196,6 +1247,7 @@
     "fingerprint": "sha256:0d4bd197cb31ba8d395640fe104102c0e549b4e0f63c3a6557159f62f28255d1",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -1219,6 +1271,7 @@
     "fingerprint": "sha256:0244a14e2f675fc4f2d854012e79e2242c3441b855dfc0acad32a69fcd837121",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -1242,6 +1295,7 @@
     "fingerprint": "sha256:120004adecac61928b41859f183e0ea707c9218d6d1270b743699b1980984c7b",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -1265,6 +1319,7 @@
     "fingerprint": "sha256:a142b4adeea44bce0f23cdd28e54f874fd13f180494362e26aa85ae825ec80a8",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -1289,6 +1344,7 @@
     "fingerprint": "sha256:d2ba751b9e8289c6e868330d2ea952ba118290c301dea8c809e8b617bbdc1f1c",
     "api": "numpy/numpy",
     "version": "2.0.0",
+    "previous_version": "1.26.4",
     "change_type": "breaking",
     "breaking": true,
     "subject": {

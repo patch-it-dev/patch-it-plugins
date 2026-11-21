@@ -61,7 +61,7 @@ func supabasePlugin(latest string) Plugin {
 // The golden test: the two operations Supabase deprecated in the
 // Management API spec's history. On 2025-02-19, POST
 // /v1/projects/{ref}/functions ("This endpoint is deprecated - use the deploy
-// endpoint."), here as a daily ingest. On 2026-06-29, GET
+// endpoint."), the pair 57d668c6 -> bf04ff66. On 2026-06-29, GET
 // /v1/projects/{ref}/analytics/endpoints/logs.all, the pair fixture: the
 // flag alone, no reason yet. (On 2026-09-30 its description became "This
 // endpoint has been removed and always responds with `410 Gone`", with the
@@ -70,10 +70,8 @@ func TestSupabaseGolden(t *testing.T) {
 	ctx := context.Background()
 	s := openStore(t)
 	env := vercelEnv(s)
-	for _, tag := range []string{"57d668c6", "bf04ff66"} {
-		if rejected, err := kittest.Run(ctx, env, s, supabasePlugin(tag)); err != nil || rejected {
-			t.Fatalf("run %s: rejected=%v err=%v", tag, rejected, err)
-		}
+	if rejected, err := kittest.Pair(ctx, env, s, supabasePlugin(""), "57d668c6", "bf04ff66"); err != nil || rejected {
+		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
 	}
 	if rejected, err := kittest.Pair(ctx, env, s, supabasePlugin(""), "693bdc38", "eb21ae25"); err != nil || rejected {
 		t.Fatalf("pair: rejected=%v err=%v", rejected, err)

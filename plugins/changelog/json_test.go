@@ -19,17 +19,29 @@ const (
 	atlasFixture = "testdata/mongodb-atlas-changelog-c0f99ca9.json"
 )
 
-// saved serves the commits lookup and the changelog at that commit.
-func savedLog(commits, sha, file string) kittest.Pages {
-	return kittest.Pages{MongoDBAtlas.CommitsURL(): commits, MongoDBAtlas.URL(sha): file}
+// atlasBefore is the commit that changed the changelog before atlasSHA
+// (2026-11-09 20:16 UTC, "Release API Changelog").
+var atlasBefore = plugin.Version{ID: "2026-11-09", Ref: "f49749a61f67254d63931bbbefc8880dabd18054"}
+
+// logPair is the pair atlasBefore -> sha with the changelog at sha saved as
+// file. The commit before is named, not read: every change in file is
+// extracted, as if the file before had none.
+func logPair(t *testing.T, sha, file string) []event.Event {
+	t.Helper()
+	env := kittest.Env(t, kittest.Pages{MongoDBAtlas.URL(sha): file})
+	p := Plugin{Log: MongoDBAtlas}
+	to, err := p.ReadAt(context.Background(), env, plugin.Version{ID: "2026-11-18", Ref: sha})
+	if err != nil {
+		t.Fatal(err)
+	}
+	return kittest.Extracted(t, env, p, plugin.Snapshot{Version: atlasBefore}, to)
 }
 
 // The golden test: MongoDB's changelog as released at c0f99ca9 (2026-11-18),
 // with every change this plugin doesn't read replaced by {} so that every
 // pointer is the one in the real file (testdata/README.md).
 func TestJSONGolden(t *testing.T) {
-	pages := savedLog("testdata/commits-c0f99ca9.json", atlasSHA, atlasFixture)
-	got := kittest.Ingest(t, Plugin{Log: MongoDBAtlas}, pages)
+	got := logPair(t, atlasSHA, atlasFixture)
 	kittest.Golden(t, "testdata/golden/mongodb-atlas.json", got)
 
 	// Every event cites the pinned file, and its excerpt is the change its
@@ -98,7 +110,7 @@ func TestPropertyChangesMakeNoEvent(t *testing.T) {
 	if notBC != 23 {
 		t.Fatalf("the atlasFixture has %d changes not backward compatible, want 23", notBC)
 	}
-	if got := kittest.Ingest(t, Plugin{Log: MongoDBAtlas}, savedLog("testdata/commits-day.json", sha, file)); len(got) != 0 {
+	if got := logPair(t, sha, file); len(got) != 0 {
 		for _, e := range got {
 			t.Logf("got: %s", e.Description)
 		}

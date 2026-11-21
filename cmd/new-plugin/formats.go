@@ -69,13 +69,13 @@ func read{{.Ident}}(e Entry) []Finding {
 </channel></rss>
 `},
 		source: "{{.File}}.rss.xml",
-		ingest: `// {{.Lower}}Ingest runs the plugin over a saved copy of the feed, cited
-// through a test archive that serves the same copy.
+		ingest: `// {{.Lower}}Ingest is a first read of a saved copy of the feed (a living
+// page), cited through a test archive that serves the same copy.
 func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
 	saved := kittest.Pages{feed.{{.Ident}}.URL: file}
 	archive := &kittest.Archive{T: t, Pages: saved}
-	return kittest.IngestWith(t, kittest.Env(t, saved), Plugin{Page: feed.{{.Ident}}, Archiver: archive})
+	return kittest.Page(t, kittest.Env(t, saved), Plugin{Page: feed.{{.Ident}}, Archiver: archive})
 }
 `,
 		imports: []string{"github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/plugins/notices/feed"},
@@ -141,13 +141,13 @@ func Test{{.Ident}}DropsANonChange(t *testing.T) {
 }
 `,
 		source: "{{.File}}-deprecations.md",
-		ingest: `// {{.Lower}}Ingest runs the plugin over a saved copy of the page, cited
-// through a test archive that serves the same copy.
+		ingest: `// {{.Lower}}Ingest is a first read of a saved copy of the page (a living
+// page), cited through a test archive that serves the same copy.
 func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
 	saved := kittest.Pages{retire.{{.Ident}}.URL: file}
 	archive := &kittest.Archive{T: t, Pages: saved}
-	return kittest.IngestWith(t, kittest.Env(t, saved), Plugin{Page: retire.{{.Ident}}, Archiver: archive})
+	return kittest.Page(t, kittest.Env(t, saved), Plugin{Page: retire.{{.Ident}}, Archiver: archive})
 }
 `,
 		imports: []string{"encoding/json", "strings", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/plugins/notices/retire"},
@@ -209,13 +209,22 @@ func Test{{.Ident}}DropsANonChange(t *testing.T) {
 }
 `,
 		source: "{{.File}}-MIGRATION.md",
-		ingest: `// {{.Lower}}Ingest runs the plugin over a saved copy of the guide.
+		ingest: `// {{.Lower}}Previous is the release before the guide's major on PyPI: the
+// pair's older side, which has no guide.
+// ` + todo + `: the real release before it.
+const {{.Lower}}Previous = "0.0.0"
+
+// {{.Lower}}Ingest is the version pair {{.Lower}}Previous -> the guide's
+// major over a saved copy of the guide.
 func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
-	return kittest.Ingest(t, Plugin{Guide: sdkguide.{{.Ident}}}, kittest.Pages{sdkguide.{{.Ident}}.URL(): file})
+	g := sdkguide.{{.Ident}}
+	env := kittest.Env(t, kittest.Pages{g.URL(): file})
+	return kittest.Versions(t, env, Plugin{Guide: g},
+		plugin.Version{ID: {{.Lower}}Previous, Ref: "v" + {{.Lower}}Previous}, plugin.Version{ID: g.Version(), Ref: "v" + g.Version()})
 }
 `,
-		imports: []string{"encoding/json", "strings", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide/sdkguide"},
+		imports: []string{"encoding/json", "strings", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/core/plugin", "github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide/sdkguide"},
 	},
 
 	"migrationguide/members": {
@@ -286,13 +295,21 @@ func Test{{.Ident}}DropsANonChange(t *testing.T) {
 }
 `,
 		source: "{{.File}}-migration-guide.rst",
-		ingest: `// {{.Lower}}Ingest runs the plugin over a saved copy of the guide.
+		ingest: `// {{.Lower}}Previous is the release before the guide's on PyPI: the pair's
+// older side, which has no guide.
+// ` + todo + `: the real release before it.
+const {{.Lower}}Previous = "0.0.0"
+
+// {{.Lower}}Ingest is the version pair {{.Lower}}Previous -> the guide's
+// release over a saved copy of the guide.
 func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
-	return kittest.Ingest(t, Plugin{Guide: members.{{.Ident}}}, kittest.Pages{members.{{.Ident}}.URL(): file})
+	g := members.{{.Ident}}
+	env := kittest.Env(t, kittest.Pages{g.URL(): file})
+	return kittest.Versions(t, env, Plugin{Guide: g}, plugin.Version{ID: {{.Lower}}Previous}, plugin.Version{ID: g.Release})
 }
 `,
-		imports: []string{"slices", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide/members"},
+		imports: []string{"slices", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/core/plugin", "github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide/members"},
 	},
 
 	"changelog/markdown": {
@@ -328,13 +345,28 @@ var {{.Ident}}Golden = {{.Ident}}.At("1.0.0")
 - A placeholder entry.
 `},
 		source: "{{.File}}-CHANGELOG.md",
-		ingest: `// {{.Lower}}Ingest runs the plugin over a saved copy of the changelog.
+		ingest: `// {{.Lower}}Previous is the release before {{.Ident}}Golden's on the
+// registry: the pair's older side.
+// ` + todo + `: the real release before it.
+const {{.Lower}}Previous = "0.0.0"
+
+// {{.Lower}}Ingest is the version pair {{.Lower}}Previous -> {{.Ident}}Golden
+// over a saved copy of the changelog. A changelog's Extract reads only the
+// newer release's section, so the older side is named, not read.
 func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
-	return kittest.Ingest(t, Plugin{File: {{.Ident}}Golden}, kittest.Pages{ {{.Ident}}Golden.URL(): file})
+	f := {{.Ident}}Golden
+	env := kittest.Env(t, kittest.Pages{f.URL(): file})
+	p := Plugin{File: f}
+	to, err := p.ReadAt(context.Background(), env, plugin.Version{ID: f.Release, Ref: f.Tag})
+	if err != nil {
+		t.Fatal(err)
+	}
+	from := plugin.Snapshot{Version: plugin.Version{ID: {{.Lower}}Previous, Ref: f.TagPrefix + {{.Lower}}Previous}}
+	return kittest.Extracted(t, env, p, from, to)
 }
 `,
-		imports: []string{"github.com/patch-it-dev/patch-it-plugins/core/event"},
+		imports: []string{"context", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/core/plugin"},
 	},
 
 	"changelog/json": {
@@ -356,23 +388,31 @@ var {{.Ident}} = Log{
 		pluginOf: `Plugin{Log: {{.Ident}}}`,
 		fixtures: map[string]string{
 			"{{.File}}-changelog.json": `[{"date": "2026-11-14", "paths": [{"path": "/placeholder", "httpMethod": "GET", "versions": [{"version": "2026-01-01", "changes": [{"change": "placeholder: not a life-cycle change", "changeCode": "response-property-added", "backwardCompatible": true}]}]}]}]` + "\n",
-			"{{.File}}-commits.json":   `[{"sha": "0000000000000000000000000000000000000000"}]` + "\n",
 		},
 		source: "{{.File}}-changelog.json",
-		ingest: `// {{.Lower}}Commit is the commit the saved changelog is at.
-// ` + todo + `: the real commit, and its commits response saved alongside.
-const {{.Lower}}Commit = "0000000000000000000000000000000000000000"
+		ingest: `// The commit the saved changelog is at, and the one that changed the file
+// before it (each version's ID is its commit's date).
+// ` + todo + `: the real commits.
+var (
+	{{.Lower}}Commit = plugin.Version{ID: "2026-11-14", Ref: "1111111111111111111111111111111111111111"}
+	{{.Lower}}Before = plugin.Version{ID: "2026-11-01", Ref: "0000000000000000000000000000000000000000"}
+)
 
-// {{.Lower}}Ingest runs the plugin over a saved copy of the changelog.
+// {{.Lower}}Ingest is the version pair {{.Lower}}Before -> {{.Lower}}Commit
+// over a saved copy of the changelog at {{.Lower}}Commit. The commit before
+// is named, not read: every change in file is extracted.
 func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
-	return kittest.Ingest(t, Plugin{Log: {{.Ident}}}, kittest.Pages{
-		{{.Ident}}.CommitsURL():         "testdata/{{.File}}-commits.json",
-		{{.Ident}}.URL({{.Lower}}Commit): file,
-	})
+	env := kittest.Env(t, kittest.Pages{ {{.Ident}}.URL({{.Lower}}Commit.Ref): file})
+	p := Plugin{Log: {{.Ident}}}
+	to, err := p.ReadAt(context.Background(), env, {{.Lower}}Commit)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return kittest.Extracted(t, env, p, plugin.Snapshot{Version: {{.Lower}}Before}, to)
 }
 `,
-		imports: []string{"github.com/patch-it-dev/patch-it-plugins/core/event"},
+		imports: []string{"context", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/core/plugin"},
 	},
 
 	"catalog": {
@@ -414,15 +454,11 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 		{{.Ident}}.URL({{.Lower}}OldRef): "testdata/{{.File}}-old.json",
 		{{.Ident}}.URL({{.Lower}}NewRef): file,
 	})
-	sink := env.Baselines.(kittest.Sink)
-	p := Plugin{Catalog: {{.Ident}}}
-	if rejected, err := kittest.Pair(context.Background(), env, sink, p, {{.Lower}}OldRef, {{.Lower}}NewRef); err != nil || rejected {
-		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
-	}
-	return kittest.Stored(t, sink)
+	return kittest.Versions(t, env, Plugin{Catalog: {{.Ident}}},
+		plugin.Version{ID: {{.Lower}}OldRef, Ref: {{.Lower}}OldRef}, plugin.Version{ID: {{.Lower}}NewRef, Ref: {{.Lower}}NewRef})
 }
 `,
-		imports: []string{"context", "github.com/patch-it-dev/patch-it-plugins/core/event"},
+		imports: []string{"github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/core/plugin"},
 	},
 
 	"openapi": {
@@ -498,16 +534,11 @@ func (a {{.Lower}}Adapter) Fetch(_ context.Context, tag string) (adapter.Spec, e
 // {{.Lower}}Ingest extracts the change from the saved old spec to file.
 func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
-	env := kittest.Env(t, nil)
-	sink := env.Baselines.(kittest.Sink)
 	p := Plugin{Adapter: {{.Lower}}Adapter{"old": "testdata/{{.File}}-old.json", "new": file}}
-	if rejected, err := kittest.Pair(context.Background(), env, sink, p, "old", "new"); err != nil || rejected {
-		t.Fatalf("pair: rejected=%v err=%v", rejected, err)
-	}
-	return kittest.Stored(t, sink)
+	return kittest.Versions(t, kittest.Env(t, nil), p, plugin.Version{ID: "old", Ref: "old"}, plugin.Version{ID: "new", Ref: "new"})
 }
 `,
-		imports: []string{"context", "fmt", "os", "github.com/patch-it-dev/patch-it-plugins/plugins/openapi/adapter", "github.com/patch-it-dev/patch-it-plugins/core/event"},
+		imports: []string{"context", "fmt", "os", "github.com/patch-it-dev/patch-it-plugins/plugins/openapi/adapter", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/core/plugin"},
 		next:    "Write LatestTag, Fetch and Versions in plugins/openapi/adapter/{{.File}}.go (fetch.Get only); add Diff/Keep to the Register line if the spec needs them (see vercel.go).",
 	},
 	"apisurface": {
@@ -574,19 +605,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	if err != nil || len(vs) != 2 {
 		t.Fatalf("versions %v: %v", vs, err)
 	}
-	from, err := p.ReadAt(ctx, env, vs[0])
-	if err != nil {
-		t.Fatal(err)
-	}
-	to, err := p.ReadAt(ctx, env, vs[1])
-	if err != nil {
-		t.Fatal(err)
-	}
-	res, err := p.Extract(ctx, env, from, to)
-	if err != nil || len(res.Rejected) > 0 {
-		t.Fatalf("%v %v", err, res.Rejected)
-	}
-	return res.Events
+	return kittest.Versions(t, env, p, vs[0], vs[1])
 }
 `,
 		imports: []string{"archive/zip", "bytes", "context", "fmt", "github.com/patch-it-dev/patch-it-plugins/core/event"},

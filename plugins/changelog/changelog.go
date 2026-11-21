@@ -182,36 +182,6 @@ func (p Plugin) Name() string {
 	return p.File.API
 }
 
-// Run reads the pinned release, or the newest one on the registry, and
-// stores its events. A release's tag never changes, so a rerun stores nothing
-// new: the fingerprints dedupe.
-func (p Plugin) Run(ctx context.Context, env plugin.Env) (plugin.Result, error) {
-	if p.isLog() {
-		return p.runLog(ctx, env)
-	}
-	v := plugin.Version{ID: p.File.Release, Ref: p.File.Tag}
-	if p.File.Tag == "" {
-		vs, err := p.ListVersions(ctx, env)
-		if err != nil {
-			return plugin.Result{}, err
-		}
-		if len(vs) == 0 {
-			return plugin.Result{}, fmt.Errorf("%s: no release listed", p.File.Package)
-		}
-		v = vs[len(vs)-1]
-	}
-	to, err := p.ReadAt(ctx, env, v)
-	if err != nil {
-		return plugin.Result{}, err
-	}
-	res, err := p.Extract(ctx, env, plugin.Snapshot{}, to)
-	if err != nil {
-		return plugin.Result{}, err
-	}
-	res.Baselines = []plugin.Spec{plugin.Baseline(p.File.API, v.ID, v.Ref, to.SourceURL, to.Content, env.Now().UTC())}
-	return res, nil
-}
-
 // ListVersions is every final release of the package on its registry, oldest
 // first, each read at TagPrefix + version; a pinned File has its one release.
 func (p Plugin) ListVersions(ctx context.Context, env plugin.Env) ([]plugin.Version, error) {
@@ -303,7 +273,7 @@ func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 		}
 		events = append(events, e)
 	}
-	return plugin.Result{Label: f.URL(), Events: events, Rejected: rejected}, nil
+	return plugin.Result{Events: events, Rejected: rejected}, nil
 }
 
 var _ plugin.Versioned = Plugin{}

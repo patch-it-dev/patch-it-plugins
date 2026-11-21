@@ -1,15 +1,16 @@
 {
-  "_comment": "Real output of the `stripe` plugin for the demo breaking change: Stripe spec v207 -> v208 (API 2022-08-01 -> 2022-11-15), 38 events, generated 2026-10-02 by replaying v207 -> v208 in patch-it's hosted ingestion service and served with the stored row id as `id`, the way GET /v1/changes serves it.",
+  "_comment": "The ingestion service's real output for the demo breaking change: Stripe spec v207 -> v208 (API 2022-08-01 -> 2022-11-15), 38 events, generated 2026-10-02 and dumped from its store with the row id as `id`, the same way the feed serves it. The inject-and-verify harness feeds this to the seeded repos in test-repos/. Rewritten 2026-11-21 when the contract named sources by their provider/source id: `api` is the id, every fingerprint recomputed over it with the same detail, and the event's subject as the server writes it.",
   "changes": [
     {
       "id": 1,
-      "fingerprint": "sha256:4a725ad1e97a4f9c727653207f3113d3bd58b01c7f4d8ee7efc813c0cbd82680",
-      "api": "stripe",
+      "fingerprint": "sha256:57a96526c18c52ecc1c77ce40f01afdb349612cf95af31f2f973ebd8f5ee0037",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "schema",
         "side": "response",
         "schema": "deleted_sku"
@@ -18,18 +19,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/components/schemas/deleted_sku",
       "source_excerpt": "{\"description\":\"\",\"properties\":{\"deleted\":{\"description\":\"Always true for a deleted object\",\"enum\":[true],\"type\":\"boolean\"},\"id\":{\"description\":\"Unique identifier for the object.\",\"maxLength\":5000,\"type\":\"string\"},\"object\":{\"description\":\"String representing the object's type. Objects of the same type share the same value.\",\"enum\":[\"sku\"],\"type\":\"string\"}},\"required\":[\"deleted\",\"id\",\"object\"],\"title\":\"DeletedSku\",\"type\":\"object\",\"x-expandableFields\":[],\"x-resourceId\":\"deleted_sku\"}",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 2,
-      "fingerprint": "sha256:7f337a72ab7e1b5c52742b25e56978e6acd5c2aefaa4cec4edac6a5a7011b701",
-      "api": "stripe",
+      "fingerprint": "sha256:0ea2d0f486b14e8074e8b1db978530f4183ea44bfd4e1492f844b5f1de58e111",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "schema_property",
         "side": "response",
         "schema": "item",
@@ -39,18 +41,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/components/schemas/item/properties/product",
       "source_excerpt": "{\"anyOf\":[{\"maxLength\":5000,\"type\":\"string\"},{\"$ref\":\"#/components/schemas/product\"},{\"$ref\":\"#/components/schemas/deleted_product\"}],\"description\":\"The ID of the product for this line item.\\n\\nThis will always be the same as `price.product`.\",\"x-expansionResources\":{\"oneOf\":[{\"$ref\":\"#/components/schemas/product\"},{\"$ref\":\"#/components/schemas/deleted_product\"}]}}",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 3,
-      "fingerprint": "sha256:c6cd0d306216400cbd27d91de20145dab38c9c83e91e9d95aedbe0a421f29b5d",
-      "api": "stripe",
+      "fingerprint": "sha256:5b3698385e9966e58e79e35aac53a0848c6f2fddda5af4a86c0570a3f183bbf0",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "schema",
         "side": "response",
         "schema": "order"
@@ -59,18 +62,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/components/schemas/order",
       "source_excerpt": "{\"description\":\"An Order describes a purchase being made by a customer, including the\\nproducts \\u0026 quantities being purchased, the order status, the payment information,\\nand the billing/shipping details.\\n\\nRelated guide: [Orders overview](https://stripe.com/docs/orders)\",\"properties\":{\"amount_subtotal\":{\"description\":\"Order cost before any discounts or taxes are applied. A positive integer representing the subtotal of the order in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency).\",\"type\":\"integer\"},\"amount_total\":{\"description\":\"Total order cost after discounts and taxes are applied. A positive integer representing the cost of the order in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). To submit an order, the total must be either 0 or at least $0.50 USD or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts).\",\"type\":\"integer\"},\"application\":{\"anyOf\":[{\"maxLength\":5000,\"type\":\"string\"},{\"$ref\":\"#/components/schemas/application\"}],\"description\":\"ID of the Connect application that created the Order, if any.\",\"nullable\":true,\"x-expansionResources\":{\"oneOf\":[{\"$ref\":\"#/components/schemas/application\"}]}},\"automatic_tax\":{\"$ref\":\"#/components/schemas/orders_v2_resource_automatic_tax\"},\"billing_details\":{\"anyOf\":[{\"$ref\":\"#/components/schemas/orders_v2_resource_billing_details\"}],\"description\":\"Customer billing details associated with the order.\",\"nullable\":true},\"client_permissions\":{\"anyOf\":[{\"$ref\":\"#/components/schemas/orders_v2_resource_client_permissions\"}],\"description\":\"The fields on the Order that can be updated from the client\",\"nullable\":true},\"client_secret\":{\"description\":\"The client secret of this Order. Used for client-side retrieval using a publishable key. \\n\\nThe client secret ca…",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 4,
-      "fingerprint": "sha256:8fc8ce4f732dd33a5d57c13b7a57d5387636afbc7d3e8a9770a7836e733911d3",
-      "api": "stripe",
+      "fingerprint": "sha256:e0e79aa71ebdb58d34576b3b684114b1616d6a065e97fb1a36a199a0870442c3",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "schema",
         "side": "response",
         "schema": "orders_payment_method_options_afterpay_clearpay"
@@ -79,18 +83,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/components/schemas/orders_payment_method_options_afterpay_clearpay",
       "source_excerpt": "{\"description\":\"\",\"properties\":{\"capture_method\":{\"description\":\"Controls when the funds will be captured from the customer's account.\",\"enum\":[\"automatic\",\"manual\"],\"type\":\"string\"},\"reference\":{\"description\":\"Order identifier shown to the user in Afterpay's online portal. We recommend using a value that helps you answer any questions a customer might have about the payment. The identifier is limited to 128 characters and may contain only letters, digits, underscores, backslashes and dashes.\",\"maxLength\":5000,\"nullable\":true,\"type\":\"string\"},\"setup_future_usage\":{\"description\":\"Indicates that you intend to make future payments with the payment method.\\n\\nProviding this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the order's Customer, if present, after the order's PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.\\n\\nWhen processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).\\n\\nIf `setup_future_usage` is already set and you are performing a request using a publishable key, you may only update the value from `on_session` to `off_session`.\",\"enum\":[\"none\"],\"type\":\"string\"}},\"title\":\"orders_payment_method_options_afterpay_clearpay\",\"type\":\"object\",\"x-expandableFields\":[]}",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 5,
-      "fingerprint": "sha256:e9b930fcead1814167005936d6d705b9f89722d6cbe21b4ca63dd57e17965551",
-      "api": "stripe",
+      "fingerprint": "sha256:bd6da6bc08bbe77a9910ae9cfda44d7a80fb4f157491d4930f08f353ba3f93a0",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "schema",
         "side": "response",
         "schema": "orders_v2_resource_automatic_payment_methods"
@@ -99,18 +104,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/components/schemas/orders_v2_resource_automatic_payment_methods",
       "source_excerpt": "{\"description\":\"\",\"properties\":{\"enabled\":{\"description\":\"Whether this Order has been opted into managing payment method types via the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods).\",\"type\":\"boolean\"}},\"required\":[\"enabled\"],\"title\":\"OrdersV2ResourceAutomaticPaymentMethods\",\"type\":\"object\",\"x-expandableFields\":[]}",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 6,
-      "fingerprint": "sha256:2c4f45fba62d4ec33a08086f961e4a8a9da267662352208e649d772922a217e5",
-      "api": "stripe",
+      "fingerprint": "sha256:d7e7cc87c05b01c3369e47e11aca80188dd358d655007a27f78256104bda27cb",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "schema",
         "side": "response",
         "schema": "orders_v2_resource_automatic_tax"
@@ -119,18 +125,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/components/schemas/orders_v2_resource_automatic_tax",
       "source_excerpt": "{\"description\":\"\",\"properties\":{\"enabled\":{\"description\":\"Whether Stripe automatically computes tax on this Order.\",\"type\":\"boolean\"},\"status\":{\"description\":\"The status of the most recent automated tax calculation for this Order.\",\"enum\":[\"complete\",\"failed\",\"requires_location_inputs\"],\"nullable\":true,\"type\":\"string\"}},\"required\":[\"enabled\"],\"title\":\"OrdersV2ResourceAutomaticTax\",\"type\":\"object\",\"x-expandableFields\":[]}",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 7,
-      "fingerprint": "sha256:09d372ba1fdf8b3cac5465cb6078ccc393616e9784cc95d43c748b31a423980c",
-      "api": "stripe",
+      "fingerprint": "sha256:514ced5801ea5f78b7659707af7f84d4362dfe8cebe9745dfe09d6b3ba68d4c6",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "schema",
         "side": "response",
         "schema": "orders_v2_resource_billing_details"
@@ -139,18 +146,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/components/schemas/orders_v2_resource_billing_details",
       "source_excerpt": "{\"description\":\"\",\"properties\":{\"address\":{\"anyOf\":[{\"$ref\":\"#/components/schemas/address\"}],\"description\":\"Billing address for the order.\",\"nullable\":true},\"email\":{\"description\":\"Email address for the order.\",\"maxLength\":5000,\"nullable\":true,\"type\":\"string\"},\"name\":{\"description\":\"Full name for the order.\",\"maxLength\":5000,\"nullable\":true,\"type\":\"string\"},\"phone\":{\"description\":\"Billing phone number for the order (including extension).\",\"maxLength\":5000,\"nullable\":true,\"type\":\"string\"}},\"title\":\"OrdersV2ResourceBillingDetails\",\"type\":\"object\",\"x-expandableFields\":[\"address\"]}",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 8,
-      "fingerprint": "sha256:c96ce3c4363c30c2e0c84d2f4a3a8ef36681a1707036f7334b4074bf6eade95f",
-      "api": "stripe",
+      "fingerprint": "sha256:052125ba39bdd81ab4a1fbac689b5839ef4b822342c14f35958962200ee626a9",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "schema",
         "side": "response",
         "schema": "orders_v2_resource_card_payment_method_options"
@@ -159,18 +167,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/components/schemas/orders_v2_resource_card_payment_method_options",
       "source_excerpt": "{\"description\":\"\",\"properties\":{\"capture_method\":{\"description\":\"Controls when the funds will be captured from the customer's account.\",\"enum\":[\"automatic\",\"manual\"],\"type\":\"string\"},\"setup_future_usage\":{\"description\":\"Indicates that you intend to make future payments with the payment method.\\n\\nProviding this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the order's Customer, if present, after the order's PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.\\n\\nWhen processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).\\n\\nIf `setup_future_usage` is already set and you are performing a request using a publishable key, you may only update the value from `on_session` to `off_session`.\",\"enum\":[\"none\",\"off_session\",\"on_session\"],\"type\":\"string\"}},\"required\":[\"capture_method\"],\"title\":\"OrdersV2ResourceCardPaymentMethodOptions\",\"type\":\"object\",\"x-expandableFields\":[]}",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 9,
-      "fingerprint": "sha256:73fddc31b026695c6c636da6489480bb8c7a610ee37e881370afc7bc86a85ab7",
-      "api": "stripe",
+      "fingerprint": "sha256:d96aaa2cae1d48dfaaadaa3cd6e7d1f9a53fa2c99315c1cb7bed895dce25e681",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "schema",
         "side": "response",
         "schema": "orders_v2_resource_client_permissions"
@@ -179,18 +188,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/components/schemas/orders_v2_resource_client_permissions",
       "source_excerpt": "{\"description\":\"\",\"properties\":{\"billing_details\":{\"description\":\"Allows or disallows billing details to be set on an Order with a publishable key and Order client_secret\",\"enum\":[\"allow\",\"disallow\"],\"nullable\":true,\"type\":\"string\"},\"promotion_codes\":{\"description\":\"Allows or disallows promotion codes to be set on an Order with a publishable key and Order client_secret\",\"enum\":[\"allow\",\"disallow\"],\"nullable\":true,\"type\":\"string\"},\"shipping_details\":{\"description\":\"Allows or disallows shipping details to be set on an Order with a publishable key and Order client_secret\",\"enum\":[\"allow\",\"disallow\"],\"nullable\":true,\"type\":\"string\"}},\"title\":\"OrdersV2ResourceClientPermissions\",\"type\":\"object\",\"x-expandableFields\":[]}",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 10,
-      "fingerprint": "sha256:8430403cff5082f6a4bc07c532c1463ff61abc8dc1db9784b2e836945aeefb48",
-      "api": "stripe",
+      "fingerprint": "sha256:e96c6a8159a569b37ddcf81ba50c8f41f68973fe2fdedb4b3b45e2317fb83753",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "schema",
         "side": "response",
         "schema": "orders_v2_resource_payment"
@@ -199,18 +209,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/components/schemas/orders_v2_resource_payment",
       "source_excerpt": "{\"description\":\"\",\"properties\":{\"payment_intent\":{\"anyOf\":[{\"maxLength\":5000,\"type\":\"string\"},{\"$ref\":\"#/components/schemas/payment_intent\"}],\"description\":\"ID of the payment intent associated with this order. Null when the order is `open`.\",\"nullable\":true,\"x-expansionResources\":{\"oneOf\":[{\"$ref\":\"#/components/schemas/payment_intent\"}]}},\"settings\":{\"anyOf\":[{\"$ref\":\"#/components/schemas/orders_v2_resource_payment_settings\"}],\"description\":\"Settings describing how the order should configure generated PaymentIntents.\",\"nullable\":true},\"status\":{\"description\":\"The status of the underlying payment associated with this order, if any. Null when the order is `open`.\",\"enum\":[\"canceled\",\"complete\",\"not_required\",\"processing\",\"requires_action\",\"requires_capture\",\"requires_confirmation\",\"requires_payment_method\"],\"nullable\":true,\"type\":\"string\"}},\"title\":\"OrdersV2ResourcePayment\",\"type\":\"object\",\"x-expandableFields\":[\"payment_intent\",\"settings\"]}",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 11,
-      "fingerprint": "sha256:9c08b3864749f494a30eeeff2c8c8f5141dbf9b2e5f72a0d978cf2cb925faa14",
-      "api": "stripe",
+      "fingerprint": "sha256:48e9cda4892e9097736e39d5ca284d6c95a5be72ebd0576a71af6ec43387ee50",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "schema",
         "side": "response",
         "schema": "orders_v2_resource_payment_method_options"
@@ -219,18 +230,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/components/schemas/orders_v2_resource_payment_method_options",
       "source_excerpt": "{\"description\":\"\",\"properties\":{\"acss_debit\":{\"$ref\":\"#/components/schemas/payment_intent_payment_method_options_acss_debit\"},\"afterpay_clearpay\":{\"$ref\":\"#/components/schemas/orders_payment_method_options_afterpay_clearpay\"},\"alipay\":{\"$ref\":\"#/components/schemas/payment_method_options_alipay\"},\"bancontact\":{\"$ref\":\"#/components/schemas/payment_method_options_bancontact\"},\"card\":{\"$ref\":\"#/components/schemas/orders_v2_resource_card_payment_method_options\"},\"customer_balance\":{\"$ref\":\"#/components/schemas/payment_method_options_customer_balance\"},\"ideal\":{\"$ref\":\"#/components/schemas/payment_method_options_ideal\"},\"klarna\":{\"$ref\":\"#/components/schemas/payment_method_options_klarna\"},\"link\":{\"$ref\":\"#/components/schemas/payment_intent_payment_method_options_link\"},\"oxxo\":{\"$ref\":\"#/components/schemas/payment_method_options_oxxo\"},\"p24\":{\"$ref\":\"#/components/schemas/payment_method_options_p24\"},\"paypal\":{\"$ref\":\"#/components/schemas/payment_method_options_paypal\"},\"sepa_debit\":{\"$ref\":\"#/components/schemas/payment_intent_payment_method_options_sepa_debit\"},\"sofort\":{\"$ref\":\"#/components/schemas/payment_method_options_sofort\"},\"wechat_pay\":{\"$ref\":\"#/components/schemas/payment_method_options_wechat_pay\"}},\"title\":\"OrdersV2ResourcePaymentMethodOptions\",\"type\":\"object\",\"x-expandableFields\":[\"acss_debit\",\"afterpay_clearpay\",\"alipay\",\"bancontact\",\"card\",\"customer_balance\",\"ideal\",\"klarna\",\"link\",\"oxxo\",\"p24\",\"paypal\",\"sepa_debit\",\"sofort\",\"wechat_pay\"]}",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 12,
-      "fingerprint": "sha256:2f79025a4a7157a5cee36d5c3eaa15ec0910cf68ac4e25703f503df4d73e5fb2",
-      "api": "stripe",
+      "fingerprint": "sha256:36ced75f4164eed4f89652c6d0603468449110730f5065abefcd3e14ec22d03b",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "schema",
         "side": "response",
         "schema": "orders_v2_resource_payment_settings"
@@ -239,18 +251,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/components/schemas/orders_v2_resource_payment_settings",
       "source_excerpt": "{\"description\":\"\",\"properties\":{\"application_fee_amount\":{\"description\":\"The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account.\",\"nullable\":true,\"type\":\"integer\"},\"automatic_payment_methods\":{\"anyOf\":[{\"$ref\":\"#/components/schemas/orders_v2_resource_automatic_payment_methods\"}],\"description\":\"Indicates whether order has been opted into using [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods) to manage payment method types.\",\"nullable\":true},\"payment_method_options\":{\"anyOf\":[{\"$ref\":\"#/components/schemas/orders_v2_resource_payment_method_options\"}],\"description\":\"PaymentMethod-specific configuration to provide to the order's PaymentIntent.\",\"nullable\":true},\"payment_method_types\":{\"description\":\"The list of [payment method types](https://stripe.com/docs/payments/payment-methods/overview) to provide to the order's PaymentIntent. Do not include this attribute if you prefer to manage your payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods).\",\"items\":{\"enum\":[\"acss_debit\",\"afterpay_clearpay\",\"alipay\",\"au_becs_debit\",\"bacs_debit\",\"bancontact\",\"card\",\"customer_balance\",\"eps\",\"fpx\",\"giropay\",\"grabpay\",\"ideal\",\"klarna\",\"link\",\"oxxo\",\"p24\",\"sepa_debit\",\"sofort\",\"wechat_pay\"],\"type\":\"string\",\"x-stripeBypassValidation\":true},\"nullable\":true,\"type\":\"array\"},\"return_url\":{\"description\":\"The URL to redirect the customer to after they authenticate their payment.\",\"maxLength\":5000,\"nullable\":true,\"type\":\"string\"},\"statement_descriptor\":{\"description\":\"For non-card charges, you can use this value as the complete description that appears on your customers' statements. Must contain at least one letter, maximum 22 characters.\",\"maxLength\":5000,\"nullable\":true,\"type\":\"string\"},\"statement_descriptor_suffix\":{\"description\":\"Provides information about a card payment that customers see on their statements. Concatenated with…",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 13,
-      "fingerprint": "sha256:86f1ca802aa188a6e035ab46a1cd2b7f57b526985a4563f4d0311b1259939d39",
-      "api": "stripe",
+      "fingerprint": "sha256:04dbeca3ff090ac83b45ec681e957016f203d9711bac150953078cf8cd34fdc0",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "schema",
         "side": "response",
         "schema": "orders_v2_resource_shipping_cost"
@@ -259,18 +272,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/components/schemas/orders_v2_resource_shipping_cost",
       "source_excerpt": "{\"description\":\"\",\"properties\":{\"amount_subtotal\":{\"description\":\"Total shipping cost before any discounts or taxes are applied.\",\"type\":\"integer\"},\"amount_tax\":{\"description\":\"Total tax amount applied due to shipping costs. If no tax was applied, defaults to 0.\",\"type\":\"integer\"},\"amount_total\":{\"description\":\"Total shipping cost after discounts and taxes are applied.\",\"type\":\"integer\"},\"shipping_rate\":{\"anyOf\":[{\"maxLength\":5000,\"type\":\"string\"},{\"$ref\":\"#/components/schemas/shipping_rate\"}],\"description\":\"The ID of the ShippingRate for this order.\",\"nullable\":true,\"x-expansionResources\":{\"oneOf\":[{\"$ref\":\"#/components/schemas/shipping_rate\"}]}},\"taxes\":{\"description\":\"The taxes applied to the shipping rate.\",\"items\":{\"$ref\":\"#/components/schemas/line_items_tax_amount\"},\"type\":\"array\"}},\"required\":[\"amount_subtotal\",\"amount_tax\",\"amount_total\"],\"title\":\"OrdersV2ResourceShippingCost\",\"type\":\"object\",\"x-expandableFields\":[\"shipping_rate\",\"taxes\"]}",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 14,
-      "fingerprint": "sha256:01beb5af51bf552717a94c62a13b62f31247e8c90063e78fa9eb82432252fbbb",
-      "api": "stripe",
+      "fingerprint": "sha256:52d83d45909548025043005808d20349eba4a14a69dbb167903c74b8bc0805f5",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "schema",
         "side": "response",
         "schema": "orders_v2_resource_shipping_details"
@@ -279,18 +293,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/components/schemas/orders_v2_resource_shipping_details",
       "source_excerpt": "{\"description\":\"\",\"properties\":{\"address\":{\"anyOf\":[{\"$ref\":\"#/components/schemas/address\"}],\"description\":\"Recipient shipping address. Required if the order includes products that are shippable.\",\"nullable\":true},\"name\":{\"description\":\"Recipient name.\",\"maxLength\":5000,\"nullable\":true,\"type\":\"string\"},\"phone\":{\"description\":\"Recipient phone (including extension).\",\"maxLength\":5000,\"nullable\":true,\"type\":\"string\"}},\"title\":\"OrdersV2ResourceShippingDetails\",\"type\":\"object\",\"x-expandableFields\":[\"address\"]}",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 15,
-      "fingerprint": "sha256:1bdd43c909457518664a7ed2f2c496c30bb65e21719d9059ee4bf34dc32da6cf",
-      "api": "stripe",
+      "fingerprint": "sha256:4f9a0a0d8f4039c5297bd3e123f6b6eeff9ee9e83ceaaf7243b206622ce6ef44",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "schema",
         "side": "response",
         "schema": "orders_v2_resource_tax_details"
@@ -299,18 +314,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/components/schemas/orders_v2_resource_tax_details",
       "source_excerpt": "{\"description\":\"\",\"properties\":{\"tax_exempt\":{\"description\":\"Describes the purchaser's tax exemption status. One of `none`, `exempt`, or `reverse`.\",\"enum\":[\"exempt\",\"none\",\"reverse\"],\"type\":\"string\"},\"tax_ids\":{\"description\":\"The purchaser's tax IDs to be used in calculation of tax for this Order.\",\"items\":{\"$ref\":\"#/components/schemas/orders_v2_resource_tax_details_resource_tax_id\"},\"type\":\"array\"}},\"required\":[\"tax_exempt\",\"tax_ids\"],\"title\":\"OrdersV2ResourceTaxDetails\",\"type\":\"object\",\"x-expandableFields\":[\"tax_ids\"]}",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 16,
-      "fingerprint": "sha256:29c4388ad46478e2626798dc0cb6330862b7bc69fb1f6cbc2d20b71b2d9d8c96",
-      "api": "stripe",
+      "fingerprint": "sha256:847dd5cef17d429f701017c65e46c95f0633fad47bb5c338b9663d20f3ad00a6",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "schema",
         "side": "response",
         "schema": "orders_v2_resource_tax_details_resource_tax_id"
@@ -319,18 +335,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/components/schemas/orders_v2_resource_tax_details_resource_tax_id",
       "source_excerpt": "{\"description\":\"\",\"properties\":{\"type\":{\"description\":\"The type of the tax ID, one of `eu_vat`, `br_cnpj`, `br_cpf`, `eu_oss_vat`, `gb_vat`, `nz_gst`, `au_abn`, `au_arn`, `in_gst`, `no_vat`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `jp_trn`, `li_uid`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, `ge_vat`, `ua_vat`, `is_vat`, `bg_uic`, `hu_tin`, `si_tin`, `ke_pin`, `tr_tin`, `eg_tin`, `ph_tin`, or `unknown`\",\"enum\":[\"ae_trn\",\"au_abn\",\"au_arn\",\"bg_uic\",\"br_cnpj\",\"br_cpf\",\"ca_bn\",\"ca_gst_hst\",\"ca_pst_bc\",\"ca_pst_mb\",\"ca_pst_sk\",\"ca_qst\",\"ch_vat\",\"cl_tin\",\"eg_tin\",\"es_cif\",\"eu_oss_vat\",\"eu_vat\",\"gb_vat\",\"ge_vat\",\"hk_br\",\"hu_tin\",\"id_npwp\",\"il_vat\",\"in_gst\",\"is_vat\",\"jp_cn\",\"jp_rn\",\"jp_trn\",\"ke_pin\",\"kr_brn\",\"li_uid\",\"mx_rfc\",\"my_frp\",\"my_itn\",\"my_sst\",\"no_vat\",\"nz_gst\",\"ph_tin\",\"ru_inn\",\"ru_kpp\",\"sa_vat\",\"sg_gst\",\"sg_uen\",\"si_tin\",\"th_vat\",\"tr_tin\",\"tw_vat\",\"ua_vat\",\"unknown\",\"us_ein\",\"za_vat\"],\"type\":\"string\"},\"value\":{\"description\":\"The value of the tax ID.\",\"maxLength\":5000,\"nullable\":true,\"type\":\"string\"}},\"required\":[\"type\"],\"title\":\"OrdersV2ResourceTaxDetailsResourceTaxID\",\"type\":\"object\",\"x-expandableFields\":[]}",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 17,
-      "fingerprint": "sha256:46953ef83464de24a5e8a3eb2b1867f9c1ce75f4be818f6c9b08ed487f25139a",
-      "api": "stripe",
+      "fingerprint": "sha256:6f2f64559ededab83adbf15ecca55d3dd48c88aad1f708cb5907e458ed9653a0",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "schema",
         "side": "response",
         "schema": "orders_v2_resource_total_details"
@@ -339,18 +356,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/components/schemas/orders_v2_resource_total_details",
       "source_excerpt": "{\"description\":\"\",\"properties\":{\"amount_discount\":{\"description\":\"This is the sum of all the discounts.\",\"type\":\"integer\"},\"amount_shipping\":{\"description\":\"This is the sum of all the shipping amounts.\",\"nullable\":true,\"type\":\"integer\"},\"amount_tax\":{\"description\":\"This is the sum of all the tax amounts.\",\"type\":\"integer\"},\"breakdown\":{\"$ref\":\"#/components/schemas/orders_v2_resource_total_details_api_resource_breakdown\"}},\"required\":[\"amount_discount\",\"amount_tax\"],\"title\":\"OrdersV2ResourceTotalDetails\",\"type\":\"object\",\"x-expandableFields\":[\"breakdown\"]}",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 18,
-      "fingerprint": "sha256:411b67b6f8b368f262426397e0d61c0b245365e90d6e0de45d2f47af4e68a8fa",
-      "api": "stripe",
+      "fingerprint": "sha256:0da3455e610083afd1cda26af94cf97e15c1dc0d8284cf017e4c8264d4e91106",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "schema",
         "side": "response",
         "schema": "orders_v2_resource_total_details_api_resource_breakdown"
@@ -359,18 +377,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/components/schemas/orders_v2_resource_total_details_api_resource_breakdown",
       "source_excerpt": "{\"description\":\"\",\"properties\":{\"discounts\":{\"description\":\"The aggregated discounts.\",\"items\":{\"$ref\":\"#/components/schemas/line_items_discount_amount\"},\"type\":\"array\"},\"taxes\":{\"description\":\"The aggregated tax amounts by rate.\",\"items\":{\"$ref\":\"#/components/schemas/line_items_tax_amount\"},\"type\":\"array\"}},\"required\":[\"discounts\",\"taxes\"],\"title\":\"OrdersV2ResourceTotalDetailsAPIResourceBreakdown\",\"type\":\"object\",\"x-expandableFields\":[\"discounts\",\"taxes\"]}",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 19,
-      "fingerprint": "sha256:e78b66554958d04665b9746676a62d0264e5394e98901a782018af637735d049",
-      "api": "stripe",
+      "fingerprint": "sha256:62a4ecfe2bca21d8ee034ca1ae09ca816e6363a5ee6099ba7ad313e67d3a7738",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "schema",
         "side": "response",
         "schema": "orders_v2_resource_transfer_data"
@@ -379,18 +398,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/components/schemas/orders_v2_resource_transfer_data",
       "source_excerpt": "{\"description\":\"\",\"properties\":{\"amount\":{\"description\":\"The amount that will be transferred automatically when the order is paid. If no amount is set, the full amount is transferred. There cannot be any line items with recurring prices when using this field.\",\"nullable\":true,\"type\":\"integer\"},\"destination\":{\"anyOf\":[{\"maxLength\":5000,\"type\":\"string\"},{\"$ref\":\"#/components/schemas/account\"}],\"description\":\"ID of the Connected account receiving the transfer.\",\"x-expansionResources\":{\"oneOf\":[{\"$ref\":\"#/components/schemas/account\"}]}}},\"required\":[\"destination\"],\"title\":\"OrdersV2ResourceTransferData\",\"type\":\"object\",\"x-expandableFields\":[\"destination\"]}",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 20,
-      "fingerprint": "sha256:046db70bb055bf2aae454cb61f66d84532e9725002540f483ed6f22214af1d5b",
-      "api": "stripe",
+      "fingerprint": "sha256:4f4c165c6c54d1a8ddd15322f14db35b4758c8b5134b675771a1babb4ad67ee1",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "schema_property",
         "side": "response",
         "schema": "payment_intent",
@@ -400,18 +420,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/components/schemas/payment_intent/properties/charges",
       "source_excerpt": "{\"description\":\"Charges that were created by this PaymentIntent, if any.\",\"properties\":{\"data\":{\"description\":\"This list only contains the latest charge, even if there were previously multiple unsuccessful charges. To view all previous charges for a PaymentIntent, you can filter the charges list using the `payment_intent` [parameter](https://stripe.com/docs/api/charges/list#list_charges-payment_intent).\",\"items\":{\"$ref\":\"#/components/schemas/charge\"},\"type\":\"array\"},\"has_more\":{\"description\":\"True if this list has another page of items after this one that can be fetched.\",\"type\":\"boolean\"},\"object\":{\"description\":\"String representing the object's type. Objects of the same type share the same value. Always has the value `list`.\",\"enum\":[\"list\"],\"type\":\"string\"},\"url\":{\"description\":\"The URL where this list can be accessed.\",\"maxLength\":5000,\"type\":\"string\"}},\"required\":[\"data\",\"has_more\",\"object\",\"url\"],\"title\":\"PaymentFlowsPaymentIntentResourceChargeList\",\"type\":\"object\",\"x-expandableFields\":[\"data\"]}",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 21,
-      "fingerprint": "sha256:ada6416e3f66223fe7506b5061a93d844156f09a6c40a4d7d6ef8e1d1cea8b09",
-      "api": "stripe",
+      "fingerprint": "sha256:4a3568912f55fb9a0d323e4187eea8d5f3950be3061527d53473e77a8e604f22",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "new_feature",
       "breaking": false,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "schema_property",
         "side": "response",
         "schema": "payment_intent",
@@ -421,18 +442,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v208/openapi/spec3.json",
       "source_pointer": "/components/schemas/payment_intent/properties/latest_charge",
       "source_excerpt": "{\"anyOf\":[{\"maxLength\":5000,\"type\":\"string\"},{\"$ref\":\"#/components/schemas/charge\"}],\"description\":\"The latest charge created by this payment intent.\",\"nullable\":true,\"x-expansionResources\":{\"oneOf\":[{\"$ref\":\"#/components/schemas/charge\"}]}}",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 22,
-      "fingerprint": "sha256:0ec41b807a348a37b483045f61349cc5f7f4ecc3edabc0753a286ec95b5a9efb",
-      "api": "stripe",
+      "fingerprint": "sha256:7bd2c2dcf82e3d16837fbd6c92853df42d80c1f37328b6b7689e57fe4c052ccf",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "schema",
         "side": "response",
         "schema": "payment_method_options_paypal"
@@ -441,18 +463,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/components/schemas/payment_method_options_paypal",
       "source_excerpt": "{\"description\":\"\",\"properties\":{\"capture_method\":{\"description\":\"Controls when the funds will be captured from the customer's account.\",\"enum\":[\"manual\"],\"type\":\"string\"},\"preferred_locale\":{\"description\":\"Preferred locale of the PayPal checkout page that the customer is redirected to.\",\"maxLength\":5000,\"nullable\":true,\"type\":\"string\"}},\"title\":\"payment_method_options_paypal\",\"type\":\"object\",\"x-expandableFields\":[]}",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 23,
-      "fingerprint": "sha256:0b340e25ff490fb00302880d0276ade8f728ff593756b2d84287bf01bb485f25",
-      "api": "stripe",
+      "fingerprint": "sha256:8d3a813a8a38e994e6876a32ba5b0b662d96341494fa362bfda7504e69e08e40",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "schema",
         "side": "response",
         "schema": "sku"
@@ -461,18 +484,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/components/schemas/sku",
       "source_excerpt": "{\"description\":\"Stores representations of [stock keeping units](http://en.wikipedia.org/wiki/Stock_keeping_unit).\\nSKUs describe specific product variations, taking into account any combination of: attributes,\\ncurrency, and cost. For example, a product may be a T-shirt, whereas a specific SKU represents\\nthe `size: large`, `color: red` version of that shirt.\\n\\nCan also be used to manage inventory.\",\"properties\":{\"active\":{\"description\":\"Whether the SKU is available for purchase.\",\"type\":\"boolean\"},\"attributes\":{\"additionalProperties\":{\"maxLength\":5000,\"type\":\"string\"},\"description\":\"A dictionary of attributes and values for the attributes defined by the product. If, for example, a product's attributes are `[\\\"size\\\", \\\"gender\\\"]`, a valid SKU has the following dictionary of attributes: `{\\\"size\\\": \\\"Medium\\\", \\\"gender\\\": \\\"Unisex\\\"}`.\",\"type\":\"object\"},\"created\":{\"description\":\"Time at which the object was created. Measured in seconds since the Unix epoch.\",\"format\":\"unix-time\",\"type\":\"integer\"},\"currency\":{\"description\":\"Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).\",\"type\":\"string\"},\"id\":{\"description\":\"Unique identifier for the object.\",\"maxLength\":5000,\"type\":\"string\"},\"image\":{\"description\":\"The URL of an image for this SKU, meant to be displayable to the customer.\",\"maxLength\":2048,\"nullable\":true,\"type\":\"string\"},\"inventory\":{\"$ref\":\"#/components/schemas/sku_inventory\"},\"livemode\":{\"description\":\"Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.\",\"type\":\"boolean\"},\"metadata\":{\"additionalProperties\":{\"maxLength\":500,\"type\":\"string\"},\"description\":\"Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.\",\"type\":\"object\"},\"object\":{\"description\":\"S…",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 24,
-      "fingerprint": "sha256:932af5a181db2902eee4df19a869b2f7115b04056bf6bea20daacc78dd0a8bec",
-      "api": "stripe",
+      "fingerprint": "sha256:6c377109ae7f032fc0b9ecae1aab716cc7995e183512faf607b81786ce95a7ef",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "schema",
         "side": "response",
         "schema": "sku_inventory"
@@ -481,18 +505,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/components/schemas/sku_inventory",
       "source_excerpt": "{\"description\":\"\",\"properties\":{\"quantity\":{\"description\":\"The count of inventory available. Will be present if and only if `type` is `finite`.\",\"nullable\":true,\"type\":\"integer\"},\"type\":{\"description\":\"Inventory type. Possible values are `finite`, `bucket` (not quantified), and `infinite`.\",\"maxLength\":5000,\"type\":\"string\"},\"value\":{\"description\":\"An indicator of the inventory available. Possible values are `in_stock`, `limited`, and `out_of_stock`. Will be present if and only if `type` is `bucket`.\",\"maxLength\":5000,\"nullable\":true,\"type\":\"string\"}},\"required\":[\"type\"],\"title\":\"SKUInventory\",\"type\":\"object\",\"x-expandableFields\":[]}",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 25,
-      "fingerprint": "sha256:c433e079ecd62ed8943cfff3cd168d3765fb00b6452ed0f1bc2f410feb3a572d",
-      "api": "stripe",
+      "fingerprint": "sha256:ac0d4c8c330f1edf93e429407ca8f54989c0c91fc76dc5e1d9db7e2a7ac52352",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "operation",
         "side": "request",
         "operation": "GET /v1/orders"
@@ -501,18 +526,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/paths/~1v1~1orders/get",
       "source_excerpt": "{\"description\":\"\\u003cp\\u003eReturns a list of your orders. The orders are returned sorted by creation date, with the most recently created orders appearing first.\\u003c/p\\u003e\",\"operationId\":\"GetOrders\",\"parameters\":[{\"description\":\"Only return orders for the given customer.\",\"in\":\"query\",\"name\":\"customer\",\"required\":false,\"schema\":{\"maxLength\":5000,\"type\":\"string\"},\"style\":\"form\"},{\"description\":\"A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.\",\"in\":\"query\",\"name\":\"ending_before\",\"required\":false,\"schema\":{\"type\":\"string\"},\"style\":\"form\"},{\"description\":\"Specifies which fields in the response should be expanded.\",\"explode\":true,\"in\":\"query\",\"name\":\"expand\",\"required\":false,\"schema\":{\"items\":{\"maxLength\":5000,\"type\":\"string\"},\"type\":\"array\"},\"style\":\"deepObject\"},{\"description\":\"A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.\",\"in\":\"query\",\"name\":\"limit\",\"required\":false,\"schema\":{\"type\":\"integer\"},\"style\":\"form\"},{\"description\":\"A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.\",\"in\":\"query\",\"name\":\"starting_after\",\"required\":false,\"schema\":{\"type\":\"string\"},\"style\":\"form\"}],\"requestBody\":{\"content\":{\"application/x-www-form-urlencoded\":{\"encoding\":{},\"schema\":{\"additionalProperties\":false,\"properties\":{},\"type\":\"object\"}}},\"required\":false},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"description\":\"\",\"properties\":{\"data\":{\"items\":{\"$ref\":\"#/components/schemas/order\"},\"type\":\"array\"},\"has_more\":{\"descrip…",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 26,
-      "fingerprint": "sha256:4e0d6d25ac30cc9cf44313f6492374c53974db0d0e019e168c44d2003c0c0bf4",
-      "api": "stripe",
+      "fingerprint": "sha256:61e458893e2703c9a6d5d899d8260a005d4d30c3123c5e561c0d6860fb248fe6",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "operation",
         "side": "request",
         "operation": "POST /v1/orders"
@@ -521,18 +547,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/paths/~1v1~1orders/post",
       "source_excerpt": "{\"description\":\"\\u003cp\\u003eCreates a new \\u003ccode\\u003eopen\\u003c/code\\u003e order object.\\u003c/p\\u003e\",\"operationId\":\"PostOrders\",\"requestBody\":{\"content\":{\"application/x-www-form-urlencoded\":{\"encoding\":{\"automatic_tax\":{\"explode\":true,\"style\":\"deepObject\"},\"billing_details\":{\"explode\":true,\"style\":\"deepObject\"},\"client_permissions\":{\"explode\":true,\"style\":\"deepObject\"},\"discounts\":{\"explode\":true,\"style\":\"deepObject\"},\"expand\":{\"explode\":true,\"style\":\"deepObject\"},\"line_items\":{\"explode\":true,\"style\":\"deepObject\"},\"metadata\":{\"explode\":true,\"style\":\"deepObject\"},\"payment\":{\"explode\":true,\"style\":\"deepObject\"},\"shipping_cost\":{\"explode\":true,\"style\":\"deepObject\"},\"shipping_details\":{\"explode\":true,\"style\":\"deepObject\"},\"tax_details\":{\"explode\":true,\"style\":\"deepObject\"}},\"schema\":{\"additionalProperties\":false,\"properties\":{\"automatic_tax\":{\"description\":\"Settings for automatic tax calculation for this order.\",\"properties\":{\"enabled\":{\"type\":\"boolean\"}},\"required\":[\"enabled\"],\"title\":\"automatic_tax\",\"type\":\"object\"},\"billing_details\":{\"anyOf\":[{\"properties\":{\"address\":{\"properties\":{\"city\":{\"maxLength\":5000,\"type\":\"string\"},\"country\":{\"maxLength\":5000,\"type\":\"string\"},\"line1\":{\"maxLength\":5000,\"type\":\"string\"},\"line2\":{\"maxLength\":5000,\"type\":\"string\"},\"postal_code\":{\"maxLength\":5000,\"type\":\"string\"},\"state\":{\"maxLength\":5000,\"type\":\"string\"}},\"title\":\"validated_optional_fields_address\",\"type\":\"object\"},\"email\":{\"type\":\"string\"},\"name\":{\"maxLength\":5000,\"type\":\"string\"},\"phone\":{\"maxLength\":20,\"type\":\"string\"}},\"title\":\"billing_details\",\"type\":\"object\"},{\"enum\":[\"\"],\"type\":\"string\"}],\"description\":\"Billing details for the customer. If a customer is provided, this will be automatically populated with values from that customer if override values are not provided.\"},\"client_permissions\":{\"description\":\"The fields on the order that are allowed to be updated from your frontend application with a publishable key and order client secret.\",\"properties\":{\"billing_det…",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 27,
-      "fingerprint": "sha256:536523eee4e952c5cfd8b2f05913ac789089c21e0d31d4f265c577d72120387a",
-      "api": "stripe",
+      "fingerprint": "sha256:74db8ee8e3707ba1a36f4392ea5938d0fe3736e35fa502cbb2821b71bb3d9e84",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "operation",
         "side": "request",
         "operation": "GET /v1/orders/{id}"
@@ -541,18 +568,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/paths/~1v1~1orders~1{id}/get",
       "source_excerpt": "{\"description\":\"\\u003cp\\u003eRetrieves the details of an existing order. Supply the unique order ID from either an order creation request or the order list, and Stripe will return the corresponding order information.\\u003c/p\\u003e\",\"operationId\":\"GetOrdersId\",\"parameters\":[{\"description\":\"Specifies which fields in the response should be expanded.\",\"explode\":true,\"in\":\"query\",\"name\":\"expand\",\"required\":false,\"schema\":{\"items\":{\"maxLength\":5000,\"type\":\"string\"},\"type\":\"array\"},\"style\":\"deepObject\"},{\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"maxLength\":5000,\"type\":\"string\"},\"style\":\"simple\"}],\"requestBody\":{\"content\":{\"application/x-www-form-urlencoded\":{\"encoding\":{},\"schema\":{\"additionalProperties\":false,\"properties\":{},\"type\":\"object\"}}},\"required\":false},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/order\"}}},\"description\":\"Successful response.\"},\"default\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/error\"}}},\"description\":\"Error response.\"}}}",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 28,
-      "fingerprint": "sha256:50748812f2eaec8bd5409be4217f060e44c6ce5ff63d23fcc16f452f0ba7de19",
-      "api": "stripe",
+      "fingerprint": "sha256:8b4e49306b4f95483d9da7888aeab3e6c731bf9b2e455ac03a3d89e16a823775",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "operation",
         "side": "request",
         "operation": "POST /v1/orders/{id}"
@@ -561,18 +589,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/paths/~1v1~1orders~1{id}/post",
       "source_excerpt": "{\"description\":\"\\u003cp\\u003eUpdates the specific order by setting the values of the parameters passed. Any parameters not provided will be left unchanged.\\u003c/p\\u003e\",\"operationId\":\"PostOrdersId\",\"parameters\":[{\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"maxLength\":5000,\"type\":\"string\"},\"style\":\"simple\"}],\"requestBody\":{\"content\":{\"application/x-www-form-urlencoded\":{\"encoding\":{\"automatic_tax\":{\"explode\":true,\"style\":\"deepObject\"},\"billing_details\":{\"explode\":true,\"style\":\"deepObject\"},\"client_permissions\":{\"explode\":true,\"style\":\"deepObject\"},\"discounts\":{\"explode\":true,\"style\":\"deepObject\"},\"expand\":{\"explode\":true,\"style\":\"deepObject\"},\"line_items\":{\"explode\":true,\"style\":\"deepObject\"},\"metadata\":{\"explode\":true,\"style\":\"deepObject\"},\"payment\":{\"explode\":true,\"style\":\"deepObject\"},\"shipping_cost\":{\"explode\":true,\"style\":\"deepObject\"},\"shipping_details\":{\"explode\":true,\"style\":\"deepObject\"},\"tax_details\":{\"explode\":true,\"style\":\"deepObject\"}},\"schema\":{\"additionalProperties\":false,\"properties\":{\"automatic_tax\":{\"description\":\"Settings for automatic tax calculation for this order.\",\"properties\":{\"enabled\":{\"type\":\"boolean\"}},\"required\":[\"enabled\"],\"title\":\"automatic_tax\",\"type\":\"object\"},\"billing_details\":{\"anyOf\":[{\"properties\":{\"address\":{\"properties\":{\"city\":{\"maxLength\":5000,\"type\":\"string\"},\"country\":{\"maxLength\":5000,\"type\":\"string\"},\"line1\":{\"maxLength\":5000,\"type\":\"string\"},\"line2\":{\"maxLength\":5000,\"type\":\"string\"},\"postal_code\":{\"maxLength\":5000,\"type\":\"string\"},\"state\":{\"maxLength\":5000,\"type\":\"string\"}},\"title\":\"validated_optional_fields_address\",\"type\":\"object\"},\"email\":{\"type\":\"string\"},\"name\":{\"maxLength\":5000,\"type\":\"string\"},\"phone\":{\"maxLength\":20,\"type\":\"string\"}},\"title\":\"billing_details\",\"type\":\"object\"},{\"enum\":[\"\"],\"type\":\"string\"}],\"description\":\"Billing details for the customer. If a customer is provided, this will be automatically populated with values from that customer if override values are not provided.\"},\"client_permissio…",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 29,
-      "fingerprint": "sha256:3b29bf72613c37462ed702dcccf447b67d854fe41ee6d70dd7eff8d37d3d6318",
-      "api": "stripe",
+      "fingerprint": "sha256:6936d737ecd19e1540427434f59be6551c28f8bd238d5e63e0587356568cfac3",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "operation",
         "side": "request",
         "operation": "POST /v1/orders/{id}/cancel"
@@ -581,18 +610,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/paths/~1v1~1orders~1{id}~1cancel/post",
       "source_excerpt": "{\"description\":\"\\u003cp\\u003eCancels the order as well as the payment intent if one is attached.\\u003c/p\\u003e\",\"operationId\":\"PostOrdersIdCancel\",\"parameters\":[{\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"maxLength\":5000,\"type\":\"string\"},\"style\":\"simple\"}],\"requestBody\":{\"content\":{\"application/x-www-form-urlencoded\":{\"encoding\":{\"expand\":{\"explode\":true,\"style\":\"deepObject\"}},\"schema\":{\"additionalProperties\":false,\"properties\":{\"expand\":{\"description\":\"Specifies which fields in the response should be expanded.\",\"items\":{\"maxLength\":5000,\"type\":\"string\"},\"type\":\"array\"}},\"type\":\"object\"}}},\"required\":false},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/order\"}}},\"description\":\"Successful response.\"},\"default\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/error\"}}},\"description\":\"Error response.\"}}}",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 30,
-      "fingerprint": "sha256:053810da9b4a082982c62116e79b7d743dac982d572708658a87e3079ef73b13",
-      "api": "stripe",
+      "fingerprint": "sha256:39de2015fd20a2f35f7086faf3badadd63787ea0ed760bfa0ccc7498e155746d",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "operation",
         "side": "request",
         "operation": "GET /v1/orders/{id}/line_items"
@@ -601,18 +631,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/paths/~1v1~1orders~1{id}~1line_items/get",
       "source_excerpt": "{\"description\":\"\\u003cp\\u003eWhen retrieving an order, there is an includable \\u003cstrong\\u003eline_items\\u003c/strong\\u003e property containing the first handful of those items. There is also a URL where you can retrieve the full (paginated) list of line items.\\u003c/p\\u003e\",\"operationId\":\"GetOrdersIdLineItems\",\"parameters\":[{\"description\":\"A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.\",\"in\":\"query\",\"name\":\"ending_before\",\"required\":false,\"schema\":{\"maxLength\":5000,\"type\":\"string\"},\"style\":\"form\"},{\"description\":\"Specifies which fields in the response should be expanded.\",\"explode\":true,\"in\":\"query\",\"name\":\"expand\",\"required\":false,\"schema\":{\"items\":{\"maxLength\":5000,\"type\":\"string\"},\"type\":\"array\"},\"style\":\"deepObject\"},{\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"maxLength\":5000,\"type\":\"string\"},\"style\":\"simple\"},{\"description\":\"A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.\",\"in\":\"query\",\"name\":\"limit\",\"required\":false,\"schema\":{\"type\":\"integer\"},\"style\":\"form\"},{\"description\":\"A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.\",\"in\":\"query\",\"name\":\"starting_after\",\"required\":false,\"schema\":{\"maxLength\":5000,\"type\":\"string\"},\"style\":\"form\"}],\"requestBody\":{\"content\":{\"application/x-www-form-urlencoded\":{\"encoding\":{},\"schema\":{\"additionalProperties\":false,\"properties\":{},\"type\":\"object\"}}},\"required\":false},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"description\":\"\",\"properties\":{\"data\":{\"d…",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 31,
-      "fingerprint": "sha256:7031be88827866976283257ddd844835f4ae65b18677a5a76d3bfea58c498008",
-      "api": "stripe",
+      "fingerprint": "sha256:f53d52b2cbb7aa2193c24360496ed9e9c71611d85e14b53af5b80e454969a5d1",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "operation",
         "side": "request",
         "operation": "POST /v1/orders/{id}/reopen"
@@ -621,18 +652,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/paths/~1v1~1orders~1{id}~1reopen/post",
       "source_excerpt": "{\"description\":\"\\u003cp\\u003eReopens a \\u003ccode\\u003esubmitted\\u003c/code\\u003e order.\\u003c/p\\u003e\",\"operationId\":\"PostOrdersIdReopen\",\"parameters\":[{\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"maxLength\":5000,\"type\":\"string\"},\"style\":\"simple\"}],\"requestBody\":{\"content\":{\"application/x-www-form-urlencoded\":{\"encoding\":{\"expand\":{\"explode\":true,\"style\":\"deepObject\"}},\"schema\":{\"additionalProperties\":false,\"properties\":{\"expand\":{\"description\":\"Specifies which fields in the response should be expanded.\",\"items\":{\"maxLength\":5000,\"type\":\"string\"},\"type\":\"array\"}},\"type\":\"object\"}}},\"required\":false},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/order\"}}},\"description\":\"Successful response.\"},\"default\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/error\"}}},\"description\":\"Error response.\"}}}",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 32,
-      "fingerprint": "sha256:49537b882a9f467a5253bc648ce3d4cd037b753e46a22eba20109e11e8d974b8",
-      "api": "stripe",
+      "fingerprint": "sha256:fa0d987afe6c76ac69be71e9e9d6e7b949aaf6409665be026a98dd0dc5da8a57",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "operation",
         "side": "request",
         "operation": "POST /v1/orders/{id}/submit"
@@ -641,18 +673,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/paths/~1v1~1orders~1{id}~1submit/post",
       "source_excerpt": "{\"description\":\"\\u003cp\\u003eSubmitting an Order transitions the status to \\u003ccode\\u003eprocessing\\u003c/code\\u003e and creates a PaymentIntent object so the order can be paid. If the Order has an \\u003ccode\\u003eamount_total\\u003c/code\\u003e of 0, no PaymentIntent object will be created. Once the order is submitted, its contents cannot be changed, unless the \\u003ca href=\\\"#reopen_order\\\"\\u003ereopen\\u003c/a\\u003e method is called.\\u003c/p\\u003e\",\"operationId\":\"PostOrdersIdSubmit\",\"parameters\":[{\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"maxLength\":5000,\"type\":\"string\"},\"style\":\"simple\"}],\"requestBody\":{\"content\":{\"application/x-www-form-urlencoded\":{\"encoding\":{\"expand\":{\"explode\":true,\"style\":\"deepObject\"}},\"schema\":{\"additionalProperties\":false,\"properties\":{\"expand\":{\"description\":\"Specifies which fields in the response should be expanded.\",\"items\":{\"maxLength\":5000,\"type\":\"string\"},\"type\":\"array\"},\"expected_total\":{\"description\":\"`expected_total` should always be set to the order's `amount_total` field. If they don't match, submitting the order will fail. This helps detect race conditions where something else concurrently modifies the order.\",\"type\":\"integer\"}},\"required\":[\"expected_total\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/order\"}}},\"description\":\"Successful response.\"},\"default\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/error\"}}},\"description\":\"Error response.\"}}}",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 33,
-      "fingerprint": "sha256:01f774682b3029d82283079e7dd1474fb6966da78d10fb7f9a8f727ab8143df9",
-      "api": "stripe",
+      "fingerprint": "sha256:0808b6e17cc92b253a00a13ffebbdd30e810356609cece9be7a9defa7a84dac4",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "operation",
         "side": "request",
         "operation": "GET /v1/skus"
@@ -661,18 +694,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/paths/~1v1~1skus/get",
       "source_excerpt": "{\"description\":\"\\u003cp\\u003eReturns a list of your SKUs. The SKUs are returned sorted by creation date, with the most recently created SKUs appearing first.\\u003c/p\\u003e\",\"operationId\":\"GetSkus\",\"parameters\":[{\"description\":\"Only return SKUs that are active or inactive (e.g., pass `false` to list all inactive products).\",\"in\":\"query\",\"name\":\"active\",\"required\":false,\"schema\":{\"type\":\"boolean\"},\"style\":\"form\"},{\"description\":\"Only return SKUs that have the specified key-value pairs in this partially constructed dictionary. Can be specified only if `product` is also supplied. For instance, if the associated product has attributes `[\\\"color\\\", \\\"size\\\"]`, passing in `attributes[color]=red` returns all the SKUs for this product that have `color` set to `red`.\",\"explode\":true,\"in\":\"query\",\"name\":\"attributes\",\"required\":false,\"schema\":{\"additionalProperties\":{\"maxLength\":500,\"type\":\"string\"},\"type\":\"object\"},\"style\":\"deepObject\"},{\"description\":\"A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.\",\"in\":\"query\",\"name\":\"ending_before\",\"required\":false,\"schema\":{\"maxLength\":5000,\"type\":\"string\"},\"style\":\"form\"},{\"description\":\"Specifies which fields in the response should be expanded.\",\"explode\":true,\"in\":\"query\",\"name\":\"expand\",\"required\":false,\"schema\":{\"items\":{\"maxLength\":5000,\"type\":\"string\"},\"type\":\"array\"},\"style\":\"deepObject\"},{\"description\":\"Only return SKUs with the given IDs.\",\"explode\":true,\"in\":\"query\",\"name\":\"ids\",\"required\":false,\"schema\":{\"items\":{\"maxLength\":5000,\"type\":\"string\"},\"type\":\"array\"},\"style\":\"deepObject\"},{\"description\":\"Only return SKUs that are either in stock or out of stock (e.g., pass `false` to list all SKUs that are out of stock). If no value is provided, all SKUs are returned.\",\"in\":\"query\",\"na…",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 34,
-      "fingerprint": "sha256:df95e9fcc8338cc0bfc904300a89e9d5c7f2bfa5c6589fcc51f63c449acc9d29",
-      "api": "stripe",
+      "fingerprint": "sha256:582e227f150d95e862a1fb7ea5301754be155621d20ea7201405365fb14e3ec1",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "operation",
         "side": "request",
         "operation": "POST /v1/skus"
@@ -681,18 +715,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/paths/~1v1~1skus/post",
       "source_excerpt": "{\"description\":\"\\u003cp\\u003eCreates a new SKU associated with a product.\\u003c/p\\u003e\",\"operationId\":\"PostSkus\",\"requestBody\":{\"content\":{\"application/x-www-form-urlencoded\":{\"encoding\":{\"attributes\":{\"explode\":true,\"style\":\"deepObject\"},\"expand\":{\"explode\":true,\"style\":\"deepObject\"},\"inventory\":{\"explode\":true,\"style\":\"deepObject\"},\"metadata\":{\"explode\":true,\"style\":\"deepObject\"},\"package_dimensions\":{\"explode\":true,\"style\":\"deepObject\"}},\"schema\":{\"additionalProperties\":false,\"properties\":{\"active\":{\"description\":\"Whether the SKU is available for purchase. Default to `true`.\",\"type\":\"boolean\"},\"attributes\":{\"additionalProperties\":{\"maxLength\":500,\"type\":\"string\"},\"description\":\"A dictionary of attributes and values for the attributes defined by the product. If, for example, a product's attributes are `[\\\"size\\\", \\\"gender\\\"]`, a valid SKU has the following dictionary of attributes: `{\\\"size\\\": \\\"Medium\\\", \\\"gender\\\": \\\"Unisex\\\"}`.\",\"type\":\"object\"},\"currency\":{\"description\":\"Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).\",\"type\":\"string\"},\"expand\":{\"description\":\"Specifies which fields in the response should be expanded.\",\"items\":{\"maxLength\":5000,\"type\":\"string\"},\"type\":\"array\"},\"id\":{\"description\":\"The identifier for the SKU. Must be unique. If not provided, an identifier will be randomly generated.\",\"type\":\"string\"},\"image\":{\"description\":\"The URL of an image for this SKU, meant to be displayable to the customer.\",\"maxLength\":5000,\"type\":\"string\"},\"inventory\":{\"description\":\"Description of the SKU's inventory.\",\"properties\":{\"quantity\":{\"type\":\"integer\"},\"type\":{\"enum\":[\"bucket\",\"finite\",\"infinite\"],\"type\":\"string\"},\"value\":{\"enum\":[\"\",\"in_stock\",\"limited\",\"out_of_stock\"],\"type\":\"string\"}},\"required\":[\"type\"],\"title\":\"inventory_create_specs\",\"type\":\"object\"},\"metadata\":{\"additionalProperties\":{\"type\":\"string\"},\"description\":\"Set of [key-value…",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 35,
-      "fingerprint": "sha256:14caca76e88e241c1ea210b00e58f57f169aed5b283ad2be8ff54ec52a915973",
-      "api": "stripe",
+      "fingerprint": "sha256:ee12f22abce7e5d56a6d029ec306e54524588051967305609d98dc4d1f7c8da8",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "operation",
         "side": "request",
         "operation": "DELETE /v1/skus/{id}"
@@ -701,18 +736,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/paths/~1v1~1skus~1{id}/delete",
       "source_excerpt": "{\"description\":\"\\u003cp\\u003eDelete a SKU. Deleting a SKU is only possible until it has been used in an order.\\u003c/p\\u003e\",\"operationId\":\"DeleteSkusId\",\"parameters\":[{\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"maxLength\":5000,\"type\":\"string\"},\"style\":\"simple\"}],\"requestBody\":{\"content\":{\"application/x-www-form-urlencoded\":{\"encoding\":{},\"schema\":{\"additionalProperties\":false,\"properties\":{},\"type\":\"object\"}}},\"required\":false},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/deleted_sku\"}}},\"description\":\"Successful response.\"},\"default\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/error\"}}},\"description\":\"Error response.\"}}}",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 36,
-      "fingerprint": "sha256:72d9ff39f42d1184ff5eed289fcd3e4e0151bd6706c6cbc7702fb8a38aaa098b",
-      "api": "stripe",
+      "fingerprint": "sha256:2af9a32e23e3b6e422640e827bec1c692547d9d3083f190df63d4c963e9d059b",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "operation",
         "side": "request",
         "operation": "GET /v1/skus/{id}"
@@ -721,18 +757,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/paths/~1v1~1skus~1{id}/get",
       "source_excerpt": "{\"description\":\"\\u003cp\\u003eRetrieves the details of an existing SKU. Supply the unique SKU identifier from either a SKU creation request or from the product, and Stripe will return the corresponding SKU information.\\u003c/p\\u003e\",\"operationId\":\"GetSkusId\",\"parameters\":[{\"description\":\"Specifies which fields in the response should be expanded.\",\"explode\":true,\"in\":\"query\",\"name\":\"expand\",\"required\":false,\"schema\":{\"items\":{\"maxLength\":5000,\"type\":\"string\"},\"type\":\"array\"},\"style\":\"deepObject\"},{\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"maxLength\":5000,\"type\":\"string\"},\"style\":\"simple\"}],\"requestBody\":{\"content\":{\"application/x-www-form-urlencoded\":{\"encoding\":{},\"schema\":{\"additionalProperties\":false,\"properties\":{},\"type\":\"object\"}}},\"required\":false},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"anyOf\":[{\"$ref\":\"#/components/schemas/sku\"},{\"$ref\":\"#/components/schemas/deleted_sku\"}]}}},\"description\":\"Successful response.\"},\"default\":{\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/error\"}}},\"description\":\"Error response.\"}}}",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 37,
-      "fingerprint": "sha256:4d2fb0cb8eb68432abf0d1411ae80c0bca0bc7a225bca54ffc9dae4a4a18bb5e",
-      "api": "stripe",
+      "fingerprint": "sha256:f86d32486304957f08eae09bcd690bf6a166dd74bb970e275af33c55b60caf8b",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "breaking",
       "breaking": true,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "operation",
         "side": "request",
         "operation": "POST /v1/skus/{id}"
@@ -741,18 +778,19 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v207/openapi/spec3.json",
       "source_pointer": "/paths/~1v1~1skus~1{id}/post",
       "source_excerpt": "{\"description\":\"\\u003cp\\u003eUpdates the specific SKU by setting the values of the parameters passed. Any parameters not provided will be left unchanged.\\u003c/p\\u003e\\n\\n\\u003cp\\u003eNote that a SKU’s \\u003ccode\\u003eattributes\\u003c/code\\u003e are not editable. Instead, you would need to deactivate the existing SKU and create a new one with the new attribute values.\\u003c/p\\u003e\",\"operationId\":\"PostSkusId\",\"parameters\":[{\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"maxLength\":5000,\"type\":\"string\"},\"style\":\"simple\"}],\"requestBody\":{\"content\":{\"application/x-www-form-urlencoded\":{\"encoding\":{\"attributes\":{\"explode\":true,\"style\":\"deepObject\"},\"expand\":{\"explode\":true,\"style\":\"deepObject\"},\"inventory\":{\"explode\":true,\"style\":\"deepObject\"},\"metadata\":{\"explode\":true,\"style\":\"deepObject\"},\"package_dimensions\":{\"explode\":true,\"style\":\"deepObject\"}},\"schema\":{\"additionalProperties\":false,\"properties\":{\"active\":{\"description\":\"Whether this SKU is available for purchase.\",\"type\":\"boolean\"},\"attributes\":{\"additionalProperties\":{\"maxLength\":500,\"type\":\"string\"},\"description\":\"A dictionary of attributes and values for the attributes defined by the product. When specified, `attributes` will partially update the existing attributes dictionary on the product, with the postcondition that a value must be present for each attribute key on the product.\",\"type\":\"object\"},\"currency\":{\"description\":\"Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).\",\"type\":\"string\"},\"expand\":{\"description\":\"Specifies which fields in the response should be expanded.\",\"items\":{\"maxLength\":5000,\"type\":\"string\"},\"type\":\"array\"},\"image\":{\"description\":\"The URL of an image for this SKU, meant to be displayable to the customer.\",\"maxLength\":5000,\"type\":\"string\"},\"inventory\":{\"description\":\"Description of the SKU's inventory.\",\"properties\":{\"quantity\":{\"type\":\"integer\"},\"type\":{\"enum\":[\"bu…",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     },
     {
       "id": 38,
-      "fingerprint": "sha256:7b3de270bf47b96b20c381b1d5c44f98143457d2732fef9d7969d23b202c5ed2",
-      "api": "stripe",
+      "fingerprint": "sha256:5e0bf470298434a89ce8711c823cf4f40ad76371ab7e4dc2c4713391d324d4bf",
+      "api": "stripe/api",
       "version": "2022-11-15",
       "previous_version": "2022-08-01",
       "change_type": "new_feature",
       "breaking": false,
-      "affected": {
+      "subject": {
+        "type": "api_operation",
         "kind": "request_parameter",
         "side": "request",
         "operation": "POST /v1/webhook_endpoints",
@@ -762,7 +800,7 @@
       "source_url": "https://raw.githubusercontent.com/stripe/openapi/v208/openapi/spec3.json",
       "source_pointer": "/paths/~1v1~1webhook_endpoints/post/requestBody/content/application~1x-www-form-urlencoded/schema/properties/api_version/enum",
       "source_excerpt": "[\"2011-01-01\",\"2011-06-21\",\"2011-06-28\",\"2011-08-01\",\"2011-09-15\",\"2011-11-17\",\"2012-02-23\",\"2012-03-25\",\"2012-06-18\",\"2012-06-28\",\"2012-07-09\",\"2012-09-24\",\"2012-10-26\",\"2012-11-07\",\"2013-02-11\",\"2013-02-13\",\"2013-07-05\",\"2013-08-12\",\"2013-08-13\",\"2013-10-29\",\"2013-12-03\",\"2014-01-31\",\"2014-03-13\",\"2014-03-28\",\"2014-05-19\",\"2014-06-13\",\"2014-06-17\",\"2014-07-22\",\"2014-07-26\",\"2014-08-04\",\"2014-08-20\",\"2014-09-08\",\"2014-10-07\",\"2014-11-05\",\"2014-11-20\",\"2014-12-08\",\"2014-12-17\",\"2014-12-22\",\"2015-01-11\",\"2015-01-26\",\"2015-02-10\",\"2015-02-16\",\"2015-02-18\",\"2015-03-24\",\"2015-04-07\",\"2015-06-15\",\"2015-07-07\",\"2015-07-13\",\"2015-07-28\",\"2015-08-07\",\"2015-08-19\",\"2015-09-03\",\"2015-09-08\",\"2015-09-23\",\"2015-10-01\",\"2015-10-12\",\"2015-10-16\",\"2016-02-03\",\"2016-02-19\",\"2016-02-22\",\"2016-02-23\",\"2016-02-29\",\"2016-03-07\",\"2016-06-15\",\"2016-07-06\",\"2016-10-19\",\"2017-01-27\",\"2017-02-14\",\"2017-04-06\",\"2017-05-25\",\"2017-06-05\",\"2017-08-15\",\"2017-12-14\",\"2018-01-23\",\"2018-02-05\",\"2018-02-06\",\"2018-02-28\",\"2018-05-21\",\"2018-07-27\",\"2018-08-23\",\"2018-09-06\",\"2018-09-24\",\"2018-10-31\",\"2018-11-08\",\"2019-02-11\",\"2019-02-19\",\"2019-03-14\",\"2019-05-16\",\"2019-08-14\",\"2019-09-09\",\"2019-10-08\",\"2019-10-17\",\"2019-11-05\",\"2019-12-03\",\"2020-03-02\",\"2020-08-27\",\"2022-08-01\",\"2022-11-15\"]",
-      "confidence": 1,
+      "confidence": 1.0,
       "detected_at": "2026-10-02T23:07:28.118307Z"
     }
   ]

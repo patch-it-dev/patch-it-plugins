@@ -4,6 +4,7 @@
     "fingerprint": "sha256:cb56adac1f3a1b3f106171fbc370c0ed910ca4e26c265a8af4d9b611a8ccd28d",
     "api": "cloudflare/api",
     "version": "2026-10-02",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -24,6 +25,7 @@
     "fingerprint": "sha256:09b314da125464c093d1f10907f3fbe93ba350f997632cac22cc01c508128c0d",
     "api": "cloudflare/api",
     "version": "2026-10-02",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -44,6 +46,7 @@
     "fingerprint": "sha256:30a6eacd3f6453c61a3c773d58d7562cf8a385bd5a27a0d63ebf1b4d0ebd2a7c",
     "api": "cloudflare/api",
     "version": "2026-10-02",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -64,6 +67,7 @@
     "fingerprint": "sha256:c7819950049c77f39919033207cbc15c099ab07cb905ca86160ecb8a155082cd",
     "api": "cloudflare/api",
     "version": "2027-03-31",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -84,6 +88,7 @@
     "fingerprint": "sha256:bedb26c4e258748b9b5cc003f057ec7f35f4d24d06fa20f6f8c9ff2f31057e92",
     "api": "cloudflare/api",
     "version": "2027-03-31",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -104,6 +109,7 @@
     "fingerprint": "sha256:42e4b366ee1ff7e298943b79aa8a6dc4463d359040fab9dad8b01c151d3e778b",
     "api": "cloudflare/api",
     "version": "2026-07-21",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -124,6 +130,7 @@
     "fingerprint": "sha256:bb96b97266df769aa7fcaccb9acb5a9c45d6710dae6cdd7dbe896b0f8ae2c50e",
     "api": "cloudflare/api",
     "version": "2026-07-21",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -144,6 +151,7 @@
     "fingerprint": "sha256:5e8f496408a25bba3b6e1df484c6bad28589213a2ed30ad95d60bf9b7248ca36",
     "api": "cloudflare/api",
     "version": "2026-07-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -164,6 +172,7 @@
     "fingerprint": "sha256:c74cc4fe6bd7220de67702e2c4b95c769b5a25ae9268568fc0dfb8cb7b511284",
     "api": "cloudflare/api",
     "version": "2026-07-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -184,6 +193,7 @@
     "fingerprint": "sha256:18cad2ef2fe48e787f1aa8f03a2585bf488789b96454cf62f33dc110a7fd7faa",
     "api": "cloudflare/api",
     "version": "2026-07-09",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -204,6 +214,7 @@
     "fingerprint": "sha256:a6adf32eab7e1b63c7147678a4954ba76bff4b087e0ac7fcc3c6c5e738ff16d3",
     "api": "cloudflare/api",
     "version": "2026-07-09",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -224,6 +235,7 @@
     "fingerprint": "sha256:3ea497d35767362d916e4a043f4f5b9c1305ef5a195a83bab759492e980f5d2a",
     "api": "cloudflare/api",
     "version": "2026-07-09",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -244,6 +256,7 @@
     "fingerprint": "sha256:a22b1027c2c81b3b926ba8e9efba378a018be84818dd90e46d6e18173bda543a",
     "api": "cloudflare/api",
     "version": "2025-09-18",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -264,6 +277,7 @@
     "fingerprint": "sha256:17b581c0fb930cece080b79d7274e6d5b6a0d3008bd35c42d02dfe61664bc486",
     "api": "cloudflare/api",
     "version": "2025-09-18",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -284,6 +298,7 @@
     "fingerprint": "sha256:75d26824c9ee18c8106edf4ddbae2a72d8a437fc109b4d76c029a43076e2311b",
     "api": "cloudflare/api",
     "version": "2026-09-27",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -304,6 +319,7 @@
     "fingerprint": "sha256:f40cf57ea9ebde836781999db0c4ed64e61d03ccf1d9f52842c9b3df9d54bc9b",
     "api": "cloudflare/api",
     "version": "2026-09-27",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -324,6 +340,7 @@
     "fingerprint": "sha256:1c722f6fea1c80a215657c119c6a26790387d00a538a95005a82e46c9488e56c",
     "api": "cloudflare/api",
     "version": "2026-09-27",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "breaking",
     "breaking": true,
     "subject": {
@@ -344,6 +361,7 @@
     "fingerprint": "sha256:9c4478afa6ea8f69da6bb8621392fd5d8c02e3ccb3f5c75670fe10e720983428",
     "api": "cloudflare/api",
     "version": "2025-12-09",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -364,6 +382,7 @@
     "fingerprint": "sha256:1b1459ce03ac27a49e8d75678ca4f389130da1083b4042b4ad92fe9ed022beb5",
     "api": "cloudflare/api",
     "version": "2025-12-09",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -384,6 +403,7 @@
     "fingerprint": "sha256:3d3a8051a8e6fafad5e79bc47334f8a4fbd4c01d3796d96d52583f674dd28e45",
     "api": "cloudflare/api",
     "version": "2025-11-11",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -404,6 +424,7 @@
     "fingerprint": "sha256:4e60f8fa58582e8def499610e7b81eab46dade7ec3964299482626980995d627",
     "api": "cloudflare/api",
     "version": "2025-11-11",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -424,6 +445,7 @@
     "fingerprint": "sha256:1853eaf0d910625df4d8d43bb8f2440f9d92c0465c4cf64dc5c4d96c129510a0",
     "api": "cloudflare/api",
     "version": "2025-11-11",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -444,6 +466,7 @@
     "fingerprint": "sha256:e36dc8458b216953d0efd03dd378d68ec7cf0cf6ddea8a2fe38887399f7abeec",
     "api": "cloudflare/api",
     "version": "2025-11-11",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -464,6 +487,7 @@
     "fingerprint": "sha256:ad3e460c87337f2a896091614fdcd3b88d72720dc312a79b0aebe50246fbbf8d",
     "api": "cloudflare/api",
     "version": "2025-11-11",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -484,6 +508,7 @@
     "fingerprint": "sha256:f8a8cfd845a7c2ab4c1b7c050d847ae2c47c804e8b99b7f60e9097a945a273a7",
     "api": "cloudflare/api",
     "version": "2025-11-03",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -504,6 +529,7 @@
     "fingerprint": "sha256:8c78397dd771f2d2bb226d7dcaaaf583ed67953839244a16df26e77348fbcf52",
     "api": "cloudflare/api",
     "version": "2025-11-03",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -524,6 +550,7 @@
     "fingerprint": "sha256:d87ac63c4f437079a03c4ce1cb086d0c2e3359d1430aae6868feace096519e7b",
     "api": "cloudflare/api",
     "version": "2025-07-01",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -544,6 +571,7 @@
     "fingerprint": "sha256:3415b78258b0540ed234add1379e0e735f46b695e98096dba089e707e3d1b045",
     "api": "cloudflare/api",
     "version": "2025-07-01",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -564,6 +592,7 @@
     "fingerprint": "sha256:ce2ffc810d604c55bec6b39856d3a81e2c97a8283b88e49dc7558f58f29ae344",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -584,6 +613,7 @@
     "fingerprint": "sha256:425ed49112f2e3782b9094a56fb34b5151353382ecef7bec60afc83aa67910f4",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -604,6 +634,7 @@
     "fingerprint": "sha256:33414c74a174db4bed18b866950ab5369f7225077c2d2733c3c5edb19d3a834f",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -624,6 +655,7 @@
     "fingerprint": "sha256:64805446332835abca89e331bb8f3916f8cabe89c49dff6fc2ea491717b1a938",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -644,6 +676,7 @@
     "fingerprint": "sha256:9a10ede8b22e5eb07b0270642d9d39e2ba8b3e00e4aace6fc438ce3fdb3f55a7",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -664,6 +697,7 @@
     "fingerprint": "sha256:f9cc9aa0cc85b5387ef64d7f9425d900227ee0b1aa04ec006e98f54cec0107c5",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -684,6 +718,7 @@
     "fingerprint": "sha256:a180c38f16c53abdebcee4a7965a74d83c2a1183d997b6511fd5db39759f9fd9",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -704,6 +739,7 @@
     "fingerprint": "sha256:7bc7e7bdfa4d514d8036aff3230c68729db4071ea4a31eef78cae0429da7a8aa",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -724,6 +760,7 @@
     "fingerprint": "sha256:3eb5ba7e10f2f270de01e4ae557d65309444fc7d1e44a12393c284806a8f274a",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -744,6 +781,7 @@
     "fingerprint": "sha256:1191798fc9d356794bb34dacbb1c4ee0eefb8ef43cfe003507249c6d38bb8ddd",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -764,6 +802,7 @@
     "fingerprint": "sha256:d869c9d886727d0a740569404f4cb6204ef9c90f951ef4b5068671fd2966247d",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -784,6 +823,7 @@
     "fingerprint": "sha256:06436d2eebf1ca793d5866ebb84b07f631f591a2efa15e0d2c52cad055ce0cd2",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -804,6 +844,7 @@
     "fingerprint": "sha256:b137d7f6e30122960f81975f3db97d7dc65291be284820b2e8595d7a517da2ad",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -824,6 +865,7 @@
     "fingerprint": "sha256:f52cb95e17a1267a8712549f2ea7b74748bcf0e0cd49fc2e5b2b0f289556b2d2",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -844,6 +886,7 @@
     "fingerprint": "sha256:259a3b7f1d8fd6ad5af3a6b5ce2448c0dc4b0720e5be5b962956d2cf89f13618",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -864,6 +907,7 @@
     "fingerprint": "sha256:be17ebd2c1ae1257cc3466756f3becd673cffaccc7cfbd51c78c7a8bb4a68f2f",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -884,6 +928,7 @@
     "fingerprint": "sha256:498acad448ff11d1ca7b4adf1743dc8319610e1e363cb8eef6ef06fb894fd752",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -904,6 +949,7 @@
     "fingerprint": "sha256:cecdafa7ca394cd10c66b4d1391d8cd0cb1406a98d562306945b65cf12f7d95c",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -924,6 +970,7 @@
     "fingerprint": "sha256:8e18580b12de646fced9e8639c075485602934bbecf31fb3fcd4626965e3130d",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -944,6 +991,7 @@
     "fingerprint": "sha256:5cf1987f172cad5871dc6e3431a88d91ac22d9d71139d76b1796382afd9ac354",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -964,6 +1012,7 @@
     "fingerprint": "sha256:6ffc521452c053a0219f42d91aee94d7258cc86595367653bfe258cbb9a58461",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -984,6 +1033,7 @@
     "fingerprint": "sha256:23496598d02a7dacc0db57301a3b758249b00c6f9bbd8d4db7b8d46c0ac6d9d8",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1004,6 +1054,7 @@
     "fingerprint": "sha256:503a4d7c97c38f6ea08752cde821c0013a3ea1b255a23e1ea261150d4728e110",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1024,6 +1075,7 @@
     "fingerprint": "sha256:3135305369b1b70e2f7d7e013de4dada5ee453d10af6b06f4c1079a929294bae",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1044,6 +1096,7 @@
     "fingerprint": "sha256:adec4debce9bb93c7982100da8ea92300e9340bcb6f7d812a6af3683568094ca",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1064,6 +1117,7 @@
     "fingerprint": "sha256:fc10048108b7ca3d08aba952289499ffa4ce3bd9a7f7bd16dddee5aef857e7ca",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1084,6 +1138,7 @@
     "fingerprint": "sha256:1bfef3838571477e1fa07a240dbd0aa4d7dbc5bbcd5ee6e3c039906ca230277d",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1104,6 +1159,7 @@
     "fingerprint": "sha256:295c6ae1775686ce83ddc54c0f37fdfa1ce0fbcb402f41386a9d657f9875ad2a",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1124,6 +1180,7 @@
     "fingerprint": "sha256:8661542398e02bcc1177b42fdea573219d96c63f95e0e8da732e8c2ae29e2a70",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1144,6 +1201,7 @@
     "fingerprint": "sha256:3ba9c7a5958e72c3fc7126273c692fae0c764ff0a6ebbc5b95259913a4edce36",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1164,6 +1222,7 @@
     "fingerprint": "sha256:f0e7ad06ea3277a4913178fb4496ca6f97c54ceb82a58d17da8fd1f01df0213e",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1184,6 +1243,7 @@
     "fingerprint": "sha256:d21dcb330f6468445190911528a37aadb910918003ea905a09854c99ba329af7",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1204,6 +1264,7 @@
     "fingerprint": "sha256:36bcd50c977f7fdc6a5454e930bd68320f86c25ead8c812748c3201f82a067f6",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1224,6 +1285,7 @@
     "fingerprint": "sha256:99d329002c578abd3af2041c2b4682d55de66c529a3a9fbe89d433ffa01b8481",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1244,6 +1306,7 @@
     "fingerprint": "sha256:de8b13bb295b1ff6caae04a075e87216f0587cefd47662958966a24cb5e3aa4e",
     "api": "cloudflare/api",
     "version": "2025-06-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1264,6 +1327,7 @@
     "fingerprint": "sha256:b4fbb0d5da10ef76dd972b661434a6384f51c5da400e35fa0e5b3a223c560f4e",
     "api": "cloudflare/api",
     "version": "2025-06-08",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1284,6 +1348,7 @@
     "fingerprint": "sha256:c7d5d01f2cbe9dc85c2d26beba55283a2d3d342bb7c4d86b575e39ea2acdb039",
     "api": "cloudflare/api",
     "version": "2025-06-08",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1304,6 +1369,7 @@
     "fingerprint": "sha256:936804624340abb866835350b87afd294a4a0c2a14720ee399fa971fe99722a1",
     "api": "cloudflare/api",
     "version": "2025-03-23",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1324,6 +1390,7 @@
     "fingerprint": "sha256:ae54224a3bc5f6c162d2a39c7ad1e2d8bfc294e8f095a6fb425b7fa92453991b",
     "api": "cloudflare/api",
     "version": "2024-09-13",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1344,6 +1411,7 @@
     "fingerprint": "sha256:109443f03dbd74f10fe9f23473f35c6c1a77a7a52fb1eeae2bc598e4da27d374",
     "api": "cloudflare/api",
     "version": "2024-09-13",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1364,6 +1432,7 @@
     "fingerprint": "sha256:369c1017e008311e30160fe237ba412fdfd5f7ea7fa371b0898aa9a6f1641c20",
     "api": "cloudflare/api",
     "version": "2024-09-13",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1384,6 +1453,7 @@
     "fingerprint": "sha256:3ed49bd15de4fe5681062e4ada006ef5db3a5c74d7e49297978b1f57750d8117",
     "api": "cloudflare/api",
     "version": "2024-09-13",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1404,6 +1474,7 @@
     "fingerprint": "sha256:1bbcf47531039df6cf26589463f5a2f842ceb391955619ee7870e81de246ea54",
     "api": "cloudflare/api",
     "version": "2024-08-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1424,6 +1495,7 @@
     "fingerprint": "sha256:236695e093c2ccc67a5d0e6934ed284839882d9d3f90fc090c9a835ac820c425",
     "api": "cloudflare/api",
     "version": "2024-08-15",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1444,6 +1516,7 @@
     "fingerprint": "sha256:8c9c7efb1ab475de41a640b1a5beacce9a7fb432140d7f6ef2c1ed59ca5b2a43",
     "api": "cloudflare/api",
     "version": "2024-08-05",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1464,6 +1537,7 @@
     "fingerprint": "sha256:e4bf3bfcd9b07ccea28cd701297ebcd097a8c076b278e433c421289ccbb97fd3",
     "api": "cloudflare/api",
     "version": "2024-08-05",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1484,6 +1558,7 @@
     "fingerprint": "sha256:9aafe90e8006993b02af0a7598b9fe358b7461a50a26c9ef3bcd476bb7117151",
     "api": "cloudflare/api",
     "version": "2024-06-30",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1504,6 +1579,7 @@
     "fingerprint": "sha256:8509160822c4ef1a919f6aa3dd4398cfcebd69871640d77e4157fcf2e15e3132",
     "api": "cloudflare/api",
     "version": "2024-06-30",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1524,6 +1600,7 @@
     "fingerprint": "sha256:0aaac98e595e36b46ceb4254db6cc4962321843161ca40d0bdf18bcbed8b8b95",
     "api": "cloudflare/api",
     "version": "2024-06-14",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1544,6 +1621,7 @@
     "fingerprint": "sha256:a8456ffb133b7cb1820c54e4d18d9f0c183b4a883f7f1350d778be153b193849",
     "api": "cloudflare/api",
     "version": "2024-06-14",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1564,6 +1642,7 @@
     "fingerprint": "sha256:f2cfb40aaeeab4290539cebc6893fca6e587f52077a98afbe884b0b32d225eb6",
     "api": "cloudflare/api",
     "version": "2024-03-31",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1584,6 +1663,7 @@
     "fingerprint": "sha256:fcc3a0e044104a636e7af25ca521259f1414eda448a7332a7fdf2099e9d5d39f",
     "api": "cloudflare/api",
     "version": "2024-03-31",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1604,6 +1684,7 @@
     "fingerprint": "sha256:ee771e91c7b543523172bbdfb878a4af0ee347e11fadb7ed1033c0b6f14dd409",
     "api": "cloudflare/api",
     "version": "2024-02-04",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1624,6 +1705,7 @@
     "fingerprint": "sha256:a6142510065d1ffcf3c9c9a8f3388407a4ebc6cc3ef6981d82a159182f7ff0d5",
     "api": "cloudflare/api",
     "version": "2024-02-04",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1644,6 +1726,7 @@
     "fingerprint": "sha256:5be7bbc18164d845bb6d4adf5279c70cec4bd5fafd8299cea0aaeda47e7a84ba",
     "api": "cloudflare/api",
     "version": "2024-02-04",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1664,6 +1747,7 @@
     "fingerprint": "sha256:365dabe9d8029ff07060a034692552147bd5a2dc6f4c244f473972bcceb3904d",
     "api": "cloudflare/api",
     "version": "2024-02-04",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1684,6 +1768,7 @@
     "fingerprint": "sha256:c06f2d43b44ce024984cc1ca7f8bfc5b91e8fe0f8a9572722dd894f650aab269",
     "api": "cloudflare/api",
     "version": "2023-06-06",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1704,6 +1789,7 @@
     "fingerprint": "sha256:d786e20b8b7fbfdf71c9f93ddeac2af72f846b0d205d06a0537090868dafbeb6",
     "api": "cloudflare/api",
     "version": "2023-06-06",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1724,6 +1810,7 @@
     "fingerprint": "sha256:b2afbae55523fba186e40b5bfbb15aa462217115282bce343803f3ddb0877f08",
     "api": "cloudflare/api",
     "version": "2023-06-06",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1744,6 +1831,7 @@
     "fingerprint": "sha256:726e750596fe086865365c9e5eec48b163a17a4bb5d0b3b1abb6e24f1c6b59b0",
     "api": "cloudflare/api",
     "version": "2023-03-19",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1764,6 +1852,7 @@
     "fingerprint": "sha256:9d7a295c950e6fc992e756fe4b308a0a7cbe6848b748dceb1e577644f63a2b30",
     "api": "cloudflare/api",
     "version": "2023-03-19",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1784,6 +1873,7 @@
     "fingerprint": "sha256:e7702469b58b59996a7c31f6d209015972cc45baafdb1dde110612124691ae29",
     "api": "cloudflare/api",
     "version": "2023-03-19",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1804,6 +1894,7 @@
     "fingerprint": "sha256:610abf032e5253a64d0750e8681965f304f4d06d793408c8e08bf484faec226f",
     "api": "cloudflare/api",
     "version": "2023-03-19",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1824,6 +1915,7 @@
     "fingerprint": "sha256:2b731caf0e50c134499509637343797743b8a2023659200500aa13ded66c67ba",
     "api": "cloudflare/api",
     "version": "2023-03-19",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1844,6 +1936,7 @@
     "fingerprint": "sha256:355a1b1dccc1f6848805f1db00f2ce6e0f9a1109a2419e04e33d8f37c7a6fdc5",
     "api": "cloudflare/api",
     "version": "2021-03-01",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1864,6 +1957,7 @@
     "fingerprint": "sha256:e7c7fb5bff926f4f70853f4e1870f11094b77c7127bf353f33b193fcde2e0e49",
     "api": "cloudflare/api",
     "version": "2021-03-01",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1884,6 +1978,7 @@
     "fingerprint": "sha256:b5255ba6484e57bf92ebccbed2bd621177ad3d7e3b7971bae28f86ba9b6e09e6",
     "api": "cloudflare/api",
     "version": "2020-04-02",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1904,6 +1999,7 @@
     "fingerprint": "sha256:24877e00b429dd7e1584482a562806e2e5da591145ff82d13219ffaea8886b8c",
     "api": "cloudflare/api",
     "version": "2020-04-02",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1924,6 +2020,7 @@
     "fingerprint": "sha256:b1b258188b319bdf1081f66da17b8e10c17fb7cc27f9dde1e8543bd4f9b6afd0",
     "api": "cloudflare/api",
     "version": "2020-04-02",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1944,6 +2041,7 @@
     "fingerprint": "sha256:b079a8269aa22a30276a3a69e8b93f74ab8e9d1fb515ee292986e6e0380d8d79",
     "api": "cloudflare/api",
     "version": "2020-04-02",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1964,6 +2062,7 @@
     "fingerprint": "sha256:fe435ea852be1ef8de5a64415eb78b6b2919b116784fc2c8cc8230bef77ad18c",
     "api": "cloudflare/api",
     "version": "2020-04-02",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -1984,6 +2083,7 @@
     "fingerprint": "sha256:7b9f1d90fa4b5fa3bd6d6a00710899b1c498a342e7acd16878ed5bc5c91c67db",
     "api": "cloudflare/api",
     "version": "2020-04-02",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -2004,6 +2104,7 @@
     "fingerprint": "sha256:671bde92a237483c9a9eedb2e1a71b8232c5a0ded304d482526a99dcdcc9a054",
     "api": "cloudflare/api",
     "version": "2020-04-02",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -2024,6 +2125,7 @@
     "fingerprint": "sha256:db3297f35829831ac31d4104ffe1a20351ea7dd8755befb052587f1b7ef6c961",
     "api": "cloudflare/api",
     "version": "2020-04-02",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -2044,6 +2146,7 @@
     "fingerprint": "sha256:ab70507b04fd7821be636e6c23c700bb3dd4c8a08a8bcd7a69cca6d2b8d64b2d",
     "api": "cloudflare/api",
     "version": "2020-04-02",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -2064,6 +2167,7 @@
     "fingerprint": "sha256:c268766c19deb3e42cafc70b0dc8a985ab4916225e175696d9cb440637d713f1",
     "api": "cloudflare/api",
     "version": "2020-04-02",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -2084,6 +2188,7 @@
     "fingerprint": "sha256:a187bc3652c53e1ac3fc4c1eed3e46c2dd381b9012be5553a4fac5acc6828d45",
     "api": "cloudflare/api",
     "version": "2020-04-02",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -2104,6 +2209,7 @@
     "fingerprint": "sha256:6d4f2d565998c8a63c6ed6dea40e33ba734e531b0c4ce473cfde38e47128990f",
     "api": "cloudflare/api",
     "version": "2020-04-02",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -2124,6 +2230,7 @@
     "fingerprint": "sha256:07b87c3debecbe821246c3cd1ff699edbe01235447c7b115d889bb3690752cdc",
     "api": "cloudflare/api",
     "version": "2020-04-02",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -2144,6 +2251,7 @@
     "fingerprint": "sha256:0026aad502bf82ec5afdc69f049a5b20930d1f62f0ec8401416f4b16a69e7089",
     "api": "cloudflare/api",
     "version": "2020-04-02",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -2164,6 +2272,7 @@
     "fingerprint": "sha256:de966d817e65f6765628df10f79e7fc1dea3ca99da31d41373992476cabab73e",
     "api": "cloudflare/api",
     "version": "2020-04-02",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -2184,6 +2293,7 @@
     "fingerprint": "sha256:fa54d9d710ccf64cce5de99d76ffeefac524a1e7a2bd54a50665a3cde74b20a5",
     "api": "cloudflare/api",
     "version": "2020-04-02",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -2204,6 +2314,7 @@
     "fingerprint": "sha256:19c8ac3a1f58527481afe59697f2c1a3e74f0dcd43db9fca373e3e2ca5130456",
     "api": "cloudflare/api",
     "version": "2020-04-02",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -2224,6 +2335,7 @@
     "fingerprint": "sha256:2d2bff1a5afd28fd3b2e075980fd6eb896a78c4c0eab50a1ab6b181af012bd17",
     "api": "cloudflare/api",
     "version": "2020-04-02",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -2244,6 +2356,7 @@
     "fingerprint": "sha256:67c9f4884ff77bc7d09bd034d69d3589beb7cc43d651685a9663722a29b2117c",
     "api": "cloudflare/api",
     "version": "2020-04-02",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {
@@ -2264,6 +2377,7 @@
     "fingerprint": "sha256:e9f5ebfee335467683ad29c64f264d5ab45ca22c9c25a7d7c724e27c9a76f0ee",
     "api": "cloudflare/api",
     "version": "2020-04-02",
+    "previous_version": "2026-11-14T12:00:00Z",
     "change_type": "deprecation",
     "breaking": false,
     "subject": {

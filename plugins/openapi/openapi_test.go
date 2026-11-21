@@ -35,12 +35,8 @@ var noChangelog = fakeHints{err: fmt.Errorf("no changelog in tests")}
 // the command uses.
 func newPlugin(a adapter.Adapter, hints hint.Source) Plugin { return Plugin{Adapter: a, Hints: hints} }
 
-func env(s *kittest.Mem) plugin.Env {
-	return plugin.Env{Baselines: s, Now: time.Now}
-}
-
-func ingest(ctx context.Context, s *kittest.Mem, a adapter.Adapter) (bool, error) {
-	return kittest.Run(ctx, env(s), s, newPlugin(a, noChangelog))
+func env(*kittest.Mem) plugin.Env {
+	return plugin.Env{Now: time.Now}
 }
 
 func pair(ctx context.Context, s *kittest.Mem, a adapter.Adapter, from, to string) (bool, error) {
@@ -99,22 +95,14 @@ func storedEvents(t *testing.T, s *kittest.Mem) []string {
 	return got
 }
 
-// End to end: a real change is detected AND STORED as a change event.
-func TestIngestStoresTheEventsItFinds(t *testing.T) {
+// A version pair (ReadAt both sides, Extract): a real change is detected and
+// stored as change events, once.
+func TestAPairStoresItsEventsOnce(t *testing.T) {
 	ctx := context.Background()
 	s := openStore(t)
 
-	// First run: nothing to diff against, so the spec becomes the baseline.
-	if rejected, err := ingest(ctx, s, fakeAdapter{latest: "v1", specs: specs}); err != nil || rejected {
-		t.Fatalf("first run: rejected=%v err=%v", rejected, err)
-	}
-	if got := storedEvents(t, s); len(got) != 0 {
-		t.Fatalf("first run stored %d events, want 0: %v", len(got), got)
-	}
-
-	// Second run: v1 -> v2. The events must be in the store, not just printed.
-	if rejected, err := ingest(ctx, s, fakeAdapter{latest: "v2", specs: specs}); err != nil || rejected {
-		t.Fatalf("second run: rejected=%v err=%v", rejected, err)
+	if _, err := pair(ctx, s, fakeAdapter{specs: specs}, "v1", "v2"); err != nil {
+		t.Fatalf("pair: %v", err)
 	}
 	got := storedEvents(t, s)
 	want := map[string]bool{
@@ -128,37 +116,6 @@ func TestIngestStoresTheEventsItFinds(t *testing.T) {
 		if !want[g] {
 			t.Errorf("unexpected stored event %q", g)
 		}
-	}
-
-	// The baseline moved to v2 only after the events were safely stored.
-	last, _ := s.LastSpec("stripe/api")
-	if last == nil || last.Version != "version-v2" {
-		t.Errorf("baseline after the second run = %+v, want version-v2", last)
-	}
-
-	// Third run, nothing new: no change, and no duplicate events.
-	if _, err := ingest(ctx, s, fakeAdapter{latest: "v2", specs: specs}); err != nil {
-		t.Fatalf("third run: %v", err)
-	}
-	if again := storedEvents(t, s); len(again) != len(got) {
-		t.Errorf("unchanged spec added events: %d -> %d", len(got), len(again))
-	}
-}
-
-// A version pair (ReadAt both sides, Extract) stores its events and no
-// baseline: a backfill never moves what the next run compares with.
-func TestAPairStoresEventsAndNoBaseline(t *testing.T) {
-	ctx := context.Background()
-	s := openStore(t)
-
-	if _, err := pair(ctx, s, fakeAdapter{specs: specs}, "v1", "v2"); err != nil {
-		t.Fatalf("pair: %v", err)
-	}
-	if got := storedEvents(t, s); len(got) != 2 {
-		t.Errorf("the pair stored %d events, want 2: %v", len(got), got)
-	}
-	if last, _ := s.LastSpec("stripe/api"); last != nil {
-		t.Errorf("the pair set a baseline (%s); Extract returns none", last.Version)
 	}
 
 	// Reading the same pair again stores nothing new.
