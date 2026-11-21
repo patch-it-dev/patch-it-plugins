@@ -49,8 +49,10 @@ func TestOnlyAPlainSentenceNamesItsSymbols(t *testing.T) {
 		want string // "ct change symbols>replacement", "" = not breaking/deprecation, "drop"
 	}{
 		{KindBreaking, "Removed `App.dark` reactive attribute https://x.test/pull/1", "breaking removed_symbol App.dark"},
-		{KindBreaking, "`Placeholder.reset_color_cycle`", "breaking removed_symbol Placeholder.reset_color_cycle"},
-		{KindBreaking, "Property `Widget.focusable_children` https://x.test/1", "breaking removed_symbol Widget.focusable_children"},
+		{KindRemoved, "`Placeholder.reset_color_cycle`", "breaking removed_symbol Placeholder.reset_color_cycle"},
+		{KindBreaking, "`Placeholder.reset_color_cycle`", "drop"}, // names alone count only under Removed
+		{KindRemoved, "Deprecated: `X`", "drop"},                  // a change word is not an area
+		{KindRemoved, "Property `Widget.focusable_children` https://x.test/1", "breaking removed_symbol Widget.focusable_children"},
 		{KindBreaking, "Removed `Widget.reset_focus` (now called `Widget.blur`) https://x.test/1", "breaking renamed_symbol Widget.reset_focus>Widget.blur"},
 		{KindBreaking, "Removed the ``_prepare_conn`` method from ``HTTPConnectionPool``. Previously…", "breaking removed_symbol HTTPConnectionPool._prepare_conn"},
 		{KindBreaking, "Removed ``pkg.a`` and ``pkg.b()`` (`#1 <https://x.test/1>`__).", "breaking removed_symbol a,b"},
@@ -105,7 +107,7 @@ func TestOnlyAPlainSentenceNamesItsSymbols(t *testing.T) {
 		}
 	}
 	if SectionKind("Deprecations and Removals") != KindMixed || SectionKind("Backwards incompatible changes") != KindBreaking ||
-		SectionKind("Removed") != KindBreaking || SectionKind("Changed") != KindNone {
+		SectionKind("Removed") != KindRemoved || SectionKind("Changed") != KindNone {
 		t.Error("section kinds")
 	}
 }
