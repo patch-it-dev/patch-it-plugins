@@ -1,0 +1,765 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:ef43ad5bf96238c1c0f4c9e81332efaa8e9e859831388779052f805d89d4babb",
+    "api": "google/vertex-model-retirements",
+    "version": "2026-10-20",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.5-pro"
+    },
+    "description": "Model \"gemini-2.5-pro\" is shut down on 2026-10-20: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-3.8-flash` or `gemini-3.5-flash` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Gemini models\n| Model ID | Release date | Retirement date | Replacement model ID |\n| `gemini-2.5-pro` | June 17, 2025 | October 20, 2026 | `gemini-3.8-flash` or `gemini-3.5-flash` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:599e4f28d4387bf45611fdd8781d9a46b553fd4e8607eb1212b4bd9684f88982",
+    "api": "google/vertex-model-retirements",
+    "version": "2026-10-20",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.5-flash"
+    },
+    "description": "Model \"gemini-2.5-flash\" is shut down on 2026-10-20: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-3.8-flash` or `gemini-3.5-flash-lite` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Gemini models\n| Model ID | Release date | Retirement date | Replacement model ID |\n| `gemini-2.5-flash` | June 17, 2025 | October 20, 2026 | `gemini-3.8-flash` or `gemini-3.5-flash-lite` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:8627eb166cc0481d849b3f4a6a41df8dcacfb3cfb780b78907421cbc9916a8ce",
+    "api": "google/vertex-model-retirements",
+    "version": "2026-10-20",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.5-flash-lite"
+    },
+    "description": "Model \"gemini-2.5-flash-lite\" is shut down on 2026-10-20: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-3.8-flash` or `gemini-3.5-flash-lite` or Gemma 4 instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Gemini models\n| Model ID | Release date | Retirement date | Replacement model ID |\n| `gemini-2.5-flash-lite` | July 22, 2025 | October 20, 2026 | `gemini-3.8-flash` or `gemini-3.5-flash-lite` or Gemma 4 |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:616b469e2bd6dee6f2a2a02d7e8e575e7bb1bc940ff8ed740a0c092be3ca3bf1",
+    "api": "google/vertex-model-retirements",
+    "version": "2026-12-13",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-live-2.5-flash-native-audio",
+      "replacement": "gemini-3.8-live"
+    },
+    "description": "Model \"gemini-live-2.5-flash-native-audio\" is shut down on 2026-12-13: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-3.8-live` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Gemini models\n| Model ID | Release date | Retirement date | Replacement model ID |\n| `gemini-live-2.5-flash-native-audio` | December 12, 2025 | December 13, 2026 | `gemini-3.8-live` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:925571477afb104ac207094b15e93155a25d6f98baf62c651aedf0801415ad39",
+    "api": "google/vertex-model-retirements",
+    "version": "2027-03-15",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.5-flash-image",
+      "replacement": "gemini-3.1-flash-lite-image"
+    },
+    "description": "Model \"gemini-2.5-flash-image\" is shut down on 2027-03-15: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-3.1-flash-lite-image` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Gemini image models\n| Model ID | Release date | Retirement date | Replacement model ID |\n| `gemini-2.5-flash-image` | October 2, 2025 | March 15, 2027 | `gemini-3.1-flash-lite-image` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:fd4cc7a2c302199b382abe71f33cf4c81a018d9489eec9194a0bfc6151351791",
+    "api": "google/vertex-model-retirements",
+    "version": "2027-04-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "text-embedding-005"
+    },
+    "description": "Model \"text-embedding-005\" is shut down on 2027-04-01: Google requests naming it fail from that date.",
+    "migration_hint": "Google names no replacement model.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Embeddings models\n| Model ID | Release date | Retirement date | Replacement model ID |\n| `text-embedding-005` | November 18, 2024 | April 1, 2027 |  |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:174bced505f842a3e620a58fc0cb37092aa503454ab1dbdf37f74a6e2d3294e9",
+    "api": "google/vertex-model-retirements",
+    "version": "2027-04-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "text-embedding-004"
+    },
+    "description": "Model \"text-embedding-004\" is shut down on 2027-04-01: Google requests naming it fail from that date.",
+    "migration_hint": "Google names no replacement model.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Embeddings models\n| Model ID | Release date | Retirement date | Replacement model ID |\n| `text-embedding-004` | May 14, 2024 | April 1, 2027 |  |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
+    "fingerprint": "sha256:25ba7181945e0eacf132a86af6f7b1f52ad9c0284173544164e064fe3d27eb2b",
+    "api": "google/vertex-model-retirements",
+    "version": "2027-04-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "text-multilingual-embedding-002"
+    },
+    "description": "Model \"text-multilingual-embedding-002\" is shut down on 2027-04-01: Google requests naming it fail from that date.",
+    "migration_hint": "Google names no replacement model.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Embeddings models\n| Model ID | Release date | Retirement date | Replacement model ID |\n| `text-multilingual-embedding-002` | May 14, 2024 | April 1, 2027 |  |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 9,
+    "fingerprint": "sha256:f82b985b94b11005f52d4ea0e58d68759bd90f1d175405558677772deed5f7cf",
+    "api": "google/vertex-model-retirements",
+    "version": "2027-04-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "multimodalembedding@001"
+    },
+    "description": "Model \"multimodalembedding@001\" is shut down on 2027-04-01: Google requests naming it fail from that date.",
+    "migration_hint": "Google names no replacement model.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Embeddings models\n| Model ID | Release date | Retirement date | Replacement model ID |\n| `multimodalembedding@001` | February 12, 2024 | April 1, 2027 |  |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 10,
+    "fingerprint": "sha256:cdcfd1e991b4ace4ae24b878b08f912cc8c8c94d0e92ee797fb7c5ebb205266b",
+    "api": "google/vertex-model-retirements",
+    "version": "2027-01-28",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-3.7-flash",
+      "replacement": "gemini-4-hydrogen"
+    },
+    "description": "Model \"gemini-3.7-flash\" is shut down on 2027-01-28: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-4-hydrogen` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Models available for shorter availability periods\n| Model ID | Release date | Retirement date | Replacement model ID |\n| `gemini-3.7-flash` | August 13, 2026 | January 28, 2027 | `gemini-4-hydrogen` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 11,
+    "fingerprint": "sha256:6d64ac7272ecbadb5aa9226e29334db0d4d06aae6edd1f60e12c971f901570c1",
+    "api": "google/vertex-model-retirements",
+    "version": "2027-01-28",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-3.6-flash",
+      "replacement": "gemini-4-hydrogen"
+    },
+    "description": "Model \"gemini-3.6-flash\" is shut down on 2027-01-28: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-4-hydrogen` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Models available for shorter availability periods\n| Model ID | Release date | Retirement date | Replacement model ID |\n| `gemini-3.6-flash` | July 21, 2026 | January 28, 2027 | `gemini-4-hydrogen` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 12,
+    "fingerprint": "sha256:1bb244ddd4fb2ba43a99d295282f8dc123f8c8a010aa81bfcc0076bf3952b456",
+    "api": "google/vertex-model-retirements",
+    "version": "2026-06-30",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "veo-3.0-generate-001",
+      "replacement": "veo-3.1-generate-001"
+    },
+    "description": "Model \"veo-3.0-generate-001\" is shut down on 2026-06-30: Google requests naming it fail from that date.",
+    "migration_hint": "Use `veo-3.1-generate-001` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Retired models\n| Model ID | Release date | Retirement date | Recommended upgrade |\n| `veo-3.0-generate-001` | July 29, 2025 | June 30, 2026 | `veo-3.1-generate-001` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 13,
+    "fingerprint": "sha256:a2bfd320cabd411f16c081f877c3cffc6a1569a66dc65d75e948d8fc0661bf35",
+    "api": "google/vertex-model-retirements",
+    "version": "2026-06-30",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "veo-3.0-fast-generate-001",
+      "replacement": "veo-3.1-fast-generate-001"
+    },
+    "description": "Model \"veo-3.0-fast-generate-001\" is shut down on 2026-06-30: Google requests naming it fail from that date.",
+    "migration_hint": "Use `veo-3.1-fast-generate-001` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Retired models\n| Model ID | Release date | Retirement date | Recommended upgrade |\n| `veo-3.0-fast-generate-001` | July 29, 2025 | June 30, 2026 | `veo-3.1-fast-generate-001` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 14,
+    "fingerprint": "sha256:27b0426581ee7f389c1da65c919535f0bf24c0cae3fc0d87c5aed8d34b7a306c",
+    "api": "google/vertex-model-retirements",
+    "version": "2026-06-30",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "veo-2.0-generate-001",
+      "replacement": "veo-3.1-generate-001"
+    },
+    "description": "Model \"veo-2.0-generate-001\" is shut down on 2026-06-30: Google requests naming it fail from that date.",
+    "migration_hint": "Use `veo-3.1-generate-001` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Retired models\n| Model ID | Release date | Retirement date | Recommended upgrade |\n| `veo-2.0-generate-001` | May 27, 2025 | June 30, 2026 | `veo-3.1-generate-001` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 15,
+    "fingerprint": "sha256:09e4fe7cdc44387c7264a44d655992bd5a27288d6773fd8250a95c12f1d15660",
+    "api": "google/vertex-model-retirements",
+    "version": "2026-06-30",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagen-4.0-generate-001",
+      "replacement": "gemini-3.1-flash-lite-image"
+    },
+    "description": "Model \"imagen-4.0-generate-001\" is shut down on 2026-06-30: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-3.1-flash-lite-image` instead: Google's recommended replacement. (Google first named gemini-2.5-flash-image, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Retired models\n| Model ID | Release date | Retirement date | Recommended upgrade |\n| `imagen-4.0-generate-001` | August 14, 2025 | June 30, 2026 | `gemini-2.5-flash-image` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 16,
+    "fingerprint": "sha256:01e19784f716e18e6de20e5d29b92dc5f693a218ac80a85a6f7faed847df05b2",
+    "api": "google/vertex-model-retirements",
+    "version": "2026-06-30",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagen-4.0-ultra-generate-001",
+      "replacement": "gemini-3.1-flash-lite-image"
+    },
+    "description": "Model \"imagen-4.0-ultra-generate-001\" is shut down on 2026-06-30: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-3.1-flash-lite-image` instead: Google's recommended replacement. (Google first named gemini-2.5-flash-image, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Retired models\n| Model ID | Release date | Retirement date | Recommended upgrade |\n| `imagen-4.0-ultra-generate-001` | August 14, 2025 | June 30, 2026 | `gemini-2.5-flash-image` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 17,
+    "fingerprint": "sha256:457cfeb1eeb477b6ccd703bf5f2aeaa2d50853ec7dece2bd73dae2cb640cb233",
+    "api": "google/vertex-model-retirements",
+    "version": "2026-06-30",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagen-3.0-generate-002",
+      "replacement": "gemini-3.1-flash-lite-image"
+    },
+    "description": "Model \"imagen-3.0-generate-002\" is shut down on 2026-06-30: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-3.1-flash-lite-image` instead: Google's recommended replacement. (Google first named gemini-2.5-flash-image, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Retired models\n| Model ID | Release date | Retirement date | Recommended upgrade |\n| `imagen-3.0-generate-002` | January 29, 2025 | June 30, 2026 | `gemini-2.5-flash-image` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 18,
+    "fingerprint": "sha256:cabfde9da3d23eefa156b740e713fd626a53db013a21c3e1b1bc1a4c318c4e17",
+    "api": "google/vertex-model-retirements",
+    "version": "2026-06-30",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagen-3.0-generate-001",
+      "replacement": "gemini-3.1-flash-lite-image"
+    },
+    "description": "Model \"imagen-3.0-generate-001\" is shut down on 2026-06-30: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-3.1-flash-lite-image` instead: Google's recommended replacement. (Google first named gemini-2.5-flash-image, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Retired models\n| Model ID | Release date | Retirement date | Recommended upgrade |\n| `imagen-3.0-generate-001` | December 10, 2024 | June 30, 2026 | `gemini-2.5-flash-image` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 19,
+    "fingerprint": "sha256:f41ec12b39318c08224fe8faebc6867cfb378bf16e064d9eff2c136d2eaf7020",
+    "api": "google/vertex-model-retirements",
+    "version": "2026-06-30",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagegeneration@006",
+      "replacement": "gemini-3.1-flash-lite-image"
+    },
+    "description": "Model \"imagegeneration@006\" is shut down on 2026-06-30: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-3.1-flash-lite-image` instead: Google's recommended replacement. (Google first named gemini-2.5-flash-image, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Retired models\n| Model ID | Release date | Retirement date | Recommended upgrade |\n| `imagegeneration@006` | March 27, 2024 | June 30, 2026 | `gemini-2.5-flash-image` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 20,
+    "fingerprint": "sha256:856947b84587c850754d47d7f80372527e166991d16dd24de3f80699f89d4ce7",
+    "api": "google/vertex-model-retirements",
+    "version": "2026-06-30",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagegeneration@005",
+      "replacement": "gemini-3.1-flash-lite-image"
+    },
+    "description": "Model \"imagegeneration@005\" is shut down on 2026-06-30: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-3.1-flash-lite-image` instead: Google's recommended replacement. (Google first named gemini-2.5-flash-image, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Retired models\n| Model ID | Release date | Retirement date | Recommended upgrade |\n| `imagegeneration@005` | November 22, 2023 | June 30, 2026 | `gemini-2.5-flash-image` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 21,
+    "fingerprint": "sha256:0ab8d6f6b400873d7eac52fc6f8227a0c46060458d768d10856b0a51e83f30c9",
+    "api": "google/vertex-model-retirements",
+    "version": "2026-06-30",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagegeneration@004",
+      "replacement": "gemini-3.1-flash-lite-image"
+    },
+    "description": "Model \"imagegeneration@004\" is shut down on 2026-06-30: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-3.1-flash-lite-image` instead: Google's recommended replacement. (Google first named gemini-2.5-flash-image, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Retired models\n| Model ID | Release date | Retirement date | Recommended upgrade |\n| `imagegeneration@004` |  | June 30, 2026 | `gemini-2.5-flash-image` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 22,
+    "fingerprint": "sha256:fe51a0b57bf9d769cc3d90777822bb63cd7d09aab044be8d8509a9ccb22c3362",
+    "api": "google/vertex-model-retirements",
+    "version": "2026-06-30",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagegeneration@003",
+      "replacement": "gemini-3.1-flash-lite-image"
+    },
+    "description": "Model \"imagegeneration@003\" is shut down on 2026-06-30: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-3.1-flash-lite-image` instead: Google's recommended replacement. (Google first named gemini-2.5-flash-image, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Retired models\n| Model ID | Release date | Retirement date | Recommended upgrade |\n| `imagegeneration@003` |  | June 30, 2026 | `gemini-2.5-flash-image` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 23,
+    "fingerprint": "sha256:1310723d3a98db1fb0e54de57834d0a34d98d0f40919b1de6eee68400ffe34d0",
+    "api": "google/vertex-model-retirements",
+    "version": "2026-06-30",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagegeneration@002",
+      "replacement": "gemini-3.1-flash-lite-image"
+    },
+    "description": "Model \"imagegeneration@002\" is shut down on 2026-06-30: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-3.1-flash-lite-image` instead: Google's recommended replacement. (Google first named gemini-2.5-flash-image, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Retired models\n| Model ID | Release date | Retirement date | Recommended upgrade |\n| `imagegeneration@002` | August 17, 2023 | June 30, 2026 | `gemini-2.5-flash-image` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 24,
+    "fingerprint": "sha256:3fb712cf39ecd4e39fadd64006be677c77fa26c1b0290c0ef1fdbe3c75f77432",
+    "api": "google/vertex-model-retirements",
+    "version": "2026-06-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.0-flash",
+      "replacement": "gemini-3.5-flash-lite"
+    },
+    "description": "Model \"gemini-2.0-flash\" is shut down on 2026-06-01: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-3.5-flash-lite` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Retired models\n| Model ID | Release date | Retirement date | Recommended upgrade |\n| `gemini-2.0-flash` | February 5, 2025 | June 1, 2026 | `gemini-3.5-flash-lite` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 25,
+    "fingerprint": "sha256:a296a4a21570b7f914e1b77779b91aa200915f8a53a92cc1330e916c6b8ff664",
+    "api": "google/vertex-model-retirements",
+    "version": "2026-06-01",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-2.0-flash-lite",
+      "replacement": "gemini-3.5-flash-lite"
+    },
+    "description": "Model \"gemini-2.0-flash-lite\" is shut down on 2026-06-01: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-3.5-flash-lite` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Retired models\n| Model ID | Release date | Retirement date | Recommended upgrade |\n| `gemini-2.0-flash-lite` | February 25, 2025 | June 1, 2026 | `gemini-3.5-flash-lite` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 26,
+    "fingerprint": "sha256:28254077d822afb2858f2d40445980c945755d305b5506cde2524c2639c4c52f",
+    "api": "google/vertex-model-retirements",
+    "version": "2025-05-24",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-1.5-pro-001"
+    },
+    "description": "Model \"gemini-1.5-pro-001\" is shut down on 2025-05-24: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-3.8-flash` or `gemini-3.5-flash-lite` instead: Google's recommended replacement. (Google first named gemini-2.5-flash, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Retired models\n| Model ID | Release date | Retirement date | Recommended upgrade |\n| `gemini-1.5-pro-001` | May 24, 2024 | May 24, 2025 | `gemini-2.5-flash` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 27,
+    "fingerprint": "sha256:236a1810846de81794735a1b9c73a40d4a4d0ccdccbb77db09a320f53f25f052",
+    "api": "google/vertex-model-retirements",
+    "version": "2025-09-24",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-1.5-pro-002"
+    },
+    "description": "Model \"gemini-1.5-pro-002\" is shut down on 2025-09-24: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-3.8-flash` or `gemini-3.5-flash-lite` instead: Google's recommended replacement. (Google first named gemini-2.5-flash, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Retired models\n| Model ID | Release date | Retirement date | Recommended upgrade |\n| `gemini-1.5-pro-002` | September 24, 2024 | September 24, 2025 | `gemini-2.5-flash` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 28,
+    "fingerprint": "sha256:3a54f4a8eb835367ab091e3c8b4fd3cb3b4ab61e713716affbf05adcf18e5648",
+    "api": "google/vertex-model-retirements",
+    "version": "2025-05-24",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-1.5-flash-001"
+    },
+    "description": "Model \"gemini-1.5-flash-001\" is shut down on 2025-05-24: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-3.8-flash` or `gemini-3.5-flash-lite` or Gemma 4 instead: Google's recommended replacement. (Google first named gemini-2.5-flash-lite, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Retired models\n| Model ID | Release date | Retirement date | Recommended upgrade |\n| `gemini-1.5-flash-001` | May 24, 2024 | May 24, 2025 | `gemini-2.5-flash-lite` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 29,
+    "fingerprint": "sha256:64da17ec012eb0d5d98ad9abec413d450998e11e2dcd25823d67d8c3a791a389",
+    "api": "google/vertex-model-retirements",
+    "version": "2025-09-24",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-1.5-flash-002"
+    },
+    "description": "Model \"gemini-1.5-flash-002\" is shut down on 2025-09-24: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-3.8-flash` or `gemini-3.5-flash-lite` or Gemma 4 instead: Google's recommended replacement. (Google first named gemini-2.5-flash-lite, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Retired models\n| Model ID | Release date | Retirement date | Recommended upgrade |\n| `gemini-1.5-flash-002` | September 24, 2024 | September 24, 2025 | `gemini-2.5-flash-lite` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 30,
+    "fingerprint": "sha256:ae5f88ca2317ecabd2ac01b82f6f931deb5adf0015c376b4499f6ea739caf66f",
+    "api": "google/vertex-model-retirements",
+    "version": "2025-05-24",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "textembedding-gecko-multilingual@001",
+      "replacement": "gemini-embedding-001"
+    },
+    "description": "Model \"textembedding-gecko-multilingual@001\" is shut down on 2025-05-24: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-embedding-001` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Retired models\n| Model ID | Release date | Retirement date | Recommended upgrade |\n| `textembedding-gecko-multilingual@001` | November 2, 2023 | May 24, 2025 | `gemini-embedding-001` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 31,
+    "fingerprint": "sha256:643b42a3e2f9609a6a6c922e875cbe1a505c24c98e14f984fff4661dd1c4326a",
+    "api": "google/vertex-model-retirements",
+    "version": "2025-04-21",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-1.0-pro-001"
+    },
+    "description": "Model \"gemini-1.0-pro-001\" is shut down on 2025-04-21: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-3.8-flash` or `gemini-3.5-flash-lite` instead: Google's recommended replacement. (Google first named gemini-2.5-flash, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Retired models\n| Model ID | Release date | Retirement date | Recommended upgrade |\n| `gemini-1.0-pro-001` | February 15, 2024 | April 21, 2025 | `gemini-2.5-flash` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 32,
+    "fingerprint": "sha256:de0b474847a57fa37c32bcd2dc877d5ee8d701e04da3021ffbd5a4c0e6cc133b",
+    "api": "google/vertex-model-retirements",
+    "version": "2025-04-21",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-1.0-pro-002"
+    },
+    "description": "Model \"gemini-1.0-pro-002\" is shut down on 2025-04-21: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-3.8-flash` or `gemini-3.5-flash-lite` instead: Google's recommended replacement. (Google first named gemini-2.5-flash, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Retired models\n| Model ID | Release date | Retirement date | Recommended upgrade |\n| `gemini-1.0-pro-002` | April 9, 2024 | April 21, 2025 | `gemini-2.5-flash` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 33,
+    "fingerprint": "sha256:71a047e6aa5973d29fb5c14cbad6f3d6d867b44ca1c23708001571ff2defe05f",
+    "api": "google/vertex-model-retirements",
+    "version": "2025-04-21",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "gemini-1.0-pro-vision-001"
+    },
+    "description": "Model \"gemini-1.0-pro-vision-001\" is shut down on 2025-04-21: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-3.8-flash` or `gemini-3.5-flash-lite` instead: Google's recommended replacement. (Google first named gemini-2.5-flash, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Retired models\n| Model ID | Release date | Retirement date | Recommended upgrade |\n| `gemini-1.0-pro-vision-001` | February 15, 2024 | April 21, 2025 | `gemini-2.5-flash` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 34,
+    "fingerprint": "sha256:6ccf6a6ea1e5e02053b07007fd71bc07e2aa55ec01bba21a480316faae823278",
+    "api": "google/vertex-model-retirements",
+    "version": "2025-04-21",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "text-bison"
+    },
+    "description": "Model \"text-bison\" is shut down on 2025-04-21: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-3.8-flash` or `gemini-3.5-flash-lite` or Gemma 4 instead: Google's recommended replacement. (Google first named gemini-2.5-flash-lite, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Retired models\n| Model ID | Release date | Retirement date | Recommended upgrade |\n| `text-bison` | May 2023 | April 21, 2025 | `gemini-2.5-flash-lite` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 35,
+    "fingerprint": "sha256:02b2b6b0d29d49017b545b77d4907cbd03136b1b77d1c8eb7337e9e1eb738607",
+    "api": "google/vertex-model-retirements",
+    "version": "2025-04-21",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "chat-bison"
+    },
+    "description": "Model \"chat-bison\" is shut down on 2025-04-21: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-3.8-flash` or `gemini-3.5-flash-lite` or Gemma 4 instead: Google's recommended replacement. (Google first named gemini-2.5-flash-lite, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Retired models\n| Model ID | Release date | Retirement date | Recommended upgrade |\n| `chat-bison` | May 2023 | April 21, 2025 | `gemini-2.5-flash-lite` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 36,
+    "fingerprint": "sha256:2fc76102654a56b32be0dd835a9d862cfa95f2cafd0afff75334f99cace0db82",
+    "api": "google/vertex-model-retirements",
+    "version": "2025-04-21",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "code-gecko"
+    },
+    "description": "Model \"code-gecko\" is shut down on 2025-04-21: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-3.8-flash` or `gemini-3.5-flash-lite` or Gemma 4 instead: Google's recommended replacement. (Google first named gemini-2.5-flash-lite, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Retired models\n| Model ID | Release date | Retirement date | Recommended upgrade |\n| `code-gecko` | May 2023 | April 21, 2025 | `gemini-2.5-flash-lite` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 37,
+    "fingerprint": "sha256:a9a0bfbedd63c0022a969ca211e7db7045ff9f305110511f22e8a96edb2d809e",
+    "api": "google/vertex-model-retirements",
+    "version": "2025-04-21",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "textembedding-gecko@002",
+      "replacement": "gemini-embedding-001"
+    },
+    "description": "Model \"textembedding-gecko@002\" is shut down on 2025-04-21: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-embedding-001` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Retired models\n| Model ID | Release date | Retirement date | Recommended upgrade |\n| `textembedding-gecko@002` | November 2, 2023 | April 21, 2025 | `gemini-embedding-001` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 38,
+    "fingerprint": "sha256:5ab1b9bb58a2e1bc39a07e87308bfd8b616dab5514f50826beebad3619341215",
+    "api": "google/vertex-model-retirements",
+    "version": "2025-04-21",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "textembedding-gecko@001",
+      "replacement": "gemini-embedding-001"
+    },
+    "description": "Model \"textembedding-gecko@001\" is shut down on 2025-04-21: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-embedding-001` instead: Google's recommended replacement.",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Retired models\n| Model ID | Release date | Retirement date | Recommended upgrade |\n| `textembedding-gecko@001` | June 7, 2023 | April 21, 2025 | `gemini-embedding-001` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 39,
+    "fingerprint": "sha256:e78fa1f0b47b02780b33bdb22a95a9cff1a7635f3e5de8c61bd1d3fc87f7b239",
+    "api": "google/vertex-model-retirements",
+    "version": "2025-09-24",
+    "change_type": "breaking",
+    "breaking": true,
+    "subject": {
+      "type": "model",
+      "provider": "google",
+      "name": "imagetext",
+      "replacement": "gemini-3.1-flash-lite-image"
+    },
+    "description": "Model \"imagetext\" is shut down on 2025-09-24: Google requests naming it fail from that date.",
+    "migration_hint": "Use `gemini-3.1-flash-lite-image` instead: Google's recommended replacement. (Google first named gemini-2.5-flash-image, which is itself retired.)",
+    "source_url": "https://web.archive.org/web/20261114120000/https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+    "source_excerpt": "### Retired models\n| Model ID | Release date | Retirement date | Recommended upgrade |\n| `imagetext` | June 7, 2023 | September 24, 2025 | `gemini-2.5-flash-image` |",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

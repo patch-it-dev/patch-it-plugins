@@ -62,7 +62,7 @@ func (Neon) Versions(ctx context.Context) ([]plugin.Version, error) {
 
 // Versions are the commits that changed Convex's deployment API spec.
 func (Convex) Versions(ctx context.Context) ([]plugin.Version, error) {
-	return commits(ctx, "get-convex/convex-backend", "npm-packages/@convex-dev/platform/deployment-openapi.json")
+	return commits(ctx, "convex/convex-backend", "npm-packages/@convex-dev/platform/deployment-openapi.json")
 }
 
 // Versions are the commits that changed PlanetScale's spec.

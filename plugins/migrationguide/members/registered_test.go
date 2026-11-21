@@ -10,5 +10,5 @@ import (
 )
 
 func TestRegistersItself(t *testing.T) {
-	kittest.Registered(t, migrationguide.Plugin{Guide: NumPy2})
+	kittest.Registered(t, migrationguide.Plugin{Guide: NumPy})
 }

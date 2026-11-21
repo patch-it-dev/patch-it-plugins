@@ -2,11 +2,14 @@ package members_test
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"strings"
 	"testing"
 
+	"github.com/patch-it-dev/patch-it-plugins/core/fetch"
 	"github.com/patch-it-dev/patch-it-plugins/core/kit/kittest"
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 	"github.com/patch-it-dev/patch-it-plugins/core/versions"
 
 	"github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide"
@@ -18,15 +21,15 @@ import (
 func TestOnlyTheGuidesReleaseHasEvents(t *testing.T) {
 	env := kittest.Env(t, kittest.Pages{
 		"https://pypi.org/pypi/numpy/json": "testdata/pypi-numpy-excerpt.json",
-		NumPy2.URL():                       "testdata/numpy_2_0_migration_guide-v2.0.0.rst",
+		NumPy.RawURL("v2.0.0", 2):          "testdata/numpy_2_0_migration_guide-v2.0.0.rst",
 	})
-	p := migrationguide.Plugin{Guide: NumPy2}
+	p := migrationguide.Plugin{Guide: NumPy}
 	ctx := context.Background()
 	vs, err := p.ListVersions(ctx, env)
 	if err != nil {
 		t.Fatal(err)
 	}
-	pinned := release(t, NumPy2, "testdata/numpy_2_0_migration_guide-v2.0.0.rst", "1.26.4")
+	pinned := release(t, NumPy, "testdata/numpy_2_0_migration_guide-v2.0.0.rst", "1.26.4", "2.0.0")
 	var got []string
 	for _, pair := range versions.Pairs(vs) {
 		from, err := p.ReadAt(ctx, env, pair[0])
@@ -54,11 +57,41 @@ func TestOnlyTheGuidesReleaseHasEvents(t *testing.T) {
 	}
 }
 
-// Each release's ref follows the guide's tag shape.
-func TestTagsFollowTheGuide(t *testing.T) {
-	for g, want := range map[*Guide]string{&NumPy2: "v2.0.0", &PostHog8: "posthog-v8.0.0", &NewRelic11: "f0b4f817bf9a7b76a78e26609369a8a7ce764c8e"} {
-		if got := g.Tag(); got != want {
-			t.Errorf("%s: tag %q, want %q", g.Package, got, want)
+// Each guide is read where its package publishes it: at the major's first
+// tag (TagPrefix + version), or, for a docs repo with no tags, at the newest
+// commit that changed the major's note.
+func TestEachGuideIsReadWhereItsPublished(t *testing.T) {
+	ctx := context.Background()
+	for _, c := range []struct {
+		g    Guide
+		rel  string
+		want string
+	}{
+		{NumPy, "2.0.0", "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst"},
+		{PostHog, "8.0.0", "https://raw.githubusercontent.com/PostHog/posthog-python/posthog-v8.0.0/docs/migration-7.x-to-8.0.md"},
+		{NewRelic, "11.0.0", "https://raw.githubusercontent.com/newrelic/docs-website/" + newrelicCommit + "/src/content/docs/release-notes/agent-release-notes/python-release-notes/python-agent-110000.mdx"},
+	} {
+		got, err := c.g.GuideURL(ctx, guideEnv(t, c.g, "testdata/README.md", c.rel), plugin.Version{ID: c.rel})
+		if err != nil || got != c.want {
+			t.Errorf("%s %s: %q, %v; want %q", c.g.Package, c.rel, got, err, c.want)
 		}
+		if got, err := c.g.GuideURL(ctx, plugin.Env{}, plugin.Version{ID: c.rel[:len(c.rel)-1] + "1"}); got != "" || err != nil {
+			t.Errorf("%s: a release that isn't a major's first has no guide: %q, %v", c.g.Package, got, err)
+		}
+	}
+}
+
+// A major with no guide has nothing to read: a 404 at its tag, or (docs
+// repo) no commit ever changed its note's path. The pair is skipped, not
+// failed, and not a release without changes.
+func TestAMajorWithNoGuideHasNothingToRead(t *testing.T) {
+	ctx := context.Background()
+	env := kittest.Env(t, kittest.Pages{NewRelic.CommitsURL(14): "testdata/github-commits-none.json"})
+	if _, err := (migrationguide.Plugin{Guide: NewRelic}).ReadAt(ctx, env, plugin.Version{ID: "14.0.0"}); !errors.Is(err, plugin.ErrNothingToRead) {
+		t.Errorf("no commit for the note: %v, want plugin.ErrNothingToRead", err)
+	}
+	notFound := plugin.Env{Get: func(context.Context, string) ([]byte, error) { return nil, &fetch.StatusError{StatusCode: 404} }}
+	if _, err := (migrationguide.Plugin{Guide: NumPy}).ReadAt(ctx, notFound, plugin.Version{ID: "3.0.0"}); !errors.Is(err, plugin.ErrNothingToRead) {
+		t.Errorf("no guide at the tag: %v, want plugin.ErrNothingToRead", err)
 	}
 }

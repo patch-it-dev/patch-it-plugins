@@ -8,7 +8,7 @@ import (
 )
 
 func TestRetirementsRegisterThemselves(t *testing.T) {
-	for _, p := range []retire.Page{retire.OpenAI, retire.Anthropic} {
+	for _, p := range []retire.Page{retire.OpenAI, retire.Anthropic, retire.Gemini, retire.Vertex} {
 		kittest.Registered(t, Plugin{Page: p})
 	}
 }

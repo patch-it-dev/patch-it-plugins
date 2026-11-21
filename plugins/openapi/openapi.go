@@ -145,7 +145,7 @@ func init() {
 		Sources: []plugin.Source{{
 			ID: "deployment-api", Layer: plugin.LayerAPI, Page: "providers/convex.md",
 			Watches: "Deployment API operations deprecated, and deprecated operations removed, between commits of the spec",
-			URLs:    []string{"https://github.com/get-convex/convex-backend"},
+			URLs:    []string{"https://github.com/convex/convex-backend"},
 			Plugin:  Plugin{Adapter: adapter.Convex{}, Diff: convexDiff, Keep: convexKeep},
 		}},
 	})

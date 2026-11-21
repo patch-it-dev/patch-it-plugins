@@ -112,12 +112,6 @@ var Urllib3 = File{
 	Repo: "urllib3/urllib3", Path: "CHANGES.rst",
 }
 
-// The releases the golden files pin.
-var (
-	Textual0860 = Textual.At("0.86.0")
-	Urllib3200  = Urllib3.At("2.0.0")
-)
-
 // URL is what ReadAt fetches: the changelog as it was at the (pinned) tag,
 // or the tag's release on GitHub's API.
 func (f File) URL() string {

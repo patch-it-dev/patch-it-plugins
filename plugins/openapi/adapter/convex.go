@@ -12,19 +12,19 @@ import (
 // Variables, not constants, only so tests can point them at a local server.
 var (
 	// convexCommitsURL lists the commits that changed the Deployment API
-	// spec in get-convex/convex-backend, newest first; with per_page=1, the
+	// spec in convex/convex-backend, newest first; with per_page=1, the
 	// newest.
-	convexCommitsURL = "https://api.github.com/repos/get-convex/convex-backend/commits?path=npm-packages/@convex-dev/platform/deployment-openapi.json&per_page=1"
+	convexCommitsURL = "https://api.github.com/repos/convex/convex-backend/commits?path=npm-packages/@convex-dev/platform/deployment-openapi.json&per_page=1"
 	// convexCommitURL is one commit, for its date.
-	convexCommitURL = "https://api.github.com/repos/get-convex/convex-backend/commits/%s"
+	convexCommitURL = "https://api.github.com/repos/convex/convex-backend/commits/%s"
 	// convexSpecURLTemplate is the Deployment API spec at one commit: 68
 	// commits from 2025-08-19 to 2026-11-16 (checked 2026-11-19), and a
 	// commit never changes.
-	convexSpecURLTemplate = "https://raw.githubusercontent.com/get-convex/convex-backend/%s/npm-packages/@convex-dev/platform/deployment-openapi.json"
+	convexSpecURLTemplate = "https://raw.githubusercontent.com/convex/convex-backend/%s/npm-packages/@convex-dev/platform/deployment-openapi.json"
 )
 
 // Convex adapts the Convex Deployment API spec (`{deployment-url}/api/v1`)
-// in get-convex/convex-backend for the openapi plugin. A tag here is the
+// in convex/convex-backend for the openapi plugin. A tag here is the
 // commit that last changed the spec, as for Supabase.
 //
 // The repo does tag releases, `precompiled-YYYY-MM-DD-<sha>` (1,213 of

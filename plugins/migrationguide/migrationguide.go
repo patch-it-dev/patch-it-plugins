@@ -13,10 +13,12 @@ package migrationguide
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"time"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
+	"github.com/patch-it-dev/patch-it-plugins/core/fetch"
 	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 	"github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide/members"
 	"github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide/sdkguide"
@@ -37,30 +39,30 @@ func init() {
 		ID: "numpy", Name: "NumPy", Category: plugin.CategoryPackages, Homepage: "https://numpy.org",
 		Sources: []plugin.Source{{
 			ID: "numpy", Layer: plugin.LayerPackage, Page: "providers/numpy.md",
-			Watches:  "Members removed or renamed in the main namespace in NumPy 2.0",
-			URLs:     []string{"https://github.com/numpy/numpy/blob/v2.0.0/doc/source/numpy_2_0_migration_guide.rst"},
+			Watches:  "Members a new major removes or renames in the main namespace, from that major's migration guide at its first tag",
+			URLs:     []string{"https://numpy.org/devdocs/numpy_2_0_migration_guide.html", "https://pypi.org/project/numpy/"},
 			Packages: []string{"pypi:numpy"},
-			Plugin:   Plugin{Guide: members.NumPy2},
+			Plugin:   Plugin{Guide: members.NumPy},
 		}},
 	})
 	plugin.RegisterProvider(plugin.Provider{
 		ID: "posthog", Name: "PostHog", Category: plugin.CategoryAnalytics, Homepage: "https://posthog.com",
 		Sources: []plugin.Source{{
 			ID: "python-sdk", Layer: plugin.LayerSDK, Page: "providers/posthog.md",
-			Watches:  "Members removed in the posthog Python SDK 8.0.0",
-			URLs:     []string{"https://github.com/PostHog/posthog-python/blob/posthog-v8.0.0/docs/migration-7.x-to-8.0.md"},
+			Watches:  "Members a new major of the posthog Python SDK removes, from its migration guide in docs/ at the major's first tag",
+			URLs:     []string{"https://github.com/PostHog/posthog-python/tree/main/docs", "https://pypi.org/project/posthog/"},
 			Packages: []string{"pypi:posthog"},
-			Plugin:   Plugin{Guide: members.PostHog8},
+			Plugin:   Plugin{Guide: members.PostHog},
 		}},
 	})
 	plugin.RegisterProvider(plugin.Provider{
 		ID: "newrelic", Name: "New Relic", Category: plugin.CategoryMonitoring, Homepage: "https://newrelic.com",
 		Sources: []plugin.Source{{
 			ID: "python-agent", Layer: plugin.LayerSDK, Page: "providers/newrelic.md",
-			Watches:  "Members removed in the New Relic Python agent 11.0.0",
-			URLs:     []string{"https://github.com/newrelic/docs-website/blob/f0b4f817bf9a7b76a78e26609369a8a7ce764c8e/src/content/docs/release-notes/agent-release-notes/python-release-notes/python-agent-110000.mdx"},
+			Watches:  "Members a new major of the New Relic Python agent removes, from the major's release notes (Removed features)",
+			URLs:     []string{"https://docs.newrelic.com/docs/release-notes/agent-release-notes/python-release-notes/", "https://pypi.org/project/newrelic/"},
 			Packages: []string{"pypi:newrelic"},
-			Plugin:   Plugin{Guide: members.NewRelic11},
+			Plugin:   Plugin{Guide: members.NewRelic},
 		}},
 	})
 }
@@ -74,13 +76,13 @@ type Guide interface {
 	// Releases are the versions, oldest first, each with the ref its guide
 	// would be read at.
 	Releases(ctx context.Context, env plugin.Env) ([]plugin.Version, error)
-	// GuideURL is where the guide is at v, pinned to v's tag, or "" when v
-	// has no guide (a release that isn't a new major).
-	GuideURL(v plugin.Version) string
-	// Read turns the guide, as read at to, into events with
+	// GuideURL is where the guide is at v, pinned to v's tag (or a commit),
+	// or "" when v has no guide (a release that isn't a new major).
+	GuideURL(ctx context.Context, env plugin.Env, v plugin.Version) (string, error)
+	// Read turns the guide, as read at to from sourceURL, into events with
 	// previous_version from, and the rows that failed to become events. err
 	// is a guide it can't read.
-	Read(page []byte, from, to plugin.Version, now time.Time) (events []event.Event, rejected []error, err error)
+	Read(page []byte, sourceURL string, from, to plugin.Version, now time.Time) (events []event.Event, rejected []error, err error)
 }
 
 // Plugin reads one source's migration guide.
@@ -96,13 +98,22 @@ func (p Plugin) ListVersions(ctx context.Context, env plugin.Env) ([]plugin.Vers
 }
 
 // ReadAt fetches the guide at v; a release with no guide reads as nothing (a
-// snapshot with no content).
+// snapshot with no content). A new major whose guide isn't there (a 404 at
+// its tag) has nothing to read: plugin.ErrNothingToRead, so the pair is
+// kept as skipped, not as a failure, nor as a release with no changes.
 func (p Plugin) ReadAt(ctx context.Context, env plugin.Env, v plugin.Version) (plugin.Snapshot, error) {
-	url := p.Guide.GuideURL(v)
+	url, err := p.Guide.GuideURL(ctx, env, v)
+	if err != nil {
+		return plugin.Snapshot{}, err
+	}
 	if url == "" {
 		return plugin.Snapshot{Version: v}, nil
 	}
 	page, err := env.Get(ctx, url)
+	var se *fetch.StatusError
+	if errors.As(err, &se) && se.StatusCode == 404 {
+		return plugin.Snapshot{}, fmt.Errorf("no guide at %s: %w", url, plugin.ErrNothingToRead)
+	}
 	if err != nil {
 		return plugin.Snapshot{}, fmt.Errorf("fetching %s: %w", url, err)
 	}
@@ -115,7 +126,7 @@ func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 	if to.Content == nil {
 		return plugin.Result{}, nil
 	}
-	events, rejected, err := p.Guide.Read(to.Content, from.Version, to.Version, env.Now().UTC())
+	events, rejected, err := p.Guide.Read(to.Content, to.SourceURL, from.Version, to.Version, env.Now().UTC())
 	if err != nil {
 		return plugin.Result{}, fmt.Errorf("reading %s: %w", to.SourceURL, err)
 	}

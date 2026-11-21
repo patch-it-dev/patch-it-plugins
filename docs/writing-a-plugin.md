@@ -83,10 +83,10 @@ Write the numbers on the provider page, as `providers/vercel.md` does for its sp
 | Kind | Reads | Add a source by |
 |---|---|---|
 | `plugins/openapi` | An OpenAPI spec per release, diffed with `core/diff/` and turned into events by `core/normalize/` | An `adapter.Adapter` in `plugins/openapi/adapter/` (latest tag, fetch a tag's spec; `Versions` to list every release) and a `plugin.RegisterProvider` block |
-| `plugins/notices` | A live page of dated notices: a model provider's deprecations page (a table of date, model, replacement), a vendor's RSS or Atom feed, a vendor's table of whole API version ranges and their support status | A `retire.Page` in `plugins/notices/retire/providers.go`, a `feed.Feed` with a reader for that vendor's entries in `plugins/notices/feed/`, or an `eol.Page` in `plugins/notices/eol/` (`new-plugin` doesn't scaffold this reader yet) |
+| `plugins/notices` | A live page of dated notices: a model provider's deprecations page (a table of date, model, replacement: Markdown, Markdoc or HTML), a vendor's RSS or Atom feed, a vendor's table of whole API version ranges and their support status | A `retire.Page` in `plugins/notices/retire/providers.go`, a `feed.Feed` with a reader for that vendor's entries in `plugins/notices/feed/`, or an `eol.Page` in `plugins/notices/eol/` (`new-plugin` doesn't scaffold this reader yet) |
 | `plugins/migrationguide` | A guide that lists what a release removed, at the release's tag: an SDK's migration guide per new major (removed request parameters), or a package's table of removed members (an RST simple table or a Markdown pipe table) | A `sdkguide.Guide` in `plugins/migrationguide/sdkguide/`, or a `members.Guide` in `plugins/migrationguide/members/` |
 | `plugins/changelog` | A changelog: a `CHANGELOG.md` / `CHANGES.rst` / `HISTORY.rst`, each release's section at its tag (releases from PyPI or npm, or for any other ecosystem the repo's `TagPrefix` + X.Y.Z tags), or each GitHub release's notes (`Notes`), or a vendor's machine-readable API changelog in JSON (per day, endpoint and API version, oasdiff change codes), commit by commit | A `changelog.File` with its `Ecosystem` and `TagPrefix`, or a `changelog.Log` |
-| `plugins/catalog` | A flat JSON catalog, one entry per name, with no release tags to pin — a commit SHA stands in | A `catalog.Catalog`, diffed between two snapshots for names that disappeared entirely |
+| `plugins/catalog` | A provider's own structured list of what it offers: a command catalog kept as one JSON file per command in its repo, read at each release tag and compared for commands that disappeared entirely | A `catalog.Commands` (repo, directory, release tag pattern); a catalog of another shape is a new reader type in the package |
 | `plugins/apisurface` | A published package's public API, compared between two releases: the classes, functions, methods and parameters in each release's files (Python first: the wheel or sdist from PyPI) | A `apisurface.Package` (registry name, ecosystem, top-level module) and its `plugin.RegisterProvider` block |
 
 ## 4. The interface
@@ -136,7 +136,7 @@ When a release or a page has no part the reader can use (a changelog with no sec
 
 A source that has versions (a spec's releases, a package's releases, a guide per major, the commits that changed a file) is read version by version, so a customer several versions behind gets every step: the runner lists the versions, reads each consecutive pair with `ReadAt` and extracts it once (a released version never changes).
 
-- **List** with [`core/versions`](../core/versions/versions.go): `GitHubReleases`, `GitHubTags`, `GitHubCommits` (the commits that changed a file), `PyPIReleases`, `NPMReleases`, `GitHubPages` (any other GitHub list, page by page). An OpenAPI adapter lists its own versions (`adapter.Lister`): every adapter does. Never pin a tag in code: a version you need for a golden test is a pinned *case* in the test (`changelog.Urllib3.At("2.0.0")`), not the registered source.
+- **List** with [`core/versions`](../core/versions/versions.go): `GitHubReleases`, `GitHubTags`, `GitHubCommits` (the commits that changed a file), `PyPIReleases` (`PyPIReleasesWithYanked` when a change can be documented at a release later yanked), `NPMReleases`, `GitHubPages` (any other GitHub list, page by page). An OpenAPI adapter lists its own versions (`adapter.Lister`): every adapter does. Never pin a tag in code: a version you need for a golden test is a pinned *case* in the test (`changelog.Urllib3.At("2.0.0")`, in a `_test.go` file), not the registered source; `plugins/all`'s `TestNoPinnedReleaseInPluginCode` fails on a release number or commit SHA in any plugin's non-test code.
 - **Pins** (`Version.MapsTo`): when a release pins a version of another source (an SDK release and the API version it calls), set it while listing, from the release itself (its notes, the version constant in its code). It is how a feed query on the SDK's versions also returns the API's changes. Leave it zero when the release doesn't say: never fill it from a table kept by hand.
 - **Read at** a version's `Ref` (a tag, a commit SHA) and return the exact URL read as the snapshot's `SourceURL`: it's the events' citation.
 - **Extract** sets `previous_version` to `from`'s version: every `api_operation` and `package_release` event must name it (the contract's rule 13). `from` is zero only for the first version read, which has nothing to compare: patch-it's hosted ingestion service reads that version as its first snapshot and extracts nothing from it, so a version pair always starts at a real `from` (an `api_operation` or `package_release` event extracted from zero would be rejected).
@@ -205,11 +205,13 @@ The test kit, `core/kit/kittest`, runs the plugin with no network, no database a
 ```go
 func TestGolden(t *testing.T) {
     env := kittest.Env(t, kittest.Pages{
-        Redis.URL(oldRef): "testdata/redis-doc-cc0427b.json",
-        Redis.URL(newRef): "testdata/redis-doc-06f3598.json",
+        Redis.listingURL("8.8-m03"):              "testdata/redis-contents-src-commands-8.8-m03.json",
+        Redis.listingURL("8.8-rc1"):              "testdata/redis-contents-src-commands-8.8-rc1.json",
+        Redis.FileURL("8.8-m03", "gcra.json"):    "testdata/redis-8.8-m03-gcra.json",
+        Redis.FileURL("8.8-m03", "gcrasetvalue.json"): "testdata/redis-8.8-m03-gcrasetvalue.json",
     })
-    got := kittest.Versions(t, env, Plugin{Catalog: Redis},
-        plugin.Version{ID: oldRef, Ref: oldRef}, plugin.Version{ID: newRef, Ref: newRef})
+    got := kittest.Versions(t, env, Redis,
+        plugin.Version{ID: "8.8-m03", Ref: "8.8-m03"}, plugin.Version{ID: "8.8-rc1", Ref: "8.8-rc1"})
     kittest.Golden(t, "testdata/golden/redis-commands.json", got)
 }
 ```

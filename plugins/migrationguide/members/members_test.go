@@ -18,7 +18,7 @@ func guide(t *testing.T) []byte {
 
 func byMember(t *testing.T) map[string]Removal {
 	t.Helper()
-	rs, err := Parse(guide(t), NumPy2)
+	rs, err := Parse(guide(t), NumPy)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -71,10 +71,7 @@ func TestOnlyOnePlainReplacementInNpIsARename(t *testing.T) {
 func TestTheGuideStoresOneEventPerMemberAndARerunNothing(t *testing.T) {
 	// The guide at the v2.0.0 tag, and nothing else; kittest extracts the
 	// pair again and fails on anything new.
-	if NumPy2.URL() != "https://raw.githubusercontent.com/numpy/numpy/v2.0.0/doc/source/numpy_2_0_migration_guide.rst" {
-		t.Fatalf("the guide is read at %s, not the v2.0.0 tag", NumPy2.URL())
-	}
-	events := release(t, NumPy2, "testdata/numpy_2_0_migration_guide-v2.0.0.rst", "1.26.4")
+	events := release(t, NumPy, "testdata/numpy_2_0_migration_guide-v2.0.0.rst", "1.26.4", "2.0.0")
 	if len(events) != 56 {
 		t.Fatalf("%d events, want 56", len(events))
 	}

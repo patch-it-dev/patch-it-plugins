@@ -1,0 +1,90 @@
+[
+  {
+    "id": 0,
+    "fingerprint": "sha256:b2d3b47705a97f5ad0eba1ad05610205e8134a851eb1a61e7ff4588dcb316f64",
+    "api": "github/graphql",
+    "version": "2027-01-01",
+    "previous_version": "2026-02-13",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "schema_property",
+      "side": "response",
+      "schema": "CheckAnnotation",
+      "property": "databaseId"
+    },
+    "description": "GitHub's GraphQL API removes CheckAnnotation.databaseId on 2027-01-01: code that queries or sends it fails from that date.",
+    "migration_hint": "databaseId will be removed. Use fullDatabaseId instead. databaseId will be removed because it does not support 64-bit signed integer identifiers.",
+    "source_url": "https://raw.githubusercontent.com/github/docs/3a14e541873e834edf32b43b71911fe80d109a70/src/graphql/data/fpt/upcoming-changes.json",
+    "source_excerpt": "{\"location\":\"CheckAnnotation.databaseId\",\"description\":\"<p><code>databaseId</code> will be removed. Use <code>fullDatabaseId</code> instead.</p>\",\"reason\":\"<p><code>databaseId</code> will be removed because it does not support 64-bit signed integer identifiers.</p>\",\"date\":\"2027-01-01\",\"criticality\":\"breaking\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 0,
+    "fingerprint": "sha256:cd07336291aa000b124d74fd081c22b95cc1ca0fabadf51cf776e9bb93e309f5",
+    "api": "github/graphql",
+    "version": "2027-01-01",
+    "previous_version": "2026-02-13",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "schema_property",
+      "side": "response",
+      "schema": "Artifact",
+      "property": "databaseId"
+    },
+    "description": "GitHub's GraphQL API removes Artifact.databaseId on 2027-01-01: code that queries or sends it fails from that date.",
+    "migration_hint": "databaseId will be removed. Use fullDatabaseId instead. databaseId will be removed because it does not support 64-bit signed integer identifiers.",
+    "source_url": "https://raw.githubusercontent.com/github/docs/3a14e541873e834edf32b43b71911fe80d109a70/src/graphql/data/fpt/upcoming-changes.json",
+    "source_excerpt": "{\"location\":\"Artifact.databaseId\",\"description\":\"<p><code>databaseId</code> will be removed. Use <code>fullDatabaseId</code> instead.</p>\",\"reason\":\"<p><code>databaseId</code> will be removed because it does not support 64-bit signed integer identifiers.</p>\",\"date\":\"2027-01-01\",\"criticality\":\"breaking\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 0,
+    "fingerprint": "sha256:da197a3086fc3c9c3642b6045598ee0f65d32f78b16c26c3697eedc79c0463ed",
+    "api": "github/graphql",
+    "version": "2026-10-01",
+    "previous_version": "2026-03-03",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "schema_property",
+      "side": "response",
+      "schema": "User",
+      "property": "viewerRelevantRepositories"
+    },
+    "description": "GitHub's GraphQL API removes User.viewerRelevantRepositories on 2026-10-01: code that queries or sends it fails from that date.",
+    "migration_hint": "viewerRelevantRepositories will be removed. Use viewerCopilotChatRepositorySuggestions instead. viewerRelevantRepositories has been renamed to viewerCopilotChatRepositorySuggestions.",
+    "source_url": "https://raw.githubusercontent.com/github/docs/a934f06d211bef668253e3826c118a4e559dc1ba/src/graphql/data/fpt/upcoming-changes.json",
+    "source_excerpt": "{\"location\":\"User.viewerRelevantRepositories\",\"description\":\"<p><code>viewerRelevantRepositories</code> will be removed. Use viewerCopilotChatRepositorySuggestions instead.</p>\",\"reason\":\"<p><code>viewerRelevantRepositories</code> has been renamed to <code>viewerCopilotChatRepositorySuggestions</code>.</p>\",\"date\":\"2026-10-01\",\"criticality\":\"breaking\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 0,
+    "fingerprint": "sha256:baa075ad2dbf3bd79789a7485b386db64b050383e1b6bf2de5ac11719d70263f",
+    "api": "github/graphql",
+    "version": "2026-10-01",
+    "previous_version": "2026-05-22",
+    "change_type": "deprecation",
+    "breaking": false,
+    "subject": {
+      "type": "api_operation",
+      "kind": "schema_property",
+      "side": "response",
+      "schema": "CopilotAgentTask",
+      "property": "type"
+    },
+    "description": "GitHub's GraphQL API removes CopilotAgentTask.type on 2026-10-01: code that queries or sends it fails from that date.",
+    "migration_hint": "type will be removed. Use codingAgentFilter and codingAgentTypeFilter instead. type will be removed.",
+    "source_url": "https://raw.githubusercontent.com/github/docs/c5738e5815fff90d38f0166f7c9949bfb664e003/src/graphql/data/fpt/upcoming-changes.json",
+    "source_excerpt": "{\"location\":\"CopilotAgentTask.type\",\"description\":\"<p><code>type</code> will be removed. Use <code>codingAgentFilter</code> and <code>codingAgentTypeFilter</code> instead.</p>\",\"reason\":\"<p><code>type</code> will be removed.</p>\",\"date\":\"2026-10-01\",\"criticality\":\"breaking\"}",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

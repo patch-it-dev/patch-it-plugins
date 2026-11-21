@@ -2,9 +2,12 @@
 // that removed members of its top-level module, read from the release's own
 // migration guide at its tag: change event v2's `package_release` subject.
 // The kind (plugins/migrationguide) reads the guide and calls Read; this
-// package knows where the guide is and how its table reads. NumPy 2.0 first: its guide lists about 60 members of the main `np`
-// namespace that were removed, each with a migration guideline, and code using
-// one raises AttributeError on NumPy 2 (checked 2026-11-04 at tag v2.0.0).
+// package knows where the guide is and how its table reads. A guide is read
+// at the first release of each major (X.0.0), listed from PyPI: nothing in
+// the code names a release. NumPy first: its 2.0 guide lists about 60
+// members of the main `np` namespace that were removed, each with a
+// migration guideline, and code using one raises AttributeError on NumPy 2
+// (checked 2026-11-04 at tag v2.0.0).
 //
 // A row whose guideline is exactly one replacement in the module ("Use
 // “np.float64“ instead.") becomes a `renamed_symbol` with that replacement:
@@ -24,33 +27,40 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"net/url"
 	"regexp"
 	"slices"
+	"strconv"
 	"strings"
 	"time"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
+	"github.com/patch-it-dev/patch-it-plugins/core/github"
 	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 	"github.com/patch-it-dev/patch-it-plugins/core/versions"
 )
 
-// Guide is one package's guide to one release.
+// Guide is one package's guide to each of its majors.
 type Guide struct {
 	API     string // the source id the events carry: "numpy/numpy"
 	Package string // the PyPI name: "numpy"
 	Module  string // how the guide writes the module in a replacement: "np"
-	Release string // "2.0.0"
 	Repo    string // owner/name on GitHub
-	Path    string // the guide's path in the repo at the release tag
+	// Path is the guide's path in the repo for a major, "{major}" standing
+	// for the major's number and "{prev}" for the one before:
+	// "doc/source/numpy_{major}_0_migration_guide.rst" is
+	// doc/source/numpy_2_0_migration_guide.rst for 2.0.0.
+	Path    string
 	Section string // the heading the table is under
 
 	// TagPrefix makes a release's git tag: TagPrefix + version ("" is "v":
-	// v2.0.0; PostHog's is "posthog-v"). The guide is read at Release's tag.
+	// v2.0.0; PostHog's is "posthog-v"). A major's guide is read at the tag
+	// of its first release.
 	TagPrefix string
-	// DocsRef, when the guide isn't in the package's own repo but in a docs
-	// repo with no release tags (New Relic's release notes), is the commit
-	// of Repo the guide is read at.
-	DocsRef string
+	// Untagged is a guide that isn't in the package's own repo but in a docs
+	// repo with no release tags (New Relic's release notes): it is read at
+	// the newest commit that changed its path, looked up when it's read.
+	Untagged bool
 	// Format is how the table is written: FormatRST (the default) or
 	// FormatMarkdown.
 	Format Format
@@ -111,13 +121,8 @@ const (
 	FormatMarkdown Format = "markdown"
 )
 
-func (g Guide) tag() string { return g.tagOf(g.Release) }
-
-// tagOf is the git ref a release of the package is read at.
+// tagOf is the git tag of a release of the package.
 func (g Guide) tagOf(release string) string {
-	if g.DocsRef != "" {
-		return g.DocsRef
-	}
 	if g.TagPrefix != "" {
 		return g.TagPrefix + release
 	}
@@ -138,21 +143,33 @@ func (g Guide) header() string {
 	return "removed member"
 }
 
-// NumPy2 is NumPy's 2.0 migration guide, "Main namespace" table.
-var NumPy2 = Guide{
+// NumPy is NumPy's migration guide to a major, "Main namespace" table
+// (doc/source/numpy_2_0_migration_guide.rst at v2.0.0, checked 2026-11-04;
+// no other major has one yet, checked 2026-11-20).
+var NumPy = Guide{
 	API:     "numpy/numpy",
 	Package: "numpy",
 	Module:  "np",
-	Release: "2.0.0",
 	Repo:    "numpy/numpy",
-	Path:    "doc/source/numpy_2_0_migration_guide.rst",
+	Path:    "doc/source/numpy_{major}_0_migration_guide.rst",
 	Section: "Main namespace",
 	Effect:  "code using it raises AttributeError",
 }
 
-// URL is the guide as it was at the release tag: its own provenance.
-func (g Guide) URL() string {
-	return fmt.Sprintf("https://raw.githubusercontent.com/%s/%s/%s", g.Repo, g.tag(), g.Path)
+// PathAt is the guide's path for a major.
+func (g Guide) PathAt(major int) string {
+	return strings.NewReplacer("{major}", strconv.Itoa(major), "{prev}", strconv.Itoa(major-1)).Replace(g.Path)
+}
+
+// commitsURL lists the newest commit that changed a major's guide.
+func (g Guide) commitsURL(major int) string {
+	return fmt.Sprintf("%s/repos/%s/commits?path=%s&per_page=1", github.API, g.Repo, url.QueryEscape(g.PathAt(major)))
+}
+
+// RawURL is the guide for a major at a git ref (a tag or a commit): its own
+// provenance, as it never changes.
+func (g Guide) RawURL(ref string, major int) string {
+	return fmt.Sprintf("%s/%s/%s/%s", github.Raw, g.Repo, ref, g.PathAt(major))
 }
 
 // Removal is one removed member and the guide's guideline for it.
@@ -245,10 +262,13 @@ func parseRST(page []byte, g Guide) ([]Removal, error) {
 // Slug is the source id the events carry: "numpy/numpy".
 func (g Guide) Slug() string { return g.API }
 
-// Releases is every final release of the package on PyPI, oldest first,
-// each with the ref its guide would be read at.
+// Releases is every final release of the package on PyPI, yanked ones
+// included, oldest first, each with its tag. A yanked release stays: it can
+// be the one a guide documents (New Relic's 11.0.0, yanked for a
+// server-side configuration issue), and a pin on a later one still crosses
+// it.
 func (g Guide) Releases(ctx context.Context, env plugin.Env) ([]plugin.Version, error) {
-	vs, err := versions.PyPIReleases(ctx, env.Get, g.Package)
+	vs, err := versions.PyPIReleasesWithYanked(ctx, env.Get, g.Package)
 	if err != nil {
 		return nil, err
 	}
@@ -258,34 +278,44 @@ func (g Guide) Releases(ctx context.Context, env plugin.Env) ([]plugin.Version, 
 	return vs, nil
 }
 
-// GuideURL is the guide when v is the release it documents; any other
-// release has no guide ("").
-func (g Guide) GuideURL(v plugin.Version) string {
-	if v.ID != g.Release {
-		return ""
+// GuideURL is the guide for v's major when v is its first release (X.0.0),
+// at v's tag or, Untagged, at the newest commit that changed the guide's
+// path; any other release has no guide (""). A major whose guide's path has
+// no commit has nothing to read (plugin.ErrNothingToRead).
+func (g Guide) GuideURL(ctx context.Context, env plugin.Env, v plugin.Version) (string, error) {
+	if !versions.FirstOfMajor(v.ID) {
+		return "", nil
 	}
-	return g.URL()
+	major := versions.Major(v.ID)
+	if !g.Untagged {
+		return g.RawURL(g.tagOf(v.ID), major), nil
+	}
+	sha, err := github.LatestCommit(ctx, env.Get, g.commitsURL(major))
+	if err != nil {
+		return "", fmt.Errorf("the commit %s's guide for %s is read at: %w", g.Package, v.ID, err)
+	}
+	return g.RawURL(sha, major), nil
 }
 
-// Read is an event per removed member in the guide, with previous_version
-// from's release.
-func (g Guide) Read(page []byte, from, _ plugin.Version, now time.Time) (events []event.Event, rejected []error, err error) {
+// Read is an event per removed member in the guide to's release documents,
+// read from sourceURL, with previous_version from's release.
+func (g Guide) Read(page []byte, sourceURL string, from, to plugin.Version, now time.Time) (events []event.Event, rejected []error, err error) {
 	removals, err := Parse(page, g)
 	if err != nil {
 		return nil, nil, err
 	}
 	for _, r := range removals {
 		if r.Dropped != "" {
-			log.Printf("%s %s: dropped %q: %s", g.Package, g.Release, r.Member, r.Dropped)
+			log.Printf("%s %s: dropped %q: %s", g.Package, to.ID, r.Member, r.Dropped)
 			continue
 		}
 		subject := event.Subject{
 			Type: event.SubjectPackageRelease, Ecosystem: "pypi", Package: g.Package,
 			Change: event.PackageRemovedSymbol, Symbols: []string{r.Member},
 		}
-		desc := fmt.Sprintf("`%s` was removed in %s %s.", r.Member, g.Package, g.Release)
+		desc := fmt.Sprintf("`%s` was removed in %s %s.", r.Member, g.Package, to.ID)
 		if g.Effect != "" {
-			desc = fmt.Sprintf("%s.%s was removed in %s %s: %s.", g.Module, r.Member, g.Package, g.Release, g.Effect)
+			desc = fmt.Sprintf("%s.%s was removed in %s %s: %s.", g.Module, r.Member, g.Package, to.ID, g.Effect)
 		}
 		if r.Replacement != "" && !g.NewReplacements && (g.DropIns == nil || slices.Contains(g.DropIns, r.Member)) {
 			subject.Change, subject.Replacement = event.PackageRenamedSymbol, r.Replacement
@@ -293,13 +323,13 @@ func (g Guide) Read(page []byte, from, _ plugin.Version, now time.Time) (events 
 		e := event.Event{
 			API:             g.API,
 			PreviousVersion: from.ID,
-			Version:         g.Release,
+			Version:         to.ID,
 			ChangeType:      event.ChangeTypeBreaking,
 			Breaking:        true,
 			Subject:         subject,
 			Description:     desc,
-			MigrationHint:   fmt.Sprintf("%s (%s's %s for %s)", g.absoluteLinks(r.Guideline), g.Package, g.doc(), g.Release),
-			SourceURL:       g.URL(),
+			MigrationHint:   fmt.Sprintf("%s (%s's %s for %s)", g.absoluteLinks(r.Guideline), g.Package, g.doc(), to.ID),
+			SourceURL:       sourceURL,
 			SourceExcerpt:   r.Excerpt,
 			Confidence:      1.0,
 			DetectedAt:      now,

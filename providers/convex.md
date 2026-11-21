@@ -8,7 +8,7 @@ Kind: `openapi` (`plugins/openapi`), with `adapter.Convex`.
 
 ## Why this source
 
-- **Source:** `npm-packages/@convex-dev/platform/deployment-openapi.json` in [get-convex/convex-backend](https://github.com/get-convex/convex-backend), pinned to the commit that last changed it (`https://raw.githubusercontent.com/get-convex/convex-backend/<sha>/npm-packages/@convex-dev/platform/deployment-openapi.json`). The newest such commit comes from the GitHub commits API. Checked on 2026-11-19.
+- **Source:** `npm-packages/@convex-dev/platform/deployment-openapi.json` in [convex/convex-backend](https://github.com/convex/convex-backend) (the org was `get-convex` until 2026; GitHub redirects the old URLs, checked 2026-11-20), pinned to the commit that last changed it (`https://raw.githubusercontent.com/convex/convex-backend/<sha>/npm-packages/@convex-dev/platform/deployment-openapi.json`). The newest such commit comes from the GitHub commits API. Checked on 2026-11-19.
 - **Why a commit, not a release tag:** the repo tags `precompiled-YYYY-MM-DD-<sha>` builds (1,213 of them), but those are daily builds of the self-hosted backend, not releases of the API. There are several on some days, ordered only by commit date, and the spec is the same in most of them. The spec at a tag is the spec at the last commit before it that changed the file, so the commits see every version a tag would, and finding the newest takes one call instead of paging through the tags. A commit never changes, so it can be cited and replayed.
 - **Why this one:**
   - It's Convex's own description of the API: its docs build renders the API reference from it.
@@ -16,7 +16,7 @@ Kind: `openapi` (`plugins/openapi`), with `adapter.Convex`.
   - There are 68 versions from 2025-08-19, when the spec was added, to 2026-11-16.
 - **Alternatives considered:**
   - **The Management API spec** (`management-openapi.json`, next to it: teams, projects, deployments). Its `info.license` is `LicenseRef-Convex`, which nothing in the repo defines, so the plugin neither reads nor saves it.
-  - **The SDK changelogs** (`convex` on npm, `get-convex/convex-js` `CHANGELOG.md`; `convex-py`). One flat list of bullets per version (95 versions in `convex-js`), with no removed or deprecated sections for the `changelog` plugin to read.
+  - **The SDK changelogs** (`convex` on npm, `convex/convex-js` `CHANGELOG.md`; `convex-py`). One flat list of bullets per version (95 versions in `convex-js`), with no removed or deprecated sections for the `changelog` plugin to read.
   - **[Convex News](https://news.convex.dev/)** (RSS at `https://news.convex.dev/rss/`). Product news and announcements, newest post 2026-09-21; it doesn't name API operations.
   - **The `@convex-dev/platform` npm package** (0.1.11). Its tarball has only `package.json` and the generated client, not the specs.
 - **Quote:** "Deprecated: use `GET /integrations` instead." (`GET /api/v1/list_log_streams`, deprecated in the spec on 2026-11-05)

@@ -1,0 +1,232 @@
+{
+  "2026-04-01": [
+    {
+      "location": "TeamRemoveRepositoryAuditEntry.userUrl",
+      "description": "<p><code>userUrl</code> will be removed.</p>",
+      "reason": "<p>The GraphQL audit-log is deprecated. Please use the REST API instead.</p>",
+      "date": "2026-04-01",
+      "criticality": "breaking",
+      "owner": "audit_logs"
+    }
+  ],
+  "2026-01-01": [
+    {
+      "location": "NotificationThread.subject",
+      "description": "<p><code>subject</code> will be removed. Use the <code>optionalSubject</code> field instead.</p>",
+      "reason": "<p>Null values are possible for this field.</p>",
+      "date": "2026-01-01",
+      "criticality": "breaking",
+      "owner": "github/notifications"
+    }
+  ],
+  "2025-10-01": [
+    {
+      "location": "SecurityAdvisory.cvss",
+      "description": "<p><code>cvss</code> will be removed. New <code>cvss_severities</code> field will now contain both <code>cvss_v3</code> and <code>cvss_v4</code> properties.</p>",
+      "reason": "<p><code>cvss</code> will be removed.</p>",
+      "date": "2025-10-01",
+      "criticality": "breaking",
+      "owner": "github/advisory-database"
+    }
+  ],
+  "2025-04-01": [
+    {
+      "location": "User.viewerCanCreateProjects",
+      "description": "<p><code>viewerCanCreateProjects</code> will be removed.</p>",
+      "reason": "<p>Projects (classic) is being deprecated in favor of the new Projects experience, see: <a href=\"https://github.blog/changelog/2024-05-23-sunset-notice-projects-classic/\">https://github.blog/changelog/2024-05-23-sunset-notice-projects-classic/</a>.</p>",
+      "date": "2025-04-01",
+      "criticality": "breaking",
+      "owner": "github/memex"
+    }
+  ],
+  "2025-01-01": [
+    {
+      "location": "AddMobileDevicePublicKeyPayload.expiresAt",
+      "description": "<p><code>expiresAt</code> will be removed. Do not rely on this field, it is currently set to a date far in the future if a device key is expirationless</p>",
+      "reason": "<p>We are deprecating expirations for mobile device keys used in mobile 2FA</p>",
+      "date": "2025-01-01",
+      "criticality": "breaking",
+      "owner": "chriskirkland"
+    }
+  ],
+  "2024-10-01": [
+    {
+      "location": "Workflow.hasWorkflowDispatchTrigger",
+      "description": "<p><code>hasWorkflowDispatchTrigger</code> will be removed. Use <code>has_workflow_dispatch_trigger_for_branch(branch_ref)</code> instead.</p>",
+      "reason": "<p><code>has_workflow_dispatch_trigger</code> is being removed because it can be misleading and only checks a repository's default branch</p>",
+      "date": "2024-10-01",
+      "criticality": "breaking",
+      "owner": "stevepopovich"
+    }
+  ],
+  "2024-04-01": [
+    {
+      "location": "TopicSuggestionDeclineReason.TOO_SPECIFIC",
+      "description": "<p><code>TOO_SPECIFIC</code> will be removed.</p>",
+      "reason": "<p>Suggested topics are no longer supported</p>",
+      "date": "2024-04-01",
+      "criticality": "breaking",
+      "owner": "calvinchilds"
+    }
+  ],
+  "2023-10-01": [
+    {
+      "location": "PullRequestReviewComment.position",
+      "description": "<p><code>position</code> will be removed. Use the <code>line</code> and <code>startLine</code> fields instead, which are file line numbers instead of diff line numbers</p>",
+      "reason": "<p>We are phasing out diff-relative positioning for PR comments</p>",
+      "date": "2023-10-01",
+      "criticality": "breaking",
+      "owner": "aharpole"
+    }
+  ],
+  "2023-07-01": [
+    {
+      "location": "ProjectV2ItemFieldGroup.field",
+      "description": "<p><code>field</code> will be removed. Check out the <code>ProjectV2ItemFieldGroup#groupByField</code> API as an example for the more capable alternative.</p>",
+      "reason": "<p>The <code>ProjectV2ItemFieldGroup#field</code> API is deprecated in favour of the more capable <code>ProjectV2ItemFieldGroup#groupByField</code> API.</p>",
+      "date": "2023-07-01",
+      "criticality": "breaking",
+      "owner": "stevepopovich"
+    }
+  ],
+  "2023-04-01": [
+    {
+      "location": "Repository.squashPrTitleUsedAsDefault",
+      "description": "<p><code>squashPrTitleUsedAsDefault</code> will be removed. Use <code>Repository.squashMergeCommitTitle</code> instead.</p>",
+      "reason": "<p><code>squashPrTitleUsedAsDefault</code> will be removed.</p>",
+      "date": "2023-04-01",
+      "criticality": "breaking",
+      "owner": "github/pull_requests"
+    }
+  ],
+  "2023-02-10": [
+    {
+      "location": "PackageType.MAVEN",
+      "description": "<p><code>MAVEN</code> will be removed.</p>",
+      "reason": "<p>MAVEN will be removed from this enum as this type will be migrated to only be used by the Packages REST API.</p>",
+      "date": "2023-02-10",
+      "criticality": "breaking",
+      "owner": "ankitkaushal01"
+    }
+  ],
+  "2023-01-01": [
+    {
+      "location": "ProjectV2View.visibleFields",
+      "description": "<p><code>visibleFields</code> will be removed. Check out the <code>ProjectV2View#fields</code> API as an example for the more capable alternative.</p>",
+      "reason": "<p>The <code>ProjectV2View#visibleFields</code> API is deprecated in favour of the more capable <code>ProjectV2View#fields</code> API.</p>",
+      "date": "2023-01-01",
+      "criticality": "breaking",
+      "owner": "mattruggio"
+    }
+  ],
+  "2022-12-28": [
+    {
+      "location": "PackageType.RUBYGEMS",
+      "description": "<p><code>RUBYGEMS</code> will be removed.</p>",
+      "reason": "<p>RUBYGEMS will be removed from this enum as this type will be migrated to only be used by the Packages REST API.</p>",
+      "date": "2022-12-28",
+      "criticality": "breaking",
+      "owner": "ankitkaushal01"
+    }
+  ],
+  "2022-11-21": [
+    {
+      "location": "PackageType.NUGET",
+      "description": "<p><code>NUGET</code> will be removed.</p>",
+      "reason": "<p>NUGET will be removed from this enum as this type will be migrated to only be used by the Packages REST API.</p>",
+      "date": "2022-11-21",
+      "criticality": "breaking",
+      "owner": "s-anupam"
+    }
+  ],
+  "2022-10-01": [
+    {
+      "location": "RemovePullRequestFromMergeQueueInput.branch",
+      "description": "<p><code>branch</code> will be removed.</p>",
+      "reason": "<p>PRs are removed from the merge queue for the base branch, the <code>branch</code> argument is now a no-op</p>",
+      "date": "2022-10-01",
+      "criticality": "breaking",
+      "owner": "jhunschejones"
+    }
+  ],
+  "2022-07-01": [
+    {
+      "location": "Query.sponsorables.dependencyEcosystem",
+      "description": "<p><code>dependencyEcosystem</code> will be removed. Use the ecosystem argument instead.</p>",
+      "reason": "<p>The type is switching from SecurityAdvisoryEcosystem to DependencyGraphEcosystem.</p>",
+      "date": "2022-07-01",
+      "criticality": "breaking",
+      "owner": "cheshire137"
+    }
+  ],
+  "2021-10-01": [
+    {
+      "location": "ReactionGroup.users",
+      "description": "<p><code>users</code> will be removed. Use the <code>reactors</code> field instead.</p>",
+      "reason": "<p>Reactors can now be mannequins, bots, and organizations.</p>",
+      "date": "2021-10-01",
+      "criticality": "breaking",
+      "owner": "synthead"
+    }
+  ],
+  "2021-06-21": [
+    {
+      "location": "PackageType.DOCKER",
+      "description": "<p><code>DOCKER</code> will be removed.</p>",
+      "reason": "<p>DOCKER will be removed from this enum as this type will be migrated to only be used by the Packages REST API.</p>",
+      "date": "2021-06-21",
+      "criticality": "breaking",
+      "owner": "reybard"
+    }
+  ],
+  "2021-01-01": [
+    {
+      "location": "MergeStateStatus.DRAFT",
+      "description": "<p><code>DRAFT</code> will be removed. Use PullRequest.isDraft instead.</p>",
+      "reason": "<p>DRAFT state will be removed from this enum and <code>isDraft</code> should be used instead</p>",
+      "date": "2021-01-01",
+      "criticality": "breaking",
+      "owner": "nplasterer"
+    }
+  ],
+  "2020-10-01": [
+    {
+      "location": "Sponsorship.sponsor",
+      "description": "<p><code>sponsor</code> will be removed. Use <code>Sponsorship.sponsorEntity</code> instead.</p>",
+      "reason": "<p><code>Sponsorship.sponsor</code> will be removed.</p>",
+      "date": "2020-10-01",
+      "criticality": "breaking",
+      "owner": "nholden"
+    }
+  ],
+  "2020-04-01": [
+    {
+      "location": "Sponsorship.maintainer",
+      "description": "<p><code>maintainer</code> will be removed. Use <code>Sponsorship.sponsorable</code> instead.</p>",
+      "reason": "<p><code>Sponsorship.maintainer</code> will be removed.</p>",
+      "date": "2020-04-01",
+      "criticality": "breaking",
+      "owner": "antn"
+    }
+  ],
+  "2020-01-01": [
+    {
+      "location": "UnassignedEvent.user",
+      "description": "<p><code>user</code> will be removed. Use the <code>assignee</code> field instead.</p>",
+      "reason": "<p>Assignees can now be mannequins.</p>",
+      "date": "2020-01-01",
+      "criticality": "breaking",
+      "owner": "tambling"
+    }
+  ],
+  "2019-04-01": [
+    {
+      "location": "LegacyMigration.uploadUrlTemplate",
+      "description": "<p><code>uploadUrlTemplate</code> will be removed. Use <code>uploadUrl</code> instead.</p>",
+      "reason": "<p><code>uploadUrlTemplate</code> is being removed because it is not a standard URL and adds an extra user step.</p>",
+      "date": "2019-04-01",
+      "criticality": "breaking",
+      "owner": "tambling"
+    }
+  ]
+}
