@@ -141,7 +141,7 @@ func importInAll(root, kind string) ([]byte, bool, error) {
 	if err != nil {
 		return nil, false, err
 	}
-	imp := `"github.com/patch-it-dev/patch-it-plugins/plugins/` + kind + `"`
+	imp := `"github.com/patch-it-dev/patch-it-plugins/kinds/` + kind + `"`
 	if bytes.Contains(src, []byte(imp)) {
 		return nil, false, nil
 	}

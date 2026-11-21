@@ -79,7 +79,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	return kittest.Page(t, kittest.Env(t, saved), Plugin{Page: feed.{{.Ident}}, Archiver: archive})
 }
 `,
-		imports: []string{"github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/plugins/notices/feed"},
+		imports: []string{"github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/kinds/notices/feed"},
 	},
 
 	"notices/deprecations": {
@@ -151,7 +151,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	return kittest.Page(t, kittest.Env(t, saved), Plugin{Page: retire.{{.Ident}}, Archiver: archive})
 }
 `,
-		imports: []string{"encoding/json", "strings", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/plugins/notices/retire"},
+		imports: []string{"encoding/json", "strings", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/kinds/notices/retire"},
 	},
 
 	"migrationguide/sdk": {
@@ -225,7 +225,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 		plugin.Version{ID: {{.Lower}}Previous, Ref: "v" + {{.Lower}}Previous}, plugin.Version{ID: g.Version(), Ref: "v" + g.Version()})
 }
 `,
-		imports: []string{"encoding/json", "strings", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/core/plugin", "github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide/sdkguide"},
+		imports: []string{"encoding/json", "strings", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/core/plugin", "github.com/patch-it-dev/patch-it-plugins/kinds/migrationguide/sdkguide"},
 	},
 
 	"migrationguide/members": {
@@ -314,7 +314,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	return kittest.Versions(t, env, Plugin{Guide: g}, plugin.Version{ID: {{.Lower}}Previous}, plugin.Version{ID: {{.Lower}}Release})
 }
 `,
-		imports: []string{"slices", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/core/plugin", "github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide/members"},
+		imports: []string{"slices", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/core/plugin", "github.com/patch-it-dev/patch-it-plugins/kinds/migrationguide/members"},
 	},
 
 	"changelog/markdown": {
@@ -551,7 +551,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	return kittest.Versions(t, kittest.Env(t, nil), p, plugin.Version{ID: "old", Ref: "old"}, plugin.Version{ID: "new", Ref: "new"})
 }
 `,
-		imports: []string{"context", "fmt", "os", "github.com/patch-it-dev/patch-it-plugins/plugins/openapi/adapter", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/core/plugin"},
+		imports: []string{"context", "fmt", "os", "github.com/patch-it-dev/patch-it-plugins/kinds/openapi/adapter", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/core/plugin"},
 		next:    "Write LatestTag, Fetch and Versions in plugins/openapi/adapter/{{.File}}.go (fetch.Get only); add Diff/Keep to the Register line if the spec needs them (see vercel.go).",
 	},
 	"apisurface/pypi": {
