@@ -8,8 +8,10 @@ import (
 	"slices"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
+	"github.com/patch-it-dev/patch-it-plugins/core/versions"
 )
 
 // recorded serves saved API responses (testdata/versions/, recorded
@@ -178,5 +180,28 @@ func TestDailyKeepsEachDaysLastCommit(t *testing.T) {
 	}
 	if want := "2026-10-27 a,2026-10-28 c,2026-10-30 d"; strings.Join(got, ",") != want {
 		t.Errorf("got %v, want %s", got, want)
+	}
+}
+
+// Stripe's versions are its API versions, as each release's notes name
+// them: one per version, oldest first, read at the newest release carrying
+// it and dated by the first; v2190, whose notes name none, is left out.
+func TestStripeListsAPIVersions(t *testing.T) {
+	srv := recorded(t, map[string]string{"/repos/stripe/openapi/releases?per_page=100&page=1": "stripe-openapi-releases.json"})
+	old := versions.GitHubAPI
+	versions.GitHubAPI = srv.URL
+	t.Cleanup(func() { versions.GitHubAPI = old })
+	vs, err := Stripe{}.Versions(context.Background())
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := "2026-02-25.clover@v2203 2026-03-25.dahlia@v2248 2026-04-22.dahlia@v2275 2026-05-27.dahlia@v2323 2026-06-24.dahlia@v2348 " +
+		"2026-07-29.dahlia@v2441 2026-08-26.dahlia@v2516 2026-09-30.endive@v2592 2026-10-28.endive@v2600 2026-11-18.endive@v2602"
+	if got := ids(vs); got != want {
+		t.Fatalf("got  %s\nwant %s", got, want)
+	}
+	last := vs[len(vs)-1]
+	if !last.Released.Equal(time.Date(2026, 11, 17, 22, 34, 17, 0, time.UTC)) || last.URL != "https://github.com/stripe/openapi/releases/tag/v2602" {
+		t.Errorf("newest: released %s (want v2601's date), url %s", last.Released, last.URL)
 	}
 }

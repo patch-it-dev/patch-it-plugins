@@ -270,11 +270,16 @@ func (p Plugin) ListVersions(ctx context.Context, _ plugin.Env) ([]plugin.Versio
 }
 
 // ReadAt fetches the spec at v.Ref. The snapshot's version ID is the version
-// the spec itself declares (what events carry), which may differ from the tag.
+// the spec itself declares (what events carry), which may differ from the tag;
+// for an adapter that lists the specs' own versions (SpecVersioned) it must
+// be v's.
 func (p Plugin) ReadAt(ctx context.Context, _ plugin.Env, v plugin.Version) (plugin.Snapshot, error) {
 	s, err := p.Adapter.Fetch(ctx, v.Ref)
 	if err != nil {
 		return plugin.Snapshot{}, fmt.Errorf("fetching %s %s: %w", p.Adapter.API(), v.Ref, err)
+	}
+	if _, ok := p.Adapter.(adapter.SpecVersioned); ok && s.Version != v.ID {
+		return plugin.Snapshot{}, fmt.Errorf("%s %s: the spec at %s declares %s: not published there yet", p.Adapter.API(), v.ID, v.Ref, s.Version)
 	}
 	v.ID = s.Version
 	return plugin.Snapshot{Version: v, Content: s.Content, SourceURL: s.SourceURL}, nil
