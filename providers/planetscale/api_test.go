@@ -94,8 +94,8 @@ func TestPlanetScaleGolden(t *testing.T) {
 		if !want[e.Subject.Operation] {
 			t.Errorf("unexpected event %s", e.Subject.Operation)
 		}
-		if e.ChangeType != event.ChangeTypeDeprecation || e.Version != "2026-11-09" || !strings.HasSuffix(e.SourcePointer, "/description") {
-			t.Errorf("%s: %s %s citing %s", e.Subject.Operation, e.ChangeType, e.Version, e.SourcePointer)
+		if e.Change != event.ChangeDeprecated || e.Version != "2026-11-09" || !strings.HasSuffix(e.SourcePointer, "/description") {
+			t.Errorf("%s: %s %s citing %s", e.Subject.Operation, e.Change, e.Version, e.SourcePointer)
 		}
 		if url := base + "/" + to + "/schemas/openapi.yaml"; e.SourceURL != url {
 			t.Errorf("%s: source_url %s, want %s", e.Subject.Operation, e.SourceURL, url)
@@ -134,7 +134,7 @@ func TestPlanetScaleDropsRemovalsThatWerentDeprecated(t *testing.T) {
 	p.Keep = nil
 	var removed []string
 	for _, e := range pairPlanetScale(t, p, from, to) {
-		if e.Breaking && e.Subject.Kind == event.KindOperation && strings.HasSuffix(e.Description, " removed.") {
+		if (e.Change == event.ChangeBreaking) && e.Subject.Kind == event.KindOperation && strings.HasSuffix(e.Description, " removed.") {
 			removed = append(removed, e.Subject.Operation)
 		}
 	}

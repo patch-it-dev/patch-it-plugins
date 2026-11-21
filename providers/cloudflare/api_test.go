@@ -47,7 +47,7 @@ func TestCloudflareRegistrarEndOfLife(t *testing.T) {
 			continue
 		}
 		got++
-		if f.ChangeType != event.ChangeTypeBreaking || f.Version != "2026-09-27" {
+		if f.ChangeType != event.ChangeBreaking || f.Version != "2026-09-27" {
 			t.Errorf("%s: %s %s, want breaking 2026-09-27", f.Subject.Operation, f.ChangeType, f.Version)
 		}
 		if f.Subject.Type != event.SubjectAPIOperation || f.Subject.Kind != event.KindOperation || f.Subject.Side != event.SideRequest {
@@ -95,15 +95,15 @@ func TestCloudflareValueDeprecationIsNoOperation(t *testing.T) {
 // list items that aren't one operation.
 func TestCloudflareCounts(t *testing.T) {
 	kept, dropped := cloudflareFindings(t)
-	byType := map[event.ChangeType]int{}
+	byType := map[event.Change]int{}
 	items := map[string]bool{}
 	for _, f := range kept {
 		byType[f.ChangeType]++
 		items[f.Entry] = true
 	}
-	if byType[event.ChangeTypeBreaking] != 5 || byType[event.ChangeTypeDeprecation] != 109 || len(dropped) != 27 || len(items) != 27 {
+	if byType[event.ChangeBreaking] != 5 || byType[event.ChangeDeprecated] != 109 || len(dropped) != 27 || len(items) != 27 {
 		t.Errorf("breaking %d, deprecation %d, dropped %d, from %d items; want 5, 109, 27, 27",
-			byType[event.ChangeTypeBreaking], byType[event.ChangeTypeDeprecation], len(dropped), len(items))
+			byType[event.ChangeBreaking], byType[event.ChangeDeprecated], len(dropped), len(items))
 	}
 	var noList int
 	for _, f := range dropped {
@@ -153,13 +153,13 @@ func TestCloudflareDates(t *testing.T) {
 	item := "<li><code>GET /old</code></li>"
 	for dates, want := range map[string]string{
 		"<p>Deprecation date: April 10, 2026</p><p>End of life date: September 27, 2026</p><p>After this date, the legacy endpoints will no longer be available.</p>": "breaking 2026-09-27",
-		"<p>Deprecation date: April 10, 2026</p><p>End of life date: September 27, 2026</p>":                                                                          "deprecation 2026-04-10",
+		"<p>Deprecation date: April 10, 2026</p><p>End of life date: September 27, 2026</p>":                                                                          "deprecated 2026-04-10",
 		"<p>End of life date: September 27, 2026</p><p>After this date, the endpoints will no longer be available.</p>":                                               "breaking 2026-09-27",
-		"<p>Deprecation date: April 10, 2026</p><p>The endpoints will no longer be available after the migration.</p>":                                                "deprecation 2026-04-10",
-		"<p>Deprecation date: November 2025</p><p>End of life date: January 2026</p>":                                                                                 "deprecation 2026-06-29",
-		"<p>Deprecation date: April 10, 2026</p><p>End of life date: January 2026</p>":                                                                                "deprecation 2026-04-10",
-		"<p>Deprecation date: April 10, 2026</p>":                                                                                                                     "deprecation 2026-04-10",
-		"": "deprecation 2026-06-29",
+		"<p>Deprecation date: April 10, 2026</p><p>The endpoints will no longer be available after the migration.</p>":                                                "deprecated 2026-04-10",
+		"<p>Deprecation date: November 2025</p><p>End of life date: January 2026</p>":                                                                                 "deprecated 2026-06-29",
+		"<p>Deprecation date: April 10, 2026</p><p>End of life date: January 2026</p>":                                                                                "deprecated 2026-04-10",
+		"<p>Deprecation date: April 10, 2026</p>":                                                                                                                     "deprecated 2026-04-10",
+		"": "deprecated 2026-06-29",
 	} {
 		fs := readCloudflareAPI(cfEntry(dates, item))
 		if len(fs) != 1 || fs[0].Dropped != "" {
@@ -174,18 +174,18 @@ func TestCloudflareDates(t *testing.T) {
 	// item under "Affected APIs:", about a field, so it stays a deprecation.
 	mirage := cfEntry("<p>Deprecation date: November 3, 2025</p><p>End of life date: January 15, 2026</p>", item)
 	mirage.HTML += "<p>Affected APIs:</p><ul><li><code>POST /zones/{zone_id}/pagerules</code> - Mirage parameter will be removed.</li></ul>"
-	if fs := readCloudflareAPI(mirage); len(fs) != 1 || fs[0].ChangeType != event.ChangeTypeDeprecation || fs[0].Version != "2025-11-03" {
+	if fs := readCloudflareAPI(mirage); len(fs) != 1 || fs[0].ChangeType != event.ChangeDeprecated || fs[0].Version != "2025-11-03" {
 		t.Errorf("a field's removal under Affected APIs: %+v, want deprecation 2025-11-03", fs)
 	}
 	// A paragraph that says something is removed, but not the endpoints.
 	field := cfEntry("<p>Deprecation date: November 3, 2025</p><p>End of life date: January 15, 2026</p><p>The mirage setting will be removed from the dashboard.</p>", item)
-	if fs := readCloudflareAPI(field); len(fs) != 1 || fs[0].ChangeType != event.ChangeTypeDeprecation {
+	if fs := readCloudflareAPI(field); len(fs) != 1 || fs[0].ChangeType != event.ChangeDeprecated {
 		t.Errorf("a setting's removal: %+v, want deprecation", fs)
 	}
 	// A paragraph that mentions the API, but what's removed is something else
 	// (the Service Key item, given a list and a full date).
 	auth := cfEntry("<p>Deprecation date: March 19, 2026</p><p>End of life date: September 30, 2026</p><p>Service Key authentication for the Cloudflare API is deprecated and will be removed on September 30, 2026.</p>", item)
-	if fs := readCloudflareAPI(auth); len(fs) != 1 || fs[0].ChangeType != event.ChangeTypeDeprecation {
+	if fs := readCloudflareAPI(auth); len(fs) != 1 || fs[0].ChangeType != event.ChangeDeprecated {
 		t.Errorf("an authentication method's removal: %+v, want deprecation", fs)
 	}
 	// The endpoints as what stops, as the Registrar and Zone Settings Batch
@@ -196,7 +196,7 @@ func TestCloudflareDates(t *testing.T) {
 		"By the end of March 2024, the current public-facing API will be removed.",
 	} {
 		fs := readCloudflareAPI(cfEntry("<p>End of life date: March 31, 2027</p><p>"+stop+"</p>", item))
-		if len(fs) != 1 || fs[0].ChangeType != event.ChangeTypeBreaking {
+		if len(fs) != 1 || fs[0].ChangeType != event.ChangeBreaking {
 			t.Errorf("%q: %+v, want breaking", stop, fs)
 		}
 	}

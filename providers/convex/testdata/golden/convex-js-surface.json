@@ -5,8 +5,7 @@
     "api": "convex/js-surface",
     "version": "1.35.1",
     "previous_version": "1.35.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",

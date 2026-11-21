@@ -51,7 +51,7 @@ func readGitHubActions(e extract.Entry) []feed.Finding {
 		}
 		label := codes[0]
 		desc := fmt.Sprintf("GitHub-hosted runner label %q is retired on %s: jobs that run on it fail from that date.", label, date)
-		if ct == event.ChangeTypeDeprecation {
+		if ct == event.ChangeDeprecated {
 			desc = fmt.Sprintf("GitHub-hosted runner label %q is deprecated; GitHub names %s for it.", label, date)
 		}
 		out = append(out, feed.Finding{

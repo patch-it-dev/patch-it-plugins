@@ -62,7 +62,7 @@ type Row struct {
 // Finding is one version number a row's status names, or a row that names
 // none (Dropped set).
 type Finding struct {
-	ChangeType event.ChangeType
+	ChangeType event.Change
 	Version    string // "21.0"
 	Season     string // "Summer ’25", or "Summer ’27, retired from Summer ’28"
 	Excerpt    string
@@ -134,14 +134,14 @@ func Findings(page []byte) ([]Finding, error) {
 		label := r.Label
 		excerpt := label + " | " + r.Status
 
-		var ct event.ChangeType
+		var ct event.Change
 		var season string
 		switch {
 		case retired.MatchString(r.Status):
-			ct, season = event.ChangeTypeBreaking, retired.FindStringSubmatch(r.Status)[1]
+			ct, season = event.ChangeBreaking, retired.FindStringSubmatch(r.Status)[1]
 		case deprecd.MatchString(r.Status):
 			m := deprecd.FindStringSubmatch(r.Status)
-			ct, season = event.ChangeTypeDeprecation, m[1]+", retired from "+m[2]
+			ct, season = event.ChangeDeprecated, m[1]+", retired from "+m[2]
 		default:
 			out = append(out, Finding{Row: label, Dropped: fmt.Sprintf("status %q names neither a retirement nor a deprecation", r.Status)})
 			continue
@@ -210,8 +210,7 @@ func (pg Page) Events(found kit.Notices, citeURL, previous string, now time.Time
 			API:             pg.API,
 			Version:         f.Version,
 			PreviousVersion: previous,
-			ChangeType:      f.ChangeType,
-			Breaking:        f.ChangeType == event.ChangeTypeBreaking,
+			Change:          f.ChangeType,
 			Subject: event.Subject{
 				Type:      event.SubjectAPIOperation,
 				Kind:      event.KindOperation,
@@ -225,7 +224,7 @@ func (pg Page) Events(found kit.Notices, citeURL, previous string, now time.Time
 			Confidence:    1.0,
 			DetectedAt:    now,
 		}
-		e.Fingerprint = event.Fingerprint(e.API, e.Version, e.ChangeType, e.Subject, "")
+		e.Fingerprint = event.Fingerprint(e.API, e.Version, e.Change, e.Subject, "")
 		if err := e.Validate(); err != nil {
 			rejected = append(rejected, fmt.Errorf("%s %s: %w", pg.API, f.Version, err))
 			continue
@@ -236,7 +235,7 @@ func (pg Page) Events(found kit.Notices, citeURL, previous string, now time.Time
 }
 
 func describe(pg Page, f Finding) string {
-	if f.ChangeType == event.ChangeTypeBreaking {
+	if f.ChangeType == event.ChangeBreaking {
 		return fmt.Sprintf("%s REST API version %s is retired, as of %s: it returns 410:GONE for every resource.", pg.Vendor, f.Version, f.Season)
 	}
 	return fmt.Sprintf("%s REST API version %s is deprecated and scheduled for retirement: unsupported from %s.", pg.Vendor, f.Version, f.Season)

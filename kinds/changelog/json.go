@@ -72,10 +72,10 @@ type change struct {
 // (streams/activeVpcPeeringConnections, 2025-01-10) comes with
 // `endpoint-added` the same day, and the endpoint changes again later: it
 // wasn't removed.
-var lifecycle = map[string]event.ChangeType{
-	"endpoint-deprecated":         event.ChangeTypeDeprecation,
-	"resource-version-deprecated": event.ChangeTypeDeprecation,
-	"endpoint-removed":            event.ChangeTypeBreaking,
+var lifecycle = map[string]event.Change{
+	"endpoint-deprecated":         event.ChangeDeprecated,
+	"resource-version-deprecated": event.ChangeDeprecated,
+	"endpoint-removed":            event.ChangeBreaking,
 }
 
 // reactivated withdraws a deprecation: "endpoint reactivated". MongoDB does
@@ -85,7 +85,7 @@ const reactivated = "endpoint-reactivated"
 
 // LogFinding is one life-cycle change.
 type LogFinding struct {
-	ChangeType event.ChangeType
+	ChangeType event.Change
 	Date       string // the changelog's day
 	Operation  string // "GET /api/atlas/v2/groups/{groupId}/clusters"
 	Version    string // the API version it's about: "2023-01-01"
@@ -129,7 +129,7 @@ func (l Log) Read(b []byte) ([]LogFinding, error) {
 					}
 					op := p.Method + " " + p.Path
 					key := op + " " + v.Version
-					if r, ok := removed[key]; ok && r.f.Date < d.Date && lifecycle[c.ChangeCode] != event.ChangeTypeBreaking {
+					if r, ok := removed[key]; ok && r.f.Date < d.Date && lifecycle[c.ChangeCode] != event.ChangeBreaking {
 						// It came back. Whether its old deprecation still
 						// applies is unclear, so that goes too.
 						delete(removed, key)
@@ -154,7 +154,7 @@ func (l Log) Read(b []byte) ([]LogFinding, error) {
 					}
 					seq++
 					target := deprecated
-					if ct == event.ChangeTypeBreaking {
+					if ct == event.ChangeBreaking {
 						target = removed
 					}
 					if _, dup := target[key]; !dup {
@@ -236,8 +236,7 @@ func (p Plugin) extractLog(env plugin.Env, from, to plugin.Snapshot) (plugin.Res
 			API:             l.API,
 			Version:         f.Version,
 			PreviousVersion: from.Version.ID,
-			ChangeType:      f.ChangeType,
-			Breaking:        f.ChangeType == event.ChangeTypeBreaking,
+			Change:          f.ChangeType,
 			Subject:         event.Subject{Type: event.SubjectAPIOperation, Kind: event.KindOperation, Side: event.SideRequest, Operation: f.Operation},
 			Description:     describeLog(l, f),
 			SourceURL:       to.SourceURL,
@@ -246,7 +245,7 @@ func (p Plugin) extractLog(env plugin.Env, from, to plugin.Snapshot) (plugin.Res
 			Confidence:      1.0,
 			DetectedAt:      now,
 		}
-		e.Fingerprint = event.Fingerprint(e.API, e.Version, e.ChangeType, e.Subject, "")
+		e.Fingerprint = event.Fingerprint(e.API, e.Version, e.Change, e.Subject, "")
 		if err := e.Validate(); err != nil {
 			rejected = append(rejected, fmt.Errorf("%s %s %s: %w", l.API, f.Operation, f.Version, err))
 			continue
@@ -271,7 +270,7 @@ func (f LogFinding) key() string { return string(f.ChangeType) + " " + f.Operati
 
 func describeLog(l Log, f LogFinding) string {
 	switch f.ChangeType {
-	case event.ChangeTypeBreaking:
+	case event.ChangeBreaking:
 		return fmt.Sprintf("%s %s, API version %s, removed on %s (%s's changelog, %s).", l.Name, f.Operation, f.Version, f.Date, l.Vendor, f.Code)
 	default:
 		return fmt.Sprintf("%s %s, API version %s, deprecated on %s (%s's changelog, %s).", l.Name, f.Operation, f.Version, f.Date, l.Vendor, f.Code)

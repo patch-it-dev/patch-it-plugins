@@ -58,11 +58,11 @@ func TestOnlyAPlainSentenceNamesItsSymbols(t *testing.T) {
 		{KindBreaking, "Removed ``pkg.a`` and ``pkg.b()`` (`#1 <https://x.test/1>`__).", "breaking removed_symbol a,b"},
 		{KindNone, "Breaking change: `SyntaxAwareDocument.language_name` property removed https://x.test/1", "breaking removed_symbol SyntaxAwareDocument.language_name"},
 		{KindNone, "Breaking change: Renamed `App.namespace_bindings` to `active_bindings`", "breaking renamed_symbol App.namespace_bindings>active_bindings"},
-		{KindDeprecation, "Deprecated ``A`` and ``B`` in favor of ``C``", "deprecation renamed_symbol A,B>C"},
-		{KindDeprecation, "The `structlog.types` module is now deprecated in favor of the `structlog.typing` module.", "deprecation renamed_symbol types>typing"},
-		{KindDeprecation, "Deprecated ``pkg.contrib.x`` module which will be removed in pkg v2.1.0 (#1)", "deprecation removed_symbol contrib.x"},
+		{KindDeprecation, "Deprecated ``A`` and ``B`` in favor of ``C``", "deprecated renamed_symbol A,B>C"},
+		{KindDeprecation, "The `structlog.types` module is now deprecated in favor of the `structlog.typing` module.", "deprecated renamed_symbol types>typing"},
+		{KindDeprecation, "Deprecated ``pkg.contrib.x`` module which will be removed in pkg v2.1.0 (#1)", "deprecated removed_symbol contrib.x"},
 		{KindMixed, "Removed `X`", "breaking removed_symbol X"},
-		{KindMixed, "Deprecated `Y`", "deprecation removed_symbol Y"},
+		{KindMixed, "Deprecated `Y`", "deprecated removed_symbol Y"},
 		// The SDK changelogs' shapes: a mark that makes a bullet breaking, and
 		// an area, issue or commit read past.
 		{KindNone, "⚠️ [#1914](https://x.test/1914) Remove deprecated `StripeObject.request()` method", "breaking removed_symbol StripeObject.request"},
@@ -73,7 +73,7 @@ func TestOnlyAPlainSentenceNamesItsSymbols(t *testing.T) {
 		{KindBreaking, "fc05013: Remove `Capture.Library` and `Exception.Library`. Set `$lib` instead.", "breaking removed_symbol Capture.Library,Exception.Library"},
 		{KindBreaking, "`octokit.users.listEmails()` has been renamed to `octokit.users.listEmailsForAuthenticated()`", "breaking renamed_symbol octokit.users.listEmails>octokit.users.listEmailsForAuthenticated"},
 		{KindBreaking, "`Redis#serverInfo` is removed. This field is never documented.", "breaking removed_symbol Redis.serverInfo"},
-		{KindDeprecation, "Tracing - Deprecates `ddtrace.filters.FilterRequestsOnUrl`.", "deprecation removed_symbol ddtrace.filters.FilterRequestsOnUrl"},
+		{KindDeprecation, "Tracing - Deprecates `ddtrace.filters.FilterRequestsOnUrl`.", "deprecated removed_symbol ddtrace.filters.FilterRequestsOnUrl"},
 		{SectionKind("Major Changes"), "Remove `X`", "breaking removed_symbol X"},
 		{SectionKind("⚠ BREAKING CHANGES"), "**api:** add support for new API version 2026-10-21", "drop"},
 		// Not plain: dropped.
@@ -98,7 +98,7 @@ func TestOnlyAPlainSentenceNamesItsSymbols(t *testing.T) {
 				got += ">" + ch.Replacement
 			}
 		}
-		if c.want == "deprecation renamed_symbol types>typing" {
+		if c.want == "deprecated renamed_symbol types>typing" {
 			ch, _, _ = Classify(c.kind, c.text, "structlog")
 			got = string(ch.ChangeType) + " " + string(ch.Change) + " " + strings.Join(ch.Symbols, ",") + ">" + ch.Replacement
 		}

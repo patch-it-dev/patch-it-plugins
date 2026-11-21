@@ -4,8 +4,7 @@
     "fingerprint": "sha256:caea2393099a2cf5bdbb0fbc226f25dfe2dfce8afb3267eec5faf86162821f2c",
     "api": "google/gemini-models",
     "version": "2027-05-07",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -24,8 +23,7 @@
     "fingerprint": "sha256:8858145e5f4653df2466841a60dc2868c6f426c5af9150f55afc1fda77513773",
     "api": "google/gemini-models",
     "version": "2026-12-18",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -43,8 +41,7 @@
     "fingerprint": "sha256:0cac57f7a4434d25aae59532745358c6f44758d0c4ddf897a2927a170b6dbf28",
     "api": "google/gemini-models",
     "version": "2026-03-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -63,8 +60,7 @@
     "fingerprint": "sha256:3f4158206697b71cbe0dbbe74a52310d52e6f44033349189349d8d8128e59336",
     "api": "google/gemini-models",
     "version": "2026-05-25",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -83,8 +79,7 @@
     "fingerprint": "sha256:871f6f3d545e0f3bf03421077213fe06548c79e9e8ddf9954d79b95e15adc17d",
     "api": "google/gemini-models",
     "version": "2026-12-01",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -102,8 +97,7 @@
     "fingerprint": "sha256:c02264b3e06bca3097caafa91d4a6dada49368e16d087f58ff1debbffc121a43",
     "api": "google/gemini-models",
     "version": "2026-07-28",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -122,8 +116,7 @@
     "fingerprint": "sha256:2adc7a8dfc6a692ee12da231f25be750326a077e9b3cd26aa82764f23aa6acd2",
     "api": "google/gemini-models",
     "version": "2025-12-02",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -142,8 +135,7 @@
     "fingerprint": "sha256:b225c413ec1d91b929eb2d7124814f928b9b04e18a9f08611c5fbfcf08e0a0e0",
     "api": "google/gemini-models",
     "version": "2025-12-02",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -162,8 +154,7 @@
     "fingerprint": "sha256:4c2be4641bb22e1ae2d4c3b95da03ca363cd5e488a394cca4bc001f8915a835b",
     "api": "google/gemini-models",
     "version": "2025-12-02",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -182,8 +173,7 @@
     "fingerprint": "sha256:60b751f9d3e759c519bbcabec3139c1de457129e71ed1ed966711f60af5374e1",
     "api": "google/gemini-models",
     "version": "2026-12-01",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -201,8 +191,7 @@
     "fingerprint": "sha256:b6d458a69ba2b51781274669929bebda33e4bebcf1927c1f63e23022386b265a",
     "api": "google/gemini-models",
     "version": "2026-03-31",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -221,8 +210,7 @@
     "fingerprint": "sha256:b81dc7696b0da57fbd358d29f47d03a65f8ae9260049cf302d1bd6b4a7098bf3",
     "api": "google/gemini-models",
     "version": "2025-11-18",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -241,8 +229,7 @@
     "fingerprint": "sha256:8571eb750e46025a2b5ae4d0d645c01e1db00df8ffaa3ffae4a10a1f163d96b6",
     "api": "google/gemini-models",
     "version": "2026-02-17",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -261,8 +248,7 @@
     "fingerprint": "sha256:856205baa026aae1af080949fbba2a7272d91ad3467927e12bc533e6d318fe3e",
     "api": "google/gemini-models",
     "version": "2026-06-01",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -281,8 +267,7 @@
     "fingerprint": "sha256:83b2140ac7dce78acb6a4338e680fefed3069e978f060b707b965b078746b345",
     "api": "google/gemini-models",
     "version": "2026-06-01",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -301,8 +286,7 @@
     "fingerprint": "sha256:606afbea818c0aa70a918ce8a161373fc742c491a4c591180ce32e582e7271a6",
     "api": "google/gemini-models",
     "version": "2026-06-01",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -321,8 +305,7 @@
     "fingerprint": "sha256:c46f075bda7582cef7ad8fb25fda10b4412029124b68f67aa3aae129cb26fb54",
     "api": "google/gemini-models",
     "version": "2026-06-01",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -341,8 +324,7 @@
     "fingerprint": "sha256:f33c6d97b86cb936d566061674c549260c611d3084532190e53ede81a667cb64",
     "api": "google/gemini-models",
     "version": "2025-12-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -361,8 +343,7 @@
     "fingerprint": "sha256:1905e464a0c97bc4e0adc0812fe8f9e578f239fe86d263dbd8ea112ecd669cf8",
     "api": "google/gemini-models",
     "version": "2025-12-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -381,8 +362,7 @@
     "fingerprint": "sha256:7b91dbf1e5b957702a1f2e048ff346070c9765f96ec23c6cf018562a7391c15f",
     "api": "google/gemini-models",
     "version": "2027-03-31",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -401,8 +381,7 @@
     "fingerprint": "sha256:b3d90322199ab4367fc8eba144f8cd88b5a5c3b786a7374d159a2332d9f5244c",
     "api": "google/gemini-models",
     "version": "2025-12-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -421,8 +400,7 @@
     "fingerprint": "sha256:840b70b0db6e2eb215e8266fe0105f25a0855d32aba42a776523c0fd0d8a4e52",
     "api": "google/gemini-models",
     "version": "2025-12-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -441,8 +419,7 @@
     "fingerprint": "sha256:a6a20dbe9b625f444a1644e3c8ccbce9a63ebfa4e039393c75633c8ca4b13974",
     "api": "google/gemini-models",
     "version": "2026-12-18",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -460,8 +437,7 @@
     "fingerprint": "sha256:8bc72c3cc1260e614977f305a2c61bee114dd67ec702fff60f09a036232e2a97",
     "api": "google/gemini-models",
     "version": "2026-12-18",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -479,8 +455,7 @@
     "fingerprint": "sha256:6c676c8e23b7b1d9db5de5e998a741c6fbac7dc2c2bf1929b647e7f6cf680542",
     "api": "google/gemini-models",
     "version": "2028-05-14",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -499,8 +474,7 @@
     "fingerprint": "sha256:f78e21e24ec4d3f9122c2631190b6b92736ec1bd89010b63b209bf2507daf953",
     "api": "google/gemini-models",
     "version": "2026-11-06",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -518,8 +492,7 @@
     "fingerprint": "sha256:0a968f052281aeb0c8cd71d3a92db497be8040686f23c3d592f6406aea39d68f",
     "api": "google/gemini-models",
     "version": "2026-01-14",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -538,8 +511,7 @@
     "fingerprint": "sha256:d1332b877be37336a413687d6be1480cf66dcfb3369101147a88c216a58e0736",
     "api": "google/gemini-models",
     "version": "2025-10-30",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -558,8 +530,7 @@
     "fingerprint": "sha256:9961f36c881a0bdf2d339315acd7895323e3b4672b0957436987f3b1c8296b2f",
     "api": "google/gemini-models",
     "version": "2025-10-30",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -578,8 +549,7 @@
     "fingerprint": "sha256:49b126de93982f83c2ee88f884ad720f1d0921206dae42f5826227db76af68ee",
     "api": "google/gemini-models",
     "version": "2025-10-30",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -598,8 +568,7 @@
     "fingerprint": "sha256:ef27905e81e0ee48ec07d4669a42ea6ce0dd785a7f85033d7e1d34d7bf411b94",
     "api": "google/gemini-models",
     "version": "2025-10-30",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -618,8 +587,7 @@
     "fingerprint": "sha256:acc61a0a44b398c42fb63c271aa2163a03749d76b12932f561f303c4981ae96e",
     "api": "google/gemini-models",
     "version": "2027-03-15",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -638,8 +606,7 @@
     "fingerprint": "sha256:352f204e72c7ab36bb05cb742c9edee87f1589930ece2bc90ffbb851c443aba7",
     "api": "google/gemini-models",
     "version": "2026-06-25",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -658,8 +625,7 @@
     "fingerprint": "sha256:1d09afffb5768ce989c65f94befc597bdba8a13131ad7c2cc139741a1b39bf56",
     "api": "google/gemini-models",
     "version": "2026-06-25",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -678,8 +644,7 @@
     "fingerprint": "sha256:9132c7b110d46a16200f6541ece38bcbe0748e75d36c1bd3586eab10398fbe37",
     "api": "google/gemini-models",
     "version": "2026-01-15",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -698,8 +663,7 @@
     "fingerprint": "sha256:c42e560875145b4013adeac0199e6ee63421d16e345ee97c023565710c4f3215",
     "api": "google/gemini-models",
     "version": "2025-11-14",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -718,8 +682,7 @@
     "fingerprint": "sha256:c889c0a9533b444eda90a0d8d057d30a837941242dfaa095a5378027d6579654",
     "api": "google/gemini-models",
     "version": "2026-08-17",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -738,8 +701,7 @@
     "fingerprint": "sha256:b65d181909243d2cfdbcf4a81fea4fa279eacdb61e776b235685042b1d273da4",
     "api": "google/gemini-models",
     "version": "2026-08-17",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -758,8 +720,7 @@
     "fingerprint": "sha256:8a703192637bc96b8f7a341b9ef30531bd5bb58dd26c89e4fd938dd9834daaa4",
     "api": "google/gemini-models",
     "version": "2026-08-17",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -778,8 +739,7 @@
     "fingerprint": "sha256:03f79598c1d1c60b2390af7583c7346dc18c2cacc9116a52d1d1e4f575c6d070",
     "api": "google/gemini-models",
     "version": "2026-02-17",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -798,8 +758,7 @@
     "fingerprint": "sha256:4e1ece623c8fc9d8f782fc8b9c1bc5c27904204d0cffa5e5369098ba245124e1",
     "api": "google/gemini-models",
     "version": "2026-02-17",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -818,8 +777,7 @@
     "fingerprint": "sha256:7855e31da95e666c348f96b9ccfbc5e353c3c0c0713553ddbae260d29ebded13",
     "api": "google/gemini-models",
     "version": "2025-11-10",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -838,8 +796,7 @@
     "fingerprint": "sha256:f4406ae5b26f233d65b6f39e0a4c99868f125bbea55dc703938ca776d8ec633b",
     "api": "google/gemini-models",
     "version": "2026-10-22",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -858,8 +815,7 @@
     "fingerprint": "sha256:8554aabbaf268ea7946f6a3e686c1157fbff2a57997d35773f1fbf46bec5afc0",
     "api": "google/gemini-models",
     "version": "2026-10-22",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -878,8 +834,7 @@
     "fingerprint": "sha256:0a83cb678a880fb7254c61aec5e1b0e0ba19aa5435d956156d5459eddbe9be4c",
     "api": "google/gemini-models",
     "version": "2026-10-22",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -898,8 +853,7 @@
     "fingerprint": "sha256:9ae0db34527de17bb0383edde0172525ec9032cf2a5cdac0df7af07f7c303668",
     "api": "google/gemini-models",
     "version": "2026-06-30",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -917,8 +871,7 @@
     "fingerprint": "sha256:3a692dac54bbd0875feefbf6a8135be447fa904017da920eb1dc6d30e0f1d86a",
     "api": "google/gemini-models",
     "version": "2026-06-30",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -936,8 +889,7 @@
     "fingerprint": "sha256:a394fe9fdeeb5a404f2c0b561439c7236477e7fc837927962ab3aa5db1f896d5",
     "api": "google/gemini-models",
     "version": "2026-06-30",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -955,8 +907,7 @@
     "fingerprint": "sha256:ab74adbe95ffded3bd489bbd60695d9d94948d636f8e60daac190561b6474a19",
     "api": "google/gemini-models",
     "version": "2025-11-12",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -975,8 +926,7 @@
     "fingerprint": "sha256:0f5636525a0226794daa38aa43146d185121082d0eac106e9d875b8b991d1b91",
     "api": "google/gemini-models",
     "version": "2025-11-12",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -995,8 +945,7 @@
     "fingerprint": "sha256:32849db67ffe3564cf53e5d5b56a8536949a7fd3aa6cb28223c0bd8656ee4e7e",
     "api": "google/gemini-models",
     "version": "2026-12-03",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -1014,8 +963,7 @@
     "fingerprint": "sha256:6b6d10f0220a8da62121f3ed15db742d6f8bbdd987db4671ee04709957275efc",
     "api": "google/gemini-models",
     "version": "2026-10-22",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -1034,8 +982,7 @@
     "fingerprint": "sha256:54a233efe659c23ad8898c69d4d211f7e48aa36acbd16fadb14a3547a6f3daf4",
     "api": "google/gemini-models",
     "version": "2026-08-31",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -1054,8 +1001,7 @@
     "fingerprint": "sha256:0a9481a7ed1278252e1175f2555423a03b83d4680e42f075558914f3ef3e2e5b",
     "api": "google/gemini-models",
     "version": "2026-04-30",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",

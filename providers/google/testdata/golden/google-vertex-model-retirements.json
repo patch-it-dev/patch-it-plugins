@@ -4,8 +4,7 @@
     "fingerprint": "sha256:ef43ad5bf96238c1c0f4c9e81332efaa8e9e859831388779052f805d89d4babb",
     "api": "google/vertex-model-retirements",
     "version": "2026-10-20",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -23,8 +22,7 @@
     "fingerprint": "sha256:599e4f28d4387bf45611fdd8781d9a46b553fd4e8607eb1212b4bd9684f88982",
     "api": "google/vertex-model-retirements",
     "version": "2026-10-20",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -42,8 +40,7 @@
     "fingerprint": "sha256:8627eb166cc0481d849b3f4a6a41df8dcacfb3cfb780b78907421cbc9916a8ce",
     "api": "google/vertex-model-retirements",
     "version": "2026-10-20",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -61,8 +58,7 @@
     "fingerprint": "sha256:616b469e2bd6dee6f2a2a02d7e8e575e7bb1bc940ff8ed740a0c092be3ca3bf1",
     "api": "google/vertex-model-retirements",
     "version": "2026-12-13",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -81,8 +77,7 @@
     "fingerprint": "sha256:925571477afb104ac207094b15e93155a25d6f98baf62c651aedf0801415ad39",
     "api": "google/vertex-model-retirements",
     "version": "2027-03-15",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -101,8 +96,7 @@
     "fingerprint": "sha256:fd4cc7a2c302199b382abe71f33cf4c81a018d9489eec9194a0bfc6151351791",
     "api": "google/vertex-model-retirements",
     "version": "2027-04-01",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -120,8 +114,7 @@
     "fingerprint": "sha256:174bced505f842a3e620a58fc0cb37092aa503454ab1dbdf37f74a6e2d3294e9",
     "api": "google/vertex-model-retirements",
     "version": "2027-04-01",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -139,8 +132,7 @@
     "fingerprint": "sha256:25ba7181945e0eacf132a86af6f7b1f52ad9c0284173544164e064fe3d27eb2b",
     "api": "google/vertex-model-retirements",
     "version": "2027-04-01",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -158,8 +150,7 @@
     "fingerprint": "sha256:f82b985b94b11005f52d4ea0e58d68759bd90f1d175405558677772deed5f7cf",
     "api": "google/vertex-model-retirements",
     "version": "2027-04-01",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -177,8 +168,7 @@
     "fingerprint": "sha256:cdcfd1e991b4ace4ae24b878b08f912cc8c8c94d0e92ee797fb7c5ebb205266b",
     "api": "google/vertex-model-retirements",
     "version": "2027-01-28",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -197,8 +187,7 @@
     "fingerprint": "sha256:6d64ac7272ecbadb5aa9226e29334db0d4d06aae6edd1f60e12c971f901570c1",
     "api": "google/vertex-model-retirements",
     "version": "2027-01-28",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -217,8 +206,7 @@
     "fingerprint": "sha256:1bb244ddd4fb2ba43a99d295282f8dc123f8c8a010aa81bfcc0076bf3952b456",
     "api": "google/vertex-model-retirements",
     "version": "2026-06-30",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -237,8 +225,7 @@
     "fingerprint": "sha256:a2bfd320cabd411f16c081f877c3cffc6a1569a66dc65d75e948d8fc0661bf35",
     "api": "google/vertex-model-retirements",
     "version": "2026-06-30",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -257,8 +244,7 @@
     "fingerprint": "sha256:27b0426581ee7f389c1da65c919535f0bf24c0cae3fc0d87c5aed8d34b7a306c",
     "api": "google/vertex-model-retirements",
     "version": "2026-06-30",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -277,8 +263,7 @@
     "fingerprint": "sha256:09e4fe7cdc44387c7264a44d655992bd5a27288d6773fd8250a95c12f1d15660",
     "api": "google/vertex-model-retirements",
     "version": "2026-06-30",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -297,8 +282,7 @@
     "fingerprint": "sha256:01e19784f716e18e6de20e5d29b92dc5f693a218ac80a85a6f7faed847df05b2",
     "api": "google/vertex-model-retirements",
     "version": "2026-06-30",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -317,8 +301,7 @@
     "fingerprint": "sha256:457cfeb1eeb477b6ccd703bf5f2aeaa2d50853ec7dece2bd73dae2cb640cb233",
     "api": "google/vertex-model-retirements",
     "version": "2026-06-30",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -337,8 +320,7 @@
     "fingerprint": "sha256:cabfde9da3d23eefa156b740e713fd626a53db013a21c3e1b1bc1a4c318c4e17",
     "api": "google/vertex-model-retirements",
     "version": "2026-06-30",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -357,8 +339,7 @@
     "fingerprint": "sha256:f41ec12b39318c08224fe8faebc6867cfb378bf16e064d9eff2c136d2eaf7020",
     "api": "google/vertex-model-retirements",
     "version": "2026-06-30",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -377,8 +358,7 @@
     "fingerprint": "sha256:856947b84587c850754d47d7f80372527e166991d16dd24de3f80699f89d4ce7",
     "api": "google/vertex-model-retirements",
     "version": "2026-06-30",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -397,8 +377,7 @@
     "fingerprint": "sha256:0ab8d6f6b400873d7eac52fc6f8227a0c46060458d768d10856b0a51e83f30c9",
     "api": "google/vertex-model-retirements",
     "version": "2026-06-30",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -417,8 +396,7 @@
     "fingerprint": "sha256:fe51a0b57bf9d769cc3d90777822bb63cd7d09aab044be8d8509a9ccb22c3362",
     "api": "google/vertex-model-retirements",
     "version": "2026-06-30",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -437,8 +415,7 @@
     "fingerprint": "sha256:1310723d3a98db1fb0e54de57834d0a34d98d0f40919b1de6eee68400ffe34d0",
     "api": "google/vertex-model-retirements",
     "version": "2026-06-30",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -457,8 +434,7 @@
     "fingerprint": "sha256:3fb712cf39ecd4e39fadd64006be677c77fa26c1b0290c0ef1fdbe3c75f77432",
     "api": "google/vertex-model-retirements",
     "version": "2026-06-01",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -477,8 +453,7 @@
     "fingerprint": "sha256:a296a4a21570b7f914e1b77779b91aa200915f8a53a92cc1330e916c6b8ff664",
     "api": "google/vertex-model-retirements",
     "version": "2026-06-01",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -497,8 +472,7 @@
     "fingerprint": "sha256:28254077d822afb2858f2d40445980c945755d305b5506cde2524c2639c4c52f",
     "api": "google/vertex-model-retirements",
     "version": "2025-05-24",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -516,8 +490,7 @@
     "fingerprint": "sha256:236a1810846de81794735a1b9c73a40d4a4d0ccdccbb77db09a320f53f25f052",
     "api": "google/vertex-model-retirements",
     "version": "2025-09-24",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -535,8 +508,7 @@
     "fingerprint": "sha256:3a54f4a8eb835367ab091e3c8b4fd3cb3b4ab61e713716affbf05adcf18e5648",
     "api": "google/vertex-model-retirements",
     "version": "2025-05-24",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -554,8 +526,7 @@
     "fingerprint": "sha256:64da17ec012eb0d5d98ad9abec413d450998e11e2dcd25823d67d8c3a791a389",
     "api": "google/vertex-model-retirements",
     "version": "2025-09-24",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -573,8 +544,7 @@
     "fingerprint": "sha256:ae5f88ca2317ecabd2ac01b82f6f931deb5adf0015c376b4499f6ea739caf66f",
     "api": "google/vertex-model-retirements",
     "version": "2025-05-24",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -593,8 +563,7 @@
     "fingerprint": "sha256:643b42a3e2f9609a6a6c922e875cbe1a505c24c98e14f984fff4661dd1c4326a",
     "api": "google/vertex-model-retirements",
     "version": "2025-04-21",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -612,8 +581,7 @@
     "fingerprint": "sha256:de0b474847a57fa37c32bcd2dc877d5ee8d701e04da3021ffbd5a4c0e6cc133b",
     "api": "google/vertex-model-retirements",
     "version": "2025-04-21",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -631,8 +599,7 @@
     "fingerprint": "sha256:71a047e6aa5973d29fb5c14cbad6f3d6d867b44ca1c23708001571ff2defe05f",
     "api": "google/vertex-model-retirements",
     "version": "2025-04-21",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -650,8 +617,7 @@
     "fingerprint": "sha256:6ccf6a6ea1e5e02053b07007fd71bc07e2aa55ec01bba21a480316faae823278",
     "api": "google/vertex-model-retirements",
     "version": "2025-04-21",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -669,8 +635,7 @@
     "fingerprint": "sha256:02b2b6b0d29d49017b545b77d4907cbd03136b1b77d1c8eb7337e9e1eb738607",
     "api": "google/vertex-model-retirements",
     "version": "2025-04-21",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -688,8 +653,7 @@
     "fingerprint": "sha256:2fc76102654a56b32be0dd835a9d862cfa95f2cafd0afff75334f99cace0db82",
     "api": "google/vertex-model-retirements",
     "version": "2025-04-21",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -707,8 +671,7 @@
     "fingerprint": "sha256:a9a0bfbedd63c0022a969ca211e7db7045ff9f305110511f22e8a96edb2d809e",
     "api": "google/vertex-model-retirements",
     "version": "2025-04-21",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -727,8 +690,7 @@
     "fingerprint": "sha256:5ab1b9bb58a2e1bc39a07e87308bfd8b616dab5514f50826beebad3619341215",
     "api": "google/vertex-model-retirements",
     "version": "2025-04-21",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",
@@ -747,8 +709,7 @@
     "fingerprint": "sha256:e78fa1f0b47b02780b33bdb22a95a9cff1a7635f3e5de8c61bd1d3fc87f7b239",
     "api": "google/vertex-model-retirements",
     "version": "2025-09-24",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "model",
       "provider": "google",

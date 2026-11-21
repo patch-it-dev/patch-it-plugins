@@ -5,8 +5,7 @@
     "api": "cloudflare/python-surface",
     "version": "5.4.0",
     "previous_version": "5.3.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -29,8 +28,7 @@
     "api": "cloudflare/python-surface",
     "version": "5.4.0",
     "previous_version": "5.3.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -53,8 +51,7 @@
     "api": "cloudflare/python-surface",
     "version": "5.4.0",
     "previous_version": "5.3.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",

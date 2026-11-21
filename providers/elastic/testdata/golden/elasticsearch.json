@@ -1,12 +1,11 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:9a7edf6e9f3b40c20d4e303d0ce42472b9c1c66e5125936f35e60b6f5255759f",
+    "fingerprint": "sha256:3bf75cb5b39cd59499e92404619e41624cac2bf605c8e937f505ccbb03d34faa",
     "api": "elastic/elasticsearch-api",
     "version": "9.0.0",
     "previous_version": "8.19.0",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -22,12 +21,11 @@
   },
   {
     "id": 2,
-    "fingerprint": "sha256:89077715c1d3fdf2e229be46735a4d52bd3a9553d0531aa4ae56a073844c3770",
+    "fingerprint": "sha256:de634f9f7f09ff569dbf66f7b8a8eed753a7babb9528ef4d1ebed936e9786a67",
     "api": "elastic/elasticsearch-api",
     "version": "9.0.0",
     "previous_version": "8.19.0",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -43,12 +41,11 @@
   },
   {
     "id": 3,
-    "fingerprint": "sha256:72e6f44c763a9142fc69cf2328a5bff614ea2bb795a01b16f553b857230daecc",
+    "fingerprint": "sha256:16be486d6c08beb012b100593c3b947cea059ef40de1cd4dcd2670537985becd",
     "api": "elastic/elasticsearch-api",
     "version": "9.0.0",
     "previous_version": "8.19.0",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -64,12 +61,11 @@
   },
   {
     "id": 4,
-    "fingerprint": "sha256:6850c9d36ef120c4172c027d16743ced30b082c38a50f409adc5d41527aeba36",
+    "fingerprint": "sha256:c9e729c8aec1cbf797902d143a50a2fdb642852891cda0b8141239ca737f94bf",
     "api": "elastic/elasticsearch-api",
     "version": "9.0.0",
     "previous_version": "8.19.0",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -85,12 +81,11 @@
   },
   {
     "id": 5,
-    "fingerprint": "sha256:6a472cf6cc4004690bee910738bc1717984e9689e71f6acd2a99a39e3fc6f502",
+    "fingerprint": "sha256:0608626d552e10cfd105f786f631cafda6833d5db883682a3d67474f21392d46",
     "api": "elastic/elasticsearch-api",
     "version": "9.0.0",
     "previous_version": "8.19.0",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -110,8 +105,7 @@
     "api": "elastic/elasticsearch-api",
     "version": "9.0.0",
     "previous_version": "8.19.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -131,8 +125,7 @@
     "api": "elastic/elasticsearch-api",
     "version": "9.0.0",
     "previous_version": "8.19.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -152,8 +145,7 @@
     "api": "elastic/elasticsearch-api",
     "version": "9.0.0",
     "previous_version": "8.19.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",

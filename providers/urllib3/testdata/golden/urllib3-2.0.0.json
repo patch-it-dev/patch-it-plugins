@@ -5,8 +5,7 @@
     "api": "urllib3/urllib3",
     "version": "2.0.0",
     "previous_version": "1.26.15",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -29,8 +28,7 @@
     "api": "urllib3/urllib3",
     "version": "2.0.0",
     "previous_version": "1.26.15",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -53,8 +51,7 @@
     "api": "urllib3/urllib3",
     "version": "2.0.0",
     "previous_version": "1.26.15",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -77,8 +74,7 @@
     "api": "urllib3/urllib3",
     "version": "2.0.0",
     "previous_version": "1.26.15",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -101,8 +97,7 @@
     "api": "urllib3/urllib3",
     "version": "2.0.0",
     "previous_version": "1.26.15",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -121,12 +116,11 @@
   },
   {
     "id": 6,
-    "fingerprint": "sha256:8af004c9a0ba8e72258d2f43ab47b92a007468f6aee662b332afdef3370e5b1f",
+    "fingerprint": "sha256:8a110b99e92c59bb43aaf2c9ee095e2dd38ee7c20deb00c2ac30d33ce362f43f",
     "api": "urllib3/urllib3",
     "version": "2.0.0",
     "previous_version": "1.26.15",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -146,12 +140,11 @@
   },
   {
     "id": 7,
-    "fingerprint": "sha256:bbef62c5f4f8c4a73497468084c88085703613cf84ca801fc166f660970dd802",
+    "fingerprint": "sha256:cca25979a339413646222f3bd56374750021dc23609b24c133d35ed90f46b6bd",
     "api": "urllib3/urllib3",
     "version": "2.0.0",
     "previous_version": "1.26.15",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -170,12 +163,11 @@
   },
   {
     "id": 8,
-    "fingerprint": "sha256:286dce48e3ed461fe14bb2350c560709459821ffa331e7eea09922ae59db1491",
+    "fingerprint": "sha256:6fb7a2d6cd1ec7cb76ae7c9fb266eeadb221176fde204d409e4d6d95f6d6107c",
     "api": "urllib3/urllib3",
     "version": "2.0.0",
     "previous_version": "1.26.15",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -194,12 +186,11 @@
   },
   {
     "id": 9,
-    "fingerprint": "sha256:d85bf269a9bc3ef4e5282d3fb165481b04d7206e75bbd5f655c11ab5f1ad69fa",
+    "fingerprint": "sha256:3a4c954ae982deb87b9863785b9d65599d19334af3a705226681e6b6af62f9e9",
     "api": "urllib3/urllib3",
     "version": "2.0.0",
     "previous_version": "1.26.15",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -218,12 +209,11 @@
   },
   {
     "id": 10,
-    "fingerprint": "sha256:deaa904363334a867a2a212042a73358699122b789858feb014268773d8a7979",
+    "fingerprint": "sha256:e3393773c857e49c0c7e679417170cd8809d334bc6bbe85ed367f253cb67ce74",
     "api": "urllib3/urllib3",
     "version": "2.0.0",
     "previous_version": "1.26.15",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -244,12 +234,11 @@
   },
   {
     "id": 11,
-    "fingerprint": "sha256:90ab9071df0b3a7b40197842b4a9966eb64e099dfb474d3c231dc11da00a7a7a",
+    "fingerprint": "sha256:a6e7ab9ff8a6dc5f83b4397a4c3b04a13b7823d82c844809796c903939b614a9",
     "api": "urllib3/urllib3",
     "version": "2.0.0",
     "previous_version": "1.26.15",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -268,12 +257,11 @@
   },
   {
     "id": 12,
-    "fingerprint": "sha256:84d7a90515e16d4ef2b7af2b15ec076e8b165c1201cef525d7fbdf5a55f1777d",
+    "fingerprint": "sha256:5017192e4e804d54016e7f854713489a125e88e2191493c29965632bdda7cbe8",
     "api": "urllib3/urllib3",
     "version": "2.0.0",
     "previous_version": "1.26.15",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",

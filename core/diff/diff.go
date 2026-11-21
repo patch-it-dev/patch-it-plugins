@@ -23,7 +23,7 @@ import (
 )
 
 // Kind is the shape of one structural difference. It is deliberately finer
-// than event.ChangeType: "property removed" and "enum value removed" are both
+// than event.Change: "property removed" and "enum value removed" are both
 // breaking, but they need different sentences and different fingerprints.
 type Kind string
 
@@ -50,8 +50,7 @@ const (
 // patch-it client can act on it and a human can check it against the spec.
 type Change struct {
 	Kind       Kind
-	ChangeType event.ChangeType
-	Breaking   bool
+	ChangeType event.Change
 	Side       event.Side
 
 	Operation string // "POST /v1/charges", on the request side
@@ -271,7 +270,7 @@ func (w where) child(segment string) where {
 // noise: a response property that becomes required, or a request field that
 // becomes optional, cannot break a caller, so no event is produced.
 func (d *differ) add(w where, kind Kind, detail string, inOld bool, node any) {
-	changeType, breaking, emit := classify(kind, w.side)
+	changeType, emit := classify(kind, w.side)
 	if !emit {
 		return
 	}
@@ -282,7 +281,6 @@ func (d *differ) add(w where, kind Kind, detail string, inOld bool, node any) {
 	d.changes = append(d.changes, Change{
 		Kind:       kind,
 		ChangeType: changeType,
-		Breaking:   breaking,
 		Side:       w.side,
 		Operation:  w.operation,
 		Schema:     w.schema,
@@ -296,39 +294,39 @@ func (d *differ) add(w where, kind Kind, detail string, inOld bool, node any) {
 
 // classify turns a kind plus a side into a change type. It is the table in
 // README.md, and the only place breaking-ness is decided.
-func classify(kind Kind, side event.Side) (event.ChangeType, bool, bool) {
+func classify(kind Kind, side event.Side) (event.Change, bool) {
 	request := side == event.SideRequest
 	switch kind {
 	case OperationAdded, SchemaAdded:
-		return event.ChangeTypeNewFeature, false, true
+		return event.ChangeAdded, true
 	case OperationRemoved, SchemaRemoved, PropertyRemoved, TypeChanged:
-		return event.ChangeTypeBreaking, true, true
+		return event.ChangeBreaking, true
 	case OperationDeprecated, SchemaDeprecated, PropertyDeprecated:
-		return event.ChangeTypeDeprecation, false, true
+		return event.ChangeDeprecated, true
 	case PropertyAdded, EnumValueAdded, MemberAdded:
 		// Adding to a request is only breaking when the new field is required,
 		// and that case is emitted as BecameRequired instead of PropertyAdded.
-		return event.ChangeTypeNewFeature, false, true
+		return event.ChangeAdded, true
 	case EnumValueRemoved, MemberRemoved:
 		// Callers can no longer send the value; readers never had to handle it.
 		if request {
-			return event.ChangeTypeBreaking, true, true
+			return event.ChangeBreaking, true
 		}
-		return "", false, false
+		return "", false
 	case BecameRequired:
 		// Senders must now provide it. A response gaining a guarantee is fine.
 		if request {
-			return event.ChangeTypeBreaking, true, true
+			return event.ChangeBreaking, true
 		}
-		return "", false, false
+		return "", false
 	case BecameOptional:
 		// A response field that may now be missing breaks readers.
 		if request {
-			return "", false, false
+			return "", false
 		}
-		return event.ChangeTypeBreaking, true, true
+		return event.ChangeBreaking, true
 	default:
-		return "", false, false
+		return "", false
 	}
 }
 
@@ -617,7 +615,7 @@ func (d *differ) properties(w where, oldSchema, newSchema map[string]any) {
 		switch {
 		case oldProp == nil:
 			// One change, one event. On the request side a new required field
-			// is breaking and reported only as that; emitting a new_feature
+			// is breaking and reported only as that; emitting an added event
 			// alongside it would make the same field look harmless. On the
 			// response side a required field is still just an addition
 			// (classify drops BecameRequired there), so it stays PropertyAdded.

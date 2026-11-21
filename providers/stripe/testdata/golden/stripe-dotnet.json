@@ -5,8 +5,7 @@
     "api": "stripe/dotnet",
     "version": "40.0.0",
     "previous_version": "39.126.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "nuget",
@@ -32,8 +31,7 @@
     "api": "stripe/dotnet",
     "version": "40.0.0",
     "previous_version": "39.126.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "nuget",
@@ -59,8 +57,7 @@
     "api": "stripe/dotnet",
     "version": "40.0.0",
     "previous_version": "39.126.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "nuget",
@@ -83,8 +80,7 @@
     "api": "stripe/dotnet",
     "version": "40.0.0",
     "previous_version": "39.126.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "nuget",
@@ -107,8 +103,7 @@
     "api": "stripe/dotnet",
     "version": "40.0.0",
     "previous_version": "39.126.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "nuget",

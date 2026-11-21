@@ -146,12 +146,11 @@ func Events(g Guide, rs []Removal, previous string, now time.Time) ([]event.Even
 			Change: event.PackageRemovedParameter, Parameter: r.Param, Symbols: g.Symbols,
 		}
 		e := event.Event{
-			Fingerprint:     event.Fingerprint(g.API, g.Version(), event.ChangeTypeBreaking, subject, ""),
+			Fingerprint:     event.Fingerprint(g.API, g.Version(), event.ChangeBreaking, subject, ""),
 			API:             g.API,
 			Version:         g.Version(),
 			PreviousVersion: previous,
-			ChangeType:      event.ChangeTypeBreaking,
-			Breaking:        true,
+			Change:          event.ChangeBreaking,
 			Subject:         subject,
 			Description:     fmt.Sprintf("Parameter %s removed from %s and its sibling methods in the %s SDK %s: passing it raises a TypeError.", r.Param, g.Methods, g.Package, g.Version()),
 			MigrationHint:   fmt.Sprintf("%s Source: %s", r.Instead, g.Page()),

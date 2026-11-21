@@ -5,8 +5,7 @@
     "api": "stripe/node-surface",
     "version": "23.0.0",
     "previous_version": "22.6.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -29,8 +28,7 @@
     "api": "stripe/node-surface",
     "version": "23.0.0",
     "previous_version": "22.6.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",

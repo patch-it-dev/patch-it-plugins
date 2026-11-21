@@ -102,8 +102,8 @@ func TestConvexGolden(t *testing.T) {
 			t.Errorf("unexpected event %s", e.Subject.Operation)
 			continue
 		}
-		if e.ChangeType != event.ChangeTypeDeprecation || e.Breaking || e.Version != "2026-11-05" {
-			t.Errorf("%s: %s breaking=%v version %s, want a 2026-11-05 deprecation", e.Subject.Operation, e.ChangeType, e.Breaking, e.Version)
+		if e.Change != event.ChangeDeprecated || (e.Change == event.ChangeBreaking) || e.Version != "2026-11-05" {
+			t.Errorf("%s: %s breaking=%v version %s, want a 2026-11-05 deprecation", e.Subject.Operation, e.Change, (e.Change == event.ChangeBreaking), e.Version)
 		}
 		if e.SourceURL != convexURL("5e5159cb") {
 			t.Errorf("%s: source_url %s", e.Subject.Operation, e.SourceURL)
@@ -144,7 +144,7 @@ func TestConvexDropsPropertyChangesThatWerentDeprecations(t *testing.T) {
 	unfiltered := kittest.Stored(t, s)
 	var removed int
 	for _, e := range unfiltered {
-		if e.Breaking && strings.HasPrefix(e.Description, "Property name removed from schema UsageLimitConfig") {
+		if (e.Change == event.ChangeBreaking) && strings.HasPrefix(e.Description, "Property name removed from schema UsageLimitConfig") {
 			removed++
 		}
 	}

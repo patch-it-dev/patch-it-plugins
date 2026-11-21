@@ -5,8 +5,7 @@
     "api": "redis/node-redis-surface",
     "version": "5.0.0",
     "previous_version": "1.6.1",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -29,8 +28,7 @@
     "api": "redis/node-redis-surface",
     "version": "5.0.0",
     "previous_version": "1.6.1",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",

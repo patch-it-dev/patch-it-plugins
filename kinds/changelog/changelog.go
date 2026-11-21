@@ -130,7 +130,7 @@ func (f File) Read(page []byte) (heading string, out []Finding, err error) {
 			for _, sym := range c.Symbols {
 				// urllib3 2.0.0 removed the urllib3.request module and added a
 				// top-level urllib3.request function: code calling it works.
-				if why == "" && c.ChangeType == event.ChangeTypeBreaking && added[sym] {
+				if why == "" && c.ChangeType == event.ChangeBreaking && added[sym] {
 					why = fmt.Sprintf("the same release adds `%s` back", sym)
 				}
 			}
@@ -147,7 +147,7 @@ func (f File) Read(page []byte) (heading string, out []Finding, err error) {
 func chained(fs []Finding) []Finding {
 	renamed, removed := map[string]string{}, map[string]bool{}
 	for _, f := range fs {
-		if f.Dropped != "" || f.Change.ChangeType != event.ChangeTypeBreaking {
+		if f.Dropped != "" || f.Change.ChangeType != event.ChangeBreaking {
 			continue
 		}
 		for _, sym := range f.Change.Symbols {
@@ -162,7 +162,7 @@ func chained(fs []Finding) []Finding {
 		r := f.Change.Replacement
 		// Only a breaking rename is followed: a deprecation in favor of a
 		// name stays a deprecation, whatever happens to that name.
-		if f.Dropped != "" || r == "" || f.Change.ChangeType != event.ChangeTypeBreaking {
+		if f.Dropped != "" || r == "" || f.Change.ChangeType != event.ChangeBreaking {
 			continue
 		}
 		seen := map[string]bool{}
@@ -347,8 +347,7 @@ func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 			API:             f.API,
 			Version:         f.Release,
 			PreviousVersion: from.Version.ID,
-			ChangeType:      c.ChangeType,
-			Breaking:        c.ChangeType == event.ChangeTypeBreaking,
+			Change:          c.ChangeType,
 			Subject:         subject,
 			Description:     describe(f, c),
 			MigrationHint:   cap2000(fmt.Sprintf("%s (%s's %s for %s)", fd.Bullet.Text, f.Package, f.what(), f.Release)),
@@ -357,7 +356,7 @@ func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 			Confidence:      1.0,
 			DetectedAt:      now,
 		}
-		e.Fingerprint = event.Fingerprint(e.API, e.Version, e.ChangeType, subject, "")
+		e.Fingerprint = event.Fingerprint(e.API, e.Version, e.Change, subject, "")
 		if seen[e.Fingerprint] {
 			continue
 		}
@@ -383,9 +382,9 @@ func describe(f File, c Change) string {
 		verb = "were"
 	}
 	switch {
-	case c.ChangeType == event.ChangeTypeDeprecation && c.Replacement != "":
+	case c.ChangeType == event.ChangeDeprecated && c.Replacement != "":
 		return fmt.Sprintf("%s %s deprecated in %s %s in favor of `%s`.", names, map[string]string{"was": "is", "were": "are"}[verb], f.Package, f.Release, c.Replacement)
-	case c.ChangeType == event.ChangeTypeDeprecation:
+	case c.ChangeType == event.ChangeDeprecated:
 		return fmt.Sprintf("%s %s deprecated in %s %s: a later release may remove it.", names, map[string]string{"was": "is", "were": "are"}[verb], f.Package, f.Release)
 	case c.Replacement != "":
 		return fmt.Sprintf("%s %s renamed to `%s` in %s %s: code using the old name fails.", names, verb, c.Replacement, f.Package, f.Release)

@@ -155,7 +155,7 @@ func (p Plugin) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 			continue
 		}
 		e := p.event(c, from, to, a.Artifact, b.Artifact, now)
-		e.Fingerprint = event.Fingerprint(e.API, e.Version, e.ChangeType, e.Subject, "")
+		e.Fingerprint = event.Fingerprint(e.API, e.Version, e.Change, e.Subject, "")
 		if err := e.Validate(); err != nil {
 			rejected = append(rejected, fmt.Errorf("%s %s %s: %w", p.Package.Name, to.Version.ID, c.Symbol, err))
 			continue
@@ -207,8 +207,7 @@ func (p Plugin) event(c Change, from, to plugin.Snapshot, fromFile, toFile strin
 		API:             pkg.ID,
 		Version:         to.Version.ID,
 		PreviousVersion: from.Version.ID,
-		ChangeType:      event.ChangeTypeBreaking,
-		Breaking:        true,
+		Change:          event.ChangeBreaking,
 		Subject:         subject,
 		Description:     desc,
 		MigrationHint:   hint,

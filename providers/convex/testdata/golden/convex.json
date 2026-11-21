@@ -1,12 +1,11 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:93a0aa0792cb89fc4d14ab40c6ef6dcfdfbdd333393c1f4721ab4b60603309e6",
+    "fingerprint": "sha256:eb02330e7b5258415b39513a50eb0fbaf377d327b49cab11f1b8dd53bae7fdfc",
     "api": "convex/deployment-api",
     "version": "2026-11-05",
     "previous_version": "2026-10-30",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -22,12 +21,11 @@
   },
   {
     "id": 2,
-    "fingerprint": "sha256:175e34aab0307fe16078ddc521e19db2b1134e4e7fd666a6000b4aab02069eb9",
+    "fingerprint": "sha256:fd0b9a6b7ee05703e7cb504e78be8d9636abfe638e517c97f4bf889f506055df",
     "api": "convex/deployment-api",
     "version": "2026-11-05",
     "previous_version": "2026-10-30",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -43,12 +41,11 @@
   },
   {
     "id": 3,
-    "fingerprint": "sha256:190e855c8c48bbce6697171cd6e05be6ffe713c69e2ff89f469647a4c4e53abb",
+    "fingerprint": "sha256:5ab958b0ebe381cc0e6dee577336316931c66c15bbd959ce2fdeeda881c9c238",
     "api": "convex/deployment-api",
     "version": "2026-11-05",
     "previous_version": "2026-10-30",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -64,12 +61,11 @@
   },
   {
     "id": 4,
-    "fingerprint": "sha256:187282ee12aefa2a977e85b647db8b327e008be175b5ede9416badb4810972ea",
+    "fingerprint": "sha256:777529a3ddf1e21b95a9764fe999b04ebd24798b7fcd2221b620a8babd7542ea",
     "api": "convex/deployment-api",
     "version": "2026-11-05",
     "previous_version": "2026-10-30",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -85,12 +81,11 @@
   },
   {
     "id": 5,
-    "fingerprint": "sha256:db13f14c31d4173ecb76578f5ce0a352d890a678b940333b5b548d516c14c357",
+    "fingerprint": "sha256:4fde31329af064b421e4e3ab549c5ad138e2add31ea0cac3d46d01a1724c0fc3",
     "api": "convex/deployment-api",
     "version": "2026-11-05",
     "previous_version": "2026-10-30",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -106,12 +101,11 @@
   },
   {
     "id": 6,
-    "fingerprint": "sha256:94eaf5379beef172438857103486580fbb6952b2df56268b2887a6735b285160",
+    "fingerprint": "sha256:76e9fd6c8bdade0d39552a04c5ad487c86da19b9efdbd6076aba03093b668228",
     "api": "convex/deployment-api",
     "version": "2026-11-05",
     "previous_version": "2026-10-30",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",

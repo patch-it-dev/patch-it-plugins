@@ -5,8 +5,7 @@
     "api": "stripe/java",
     "version": "21.0.0",
     "previous_version": "20.136.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "maven",
@@ -29,8 +28,7 @@
     "api": "stripe/java",
     "version": "21.0.0",
     "previous_version": "20.136.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "maven",
@@ -53,8 +51,7 @@
     "api": "stripe/java",
     "version": "21.0.0",
     "previous_version": "20.136.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "maven",
@@ -77,8 +74,7 @@
     "api": "stripe/java",
     "version": "21.0.0",
     "previous_version": "20.136.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "maven",
@@ -101,8 +97,7 @@
     "api": "stripe/java",
     "version": "21.0.0",
     "previous_version": "20.136.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "maven",
@@ -125,8 +120,7 @@
     "api": "stripe/java",
     "version": "21.0.0",
     "previous_version": "20.136.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "maven",
@@ -149,8 +143,7 @@
     "api": "stripe/java",
     "version": "21.0.0",
     "previous_version": "20.136.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "maven",
@@ -173,8 +166,7 @@
     "api": "stripe/java",
     "version": "21.0.0",
     "previous_version": "20.136.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "maven",

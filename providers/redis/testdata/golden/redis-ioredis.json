@@ -5,8 +5,7 @@
     "api": "redis/ioredis",
     "version": "5.0.0",
     "previous_version": "4.31.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",

@@ -5,8 +5,7 @@
     "api": "anthropic/typescript-surface",
     "version": "1.7.0",
     "previous_version": "1.6.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -44,8 +43,7 @@
     "api": "anthropic/typescript-surface",
     "version": "1.7.0",
     "previous_version": "1.6.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",

@@ -88,7 +88,7 @@ func storedEvents(t *testing.T, s *kittest.Mem) []string {
 	}
 	var got []string
 	for _, e := range events {
-		got = append(got, fmt.Sprintf("%s %s.%s", e.ChangeType, e.Subject.Schema, e.Subject.Property))
+		got = append(got, fmt.Sprintf("%s %s.%s", e.Change, e.Subject.Schema, e.Subject.Property))
 	}
 	return got
 }
@@ -104,8 +104,8 @@ func TestAPairStoresItsEventsOnce(t *testing.T) {
 	}
 	got := storedEvents(t, s)
 	want := map[string]bool{
-		"breaking payment_intent.charges":          true,
-		"new_feature payment_intent.latest_charge": true,
+		"breaking payment_intent.charges":    true,
+		"added payment_intent.latest_charge": true,
 	}
 	if len(got) != len(want) {
 		t.Fatalf("stored %v, want exactly %v", got, want)

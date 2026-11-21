@@ -1,12 +1,11 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:cc24f6195c643b2ebaa07b4ede7d4dfe00bdcb0874c1347e01e017af1fc8fb6f",
+    "fingerprint": "sha256:7bbec6223af4c78a7e655eda327ecfbb775ac9b0ca0a6d3725cc76c9dae8ad17",
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -22,12 +21,11 @@
   },
   {
     "id": 2,
-    "fingerprint": "sha256:58fc100be70cb15a7e2c83d5977433fc552dcbd271eed4bca7ad55026d72e3d8",
+    "fingerprint": "sha256:26597755e1b11b14243cdc43ea938e2a9033f075e15fa3cbb5a981603d2cddf2",
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -43,12 +41,11 @@
   },
   {
     "id": 3,
-    "fingerprint": "sha256:f1a7c1dde961ea7c2da23e52e9a789b096755da256c4f07bde16ab26448e7db5",
+    "fingerprint": "sha256:62c5cf4479708259d3cce85a4d68400d021760ed4fed7a4a10953315d78dd523",
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -64,12 +61,11 @@
   },
   {
     "id": 4,
-    "fingerprint": "sha256:f912840ec1cdfbde49c8958870be43bf49c4c740308434e1176bd3b9a8a8cd0a",
+    "fingerprint": "sha256:a191c97aa0aac205c199a42b6d07598728a72da40b8297e9009f37e79db6cd72",
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -85,12 +81,11 @@
   },
   {
     "id": 5,
-    "fingerprint": "sha256:d86286f29ec943830ed073221731f182bbc6402413fc976d09384abf2adf3553",
+    "fingerprint": "sha256:4f45630c929e2d85b0a843531e6212117ac48b0def9c43b40ea81d50af93bc7a",
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -106,12 +101,11 @@
   },
   {
     "id": 6,
-    "fingerprint": "sha256:2bc605298b2197c441f892d8b363b1d4d906a0fe5852c68a62f751f3f95d2ddc",
+    "fingerprint": "sha256:9b55df8f4ffe3bb26b76f52cf93f77cabea544bfb3281dcc603b93b904b6d8e7",
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -127,12 +121,11 @@
   },
   {
     "id": 7,
-    "fingerprint": "sha256:af5b6044d2d4daafeee3bb3cfc171208ef70fb74d226a9c816bccedf5269b6c7",
+    "fingerprint": "sha256:9b67d243afd424be9934ba0eb1eaba0b539bce26d5c4907dcb1be36d19583a0e",
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -148,12 +141,11 @@
   },
   {
     "id": 8,
-    "fingerprint": "sha256:7f07e58557631d8d00e31a56f0c5ea611fb3a31675049aa344c08f87f93a3906",
+    "fingerprint": "sha256:01118c6f97be658f71a5b9da0721b27f4da3e29687a5d1965fdc468ddfdeeffa",
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -169,12 +161,11 @@
   },
   {
     "id": 9,
-    "fingerprint": "sha256:ef82850143544d5fa34eb2c35dec55de7eea3f859b77bb4ec5a49a63ef251d4d",
+    "fingerprint": "sha256:5c9653554f526db15d9373eb71d473df4113b7205c63826c78e890665a7b7b8c",
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -190,12 +181,11 @@
   },
   {
     "id": 10,
-    "fingerprint": "sha256:c8e80b8e19b699e5a4419b8ad98140959520fbe6f66a1c24672d1793e9457a09",
+    "fingerprint": "sha256:fa7f18214437c93397181abebed1ed0720fefdd3b068b948a589e8cf087c720e",
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -211,12 +201,11 @@
   },
   {
     "id": 11,
-    "fingerprint": "sha256:bfb77e886c515a27e002946c9dfe495a44612c21c33d545acb72f5477af7f53c",
+    "fingerprint": "sha256:5faca8963746a3185c0ea3ba6727e65bfb08c12a516398445b59323bf4253fc4",
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -232,12 +221,11 @@
   },
   {
     "id": 12,
-    "fingerprint": "sha256:8bb4a901d1c83e82e67c4accbdf2ee67e3fe170d29ba289835a9e68e2f5558b3",
+    "fingerprint": "sha256:31bbd4807a6b97dd9d6eeaef84b3799d03be473e1b62154ede95c6d7b589655e",
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -253,12 +241,11 @@
   },
   {
     "id": 13,
-    "fingerprint": "sha256:92d94ba56f6811cc4dad18ede386020e893f66ff9ff9b28f6993e4677ea7be8d",
+    "fingerprint": "sha256:2edfdccbb95959a52543cb737779c35aef94170c4f497bde2829577dd1046773",
     "api": "mongodb/atlas-admin-api",
     "version": "2023-02-01",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -274,12 +261,11 @@
   },
   {
     "id": 14,
-    "fingerprint": "sha256:665bf236dcb1319e2cd5c5da8a271bb0d235917d99e7d9384b7730f35cf9b80f",
+    "fingerprint": "sha256:d5135b36691b7dc9c8c6d6c5953bc8beea2612889f66e43496036086009de056",
     "api": "mongodb/atlas-admin-api",
     "version": "2023-02-01",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -295,12 +281,11 @@
   },
   {
     "id": 15,
-    "fingerprint": "sha256:f3fc7367c663e20fd644b6b96befb1cf5d2185dd3cefab1092897f488580cb50",
+    "fingerprint": "sha256:7c37e2cd6bc4291dbef6bd549846965ce87767df7d6f65a5844e40644923e455",
     "api": "mongodb/atlas-admin-api",
     "version": "2023-02-01",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -316,12 +301,11 @@
   },
   {
     "id": 16,
-    "fingerprint": "sha256:ca95618f62b1986840a47ea36d5ff501008d104abb52318a1af6ab1f847d86d8",
+    "fingerprint": "sha256:4f270252e10dd002da8445445d65b775d6a3ecb78301fd8e19558a33f2e4a6bf",
     "api": "mongodb/atlas-admin-api",
     "version": "2023-02-01",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -337,12 +321,11 @@
   },
   {
     "id": 17,
-    "fingerprint": "sha256:9c307d0bb3ce60d32a75da2afa0555d1233500095be5f51e9c440b49b6f0098d",
+    "fingerprint": "sha256:0a189743222fd120101f32fb8cd94139f3bfe26f8aa712a94352acbaf2e6bf2d",
     "api": "mongodb/atlas-admin-api",
     "version": "2023-11-15",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -358,12 +341,11 @@
   },
   {
     "id": 18,
-    "fingerprint": "sha256:dcecedf2e09ebd4a3156b58b05d495c5c4074af97cbd044a06cb9deffaa5eaa9",
+    "fingerprint": "sha256:6ce3974ab86222dc55886edfbf0d13478ae17ad77e77828c2e51254075d789b8",
     "api": "mongodb/atlas-admin-api",
     "version": "2023-11-15",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -379,12 +361,11 @@
   },
   {
     "id": 19,
-    "fingerprint": "sha256:160f906532581397e3ebddda5b1b7f056509ae3def7884dd6a9ede41a5f493cc",
+    "fingerprint": "sha256:303c984c883f9939188347a289f8bd118c207dd42e1b61ec34362c39ef739255",
     "api": "mongodb/atlas-admin-api",
     "version": "2024-05-30",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -400,12 +381,11 @@
   },
   {
     "id": 20,
-    "fingerprint": "sha256:627be9a47ff6458c73002e89125b40400721e03603963ac478905deee028d8d3",
+    "fingerprint": "sha256:6756b5e5ff85508b30274a5db65897513067e0159c07f6a941f21a4e5b1a672f",
     "api": "mongodb/atlas-admin-api",
     "version": "2024-05-30",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -421,12 +401,11 @@
   },
   {
     "id": 21,
-    "fingerprint": "sha256:af242c9e3aae3b5ba5489753c4ecc410ce889cf05fe4f1b1c1fe1a840bb25f2d",
+    "fingerprint": "sha256:2564657b9663e6c85b986e3ee298f5085e11df042504b1031c3d4208490fd729",
     "api": "mongodb/atlas-admin-api",
     "version": "2024-05-30",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -442,12 +421,11 @@
   },
   {
     "id": 22,
-    "fingerprint": "sha256:30d873ec4a52dbb90d6d6fa49fc26e4bcb5e1e8e63601e9743737f002344084b",
+    "fingerprint": "sha256:234bdd0756d6b215aa9ba3f86501d50336585189d6304fd60d4729cce7d1affd",
     "api": "mongodb/atlas-admin-api",
     "version": "2024-05-30",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -463,12 +441,11 @@
   },
   {
     "id": 23,
-    "fingerprint": "sha256:ddb7365f8bf1b14590d796042c46bfc9a2e3fc12991561e835bf5bf9ebbd16f5",
+    "fingerprint": "sha256:ef541391704d0f74673ad4c005186342f3216ada4e2d33bf9519fbddf214cdb6",
     "api": "mongodb/atlas-admin-api",
     "version": "2024-05-30",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -484,12 +461,11 @@
   },
   {
     "id": 24,
-    "fingerprint": "sha256:51fabed35665b97a15ad2af6ec7f4de6e7f6c8913b075fae8f3d2badd866f80c",
+    "fingerprint": "sha256:fa361068d3c659a430d2632ab54c9ff71e5bb779e6be3d3a623266bc44d4c3e0",
     "api": "mongodb/atlas-admin-api",
     "version": "2024-08-05",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -505,12 +481,11 @@
   },
   {
     "id": 25,
-    "fingerprint": "sha256:cb70fc3369d62e371c873c7590d8e64a4aae64e2591e645811fe119eb2cc520c",
+    "fingerprint": "sha256:58c58a8ea017c871a5fb0b7873fee04192f2bd190c5303af9f6f43ce8de272be",
     "api": "mongodb/atlas-admin-api",
     "version": "2024-08-05",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -530,8 +505,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -551,8 +525,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -568,12 +541,11 @@
   },
   {
     "id": 28,
-    "fingerprint": "sha256:6f26729ebc2b23eb9cfbf54274a08b8a052333c332fd22ba1600353dd4cd5500",
+    "fingerprint": "sha256:e9a2b01222e2e03d939fd603b3d9ede08efc8ad62c1d1e4a81c2f652bf515eb9",
     "api": "mongodb/atlas-admin-api",
     "version": "2025-02-19",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -589,12 +561,11 @@
   },
   {
     "id": 29,
-    "fingerprint": "sha256:5cc945d7dfc328833dab035345f094a55b0056a6c4c9ebb8dee8d1e16212e7e4",
+    "fingerprint": "sha256:45bd235464875911ea768d4374c0ce33f46aec42f15b3a64f6830438004f5bd0",
     "api": "mongodb/atlas-admin-api",
     "version": "2025-02-19",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -610,12 +581,11 @@
   },
   {
     "id": 30,
-    "fingerprint": "sha256:33e575770ae4ee93abc83c3297a204b9fac76804f78b5afdb9445087cc5a7ebc",
+    "fingerprint": "sha256:0b0c155a3bc2bcf99d88639fe83a0533283674686921812ad9c80d50f96c8965",
     "api": "mongodb/atlas-admin-api",
     "version": "2025-02-19",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -631,12 +601,11 @@
   },
   {
     "id": 31,
-    "fingerprint": "sha256:8de6ab83507db7269db3a639255a2068c387e9785875b2c21d1e7d995be7c482",
+    "fingerprint": "sha256:dea2780e1a2535ca1f223a05acb7e47578a4321d18c722549ee72359eed1b78d",
     "api": "mongodb/atlas-admin-api",
     "version": "2025-02-19",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -652,12 +621,11 @@
   },
   {
     "id": 32,
-    "fingerprint": "sha256:542ae91c8f1ad44bf462d703f155afbaa85908ac86c09a6d4a4c93b756144e98",
+    "fingerprint": "sha256:d50d1b7d9f47acac50f8f3637ee69cb014abf38bc9818c1ff852be2bf34e6eca",
     "api": "mongodb/atlas-admin-api",
     "version": "2025-02-19",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -673,12 +641,11 @@
   },
   {
     "id": 33,
-    "fingerprint": "sha256:d2b323f2d8dd032dd30e1646e666563a89226e1a0078c532e5139a348eaeed13",
+    "fingerprint": "sha256:b1a089eff65ecfcda6edd8d7445ed2e742565a9131e05d0650809d4954b77f36",
     "api": "mongodb/atlas-admin-api",
     "version": "2025-02-19",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -694,12 +661,11 @@
   },
   {
     "id": 34,
-    "fingerprint": "sha256:5f6e8e3f099b05d54e52927c9c468842df69607f7a28c3fa86e3f1d0fdf8b86a",
+    "fingerprint": "sha256:cfef8d62866ade6bb1bb5720a6a103e66df80dc927943706f1b28eba449f2974",
     "api": "mongodb/atlas-admin-api",
     "version": "2025-02-19",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -715,12 +681,11 @@
   },
   {
     "id": 35,
-    "fingerprint": "sha256:690d31fcafd5209816ad6c16c0ed9199c7599bdba84872bdfa5b6b126238d985",
+    "fingerprint": "sha256:7afc96875d0620b269bc4a9eec56e63a9b100fb70432f24ed3c8895e618bc894",
     "api": "mongodb/atlas-admin-api",
     "version": "2025-02-19",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -736,12 +701,11 @@
   },
   {
     "id": 36,
-    "fingerprint": "sha256:d146c472539b4b5494c7f9749a708129bad45aa22ebe8a966e2061f2d68a4c06",
+    "fingerprint": "sha256:8e7cc37962a7bf771fbf2e33a1cc125d6568288d9dabb250b1834b7d6d6bfc6f",
     "api": "mongodb/atlas-admin-api",
     "version": "2025-02-19",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -757,12 +721,11 @@
   },
   {
     "id": 37,
-    "fingerprint": "sha256:9c3c5c4e3f219e8954c0f98003c889eb5b0ee10ddfa858a3350736b48e2a263e",
+    "fingerprint": "sha256:aa4c90f462e2be5d10900a3b65242518a92d8830b16eff95abc9828cc51d2a68",
     "api": "mongodb/atlas-admin-api",
     "version": "2025-02-19",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -778,12 +741,11 @@
   },
   {
     "id": 38,
-    "fingerprint": "sha256:58a98f24cdcd722bad12234a6e5d3d013f63f31b1f121670e93801e2a27713c0",
+    "fingerprint": "sha256:2d127d15e923885f933814f92c6d88024415496414c3d136d1a9e4e71d51cfdb",
     "api": "mongodb/atlas-admin-api",
     "version": "2025-02-19",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -799,12 +761,11 @@
   },
   {
     "id": 39,
-    "fingerprint": "sha256:329a4a061813ba41a8e5e2ce063df7ce6542b48922730c70778e181a287ad576",
+    "fingerprint": "sha256:ebc789534228fef34cb7ee7b2581ff165aae6479a4a4dba960925808b5593859",
     "api": "mongodb/atlas-admin-api",
     "version": "2025-02-19",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -820,12 +781,11 @@
   },
   {
     "id": 40,
-    "fingerprint": "sha256:e5c8117858980a087db6a750044cc9be9ac1d70e6fa2921191d9affd006bb891",
+    "fingerprint": "sha256:d819d31c4d36f62095dfe8f957e9adad6580f992ab15839c57129afb16ed51e9",
     "api": "mongodb/atlas-admin-api",
     "version": "2025-02-19",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -841,12 +801,11 @@
   },
   {
     "id": 41,
-    "fingerprint": "sha256:366c39d16e92feed3c2ad2eb125b18d547062da23306e4aeaa96c12446f723f3",
+    "fingerprint": "sha256:4dbde1448aa4175de05dc1d8d4227746f3b5918f1d0c637a176c227db4e2aea9",
     "api": "mongodb/atlas-admin-api",
     "version": "2025-02-19",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -866,8 +825,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -887,8 +845,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -908,8 +865,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -929,8 +885,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -950,8 +905,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -971,8 +925,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -992,8 +945,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1013,8 +965,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1034,8 +985,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1055,8 +1005,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1076,8 +1025,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1097,8 +1045,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1118,8 +1065,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1139,8 +1085,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1160,8 +1105,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1181,8 +1125,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1202,8 +1145,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1223,8 +1165,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1244,8 +1185,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1265,8 +1205,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1286,8 +1225,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1307,8 +1245,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1328,8 +1265,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1349,8 +1285,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1370,8 +1305,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1391,8 +1325,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1412,8 +1345,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1433,8 +1365,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1454,8 +1385,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1475,8 +1405,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1496,8 +1425,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1517,8 +1445,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1538,8 +1465,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1559,8 +1485,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1580,8 +1505,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1601,8 +1525,7 @@
     "api": "mongodb/atlas-admin-api",
     "version": "2023-01-01",
     "previous_version": "2026-11-09",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1618,12 +1541,11 @@
   },
   {
     "id": 78,
-    "fingerprint": "sha256:16c25ef30e3ca196af5f94eb2a15c327b7408a059e08647eb3952c0c260a5750",
+    "fingerprint": "sha256:951dbb819dddfc252372de69509ad74b5063b2d293062b9444448203ad03d015",
     "api": "mongodb/atlas-admin-api",
     "version": "2025-03-12",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1639,12 +1561,11 @@
   },
   {
     "id": 79,
-    "fingerprint": "sha256:2bb72b9a509e7e1c82c80f7c19d34d5840d0dff7b9d2db6283729f52c111c2eb",
+    "fingerprint": "sha256:64ad72849c4c11f8e84e4d66769da1367994241ca7b781747846b439b3948ce0",
     "api": "mongodb/atlas-admin-api",
     "version": "2025-03-12",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1660,12 +1581,11 @@
   },
   {
     "id": 80,
-    "fingerprint": "sha256:3d8712c8fd430ebc1c2ca68ce8f2db339d7b5521eeecf35ebfccfe5abdb009c4",
+    "fingerprint": "sha256:0b9bcafa1c8955152dbd7a823d88f7fdfc5409568f30ada60d74e406a33857af",
     "api": "mongodb/atlas-admin-api",
     "version": "2025-03-12",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -1681,12 +1601,11 @@
   },
   {
     "id": 81,
-    "fingerprint": "sha256:b1da7820ea9b85583c0270feae07d446556fb0468da2b61b1dd666f9d0b63f9d",
+    "fingerprint": "sha256:93debe07963eb6b23eb03b583e000ec862a10ac54c16cda69684434c23745423",
     "api": "mongodb/atlas-admin-api",
     "version": "2025-03-12",
     "previous_version": "2026-11-09",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",

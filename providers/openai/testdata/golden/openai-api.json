@@ -1,12 +1,11 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:fe20f958f779ea71cf22a7ab8f02ed3c6b50d393e95dc617b3d6fac6371f41f2",
+    "fingerprint": "sha256:09f32082ec45f40d2cf4b69073957c23893c159c3c12cd116ccd34ad940590c1",
     "api": "openai/api",
     "version": "2026-10-28",
     "previous_version": "2026-10-27",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",

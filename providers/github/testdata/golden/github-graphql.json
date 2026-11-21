@@ -1,12 +1,11 @@
 [
   {
     "id": 0,
-    "fingerprint": "sha256:b2d3b47705a97f5ad0eba1ad05610205e8134a851eb1a61e7ff4588dcb316f64",
+    "fingerprint": "sha256:1d12c73ed6bb1158f4c8472da0634b0a592ef6ae269efff912b9a5b578b76983",
     "api": "github/graphql",
     "version": "2027-01-01",
     "previous_version": "2026-02-13",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "schema_property",
@@ -23,12 +22,11 @@
   },
   {
     "id": 0,
-    "fingerprint": "sha256:cd07336291aa000b124d74fd081c22b95cc1ca0fabadf51cf776e9bb93e309f5",
+    "fingerprint": "sha256:1d65855ed9cd7bbc1e7b132af416cb3e5f786e14c22929fd008785d81a225561",
     "api": "github/graphql",
     "version": "2027-01-01",
     "previous_version": "2026-02-13",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "schema_property",
@@ -45,12 +43,11 @@
   },
   {
     "id": 0,
-    "fingerprint": "sha256:da197a3086fc3c9c3642b6045598ee0f65d32f78b16c26c3697eedc79c0463ed",
+    "fingerprint": "sha256:af67e381d65adb4520943a44a3f5f6c56166149106dd05cd8e538ca1864cdfda",
     "api": "github/graphql",
     "version": "2026-10-01",
     "previous_version": "2026-03-03",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "schema_property",
@@ -67,12 +64,11 @@
   },
   {
     "id": 0,
-    "fingerprint": "sha256:baa075ad2dbf3bd79789a7485b386db64b050383e1b6bf2de5ac11719d70263f",
+    "fingerprint": "sha256:322f81e53a4f2aabf1671494c6cb64faa4576fe96584c60c901740b658b5cafd",
     "api": "github/graphql",
     "version": "2026-10-01",
     "previous_version": "2026-05-22",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "schema_property",

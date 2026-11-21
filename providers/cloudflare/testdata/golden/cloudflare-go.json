@@ -5,8 +5,7 @@
     "api": "cloudflare/go",
     "version": "7.15.0",
     "previous_version": "7.14.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",

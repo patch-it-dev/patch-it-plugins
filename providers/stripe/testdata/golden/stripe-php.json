@@ -5,8 +5,7 @@
     "api": "stripe/php",
     "version": "9.0.0",
     "previous_version": "8.12.1",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "packagist",
@@ -34,8 +33,7 @@
     "api": "stripe/php",
     "version": "9.0.0",
     "previous_version": "8.12.1",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "packagist",
@@ -64,8 +62,7 @@
     "api": "stripe/php",
     "version": "9.0.0",
     "previous_version": "8.12.1",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "packagist",
@@ -88,8 +85,7 @@
     "api": "stripe/php",
     "version": "9.0.0",
     "previous_version": "8.12.1",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "packagist",
@@ -112,8 +108,7 @@
     "api": "stripe/php",
     "version": "9.0.0",
     "previous_version": "8.12.1",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "packagist",
@@ -136,8 +131,7 @@
     "api": "stripe/php",
     "version": "9.0.0",
     "previous_version": "8.12.1",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "packagist",
@@ -160,8 +154,7 @@
     "api": "stripe/php",
     "version": "9.0.0",
     "previous_version": "8.12.1",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "packagist",
@@ -184,8 +177,7 @@
     "api": "stripe/php",
     "version": "9.0.0",
     "previous_version": "8.12.1",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "packagist",
@@ -208,8 +200,7 @@
     "api": "stripe/php",
     "version": "9.0.0",
     "previous_version": "8.12.1",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "packagist",
@@ -232,8 +223,7 @@
     "api": "stripe/php",
     "version": "9.0.0",
     "previous_version": "8.12.1",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "packagist",
@@ -256,8 +246,7 @@
     "api": "stripe/php",
     "version": "9.0.0",
     "previous_version": "8.12.1",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "packagist",
@@ -280,8 +269,7 @@
     "api": "stripe/php",
     "version": "9.0.0",
     "previous_version": "8.12.1",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "packagist",
@@ -304,8 +292,7 @@
     "api": "stripe/php",
     "version": "9.0.0",
     "previous_version": "8.12.1",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "packagist",

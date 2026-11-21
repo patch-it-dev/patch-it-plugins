@@ -71,7 +71,7 @@ func TestTenantBackupSunset(t *testing.T) {
 			continue
 		}
 		n++
-		if f.ChangeType != event.ChangeTypeBreaking || f.Date != "2026-01-22" || f.Code != "endpoint-removed" {
+		if f.ChangeType != event.ChangeBreaking || f.Date != "2026-01-22" || f.Code != "endpoint-removed" {
 			t.Errorf("%s: %s %s %s", f.Operation, f.ChangeType, f.Date, f.Code)
 		}
 		if !strings.Contains(f.Excerpt, "has reached its sunset date '2026-01-22'") {
@@ -185,7 +185,7 @@ func TestLifeCycleInOrder(t *testing.T) {
 	for _, f := range fs {
 		got = append(got, f.Date+" "+f.Operation+" "+string(f.ChangeType))
 	}
-	want := []string{"2026-01-15 GET /b deprecation", "2026-03-01 GET /a deprecation", "2026-05-01 GET /b breaking"}
+	want := []string{"2026-01-15 GET /b deprecated", "2026-03-01 GET /a deprecated", "2026-05-01 GET /b breaking"}
 	if strings.Join(got, "; ") != strings.Join(want, "; ") {
 		t.Errorf("got %q, want %q", got, want)
 	}
@@ -327,10 +327,10 @@ func TestJSONChangelogPairByPair(t *testing.T) {
 			t.Fatalf("%v %v", err, res.Rejected)
 		}
 		for _, e := range res.Events {
-			got = append(got, vs[pair[1]].ID+": "+e.Subject.Operation+" "+string(e.ChangeType))
+			got = append(got, vs[pair[1]].ID+": "+e.Subject.Operation+" "+string(e.Change))
 		}
 	}
-	want := "2026-02-01: GET /b deprecation; 2026-03-01: GET /a breaking"
+	want := "2026-02-01: GET /b deprecated; 2026-03-01: GET /a breaking"
 	if strings.Join(got, "; ") != want {
 		t.Errorf("pairs gave %q, want %q", strings.Join(got, "; "), want)
 	}

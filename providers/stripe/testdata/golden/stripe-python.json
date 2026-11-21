@@ -5,8 +5,7 @@
     "api": "stripe/python",
     "version": "4.0.0",
     "previous_version": "3.5.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -35,8 +34,7 @@
     "api": "stripe/python",
     "version": "4.0.0",
     "previous_version": "3.5.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -59,8 +57,7 @@
     "api": "stripe/python",
     "version": "4.0.0",
     "previous_version": "3.5.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -83,8 +80,7 @@
     "api": "stripe/python",
     "version": "4.0.0",
     "previous_version": "3.5.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",

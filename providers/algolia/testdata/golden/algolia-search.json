@@ -1,12 +1,11 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:185305649ae5f0070c023dbd84d3b8fa2fd69b0b9396e9bcf6ab865030bbff54",
+    "fingerprint": "sha256:b7717115a5144f19e1a818bd2804f9e46ffffdf5d98cfdab61821dabed155423",
     "api": "algolia/search-api",
     "version": "2025-04-01",
     "previous_version": "2025-03-25",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -22,12 +21,11 @@
   },
   {
     "id": 2,
-    "fingerprint": "sha256:2abd5794c049ff2047ac323f87f07289957eaa94026f57230857e3da4e0b4d9c",
+    "fingerprint": "sha256:00bd1ebe5d158c3f258a11467ca21c608bb2cdf802c1ac176aac4cdd29c61e7e",
     "api": "algolia/search-api",
     "version": "2025-04-01",
     "previous_version": "2025-03-25",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -43,12 +41,11 @@
   },
   {
     "id": 3,
-    "fingerprint": "sha256:10eb98743283aa78f98c179d431384a36df1f5e383cc427087c65ce25082532f",
+    "fingerprint": "sha256:afc1dfe8605a3d5ab2d9dcdeea91d5798b185ffc042c2a8452a2cc9253fe2ec5",
     "api": "algolia/search-api",
     "version": "2025-04-01",
     "previous_version": "2025-03-25",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -64,12 +61,11 @@
   },
   {
     "id": 4,
-    "fingerprint": "sha256:aba31879e97ea5de446ccdecdd94cfe51c9d939574f169f67d0264debd2b0dd1",
+    "fingerprint": "sha256:1544af9c03ef30905392aad56322ac52e457830fcb3e0403fbf60bb77df907a0",
     "api": "algolia/search-api",
     "version": "2025-04-01",
     "previous_version": "2025-03-25",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -85,12 +81,11 @@
   },
   {
     "id": 5,
-    "fingerprint": "sha256:89631e91da5c783ab2b68d6c400a225118eaf31e4977caf323fd97633825092c",
+    "fingerprint": "sha256:bf5aa62fa956f83b6a9c934ba7dcd1fc2a33f8848cd26e4bf9ebd97d113defa8",
     "api": "algolia/search-api",
     "version": "2025-04-01",
     "previous_version": "2025-03-25",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -106,12 +101,11 @@
   },
   {
     "id": 6,
-    "fingerprint": "sha256:65043d5a11f9527a38ff560bd15771a2417670c3dd2d7e8631c0f5bd4fab926e",
+    "fingerprint": "sha256:1894d335bc7461203aefe9be1bc8b51c3b11f9db72403f3517a21b87cbe1bf85",
     "api": "algolia/search-api",
     "version": "2025-04-01",
     "previous_version": "2025-03-25",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -127,12 +121,11 @@
   },
   {
     "id": 7,
-    "fingerprint": "sha256:beefe5487e2bae8dc4017249ce0580e1a0570a403466e9b700f98b10b594d184",
+    "fingerprint": "sha256:c04b22f67c18a0a5b6500954943593b663bd488bc399770a2eccbb25e10692cc",
     "api": "algolia/search-api",
     "version": "2025-04-01",
     "previous_version": "2025-03-25",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -148,12 +141,11 @@
   },
   {
     "id": 8,
-    "fingerprint": "sha256:2b249c86f444ddda89abd95f7f78fc38b42df4f605c7fb7f298f37fc49bf4dd5",
+    "fingerprint": "sha256:fb13e4268f1a6784226c3b33f8e14134e28717e0514dad9727faca7c412f05fa",
     "api": "algolia/search-api",
     "version": "2025-04-01",
     "previous_version": "2025-03-25",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -169,12 +161,11 @@
   },
   {
     "id": 9,
-    "fingerprint": "sha256:5b72de487e9077705f70e2ef2836ae72347896671c162b7f0e35812b71272850",
+    "fingerprint": "sha256:c592b2a603fd1d80a73bf8ab077808e6898d2de00e1b7e0b24ea38059e26ea7a",
     "api": "algolia/search-api",
     "version": "2025-04-01",
     "previous_version": "2025-03-25",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",

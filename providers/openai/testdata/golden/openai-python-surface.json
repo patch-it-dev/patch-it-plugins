@@ -5,8 +5,7 @@
     "api": "openai/python-surface",
     "version": "1.1.2",
     "previous_version": "1.1.1",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",

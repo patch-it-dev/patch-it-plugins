@@ -6,8 +6,7 @@
       "api": "stripe/api",
       "version": "2026-09-30.endive",
       "previous_version": "2026-08-26.dahlia",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "api_operation",
         "kind": "schema_property",
@@ -26,8 +25,7 @@
       "fingerprint": "sha256:e81c4586518962482b93b1b972578acf16396be3ce7e4205de6a16dfc8618e95",
       "api": "openai/models",
       "version": "2026-12-11",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "model",
         "provider": "openai",
@@ -47,8 +45,7 @@
       "api": "example/examplepkg",
       "version": "2.0.0",
       "previous_version": "1.9.0",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -71,8 +68,7 @@
       "api": "example/examplepkg",
       "version": "2.0.0",
       "previous_version": "1.9.0",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "package_release",
         "ecosystem": "pypi",
@@ -90,12 +86,11 @@
     },
     {
       "id": 5,
-      "fingerprint": "sha256:e10a07a898889d128c1d278b8ffc9d5554d7c3a911a2275972312337cdaf82ba",
+      "fingerprint": "sha256:507f7369e8049300529490c80b58b28c43f31a0c4fe85f56be03486d15ae4d5e",
       "api": "example/examplepkg",
       "version": "2.0.0",
       "previous_version": "1.9.0",
-      "change_type": "deprecation",
-      "breaking": false,
+      "change": "deprecated",
       "subject": {
         "type": "package_release",
         "ecosystem": "npm",
@@ -117,8 +112,7 @@
       "fingerprint": "sha256:a6a538cb0f3058030c288bbce398fe0534dbee242e3f375f9cedd3fc9c467c7a",
       "api": "github/actions",
       "version": "2026-09-23",
-      "change_type": "breaking",
-      "breaking": true,
+      "change": "breaking",
       "subject": {
         "type": "ci_runtime",
         "platform": "github-actions",
@@ -128,6 +122,112 @@
       "description": "Node 20 is no longer available on GitHub Actions runners from 2026-09-23.",
       "source_url": "https://example.test/github-actions/2026-09-23",
       "source_excerpt": "Synthetic fixture for ci_runtime: not a real source.",
+      "confidence": 1,
+      "detected_at": "2026-11-03T12:00:00Z"
+    },
+    {
+      "id": 7,
+      "fingerprint": "sha256:7a96622300be7ae81ca934c11c0f1f7bd03cf564b5e8419992ab05b6bd579b98",
+      "api": "stripe/api",
+      "version": "2026-09-30.endive",
+      "previous_version": "2026-08-26.dahlia",
+      "change": "added",
+      "subject": {
+        "type": "api_operation",
+        "kind": "operation",
+        "side": "request",
+        "operation": "POST /v1/billing/feedback_options"
+      },
+      "description": "New operation POST /v1/billing/feedback_options.",
+      "source_url": "https://example.test/stripe/2026-09-30.endive",
+      "source_excerpt": "Synthetic fixture for an added api_operation: not a real source.",
+      "confidence": 1,
+      "detected_at": "2026-11-03T12:00:00Z"
+    },
+    {
+      "id": 8,
+      "fingerprint": "sha256:33462289436992f4cb146bc90c9d6033ff344a5e40f0f21f421ce277e7709444",
+      "api": "stripe/api",
+      "version": "2026-09-30.endive",
+      "previous_version": "2026-09-30.endive",
+      "change": "added",
+      "subject": {
+        "type": "api_operation",
+        "kind": "schema_property",
+        "side": "response",
+        "schema": "invoice",
+        "property": "amount_overpaid"
+      },
+      "description": "Property invoice.amount_overpaid added inside API version 2026-09-30.endive.",
+      "source_url": "https://example.test/stripe/2026-09-30.endive/v2",
+      "source_excerpt": "Synthetic fixture for an addition inside one version: not a real source.",
+      "confidence": 1,
+      "detected_at": "2026-11-03T12:00:00Z"
+    },
+    {
+      "id": 9,
+      "fingerprint": "sha256:d162f36ce003fe5f8748b8b8781fd7190d73cbbb4e196f65cdb70144542474c6",
+      "api": "example/examplepkg",
+      "version": "2.0.0",
+      "previous_version": "1.9.0",
+      "change": "added",
+      "subject": {
+        "type": "package_release",
+        "ecosystem": "pypi",
+        "package": "examplepkg",
+        "change": "added_symbol",
+        "symbols": [
+          "Client.stream"
+        ]
+      },
+      "description": "Client.stream added in examplepkg 2.0.0.",
+      "source_url": "https://example.test/examplepkg/2.0.0",
+      "source_excerpt": "Synthetic fixture for an added package_release symbol: not a real source.",
+      "confidence": 1,
+      "detected_at": "2026-11-03T12:00:00Z"
+    },
+    {
+      "id": 10,
+      "fingerprint": "sha256:26f82c73e55323c84dcbf867e612230bb0d801d080f0153a1cd3f3856e99bf21",
+      "api": "example/examplepkg",
+      "version": "2.0.0",
+      "previous_version": "1.9.0",
+      "change": "added",
+      "subject": {
+        "type": "package_release",
+        "ecosystem": "pypi",
+        "package": "examplepkg",
+        "change": "added_parameter",
+        "symbols": [
+          "Client.send"
+        ],
+        "parameter": "timeout"
+      },
+      "description": "Client.send takes a new parameter timeout in examplepkg 2.0.0.",
+      "source_url": "https://example.test/examplepkg/2.0.0",
+      "source_excerpt": "Synthetic fixture for an added package_release parameter: not a real source.",
+      "confidence": 1,
+      "detected_at": "2026-11-03T12:00:00Z"
+    },
+    {
+      "id": 11,
+      "fingerprint": "sha256:b8e9d485abe026123c5bd7d6f2d6ca52e7cad05b9db77e5961e0e2ed233d4df2",
+      "api": "example/examplepkg",
+      "version": "2.0.0",
+      "previous_version": "1.9.0",
+      "change": "deprecated",
+      "subject": {
+        "type": "package_release",
+        "ecosystem": "pypi",
+        "package": "examplepkg",
+        "change": "removed_symbol",
+        "symbols": [
+          "Client.legacy_stream"
+        ]
+      },
+      "description": "Client.legacy_stream is deprecated in examplepkg 2.0.0.",
+      "source_url": "https://example.test/examplepkg/2.0.0",
+      "source_excerpt": "Synthetic fixture for a deprecated package_release symbol: not a real source.",
       "confidence": 1,
       "detected_at": "2026-11-03T12:00:00Z"
     }

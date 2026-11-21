@@ -1,12 +1,11 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:ea7af6c4ce0ac5f78892593033526fd049b9dba84678559c95df62268c0bc143",
+    "fingerprint": "sha256:f3d4ce13b11ee0e6433686e9f2a713aea1b7eeb0e3352fbe1db690d3f7de94f0",
     "api": "appwrite/api",
     "version": "2026-06-24",
     "previous_version": "2026-06-19",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -22,12 +21,11 @@
   },
   {
     "id": 2,
-    "fingerprint": "sha256:9aa750c05754b5e4d77e8532451916c43d59030fe5b1d4185e4298ec266c8d7a",
+    "fingerprint": "sha256:b807d1d8be77541f41b2889ce828cfe3fff49193ee47b1b524fbf94ee6ae39d2",
     "api": "appwrite/api",
     "version": "2026-06-24",
     "previous_version": "2026-06-19",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -43,12 +41,11 @@
   },
   {
     "id": 3,
-    "fingerprint": "sha256:ed8a5adc8dd491e36fe308d44039febe9e44f77c6d47a71ed7edd95566bbf803",
+    "fingerprint": "sha256:e364e5934aa2225c68149e4cb13b6b64127f1fafc8a82fb5ef2eb12b4118a17a",
     "api": "appwrite/api",
     "version": "2026-06-24",
     "previous_version": "2026-06-19",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -64,12 +61,11 @@
   },
   {
     "id": 4,
-    "fingerprint": "sha256:b51c68833b56e4e1c8442fc7e966e85a861a363dc6a68569911d9561e7cc0608",
+    "fingerprint": "sha256:786bd53bff57f70374d502eb86e4b46c560f1cac131fd1569d811ccc68509898",
     "api": "appwrite/api",
     "version": "2026-06-24",
     "previous_version": "2026-06-19",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -85,12 +81,11 @@
   },
   {
     "id": 5,
-    "fingerprint": "sha256:45f6a512d1b968c8a1b7ddb488391ee2b7cbcd30455bfdb642393b3fa5a0cf96",
+    "fingerprint": "sha256:fa5fe5f261fa5fad39a7ba08824668385be7a45f175c46f264ff38134593e52d",
     "api": "appwrite/api",
     "version": "2026-06-24",
     "previous_version": "2026-06-19",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -106,12 +101,11 @@
   },
   {
     "id": 6,
-    "fingerprint": "sha256:3743d82a53dccfe87925bbd535a5912c06a0aeaf22671d8420d7eb3d91894166",
+    "fingerprint": "sha256:97ed83ef3622dbf2f5c23df323e4354ceba3044ae92cedf37a16e08e93d2c41c",
     "api": "appwrite/api",
     "version": "2026-06-24",
     "previous_version": "2026-06-19",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -127,12 +121,11 @@
   },
   {
     "id": 7,
-    "fingerprint": "sha256:336e841ee77ca88bd25892dff4e73695b80040fef648dd950d67ba359220b1a1",
+    "fingerprint": "sha256:54c39dacd0ee97cfaf9c11d83f8219b715decf059648b3b199fc31b6a20ec6cd",
     "api": "appwrite/api",
     "version": "2026-06-24",
     "previous_version": "2026-06-19",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -148,12 +141,11 @@
   },
   {
     "id": 8,
-    "fingerprint": "sha256:401e0496b4fedc6207569d1f157a590412f9d3007535d2fe2d4f091f4af727cf",
+    "fingerprint": "sha256:e7c84a815fba41c49344d3ed5611b7213910091ff7ce7381c3ce8185a0c5237e",
     "api": "appwrite/api",
     "version": "2026-06-24",
     "previous_version": "2026-06-19",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -169,12 +161,11 @@
   },
   {
     "id": 9,
-    "fingerprint": "sha256:10a2398eeb480ab3fd425040d9f435ba8bce60e3da7a770ed2ac338276eccab9",
+    "fingerprint": "sha256:58bdbda983ecf7eb2c118980f1a8fa9966acba6689b402b09a9090a0a0b659a1",
     "api": "appwrite/api",
     "version": "2026-06-24",
     "previous_version": "2026-06-19",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -190,12 +181,11 @@
   },
   {
     "id": 10,
-    "fingerprint": "sha256:a6cf84f00941198ec439e57f2a9c4a3344ab0eb343a683844ea51a726d663d26",
+    "fingerprint": "sha256:b9aac8af40aac3e03a2b728d6e8c548c3f384c74845438fe35328fe19b4f26ff",
     "api": "appwrite/api",
     "version": "2026-06-24",
     "previous_version": "2026-06-19",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -211,12 +201,11 @@
   },
   {
     "id": 11,
-    "fingerprint": "sha256:924d1a10c8c836c00fd7a914f97a5452f25e44d1e62c3707ebefce3946ae325a",
+    "fingerprint": "sha256:32a8599f404814fc2dc06441a816f63934bd3c047e22ab98f3cad5fada6d2344",
     "api": "appwrite/api",
     "version": "2026-06-24",
     "previous_version": "2026-06-19",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -232,12 +221,11 @@
   },
   {
     "id": 12,
-    "fingerprint": "sha256:e8b38a262b69d595c0ec9a0f557680d278e5831b8b85cd6270a21b401297a2cc",
+    "fingerprint": "sha256:f1af87844bbce46763ae894ab0b99f458396e5999750d14f78209c94c5251119",
     "api": "appwrite/api",
     "version": "2026-06-24",
     "previous_version": "2026-06-19",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -253,12 +241,11 @@
   },
   {
     "id": 13,
-    "fingerprint": "sha256:3c9ef0414441ad96b68e3611ba21a866c848303105c6957377fa49dd3233774f",
+    "fingerprint": "sha256:1ea101b6eb8c50a4968e384332c6777fe5b6aed9165ebd5f70f607f0a8b3c7e3",
     "api": "appwrite/api",
     "version": "2026-06-24",
     "previous_version": "2026-06-19",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -274,12 +261,11 @@
   },
   {
     "id": 14,
-    "fingerprint": "sha256:666d6159ed9b9d2464b84233bc13a470b3d5539f675a9a6d842b17c9906d9f9b",
+    "fingerprint": "sha256:09254914293452c65e9bfe7ed979295dc95630be0a26bf293e527039278c567b",
     "api": "appwrite/api",
     "version": "2026-06-24",
     "previous_version": "2026-06-19",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",

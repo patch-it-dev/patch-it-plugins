@@ -70,7 +70,7 @@ var changeWord = regexp.MustCompile(`(?i)^(added|changed|deprecated|fixed|securi
 
 // Change is what one bullet says, when it says it plainly enough.
 type Change struct {
-	ChangeType  event.ChangeType
+	ChangeType  event.Change
 	Change      event.PackageChange // removed_symbol or renamed_symbol
 	Symbols     []string            // as code writes them after the import
 	Replacement string              // renamed_symbol only
@@ -134,29 +134,29 @@ func Classify(k Kind, text, module string) (c Change, ok bool, why string) {
 	}
 	if k != KindDeprecation {
 		if m := try(renamed); m != nil {
-			return names(event.ChangeTypeBreaking, codes, "§", "", "", "", module, codes[1])
+			return names(event.ChangeBreaking, codes, "§", "", "", "", module, codes[1])
 		}
 		if m := try(renamedPassive); m != nil {
-			return names(event.ChangeTypeBreaking, codes, "§", "", "", "", module, codes[1])
+			return names(event.ChangeBreaking, codes, "§", "", "", "", module, codes[1])
 		}
 		if m := try(removedActive); m != nil {
-			return names(event.ChangeTypeBreaking, codes, m[1], m[2], m[3], "", module, "")
+			return names(event.ChangeBreaking, codes, m[1], m[2], m[3], "", module, "")
 		}
 		if m := try(removedPassive); m != nil {
-			return names(event.ChangeTypeBreaking, codes, m[1], m[2], "", "", module, "")
+			return names(event.ChangeBreaking, codes, m[1], m[2], "", "", module, "")
 		}
 		// Only names, no verb ("`Placeholder.reset_color_cycle`"): counts
 		// under a Removed heading, where the heading is the verb.
 		if m := try(bare); m != nil && removedHeading {
-			return names(event.ChangeTypeBreaking, codes, m[1], "", "", "", module, "")
+			return names(event.ChangeBreaking, codes, m[1], "", "", "", module, "")
 		}
 	}
 	if k != KindBreaking {
 		if m := try(deprecActive); m != nil {
-			return names(event.ChangeTypeDeprecation, codes, m[1], "", "", m[2], module, "")
+			return names(event.ChangeDeprecated, codes, m[1], "", "", m[2], module, "")
 		}
 		if m := try(deprecPassive); m != nil {
-			return names(event.ChangeTypeDeprecation, codes, m[1], "", "", m[2], module, "")
+			return names(event.ChangeDeprecated, codes, m[1], "", "", m[2], module, "")
 		}
 	}
 	return Change{}, true, "doesn't say plainly which names it removes or deprecates"
@@ -186,7 +186,7 @@ func template(text string) (string, []string) {
 // names turns the § groups of a matched template into a Change. list is the
 // matched list of §s; owner, when set, is the § the names were removed from;
 // newName / favour the replacement's §.
-func names(ct event.ChangeType, codes []string, list, owner, newName, favour, module, renamedTo string) (Change, bool, string) {
+func names(ct event.Change, codes []string, list, owner, newName, favour, module, renamedTo string) (Change, bool, string) {
 	// Which codes are in which group: count §s before each group.
 	idx := 0
 	take := func(group string) []string {

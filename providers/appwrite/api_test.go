@@ -130,9 +130,9 @@ func TestAppwriteGolden(t *testing.T) {
 	file := appwriteFiles[appwrite19New+"/1.9.x"]["open-api3-1.9.x-server.json"]
 	url := base + "/" + appwrite19New + "/specs/1.9.x/open-api3-1.9.x-server.json"
 	for _, e := range events {
-		if e.ChangeType != event.ChangeTypeDeprecation || e.Breaking || e.Version != "2026-06-24" || e.SourceURL != url ||
+		if e.Change != event.ChangeDeprecated || (e.Change == event.ChangeBreaking) || e.Version != "2026-06-24" || e.SourceURL != url ||
 			!strings.Contains(e.Subject.Operation, " /v1/databases/") || strings.HasPrefix(e.SourcePointer, "/paths/~1v1") {
-			t.Errorf("%s: %s %s from %s", e.Subject.Operation, e.ChangeType, e.Version, e.SourceURL)
+			t.Errorf("%s: %s %s from %s", e.Subject.Operation, e.Change, e.Version, e.SourceURL)
 		}
 		if !strings.HasSuffix(e.SourcePointer, "/x-appwrite/deprecated") || openapitest.JSONNode(t, file, e.SourcePointer) != e.SourceExcerpt {
 			t.Errorf("%s: excerpt %s doesn't match %s", e.Subject.Operation, e.SourceExcerpt, e.SourcePointer)
@@ -161,7 +161,7 @@ func TestAppwriteDropsRemovals(t *testing.T) {
 	p.Keep = nil
 	var removed int
 	for _, e := range pairAppwrite(t, p, appwrite24Old, appwrite24New) {
-		if e.ChangeType == event.ChangeTypeBreaking && e.Subject.Kind == event.KindOperation {
+		if e.Change == event.ChangeBreaking && e.Subject.Kind == event.KindOperation {
 			removed++
 		}
 	}

@@ -59,11 +59,11 @@ func TestEventsOnePerModel(t *testing.T) {
 	if e.Subject.Type != want.Type || e.Subject.Provider != want.Provider || e.Subject.Name != want.Name || e.Subject.Replacement != want.Replacement {
 		t.Errorf("subject: %+v", e.Subject)
 	}
-	if e.API != "openai/models" || e.Version != "2026-10-23" || e.PreviousVersion != "" || !e.Breaking ||
+	if e.API != "openai/models" || e.Version != "2026-10-23" || e.PreviousVersion != "" || e.Change != event.ChangeBreaking ||
 		e.SourceURL != src || e.SourceExcerpt != rs[0].Excerpt || e.Confidence != 1.0 {
 		t.Errorf("event: %+v", e)
 	}
-	if e.Fingerprint != event.Fingerprint("openai/models", "2026-10-23", event.ChangeTypeBreaking, e.Subject, "") {
+	if e.Fingerprint != event.Fingerprint("openai/models", "2026-10-23", event.ChangeBreaking, e.Subject, "") {
 		t.Error("the fingerprint is the contract's formula over the model subject")
 	}
 	// The replacement is set only when the provider names exactly one model.

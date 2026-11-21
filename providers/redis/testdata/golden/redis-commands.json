@@ -5,8 +5,7 @@
     "api": "redis/commands",
     "version": "8.8-rc1",
     "previous_version": "8.8-m03",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "redis",
@@ -28,8 +27,7 @@
     "api": "redis/commands",
     "version": "8.8-rc1",
     "previous_version": "8.8-m03",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "redis",

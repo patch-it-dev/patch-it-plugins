@@ -45,7 +45,7 @@ func TestNewRelicEachRowOfTheTable(t *testing.T) {
 			t.Fatalf("%v: one symbol per event", e.Subject.Symbols)
 		}
 		if e.API != "newrelic/python-agent" || e.Version != "11.0.0" || e.Subject.Ecosystem != "pypi" || e.Subject.Package != "newrelic" ||
-			e.ChangeType != event.ChangeTypeBreaking || !strings.HasPrefix(e.SourceExcerpt, "Removed features\n    | Legacy API ") ||
+			e.Change != event.ChangeBreaking || !strings.HasPrefix(e.SourceExcerpt, "Removed features\n    | Legacy API ") ||
 			!strings.HasSuffix(e.MigrationHint, "(newrelic's release notes for 11.0.0)") {
 			t.Errorf("%+v", e)
 		}

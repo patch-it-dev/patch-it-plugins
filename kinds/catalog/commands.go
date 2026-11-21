@@ -151,7 +151,7 @@ func (c Commands) Extract(ctx context.Context, env plugin.Env, from, to plugin.S
 		}
 		made = append(made, event.Event{
 			API: c.API, Version: to.Version.ID, PreviousVersion: from.Version.ID,
-			ChangeType: event.ChangeTypeBreaking, Breaking: true,
+			Change: event.ChangeBreaking,
 			Subject: event.Subject{
 				Type: event.SubjectPackageRelease, Ecosystem: c.Ecosystem, Package: c.Package,
 				Change: event.PackageRemovedSymbol, Symbols: []string{name},

@@ -1,12 +1,11 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:a4087965f42c9adeebfca1fce9db2fcc702fac2032be5becb97e084e058725a8",
+    "fingerprint": "sha256:36d945fa3ba5e9c5abc4ac90b1173a2be546af54fd0dcd657b2aba14f889ea17",
     "api": "planetscale/api",
     "version": "2026-11-09",
     "previous_version": "2026-10-23",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -22,12 +21,11 @@
   },
   {
     "id": 2,
-    "fingerprint": "sha256:a0e317945d1c458b22634689ab4613d532123c479b9b89cb5255c35fae24d635",
+    "fingerprint": "sha256:6a5b611241acbf710f2ec8641b7994452b0761eebd037fa768ee904219663af5",
     "api": "planetscale/api",
     "version": "2026-11-09",
     "previous_version": "2026-10-23",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -43,12 +41,11 @@
   },
   {
     "id": 3,
-    "fingerprint": "sha256:c35e7b205fe4211446cbbf0900597be4f3930c66eb5436f42a4808aa9b024c65",
+    "fingerprint": "sha256:208335ce38a53a637b5f69b4385bdf10e3646e66db935bd5fc3c54b052de783f",
     "api": "planetscale/api",
     "version": "2026-11-09",
     "previous_version": "2026-10-23",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -64,12 +61,11 @@
   },
   {
     "id": 4,
-    "fingerprint": "sha256:e4a98b2e24ca8682268a2dd9bf628575f0437a8e562fe0a85f72335e09f8545a",
+    "fingerprint": "sha256:4e2367648e09e520c98fa697a606ec0e9a9a88ff138a296209d0ae641e0b7f2a",
     "api": "planetscale/api",
     "version": "2026-11-09",
     "previous_version": "2026-10-23",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -85,12 +81,11 @@
   },
   {
     "id": 5,
-    "fingerprint": "sha256:f63159b51e042b49e72a3209e0b5851ad836cfb5925e4380c23770b8f1b562fd",
+    "fingerprint": "sha256:ccf58852d6b1217d573ae434fdcee710e08b5815ed920527014db2309b67bc32",
     "api": "planetscale/api",
     "version": "2026-11-09",
     "previous_version": "2026-10-23",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",

@@ -77,7 +77,7 @@ func readVertexAI(e extract.Entry) []feed.Finding {
 				hint = fmt.Sprintf("Use `%s` instead: Google's recommended migration.", repl[0])
 			}
 			desc := fmt.Sprintf("Model %q is deprecated on Vertex AI: Google asks to move off it before %s to avoid service disruption.", name, date)
-			if ct == event.ChangeTypeBreaking {
+			if ct == event.ChangeBreaking {
 				desc = fmt.Sprintf("Model %q is shut down on Vertex AI on %s: requests naming it fail from that date.", name, date)
 			}
 			out = append(out, feed.Finding{

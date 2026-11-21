@@ -110,15 +110,15 @@ func TestChangesClassification(t *testing.T) {
 		"request became_required breaking | POST /v1/charges | idempotency | added as required",
 		"request enum_value_removed breaking | POST /v1/charges | method | bank",
 		"request operation_removed breaking | GET /v1/orders |",
-		"request operation_deprecated deprecation | POST /v1/charges |",
-		"request operation_added new_feature | POST /v1/refunds |",
+		"request operation_deprecated deprecated | POST /v1/charges |",
+		"request operation_added added | POST /v1/refunds |",
 		// Response side (components.schemas).
-		"response property_added new_feature | charge | receipt",
-		"response property_deprecated deprecation | charge | id",
-		"response enum_value_added new_feature | charge | status | refunded",
+		"response property_added added | charge | receipt",
+		"response property_deprecated deprecated | charge | id",
+		"response enum_value_added added | charge | status | refunded",
 		"response type_changed breaking | charge | source | customer → card",
 		"response property_removed breaking | customer | email",
-		"response schema_added new_feature | card |",
+		"response schema_added added | card |",
 		"response schema_removed breaking | order |",
 	}
 
@@ -134,7 +134,7 @@ func TestChangesClassification(t *testing.T) {
 	}
 }
 
-// Regression: a new required request field used to emit a new_feature
+// Regression: a new required request field used to emit an added event
 // "property added" next to the breaking event, so the same field looked both
 // harmless and harmful.
 func TestNewRequiredRequestFieldIsOneBreakingEvent(t *testing.T) {

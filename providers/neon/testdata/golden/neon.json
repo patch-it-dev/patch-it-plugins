@@ -1,12 +1,11 @@
 [
   {
     "id": 1,
-    "fingerprint": "sha256:50fac21d2215fb2ff00b13fe54d7d0bcbb21769dedc49d0db8ab8e2f25844828",
+    "fingerprint": "sha256:c1b446911c247bc8095a37df9add72275652335e3014f3e3fbb68fd9ebdc573a",
     "api": "neon/api",
     "version": "2026-08-23",
     "previous_version": "2026-08-17",
-    "change_type": "deprecation",
-    "breaking": false,
+    "change": "deprecated",
     "subject": {
       "type": "api_operation",
       "kind": "operation",

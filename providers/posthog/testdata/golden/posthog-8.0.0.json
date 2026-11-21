@@ -5,8 +5,7 @@
     "api": "posthog/python-sdk",
     "version": "8.0.0",
     "previous_version": "7.91.4",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -29,8 +28,7 @@
     "api": "posthog/python-sdk",
     "version": "8.0.0",
     "previous_version": "7.91.4",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -53,8 +51,7 @@
     "api": "posthog/python-sdk",
     "version": "8.0.0",
     "previous_version": "7.91.4",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -77,8 +74,7 @@
     "api": "posthog/python-sdk",
     "version": "8.0.0",
     "previous_version": "7.91.4",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -101,8 +97,7 @@
     "api": "posthog/python-sdk",
     "version": "8.0.0",
     "previous_version": "7.91.4",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -125,8 +120,7 @@
     "api": "posthog/python-sdk",
     "version": "8.0.0",
     "previous_version": "7.91.4",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -149,8 +143,7 @@
     "api": "posthog/python-sdk",
     "version": "8.0.0",
     "previous_version": "7.91.4",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",

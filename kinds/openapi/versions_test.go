@@ -63,7 +63,7 @@ func TestEveryConsecutivePairIsExtracted(t *testing.T) {
 			t.Fatalf("Extract: %v %v", err, res.Rejected)
 		}
 		for _, ev := range res.Events {
-			got = append(got, fmt.Sprintf("%s<-%s %s %s", ev.Version, ev.PreviousVersion, ev.ChangeType, ev.Subject.Property))
+			got = append(got, fmt.Sprintf("%s<-%s %s %s", ev.Version, ev.PreviousVersion, ev.Change, ev.Subject.Property))
 		}
 	}
 	want := "version-v2<-version-v1 breaking a|version-v3<-version-v2 breaking b|version-v4<-version-v3 breaking c"

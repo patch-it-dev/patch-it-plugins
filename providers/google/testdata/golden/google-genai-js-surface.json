@@ -5,8 +5,7 @@
     "api": "google/genai-js-surface",
     "version": "1.0.0",
     "previous_version": "0.15.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -29,8 +28,7 @@
     "api": "google/genai-js-surface",
     "version": "1.0.0",
     "previous_version": "0.15.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",
@@ -53,8 +51,7 @@
     "api": "google/genai-js-surface",
     "version": "1.0.0",
     "previous_version": "0.15.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "npm",

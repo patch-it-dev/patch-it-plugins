@@ -5,8 +5,7 @@
     "api": "flagsmith/api",
     "version": "2.287.0",
     "previous_version": "2.286.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -26,8 +25,7 @@
     "api": "flagsmith/api",
     "version": "2.287.0",
     "previous_version": "2.286.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",
@@ -47,8 +45,7 @@
     "api": "flagsmith/api",
     "version": "2.287.0",
     "previous_version": "2.286.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "api_operation",
       "kind": "operation",

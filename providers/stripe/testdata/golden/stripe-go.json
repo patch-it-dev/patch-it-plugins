@@ -5,8 +5,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -29,8 +28,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -53,8 +51,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -79,8 +76,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -105,8 +101,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -129,8 +124,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -153,8 +147,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -177,8 +170,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -201,8 +193,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -225,8 +216,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -249,8 +239,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -277,8 +266,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -301,8 +289,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -325,8 +312,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -349,8 +335,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -373,8 +358,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -397,8 +381,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -421,8 +404,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -445,8 +427,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -470,8 +451,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -494,8 +474,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -518,8 +497,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -542,8 +520,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -567,8 +544,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -597,8 +573,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -621,8 +596,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -646,8 +620,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -673,8 +646,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -700,8 +672,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -724,8 +695,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -750,8 +720,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -775,8 +744,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -799,8 +767,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -824,8 +791,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -848,8 +814,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -872,8 +837,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -897,8 +861,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",
@@ -921,8 +884,7 @@
     "api": "stripe/go",
     "version": "73.0.0",
     "previous_version": "72.122.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "go",

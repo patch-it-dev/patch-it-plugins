@@ -5,8 +5,7 @@
     "api": "textual/textual",
     "version": "0.86.0",
     "previous_version": "0.85.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -29,8 +28,7 @@
     "api": "textual/textual",
     "version": "0.86.0",
     "previous_version": "0.85.2",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",

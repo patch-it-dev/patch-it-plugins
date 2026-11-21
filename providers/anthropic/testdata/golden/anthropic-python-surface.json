@@ -5,8 +5,7 @@
     "api": "anthropic/python-surface",
     "version": "2.7.0",
     "previous_version": "2.6.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",
@@ -30,8 +29,7 @@
     "api": "anthropic/python-surface",
     "version": "2.7.0",
     "previous_version": "2.6.0",
-    "change_type": "breaking",
-    "breaking": true,
+    "change": "breaking",
     "subject": {
       "type": "package_release",
       "ecosystem": "pypi",

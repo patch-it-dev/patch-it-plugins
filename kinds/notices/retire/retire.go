@@ -273,11 +273,10 @@ func Events(p Page, rs []Retirement, sourceURL string, now time.Time) ([]event.E
 		h := hint(p.Vendor, r)
 		subject := event.Subject{Type: event.SubjectModel, Provider: p.Provider, Name: r.Model, Replacement: replacement(r.Replacement)}
 		e := event.Event{
-			Fingerprint:   event.Fingerprint(p.API, r.Date, event.ChangeTypeBreaking, subject, ""),
+			Fingerprint:   event.Fingerprint(p.API, r.Date, event.ChangeBreaking, subject, ""),
 			API:           p.API,
 			Version:       r.Date,
-			ChangeType:    event.ChangeTypeBreaking,
-			Breaking:      true,
+			Change:        event.ChangeBreaking,
 			Subject:       subject,
 			Description:   describe(p, r),
 			MigrationHint: h,

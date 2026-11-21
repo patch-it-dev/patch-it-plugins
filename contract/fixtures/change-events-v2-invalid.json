@@ -7,8 +7,7 @@
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "api": "openai/models",
         "version": "2026-12-11",
-        "change_type": "breaking",
-        "breaking": true,
+        "change": "breaking",
         "subject": {
           "type": "sdk_release",
           "provider": "openai",
@@ -30,8 +29,7 @@
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "api": "openai/models",
         "version": "2026-12-11",
-        "change_type": "breaking",
-        "breaking": true,
+        "change": "breaking",
         "subject": {
           "type": "model",
           "provider": "openai",
@@ -52,8 +50,7 @@
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "api": "openai/models",
         "version": "2026-12-11",
-        "change_type": "breaking",
-        "breaking": true,
+        "change": "breaking",
         "subject": {
           "type": "model",
           "name": "examplemodel-1",
@@ -74,8 +71,7 @@
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "api": "openai/models",
         "version": "2026-12-11",
-        "change_type": "breaking",
-        "breaking": true,
+        "change": "breaking",
         "subject": {
           "type": "model",
           "provider": "openai",
@@ -99,8 +95,7 @@
         "api": "openai/models",
         "version": "2026-12-11",
         "previous_version": "1.9.0",
-        "change_type": "breaking",
-        "breaking": true,
+        "change": "breaking",
         "subject": {
           "type": "package_release",
           "ecosystem": "pypi",
@@ -126,8 +121,7 @@
         "api": "openai/models",
         "version": "2026-12-11",
         "previous_version": "1.9.0",
-        "change_type": "breaking",
-        "breaking": true,
+        "change": "breaking",
         "subject": {
           "type": "package_release",
           "ecosystem": "pypi",
@@ -153,8 +147,7 @@
         "api": "openai/models",
         "version": "2026-12-11",
         "previous_version": "1.9.0",
-        "change_type": "breaking",
-        "breaking": true,
+        "change": "breaking",
         "subject": {
           "type": "package_release",
           "ecosystem": "pypi",
@@ -180,8 +173,7 @@
         "api": "openai/models",
         "version": "2026-12-11",
         "previous_version": "1.9.0",
-        "change_type": "breaking",
-        "breaking": true,
+        "change": "breaking",
         "subject": {
           "type": "package_release",
           "ecosystem": "pypi",
@@ -206,8 +198,7 @@
         "api": "openai/models",
         "version": "2026-12-11",
         "previous_version": "1.9.0",
-        "change_type": "breaking",
-        "breaking": true,
+        "change": "breaking",
         "subject": {
           "type": "package_release",
           "ecosystem": "pypi",
@@ -234,8 +225,7 @@
         "api": "openai/models",
         "version": "2026-12-11",
         "previous_version": "1.9.0",
-        "change_type": "breaking",
-        "breaking": true,
+        "change": "breaking",
         "subject": {
           "type": "package_release",
           "ecosystem": "pypi",
@@ -262,8 +252,7 @@
         "api": "openai/models",
         "version": "2026-12-11",
         "previous_version": "1.9.0",
-        "change_type": "breaking",
-        "breaking": true,
+        "change": "breaking",
         "subject": {
           "type": "package_release",
           "package": "examplepkg",
@@ -288,8 +277,7 @@
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "api": "openai/models",
         "version": "2026-12-11",
-        "change_type": "breaking",
-        "breaking": true,
+        "change": "breaking",
         "subject": {
           "type": "ci_runtime",
           "platform": "github-actions"
@@ -310,8 +298,7 @@
         "api": "openai/models",
         "version": "2026-12-11",
         "previous_version": "2026-08-26.dahlia",
-        "change_type": "breaking",
-        "breaking": true,
+        "change": "breaking",
         "subject": {
           "type": "api_operation",
           "kind": "request_parameter",
@@ -336,8 +323,7 @@
         "api": "openai/models",
         "version": "2026-12-11",
         "previous_version": "2026-08-26.dahlia",
-        "change_type": "breaking",
-        "breaking": true,
+        "change": "breaking",
         "subject": {
           "type": "api_operation",
           "kind": "schema_property",
@@ -361,8 +347,7 @@
         "api": "openai/models",
         "version": "2026-12-11",
         "previous_version": "2026-08-26.dahlia",
-        "change_type": "breaking",
-        "breaking": true,
+        "change": "breaking",
         "subject": {
           "type": "api_operation",
           "kind": "request_parameter",
@@ -384,8 +369,7 @@
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "api": "openai/models",
         "version": "2026-12-11",
-        "change_type": "breaking",
-        "breaking": true,
+        "change": "breaking",
         "subject": {
           "type": "model",
           "provider": "openai",
@@ -408,8 +392,7 @@
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "api": "openai/models",
         "version": "2026-12-11",
-        "change_type": "breaking",
-        "breaking": true,
+        "change": "breaking",
         "subject": {
           "type": "model",
           "provider": "openai",
@@ -436,8 +419,7 @@
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "api": "openai/models",
         "version": "2026-12-11",
-        "change_type": "breaking",
-        "breaking": true,
+        "change": "breaking",
         "description": "Model examplemodel-1 is shut down on 2026-12-11.",
         "source_url": "https://example.test/openai-models/2026-12-11",
         "source_excerpt": "Synthetic fixture for model: not a real source.",
@@ -453,8 +435,7 @@
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "api": "openai/models",
         "version": "2026-12-11",
-        "change_type": "breaking",
-        "breaking": true,
+        "change": "breaking",
         "subject": {
           "type": "model",
           "provider": "openai",
@@ -469,14 +450,13 @@
       }
     },
     {
-      "why_invalid": "breaking disagrees with change_type",
+      "why_invalid": "change isn't one of its values (new_feature, the old name)",
       "event": {
         "id": 2,
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "api": "openai/models",
         "version": "2026-12-11",
-        "change_type": "breaking",
-        "breaking": false,
+        "change": "new_feature",
         "subject": {
           "type": "model",
           "provider": "openai",
@@ -498,8 +478,7 @@
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "api": "openai/models",
         "version": "2026-12-11",
-        "change_type": "breaking",
-        "breaking": true,
+        "change": "breaking",
         "subject": {
           "type": "ci_runtime",
           "runtime": "node20"
@@ -520,8 +499,7 @@
         "api": "openai/models",
         "version": "2026-12-11",
         "previous_version": "1.9.0",
-        "change_type": "breaking",
-        "breaking": true,
+        "change": "breaking",
         "subject": {
           "type": "package_release",
           "ecosystem": "pypi",
@@ -546,8 +524,7 @@
         "api": "openai/models",
         "version": "2026-12-11",
         "previous_version": "2026-08-26.dahlia",
-        "change_type": "breaking",
-        "breaking": true,
+        "change": "breaking",
         "subject": {
           "type": "api_operation",
           "kind": "operation",
@@ -570,8 +547,7 @@
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "api": "openai/models",
         "version": "2026-12-11",
-        "change_type": "breaking",
-        "breaking": true,
+        "change": "breaking",
         "subject": {
           "TYPE": "model",
           "provider": "openai",
@@ -591,8 +567,7 @@
         "id": 2,
         "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "version": "2026-12-11",
-        "change_type": "breaking",
-        "breaking": true,
+        "change": "breaking",
         "subject": {
           "type": "model",
           "provider": "openai",
@@ -615,8 +590,7 @@
         "fingerprint": "sha256:7caa5ac7c7922798e11123fce490b3309dba0ca23ed2460938b8e284d2001a0d",
         "api": "example/examplepkg",
         "version": "2.0.0",
-        "change_type": "breaking",
-        "breaking": true,
+        "change": "breaking",
         "subject": {
           "type": "package_release",
           "ecosystem": "pypi",
@@ -641,8 +615,7 @@
         "fingerprint": "sha256:f8416cbd34c4ff65d68365ae656c636732d41bb1027ed839440137f87c26d4cf",
         "api": "stripe/api",
         "version": "2026-09-30.endive",
-        "change_type": "breaking",
-        "breaking": true,
+        "change": "breaking",
         "subject": {
           "type": "api_operation",
           "kind": "schema_property",
@@ -664,8 +637,7 @@
         "fingerprint": "sha256:f8416cbd34c4ff65d68365ae656c636732d41bb1027ed839440137f87c26d4cf",
         "api": "stripe",
         "version": "2026-09-30.endive",
-        "change_type": "breaking",
-        "breaking": true,
+        "change": "breaking",
         "subject": {
           "type": "api_operation",
           "kind": "schema_property",
@@ -688,8 +660,7 @@
         "fingerprint": "sha256:f8416cbd34c4ff65d68365ae656c636732d41bb1027ed839440137f87c26d4cf",
         "api": "Stripe/API",
         "version": "2026-09-30.endive",
-        "change_type": "breaking",
-        "breaking": true,
+        "change": "breaking",
         "subject": {
           "type": "api_operation",
           "kind": "schema_property",
@@ -703,6 +674,149 @@
         "confidence": 1,
         "detected_at": "2026-11-03T12:00:00Z",
         "previous_version": "2026-08-26.dahlia"
+      }
+    },
+    {
+      "why_invalid": "no change",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "api": "openai/models",
+        "version": "2026-12-11",
+        "subject": {
+          "type": "model",
+          "provider": "openai",
+          "name": "examplemodel-1",
+          "replacement": "examplemodel-2"
+        },
+        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+        "source_url": "https://example.test/openai-models/2026-12-11",
+        "source_excerpt": "Synthetic fixture for model: not a real source.",
+        "confidence": 1.0,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "migration_hint": "Use `examplemodel-2` instead."
+      }
+    },
+    {
+      "why_invalid": "change_type, a field the contract no longer defines",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:4cc21743a49bad012ff7a7b58dfdbef6d18ca1f782bf15b9939e24708235d64e",
+        "api": "openai/models",
+        "version": "2026-12-11",
+        "change": "breaking",
+        "subject": {
+          "type": "model",
+          "provider": "openai",
+          "name": "examplemodel-1",
+          "replacement": "examplemodel-2"
+        },
+        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+        "source_url": "https://example.test/openai-models/2026-12-11",
+        "source_excerpt": "Synthetic fixture for model: not a real source.",
+        "confidence": 1.0,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "migration_hint": "Use `examplemodel-2` instead.",
+        "change_type": "breaking"
+      }
+    },
+    {
+      "why_invalid": "breaking, a field the contract no longer defines",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:4cc21743a49bad012ff7a7b58dfdbef6d18ca1f782bf15b9939e24708235d64e",
+        "api": "openai/models",
+        "version": "2026-12-11",
+        "change": "breaking",
+        "subject": {
+          "type": "model",
+          "provider": "openai",
+          "name": "examplemodel-1",
+          "replacement": "examplemodel-2"
+        },
+        "description": "Model examplemodel-1 is shut down on 2026-12-11.",
+        "source_url": "https://example.test/openai-models/2026-12-11",
+        "source_excerpt": "Synthetic fixture for model: not a real source.",
+        "confidence": 1.0,
+        "detected_at": "2026-11-03T12:00:00Z",
+        "migration_hint": "Use `examplemodel-2` instead.",
+        "breaking": true
+      }
+    },
+    {
+      "why_invalid": "package_release added_symbol that isn't an added change",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:4d92e0812020e9bcc0f3e420a7fc256bb136f56ab17f3e9a536ca04e89845053",
+        "api": "example/examplepkg",
+        "version": "2.0.0",
+        "previous_version": "1.9.0",
+        "change": "breaking",
+        "subject": {
+          "type": "package_release",
+          "ecosystem": "pypi",
+          "package": "examplepkg",
+          "change": "added_symbol",
+          "symbols": [
+            "Client.stream"
+          ]
+        },
+        "description": "Client.stream added in examplepkg 2.0.0.",
+        "source_url": "https://example.test/examplepkg/2.0.0",
+        "source_excerpt": "Synthetic fixture for package_release: not a real source.",
+        "confidence": 1,
+        "detected_at": "2026-11-03T12:00:00Z"
+      }
+    },
+    {
+      "why_invalid": "package_release renamed_symbol filed as an added change",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:44d5ef865cee32e94845092e3a5ad7442f7209e8bddb9907a90afa881c41a994",
+        "api": "example/examplepkg",
+        "version": "2.0.0",
+        "previous_version": "1.9.0",
+        "change": "added",
+        "subject": {
+          "type": "package_release",
+          "ecosystem": "pypi",
+          "package": "examplepkg",
+          "change": "renamed_symbol",
+          "symbols": [
+            "Model.parse_obj"
+          ],
+          "replacement": "Model.model_validate"
+        },
+        "description": "Model.parse_obj renamed to Model.model_validate in examplepkg 2.0.0.",
+        "source_url": "https://example.test/examplepkg/2.0.0",
+        "source_excerpt": "Synthetic fixture for package_release: not a real source.",
+        "confidence": 1,
+        "detected_at": "2026-11-03T12:00:00Z"
+      }
+    },
+    {
+      "why_invalid": "package_release added_parameter without the parameter",
+      "event": {
+        "id": 2,
+        "fingerprint": "sha256:2917f54b405bad503bee95525f712ce7814868516680d954740e7a06b3d33e4a",
+        "api": "example/examplepkg",
+        "version": "2.0.0",
+        "previous_version": "1.9.0",
+        "change": "added",
+        "subject": {
+          "type": "package_release",
+          "ecosystem": "pypi",
+          "package": "examplepkg",
+          "change": "added_parameter",
+          "symbols": [
+            "Client.send"
+          ]
+        },
+        "description": "Client.send takes a new parameter in examplepkg 2.0.0.",
+        "source_url": "https://example.test/examplepkg/2.0.0",
+        "source_excerpt": "Synthetic fixture for package_release: not a real source.",
+        "confidence": 1,
+        "detected_at": "2026-11-03T12:00:00Z"
       }
     }
   ]

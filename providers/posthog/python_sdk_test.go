@@ -42,7 +42,7 @@ func TestPostHogEachRowOfTheTable(t *testing.T) {
 			t.Fatalf("%v: one symbol per event", e.Subject.Symbols)
 		}
 		if e.API != "posthog/python-sdk" || e.Version != "8.0.0" || e.Subject.Ecosystem != "pypi" || e.Subject.Package != "posthog" ||
-			e.ChangeType != event.ChangeTypeBreaking || !strings.HasPrefix(e.SourceExcerpt, "Fix removed APIs\n| Removed | Use instead |") {
+			e.Change != event.ChangeBreaking || !strings.HasPrefix(e.SourceExcerpt, "Fix removed APIs\n| Removed | Use instead |") {
 			t.Errorf("%+v", e)
 		}
 		got[e.Subject.Symbols[0]] = want{e.Subject.Change, e.Subject.Replacement}
