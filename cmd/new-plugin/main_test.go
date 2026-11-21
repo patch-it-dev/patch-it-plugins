@@ -26,8 +26,9 @@ func optionsFor(root, tmpl string) Options {
 }
 
 // A source of every kind and reader, scaffolded into a copy of the repo:
-// the copy builds, vets and passes its tests, and list-plugins lists them
-// all. Then the same command again changes nothing.
+// the first makes the provider's folder, every other is one more source in
+// it. The copy builds, vets and passes its tests, and list-plugins lists
+// them all. Then the same command again changes nothing.
 func TestScaffoldEveryKind(t *testing.T) {
 	if testing.Short() {
 		t.Skip("runs the go command over a copy of the repo")
@@ -47,7 +48,7 @@ func TestScaffoldEveryKind(t *testing.T) {
 			t.Errorf("%s: no next steps in\n%s", f, out.String())
 		}
 	}
-	for _, args := range [][]string{{"build", "./..."}, {"vet", "./..."}, {"test", "-count=1", "./plugins/...", "./internal/..."}} {
+	for _, args := range [][]string{{"build", "./..."}, {"vet", "./..."}, {"test", "-count=1", "./providers/...", "./internal/..."}} {
 		cmd := exec.Command(goCmd, args...)
 		cmd.Dir = root
 		if b, err := cmd.CombinedOutput(); err != nil {
@@ -77,22 +78,65 @@ func TestScaffoldEveryKind(t *testing.T) {
 	}
 }
 
-// A second source of a provider shares its page and its provider: no new
-// page, and the registration names the existing ones.
-func TestScaffoldSharesTheProviderPage(t *testing.T) {
+// A source of a provider that has a folder goes in it: one more source in
+// its provider.go's one registration, a section in its README.md, rows in
+// its testdata README, and no new import in providers/all.
+func TestScaffoldAddsASourceToItsProvider(t *testing.T) {
 	root := copyRepo(t)
-	o := Options{Root: root, ProviderID: "algolia", SourceID: "analytics", Kind: "openapi", Page: "algolia", Today: today}
+	allBefore, _ := os.ReadFile(filepath.Join(root, "providers", "all", "all.go"))
+	o := Options{Root: root, ProviderID: "algolia", SourceID: "analytics", Kind: "openapi", Today: today}
 	if err := Run(o, io.Discard); err != nil {
 		t.Fatal(err)
 	}
-	if _, err := os.Stat(filepath.Join(root, "providers", "algolia-analytics.md")); err == nil {
-		t.Error("wrote providers/algolia-analytics.md; want the shared providers/algolia.md")
-	}
-	reg, _ := os.ReadFile(filepath.Join(root, "plugins", "openapi", "openapi.go"))
-	for _, want := range []string{`ID: "algolia", Name: "Algolia"`, `ID: "analytics"`, `Page: "providers/algolia.md"`, `plugin.Category("search")`} {
+	reg, _ := os.ReadFile(filepath.Join(root, "providers", "algolia", "provider.go"))
+	for _, want := range []string{`ID: "algolia", Name: "Algolia"`, `ID: "analytics"`, `openapi.Plugin{Adapter: Analytics{}}`} {
 		if !bytes.Contains(reg, []byte(want)) {
-			t.Errorf("the registration has no %s", want)
+			t.Errorf("provider.go has no %s", want)
 		}
+	}
+	if n := bytes.Count(reg, []byte("plugin.RegisterProvider(")); n != 1 {
+		t.Errorf("provider.go registers the provider %d times, want once", n)
+	}
+	page, _ := os.ReadFile(filepath.Join(root, "providers", "algolia", "README.md"))
+	if !bytes.Contains(page, []byte("`algolia/analytics`")) || !bytes.Contains(page, []byte("`algolia/search-api`")) {
+		t.Error("README.md doesn't keep its sections and add one for algolia/analytics")
+	}
+	rows, _ := os.ReadFile(filepath.Join(root, "providers", "algolia", "testdata", "README.md"))
+	if !bytes.Contains(rows, []byte("`analytics-new.json`")) {
+		t.Error("testdata/README.md has no row for the new source's saved copy")
+	}
+	if _, err := os.Stat(filepath.Join(root, "providers", "algolia", "analytics.go")); err != nil {
+		t.Error(err)
+	}
+	if allAfter, _ := os.ReadFile(filepath.Join(root, "providers", "all", "all.go")); !bytes.Equal(allBefore, allAfter) {
+		t.Error("providers/all changed for a provider it imports already")
+	}
+}
+
+// A provider.go with other calls above its registration (a package-level
+// var, a helper) still gets the source inside its RegisterProvider call.
+func TestScaffoldFindsTheRegistrationAmongOtherCalls(t *testing.T) {
+	root := copyRepo(t)
+	path := filepath.Join(root, "providers", "textual", "provider.go")
+	src, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	src = bytes.Replace(src, []byte("\nfunc init() {"), []byte("\nvar _ = len(\"x\")\n\nfunc helper() []int { return append([]int{}, 1) }\n\nfunc init() {"), 1)
+	if !bytes.Contains(src, []byte(`var _ = len("x")`)) {
+		t.Fatal("setup didn't apply: provider.go has no \"func init() {\" to put the calls above")
+	}
+	if err := os.WriteFile(path, src, 0o644); err != nil {
+		t.Fatal(err)
+	}
+	o := Options{Root: root, ProviderID: "textual", SourceID: "docs", Kind: "notices", Reader: "feed", Today: today}
+	if err := Run(o, io.Discard); err != nil {
+		t.Fatal(err)
+	}
+	reg, _ := os.ReadFile(path)
+	at := bytes.Index(reg, []byte("plugin.RegisterProvider("))
+	if at < 0 || !bytes.Contains(reg[at:], []byte(`ID: "docs"`)) || bytes.Count(reg, []byte(`ID: "docs"`)) != 1 {
+		t.Errorf("the source isn't inside the registration:\n%s", reg)
 	}
 }
 

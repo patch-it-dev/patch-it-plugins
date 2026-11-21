@@ -4,9 +4,9 @@ Rules for AI coding agents (and humans) working in this repo. `CLAUDE.md` import
 
 ## Rule 1: every new or changed provider or source has complete metadata in its registration
 
-**A source exists when its kind's package registers it with `plugin.RegisterProvider`, and its metadata lives only there: the provider's id, name, category and homepage, and each source's id, layer, what it watches, the URLs it reads, the packages it covers (`pypi:stripe`) and its page, `providers/<name>.md`.** Adding, changing or removing a source is a change to that registration (and to its page) in the same PR. There is no list to update: nothing in this repo, the docs site or anywhere else keeps one by hand.
+**A source exists when its provider's `providers/<provider>/provider.go` registers it with `plugin.RegisterProvider` (once per provider, every source of it, whatever the kind), and its metadata lives only there: the provider's id, name, category and homepage, and each source's id, layer, what it watches, the URLs it reads and the packages it covers (`pypi:stripe`). Its page is the provider's, `providers/<provider>/README.md`, one section per source.** Adding, changing or removing a source is a change to that registration (and to its section of the page) in the same PR. There is no list to update: nothing in this repo, the docs site or anywhere else keeps one by hand.
 
-`go run ./cmd/list-plugins` prints the list from the registry (JSON), and the Release workflow attaches it to every release as `plugins.json`; the docs site and patch-it's hosted ingestion service read it from there. `RegisterProvider` refuses incomplete metadata and `go test` fails when a source's page is missing, but no check can tell whether the words are right: you are that check. Say in the PR that you read them.
+`go run ./cmd/list-plugins` prints the list from the registry (JSON), and the Release workflow attaches it to every release as `plugins.json`; the docs site and patch-it's hosted ingestion service read it from there. `RegisterProvider` refuses incomplete metadata or a second registration of a provider, and `go test` fails when a provider's folder isn't imported by `providers/all`, or a source isn't named on its provider's page, but no check can tell whether the words are right: you are that check. Say in the PR that you read them.
 
 ## Rule 2: this repo is public
 
@@ -23,12 +23,14 @@ Refer to the service that runs these plugins as "patch-it's hosted ingestion ser
 
 ## Rules for plugin code
 
-- **Start a new source with `make new-plugin ARGS='--provider <id> --name <Name> --source <id> --kind <kind>'`** (`go run ./cmd/new-plugin`; [which kind](docs/which-kind.md)), then fill in every `TODO(new-plugin)`; `make todos` (part of `make check` and CI_go) fails while one is left.
+- **How to read is a kind; what to read is a provider.** `kinds/<kind>/` reads one kind of source, written once, and imports no provider. `providers/<provider>/` holds one provider and nothing about another: `provider.go` (its registration, built from the kinds' exported types), `README.md` (its page), any code only it needs (`<source>.go`: an OpenAPI adapter, a feed's reader), `testdata/` and its tests. A provider imports only `core/` and `kinds/`. No folder per source, no forwarders: when code moves, the old path goes in the same change. `go test ./providers/all` checks all of this.
+
+- **Start a new source with `make new-plugin ARGS='--provider <id> --name <Name> --source <id> --kind <kind>'`** (`go run ./cmd/new-plugin`; [which kind](docs/which-kind.md)): it writes into `providers/<id>/`, a new folder or one more source in the existing one. Then fill in every `TODO(new-plugin)`; `make todos` (part of `make check` and CI_go) fails while one is left.
 - **Fetch only through the environment** (`env.Get` or `core/kit/`). No `net/http` outside the fetch layer, no filesystem outside `testdata/`, no database.
-- **Golden test + dated source quote**: a saved copy of the real source in `testdata/`, a row in `testdata/README.md` (URL, date fetched, license, quote), and `testdata/golden/<provider>-<source>.json` with the exact events.
+- **Golden test + dated source quote**: a saved copy of the real source in `providers/<provider>/testdata/`, a row in its `testdata/README.md` (URL, date fetched, license, quote), and `testdata/golden/<provider>-<source>.json` with the exact events.
 - **Precision over recall.** When unsure whether something is a change, don't emit an event.
-- **One pinned drop test** per plugin: a realistic input that must produce no event.
-- **`providers/<provider>-<source>.md`** for every provider, copied from `providers/_template.md`, including **Why this source**: the link, the date it was checked, why it's the best source, the alternatives not used, and a short quote.
+- **One pinned drop test** per source: a realistic input that must produce no event.
+- **A section of `providers/<provider>/README.md`** for every source (a new provider's page from `docs/provider-template.md`), including **Why this source**: the link, the date it was checked, why it's the best source, the alternatives not used, and a short quote.
 - **No source, no event**: every event carries the source URL and a quote.
 - Don't edit golden files to make a test pass without explaining in the PR why the new output is right.
 
@@ -59,16 +61,20 @@ core/kit/  core/kit/kittest/   Cite, Wayback, Notices; the test kit (Mem, Pages,
 core/extract/          what readers of prose share: RSS/Atom entries, HTML as text, dates, code spans
 core/event/            the change event of patch-it's contract: types, fingerprint, validation
 core/diff/ core/normalize/ core/hint/   the OpenAPI diff engine and its helpers
-plugins/<kind>/        one package per kind, with its providers: openapi (+ adapter/, one spec adapter
-                       per provider), notices (+ retire/, feed/, eol/), migrationguide (+ sdkguide/,
-                       members/), changelog (Markdown, RST, GitHub release notes or JSON), catalog, apisurface (+ pysurface/, dtsurface/);
-                       plugins/all imports every one
+kinds/<kind>/          how to read, one package per kind, written once, no provider in it: openapi (+ adapter/,
+                       the interface a provider's spec adapter implements), notices (+ retire/, feed/, eol/),
+                       migrationguide (+ sdkguide/, members/), changelog (Markdown, RST, GitHub release notes
+                       or JSON), catalog, apisurface (+ pysurface/, dtsurface/); each with a <kind>test/ package
+                       its providers' tests share
+providers/<provider>/  what to read, one folder per provider: provider.go (its RegisterProvider: the provider
+                       and every source), README.md (its page, a section per source), <source>.go only for code
+                       only it needs, testdata/ (+ README.md, golden/), its golden and drop tests
+providers/all/         imports every provider; its tests check the folders, the metadata and the import graph
 cmd/list-plugins/      prints the list from the registry (make plugins); internal/pluginlist/ is its logic
-cmd/new-plugin/        scaffolds a provider's source on a kind (make new-plugin ARGS=...; go run ./cmd/new-plugin --help)
+cmd/new-plugin/        scaffolds a source into providers/<provider>/ (make new-plugin ARGS=...; go run ./cmd/new-plugin --help)
 contract/fixtures/     a copy of patch-it's change-event fixtures (CI_contract checks it)
 Makefile               make check (what CI_go runs, plus the leak guard), make plugins
-docs/                  contributor docs, including writing-a-plugin.md
-providers/<provider>-<source>.md   one page per provider
+docs/                  contributor docs, including writing-a-plugin.md and provider-template.md
 scripts/               leak_guard.py (hashed internal names), check_contract.py
 .github/               CODEOWNERS, PR template, release-notes categories, workflows
                        (CI_go, CI_dco, CI_leak_guard, CI_contract, Release)

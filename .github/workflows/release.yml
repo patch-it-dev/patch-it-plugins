@@ -5,8 +5,8 @@
 # A maintainer can also run it by hand any time (Actions -> Release -> Run workflow ->
 # pick the bump), e.g. for an urgent fix or a minor release. It never runs on push or on a PR.
 #
-#   patch  v0.4.1 -> v0.4.2   fixes, new providers on an existing format plugin
-#   minor  v0.4.1 -> v0.5.0   new format plugins, new exported API, anything a user should read about
+#   patch  v0.4.1 -> v0.4.2   fixes, new providers or sources on an existing kind
+#   minor  v0.4.1 -> v0.5.0   new kinds, new or moved exported API, anything a user should read about
 #   (no tag yet -> v0.1.0)
 #
 # v1.0.0 and later majors are not an option here: they are a deliberate decision a
@@ -26,7 +26,7 @@ on:
   workflow_dispatch:
     inputs:
       bump:
-        description: "Which part of the version to bump (patch: fixes and providers; minor: new format plugins or API)"
+        description: "Which part of the version to bump (patch: fixes and providers; minor: new kinds or API)"
         type: choice
         options:
           - patch
@@ -99,12 +99,12 @@ jobs:
             echo "::error::$next already exists."
             exit 1
           fi
-          # A new format plugin (a new plugins/<format>/ directory) deserves a minor, not a
+          # A new kind (a new kinds/<kind>/ directory) deserves a minor, not a
           # patch. A scheduled run can't decide that, so it skips and a maintainer releases by hand.
           if [ "$EVENT" = "schedule" ] && [ -n "$latest" ]; then
-            new_formats=$(comm -13 <(git ls-tree -d --name-only "$latest" plugins/ | sort) <(git ls-tree -d --name-only HEAD plugins/ | sort))
+            new_formats=$(comm -13 <(git ls-tree -d --name-only "$latest" kinds/ | sort) <(git ls-tree -d --name-only HEAD kinds/ | sort))
             if [ -n "$new_formats" ]; then
-              echo "::warning::New format plugin(s) since $latest: $new_formats. That's a minor release: run Release by hand with bump=minor."
+              echo "::warning::New kind(s) since $latest: $new_formats. That's a minor release: run Release by hand with bump=minor."
               echo "skip=true" >> "$GITHUB_OUTPUT"
               exit 0
             fi

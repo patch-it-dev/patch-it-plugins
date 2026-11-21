@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
-	_ "github.com/patch-it-dev/patch-it-plugins/plugins/all"
+	_ "github.com/patch-it-dev/patch-it-plugins/providers/all"
 )
 
 const root = "../.."

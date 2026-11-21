@@ -1,7 +1,8 @@
 # The plugins build, are formatted and vetted, and their tests pass with the race
 # detector. Two guards keep plugins self-contained:
 #   - imports: only this module, the standard library and the approved dependencies;
-#   - network: net/http only in the fetch layer (core/fetch/, core/kit/, plugins/openapi/adapter/).
+#   - network: net/http only in the fetch layer (core/fetch/, core/kit/) and the
+#     openapi test kit (kinds/openapi/openapitest/, recorded responses over httptest).
 # The steps are Makefile targets, so `make check` runs exactly this locally.
 # Until the Go code lands there is no go.mod, and every step after the first is skipped
 # with a notice, so the check passes.

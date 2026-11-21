@@ -1,24 +1,25 @@
 package main
 
-// formatSpec is how a provider is added to one format plugin: where its
-// definition goes, the line that registers it, the placeholder sources its
-// test reads, and how the test runs it.
+// formatSpec is how a source is added on one kind (and reader): its
+// definition in the provider's package, the plugin its registration runs,
+// the placeholder sources its test reads, and how the test runs it.
 type formatSpec struct {
-	kind     string            // the kind: the plugins/<kind> package that registers and tests it
-	layer    string            // the source's default layer (plugin.Layers())
-	defDir   string            // the package directory the definition goes in
-	def      string            // the definition file (template)
-	register string            // the plugin.Register line added to plugins/<format>'s init (template)
-	ref      string            // how the test and the Register line name the definition
-	pluginOf string            // the plugin literal for the registered test (template)
-	fixtures map[string]string // placeholder sources under plugins/<format>/testdata: name (template) -> content (template)
-	source   string            // the fixture the golden test reads; the drop test reads a copy, <name>-drop.<ext>
-	ingest   string            // the test's <lower>Ingest func and anything it needs (template)
-	imports  []string          // the test's imports besides testing and kittest
-	next     string            // a format-specific line for the next steps
-	drop     string            // the drop test, when "no event at all" can't be it (template)
-	dropFile string            // the drop test's placeholder, when not a copy of the source's
+	kind       string            // the kind: the kinds/<kind> package whose plugin runs it
+	layer      string            // the source's default layer (plugin.Layers())
+	def        string            // the definition file, providers/<provider>/<source>.go (template)
+	plugin     string            // the plugin its registration runs, in provider.go (template)
+	regImports []string          // what provider.go imports for plugin
+	pluginOf   string            // the plugin literal for the registered test (template)
+	fixtures   map[string]string // placeholder sources under providers/<provider>/testdata: name (template) -> content (template)
+	source     string            // the fixture the golden test reads; the drop test reads a copy, <name>-drop.<ext>
+	ingest     string            // the test's <lower>Ingest func and anything it needs (template)
+	imports    []string          // the test's imports besides testing and kittest
+	next       string            // a format-specific line for the next steps
+	drop       string            // the drop test, when "no event at all" can't be it (template)
+	dropFile   string            // the drop test's placeholder, when not a copy of the source's
 }
+
+const module = "github.com/patch-it-dev/patch-it-plugins/"
 
 const todo = "TODO(new-plugin)"
 
@@ -32,17 +33,18 @@ var defaultReaders = map[string]string{
 
 var formats = map[string]formatSpec{
 	"notices/feed": {
-		kind:   "notices",
-		layer:  "api",
-		defDir: "plugins/notices/feed",
-		def: `package feed
+		kind:  "notices",
+		layer: "api",
+		def: `package {{.Package}}
+
+import "github.com/patch-it-dev/patch-it-plugins/kinds/notices/feed"
 
 // {{.Ident}} is {{.Provider}}'s feed of changes.
 //
 // ` + todo + `: say what the feed is and what you checked, with the date, as
-// the feeds in readers.go do: RSS or Atom, how many entries it keeps, how
-// {{.Provider}} marks a breaking change or a deprecation.
-var {{.Ident}} = Feed{
+// providers/github/actions.go does: RSS or Atom, how many entries it keeps,
+// how {{.Provider}} marks a breaking change or a deprecation.
+var {{.Ident}} = feed.Feed{
 	API:    "{{.ID}}",
 	Vendor: "{{.Provider}}",
 	URL:    "{{.Source}}",
@@ -56,13 +58,15 @@ var {{.Ident}} = Feed{
 // lines in Excerpt. For an entry that is marked but that you can't read for
 // sure, return a Finding with only Entry and Dropped set. Return nothing for
 // an entry that isn't a breaking change or a deprecation. Precision over
-// recall: readCloudflareAPI in readers.go is a worked example.
-func read{{.Ident}}(e Entry) []Finding {
+// recall: readCloudflareAPI in providers/cloudflare/api.go is a worked
+// example.
+func read{{.Ident}}(e feed.Entry) []feed.Finding {
 	return nil
 }
 `,
-		register: `plugin.Register(Plugin{Page: feed.{{.Ident}}, Archiver: kit.Wayback{}})`,
-		pluginOf: `Plugin{Page: feed.{{.Ident}}}`,
+		plugin:     `notices.Plugin{Page: {{.Ident}}, Archiver: kit.Wayback{}}`,
+		regImports: []string{"github.com/patch-it-dev/patch-it-plugins/kinds/notices", "github.com/patch-it-dev/patch-it-plugins/core/kit"},
+		pluginOf:   `notices.Plugin{Page: {{.Ident}}}`,
 		fixtures: map[string]string{"{{.File}}.rss.xml": `<?xml version="1.0" encoding="UTF-8"?>
 <!-- ` + todo + `: a placeholder. Replace it with a real copy of {{.Source}} (curl -o) and list it in README.md. -->
 <rss version="2.0"><channel><title>placeholder</title><link>https://example.com/</link><description>placeholder</description>
@@ -74,40 +78,45 @@ func read{{.Ident}}(e Entry) []Finding {
 // page), cited through a test archive that serves the same copy.
 func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
-	saved := kittest.Pages{feed.{{.Ident}}.URL: file}
+	saved := kittest.Pages{ {{.Ident}}.URL: file}
 	archive := &kittest.Archive{T: t, Pages: saved}
-	return kittest.Page(t, kittest.Env(t, saved), Plugin{Page: feed.{{.Ident}}, Archiver: archive})
+	return kittest.Page(t, kittest.Env(t, saved), notices.Plugin{Page: {{.Ident}}, Archiver: archive})
 }
 `,
-		imports: []string{"github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/plugins/notices/feed"},
+		imports: []string{"github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/kinds/notices"},
 	},
 
 	"notices/deprecations": {
-		kind:   "notices",
-		layer:  "ai-models",
-		defDir: "plugins/notices/retire",
-		def: `package retire
+		kind:  "notices",
+		layer: "ai-models",
+		def: `package {{.Package}}
 
-import "strings"
+import (
+	"strings"
+
+	"github.com/patch-it-dev/patch-it-plugins/kinds/notices/retire"
+)
 
 // {{.Ident}} is {{.Provider}}'s model deprecations page.
 //
 // ` + todo + `: say what the page is and what you checked, with the date, as
-// providers.go does: served as markdown, the table's columns (a "Shutdown
-// date" or "Retirement date" column first, then the model and its
-// replacement), how far back it goes.
-var {{.Ident}} = Page{
+// providers/openai/models.go does: served as markdown, the table's columns
+// (a "Shutdown date" or "Retirement date" column first, then the model and
+// its replacement), how far back it goes.
+var {{.Ident}} = retire.Page{
 	API:      "{{.ID}}",
 	Provider: "{{.ProviderID}}",
 	Vendor:   "{{.Provider}}",
 	URL:      "{{.Source}}",
 	// ` + todo + `: keep the model names the provider's calls take as text
-	// models (not image or embedding ones), as openAIText in providers.go does.
+	// models (not image or embedding ones), as openAIText in
+	// providers/openai/models.go does.
 	Keep: func(name string) bool { return strings.HasPrefix(name, "placeholder-text-") },
 }
 `,
-		register: `plugin.Register(Plugin{Page: retire.{{.Ident}}, Archiver: kit.Wayback{}})`,
-		pluginOf: `Plugin{Page: retire.{{.Ident}}}`,
+		plugin:     `notices.Plugin{Page: {{.Ident}}, Archiver: kit.Wayback{}}`,
+		regImports: []string{"github.com/patch-it-dev/patch-it-plugins/kinds/notices", "github.com/patch-it-dev/patch-it-plugins/core/kit"},
+		pluginOf:   `notices.Plugin{Page: {{.Ident}}}`,
 		fixtures: map[string]string{"{{.File}}-deprecations.md": `# Placeholder deprecations page
 
 ` + todo + `: a placeholder. Replace it with a real copy of {{.Source}} (as markdown) and list it in README.md.
@@ -146,26 +155,27 @@ func Test{{.Ident}}DropsANonChange(t *testing.T) {
 // page), cited through a test archive that serves the same copy.
 func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
-	saved := kittest.Pages{retire.{{.Ident}}.URL: file}
+	saved := kittest.Pages{ {{.Ident}}.URL: file}
 	archive := &kittest.Archive{T: t, Pages: saved}
-	return kittest.Page(t, kittest.Env(t, saved), Plugin{Page: retire.{{.Ident}}, Archiver: archive})
+	return kittest.Page(t, kittest.Env(t, saved), notices.Plugin{Page: {{.Ident}}, Archiver: archive})
 }
 `,
-		imports: []string{"encoding/json", "strings", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/plugins/notices/retire"},
+		imports: []string{"encoding/json", "strings", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/kinds/notices"},
 	},
 
 	"migrationguide/sdk": {
-		kind:   "migrationguide",
-		layer:  "sdk",
-		defDir: "plugins/migrationguide/sdkguide",
-		def: `package sdkguide
+		kind:  "migrationguide",
+		layer: "sdk",
+		def: `package {{.Package}}
+
+import "github.com/patch-it-dev/patch-it-plugins/kinds/migrationguide/sdkguide"
 
 // {{.Ident}} is {{.Provider}}'s SDK guide to each major release (MIGRATION.md
 // at the major's first tag), its releases listed from PyPI.
 //
 // ` + todo + `: the PyPI name, the repo and the calls the guide's table
 // names. Say what you checked, with the date.
-var {{.Ident}} = Guide{
+var {{.Ident}} = sdkguide.Guide{
 	API:     "{{.ID}}",
 	Package: "{{.PyPI}}",
 	Repo:    "TODO-owner/TODO-repo",
@@ -173,8 +183,9 @@ var {{.Ident}} = Guide{
 	Symbols: []string{"TODO.create"},
 }
 `,
-		register: `plugin.Register(Plugin{Guide: sdkguide.{{.Ident}}})`,
-		pluginOf: `Plugin{Guide: sdkguide.{{.Ident}}}`,
+		plugin:     `migrationguide.Plugin{Guide: {{.Ident}}}`,
+		regImports: []string{"github.com/patch-it-dev/patch-it-plugins/kinds/migrationguide"},
+		pluginOf:   `migrationguide.Plugin{Guide: {{.Ident}}}`,
 		fixtures: map[string]string{"{{.File}}-MIGRATION.md": `# Migrating to v1
 
 ` + todo + `: a placeholder. Replace it with a real copy of the guide at the release tag and list it in README.md.
@@ -219,20 +230,21 @@ const {{.Lower}}Previous = "0.0.0"
 // ` + todo + `: the major the saved guide is for.
 func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
-	g := sdkguide.{{.Ident}}.At(1)
+	g := {{.Ident}}.At(1)
 	env := kittest.Env(t, kittest.Pages{g.URL(): file})
-	return kittest.Versions(t, env, Plugin{Guide: g},
+	return kittest.Versions(t, env, migrationguide.Plugin{Guide: g},
 		plugin.Version{ID: {{.Lower}}Previous, Ref: "v" + {{.Lower}}Previous}, plugin.Version{ID: g.Version(), Ref: "v" + g.Version()})
 }
 `,
-		imports: []string{"encoding/json", "strings", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/core/plugin", "github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide/sdkguide"},
+		imports: []string{"encoding/json", "strings", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/core/plugin", "github.com/patch-it-dev/patch-it-plugins/kinds/migrationguide"},
 	},
 
 	"migrationguide/members": {
-		kind:   "migrationguide",
-		layer:  "package",
-		defDir: "plugins/migrationguide/members",
-		def: `package members
+		kind:  "migrationguide",
+		layer: "package",
+		def: `package {{.Package}}
+
+import "github.com/patch-it-dev/patch-it-plugins/kinds/migrationguide/members"
 
 // {{.Ident}} is {{.Provider}}'s migration guide to each major, with its table
 // of removed members, read at the major's first tag.
@@ -241,7 +253,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 // guide's path at a major's tag ({major} for its number, {prev} for the one
 // before) and the heading the table is under. Say what you checked, with the
 // date.
-var {{.Ident}} = Guide{
+var {{.Ident}} = members.Guide{
 	API:     "{{.ID}}",
 	Package: "{{.PyPI}}",
 	Module:  "{{.Module}}",
@@ -250,8 +262,9 @@ var {{.Ident}} = Guide{
 	Section: "Removed members",
 }
 `,
-		register: `plugin.Register(Plugin{Guide: members.{{.Ident}}})`,
-		pluginOf: `Plugin{Guide: members.{{.Ident}}}`,
+		plugin:     `migrationguide.Plugin{Guide: {{.Ident}}}`,
+		regImports: []string{"github.com/patch-it-dev/patch-it-plugins/kinds/migrationguide"},
+		pluginOf:   `migrationguide.Plugin{Guide: {{.Ident}}}`,
 		fixtures: map[string]string{"{{.File}}-migration-guide.rst": `.. ` + todo + `: a placeholder. Replace it with a real copy of the guide at the release tag and list it in README.md.
 
 Removed members
@@ -290,7 +303,7 @@ placeholder_elsewhere   Not in the main table.
 func Test{{.Ident}}DropsANonChange(t *testing.T) {
 	for _, e := range {{.Lower}}Ingest(t, {{.Lower}}Drop) {
 		if slices.Contains(e.Subject.Symbols, "placeholder_elsewhere") {
-			t.Errorf("event for placeholder_elsewhere, which isn't under %q", members.{{.Ident}}.Section)
+			t.Errorf("event for placeholder_elsewhere, which isn't under %q", {{.Ident}}.Section)
 		}
 	}
 }
@@ -309,33 +322,35 @@ const {{.Lower}}Release = "1.0.0"
 // {{.Lower}}Release over a saved copy of the guide.
 func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
-	g := members.{{.Ident}}
+	g := {{.Ident}}
 	env := kittest.Env(t, kittest.Pages{g.RawURL("v"+{{.Lower}}Release, 1): file})
-	return kittest.Versions(t, env, Plugin{Guide: g}, plugin.Version{ID: {{.Lower}}Previous}, plugin.Version{ID: {{.Lower}}Release})
+	return kittest.Versions(t, env, migrationguide.Plugin{Guide: g}, plugin.Version{ID: {{.Lower}}Previous}, plugin.Version{ID: {{.Lower}}Release})
 }
 `,
-		imports: []string{"slices", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/core/plugin", "github.com/patch-it-dev/patch-it-plugins/plugins/migrationguide/members"},
+		imports: []string{"slices", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/core/plugin", "github.com/patch-it-dev/patch-it-plugins/kinds/migrationguide"},
 	},
 
 	"changelog/markdown": {
-		kind:   "changelog",
-		layer:  "package",
-		defDir: "plugins/changelog",
-		def: `package changelog
+		kind:  "changelog",
+		layer: "package",
+		def: `package {{.Package}}
+
+import "github.com/patch-it-dev/patch-it-plugins/kinds/changelog"
 
 // {{.Ident}} is {{.Provider}}'s changelog, read release by release (its
 // releases listed from the ecosystem's registry, each at TagPrefix+version).
 //
 // ` + todo + `: the ecosystem, the import name, the repo, the tag prefix and
-// the changelog's path. Say what you checked, with the date, as changelog.go
-// does for Textual and urllib3.
-var {{.Ident}} = File{
+// the changelog's path. Say what you checked, with the date, as
+// providers/textual/provider.go does.
+var {{.Ident}} = changelog.File{
 	API: "{{.ID}}", Package: "{{.PyPI}}", Ecosystem: "pypi", Module: "{{.Module}}",
 	Repo: "TODO-owner/TODO-repo", TagPrefix: "v", Path: "CHANGELOG.md",
 }
 `,
-		register: `plugin.Register(Plugin{File: {{.Ident}}})`,
-		pluginOf: `Plugin{File: {{.Ident}}}`,
+		plugin:     `changelog.Plugin{File: {{.Ident}}}`,
+		regImports: []string{"github.com/patch-it-dev/patch-it-plugins/kinds/changelog"},
+		pluginOf:   `changelog.Plugin{File: {{.Ident}}}`,
 		fixtures: map[string]string{"{{.File}}-CHANGELOG.md": `# Changelog
 
 <!-- ` + todo + `: a placeholder. Replace it with a real copy of the changelog at the release tag and list it in README.md. -->
@@ -364,7 +379,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
 	f := {{.Ident}}Golden
 	env := kittest.Env(t, kittest.Pages{f.URL(): file})
-	p := Plugin{File: f}
+	p := changelog.Plugin{File: f}
 	to, err := p.ReadAt(context.Background(), env, plugin.Version{ID: f.Release, Ref: f.Tag})
 	if err != nil {
 		t.Fatal(err)
@@ -373,26 +388,28 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	return kittest.Extracted(t, env, p, from, to)
 }
 `,
-		imports: []string{"context", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/core/plugin"},
+		imports: []string{"context", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/core/plugin", "github.com/patch-it-dev/patch-it-plugins/kinds/changelog"},
 	},
 
 	"changelog/json": {
-		kind:   "changelog",
-		layer:  "api",
-		defDir: "plugins/changelog",
-		def: `package changelog
+		kind:  "changelog",
+		layer: "api",
+		def: `package {{.Package}}
+
+import "github.com/patch-it-dev/patch-it-plugins/kinds/changelog"
 
 // {{.Ident}} is {{.Provider}}'s machine-readable API changelog.
 //
 // ` + todo + `: the repo and the file's path, and what you checked, with the
-// date, as json.go does for MongoDB Atlas.
-var {{.Ident}} = Log{
+// date, as providers/mongodb/provider.go does for the Atlas changelog.
+var {{.Ident}} = changelog.Log{
 	API: "{{.ID}}", Vendor: "{{.Provider}}", Name: "TODO: the API's name, for sentences",
 	Repo: "TODO-owner/TODO-repo", Path: "changelog/changelog.json",
 }
 `,
-		register: `plugin.Register(Plugin{Log: {{.Ident}}})`,
-		pluginOf: `Plugin{Log: {{.Ident}}}`,
+		plugin:     `changelog.Plugin{Log: {{.Ident}}}`,
+		regImports: []string{"github.com/patch-it-dev/patch-it-plugins/kinds/changelog"},
+		pluginOf:   `changelog.Plugin{Log: {{.Ident}}}`,
 		fixtures: map[string]string{
 			"{{.File}}-changelog.json": `[{"date": "2026-11-14", "paths": [{"path": "/placeholder", "httpMethod": "GET", "versions": [{"version": "2026-01-01", "changes": [{"change": "placeholder: not a life-cycle change", "changeCode": "response-property-added", "backwardCompatible": true}]}]}]}]` + "\n",
 		},
@@ -411,7 +428,7 @@ var (
 func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
 	env := kittest.Env(t, kittest.Pages{ {{.Ident}}.URL({{.Lower}}Commit.Ref): file})
-	p := Plugin{Log: {{.Ident}}}
+	p := changelog.Plugin{Log: {{.Ident}}}
 	to, err := p.ReadAt(context.Background(), env, {{.Lower}}Commit)
 	if err != nil {
 		t.Fatal(err)
@@ -419,31 +436,36 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	return kittest.Extracted(t, env, p, plugin.Snapshot{Version: {{.Lower}}Before}, to)
 }
 `,
-		imports: []string{"context", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/core/plugin"},
+		imports: []string{"context", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/core/plugin", "github.com/patch-it-dev/patch-it-plugins/kinds/changelog"},
 	},
 
 	"catalog": {
-		kind:   "catalog",
-		layer:  "runtime",
-		defDir: "plugins/catalog",
-		def: `package catalog
+		kind:  "catalog",
+		layer: "runtime",
+		def: `package {{.Package}}
 
-import "regexp"
+import (
+	"regexp"
+
+	"github.com/patch-it-dev/patch-it-plugins/kinds/catalog"
+)
 
 // {{.Ident}} is {{.Provider}}'s command catalog: one JSON file per command in a
-// directory of its repo, read at each release tag, as Redis's is (redis.go).
+// directory of its repo, read at each release tag, as Redis's is
+// (providers/redis/provider.go).
 //
 // ` + todo + `: the ecosystem and package for the events' subject, the repo,
 // the directory and the release tags' shape. Say what you checked, with the
-// date, as redis.go does for Redis.
-var {{.Ident}} = Commands{
+// date, as providers/redis/provider.go does.
+var {{.Ident}} = catalog.Commands{
 	API: "{{.ID}}", Ecosystem: "{{.ProviderID}}", Package: "{{.ProviderID}}",
 	Repo: "TODO-owner/TODO-repo", Dir: "TODO/commands",
 	Release: regexp.MustCompile(` + "`" + `^v?(\d+\.\d+\.\d+)$` + "`" + `),
 }
 `,
-		register: `plugin.Register({{.Ident}})`,
-		pluginOf: `{{.Ident}}`,
+		plugin:     `{{.Ident}}`,
+		regImports: []string{},
+		pluginOf:   `{{.Ident}}`,
 		fixtures: map[string]string{
 			"{{.File}}-old.json":         "[{\"name\": \"placeholder.json\", \"type\": \"file\"}, {\"name\": \"kept.json\", \"type\": \"file\"}]\n",
 			"{{.File}}-new.json":         "[{\"name\": \"kept.json\", \"type\": \"file\"}]\n",
@@ -463,8 +485,8 @@ const (
 func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
 	env := kittest.Env(t, kittest.Pages{
-		{{.Ident}}.listingURL({{.Lower}}OldRef): "testdata/{{.File}}-old.json",
-		{{.Ident}}.listingURL({{.Lower}}NewRef): file,
+		{{.Ident}}.ListingURL({{.Lower}}OldRef): "testdata/{{.File}}-old.json",
+		{{.Ident}}.ListingURL({{.Lower}}NewRef): file,
 		{{.Ident}}.FileURL({{.Lower}}OldRef, "placeholder.json"): "testdata/{{.File}}-placeholder.json",
 	})
 	return kittest.Versions(t, env, {{.Ident}},
@@ -475,50 +497,53 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	},
 
 	"openapi": {
-		kind:   "openapi",
-		layer:  "api",
-		defDir: "plugins/openapi/adapter",
-		def: `package adapter
+		kind:  "openapi",
+		layer: "api",
+		def: `package {{.Package}}
 
 import (
 	"context"
 	"fmt"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
+	"github.com/patch-it-dev/patch-it-plugins/kinds/openapi/adapter"
 )
 
 // {{.Ident}} adapts {{.Provider}}'s OpenAPI spec for the openapi plugin.
 //
 // ` + todo + `: LatestTag finds the newest release (a tag, or the commit
 // that last changed the spec) and Fetch downloads the spec at it with
-// fetch.Get, as supabase.go and vercel.go do. Say where the spec is
-// published and what you checked, with the date.
+// fetch.Get, as providers/supabase/management_api.go and
+// providers/vercel/api.go do. Say where the spec is published and what you
+// checked, with the date.
 type {{.Ident}} struct{}
 
-var _ Adapter = {{.Ident}}{}
+var _ adapter.Adapter = {{.Ident}}{}
 
 func ({{.Ident}}) API() string { return "{{.ID}}" }
 
 // LatestTag is the newest release of the spec.
 func ({{.Ident}}) LatestTag(ctx context.Context) (string, error) {
-	return "", fmt.Errorf("{{.ID}}: LatestTag isn't written yet (plugins/openapi/adapter/{{.File}}.go)")
+	return "", fmt.Errorf("{{.ID}}: LatestTag isn't written yet (providers/{{.ProviderID}}/{{.File}}.go)")
 }
 
 // Fetch downloads the spec at tag.
-func ({{.Ident}}) Fetch(ctx context.Context, tag string) (Spec, error) {
-	return Spec{}, fmt.Errorf("{{.ID}}: Fetch isn't written yet (plugins/openapi/adapter/{{.File}}.go)")
+func ({{.Ident}}) Fetch(ctx context.Context, tag string) (adapter.Spec, error) {
+	return adapter.Spec{}, fmt.Errorf("{{.ID}}: Fetch isn't written yet (providers/{{.ProviderID}}/{{.File}}.go)")
 }
 
 // Versions are every release of the spec, oldest first, each with the Ref
 // Fetch takes: what lets every pair of releases be diffed, not only the
 // newest. ` + todo + `: list them with core/versions (GitHubReleases,
-// GitHubCommits, GitHubTags), as versions.go does for the other adapters.
+// GitHubCommits, GitHubTags) or adapter.Releases and adapter.Commits, as the
+// other providers' adapters do.
 func ({{.Ident}}) Versions(ctx context.Context) ([]plugin.Version, error) {
-	return nil, fmt.Errorf("{{.ID}}: Versions isn't written yet (plugins/openapi/adapter/{{.File}}.go)")
+	return nil, fmt.Errorf("{{.ID}}: Versions isn't written yet (providers/{{.ProviderID}}/{{.File}}.go)")
 }
 `,
-		register: `plugin.Register(Plugin{Adapter: adapter.{{.Ident}}{}})`,
-		pluginOf: `Plugin{Adapter: adapter.{{.Ident}}{}}`,
+		plugin:     `openapi.Plugin{Adapter: {{.Ident}}{}}`,
+		regImports: []string{"github.com/patch-it-dev/patch-it-plugins/kinds/openapi"},
+		pluginOf:   `openapi.Plugin{Adapter: {{.Ident}}{}}`,
 		fixtures: map[string]string{
 			"{{.File}}-old.json": `{"openapi": "3.0.3", "info": {"title": "placeholder", "version": "1"}, "paths": {}}` + "\n",
 			"{{.File}}-new.json": `{"openapi": "3.0.3", "info": {"title": "placeholder", "version": "2"}, "paths": {}}` + "\n",
@@ -547,18 +572,19 @@ func (a {{.Lower}}Adapter) Fetch(_ context.Context, tag string) (adapter.Spec, e
 // {{.Lower}}Ingest extracts the change from the saved old spec to file.
 func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
-	p := Plugin{Adapter: {{.Lower}}Adapter{"old": "testdata/{{.File}}-old.json", "new": file}}
+	p := openapi.Plugin{Adapter: {{.Lower}}Adapter{"old": "testdata/{{.File}}-old.json", "new": file}}
 	return kittest.Versions(t, kittest.Env(t, nil), p, plugin.Version{ID: "old", Ref: "old"}, plugin.Version{ID: "new", Ref: "new"})
 }
 `,
-		imports: []string{"context", "fmt", "os", "github.com/patch-it-dev/patch-it-plugins/plugins/openapi/adapter", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/core/plugin"},
-		next:    "Write LatestTag, Fetch and Versions in plugins/openapi/adapter/{{.File}}.go (fetch.Get only); add Diff/Keep to the Register line if the spec needs them (see vercel.go).",
+		imports: []string{"context", "fmt", "os", "github.com/patch-it-dev/patch-it-plugins/kinds/openapi", "github.com/patch-it-dev/patch-it-plugins/kinds/openapi/adapter", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/core/plugin"},
+		next:    "Write LatestTag, Fetch and Versions in providers/{{.ProviderID}}/{{.File}}.go (fetch.Get only); add Diff/Keep to its registration if the spec needs them (see providers/vercel/api.go).",
 	},
 	"apisurface/pypi": {
-		kind:   "apisurface",
-		layer:  "sdk",
-		defDir: "plugins/apisurface",
-		def: `package apisurface
+		kind:  "apisurface",
+		layer: "sdk",
+		def: `package {{.Package}}
+
+import "github.com/patch-it-dev/patch-it-plugins/kinds/apisurface"
 
 // {{.Ident}} is {{.Provider}}'s package on PyPI, its public API read from each
 // release's wheel.
@@ -567,12 +593,13 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 // imports (from --package, or guessed). Say
 // what you checked, with the date: that the wheel holds the package's .py
 // (or .pyi) files.
-var {{.Ident}} = Package{ID: "{{.ID}}", Name: "{{.PyPI}}", Ecosystem: "pypi", Module: "{{.Module}}"}
+var {{.Ident}} = apisurface.Package{ID: "{{.ID}}", Name: "{{.PyPI}}", Ecosystem: "pypi", Module: "{{.Module}}"}
 `,
-		register: `plugin.Register(Plugin{Package: {{.Ident}}})`,
-		pluginOf: `Plugin{Package: {{.Ident}}}`,
+		plugin:     `apisurface.Plugin{Package: {{.Ident}}}`,
+		regImports: []string{"github.com/patch-it-dev/patch-it-plugins/kinds/apisurface"},
+		pluginOf:   `apisurface.Plugin{Package: {{.Ident}}}`,
 		fixtures: map[string]string{
-			"{{.File}}-old.py": "# ` + todo + `: a placeholder for the older release's module. Save the real release's wheel instead (see apisurface_test.go).\ndef placeholder(a, b=1):\n    pass\n",
+			"{{.File}}-old.py": "# ` + todo + `: a placeholder for the older release's module. Save the real release's wheel instead (see providers/openai/python_surface_test.go).\ndef placeholder(a, b=1):\n    pass\n",
 			"{{.File}}-new.py": "# ` + todo + `: a placeholder for the newer release's module: it drops b, one event.\ndef placeholder(a):\n    pass\n",
 		},
 		// The drop test's newer release: the older one again, nothing gone.
@@ -582,7 +609,7 @@ var {{.Ident}} = Package{ID: "{{.ID}}", Name: "{{.PyPI}}", Ecosystem: "pypi", Mo
 // testdata/{{.File}}-old.py as {{.Module}}/__init__.py, and 1.1.0, one
 // holding file. The wheels are built here so the placeholders are text.
 // ` + todo + `: save the two real wheels (trimmed if they're large, as
-// apisurface_test.go's are) and serve them instead.
+// providers/openai/testdata/'s are) and serve them instead.
 func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
 	wheel := func(src string) []byte {
@@ -613,7 +640,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 		t.Errorf("fetched %s, which the test didn't save", url)
 		return nil, fmt.Errorf("no saved copy of %s", url)
 	}
-	ctx, p := context.Background(), Plugin{Package: {{.Ident}}}
+	ctx, p := context.Background(), apisurface.Plugin{Package: {{.Ident}}}
 	vs, err := p.ListVersions(ctx, env)
 	if err != nil || len(vs) != 2 {
 		t.Fatalf("versions %v: %v", vs, err)
@@ -621,14 +648,15 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	return kittest.Versions(t, env, p, vs[0], vs[1])
 }
 `,
-		imports: []string{"archive/zip", "bytes", "context", "fmt", "github.com/patch-it-dev/patch-it-plugins/core/event"},
+		imports: []string{"archive/zip", "bytes", "context", "fmt", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/kinds/apisurface"},
 		next:    "Save two real wheels of the package and serve them in {{.Lower}}Ingest; the kind reads their .py files, never runs them.",
 	},
 	"apisurface/npm": {
-		kind:   "apisurface",
-		layer:  "sdk",
-		defDir: "plugins/apisurface",
-		def: `package apisurface
+		kind:  "apisurface",
+		layer: "sdk",
+		def: `package {{.Package}}
+
+import "github.com/patch-it-dev/patch-it-plugins/kinds/apisurface"
 
 // {{.Ident}} is {{.Provider}}'s package on npm, its public API read from each
 // release's TypeScript declarations.
@@ -636,12 +664,13 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 // ` + todo + `: check the name on npm, and that its tarball has .d.ts
 // files (package.json's "types" or "exports"). Say what you checked, with
 // the date.
-var {{.Ident}} = npmPackage("{{.ID}}", "{{.NPM}}")
+var {{.Ident}} = apisurface.NPMPackage("{{.ID}}", "{{.NPM}}")
 `,
-		register: `plugin.Register(Plugin{Package: {{.Ident}}})`,
-		pluginOf: `Plugin{Package: {{.Ident}}}`,
+		plugin:     `apisurface.Plugin{Package: {{.Ident}}}`,
+		regImports: []string{"github.com/patch-it-dev/patch-it-plugins/kinds/apisurface"},
+		pluginOf:   `apisurface.Plugin{Package: {{.Ident}}}`,
 		fixtures: map[string]string{
-			"{{.File}}-old.d.ts": "// ` + todo + `: a placeholder for the older release's declarations. Save the real release's tarball instead (see npm_test.go).\nexport declare function placeholder(a: string, b?: number): void;\n",
+			"{{.File}}-old.d.ts": "// ` + todo + `: a placeholder for the older release's declarations. Save the real release's tarball instead (see kinds/apisurface/apisurfacetest).\nexport declare function placeholder(a: string, b?: number): void;\n",
 			"{{.File}}-new.d.ts": "// ` + todo + `: a placeholder for the newer release's declarations: b is no longer optional, one event.\nexport declare function placeholder(a: string, b: number): void;\n",
 		},
 		// The drop test's newer release: the older one again, a name added.
@@ -651,7 +680,7 @@ var {{.Ident}} = npmPackage("{{.ID}}", "{{.NPM}}")
 // testdata/{{.File}}-old.d.ts as index.d.ts, and 1.1.0, one holding file.
 // The tarballs are built here so the placeholders are text.
 // ` + todo + `: save the two real tarballs (trimmed if they're large, as
-// npm_test.go's are) and serve them instead.
+// the providers' npm/ copies are) and serve them instead.
 func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	t.Helper()
 	tarball := func(src string) []byte {
@@ -689,7 +718,7 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 		t.Errorf("fetched %s, which the test didn't save", url)
 		return nil, fmt.Errorf("no saved copy of %s", url)
 	}
-	ctx, p := context.Background(), Plugin{Package: {{.Ident}}}
+	ctx, p := context.Background(), apisurface.Plugin{Package: {{.Ident}}}
 	vs, err := p.ListVersions(ctx, env)
 	if err != nil || len(vs) != 2 {
 		t.Fatalf("versions %v: %v", vs, err)
@@ -697,13 +726,13 @@ func {{.Lower}}Ingest(t *testing.T, file string) []event.Event {
 	return kittest.Versions(t, env, p, vs[0], vs[1])
 }
 `,
-		imports: []string{"archive/tar", "bytes", "compress/gzip", "context", "fmt", "strings", "github.com/patch-it-dev/patch-it-plugins/core/event"},
+		imports: []string{"archive/tar", "bytes", "compress/gzip", "context", "fmt", "strings", "github.com/patch-it-dev/patch-it-plugins/core/event", "github.com/patch-it-dev/patch-it-plugins/kinds/apisurface"},
 		next:    "Save two real tarballs of the package and serve them in {{.Lower}}Ingest; the kind reads their .d.ts files, never runs them.",
 	},
 }
 
 // testFile is the generated test, the same for every format.
-const testFile = `package {{.Kind}}
+const testFile = `package {{.Package}}
 
 import (
 {{range .Imports}}	"{{.}}"
@@ -724,12 +753,12 @@ func Test{{.Ident}}RegistersItself(t *testing.T) {
 // The golden test: the saved source in, every event out.
 // ` + todo + `: once the source is real, run
 //
-//	go test ./plugins/{{.Kind}} -run Test{{.Ident}}Golden -update
+//	go test ./providers/{{.ProviderID}} -run Test{{.Ident}}Golden -update
 //
-// and read testdata/golden/{{.Name}}.json like code: every event in it is a
+// and read testdata/golden/{{.Golden}}.json like code: every event in it is a
 // pull request someone may get.
 func Test{{.Ident}}Golden(t *testing.T) {
-	kittest.Golden(t, "testdata/golden/{{.Name}}.json", {{.Lower}}Ingest(t, {{.Lower}}Source))
+	kittest.Golden(t, "testdata/golden/{{.Golden}}.json", {{.Lower}}Ingest(t, {{.Lower}}Source))
 }
 
 {{if .Drop}}{{.Drop}}{{else}}// The pinned drop test: a realistic input that must not become an event.
