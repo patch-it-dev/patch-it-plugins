@@ -10,6 +10,7 @@ import (
 	_ "github.com/patch-it-dev/patch-it-plugins/providers/cloudflare"
 	_ "github.com/patch-it-dev/patch-it-plugins/providers/convex"
 	_ "github.com/patch-it-dev/patch-it-plugins/providers/datadog"
+	_ "github.com/patch-it-dev/patch-it-plugins/providers/dropbox"
 	_ "github.com/patch-it-dev/patch-it-plugins/providers/elastic"
 	_ "github.com/patch-it-dev/patch-it-plugins/providers/flagsmith"
 	_ "github.com/patch-it-dev/patch-it-plugins/providers/github"

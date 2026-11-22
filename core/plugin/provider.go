@@ -43,6 +43,8 @@ const (
 	CategoryDevTools       Category = "devtools"
 	CategoryCRM            Category = "crm"
 	CategoryPackages       Category = "packages"
+	// CategoryStorage is file storage and sync: Dropbox, not a database.
+	CategoryStorage Category = "storage"
 )
 
 // Categories are every category, in display order.
@@ -51,6 +53,7 @@ func Categories() []Category {
 		CategoryAI, CategoryPayments, CategoryInfrastructure, CategoryDatabases,
 		CategoryMonitoring, CategoryAnalytics, CategoryAuth, CategoryMessaging,
 		CategoryHosting, CategorySearch, CategoryDevTools, CategoryCRM, CategoryPackages,
+		CategoryStorage,
 	}
 }
 

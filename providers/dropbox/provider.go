@@ -1,0 +1,50 @@
+// Package dropbox is what patch-it reads for Dropbox: every source, registered
+// below with its metadata, each read by its kind (kinds/<kind>). README.md
+// says why each source and what it reads.
+package dropbox
+
+import (
+	"regexp"
+
+	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
+	"github.com/patch-it-dev/patch-it-plugins/kinds/catalog"
+)
+
+func init() {
+	plugin.RegisterProvider(plugin.Provider{
+		ID: "dropbox", Name: "Dropbox", Category: plugin.CategoryStorage, Homepage: "https://www.dropbox.com",
+		Sources: []plugin.Source{
+			{
+				ID: "files-api", Layer: plugin.LayerAPI,
+				Watches: "Routes removed or added in Dropbox's own API spec for the files namespace " +
+					"(upload, download, copy, move, delete, search, sharing of properties), from " +
+					"dropbox-api-spec's files.stone, read at each commit that changed it",
+				URLs:   []string{"https://github.com/dropbox/dropbox-api-spec/blob/main/files.stone"},
+				Plugin: FilesAPI,
+			},
+		},
+	})
+}
+
+// v2Suffix turns a Stone route name's trailing version marker (":2") into
+// the suffix the real HTTP path uses instead ("_v2"): checked against the
+// published spec on 2026-11-21, every `name:N` route is `name_vN` at
+// `/2/<namespace>/name_vN` (`search:2` is `/2/files/search_v2`,
+// `copy_batch/check:2` is `/2/files/copy_batch/check_v2`), never `name:N`
+// verbatim.
+var v2Suffix = regexp.MustCompile(`:(\d+)$`)
+
+// FilesAPI is the files namespace of Dropbox's own API Spec
+// (dropbox/dropbox-api-spec, files.stone): the Stone IDL file every
+// official Dropbox SDK (Python, JS, .NET, Java, Swift, Objective-C) is
+// generated from. Every route is a POST (Dropbox's v2 API is RPC-style,
+// confirmed against the generated openapi/openapi.yaml on 2026-11-21: every
+// one of its 267 paths is a POST), to /2/files/<name>, with a Stone
+// `:N` suffix read as `_vN` (see v2Suffix).
+var FilesAPI = catalog.Routes{
+	API: "dropbox/files-api", Vendor: "Dropbox",
+	Repo: "dropbox/dropbox-api-spec", Path: "files.stone",
+	Operation: func(name string) string {
+		return "POST /2/files/" + v2Suffix.ReplaceAllString(name, "_v$1")
+	},
+}

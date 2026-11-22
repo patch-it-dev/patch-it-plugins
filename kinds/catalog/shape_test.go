@@ -39,6 +39,27 @@ func TestACatalogThatLostMostCommandsChangedShape(t *testing.T) {
 	}
 }
 
+// A route file that lost most of its declarations (a different file served
+// in its place, or most of it deleted) changed shape; one that reorders or
+// reformats its routes, with every name still there, didn't.
+func TestARouteFileThatLostMostRoutesChangedShape(t *testing.T) {
+	env := plugin.Env{Now: time.Now}
+	decls := func(n int) []byte {
+		var b []byte
+		for i := 0; i < n; i++ {
+			b = append(b, []byte(fmt.Sprintf("route r%d (Arg, Result, Error)\n", i))...)
+		}
+		return b
+	}
+	r := Routes{API: "acme/api", Vendor: "Acme", Repo: "acme/acme", Path: "api.stone", Operation: func(n string) string { return "POST /2/" + n }}
+	if _, err := r.WithShape(plugin.Shape{}).Extract(context.Background(), env,
+		plugin.Snapshot{Version: plugin.Version{ID: "1"}, Content: decls(200), SourceURL: "https://x.test/1"},
+		plugin.Snapshot{Version: plugin.Version{ID: "2"}, Content: decls(20), SourceURL: "https://x.test/2"},
+	); !errors.Is(err, plugin.ErrShapeChanged) {
+		t.Errorf("200 -> 20 routes: %v, want ErrShapeChanged", err)
+	}
+}
+
 // A file of upcoming changes that suddenly lists nothing (reformatted, or
 // emptied by a bad commit) fails the guard; entries leaving in a batch when
 // their date passes don't.

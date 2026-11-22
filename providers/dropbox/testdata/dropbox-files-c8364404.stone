@@ -1,0 +1,67 @@
+namespace files
+route get_metadata (GetMetadataArg, Metadata, GetMetadataError)
+route list_folder/longpoll (ListFolderLongpollArg, ListFolderLongpollResult, ListFolderLongpollError)
+route list_folder (ListFolderArg, ListFolderResult, ListFolderError)
+route list_folder/continue (ListFolderContinueArg, ListFolderResult, ListFolderContinueError)
+route list_folder/get_latest_cursor (ListFolderArg, ListFolderGetLatestCursorResult, ListFolderError)
+route download (DownloadArg, FileMetadata, DownloadError)
+route download_zip (DownloadZipArg, DownloadZipResult, DownloadZipError)
+route export (ExportArg, ExportResult, ExportError)
+route upload_session/start_batch (UploadSessionStartBatchArg, UploadSessionStartBatchResult, Void)
+route upload_session/start (UploadSessionStartArg, UploadSessionStartResult, UploadSessionStartError)
+route upload_session/append:2 (UploadSessionAppendArg, Void, UploadSessionAppendError)
+route upload_session/append (UploadSessionCursor, Void, UploadSessionAppendError) deprecated by upload_session/append:2
+route upload_session/finish (UploadSessionFinishArg, FileMetadata, UploadSessionFinishError)
+route upload (UploadArg, FileMetadata, UploadError)
+route upload_session/finish_batch (UploadSessionFinishBatchArg, UploadSessionFinishBatchLaunch, Void) deprecated by upload_session/finish_batch:2
+route upload_session/finish_batch:2 (UploadSessionFinishBatchArg, UploadSessionFinishBatchResult, Void)
+route upload_session/finish_batch/check(async.PollArg, UploadSessionFinishBatchJobStatus, async.PollError)
+route search (SearchArg, SearchResult, SearchError) deprecated by search:2
+route search:2 (SearchV2Arg, SearchV2Result, SearchError)
+route search/continue:2 (SearchV2ContinueArg, SearchV2Result, SearchError)
+route create_folder:2 (CreateFolderArg, CreateFolderResult, CreateFolderError)
+route create_folder (CreateFolderArg, FolderMetadata, CreateFolderError) deprecated by create_folder:2
+route create_folder_batch (CreateFolderBatchArg, CreateFolderBatchLaunch, Void)
+route create_folder_batch/check (async.PollArg, CreateFolderBatchJobStatus, async.PollError)
+route delete:2 (DeleteArg, DeleteResult, DeleteError)
+route delete (DeleteArg, Metadata, DeleteError) deprecated by delete:2
+route delete_batch (DeleteBatchArg, DeleteBatchLaunch, Void)
+route delete_batch/check (async.PollArg, DeleteBatchJobStatus, async.PollError)
+route permanently_delete (DeleteArg, Void, DeleteError)
+route copy:2 (RelocationArg, RelocationResult, RelocationError)
+route copy (RelocationArg, Metadata, RelocationError) deprecated by copy:2
+route copy_batch:2 (CopyBatchArg, RelocationBatchV2Launch, Void)
+route copy_batch/check:2 (async.PollArg, RelocationBatchV2JobStatus, async.PollError)
+route copy_batch (RelocationBatchArg, RelocationBatchLaunch, Void) deprecated by copy_batch:2
+route copy_batch/check (async.PollArg, RelocationBatchJobStatus, async.PollError) deprecated by copy_batch/check:2
+route move:2 (RelocationArg, RelocationResult, RelocationError)
+route move (RelocationArg, Metadata, RelocationError) deprecated by move:2
+route move_batch:2(MoveBatchArg, RelocationBatchV2Launch, Void)
+route move_batch/check:2(async.PollArg, RelocationBatchV2JobStatus, async.PollError)
+route move_batch (RelocationBatchArg, RelocationBatchLaunch, Void) deprecated by move_batch:2
+route move_batch/check(async.PollArg, RelocationBatchJobStatus, async.PollError) deprecated by move_batch/check:2
+route get_thumbnail(ThumbnailArg, FileMetadata, ThumbnailError)
+route get_thumbnail_batch(GetThumbnailBatchArg, GetThumbnailBatchResult, GetThumbnailBatchError)
+route get_thumbnail:2(ThumbnailV2Arg, PreviewResult, ThumbnailV2Error)
+route get_preview(PreviewArg, FileMetadata, PreviewError)
+route list_revisions(ListRevisionsArg, ListRevisionsResult, ListRevisionsError)
+route restore(RestoreArg, FileMetadata, RestoreError)
+route get_temporary_link(GetTemporaryLinkArg, GetTemporaryLinkResult, GetTemporaryLinkError)
+route get_temporary_upload_link(GetTemporaryUploadLinkArg, GetTemporaryUploadLinkResult, Void)
+route copy_reference/get(GetCopyReferenceArg, GetCopyReferenceResult, GetCopyReferenceError)
+route copy_reference/save(SaveCopyReferenceArg, SaveCopyReferenceResult, SaveCopyReferenceError)
+route save_url(SaveUrlArg, SaveUrlResult, SaveUrlError)
+route save_url/check_job_status(async.PollArg, SaveUrlJobStatus, async.PollError)
+route alpha/get_metadata (AlphaGetMetadataArg, Metadata, AlphaGetMetadataError) deprecated by get_metadata
+route alpha/upload (UploadArg, FileMetadata, UploadError) deprecated by upload
+route properties/add(file_properties.AddPropertiesArg, Void, file_properties.AddPropertiesError) deprecated
+route properties/overwrite(file_properties.OverwritePropertyGroupArg, Void, file_properties.InvalidPropertyGroupError) deprecated
+route properties/update(file_properties.UpdatePropertiesArg, Void, file_properties.UpdatePropertiesError) deprecated
+route properties/remove(file_properties.RemovePropertiesArg, Void, file_properties.RemovePropertiesError) deprecated
+route properties/template/get(file_properties.GetTemplateArg, file_properties.GetTemplateResult, file_properties.TemplateError) deprecated
+route properties/template/list(Void, file_properties.ListTemplateResult, file_properties.TemplateError) deprecated
+route lock_file_batch (LockFileBatchArg, LockFileBatchResult, LockFileError)
+route unlock_file_batch (UnlockFileBatchArg, LockFileBatchResult, LockFileError)
+route get_file_lock_batch (LockFileBatchArg, LockFileBatchResult, LockFileError)
+route paper/create (PaperCreateArg, PaperCreateResult, PaperCreateError)
+route paper/update (PaperUpdateArg, PaperUpdateResult, PaperUpdateError)
