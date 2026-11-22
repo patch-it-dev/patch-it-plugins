@@ -21,7 +21,11 @@ import (
 // name, not the line, is what's compared, so a release that only reorders
 // or reformats the file (Dropbox did, in the commit the golden test is
 // pinned on either side of) reads as no change, never as every route
-// removed and added back.
+// removed and added back. A removed name and an added name that compute
+// the same Operation in the same pair are a renamed spelling, not a
+// removal (real, 2018-08-14: Dropbox's own copy_v2 became copy:2, the same
+// call either way) — the one case a plain name diff can't tell apart from
+// a real removal on its own.
 type Routes struct {
 	API    string // the source id the events carry: "dropbox/files-api"
 	Vendor string // for sentences: "Dropbox"
@@ -29,6 +33,7 @@ type Routes struct {
 	Path   string // the file's path in the repo: "files.stone"
 	// Operation turns a route's own name, as the file declares it
 	// ("search:2", "properties/template/list"), into the HTTP call it is.
+	// Also what tells a renamed spelling from a real removal: see above.
 	Operation func(name string) string
 
 	shape *plugin.Shape // the source's, set by RegisterProvider (WithShape); nil: no guard
@@ -101,6 +106,26 @@ func (r Routes) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 	if err := r.shape.CheckCount("routes", RoutesMinRatio, len(before), len(after)); err != nil {
 		return plugin.Result{}, fmt.Errorf("reading %s: %w", to.SourceURL, err)
 	}
+	// renamedTo/renamedFrom catch Dropbox renaming a route's own Stone
+	// spelling while the real HTTP call stays identical (confirmed real,
+	// 2018-08-14: copy_v2 -> copy:2, create_folder_v2 -> create_folder:2,
+	// delete_v2 -> delete:2, move_v2 -> move:2,
+	// upload_session/append_v2 -> upload_session/append:2 — every one
+	// still the same /2/files/<x>_v2 call). A removed name and an added
+	// name that compute the same Operation are that rename: neither event,
+	// the same rule Commands applies to a command file that moves.
+	renamedTo := map[string]bool{}   // by the operation a removed name used to answer to
+	renamedFrom := map[string]bool{} // by the operation an added name now answers to
+	for n := range before {
+		if _, ok := after[n]; !ok {
+			renamedTo[r.Operation(n)] = true
+		}
+	}
+	for n := range after {
+		if _, ok := before[n]; !ok {
+			renamedFrom[r.Operation(n)] = true
+		}
+	}
 	names := map[string]bool{}
 	for n := range before {
 		names[n] = true
@@ -118,7 +143,14 @@ func (r Routes) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 	for _, n := range sorted {
 		beforeLine, wasBefore := before[n]
 		afterLine, isAfter := after[n]
+		op := r.Operation(n)
 		switch {
+		case wasBefore && !isAfter && renamedFrom[op]:
+			// This exact operation is also newly answered to by a
+			// differently-spelled route in the same pair: a rename, not a
+			// removal.
+		case !wasBefore && isAfter && renamedTo[op]:
+			// The other half of the same rename.
 		case wasBefore && !isAfter:
 			made = append(made, event.Event{
 				API: r.API, Version: to.Version.ID, PreviousVersion: from.Version.ID,

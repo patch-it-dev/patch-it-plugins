@@ -47,6 +47,31 @@ func TestFilesAPIDropsACommentOnlyChange(t *testing.T) {
 	}
 }
 
+// The pinned rename test: a real commit (2018-08-14) where Dropbox
+// changed its own Stone spelling for five routes (copy_v2 -> copy:2,
+// create_folder_v2 -> create_folder:2, delete_v2 -> delete:2,
+// move_v2 -> move:2, upload_session/append_v2 -> upload_session/append:2)
+// with no change to the real HTTP call either spelling answers to. Found by
+// walking the full real history outside this test suite: a naive name
+// diff reports all five as a route removed and a route added, which is
+// wrong, so this is pinned here to keep it that way. get_temporary_upload_link,
+// genuinely new in the same commit, must still come through as added.
+func TestFilesAPIDropsARenamedSpelling(t *testing.T) {
+	env := kittest.Env(t, kittest.Pages{
+		FilesAPI.FileURL("222ba8c06cbf005e38f63c253b44b60d82200f17"): "testdata/dropbox-files-222ba8c0.stone",
+		FilesAPI.FileURL("ff540e4a194313d394ca506f6a6aefa2f34bf968"): "testdata/dropbox-files-ff540e4a.stone",
+	})
+	got := kittest.Versions(t, env, FilesAPI,
+		plugin.Version{ID: "2018-05-17", Ref: "222ba8c06cbf005e38f63c253b44b60d82200f17"},
+		plugin.Version{ID: "2018-08-14", Ref: "ff540e4a194313d394ca506f6a6aefa2f34bf968"})
+	if len(got) != 1 {
+		t.Fatalf("%d events, want 1 (only get_temporary_upload_link added): %+v", len(got), got)
+	}
+	if got[0].Change != "added" || got[0].Subject.Operation != "POST /2/files/get_temporary_upload_link" {
+		t.Errorf("got %+v", got[0])
+	}
+}
+
 // A route's trailing :N (search:2, copy_batch/check:2) maps to the real
 // HTTP path's _vN (search_v2, copy_batch/check_v2), never the Stone
 // spelling: checked against the published openapi/openapi.yaml on
