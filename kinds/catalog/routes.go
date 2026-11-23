@@ -2,11 +2,15 @@ package catalog
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
+	"path"
 	"regexp"
 	"sort"
+	"strings"
 
 	"github.com/patch-it-dev/patch-it-plugins/core/event"
+	"github.com/patch-it-dev/patch-it-plugins/core/github"
 	"github.com/patch-it-dev/patch-it-plugins/core/plugin"
 	"github.com/patch-it-dev/patch-it-plugins/core/versions"
 )
@@ -25,7 +29,12 @@ import (
 // the same Operation in the same pair are a renamed spelling, not a
 // removal (real, 2018-08-14: Dropbox's own copy_v2 became copy:2, the same
 // call either way) — the one case a plain name diff can't tell apart from
-// a real removal on its own.
+// a real removal on its own. A namespace can also be declared in more than
+// one file (Dropbox's files namespace was, in files_properties.stone in
+// 2016-2017 and file_tagging.stone from 2021 to 2026, whose routes then
+// moved into files.stone): a name that looks removed or added is checked
+// against every other .stone file declaring the same namespace at that
+// commit, and one found there moved, which is neither.
 type Routes struct {
 	API    string // the source id the events carry: "dropbox/files-api"
 	Vendor string // for sentences: "Dropbox"
@@ -97,7 +106,7 @@ func routesIn(content []byte) map[string]string {
 // each citing the file at the version whose content it quotes (from's for a
 // removal, to's for an addition), with previous_version from's commit. A
 // zero from has nothing to compare.
-func (r Routes) Extract(_ context.Context, env plugin.Env, from, to plugin.Snapshot) (plugin.Result, error) {
+func (r Routes) Extract(ctx context.Context, env plugin.Env, from, to plugin.Snapshot) (plugin.Result, error) {
 	if from.IsZero() {
 		return plugin.Result{}, nil
 	}
@@ -138,20 +147,51 @@ func (r Routes) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 		sorted = append(sorted, n)
 	}
 	sort.Strings(sorted)
+	var removed, added []string
+	for _, n := range sorted {
+		_, wasBefore := before[n]
+		_, isAfter := after[n]
+		op := r.Operation(n)
+		switch {
+		case wasBefore && !isAfter && !renamedFrom[op]:
+			removed = append(removed, n)
+		case !wasBefore && isAfter && !renamedTo[op]:
+			added = append(added, n)
+		}
+	}
+	ns := namespaceOf(to.Content)
+	if ns == "" {
+		ns = namespaceOf(from.Content)
+	}
+	movedTo, movedFrom := map[string]bool{}, map[string]bool{}
+	if len(removed) > 0 {
+		var err error
+		if movedTo, err = r.elsewhere(ctx, env, to.Version.Ref, ns); err != nil {
+			return plugin.Result{}, err
+		}
+	}
+	if len(added) > 0 {
+		var err error
+		if movedFrom, err = r.elsewhere(ctx, env, from.Version.Ref, ns); err != nil {
+			return plugin.Result{}, err
+		}
+	}
+	changed := map[string]bool{}
+	for _, n := range append(removed, added...) {
+		changed[n] = true
+	}
 	var made []event.Event
 	now := env.Now().UTC()
 	for _, n := range sorted {
+		if !changed[n] {
+			continue
+		}
 		beforeLine, wasBefore := before[n]
-		afterLine, isAfter := after[n]
-		op := r.Operation(n)
+		afterLine := after[n]
 		switch {
-		case wasBefore && !isAfter && renamedFrom[op]:
-			// This exact operation is also newly answered to by a
-			// differently-spelled route in the same pair: a rename, not a
-			// removal.
-		case !wasBefore && isAfter && renamedTo[op]:
-			// The other half of the same rename.
-		case wasBefore && !isAfter:
+		case wasBefore && movedTo[n], !wasBefore && movedFrom[n]:
+			// Declared in another file of the same namespace: moved.
+		case wasBefore:
 			made = append(made, event.Event{
 				API: r.API, Version: to.Version.ID, PreviousVersion: from.Version.ID,
 				Change: event.ChangeBreaking,
@@ -163,7 +203,7 @@ func (r Routes) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 				Confidence:    1.0,
 				DetectedAt:    now,
 			})
-		case !wasBefore && isAfter:
+		default:
 			made = append(made, event.Event{
 				API: r.API, Version: to.Version.ID, PreviousVersion: from.Version.ID,
 				Change: event.ChangeAdded,
@@ -179,6 +219,64 @@ func (r Routes) Extract(_ context.Context, env plugin.Env, from, to plugin.Snaps
 	}
 	events, rejected := finish(r.API, made, nil)
 	return plugin.Result{Events: events, Rejected: rejected}, nil
+}
+
+var namespaceDecl = regexp.MustCompile(`(?m)^namespace (\S+)`)
+
+// namespaceOf is the namespace a Stone file declares, "" for none.
+func namespaceOf(content []byte) string {
+	if m := namespaceDecl.FindSubmatch(content); m != nil {
+		return string(m[1])
+	}
+	return ""
+}
+
+// ListingURL is GitHub's listing, at a commit, of the directory the file is in.
+func (r Routes) ListingURL(sha string) string {
+	dir := path.Dir(r.Path)
+	if dir == "." {
+		return fmt.Sprintf("%s/repos/%s/contents?ref=%s", github.API, r.Repo, sha)
+	}
+	return fmt.Sprintf("%s/repos/%s/contents/%s?ref=%s", github.API, r.Repo, dir, sha)
+}
+
+// elsewhere is every route declared at sha in the other .stone files of the
+// file's directory that declare namespace ns. An error is returned, never
+// guessed past: a removal that can't be checked isn't reported.
+func (r Routes) elsewhere(ctx context.Context, env plugin.Env, sha, ns string) (map[string]bool, error) {
+	out := map[string]bool{}
+	if ns == "" {
+		return out, nil
+	}
+	u := r.ListingURL(sha)
+	body, err := env.Get(ctx, u)
+	if err != nil {
+		return nil, fmt.Errorf("listing %s's other files at %s: %w", r.Path, sha, err)
+	}
+	var entries []struct {
+		Path string `json:"path"`
+		Type string `json:"type"`
+	}
+	if err := json.Unmarshal(body, &entries); err != nil {
+		return nil, fmt.Errorf("parsing the listing at %s: %w", sha, err)
+	}
+	for _, e := range entries {
+		if e.Type != "file" || !strings.HasSuffix(e.Path, ".stone") || e.Path == r.Path {
+			continue
+		}
+		fu := fmt.Sprintf("%s/%s/%s/%s", github.Raw, r.Repo, sha, e.Path)
+		content, err := env.Get(ctx, fu)
+		if err != nil {
+			return nil, fmt.Errorf("fetching %s: %w", fu, err)
+		}
+		if namespaceOf(content) != ns {
+			continue
+		}
+		for n := range routesIn(content) {
+			out[n] = true
+		}
+	}
+	return out, nil
 }
 
 var (

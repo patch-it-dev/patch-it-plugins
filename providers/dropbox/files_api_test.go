@@ -15,15 +15,20 @@ func TestFilesAPIRegistersItself(t *testing.T) {
 // didn't change in between: checked 2026-11-21, no commit touches it from
 // 2023-04-26 to 2026-05-12). properties/remove, properties/template/get and
 // properties/template/list (all three already marked `deprecated` at
-// c8364404) are gone at 6c68656c; tags/add, tags/get, tags/remove and
-// upload_session/append_batch are new. Every other route is unchanged, even
+// c8364404) are gone at 6c68656c; upload_session/append_batch is new.
+// tags/add, tags/get and tags/remove are new to files.stone but not to the
+// namespace: at c8364404 they're in file_tagging.stone, also namespace
+// files, which 6c68656c deletes. Moved: no event. Every other route is unchanged, even
 // though the file reorders many of them between the two commits: a line
 // diff would read most of the file as removed and re-added, which is why
 // Routes compares names, never lines.
 func TestFilesAPIGolden(t *testing.T) {
 	env := kittest.Env(t, kittest.Pages{
-		FilesAPI.FileURL("c8364404953d875801d496a81f786c5545f78223"): "testdata/dropbox-files-c8364404.stone",
-		FilesAPI.FileURL("6c68656caafdff65a30943fe186a1800b9f35bbc"): "testdata/dropbox-files-6c68656c.stone",
+		FilesAPI.FileURL("c8364404953d875801d496a81f786c5545f78223"):                                                             "testdata/dropbox-files-c8364404.stone",
+		FilesAPI.FileURL("6c68656caafdff65a30943fe186a1800b9f35bbc"):                                                             "testdata/dropbox-files-6c68656c.stone",
+		FilesAPI.ListingURL("c8364404953d875801d496a81f786c5545f78223"):                                                          "testdata/dropbox-spec-listing-c8364404.json",
+		FilesAPI.ListingURL("6c68656caafdff65a30943fe186a1800b9f35bbc"):                                                          "testdata/dropbox-spec-listing-6c68656c.json",
+		"https://raw.githubusercontent.com/dropbox/dropbox-api-spec/c8364404953d875801d496a81f786c5545f78223/file_tagging.stone": "testdata/dropbox-file_tagging-c8364404.stone",
 	})
 	got := kittest.Versions(t, env, FilesAPI,
 		plugin.Version{ID: "2023-04-26", Ref: "c8364404953d875801d496a81f786c5545f78223"},
@@ -58,8 +63,9 @@ func TestFilesAPIDropsACommentOnlyChange(t *testing.T) {
 // genuinely new in the same commit, must still come through as added.
 func TestFilesAPIDropsARenamedSpelling(t *testing.T) {
 	env := kittest.Env(t, kittest.Pages{
-		FilesAPI.FileURL("222ba8c06cbf005e38f63c253b44b60d82200f17"): "testdata/dropbox-files-222ba8c0.stone",
-		FilesAPI.FileURL("ff540e4a194313d394ca506f6a6aefa2f34bf968"): "testdata/dropbox-files-ff540e4a.stone",
+		FilesAPI.FileURL("222ba8c06cbf005e38f63c253b44b60d82200f17"):    "testdata/dropbox-files-222ba8c0.stone",
+		FilesAPI.FileURL("ff540e4a194313d394ca506f6a6aefa2f34bf968"):    "testdata/dropbox-files-ff540e4a.stone",
+		FilesAPI.ListingURL("222ba8c06cbf005e38f63c253b44b60d82200f17"): "testdata/dropbox-spec-listing-222ba8c0.json",
 	})
 	got := kittest.Versions(t, env, FilesAPI,
 		plugin.Version{ID: "2018-05-17", Ref: "222ba8c06cbf005e38f63c253b44b60d82200f17"},

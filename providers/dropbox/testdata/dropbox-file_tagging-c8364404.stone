@@ -1,0 +1,4 @@
+namespace files
+route tags/add(AddTagArg, Void, AddTagError)
+route tags/remove(RemoveTagArg, Void, RemoveTagError)
+route tags/get(GetTagsArg, GetTagsResult, BaseTagError)

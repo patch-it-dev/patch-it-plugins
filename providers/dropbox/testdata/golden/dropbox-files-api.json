@@ -58,63 +58,6 @@
   },
   {
     "id": 4,
-    "fingerprint": "sha256:acbb2e2fbc7bae4cfc00d2986c9e449487648b82c7e170dd51bc5588ffed7cb4",
-    "api": "dropbox/files-api",
-    "version": "2026-05-12",
-    "previous_version": "2023-04-26",
-    "change": "added",
-    "subject": {
-      "type": "api_operation",
-      "kind": "operation",
-      "side": "request",
-      "operation": "POST /2/files/tags/add"
-    },
-    "description": "Dropbox's tags/add route is new in its API spec (it wasn't there as of 2023-04-26).",
-    "source_url": "https://raw.githubusercontent.com/dropbox/dropbox-api-spec/6c68656caafdff65a30943fe186a1800b9f35bbc/files.stone",
-    "source_excerpt": "route tags/add (AddTagArg, Void, AddTagError)",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 5,
-    "fingerprint": "sha256:e53f310b24ef17aeae621ce8530d4212a3409b20c53c01e291d757fd93475e01",
-    "api": "dropbox/files-api",
-    "version": "2026-05-12",
-    "previous_version": "2023-04-26",
-    "change": "added",
-    "subject": {
-      "type": "api_operation",
-      "kind": "operation",
-      "side": "request",
-      "operation": "POST /2/files/tags/get"
-    },
-    "description": "Dropbox's tags/get route is new in its API spec (it wasn't there as of 2023-04-26).",
-    "source_url": "https://raw.githubusercontent.com/dropbox/dropbox-api-spec/6c68656caafdff65a30943fe186a1800b9f35bbc/files.stone",
-    "source_excerpt": "route tags/get (GetTagsArg, GetTagsResult, BaseTagError)",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 6,
-    "fingerprint": "sha256:8aae8a45e8edbe6afdacc767e1727ac2748056718140692e4b698c8617ed3ee6",
-    "api": "dropbox/files-api",
-    "version": "2026-05-12",
-    "previous_version": "2023-04-26",
-    "change": "added",
-    "subject": {
-      "type": "api_operation",
-      "kind": "operation",
-      "side": "request",
-      "operation": "POST /2/files/tags/remove"
-    },
-    "description": "Dropbox's tags/remove route is new in its API spec (it wasn't there as of 2023-04-26).",
-    "source_url": "https://raw.githubusercontent.com/dropbox/dropbox-api-spec/6c68656caafdff65a30943fe186a1800b9f35bbc/files.stone",
-    "source_excerpt": "route tags/remove (RemoveTagArg, Void, RemoveTagError)",
-    "confidence": 1,
-    "detected_at": "2026-11-14T12:00:00Z"
-  },
-  {
-    "id": 7,
     "fingerprint": "sha256:2064dc3fc1dede9aff9d807ba6acbee82ecbdbab942c7bfcbdebdcc57632bd8a",
     "api": "dropbox/files-api",
     "version": "2026-05-12",

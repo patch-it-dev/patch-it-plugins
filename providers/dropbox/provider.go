@@ -18,10 +18,11 @@ func init() {
 			{
 				ID: "files-api", Layer: plugin.LayerAPI,
 				Watches: "Routes removed or added in Dropbox's own API spec for the files namespace " +
-					"(upload, download, copy, move, delete, search, sharing of properties), from " +
+					"(upload, download, copy, move, delete, search, thumbnails, revisions, file properties, tags, locks), from " +
 					"dropbox-api-spec's files.stone, read at each commit that changed it",
-				URLs:   []string{"https://github.com/dropbox/dropbox-api-spec/blob/main/files.stone"},
-				Plugin: FilesAPI,
+				URLs:     []string{"https://github.com/dropbox/dropbox-api-spec/blob/main/files.stone"},
+				Packages: []string{"pypi:dropbox", "npm:dropbox"},
+				Plugin:   FilesAPI,
 			},
 			apisurface.PyPI(PythonSurface, plugin.LayerSDK, "https://github.com/dropbox/dropbox-sdk-python"),
 		},
