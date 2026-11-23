@@ -1,0 +1,25 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:ac146b4c1ef739a61a7f4a3b24da3c47ce6c990e457fe597ae753cd3744ae85c",
+    "api": "dropbox/python-surface",
+    "version": "12.2.4",
+    "previous_version": "12.2.3",
+    "change": "breaking",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "dropbox",
+      "change": "removed_symbol",
+      "symbols": [
+        "base.DropboxBase.sharing_remove_file_member"
+      ]
+    },
+    "description": "The method `base.DropboxBase.sharing_remove_file_member` was removed in dropbox 12.2.4: code using it fails.",
+    "migration_hint": "dropbox 12.2.4 has no `base.DropboxBase.sharing_remove_file_member`: see the package's release notes for what replaces it.",
+    "source_url": "https://files.pythonhosted.org/packages/3e/c3/442b4dd1360c5d4a3b146de0732949c71527fd5282ef7a1e7711cd27037d/dropbox-12.2.4-py3-none-any.whl",
+    "source_excerpt": "dropbox 12.2.3 (dropbox-12.2.3-py3-none-any.whl), dropbox/base.py line 6054: def sharing_remove_file_member(self, file, member)\ndropbox 12.2.4 (dropbox-12.2.4-py3-none-any.whl): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]

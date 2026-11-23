@@ -1,0 +1,20 @@
+{
+    "info": {
+        "name": "dropbox",
+        "version": "12.2.0"
+    },
+    "urls": [
+        {
+            "filename": "dropbox-12.2.0-py3-none-any.whl",
+            "packagetype": "bdist_wheel",
+            "url": "https://files.pythonhosted.org/packages/03/52/a9deb96572656bd773955be3b86e58ce7488a883cc8b56ae09f3f07e6437/dropbox-12.2.0-py3-none-any.whl",
+            "yanked": false
+        },
+        {
+            "filename": "dropbox-12.2.0.tar.gz",
+            "packagetype": "sdist",
+            "url": "https://files.pythonhosted.org/packages/ca/59/f60393a8972b806625c829f7066e2ab42a8f4e8c13310595c2b7c8279ee0/dropbox-12.2.0.tar.gz",
+            "yanked": false
+        }
+    ]
+}

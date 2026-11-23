@@ -15,7 +15,7 @@
     "categories": {
       "type": "array",
       "description": "Every category, in display order.",
-      "items": { "type": "string", "enum": ["ai", "payments", "infrastructure", "databases", "monitoring", "analytics", "auth", "messaging", "hosting", "search", "devtools", "crm", "packages"] }
+      "items": { "type": "string", "enum": ["ai", "payments", "infrastructure", "databases", "monitoring", "analytics", "auth", "messaging", "hosting", "search", "devtools", "crm", "packages", "storage"] }
     },
     "providers": {
       "type": "array",
@@ -26,7 +26,7 @@
         "properties": {
           "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
           "name": { "type": "string", "minLength": 1 },
-          "category": { "type": "string", "enum": ["ai", "payments", "infrastructure", "databases", "monitoring", "analytics", "auth", "messaging", "hosting", "search", "devtools", "crm", "packages"] },
+          "category": { "type": "string", "enum": ["ai", "payments", "infrastructure", "databases", "monitoring", "analytics", "auth", "messaging", "hosting", "search", "devtools", "crm", "packages", "storage"] },
           "homepage": { "type": "string", "pattern": "^https://" },
           "sources": {
             "type": "array",

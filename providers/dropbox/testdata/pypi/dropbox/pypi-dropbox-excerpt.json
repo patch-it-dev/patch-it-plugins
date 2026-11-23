@@ -1,0 +1,63 @@
+{
+    "info": {
+        "name": "dropbox"
+    },
+    "releases": {
+        "12.2.0": [
+            {
+                "filename": "dropbox-12.2.0-py3-none-any.whl",
+                "packagetype": "bdist_wheel",
+                "upload_time_iso_8601": "2026-07-14T04:58:01.393052Z",
+                "yanked": false
+            },
+            {
+                "filename": "dropbox-12.2.0.tar.gz",
+                "packagetype": "sdist",
+                "upload_time_iso_8601": "2026-07-14T04:58:03.012845Z",
+                "yanked": false
+            }
+        ],
+        "12.2.1": [
+            {
+                "filename": "dropbox-12.2.1-py3-none-any.whl",
+                "packagetype": "bdist_wheel",
+                "upload_time_iso_8601": "2026-07-20T16:43:19.115255Z",
+                "yanked": false
+            },
+            {
+                "filename": "dropbox-12.2.1.tar.gz",
+                "packagetype": "sdist",
+                "upload_time_iso_8601": "2026-07-20T16:43:20.627241Z",
+                "yanked": false
+            }
+        ],
+        "12.2.3": [
+            {
+                "filename": "dropbox-12.2.3-py3-none-any.whl",
+                "packagetype": "bdist_wheel",
+                "upload_time_iso_8601": "2026-10-07T17:55:31.653723Z",
+                "yanked": false
+            },
+            {
+                "filename": "dropbox-12.2.3.tar.gz",
+                "packagetype": "sdist",
+                "upload_time_iso_8601": "2026-10-07T17:55:33.443787Z",
+                "yanked": false
+            }
+        ],
+        "12.2.4": [
+            {
+                "filename": "dropbox-12.2.4-py3-none-any.whl",
+                "packagetype": "bdist_wheel",
+                "upload_time_iso_8601": "2026-10-22T16:07:41.747132Z",
+                "yanked": false
+            },
+            {
+                "filename": "dropbox-12.2.4.tar.gz",
+                "packagetype": "sdist",
+                "upload_time_iso_8601": "2026-10-22T16:07:43.394535Z",
+                "yanked": false
+            }
+        ]
+    }
+}

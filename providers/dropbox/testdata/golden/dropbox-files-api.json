@@ -1,0 +1,78 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:c08a38dda8f324e40606d9f604492910322bbeba2d4c435d403a671bad1bf3ae",
+    "api": "dropbox/files-api",
+    "version": "2026-05-12",
+    "previous_version": "2023-04-26",
+    "change": "breaking",
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /2/files/properties/remove"
+    },
+    "description": "Dropbox's properties/remove route is gone from its API spec (it was there as of 2023-04-26): calling it fails.",
+    "source_url": "https://raw.githubusercontent.com/dropbox/dropbox-api-spec/c8364404953d875801d496a81f786c5545f78223/files.stone",
+    "source_excerpt": "route properties/remove(file_properties.RemovePropertiesArg, Void, file_properties.RemovePropertiesError) deprecated",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:cd56e1da62da5efcf3fe954a04bb4533b01d5dfa8d49b61ae01e90e98258833b",
+    "api": "dropbox/files-api",
+    "version": "2026-05-12",
+    "previous_version": "2023-04-26",
+    "change": "breaking",
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /2/files/properties/template/get"
+    },
+    "description": "Dropbox's properties/template/get route is gone from its API spec (it was there as of 2023-04-26): calling it fails.",
+    "source_url": "https://raw.githubusercontent.com/dropbox/dropbox-api-spec/c8364404953d875801d496a81f786c5545f78223/files.stone",
+    "source_excerpt": "route properties/template/get(file_properties.GetTemplateArg, file_properties.GetTemplateResult, file_properties.TemplateError) deprecated",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:913e00cf6a07683a768683098cc4dba916e8b00d65de23df354f03e96473a16e",
+    "api": "dropbox/files-api",
+    "version": "2026-05-12",
+    "previous_version": "2023-04-26",
+    "change": "breaking",
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /2/files/properties/template/list"
+    },
+    "description": "Dropbox's properties/template/list route is gone from its API spec (it was there as of 2023-04-26): calling it fails.",
+    "source_url": "https://raw.githubusercontent.com/dropbox/dropbox-api-spec/c8364404953d875801d496a81f786c5545f78223/files.stone",
+    "source_excerpt": "route properties/template/list(Void, file_properties.ListTemplateResult, file_properties.TemplateError) deprecated",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:2064dc3fc1dede9aff9d807ba6acbee82ecbdbab942c7bfcbdebdcc57632bd8a",
+    "api": "dropbox/files-api",
+    "version": "2026-05-12",
+    "previous_version": "2023-04-26",
+    "change": "added",
+    "subject": {
+      "type": "api_operation",
+      "kind": "operation",
+      "side": "request",
+      "operation": "POST /2/files/upload_session/append_batch"
+    },
+    "description": "Dropbox's upload_session/append_batch route is new in its API spec (it wasn't there as of 2023-04-26).",
+    "source_url": "https://raw.githubusercontent.com/dropbox/dropbox-api-spec/6c68656caafdff65a30943fe186a1800b9f35bbc/files.stone",
+    "source_excerpt": "route upload_session/append_batch (UploadSessionAppendBatchArg, UploadSessionAppendBatchResult, UploadSessionAppendBatchError)",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]
