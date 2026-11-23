@@ -1,0 +1,26 @@
+{
+    "info": {
+        "name": "dropbox",
+        "version": "10.10.0"
+    },
+    "urls": [
+        {
+            "filename": "dropbox-10.10.0-py2-none-any.whl",
+            "packagetype": "bdist_wheel",
+            "url": "https://files.pythonhosted.org/packages/d3/34/03373f4dac2b5dbd83511ffdef15c30ef9c1be01452f3113384dbc2b8f4d/dropbox-10.10.0-py2-none-any.whl",
+            "yanked": false
+        },
+        {
+            "filename": "dropbox-10.10.0-py3-none-any.whl",
+            "packagetype": "bdist_wheel",
+            "url": "https://files.pythonhosted.org/packages/48/7d/bccf3e7889fe5d1db6b0a52f0bbf67d5ac807aea060c2320d4ce84329880/dropbox-10.10.0-py3-none-any.whl",
+            "yanked": false
+        },
+        {
+            "filename": "dropbox-10.10.0.tar.gz",
+            "packagetype": "sdist",
+            "url": "https://files.pythonhosted.org/packages/49/18/bfdcac85c16e7b31fe8087fabee6820657e48a1514c249aae093f109ac09/dropbox-10.10.0.tar.gz",
+            "yanked": false
+        }
+    ]
+}

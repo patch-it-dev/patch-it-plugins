@@ -1,0 +1,206 @@
+[
+  {
+    "id": 1,
+    "fingerprint": "sha256:e0db59db0924e84547fd4498a236a31015e4a61d5d23cee43631c8b98e9d986c",
+    "api": "dropbox/python-surface",
+    "version": "11.0.0",
+    "previous_version": "10.10.0",
+    "change": "breaking",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "dropbox",
+      "change": "removed_symbol",
+      "symbols": [
+        "dropbox.Dropbox"
+      ]
+    },
+    "description": "The class `dropbox.Dropbox` was removed in dropbox 11.0.0: code using it fails.",
+    "migration_hint": "dropbox 11.0.0 has no `dropbox.Dropbox`: see the package's release notes for what replaces it.",
+    "source_url": "https://files.pythonhosted.org/packages/11/38/99906b7d664db658591a30a7f8357d9e13111c8ba44112a46730428f95d0/dropbox-11.0.0-py2-none-any.whl",
+    "source_excerpt": "dropbox 10.10.0 (dropbox-10.10.0-py2-none-any.whl), dropbox/dropbox.py line 677: class Dropbox(_DropboxTransport, DropboxBase)\ndropbox 11.0.0 (dropbox-11.0.0-py2-none-any.whl): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "fingerprint": "sha256:cc0a62f5d6a3879fb17c8cb5d913f6c872da2e1407c735acbdee8b6e7fc5caad",
+    "api": "dropbox/python-surface",
+    "version": "11.0.0",
+    "previous_version": "10.10.0",
+    "change": "breaking",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "dropbox",
+      "change": "removed_symbol",
+      "symbols": [
+        "dropbox.DropboxTeam"
+      ]
+    },
+    "description": "The class `dropbox.DropboxTeam` was removed in dropbox 11.0.0: code using it fails.",
+    "migration_hint": "dropbox 11.0.0 has no `dropbox.DropboxTeam`: see the package's release notes for what replaces it.",
+    "source_url": "https://files.pythonhosted.org/packages/11/38/99906b7d664db658591a30a7f8357d9e13111c8ba44112a46730428f95d0/dropbox-11.0.0-py2-none-any.whl",
+    "source_excerpt": "dropbox 10.10.0 (dropbox-10.10.0-py2-none-any.whl), dropbox/dropbox.py line 685: class DropboxTeam(_DropboxTransport, DropboxTeamBase)\ndropbox 11.0.0 (dropbox-11.0.0-py2-none-any.whl): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "fingerprint": "sha256:d8929709d2b657d81b73a2f86aa58f570f72fcd8bc8605168ff6933c63a4e91f",
+    "api": "dropbox/python-surface",
+    "version": "11.0.0",
+    "previous_version": "10.10.0",
+    "change": "breaking",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "dropbox",
+      "change": "removed_symbol",
+      "symbols": [
+        "dropbox.create_session"
+      ]
+    },
+    "description": "The function `dropbox.create_session` was removed in dropbox 11.0.0: code using it fails.",
+    "migration_hint": "dropbox 11.0.0 has no `dropbox.create_session`: see the package's release notes for what replaces it.",
+    "source_url": "https://files.pythonhosted.org/packages/11/38/99906b7d664db658591a30a7f8357d9e13111c8ba44112a46730428f95d0/dropbox-11.0.0-py2-none-any.whl",
+    "source_excerpt": "dropbox 10.10.0 (dropbox-10.10.0-py2-none-any.whl), dropbox/dropbox.py line 93: def create_session(max_connections=8, proxies=None)\ndropbox 11.0.0 (dropbox-11.0.0-py2-none-any.whl): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "fingerprint": "sha256:539ad46467bdb473404166b3e977ed482737ab570829ce516c88c1bc32d72cd5",
+    "api": "dropbox/python-surface",
+    "version": "11.0.0",
+    "previous_version": "10.10.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "dropbox",
+      "change": "added_symbol",
+      "symbols": [
+        "dropbox_client.Dropbox"
+      ]
+    },
+    "description": "New class `dropbox_client.Dropbox` in dropbox 11.0.0.",
+    "source_url": "https://files.pythonhosted.org/packages/11/38/99906b7d664db658591a30a7f8357d9e13111c8ba44112a46730428f95d0/dropbox-11.0.0-py2-none-any.whl",
+    "source_excerpt": "dropbox 10.10.0 (dropbox-10.10.0-py2-none-any.whl): not defined\ndropbox 11.0.0 (dropbox-11.0.0-py2-none-any.whl), dropbox/dropbox_client.py line 678: class Dropbox(_DropboxTransport, DropboxBase)",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "fingerprint": "sha256:5e2c069f393dcc940df1f97242a10fc248cea235bf93b03a00c832eb1e618969",
+    "api": "dropbox/python-surface",
+    "version": "11.0.0",
+    "previous_version": "10.10.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "dropbox",
+      "change": "added_symbol",
+      "symbols": [
+        "dropbox_client.DropboxTeam"
+      ]
+    },
+    "description": "New class `dropbox_client.DropboxTeam` in dropbox 11.0.0.",
+    "source_url": "https://files.pythonhosted.org/packages/11/38/99906b7d664db658591a30a7f8357d9e13111c8ba44112a46730428f95d0/dropbox-11.0.0-py2-none-any.whl",
+    "source_excerpt": "dropbox 10.10.0 (dropbox-10.10.0-py2-none-any.whl): not defined\ndropbox 11.0.0 (dropbox-11.0.0-py2-none-any.whl), dropbox/dropbox_client.py line 686: class DropboxTeam(_DropboxTransport, DropboxTeamBase)",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "fingerprint": "sha256:decd656756190737913b036792c0885304f0cd590d85d80b0d3c3c6c8ca6e7e8",
+    "api": "dropbox/python-surface",
+    "version": "11.0.0",
+    "previous_version": "10.10.0",
+    "change": "added",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "dropbox",
+      "change": "added_symbol",
+      "symbols": [
+        "dropbox_client.create_session"
+      ]
+    },
+    "description": "New function `dropbox_client.create_session` in dropbox 11.0.0.",
+    "source_url": "https://files.pythonhosted.org/packages/11/38/99906b7d664db658591a30a7f8357d9e13111c8ba44112a46730428f95d0/dropbox-11.0.0-py2-none-any.whl",
+    "source_excerpt": "dropbox 10.10.0 (dropbox-10.10.0-py2-none-any.whl): not defined\ndropbox 11.0.0 (dropbox-11.0.0-py2-none-any.whl), dropbox/dropbox_client.py line 94: def create_session(max_connections=8, proxies=None)",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "fingerprint": "sha256:aa9e359539e1c4a4597e7743d02b99348285480a4d22ad678bdf97ccfb5fd7e8",
+    "api": "dropbox/python-surface",
+    "version": "11.0.0",
+    "previous_version": "10.10.0",
+    "change": "breaking",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "dropbox",
+      "change": "removed_symbol",
+      "symbols": [
+        "stone_fixtures.EmptyContainer"
+      ]
+    },
+    "description": "The class `stone_fixtures.EmptyContainer` was removed in dropbox 11.0.0: code using it fails.",
+    "migration_hint": "dropbox 11.0.0 has no `stone_fixtures.EmptyContainer`: see the package's release notes for what replaces it.",
+    "source_url": "https://files.pythonhosted.org/packages/11/38/99906b7d664db658591a30a7f8357d9e13111c8ba44112a46730428f95d0/dropbox-11.0.0-py2-none-any.whl",
+    "source_excerpt": "dropbox 10.10.0 (dropbox-10.10.0-py2-none-any.whl), dropbox/stone_fixtures.py line 15: class EmptyContainer(bb.Struct) / def __init__(self)\ndropbox 11.0.0 (dropbox-11.0.0-py2-none-any.whl): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 8,
+    "fingerprint": "sha256:9ab3f9dc6ac24a6edc0ba81c2e829f4540a67afcfa70998f9e353916435f1ee5",
+    "api": "dropbox/python-surface",
+    "version": "11.0.0",
+    "previous_version": "10.10.0",
+    "change": "breaking",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "dropbox",
+      "change": "removed_symbol",
+      "symbols": [
+        "stone_fixtures.MixedInternalOnlyContainer"
+      ]
+    },
+    "description": "The class `stone_fixtures.MixedInternalOnlyContainer` was removed in dropbox 11.0.0: code using it fails.",
+    "migration_hint": "dropbox 11.0.0 has no `stone_fixtures.MixedInternalOnlyContainer`: see the package's release notes for what replaces it.",
+    "source_url": "https://files.pythonhosted.org/packages/11/38/99906b7d664db658591a30a7f8357d9e13111c8ba44112a46730428f95d0/dropbox-11.0.0-py2-none-any.whl",
+    "source_excerpt": "dropbox 10.10.0 (dropbox-10.10.0-py2-none-any.whl), dropbox/stone_fixtures.py line 36: class MixedInternalOnlyContainer(bb.Struct) / def __init__(self, public_value=None)\ndropbox 11.0.0 (dropbox-11.0.0-py2-none-any.whl): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  },
+  {
+    "id": 9,
+    "fingerprint": "sha256:ba2e9f98b92bf6ecb956852db1c7f0f5b1976b55367f122d11de0d87446f8809",
+    "api": "dropbox/python-surface",
+    "version": "11.0.0",
+    "previous_version": "10.10.0",
+    "change": "breaking",
+    "subject": {
+      "type": "package_release",
+      "ecosystem": "pypi",
+      "package": "dropbox",
+      "change": "removed_symbol",
+      "symbols": [
+        "stone_fixtures.MixedInternalOnlyEnum"
+      ]
+    },
+    "description": "The class `stone_fixtures.MixedInternalOnlyEnum` was removed in dropbox 11.0.0: code using it fails.",
+    "migration_hint": "dropbox 11.0.0 has no `stone_fixtures.MixedInternalOnlyEnum`: see the package's release notes for what replaces it.",
+    "source_url": "https://files.pythonhosted.org/packages/11/38/99906b7d664db658591a30a7f8357d9e13111c8ba44112a46730428f95d0/dropbox-11.0.0-py2-none-any.whl",
+    "source_excerpt": "dropbox 10.10.0 (dropbox-10.10.0-py2-none-any.whl), dropbox/stone_fixtures.py line 83: class MixedInternalOnlyEnum(bb.Union)\ndropbox 11.0.0 (dropbox-11.0.0-py2-none-any.whl): not defined",
+    "confidence": 1,
+    "detected_at": "2026-11-14T12:00:00Z"
+  }
+]
